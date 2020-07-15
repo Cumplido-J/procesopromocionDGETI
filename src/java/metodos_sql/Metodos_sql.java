@@ -6,14 +6,14 @@
 package metodos_sql;
 
 import com.mysql.jdbc.Connection;
+import java.io.FileReader;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.servlet.jsp.jstl.sql.Result;
-import javax.swing.JOptionPane;
+import java.sql.ResultSetMetaData;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Properties;
 
 /**
  *
@@ -28,23 +28,33 @@ public class Metodos_sql {
 
 //------------------------------------------------------- CONEXION BASE DE DATOS    
     private static Connection conexion;
+    /*
     private static final String driver = "com.mysql.jdbc.Driver";
-    private static final String user = "root";
-    private static final String pass = "123456";
+    private static final String user = "admin";
+    private static final String pass = "admin";
     //private static final String pass = "123456";
-    private static final String url = "jdbc:mysql://localhost/usuarios";
-
+    private static final String url = "jdbc:mysql://localhost/bdpromocion?characterEncoding=utf8&useConfigs=maxPerformance";
+    */
+    
     public static Connection conector() {
+        String driver,user,pass,url;
+        Properties p = new Properties();        
         conexion = null;
         try {
+            p.load(new FileReader("C:/Users/David Reyna/Desktop/Repositorios/procesopromocion/src/conf/config.properties"));
+            
+            driver=p.getProperty("driver");
+            user=p.getProperty("user");
+            pass=p.getProperty("pass");
+            url=p.getProperty("url");
             Class.forName(driver);
             conexion = (Connection) DriverManager.getConnection(url, user, pass);
             if (conexion != null) {
                 System.out.println("conexion establecida");
             }
-        } catch (ClassNotFoundException | SQLException ex) {
-            System.out.println("Error de conexion");
-        }
+        } catch (Exception ex) {
+            System.out.println("Error de conexion:"+ex.toString());
+        } 
         return conexion;
     }
 
@@ -154,4 +164,81 @@ public class Metodos_sql {
         return usuario;
     }
     
+    private List convertir(ResultSet rs)
+    {
+        List<String[]> datos = null; 
+        String[] tupla=null;
+        try
+        { 
+            rs.last();
+            ResultSetMetaData rsmd = rs.getMetaData(); 
+            int numCols = rsmd.getColumnCount(); 
+            datos=new ArrayList<String[]>();   
+            rs.beforeFirst(); 
+            while (rs.next())
+            {
+                tupla=new String[numCols];
+                for (int i=0;i<numCols;i++)
+                {
+                    tupla[i]=rs.getString(i+1);
+                }   
+                datos.add(tupla);
+            } 
+        }
+        catch(Exception e)
+        {
+            System.out.println(e.toString());
+        }         
+        return datos;
+        
+    }
+    
+    public List ejecutaSP(String sp){
+        List<String[]> datos = new ArrayList<String[]>();
+        String[] tupla;
+        conexion = null;
+        
+        String buscar = "call "+sp+"();";
+        conexion = conector();
+        try {
+            sentencia_preparada = conexion.prepareStatement(buscar);
+            resultado = sentencia_preparada.executeQuery();
+            datos=convertir(resultado);
+            sentencia_preparada.close();
+            conexion.close();
+        } catch (Exception e) {
+            System.out.println(e.toString());
+        }
+        return datos;
+    }
+    
+    public List ejecutaSP(String sp,String[] parametros){
+        List<String[]> datos = new ArrayList<String[]>();
+        String[] tupla;
+        conexion = null;
+        String aux="";        
+        for(String parametro:parametros){
+            if(!parametro.equals("")){
+                aux+="'"+parametro+"',";
+            }else{
+                aux+="NULL,";
+            }
+        }
+        if(aux!=""){
+            aux = aux.substring(0, aux.length() - 1);
+        }          
+        String buscar = "call "+sp+"("+aux+");";
+        System.out.println(buscar);
+        conexion = conector();
+        try {
+            sentencia_preparada = conexion.prepareStatement(buscar);
+            resultado = sentencia_preparada.executeQuery();
+            datos=convertir(resultado);            
+            sentencia_preparada.close();
+            conexion.close();
+        } catch (Exception e) {
+            System.out.println(e.toString());
+        }
+        return datos;
+    }
 }//fin clase metodos_sql
