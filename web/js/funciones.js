@@ -72,19 +72,115 @@ $(document).ready(function () {
                    $("#btnEnviar1").val("Guardar y continuar"); 
                    $("#btnEnviar1").removeAttr("disabled");
                 },success:function(data){
-                    //if(data==="ok"){
+                    if(data=="ok"){
                         mostrarSiguiente(1);
-                    /*}else{
-                        $("#mensaje").html("Error de conexión, intente nuevamente."+data);            
+                    }else{
+                        $("#mensaje").html(data);            
                         $("#modalMensaje").modal("show");
-                    }*/
+                    }
                 },error:function(){
                     
                 }
             });
             return false;
         }
-    });    
+    });   
+    
+    $('#formInfoLaboral').submit(function(e) {
+        e.preventDefault();
+    }).validate({  
+        messages: {
+            'ingresoSubsistema': {
+                required: "Campo requerido"
+            },
+            'ingresoPlantel':{
+                required: "Campo requerido"
+            },
+            'plantel':{
+                required: "Seleccione una opción"
+            },
+            'categoria':{
+                required: "Seleccione una opción"
+            },
+            'jornada':{
+                required: "Seleccione una opción"
+            },
+            'fechaPlaza':{
+                required: "Campo requerido"
+            },
+            'tipoNombramiento':{
+                required: "Seleccione una opción"
+            },
+            'fechaPromocion':{
+                required: "Campo requerido"
+            },
+            'categoriaAspira':{
+                required: "Seleccione una opción"
+            },
+            'jornadaAspira':{
+                required: "Seleccione una opción"
+            }
+        },
+        submitHandler:function(){
+            $.ajax({
+                type:$('#formInfoLaboral').attr("method"),
+                url:$('#formInfoLaboral').attr("action"),
+                data:$('#formInfoLaboral').serialize(),
+                beforeSend:function(){
+                    $("#btnEnviar2").val("Guardando...");
+                    $("#btnEnviar2").attr("disabled","disabled");
+                },
+                complete:function(){
+                   $("#btnEnviar2").val("Guardar y continuar"); 
+                   $("#btnEnviar2").removeAttr("disabled");
+                },success:function(data){
+                    if(data=="ok"){
+                        mostrarSiguiente(2);
+                    }else{
+                        $("#mensaje").html(data);            
+                        $("#modalMensaje").modal("show");
+                    }
+                },error:function(){
+                    
+                }
+            });
+            return false;
+        }
+    });
+    $('#formInfoCompatibilidad').submit(function(e) {
+        e.preventDefault();
+    }).validate({  
+        messages: {
+            'numHorasOtro': {
+                required: "Campo requerido"
+            }
+        },
+        submitHandler:function(){
+            $.ajax({
+                type:$('#formInfoCompatibilidad').attr("method"),
+                url:$('#formInfoCompatibilidad').attr("action"),
+                data:$('#formInfoCompatibilidad').serialize(),
+                beforeSend:function(){
+                    $("#btnEnviar4").val("Guardando...");
+                    $("#btnEnviar4").attr("disabled","disabled");
+                },
+                complete:function(){
+                   $("#btnEnviar4").val("Guardar y continuar"); 
+                   $("#btnEnviar4").removeAttr("disabled");
+                },success:function(data){
+                    if(data=="ok"){
+                        mostrarSiguiente(4);
+                    }else{
+                        $("#mensaje").html("|"+data+"|");            
+                        $("#modalMensaje").modal("show");
+                    }
+                },error:function(){
+                    
+                }
+            });
+            return false;
+        }
+    });
 });
 
 function actualizarTipoInstitucion() {
@@ -229,13 +325,16 @@ function cambioModulo() {
 }
 var info=[];
 function registrarInfo(){
+    
     if(info.length==0){
         $("#tablaInfo").html("");
     }
     id=$("#tipoInfo").val();
+    cadena=$("#periodo option:selected").text();
+    cadena+="<br/>";
+    cadena+=$("#tipoInfo option:selected").text();
     switch(id){
-        case "cbp":
-            cadena=$("#tipoInfo option:selected").text();
+        case "cbp":            
             cadena+="<br/>Versión:";
             cadena+=$("#version option:selected").text();
             cadena+="<br/>Semestre:";
@@ -244,10 +343,13 @@ function registrarInfo(){
             cadena+=$("#asignatura option:selected").attr("clave");
             cadena+="-";
             cadena+=$("#asignatura option:selected").text();
-            info.push(cadena);
+            cadena+="<br/>Horas:";
+            cadena+=$("#asignatura option:selected").attr("horas");
+            horas=$("#asignatura option:selected").attr("horas");
+            datos=[cadena,horas];
+            info.push(datos);
             break;
         case "cp":
-            cadena=$("#tipoInfo option:selected").text();
             cadena+="<br/>Versión:";
             cadena+=$("#version option:selected").text();
             cadena+="<br/>Semestre:";
@@ -261,27 +363,35 @@ function registrarInfo(){
             cadena+="-";
             cadena+=$("#modulo option:selected").text();
             cadena+="<br/>Submódulo:";
-            cadena+=$("#submodulo option:selected").attr("clavesubmodulo");
+            cadena+=$("#submodulo option:selected").attr("clave");
             cadena+="-";
             cadena+=$("#submodulo option:selected").text();
-            info.push(cadena);
+            cadena+="<br/>Horas:";
+            cadena+=$("#submodulo option:selected").attr("horas");
+            horas=$("#submodulo option:selected").attr("horas");
+            datos=[cadena,horas];
+            info.push(datos);
             break;
         case "tl":
-            cadena=$("#tipoInfo option:selected").text();
             cadena+=":";
             cadena+=$("#taller option:selected").text();
-            cadena+=" - "+$("#horasTaller").val()+" horas";
-            info.push(cadena);
+            cadena+="<br/>Horas:";
+            cadena+=$("#horasTaller").val();
+            horas=$("#horasTaller").val();
+            datos=[cadena,horas];
+            info.push(datos);
             break;
         default:
             break;
     }
     fila="";
+    horas=0;
    for(c=0;c<info.length;c++){
         fila+="<tr>";
-        fila+=   "<td>"+info[c]+"</td>";
+        fila+=   "<td>"+info[c][0]+"</td>";
         fila+="<td><input type='button' class='btn btn-link btn-sm' value='Borrar' onclick='borrarHoras("+c+")' /></td>";
         fila+="</tr>";
+        horas+=parseInt(info[c][1]);
    }
    if(fila!=""){
         if(fila.includes("INGLES")||fila.includes("CENNI")||fila.includes("INGLÉS")){
@@ -298,6 +408,7 @@ function registrarInfo(){
      }
    
    $("#tablaInfo").html(fila);
+   $("#numHoras").val(horas);
    $("#modalInformacion").modal("hide");
    $("#tipoInfo").val("");
    cambioTipoInfo();
@@ -305,11 +416,13 @@ function registrarInfo(){
 function borrarHoras(id){
     info.splice(id,1);
     fila="";
+    horas=0;
    for(c=0;c<info.length;c++){
         fila+="<tr>";
-        fila+=   "<td>"+info[c]+"</td>";
+        fila+=   "<td>"+info[c][0]+"</td>";
         fila+="<td><input type='button' class='btn btn-link btn-sm' value='Borrar' onclick='borrarHoras("+c+")' /></td>";
         fila+="</tr>";
+        horas+=parseInt(info[c][1]);
    }
    if(fila!=""){
         if(fila.includes("INGLES")||fila.includes("CENNI")||fila.includes("INGLÉS")){
@@ -326,6 +439,7 @@ function borrarHoras(id){
      }
    
    $("#tablaInfo").html(fila);
+   $("#numHoras").val(horas);
 }
 function mostrarSiguiente(id){
     switch(id){
@@ -500,55 +614,23 @@ function cambioDocumento(elemento){
     }else{
         $("#seccionCedula").attr("hidden","true");
         $("#cedula").removeAttr("required");
+        $("#cedula").val("");
     }
 }
 function cambioCategoria() {
-    id=$("#categoriaAspirada").val(); 
+    id=$("#categoria").val(); 
     $.get("ConsultaCatalogos", {k: "9",i:id}, function(respuesta){
         $("#jornada").html(respuesta);
+    });    
+}
+function cambioCategoriaAspira() {
+    id=$("#categoriaAspira").val(); 
+    $.get("ConsultaCatalogos", {k: "9",i:id}, function(respuesta){
+        $("#jornadaAspira").html(respuesta);
     });
     $.get("ConsultaCatalogos", {k: "10",i:id}, function(respuesta){
         $("#rbRequisitos").html("<label class='control-label'>Seleccione el requisito cumplido de acuerdo a su situación:</label>"+respuesta);
     }); 
 }
-function demoFromHTML() {
-        var pdf = new jsPDF('p', 'pt', 'letter');
-        // source can be HTML-formatted string, or a reference
-        // to an actual DOM element from which the text will be scraped.
-        source = $('#content')[0];
-
-        // we support special element handlers. Register them with jQuery-style 
-        // ID selector for either ID or node name. ("#iAmID", "div", "span" etc.)
-        // There is no support for any other type of selectors 
-        // (class, of compound) at this time.
-        specialElementHandlers = {
-            // element with id of "bypass" - jQuery style selector
-            '#bypassme': function (element, renderer) {
-                // true = "handled elsewhere, bypass text extraction"
-                return true
-            }
-        };
-        margins = {
-            top: 80,
-            bottom: 60,
-            left: 40,
-            width: 522
-        };
-        // all coords and widths are in jsPDF instance's declared units
-        // 'inches' in this case
-        pdf.fromHTML(
-        source, // HTML string or DOM elem ref.
-        margins.left, // x coord
-        margins.top, { // y coord
-            'width': margins.width, // max width of content on PDF
-            'elementHandlers': specialElementHandlers
-        },
-
-        function (dispose) {
-            // dispose: object with X, Y of the last line add to the PDF 
-            //          this allow the insertion of new lines after html
-            pdf.save('Test.pdf');
-        }, margins);
-    }
 
 

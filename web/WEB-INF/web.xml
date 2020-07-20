@@ -28,6 +28,14 @@
         <servlet-name>Servlet_cbregistro</servlet-name>
         <servlet-class>com.aplicacion.servlet.Servlet_cbregistro</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>Servlet_registroInfoLaboral</servlet-name>
+        <servlet-class>com.aplicacion.servlet.Servlet_registroInfoLaboral</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Servlet_registroInfoCompatibilidad</servlet-name>
+        <servlet-class>com.aplicacion.servlet.Servlet_registroInfoCompatibilidad</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Servlet_consultaCatalogos</servlet-name>
         <url-pattern>/Servlet_consultaCatalogos</url-pattern>
@@ -55,6 +63,14 @@
     <servlet-mapping>
         <servlet-name>Servlet_cbregistro</servlet-name>
         <url-pattern>/Servlet_cbregistro</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Servlet_registroInfoLaboral</servlet-name>
+        <url-pattern>/Servlet_registroInfoLaboral</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Servlet_registroInfoCompatibilidad</servlet-name>
+        <url-pattern>/Servlet_registroInfoCompatibilidad</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

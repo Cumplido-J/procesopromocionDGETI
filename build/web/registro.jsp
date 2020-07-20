@@ -75,8 +75,7 @@
                       <form id="formInfoAcademica" role="form" action="RegistroInfoAcademica" method="POST">
                         <div class="row">
                             <div class="form-group col-md-3">
-                              <!--<input type="text" value="${Docente.rfc}" />-->
-                                <input type="hidden" value="A" id="opcionInfoAcademica" name="opcionInfoAcademica">
+                              <!--<input type="text" value="${Docente.rfc}" />-->                                
                               <label class="control-label" for="entidad">Entidad de estudio:</label>
                               <select class="form-control input-sm" id="entidad" name="entidad" onchange="actualizarTipoInstitucion()" required>
                                   <%=new Catalogos().desplegarOpcionesEstado()%>
@@ -177,7 +176,7 @@
                   </div>
                 </div>
 
-                <div class="panel panel-default" id="panelInfoLaboral" >
+                <div class="panel panel-default" id="panelInfoLaboral" hidden>
                   <div class="panel-heading">
                     <h4 class="panel-title">
                       <a data-parent="#accordion" data-toggle="collapse" href="#infoLaboral" aria-expanded="true" aria-controls="infoLaboral">
@@ -188,7 +187,7 @@
                   </div>
                   <div class="panel-collapse collapse" id="infoLaboral">
                     <div class="panel-body">
-                      <form role="form">
+                      <form id="formInfoLaboral" role="form" action="RegistroInfoLaboral" method="POST">                      
                         <div class="row">
                             <div class="checkbox col-xs-12">
                               <label><input type="checkbox" checked="true" id="activoServicio" name="activoServicio" data-toggle="collapse" data-target="#seccionActivoServicio">Activo en Servicio</label>
@@ -198,17 +197,17 @@
                             <div class="row">
                                 <div class="form-group col-md-3 datepicker-group">
                                   <label class="control-label" for="ingresoSubsistema">Fecha de ingreso al subsistema:</label>
-                                  <input type="text" class="form-control input-sm" id="ingresoSubsistema" name="ingresoSubsistema" >
+                                  <input type="text" class="form-control input-sm" id="ingresoSubsistema" name="ingresoSubsistema" required>
 
                                 </div>
                                 <div class="form-group col-md-3 datepicker-group">
                                   <label class="control-label" for="ingresoPlantel">Fecha de ingreso al plantel:</label>
-                                  <input class="form-control input-sm" id="ingresoPlantel" name="ingresoPlantel" type="text">
+                                  <input class="form-control input-sm" id="ingresoPlantel" name="ingresoPlantel" type="text" required>
 
                                 </div>
                                 <div class="form-group col-md-3">
                                   <label class="control-label" for="plantel">Plantel:</label>
-                                  <select class="form-control input-sm" id="plantel" name="plantel" onchange="cambioPlantel()">
+                                  <select class="form-control input-sm" id="plantel" name="plantel" onchange="cambioPlantel()" required>
                                     <%=new Catalogos().desplegarOpcionesPlanteles()%>
                                   </select>
                                 </div>
@@ -220,28 +219,33 @@
                             <div class="row">
                                 <div class="form-group col-md-3">
                                   <label class="control-label" for="categoria">Categoría actual:</label>
-                                  <select class="form-control input-sm" id="categoria" name="categoria">
+                                  <select class="form-control input-sm" id="categoria" name="categoria" onchange="cambioCategoria()" required>
                                     <%=new Catalogos().desplegarOpcionesCategorias()%>
+                                  </select>                          
+                                </div>
+                                <div class="form-group col-md-3">
+                                  <label class="control-label" for="jornada">Tipo de jornada:</label>
+                                  <select class="form-control input-sm" id="jornada" name="jornada" required>
+                                      <option value=''>-Seleccione-</option>
                                   </select>                          
                                 </div>
                                 <div class="form-group col-md-3 datepicker-group">
                                   <label class="control-label" for="fechaPlaza" style="font-size: 12px;">Fecha desde que ostenta la plaza:</label>
-                                  <input class="form-control input-sm" id="fechaPlaza" name="fechaPlaza" type="text">
+                                  <input class="form-control input-sm" id="fechaPlaza" name="fechaPlaza" type="text" required>
 
                                 </div>
                                 <div class="form-group col-md-3">
                                   <label class="control-label" for="tipoNombramiento">Tipo de nombramiento:</label>
-                                  <select class="form-control input-sm" id="tipoNombramiento" name="tipoNombramiento">
+                                  <select class="form-control input-sm" id="tipoNombramiento" name="tipoNombramiento" required>
                                     <%=new Catalogos().desplegarOpcionesTipoNombramiento()%>
                                   </select>                          
-                                </div>
+                                </div>                                
+                            </div>
+                            <div class="row"> 
                                 <div class="form-group col-md-3 datepicker-group">
                                   <label class="control-label" for="fechaPromocion">Fecha de su última promoción:</label>
-                                  <input class="form-control input-sm" id="fechaPromocion" name="fechaPromocion" type="text">
-
+                                  <input class="form-control input-sm" id="fechaPromocion" name="fechaPromocion" type="text" required>
                                 </div>
-                            </div>
-                            <div class="row">                                
                                 <div class="form-group col-md-3">
                                     <label class="control-label" for="btnEvidencia3">Constancia de antiguedad:</label>
                                     <a title="Ver ejemplo" onclick="abrirModalEjemplo(3)"><span class="glyphicon glyphicon-picture"></span></a><br/>  
@@ -255,14 +259,14 @@
                             </div>
                             <div class="row">
                                 <div class="form-group col-md-3">
-                                  <label class="control-label" for="categoriaAspirada">Categoría a la que aspira:</label>
-                                  <select class="form-control input-sm" id="categoriaAspirada" name="categoriaAspirada" onchange="cambioCategoria()">
+                                  <label class="control-label" for="categoriaAspira">Categoría a la que aspira:</label>
+                                  <select class="form-control input-sm" id="categoriaAspira" name="categoriaAspira" onchange="cambioCategoriaAspira()" required>
                                      <%=new Catalogos().desplegarOpcionesCategorias()%>
                                   </select>                          
                                 </div>
                                 <div class="form-group col-md-3">
-                                  <label class="control-label" for="jornada">Tipo de jornada:</label>
-                                  <select class="form-control input-sm" id="jornada" name="jornada">
+                                  <label class="control-label" for="jornadaAspira">Tipo de jornada:</label>
+                                  <select class="form-control input-sm" id="jornadaAspira" name="jornadaAspira" required>
                                       <option value=''>-Seleccione-</option>
                                   </select>                          
                                 </div>
@@ -283,14 +287,15 @@
                         </div>
                         <div class="col-xs-12 text-right">
                           <button class="btn btn-sm btn-primary" type="reset">Limpiar</button>
-                          <input type="button" class="btn btn-sm btn-primary" value="Guardar y continuar" onclick="mostrarSiguiente(2)"/>
+                          <input class="btn btn-sm btn-primary" id="btnEnviar2" type="submit" value='Guardar y continuar'/>
+                          
                         </div>
                       </form>
                     
                   </div>
                 </div>
                 </div>
-                <div class="panel panel-default" id="panelInfoHoras" >
+                <div class="panel panel-default" id="panelInfoHoras">
                   <div class="panel-heading">
                     <h4 class="panel-title">
                       <a data-parent="#accordion" data-toggle="collapse" href="#infoHoras" aria-expanded="true" aria-controls="infoHoras">
@@ -308,7 +313,7 @@
                         <div id="seccionHoras" class="collapse in">
                             <div class="form-group col-md-3">
                               <label class="control-label" for="numHoras">Horas frente a grupo:</label>
-                              <input type="text" class="form-control input-sm" id="numHoras" name="numHoras" >
+                              <input type="text" class="form-control input-sm" id="numHoras" name="numHoras" readOnly="true">
                             </div>
                             <div class="form-group col-md-3">
                               <label class="control-label" for="numGrupos">Número de grupos:</label>
@@ -357,7 +362,7 @@
                     </div>
                   </div>
                 </div>
-                <div class="panel panel-default" id="panelInfoCompatibilidad" >
+                <div class="panel panel-default" id="panelInfoCompatibilidad" hidden>
                   <div class="panel-heading">
                     <h4 class="panel-title">
                       <a data-parent="#accordion" data-toggle="collapse" href="#infoCompatibilidad" aria-expanded="true" aria-controls="infoCompatibilidad">
@@ -368,14 +373,14 @@
                   </div>
                   <div class="panel-collapse collapse" id="infoCompatibilidad">
                     <div class="panel-body">
-                      <form role="form">                        
+                      <form role="form" id="formInfoCompatibilidad" method="POST" action="RegistroInfoCompatibilidad">                        
                         <div class="checkbox col-xs-12">
-                          <label><input data-toggle="collapse" data-target="#seccionOtro" type="checkbox" checked="true" name="funcionesOtro">Marque la casilla si desempeña funciones en otro subsistema</label>
+                          <label><input data-toggle="collapse" data-target="#seccionOtro" type="checkbox" name="funcionesOtro">Marque la casilla si desempeña funciones en otro subsistema</label>
                         </div>
-                        <div id="seccionOtro" class="collapse in" >
+                        <div id="seccionOtro" class="collapse" >
                             <div class="form-group col-md-3">
                               <label class="control-label" for="numHorasOtro">Número de horas:</label>
-                              <input type="text" class="form-control input-sm" id="numHorasOtro" name="numHorasOtro" >
+                              <input type="text" class="form-control input-sm" id="numHorasOtro" name="numHorasOtro" required>
                             </div>
                             <div class="checkbox col-md-4">
                               <label><input data-toggle="collapse" data-target="#seccionCompatibilidad" type="checkbox" checked="true" name="compatibilidad" id="compatibilidad">Marque la casilla si cuenta con la compatibilidad requerida</label>
@@ -390,7 +395,7 @@
                         </div>
                         <div class="col-xs-12 text-right">
                           <button class="btn btn-sm btn-primary" type="reset">Limpiar</button>
-                          <input type="button" class="btn btn-sm btn-primary" value="Guardar y continuar" onclick="mostrarSiguiente(4)"/>
+                          <input class="btn btn-sm btn-primary" id="btnEnviar4" type="submit" value='Guardar y continuar'/>                          
                         </div>
                       </form>
                     </div>
@@ -456,6 +461,12 @@
                 <div class="modal-body">
                     <div class="container-fluid">                    
                         <form>
+                            <div class="form-group col-md-6" >
+                                <label class="control-label" for="periodo">Periodo:</label>
+                                <select class="form-control input-sm" id="periodo" name="periodo">
+                                    <%=new Catalogos().desplegarPeriodos()%>                                        
+                                </select>                          
+                            </div>
                             <div class="form-group col-md-6">
                                 <label class="control-label" for="tipoInfo">Tipo de información:</label>
                                 <select class="form-control input-sm" id="tipoInfo" name="tipoInfo" onchange="cambioTipoInfo()">

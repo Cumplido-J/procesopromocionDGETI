@@ -286,7 +286,20 @@ public class Catalogos {
             for(String[] dato:datos){
                 respuesta+="<label class='control-label'><input type='radio' name='opReqCat' value='"+dato[0]+"' required>&nbsp;"+dato[1]+"</label><br/>";
             }
-            respuesta+="<label><input type='radio' name='opReqCat' value='0' required>&nbsp;Ninguno</label>";
+            respuesta+="<label><input type='radio' name='opReqCat' value='0' checked required>&nbsp;Ninguno</label>";
+        }catch(Exception e){
+            respuesta=e.toString();
+        }finally{
+            return respuesta;        
+        }
+    }
+    public String desplegarPeriodos(){        
+        String respuesta="<option value=''>-Seleccione-</option>";
+        try{
+            List<String[]> datos=metodos.ejecutaSP("sp_selectCatPeriodos");
+            for(String[] dato:datos){
+                respuesta+="<option value='"+dato[0]+"'>"+dato[1]+"</option>";
+            }
         }catch(Exception e){
             respuesta=e.toString();
         }finally{

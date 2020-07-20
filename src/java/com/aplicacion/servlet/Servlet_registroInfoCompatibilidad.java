@@ -5,7 +5,6 @@
  */
 package com.aplicacion.servlet;
 
-import com.aplicacion.beans.Docente;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -21,8 +20,8 @@ import metodos_sql.Metodos_sql;
  *
  * @author David Reyna
  */
-@WebServlet(name = "RegistroInfoAcademica", urlPatterns = {"/RegistroInfoAcademica"})
-public class Servlet_registroInfoAcademica extends HttpServlet {
+@WebServlet(name = "RegistroInfoCompatibilidad", urlPatterns = {"/RegistroInfoCompatibilidad"})
+public class Servlet_registroInfoCompatibilidad extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -42,10 +41,10 @@ public class Servlet_registroInfoAcademica extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet Servlet_registroInfoAcademica</title>");            
+            out.println("<title>Servlet Servlet_registroInfoCompatibilidad</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet Servlet_registroInfoAcademica at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet Servlet_registroInfoCompatibilidad at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         } finally {
@@ -79,31 +78,34 @@ public class Servlet_registroInfoAcademica extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        //processRequest(request, response);
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         try {
             HttpSession session= (HttpSession) request.getSession();
             String idUsuario=session.getAttribute("idUsuario").toString();
-            /*String idEntidad=request.getParameter("entidad");
-            String idTipoInstitucion=request.getParameter("tipoInstitucion");
-            String idInstitucion=request.getParameter("institucion");*/
-            String idCCT=request.getParameter("cct");
-            String idEscuela=request.getParameter("escuela");
-            String idGrado=request.getParameter("grado");
-            String carrera=request.getParameter("carrera");
-            String anioEgreso=request.getParameter("egreso");
-            String idModalidadTitulacion=request.getParameter("modalidad");
-            String anioTitulacion=request.getParameter("titulacion");
-            //String idComprobante=request.getParameter("documento");
-            String cedula=request.getParameter("cedula");  
+            //out.println(idUsuario);
+            
+            String funcionesOtro;
+            String numHorasOtro="0";
+            if(request.getParameter("funcionesOtro")!=null){
+                funcionesOtro="S";
+                numHorasOtro=request.getParameter("numHorasOtro");
+            }else{
+                funcionesOtro="N";
+            }            
+            String compatibilidad;
+            if(request.getParameter("compatibilidad")!=null){
+                compatibilidad="S";
+            }else{
+                compatibilidad="N";
+            }
+            
 
-
+            //out.println(notaSancion);
             Metodos_sql metodo = new Metodos_sql();
-            //in _idUsuario int,in _idEscuelaEstudio int, in _carrera varchar(300),in _anioEgreso int,in _idGradoAcademico int, in _idModalidadTitulacion int,in _anioTitulacion int,in _cedula varchar(20),idcct
-            String[] parametros={idUsuario,idEscuela,carrera,anioEgreso,idGrado,idModalidadTitulacion,anioTitulacion,cedula,idCCT};
+            String[] parametros={idUsuario,compatibilidad,numHorasOtro};
             List<String[]> datos;                           
-            datos=metodo.ejecutaSP("sp_registroInfoAcademica",parametros);            
+            datos=metodo.ejecutaSP("sp_registroInfoCompatibilidad",parametros);            
             if(!datos.isEmpty()){
                 out.print("ok");
             }else{
@@ -113,6 +115,7 @@ public class Servlet_registroInfoAcademica extends HttpServlet {
         } finally {
             out.close();
         }
+
     }
 
     /**

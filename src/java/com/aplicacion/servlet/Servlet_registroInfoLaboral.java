@@ -5,7 +5,6 @@
  */
 package com.aplicacion.servlet;
 
-import com.aplicacion.beans.Docente;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -21,8 +20,8 @@ import metodos_sql.Metodos_sql;
  *
  * @author David Reyna
  */
-@WebServlet(name = "RegistroInfoAcademica", urlPatterns = {"/RegistroInfoAcademica"})
-public class Servlet_registroInfoAcademica extends HttpServlet {
+@WebServlet(name = "RegistroInfoLaboral", urlPatterns = {"/RegistroInfoLaboral"})
+public class Servlet_registroInfoLaboral extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -42,10 +41,10 @@ public class Servlet_registroInfoAcademica extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet Servlet_registroInfoAcademica</title>");            
+            out.println("<title>Servlet Servlet_registroInfoLaboral</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet Servlet_registroInfoAcademica at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet Servlet_registroInfoLaboral at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         } finally {
@@ -79,31 +78,38 @@ public class Servlet_registroInfoAcademica extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        //processRequest(request, response);
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         try {
             HttpSession session= (HttpSession) request.getSession();
             String idUsuario=session.getAttribute("idUsuario").toString();
-            /*String idEntidad=request.getParameter("entidad");
-            String idTipoInstitucion=request.getParameter("tipoInstitucion");
-            String idInstitucion=request.getParameter("institucion");*/
-            String idCCT=request.getParameter("cct");
-            String idEscuela=request.getParameter("escuela");
-            String idGrado=request.getParameter("grado");
-            String carrera=request.getParameter("carrera");
-            String anioEgreso=request.getParameter("egreso");
-            String idModalidadTitulacion=request.getParameter("modalidad");
-            String anioTitulacion=request.getParameter("titulacion");
-            //String idComprobante=request.getParameter("documento");
-            String cedula=request.getParameter("cedula");  
+            //out.println(idUsuario);
+            
+            String activo,ingresoSubsistema="",ingresoPlantel="",idCategoriaJornada="",fechaPlaza="",idTipoNombramiento="",fechaUltimaPromocion="",idCategoriaJornadaAspira="",idPerfilRequerido="",notaSancion="N";
+            if(request.getParameter("activoServicio")!=null){
+                activo="S";
+                ingresoSubsistema=ConvertirFecha(request.getParameter("ingresoSubsistema"));
+                ingresoPlantel=ConvertirFecha(request.getParameter("ingresoPlantel"));            
+                idCategoriaJornada=request.getParameter("jornada");
+                fechaPlaza=ConvertirFecha(request.getParameter("fechaPlaza"));
+                idTipoNombramiento=request.getParameter("tipoNombramiento");
+                fechaUltimaPromocion=ConvertirFecha(request.getParameter("fechaPromocion"));
+                idCategoriaJornadaAspira=request.getParameter("jornadaAspira");
+                idPerfilRequerido=request.getParameter("opReqCat");                
+                if(request.getParameter("notaDesfavorable")!=null){
+                    notaSancion="S";
+                }
+            }else{
+                activo="N";
+            }
+            
+            
 
-
+            //out.println(notaSancion);
             Metodos_sql metodo = new Metodos_sql();
-            //in _idUsuario int,in _idEscuelaEstudio int, in _carrera varchar(300),in _anioEgreso int,in _idGradoAcademico int, in _idModalidadTitulacion int,in _anioTitulacion int,in _cedula varchar(20),idcct
-            String[] parametros={idUsuario,idEscuela,carrera,anioEgreso,idGrado,idModalidadTitulacion,anioTitulacion,cedula,idCCT};
+            String[] parametros={idUsuario,activo,ingresoSubsistema,ingresoPlantel,idCategoriaJornada,fechaPlaza,idTipoNombramiento,fechaUltimaPromocion,idCategoriaJornadaAspira,idPerfilRequerido,notaSancion};
             List<String[]> datos;                           
-            datos=metodo.ejecutaSP("sp_registroInfoAcademica",parametros);            
+            datos=metodo.ejecutaSP("sp_registroInfoLaboral",parametros);            
             if(!datos.isEmpty()){
                 out.print("ok");
             }else{
@@ -124,5 +130,11 @@ public class Servlet_registroInfoAcademica extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-
+    private String ConvertirFecha(String fecha){
+        String dia,mes,anio;
+        dia=fecha.substring(0, 2);
+        mes=fecha.substring(3, 5);
+        anio=fecha.substring(6,10);
+        return anio+"-"+mes+"-"+dia;
+    }
 }

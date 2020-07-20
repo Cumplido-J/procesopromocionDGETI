@@ -198,10 +198,10 @@ public class Metodos_sql {
         String[] tupla;
         conexion = null;
         
-        String buscar = "call "+sp+"();";
+        String instruccion = "call "+sp+"();";
         conexion = conector();
         try {
-            sentencia_preparada = conexion.prepareStatement(buscar);
+            sentencia_preparada = conexion.prepareStatement(instruccion);
             resultado = sentencia_preparada.executeQuery();
             datos=convertir(resultado);
             sentencia_preparada.close();
@@ -227,11 +227,11 @@ public class Metodos_sql {
         if(aux!=""){
             aux = aux.substring(0, aux.length() - 1);
         }          
-        String buscar = "call "+sp+"("+aux+");";
-        System.out.println(buscar);
+        String instruccion = "call "+sp+"("+aux+");";
+        System.out.println(instruccion);
         conexion = conector();
         try {
-            sentencia_preparada = conexion.prepareStatement(buscar);
+            sentencia_preparada = conexion.prepareStatement(instruccion);
             resultado = sentencia_preparada.executeQuery();
             datos=convertir(resultado);            
             sentencia_preparada.close();
