@@ -11,6 +11,7 @@ import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -46,7 +47,8 @@ public class Servlet_iniciosesion extends HttpServlet {
             out.println("<title>Servlet Servlet</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet Servlet at " + request.getContextPath() + "</h1>");
+            RequestDispatcher rd = request.getRequestDispatcher("login.jsp");
+            rd.forward(request, response);
             out.println("</body>");
             out.println("</html>");
         }
@@ -90,23 +92,30 @@ public class Servlet_iniciosesion extends HttpServlet {
             //out.println("<title>Servlet Servlet</title>");
             out.println("</head>");
             out.println("<body>");
-            String correo = request.getParameter("correo");
+            String rfc = request.getParameter("rfc");
             String clave = request.getParameter("clave");
             String claveEncriptada = "";
             claveEncriptada = Encriptar_Desencriptar.encriptar(clave);
             String btnlogin = request.getParameter("iniciarsesion");
             if (btnlogin != null) {
-                String busquedausuario = metodos.buscarusuario(correo, claveEncriptada);
-                if (correo.equals("root") && clave.equals("root")){
+                String busquedausuario = metodos.buscarusuario(rfc, claveEncriptada);
+                if (rfc.equals("root") && clave.equals("root")) {
                     out.println("ADMINISTTRADOR");
                 }//fin if root
-                else if(busquedausuario.equals("USUARIO ENCONTRADO")){
-                    String busqueda_nombre=metodos.buscar(correo);
-                     out.println("Bienvenido "+busqueda_nombre);
-                }else{
-                    out.println("USUARIO NO REGISTRADO");
+                else if (busquedausuario.equals("USUARIO ENCONTRADO")) {
+                    String busqueda_nombre = metodos.buscar(rfc);
+                    //out.println("Bienvenido "+busqueda_nombre);
+                    request.setAttribute("nom", busqueda_nombre);
+                    RequestDispatcher rd = request.getRequestDispatcher("ppsesion.jsp");
+                    rd.forward(request, response);
+                    //response.sendRedirect("ppsesion.html");
+                } else {
+                    request.setAttribute("error", "Usuario No Registrado");
+                    RequestDispatcher rd = request.getRequestDispatcher("login.jsp");
+                    rd.forward(request, response);
+                    //out.println("USUARIO NO REGISTRADOs");
                 }
-                    
+
             }
             //out.println("<h1>Servlet Servlet at " + request.getContextPath() + "</h1>");
             out.println("</body>");
@@ -115,10 +124,6 @@ public class Servlet_iniciosesion extends HttpServlet {
 
     }
 
-     
-    
-      
-    
     /**
      * Returns a short description of the servlet.
      *

@@ -9,6 +9,7 @@ import correos.Enviar_clave;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -44,7 +45,8 @@ public class Servlet_recuperarclave extends HttpServlet {
             out.println("<title>Servlet Servlet_recuperarclave</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet Servlet_recuperarclave at " + request.getContextPath() + "</h1>");
+         RequestDispatcher rd = request.getRequestDispatcher("login.jsp");
+            rd.forward(request, response);
             out.println("</body>");
             out.println("</html>");
         }
@@ -75,6 +77,7 @@ public class Servlet_recuperarclave extends HttpServlet {
      */
     Metodos_sql metodos = new Metodos_sql();
     Enviar_clave mail = new Enviar_clave();
+
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -96,11 +99,14 @@ public class Servlet_recuperarclave extends HttpServlet {
                 }//fin if root
                 else if (busquedacorreo.equals("USUARIO ENCONTRADO")) {
                     String busqueda_clave = metodos.buscarclave(correo);
-                     String claveDesencriptada = Encriptar_Desencriptar.desencriptar(busqueda_clave);
-                     mail.enviar_correo(claveDesencriptada,correo);
-                    out.println("Bienvenido, tu Clave es: " + claveDesencriptada);
+                    String claveDesencriptada = Encriptar_Desencriptar.desencriptar(busqueda_clave);
+                    mail.enviar_correo(claveDesencriptada, correo);
+                    response.sendRedirect("login.jsp");
                 } else {
-                    out.println("USUARIO NO REGISTRADO");
+                    request.setAttribute("error", "Correo No Registrado");
+                    RequestDispatcher rd = request.getRequestDispatcher("recuperar_contraseña.jsp");
+                    rd.forward(request, response);
+                    //out.println("USUARIO NO REGISTRADO");
                 }
 
             }
@@ -109,8 +115,6 @@ public class Servlet_recuperarclave extends HttpServlet {
         }
     }
 
-   
-    
     /**
      * Returns a short description of the servlet.
      *
