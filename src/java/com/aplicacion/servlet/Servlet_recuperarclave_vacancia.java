@@ -5,12 +5,9 @@
  */
 package com.aplicacion.servlet;
 
-import com.mysql.jdbc.Connection;
+import correos.Enviar_clave;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.io.UnsupportedEncodingException;
-import java.sql.DriverManager;
-import java.sql.SQLException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -24,8 +21,8 @@ import seguridad.Encriptar_Desencriptar;
  *
  * @author charl
  */
-@WebServlet(name = "Servlet_iniciosesion", urlPatterns = {"/Servlet_iniciosesion"})
-public class Servlet_iniciosesion extends HttpServlet {
+@WebServlet(name = "Servlet_recuperarclave_vacancia", urlPatterns = {"/Servlet_recuperarclave_vacancia"})
+public class Servlet_recuperarclave_vacancia extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -44,10 +41,10 @@ public class Servlet_iniciosesion extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet Servlet</title>");
+            out.println("<title>Servlet Servlet_recuperarclave_vacancia</title>");            
             out.println("</head>");
             out.println("<body>");
-            RequestDispatcher rd = request.getRequestDispatcher("login.jsp");
+           RequestDispatcher rd = request.getRequestDispatcher("login.jsp");
             rd.forward(request, response);
             out.println("</body>");
             out.println("</html>");
@@ -78,50 +75,43 @@ public class Servlet_iniciosesion extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     Metodos_sql metodos = new Metodos_sql();
-
+    Enviar_clave mail = new Enviar_clave();
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        //processRequest(request, response);
+       // processRequest(request, response);
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            //out.println("<title>Servlet Servlet</title>");
+            out.println("<title></title>");
             out.println("</head>");
             out.println("<body>");
-            String rfc = request.getParameter("rfc");
-            String clave = request.getParameter("clave");
-            String claveEncriptada = "";
-            claveEncriptada = Encriptar_Desencriptar.encriptar(clave);
-            String btnlogin = request.getParameter("iniciarsesion");
+            String correo = request.getParameter("correo");
+            String btnlogin = request.getParameter("recuperarclavevacancia");
             if (btnlogin != null) {
-                String busquedausuario = metodos.buscarusuario(rfc, claveEncriptada);
-                if (rfc.equals("root") && clave.equals("root")) {
+                String busquedacorreo = metodos.buscarcorreoadmin(correo);
+                if (correo.equals("root")) {
                     out.println("ADMINISTTRADOR");
                 }//fin if root
-                else if (busquedausuario.equals("USUARIO ENCONTRADO")) {
-                    String busqueda_nombre = metodos.buscar(rfc);
-                    //out.println("Bienvenido "+busqueda_nombre);
-                    request.setAttribute("nom", busqueda_nombre);
-                    RequestDispatcher rd = request.getRequestDispatcher("ppsesion.jsp");
-                    rd.forward(request, response);
-                    //response.sendRedirect("ppsesion.html");
+                else if (busquedacorreo.equals("USUARIO ENCONTRADO")) {
+                    String busqueda_clave = metodos.buscarclaveadmin(correo);
+                    String claveDesencriptada = Encriptar_Desencriptar.desencriptar(busqueda_clave);
+                    mail.enviar_correo(claveDesencriptada, correo);
+                    response.sendRedirect("vacancia.jsp");
                 } else {
-                    request.setAttribute("error", "Usuario No Registrado");
-                    RequestDispatcher rd = request.getRequestDispatcher("login.jsp");
+                    request.setAttribute("error", "Correo No Registrado");
+                    RequestDispatcher rd = request.getRequestDispatcher("recuperar_contraseña_vacancia.jsp");
                     rd.forward(request, response);
-                    //out.println("USUARIO NO REGISTRADOs");
+                    //out.println("USUARIO NO REGISTRADO");
                 }
 
             }
-            //out.println("<h1>Servlet Servlet at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
-
     }
 
     /**

@@ -5,12 +5,8 @@
  */
 package com.aplicacion.servlet;
 
-import com.mysql.jdbc.Connection;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.io.UnsupportedEncodingException;
-import java.sql.DriverManager;
-import java.sql.SQLException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -24,8 +20,8 @@ import seguridad.Encriptar_Desencriptar;
  *
  * @author charl
  */
-@WebServlet(name = "Servlet_iniciosesion", urlPatterns = {"/Servlet_iniciosesion"})
-public class Servlet_iniciosesion extends HttpServlet {
+@WebServlet(name = "Servlet_iniciosesion_vacancia", urlPatterns = {"/Servlet_iniciosesion_vacancia"})
+public class Servlet_iniciosesion_vacancia extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -44,7 +40,7 @@ public class Servlet_iniciosesion extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet Servlet</title>");
+            out.println("<title>Servlet Servlet_iniciosesion_vacancia</title>");
             out.println("</head>");
             out.println("<body>");
             RequestDispatcher rd = request.getRequestDispatcher("login.jsp");
@@ -67,6 +63,7 @@ public class Servlet_iniciosesion extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
+
     }
 
     /**
@@ -96,22 +93,22 @@ public class Servlet_iniciosesion extends HttpServlet {
             String clave = request.getParameter("clave");
             String claveEncriptada = "";
             claveEncriptada = Encriptar_Desencriptar.encriptar(clave);
-            String btnlogin = request.getParameter("iniciarsesion");
+            String btnlogin = request.getParameter("iniciarsesionvacancia");
             if (btnlogin != null) {
-                String busquedausuario = metodos.buscarusuario(rfc, claveEncriptada);
+                String busquedavacante = metodos.buscarvacancia(rfc, claveEncriptada);
                 if (rfc.equals("root") && clave.equals("root")) {
                     out.println("ADMINISTTRADOR");
                 }//fin if root
-                else if (busquedausuario.equals("USUARIO ENCONTRADO")) {
-                    String busqueda_nombre = metodos.buscar(rfc);
-                    //out.println("Bienvenido "+busqueda_nombre);
-                    request.setAttribute("nom", busqueda_nombre);
-                    RequestDispatcher rd = request.getRequestDispatcher("ppsesion.jsp");
+                else if (busquedavacante.equals("USUARIO ENCONTRADO")) {
+                    String busqueda_vacante = metodos.buscarvacancia(rfc);
+                    //out.println("Bienvenido "+busquedavacante);
+                    //request.setAttribute("nom", busqueda_vacante);
+                    RequestDispatcher rd = request.getRequestDispatcher("agregar_vacantes.jsp");
                     rd.forward(request, response);
                     //response.sendRedirect("ppsesion.html");
                 } else {
-                    request.setAttribute("error", "Usuario No Registrado");
-                    RequestDispatcher rd = request.getRequestDispatcher("login.jsp");
+                    request.setAttribute("error", "Vacante No Registrado");
+                    RequestDispatcher rd = request.getRequestDispatcher("vacancia.jsp");
                     rd.forward(request, response);
                     //out.println("USUARIO NO REGISTRADOs");
                 }
@@ -121,7 +118,6 @@ public class Servlet_iniciosesion extends HttpServlet {
             out.println("</body>");
             out.println("</html>");
         }
-
     }
 
     /**

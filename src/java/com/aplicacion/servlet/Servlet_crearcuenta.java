@@ -1,3 +1,4 @@
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -9,14 +10,18 @@ import correos.Validar_correo;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
+import java.sql.Date;
 import java.util.regex.Matcher;
+import javafx.scene.control.Alert;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.swing.JOptionPane;
 import metodos_sql.Metodos_sql;
-import org.apache.commons.codec.digest.DigestUtils;
+//import org.apache.commons.codec.digest.DigestUtils;
 import seguridad.Encriptar_Desencriptar;
 
 /**
@@ -37,7 +42,7 @@ public class Servlet_crearcuenta extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
+        response.setContentType("text/html;charset=ISO-8859-1");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");
@@ -46,7 +51,8 @@ public class Servlet_crearcuenta extends HttpServlet {
             out.println("<title>Servlet Servlet_crearcuenta</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet Servlet_crearcuenta at " + request.getContextPath() + "</h1>");
+            RequestDispatcher rd = request.getRequestDispatcher("login.jsp");
+            rd.forward(request, response);
             out.println("</body>");
             out.println("</html>");
         }
@@ -83,7 +89,7 @@ public class Servlet_crearcuenta extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        response.setContentType("text/html;charset=UTF-8");
+        response.setContentType("text/html;charset=ISO-8859-1");
         try (PrintWriter out = response.getWriter()) {
 
             out.println("<!DOCTYPE html>");
@@ -92,31 +98,35 @@ public class Servlet_crearcuenta extends HttpServlet {
             //out.println("<title>Servlet Servlet_crearcuenta</title>");
             out.println("</head>");
             out.println("<body>");
-            int id = 0;
-            String nombre = request.getParameter("nombre");
-            String apellido = request.getParameter("apellido");
+            String telfijo = request.getParameter("telfijo");
+            String telcel = request.getParameter("telcel");
+            String perfil = "D";
+
+            String consideraciones = request.getParameter("texto");
+            String programa = request.getParameter("programa");
+            String entidad = request.getParameter("campoentidad7");
+            String plantel = request.getParameter("n_plantel");
+            String nombre = request.getParameter("Nombre");
+            String primerApellido = request.getParameter("primerApellido");
+            String segundoApellido = request.getParameter("segundoApellido");
             String correo = request.getParameter("correo");
             String clave = request.getParameter("clave");
+            String rfc = request.getParameter("rfc");
             String claveEncriptada = "";
             claveEncriptada = Encriptar_Desencriptar.encriptar(clave);
-            //String claveencriptMD5 = DigestUtils.md5Hex(clave);
             String btnlogin = request.getParameter("crearcuenta");
             if (btnlogin != null) {
-                Matcher comparar = validar.validar_correo(correo);
-                if (comparar.find() == true) {
-                    int i = metodos.guardar(id, nombre, apellido, correo, claveEncriptada);
-                    if (i > 0) {
-                        out.print("DATOS GUARDADOS");
-                    } else {
-                        out.print("DATOS NO GUARDADOS");
-                    }
-                }//fin comparar
-                else
-                {
-                    out.println("ESCRIBE BIEN TU CORREO");
+                int datos1 = metodos.guardar2(0, programa, entidad, plantel, nombre, primerApellido, segundoApellido, correo, claveEncriptada, rfc, telfijo, telcel, perfil, consideraciones);
+                //int datos2 = metodos.guardar3(0, telfijo, telcel, consideraciones);
+                //if (datos2 > 0 && datos1 > 0) {
+                if (datos1 > 0) {
+                    response.sendRedirect("login.jsp");
+                } else {
+                    out.print("DATOS NO GUARDADOS");
                 }
+
             }//fin presionar boton
-            // out.println("<h1>Servlet Servlet_crearcuenta at " + request.getContextPath() + "</h1>");
+
             out.println("</body>");
             out.println("</html>");
         }

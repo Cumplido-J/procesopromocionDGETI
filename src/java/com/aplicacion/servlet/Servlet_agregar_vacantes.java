@@ -5,12 +5,8 @@
  */
 package com.aplicacion.servlet;
 
-import com.mysql.jdbc.Connection;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.io.UnsupportedEncodingException;
-import java.sql.DriverManager;
-import java.sql.SQLException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -18,14 +14,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import metodos_sql.Metodos_sql;
-import seguridad.Encriptar_Desencriptar;
 
 /**
  *
  * @author charl
  */
-@WebServlet(name = "Servlet_iniciosesion", urlPatterns = {"/Servlet_iniciosesion"})
-public class Servlet_iniciosesion extends HttpServlet {
+@WebServlet(name = "Servlet_agregar_vacantes", urlPatterns = {"/Servlet_agregar_vacantes"})
+public class Servlet_agregar_vacantes extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -44,7 +39,7 @@ public class Servlet_iniciosesion extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet Servlet</title>");
+            out.println("<title>Servlet Servlet_agregar_vacantes</title>");
             out.println("</head>");
             out.println("<body>");
             RequestDispatcher rd = request.getRequestDispatcher("login.jsp");
@@ -82,46 +77,53 @@ public class Servlet_iniciosesion extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        //processRequest(request, response);
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
+
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            //out.println("<title>Servlet Servlet</title>");
+            //out.println("<title>Servlet Servlet_crearcuenta</title>");
             out.println("</head>");
             out.println("<body>");
-            String rfc = request.getParameter("rfc");
-            String clave = request.getParameter("clave");
-            String claveEncriptada = "";
-            claveEncriptada = Encriptar_Desencriptar.encriptar(clave);
-            String btnlogin = request.getParameter("iniciarsesion");
-            if (btnlogin != null) {
-                String busquedausuario = metodos.buscarusuario(rfc, claveEncriptada);
-                if (rfc.equals("root") && clave.equals("root")) {
-                    out.println("ADMINISTTRADOR");
-                }//fin if root
-                else if (busquedausuario.equals("USUARIO ENCONTRADO")) {
-                    String busqueda_nombre = metodos.buscar(rfc);
-                    //out.println("Bienvenido "+busqueda_nombre);
-                    request.setAttribute("nom", busqueda_nombre);
-                    RequestDispatcher rd = request.getRequestDispatcher("ppsesion.jsp");
+            String nom1 = request.getParameter("nombre");
+            String ent1 = request.getParameter("dato_ent");
+            String pla1 = request.getParameter("dato_pla");
+            String rfc1 = request.getParameter("dato_rfc");
+            String estado = request.getParameter("campoentidad");
+            String plantel = request.getParameter("n_plantel");
+            String plaza = request.getParameter("entidad2");
+            String cantidad1 = request.getParameter("cantidad");
+            String tipo = request.getParameter("campotipo");
+            String jornada = request.getParameter("campojornada");
+            String grado_academico = request.getParameter("campogrado1");
+            String vacancia = request.getParameter("tipovacancia");
+
+            String btnvacantes = request.getParameter("agregarvacantes");
+            //out.println(estado);
+
+            if (btnvacantes != null) {
+
+                int datos5 = metodos.guardar5(0, estado, plantel, plaza, cantidad1, tipo, jornada, grado_academico, vacancia);
+
+                if (datos5 > 0) {
+                    request.setAttribute("opc", "1");
+                    request.setAttribute("consulta", "1");
+                    request.setAttribute("nom", nom1);
+                    request.setAttribute("dato_ent", ent1);
+                    request.setAttribute("dato_pla", pla1);
+                    request.setAttribute("dato_rfc", rfc1);
+                    RequestDispatcher rd = request.getRequestDispatcher("vacantes.jsp");
                     rd.forward(request, response);
-                    //response.sendRedirect("ppsesion.html");
                 } else {
-                    request.setAttribute("error", "Usuario No Registrado");
-                    RequestDispatcher rd = request.getRequestDispatcher("login.jsp");
-                    rd.forward(request, response);
-                    //out.println("USUARIO NO REGISTRADOs");
+                    out.print("Servidor en mantenimiento, Datos no Guardados");
                 }
 
-            }
-            //out.println("<h1>Servlet Servlet at " + request.getContextPath() + "</h1>");
+            }//fin presionar boton
+
             out.println("</body>");
             out.println("</html>");
         }
-
     }
 
     /**

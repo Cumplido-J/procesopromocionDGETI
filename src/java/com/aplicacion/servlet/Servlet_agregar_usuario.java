@@ -5,12 +5,8 @@
  */
 package com.aplicacion.servlet;
 
-import com.mysql.jdbc.Connection;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.io.UnsupportedEncodingException;
-import java.sql.DriverManager;
-import java.sql.SQLException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -24,8 +20,8 @@ import seguridad.Encriptar_Desencriptar;
  *
  * @author charl
  */
-@WebServlet(name = "Servlet_iniciosesion", urlPatterns = {"/Servlet_iniciosesion"})
-public class Servlet_iniciosesion extends HttpServlet {
+@WebServlet(name = "Servlet_agregar_usuario", urlPatterns = {"/Servlet_agregar_usuario"})
+public class Servlet_agregar_usuario extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -44,7 +40,7 @@ public class Servlet_iniciosesion extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet Servlet</title>");
+            out.println("<title>Servlet Servlet_agregar_usuario</title>");
             out.println("</head>");
             out.println("<body>");
             RequestDispatcher rd = request.getRequestDispatcher("login.jsp");
@@ -82,46 +78,81 @@ public class Servlet_iniciosesion extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        //processRequest(request, response);
-        response.setContentType("text/html;charset=UTF-8");
+        response.setContentType("text/html;charset=ISO-8859-1");
         try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
+
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            //out.println("<title>Servlet Servlet</title>");
+            //out.println("<title>Servlet Servlet_crearcuenta</title>");
             out.println("</head>");
             out.println("<body>");
-            String rfc = request.getParameter("rfc");
+
+            String nom1 = request.getParameter("nombre");
+            String ent1 = request.getParameter("dato_ent");
+            String pla1 = request.getParameter("dato_pla");
+            String rfc1 = request.getParameter("dato_rfc");
+            String estado = request.getParameter("campoentidad");
+            String plantel = request.getParameter("n_plantel");
+            String usuario = request.getParameter("usuario");
+            String nombre = request.getParameter("Nombre");
+            String apellidopaterno = request.getParameter("primerApellido");
+            String apellidomaterno = request.getParameter("segundoApellido");
+            String telfijo = request.getParameter("telfijo");
+            String telcel = request.getParameter("telcel");
+            String correo = request.getParameter("correo");
             String clave = request.getParameter("clave");
+            String perfil = "A";
             String claveEncriptada = "";
+            String[] check = request.getParameterValues("ckl");
             claveEncriptada = Encriptar_Desencriptar.encriptar(clave);
-            String btnlogin = request.getParameter("iniciarsesion");
+            
+            int lon = check.length;
+            String permisos="";
+            if(lon==1){permisos = check[0];}
+            if(lon==2){permisos = check[0]+check[1];}
+            if(lon==3){permisos = check[0]+check[1]+check[2];}
+            if(lon==4){permisos = check[0]+check[1]+check[2]+check[3];}
+            if(lon==5){permisos = check[0]+check[1]+check[2]+check[3]+check[4];}
+            if(lon==6){permisos = check[0]+check[1]+check[2]+check[3]+check[4]+check[5];}
+            if(lon==7){permisos = check[0]+check[1]+check[2]+check[3]+check[4]+check[5]+check[6];}
+            if(lon==8){permisos = check[0]+check[1]+check[2]+check[3]+check[4]+check[5]+check[6]+check[7];}
+            if(lon==9){permisos = check[0]+check[1]+check[2]+check[3]+check[4]+check[5]+check[6]+check[7]+check[8];}
+           
+            
+            String btnlogin = request.getParameter("agregarusuario");
+
             if (btnlogin != null) {
-                String busquedausuario = metodos.buscarusuario(rfc, claveEncriptada);
-                if (rfc.equals("root") && clave.equals("root")) {
-                    out.println("ADMINISTTRADOR");
-                }//fin if root
-                else if (busquedausuario.equals("USUARIO ENCONTRADO")) {
-                    String busqueda_nombre = metodos.buscar(rfc);
-                    //out.println("Bienvenido "+busqueda_nombre);
-                    request.setAttribute("nom", busqueda_nombre);
-                    RequestDispatcher rd = request.getRequestDispatcher("ppsesion.jsp");
+
+                int datos5 = 0;
+
+                int datos4 = metodos.guardar4(0, estado, plantel, usuario, nombre, apellidopaterno, apellidomaterno, telfijo, telcel, correo, claveEncriptada, perfil,permisos);
+
+                int id = metodos.buscarid();
+
+                for (int n = 0; n < check.length; n++) {
+                    if (check[n] != ("0")) {
+                        datos5 = metodos.guardar6(0, id, Integer.parseInt(check[n]));
+                    }
+                }
+                if (datos4 > 0 && datos5 > 0) {
+                    request.setAttribute("opc", "1");
+                    request.setAttribute("nom", nom1);
+                    request.setAttribute("consulta", "1");
+                    request.setAttribute("dato_ent", ent1);
+                    request.setAttribute("dato_pla", pla1);
+                    request.setAttribute("dato_rfc", rfc1);
+                    RequestDispatcher rd = request.getRequestDispatcher("administracion_usuarios.jsp");
                     rd.forward(request, response);
-                    //response.sendRedirect("ppsesion.html");
                 } else {
-                    request.setAttribute("error", "Usuario No Registrado");
-                    RequestDispatcher rd = request.getRequestDispatcher("login.jsp");
-                    rd.forward(request, response);
-                    //out.println("USUARIO NO REGISTRADOs");
+                    out.print("Servidor en mantenimiento, Datos no Guardados");
                 }
 
-            }
-            //out.println("<h1>Servlet Servlet at " + request.getContextPath() + "</h1>");
+            }//fin presionar boton
+
             out.println("</body>");
             out.println("</html>");
         }
-
     }
 
     /**
