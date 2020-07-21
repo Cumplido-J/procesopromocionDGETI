@@ -6,6 +6,7 @@
 package com.aplicacion.servlet;
 
 import com.aplicacion.beans.Docente;
+import com.aplicacion.beans.HorasGrupo;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;

@@ -6,6 +6,7 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import='herramientas.Catalogos'%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html lang="es">
     <head>
@@ -313,11 +314,11 @@
                         <div id="seccionHoras" class="collapse in">
                             <div class="form-group col-md-3">
                               <label class="control-label" for="numHoras">Horas frente a grupo:</label>
-                              <input type="text" class="form-control input-sm" id="numHoras" name="numHoras" readOnly="true">
+                              <input type="text" class="form-control input-sm" id="numHoras" name="numHoras" value="${Docente.getTotalHoras()}" readOnly="true">
                             </div>
                             <div class="form-group col-md-3">
                               <label class="control-label" for="numGrupos">Número de grupos:</label>
-                              <input type="text" class="form-control input-sm" id="numGrupos" name="numGrupos" >
+                              <input type="text" class="form-control input-sm" id="numGrupos" name="numGrupos" value="${Docente.getGrupos()}" readOnly="true">
                             </div>
                             <div class="text-center">
                               <input type="button" class="btn btn-link btn-sm" value="(+) Agregar información" data-toggle="modal" data-target="#modalInformacion"/>
@@ -329,7 +330,22 @@
                                   <th>Opciones</th>                        
                                 </tr>
                                 <tbody id="tablaInfo">
-                                    <td colspan="2" class="text-center"><p class="text-danger">Sin información</p></td>
+                                    <!--<td colspan="2" class="text-center"><p class="text-danger">Sin información</p></td>-->
+                                    <c:forEach items="${Docente.getArrayHoras()}" var="current">
+                                        <tr>
+                                            <td>
+                                                Periodo:<c:out value="${current.id_periodo}"/><br/>
+                                                Materia:<c:out value="${current.clave_materia}"/>-
+                                                <c:out value="${current.nombre_materia}"/><br/>
+                                                Turno:<c:out value="${current.turno}"/><br/>
+                                                Grupo:<c:out value="${current.grupo}"/><br/>
+                                                Carrera:<c:out value="${current.nombre_carrera}"/><br/>
+                                                Semestre:<c:out value="${current.semestre}"/><br/>
+                                                Horas:<c:out value="${current.numero_horas}"/><br/>
+                                            </td>
+                                            <td>&nbsp;</td>
+                                        </tr>
+                                    </c:forEach>
                                 </tbody>                                
                               </table>
                             </div>

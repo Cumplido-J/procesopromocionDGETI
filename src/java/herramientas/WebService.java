@@ -27,7 +27,7 @@ public class WebService {
     public String getData() {
         return data;
     }
-
+    
     public String getStatus() {
         return status;
     }
@@ -46,12 +46,15 @@ public class WebService {
                 String datos=in.readLine();
                 String[] aux=datos.split(";");                
                 data=aux[0].substring(aux[0].indexOf("'"));
+                data=data.replaceAll("'", "");
                 status=aux[1].substring(aux[1].indexOf("'"));
                 mensaje=aux[2].substring(aux[2].indexOf("'"));   
         } catch (Exception e) {
                 System.out.println(e.getMessage());
         }
     } 
+    
+    
     
     
 }

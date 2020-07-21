@@ -28,13 +28,6 @@ public class Metodos_sql {
 
 //------------------------------------------------------- CONEXION BASE DE DATOS    
     private static Connection conexion;
-    /*
-    private static final String driver = "com.mysql.jdbc.Driver";
-    private static final String user = "admin";
-    private static final String pass = "admin";
-    //private static final String pass = "123456";
-    private static final String url = "jdbc:mysql://localhost/bdpromocion?characterEncoding=utf8&useConfigs=maxPerformance";
-    */
     
     public static Connection conector() {
         String driver,user,pass,url;

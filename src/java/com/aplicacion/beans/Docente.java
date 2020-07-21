@@ -5,6 +5,8 @@
  */
 package com.aplicacion.beans;
 
+import com.google.gson.Gson;
+import com.sun.tools.javac.util.Convert;
 import herramientas.WebService;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -38,7 +40,7 @@ public class Docente {
     private String cedula="";
     private Boolean cargaTitulo=false;
     private Boolean cargaCedula=false;
-    private String horas="";
+    private String jsonHoras="";
     
     public Docente() {
     }
@@ -220,13 +222,32 @@ public class Docente {
     public void consumeWSCatalogoDocentes(){
         WebService ws;
         ws=new WebService("http://200.77.238.19/develop/protected/pages/herramientas/estructuras/promocion/catalogo_docentes.php?rfc="+rfc);
-        ws.consumeWS();
-        horas=ws.getData();
-        horas.replaceAll("'", "");
+        ws.consumeWS(); 
+        jsonHoras=ws.getData();
     }
     
-    public String getHoras() {
-        return horas;
+    public HorasGrupo[] getArrayHoras() {        
+        HorasGrupo[] aux=null;
+        if(jsonHoras!=""){            
+            Gson gson = new Gson();
+            aux = gson.fromJson(jsonHoras,HorasGrupo[].class);            
+        }        
+        return aux;    
     }
+    
+    public int getTotalHoras(){
+        int totalHoras=0;
+        HorasGrupo[] aux=getArrayHoras();
+        for(HorasGrupo hora:aux){
+            totalHoras+=Integer.parseInt(hora.numero_horas);
+        }
+        return totalHoras;
+    }
+    public int getGrupos(){        
+        HorasGrupo[] aux=getArrayHoras();        
+        return aux.length;
+    }
+    
+    
     
 }
