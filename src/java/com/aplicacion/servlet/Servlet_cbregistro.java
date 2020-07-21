@@ -22,7 +22,7 @@ import javax.servlet.http.HttpSession;
  * @author David Reyna
  */
 @WebServlet(name = "Registro", urlPatterns = {"/Registro"})
-public class Servlet_cbregistro extends HttpServlet {
+public class Servlet_cbRegistro extends HttpServlet {
     Docente docente;
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -70,6 +70,9 @@ public class Servlet_cbregistro extends HttpServlet {
             docente=new Docente();
             docente.setIdUsuario(session.getAttribute("idUsuario").toString());
             docente.consultaPreRegistro();
+            docente.consumeWSCatalogoDocentes();
+            
+            
             request.setAttribute("Docente", docente);
 
             ServletContext sc = getServletContext();

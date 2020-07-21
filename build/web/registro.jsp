@@ -176,7 +176,7 @@
                   </div>
                 </div>
 
-                <div class="panel panel-default" id="panelInfoLaboral" hidden>
+                <div class="panel panel-default" id="panelInfoLaboral" >
                   <div class="panel-heading">
                     <h4 class="panel-title">
                       <a data-parent="#accordion" data-toggle="collapse" href="#infoLaboral" aria-expanded="true" aria-controls="infoLaboral">
@@ -362,7 +362,7 @@
                     </div>
                   </div>
                 </div>
-                <div class="panel panel-default" id="panelInfoCompatibilidad" hidden>
+                <div class="panel panel-default" id="panelInfoCompatibilidad" >
                   <div class="panel-heading">
                     <h4 class="panel-title">
                       <a data-parent="#accordion" data-toggle="collapse" href="#infoCompatibilidad" aria-expanded="true" aria-controls="infoCompatibilidad">

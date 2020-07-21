@@ -411,6 +411,7 @@ function registrarInfo(){
    $("#numHoras").val(horas);
    $("#modalInformacion").modal("hide");
    $("#tipoInfo").val("");
+   $("#periodo").val("");
    cambioTipoInfo();
 }
 function borrarHoras(id){

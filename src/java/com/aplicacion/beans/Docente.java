@@ -5,6 +5,10 @@
  */
 package com.aplicacion.beans;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.net.URL;
+import java.net.URLConnection;
 import java.util.List;
 import metodos_sql.Metodos_sql;
 
@@ -209,6 +213,29 @@ public class Docente {
             rfc=datos.get(0)[4];
         }
     }
-    
+    public void consumeWSCatalogoDocentes(){
+        URL url;
+        try {
+                // Creando un objeto URL
+                url = new URL("http://200.77.238.19/develop/protected/pages/herramientas/estructuras/promocion/catalogo_docentes.php?rfc="+rfc);
+
+                // Realizando la petición GET
+                URLConnection con = url.openConnection();
+
+                // Leyendo el resultado
+                BufferedReader in = new BufferedReader(new InputStreamReader(
+                                con.getInputStream()));
+
+                String datos=in.readLine();
+                String[] aux=datos.split(";");
+                
+                System.out.println(aux[0].indexOf("["));
+                System.out.println(aux[0].indexOf("]"));
+                
+                
+        } catch (Exception e) {
+                System.out.println(e.getMessage());
+        }
+    }
     
 }
