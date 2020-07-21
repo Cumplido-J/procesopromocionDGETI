@@ -5,6 +5,7 @@
  */
 package com.aplicacion.beans;
 
+import herramientas.WebService;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.URL;
@@ -37,9 +38,12 @@ public class Docente {
     private String cedula="";
     private Boolean cargaTitulo=false;
     private Boolean cargaCedula=false;
-
+    private String horas="";
+    
     public Docente() {
     }
+
+    
 
     public String getIdUsuario() {
         return idUsuario;
@@ -214,7 +218,15 @@ public class Docente {
         }
     }
     public void consumeWSCatalogoDocentes(){
-        //url = new URL("http://200.77.238.19/develop/protected/pages/herramientas/estructuras/promocion/catalogo_docentes.php?rfc="+rfc);
+        WebService ws;
+        ws=new WebService("http://200.77.238.19/develop/protected/pages/herramientas/estructuras/promocion/catalogo_docentes.php?rfc="+rfc);
+        ws.consumeWS();
+        horas=ws.getData();
+        horas.replaceAll("'", "");
+    }
+    
+    public String getHoras() {
+        return horas;
     }
     
 }

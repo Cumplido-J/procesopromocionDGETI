@@ -73,6 +73,7 @@ public class Servlet_cbRegistro extends HttpServlet {
             docente.consumeWSCatalogoDocentes();
             
             
+            
             request.setAttribute("Docente", docente);
 
             ServletContext sc = getServletContext();

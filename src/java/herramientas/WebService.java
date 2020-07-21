@@ -36,22 +36,18 @@ public class WebService {
         return mensaje;
     }
 
-    private void consumeWS(){
+    public void consumeWS(){
         try {
                 // Realizando la petición GET
                 URLConnection con = new URL(url).openConnection();
-
                 // Leyendo el resultado
                 BufferedReader in = new BufferedReader(new InputStreamReader(
                                 con.getInputStream()));
-
                 String datos=in.readLine();
-                String[] aux=datos.split(";");
-                
-                System.out.println(aux[0].indexOf("["));
-                System.out.println(aux[0].indexOf("]"));
-                
-                
+                String[] aux=datos.split(";");                
+                data=aux[0].substring(aux[0].indexOf("'"));
+                status=aux[1].substring(aux[1].indexOf("'"));
+                mensaje=aux[2].substring(aux[2].indexOf("'"));   
         } catch (Exception e) {
                 System.out.println(e.getMessage());
         }
