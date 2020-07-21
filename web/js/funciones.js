@@ -147,12 +147,69 @@ $(document).ready(function () {
             return false;
         }
     });
+    $('#formInfoHorasGrupo').submit(function(e) {
+        e.preventDefault();
+    }).validate({ 
+        rules: {
+            'numHoras':{
+                min:1
+            },
+            'numGrupos':{
+                min:1
+            }
+        },
+        messages: {
+            'numHoras':{
+                min:"Debe registrar las horas frente a grupo"
+            },
+            'numGrupos':{
+                min:"Debe registrar las horas frente a grupo"
+            },
+            'nivelCENNI': {
+                required: "Campo requerido"
+            },
+            'folio': {
+                required: "Campo requerido"
+            }
+        },
+        submitHandler:function(){
+            $.ajax({
+                type:$('#formInfoHorasGrupo').attr("method"),
+                url:$('#formInfoHorasGrupo').attr("action"),
+                data:$('#formInfoHorasGrupo').serialize(),
+                beforeSend:function(){
+                    $("#btnEnviar3").val("Guardando...");
+                    $("#btnEnviar3").attr("disabled","disabled");
+                },
+                complete:function(){
+                   $("#btnEnviar3").val("Guardar y continuar"); 
+                   $("#btnEnviar3").removeAttr("disabled");
+                },success:function(data){
+                    if(data=="ok"){
+                        mostrarSiguiente(3);
+                    }else{
+                        $("#mensaje").html(data);            
+                        $("#modalMensaje").modal("show");
+                    }
+                },error:function(){
+                    
+                }
+            });
+            return false;
+        }
+    });
     $('#formInfoCompatibilidad').submit(function(e) {
         e.preventDefault();
     }).validate({  
+        rules: {
+            numHorasOtro: {
+              number: true
+            }
+        },
         messages: {
             'numHorasOtro': {
-                required: "Campo requerido"
+                required: "Campo requerido",
+                number:"Ingrese un valor numérico"
             }
         },
         submitHandler:function(){
@@ -171,8 +228,96 @@ $(document).ready(function () {
                     if(data=="ok"){
                         mostrarSiguiente(4);
                     }else{
-                        $("#mensaje").html("|"+data+"|");            
+                        $("#mensaje").html(data);            
                         $("#modalMensaje").modal("show");
+                    }
+                },error:function(){
+                    
+                }
+            });
+            return false;
+        }
+    });
+    $('#formHorasGrupo').submit(function(e) {
+        e.preventDefault();
+    }).validate({
+        rules: {
+            horas: {
+              number: true
+            }
+        },
+        messages: {
+            'periodo': {
+                required: "Seleccione una opción"
+            },
+            'grupo': {
+                required: "Campo requerido"
+            },
+            'semestre': {
+                required: "Seleccione una opción"
+            },
+            'tipoInfo': {
+                required: "Seleccione una opción"
+            },
+            'version': {
+                required: "Seleccione una opción"
+            },
+            'asignatura': {
+                required: "Seleccione una opción"
+            },
+            'carrera_cp': {
+                required: "Seleccione una opción"
+            },
+            'modulo': {
+                required: "Seleccione una opción"
+            },
+            'submodulo': {
+                required: "Seleccione una opción"
+            },
+            'taller': {
+                required: "Seleccione una opción"
+            },
+            'horas': {
+                required: "Campo requerido",
+                number:"Ingrese un valor numérico"
+            }
+        },
+        submitHandler:function(){
+            $.ajax({
+                type:$('#formHorasGrupo').attr("method"),
+                url:$('#formHorasGrupo').attr("action"),
+                data:$('#formHorasGrupo').serialize(),
+                beforeSend:function(){
+                    $("#btnEnviarHG").val("Guardando...");
+                    $("#btnEnviarHG").attr("disabled","disabled");
+                },
+                complete:function(){
+                   $("#btnEnviarHG").val("Registrar"); 
+                   $("#btnEnviarHG").removeAttr("disabled");
+                },success:function(data){
+                    var datos=data.split("|");
+                    if(datos.length==3){
+                        $("#tablaInfo").html(datos[0]);                        
+                        if(datos[0].includes("INGLES")||datos[0].includes("CENNI")||datos[0].includes("INGLÉS")){
+                            $("#seccionCENNI").removeAttr("hidden");
+                            $("#nivelCENNI").attr("required","true");
+                            $("#folio").attr("required","true");
+                        }else{
+                            $("#seccionCENNI").attr("hidden","true");
+                            $("#nivelCENNI").removeAttr("required");
+                            $("#nivelCENNI").val("");
+                            $("#folio").removeAttr("required");
+                            $("#folio").val("");
+                        }                        
+                        $("#numHoras").val(datos[1]);
+                        $("#numGrupos").val(datos[2]);
+                        $("#modalInformacion").modal("hide");
+                        $("#tipoInfo").val("");
+                        $("#periodo").val("");
+                        $("#semestre").val("");
+                        $("#grupo").val("");
+                        $("#horas").val("");
+                        cambioTipoInfo();
                     }
                 },error:function(){
                     
@@ -238,16 +383,22 @@ function cambioTipoInfo(){
                 $("#version").html(respuesta);
             }); 
             $("#version").attr("onchange","cargaAsignaturas()");
+            $("#version").attr("required","true");
             $("#version").val("");
             $("#semestre").attr("onchange","cargaAsignaturas()");
-            $("#semestre").val("");
+            //$("#semestre").val("");
             $("#asignatura").val("");
             mostrarElemento("divVersion");
-            mostrarElemento("divSemestre");
+            //mostrarElemento("divSemestre");
+            $("#asignatura").attr("required","true");
             mostrarElemento("divAsignatura");
+            $("#carrera_cp").removeAttr("required");
             ocultarElemento("divCarrera");
+            $("#modulo").removeAttr("required");
             ocultarElemento("divModulo");
+            $("#submodulo").removeAttr("required");
             ocultarElemento("divSubmodulo");
+            $("#taller").removeAttr("required");
             ocultarElemento("divTaller");
             break;
         case "cp":
@@ -256,32 +407,46 @@ function cambioTipoInfo(){
             }); 
             $("#version").attr("onchange","cargaCarreras()");
             $("#version").val("");
+            $("#version").attr("required","true");
             $("#semestre").attr("onchange","cargaCarreras()");
-            $("#semestre").val("");
+            //$("#semestre").val("");
             $("#carrera_cp").val("");
+            $("#carrera_cp").attr("required","true");
             $("#modulo").val("");
+            $("#modulo").attr("required","true");
             $("#submodulo").val("");
+            $("#submodulo").attr("required","true");
             mostrarElemento("divVersion");
-            mostrarElemento("divSemestre");
+            //mostrarElemento("divSemestre");
+            $("#asignatura").removeAttr("required");
             ocultarElemento("divAsignatura");
             mostrarElemento("divCarrera");
             mostrarElemento("divModulo");
             mostrarElemento("divSubmodulo");
+            $("#taller").removeAttr("required");
             ocultarElemento("divTaller");
             break;
         case "tl":
             $("#taller").val("");
+            $("#version").removeAttr("required");
             ocultarElemento("divVersion");
-            ocultarElemento("divSemestre");
+            //ocultarElemento("divSemestre");
+            $("#version").removeAttr("required");
             ocultarElemento("divAsignatura");
+            $("#asignatura").removeAttr("required");
+            $("#carrera_cp").removeAttr("required");
             ocultarElemento("divCarrera");
+            $("#modulo").removeAttr("required");
             ocultarElemento("divModulo");
+            $("#submodulo").removeAttr("required");            
             ocultarElemento("divSubmodulo");
             mostrarElemento("divTaller");
+            $("#taller").attr("required","true"); 
+            $("#horas").removeAttr("readOnly");
             break;
         default:
             ocultarElemento("divVersion");
-            ocultarElemento("divSemestre");
+            //ocultarElemento("divSemestre");
             ocultarElemento("divAsignatura");
             ocultarElemento("divCarrera");
             ocultarElemento("divModulo");
@@ -323,7 +488,7 @@ function cambioModulo() {
         $("#submodulo").html(respuesta);
     }); 
 }
-var info=[];
+/*var info=[];
 function registrarInfo(){
     
     if(info.length==0){
@@ -441,7 +606,7 @@ function borrarHoras(id){
    
    $("#tablaInfo").html(fila);
    $("#numHoras").val(horas);
-}
+}*/
 function mostrarSiguiente(id){
     switch(id){
         case 1:
@@ -632,6 +797,39 @@ function cambioCategoriaAspira() {
     $.get("ConsultaCatalogos", {k: "10",i:id}, function(respuesta){
         $("#rbRequisitos").html("<label class='control-label'>Seleccione el requisito cumplido de acuerdo a su situación:</label>"+respuesta);
     }); 
+}
+
+function borrarHoraGrupo(id){
+    $.post("BorrarHoraGrupo", {i: id}, function(result){
+        var datos=result.split("|");
+        if(datos.length==3){
+            $("#tablaInfo").html(datos[0]);
+            if(datos[0].includes("INGLES")||datos[0].includes("CENNI")||datos[0].includes("INGLÉS")){
+                $("#seccionCENNI").removeAttr("hidden");
+                $("#nivelCENNI").attr("required","true");
+                $("#folio").attr("required","true");
+            }else{
+                $("#seccionCENNI").attr("hidden","true");
+                $("#nivelCENNI").removeAttr("required");
+                $("#nivelCENNI").val("");
+                $("#folio").removeAttr("required");
+                $("#folio").val("");
+            } 
+            $("#numHoras").val(datos[1]);
+            $("#numGrupos").val(datos[2]);
+        }
+    });
+}
+
+function cambioAsignatura(){
+    var horas=$("#asignatura option:selected").attr("horas");
+    $("#horas").val(horas);
+    $("#horas").attr("readOnly","true");
+}
+function cambioSubmodulo(){
+    var horas=$("#submodulo option:selected").attr("horas");
+    $("#horas").val(horas);
+    $("#horas").attr("readOnly","true");
 }
 
 

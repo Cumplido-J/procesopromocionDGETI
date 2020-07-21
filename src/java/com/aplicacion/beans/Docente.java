@@ -6,12 +6,7 @@
 package com.aplicacion.beans;
 
 import com.google.gson.Gson;
-import com.sun.tools.javac.util.Convert;
 import herramientas.WebService;
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.net.URL;
-import java.net.URLConnection;
 import java.util.List;
 import metodos_sql.Metodos_sql;
 
@@ -41,9 +36,17 @@ public class Docente {
     private Boolean cargaTitulo=false;
     private Boolean cargaCedula=false;
     private String jsonHoras="";
+    private List<String[]> listaHoras=null;
+    private Boolean banderaIngles=false;
     
     public Docente() {
     }
+    
+
+    public List<String[]> getListaHoras() {
+        return listaHoras;
+    }
+    
 
     
 
@@ -238,16 +241,48 @@ public class Docente {
     public int getTotalHoras(){
         int totalHoras=0;
         HorasGrupo[] aux=getArrayHoras();
-        for(HorasGrupo hora:aux){
-            totalHoras+=Integer.parseInt(hora.numero_horas);
+        for(String[] hora:listaHoras){
+            totalHoras+=Integer.parseInt(hora[9]);
         }
         return totalHoras;
     }
-    public int getGrupos(){        
-        HorasGrupo[] aux=getArrayHoras();        
-        return aux.length;
+    public int getNumGrupos(){
+        return listaHoras.size();
     }
-    
-    
+    public void consultaHoras(){
+        Metodos_sql metodo = new Metodos_sql();
+        String[] parametros={idUsuario};
+        listaHoras=metodo.ejecutaSP("sp_selectHorasGrupo",parametros);          
+    } 
+    public void registraHorasWS(String idPeriodo,String claveAsignatura,String horas,String grupo,String semestre){
+        Metodos_sql metodo = new Metodos_sql();
+        String[] parametros={idUsuario,idPeriodo,claveAsignatura,horas,grupo,semestre};
+        List<String[]> datos=metodo.ejecutaSP("sp_registroHorasGrupoWS",parametros);          
+    }
+    public void registraHoras(String idPeriodo,String idAsignatura,String horas,String grupo,String semestre){
+        Metodos_sql metodo = new Metodos_sql();
+        String[] parametros={idUsuario,idPeriodo,idAsignatura,horas,grupo,semestre};
+        List<String[]> datos=metodo.ejecutaSP("sp_registroHorasGrupo",parametros);          
+    }
+    public void borraHoras(String idHoraGrupo){
+        Metodos_sql metodo = new Metodos_sql();
+        String[] parametros={idHoraGrupo};
+        List<String[]> datos=metodo.ejecutaSP("sp_deleteHorasGrupo",parametros);          
+    }
+
+    public Boolean getBanderaIngles() {
+        return banderaIngles;
+    }
+
+    public void setBanderaIngles(Boolean banderaIngles) {
+        this.banderaIngles = banderaIngles;
+    }
+    public void actualizaBanderaIngles(){
+        for(String[] dato:listaHoras){
+            if(dato[4].contains("INGLÉS")||dato[4].contains("INGLES")||dato[4].contains("CENNI")){
+                banderaIngles=true;
+            }
+        }
+    }
     
 }

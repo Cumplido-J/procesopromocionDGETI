@@ -43,7 +43,7 @@ public class Metodos_sql {
             Class.forName(driver);
             conexion = (Connection) DriverManager.getConnection(url, user, pass);
             if (conexion != null) {
-                System.out.println("conexion establecida");
+                //System.out.println("conexion establecida");
             }
         } catch (Exception ex) {
             System.out.println("Error de conexion:"+ex.toString());

@@ -307,18 +307,18 @@
                   </div>
                   <div class="panel-collapse collapse" id="infoHoras">
                     <div class="panel-body">
-                      <form role="form">
+                      <form role="form" id="formInfoHorasGrupo" action="RegistroInfoCENNI" method="POST">
                         <div class="checkbox col-md-6">
                           <label><input type="checkbox" checked="true" name="frenteGrupo" id="frenteGrupo" data-toggle="collapse" data-target="#seccionHoras">Marque la casilla si actualmente se encuentra frente a grupo</label>
                         </div>  
                         <div id="seccionHoras" class="collapse in">
                             <div class="form-group col-md-3">
                               <label class="control-label" for="numHoras">Horas frente a grupo:</label>
-                              <input type="text" class="form-control input-sm" id="numHoras" name="numHoras" value="${Docente.getTotalHoras()}" readOnly="true">
+                              <input type="text" class="form-control input-sm" id="numHoras" name="numHoras" value="${Docente.getTotalHoras()}"  required>
                             </div>
                             <div class="form-group col-md-3">
                               <label class="control-label" for="numGrupos">Número de grupos:</label>
-                              <input type="text" class="form-control input-sm" id="numGrupos" name="numGrupos" value="${Docente.getGrupos()}" readOnly="true">
+                              <input type="text" class="form-control input-sm" id="numGrupos" name="numGrupos" value="${Docente.getNumGrupos()}"  required>
                             </div>
                             <div class="text-center">
                               <input type="button" class="btn btn-link btn-sm" value="(+) Agregar información" data-toggle="modal" data-target="#modalInformacion"/>
@@ -331,19 +331,32 @@
                                 </tr>
                                 <tbody id="tablaInfo">
                                     <!--<td colspan="2" class="text-center"><p class="text-danger">Sin información</p></td>-->
-                                    <c:forEach items="${Docente.getArrayHoras()}" var="current">
+                                    <c:forEach items="${Docente.getListaHoras()}" var="hora">
                                         <tr>
                                             <td>
-                                                Periodo:<c:out value="${current.id_periodo}"/><br/>
-                                                Materia:<c:out value="${current.clave_materia}"/>-
-                                                <c:out value="${current.nombre_materia}"/><br/>
-                                                Turno:<c:out value="${current.turno}"/><br/>
-                                                Grupo:<c:out value="${current.grupo}"/><br/>
-                                                Carrera:<c:out value="${current.nombre_carrera}"/><br/>
-                                                Semestre:<c:out value="${current.semestre}"/><br/>
-                                                Horas:<c:out value="${current.numero_horas}"/><br/>
+                                                Periodo: <c:out value="${hora[2]}"/><br/>
+                                                <c:if test = "${hora[7] == 'A'}">
+                                                    <c:out value="Componente básico y/o propedéutico: "/> 
+                                                </c:if>
+                                                <c:if test = "${hora[7] == 'S'}">
+                                                    <c:out value="Componente profesional: "/> 
+                                                </c:if>
+                                                <c:if test = "${hora[7] == 'T'}">
+                                                    <c:out value="Taller: "/> 
+                                                </c:if> 
+                                                <c:if test = "${hora[5] != null}">
+                                                    <c:out value="${hora[5]}"/> - 
+                                                </c:if>
+                                                <c:out value="${hora[4]}"/><br/>
+                                                Grupo: <c:out value="${hora[10]}"/><br/>                                                
+                                                Semestre: <c:out value="${hora[6]}"/><br/>
+                                                Horas: <c:out value="${hora[9]}"/><br/>
                                             </td>
-                                            <td>&nbsp;</td>
+                                            <td class="text-center">
+                                                <button type="button" class="btn btn-sm" title="Borrar" onclick="borrarHoraGrupo(<c:out value="${hora[0]}"/>)">
+                                                    <span class="glyphicon glyphicon-trash"></span>
+                                                </button>                                                
+                                            </td>
                                         </tr>
                                     </c:forEach>
                                 </tbody>                                
@@ -371,8 +384,8 @@
                             </div>
                         </div>
                         <div class="col-xs-12 text-right">
-                          <button class="btn btn-sm btn-primary" type="reset">Limpiar</button>
-                          <input type="button" class="btn btn-sm btn-primary" value="Guardar y continuar" onclick="mostrarSiguiente(3)"/>
+                          <button class="btn btn-sm btn-primary" type="reset">Limpiar</button>                          
+                          <input class="btn btn-sm btn-primary" id="btnEnviar3" type="submit" value='Guardar y continuar'/>
                         </div>
                       </form>
                     </div>
@@ -475,17 +488,34 @@
                   <h4 class="modal-title">Registro información</h4>
                 </div>
                 <div class="modal-body">
-                    <div class="container-fluid">                    
-                        <form>
+                    <div class="container-fluid">
+                        
+                        <form id="formHorasGrupo" role="form" method="POST" action="RegistroHorasGrupo">
                             <div class="form-group col-md-6" >
                                 <label class="control-label" for="periodo">Periodo:</label>
-                                <select class="form-control input-sm" id="periodo" name="periodo">
+                                <select class="form-control input-sm" id="periodo" name="periodo" required>
                                     <%=new Catalogos().desplegarPeriodos()%>                                        
                                 </select>                          
                             </div>
                             <div class="form-group col-md-6">
+                                <label class="control-label" for="grupo">Grupo:</label>
+                                <input type="text" class="form-control input-sm" id="grupo" name="grupo" required>                                                                 
+                            </div>
+                            <div class="form-group col-md-6" id="divSemestre">
+                                <label class="control-label" for="semestre">Semestre:</label>
+                                <select class="form-control input-sm" id="semestre" name="semestre" required>
+                                    <option value="">-Seleccione-</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                    <option value="6">6</option>
+                                </select>                          
+                            </div>
+                            <div class="form-group col-md-6">
                                 <label class="control-label" for="tipoInfo">Tipo de información:</label>
-                                <select class="form-control input-sm" id="tipoInfo" name="tipoInfo" onchange="cambioTipoInfo()">
+                                <select class="form-control input-sm" id="tipoInfo" name="tipoInfo" onchange="cambioTipoInfo()" required>
                                     <option value="">-Seleccione-</option>
                                     <option value="cbp">Componente básico y/o propedeútico</option>
                                     <option value="cp">Componente profesional</option>
@@ -497,22 +527,10 @@
                                 <select class="form-control input-sm" id="version" name="version">
                                     <option value="">-Seleccione-</option>                                        
                                 </select>                          
-                            </div>
-                            <div class="form-group col-md-6" id="divSemestre" hidden>
-                                <label class="control-label" for="semestre">Semestre:</label>
-                                <select class="form-control input-sm" id="semestre" name="semestre">
-                                    <option value="">-Seleccione-</option>
-                                    <option value="1">1</option>
-                                    <option value="2">2</option>
-                                    <option value="3">3</option>
-                                    <option value="4">4</option>
-                                    <option value="5">5</option>
-                                    <option value="6">6</option>
-                                </select>                          
-                            </div>
+                            </div>                            
                             <div class="form-group col-md-6" id="divAsignatura" hidden>
-                                <label class="control-label" for="asignatura">Asignatura:</label>
-                                <select class="form-control input-sm" id="asignatura" name="asignatura">
+                                <label class="control-label" for="asignatura" >Asignatura:</label>
+                                <select class="form-control input-sm" id="asignatura" name="asignatura" onchange="cambioAsignatura()">
                                     <option value="">-Seleccione-</option>                                        
                                 </select>                          
                             </div>
@@ -530,7 +548,7 @@
                             </div>
                             <div class="form-group col-md-6" id="divSubmodulo" hidden>
                                 <label class="control-label" for="submodulo">Submodulo:</label>
-                                <select class="form-control input-sm" id="submodulo" name="submodulo">
+                                <select class="form-control input-sm" id="submodulo" name="submodulo" onchange="cambioSubmodulo()">
                                     <option value="">-Seleccione-</option>                                        
                                 </select>                          
                             </div>
@@ -541,14 +559,16 @@
                                         <%=new Catalogos().desplegarTalleres()%>                                        
                                     </select>                          
                                 </div>
-                                <div class="form-group col-md-6">
-                                    <label class="control-label" for="horasTaller">Horas:</label>
-                                    <input type="text" class="form-control input-sm" id="horasTaller" name="horasTaller">                                                                 
-                                </div>
+                                
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label class="control-label" for="horas">Horas:</label>
+                                <input type="text" class="form-control input-sm" id="horas" name="horas" required>                                                                 
                             </div>
                             <div class="col-xs-12 text-center">
                                 <input type="button" class="btn btn-primary btn-sm" value="Cancelar" data-dismiss="modal"/>
-                                <input type="button" class="btn btn-primary btn-sm" value="Registrar" onclick="registrarInfo()"/>                                    
+                                <input class="btn btn-sm btn-primary" id="btnEnviarHG" type="submit" value='Registrar'/>
+                                                                   
                             </div>
                         </form>
                     </div>                                       
@@ -598,6 +618,17 @@
             $( "#carrera" ).autocomplete({
               source: availableTags
             });
+            if(${Docente.getBanderaIngles()}){
+                $("#seccionCENNI").removeAttr("hidden");
+                $("#nivelCENNI").attr("required","true");
+                $("#folio").attr("required","true");
+            }else{
+                $("#seccionCENNI").attr("hidden","true");
+                $("#nivelCENNI").removeAttr("required");
+                $("#nivelCENNI").val("");
+                $("#folio").removeAttr("required");
+                $("#folio").val("");
+            } 
           } );
         </script>
     </body>

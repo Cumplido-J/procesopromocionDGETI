@@ -6,11 +6,8 @@
 package com.aplicacion.servlet;
 
 import com.aplicacion.beans.Docente;
-import com.aplicacion.beans.HorasGrupo;
 import java.io.IOException;
 import java.io.PrintWriter;
-import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -22,9 +19,9 @@ import javax.servlet.http.HttpSession;
  *
  * @author David Reyna
  */
-@WebServlet(name = "Registro", urlPatterns = {"/Registro"})
-public class Servlet_cbRegistro extends HttpServlet {
-    Docente docente;
+@WebServlet(name = "BorrarHoraGrupo", urlPatterns = {"/BorrarHoraGrupo"})
+public class Servlet_borrarHoraGrupo extends HttpServlet {
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -43,10 +40,10 @@ public class Servlet_cbRegistro extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet Servlet_cbregistro</title>");            
+            out.println("<title>Servlet Servlet_borrarHoraGrupo</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet Servlet_cbregistro at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet Servlet_borrarHoraGrupo at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         } finally {
@@ -66,28 +63,7 @@ public class Servlet_cbRegistro extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        HttpSession session= (HttpSession) request.getSession();     
-        if(session.getAttribute("idUsuario")!=null){
-            docente=new Docente();
-            docente.setIdUsuario(session.getAttribute("idUsuario").toString());
-            docente.consultaPreRegistro();
-            docente.consultaHoras();
-            if(docente.getListaHoras().isEmpty()){
-                docente.consumeWSCatalogoDocentes();
-                HorasGrupo[] horas=docente.getArrayHoras();
-                for(HorasGrupo hora:horas){
-                    docente.registraHorasWS(hora.id_periodo, hora.clave_materia, hora.numero_horas, hora.grupo,hora.semestre);
-                }
-                docente.consultaHoras();
-            } 
-            docente.actualizaBanderaIngles();
-            request.setAttribute("Docente", docente);
-            ServletContext sc = getServletContext();
-            RequestDispatcher rd = sc.getRequestDispatcher("/registro.jsp");
-            rd.forward(request,response);
-        }else{
-            response.sendRedirect("/index.html");
-        }
+        processRequest(request, response);
     }
 
     /**
@@ -101,7 +77,49 @@ public class Servlet_cbRegistro extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        //processRequest(request, response);
+        response.setContentType("text/html;charset=UTF-8");
+        PrintWriter out = response.getWriter();
+        HttpSession session= (HttpSession) request.getSession();     
+        if(session.getAttribute("idUsuario")!=null){
+            String idUsuario=session.getAttribute("idUsuario").toString();
+            String id=request.getParameter("i");
+            Docente d=new Docente();
+            d.setIdUsuario(idUsuario);
+            d.borraHoras(id);
+            d.consultaHoras();
+            String respuesta="";
+            int horas=0,grupos=0;
+            for(String[] hora:d.getListaHoras()){
+                respuesta+="<tr><td>";
+                respuesta+="Periodo: "+hora[2]+"<br/>";                
+                if(hora[7].equals("A")){
+                    respuesta+="Componente básico y/o propedéutico: ";
+                }else if(hora[7].equals("S")){
+                    respuesta+="Componente profesional:  ";
+                }else if(hora[7].equals("T")){
+                    respuesta+="Taller: ";
+                }                
+                if(hora[5]!=null){
+                    respuesta+=hora[5]+" - ";
+                }
+                respuesta+=hora[4]+"<br/>";                                                              
+                respuesta+="Grupo: "+hora[10]+"<br/>"; 
+                respuesta+="Semestre: "+hora[6]+"<br/>"; 
+                respuesta+="Horas: "+hora[9]+"<br/>";
+                respuesta+="</td>";
+                respuesta+="<td class='text-center'>";
+                respuesta+="<button type='button' class='btn btn-sm' title='Borrar' onclick='borrarHoraGrupo("+hora[0]+")'>";
+                respuesta+="<span class='glyphicon glyphicon-trash'></span>";
+                respuesta+="</button>";                                               
+                respuesta+="</td></tr>";
+                horas+=Integer.parseInt(hora[9]);
+                grupos++;
+            }
+            respuesta+="|"+horas+"|"+grupos;
+            out.println(respuesta);
+        }        
+        out.close();
     }
 
     /**

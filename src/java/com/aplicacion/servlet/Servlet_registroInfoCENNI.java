@@ -5,26 +5,24 @@
  */
 package com.aplicacion.servlet;
 
-import com.aplicacion.beans.Docente;
-import com.aplicacion.beans.HorasGrupo;
 import java.io.IOException;
 import java.io.PrintWriter;
-import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletContext;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import metodos_sql.Metodos_sql;
 
 /**
  *
  * @author David Reyna
  */
-@WebServlet(name = "Registro", urlPatterns = {"/Registro"})
-public class Servlet_cbRegistro extends HttpServlet {
-    Docente docente;
+@WebServlet(name = "RegistroInfoCENNI", urlPatterns = {"/RegistroInfoCENNI"})
+public class Servlet_registroInfoCENNI extends HttpServlet {
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -43,10 +41,10 @@ public class Servlet_cbRegistro extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet Servlet_cbregistro</title>");            
+            out.println("<title>Servlet Servlet_registroInfoCENNI</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet Servlet_cbregistro at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet Servlet_registroInfoCENNI at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         } finally {
@@ -66,28 +64,7 @@ public class Servlet_cbRegistro extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        HttpSession session= (HttpSession) request.getSession();     
-        if(session.getAttribute("idUsuario")!=null){
-            docente=new Docente();
-            docente.setIdUsuario(session.getAttribute("idUsuario").toString());
-            docente.consultaPreRegistro();
-            docente.consultaHoras();
-            if(docente.getListaHoras().isEmpty()){
-                docente.consumeWSCatalogoDocentes();
-                HorasGrupo[] horas=docente.getArrayHoras();
-                for(HorasGrupo hora:horas){
-                    docente.registraHorasWS(hora.id_periodo, hora.clave_materia, hora.numero_horas, hora.grupo,hora.semestre);
-                }
-                docente.consultaHoras();
-            } 
-            docente.actualizaBanderaIngles();
-            request.setAttribute("Docente", docente);
-            ServletContext sc = getServletContext();
-            RequestDispatcher rd = sc.getRequestDispatcher("/registro.jsp");
-            rd.forward(request,response);
-        }else{
-            response.sendRedirect("/index.html");
-        }
+        processRequest(request, response);
     }
 
     /**
@@ -101,7 +78,30 @@ public class Servlet_cbRegistro extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        response.setContentType("text/html;charset=UTF-8");
+        PrintWriter out = response.getWriter();
+        try {
+            HttpSession session= (HttpSession) request.getSession();
+            String idUsuario=session.getAttribute("idUsuario").toString();
+            //out.println(idUsuario);
+            
+            String nivel=request.getParameter("nivelCENNI");
+            String folio=request.getParameter("folio");
+            //out.println(notaSancion);
+            Metodos_sql metodo = new Metodos_sql();
+            String[] parametros={idUsuario,nivel,folio};
+            List<String[]> datos;                           
+            datos=metodo.ejecutaSP("sp_registroInfoCENNI",parametros);            
+            if(!datos.isEmpty()){
+                out.print("ok");
+            }else{
+                out.print("Error en almacenamiento de datos, intente nuevamente");
+            }
+            
+            
+        } finally {
+            out.close();
+        }
     }
 
     /**

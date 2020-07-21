@@ -36,6 +36,18 @@
         <servlet-name>Servlet_registroInfoCompatibilidad</servlet-name>
         <servlet-class>com.aplicacion.servlet.Servlet_registroInfoCompatibilidad</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>Servlet_borrarHoraGrupo</servlet-name>
+        <servlet-class>com.aplicacion.servlet.Servlet_borrarHoraGrupo</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Servlet_registroHorasGrupo</servlet-name>
+        <servlet-class>com.aplicacion.servlet.Servlet_registroHorasGrupo</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Servlet_registroInfoCENNI</servlet-name>
+        <servlet-class>com.aplicacion.servlet.Servlet_registroInfoCENNI</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Servlet_consultaCatalogos</servlet-name>
         <url-pattern>/Servlet_consultaCatalogos</url-pattern>
@@ -71,6 +83,18 @@
     <servlet-mapping>
         <servlet-name>Servlet_registroInfoCompatibilidad</servlet-name>
         <url-pattern>/Servlet_registroInfoCompatibilidad</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Servlet_borrarHoraGrupo</servlet-name>
+        <url-pattern>/Servlet_borrarHoraGrupo</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Servlet_registroHorasGrupo</servlet-name>
+        <url-pattern>/Servlet_registroHorasGrupo</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Servlet_registroInfoCENNI</servlet-name>
+        <url-pattern>/Servlet_registroInfoCENNI</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
