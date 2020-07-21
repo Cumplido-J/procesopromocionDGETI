@@ -214,28 +214,7 @@ public class Docente {
         }
     }
     public void consumeWSCatalogoDocentes(){
-        URL url;
-        try {
-                // Creando un objeto URL
-                url = new URL("http://200.77.238.19/develop/protected/pages/herramientas/estructuras/promocion/catalogo_docentes.php?rfc="+rfc);
-
-                // Realizando la petición GET
-                URLConnection con = url.openConnection();
-
-                // Leyendo el resultado
-                BufferedReader in = new BufferedReader(new InputStreamReader(
-                                con.getInputStream()));
-
-                String datos=in.readLine();
-                String[] aux=datos.split(";");
-                
-                System.out.println(aux[0].indexOf("["));
-                System.out.println(aux[0].indexOf("]"));
-                
-                
-        } catch (Exception e) {
-                System.out.println(e.getMessage());
-        }
+        //url = new URL("http://200.77.238.19/develop/protected/pages/herramientas/estructuras/promocion/catalogo_docentes.php?rfc="+rfc);
     }
     
 }
