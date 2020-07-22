@@ -10,13 +10,16 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
+import metodos_sql.Metodos_sql;
 
 /**
  *
@@ -83,9 +86,11 @@ public class Servlet_guardarArchivo extends HttpServlet {
             throws ServletException, IOException {
         PrintWriter out = response.getWriter();
         try{
-            //String nombre=request.getParameter("nombreArchivo");
-            String id=request.getParameter("idArchivo");
-            String rfc="REMA940831BA4";
+            HttpSession session= (HttpSession) request.getSession();
+            String idUsuario=session.getAttribute("idUsuario").toString();
+            
+            String idRequisito=request.getParameter("idArchivo");
+            
             Part archivo=request.getPart("archivo");
             InputStream is=archivo.getInputStream();
             
@@ -93,8 +98,8 @@ public class Servlet_guardarArchivo extends HttpServlet {
             if (!carpeta.exists()) {
                 carpeta.mkdirs();                    
             }
-            
-            File f=new File(carpeta+"/"+id+"_"+rfc+".pdf");
+            String ruta=carpeta+"/"+idUsuario+"_"+idRequisito+".pdf";
+            File f=new File(ruta);
             FileOutputStream ous=new FileOutputStream(f);
             int dato=is.read();
             while(dato!=-1){
@@ -103,6 +108,17 @@ public class Servlet_guardarArchivo extends HttpServlet {
             }
             ous.close();
             is.close();
+            
+            Metodos_sql metodo = new Metodos_sql();
+            String[] parametros={idUsuario,idRequisito,ruta};
+            List<String[]> datos;                           
+            datos=metodo.ejecutaSP("sp_registroConstancia",parametros);            
+            if(!datos.isEmpty()){
+                out.print("ok");
+            }else{
+                out.print("Error en almacenamiento de datos, intente nuevamente");
+            }
+            
         }finally{
             out.close();
         }

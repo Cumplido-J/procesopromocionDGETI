@@ -641,11 +641,12 @@ function mostrarSiguiente(id){
             break;
         case 4:
             if($("#compatibilidad").is(':checked')){
-                $("#mensaje").html("Registro exitoso.");                
+                $("#mensaje").html("Registro exitoso."); 
             }else{
                 $("#mensaje").html("Su registro será rechazado debido a que no cuenta con la compatibilidad.");
             }
             $("#modalMensaje").modal("show");
+            $(location).attr('href',"FichaRegistro");           
             break;
         default:
             break;
@@ -667,19 +668,20 @@ function abrirModalArchivo(id){
             $("#tituloModal").html("Título");            
             break;
         case 2: 
-            $("#tituloModal").html("Constancia CENNI");            
+            $("#tituloModal").html("Constancia de antigüedad");
+                      
             break;
         case 3: 
-            $("#tituloModal").html("Constancia de antigüedad");            
+            $("#tituloModal").html("Nombramiento definitivo");     
             break;  
         case 4: 
-            $("#tituloModal").html("Nombramiento definitivo");            
+            $("#tituloModal").html("Constancia de horas frente a grupo");        
             break;  
         case 5: 
-            $("#tituloModal").html("Nota favorable y sin sanción administrativa");            
+            $("#tituloModal").html("Constancia CENNI");                         
             break;      
         case 6: 
-            $("#tituloModal").html("Constancia de horas frente a grupo");            
+            $("#tituloModal").html("Nota favorable y sin sanción administrativa");        
             break;
         case 7: 
             $("#tituloModal").html("Constancia de compatibilidad");            
@@ -700,19 +702,20 @@ function abrirModalEjemplo(id){
             $("#tituloModalEjemplo").html("Título");            
             break;
         case 2: 
-            $("#tituloModalEjemplo").html("Constancia CENNI");            
+            $("#tituloModalEjemplo").html("Constancia de antigüedad");
+                      
             break;
         case 3: 
-            $("#tituloModalEjemplo").html("Constancia de antigüedad");            
+            $("#tituloModalEjemplo").html("Nombramiento definitivo");     
             break;  
         case 4: 
-            $("#tituloModalEjemplo").html("Nombramiento definitivo");            
+            $("#tituloModalEjemplo").html("Constancia de horas frente a grupo");        
             break;  
         case 5: 
-            $("#tituloModalEjemplo").html("Nota favorable y sin sanción administrativa");            
+            $("#tituloModalEjemplo").html("Constancia CENNI");                         
             break;      
         case 6: 
-            $("#tituloModalEjemplo").html("Constancia de horas frente a grupo");            
+            $("#tituloModalEjemplo").html("Nota favorable y sin sanción administrativa");        
             break;
         case 7: 
             $("#tituloModalEjemplo").html("Constancia de compatibilidad");            

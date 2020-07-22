@@ -5,12 +5,14 @@
  */
 package com.aplicacion.servlet;
 
-import java.io.ByteArrayOutputStream;
+import com.aplicacion.beans.Docente;
+import com.aplicacion.beans.HorasGrupo;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.OutputStream;
 import java.io.PrintWriter;
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -22,9 +24,9 @@ import javax.servlet.http.HttpSession;
  *
  * @author David Reyna
  */
-@WebServlet(name = "Archivo", urlPatterns = {"/Archivo"})
-public class Servlet_muestraArchivo extends HttpServlet {
-
+@WebServlet(name = "FichaRegistro", urlPatterns = {"/FichaRegistro"})
+public class Servlet_cbFichaRegistro extends HttpServlet {
+    Docente docente;
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -43,10 +45,10 @@ public class Servlet_muestraArchivo extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet Servlet_muestraArchivo</title>");            
+            out.println("<title>Servlet Servlet_cbFichaRegistro</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet Servlet_muestraArchivo at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet Servlet_cbFichaRegistro at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         } finally {
@@ -66,39 +68,19 @@ public class Servlet_muestraArchivo extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        //processRequest(request, response);
-        try {
-            HttpSession session= (HttpSession) request.getSession();
-            String idUsuario=session.getAttribute("idUsuario").toString();
-            String idDocumento="0";
-            String ruta="";
-            File documento;
-            if(request.getParameter("k")!=null){
-                idDocumento=request.getParameter("k").toString();
-                ruta="C:/ArchivosPromocion/"+idUsuario+"_"+idDocumento+".PDF";
-            }else if(request.getParameter("e")!=null){
-                idDocumento=request.getParameter("e").toString();
-                ruta="C:/ArchivosPromocion/ejemplos/registro/"+idDocumento+".PDF";
-            }
-            documento=new File(ruta);
-            if(documento.exists()){
-                FileInputStream fis=new FileInputStream(documento.getPath());
-                int tamanio=fis.available();
-                byte[] datos=new byte[tamanio];
-                fis.read(datos,0,tamanio);
-                response.setHeader("Content-disposition","inline; filename=documento.pdf");
-                response.setContentType("application/pdf");
-                response.setContentLength(tamanio);
-                response.getOutputStream().write(datos);
-                fis.close();
-            }else{
-                PrintWriter out = response.getWriter();
-                response.setContentType("text/html;charset=UTF-8");
-                out.println("<h1>El archivo solicitado no existe</h1>");
-                out.close();
-            }
-        } finally {
-            
+        HttpSession session= (HttpSession) request.getSession();     
+        if(session.getAttribute("idUsuario")!=null){
+            docente=new Docente();
+            docente.setIdUsuario(session.getAttribute("idUsuario").toString());
+            docente.consultaPreRegistro();
+            docente.consultaHoras();            
+            docente.actualizaBanderaIngles();
+            request.setAttribute("Docente", docente);
+            ServletContext sc = getServletContext();
+            RequestDispatcher rd = sc.getRequestDispatcher("/FichaRegistro.jsp");
+            rd.forward(request,response);
+        }else{
+            response.sendRedirect("/index.html");
         }
     }
 

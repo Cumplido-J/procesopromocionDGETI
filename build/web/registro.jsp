@@ -248,14 +248,14 @@
                                   <input class="form-control input-sm" id="fechaPromocion" name="fechaPromocion" type="text" required>
                                 </div>
                                 <div class="form-group col-md-3">
-                                    <label class="control-label" for="btnEvidencia3">Constancia de antiguedad:</label>
-                                    <a title="Ver ejemplo" onclick="abrirModalEjemplo(3)"><span class="glyphicon glyphicon-picture"></span></a><br/>  
-                                    <input id="btnEvidencia3" type="button" class="btn btn-sm btn-link" value="Subir archivo" onclick="abrirModalArchivo(3)"/>                          
+                                    <label class="control-label" for="btnEvidencia2">Constancia de antiguedad:</label>
+                                    <a title="Ver ejemplo" onclick="abrirModalEjemplo(2)"><span class="glyphicon glyphicon-picture"></span></a><br/>  
+                                    <input id="btnEvidencia2" type="button" class="btn btn-sm btn-link" value="Subir archivo" onclick="abrirModalArchivo(2)"/>                          
                                 </div> 
                                 <div class="form-group col-md-6">
-                                    <label class="control-label" for="btnEvidencia4">Constancia de nombramiento definitivo:</label>  
-                                    <a title="Ver ejemplo" onclick="abrirModalEjemplo(4)"><span class="glyphicon glyphicon-picture"></span></a><br/>
-                                    <input id="btnEvidencia4" type="button" class="btn btn-sm btn-link" value="Subir archivo" onclick="abrirModalArchivo(4)"/>
+                                    <label class="control-label" for="btnEvidencia3">Constancia de nombramiento definitivo:</label>  
+                                    <a title="Ver ejemplo" onclick="abrirModalEjemplo(3)"><span class="glyphicon glyphicon-picture"></span></a><br/>
+                                    <input id="btnEvidencia3" type="button" class="btn btn-sm btn-link" value="Subir archivo" onclick="abrirModalArchivo(3)"/>
                                 </div>                             
                             </div>
                             <div class="row">
@@ -280,9 +280,9 @@
                                     <label><input type="checkbox" id="notaDesfavorable" name="notaDesfavorable" data-toggle="collapse" data-target="#seccionNota" >Marque la casilla si cuenta con nota desfavorable y/o sanción administrativa</label>
                                 </div>
                                 <div id="seccionNota" class="form-group col-md-6 collapse in">
-                                    <label class="control-label" for="btnEvidencia5">Constancia de nota favorable:</label>
-                                    <a title="Ver ejemplo" onclick="abrirModalEjemplo(5)"><span class="glyphicon glyphicon-picture"></span></a><br/> 
-                                    <input id="btnEvidencia5" type="button" class="btn btn-sm btn-link" value="Subir archivo" onclick="abrirModalArchivo(5)"/>
+                                    <label class="control-label" for="btnEvidencia6">Constancia de nota favorable:</label>
+                                    <a title="Ver ejemplo" onclick="abrirModalEjemplo(6)"><span class="glyphicon glyphicon-picture"></span></a><br/> 
+                                    <input id="btnEvidencia6" type="button" class="btn btn-sm btn-link" value="Subir archivo" onclick="abrirModalArchivo(6)"/>
                                 </div> 
                             </div>
                         </div>
@@ -372,15 +372,15 @@
                                   <input type="text" class="form-control input-sm" id="folio" name="folio">
                                 </div>
                                 <div class="form-group col-md-6">
-                                    <label class="control-label" for="btnEvidencia2">Constancia CENNI:</label>
-                                    <a title="Ver ejemplo" onclick="abrirModalEjemplo(2)"><span class="glyphicon glyphicon-picture"></span></a><br/> 
-                                    <input id="btnEvidencia2" type="button" class="btn btn-sm btn-link" value="Subir archivo" onclick="abrirModalArchivo(2)"/>                                                    
+                                    <label class="control-label" for="btnEvidencia5">Constancia CENNI:</label>
+                                    <a title="Ver ejemplo" onclick="abrirModalEjemplo(5)"><span class="glyphicon glyphicon-picture"></span></a><br/> 
+                                    <input id="btnEvidencia5" type="button" class="btn btn-sm btn-link" value="Subir archivo" onclick="abrirModalArchivo(5)"/>                                                    
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="control-label" for="btnEvidencia6">Constancia de horas frente a grupo:</label>  
-                                <a title="Ver ejemplo" onclick="abrirModalEjemplo(6)"><span class="glyphicon glyphicon-picture"></span></a><br/>
-                                <input id="btnEvidencia6" type="button" class="btn btn-sm btn-link" value="Subir archivo" onclick="abrirModalArchivo(6)"/>
+                                <label class="control-label" for="btnEvidencia4">Constancia de horas frente a grupo:</label>  
+                                <a title="Ver ejemplo" onclick="abrirModalEjemplo(4)"><span class="glyphicon glyphicon-picture"></span></a><br/>
+                                <input id="btnEvidencia4" type="button" class="btn btn-sm btn-link" value="Subir archivo" onclick="abrirModalArchivo(4)"/>
                             </div>
                         </div>
                         <div class="col-xs-12 text-right">

@@ -1,5 +1,5 @@
 <%-- 
-    Document   : FichaRegistro
+    Document   : FichaRegistroIncompleto
     Created on : 6 jul 2020, 16:15:49
     Author     : David Reyna
 --%>
@@ -10,7 +10,7 @@
 <!DOCTYPE html>
 <html>
     <head>        
-        <title>Ficha de registro</title>
+        <title>Ficha de registro incompleto</title>
         <meta charset="UTF-8">
         <jsp:useBean id="docente" scope="session" class="com.aplicacion.beans.Docente" />
     </head>
@@ -30,7 +30,7 @@
                 <td><img width="200" src="<%=Imagen.muestraImagen("C:/ArchivosPromocion/logos/logoUemstis.jpg")%>"></td>
             </tr>
         </table> 
-        <center><p>FICHA DE REGISTRO</p></center>
+        <center><p>FICHA DE REGISTRO INCOMPLETO</p></center>
         <div style="font-size: 12px">
             <p>Imprimir y conservar esta ficha.</p>
             <hr/>
@@ -149,9 +149,17 @@
                     <td>:</td>
                 </tr>
             </table>
-            <p>De acuerdo a la documentación comprobatoria que ha proporcionado como evidencia de cumplimiento de los requisitos requeridos para su registro y de las evidencias para los criterios de valoración, usted ha sido aceptado para participar en el proceso de promoción en el servicio docente por cambio de categoría en Educación Media Superior, Ciclo Escolar 2020-2021.</p>
-            <p>Declara bajo protesta de decir verdad que cumple con los requisitos establecidos en la Convocatoria para el proceso de promoción en el servicio docente por cambio de categoría en Educación Media Superior, Ciclo Escolar 2020-2021. Para confirmar su dicho, las UEMSTIS podrá verificar la autenticidad de la documentación que proporciono, por lo que, en caso de alteración o falsificación de la misma, acepta la descalificación inmediata del proceso o, en su caso, la invalidación del nombramiento respectivo, sin perjuicio de las sanciones de tipo administrativo o penal en las que pudiera incurrir.</p>
-            <p>Acepta hacer públicos los resultados y recomendaciones individuales que se deriven de su valoración para el proceso de promoción en el servicio docente por cambio de categoría en Educación Media Superior ingreso a la Educación Media Superior, Ciclo Escolar 2020-2021.</p>
+            <p>De acuerdo a la documentación comprobatoria que ha proporcionado como evidencia de los requisitos requeridos para su registro</p>
+            <p>
+                a. <b>Nivel académico:</b> documento acreditado por una instancia oficial que confirma el grado de estudios requerido para participar en el Programa, de acuerdo con el perfil profesional.
+                <br/>b. <b>Antigüedad:</b> constancia expedida por el área administrativa o de personal, definida por la DGETI.
+                <br/>c. <b>Nombramiento definitivo:</b> documento expedido por la UEMSTIS.
+                <br/>d. <b>Asistencia a las horas frente al grupo:</b> constancia expedida por el área administrativa o de personal, definida por la UEMSTIS. 
+                <br/>e. <b>Nivel 14 de CENNI:</b> certificado vigente o constancia que acredite el trámite de expedición en proceso, emitido por la Secretaría de Educación Pública, para los participantes de inglés que tengan una licenciatura distinta a la de enseñanza del inglés.
+                <br/>f. <b>No contar con nota desfavorable:</b> constancia emitida por el Director del plantel, de que el participante no cuenta con nota desfavorable en los dos últimos ciclos escolares inmediatos a la publicación de la convocatoria, y carta del participante, bajo protesta de decir verdad, de que no cuenta con sanción administrativa que pueda limitar su desempeño en la función.
+                <br/>g. <b>Compatibilidad de empleos:</b> constancia vigente emitida por la autoridad competente en apego a las reglas de compatibilidad.
+            </p>
+            <p>Usted tiene su registro incompleto por lo que no es posible su participación en el proceso de promoción en el servicio docente por cambio de categoría en Educación Media Superior, Ciclo Escolar 2020-2021.</p>
             
             <br/><br/><br/><center>Nombre del participante</center>
         </div>
