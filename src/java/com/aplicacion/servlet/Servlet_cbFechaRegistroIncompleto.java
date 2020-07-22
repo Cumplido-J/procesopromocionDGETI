@@ -69,7 +69,7 @@ public class Servlet_cbFechaRegistroIncompleto extends HttpServlet {
         if(session.getAttribute("idUsuario")!=null){
             docente=new Docente();
             docente.setIdUsuario(session.getAttribute("idUsuario").toString());
-            docente.consultaPreRegistro();
+            docente.consultaInfoAspirante();
             docente.consultaHoras();            
             docente.actualizaBanderaIngles();
             request.setAttribute("Docente", docente);

@@ -7,12 +7,20 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import='herramientas.Imagen'%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix ="fmt"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE html>
 <html>
     <head>        
         <title>Ficha de registro incompleto</title>
         <meta charset="UTF-8">
         <jsp:useBean id="docente" scope="session" class="com.aplicacion.beans.Docente" />
+        <jsp:useBean id="now" class="java.util.Date" />
+        <style>
+            .borde{
+                border: 1px solid black;                
+            }
+        </style>
     </head>
     <body style="width:800px; font-family:Verdana;">
         <table >
@@ -38,7 +46,8 @@
             <table >
                 <tr>
                     <td>FOLIO</td>
-                    <td>:</td>
+                    <fmt:formatDate var="anio" value="${now}" pattern="yyyy" />
+                    <td>:<fmt:formatNumber pattern="00" value="${Docente.infoRegistro[7]}" />PCC001<fmt:formatNumber pattern="00000" value="${Docente.infoRegistro[0]}"/>${anio}</td>
                 </tr>
                 <!--<tr>
                     <td>CURP</td>
@@ -46,107 +55,146 @@
                 </tr>-->
                 <tr>
                     <td>RFC</td>
-                    <td>:${Docente.rfc}</td>
+                    <td>:${Docente.infoRegistro[5]}</td>
                 </tr>
                 <tr>
                     <td>NOMBRE</td>
-                    <td>:${Docente.nombre}</td>
+                    <td>:${Docente.infoRegistro[1]}</td>
                 </tr>
                 <tr>
                     <td>PRIMER APELLIDO</td>
-                    <td>:${Docente.primerApellido}</td>
+                    <td>:${Docente.infoRegistro[2]}</td>
                 </tr>
                 <tr>
                     <td>SEGUNDO APELLIDO</td>
-                    <td>:${Docente.segundoApellido}</td>
+                    <td>:${Docente.infoRegistro[3]}</td>
                 </tr>
                 <tr>
                     <td>CORREO ELECTRÓNICO</td>
-                    <td>:${Docente.correo}</td>
+                    <td>:${Docente.infoRegistro[4]}</td>
                 </tr>
                 <tr>
                     <td>ENTIDAD</td>
-                    <td>:</td>
+                    <td>:${Docente.infoRegistro[8]}</td>
                 </tr>
                 <tr>
                     <td>CENTRO DE TRABAJO</td>
-                    <td>:</td>
+                    <td>:${Docente.infoRegistro[9]}-${Docente.infoRegistro[10]}</td>
                 </tr>
                 <tr>
                     <td>CATEGORÍA A LA QUE ASPIRA</td>
-                    <td>:</td>
+                    <td>:${Docente.infoRegistro[41]}-${Docente.infoRegistro[43]}-${Docente.infoRegistro[45]}</td>
                 </tr>
                 <tr>
                     <td>GRADO ACADÉMICO REQUERIDO</td>
-                    <td>:</td>
+                    <td>:${Docente.infoRegistro[47]}</td>
                 </tr>
                 <tr>
                     <td>GRADO ACADÉMICO QUE OSTENTA</td>
-                    <td>:</td>
+                    <fmt:parseNumber var = "anioTitulacion" type = "number" value = "${Docente.infoRegistro[23]}" />                    
+                    <td>:${anio-anioTitulacion} años de haber obtenido el título de ${Docente.infoRegistro[20]}</td>
                 </tr>
                 <tr>
                     <td>PERFIL PROFESIONAL (CARRERA)</td>
-                    <td>:</td>
+                    <td>:${Docente.infoRegistro[17]}</td>
                 </tr>
-                <tr>
+                <!--<tr>
                     <td>ASIGNATURA/COMPONENTE PROFESIONAL/LABORATORIO O TALLER</td>
                     <td>:</td>
-                </tr>
+                </tr>-->
+                                
                 <tr>
                     <td>DOCENTE ACTIVO EN SERVICIO</td>
-                    <td>:</td>
+                    <td>:<c:out value="${Docente.infoRegistro[25] eq 'S' ? 'SI': 'NO'}"/></td>
                 </tr>
                 <tr>
-                    <td>FECHA DE INGRESO AL SUBSISTEMA</td>
-                    <td>:</td>
+                    <td>FECHA DE INGRESO AL SUBSISTEMA </td>
+                    <td>:<fmt:parseDate value = "${Docente.infoRegistro[26]}" var = "fecha" pattern = "yyyy-MM-dd" />
+                        <fmt:formatDate pattern = "dd/MM/yyyy" value = "${fecha}" />
+                    </td>
                 </tr>
                 <tr>
                     <td>FECHA DE INGRESO AL PLANTEL</td>
-                    <td>:</td>
+                    <td>:<fmt:parseDate value = "${Docente.infoRegistro[27]}" var = "fecha" pattern = "yyyy-MM-dd" />
+                        <fmt:formatDate pattern = "dd/MM/yyyy" value = "${fecha}" />
+                    </td>
                 </tr>
                 <tr>
                     <td>CATEGORÍA/NIVEL QUE OSTENTA</td>
-                    <td>:</td>
+                    <td>:${Docente.infoRegistro[29]}-${Docente.infoRegistro[31]}-${Docente.infoRegistro[33]}</td>
                 </tr>
                 <tr>
                     <td>FECHA DE INGRESO A LA PLAZA QUE OSTENTA</td>
-                    <td>:</td>
+                    <td>:<fmt:parseDate value = "${Docente.infoRegistro[34]}" var = "fecha" pattern = "yyyy-MM-dd" />
+                        <fmt:formatDate pattern = "dd/MM/yyyy" value = "${fecha}" />
+                    </td>
                 </tr>
                 <tr>
                     <td>TIPO DE NOMBRAMIENTO QUE OSTENTA </td>
-                    <td>:</td>
-                </tr>
-                <tr>
-                    <td>HORAS FRENTE A GRUPO</td>
-                    <td>:</td>
-                </tr>
+                    <td>:${Docente.infoRegistro[36]}-${Docente.infoRegistro[37]}</td>
+                </tr>                
                 <tr>
                     <td>FECHA DE SU ÚLTIMA_PROMOCIÓN</td>
-                    <td>:</td>
+                    <td>:<fmt:parseDate value = "${Docente.infoRegistro[39]}" var = "fecha" pattern = "yyyy-MM-dd" />
+                        <fmt:formatDate pattern = "dd/MM/yyyy" value = "${fecha}" /></td>
                 </tr>
                 <tr>
                     <td>NOTA DESF. o SANCIÓN_ADMINISTRATIVA</td>
-                    <td>:</td>
+                    <td>:<c:out value="${Docente.infoRegistro[48] eq 'S' ? 'SI': 'NO'}"/></td>
                 </tr>
                 <tr>
                     <td>REGLAS DE COMPATIBILIDAD</td>
-                    <td>:</td>
+                    <td>:<c:out value="${Docente.infoRegistro[49] eq 'S' ? 'SI': 'NO'}"/></td>
                 </tr>
-                <tr>
-                    <td>NIV_CENNI</td>
-                    <td>:</td>
-                </tr>
-                <tr>
-                    <td>FOLIO_CENNI </td>
-                    <td>:</td>
-                </tr>                
+                <c:if test = "${fn:length(Docente.infoRegistro[51])>0}">
+                    <tr>
+                        <td>NIV_CENNI</td>
+                        <td>:${Docente.infoRegistro[51]}</td>
+                    </tr>
+                    <tr>
+                        <td>FOLIO_CENNI </td>
+                        <td>:${Docente.infoRegistro[52]}</td>
+                    </tr>
+                </c:if>
+                                
                 <tr>
                     <td>FECHA Y HORA DE REGISTRO</td>
-                    <td>:</td>
+                    <td>:<fmt:formatDate type = "both" dateStyle = "short" timeStyle = "short" value = "${now}" /></td>
                 </tr>
                 <tr>
                     <td>CONSIDERACIONES PARTICULARES</td>
                     <td>:</td>
+                </tr>                
+                <tr>
+                    <td colspan="2">
+                        <table >
+                            <tr>
+                                <th class="borde">PERIODO</th>
+                                <th class="borde">ASIGNATURA/COMPONENTE PROFESIONAL/LABORATORIO O TALLER</th>
+                                <th class="borde">GRUPO</th>
+                                <th class="borde">SEMESTRE</th>
+                                <th class="borde">HORAS</th>
+                            </tr>
+                            <c:forEach items="${Docente.getListaHoras()}" var="hora">
+                                <tr>
+                                    <td class="borde"><c:out value="${hora[2]}"/></td>
+                                    <td class="borde">
+                                        <c:if test = "${hora[5] != null}">
+                                            <c:out value="${hora[5]}"/> - 
+                                        </c:if>
+                                        <c:out value="${hora[4]}"/><br/>
+                                    </td>   
+                                    <td class="borde"><c:out value="${hora[10]}"/></td>
+                                    <td class="borde"><c:out value="${hora[6]}"/></td>
+                                    <td class="borde"><c:out value="${hora[9]}"/></td>
+                                </tr>
+                            </c:forEach>
+                            <tr>
+                                <td colspan="4" class="borde">HORAS FRENTE A GRUPO</td>
+                                <td class="borde"><b>${Docente.getTotalHoras()}</b></td>
+                            </tr>
+                        </table>
+                    </td>
                 </tr>
             </table>
             <p>De acuerdo a la documentación comprobatoria que ha proporcionado como evidencia de los requisitos requeridos para su registro</p>
@@ -163,6 +211,7 @@
             
             <br/><br/><br/><center>Nombre del participante</center>
         </div>
-        <input type="button" value="Imprimir" onclick="window.print()">
+        <br/><br/>
+        <center><input type="button" value="Imprimir" onclick="window.print()"></center>
     </body>
 </html>

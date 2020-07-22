@@ -5,6 +5,7 @@
  */
 package com.aplicacion.servlet;
 
+import herramientas.Fecha;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -88,12 +89,12 @@ public class Servlet_registroInfoLaboral extends HttpServlet {
             String activo,ingresoSubsistema="",ingresoPlantel="",idCategoriaJornada="",fechaPlaza="",idTipoNombramiento="",fechaUltimaPromocion="",idCategoriaJornadaAspira="",idPerfilRequerido="",notaSancion="N";
             if(request.getParameter("activoServicio")!=null){
                 activo="S";
-                ingresoSubsistema=ConvertirFecha(request.getParameter("ingresoSubsistema"));
-                ingresoPlantel=ConvertirFecha(request.getParameter("ingresoPlantel"));            
+                ingresoSubsistema=Fecha.formatoAlmacenar(request.getParameter("ingresoSubsistema"));
+                ingresoPlantel=Fecha.formatoAlmacenar(request.getParameter("ingresoPlantel"));            
                 idCategoriaJornada=request.getParameter("jornada");
-                fechaPlaza=ConvertirFecha(request.getParameter("fechaPlaza"));
+                fechaPlaza=Fecha.formatoAlmacenar(request.getParameter("fechaPlaza"));
                 idTipoNombramiento=request.getParameter("tipoNombramiento");
-                fechaUltimaPromocion=ConvertirFecha(request.getParameter("fechaPromocion"));
+                fechaUltimaPromocion=Fecha.formatoAlmacenar(request.getParameter("fechaPromocion"));
                 idCategoriaJornadaAspira=request.getParameter("jornadaAspira");
                 idPerfilRequerido=request.getParameter("opReqCat");                
                 if(request.getParameter("notaDesfavorable")!=null){
@@ -130,11 +131,5 @@ public class Servlet_registroInfoLaboral extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-    private String ConvertirFecha(String fecha){
-        String dia,mes,anio;
-        dia=fecha.substring(0, 2);
-        mes=fecha.substring(3, 5);
-        anio=fecha.substring(6,10);
-        return anio+"-"+mes+"-"+dia;
-    }
+    
 }

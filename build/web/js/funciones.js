@@ -626,6 +626,7 @@ function mostrarSiguiente(id){
                 }
             }else{
                 $("#mensaje").html("Su registro será rechazado debido a que no se encuentra activo en el servicio.");
+                $(location).attr('href',"FichaRegistroIncompleto");
                 $("#modalMensaje").modal("show");
             }
             break;
@@ -636,17 +637,20 @@ function mostrarSiguiente(id){
                 $("#infoCompatibilidad").collapse("show");
             }else{
                 $("#mensaje").html("Su registro será rechazado debido a que no se encuentra frente a grupo.");
+                $(location).attr('href',"FichaRegistroIncompleto");
                 $("#modalMensaje").modal("show");
             }
             break;
         case 4:
             if($("#compatibilidad").is(':checked')){
                 $("#mensaje").html("Registro exitoso."); 
+                $(location).attr('href',"FichaRegistro");
             }else{
                 $("#mensaje").html("Su registro será rechazado debido a que no cuenta con la compatibilidad.");
+                $(location).attr('href',"FichaRegistroIncompleto");
             }
             $("#modalMensaje").modal("show");
-            $(location).attr('href',"FichaRegistro");           
+                       
             break;
         default:
             break;

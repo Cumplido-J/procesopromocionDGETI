@@ -177,7 +177,7 @@
                   </div>
                 </div>
 
-                <div class="panel panel-default" id="panelInfoLaboral" >
+                <div class="panel panel-default" id="panelInfoLaboral" hidden>
                   <div class="panel-heading">
                     <h4 class="panel-title">
                       <a data-parent="#accordion" data-toggle="collapse" href="#infoLaboral" aria-expanded="true" aria-controls="infoLaboral">
@@ -186,7 +186,7 @@
                     </h4>
                     <button type="button" class="collpase-button collapsed" data-parent="#accordion" data-toggle="collapse" href="#infoLaboral"></button>
                   </div>
-                  <div class="panel-collapse collapse" id="infoLaboral">
+                  <div class="panel-collapse collapse" id="infoLaboral" >
                     <div class="panel-body">
                       <form id="formInfoLaboral" role="form" action="RegistroInfoLaboral" method="POST">                      
                         <div class="row">
@@ -296,7 +296,7 @@
                   </div>
                 </div>
                 </div>
-                <div class="panel panel-default" id="panelInfoHoras">
+                <div class="panel panel-default" id="panelInfoHoras" hidden>
                   <div class="panel-heading">
                     <h4 class="panel-title">
                       <a data-parent="#accordion" data-toggle="collapse" href="#infoHoras" aria-expanded="true" aria-controls="infoHoras">
@@ -305,7 +305,7 @@
                     </h4>
                     <button type="button" class="collpase-button collapsed" data-parent="#accordion" data-toggle="collapse" href="#infoHoras"></button>
                   </div>
-                  <div class="panel-collapse collapse" id="infoHoras">
+                  <div class="panel-collapse collapse" id="infoHoras" >
                     <div class="panel-body">
                       <form role="form" id="formInfoHorasGrupo" action="RegistroInfoCENNI" method="POST">
                         <div class="checkbox col-md-6">
@@ -391,7 +391,7 @@
                     </div>
                   </div>
                 </div>
-                <div class="panel panel-default" id="panelInfoCompatibilidad" >
+                <div class="panel panel-default" id="panelInfoCompatibilidad" hidden>
                   <div class="panel-heading">
                     <h4 class="panel-title">
                       <a data-parent="#accordion" data-toggle="collapse" href="#infoCompatibilidad" aria-expanded="true" aria-controls="infoCompatibilidad">
@@ -400,7 +400,7 @@
                     </h4>
                     <button type="button" class="collpase-button collapsed" data-parent="#accordion" data-toggle="collapse" href="#infoCompatibilidad"></button>
                   </div>
-                  <div class="panel-collapse collapse" id="infoCompatibilidad">
+                  <div class="panel-collapse collapse" id="infoCompatibilidad" >
                     <div class="panel-body">
                       <form role="form" id="formInfoCompatibilidad" method="POST" action="RegistroInfoCompatibilidad">                        
                         <div class="checkbox col-xs-12">
@@ -618,7 +618,7 @@
             $( "#carrera" ).autocomplete({
               source: availableTags
             });
-            if(${Docente.getBanderaIngles()}){
+            if(${Docente.getBanderaIngles()==true}){
                 $("#seccionCENNI").removeAttr("hidden");
                 $("#nivelCENNI").attr("required","true");
                 $("#folio").attr("required","true");

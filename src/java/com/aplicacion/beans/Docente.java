@@ -38,6 +38,7 @@ public class Docente {
     private String jsonHoras="";
     private List<String[]> listaHoras=null;
     private Boolean banderaIngles=false;
+    private String[]infoRegistro=null;
     
     public Docente() {
     }
@@ -209,6 +210,14 @@ public class Docente {
     public void setCargaCedula(Boolean cargaCedula) {
         this.cargaCedula = cargaCedula;
     }
+
+    public String[] getInfoRegistro() {
+        return infoRegistro;
+    }
+
+    public void setInfoRegistro(String[] infoRegistro) {
+        this.infoRegistro = infoRegistro;
+    }
     
     public void consultaPreRegistro(){
         Metodos_sql metodo = new Metodos_sql();
@@ -284,5 +293,15 @@ public class Docente {
             }
         }
     }
+    public void consultaInfoAspirante(){
+        Metodos_sql metodo = new Metodos_sql();
+        String[] parametros={idUsuario};
+        List<String[]> datos=metodo.ejecutaSP("sp_consultaRegistro",parametros);
+        if(!datos.isEmpty()){
+            infoRegistro=datos.get(0);
+        }
+    }
+    
+    
     
 }
