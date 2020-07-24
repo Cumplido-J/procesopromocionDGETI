@@ -8,9 +8,11 @@ package com.aplicacion.servlet;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintWriter;
+import java.util.Properties;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -68,17 +70,19 @@ public class Servlet_muestraArchivo extends HttpServlet {
             throws ServletException, IOException {
         //processRequest(request, response);
         try {
+            Properties p = new Properties();
+            p.load(new FileReader("C:/Users/David Reyna/Desktop/Repositorios/procesopromocion/src/conf/config.properties"));
+            String ruta=p.getProperty("rutaEvidenciasRegistro");
             HttpSession session= (HttpSession) request.getSession();
             String idUsuario=session.getAttribute("idUsuario").toString();
-            String idDocumento="0";
-            String ruta="";
+            String idDocumento="0";            
             File documento;
             if(request.getParameter("k")!=null){
                 idDocumento=request.getParameter("k").toString();
-                ruta="C:/ArchivosPromocion/"+idUsuario+"_"+idDocumento+".PDF";
+                ruta+="/"+idUsuario+"_"+idDocumento+".PDF";
             }else if(request.getParameter("e")!=null){
                 idDocumento=request.getParameter("e").toString();
-                ruta="C:/ArchivosPromocion/ejemplos/registro/"+idDocumento+".PDF";
+                ruta+="/ejemplos/"+idDocumento+".PDF";
             }
             documento=new File(ruta);
             if(documento.exists()){

@@ -7,10 +7,12 @@ package com.aplicacion.servlet;
 
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
 import java.util.List;
+import java.util.Properties;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
@@ -85,7 +87,11 @@ public class Servlet_guardarArchivo extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         PrintWriter out = response.getWriter();
+         
         try{
+            Properties p = new Properties();
+            p.load(new FileReader("C:/Users/David Reyna/Desktop/Repositorios/procesopromocion/src/conf/config.properties"));
+            String ruta=p.getProperty("rutaEvidenciasRegistro");
             HttpSession session= (HttpSession) request.getSession();
             String idUsuario=session.getAttribute("idUsuario").toString();
             
@@ -94,11 +100,11 @@ public class Servlet_guardarArchivo extends HttpServlet {
             Part archivo=request.getPart("archivo");
             InputStream is=archivo.getInputStream();
             
-            File carpeta = new File("C:/ArchivosPromocion");
+            File carpeta = new File(ruta);
             if (!carpeta.exists()) {
                 carpeta.mkdirs();                    
             }
-            String ruta=carpeta+"/"+idUsuario+"_"+idRequisito+".pdf";
+            ruta+="/"+idUsuario+"_"+idRequisito+".pdf";
             File f=new File(ruta);
             FileOutputStream ous=new FileOutputStream(f);
             int dato=is.read();
