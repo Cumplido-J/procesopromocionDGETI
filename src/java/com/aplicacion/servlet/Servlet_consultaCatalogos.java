@@ -99,7 +99,7 @@ public class Servlet_consultaCatalogos extends HttpServlet {
                   respuesta=catalogo.desplegarOpcionesJornada(request.getParameter("i"));
                break;
                case "10":
-                  respuesta=catalogo.consultaRequisitosCategoria(request.getParameter("i"));
+                  respuesta=catalogo.desplegarRequisitosCategoria(request.getParameter("i"));
                break;
                case "11":
                   respuesta=catalogo.desplegarOpcionesTipoInstitucion(request.getParameter("i"));

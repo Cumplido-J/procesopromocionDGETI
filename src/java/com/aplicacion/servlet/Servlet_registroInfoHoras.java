@@ -20,8 +20,8 @@ import metodos_sql.Metodos_sql;
  *
  * @author David Reyna
  */
-@WebServlet(name = "RegistroInfoCENNI", urlPatterns = {"/RegistroInfoCENNI"})
-public class Servlet_registroInfoCENNI extends HttpServlet {
+@WebServlet(name = "RegistroInfoHoras", urlPatterns = {"/RegistroInfoHoras"})
+public class Servlet_registroInfoHoras extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -41,10 +41,10 @@ public class Servlet_registroInfoCENNI extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet Servlet_registroInfoCENNI</title>");            
+            out.println("<title>Servlet Servlet_registroInfoHoras</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet Servlet_registroInfoCENNI at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet Servlet_registroInfoHoras at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         } finally {
@@ -84,14 +84,17 @@ public class Servlet_registroInfoCENNI extends HttpServlet {
             HttpSession session= (HttpSession) request.getSession();
             String idUsuario=session.getAttribute("idUsuario").toString();
             //out.println(idUsuario);
-            
+            String frenteGrupo="N";
+            if(request.getParameter("frenteGrupo")!=null){
+                frenteGrupo="S";
+            }
             String nivel=request.getParameter("nivelCENNI");
             String folio=request.getParameter("folio");
             //out.println(notaSancion);
             Metodos_sql metodo = new Metodos_sql();
-            String[] parametros={idUsuario,nivel,folio};
+            String[] parametros={idUsuario,frenteGrupo,nivel,folio};
             List<String[]> datos;                           
-            datos=metodo.ejecutaSP("sp_registroInfoCENNI",parametros);            
+            datos=metodo.ejecutaSP("sp_registroInfoHoras",parametros);            
             if(!datos.isEmpty()){
                 out.print("ok");
             }else{

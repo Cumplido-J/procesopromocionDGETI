@@ -70,15 +70,18 @@ public class Servlet_cbRegistro extends HttpServlet {
         if(session.getAttribute("idUsuario")!=null){
             docente=new Docente();
             docente.setIdUsuario(session.getAttribute("idUsuario").toString());
-            docente.consultaPreRegistro();
+            docente.consultaInfoAspirante();            
+            docente.consultaDocumentos();
             docente.consultaHoras();
             if(docente.getListaHoras().isEmpty()){
                 docente.consumeWSCatalogoDocentes();
-                HorasGrupo[] horas=docente.getArrayHoras();
-                for(HorasGrupo hora:horas){
-                    docente.registraHorasWS(hora.id_periodo, hora.clave_materia, hora.numero_horas, hora.grupo,hora.semestre);
+                if(docente.getJsonHoras().length()>0){
+                    HorasGrupo[] horas=docente.getArrayHoras();                    
+                    for(HorasGrupo hora:horas){
+                        docente.registraHorasWS(hora.id_periodo, hora.clave_materia, hora.numero_horas, hora.grupo,hora.semestre);
+                    }
+                    docente.consultaHoras();
                 }
-                docente.consultaHoras();
             } 
             docente.actualizaBanderaIngles();
             request.setAttribute("Docente", docente);

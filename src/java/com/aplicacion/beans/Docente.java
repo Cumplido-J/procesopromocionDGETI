@@ -16,12 +16,12 @@ import metodos_sql.Metodos_sql;
  */
 public class Docente {
     private String idUsuario="";
-    private String nombre="";
+    /*private String nombre="";
     private String primerApellido="";
     private String segundoApellido="";
-    private String correo="";
+    private String correo="";*/
     private String rfc="";
-    private String idEntidad="";
+    /*private String idEntidad="";
     private String idTipoInstitucion="";
     private String idInstitucion="";
     private String idCCT="";
@@ -34,23 +34,29 @@ public class Docente {
     private String idComprobante="";
     private String cedula="";
     private Boolean cargaTitulo=false;
-    private Boolean cargaCedula=false;
-    private String jsonHoras="";
+    private Boolean cargaCedula=false;*/
+    private String jsonHoras=null;
     private List<String[]> listaHoras=null;
+    private List<String[]> listaDocumentos=null;
     private Boolean banderaIngles=false;
     private String[]infoRegistro=null;
     
     public Docente() {
+    }
+
+    public String getJsonHoras() {
+        return jsonHoras;
     }
     
 
     public List<String[]> getListaHoras() {
         return listaHoras;
     }
-    
 
+    public List<String[]> getListaDocumentos() {
+        return listaDocumentos;
+    }
     
-
     public String getIdUsuario() {
         return idUsuario;
     }
@@ -59,7 +65,7 @@ public class Docente {
         this.idUsuario = idUsuario;
     }
 
-    public String getNombre() {
+    /*public String getNombre() {
         return nombre;
     }
 
@@ -89,7 +95,7 @@ public class Docente {
 
     public void setCorreo(String correo) {
         this.correo = correo;
-    }
+    }*/
 
     public String getRfc() {
         return rfc;
@@ -99,7 +105,7 @@ public class Docente {
         this.rfc = rfc;
     }
 
-    public String getIdEntidad() {
+    /*public String getIdEntidad() {
         return idEntidad;
     }
 
@@ -209,7 +215,7 @@ public class Docente {
 
     public void setCargaCedula(Boolean cargaCedula) {
         this.cargaCedula = cargaCedula;
-    }
+    }*/
 
     public String[] getInfoRegistro() {
         return infoRegistro;
@@ -219,7 +225,7 @@ public class Docente {
         this.infoRegistro = infoRegistro;
     }
     
-    public void consultaPreRegistro(){
+    /*public void consultaPreRegistro(){
         Metodos_sql metodo = new Metodos_sql();
         String[] parametros={idUsuario};
         List<String[]> datos=metodo.ejecutaSP("sp_selectUsuario",parametros);
@@ -230,17 +236,18 @@ public class Docente {
             correo=datos.get(0)[3];
             rfc=datos.get(0)[4];
         }
-    }
+    }*/
     public void consumeWSCatalogoDocentes(){
         WebService ws;
         ws=new WebService("http://200.77.238.19/develop/protected/pages/herramientas/estructuras/promocion/catalogo_docentes.php?rfc="+rfc);
         ws.consumeWS(); 
         jsonHoras=ws.getData();
+        System.out.println("|"+jsonHoras+"|");
     }
     
     public HorasGrupo[] getArrayHoras() {        
         HorasGrupo[] aux=null;
-        if(jsonHoras!=""){            
+        if(jsonHoras.length()>0){            
             Gson gson = new Gson();
             aux = gson.fromJson(jsonHoras,HorasGrupo[].class);            
         }        
@@ -249,9 +256,11 @@ public class Docente {
     
     public int getTotalHoras(){
         int totalHoras=0;
-        HorasGrupo[] aux=getArrayHoras();
-        for(String[] hora:listaHoras){
-            totalHoras+=Integer.parseInt(hora[9]);
+        //HorasGrupo[] aux=getArrayHoras();
+        if(listaHoras.size()>0){
+            for(String[] hora:listaHoras){
+                totalHoras+=Integer.parseInt(hora[9]);
+            }
         }
         return totalHoras;
     }
@@ -299,9 +308,46 @@ public class Docente {
         List<String[]> datos=metodo.ejecutaSP("sp_consultaRegistro",parametros);
         if(!datos.isEmpty()){
             infoRegistro=datos.get(0);
+            rfc=infoRegistro[5];
         }
     }
-    
-    
+    public void consultaDocumentos(){
+        Metodos_sql metodo = new Metodos_sql();
+        String[] parametros={idUsuario,""};
+        listaDocumentos=metodo.ejecutaSP("sp_selectConstanciasRegistro",parametros);        
+    }
+    public boolean documentoCargado(String idDocumento){
+        boolean retorno=false;
+        for(String[] dato:listaDocumentos){
+            if(dato[2].equals(idDocumento)){
+                retorno=true;
+                break;
+            }
+        }
+        return retorno;
+    }
+    public boolean verificaSeccion(String idSeccion){
+        boolean retorno=false;
+        switch(idSeccion){
+            case "1":
+                if(infoRegistro[14]!=null){
+                    if(documentoCargado("1")==true){//Si ya se registró la información academica y se cargo el titulo                        
+                        if(infoRegistro[24]==null){//Si no se registró información de Cédula
+                            retorno=true;                            
+                        }else{
+                            if(documentoCargado("8")==true){//Si sí se registró la información de Cédula y se cargo el documento
+                                retorno=true;
+                            }else{
+                                retorno=false;
+                            }
+                        }  
+                    }
+                }
+                break;
+            default:
+                break;
+        }
+        return retorno;
+    }
     
 }

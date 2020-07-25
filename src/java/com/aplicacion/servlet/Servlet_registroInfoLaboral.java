@@ -85,16 +85,16 @@ public class Servlet_registroInfoLaboral extends HttpServlet {
             HttpSession session= (HttpSession) request.getSession();
             String idUsuario=session.getAttribute("idUsuario").toString();
             //out.println(idUsuario);
-            
+            Fecha fecha=new Fecha();
             String activo,ingresoSubsistema="",ingresoPlantel="",idCategoriaJornada="",fechaPlaza="",idTipoNombramiento="",fechaUltimaPromocion="",idCategoriaJornadaAspira="",idPerfilRequerido="",notaSancion="N";
             if(request.getParameter("activoServicio")!=null){
                 activo="S";
-                ingresoSubsistema=Fecha.formatoAlmacenar(request.getParameter("ingresoSubsistema"));
-                ingresoPlantel=Fecha.formatoAlmacenar(request.getParameter("ingresoPlantel"));            
+                ingresoSubsistema=fecha.formatoAlmacenar(request.getParameter("ingresoSubsistema"));
+                ingresoPlantel=fecha.formatoAlmacenar(request.getParameter("ingresoPlantel"));            
                 idCategoriaJornada=request.getParameter("jornada");
-                fechaPlaza=Fecha.formatoAlmacenar(request.getParameter("fechaPlaza"));
+                fechaPlaza=fecha.formatoAlmacenar(request.getParameter("fechaPlaza"));
                 idTipoNombramiento=request.getParameter("tipoNombramiento");
-                fechaUltimaPromocion=Fecha.formatoAlmacenar(request.getParameter("fechaPromocion"));
+                fechaUltimaPromocion=fecha.formatoAlmacenar(request.getParameter("fechaPromocion"));
                 idCategoriaJornadaAspira=request.getParameter("jornadaAspira");
                 idPerfilRequerido=request.getParameter("opReqCat");                
                 if(request.getParameter("notaDesfavorable")!=null){

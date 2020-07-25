@@ -44,11 +44,15 @@ public class WebService {
                 BufferedReader in = new BufferedReader(new InputStreamReader(
                                 con.getInputStream()));
                 String datos=in.readLine();
-                String[] aux=datos.split(";");                
-                data=aux[0].substring(aux[0].indexOf("'"));
-                data=data.replaceAll("'", "");
-                status=aux[1].substring(aux[1].indexOf("'"));
-                mensaje=aux[2].substring(aux[2].indexOf("'"));   
+                String[] aux=datos.split(";");
+                System.out.println(url);
+                System.out.println(datos);
+                if(aux.length==3){
+                    data=aux[0].substring(aux[0].indexOf("'"));
+                    data=data.replaceAll("'", "");                    
+                    status=aux[1].substring(aux[1].indexOf("'"));
+                    mensaje=aux[2].substring(aux[2].indexOf("'"));
+                }
         } catch (Exception e) {
                 System.out.println(e.getMessage());
         }

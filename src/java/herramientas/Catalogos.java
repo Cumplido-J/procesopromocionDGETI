@@ -14,9 +14,14 @@ import metodos_sql.Metodos_sql;
  * @author David Reyna
  */
 public class Catalogos {
-    Metodos_sql metodos = new Metodos_sql();
+    Metodos_sql metodos;
+
+    public Catalogos() {
+        metodos = new Metodos_sql();
+    }
     
-    public String desplegarOpcionesEstado(){        
+    
+    public  String desplegarOpcionesEstado(){        
         String respuesta="<option value=''>-Seleccione-</option>";        
         try{
             List<String[]> datos=metodos.ejecutaSP("sp_selectCatEntidades");
@@ -30,6 +35,12 @@ public class Catalogos {
             return respuesta;        
         }
     }
+    public String desplegarOpcionesEstado(String id){
+        String respuesta=desplegarOpcionesEstado();
+        String aux="value='"+id+"'";
+        respuesta=respuesta.replaceFirst(aux, aux+" selected");
+        return respuesta;  
+    }    
     public String desplegarOpcionesGrado(){        
         String respuesta="<option value=''>-Seleccione-</option>";
         try{
@@ -42,6 +53,12 @@ public class Catalogos {
         }finally{
             return respuesta;        
         }
+    }
+    public String desplegarOpcionesGrado(String id){
+        String respuesta=desplegarOpcionesGrado();
+        String aux="value='"+id+"'";
+        respuesta=respuesta.replaceFirst(aux, aux+" selected");
+        return respuesta;  
     }
     
     public String desplegarOpcionesModalidadTitulacion(){        
@@ -57,6 +74,13 @@ public class Catalogos {
             return respuesta;        
         }
     }
+    public String desplegarOpcionesModalidadTitulacion(String id){
+        String respuesta=desplegarOpcionesModalidadTitulacion();
+        String aux="value='"+id+"'";
+        respuesta=respuesta.replaceFirst(aux, aux+" selected");
+        return respuesta;  
+    }
+    
     public String desplegarOpcionesPlanteles(){        
         String respuesta="<option value=''>-Seleccione-</option>";
         try{
@@ -69,6 +93,13 @@ public class Catalogos {
         }finally{
             return respuesta;        
         }
+    }
+    
+    public String desplegarOpcionesPlanteles(String id){
+        String respuesta=desplegarOpcionesPlanteles();
+        String aux="value='"+id+"'";
+        respuesta=respuesta.replaceFirst(aux, aux+" selected");
+        return respuesta;  
     }
     
     public String desplegarOpcionesTipoInstitucion(String idEstado){        
@@ -85,6 +116,12 @@ public class Catalogos {
             return respuesta;        
         }
     }
+    public String desplegarOpcionesTipoInstitucion(String idEstado,String id){
+        String respuesta=desplegarOpcionesTipoInstitucion(idEstado);
+        String aux="value='"+id+"'";
+        respuesta=respuesta.replaceFirst(aux, aux+" selected");
+        return respuesta;  
+    }
     public String desplegarOpcionesInstituciones(String idEntidad,String idTipo){        
         String respuesta="<option value=''>-Seleccione-</option>";
         String[] parametros={idEntidad,idTipo};
@@ -98,6 +135,12 @@ public class Catalogos {
         }finally{
             return respuesta;        
         }
+    }
+    public String desplegarOpcionesInstituciones(String idEntidad,String idTipo,String id){
+        String respuesta=desplegarOpcionesInstituciones(idEntidad,idTipo);
+        String aux="value='"+id+"'";
+        respuesta=respuesta.replaceFirst(aux, aux+" selected");
+        return respuesta;  
     }
     public String desplegarOpcionesCCT(String idInstitucion){        
         String respuesta="<option value=''>-Seleccione-</option>";
@@ -113,6 +156,12 @@ public class Catalogos {
             return respuesta;        
         }
     }
+    public String desplegarOpcionesCCT(String idInstitucion,String id){
+        String respuesta=desplegarOpcionesCCT(idInstitucion);
+        String aux="value='"+id+"'";
+        respuesta=respuesta.replaceFirst(aux, aux+" selected");
+        return respuesta;  
+    }
     public String desplegarOpcionesEscuelas(String idInstitucion){        
         String respuesta="<option value=''>-Seleccione-</option>";
         String[] parametros={idInstitucion};
@@ -127,6 +176,12 @@ public class Catalogos {
             return respuesta;        
         }
     }
+    public String desplegarOpcionesEscuelas(String idInstitucion,String id){
+        String respuesta=desplegarOpcionesEscuelas(idInstitucion);
+        String aux="value='"+id+"'";
+        respuesta=respuesta.replaceFirst(aux, aux+" selected");
+        return respuesta;  
+    }
     public String desplegarOpcionesCategorias(){        
         String respuesta="<option value=''>-Seleccione-</option>";
         try{
@@ -140,6 +195,12 @@ public class Catalogos {
             return respuesta;        
         }
     }
+    public String desplegarOpcionesCategorias(String id){
+        String respuesta=desplegarOpcionesCategorias();
+        String aux="value='"+id+"'";
+        respuesta=respuesta.replaceFirst(aux, aux+" selected");
+        return respuesta;  
+    }
     public String desplegarOpcionesTipoNombramiento(){        
         String respuesta="<option value=''>-Seleccione-</option>";
         try{
@@ -152,6 +213,12 @@ public class Catalogos {
         }finally{
             return respuesta;        
         }
+    }
+    public String desplegarOpcionesTipoNombramiento(String id){
+        String respuesta=desplegarOpcionesTipoNombramiento();
+        String aux="value='"+id+"'";
+        respuesta=respuesta.replaceFirst(aux, aux+" selected");
+        return respuesta;  
     }
     public String desplegarVersionesCompBP(){        
         String respuesta="<option value=''>-Seleccione-</option>";
@@ -278,7 +345,13 @@ public class Catalogos {
             return respuesta;        
         }
     }
-    public String consultaRequisitosCategoria(String idCategoria){        
+    public String desplegarOpcionesJornada(String idCategoria,String id){
+        String respuesta=desplegarOpcionesJornada(idCategoria);
+        String aux="value='"+id+"'";
+        respuesta=respuesta.replaceFirst(aux, aux+" selected");        
+        return respuesta;  
+    }
+    public String desplegarRequisitosCategoria(String idCategoria){        
         String respuesta="";
         String[] parametros={idCategoria};
         try{
@@ -286,14 +359,21 @@ public class Catalogos {
             for(String[] dato:datos){
                 respuesta+="<label class='control-label'><input type='radio' name='opReqCat' value='"+dato[0]+"' required>&nbsp;"+dato[1]+"</label><br/>";
             }
-            respuesta+="<label><input type='radio' name='opReqCat' value='0' checked required>&nbsp;Ninguno</label>";
+            respuesta+="<label><input type='radio' name='opReqCat' value='' checked required>&nbsp;Ninguno</label>";
         }catch(Exception e){
             respuesta=e.toString();
         }finally{
             return respuesta;        
         }
     }
-    public String desplegarPeriodos(){        
+    public String desplegarRequisitosCategoria(String idCategoria,String id){
+        String respuesta=desplegarRequisitosCategoria(idCategoria);
+        String aux="value='"+id+"'";
+        respuesta=respuesta.replaceFirst("checked","");
+        respuesta=respuesta.replaceFirst(aux, aux+" checked");
+        return respuesta;  
+    }
+    public String desplegarOpcionesPeriodos(){        
         String respuesta="<option value=''>-Seleccione-</option>";
         try{
             List<String[]> datos=metodos.ejecutaSP("sp_selectCatPeriodos");
@@ -305,5 +385,11 @@ public class Catalogos {
         }finally{
             return respuesta;        
         }
+    }
+    public String desplegarOpcionesPeriodos(String id){
+        String respuesta=desplegarOpcionesPeriodos();
+        String aux="value='"+id+"'";
+        respuesta=respuesta.replaceFirst(aux, aux+" selected");
+        return respuesta;  
     }
 }

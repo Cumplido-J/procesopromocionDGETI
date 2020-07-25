@@ -45,16 +45,16 @@
         <servlet-class>com.aplicacion.servlet.Servlet_registroHorasGrupo</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>Servlet_registroInfoCENNI</servlet-name>
-        <servlet-class>com.aplicacion.servlet.Servlet_registroInfoCENNI</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>Servlet_cbFichaRegistro</servlet-name>
         <servlet-class>com.aplicacion.servlet.Servlet_cbFichaRegistro</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>Servlet_cbFechaRegistroIncompleto</servlet-name>
         <servlet-class>com.aplicacion.servlet.Servlet_cbFechaRegistroIncompleto</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Servlet_registroInfoHoras</servlet-name>
+        <servlet-class>com.aplicacion.servlet.Servlet_registroInfoHoras</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>Servlet_consultaCatalogos</servlet-name>
@@ -101,16 +101,16 @@
         <url-pattern>/Servlet_registroHorasGrupo</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>Servlet_registroInfoCENNI</servlet-name>
-        <url-pattern>/Servlet_registroInfoCENNI</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
         <servlet-name>Servlet_cbFichaRegistro</servlet-name>
         <url-pattern>/Servlet_cbFichaRegistro</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>Servlet_cbFechaRegistroIncompleto</servlet-name>
         <url-pattern>/Servlet_cbFechaRegistroIncompleto</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Servlet_registroInfoHoras</servlet-name>
+        <url-pattern>/Servlet_registroInfoHoras</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

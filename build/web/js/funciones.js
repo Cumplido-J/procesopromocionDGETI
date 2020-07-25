@@ -73,6 +73,28 @@ $(document).ready(function () {
                    $("#btnEnviar1").removeAttr("disabled");
                 },success:function(data){
                     if(data=="ok"){
+                        if($("#btnEvidencia1").val()=="Ver archivo"){
+                            $("#alertaBtnEvidencia1").attr("style","display:none;");
+                            if($("#documento").val()=="cedula"){
+                                if($("#btnEvidencia8").val()=="Ver archivo"){
+                                    $("#alertaBtnEvidencia8").attr("style","display:none;");
+                                    $("#estatusInfoAcademica").attr("class","glyphicon glyphicon-ok-sign completo");
+                                    $("#estatusInfoAcademica").attr("title","Sección completa");
+                                }else{
+                                    $("#alertaBtnEvidencia8").removeAttr("style");
+                                    $("#estatusInfoAcademica").attr("class","glyphicon glyphicon-exclamation-sign incompleto");
+                                    $("#estatusInfoAcademica").attr("title","Sección incompleta");
+                                }
+                            }else{
+                                $("#estatusInfoAcademica").attr("class","glyphicon glyphicon-ok-sign completo");
+                                $("#estatusInfoAcademica").attr("title","Sección completa");
+                            }
+                            
+                        }else{
+                            $("#alertaBtnEvidencia1").removeAttr("style");
+                            $("#estatusInfoAcademica").attr("class","glyphicon glyphicon-exclamation-sign incompleto");
+                            $("#estatusInfoAcademica").attr("title","Sección incompleta");
+                        }                        
                         mostrarSiguiente(1);
                     }else{
                         $("#mensaje").html(data);            
@@ -149,24 +171,16 @@ $(document).ready(function () {
     });
     $('#formInfoHorasGrupo').submit(function(e) {
         e.preventDefault();
-    }).validate({ 
+    }).validate({    
         rules: {
-            'numHoras':{
-                min:1
-            },
-            'numGrupos':{
-                min:1
+            nivelCENNI: {
+              number: true
             }
         },
-        messages: {
-            'numHoras':{
-                min:"Debe registrar las horas frente a grupo"
-            },
-            'numGrupos':{
-                min:"Debe registrar las horas frente a grupo"
-            },
+        messages: {            
             'nivelCENNI': {
-                required: "Campo requerido"
+                required: "Campo requerido",
+                number: "Ingrese sólo números"
             },
             'folio': {
                 required: "Campo requerido"
@@ -632,13 +646,19 @@ function mostrarSiguiente(id){
             break;
         case 3:
             if($("#frenteGrupo").is(':checked')){
-                $("#infoHoras").collapse("hide");
-                $("#panelInfoCompatibilidad").removeAttr("hidden");
-                $("#infoCompatibilidad").collapse("show");
+                if($("#numHoras").val()>0){
+                    $("#infoHoras").collapse("hide");
+                    $("#panelInfoCompatibilidad").removeAttr("hidden");
+                    $("#infoCompatibilidad").collapse("show");
+                }else{
+                    $("#mensaje").html("Debe registrar la información de horas frente a grupo.");
+                    $("#modalMensaje").modal("show");
+                }
             }else{
                 $("#mensaje").html("Su registro será rechazado debido a que no se encuentra frente a grupo.");
-                $(location).attr('href',"FichaRegistroIncompleto");
                 $("#modalMensaje").modal("show");
+                $(location).attr('href',"FichaRegistroIncompleto");
+                
             }
             break;
         case 4:
@@ -741,7 +761,8 @@ function subirArchivo(){
         document.formArchivo.action="GuardarArchivo";
         document.formArchivo.submit();
         var id=$("#idArchivo").val(); 
-        $("#btnEvidencia"+id).attr("value","Visualizar archivo");        
+        $("#btnEvidencia"+id).attr("value","Ver archivo");
+        $("#alertaBtnEvidencia"+id).attr("style","display:none;");
         $("#mensaje").html("El archivo fue cargado correctamente");
     }
     $("#modalMensaje").modal("show");
@@ -802,7 +823,7 @@ function cambioCategoriaAspira() {
         $("#jornadaAspira").html(respuesta);
     });
     $.get("ConsultaCatalogos", {k: "10",i:id}, function(respuesta){
-        $("#rbRequisitos").html("<label class='control-label'>Seleccione el requisito cumplido de acuerdo a su situación:</label>"+respuesta);
+        $("#rbRequisitos").html(respuesta);
     }); 
 }
 

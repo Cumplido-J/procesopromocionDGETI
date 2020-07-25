@@ -7,6 +7,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import='herramientas.Catalogos'%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE html>
 <html lang="es">
     <head>
@@ -17,6 +18,8 @@
         <link href="https://framework-gb.cdn.gob.mx/assets/styles/main.css" rel="stylesheet"/>        
         <link href="css/estilos.css" rel="stylesheet"/>
         <jsp:useBean id="docente" scope="session" class="com.aplicacion.beans.Docente" />
+        <jsp:useBean id="catalogo" class="herramientas.Catalogos" />
+        <jsp:useBean id="fecha" class="herramientas.Fecha" />
     </head>
     <body>
         <main class="page">            
@@ -66,104 +69,132 @@
                   <div class="panel-heading">
                     <h4 class="panel-title">
                       <a data-parent="#accordion" data-toggle="collapse" href="#infoAcademica" aria-expanded="true" aria-controls="infoAcademica">
-                      Información Académica
+                        Información Académica
+                        <c:set var="bandera" value="${Docente.verificaSeccion('1')}"></c:set>
+                        <c:if test = "${bandera==true}">
+                            <span class="glyphicon glyphicon-ok-sign completo" title="Sección completa" id="estatusInfoAcademica"></span>  
+                            <c:set var="in" value=""></c:set>
+                        </c:if>
+                        <c:if test = "${bandera==false}">
+                            <span class="glyphicon glyphicon-exclamation-sign incompleto" title="Sección incompleta" id="estatusInfoAcademica"></span>
+                            <c:set var="in" value="in"></c:set>
+                        </c:if>
                       </a>
                     </h4>
+                    
                     <button type="button" class="collpase-button collapsed" data-parent="#accordion" data-toggle="collapse" href="#infoAcademica"></button>
                   </div>
-                  <div class="panel-collapse collapse in" id="infoAcademica">
+                  <div class="panel-collapse collapse ${in}" id="infoAcademica">
                     <div class="panel-body">
                       <form id="formInfoAcademica" role="form" action="RegistroInfoAcademica" method="POST">
                         <div class="row">
                             <div class="form-group col-md-3">
                               <!--<input type="text" value="${Docente.rfc}" />-->                                
                               <label class="control-label" for="entidad">Entidad de estudio:</label>
-                              <select class="form-control input-sm" id="entidad" name="entidad" onchange="actualizarTipoInstitucion()" required>
-                                  <%=new Catalogos().desplegarOpcionesEstado()%>
+                              <select class="form-control input-sm" id="entidad" name="entidad" onchange="actualizarTipoInstitucion()" required>                                  
+                                  ${catalogo.desplegarOpcionesEstado(Docente.infoRegistro[55])}
                               </select>
                             </div>
                             <div class="form-group col-md-3">
                               <label class="control-label" for="tipoInstitucion">Tipo de institución:</label>
                               <select class="form-control input-sm" id="tipoInstitucion" name="tipoInstitucion" onchange="actualizarInstitucion()" required>
-                                <option value="">-Seleccione-</option>                                
+                                ${catalogo.desplegarOpcionesTipoInstitucion(Docente.infoRegistro[55],Docente.infoRegistro[57])}                                
                               </select>
                             </div>                            
                             <div class="form-group col-md-3">
                               <label class="control-label" for="institucion">Institución:</label>
                               <select class="form-control input-sm" id="institucion" name="institucion" onchange="cambioInstitucion()" required>
-                                <option value=''>-Seleccione-</option>
+                                ${catalogo.desplegarOpcionesInstituciones(Docente.infoRegistro[55],Docente.infoRegistro[57],Docente.infoRegistro[56])}
                               </select>
                             </div>
                             <div class="form-group col-md-3">
                               <label class="control-label" for="cct">CCT:</label>
                               <select class="form-control input-sm" id="cct" name="cct">
-                                <option value=''>-Seleccione-</option>
+                                ${catalogo.desplegarOpcionesCCT(Docente.infoRegistro[56],Docente.infoRegistro[53])}
                               </select>
                             </div>
                         </div>
                         <div class="row">
                             <div class="form-group col-md-3">
                               <label class="control-label" for="escuela">Escuela o Facultad:</label>
-                              <select class="form-control input-sm" id="escuela" name="escuela" required
-                                      >
-                                <option value=''>-Seleccione-</option>
+                              <select class="form-control input-sm" id="escuela" name="escuela" required>
+                                ${catalogo.desplegarOpcionesEscuelas(Docente.infoRegistro[56],Docente.infoRegistro[14])}
                               </select>
                             </div>
                             <div class="form-group col-md-3">
                               <label class="control-label" for="grado">Grado Académico:</label>
-                              <select class="form-control input-sm" id="grado" name="grado" required>
-                                <%=new Catalogos().desplegarOpcionesGrado()%>
+                              <select class="form-control input-sm" id="grado" name="grado" required>                                
+                                ${catalogo.desplegarOpcionesGrado(Docente.infoRegistro[19])}
                               </select>
                             </div>
                             <div class="form-group col-md-3">
                               <label class="control-label" for="carrera">Carrera:</label>                              
-                              <input type="text" class="form-control input-sm" id="carrera" name="carrera" required>
-                              <!--<select class="form-control input-sm" id="carrera" name="carrera">
-                                <option>-Seleccione-</option>
-                              </select>-->
+                              <input type="text" class="form-control input-sm" id="carrera" name="carrera" value="${Docente.infoRegistro[17]}" required>                                                            
                             </div>
                             <div class="form-group col-md-3">
                               <label class="control-label" for="egreso">Año de egreso:</label>
-                              <input type="text" class="form-control input-sm" id="egreso" name="egreso" pattern="[0-9]{4}" maxlength="4" required>
+                              <input type="text" class="form-control input-sm" id="egreso" name="egreso" pattern="[0-9]{4}" maxlength="4" value="${Docente.infoRegistro[18]}" required>
                             </div>
                         </div>
                         <div class="row">
                             <div class="form-group col-md-3">
                               <label class="control-label" for="modalidad">Modalidad de Titulación:</label>
                               <select class="form-control input-sm" id="modalidad" name="modalidad" required>
-                                <%=new Catalogos().desplegarOpcionesModalidadTitulacion()%>
+                                ${catalogo.desplegarOpcionesModalidadTitulacion(Docente.infoRegistro[21])}
                               </select>
                             </div>
                             <div class="form-group col-md-3">
                               <label class="control-label" for="titulacion">Año de titulación:</label>
-                              <input type="text" class="form-control input-sm" id="titulacion" name="titulacion" pattern="[0-9]{4}" maxlength="4" required>
+                              <input type="text" class="form-control input-sm" id="titulacion" name="titulacion" pattern="[0-9]{4}" value="${Docente.infoRegistro[23]}" maxlength="4" required>
                             </div>                            
                             <div class="form-group col-md-3">
-                              <label class="control-label" for="btnEvidencia1">Título:</label>
-                              <a title="Ver ejemplo" onclick="abrirModalEjemplo(1)">
-                                <span class="glyphicon glyphicon-picture"></span>
-                              </a><br/>                          
-                              <input id="btnEvidencia1" type="button" class="btn btn-sm btn-link" value="Subir archivo" onclick="abrirModalArchivo(1)"/>
+                                <label class="control-label" for="btnEvidencia1">Título:</label>
+                                <a title="Ver ejemplo" onclick="abrirModalEjemplo(1)">
+                                  <span class="glyphicon glyphicon-picture"></span>
+                                </a><br/> 
+                                <c:if test = "${Docente.documentoCargado('1')==true}">
+                                    <input id="btnEvidencia1" type="button" class="btn btn-sm btn-link" value="Ver archivo" onclick="abrirModalArchivo(1)"/>                                    
+                                    <span class="glyphicon glyphicon-exclamation-sign incompleto" title="Sección incompleta" id="alertaBtnEvidencia1" style="display:none;"></span>
+                                </c:if>
+                                <c:if test = "${Docente.documentoCargado('1')==false}">
+                                    <input id="btnEvidencia1" type="button" class="btn btn-sm btn-link incompleto" value="Subir archivo" onclick="abrirModalArchivo(1)"/>
+                                    <span class="glyphicon glyphicon-exclamation-sign incompleto" title="Sección incompleta" id="alertaBtnEvidencia1"></span>
+                                </c:if>
                             </div> 
                             <div class="form-group col-md-3">
                               <label class="control-label" for="documento">Documento comprobatorio:</label>
                               <select class="form-control input-sm" id="documento" name="documento" onchange="cambioDocumento(this)" required>
-                                  <option value="">-Seleccionar-</option>
-                                  <option value="acta">Acta de grado</option>
-                                  <option value="cedula">Cédula profesional</option>
+                                  <option value="">-Seleccionar-</option>                                  
+                                  <c:if test = "${Docente.infoRegistro[24]==null}">
+                                      <option value="acta" selected>Acta de grado</option>
+                                      <option value="cedula">Cédula profesional</option>
+                                  </c:if>
+                                  <c:if test = "${Docente.infoRegistro[24]!=null}">
+                                      <option value="acta">Acta de grado</option>
+                                      <option value="cedula" selected>Cédula profesional</option>
+                                  </c:if>
                               </select>
                             </div>
                         </div>
                         <div class="row">
-                            <div id="seccionCedula" hidden="true">
+                            <c:if test = "${Docente.infoRegistro[24]==null}">
+                                <c:set var="hidden" value="hidden"></c:set>
+                            </c:if>
+                            <div id="seccionCedula" ${hidden}>
                                 <div class="form-group col-md-3">
                                   <label class="control-label" for="cedula">Número de Cédula:</label>
-                                  <input type="text" class="form-control input-sm" id="cedula" name="cedula">
+                                  <input type="text" class="form-control input-sm" id="cedula" name="cedula" value="${Docente.infoRegistro[24]}">
                                 </div>
                                 <div class="form-group col-md-3">
-                                  <label class="control-label" for="btnEvidencia8">Cédula profesional:</label>
-                                  <a title="Ver ejemplo" onclick="abrirModalEjemplo(8)"><span class="glyphicon glyphicon-picture"></span></a><br/>                          
-                                  <input id="btnEvidencia8" type="button" class="btn btn-sm btn-link" value="Subir archivo" onclick="abrirModalArchivo(8)"/>
+                                    <label class="control-label" for="btnEvidencia8">Cédula profesional:</label>
+                                    <a title="Ver ejemplo" onclick="abrirModalEjemplo(8)"><span class="glyphicon glyphicon-picture"></span></a><br/>  
+                                    <c:if test = "${Docente.documentoCargado('8')==true}">
+                                        <input id="btnEvidencia8" type="button" class="btn btn-sm btn-link" value="Ver archivo" onclick="abrirModalArchivo(8)"/>                                    
+                                    </c:if>
+                                    <c:if test = "${Docente.documentoCargado('8')==false}">
+                                        <input id="btnEvidencia8" type="button" class="btn btn-sm btn-link incompleto" value="Subir archivo" onclick="abrirModalArchivo(8)"/>
+                                        <span class="glyphicon glyphicon-exclamation-sign incompleto" title="Sección incompleta" id="alertaBtnEvidencia8"></span>
+                                    </c:if>                                  
                                 </div> 
                             </div>
                         </div>                        
@@ -176,9 +207,21 @@
                     </div>
                   </div>
                 </div>
-
-                <div class="panel panel-default" id="panelInfoLaboral" hidden>
-                  <div class="panel-heading">
+                <c:if test = "${Docente.infoRegistro[14]!=null}">
+                    <c:set var="hidden" value=""></c:set>
+                    <c:if test = "${Docente.infoRegistro[26]==null}">
+                        <c:set var="in" value="in"></c:set>
+                    </c:if>
+                    <c:if test = "${Docente.infoRegistro[26]!=null}">
+                        <c:set var="in" value=""></c:set>
+                    </c:if>
+                </c:if>
+                <c:if test = "${Docente.infoRegistro[14]==null}">
+                    <c:set var="hidden" value="hidden"></c:set>                    
+                </c:if>    
+                            
+                <div class="panel panel-default" id="panelInfoLaboral" ${hidden}>
+                  <div class="panel-heading" id="phInfoLaboral">
                     <h4 class="panel-title">
                       <a data-parent="#accordion" data-toggle="collapse" href="#infoLaboral" aria-expanded="true" aria-controls="infoLaboral">
                       Información Laboral
@@ -186,103 +229,142 @@
                     </h4>
                     <button type="button" class="collpase-button collapsed" data-parent="#accordion" data-toggle="collapse" href="#infoLaboral"></button>
                   </div>
-                  <div class="panel-collapse collapse" id="infoLaboral" >
+                  <div class="panel-collapse collapse ${in}" id="infoLaboral" >
                     <div class="panel-body">
                       <form id="formInfoLaboral" role="form" action="RegistroInfoLaboral" method="POST">                      
                         <div class="row">
                             <div class="checkbox col-xs-12">
-                              <label><input type="checkbox" checked="true" id="activoServicio" name="activoServicio" data-toggle="collapse" data-target="#seccionActivoServicio">Activo en Servicio</label>
+                              <c:if test = "${Docente.infoRegistro[25]=='S'}">
+                                    <c:set var="checked" value="checked='true'"></c:set>
+                                    <c:set var="in" value="in"></c:set>
+                              </c:if>
+                              <c:if test = "${Docente.infoRegistro[25]=='N'}">
+                                    <c:set var="checked" value=""></c:set>
+                                    <c:set var="in" value=""></c:set>
+                              </c:if>
+                              <label><input type="checkbox" ${checked} id="activoServicio" name="activoServicio" data-toggle="collapse" data-target="#seccionActivoServicio">Activo en Servicio</label>
                             </div>
                         </div>
-                        <div id="seccionActivoServicio" class="collapse in">
+                        <div id="seccionActivoServicio" class="collapse ${in}">
                             <div class="row">
                                 <div class="form-group col-md-3 datepicker-group">
                                   <label class="control-label" for="ingresoSubsistema">Fecha de ingreso al subsistema:</label>
-                                  <input type="text" class="form-control input-sm" id="ingresoSubsistema" name="ingresoSubsistema" required>
+                                  <input type="text" class="form-control input-sm" id="ingresoSubsistema" name="ingresoSubsistema" value="${fecha.formatoImprimir(Docente.infoRegistro[26])}" required>
 
                                 </div>
                                 <div class="form-group col-md-3 datepicker-group">
                                   <label class="control-label" for="ingresoPlantel">Fecha de ingreso al plantel:</label>
-                                  <input class="form-control input-sm" id="ingresoPlantel" name="ingresoPlantel" type="text" required>
+                                  <input class="form-control input-sm" id="ingresoPlantel" name="ingresoPlantel" type="text" value="${fecha.formatoImprimir(Docente.infoRegistro[27])}" required>
 
                                 </div>
                                 <div class="form-group col-md-3">
-                                  <label class="control-label" for="plantel">Plantel:</label>
-                                  <select class="form-control input-sm" id="plantel" name="plantel" onchange="cambioPlantel()" required>
-                                    <%=new Catalogos().desplegarOpcionesPlanteles()%>
-                                  </select>
+                                  <label class="control-label" for="plantel">Plantel:</label>      
+                                  <br/><span>${Docente.infoRegistro[10]}</span>
                                 </div>
                                 <div class="form-group col-md-3">
                                   <br/>
-                                  <span class="text-danger" id="marginacion"></span>
+                                  <span class="text-danger" id="marginacion">
+                                      <c:if test="${Docente.infoRegistro[58]!=null}">
+                                          <c:out value="Con grado de marginación"></c:out>
+                                      </c:if>
+                                  </span>
                                 </div>  
                             </div>
                             <div class="row">
                                 <div class="form-group col-md-3">
                                   <label class="control-label" for="categoria">Categoría actual:</label>
                                   <select class="form-control input-sm" id="categoria" name="categoria" onchange="cambioCategoria()" required>
-                                    <%=new Catalogos().desplegarOpcionesCategorias()%>
+                                    ${catalogo.desplegarOpcionesCategorias(Docente.infoRegistro[30])}
                                   </select>                          
                                 </div>
                                 <div class="form-group col-md-3">
                                   <label class="control-label" for="jornada">Tipo de jornada:</label>
                                   <select class="form-control input-sm" id="jornada" name="jornada" required>
-                                      <option value=''>-Seleccione-</option>
+                                      ${catalogo.desplegarOpcionesJornada(Docente.infoRegistro[30],Docente.infoRegistro[28])}
                                   </select>                          
                                 </div>
                                 <div class="form-group col-md-3 datepicker-group">
                                   <label class="control-label" for="fechaPlaza" style="font-size: 12px;">Fecha desde que ostenta la plaza:</label>
-                                  <input class="form-control input-sm" id="fechaPlaza" name="fechaPlaza" type="text" required>
+                                  <input class="form-control input-sm" id="fechaPlaza" name="fechaPlaza" type="text" value="${fecha.formatoImprimir(Docente.infoRegistro[34])}" required>
 
                                 </div>
                                 <div class="form-group col-md-3">
                                   <label class="control-label" for="tipoNombramiento">Tipo de nombramiento:</label>
-                                  <select class="form-control input-sm" id="tipoNombramiento" name="tipoNombramiento" required>
-                                    <%=new Catalogos().desplegarOpcionesTipoNombramiento()%>
+                                  <select class="form-control input-sm" id="tipoNombramiento" name="tipoNombramiento" required>                                    
+                                    ${catalogo.desplegarOpcionesTipoNombramiento(Docente.infoRegistro[35])}
                                   </select>                          
                                 </div>                                
                             </div>
                             <div class="row"> 
                                 <div class="form-group col-md-3 datepicker-group">
                                   <label class="control-label" for="fechaPromocion">Fecha de su última promoción:</label>
-                                  <input class="form-control input-sm" id="fechaPromocion" name="fechaPromocion" type="text" required>
+                                  <input class="form-control input-sm" id="fechaPromocion" name="fechaPromocion" type="text" value="${fecha.formatoImprimir(Docente.infoRegistro[39])}" required>
                                 </div>
-                                <div class="form-group col-md-3">
+                                <div class="form-group col-md-3">                                    
                                     <label class="control-label" for="btnEvidencia2">Constancia de antiguedad:</label>
                                     <a title="Ver ejemplo" onclick="abrirModalEjemplo(2)"><span class="glyphicon glyphicon-picture"></span></a><br/>  
-                                    <input id="btnEvidencia2" type="button" class="btn btn-sm btn-link" value="Subir archivo" onclick="abrirModalArchivo(2)"/>                          
+                                    <c:if test = "${Docente.documentoCargado('2')==true}">
+                                        <input id="btnEvidencia2" type="button" class="btn btn-sm btn-link" value="Ver archivo" onclick="abrirModalArchivo(2)"/>                                    
+                                    </c:if>
+                                    <c:if test = "${Docente.documentoCargado('2')==false}">
+                                        <input id="btnEvidencia2" type="button" class="btn btn-sm btn-link incompleto" value="Subir archivo" onclick="abrirModalArchivo(2)"/>
+                                        <span class="glyphicon glyphicon-exclamation-sign incompleto" title="Sección incompleta" id="alertaBtnEvidencia2"></span>
+                                    </c:if>                                    
                                 </div> 
                                 <div class="form-group col-md-6">
                                     <label class="control-label" for="btnEvidencia3">Constancia de nombramiento definitivo:</label>  
                                     <a title="Ver ejemplo" onclick="abrirModalEjemplo(3)"><span class="glyphicon glyphicon-picture"></span></a><br/>
-                                    <input id="btnEvidencia3" type="button" class="btn btn-sm btn-link" value="Subir archivo" onclick="abrirModalArchivo(3)"/>
+                                    <c:if test = "${Docente.documentoCargado('3')==true}">
+                                        <input id="btnEvidencia3" type="button" class="btn btn-sm btn-link" value="Ver archivo" onclick="abrirModalArchivo(3)"/>                                    
+                                    </c:if>
+                                    <c:if test = "${Docente.documentoCargado('3')==false}">
+                                        <input id="btnEvidencia3" type="button" class="btn btn-sm btn-link incompleto" value="Subir archivo" onclick="abrirModalArchivo(3)"/>
+                                        <span class="glyphicon glyphicon-exclamation-sign incompleto" title="Sección incompleta" id="alertaBtnEvidencia3"></span>
+                                    </c:if>                                    
                                 </div>                             
                             </div>
                             <div class="row">
                                 <div class="form-group col-md-3">
                                   <label class="control-label" for="categoriaAspira">Categoría a la que aspira:</label>
-                                  <select class="form-control input-sm" id="categoriaAspira" name="categoriaAspira" onchange="cambioCategoriaAspira()" required>
-                                     <%=new Catalogos().desplegarOpcionesCategorias()%>
+                                  <select class="form-control input-sm" id="categoriaAspira" name="categoriaAspira" onchange="cambioCategoriaAspira()" required>                                     
+                                     ${catalogo.desplegarOpcionesCategorias(Docente.infoRegistro[42])}
                                   </select>                          
                                 </div>
                                 <div class="form-group col-md-3">
                                   <label class="control-label" for="jornadaAspira">Tipo de jornada:</label>
                                   <select class="form-control input-sm" id="jornadaAspira" name="jornadaAspira" required>
-                                      <option value=''>-Seleccione-</option>
+                                      ${catalogo.desplegarOpcionesJornada(Docente.infoRegistro[42],Docente.infoRegistro[40])}
                                   </select>                          
                                 </div>
-                                <div class="form-group col-md-6" id="rbRequisitos">
-                                    
+                                <div class="form-group col-md-6">
+                                    <label class="control-label">Seleccione el requisito cumplido de acuerdo a su situación:</label><br>
+                                    <span id="rbRequisitos">
+                                        ${catalogo.desplegarRequisitosCategoria(Docente.infoRegistro[42],Docente.infoRegistro[46])}
+                                    </span>                                    
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="checkbox col-md-6">
-                                    <label><input type="checkbox" id="notaDesfavorable" name="notaDesfavorable" data-toggle="collapse" data-target="#seccionNota" >Marque la casilla si cuenta con nota desfavorable y/o sanción administrativa</label>
+                                    <c:if test = "${Docente.infoRegistro[48]=='S'}">
+                                        <c:set var="checked" value="checked='true'"></c:set>
+                                        <c:set var="in" value=""></c:set>
+                                    </c:if>
+                                    <c:if test = "${Docente.infoRegistro[48]=='N'}">
+                                        <c:set var="checked" value=""></c:set>
+                                        <c:set var="in" value="in"></c:set>
+                                    </c:if>
+                                    <label><input type="checkbox" id="notaDesfavorable" ${checked} name="notaDesfavorable" data-toggle="collapse" data-target="#seccionNota" >Marque la casilla si cuenta con nota desfavorable y/o sanción administrativa</label>
                                 </div>
-                                <div id="seccionNota" class="form-group col-md-6 collapse in">
+                                <div id="seccionNota" class="form-group col-md-6 collapse ${in}">
                                     <label class="control-label" for="btnEvidencia6">Constancia de nota favorable:</label>
                                     <a title="Ver ejemplo" onclick="abrirModalEjemplo(6)"><span class="glyphicon glyphicon-picture"></span></a><br/> 
-                                    <input id="btnEvidencia6" type="button" class="btn btn-sm btn-link" value="Subir archivo" onclick="abrirModalArchivo(6)"/>
+                                    <c:if test = "${Docente.documentoCargado('6')==true}">
+                                        <input id="btnEvidencia6" type="button" class="btn btn-sm btn-link" value="Ver archivo" onclick="abrirModalArchivo(6)"/>                                    
+                                    </c:if>
+                                    <c:if test = "${Docente.documentoCargado('6')==false}">
+                                        <input id="btnEvidencia6" type="button" class="btn btn-sm btn-link incompleto" value="Subir archivo" onclick="abrirModalArchivo(6)"/>
+                                        <span class="glyphicon glyphicon-exclamation-sign incompleto" title="Sección incompleta" id="alertaBtnEvidencia6"></span>
+                                    </c:if>                                    
                                 </div> 
                             </div>
                         </div>
@@ -296,8 +378,16 @@
                   </div>
                 </div>
                 </div>
-                <div class="panel panel-default" id="panelInfoHoras" hidden>
-                  <div class="panel-heading">
+                <c:if test = "${Docente.infoRegistro[26]!=null}">
+                    <c:set var="hidden" value=""></c:set>
+                    <c:set var="in" value=""></c:set>
+                </c:if>
+                <c:if test = "${Docente.infoRegistro[26]==null}">
+                    <c:set var="hidden" value="hidden"></c:set>
+                    <c:set var="in" value=""></c:set>
+                </c:if>
+                <div class="panel panel-default" id="panelInfoHoras" ${hidden}>
+                  <div class="panel-heading" id="phInfoHoras">
                     <h4 class="panel-title">
                       <a data-parent="#accordion" data-toggle="collapse" href="#infoHoras" aria-expanded="true" aria-controls="infoHoras">
                       Horas frente a grupo
@@ -305,20 +395,29 @@
                     </h4>
                     <button type="button" class="collpase-button collapsed" data-parent="#accordion" data-toggle="collapse" href="#infoHoras"></button>
                   </div>
-                  <div class="panel-collapse collapse" id="infoHoras" >
+                  <div class="panel-collapse collapse ${in}" id="infoHoras" >
                     <div class="panel-body">
-                      <form role="form" id="formInfoHorasGrupo" action="RegistroInfoCENNI" method="POST">
+                      <form role="form" id="formInfoHorasGrupo" action="RegistroInfoHoras" method="POST">
                         <div class="checkbox col-md-6">
-                          <label><input type="checkbox" checked="true" name="frenteGrupo" id="frenteGrupo" data-toggle="collapse" data-target="#seccionHoras">Marque la casilla si actualmente se encuentra frente a grupo</label>
+                            <c:if test="${Docente.infoRegistro[59]=='S'}">
+                                <c:set var="checked" value='checked'></c:set>
+                                <c:set var="in" value='in'></c:set>
+                            </c:if>
+                            <c:if test="${Docente.infoRegistro[59]=='N'}">
+                                <c:set var="checked" value=''></c:set>
+                                <c:set var="in" value=''></c:set>
+                            </c:if>
+                          <label><input type="checkbox" ${checked} name="frenteGrupo" id="frenteGrupo" data-toggle="collapse" data-target="#seccionHoras">Marque la casilla si actualmente se encuentra frente a grupo</label>
                         </div>  
-                        <div id="seccionHoras" class="collapse in">
+                        <div id="seccionHoras" class="collapse ${in}">
                             <div class="form-group col-md-3">
                               <label class="control-label" for="numHoras">Horas frente a grupo:</label>
-                              <input type="text" class="form-control input-sm" id="numHoras" name="numHoras" value="${Docente.getTotalHoras()}"  required>
+                              <c:set var="totalHoras" value="${Docente.getTotalHoras()}"></c:set>
+                              <input type="text" class="form-control input-sm" id="numHoras" name="numHoras" value="${totalHoras}" readOnly  required>
                             </div>
                             <div class="form-group col-md-3">
                               <label class="control-label" for="numGrupos">Número de grupos:</label>
-                              <input type="text" class="form-control input-sm" id="numGrupos" name="numGrupos" value="${Docente.getNumGrupos()}"  required>
+                              <input type="text" class="form-control input-sm" id="numGrupos" name="numGrupos" value="${Docente.getNumGrupos()}" readOnly required>
                             </div>
                             <div class="text-center">
                               <input type="button" class="btn btn-link btn-sm" value="(+) Agregar información" data-toggle="modal" data-target="#modalInformacion"/>
@@ -365,22 +464,35 @@
                             <div class="row" id="seccionCENNI" hidden>
                                 <div class="form-group col-md-3">
                                   <label class="control-label" for="nivelCENNI">Nivel de Inglés CENNI:</label>
-                                  <input type="text" class="form-control input-sm" id="nivelCENNI" name="nivelCENNI" pattern="[0-9]+">                          
+                                  <input type="text" class="form-control input-sm" id="nivelCENNI" name="nivelCENNI" maxlength="2" pattern="[0-9]+" value="${Docente.infoRegistro[51]}">                          
                                 </div>
                                 <div class="form-group col-md-3">
                                   <label class="control-label" for="folio">Folio CENNI:</label>
-                                  <input type="text" class="form-control input-sm" id="folio" name="folio">
+                                  <input type="text" class="form-control input-sm" id="folio" name="folio" maxlength='15' value="${Docente.infoRegistro[52]}">
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label class="control-label" for="btnEvidencia5">Constancia CENNI:</label>
                                     <a title="Ver ejemplo" onclick="abrirModalEjemplo(5)"><span class="glyphicon glyphicon-picture"></span></a><br/> 
-                                    <input id="btnEvidencia5" type="button" class="btn btn-sm btn-link" value="Subir archivo" onclick="abrirModalArchivo(5)"/>                                                    
+                                    <c:if test = "${Docente.documentoCargado('5')==true}">
+                                        <input id="btnEvidencia5" type="button" class="btn btn-sm btn-link" value="Ver archivo" onclick="abrirModalArchivo(5)"/>                                    
+                                    </c:if>
+                                    <c:if test = "${Docente.documentoCargado('5')==false}">
+                                        <input id="btnEvidencia5" type="button" class="btn btn-sm btn-link incompleto" value="Subir archivo" onclick="abrirModalArchivo(5)"/>
+                                        <span class="glyphicon glyphicon-exclamation-sign incompleto" title="Sección incompleta" id="alertaBtnEvidencia5"></span>
+                                    </c:if>
+                                    
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="control-label" for="btnEvidencia4">Constancia de horas frente a grupo:</label>  
                                 <a title="Ver ejemplo" onclick="abrirModalEjemplo(4)"><span class="glyphicon glyphicon-picture"></span></a><br/>
-                                <input id="btnEvidencia4" type="button" class="btn btn-sm btn-link" value="Subir archivo" onclick="abrirModalArchivo(4)"/>
+                                <c:if test = "${Docente.documentoCargado('4')==true}">
+                                    <input id="btnEvidencia4" type="button" class="btn btn-sm btn-link" value="Ver archivo" onclick="abrirModalArchivo(4)"/>                                    
+                                </c:if>
+                                <c:if test = "${Docente.documentoCargado('4')==false}">
+                                    <input id="btnEvidencia4" type="button" class="btn btn-sm btn-link incompleto" value="Subir archivo" onclick="abrirModalArchivo(4)"/>
+                                    <span class="glyphicon glyphicon-exclamation-sign incompleto" title="Sección incompleta" id="alertaBtnEvidencia4"></span>
+                                </c:if>                                
                             </div>
                         </div>
                         <div class="col-xs-12 text-right">
@@ -391,8 +503,16 @@
                     </div>
                   </div>
                 </div>
-                <div class="panel panel-default" id="panelInfoCompatibilidad" hidden>
-                  <div class="panel-heading">
+                <c:if test = "${totalHoras>0}">
+                    <c:set var="hidden" value=""></c:set>
+                    <c:set var="in" value="in"></c:set>
+                </c:if>
+                <c:if test = "${totalHoras==0}">
+                    <c:set var="hidden" value="hidden"></c:set>
+                    <c:set var="in" value=""></c:set>
+                </c:if>
+                <div class="panel panel-default" id="panelInfoCompatibilidad" ${hidden}>
+                  <div class="panel-heading" id="phInfoCompatibilidad">
                     <h4 class="panel-title">
                       <a data-parent="#accordion" data-toggle="collapse" href="#infoCompatibilidad" aria-expanded="true" aria-controls="infoCompatibilidad">
                       Compatibilidad
@@ -400,25 +520,47 @@
                     </h4>
                     <button type="button" class="collpase-button collapsed" data-parent="#accordion" data-toggle="collapse" href="#infoCompatibilidad"></button>
                   </div>
-                  <div class="panel-collapse collapse" id="infoCompatibilidad" >
+                  <div class="panel-collapse collapse ${in}" id="infoCompatibilidad" >
                     <div class="panel-body">
-                      <form role="form" id="formInfoCompatibilidad" method="POST" action="RegistroInfoCompatibilidad">                        
+                      <form role="form" id="formInfoCompatibilidad" method="POST" action="RegistroInfoCompatibilidad">                           
                         <div class="checkbox col-xs-12">
-                          <label><input data-toggle="collapse" data-target="#seccionOtro" type="checkbox" name="funcionesOtro">Marque la casilla si desempeña funciones en otro subsistema</label>
+                          <c:if test="${Docente.infoRegistro[50]!=null}">
+                              <c:set var="checked" value="checked"></c:set>
+                              <c:set var="in" value="in"></c:set>
+                          </c:if>
+                          <c:if test="${Docente.infoRegistro[50]==null}">
+                              <c:set var="checked" value=""></c:set>
+                              <c:set var="in" value=""></c:set>
+                          </c:if>
+                          <label><input data-toggle="collapse" ${checked} data-target="#seccionOtro" type="checkbox" name="funcionesOtro">Marque la casilla si desempeña funciones en otro subsistema</label>
                         </div>
-                        <div id="seccionOtro" class="collapse" >
+                        <div id="seccionOtro" class="collapse ${in}" >
                             <div class="form-group col-md-3">
                               <label class="control-label" for="numHorasOtro">Número de horas:</label>
-                              <input type="text" class="form-control input-sm" id="numHorasOtro" name="numHorasOtro" required>
+                              <input type="text" class="form-control input-sm" id="numHorasOtro" name="numHorasOtro" value="${Docente.infoRegistro[50]}" required>
                             </div>
                             <div class="checkbox col-md-4">
-                              <label><input data-toggle="collapse" data-target="#seccionCompatibilidad" type="checkbox" checked="true" name="compatibilidad" id="compatibilidad">Marque la casilla si cuenta con la compatibilidad requerida</label>
+                              <c:if test="${Docente.infoRegistro[49]=='S'}">
+                                <c:set var="checked" value="checked"></c:set>
+                                <c:set var="in" value="in"></c:set>
+                              </c:if>
+                              <c:if test="${Docente.infoRegistro[49]=='N'}">
+                                <c:set var="checked" value=""></c:set>
+                                <c:set var="in" value=""></c:set>
+                              </c:if>
+                              <label><input data-toggle="collapse" data-target="#seccionCompatibilidad" type="checkbox" ${checked} name="compatibilidad" id="compatibilidad">Marque la casilla si cuenta con la compatibilidad requerida</label>
                             </div>
-                            <div id="seccionCompatibilidad" class="collapse in" >
+                            <div id="seccionCompatibilidad" class="collapse ${in}" >
                                 <div class="form-group col-md-4">
                                     <label class="control-label" for="btnEvidencia7">Constancia de compatibilidad:</label>  
                                     <a title="Ver ejemplo" onclick="abrirModalEjemplo(7)"><span class="glyphicon glyphicon-picture"></span></a><br/>
-                                    <input id="btnEvidencia7" type="button" class="btn btn-sm btn-link" value="Subir archivo" onclick="abrirModalArchivo(7)"/>                          
+                                    <c:if test = "${Docente.documentoCargado('7')==true}">
+                                        <input id="btnEvidencia7" type="button" class="btn btn-sm btn-link" value="Ver archivo" onclick="abrirModalArchivo(7)"/>                                    
+                                    </c:if>
+                                    <c:if test = "${Docente.documentoCargado('7')==false}">
+                                        <input id="btnEvidencia7" type="button" class="btn btn-sm btn-link incompleto" value="Subir archivo" onclick="abrirModalArchivo(7)"/>
+                                        <span class="glyphicon glyphicon-exclamation-sign incompleto" title="Sección incompleta" id="alertaBtnEvidencia7"></span>
+                                    </c:if>                                    
                                 </div> 
                             </div>
                         </div>
@@ -494,7 +636,8 @@
                             <div class="form-group col-md-6" >
                                 <label class="control-label" for="periodo">Periodo:</label>
                                 <select class="form-control input-sm" id="periodo" name="periodo" required>
-                                    <%=new Catalogos().desplegarPeriodos()%>                                        
+                                    <%=new Catalogos().desplegarOpcionesPeriodos()%>  
+                                    
                                 </select>                          
                             </div>
                             <div class="form-group col-md-6">
