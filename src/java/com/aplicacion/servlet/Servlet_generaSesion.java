@@ -64,7 +64,7 @@ public class Servlet_generaSesion extends HttpServlet {
             throws ServletException, IOException {
         //processRequest(request, response);
         HttpSession session= (HttpSession) request.getSession(true); 
-        session.setAttribute("idUsuario",2);
+        session.setAttribute("idUsuario",1);
         response.sendRedirect("Registro");
     }
 

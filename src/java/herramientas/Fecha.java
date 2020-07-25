@@ -30,4 +30,16 @@ public class Fecha {
         }
         return respuesta;
     }
+    public String formatoImprimirFH(String cadena){
+        String respuesta="";
+        String aux1[]=cadena.split(" ");
+        if(aux1.length==2){
+            String aux2[]=aux1[0].split("-");
+            if(aux2.length==3){
+                respuesta=aux2[2]+"/"+aux2[1]+"/"+aux2[0]+" "+aux1[1].substring(0, 5);
+
+            }
+        }
+        return respuesta;
+    }
 }

@@ -103,7 +103,7 @@ public class Servlet_registroInfoCompatibilidad extends HttpServlet {
 
             //out.println(notaSancion);
             Metodos_sql metodo = new Metodos_sql();
-            String[] parametros={idUsuario,compatibilidad,numHorasOtro};
+            String[] parametros={idUsuario,funcionesOtro,compatibilidad,numHorasOtro};
             List<String[]> datos;                           
             datos=metodo.ejecutaSP("sp_registroInfoCompatibilidad",parametros);            
             if(!datos.isEmpty()){

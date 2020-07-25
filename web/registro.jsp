@@ -68,18 +68,18 @@
                 <div class="panel panel-default">
                   <div class="panel-heading">
                     <h4 class="panel-title">
-                      <a data-parent="#accordion" data-toggle="collapse" href="#infoAcademica" aria-expanded="true" aria-controls="infoAcademica">
-                        Información Académica
+                        <a data-parent="#accordion" data-toggle="collapse" href="#infoAcademica" aria-expanded="true" aria-controls="infoAcademica">
+                          Información Académica                        
                         <c:set var="bandera" value="${Docente.verificaSeccion('1')}"></c:set>
                         <c:if test = "${bandera==true}">
-                            <span class="glyphicon glyphicon-ok-sign completo" title="Sección completa" id="estatusInfoAcademica"></span>  
+                            <span class="glyphicon glyphicon-ok-sign completo" title="Sección completa" id="estatusInfoAcademica" completo="true"></span>  
                             <c:set var="in" value=""></c:set>
                         </c:if>
                         <c:if test = "${bandera==false}">
-                            <span class="glyphicon glyphicon-exclamation-sign incompleto" title="Sección incompleta" id="estatusInfoAcademica"></span>
+                            <span class="glyphicon glyphicon-exclamation-sign incompleto" title="Sección incompleta" id="estatusInfoAcademica" completo="false"></span>
                             <c:set var="in" value="in"></c:set>
                         </c:if>
-                      </a>
+                        </a>
                     </h4>
                     
                     <button type="button" class="collpase-button collapsed" data-parent="#accordion" data-toggle="collapse" href="#infoAcademica"></button>
@@ -223,9 +223,18 @@
                 <div class="panel panel-default" id="panelInfoLaboral" ${hidden}>
                   <div class="panel-heading" id="phInfoLaboral">
                     <h4 class="panel-title">
-                      <a data-parent="#accordion" data-toggle="collapse" href="#infoLaboral" aria-expanded="true" aria-controls="infoLaboral">
-                      Información Laboral
-                      </a>
+                        <a data-parent="#accordion" data-toggle="collapse" href="#infoLaboral" aria-expanded="true" aria-controls="infoLaboral">
+                        Información Laboral                        
+                        <c:set var="bandera" value="${Docente.verificaSeccion('2')}"></c:set>
+                        <c:if test = "${bandera==true}">
+                            <span class="glyphicon glyphicon-ok-sign completo" title="Sección completa" id="estatusInfoLaboral" completo="true"></span>  
+                            <c:set var="in" value=""></c:set>
+                        </c:if>
+                        <c:if test = "${bandera==false}">
+                            <span class="glyphicon glyphicon-exclamation-sign incompleto" title="Sección incompleta" id="estatusInfoLaboral" completo="false"></span>
+                            <c:set var="in" value="in"></c:set>
+                        </c:if>
+                        </a>
                     </h4>
                     <button type="button" class="collpase-button collapsed" data-parent="#accordion" data-toggle="collapse" href="#infoLaboral"></button>
                   </div>
@@ -238,7 +247,7 @@
                                     <c:set var="checked" value="checked='true'"></c:set>
                                     <c:set var="in" value="in"></c:set>
                               </c:if>
-                              <c:if test = "${Docente.infoRegistro[25]=='N'}">
+                              <c:if test = "${Docente.infoRegistro[25]!='S'}">
                                     <c:set var="checked" value=""></c:set>
                                     <c:set var="in" value=""></c:set>
                               </c:if>
@@ -349,7 +358,7 @@
                                         <c:set var="checked" value="checked='true'"></c:set>
                                         <c:set var="in" value=""></c:set>
                                     </c:if>
-                                    <c:if test = "${Docente.infoRegistro[48]=='N'}">
+                                    <c:if test = "${Docente.infoRegistro[48]!='S'}">
                                         <c:set var="checked" value=""></c:set>
                                         <c:set var="in" value="in"></c:set>
                                     </c:if>
@@ -391,6 +400,15 @@
                     <h4 class="panel-title">
                       <a data-parent="#accordion" data-toggle="collapse" href="#infoHoras" aria-expanded="true" aria-controls="infoHoras">
                       Horas frente a grupo
+                        <c:set var="bandera" value="${Docente.verificaSeccion('3')}"></c:set>
+                        <c:if test = "${bandera==true}">
+                            <span class="glyphicon glyphicon-ok-sign completo" title="Sección completa" id="estatusInfoHoras" completo="true"></span>  
+                            <c:set var="in" value=""></c:set>
+                        </c:if>
+                        <c:if test = "${bandera==false}">
+                            <span class="glyphicon glyphicon-exclamation-sign incompleto" title="Sección incompleta" id="estatusInfoHoras" completo="false"></span>
+                            <c:set var="in" value="in"></c:set>
+                        </c:if>
                       </a>
                     </h4>
                     <button type="button" class="collpase-button collapsed" data-parent="#accordion" data-toggle="collapse" href="#infoHoras"></button>
@@ -403,7 +421,7 @@
                                 <c:set var="checked" value='checked'></c:set>
                                 <c:set var="in" value='in'></c:set>
                             </c:if>
-                            <c:if test="${Docente.infoRegistro[59]=='N'}">
+                            <c:if test="${Docente.infoRegistro[59]!='S'}">
                                 <c:set var="checked" value=''></c:set>
                                 <c:set var="in" value=''></c:set>
                             </c:if>
@@ -516,6 +534,15 @@
                     <h4 class="panel-title">
                       <a data-parent="#accordion" data-toggle="collapse" href="#infoCompatibilidad" aria-expanded="true" aria-controls="infoCompatibilidad">
                       Compatibilidad
+                        <c:set var="bandera" value="${Docente.verificaSeccion('4')}"></c:set>
+                        <c:if test = "${bandera==true}">
+                            <span class="glyphicon glyphicon-ok-sign completo" title="Sección completa" id="estatusInfoCompatibilidad" completo="true"></span>  
+                            <c:set var="in" value="in"></c:set>
+                        </c:if>
+                        <c:if test = "${bandera==false}">
+                            <span class="glyphicon glyphicon-exclamation-sign incompleto" title="Sección incompleta" id="estatusInfoCompatibilidad" completo="false"></span>
+                            <c:set var="in" value="in"></c:set>
+                        </c:if>
                       </a>
                     </h4>
                     <button type="button" class="collpase-button collapsed" data-parent="#accordion" data-toggle="collapse" href="#infoCompatibilidad"></button>
@@ -524,15 +551,17 @@
                     <div class="panel-body">
                       <form role="form" id="formInfoCompatibilidad" method="POST" action="RegistroInfoCompatibilidad">                           
                         <div class="checkbox col-xs-12">
-                          <c:if test="${Docente.infoRegistro[50]!=null}">
-                              <c:set var="checked" value="checked"></c:set>
-                              <c:set var="in" value="in"></c:set>
-                          </c:if>
-                          <c:if test="${Docente.infoRegistro[50]==null}">
-                              <c:set var="checked" value=""></c:set>
-                              <c:set var="in" value=""></c:set>
-                          </c:if>
-                          <label><input data-toggle="collapse" ${checked} data-target="#seccionOtro" type="checkbox" name="funcionesOtro">Marque la casilla si desempeña funciones en otro subsistema</label>
+                          
+                        <c:if test="${Docente.infoRegistro[60]=='S'}">
+                            <c:set var="checked" value="checked"></c:set>
+                            <c:set var="in" value="in"></c:set>
+                        </c:if>
+                        <c:if test="${Docente.infoRegistro[60]!='S'}">
+                            <c:set var="checked" value=""></c:set>
+                            <c:set var="in" value=""></c:set>
+                        </c:if>
+                          
+                          <label><input data-toggle="collapse" ${checked} data-target="#seccionOtro" type="checkbox" name="funcionesOtro" id="funcionesOtro">Marque la casilla si desempeña funciones en otro subsistema</label>
                         </div>
                         <div id="seccionOtro" class="collapse ${in}" >
                             <div class="form-group col-md-3">
@@ -544,7 +573,7 @@
                                 <c:set var="checked" value="checked"></c:set>
                                 <c:set var="in" value="in"></c:set>
                               </c:if>
-                              <c:if test="${Docente.infoRegistro[49]=='N'}">
+                              <c:if test="${Docente.infoRegistro[49]!='S'}">
                                 <c:set var="checked" value=""></c:set>
                                 <c:set var="in" value=""></c:set>
                               </c:if>

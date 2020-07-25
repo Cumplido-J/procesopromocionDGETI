@@ -331,16 +331,53 @@ public class Docente {
         switch(idSeccion){
             case "1":
                 if(infoRegistro[14]!=null){
-                    if(documentoCargado("1")==true){//Si ya se registró la información academica y se cargo el titulo                        
+                    if(documentoCargado("1")){//Si ya se registró la información academica y se cargo el titulo                        
                         if(infoRegistro[24]==null){//Si no se registró información de Cédula
                             retorno=true;                            
                         }else{
-                            if(documentoCargado("8")==true){//Si sí se registró la información de Cédula y se cargo el documento
+                            if(documentoCargado("8")){//Si sí se registró la información de Cédula y se cargo el documento
                                 retorno=true;
-                            }else{
-                                retorno=false;
                             }
                         }  
+                    }
+                }
+                break;
+            case "2":
+                if(infoRegistro[26]!=null){
+                    if(documentoCargado("2")&&documentoCargado("3")){//Si ya se registró la información laboral  y se cargo la constancia de antiguedad y nombramiento                       
+                        if(infoRegistro[48].equals("S")){//Si cuenta con nota desfavorable
+                            retorno=true;                            
+                        }else{
+                            if(documentoCargado("6")){//Si no cuenta con nota desfavorable y se cargo el documento
+                                retorno=true;
+                            }
+                        }  
+                    }
+                }
+                break;
+            case "3":
+                if(listaHoras.size()>0){
+                    if(documentoCargado("4")){//Si ya se registró la información de horas frente a grupo  y se cargo la constancia                       
+                        if(infoRegistro[52]==null){//Si no requiere registrar CENNI
+                            retorno=true;                            
+                        }else{
+                            if(documentoCargado("5")){//Si requiere registrar CENNI y se cargo el documento
+                                retorno=true;
+                            }
+                        }  
+                    }
+                }
+                break;
+            case "4": 
+                if(infoRegistro[60]!=null){
+                    if(infoRegistro[60].equals("S")){//Si marco la casilla de funciones en otro subsistema
+                        if(infoRegistro[49].equals("S")){//Si marcó la casilla de compatibilidad 
+                            if(documentoCargado("7")){//Si cargó la constancia de compatibilidad                              
+                                retorno=true;                        
+                            }                    
+                        }
+                    }else{
+                        retorno=true; 
                     }
                 }
                 break;

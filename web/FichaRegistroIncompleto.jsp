@@ -15,6 +15,7 @@
         <title>Ficha de registro incompleto</title>
         <meta charset="UTF-8">
         <jsp:useBean id="docente" scope="session" class="com.aplicacion.beans.Docente" />
+        <jsp:useBean id="fecha" class="herramientas.Fecha" /> 
         <jsp:useBean id="now" class="java.util.Date" />
         <style>
             .borde{
@@ -109,15 +110,11 @@
                 </tr>
                 <tr>
                     <td>FECHA DE INGRESO AL SUBSISTEMA </td>
-                    <td>:<fmt:parseDate value = "${Docente.infoRegistro[26]}" var = "fecha" pattern = "yyyy-MM-dd" />
-                        <fmt:formatDate pattern = "dd/MM/yyyy" value = "${fecha}" />
-                    </td>
+                    <td>:${fecha.formatoImprimir(Docente.infoRegistro[26])}</td>
                 </tr>
                 <tr>
                     <td>FECHA DE INGRESO AL PLANTEL</td>
-                    <td>:<fmt:parseDate value = "${Docente.infoRegistro[27]}" var = "fecha" pattern = "yyyy-MM-dd" />
-                        <fmt:formatDate pattern = "dd/MM/yyyy" value = "${fecha}" />
-                    </td>
+                    <td>:${fecha.formatoImprimir(Docente.infoRegistro[27])}</td>
                 </tr>
                 <tr>
                     <td>CATEGORÍA/NIVEL QUE OSTENTA</td>
@@ -125,9 +122,7 @@
                 </tr>
                 <tr>
                     <td>FECHA DE INGRESO A LA PLAZA QUE OSTENTA</td>
-                    <td>:<fmt:parseDate value = "${Docente.infoRegistro[34]}" var = "fecha" pattern = "yyyy-MM-dd" />
-                        <fmt:formatDate pattern = "dd/MM/yyyy" value = "${fecha}" />
-                    </td>
+                    <td>:${fecha.formatoImprimir(Docente.infoRegistro[34])}</td>
                 </tr>
                 <tr>
                     <td>TIPO DE NOMBRAMIENTO QUE OSTENTA </td>
@@ -135,17 +130,23 @@
                 </tr>                
                 <tr>
                     <td>FECHA DE SU ÚLTIMA_PROMOCIÓN</td>
-                    <td>:<fmt:parseDate value = "${Docente.infoRegistro[39]}" var = "fecha" pattern = "yyyy-MM-dd" />
-                        <fmt:formatDate pattern = "dd/MM/yyyy" value = "${fecha}" /></td>
+                    <td>:${fecha.formatoImprimir(Docente.infoRegistro[39])}</td>
                 </tr>
                 <tr>
                     <td>NOTA DESF. o SANCIÓN_ADMINISTRATIVA</td>
                     <td>:<c:out value="${Docente.infoRegistro[48] eq 'S' ? 'SI': 'NO'}"/></td>
                 </tr>
+                <c:set var="horasOtro" value="${Docente.infoRegistro[60] eq 'S' ? 'SI': 'NO'}"></c:set>
                 <tr>
-                    <td>REGLAS DE COMPATIBILIDAD</td>
-                    <td>:<c:out value="${Docente.infoRegistro[49] eq 'S' ? 'SI': 'NO'}"/></td>
+                    <td>DESEMPEÑA FUNCIONES EN OTRO SUBSISTEMA</td>
+                    <td>:<c:out value="${horasOtro}"/></td>
                 </tr>
+                <c:if test="${horasOtro=='SI'}">
+                    <tr>
+                        <td>REGLAS DE COMPATIBILIDAD</td>
+                        <td>:<c:out value="${Docente.infoRegistro[49] eq 'S' ? 'SI': 'NO'}"/></td>
+                    </tr>
+                </c:if>
                 <c:if test = "${fn:length(Docente.infoRegistro[51])>0}">
                     <tr>
                         <td>NIV_CENNI</td>
@@ -159,7 +160,7 @@
                                 
                 <tr>
                     <td>FECHA Y HORA DE REGISTRO</td>
-                    <td>:<fmt:formatDate type = "both" dateStyle = "short" timeStyle = "short" value = "${now}" /></td>
+                    <td>:${fecha.formatoImprimirFH(Docente.infoRegistro[61])}</td>
                 </tr>
                 <tr>
                     <td>CONSIDERACIONES PARTICULARES</td>

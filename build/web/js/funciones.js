@@ -72,29 +72,7 @@ $(document).ready(function () {
                    $("#btnEnviar1").val("Guardar y continuar"); 
                    $("#btnEnviar1").removeAttr("disabled");
                 },success:function(data){
-                    if(data=="ok"){
-                        if($("#btnEvidencia1").val()=="Ver archivo"){
-                            $("#alertaBtnEvidencia1").attr("style","display:none;");
-                            if($("#documento").val()=="cedula"){
-                                if($("#btnEvidencia8").val()=="Ver archivo"){
-                                    $("#alertaBtnEvidencia8").attr("style","display:none;");
-                                    $("#estatusInfoAcademica").attr("class","glyphicon glyphicon-ok-sign completo");
-                                    $("#estatusInfoAcademica").attr("title","Sección completa");
-                                }else{
-                                    $("#alertaBtnEvidencia8").removeAttr("style");
-                                    $("#estatusInfoAcademica").attr("class","glyphicon glyphicon-exclamation-sign incompleto");
-                                    $("#estatusInfoAcademica").attr("title","Sección incompleta");
-                                }
-                            }else{
-                                $("#estatusInfoAcademica").attr("class","glyphicon glyphicon-ok-sign completo");
-                                $("#estatusInfoAcademica").attr("title","Sección completa");
-                            }
-                            
-                        }else{
-                            $("#alertaBtnEvidencia1").removeAttr("style");
-                            $("#estatusInfoAcademica").attr("class","glyphicon glyphicon-exclamation-sign incompleto");
-                            $("#estatusInfoAcademica").attr("title","Sección incompleta");
-                        }                        
+                    if(data=="ok"){                                               
                         mostrarSiguiente(1);
                     }else{
                         $("#mensaje").html(data);            
@@ -217,13 +195,15 @@ $(document).ready(function () {
     }).validate({  
         rules: {
             numHorasOtro: {
-              number: true
+              number: true,
+              min:1              
             }
         },
         messages: {
             'numHorasOtro': {
                 required: "Campo requerido",
-                number:"Ingrese un valor numérico"
+                number:"Ingrese un valor numérico",
+                min:"Ingrese un valor mayor a cero"
             }
         },
         submitHandler:function(){
@@ -622,16 +602,55 @@ function borrarHoras(id){
    $("#numHoras").val(horas);
 }*/
 function mostrarSiguiente(id){
+    var completo=true;
     switch(id){
-        case 1:
+        case 1:     
+            if($("#btnEvidencia1").val()=="Subir archivo"){
+                completo=false;
+            }
+            if($("#documento").val()=="cedula"){
+                if($("#btnEvidencia8").val()=="Subir archivo"){
+                    completo=false;
+                }
+            }
+            if(completo){
+                $("#estatusInfoAcademica").attr("class","glyphicon glyphicon-ok-sign completo");
+                $("#estatusInfoAcademica").attr("title","Sección completa");
+                $("#estatusInfoAcademica").attr("completo",true);
+            }else{
+                $("#estatusInfoAcademica").attr("class","glyphicon glyphicon-exclamation-sign incompleto");
+                $("#estatusInfoAcademica").attr("title","Sección incompleta");
+                $("#estatusInfoAcademica").attr("completo",false);
+            }           
             $("#infoAcademica").collapse("hide");
             $("#panelInfoLaboral").removeAttr("hidden");
             $("#infoLaboral").collapse("show");
             break;
-        case 2:  
+        case 2:
+            if($("#btnEvidencia2").val()=="Subir archivo"){
+                completo=false;
+            }
+            if($("#btnEvidencia3").val()=="Subir archivo"){
+                completo=false;
+            }
+            if(!$("#notaDesfavorable").is(':checked')){
+                if($("#btnEvidencia6").val()=="Subir archivo"){
+                    completo=false;
+                }
+            }            
+            if(completo){
+                $("#estatusInfoLaboral").attr("class","glyphicon glyphicon-ok-sign completo");
+                $("#estatusInfoLaboral").attr("title","Sección completa");
+                $("#estatusInfoLaboral").attr("completo",true);
+            }else{
+                $("#estatusInfoLaboral").attr("class","glyphicon glyphicon-exclamation-sign incompleto");
+                $("#estatusInfoLaboral").attr("title","Sección incompleta");
+                $("#estatusInfoLaboral").attr("completo",false);
+            } 
+            
             if($("#activoServicio").is(':checked')){
                 if($("#notaDesfavorable").is(':checked')){
-                    $("#mensaje").html("Su registro será rechazado debido a que cuenta con nota desfavorable y/o sanción administrativa.");
+                    $("#mensaje").html("Su registro será procesado como incompleto debido a que cuenta con nota desfavorable y/o sanción administrativa.");
                     $("#modalMensaje").modal("show");
                 }else{
                     $("#infoLaboral").collapse("hide");
@@ -639,12 +658,30 @@ function mostrarSiguiente(id){
                     $("#infoHoras").collapse("show");
                 }
             }else{
-                $("#mensaje").html("Su registro será rechazado debido a que no se encuentra activo en el servicio.");
-                $(location).attr('href',"FichaRegistroIncompleto");
+                $("#mensaje").html("Su registro será procesado como incompleto debido a que no se encuentra activo en el servicio.");                
                 $("#modalMensaje").modal("show");
+                //$(location).attr('href',"FichaRegistroIncompleto");
             }
             break;
-        case 3:
+        case 3:            
+            if($("#btnEvidencia4").val()=="Subir archivo"){
+                completo=false;
+            }            
+            if($("#folio").val()!=""){
+                if($("#btnEvidencia5").val()=="Subir archivo"){
+                    completo=false;
+                }
+            }            
+            if(completo){
+                $("#estatusInfoHoras").attr("class","glyphicon glyphicon-ok-sign completo");
+                $("#estatusInfoHoras").attr("title","Sección completa");
+                $("#estatusInfoHoras").attr("completo",true);
+            }else{
+                $("#estatusInfoHoras").attr("class","glyphicon glyphicon-exclamation-sign incompleto");
+                $("#estatusInfoHoras").attr("title","Sección incompleta");
+                $("#estatusInfoHoras").attr("completo",false);
+            } 
+            
             if($("#frenteGrupo").is(':checked')){
                 if($("#numHoras").val()>0){
                     $("#infoHoras").collapse("hide");
@@ -655,19 +692,58 @@ function mostrarSiguiente(id){
                     $("#modalMensaje").modal("show");
                 }
             }else{
-                $("#mensaje").html("Su registro será rechazado debido a que no se encuentra frente a grupo.");
+                $("#mensaje").html("Su registro será procesado como incompleto debido a que no se encuentra frente a grupo.");
                 $("#modalMensaje").modal("show");
-                $(location).attr('href',"FichaRegistroIncompleto");
+                //$(location).attr('href',"FichaRegistroIncompleto");
                 
             }
             break;
-        case 4:
-            if($("#compatibilidad").is(':checked')){
-                $("#mensaje").html("Registro exitoso."); 
-                $(location).attr('href',"FichaRegistro");
+        case 4:  
+            if($("#funcionesOtro").is(':checked')){
+                if($("#compatibilidad").is(':checked')){
+                    if($("#btnEvidencia7").val()=="Subir archivo"){
+                        completo=false;
+                    }
+                }  
+            }
+            if(completo){
+                $("#estatusInfoCompatibilidad").attr("class","glyphicon glyphicon-ok-sign completo");
+                $("#estatusInfoCompatibilidad").attr("title","Sección completa");
+                $("#estatusInfoCompatibilidad").attr("completo",true);
             }else{
-                $("#mensaje").html("Su registro será rechazado debido a que no cuenta con la compatibilidad.");
-                $(location).attr('href',"FichaRegistroIncompleto");
+                $("#estatusInfoCompatibilidad").attr("class","glyphicon glyphicon-exclamation-sign incompleto");
+                $("#estatusInfoCompatibilidad").attr("title","Sección incompleta");
+                $("#estatusInfoCompatibilidad").attr("completo",false);
+            } 
+            if($("#funcionesOtro").is(':checked')){
+                if(!$("#compatibilidad").is(':checked')){                
+                    $("#mensaje").html("Su registro será procesado como incompleto debido a que no cuenta con la compatibilidad.");
+                    //$(location).attr('href',"FichaRegistroIncompleto");
+                }else{
+                    if(
+                        $("#estatusInfoAcademica").attr("completo")=='true'
+                        &&$("#estatusInfoLaboral").attr("completo")=='true'
+                        &&$("#estatusInfoHoras").attr("completo")=='true'
+                        &&$("#estatusInfoCompatibilidad").attr("completo")=='true'
+                    ){
+                        $("#mensaje").html("Registro completo");
+                        $(location).attr('href',"FichaRegistro");
+                    }else{
+                        $("#mensaje").html('Formulario incompleto revise los campos marcados con <span class="glyphicon glyphicon-exclamation-sign incompleto" ></span>');
+                    }
+                }
+            }else{
+                if(
+                    $("#estatusInfoAcademica").attr("completo")=='true'
+                    &&$("#estatusInfoLaboral").attr("completo")=='true'
+                    &&$("#estatusInfoHoras").attr("completo")=='true'
+                    &&$("#estatusInfoCompatibilidad").attr("completo")=='true'
+                ){
+                    $("#mensaje").html("Registro completo");
+                    $(location).attr('href',"FichaRegistro");
+                }else{
+                    $("#mensaje").html('Formulario incompleto revise los campos marcados con <span class="glyphicon glyphicon-exclamation-sign incompleto" ></span>');
+                }
             }
             $("#modalMensaje").modal("show");
                        
