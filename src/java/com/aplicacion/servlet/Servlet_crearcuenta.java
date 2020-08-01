@@ -19,6 +19,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.swing.JOptionPane;
 import metodos_sql.Metodos_sql;
 //import org.apache.commons.codec.digest.DigestUtils;
@@ -98,35 +99,51 @@ public class Servlet_crearcuenta extends HttpServlet {
             //out.println("<title>Servlet Servlet_crearcuenta</title>");
             out.println("</head>");
             out.println("<body>");
-            String telfijo = request.getParameter("telfijo");
-            String telcel = request.getParameter("telcel");
-            String perfil = "D";
+            HttpSession session = (HttpSession) request.getSession(true);
+            String idUsuario = "";
+            String rfc = "";
+            if (session.getAttribute("idUsuario") != null && session.getAttribute("rfc") != null) {
+                idUsuario = session.getAttribute("idUsuario").toString();
+                rfc = session.getAttribute("rfc").toString();
 
-            String consideraciones = request.getParameter("texto");
-            String programa = request.getParameter("programa");
-            String entidad = request.getParameter("campoentidad7");
-            String plantel = request.getParameter("n_plantel");
-            String nombre = request.getParameter("Nombre");
-            String primerApellido = request.getParameter("primerApellido");
-            String segundoApellido = request.getParameter("segundoApellido");
-            String correo = request.getParameter("correo");
-            String clave = request.getParameter("clave");
-            String rfc = request.getParameter("rfc");
-            String claveEncriptada = "";
-            claveEncriptada = Encriptar_Desencriptar.encriptar(clave);
-            String btnlogin = request.getParameter("crearcuenta");
-            if (btnlogin != null) {
-                int datos1 = metodos.guardar2(0, programa, entidad, plantel, nombre, primerApellido, segundoApellido, correo, claveEncriptada, rfc, telfijo, telcel, perfil, consideraciones);
-                //int datos2 = metodos.guardar3(0, telfijo, telcel, consideraciones);
-                //if (datos2 > 0 && datos1 > 0) {
-                if (datos1 > 0) {
-                    response.sendRedirect("login.jsp");
-                } else {
-                    out.print("DATOS NO GUARDADOS");
-                }
+                String telfijo = request.getParameter("telfijo");
+                String telcel = request.getParameter("telcel");
+                String perfil = "D";
 
-            }//fin presionar boton
+                String consideraciones = request.getParameter("texto");
+                String programa = request.getParameter("programa");
+                String entidad = request.getParameter("campoentidad7");
+                String id_entidad = request.getParameter("entidad");
+                String plantel = request.getParameter("n_plantel");
+                String nombre = request.getParameter("Nombre");
+                String primerApellido = request.getParameter("primerApellido");
+                String segundoApellido = request.getParameter("segundoApellido");
+                String correo = request.getParameter("correo");
+                String clave = request.getParameter("clave");
+                String rfc2 = request.getParameter("rfc");
+                String claveEncriptada = "";
+                claveEncriptada = Encriptar_Desencriptar.encriptar(clave);
+                String btnlogin = request.getParameter("crearcuenta");
+                if (btnlogin != null) {
+                    int datos1 = metodos.guardar2(0, programa, id_entidad, plantel, nombre, primerApellido, segundoApellido, correo, claveEncriptada, rfc2, telfijo, telcel, perfil, consideraciones);
+                    //int datos2 = metodos.guardar3(0, telfijo, telcel, consideraciones);
+                    //if (datos2 > 0 && datos1 > 0) {
+                    if (datos1 > 0) {
+                        request.setAttribute("aviso_nom", nombre);
+                        request.setAttribute("ver", "1");
+                        session.setAttribute("idUsuario", idUsuario);
+                        session.setAttribute("rfc", rfc);
+                        RequestDispatcher rd = request.getRequestDispatcher("aviso_guardar.jsp");
+                        rd.forward(request, response);
+                        //response.sendRedirect("aviso_guardar.jsp");
+                    } else {
+                        out.print("DATOS NO GUARDADOS");
+                    }
 
+                }//fin presionar boton
+            } else {
+                response.sendRedirect("login.jsp");
+            }
             out.println("</body>");
             out.println("</html>");
         }

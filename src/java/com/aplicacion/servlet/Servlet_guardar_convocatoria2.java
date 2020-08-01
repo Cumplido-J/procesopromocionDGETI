@@ -19,8 +19,8 @@ import javax.servlet.http.HttpSession;
  *
  * @author charl
  */
-@WebServlet(name = "Servlet_convocatoria", urlPatterns = {"/Servlet_convocatoria"})
-public class Servlet_convocatoria extends HttpServlet {
+@WebServlet(name = "Servlet_guardar_convocatoria2", urlPatterns = {"/Servlet_guardar_convocatoria2"})
+public class Servlet_guardar_convocatoria2 extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -39,11 +39,10 @@ public class Servlet_convocatoria extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet Servlet_convocatoria</title>");
+            out.println("<title>Servlet Servlet_guardar_convocatoria2</title>");
             out.println("</head>");
             out.println("<body>");
-            RequestDispatcher rd = request.getRequestDispatcher("login.jsp");
-            rd.forward(request, response);
+            out.println("<h1>Servlet Servlet_guardar_convocatoria2 at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -75,12 +74,14 @@ public class Servlet_convocatoria extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
+        // processRequest(request, response);
+        response.setContentType("text/html;charset=ISO-8859-1");
         try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
+
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
+            //out.println("<title>Servlet Servlet_crearcuenta</title>");
             out.println("</head>");
             out.println("<body>");
             HttpSession session = (HttpSession) request.getSession(true);
@@ -97,41 +98,46 @@ public class Servlet_convocatoria extends HttpServlet {
                 String ent1 = request.getParameter("dato_ent");
                 String pla1 = request.getParameter("dato_pla");
                 String rfc1 = request.getParameter("dato_rfc");
-                String btnregresa = request.getParameter("convocatoria");
-                if (btnregresa != null) {
+
+                String btnlogin = request.getParameter("guardar");
+
+                if (btnlogin != null) {
+
+                    request.setAttribute("ver", "1");
                     request.setAttribute("opc", "1");
                     request.setAttribute("nom", nom1);
+                    request.setAttribute("consulta", "1");
                     request.setAttribute("dato_ent", ent1);
                     request.setAttribute("dato_pla", pla1);
                     request.setAttribute("dato_rfc", rfc1);
                     request.setAttribute("per1", per1);
                     request.setAttribute("per3", per3);
                     request.setAttribute("per4", per4);
-                    request.setAttribute("consulta", "1");
                     session.setAttribute("idUsuario", idUsuario);
                     session.setAttribute("rfc", rfc);
-                    RequestDispatcher rd = request.getRequestDispatcher("convocatoria.jsp");
+                    RequestDispatcher rd = request.getRequestDispatcher("administracion_usuarios.jsp");
                     rd.forward(request, response);
-                }
                 } else {
-                    response.sendRedirect("login.jsp");
-                }
-                //out.println("<h1>Servlet Servlet at " + request.getContextPath() + "</h1>");
-                out.println("</body>");
-                out.println("</html>");
+                    out.print("Servidor en mantenimiento, Datos no Guardados");
+                }//fin presionar boton
+            } else {
+                response.sendRedirect("login.jsp");
             }
+            out.println("</body>");
+            out.println("</html>");
+
         }
 
-        /**
-         * Returns a short description of the servlet.
-         *
-         * @return a String containing servlet description
-         */
-        @Override
-        public String getServletInfo
-        
-            () {
-        return "Short description";
-        }// </editor-fold>
-
     }
+
+    /**
+     * Returns a short description of the servlet.
+     *
+     * @return a String containing servlet description
+     */
+    @Override
+    public String getServletInfo() {
+        return "Short description";
+    }// </editor-fold>
+
+}

@@ -13,6 +13,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -82,21 +83,41 @@ public class Servlet_ir_a_vacantes extends HttpServlet {
             out.println("<head>");
             out.println("</head>");
             out.println("<body>");
-            String nom1 = request.getParameter("nombre");
-            String ent1 = request.getParameter("dato_ent");
-            String pla1 = request.getParameter("dato_pla");
-            String rfc1 = request.getParameter("dato_rfc");
-            String btnir = request.getParameter("ir");
-            if (btnir != null) {
-                request.setAttribute("opc", "1");
-                request.setAttribute("consulta", "1");
-                request.setAttribute("nom", nom1);
-                request.setAttribute("dato_ent", ent1);
-                request.setAttribute("dato_pla", pla1);
-                request.setAttribute("dato_rfc", rfc1);
-                request.setAttribute("ver", "1");
-                RequestDispatcher rd = request.getRequestDispatcher("vacantes.jsp");
-                rd.forward(request, response);
+            HttpSession session = (HttpSession) request.getSession(true);
+            String idUsuario = "";
+            String rfc = "";
+            if (session.getAttribute("idUsuario") != null && session.getAttribute("rfc") != null) {
+                idUsuario = session.getAttribute("idUsuario").toString();
+                rfc = session.getAttribute("rfc").toString();
+
+                String per1 = request.getParameter("permiso1");
+                String per3 = request.getParameter("permiso3");
+                String per4 = request.getParameter("permiso4");
+                String nom1 = request.getParameter("nombre");
+                String ent1 = request.getParameter("dato_ent");
+                String pla1 = request.getParameter("dato_pla");
+                String rfc1 = request.getParameter("dato_rfc");
+                String btnir = request.getParameter("ir");
+                if (btnir != null) {
+                    request.setAttribute("opc", "1");
+                    request.setAttribute("consulta", "1");
+                    request.setAttribute("nom", nom1);
+                    request.setAttribute("dato_ent", ent1);
+                    request.setAttribute("dato_pla", pla1);
+                    request.setAttribute("dato_rfc", rfc1);
+                    request.setAttribute("per1", per1);
+                    request.setAttribute("per3", per3);
+                    request.setAttribute("per4", per4);
+                    request.setAttribute("ver", "1");
+                    session.setAttribute("idUsuario", idUsuario);
+                    session.setAttribute("rfc", rfc);
+                    session.setAttribute("idUsuario", idUsuario);
+                    session.setAttribute("rfc", rfc);
+                    RequestDispatcher rd = request.getRequestDispatcher("vacantes.jsp");
+                    rd.forward(request, response);
+                }
+            } else {
+                response.sendRedirect("login.jsp");
             }
             //out.println("<h1>Servlet Servlet at " + request.getContextPath() + "</h1>");
             out.println("</body>");

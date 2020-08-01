@@ -13,6 +13,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import metodos_sql.Metodos_sql;
 
 /**
@@ -86,41 +87,62 @@ public class Servlet_agregar_vacantes extends HttpServlet {
             //out.println("<title>Servlet Servlet_crearcuenta</title>");
             out.println("</head>");
             out.println("<body>");
-            String nom1 = request.getParameter("nombre");
-            String ent1 = request.getParameter("dato_ent");
-            String pla1 = request.getParameter("dato_pla");
-            String rfc1 = request.getParameter("dato_rfc");
-            String estado = request.getParameter("campoentidad");
-            String plantel = request.getParameter("n_plantel");
-            String plaza = request.getParameter("entidad2");
-            String cantidad1 = request.getParameter("cantidad");
-            String tipo = request.getParameter("campotipo");
-            String jornada = request.getParameter("campojornada");
-            String grado_academico = request.getParameter("campogrado1");
-            String vacancia = request.getParameter("tipovacancia");
+            HttpSession session = (HttpSession) request.getSession(true);
+            String idUsuario = "";
+            String rfc = "";
+            if (session.getAttribute("idUsuario") != null && session.getAttribute("rfc") != null) {
+                idUsuario = session.getAttribute("idUsuario").toString();
+                rfc = session.getAttribute("rfc").toString();
 
-            String btnvacantes = request.getParameter("agregarvacantes");
-            //out.println(estado);
+                String per1 = request.getParameter("permiso1");
+                String per3 = request.getParameter("permiso3");
+                String per4 = request.getParameter("permiso4");
+                String nom1 = request.getParameter("nombre");
+                String ent1 = request.getParameter("dato_ent");
+                String pla1 = request.getParameter("dato_pla");
+                String rfc1 = request.getParameter("dato_rfc");
+                String estado = request.getParameter("campoentidad");
+                String estadon = request.getParameter("entidad");
+                String plantel = request.getParameter("n_plantel");
+                String plaza = request.getParameter("entidad2");
+                String cantidad1 = request.getParameter("cantidad");
+                String tipo = request.getParameter("campotipo");
+                String tipon = request.getParameter("n_plantel2");
+                String jornada = request.getParameter("campojornada");
+                String jornadan = request.getParameter("n_plantel3");
+                String grado_academico = request.getParameter("campogrado1");
+                String vacancia = request.getParameter("tipovacancia");
 
-            if (btnvacantes != null) {
+                String btnvacantes = request.getParameter("agregarvacantes");
+                //out.println(estado);
 
-                int datos5 = metodos.guardar5(0, estado, plantel, plaza, cantidad1, tipo, jornada, grado_academico, vacancia);
+                if (btnvacantes != null) {
 
-                if (datos5 > 0) {
-                    request.setAttribute("opc", "1");
-                    request.setAttribute("consulta", "1");
-                    request.setAttribute("nom", nom1);
-                    request.setAttribute("dato_ent", ent1);
-                    request.setAttribute("dato_pla", pla1);
-                    request.setAttribute("dato_rfc", rfc1);
-                    RequestDispatcher rd = request.getRequestDispatcher("vacantes.jsp");
-                    rd.forward(request, response);
-                } else {
-                    out.print("Servidor en mantenimiento, Datos no Guardados");
-                }
+                    int datos5 = metodos.guardar5(0, estadon, plantel, plaza, cantidad1, tipon, jornadan, grado_academico, vacancia);
 
-            }//fin presionar boton
+                    if (datos5 > 0) {
+                        request.setAttribute("ver", "1");
+                        request.setAttribute("opc", "1");
+                        request.setAttribute("consulta", "1");
+                        request.setAttribute("nom", nom1);
+                        request.setAttribute("dato_ent", ent1);
+                        request.setAttribute("dato_pla", pla1);
+                        request.setAttribute("dato_rfc", rfc1);
+                        request.setAttribute("per1", per1);
+                        request.setAttribute("per3", per3);
+                        request.setAttribute("per4", per4);
+                        session.setAttribute("idUsuario", idUsuario);
+                        session.setAttribute("rfc", rfc);
+                        RequestDispatcher rd = request.getRequestDispatcher("aviso_guardar_vacancia.jsp");
+                        rd.forward(request, response);
+                    } else {
+                        out.print("Servidor en mantenimiento, Datos no guardados");
+                    }
 
+                }//fin presionar boton
+            } else {
+                response.sendRedirect("login.jsp");
+            }
             out.println("</body>");
             out.println("</html>");
         }

@@ -17,6 +17,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import metodos_sql.Metodos_sql;
 import seguridad.Encriptar_Desencriptar;
 
@@ -92,30 +93,42 @@ public class Servlet_iniciosesion extends HttpServlet {
             //out.println("<title>Servlet Servlet</title>");
             out.println("</head>");
             out.println("<body>");
-            String rfc = request.getParameter("rfc");
-            String clave = request.getParameter("clave");
-            String claveEncriptada = "";
-            claveEncriptada = Encriptar_Desencriptar.encriptar(clave);
-            String btnlogin = request.getParameter("iniciarsesion");
-            if (btnlogin != null) {
-                String busquedausuario = metodos.buscarusuario(rfc, claveEncriptada);
-                if (rfc.equals("root") && clave.equals("root")) {
-                    out.println("ADMINISTTRADOR");
-                }//fin if root
-                else if (busquedausuario.equals("USUARIO ENCONTRADO")) {
-                    String busqueda_nombre = metodos.buscar(rfc);
-                    //out.println("Bienvenido "+busqueda_nombre);
-                    request.setAttribute("nom", busqueda_nombre);
-                    RequestDispatcher rd = request.getRequestDispatcher("ppsesion.jsp");
-                    rd.forward(request, response);
-                    //response.sendRedirect("ppsesion.html");
-                } else {
-                    request.setAttribute("error", "Usuario No Registrado");
-                    RequestDispatcher rd = request.getRequestDispatcher("login.jsp");
-                    rd.forward(request, response);
-                    //out.println("USUARIO NO REGISTRADOs");
-                }
+            HttpSession session = (HttpSession) request.getSession(true);
+            String idUsuario = "";
+            String rfc = "";
+            if (session.getAttribute("idUsuario") != null && session.getAttribute("rfc") != null) {
+                idUsuario = session.getAttribute("idUsuario").toString();
+                rfc = session.getAttribute("rfc").toString();
 
+                String rfc2 = request.getParameter("rfc");
+                String clave = request.getParameter("clave");
+                String claveEncriptada = "";
+                claveEncriptada = Encriptar_Desencriptar.encriptar(clave);
+                String btnlogin = request.getParameter("iniciarsesion");
+                if (btnlogin != null) {
+                    String busquedausuario = metodos.buscarusuario(rfc2, claveEncriptada);
+                    if (rfc.equals("root") && clave.equals("root")) {
+                        out.println("ADMINISTTRADOR");
+                    }//fin if root
+                    else if (busquedausuario.equals("USUARIO ENCONTRADO")) {
+                        String busqueda_nombre = metodos.buscar(rfc2);
+                        //out.println("Bienvenido "+busqueda_nombre);
+                        request.setAttribute("nom", busqueda_nombre);
+                        session.setAttribute("idUsuario", idUsuario);
+                        session.setAttribute("rfc", rfc2);
+                        RequestDispatcher rd = request.getRequestDispatcher("ppsesion.jsp");
+                        rd.forward(request, response);
+                        //response.sendRedirect("ppsesion.html");
+                    } else {
+                        request.setAttribute("error", "Usuario No Registrado");
+                        RequestDispatcher rd = request.getRequestDispatcher("login.jsp");
+                        rd.forward(request, response);
+                        //out.println("USUARIO NO REGISTRADOs");
+                    }
+
+                }
+            } else {
+                response.sendRedirect("login.jsp");
             }
             //out.println("<h1>Servlet Servlet at " + request.getContextPath() + "</h1>");
             out.println("</body>");

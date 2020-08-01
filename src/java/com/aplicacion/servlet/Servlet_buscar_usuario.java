@@ -13,6 +13,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import metodos_sql.Metodos_sql;
 import seguridad.Encriptar_Desencriptar;
 
@@ -87,66 +88,84 @@ public class Servlet_buscar_usuario extends HttpServlet {
             //out.println("<title>Servlet Servlet</title>");
             out.println("</head>");
             out.println("<body>");
-            String entidadt = "";
-            String entidad = "";
-            String n_plantel = "";
-            String usuario = "";
+            HttpSession session = (HttpSession) request.getSession(true);
+            String idUsuario = "";
+            String rfc = "";
+            if (session.getAttribute("idUsuario") != null && session.getAttribute("rfc") != null) {
+                idUsuario = session.getAttribute("idUsuario").toString();
+                rfc = session.getAttribute("rfc").toString();
 
-            String nom1 = request.getParameter("nombre");
-            String ent1 = request.getParameter("dato_ent");
-            String pla1 = request.getParameter("dato_pla");
-            String rfc1 = request.getParameter("dato_rfc");
-            entidadt = request.getParameter("campoentidad7");
-            entidad = request.getParameter("entidad");
-            n_plantel = request.getParameter("n_plantel");
-            usuario = request.getParameter("usuario");
+                String entidadt = "";
+                String entidad = "";
+                String n_plantel = "";
+                String usuario = "";
 
-            String btnlogin = request.getParameter("buscarusuario");
-            if (btnlogin != null) {
+                String per1 = request.getParameter("permiso1");
+                String per3 = request.getParameter("permiso3");
+                String per4 = request.getParameter("permiso4");
+                String nom1 = request.getParameter("nombre");
+                String ent1 = request.getParameter("dato_ent");
+                String pla1 = request.getParameter("dato_pla");
+                String rfc1 = request.getParameter("dato_rfc");
+                entidadt = request.getParameter("campoentidad7");
+                entidad = request.getParameter("entidad");
+                n_plantel = request.getParameter("n_plantel");
+                usuario = request.getParameter("usuario");
 
-                if (entidad.equals("0") && n_plantel.equals("0") && usuario.equals("")) {
-                    request.setAttribute("consulta", "1");
-                    //out.print("caso 1"); //nada
+                String btnlogin = request.getParameter("buscarusuario");
+                if (btnlogin != null) {
 
-                } else if (entidad != ("0") && n_plantel != ("0") && usuario.equals("")) {
-                    if (n_plantel.equals("0")) {
-                        request.setAttribute("consulta", "2");
-                        //out.print("caso 2");//entidad
-                    } else {
-                        request.setAttribute("consulta", "3");
-                        //out.print("caso 3"); //entidad y plantel  
+                    if (entidad.equals("0") && n_plantel.equals("0") && usuario.equals("")) {
+                        request.setAttribute("consulta", "1");
+                        //out.print("caso 1"); //nada
+
+                    } else if (entidad != ("0") && n_plantel != ("0") && usuario.equals("")) {
+                        if (n_plantel.equals("0")) {
+                            request.setAttribute("consulta", "2");
+                            //out.print("caso 2");//entidad
+                        } else {
+                            request.setAttribute("consulta", "3");
+                            //out.print("caso 3"); //entidad y plantel  
+                        }
+
+                    } else if (entidad.equals("0") && n_plantel.equals("0") && usuario != "") {
+                        request.setAttribute("consulta", "4");
+                        //out.print("caso 4");   //usuario
+                    } else if (entidad != "0" && n_plantel != ("0") && usuario != "") {
+                        if (n_plantel.equals("0")) {
+                            request.setAttribute("consulta", "5");
+                            //out.print("caso 5");//entidad y usuario
+                        } else {
+                            request.setAttribute("consulta", "6");
+                            //out.print("caso 6"); //todos
+                        }
+
+                        //request.setAttribute("consulta", "4");
                     }
 
-                } else if (entidad.equals("0") && n_plantel.equals("0") && usuario != "") {
-                    request.setAttribute("consulta", "4");
-                    //out.print("caso 4");   //usuario
-                } else if (entidad != "0" && n_plantel != ("0") && usuario != "") {
-                    if (n_plantel.equals("0")) {
-                        request.setAttribute("consulta", "5");
-                        //out.print("caso 5");//entidad y usuario
-                    } else {
-                        request.setAttribute("consulta", "6");
-                        //out.print("caso 6"); //todos
-                    }
-
-                    //request.setAttribute("consulta", "4");
+                    request.setAttribute("est", entidad);
+                    request.setAttribute("pla", n_plantel);
+                    request.setAttribute("usu", usuario);
+                    request.setAttribute("opc", "1");
+                    request.setAttribute("nom", nom1);
+                    request.setAttribute("dato_ent", ent1);
+                    request.setAttribute("dato_pla", pla1);
+                    request.setAttribute("dato_rfc", rfc1);
+                    request.setAttribute("per1", per1);
+                    request.setAttribute("per3", per3);
+                    request.setAttribute("per4", per4);
+                    session.setAttribute("idUsuario", idUsuario);
+                    session.setAttribute("rfc", rfc);
+                    RequestDispatcher rd = request.getRequestDispatcher("administracion_usuarios.jsp");
+                    rd.forward(request, response);
+                } else {
+                    request.setAttribute("error", "Administrador No Registrado");
+                    RequestDispatcher rd = request.getRequestDispatcher("administracion_usuarios.jsp");
+                    rd.forward(request, response);
+                    //out.println("USUARIO NO REGISTRADOs");
                 }
-
-                request.setAttribute("est", entidadt);
-                request.setAttribute("pla", n_plantel);
-                request.setAttribute("usu", usuario);
-                request.setAttribute("opc", "1");
-                request.setAttribute("nom", nom1);
-                request.setAttribute("dato_ent", ent1);
-                request.setAttribute("dato_pla", pla1);
-                request.setAttribute("dato_rfc", rfc1);
-                RequestDispatcher rd = request.getRequestDispatcher("administracion_usuarios.jsp");
-                rd.forward(request, response);
             } else {
-                request.setAttribute("error", "Administrador No Registrado");
-                RequestDispatcher rd = request.getRequestDispatcher("administracion_usuarios.jsp");
-                rd.forward(request, response);
-                //out.println("USUARIO NO REGISTRADOs");
+                response.sendRedirect("login.jsp");
             }
 
 //            }

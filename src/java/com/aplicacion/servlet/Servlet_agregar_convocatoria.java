@@ -19,8 +19,8 @@ import javax.servlet.http.HttpSession;
  *
  * @author charl
  */
-@WebServlet(name = "Servlet_convocatoria", urlPatterns = {"/Servlet_convocatoria"})
-public class Servlet_convocatoria extends HttpServlet {
+@WebServlet(name = "Servlet_agregar_convocatoria", urlPatterns = {"/Servlet_agregar_convocatoria"})
+public class Servlet_agregar_convocatoria extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -39,11 +39,10 @@ public class Servlet_convocatoria extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet Servlet_convocatoria</title>");
+            out.println("<title>Servlet Servlet_agregar_convocatoria</title>");
             out.println("</head>");
             out.println("<body>");
-            RequestDispatcher rd = request.getRequestDispatcher("login.jsp");
-            rd.forward(request, response);
+            out.println("<h1>Servlet Servlet_agregar_convocatoria at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -75,6 +74,7 @@ public class Servlet_convocatoria extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        //processRequest(request, response);
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
@@ -97,9 +97,10 @@ public class Servlet_convocatoria extends HttpServlet {
                 String ent1 = request.getParameter("dato_ent");
                 String pla1 = request.getParameter("dato_pla");
                 String rfc1 = request.getParameter("dato_rfc");
-                String btnregresa = request.getParameter("convocatoria");
+                String btnregresa = request.getParameter("agregar_convocatoria");
                 if (btnregresa != null) {
                     request.setAttribute("opc", "1");
+                    request.setAttribute("consulta", "1");
                     request.setAttribute("nom", nom1);
                     request.setAttribute("dato_ent", ent1);
                     request.setAttribute("dato_pla", pla1);
@@ -107,31 +108,29 @@ public class Servlet_convocatoria extends HttpServlet {
                     request.setAttribute("per1", per1);
                     request.setAttribute("per3", per3);
                     request.setAttribute("per4", per4);
-                    request.setAttribute("consulta", "1");
                     session.setAttribute("idUsuario", idUsuario);
                     session.setAttribute("rfc", rfc);
-                    RequestDispatcher rd = request.getRequestDispatcher("convocatoria.jsp");
+                    RequestDispatcher rd = request.getRequestDispatcher("Registro_convocatoria.jsp");
                     rd.forward(request, response);
                 }
-                } else {
-                    response.sendRedirect("login.jsp");
-                }
-                //out.println("<h1>Servlet Servlet at " + request.getContextPath() + "</h1>");
-                out.println("</body>");
-                out.println("</html>");
+            } else {
+                response.sendRedirect("login.jsp");
             }
+            //out.println("<h1>Servlet Servlet at " + request.getContextPath() + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
         }
 
-        /**
-         * Returns a short description of the servlet.
-         *
-         * @return a String containing servlet description
-         */
-        @Override
-        public String getServletInfo
-        
-            () {
-        return "Short description";
-        }// </editor-fold>
-
     }
+
+    /**
+     * Returns a short description of the servlet.
+     *
+     * @return a String containing servlet description
+     */
+    @Override
+    public String getServletInfo() {
+        return "Short description";
+    }// </editor-fold>
+
+}
