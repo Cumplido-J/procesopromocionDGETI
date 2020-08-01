@@ -3,6 +3,7 @@
     Created on : 06-jun-2020, 9:09:41
     Author     : charl
 --%>
+
 <%@page import="java.sql.ResultSet"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -25,6 +26,43 @@
         <script src="js/jquery-3.5.1.min.js"></script>
         <script src="js/jquery.dataTables.min.js"></script>
         <script type="text/javascript">
+
+            function habilitar() {
+                var camp1 = document.getElementById("permiso1");
+                var camp3 = document.getElementById("permiso3");
+                var camp4 = document.getElementById("permiso4");
+                var boton1 = document.getElementById("activado_usuario");
+                var boton3 = document.getElementById("activado_convocatoria");
+                var boton4 = document.getElementById("activado_vacancia");
+
+                if (camp1.value == "true") {
+                    boton1.disabled = true;
+                    boton1.style.color = "#FF3000";
+                } else
+                {
+                    boton1.disabled = false;
+                    boton1.style.color = "#FFFFFF";
+                }
+
+                if (camp3.value == "true") {
+                    boton3.disabled = true;
+                    boton3.style.color = "#FF3000";
+                } else
+                {
+                    boton3.disabled = false;
+                    boton3.style.color = "#FFFFFF";
+                }
+
+                if (camp4.value == "true") {
+                    boton4.disabled = true;
+                    boton4.style.color = "#FF3000";
+                } else
+                {
+                    boton4.disabled = false;
+                    boton4.style.color = "#FFFFFF";
+                }
+            }
+
 
             function plantel() {
                 var combo7 = document.getElementById("entidad");
@@ -50,6 +88,16 @@
         <!--Termina  para el framework del gobierno-->
     </head>
     <body>
+        <%
+            session = (HttpSession) request.getSession(true);
+            String idUsuario = "";
+            String rfc = "";
+            if (session.getAttribute("idUsuario") != null && session.getAttribute("rfc") != null) {
+                idUsuario = session.getAttribute("idUsuario").toString();
+                rfc = session.getAttribute("rfc").toString();
+                session.setAttribute("idUsuario", idUsuario);
+                session.setAttribute("rfc", rfc);
+        %>
         <div>
             <!--  para el framework del gobierno-->
             <nav class="navbar navbar-inverse sub-navbar navbar-fixed-top">
@@ -70,6 +118,7 @@
                                 <ul class="menu">
                                     <li aling="navbar-center">
                                         <%
+                                            String usu1 = String.valueOf(request.getAttribute("idUsuario"));
                                             String ent1 = String.valueOf(request.getAttribute("dato_ent"));
                                             String pla1 = String.valueOf(request.getAttribute("dato_pla"));
                                             String nom1 = String.valueOf(request.getAttribute("nom"));
@@ -83,8 +132,14 @@
                                             <li>
 
                                                 <form id="data3"  role="form" method="POST" action="Servlet_regresar">
-                                                    <button class="propiedadesboton" type="submit" name="regresa" id="activado_usuario">Usuario</button>
+                                                    <button class="propiedadesboton" type="submit" name="regresa" id="activado_usuario" onmouseover="habilitar();">Usuario</button>
+                                                    <%
+                                                        session.setAttribute("idUsuario", idUsuario);
+                                                        session.setAttribute("rfc", rfc);
+                                                    %>
                                                     <input type="hidden" name="permiso1" id="permiso1" value="<%=request.getAttribute("per1")%>">
+                                                    <input type="hidden" name="permiso3" id="permiso3" value="<%=request.getAttribute("per3")%>">
+                                                    <input type="hidden" name="permiso4" id="permiso4" value="<%=request.getAttribute("per4")%>">
                                                     <input type="hidden" name="nombre" id="nombre" value="<%=request.getAttribute("nom")%>">
                                                     <input type="hidden" name="dato_ent" id="dato_ent" value="<%=request.getAttribute("dato_ent")%>">
                                                     <input type="hidden" name="dato_pla" id="dato_pla" value="<%=request.getAttribute("dato_pla")%>">
@@ -93,7 +148,14 @@
                                             </li>   
                                             <li>
                                                 <form id="data4"  role="form" method="POST" action="Servlet_convocatoria">
-                                                    <button class="propiedadesboton" type="submit" name="convocatoria" id="activado_convocatoria">Convocatoria</button>
+                                                    <button class="propiedadesboton" type="submit" name="convocatoria" id="activado_convocatoria" onmouseover="habilitar();">Convocatoria</button>
+                                                    <%
+                                                        session.setAttribute("idUsuario", idUsuario);
+                                                        session.setAttribute("rfc", rfc);
+                                                    %>
+                                                    <input type="hidden" name="permiso1" id="permiso1" value="<%=request.getAttribute("per1")%>">
+                                                    <input type="hidden" name="permiso3" id="permiso3" value="<%=request.getAttribute("per3")%>">
+                                                    <input type="hidden" name="permiso4" id="permiso4" value="<%=request.getAttribute("per4")%>">
                                                     <input type="hidden" name="nombre" id="nombre" value="<%=request.getAttribute("nom")%>">
                                                     <input type="hidden" name="dato_ent" id="dato_ent" value="<%=request.getAttribute("dato_ent")%>">
                                                     <input type="hidden" name="dato_pla" id="dato_pla" value="<%=request.getAttribute("dato_pla")%>">
@@ -102,7 +164,14 @@
                                             </li>
                                             <li>
                                                 <form id="data3"  role="form" method="POST" action="Servlet_ir_a_vacantes">
-                                                    <button class="propiedadesboton" type="submit" name="ir" id="activado_vacancia">Vacancia</button>
+                                                    <button class="propiedadesboton" type="submit" name="ir" id="activado_vacancia" onmouseover="habilitar();">Vacancia</button>
+                                                    <%
+                                                        session.setAttribute("idUsuario", idUsuario);
+                                                        session.setAttribute("rfc", rfc);
+                                                    %>
+                                                    <input type="hidden" name="permiso1" id="permiso1" value="<%=request.getAttribute("per1")%>">
+                                                    <input type="hidden" name="permiso3" id="permiso3" value="<%=request.getAttribute("per3")%>">
+                                                    <input type="hidden" name="permiso4" id="permiso4" value="<%=request.getAttribute("per4")%>">
                                                     <input type="hidden" name="nombre" id="nombre" value="<%=request.getAttribute("nom")%>">
                                                     <input type="hidden" name="dato_ent" id="dato_ent" value="<%=request.getAttribute("dato_ent")%>">
                                                     <input type="hidden" name="dato_pla" id="dato_pla" value="<%=request.getAttribute("dato_pla")%>">
@@ -212,6 +281,8 @@
                             </thead>
                             <%
                                 String elegir1 = "0";
+                                String nombre_entidad = "";
+                                String nombre_plantel = "";
 
                                 elegir1 = String.valueOf(request.getAttribute("opc"));
 
@@ -223,10 +294,12 @@
 
                                     if (request.getAttribute("consulta").equals("3")) {
                                         rs2 = cn.mostrar_usuarios("SELECT * FROM usuario WHERE perfil='A' && entidad='" + request.getAttribute("est") + "' && plantel='" + request.getAttribute("pla") + "'");
+
                                     }
 
                                     if (request.getAttribute("consulta").equals("2")) {
                                         rs2 = cn.mostrar_usuarios("SELECT * FROM usuario WHERE perfil='A' && entidad='" + request.getAttribute("est") + "'");
+
                                     }
 
                                     if (request.getAttribute("consulta").equals("4")) {
@@ -246,20 +319,24 @@
                             <tr>
                                 <td align="center">
                                     <div class="datos_tabla"> 
-                                        <% if (rs2.getString("entidad") == null) {
+                                        <%
+                                            nombre_entidad = cn.buscarentidad("SELECT * FROM catentidades WHERE id='" + rs2.getString("entidad") + "'");
+                                            if (nombre_entidad == null) {
                                                 out.print("");
                                             } else {
-                                                out.print(rs2.getString("entidad"));
+                                                out.print(nombre_entidad);
                                             }
                                         %>
                                     </div>
                                 </td>
                                 <td align="center">
                                     <div class="datos_tabla"> 
-                                        <% if (rs2.getString("plantel") == null) {
+                                        <%
+                                            nombre_plantel = cn.buscarplantel("SELECT * FROM catplanteles WHERE id='" + rs2.getString("plantel") + "'");
+                                            if (nombre_plantel == null) {
                                                 out.print("");
                                             } else {
-                                                out.print(rs2.getString("plantel"));
+                                                out.print(nombre_plantel);
                                             }
                                         %>
                                     </div>
@@ -300,6 +377,7 @@
                                                 out.print("");
                                             } else {
                                                 out.print(rs2.getString("segundoApellido"));
+                                               
                                             }
                                         %>
                                     </div>
@@ -312,12 +390,26 @@
                                 }
                             %>
                         </table><br><br>
+                        <%
+                            session.setAttribute("idUsuario", idUsuario);
+                            session.setAttribute("rfc", rfc);
+                        %>
+                        <input type="hidden" name="permiso1" id="permiso1" value="<%=request.getAttribute("per1")%>">
+                        <input type="hidden" name="permiso3" id="permiso3" value="<%=request.getAttribute("per3")%>">
+                        <input type="hidden" name="permiso4" id="permiso4" value="<%=request.getAttribute("per4")%>">
                         <input type="hidden" name="nombre" id="nombre" value="<%=request.getAttribute("nom")%>">
                         <input type="hidden" name="dato_ent" id="dato_ent" value="<%=request.getAttribute("dato_ent")%>">
                         <input type="hidden" name="dato_pla" id="dato_pla" value="<%=request.getAttribute("dato_pla")%>">
                         <input type="hidden" name="dato_rfc" id="dato_rfc" value="<%=request.getAttribute("dato_rfc")%>">
                     </form>
                     <form id="data2" class="form-horizontal" role="form" method="POST" action="Servlet_P_Agregar">
+                        <%
+                            session.setAttribute("idUsuario", idUsuario);
+                            session.setAttribute("rfc", rfc);
+                        %>
+                        <input type="hidden" name="permiso1" id="permiso1" value="<%=request.getAttribute("per1")%>">
+                        <input type="hidden" name="permiso3" id="permiso3" value="<%=request.getAttribute("per3")%>">
+                        <input type="hidden" name="permiso4" id="permiso4" value="<%=request.getAttribute("per4")%>">
                         <input type="hidden" name="nombre" id="nombre" value="<%=request.getAttribute("nom")%>">
                         <input type="hidden" name="dato_ent" id="dato_ent" value="<%=request.getAttribute("dato_ent")%>">
                         <input type="hidden" name="dato_pla" id="dato_pla" value="<%=request.getAttribute("dato_pla")%>">
@@ -332,5 +424,10 @@
             <!-- JS  para el framework del gobierno-->
             <script src="https://framework-gb.cdn.gob.mx/gobmx.js"></script>
         </div>
+        <%
+            } else {
+                response.sendRedirect("login.jsp");
+            }
+        %>
     </body>
 </html>

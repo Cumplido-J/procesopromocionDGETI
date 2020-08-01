@@ -16,7 +16,7 @@
         String com = "Select id, idEntidad, plantel from catplanteles WHERE idEntidad= '" + entidad + "'";
         ResultSet rs2 = cx.mostrar(com);
         while (rs2.next()) {%>
-    <option  value = "<%=rs2.getString("plantel")%>"><%=rs2.getString("plantel")%></option>
+    <option  value = "<%=rs2.getString("id")%>"><%=rs2.getString("plantel")%></option>
     <%}%>
   
 

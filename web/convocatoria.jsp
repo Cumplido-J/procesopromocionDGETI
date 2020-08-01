@@ -1,8 +1,9 @@
 <%-- 
-    Document   : agregar_vacantes
-    Created on : 12-jun-2020, 15:03:22
+    Document   : convocatoria
+    Created on : 30-jul-2020, 14:29:31
     Author     : charl
 --%>
+
 <%@page import="java.sql.ResultSet"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -62,19 +63,6 @@
                 }
             }
 
-
-            function plantel() {
-                var combo70 = document.getElementById("entidad");
-                var selected70 = combo70.options[combo70.selectedIndex].text;
-                $("#campoentidad70").val(selected70);
-
-                $("#i_opc").val("1");
-                $.post("combo1.jsp", $("#data").serialize(), function (data) {
-                    $("#i_plantel").html(data);
-                });
-
-            }
-
             $(document).ready(function () {
                 $('#tabla_usuarios').DataTable();
             });
@@ -88,7 +76,7 @@
         <!--Termina  para el framework del gobierno-->
     </head>
     <body>
-          <%
+        <%
             session = (HttpSession) request.getSession(true);
             String idUsuario = "";
             String rfc = "";
@@ -127,10 +115,10 @@
                                             <li>
                                                 <form id="data3"  role="form" method="POST" action="Servlet_regresar">
                                                     <button class="propiedadesboton" type="submit" name="regresa" id="activado_usuario" onmouseover="habilitar();">Usuario</button>
-                                                     <%
-                            session.setAttribute("idUsuario", idUsuario);
-                            session.setAttribute("rfc", rfc);
-                        %>
+                                                    <%
+                                                        session.setAttribute("idUsuario", idUsuario);
+                                                        session.setAttribute("rfc", rfc);
+                                                    %>
                                                     <input type="hidden" name="permiso1" id="permiso1" value="<%=request.getAttribute("per1")%>">
                                                     <input type="hidden" name="permiso3" id="permiso3" value="<%=request.getAttribute("per3")%>">
                                                     <input type="hidden" name="permiso4" id="permiso4" value="<%=request.getAttribute("per4")%>">
@@ -143,10 +131,10 @@
                                             <li>
                                                 <form id="data4"  role="form" method="POST" action="Servlet_convocatoria">
                                                     <button class="propiedadesboton" type="submit" name="convocatoria" id="activado_convocatoria" onmouseover="habilitar();">Convocatoria</button>
-                                                     <%
-                            session.setAttribute("idUsuario", idUsuario);
-                            session.setAttribute("rfc", rfc);
-                        %>
+                                                    <%
+                                                        session.setAttribute("idUsuario", idUsuario);
+                                                        session.setAttribute("rfc", rfc);
+                                                    %>
                                                     <input type="hidden" name="permiso1" id="permiso1" value="<%=request.getAttribute("per1")%>">
                                                     <input type="hidden" name="permiso3" id="permiso3" value="<%=request.getAttribute("per3")%>">
                                                     <input type="hidden" name="permiso4" id="permiso4" value="<%=request.getAttribute("per4")%>">
@@ -159,10 +147,10 @@
                                             <li>
                                                 <form id="data3"  role="form" method="POST" action="Servlet_ir_a_vacantes">
                                                     <button class="propiedadesboton" type="submit" name="ir" id="activado_vacancia" onmouseover="habilitar();">Vacancia</button>
-                                                     <%
-                            session.setAttribute("idUsuario", idUsuario);
-                            session.setAttribute("rfc", rfc);
-                        %>
+                                                    <%
+                                                        session.setAttribute("idUsuario", idUsuario);
+                                                        session.setAttribute("rfc", rfc);
+                                                    %>
                                                     <input type="hidden" name="permiso1" id="permiso1" value="<%=request.getAttribute("per1")%>">
                                                     <input type="hidden" name="permiso3" id="permiso3" value="<%=request.getAttribute("per3")%>">
                                                     <input type="hidden" name="permiso4" id="permiso4" value="<%=request.getAttribute("per4")%>">
@@ -196,91 +184,57 @@
                 </div>
             </header>
             <div class="ruta">
-                <p> UEMSTIS > Promoción Docente > Vacantes</p>
+                <p> UEMSTIS > Promoción Docente > Convocatoria</p>
             </div>
             <section class="sectionart">
                 <div class="articulosart">
-                    <h3>Carga de vacancia en los planteles</h3>
+                    <h3>Carga de Convocatoria</h3>
                     <jsp:useBean id="cn" class="metodos_sql.Metodos_sql" scope="page"></jsp:useBean>
-                        <form id="data" class="form-horizontal" role="form" method="POST" action="Servlet_buscar_vacancia">
-
+                        <form id="data" class="form-horizontal" role="form" method="POST" action="Servlet_buscar_convocatoria">
                             <table  border="0" width="120%">   
                                 <tr><td align="center">
-                                        <input type="hidden" name="f_opc" id="i_opc">
-                                        <input type="hidden" name="campoentidad70" id="campoentidad70" >
-                                        <label>Entidad</label><br>
 
-                                    <%
-                                        ResultSet rs = cn.mostrar("Select id, entidad from catentidades");
-                                    %>
+                                        <input type="hidden" name="publicaciont" id="publicaciont" >
+                                        <label>Publicación</label><br>
+                                        <input type="date" id="publicacion" name="publicacion" value="" min="2020-01-01" max="2020-12-31">
 
-                                    <select class="select" name="entidad" id="entidad" onchange="plantel()">
-                                        <option value="0">Escoge una opcion</option>
-                                        <%
-                                            while (rs.next()) {
-                                        %>
-                                        <option value="<%=rs.getString("id")%>"><%=rs.getString("entidad")%></option>
-                                        <%
-                                            }
-                                        %>
-                                    </select>
-                                </td>
-                                <td align="center">
-                                    <label>Plantel</label><br>                                 
+                                    </td>
+                                    <td align="center">
 
-                                    <select class="select" name="n_plantel" id="i_plantel">
-                                        <option value="0">Escoge una opcion</option>
-                                    </select>
-                                </td>
-                                <td align="center">
-                                    <label>Categoria Plaza</label><br>
-                                    <select class="select" name="categoria" id="i_plantel">
-                                        <option value="0">Escoge una opcion</option>
-                                        <option value="TD">Tecnico docente</option> 
-                                        <option value="D">Docente</option>
-                                    </select>
+                                        <input type="hidden" name="resultadost" id="resultadost" >
+                                        <label>Resultados</label><br>
+                                        <input type="date" id="resultados" name="resultados" value="" min="2020-01-01" max="2020-12-31">
 
-                                </td>
-                            </tr>
-                            <tr>
-                                <td></td>
-                                <td></td>
-                                <td>
-                                    <div class="error"> 
-                                        <% if (request.getAttribute("error") == null) {
-                                                out.print("");
-                                            } else {
-                                                out.print(request.getAttribute("error"));
-                                            }
+                                    </td>
 
-
-                                        %>
-                                    </div>
-                                </td>
-                            </tr>
-
-                        </table><br><br>
-
-                        <div class="form-group">
-                            <button class="btn btn-primary pull-right" type="submit" name="pVacancia" form="data2">Agregar</button>
-                            <button class="btn btn-primary pull-right" type="submit" name="buscarvacancia">Buscar</button>
-
-                        </div>
-                        <br><br>
-
-                        <table  border="1" width="160%" id="tabla_usuarios" class="display">  
-                            <thead>
-                                <tr>
-                                    <th>Estado</th>
-                                    <th>Plantel</th>
-                                    <th>Plaza</th>
-                                    <th>#Plazas</th>
-                                    <th>Tipo de Categoria</th>
-                                    <th>Jornada</th> 
-                                    <th>Vacancia</th>
                                 </tr>
-                            </thead>
-                            <%                                String elegir1 = "0";
+
+
+                            </table><br><br>
+
+                            <div class="form-group">
+                                <button class="btn btn-primary pull-right" type="submit" name="agregar_convocatoria" form="data2">Agregar</button>
+                                <button class="btn btn-primary pull-right" type="submit" name="buscar_convocatoria">Buscar</button>
+
+                            </div>
+                            <br><br>
+
+                            <table  border="1" width="160%" id="tabla_usuarios" class="display">  
+                                <thead>
+                                    <tr>
+                                        <th>Nombre</th>
+                                        <th>Publicacion</th>
+                                        <th>Inicio Registro</th>
+                                        <th>Fin Registro</th>
+                                        <th>Inicio Valoracion</th>
+                                        <th>Fin Valoracion</th> 
+                                        <th>Inicio Dictaminación</th>
+                                        <th>Fin Dictaminación</th>
+                                        <th>Resultados</th>
+                                    </tr>
+                                </thead>
+                            <%
+                                String elegir1 = "0";
                                 String nombre_entidad = "";
                                 String nombre_plantel = "";
                                 String tipo_categoria = "";
@@ -291,27 +245,19 @@
                                 if (elegir1.equals("1")) {
                                     ResultSet rs2 = null;
                                     if (request.getAttribute("consulta").equals("1")) {
-                                        rs2 = cn.mostrar_usuarios("SELECT * FROM vacancia");
-                                    }
-
-                                    if (request.getAttribute("consulta").equals("3")) {
-                                        rs2 = cn.mostrar_usuarios("SELECT * FROM vacancia WHERE entidad='" + request.getAttribute("est") + "' && plantel='" + request.getAttribute("pla") + "'");
+                                        rs2 = cn.mostrar_usuarios("SELECT * FROM convocatoria");
                                     }
 
                                     if (request.getAttribute("consulta").equals("2")) {
-                                        rs2 = cn.mostrar_usuarios("SELECT * FROM vacancia WHERE entidad='" + request.getAttribute("est") + "'");
+                                        rs2 = cn.mostrar_usuarios("SELECT * FROM convocatoria WHERE resultados='" + request.getAttribute("res") + "'");
+                                    }
+
+                                    if (request.getAttribute("consulta").equals("3")) {
+                                        rs2 = cn.mostrar_usuarios("SELECT * FROM convocatoria WHERE publicacion='" + request.getAttribute("pub") + "'");
                                     }
 
                                     if (request.getAttribute("consulta").equals("4")) {
-                                        rs2 = cn.mostrar_usuarios("SELECT * FROM vacancia WHERE plaza='" + request.getAttribute("cat") + "'");
-                                    }
-
-                                    if (request.getAttribute("consulta").equals("5")) {
-                                        rs2 = cn.mostrar_usuarios("SELECT * FROM vacancia WHERE entidad='" + request.getAttribute("est") + "' && plaza='" + request.getAttribute("cat") + "'");
-                                    }
-
-                                    if (request.getAttribute("consulta").equals("6")) {
-                                        rs2 = cn.mostrar_usuarios("SELECT * FROM vacancia WHERE entidad='" + request.getAttribute("est") + "' && plantel='" + request.getAttribute("pla") + "' && plaza='" + request.getAttribute("cat") + "'");
+                                        rs2 = cn.mostrar_usuarios("SELECT * FROM convocatoria WHERE publicacion='" + request.getAttribute("pub") + "' && resultados='" + request.getAttribute("res") + "'");
                                     }
 
                                     while (rs2.next()) {
@@ -319,70 +265,60 @@
                             <tr>
                                 <td align="center">
                                     <div class="datos_tabla"> 
-                                        <%
-                                            nombre_entidad = cn.buscarentidad("SELECT * FROM catentidades WHERE id='" + rs2.getString("entidad") + "'");
-                                            if (nombre_entidad == null) {
+                                        <% if (rs2.getString("nombre") == null) {
                                                 out.print("");
                                             } else {
-                                                out.print(nombre_entidad);
+                                                out.print(rs2.getString("nombre"));
                                             }
                                         %>
                                     </div>
                                 </td>
                                 <td align="center">
                                     <div class="datos_tabla"> 
-                                        <%
-                                            nombre_plantel = cn.buscarplantel("SELECT * FROM catplanteles WHERE id='" + rs2.getString("plantel") + "'");
-                                            if (nombre_plantel == null) {
+                                        <% if (rs2.getString("publicacion") == null) {
                                                 out.print("");
                                             } else {
-                                                out.print(nombre_plantel);
+                                                out.print(rs2.getString("publicacion"));
                                             }
                                         %>
                                     </div>
                                 </td>
                                 <td align="center">
                                     <div class="datos_tabla"> 
-                                        <% if (rs2.getString("plaza") == null) {
+                                        <% if (rs2.getString("inicioRegistro") == null) {
                                                 out.print("");
                                             } else {
-                                                out.print(rs2.getString("plaza"));
+                                                out.print(rs2.getString("inicioRegistro"));
                                             }
                                         %>
                                     </div>
                                 </td>
                                 <td align="center">
                                     <div class="datos_tabla"> 
-                                        <% if (rs2.getString("cantidadplazas") == null) {
+                                        <% if (rs2.getString("finRegistro") == null) {
                                                 out.print("");
                                             } else {
-                                                out.print(rs2.getString("cantidadplazas"));
+                                                out.print(rs2.getString("finRegistro"));
                                             }
                                         %>
                                     </div>
                                 </td>
                                 <td align="center">
-                                    <div class="c_nom"> 
-                                        <%
-                                            tipo_categoria = cn.buscartipocategoria("SELECT * FROM catcategoriasplaza WHERE id='" + rs2.getString("tipocategoria") + "'");
-                                            if (tipo_categoria == null) {
+                                    <div class="datos_tabla"> 
+                                        <% if (rs2.getString("inicioValoracion") == null) {
                                                 out.print("");
                                             } else {
-                                                out.print(tipo_categoria);
+                                                out.print(rs2.getString("inicioValoracion"));
                                             }
-
-
                                         %>
                                     </div>
                                 </td>
                                 <td align="center">
-                                    <div class="c_nom"> 
-                                        <%                                            
-                                            nombre_jornada = cn.buscarjornada("SELECT * FROM catjornada WHERE id='" + rs2.getString("jornada") + "'");
-                                            if (nombre_jornada == null) {
+                                    <div class="datos_tabla"> 
+                                        <% if (rs2.getString("finValoracion") == null) {
                                                 out.print("");
                                             } else {
-                                                out.print(nombre_jornada);
+                                                out.print(rs2.getString("finValoracion"));
                                             }
                                         %>
                                     </div>
@@ -390,26 +326,52 @@
 
                                 <td align="center">
                                     <div class="datos_tabla"> 
-                                        <% if (rs2.getString("vacancia") == null) {
+                                        <% if (rs2.getString("inicioDictaminacion") == null) {
                                                 out.print("");
                                             } else {
-                                                out.print(rs2.getString("vacancia"));
+                                                out.print(rs2.getString("inicioDictaminacion"));
+                                            }
+                                        %>
+                                    </div>
+                                </td>
+
+                                <td align="center">
+                                    <div class="datos_tabla"> 
+                                        <% if (rs2.getString("finDictaminacion") == null) {
+                                                out.print("");
+                                            } else {
+                                                out.print(rs2.getString("finDictaminacion"));
+                                            }
+                                        %>
+                                    </div>
+                                </td>
+
+                                <td align="center">
+                                    <div class="datos_tabla"> 
+                                        <% if (rs2.getString("resultados") == null) {
+                                                out.print("");
+                                            } else {
+                                                out.print(rs2.getString("resultados"));
+                                                out.print(idUsuario);
+                                                out.print(rfc);
                                             }
                                         %>
                                     </div>
                                 </td>
                             </tr>
-                            <%}
+                            <%
+                                    }
                                 }//fin if elegir
                                 else {
                                     response.sendRedirect("login.jsp");
                                 }
                             %>
                         </table><br><br>
-                         <%
+                        <%
                             session.setAttribute("idUsuario", idUsuario);
                             session.setAttribute("rfc", rfc);
                         %>
+
                         <input type="hidden" name="permiso1" id="permiso1" value="<%=request.getAttribute("per1")%>">
                         <input type="hidden" name="permiso3" id="permiso3" value="<%=request.getAttribute("per3")%>">
                         <input type="hidden" name="permiso4" id="permiso4" value="<%=request.getAttribute("per4")%>">
@@ -423,11 +385,12 @@
 
                 </asideart>
             </section> 
-            <form id="data2" class="form-horizontal" role="form" method="POST" action="Servlet_P_Vacancia">
-                 <%
-                            session.setAttribute("idUsuario", idUsuario);
-                            session.setAttribute("rfc", rfc);
-                        %>
+
+            <form id="data2" class="form-horizontal" role="form" method="POST" action="Servlet_agregar_convocatoria">
+                <%
+                    session.setAttribute("idUsuario", idUsuario);
+                    session.setAttribute("rfc", rfc);
+                %>
                 <input type="hidden" name="permiso1" id="permiso1" value="<%=request.getAttribute("per1")%>">
                 <input type="hidden" name="permiso3" id="permiso3" value="<%=request.getAttribute("per3")%>">
                 <input type="hidden" name="permiso4" id="permiso4" value="<%=request.getAttribute("per4")%>">
@@ -435,16 +398,13 @@
                 <input type="hidden" name="dato_ent" id="dato_ent" value="<%=request.getAttribute("dato_ent")%>">
                 <input type="hidden" name="dato_pla" id="dato_pla" value="<%=request.getAttribute("dato_pla")%>">
                 <input type="hidden" name="dato_rfc" id="dato_rfc" value="<%=request.getAttribute("dato_rfc")%>">
-
-
             </form>
-
 
 
             <!-- JS  para el framework del gobierno-->
             <script src="https://framework-gb.cdn.gob.mx/gobmx.js"></script>
         </div>
-                <%
+        <%
             } else {
                 response.sendRedirect("login.jsp");
             }
