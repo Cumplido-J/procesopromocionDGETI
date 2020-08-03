@@ -90,7 +90,8 @@ public class Servlet_guardarArchivo extends HttpServlet {
          
         try{
             Properties p = new Properties();
-            p.load(new FileReader("C:/Users/David Reyna/Desktop/Repositorios/procesopromocion/src/conf/config.properties"));
+            
+            p.load(new FileReader("C:/ArchivosPromocion/config.properties"));
             String ruta=p.getProperty("rutaEvidenciasRegistro");
             HttpSession session= (HttpSession) request.getSession();
             String idUsuario=session.getAttribute("idUsuario").toString();
@@ -116,7 +117,7 @@ public class Servlet_guardarArchivo extends HttpServlet {
             is.close();
             
             Metodos_sql metodo = new Metodos_sql();
-            String[] parametros={idUsuario,idRequisito,ruta};
+            String[] parametros={idUsuario,idRequisito};
             List<String[]> datos;                           
             datos=metodo.ejecutaSP("sp_registroConstancia",parametros);            
             if(!datos.isEmpty()){

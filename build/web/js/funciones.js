@@ -319,7 +319,7 @@ $(document).ready(function () {
             });
             return false;
         }
-    });
+    });    
 });
 
 function actualizarTipoInstitucion() {
@@ -650,16 +650,21 @@ function mostrarSiguiente(id){
             
             if($("#activoServicio").is(':checked')){
                 if($("#notaDesfavorable").is(':checked')){
-                    $("#mensaje").html("Su registro será procesado como incompleto debido a que cuenta con nota desfavorable y/o sanción administrativa.");
-                    $("#modalMensaje").modal("show");
+                    $("#btnConfirmacion").attr("onClick","enviarConfirmacion(2)");
+                    $("#descripcionBitacora").val("El usuario confirma que:"+$("#mensajeNotaDesfavorable").val());
+                    $("#mensajeConfirmacion").html($("#mensajeNotaDesfavorable").val());
+                    $("#modalConfirmacion").modal("show");
+                    //$(location).attr('href',"FichaRegistroIncompleto");
                 }else{
                     $("#infoLaboral").collapse("hide");
                     $("#panelInfoHoras").removeAttr("hidden");
                     $("#infoHoras").collapse("show");
                 }
             }else{
-                $("#mensaje").html("Su registro será procesado como incompleto debido a que no se encuentra activo en el servicio.");                
-                $("#modalMensaje").modal("show");
+                $("#btnConfirmacion").attr("onClick","enviarConfirmacion(1)");
+                $("#descripcionBitacora").val("El usuario confirma que:"+$("#mensajeInactivoServicio").val());                
+                $("#mensajeConfirmacion").html($("#mensajeInactivoServicio").val());                
+                $("#modalConfirmacion").modal("show");
                 //$(location).attr('href',"FichaRegistroIncompleto");
             }
             break;
@@ -688,12 +693,14 @@ function mostrarSiguiente(id){
                     $("#panelInfoCompatibilidad").removeAttr("hidden");
                     $("#infoCompatibilidad").collapse("show");
                 }else{
-                    $("#mensaje").html("Debe registrar la información de horas frente a grupo.");
-                    $("#modalMensaje").modal("show");
+                    $("#mensajeConfirmacion").html("Debe registrar la información de horas frente a grupo.");
+                    $("#modalConfirmacion").modal("show");
                 }
             }else{
-                $("#mensaje").html("Su registro será procesado como incompleto debido a que no se encuentra frente a grupo.");
-                $("#modalMensaje").modal("show");
+                $("#btnConfirmacion").attr("onClick","enviarConfirmacion(3)");
+                $("#descripcionBitacora").val("El usuario confirma que:"+$("#mensajeNoFrenteGrupo").val());
+                $("#mensajeConfirmacion").html($("#mensajeNoFrenteGrupo").val());
+                $("#modalConfirmacion").modal("show");
                 //$(location).attr('href',"FichaRegistroIncompleto");
                 
             }
@@ -716,9 +723,12 @@ function mostrarSiguiente(id){
                 $("#estatusInfoCompatibilidad").attr("completo",false);
             } 
             if($("#funcionesOtro").is(':checked')){
-                if(!$("#compatibilidad").is(':checked')){                
-                    $("#mensaje").html("Su registro será procesado como incompleto debido a que no cuenta con la compatibilidad.");
+                if(!$("#compatibilidad").is(':checked')){ 
+                    $("#btnConfirmacion").attr("onClick","enviarConfirmacion(4)");
+                    $("#descripcionBitacora").val("El usuario confirma que:"+$("#mensajeNoCompatibilidad").val());
+                    $("#mensajeConfirmacion").html($("#mensajeNoCompatibilidad").val());
                     //$(location).attr('href',"FichaRegistroIncompleto");
+                    $("#modalConfirmacion").modal("show");
                 }else{
                     if(
                         $("#estatusInfoAcademica").attr("completo")=='true'
@@ -726,10 +736,12 @@ function mostrarSiguiente(id){
                         &&$("#estatusInfoHoras").attr("completo")=='true'
                         &&$("#estatusInfoCompatibilidad").attr("completo")=='true'
                     ){
-                        $("#mensaje").html("Registro completo");
+                        $("#mensaje").html($("#mensajeRegistroCompleto").val());
                         $(location).attr('href',"FichaRegistro");
+                        $("#modalMensaje").modal("show");
                     }else{
-                        $("#mensaje").html('Formulario incompleto revise los campos marcados con <span class="glyphicon glyphicon-exclamation-sign incompleto" ></span>');
+                        $("#mensaje").html('Formulario incompleto revise los campos marcados con el icono <span class="glyphicon glyphicon-exclamation-sign incompleto" ></span>');
+                        $("#modalMensaje").modal("show");
                     }
                 }
             }else{
@@ -740,12 +752,14 @@ function mostrarSiguiente(id){
                     &&$("#estatusInfoCompatibilidad").attr("completo")=='true'
                 ){
                     $("#mensaje").html("Registro completo");
+                    $("#modalMensaje").modal("show");
                     $(location).attr('href',"FichaRegistro");
                 }else{
                     $("#mensaje").html('Formulario incompleto revise los campos marcados con <span class="glyphicon glyphicon-exclamation-sign incompleto" ></span>');
+                    $("#modalMensaje").modal("show");
                 }
             }
-            $("#modalMensaje").modal("show");
+            
                        
             break;
         default:
@@ -925,6 +939,8 @@ function borrarHoraGrupo(id){
     });
 }
 
+
+
 function cambioAsignatura(){
     var horas=$("#asignatura option:selected").attr("horas");
     $("#horas").val(horas);
@@ -934,6 +950,65 @@ function cambioSubmodulo(){
     var horas=$("#submodulo option:selected").attr("horas");
     $("#horas").val(horas);
     $("#horas").attr("readOnly","true");
+}
+function enviarConfirmacion(parametro){
+    var btnEnviar = $("#btnConfirmacion");
+    $.ajax({
+        type: $("#formBitacora").attr("method"),
+        url: $("#formBitacora").attr("action"),
+        data:$("#formBitacora").serialize(),
+        beforeSend: function(){            
+            btnEnviar.val("Enviando");
+            btnEnviar.attr("disabled","disabled");
+        },
+        complete:function(data){
+            btnEnviar.val("Enviar formulario");
+            btnEnviar.removeAttr("disabled");
+        },
+        success: function(data){
+            switch(parametro){
+                case 1:
+                    $("#btnEnviar2").attr("disabled","disabled");
+                    $("#activoServicio").attr("disabled",true);
+                    $("#btnFinalizar").removeAttr("disabled");
+                    break;
+                case 2:
+                    $("#btnEnviar2").attr("disabled","disabled");
+                    $("#notaDesfavorable").attr("disabled",true);
+                    $("#btnFinalizar").removeAttr("disabled");
+                    break;
+                case 3:
+                    $("#btnEnviar3").attr("disabled","disabled");
+                    $("#frenteGrupo").attr("disabled",true);
+                    $("#btnFinalizar").removeAttr("disabled");
+                    break;
+                case 4:
+                    $("#btnEnviar4").attr("disabled","disabled");
+                    $("#compatibilidad").attr("disabled",true);
+                    $("#btnFinalizar").removeAttr("disabled");
+                    break;
+                default:
+                    break;
+            }            
+            
+            $("#modalConfirmacion").modal("hide");
+        },
+        error: function(data){
+        }
+    });
+}
+
+function confirmarHoraGrupo(id){
+    $("#btnConfirmacion").attr("onClick","enviarConfirmacion(5)");
+    $("#descripcionBitacora").val("El usuario confirma que:"+$("#mensajeConfirmacionHora").val());
+    $("#mensajeConfirmacion").html($("#mensajeConfirmacionHora").val());
+    $("#modalConfirmacion").modal("show");
+}
+function rechazarHoraGrupo(id){
+    $("#btnConfirmacion").attr("onClick","enviarConfirmacion(6)");
+    $("#descripcionBitacora").val("El usuario confirma que:"+$("#mensajeRechazoHora").val());
+    $("#mensajeConfirmacion").html($("#mensajeRechazoHora").val());
+    $("#modalConfirmacion").modal("show");
 }
 
 

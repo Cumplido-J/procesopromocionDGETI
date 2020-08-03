@@ -56,6 +56,14 @@
         <servlet-name>Servlet_registroInfoHoras</servlet-name>
         <servlet-class>com.aplicacion.servlet.Servlet_registroInfoHoras</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>Servlet_registroBitacora</servlet-name>
+        <servlet-class>com.aplicacion.servlet.Servlet_registroBitacora</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Servlet_finalizaRegistro</servlet-name>
+        <servlet-class>com.aplicacion.servlet.Servlet_finalizaRegistro</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Servlet_consultaCatalogos</servlet-name>
         <url-pattern>/Servlet_consultaCatalogos</url-pattern>
@@ -111,6 +119,14 @@
     <servlet-mapping>
         <servlet-name>Servlet_registroInfoHoras</servlet-name>
         <url-pattern>/Servlet_registroInfoHoras</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Servlet_registroBitacora</servlet-name>
+        <url-pattern>/Servlet_registroBitacora</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Servlet_finalizaRegistro</servlet-name>
+        <url-pattern>/Servlet_finalizaRegistro</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

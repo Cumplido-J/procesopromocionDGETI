@@ -71,7 +71,7 @@ public class Servlet_muestraArchivo extends HttpServlet {
         //processRequest(request, response);
         try {
             Properties p = new Properties();
-            p.load(new FileReader("C:/Users/David Reyna/Desktop/Repositorios/procesopromocion/src/conf/config.properties"));
+            p.load(new FileReader("C:/ArchivosPromocion/config.properties"));
             String ruta=p.getProperty("rutaEvidenciasRegistro");
             HttpSession session= (HttpSession) request.getSession();
             String idUsuario=session.getAttribute("idUsuario").toString();

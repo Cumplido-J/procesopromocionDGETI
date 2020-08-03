@@ -15,6 +15,7 @@
         <link rel="stylesheet" href="css/estilos.css">
         <link href="/favicon.ico" rel="shortcut icon">
         <link href="https://framework-gb.cdn.gob.mx/assets/styles/main.css" rel="stylesheet">
+        <%@page import='herramientas.Imagen'%>
     </head>
     <body>
         <div>
@@ -34,11 +35,13 @@
                     <div class="collapse navbar-collapse" id="subenlaces">
                         <ul class="nav navbar-nav navbar-right">
                             <li aling="navbar-center">
+                                <a>
                                 <%
                                     out.print(request.getAttribute("nom"));
                                 %>
+                                </a>
                             </li>
-                            <li><a href="index.html">Cerrar Sesión</a></li>
+                            <li><a href="login.jsp">Cerrar Sesión</a></li>
                         </ul>
                     </div>
                 </div>
@@ -60,15 +63,15 @@
 
             <div class="articulosses">
                 <article class="articleses">
-                    <a href="EvidReg.html"><img src="imagenes/EvidReg.jpg" alt=""></a>
-                    <a href="EvidReg.html"><h3>Evidencias de registro</h3></a>
+                    <a href="Registro"><img src="<%=Imagen.muestraImagen("C:/ArchivosPromocion/imagenes/EvidReg.jpg")%>" alt=""></a>
+                    <a href="Registro"><h3>Evidencias de registro</h3></a>
                 </article>
                 <article class="articleses">
-                    <a href="articulo.html"><img src="imagenes/EvidVal.jpg" alt=""></a>
-                    <a href="articulo.html"><h3>Evidencias de valoración</h3></a>
+                    <a href="evidenciaRegistroDocentes.html"><img src="<%=Imagen.muestraImagen("C:/ArchivosPromocion/imagenes/EvidVal.jpg")%>" alt=""></a>
+                    <a href="evidenciaRegistroDocentes.html"><h3>Evidencias de valoración</h3></a>
                 </article>
                 <article class="articleses">
-                    <a href="articulo.html"><img src="imagenes/Resultados.jpg" alt=""></a>
+                    <a href="articulo.html"><img src="<%=Imagen.muestraImagen("C:/ArchivosPromocion/imagenes/Resultados.jpg")%>" alt=""></a>
                     <a href="articulo.html"><h3>Emisión de Resultados</h3></a>
                 </article>
 

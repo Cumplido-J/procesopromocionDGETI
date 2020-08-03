@@ -59,7 +59,10 @@ public class Servlet_cerrarsesion extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        //processRequest(request, response);
+        HttpSession sesion = request.getSession();
+        sesion.invalidate();
+        response.sendRedirect("login.jsp");
     }
 
     /**
@@ -75,7 +78,7 @@ public class Servlet_cerrarsesion extends HttpServlet {
             throws ServletException, IOException {
         HttpSession sesion = request.getSession();
         sesion.invalidate();
-        response.sendRedirect("index.html");
+        response.sendRedirect("login.jsp");
     }
 
     /**

@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html lang="es">
+    <head>
+        <title>Evidencias Registro</title>
+        <meta charset="UTF-8"/>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>        
+        <link href="https://framework-gb.cdn.gob.mx/assets/styles/main.css" rel="stylesheet"/>
+        <!--<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+        <link rel="stylesheet" href="/resources/demos/style.css">-->
+        <link href="css/estilosRegistro.css" rel="stylesheet"/>
+    </head>
+    <body>
+        <main class="page">            
+            <!--Barra navegación UEMSTIS-->
+            <nav class="navbar navbar-inverse sub-navbar navbar-fixed-top">
+                <div class="container">
+                  <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#subenlaces">
+                      <span class="sr-only">Interruptor de Navegación</span>
+                      <span class="icon-bar"></span>
+                      <span class="icon-bar"></span>
+                      <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="/">UEMSTIS</a>
+                  </div>
+                  <div class="collapse navbar-collapse" id="subenlaces">
+                    <ul class="nav navbar-nav navbar-right">
+                      <li><a href="#">Inicio</a></li>                          
+                    </ul>
+                  </div>
+                </div>
+            </nav>
+            <!--FIN Barra navegación UEMSTIS-->                
+            <!--Barra encabezado-->
+            <div class="encabezado row text-center">
+                <p>Unidad de Educación Media Superior Tecnológica Industrial y de Servicios</p>
+            </div>
+            <!--FIN Barra encabezado-->
+            <div class="container">
+              <div class="text-center">
+                  <h4>Programa de Promoción en el Servicio Docente en Educación Media Superior</h4>
+              </div>
+              <!--Breadcrumbs-->
+              <ol class="breadcrumb">
+                <li><a href="#">UEMSTIS</a></li>
+                <li><a href="#">Promoción Docente</a></li>
+                <li class="active">Registro de aspirante</li>
+              </ol>
+              <!--FIN Breadcrumbs-->
+              <div class="text-center">
+                <h4>Registro de requisitos para participar en el:</h4>
+                <h4>Programa de Promoción en el Servicio Docente por Cambio de Categoría en Educación Media Superior</h4>
+              </div>
+              <!--Paneles colapsables-->
+              <div class="panel-group ficha-collapse" id="accordion">
+                <div class="panel panel-default">
+                  <div class="panel-heading">
+                    <h4 class="panel-title">
+                      <a data-parent="#accordion" data-toggle="collapse" href="#infoAntiguedad" aria-expanded="true" aria-controls="infoAntiguedad">
+                      Antiguedad
+                      </a>
+                    </h4>
+                    <button type="button" class="collpase-button collapsed" data-parent="#accordion" data-toggle="collapse" href="#infoAntiguedad"></button>
+                  </div>
+                  <div class="panel-collapse collapse" id="infoAntiguedad">
+                    <div class="panel-body">
+                      <form role="form">
+                         <div>
+                          <label class="control-label" for="modalidad">Antiguedad:</label>
+                          <select class="form-control input-sm" id="modalidad" name="modalidad">
+                            <option>-Seleccione-</option>
+                            <option value='1'>1 a 10 años</option>
+                            <option value='2'>11 a 15 años</option>
+                            <option value='3'>16 a 20 años</option>
+                            <option value='4'>21 a 25 años</option>
+                            <option value='5'>Más de 25 años</option></select>
+                        </div>
+                        <div>
+                          <label class="control-label" for="evidencia7">Cargar de constancia de antiguedad:</label>
+                          <input type="file" class="form-control input-sm" id="evidencia7" name="evidencia7" >
+                        </div>
+                          <br>
+                        <div class="col-xs-12 text-right">
+                          <button class="btn btn-sm btn-primary" type="reset">Limpiar</button>
+                          <button class="btn btn-sm btn-primary" type="submit">Guardar y continuar</button>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+                
+                <div class="panel panel-default">
+                  <div class="panel-heading">
+                    <h4 class="panel-title">
+                      <a data-parent="#accordion" data-toggle="collapse" href="#infoExperiencia" aria-expanded="true" aria-controls="infoExperiencia">
+                      Experiencia y tiempo de trabajo en zonas de marginación, pobreza y descomposición social
+                      </a>
+                    </h4>
+                    <button type="button" class="collpase-button collapsed" data-parent="#accordion" data-toggle="collapse" href="#infoExperiencia"></button>
+                  </div>
+                  <div class="panel-collapse collapse" id="infoExperiencia">
+                    <div class="panel-body">
+                      <form role="form">
+                         <div>
+                          <label class="control-label" for="modalidad">Seleccionar tiempo de experiencia:</label>
+                          <select class="form-control input-sm" id="modalidad" name="modalidad">
+                            <option>-Seleccione-</option>
+                            <option value='1'>Experiencia menor a un año</option>
+                            <option value='2'>Experiencia de un año o más</option>
+                          </select>
+                        </div>
+                        <div>
+                          <label class="control-label" for="evidencia7">Cargar de constancia de experiecia</label>
+                          <input type="file" class="form-control input-sm" id="evidencia7" name="evidencia7" >
+                        </div>
+                          <br>
+                        <div class="col-xs-12 text-right">
+                          <button class="btn btn-sm btn-primary" type="reset">Limpiar</button>
+                          <button class="btn btn-sm btn-primary" type="submit">Guardar y continuar</button>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+                  
+                <div class="panel panel-default">
+                  <div class="panel-heading">
+                    <h4 class="panel-title">
+                      <a data-parent="#accordion" data-toggle="collapse" href="#infoReconocimiento" aria-expanded="true" aria-controls="infoReconocimiento">
+                      Reconocimiento al buen desempeño por la comunidad educativa
+                      </a>
+                    </h4>
+                    <button type="button" class="collpase-button collapsed" data-parent="#accordion" data-toggle="collapse" href="#infoReconocimiento"></button>
+                  </div>
+                  <div class="panel-collapse collapse" id="infoReconocimiento">
+                    <div class="panel-body">
+                      <form role="form">
+                         <div>
+                          <label class="control-label" for="modalidad">Seleccionar reconocimieno al buen desempeño por la comunidad:</label>
+                          <select class="form-control input-sm" id="modalidad" name="modalidad">
+                            <option>-Seleccione un reconocimiento-</option>
+                            <option value='1'>A madres y padres de familia o tutores</option>
+                            <option value='2'>A alumnos</option>
+                            <option value='3'>A compañeros de trabajo</option>
+                          </select>
+                        </div>
+                        <div>
+                          <label class="control-label" for="evidencia7">Cargar de constancia de reconocimiento</label>
+                          <input type="file" class="form-control input-sm" id="evidencia7" name="evidencia7" >
+                        </div>
+                          <br>
+                        <div class="col-xs-12 text-right">
+                          <button class="btn btn-sm btn-primary" type="reset">Limpiar</button>
+                          <button class="btn btn-sm btn-primary" type="submit">Guardar y continuar</button>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+                
+                <div class="panel panel-default">
+                  <div class="panel-heading">
+                    <h4 class="panel-title">
+                      <a data-parent="#accordion" data-toggle="collapse" href="#infoGradoAcademico" aria-expanded="true" aria-controls="infoGradoAcademico">
+                      Formacion Ácademica y/o Posgrado
+                      </a>
+                    </h4>
+                    <button type="button" class="collpase-button collapsed" data-parent="#accordion" data-toggle="collapse" href="#infoGradoAcademico"></button>
+                  </div>
+                  <div class="panel-collapse collapse" id="infoGradoAcademico">
+                    <div class="panel-body">
+                      <form role="form">
+                         <div>
+                          <label class="control-label" for="modalidad">Grado académico:</label>
+                          <select class="form-control input-sm" id="modalidad" name="modalidad">
+                            <option>-Seleccione un reconocimiento-</option>
+                            <option value='1'>Carrera Técnica</option>
+                            <option value='2'>Licenciatura</option>
+                            <option value='3'>Especialidad</option>
+                            <option value='3'>Maestria</option>
+                            <option value='3'>Doctorado</option>
+                          </select>
+                        </div>
+                        <div>
+                          <label class="control-label" for="evidencia7">Cargar de constancia de grado académico</label>
+                          <input type="file" class="form-control input-sm" id="evidencia7" name="evidencia7" >
+                        </div>
+                          <br>
+                        <div class="col-xs-12 text-right">
+                          <button class="btn btn-sm btn-primary" type="reset">Limpiar</button>
+                          <button class="btn btn-sm btn-primary" type="submit">Guardar y continuar</button>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+                
+                <div class="panel panel-default">
+                  <div class="panel-heading">
+                    <h4 class="panel-title">
+                      <a data-parent="#accordion" data-toggle="collapse" href="#infoCapacitacion" aria-expanded="true" aria-controls="infoCapacitacion">
+                      Capacitación y actualización
+                      </a>
+                    </h4>
+                    <button type="button" class="collpase-button collapsed" data-parent="#accordion" data-toggle="collapse" href="#infoCapacitacion"></button>
+                  </div>
+                  <div class="panel-collapse collapse" id="infoCapacitacion">
+                    <div class="panel-body">
+                      <form role="form">
+                         <div class="checkbox col-md-6">
+                          <label><input type="checkbox" checked="false" name="check" id="check" onchange="showContent()">Tienen certificaciones laborales o de idiomas vigentes</label>
+                        </div>
+                        <div>
+                          <div id="content">
+                          <label class="control-label" for="modalidad">Seleccione el rango de horas de los cursos totales en los años anteriores:</label>
+                          <select class="form-control input-sm" id="content1" name="horasCurso">
+                            <option>-Seleccione rango de horas totales-</option>
+                            <option value='1'>120 a 160</option>
+                            <option value='2'>161 a 199</option>
+                            <option value='3'>200 horas o más</option>
+                          </select>
+                        </div>
+                        <div class="form-group col-md-4" id="content" >
+                          <label class="control-label" for="evidencia7" id="content">Cargar constancia de cursos:</label>
+                          <input type="file" class="form-control input-sm" id="evidencia7" name="evidencia7" >
+                        </div>
+                        </div>
+                            
+                        <div class="col-xs-12 text-right">
+                          <button class="btn btn-sm btn-primary" type="reset">Limpiar</button>
+                          <button class="btn btn-sm btn-primary" type="submit">Guardar y continuar</button>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+                  
+                <div class="panel panel-default">
+                  <div class="panel-heading">
+                    <h4 class="panel-title">
+                      <a data-parent="#accordion" data-toggle="collapse" href="#infoMejoraContinua" aria-expanded="true" aria-controls="infoMejoraContinua">
+                          </a>Las aportaciones en materia de mejora continua en la educación, la docencia o la investigación
+                    </h4>
+                    <button type="button" class="collpase-button collapsed" data-parent="#accordion" data-toggle="collapse" href="#infoMejoraContinua"></button>
+                  </div>
+                  <div class="panel-collapse collapse" id="infoMejoraContinua">
+                    <div class="panel-body">
+                      <form role="form">
+                        <div id="content">
+                          <label class="control-label" for="modalidad">Seleccione las aportaciones en materia de mejora continua:</label>
+                          <select class="form-control input-sm" id="content1" name="horasCurso">
+                            <option>-Seleccione Numero de aportaciones-</option>
+                            <option value='1'>1 aportación</option>
+                            <option value='2'>2 aportaciónes</option>
+                            <option value='3'>3 aportaciónes</option>
+                            <option value='4'>4 aportaciónes</option>
+                            <option value='5'>5 aportaciónes</option>
+                          </select>
+                        </div>                
+                        <div>
+                            <div id="content" >
+                          <label class="control-label" for="evidencia7" id="content">Cargar constancia de cursos:</label>
+                          <input type="file" class="form-control input-sm" id="evidencia7" name="evidencia7" >
+                        </div>
+                        </div>
+                          <br>    
+                        <div class="col-xs-12 text-right">
+                          <button class="btn btn-sm btn-primary" type="reset">Limpiar</button>
+                          <button class="btn btn-sm btn-primary" type="submit">Guardar y continuar</button>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+                  
+                  <div class="panel panel-default">
+                  <div class="panel-heading">
+                    <h4 class="panel-title">
+                      <a data-parent="#accordion" data-toggle="collapse" href="#infoParticipacion" aria-expanded="true" aria-controls="infoParticipacion">
+                          </a>Participación en eventos y actividades
+                    </h4>
+                    <button type="button" class="collpase-button collapsed" data-parent="#accordion" data-toggle="collapse" href="#infoParticipacion"></button>
+                  </div>
+                  <div class="panel-collapse collapse" id="infoParticipacion">
+                    <div class="panel-body">
+                      <form role="form">
+                        <div id="content">
+                          <label class="control-label" for="modalidad">Participación en eventos y actividades academicás:</label>
+                          <select class="form-control input-sm" id="content1" name="horasCurso">
+                            <option>-Seleccione Numero de participaciones-</option>
+                            <option value='1'>1 participaciones</option>
+                            <option value='2'>2 participaciones</option>
+                            <option value='3'>3 participaciones</option>
+                            <option value='4'>4 participaciones</option>
+                            <option value='5'>5 participaciones o más</option>
+                          </select>
+                        </div>                
+                        <div>
+                            <div id="content" >
+                          <label class="control-label" for="evidencia7" id="content">Cargar constancia de cursos:</label>
+                          <input type="file" class="form-control input-sm" id="evidencia7" name="evidencia7" >
+                        </div>
+                        </div>
+                            
+                          <div class="col-xs-12 text-right"><br>
+                          <button class="btn btn-sm btn-primary" type="reset">Limpiar</button>
+                          <button class="btn btn-sm btn-primary" type="submit">Guardar y continuar</button>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+                  
+                  <div class="panel panel-default">
+                  <div class="panel-heading">
+                    <h4 class="panel-title">
+                      <a data-parent="#accordion" data-toggle="collapse" href="#infoTutorriaDocente" aria-expanded="true" aria-controls="infoTutorriaDocente">
+                          </a>Actividades de tutoría o acompañamiento docente
+                    </h4>
+                    <button type="button" class="collpase-button collapsed" data-parent="#accordion" data-toggle="collapse" href="#infoTutorriaDocente"></button>
+                  </div>
+                  <div class="panel-collapse collapse" id="infoTutorriaDocente">
+                    <div class="panel-body">
+                      <form role="form">
+                        <div id="content">
+                          <label class="control-label" for="modalidad">Seleccione una opción:</label>
+                          <select class="form-control input-sm" id="content1" name="opc8">
+                            <option>-Seleccione Numero de participaciones-</option>
+                            <option value='1'>A un docente o técnico docente</option>
+                            <option value='2'>A dos docentes o técnico docente</option>
+                          </select>
+                        </div>                
+                        <div>
+                            <div id="content" >
+                          <label class="control-label" for="evidencia7" id="content">Cargar constancia de cursos:</label>
+                          <input type="file" class="form-control input-sm" id="evidencia7" name="evidencia7" >
+                        </div>
+                        </div>
+                            
+                          <div class="col-xs-12 text-right"><br>
+                          <button class="btn btn-sm btn-primary" type="reset">Limpiar</button>
+                          <button class="btn btn-sm btn-primary" type="submit">Guardar y continuar</button>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+                  
+                  <div class="panel panel-default">
+                  <div class="panel-heading">
+                    <h4 class="panel-title">
+                      <a data-parent="#accordion" data-toggle="collapse" href="#seccion9" aria-expanded="true" aria-controls="seccion9">
+                          </a>Publicaciones académicas o de investigación
+                    </h4>
+                    <button type="button" class="collpase-button collapsed" data-parent="#accordion" data-toggle="collapse" href="#seccion9"></button>
+                  </div>
+                  <div class="panel-collapse collapse" id="seccion9">
+                    <div class="panel-body">
+                      <form role="form">
+                        <div id="content">
+                          <label class="control-label" for="modalidad">Seleccione el número de publicaciones en los ultimos 2 años:</label>
+                          <select class="form-control input-sm" id="content1" name="opc9">
+                            <option>-Seleccione una opcioón-</option>
+                            <option value='1'>Una publicación</option>
+                            <option value='2'>Dos publicaciones o más</option>
+                          </select>
+                        </div>                
+                        <div>
+                            <div id="content" >
+                          <label class="control-label" for="evidencia9" id="content">Cargar constancia de publicaciónes:</label>
+                          <input type="file" class="form-control input-sm" id="evidencia7" name="evidencia9" >
+                        </div>
+                        </div>
+                            
+                          <div class="col-xs-12 text-right"><br>
+                          <button class="btn btn-sm btn-primary" type="reset">Limpiar</button>
+                          <button class="btn btn-sm btn-primary" type="submit">Guardar y continuar</button>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+                  
+              </div>
+              <!--FIN Paneles colapsables-->
+              <div class="col-xs-12 text-center" style="
+    margin-top: -40px;
+"><br>
+                          <button class="btn btn-sm btn-primary" type="submit" style="
+    height: 70;
+    height: 60px !important;
+    width: 190px !important;
+    th: 120px !important;
+    font-size: 20px !important;
+    font-weight: 600;
+">Enviar</button>
+              </div>
+          </div>
+                
+        </main>
+        <script src="https://framework-gb.cdn.gob.mx/gobmx.js"></script>        
+        <script src="https://code.jquery.com/jquery-1.12.4.js"></script>      
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>  
+        <script src="https://framework-gb.cdn.gob.mx/assets/scripts/jquery-ui-datepicker.js"></script>
+        <!--<script src="js/funciones.js"></script>--> 
+        <script type="text/javascript">
+    function showContent() {
+        element = document.getElementById("content");
+        check = document.getElementById("check");
+        if (check.checked) {
+            element.style.display='block';
+        }
+        else {
+            element.style.display='none';
+        }
+    }
+</script>
+    </body>
+</html>

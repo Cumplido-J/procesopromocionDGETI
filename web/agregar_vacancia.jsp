@@ -298,7 +298,7 @@
 
             <!-- JS  para el framework del gobierno-->
             <script src="https://framework-gb.cdn.gob.mx/gobmx.js"></script>
-            <script src="notificaciones3.js"></script>
+            <script src="js/notificaciones3.js"></script>
         </div>
     </body>
 </html>

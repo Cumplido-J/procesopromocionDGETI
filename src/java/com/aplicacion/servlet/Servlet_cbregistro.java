@@ -67,9 +67,11 @@ public class Servlet_cbRegistro extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession session= (HttpSession) request.getSession();     
-        if(session.getAttribute("idUsuario")!=null){
+        if(session.getAttribute("idUsuario")!=null&&session.getAttribute("rfc")!=null){
             docente=new Docente();
             docente.setIdUsuario(session.getAttribute("idUsuario").toString());
+            docente.setRfc(session.getAttribute("rfc").toString());
+            
             docente.consultaInfoAspirante();            
             docente.consultaDocumentos();
             docente.consultaHoras();
@@ -89,7 +91,7 @@ public class Servlet_cbRegistro extends HttpServlet {
             RequestDispatcher rd = sc.getRequestDispatcher("/registro.jsp");
             rd.forward(request,response);
         }else{
-            response.sendRedirect("/index.html");
+            response.sendRedirect("login.jsp");
         }
     }
 

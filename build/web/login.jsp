@@ -108,10 +108,8 @@
 
                         <div class="form-group">
                             <div class="col-sm-offset-3 col-sm-9">
-                                <button class="btn btn-primary pull-right" type="submit" name="iniciarsesion">Enviar</button>
-                            </div>
-                            <div class="col-sm-offset-3 col-sm-9">
-                                <a href="RegPart.jsp"><button class="btn btn-primary pull-right" type="button">Regístrate aquí</button></a>
+                                <button class="btn btn-primary" type="submit" name="iniciarsesion">Enviar</button>                            
+                                <a href="RegPart.jsp"><button class="btn btn-primary" type="button">Regístrate aquí</button></a>
                             </div>
                         </div>
                     </form>

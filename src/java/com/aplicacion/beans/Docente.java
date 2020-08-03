@@ -7,7 +7,9 @@ package com.aplicacion.beans;
 
 import com.google.gson.Gson;
 import herramientas.WebService;
+import java.io.FileReader;
 import java.util.List;
+import java.util.Properties;
 import metodos_sql.Metodos_sql;
 
 /**
@@ -239,10 +241,16 @@ public class Docente {
     }*/
     public void consumeWSCatalogoDocentes(){
         WebService ws;
-        ws=new WebService("http://200.77.238.19/develop/protected/pages/herramientas/estructuras/promocion/catalogo_docentes.php?rfc="+rfc);
-        ws.consumeWS(); 
-        jsonHoras=ws.getData();
-        System.out.println("|"+jsonHoras+"|");
+        try{
+            Properties p = new Properties();
+            p.load(new FileReader("C:/ArchivosPromocion/config.properties"));
+            String url=p.getProperty("urlWSHoras");
+            ws=new WebService(url+rfc);
+            ws.consumeWS(); 
+            jsonHoras=ws.getData();  
+        }catch(Exception e){
+            System.out.println(e.toString());
+        }
     }
     
     public HorasGrupo[] getArrayHoras() {        
@@ -272,6 +280,49 @@ public class Docente {
         String[] parametros={idUsuario};
         listaHoras=metodo.ejecutaSP("sp_selectHorasGrupo",parametros);          
     } 
+    public String mostrarHoras(){
+        String respuesta="";
+        for(String[] hora:listaHoras){
+                respuesta+="<tr><td>";
+                respuesta+="Periodo: "+hora[2]+"<br/>";                
+                if(hora[7].equals("A")){
+                    respuesta+="Componente básico y/o propedéutico: ";
+                }else if(hora[7].equals("S")){
+                    respuesta+="Componente profesional:  ";
+                }else if(hora[7].equals("T")){
+                    respuesta+="Taller: ";
+                }                
+                if(hora[5]!=null){
+                    respuesta+=hora[5]+" - ";
+                }
+                respuesta+=hora[4]+"<br/>";                                                              
+                respuesta+="Grupo: "+hora[10]+"<br/>"; 
+                respuesta+="Semestre: "+hora[6]+"<br/>"; 
+                respuesta+="Horas: "+hora[9]+"<br/>";
+                respuesta+="</td>";
+                respuesta+="<td class='text-center'>";
+                if(hora[11].equals("F")){
+                    respuesta+="<button type='button' class='btn btn-sm' title='Borrar' onclick='borrarHoraGrupo("+hora[0]+")'>";
+                    respuesta+="<span class='glyphicon glyphicon-trash'></span>";
+                    respuesta+="</button>";   
+                }
+                else if(hora[12]==null){
+                    respuesta+="<button type='button' class='btn btn-sm' title='Confirmar como correcta' onclick='confirmarHoraGrupo("+hora[0]+")'>";
+                    respuesta+="<span class='glyphicon glyphicon-ok completo'></span>";
+                    respuesta+="</button>";
+                    respuesta+="<button type='button' class='btn btn-sm' title='Confirmar como correcta' onclick='rechazarHoraGrupo("+hora[0]+")'>";
+                    respuesta+="<span class='glyphicon glyphicon-remove incompleto'></span>";
+                    respuesta+="</button>";
+                }
+                else if(hora[11].equals("V")&&hora[12].equals("V")){
+                    respuesta+="<button type='button' class='btn btn-sm' disabled title='Esta información no puede borrarse'>";
+                    respuesta+="<span class='glyphicon glyphicon-trash'></span>";
+                    respuesta+="</button>";   
+                }                                              
+                respuesta+="</td></tr>";                
+            }
+        return respuesta;
+    }
     public void registraHorasWS(String idPeriodo,String claveAsignatura,String horas,String grupo,String semestre){
         Metodos_sql metodo = new Metodos_sql();
         String[] parametros={idUsuario,idPeriodo,claveAsignatura,horas,grupo,semestre};
@@ -307,8 +358,7 @@ public class Docente {
         String[] parametros={idUsuario};
         List<String[]> datos=metodo.ejecutaSP("sp_consultaRegistro",parametros);
         if(!datos.isEmpty()){
-            infoRegistro=datos.get(0);
-            rfc=infoRegistro[5];
+            infoRegistro=datos.get(0);            
         }
     }
     public void consultaDocumentos(){

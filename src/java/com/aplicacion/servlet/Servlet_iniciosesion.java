@@ -17,6 +17,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import metodos_sql.Metodos_sql;
 import seguridad.Encriptar_Desencriptar;
 
@@ -104,6 +105,10 @@ public class Servlet_iniciosesion extends HttpServlet {
                 }//fin if root
                 else if (busquedausuario.equals("USUARIO ENCONTRADO")) {
                     String busqueda_nombre = metodos.buscar(rfc);
+                    String id=metodos.buscarId(rfc);
+                    HttpSession session= (HttpSession) request.getSession(true); 
+                    session.setAttribute("idUsuario",id);
+                    session.setAttribute("rfc",rfc);
                     //out.println("Bienvenido "+busqueda_nombre);
                     request.setAttribute("nom", busqueda_nombre);
                     RequestDispatcher rd = request.getRequestDispatcher("ppsesion.jsp");

@@ -107,33 +107,9 @@ public class Servlet_registroHorasGrupo extends HttpServlet {
             d.registraHoras(idPeriodo, idAsignatura, horas, grupo,semestre);
             d.consultaHoras();
             String respuesta="";
-            int totalHoras=0,grupos=0;
-            for(String[] hora:d.getListaHoras()){
-                respuesta+="<tr><td>";
-                respuesta+="Periodo: "+hora[2]+"<br/>";
-                if(hora[7].equals("A")){
-                    respuesta+="Componente básico y/o propedéutico: ";
-                }else if(hora[7].equals("S")){
-                    respuesta+="Componente profesional:  ";
-                }else if(hora[7].equals("T")){
-                    respuesta+="Taller: ";
-                }   
-                if(hora[5]!=null){
-                    respuesta+=hora[5]+" - ";
-                }
-                respuesta+=hora[4]+"<br/>";                                                             
-                respuesta+="Grupo: "+hora[10]+"<br/>";  
-                respuesta+="Semestre: "+hora[6]+"<br/>";  
-                respuesta+="Horas: "+hora[9]+"<br/>";
-                respuesta+="</td>";
-                respuesta+="<td class='text-center'>";
-                respuesta+="<button type='button' class='btn btn-sm' title='Borrar' onclick='borrarHoraGrupo("+hora[0]+")'>";
-                respuesta+="<span class='glyphicon glyphicon-trash'></span>";
-                respuesta+="</button>";                                               
-                respuesta+="</td></tr>";
-                totalHoras+=Integer.parseInt(hora[9]);
-                grupos++;
-            }
+            int totalHoras=d.getTotalHoras();
+            int grupos=d.getNumGrupos();
+            respuesta=d.mostrarHoras();
             respuesta+="|"+totalHoras+"|"+grupos;
             out.println(respuesta);
         }        

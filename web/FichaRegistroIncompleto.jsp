@@ -26,17 +26,13 @@
     <body style="width:800px; font-family:Verdana;">
         <table >
             <tr>
-                <td><img width="200" src="<%=Imagen.muestraImagen("C:/ArchivosPromocion/logos/logoSepSems.jpg")%>"></td>
-                <td>
-                    <center>
-                        <p>
+                <td valign="top"><img width="200" src="<%=Imagen.muestraImagen("C:/ArchivosPromocion/logos/logoSepSems.jpg")%>"></td>
+                <td style="text-align:center;">                    
                         Convocatoria para el proceso de promoción en el servicio docente por cambio de categoría en Educación Media Superior 
                         <br/>(Promoción horizontal)
-                        <br/>Ciclo Escolar 2020-2021
-                        </p>
-                    </center>
+                        <br/>Ciclo Escolar 2020-2021                                            
                 </td>
-                <td><img width="200" src="<%=Imagen.muestraImagen("C:/ArchivosPromocion/logos/logoUemstis.jpg")%>"></td>
+                <td valign="top"><img width="200" src="<%=Imagen.muestraImagen("C:/ArchivosPromocion/logos/logoUemstis.jpg")%>"></td>
             </tr>
         </table> 
         <center><p>FICHA DE REGISTRO INCOMPLETO</p></center>
@@ -164,7 +160,7 @@
                 </tr>
                 <tr>
                     <td>CONSIDERACIONES PARTICULARES</td>
-                    <td>:</td>
+                    <td>:${Docente.infoRegistro[62]}</td>
                 </tr>                
                 <tr>
                     <td colspan="2">

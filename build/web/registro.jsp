@@ -16,12 +16,20 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>        
         <link href="https://framework-gb.cdn.gob.mx/assets/styles/main.css" rel="stylesheet"/>        
-        <link href="css/estilos.css" rel="stylesheet"/>
+        <link href="css/estilosRegistro.css" rel="stylesheet"/>
         <jsp:useBean id="docente" scope="session" class="com.aplicacion.beans.Docente" />
+        <jsp:useBean id="mensaje" class="com.aplicacion.beans.Mensaje" />
         <jsp:useBean id="catalogo" class="herramientas.Catalogos" />
         <jsp:useBean id="fecha" class="herramientas.Fecha" />
     </head>
     <body>
+        <input type="hidden" id="mensajeRegistroCompleto" value="${mensaje.registroCompleto}" />
+        <input type="hidden" id="mensajeNotaDesfavorable" value="${mensaje.notaDesfavorable}" />
+        <input type="hidden" id="mensajeInactivoServicio" value="${mensaje.inactivoServicio}" />
+        <input type="hidden" id="mensajeNoFrenteGrupo" value="${mensaje.noFrenteGrupo}" />
+        <input type="hidden" id="mensajeNoCompatibilidad" value="${mensaje.noCompatibilidad}" />
+        <input type="hidden" id="mensajeConfirmacionHora" value="${mensaje.confirmacionHora}" />
+        <input type="hidden" id="mensajeRechazoHora" value="${mensaje.rechazoHora}" />
         <main class="page">            
             <!--Barra navegación UEMSTIS-->
             <nav class="navbar navbar-inverse sub-navbar navbar-fixed-top">
@@ -36,8 +44,8 @@
                     <a class="navbar-brand" href="/">UEMSTIS</a>
                   </div>
                   <div class="collapse navbar-collapse" id="subenlaces">
-                    <ul class="nav navbar-nav navbar-right">
-                      <li><a href="#">Inicio</a></li>                          
+                    <ul class="nav navbar-nav navbar-right">                      
+                      <li><a href="Servlet_cerrarsesion">Cerrar sesión</a></li> 
                     </ul>
                   </div>
                 </div>
@@ -387,11 +395,12 @@
                   </div>
                 </div>
                 </div>
-                <c:if test = "${Docente.infoRegistro[26]!=null}">
+                
+                <c:if test = "${Docente.infoRegistro[48]=='N'}">                
                     <c:set var="hidden" value=""></c:set>
                     <c:set var="in" value=""></c:set>
                 </c:if>
-                <c:if test = "${Docente.infoRegistro[26]==null}">
+                <c:if test = "${Docente.infoRegistro[48]!='N'}">
                     <c:set var="hidden" value="hidden"></c:set>
                     <c:set var="in" value=""></c:set>
                 </c:if>
@@ -447,35 +456,9 @@
                                   <th>Opciones</th>                        
                                 </tr>
                                 <tbody id="tablaInfo">
+                                    ${Docente.mostrarHoras()}
                                     <!--<td colspan="2" class="text-center"><p class="text-danger">Sin información</p></td>-->
-                                    <c:forEach items="${Docente.getListaHoras()}" var="hora">
-                                        <tr>
-                                            <td>
-                                                Periodo: <c:out value="${hora[2]}"/><br/>
-                                                <c:if test = "${hora[7] == 'A'}">
-                                                    <c:out value="Componente básico y/o propedéutico: "/> 
-                                                </c:if>
-                                                <c:if test = "${hora[7] == 'S'}">
-                                                    <c:out value="Componente profesional: "/> 
-                                                </c:if>
-                                                <c:if test = "${hora[7] == 'T'}">
-                                                    <c:out value="Taller: "/> 
-                                                </c:if> 
-                                                <c:if test = "${hora[5] != null}">
-                                                    <c:out value="${hora[5]}"/> - 
-                                                </c:if>
-                                                <c:out value="${hora[4]}"/><br/>
-                                                Grupo: <c:out value="${hora[10]}"/><br/>                                                
-                                                Semestre: <c:out value="${hora[6]}"/><br/>
-                                                Horas: <c:out value="${hora[9]}"/><br/>
-                                            </td>
-                                            <td class="text-center">
-                                                <button type="button" class="btn btn-sm" title="Borrar" onclick="borrarHoraGrupo(<c:out value="${hora[0]}"/>)">
-                                                    <span class="glyphicon glyphicon-trash"></span>
-                                                </button>                                                
-                                            </td>
-                                        </tr>
-                                    </c:forEach>
+                                    
                                 </tbody>                                
                               </table>
                             </div>
@@ -520,12 +503,12 @@
                       </form>
                     </div>
                   </div>
-                </div>
-                <c:if test = "${totalHoras>0}">
+                </div>                                
+                <c:if test = "${Docente.infoRegistro[59]=='S'}">
                     <c:set var="hidden" value=""></c:set>
                     <c:set var="in" value="in"></c:set>
                 </c:if>
-                <c:if test = "${totalHoras==0}">
+                <c:if test = "${Docente.infoRegistro[59]!='S'}">
                     <c:set var="hidden" value="hidden"></c:set>
                     <c:set var="in" value=""></c:set>
                 </c:if>
@@ -604,6 +587,12 @@
                 
               </div>
               <!--FIN Paneles colapsables-->
+              <div class="container text-center" style="margin-bottom:15px;">
+                  <form action="FinalizaRegistro" method="POST">
+                      <input type="hidden" name="k" value="false">
+                      <input type="submit" disabled="true" class="btn btn-primary" value="Finalizar registro" id="btnFinalizar">
+                  </form>
+              </div>
           </div>
                             
          <!--MODAL-->                 
@@ -771,7 +760,32 @@
 
             </div>
           </div>
-       
+                                  
+        <div class="modal fade" id="modalConfirmacion" role="dialog">
+            <div class="modal-dialog">
+
+              <!-- Modal content-->
+              <div class="modal-content panel">
+                  <form id="formBitacora" action="RegistroBitacora" method="POST">
+                    <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal">&times;</button>
+                      <h4 class="modal-title">Aviso</h4>
+                    </div>
+                    <div class="modal-body">
+                      <p id="mensajeConfirmacion"></p>
+                      <input type="hidden" id="idUsuario" name="idUsuario" value="${Docente.idUsuario}">
+                      <input type="hidden" id="rfc" name="rfc" value="${Docente.rfc}">
+                      <input type="hidden" value="" id="descripcionBitacora" name="descripcionBitacora">
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" id="btnConfirmacion" class="btn btn-sm btn-default">Confirmar</button>
+                      <button type="button" class="btn btn-sm btn-default" data-dismiss="modal">Cancelar</button>
+                    </div>
+                  </form>
+              </div>
+
+            </div>
+          </div> 
          
          <!--FIN MODAL-->                   
                 
