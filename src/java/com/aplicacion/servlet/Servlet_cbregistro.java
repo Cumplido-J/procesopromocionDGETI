@@ -23,7 +23,7 @@ import javax.servlet.http.HttpSession;
  * @author David Reyna
  */
 @WebServlet(name = "Registro", urlPatterns = {"/Registro"})
-public class Servlet_cbRegistro extends HttpServlet {
+public class Servlet_cbregistro extends HttpServlet {
     Docente docente;
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
