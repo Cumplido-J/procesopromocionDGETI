@@ -79,6 +79,7 @@ public class Metodos_sql {
             sentencia_preparada.close();
             conexion.close();
         } catch (Exception ex) {
+            System.out.println(ex.toString());
         }
         return resultado;
     }//fin metodo guardar
@@ -127,6 +128,7 @@ public class Metodos_sql {
             sentencia_preparada.close();
             conexion.close();
         } catch (Exception ex) {
+            System.out.println(ex.toString());
         }
         return resultado;
     }//fin metodo guardar 
@@ -136,7 +138,7 @@ public class Metodos_sql {
         int resultado = 0;
 
         conexion = null;
-        String guardar = "INSERT INTO usuario(id,programa,entidad,plantel,nombre,primerApellido,segundoApellido,correo,clave,curp,telfijo,telcel,perfil,consideraciones) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+        String guardar = "INSERT INTO usuario(id,programa,entidad,plantel,nombre,primerApellido,segundoApellido,correo,clave,curp,telfijo,telcel,perfil,consideraciones) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
         conexion = conector();
         try {
             sentencia_preparada = conexion.prepareStatement(guardar);
@@ -154,11 +156,12 @@ public class Metodos_sql {
             sentencia_preparada.setString(12, telcel);
             sentencia_preparada.setString(13, perfil);
             sentencia_preparada.setString(14, null);
-
+            System.out.println(sentencia_preparada.toString());
             resultado = sentencia_preparada.executeUpdate();
             sentencia_preparada.close();
             conexion.close();
         } catch (Exception ex) {
+            System.out.println(ex.toString());
         }
         return resultado;
     }//fin metodo guardar
@@ -190,6 +193,7 @@ public class Metodos_sql {
             sentencia_preparada.close();
             conexion.close();
         } catch (Exception ex) {
+            System.out.println(ex.toString());
         }
         return resultado;
     }//fin metodo guardar 
@@ -212,6 +216,7 @@ public class Metodos_sql {
             sentencia_preparada.close();
             conexion.close();
         } catch (Exception ex) {
+            System.out.println(ex.toString());
         }
         return resultado;
     }//fin metodo guardar 
@@ -243,6 +248,7 @@ public class Metodos_sql {
             sentencia_preparada.close();
             conexion.close();
         } catch (Exception ex) {
+            System.out.println(ex.toString());
         }
         return resultado;
     }//fin metodo guardar 
@@ -261,29 +267,14 @@ public class Metodos_sql {
             }
             conexion.close();
         } catch (Exception e) {
+            System.out.println(e.toString());
 
         }
         return nombre;
     }//fin metodo buscar
 	
     
-    public String buscarId(String rfc) {
-        String id = null;
-        conexion = null;
-        String buscar = "SELECT id FROM usuario WHERE curp='" + rfc + "'";
-        conexion = conector();
-        try {
-            sentencia_preparada = conexion.prepareStatement(buscar);
-            resultado = sentencia_preparada.executeQuery();
-            if (resultado.next()) {
-                id = resultado.getString("id");
-            }
-            conexion.close();
-        } catch (Exception e) {
-
-        }
-        return id;
-    }
+    
     
     
 
@@ -306,7 +297,8 @@ public class Metodos_sql {
                 nombre[4] = resultado.getString("id");
             }
             conexion.close();
-        } catch (Exception e) {
+        } catch (Exception ex) {
+            System.out.println(ex.toString());
 
         }
         return nombre;
@@ -325,7 +317,8 @@ public class Metodos_sql {
                 nombre = resultado.getString("nombre");
             }
             conexion.close();
-        } catch (Exception e) {
+        } catch (Exception ex) {
+            System.out.println(ex.toString());
 
         }
         return nombre;
@@ -344,7 +337,8 @@ public class Metodos_sql {
                 clave = resultado.getString("clave");
             }
             conexion.close();
-        } catch (Exception e) {
+        } catch (Exception ex) {
+            System.out.println(ex.toString());
 
         }
         return clave;
@@ -364,6 +358,7 @@ public class Metodos_sql {
             }
             conexion.close();
         } catch (Exception e) {
+            System.out.println(e.toString());
 
         }
         return clave;
@@ -385,7 +380,7 @@ public class Metodos_sql {
             }
             conexion.close();
         } catch (Exception e) {
-
+System.out.println(e.toString());
         }
         return usuario;
     }
@@ -405,7 +400,8 @@ public class Metodos_sql {
                 usuario = "USUARIO NO ENCONTRADO";
             }
             conexion.close();
-        } catch (Exception e) {
+        } catch (Exception ex) {
+            System.out.println(ex.toString());
 
         }
         return usuario;
@@ -426,7 +422,8 @@ public class Metodos_sql {
                 usuario = "USUARIO NO ENCONTRADO";
             }
             conexion.close();
-        } catch (Exception e) {
+        } catch (Exception ex) {
+            System.out.println(ex.toString());
 
         }
         return usuario;
@@ -448,7 +445,8 @@ public class Metodos_sql {
                 usuario = "USUARIO NO ENCONTRADO";
             }
             conexion.close();
-        } catch (Exception e) {
+        } catch (Exception ex) {
+            System.out.println(ex.toString());
 
         }
         return usuario;
@@ -469,7 +467,8 @@ public class Metodos_sql {
                 usuario = "USUARIO NO ENCONTRADO";
             }
             conexion.close();
-        } catch (Exception e) {
+        } catch (Exception ex) {
+            System.out.println(ex.toString());
 
         }
         return usuario;
@@ -495,7 +494,8 @@ public class Metodos_sql {
             }
 
             conexion.close();
-        } catch (Exception e) {
+        } catch (Exception ex) {
+            System.out.println(ex.toString());
 
         }
         return permisos;
@@ -511,7 +511,8 @@ public class Metodos_sql {
             sentencia_preparada = conexion.prepareStatement(buscar);
             resultado = sentencia_preparada.executeQuery();
 
-        } catch (Exception e) {
+        } catch (Exception ex) {
+            System.out.println(ex.toString());
 
         }
         return resultado;
@@ -526,7 +527,8 @@ public class Metodos_sql {
             sentencia_preparada = conexion.prepareStatement(buscar);
             resultado = sentencia_preparada.executeQuery();
 
-        } catch (Exception e) {
+        } catch (Exception ex) {
+            System.out.println(ex.toString());
 
         }
         return resultado;
@@ -545,17 +547,19 @@ public class Metodos_sql {
                 id = resultado.getInt("id");
             }
             conexion.close();
-        } catch (Exception e) {
+        } catch (Exception ex) {
+            System.out.println(ex.toString());
 
         }
         return id;
     }//fin metodo buscar
-	
-	//-----------BUSCAR RFC PARA INICIO DE SESION
+	    
+    //-----------BUSCAR RFC PARA INICIO DE SESION
     public int buscarId(String rfc) {
         int id = 0;
         conexion = null;
-        String buscar = "SELECT id FROM usuario WHERE (perfil='A' || perfil='S') && curp='"+rfc+"'";
+        String buscar = "SELECT id FROM usuario WHERE curp='"+rfc+"'";
+        System.out.println(buscar);
         conexion = conector();
         try {
             sentencia_preparada = conexion.prepareStatement(buscar);
@@ -564,7 +568,8 @@ public class Metodos_sql {
                 id = resultado.getInt("id");
             }
             conexion.close();
-        } catch (Exception e) {
+        } catch (Exception ex) {
+            System.out.println(ex.toString());
 
         }
         return id;
@@ -581,7 +586,8 @@ public class Metodos_sql {
                 entidad = resultado.getString("entidad");
             }
             conexion.close();
-        } catch (Exception e) {
+        } catch (Exception ex) {
+            System.out.println(ex.toString());
 
         }
         return entidad;
@@ -600,6 +606,7 @@ public class Metodos_sql {
             }
             conexion.close();
         } catch (Exception e) {
+            System.out.println(e.toString());
 
         }
         return plantel;
@@ -617,6 +624,7 @@ public class Metodos_sql {
             }
             conexion.close();
         } catch (Exception e) {
+            System.out.println(e.toString());
 
         }
         return tipo;
@@ -634,6 +642,7 @@ public class Metodos_sql {
             }
             conexion.close();
         } catch (Exception e) {
+            System.out.println(e.toString());
 
         }
         return jornada;

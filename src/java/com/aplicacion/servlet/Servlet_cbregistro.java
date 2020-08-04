@@ -71,7 +71,7 @@ public class Servlet_cbRegistro extends HttpServlet {
             docente=new Docente();
             docente.setIdUsuario(session.getAttribute("idUsuario").toString());
             docente.setRfc(session.getAttribute("rfc").toString());
-            
+            System.out.println("================================="+docente.getIdUsuario()+"\n"+docente.getRfc()+"==============");
             docente.consultaInfoAspirante();            
             docente.consultaDocumentos();
             docente.consultaHoras();

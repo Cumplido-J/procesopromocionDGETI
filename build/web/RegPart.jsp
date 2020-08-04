@@ -86,12 +86,21 @@
                             <div class="registro">
                                 <div class="caja">
                                     <p>Programa por el que participa
-                                        <select class="form-control" name="programa" id="prog" onchange="programa1()" >
-                                            <option value="0">Seleccione el programa por el que participa</option>
-                                            <option value="1">Programa de Promoción en el Servicio Docente por Cambio de Categoría en Educación Media Superior</option>
-                                            <option value="2">Programa de Promoción en el Servicio Docente por Asignación de Horas Adicionales en Educación Media Superior</option>
-                                            <option value="3">Programa de Promoción en la Función por Incentivos en Educación Media Superior</option>
-                                        </select>	
+                                      	 <%
+                                        ResultSet rs2 = cn.mostrar("Select id, programa from catprogramas");
+                                    %>
+
+                                    <select class="form-control" name="programa" id="prog" onchange="programa1()">
+                                        <option value="0">Escoge una opcion</option>
+                                        <%
+                                            while (rs2.next()) {
+                                        %>
+                                        <option value="<%=rs2.getString("id")%>"><%=rs2.getString("programa")%></option>
+
+                                        <%
+                                            }
+                                        %>
+                                    </select>
                                     </p>
                                      <div id="n100"></div>
                                 </div>
@@ -189,7 +198,8 @@
                         </div>
                       
                           
-                                <input  class="btn btn-primary pull-right" type="submit" value="Enviar" name="crearcuenta">
+                                <input  class="btn btn-primary pull-right" type="submit" value="Enviar" name="crearcuenta" id="ventana1" >
+                              
                                 <input  class="btn btn-primary pull-right" type="reset" value="Borrar">
                           
                         
@@ -204,7 +214,7 @@
             <!-- JS  para el framework del gobierno-->
             <script src="https://framework-gb.cdn.gob.mx/gobmx.js"></script>
             <script src="js/notificaciones2.js"></script>
-      
+            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
         </div>
 
        

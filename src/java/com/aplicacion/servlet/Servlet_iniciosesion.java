@@ -40,7 +40,8 @@ public class Servlet_iniciosesion extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
+        try {
+            PrintWriter out = response.getWriter();
             /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");
             out.println("<html>");
@@ -52,6 +53,8 @@ public class Servlet_iniciosesion extends HttpServlet {
             rd.forward(request, response);
             out.println("</body>");
             out.println("</html>");
+        }catch(Exception e){
+            System.out.println(e.toString());
         }
     }
 
@@ -105,7 +108,7 @@ public class Servlet_iniciosesion extends HttpServlet {
                 }//fin if root
                 else if (busquedausuario.equals("USUARIO ENCONTRADO")) {
                     String busqueda_nombre = metodos.buscar(rfc);
-                    String id=metodos.buscarId(rfc);
+                    int id=metodos.buscarId(rfc);
                     HttpSession session= (HttpSession) request.getSession(true); 
                     session.setAttribute("idUsuario",id);
                     session.setAttribute("rfc",rfc);

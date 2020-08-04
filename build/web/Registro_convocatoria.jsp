@@ -13,6 +13,44 @@
         <link href="/favicon.ico" rel="shortcut icon">
         <link href="https://framework-gb.cdn.gob.mx/assets/styles/main.css" rel="stylesheet">     
         <script type="text/javascript">
+            function habilitar() {
+                var camp1 = document.getElementById("permiso1");
+                var camp3 = document.getElementById("permiso3");
+                var camp4 = document.getElementById("permiso4");
+                var boton1 = document.getElementById("activado_usuario");
+                var boton3 = document.getElementById("activado_convocatoria");
+                var boton4 = document.getElementById("activado_vacancia");
+
+                if (camp1.value == "true") {
+                    boton1.disabled = true;
+                    boton1.style.color = "#FF3000";
+                } else
+                {
+                    boton1.disabled = false;
+                    boton1.style.color = "#FFFFFF";
+                }
+
+                if (camp3.value == "true") {
+                    boton3.disabled = true;
+                    boton3.style.color = "#FF3000";
+                } else
+                {
+                    boton3.disabled = false;
+                    boton3.style.color = "#FFFFFF";
+                }
+
+                if (camp4.value == "true") {
+                    boton4.disabled = true;
+                    boton4.style.color = "#FF3000";
+                } else
+                {
+                    boton4.disabled = false;
+                    boton4.style.color = "#FFFFFF";
+                }
+            }
+
+
+
             var thecontents = new Array()
             thecontents[0] = "imagenes/nada.png"
             thecontents[1] = "imagenes/sems.jpg"
@@ -28,7 +66,16 @@
         </script> 
     </head>
     <body>
-
+        <%
+            session = (HttpSession) request.getSession(true);
+            String idUsuario = "";
+            String rfc = "";
+            if (session.getAttribute("idUsuario") != null && session.getAttribute("rfc") != null) {
+                idUsuario = session.getAttribute("idUsuario").toString();
+                rfc = session.getAttribute("rfc").toString();
+                session.setAttribute("idUsuario", idUsuario);
+                session.setAttribute("rfc", rfc);
+        %>
 
         <div>
             <!--  para el framework del gobierno-->
@@ -54,7 +101,14 @@
                                         <ul class="submenu">
                                             <li>
                                                 <form id="data3"  role="form" method="POST" action="Servlet_regresar">
-                                                    <button class="propiedadesboton" type="submit" name="regresa">Usuario</button>
+                                                    <button class="propiedadesboton" type="submit" name="regresa" id="activado_usuario" onmouseover="habilitar();">Usuario</button>
+                                                    <%
+                                                        session.setAttribute("idUsuario", idUsuario);
+                                                        session.setAttribute("rfc", rfc);
+                                                    %>
+                                                    <input type="hidden" name="permiso1" id="permiso1" value="<%=request.getAttribute("per1")%>">
+                                                    <input type="hidden" name="permiso3" id="permiso3" value="<%=request.getAttribute("per3")%>">
+                                                    <input type="hidden" name="permiso4" id="permiso4" value="<%=request.getAttribute("per4")%>">
                                                     <input type="hidden" name="nombre" id="nombre" value="<%=request.getAttribute("nom")%>">
                                                     <input type="hidden" name="dato_ent" id="dato_ent" value="<%=request.getAttribute("dato_ent")%>">
                                                     <input type="hidden" name="dato_pla" id="dato_pla" value="<%=request.getAttribute("dato_pla")%>">
@@ -63,7 +117,14 @@
                                             </li>   
                                             <li>
                                                 <form id="data4"  role="form" method="POST" action="Servlet_convocatoria">
-                                                    <button class="propiedadesboton" type="submit" name="convocatoria" id="activado_convocatoria">Convocatoria</button>
+                                                    <button class="propiedadesboton" type="submit" name="convocatoria" id="activado_convocatoria" onmouseover="habilitar();">Convocatoria</button>
+                                                    <%
+                                                        session.setAttribute("idUsuario", idUsuario);
+                                                        session.setAttribute("rfc", rfc);
+                                                    %>
+                                                    <input type="hidden" name="permiso1" id="permiso1" value="<%=request.getAttribute("per1")%>">
+                                                    <input type="hidden" name="permiso3" id="permiso3" value="<%=request.getAttribute("per3")%>">
+                                                    <input type="hidden" name="permiso4" id="permiso4" value="<%=request.getAttribute("per4")%>">
                                                     <input type="hidden" name="nombre" id="nombre" value="<%=request.getAttribute("nom")%>">
                                                     <input type="hidden" name="dato_ent" id="dato_ent" value="<%=request.getAttribute("dato_ent")%>">
                                                     <input type="hidden" name="dato_pla" id="dato_pla" value="<%=request.getAttribute("dato_pla")%>">
@@ -72,7 +133,14 @@
                                             </li>
                                             <li>
                                                 <form id="data3"  role="form" method="POST" action="Servlet_ir_a_vacantes">
-                                                    <button class="propiedadesboton" type="submit" name="ir" id="activado_vacancia">Vacancia</button>
+                                                    <button class="propiedadesboton" type="submit" name="ir" id="activado_vacancia" onmouseover="habilitar();">Vacancia</button>
+                                                    <%
+                                                        session.setAttribute("idUsuario", idUsuario);
+                                                        session.setAttribute("rfc", rfc);
+                                                    %>
+                                                    <input type="hidden" name="permiso1" id="permiso1" value="<%=request.getAttribute("per1")%>">
+                                                    <input type="hidden" name="permiso3" id="permiso3" value="<%=request.getAttribute("per3")%>">
+                                                    <input type="hidden" name="permiso4" id="permiso4" value="<%=request.getAttribute("per4")%>">
                                                     <input type="hidden" name="nombre" id="nombre" value="<%=request.getAttribute("nom")%>">
                                                     <input type="hidden" name="dato_ent" id="dato_ent" value="<%=request.getAttribute("dato_ent")%>">
                                                     <input type="hidden" name="dato_pla" id="dato_pla" value="<%=request.getAttribute("dato_pla")%>">
@@ -188,7 +256,8 @@
 
                         <div class="registro">    
                             <div class="caja">
-                                <p>Titulo de la Convocatoria<textarea id="textarea" name="textarea" rows="3" cols="100%"></textarea></p>
+                                <p>Titulo de la Convocatoria<br>
+                                    <textarea id="textarea" name="textarea" rows="3" cols="100%"></textarea></p>
                                 <div id="c1"></div>
                             </div>
 
@@ -217,17 +286,17 @@
                             <div class="caja">
                                 <p>Periodo de valoración</p>
                                 Inicio <input type="date" id="periodo_valoracion_inicio" name="periodo_valoracion_inicio" value="" min="2020-01-01" max="2020-12-31">
-                                 <div id="c5"></div>
+                                <div id="c5"></div>
                                 <br>  Final &nbsp;<input type="date" id="periodo_valoracion_fin" name="periodo_valoracion_fin" value="" min="2020-01-01" max="2020-12-31"> 
-                                 <div id="c6"></div>
+                                <div id="c6"></div>
                             </div>
 
                             <div class="caja">
                                 <p>Periodo de dictaminación</p>
                                 Inicio <input type="date" id="periodo_dictaminacion_inicio" name="periodo_dictaminacion_inicio" value="" min="2020-01-01" max="2020-12-31">
-                                 <div id="c7"></div>
+                                <div id="c7"></div>
                                 <br>  Final &nbsp;<input type="date" id="periodo_dictaminacion_fin" name="periodo_dictaminacion_fin" value="" min="2020-01-01" max="2020-12-31"> 
-                                 <div id="c8"></div>
+                                <div id="c8"></div>
                             </div>
                         </div>
 
@@ -237,7 +306,7 @@
                                 <p>Publicación de resultados
                                     <input type="date" id="publicacion_resultados" name="publicacion_resultados" value="" min="2020-01-01" max="2020-12-31">
                                 </p>
-                                 <div id="c9"></div>
+                                <div id="c9"></div>
                             </div>
                         </div>
 
@@ -249,13 +318,20 @@
 
                         <div class="registro">  
                             <div class="caja">
+                                <%
+                                    session.setAttribute("idUsuario", idUsuario);
+                                    session.setAttribute("rfc", rfc);
+                                %>
+                                <input type="hidden" name="permiso1" id="permiso1" value="<%=request.getAttribute("per1")%>">
+                                <input type="hidden" name="permiso3" id="permiso3" value="<%=request.getAttribute("per3")%>">
+                                <input type="hidden" name="permiso4" id="permiso4" value="<%=request.getAttribute("per4")%>">
                                 <input type="hidden" name="nombre" id="nombre" value="<%=request.getAttribute("nom")%>">
                                 <input type="hidden" name="dato_ent" id="dato_ent" value="<%=request.getAttribute("dato_ent")%>">
                                 <input type="hidden" name="dato_pla" id="dato_pla" value="<%=request.getAttribute("dato_pla")%>">
                                 <input type="hidden" name="dato_rfc" id="dato_rfc" value="<%=request.getAttribute("dato_rfc")%>">
                                 <input  class="btn btn-primary pull-right" type="submit" value="Guardar" name="guardar" form="regconv">
 
-                                <input  class="btn btn-primary pull-right" type="submit" value="Regresar" name="regresa3" id="check" form="data2">
+
                             </div>
                         </div>
                     </form>  
@@ -266,6 +342,13 @@
                 </asideart>
 
                 <form id="data2" class="form-horizontal" role="form" method="POST" action="Servlet_regresar3">
+                    <%
+                        session.setAttribute("idUsuario", idUsuario);
+                        session.setAttribute("rfc", rfc);
+                    %>
+                    <input type="hidden" name="permiso1" id="permiso1" value="<%=request.getAttribute("per1")%>">
+                    <input type="hidden" name="permiso3" id="permiso3" value="<%=request.getAttribute("per3")%>">
+                    <input type="hidden" name="permiso4" id="permiso4" value="<%=request.getAttribute("per4")%>">
                     <input type="hidden" name="nombre" id="nombre" value="<%=request.getAttribute("nom")%>">
                     <input type="hidden" name="dato_ent" id="dato_ent" value="<%=request.getAttribute("dato_ent")%>">
                     <input type="hidden" name="dato_pla" id="dato_pla" value="<%=request.getAttribute("dato_pla")%>">
@@ -285,7 +368,11 @@
             <script src='https://code.jquery.com/jquery-1.12.4.min.js'></script>
             <script src="js/notificaciones4.js"></script>
         </div>
-
+        <%
+            } else {
+                response.sendRedirect("login.jsp");
+            }
+        %>
 
     </body>  
 </html>

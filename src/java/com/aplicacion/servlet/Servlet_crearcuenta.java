@@ -44,7 +44,8 @@ public class Servlet_crearcuenta extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=ISO-8859-1");
-        try (PrintWriter out = response.getWriter()) {
+        try{
+            PrintWriter out = response.getWriter();
             /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");
             out.println("<html>");
@@ -56,6 +57,8 @@ public class Servlet_crearcuenta extends HttpServlet {
             rd.forward(request, response);
             out.println("</body>");
             out.println("</html>");
+        }catch(Exception e){
+            System.out.println(e.toString());
         }
     }
 
@@ -99,12 +102,12 @@ public class Servlet_crearcuenta extends HttpServlet {
             //out.println("<title>Servlet Servlet_crearcuenta</title>");
             out.println("</head>");
             out.println("<body>");
-            HttpSession session = (HttpSession) request.getSession(true);
+            //HttpSession session = (HttpSession) request.getSession(true);
             String idUsuario = "";
             String rfc = "";
-            if (session.getAttribute("idUsuario") != null && session.getAttribute("rfc") != null) {
-                idUsuario = session.getAttribute("idUsuario").toString();
-                rfc = session.getAttribute("rfc").toString();
+            //if (session.getAttribute("idUsuario") != null && session.getAttribute("rfc") != null) {
+                /*idUsuario = session.getAttribute("idUsuario").toString();
+                rfc = session.getAttribute("rfc").toString();*/
 
                 String telfijo = request.getParameter("telfijo");
                 String telcel = request.getParameter("telcel");
@@ -131,8 +134,8 @@ public class Servlet_crearcuenta extends HttpServlet {
                     if (datos1 > 0) {
                         request.setAttribute("aviso_nom", nombre);
                         request.setAttribute("ver", "1");
-                        session.setAttribute("idUsuario", idUsuario);
-                        session.setAttribute("rfc", rfc);
+                        //session.setAttribute("idUsuario", idUsuario);
+                        //session.setAttribute("rfc", rfc);
                         RequestDispatcher rd = request.getRequestDispatcher("aviso_guardar.jsp");
                         rd.forward(request, response);
                         //response.sendRedirect("aviso_guardar.jsp");
@@ -141,9 +144,9 @@ public class Servlet_crearcuenta extends HttpServlet {
                     }
 
                 }//fin presionar boton
-            } else {
+            /*} else {
                 response.sendRedirect("login.jsp");
-            }
+            }*/
             out.println("</body>");
             out.println("</html>");
         }
