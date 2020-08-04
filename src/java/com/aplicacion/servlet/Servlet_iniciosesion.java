@@ -5,6 +5,7 @@
  */
 package com.aplicacion.servlet;
 
+import com.aplicacion.beans.Docente;
 import com.mysql.jdbc.Connection;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -27,7 +28,7 @@ import seguridad.Encriptar_Desencriptar;
  */
 @WebServlet(name = "Servlet_iniciosesion", urlPatterns = {"/Servlet_iniciosesion"})
 public class Servlet_iniciosesion extends HttpServlet {
-
+    Docente docente;
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -111,12 +112,12 @@ public class Servlet_iniciosesion extends HttpServlet {
                     int id=metodos.buscarId(rfc);
                     HttpSession session= (HttpSession) request.getSession(true); 
                     session.setAttribute("idUsuario",id);
-                    session.setAttribute("rfc",rfc);
-                    //out.println("Bienvenido "+busqueda_nombre);
-                    request.setAttribute("nom", busqueda_nombre);
+                    session.setAttribute("rfc",rfc);                    
+                    //out.println("Bienvenido "+busqueda_nombre);                    
+                    /*request.setAttribute("nom", busqueda_nombre);
                     RequestDispatcher rd = request.getRequestDispatcher("ppsesion.jsp");
-                    rd.forward(request, response);
-                    //response.sendRedirect("ppsesion.html");
+                    rd.forward(request, response);*/
+                    response.sendRedirect("SesionDocente");
                 } else {
                     request.setAttribute("error", "Usuario No Registrado");
                     RequestDispatcher rd = request.getRequestDispatcher("login.jsp");

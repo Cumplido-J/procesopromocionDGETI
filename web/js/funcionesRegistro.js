@@ -651,6 +651,7 @@ function mostrarSiguiente(id){
             if($("#activoServicio").is(':checked')){
                 if($("#notaDesfavorable").is(':checked')){
                     $("#btnConfirmacion").attr("onClick","enviarConfirmacion(2)");
+                    $("#idHora").val("");
                     $("#descripcionBitacora").val("El usuario confirma que:"+$("#mensajeNotaDesfavorable").val());
                     $("#mensajeConfirmacion").html($("#mensajeNotaDesfavorable").val());
                     $("#modalConfirmacion").modal("show");
@@ -662,6 +663,7 @@ function mostrarSiguiente(id){
                 }
             }else{
                 $("#btnConfirmacion").attr("onClick","enviarConfirmacion(1)");
+                $("#idHora").val("");
                 $("#descripcionBitacora").val("El usuario confirma que:"+$("#mensajeInactivoServicio").val());                
                 $("#mensajeConfirmacion").html($("#mensajeInactivoServicio").val());                
                 $("#modalConfirmacion").modal("show");
@@ -698,6 +700,7 @@ function mostrarSiguiente(id){
                 }
             }else{
                 $("#btnConfirmacion").attr("onClick","enviarConfirmacion(3)");
+                $("#idHora").val("");
                 $("#descripcionBitacora").val("El usuario confirma que:"+$("#mensajeNoFrenteGrupo").val());
                 $("#mensajeConfirmacion").html($("#mensajeNoFrenteGrupo").val());
                 $("#modalConfirmacion").modal("show");
@@ -725,6 +728,7 @@ function mostrarSiguiente(id){
             if($("#funcionesOtro").is(':checked')){
                 if(!$("#compatibilidad").is(':checked')){ 
                     $("#btnConfirmacion").attr("onClick","enviarConfirmacion(4)");
+                    $("#idHora").val("");
                     $("#descripcionBitacora").val("El usuario confirma que:"+$("#mensajeNoCompatibilidad").val());
                     $("#mensajeConfirmacion").html($("#mensajeNoCompatibilidad").val());
                     //$(location).attr('href',"FichaRegistroIncompleto");
@@ -751,9 +755,11 @@ function mostrarSiguiente(id){
                     &&$("#estatusInfoHoras").attr("completo")=='true'
                     &&$("#estatusInfoCompatibilidad").attr("completo")=='true'
                 ){
-                    $("#mensaje").html("Registro completo");
+                    $("#banderaCompleto").val("true");
+                    $("#btnFinalizar").removeAttr("disabled");
+                    /*$("#mensaje").html("Registro completo");
                     $("#modalMensaje").modal("show");
-                    $(location).attr('href',"FichaRegistro");
+                    $(location).attr('href',"FichaRegistro");*/
                 }else{
                     $("#mensaje").html('Formulario incompleto revise los campos marcados con <span class="glyphicon glyphicon-exclamation-sign incompleto" ></span>');
                     $("#modalMensaje").modal("show");
@@ -966,6 +972,7 @@ function enviarConfirmacion(parametro){
             btnEnviar.removeAttr("disabled");
         },
         success: function(data){
+            var datos;
             switch(parametro){
                 case 1:
                     $("#btnEnviar2").attr("disabled","disabled");
@@ -987,6 +994,22 @@ function enviarConfirmacion(parametro){
                     $("#compatibilidad").attr("disabled",true);
                     $("#btnFinalizar").removeAttr("disabled");
                     break;
+                case 5:
+                    datos=data.split("|");
+                    if(datos.length==3){
+                        $("#tablaInfo").html(datos[0]);
+                        $("#numHoras").val(datos[1]);
+                        $("#numGrupos").val(datos[2]);
+                    }
+                    break;
+                case 6:
+                    datos=data.split("|");
+                    if(datos.length==3){
+                        $("#tablaInfo").html(datos[0]);
+                        $("#numHoras").val(datos[1]);
+                        $("#numGrupos").val(datos[2]);
+                    }
+                    break;
                 default:
                     break;
             }            
@@ -1000,12 +1023,14 @@ function enviarConfirmacion(parametro){
 
 function confirmarHoraGrupo(id){
     $("#btnConfirmacion").attr("onClick","enviarConfirmacion(5)");
+    $("#idHora").val(id);
     $("#descripcionBitacora").val("El usuario confirma que:"+$("#mensajeConfirmacionHora").val());
     $("#mensajeConfirmacion").html($("#mensajeConfirmacionHora").val());
     $("#modalConfirmacion").modal("show");
 }
 function rechazarHoraGrupo(id){
     $("#btnConfirmacion").attr("onClick","enviarConfirmacion(6)");
+    $("#idHora").val("-"+id);
     $("#descripcionBitacora").val("El usuario confirma que:"+$("#mensajeRechazoHora").val());
     $("#mensajeConfirmacion").html($("#mensajeRechazoHora").val());
     $("#modalConfirmacion").modal("show");
