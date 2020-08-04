@@ -44,7 +44,8 @@
                     <a class="navbar-brand" href="/">UEMSTIS</a>
                   </div>
                   <div class="collapse navbar-collapse" id="subenlaces">
-                    <ul class="nav navbar-nav navbar-right">                      
+                    <ul class="nav navbar-nav navbar-right">      
+                      <li><a href="SesionDocente">Regresar</a></li>
                       <li><a href="Servlet_cerrarsesion">Cerrar sesión</a></li> 
                     </ul>
                   </div>
@@ -520,7 +521,7 @@
                         <c:set var="bandera" value="${Docente.verificaSeccion('4')}"></c:set>
                         <c:if test = "${bandera==true}">
                             <span class="glyphicon glyphicon-ok-sign completo" title="Sección completa" id="estatusInfoCompatibilidad" completo="true"></span>  
-                            <c:set var="in" value="in"></c:set>
+                            <c:set var="in" value=""></c:set>
                         </c:if>
                         <c:if test = "${bandera==false}">
                             <span class="glyphicon glyphicon-exclamation-sign incompleto" title="Sección incompleta" id="estatusInfoCompatibilidad" completo="false"></span>
@@ -586,11 +587,30 @@
                 </div>
                 
               </div>
+                                
               <!--FIN Paneles colapsables-->
+              <c:set var="banderaCompleto" value="true"></c:set>
+              <c:set var="disabled" value=""></c:set>
+              <c:if test="${Docente.verificaSeccion('1')==false}">
+                  <c:set var="banderaCompleto" value="false"></c:set>
+                  <c:set var="disabled" value="disabled"></c:set>
+              </c:if>
+              <c:if test="${Docente.verificaSeccion('2')==false}">
+                  <c:set var="banderaCompleto" value="false"></c:set>
+                  <c:set var="disabled" value="disabled"></c:set>
+              </c:if>
+              <c:if test="${Docente.verificaSeccion('3')==false}">
+                  <c:set var="banderaCompleto" value="false"></c:set>
+                  <c:set var="disabled" value="disabled"></c:set>
+              </c:if>
+              <c:if test="${Docente.verificaSeccion('4')==false}">
+                  <c:set var="banderaCompleto" value="false"></c:set>
+                  <c:set var="disabled" value="disabled"></c:set>
+              </c:if>
               <div class="container text-center" style="margin-bottom:15px;">
                   <form action="FinalizaRegistro" method="POST">
-                      <input type="hidden" name="k" value="false">
-                      <input type="submit" disabled="true" class="btn btn-primary" value="Finalizar registro" id="btnFinalizar">
+                      <input type="hidden" id="banderaCompleto" name="k" value="${banderaCompleto}">
+                      <input type="submit" ${disabled} class="btn btn-primary" value="Finalizar registro" id="btnFinalizar">
                   </form>
               </div>
           </div>
@@ -775,6 +795,7 @@
                       <p id="mensajeConfirmacion"></p>
                       <input type="hidden" id="idUsuario" name="idUsuario" value="${Docente.idUsuario}">
                       <input type="hidden" id="rfc" name="rfc" value="${Docente.rfc}">
+                      <input type="hidden" id="idHora" name="idHora" value="">
                       <input type="hidden" value="" id="descripcionBitacora" name="descripcionBitacora">
                     </div>
                     <div class="modal-footer">
@@ -795,7 +816,7 @@
         <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>  
         <script src="https://framework-gb.cdn.gob.mx/assets/scripts/jquery-ui-datepicker.js"></script>
         <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.1/jquery.validate.min.js"></script>
-        <script src="js/funciones.js"></script> 
+        <script src="js/funcionesRegistro.js"></script> 
         <script>
             $( function() {
             var availableTags = [

@@ -71,25 +71,30 @@ public class Servlet_cbregistro extends HttpServlet {
             docente=new Docente();
             docente.setIdUsuario(session.getAttribute("idUsuario").toString());
             docente.setRfc(session.getAttribute("rfc").toString());
-            System.out.println("================================="+docente.getIdUsuario()+"\n"+docente.getRfc()+"==============");
-            docente.consultaInfoAspirante();            
-            docente.consultaDocumentos();
-            docente.consultaHoras();
-            if(docente.getListaHoras().isEmpty()){
-                docente.consumeWSCatalogoDocentes();
-                if(docente.getJsonHoras().length()>0){
-                    HorasGrupo[] horas=docente.getArrayHoras();                    
-                    for(HorasGrupo hora:horas){
-                        docente.registraHorasWS(hora.id_periodo, hora.clave_materia, hora.numero_horas, hora.grupo,hora.semestre);
+            docente.consultaInfoAspirante();
+            String datos[]=docente.getInfoRegistro();
+            if(datos[61]==null){
+                docente.consultaDocumentos();
+                docente.consultaHoras();
+                if(docente.getListaHoras().isEmpty()){
+                    docente.consumeWSCatalogoDocentes();
+                    if(docente.getJsonHoras().length()>0){
+                        HorasGrupo[] horas=docente.getArrayHoras();                    
+                        for(HorasGrupo hora:horas){
+                            docente.registraHorasWS(hora.id_periodo, hora.clave_materia, hora.numero_horas, hora.grupo,hora.semestre);
+                        }
+                        docente.consultaHoras();
                     }
-                    docente.consultaHoras();
-                }
-            } 
-            docente.actualizaBanderaIngles();
-            request.setAttribute("Docente", docente);
-            ServletContext sc = getServletContext();
-            RequestDispatcher rd = sc.getRequestDispatcher("/registro.jsp");
-            rd.forward(request,response);
+                } 
+                docente.actualizaBanderaIngles();
+                request.setAttribute("Docente", docente);
+                ServletContext sc = getServletContext();
+                RequestDispatcher rd = sc.getRequestDispatcher("/registro.jsp");
+                rd.forward(request,response);
+            }else{
+                response.sendRedirect("evidenciaRegistroDocentes.html");
+            }
+            
         }else{
             response.sendRedirect("login.jsp");
         }

@@ -6,23 +6,25 @@
 package com.aplicacion.servlet;
 
 import com.aplicacion.beans.Docente;
+import com.aplicacion.beans.HorasGrupo;
 import java.io.IOException;
 import java.io.PrintWriter;
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import metodos_sql.Metodos_sql;
 
 /**
  *
  * @author David Reyna
  */
-@WebServlet(name = "BorrarHoraGrupo", urlPatterns = {"/BorrarHoraGrupo"})
-public class Servlet_borrarHoraGrupo extends HttpServlet {
-
+@WebServlet(name = "SesionDocente", urlPatterns = {"/SesionDocente"})
+public class Servlet_cbSesionDocente extends HttpServlet {
+    Docente docente;
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -35,20 +37,17 @@ public class Servlet_borrarHoraGrupo extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        PrintWriter out = response.getWriter();
-        try {
+        try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet Servlet_borrarHoraGrupo</title>");            
+            out.println("<title>Servlet Servlet_cbSesionDocente</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet Servlet_borrarHoraGrupo at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet Servlet_cbSesionDocente at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
-        } finally {
-            out.close();
         }
     }
 
@@ -64,7 +63,20 @@ public class Servlet_borrarHoraGrupo extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        HttpSession session= (HttpSession) request.getSession();     
+        if(session.getAttribute("idUsuario")!=null&&session.getAttribute("rfc")!=null){
+            docente=new Docente();
+            docente.setIdUsuario(session.getAttribute("idUsuario").toString());
+            docente.setRfc(session.getAttribute("rfc").toString());
+            docente.consultaInfoAspirante();            
+            request.setAttribute("Docente", docente);
+            ServletContext sc = getServletContext();
+            RequestDispatcher rd = sc.getRequestDispatcher("/ppsesion.jsp");
+            rd.forward(request,response);
+        }else{
+            response.sendRedirect("login.jsp");
+        }
+        //processRequest(request, response);
     }
 
     /**
@@ -78,31 +90,7 @@ public class Servlet_borrarHoraGrupo extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        //processRequest(request, response);
-        response.setContentType("text/html;charset=UTF-8");
-        PrintWriter out = response.getWriter();
-        HttpSession session= (HttpSession) request.getSession();     
-        if(session.getAttribute("idUsuario")!=null){
-            String idUsuario=session.getAttribute("idUsuario").toString();
-            String id=request.getParameter("i");
-            Docente d=new Docente();
-            d.setIdUsuario(idUsuario);
-            d.borraHoras(id);
-            d.consultaHoras();
-            
-            /*Metodos_sql metodos=new Metodos_sql();
-            String descripcion="El usuario con id "+idUsuario+" elimino la información de horas con id "+id;
-            String[] parametros={idUsuario,"A",descripcion};
-            metodos.ejecutaSP("sp_insertBitacora", parametros);*/
-            
-            String respuesta="";
-            int horas=d.getTotalHoras();
-            int grupos=d.getNumGrupos();
-            respuesta=d.mostrarHoras();
-            respuesta+="|"+horas+"|"+grupos;
-            out.println(respuesta);
-        }        
-        out.close();
+        processRequest(request, response);
     }
 
     /**

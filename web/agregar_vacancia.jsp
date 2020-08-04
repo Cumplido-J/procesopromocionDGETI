@@ -204,7 +204,7 @@
 
                     <div class="registro">
                         <div class="caja">
-                            <p>Cantidad de Plazas<input id="cantidad" class="form-control" type="text" name="cantidad" size="33" placeholder="Nombre" maxlength="3"></p>
+                            <p>Cantidad de Plazas<input id="cantidad" class="form-control" type="text" name="cantidad" size="33" placeholder="Número plazas" maxlength="3"></p>
                             <div id="n100"></div>
                         </div>
                         <div class="caja">
