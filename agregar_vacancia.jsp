@@ -89,16 +89,6 @@
         </script>
     </head>
     <body>
-         <%
-            session = (HttpSession) request.getSession(true);
-            String idUsuario = "";
-            String rfc = "";
-            if (session.getAttribute("idUsuario") != null && session.getAttribute("rfc") != null) {
-                idUsuario = session.getAttribute("idUsuario").toString();
-                rfc = session.getAttribute("rfc").toString();
-                session.setAttribute("idUsuario", idUsuario);
-                session.setAttribute("rfc", rfc);
-        %>
         <div>
             <!--  para el framework del gobierno-->
             <nav class="navbar navbar-inverse sub-navbar navbar-fixed-top">
@@ -287,10 +277,6 @@
                         <button class="btn btn-primary pull-right" type="submit" name="agregarvacantes">Agregar</button>
 
                     </div>
-                      <%
-                            session.setAttribute("idUsuario", idUsuario);
-                            session.setAttribute("rfc", rfc);
-                        %>
                     <input type="hidden" name="permiso1" id="permiso1" value="<%=request.getAttribute("per1")%>">
                     <input type="hidden" name="permiso3" id="permiso3" value="<%=request.getAttribute("per3")%>">
                     <input type="hidden" name="permiso4" id="permiso4" value="<%=request.getAttribute("per4")%>">
@@ -304,10 +290,6 @@
                 <div class="posision1">   
                     <button class="btn btn-primary pull-right posision2" type="submit" name="regresa2" id="check">Regresar</button></a>
                 </div>
-                  <%
-                            session.setAttribute("idUsuario", idUsuario);
-                            session.setAttribute("rfc", rfc);
-                        %>
                 <input type="hidden" name="permiso1" id="permiso1" value="<%=request.getAttribute("per1")%>">
                 <input type="hidden" name="permiso3" id="permiso3" value="<%=request.getAttribute("per3")%>">
                 <input type="hidden" name="permiso4" id="permiso4" value="<%=request.getAttribute("per4")%>">
@@ -324,10 +306,5 @@
             <script src="https://framework-gb.cdn.gob.mx/gobmx.js"></script>
             <script src="js/notificaciones3.js"></script>
         </div>
-            <%
-            } else {
-                response.sendRedirect("login.jsp");
-            }
-        %>
     </body>
 </html>

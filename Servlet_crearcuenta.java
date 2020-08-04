@@ -1,3 +1,4 @@
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -5,22 +6,30 @@
  */
 package com.aplicacion.servlet;
 
+import correos.Validar_correo;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
+import java.sql.Date;
+import java.util.regex.Matcher;
+import javafx.scene.control.Alert;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+import javax.swing.JOptionPane;
+import metodos_sql.Metodos_sql;
+//import org.apache.commons.codec.digest.DigestUtils;
+import seguridad.Encriptar_Desencriptar;
 
 /**
  *
  * @author charl
  */
-@WebServlet(name = "Servlet_convocatoria", urlPatterns = {"/Servlet_convocatoria"})
-public class Servlet_convocatoria extends HttpServlet {
+@WebServlet(name = "Servlet_crearcuenta", urlPatterns = {"/Servlet_crearcuenta"})
+public class Servlet_crearcuenta extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -33,13 +42,13 @@ public class Servlet_convocatoria extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
+        response.setContentType("text/html;charset=ISO-8859-1");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet Servlet_convocatoria</title>");
+            out.println("<title>Servlet Servlet_crearcuenta</title>");
             out.println("</head>");
             out.println("<body>");
             RequestDispatcher rd = request.getRequestDispatcher("login.jsp");
@@ -72,66 +81,67 @@ public class Servlet_convocatoria extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
+    //----------------------------------------------------------CREAR CUENTA
+    Metodos_sql metodos = new Metodos_sql();
+    Validar_correo validar = new Validar_correo();
+
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
+
+        response.setContentType("text/html;charset=ISO-8859-1");
         try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
+
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
+            //out.println("<title>Servlet Servlet_crearcuenta</title>");
             out.println("</head>");
             out.println("<body>");
-            HttpSession session = (HttpSession) request.getSession(true);
-            String idUsuario = "";
-            String rfc = "";
-            if (session.getAttribute("idUsuario") != null && session.getAttribute("rfc") != null) {
-                idUsuario = session.getAttribute("idUsuario").toString();
-                rfc = session.getAttribute("rfc").toString();
+            String telfijo = request.getParameter("telfijo");
+            String telcel = request.getParameter("telcel");
+            String perfil = "D";
 
-                String per1 = request.getParameter("permiso1");
-                String per3 = request.getParameter("permiso3");
-                String per4 = request.getParameter("permiso4");
-                String nom1 = request.getParameter("nombre");
-                String ent1 = request.getParameter("dato_ent");
-                String pla1 = request.getParameter("dato_pla");
-                String rfc1 = request.getParameter("dato_rfc");
-                String btnregresa = request.getParameter("convocatoria");
-                if (btnregresa != null) {
-                    request.setAttribute("opc", "1");
-                    request.setAttribute("nom", nom1);
-                    request.setAttribute("dato_ent", ent1);
-                    request.setAttribute("dato_pla", pla1);
-                    request.setAttribute("dato_rfc", rfc1);
-                    request.setAttribute("per1", per1);
-                    request.setAttribute("per3", per3);
-                    request.setAttribute("per4", per4);
-                    request.setAttribute("consulta", "1");
-                    session.setAttribute("idUsuario", idUsuario);
-                    session.setAttribute("rfc", rfc);
-                    RequestDispatcher rd = request.getRequestDispatcher("convocatoria.jsp");
-                    rd.forward(request, response);
-                }
-                } else {
+            String consideraciones = request.getParameter("texto");
+            String programa = request.getParameter("programa");
+            String entidad = request.getParameter("campoentidad7");
+            String id_entidad = request.getParameter("entidad");
+            String plantel = request.getParameter("n_plantel");
+            String nombre = request.getParameter("Nombre");
+            String primerApellido = request.getParameter("primerApellido");
+            String segundoApellido = request.getParameter("segundoApellido");
+            String correo = request.getParameter("correo");
+            String clave = request.getParameter("clave");
+            String rfc = request.getParameter("rfc");
+            String claveEncriptada = "";
+            claveEncriptada = Encriptar_Desencriptar.encriptar(clave);
+            String btnlogin = request.getParameter("crearcuenta");
+            if (btnlogin != null) {
+                int datos1 = metodos.guardar2(0, programa, id_entidad, plantel, nombre, primerApellido, segundoApellido, correo, claveEncriptada, rfc, telfijo, telcel, perfil, consideraciones);
+                //int datos2 = metodos.guardar3(0, telfijo, telcel, consideraciones);
+                //if (datos2 > 0 && datos1 > 0) {
+                if (datos1 > 0) {
                     response.sendRedirect("login.jsp");
+                } else {
+                    out.print("DATOS NO GUARDADOS");
                 }
-                //out.println("<h1>Servlet Servlet at " + request.getContextPath() + "</h1>");
-                out.println("</body>");
-                out.println("</html>");
-            }
+
+            }//fin presionar boton
+
+            out.println("</body>");
+            out.println("</html>");
         }
 
-        /**
-         * Returns a short description of the servlet.
-         *
-         * @return a String containing servlet description
-         */
-        @Override
-        public String getServletInfo
-        
-            () {
-        return "Short description";
-        }// </editor-fold>
-
     }
+
+    /**
+     * Returns a short description of the servlet.
+     *
+     * @return a String containing servlet description
+     */
+    @Override
+    public String getServletInfo() {
+        return "Short description";
+    }// </editor-fold>
+
+}

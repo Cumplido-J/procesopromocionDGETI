@@ -88,16 +88,6 @@
         <!--Termina  para el framework del gobierno-->
     </head>
     <body>
-          <%
-            session = (HttpSession) request.getSession(true);
-            String idUsuario = "";
-            String rfc = "";
-            if (session.getAttribute("idUsuario") != null && session.getAttribute("rfc") != null) {
-                idUsuario = session.getAttribute("idUsuario").toString();
-                rfc = session.getAttribute("rfc").toString();
-                session.setAttribute("idUsuario", idUsuario);
-                session.setAttribute("rfc", rfc);
-        %>
         <div>
             <!--  para el framework del gobierno-->
             <nav class="navbar navbar-inverse sub-navbar navbar-fixed-top">
@@ -127,10 +117,6 @@
                                             <li>
                                                 <form id="data3"  role="form" method="POST" action="Servlet_regresar">
                                                     <button class="propiedadesboton" type="submit" name="regresa" id="activado_usuario" onmouseover="habilitar();">Usuario</button>
-                                                     <%
-                            session.setAttribute("idUsuario", idUsuario);
-                            session.setAttribute("rfc", rfc);
-                        %>
                                                     <input type="hidden" name="permiso1" id="permiso1" value="<%=request.getAttribute("per1")%>">
                                                     <input type="hidden" name="permiso3" id="permiso3" value="<%=request.getAttribute("per3")%>">
                                                     <input type="hidden" name="permiso4" id="permiso4" value="<%=request.getAttribute("per4")%>">
@@ -143,10 +129,6 @@
                                             <li>
                                                 <form id="data4"  role="form" method="POST" action="Servlet_convocatoria">
                                                     <button class="propiedadesboton" type="submit" name="convocatoria" id="activado_convocatoria" onmouseover="habilitar();">Convocatoria</button>
-                                                     <%
-                            session.setAttribute("idUsuario", idUsuario);
-                            session.setAttribute("rfc", rfc);
-                        %>
                                                     <input type="hidden" name="permiso1" id="permiso1" value="<%=request.getAttribute("per1")%>">
                                                     <input type="hidden" name="permiso3" id="permiso3" value="<%=request.getAttribute("per3")%>">
                                                     <input type="hidden" name="permiso4" id="permiso4" value="<%=request.getAttribute("per4")%>">
@@ -159,10 +141,6 @@
                                             <li>
                                                 <form id="data3"  role="form" method="POST" action="Servlet_ir_a_vacantes">
                                                     <button class="propiedadesboton" type="submit" name="ir" id="activado_vacancia" onmouseover="habilitar();">Vacancia</button>
-                                                     <%
-                            session.setAttribute("idUsuario", idUsuario);
-                            session.setAttribute("rfc", rfc);
-                        %>
                                                     <input type="hidden" name="permiso1" id="permiso1" value="<%=request.getAttribute("per1")%>">
                                                     <input type="hidden" name="permiso3" id="permiso3" value="<%=request.getAttribute("per3")%>">
                                                     <input type="hidden" name="permiso4" id="permiso4" value="<%=request.getAttribute("per4")%>">
@@ -406,10 +384,6 @@
                                 }
                             %>
                         </table><br><br>
-                         <%
-                            session.setAttribute("idUsuario", idUsuario);
-                            session.setAttribute("rfc", rfc);
-                        %>
                         <input type="hidden" name="permiso1" id="permiso1" value="<%=request.getAttribute("per1")%>">
                         <input type="hidden" name="permiso3" id="permiso3" value="<%=request.getAttribute("per3")%>">
                         <input type="hidden" name="permiso4" id="permiso4" value="<%=request.getAttribute("per4")%>">
@@ -424,10 +398,6 @@
                 </asideart>
             </section> 
             <form id="data2" class="form-horizontal" role="form" method="POST" action="Servlet_P_Vacancia">
-                 <%
-                            session.setAttribute("idUsuario", idUsuario);
-                            session.setAttribute("rfc", rfc);
-                        %>
                 <input type="hidden" name="permiso1" id="permiso1" value="<%=request.getAttribute("per1")%>">
                 <input type="hidden" name="permiso3" id="permiso3" value="<%=request.getAttribute("per3")%>">
                 <input type="hidden" name="permiso4" id="permiso4" value="<%=request.getAttribute("per4")%>">
@@ -444,10 +414,5 @@
             <!-- JS  para el framework del gobierno-->
             <script src="https://framework-gb.cdn.gob.mx/gobmx.js"></script>
         </div>
-                <%
-            } else {
-                response.sendRedirect("login.jsp");
-            }
-        %>
     </body>
 </html>

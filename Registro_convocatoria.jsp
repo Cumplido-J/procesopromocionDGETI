@@ -66,16 +66,7 @@
         </script> 
     </head>
     <body>
-        <%
-            session = (HttpSession) request.getSession(true);
-            String idUsuario = "";
-            String rfc = "";
-            if (session.getAttribute("idUsuario") != null && session.getAttribute("rfc") != null) {
-                idUsuario = session.getAttribute("idUsuario").toString();
-                rfc = session.getAttribute("rfc").toString();
-                session.setAttribute("idUsuario", idUsuario);
-                session.setAttribute("rfc", rfc);
-        %>
+
 
         <div>
             <!--  para el framework del gobierno-->
@@ -102,10 +93,6 @@
                                             <li>
                                                 <form id="data3"  role="form" method="POST" action="Servlet_regresar">
                                                     <button class="propiedadesboton" type="submit" name="regresa" id="activado_usuario" onmouseover="habilitar();">Usuario</button>
-                                                    <%
-                                                        session.setAttribute("idUsuario", idUsuario);
-                                                        session.setAttribute("rfc", rfc);
-                                                    %>
                                                     <input type="hidden" name="permiso1" id="permiso1" value="<%=request.getAttribute("per1")%>">
                                                     <input type="hidden" name="permiso3" id="permiso3" value="<%=request.getAttribute("per3")%>">
                                                     <input type="hidden" name="permiso4" id="permiso4" value="<%=request.getAttribute("per4")%>">
@@ -118,10 +105,6 @@
                                             <li>
                                                 <form id="data4"  role="form" method="POST" action="Servlet_convocatoria">
                                                     <button class="propiedadesboton" type="submit" name="convocatoria" id="activado_convocatoria" onmouseover="habilitar();">Convocatoria</button>
-                                                    <%
-                                                        session.setAttribute("idUsuario", idUsuario);
-                                                        session.setAttribute("rfc", rfc);
-                                                    %>
                                                     <input type="hidden" name="permiso1" id="permiso1" value="<%=request.getAttribute("per1")%>">
                                                     <input type="hidden" name="permiso3" id="permiso3" value="<%=request.getAttribute("per3")%>">
                                                     <input type="hidden" name="permiso4" id="permiso4" value="<%=request.getAttribute("per4")%>">
@@ -134,10 +117,6 @@
                                             <li>
                                                 <form id="data3"  role="form" method="POST" action="Servlet_ir_a_vacantes">
                                                     <button class="propiedadesboton" type="submit" name="ir" id="activado_vacancia" onmouseover="habilitar();">Vacancia</button>
-                                                    <%
-                                                        session.setAttribute("idUsuario", idUsuario);
-                                                        session.setAttribute("rfc", rfc);
-                                                    %>
                                                     <input type="hidden" name="permiso1" id="permiso1" value="<%=request.getAttribute("per1")%>">
                                                     <input type="hidden" name="permiso3" id="permiso3" value="<%=request.getAttribute("per3")%>">
                                                     <input type="hidden" name="permiso4" id="permiso4" value="<%=request.getAttribute("per4")%>">
@@ -256,8 +235,7 @@
 
                         <div class="registro">    
                             <div class="caja">
-                                <p>Titulo de la Convocatoria<br>
-                                    <textarea id="textarea" name="textarea" rows="3" cols="100%"></textarea></p>
+                                <p>Titulo de la Convocatoria<textarea id="textarea" name="textarea" rows="3" cols="100%"></textarea></p>
                                 <div id="c1"></div>
                             </div>
 
@@ -318,10 +296,6 @@
 
                         <div class="registro">  
                             <div class="caja">
-                                <%
-                                    session.setAttribute("idUsuario", idUsuario);
-                                    session.setAttribute("rfc", rfc);
-                                %>
                                 <input type="hidden" name="permiso1" id="permiso1" value="<%=request.getAttribute("per1")%>">
                                 <input type="hidden" name="permiso3" id="permiso3" value="<%=request.getAttribute("per3")%>">
                                 <input type="hidden" name="permiso4" id="permiso4" value="<%=request.getAttribute("per4")%>">
@@ -342,10 +316,6 @@
                 </asideart>
 
                 <form id="data2" class="form-horizontal" role="form" method="POST" action="Servlet_regresar3">
-                    <%
-                        session.setAttribute("idUsuario", idUsuario);
-                        session.setAttribute("rfc", rfc);
-                    %>
                     <input type="hidden" name="permiso1" id="permiso1" value="<%=request.getAttribute("per1")%>">
                     <input type="hidden" name="permiso3" id="permiso3" value="<%=request.getAttribute("per3")%>">
                     <input type="hidden" name="permiso4" id="permiso4" value="<%=request.getAttribute("per4")%>">
@@ -368,11 +338,7 @@
             <script src='https://code.jquery.com/jquery-1.12.4.min.js'></script>
             <script src="js/notificaciones4.js"></script>
         </div>
-        <%
-            } else {
-                response.sendRedirect("login.jsp");
-            }
-        %>
+
 
     </body>  
 </html>

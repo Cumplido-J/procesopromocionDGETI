@@ -13,14 +13,15 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+import metodos_sql.Metodos_sql;
+import seguridad.Encriptar_Desencriptar;
 
 /**
  *
  * @author charl
  */
-@WebServlet(name = "Servlet_ir_a_vacantes", urlPatterns = {"/Servlet_ir_a_vacantes"})
-public class Servlet_ir_a_vacantes extends HttpServlet {
+@WebServlet(name = "Servlet_agregar_usuario", urlPatterns = {"/Servlet_agregar_usuario"})
+public class Servlet_agregar_usuario extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -39,7 +40,7 @@ public class Servlet_ir_a_vacantes extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet Servlet_ir_a_vacantes</title>");
+            out.println("<title>Servlet Servlet_agregar_usuario</title>");
             out.println("</head>");
             out.println("<body>");
             RequestDispatcher rd = request.getRequestDispatcher("login.jsp");
@@ -72,54 +73,84 @@ public class Servlet_ir_a_vacantes extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
+    Metodos_sql metodos = new Metodos_sql();
+
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
+        response.setContentType("text/html;charset=ISO-8859-1");
         try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
+
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
+            //out.println("<title>Servlet Servlet_crearcuenta</title>");
             out.println("</head>");
             out.println("<body>");
-            HttpSession session = (HttpSession) request.getSession(true);
-            String idUsuario = "";
-            String rfc = "";
-            if (session.getAttribute("idUsuario") != null && session.getAttribute("rfc") != null) {
-                idUsuario = session.getAttribute("idUsuario").toString();
-                rfc = session.getAttribute("rfc").toString();
 
-                String per1 = request.getParameter("permiso1");
-                String per3 = request.getParameter("permiso3");
-                String per4 = request.getParameter("permiso4");
-                String nom1 = request.getParameter("nombre");
-                String ent1 = request.getParameter("dato_ent");
-                String pla1 = request.getParameter("dato_pla");
-                String rfc1 = request.getParameter("dato_rfc");
-                String btnir = request.getParameter("ir");
-                if (btnir != null) {
+            String nom1 = request.getParameter("nombre");
+            String ent1 = request.getParameter("dato_ent");
+            String pla1 = request.getParameter("dato_pla");
+            String rfc1 = request.getParameter("dato_rfc");
+            String estado = request.getParameter("campoentidad");
+            String id_estado = request.getParameter("entidad");
+            String plantel = request.getParameter("n_plantel");
+            String usuario = request.getParameter("usuario");
+            String nombre = request.getParameter("Nombre");
+            String apellidopaterno = request.getParameter("primerApellido");
+            String apellidomaterno = request.getParameter("segundoApellido");
+            String telfijo = request.getParameter("telfijo");
+            String telcel = request.getParameter("telcel");
+            String correo = request.getParameter("correo");
+            String clave = request.getParameter("clave");
+            String perfil = "A";
+            String claveEncriptada = "";
+            String[] check = request.getParameterValues("ckl");
+            claveEncriptada = Encriptar_Desencriptar.encriptar(clave);
+            
+            int lon = check.length;
+            String permisos="";
+            if(lon==1){permisos = check[0];}
+            if(lon==2){permisos = check[0]+check[1];}
+            if(lon==3){permisos = check[0]+check[1]+check[2];}
+            if(lon==4){permisos = check[0]+check[1]+check[2]+check[3];}
+            if(lon==5){permisos = check[0]+check[1]+check[2]+check[3]+check[4];}
+            if(lon==6){permisos = check[0]+check[1]+check[2]+check[3]+check[4]+check[5];}
+            if(lon==7){permisos = check[0]+check[1]+check[2]+check[3]+check[4]+check[5]+check[6];}
+            if(lon==8){permisos = check[0]+check[1]+check[2]+check[3]+check[4]+check[5]+check[6]+check[7];}
+            if(lon==9){permisos = check[0]+check[1]+check[2]+check[3]+check[4]+check[5]+check[6]+check[7]+check[8];}
+           
+            
+            String btnlogin = request.getParameter("agregarusuario");
+
+            if (btnlogin != null) {
+
+                int datos5 = 0;
+
+                int datos4 = metodos.guardar4(0, id_estado, plantel, usuario, nombre, apellidopaterno, apellidomaterno, telfijo, telcel, correo, claveEncriptada, perfil,permisos);
+
+                int id = metodos.buscarid();
+
+                for (int n = 0; n < check.length; n++) {
+                    if (check[n] != ("0")) {
+                        datos5 = metodos.guardar6(0, id, Integer.parseInt(check[n]));
+                    }
+                }
+                if (datos4 > 0 && datos5 > 0) {
                     request.setAttribute("opc", "1");
-                    request.setAttribute("consulta", "1");
                     request.setAttribute("nom", nom1);
+                    request.setAttribute("consulta", "1");
                     request.setAttribute("dato_ent", ent1);
                     request.setAttribute("dato_pla", pla1);
                     request.setAttribute("dato_rfc", rfc1);
-                    request.setAttribute("per1", per1);
-                    request.setAttribute("per3", per3);
-                    request.setAttribute("per4", per4);
-                    request.setAttribute("ver", "1");
-                    session.setAttribute("idUsuario", idUsuario);
-                    session.setAttribute("rfc", rfc);
-                    session.setAttribute("idUsuario", idUsuario);
-                    session.setAttribute("rfc", rfc);
-                    RequestDispatcher rd = request.getRequestDispatcher("vacantes.jsp");
+                    RequestDispatcher rd = request.getRequestDispatcher("administracion_usuarios.jsp");
                     rd.forward(request, response);
+                } else {
+                    out.print("Servidor en mantenimiento, Datos no Guardados");
                 }
-            } else {
-                response.sendRedirect("login.jsp");
-            }
-            //out.println("<h1>Servlet Servlet at " + request.getContextPath() + "</h1>");
+
+            }//fin presionar boton
+
             out.println("</body>");
             out.println("</html>");
         }

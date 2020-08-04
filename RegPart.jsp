@@ -198,8 +198,7 @@
                         </div>
                       
                           
-                                <input  class="btn btn-primary pull-right" type="submit" value="Enviar" name="crearcuenta" id="ventana1" >
-                              
+                                <input  class="btn btn-primary pull-right" type="submit" value="Enviar" name="crearcuenta">
                                 <input  class="btn btn-primary pull-right" type="reset" value="Borrar">
                           
                         
@@ -214,7 +213,7 @@
             <!-- JS  para el framework del gobierno-->
             <script src="https://framework-gb.cdn.gob.mx/gobmx.js"></script>
             <script src="js/notificaciones2.js"></script>
-            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+      
         </div>
 
        

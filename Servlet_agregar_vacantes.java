@@ -13,14 +13,14 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+import metodos_sql.Metodos_sql;
 
 /**
  *
  * @author charl
  */
-@WebServlet(name = "Servlet_convocatoria", urlPatterns = {"/Servlet_convocatoria"})
-public class Servlet_convocatoria extends HttpServlet {
+@WebServlet(name = "Servlet_agregar_vacantes", urlPatterns = {"/Servlet_agregar_vacantes"})
+public class Servlet_agregar_vacantes extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -39,7 +39,7 @@ public class Servlet_convocatoria extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet Servlet_convocatoria</title>");
+            out.println("<title>Servlet Servlet_agregar_vacantes</title>");
             out.println("</head>");
             out.println("<body>");
             RequestDispatcher rd = request.getRequestDispatcher("login.jsp");
@@ -72,34 +72,49 @@ public class Servlet_convocatoria extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
+    Metodos_sql metodos = new Metodos_sql();
+
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
+
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
+            //out.println("<title>Servlet Servlet_crearcuenta</title>");
             out.println("</head>");
             out.println("<body>");
-            HttpSession session = (HttpSession) request.getSession(true);
-            String idUsuario = "";
-            String rfc = "";
-            if (session.getAttribute("idUsuario") != null && session.getAttribute("rfc") != null) {
-                idUsuario = session.getAttribute("idUsuario").toString();
-                rfc = session.getAttribute("rfc").toString();
+            String per1 = request.getParameter("permiso1");
+            String per3 = request.getParameter("permiso3");
+            String per4 = request.getParameter("permiso4");
+            String nom1 = request.getParameter("nombre");
+            String ent1 = request.getParameter("dato_ent");
+            String pla1 = request.getParameter("dato_pla");
+            String rfc1 = request.getParameter("dato_rfc");
+            String estado = request.getParameter("campoentidad");
+            String estadon = request.getParameter("entidad");
+            String plantel = request.getParameter("n_plantel");
+            String plaza = request.getParameter("entidad2");
+            String cantidad1 = request.getParameter("cantidad");
+            String tipo = request.getParameter("campotipo");
+            String tipon = request.getParameter("n_plantel2");
+            String jornada = request.getParameter("campojornada");
+            String jornadan = request.getParameter("n_plantel3");
+            String grado_academico = request.getParameter("campogrado1");
+            String vacancia = request.getParameter("tipovacancia");
 
-                String per1 = request.getParameter("permiso1");
-                String per3 = request.getParameter("permiso3");
-                String per4 = request.getParameter("permiso4");
-                String nom1 = request.getParameter("nombre");
-                String ent1 = request.getParameter("dato_ent");
-                String pla1 = request.getParameter("dato_pla");
-                String rfc1 = request.getParameter("dato_rfc");
-                String btnregresa = request.getParameter("convocatoria");
-                if (btnregresa != null) {
+            String btnvacantes = request.getParameter("agregarvacantes");
+            //out.println(estado);
+
+            if (btnvacantes != null) {
+
+                int datos5 = metodos.guardar5(0, estadon, plantel, plaza, cantidad1, tipon, jornadan, grado_academico, vacancia);
+
+                if (datos5 > 0) {
                     request.setAttribute("opc", "1");
+                    request.setAttribute("consulta", "1");
                     request.setAttribute("nom", nom1);
                     request.setAttribute("dato_ent", ent1);
                     request.setAttribute("dato_pla", pla1);
@@ -107,31 +122,27 @@ public class Servlet_convocatoria extends HttpServlet {
                     request.setAttribute("per1", per1);
                     request.setAttribute("per3", per3);
                     request.setAttribute("per4", per4);
-                    request.setAttribute("consulta", "1");
-                    session.setAttribute("idUsuario", idUsuario);
-                    session.setAttribute("rfc", rfc);
-                    RequestDispatcher rd = request.getRequestDispatcher("convocatoria.jsp");
+                    RequestDispatcher rd = request.getRequestDispatcher("vacantes.jsp");
                     rd.forward(request, response);
-                }
                 } else {
-                    response.sendRedirect("login.jsp");
+                    out.print("Servidor en mantenimiento, Datos no Guardados");
                 }
-                //out.println("<h1>Servlet Servlet at " + request.getContextPath() + "</h1>");
-                out.println("</body>");
-                out.println("</html>");
-            }
+
+            }//fin presionar boton
+
+            out.println("</body>");
+            out.println("</html>");
         }
-
-        /**
-         * Returns a short description of the servlet.
-         *
-         * @return a String containing servlet description
-         */
-        @Override
-        public String getServletInfo
-        
-            () {
-        return "Short description";
-        }// </editor-fold>
-
     }
+
+    /**
+     * Returns a short description of the servlet.
+     *
+     * @return a String containing servlet description
+     */
+    @Override
+    public String getServletInfo() {
+        return "Short description";
+    }// </editor-fold>
+
+}

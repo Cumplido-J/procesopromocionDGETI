@@ -13,14 +13,13 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author charl
  */
-@WebServlet(name = "Servlet_convocatoria", urlPatterns = {"/Servlet_convocatoria"})
-public class Servlet_convocatoria extends HttpServlet {
+@WebServlet(name = "Servlet_P_Agregar", urlPatterns = {"/Servlet_P_Agregar"})
+public class Servlet_P_Agregar extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -39,7 +38,7 @@ public class Servlet_convocatoria extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet Servlet_convocatoria</title>");
+            out.println("<title>Servlet Servlet_P_Agregar</title>");
             out.println("</head>");
             out.println("<body>");
             RequestDispatcher rd = request.getRequestDispatcher("login.jsp");
@@ -83,55 +82,34 @@ public class Servlet_convocatoria extends HttpServlet {
             out.println("<head>");
             out.println("</head>");
             out.println("<body>");
-            HttpSession session = (HttpSession) request.getSession(true);
-            String idUsuario = "";
-            String rfc = "";
-            if (session.getAttribute("idUsuario") != null && session.getAttribute("rfc") != null) {
-                idUsuario = session.getAttribute("idUsuario").toString();
-                rfc = session.getAttribute("rfc").toString();
-
-                String per1 = request.getParameter("permiso1");
-                String per3 = request.getParameter("permiso3");
-                String per4 = request.getParameter("permiso4");
-                String nom1 = request.getParameter("nombre");
-                String ent1 = request.getParameter("dato_ent");
-                String pla1 = request.getParameter("dato_pla");
-                String rfc1 = request.getParameter("dato_rfc");
-                String btnregresa = request.getParameter("convocatoria");
-                if (btnregresa != null) {
-                    request.setAttribute("opc", "1");
-                    request.setAttribute("nom", nom1);
-                    request.setAttribute("dato_ent", ent1);
-                    request.setAttribute("dato_pla", pla1);
-                    request.setAttribute("dato_rfc", rfc1);
-                    request.setAttribute("per1", per1);
-                    request.setAttribute("per3", per3);
-                    request.setAttribute("per4", per4);
-                    request.setAttribute("consulta", "1");
-                    session.setAttribute("idUsuario", idUsuario);
-                    session.setAttribute("rfc", rfc);
-                    RequestDispatcher rd = request.getRequestDispatcher("convocatoria.jsp");
-                    rd.forward(request, response);
-                }
-                } else {
-                    response.sendRedirect("login.jsp");
-                }
-                //out.println("<h1>Servlet Servlet at " + request.getContextPath() + "</h1>");
-                out.println("</body>");
-                out.println("</html>");
+            String nom1 = request.getParameter("nombre");
+            String ent1 = request.getParameter("dato_ent");
+            String pla1 = request.getParameter("dato_pla");
+            String rfc1 = request.getParameter("dato_rfc");
+            String btnregresa = request.getParameter("pAgregar");
+            if (btnregresa != null) {
+                request.setAttribute("ver", "1");
+                request.setAttribute("nom", nom1);
+                request.setAttribute("dato_ent", ent1);
+                request.setAttribute("dato_pla", pla1);
+                request.setAttribute("dato_rfc", rfc1);
+                RequestDispatcher rd = request.getRequestDispatcher("agregar_usuarios.jsp");
+                rd.forward(request, response);
             }
+            //out.println("<h1>Servlet Servlet at " + request.getContextPath() + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
         }
-
-        /**
-         * Returns a short description of the servlet.
-         *
-         * @return a String containing servlet description
-         */
-        @Override
-        public String getServletInfo
-        
-            () {
-        return "Short description";
-        }// </editor-fold>
-
     }
+
+    /**
+     * Returns a short description of the servlet.
+     *
+     * @return a String containing servlet description
+     */
+    @Override
+    public String getServletInfo() {
+        return "Short description";
+    }// </editor-fold>
+
+}

@@ -13,15 +13,15 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import metodos_sql.Metodos_sql;
+import seguridad.Encriptar_Desencriptar;
 
 /**
  *
  * @author charl
  */
-@WebServlet(name = "Servlet_buscar_vacancia", urlPatterns = {"/Servlet_buscar_vacancia"})
-public class Servlet_buscar_vacancia extends HttpServlet {
+@WebServlet(name = "Servlet_iniciosesion_administrador", urlPatterns = {"/Servlet_iniciosesion_administrador"})
+public class Servlet_iniciosesion_administrador extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -40,7 +40,7 @@ public class Servlet_buscar_vacancia extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet Servlet_buscar_vacancia</title>");
+            out.println("<title>Servlet Servlet_iniciosesion_administrador</title>");
             out.println("</head>");
             out.println("<body>");
             RequestDispatcher rd = request.getRequestDispatcher("login.jsp");
@@ -74,7 +74,7 @@ public class Servlet_buscar_vacancia extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     Metodos_sql metodos = new Metodos_sql();
-
+    
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -88,78 +88,95 @@ public class Servlet_buscar_vacancia extends HttpServlet {
             //out.println("<title>Servlet Servlet</title>");
             out.println("</head>");
             out.println("<body>");
-            HttpSession session = (HttpSession) request.getSession(true);
-            String idUsuario = "";
-            String rfc = "";
-            if (session.getAttribute("idUsuario") != null && session.getAttribute("rfc") != null) {
-                idUsuario = session.getAttribute("idUsuario").toString();
-                rfc = session.getAttribute("rfc").toString();
-
-                String per1 = request.getParameter("permiso1");
-                String per3 = request.getParameter("permiso3");
-                String per4 = request.getParameter("permiso4");
-                String nom1 = request.getParameter("nombre");
-                String ent1 = request.getParameter("dato_ent");
-                String pla1 = request.getParameter("dato_pla");
-                String rfc1 = request.getParameter("dato_rfc");
-                String entidadt = request.getParameter("campoentidad70");
-                String entidad = request.getParameter("entidad");
-                String n_plantel = request.getParameter("n_plantel");
-                String categoria = request.getParameter("categoria");
-
-                String btnvacancia = request.getParameter("buscarvacancia");
-                if (btnvacancia != null) {
-
-                    if (entidad.equals("0") && n_plantel.equals("0") && categoria.equals("0")) {
-                        request.setAttribute("consulta", "1");
-                        //out.print("caso 1"); nada
-                    } else if (entidad != ("0") && n_plantel != ("0") && categoria.equals("0")) {
-                        if (n_plantel.equals("0")) {
-                            request.setAttribute("consulta", "2");
-                            //out.print("caso 2");//entidad
-                        } else {
-                            request.setAttribute("consulta", "3");
-                            //out.print("caso 3"); //entidad y plantel  
+            String rfc = request.getParameter("rfc");
+            String clave = request.getParameter("clave");
+            String claveEncriptada = "";
+            claveEncriptada = Encriptar_Desencriptar.encriptar(clave);
+            String btnlogin = request.getParameter("iniciarsesionadmin");
+            int boton1 = 0, boton2 = 0, boton3 = 0, boton4 = 0, boton5 = 0, boton6 = 0, boton7 = 0, boton8 = 0, boton9 = 0;
+            int numero=0;
+//            String colorred = "color:#FF3000";
+            String per1 = "true";
+            String per2 = "true";
+            String per3 = "true";
+            String per4 = "true";
+            String per5 = "true";
+            
+            if (btnlogin != null) {
+                String busquedaadmin = metodos.buscaradmin(rfc, claveEncriptada);
+                if (rfc.equals("root") && clave.equals("root")) {
+                    out.println("ADMINISTTRADOR");
+                }//fin if root
+                else if (busquedaadmin.equals("USUARIO ENCONTRADO")) {
+                    String busqueda_nombre[] = metodos.buscaradmin2(rfc);
+                    
+                    String id_usuario = busqueda_nombre[4].toString();
+                    String permisos[] = metodos.buscarpermisos(Integer.parseInt(id_usuario));
+                    
+                    for(int i=0;i<permisos.length;i++){
+                        if(permisos[i]!=null){
+                        numero++;
                         }
-
-                    } else if (entidad.equals("0") && n_plantel.equals("0") && categoria != "0") {
-                        request.setAttribute("consulta", "4");
-                        //out.print("caso 4");   usuario
-                    } else if (entidad != "0" && n_plantel != ("0") && categoria != "0") {
-                        if (n_plantel.equals("0")) {
-                            request.setAttribute("consulta", "5");
-                            //out.print("caso 5");//entidad y usuario
-                        } else {
-                            request.setAttribute("consulta", "6");
-                            //out.print("caso 6"); //todos
+                    }
+                    
+                    for (int n = 0; n < numero; n++) {
+                        if (permisos[n].equals("1")) {
+                            boton1 = 1;
+                            per1 = "false";
                         }
-
-                        //request.setAttribute("consulta", "4");
+                        if (permisos[n].equals("2")) {
+                            boton2 = 1;
+                            per2 = "false";
+                        }
+                        if (permisos[n].equals("3")) {
+                            boton3 = 1;
+                            per3 = "false";
+                        }
+                        if (permisos[n].equals("4")) {
+                            boton4 = 1;
+                            per4 = "false";
+                        }
+                        if (permisos[n].equals("5")) {
+                            boton5 = 1;
+                            per5 = "false";
+                        }
+                       
                     }
 
-                    request.setAttribute("est", entidad);
-                    request.setAttribute("pla", n_plantel);
-                    request.setAttribute("cat", categoria);
+//                 out.println(String.valueOf(boton1)+
+//                         String.valueOf(boton2)+
+//                         String.valueOf(boton3)+
+//                         String.valueOf(boton4)+
+//                         String.valueOf(boton5)+
+//                         String.valueOf(boton6)+
+//                         String.valueOf(boton7)+
+//                         String.valueOf(boton8)+
+//                         String.valueOf(boton9));
+//                 out.println(String.valueOf(per1)+
+//                         String.valueOf(per2)+
+//                         String.valueOf(per3)+
+//                         String.valueOf(per4)+
+//                         String.valueOf(per5));
                     request.setAttribute("opc", "1");
-                    request.setAttribute("nom", nom1);
-                    request.setAttribute("dato_ent", ent1);
-                    request.setAttribute("dato_pla", pla1);
-                    request.setAttribute("dato_rfc", rfc1);
+                    request.setAttribute("consulta", "1");
+                    request.setAttribute("dato_ent", busqueda_nombre[0]);
+                    request.setAttribute("dato_pla", busqueda_nombre[1]);
+                    request.setAttribute("nom", busqueda_nombre[2]);
+                    request.setAttribute("dato_rfc", busqueda_nombre[3]);
+                    
                     request.setAttribute("per1", per1);
                     request.setAttribute("per3", per3);
                     request.setAttribute("per4", per4);
-                    session.setAttribute("idUsuario", idUsuario);
-                    session.setAttribute("rfc", rfc);
-                    RequestDispatcher rd = request.getRequestDispatcher("vacantes.jsp");
+
+                    RequestDispatcher rd = request.getRequestDispatcher("administracion_usuarios.jsp");
                     rd.forward(request, response);
                 } else {
-                    request.setAttribute("error", "Vacante No Registrado");
-                    RequestDispatcher rd = request.getRequestDispatcher("vacantes.jsp");
+                    request.setAttribute("error", "Administrador No Registrado");
+                    RequestDispatcher rd = request.getRequestDispatcher("administradores.jsp");
                     rd.forward(request, response);
                     //out.println("USUARIO NO REGISTRADOs");
                 }
-            } else {
-                response.sendRedirect("login.jsp");
+                
             }
             //out.println("<h1>Servlet Servlet at " + request.getContextPath() + "</h1>");
             out.println("</body>");

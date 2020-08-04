@@ -1,6 +1,6 @@
 <%-- 
-    Document   : login
-    Created on : 01-jun-2020, 13:40:53
+    Document   : administradores
+    Created on : 05-jun-2020, 16:05:04
     Author     : charl
 --%>
 
@@ -19,14 +19,6 @@
         <!-- CSS -->
         <link href="/favicon.ico" rel="shortcut icon">
         <link href="https://framework-gb.cdn.gob.mx/assets/styles/main.css" rel="stylesheet">
-
-        <!-- Respond.js soporte de media queries para Internet Explorer 8 -->
-        <!-- ie8.js EventTarget para cada nodo en Internet Explorer 8 -->
-        <!--[if lt IE 9]>
-          <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-          <script src="https://cdnjs.cloudflare.com/ajax/libs/ie8/0.2.2/ie8.js"></script>
-        <![endif]-->
-        <!--Termina  para el framework del gobierno-->
     </head>
     <body>
         <div>
@@ -64,12 +56,12 @@
                 </div>
             </header>
             <div class="ruta">
-                <p> UEMSTIS > Promoción Docente > Iniciar sesión</p>
+                <p> UEMSTIS > Promoción Docente > Agregar Administrador</p>
             </div>
             <section class="sectionart">
                 <div class="articulosart">
-                    <h3>Iniciar sesión</h3>	
-                    <form class="form-horizontal" role="form" method="POST" action="Servlet_iniciosesion">
+                    <h3>Iniciar sesión Administrador</h3>	
+                    <form class="form-horizontal" role="form" method="POST" action="Servlet_iniciosesion_administrador">
                         <div class="form-group">
                             <label class="col-sm-3 control-label" for="curp">RFC:</label>
                             <div class="col-sm-9">
@@ -81,8 +73,8 @@
                             <div class="col-sm-9">
                                 <input class="form-control" id="password-03" placeholder="Contraseña" type="password" name="clave">
                             </div>
-
                         </div>
+
                         <div class="error"> 
                             <%
                                 if (request.getAttribute("error") == null) {
@@ -92,15 +84,13 @@
                                 }
                             %>
                         </div>
+
                         <div class="form-group">
                             <div class="col-sm-offset-3 col-sm-9">
                                 <divlog class="divlog">
-                                   
+
                                     <divOlvide class="divOlvide">
-                                        <a href="recuperar_contraseña.jsp">Olvidé mi contraseña</a>
-                                    </divOlvide>
-                                    <divOlvide class="divOlvide">
-                                        <a href="administradores.jsp">Inicia sesión como Administrador</a>
+                                        <a href="recuperar_contraseña_administrador.jsp">Olvidé mi contraseña</a>
                                     </divOlvide>
                                 </divlog>
                             </div>
@@ -108,15 +98,13 @@
 
                         <div class="form-group">
                             <div class="col-sm-offset-3 col-sm-9">
-                                <button class="btn btn-primary" type="submit" name="iniciarsesion">Enviar</button>                            
-                                <a href="RegPart.jsp"><button class="btn btn-primary" type="button">Regístrate aquí</button></a>
+                                
+                                <button class="btn btn-primary pull-right" type="submit" name="iniciarsesionadmin">Enviar</button>
+                                <input class="btn btn-primary pull-right" type="button" onclick="history.back()" name="volver atrás" value="Regresar">
                             </div>
+                           
                         </div>
                     </form>
-                        
-                        
-                        
-                        
                 </div>
                 <asideart class="asideart">
 
@@ -125,6 +113,5 @@
             <!-- JS  para el framework del gobierno-->
             <script src="https://framework-gb.cdn.gob.mx/gobmx.js"></script>
         </div>
-
     </body>
 </html>

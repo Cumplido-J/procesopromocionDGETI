@@ -57,7 +57,7 @@ public class Metodos_sql {
         int resultado = 0;
 
         conexion = null;
-        String guardar = "INSERT INTO usuario(id,programa,entidad,plantel,nombre,primerApellido,segundoApellido,correo,clave,curp,telfijo,telcel,perfil,permisos,consideraciones) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+        String guardar = "INSERT INTO usuario(id,programa,entidad,plantel,nombre,primerApellido,segundoApellido,correo,clave,curp,telfijo,telcel,perfil,consideraciones) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
         conexion = conector();
         try {
             sentencia_preparada = conexion.prepareStatement(guardar);
@@ -74,8 +74,7 @@ public class Metodos_sql {
             sentencia_preparada.setString(11, telfijo);
             sentencia_preparada.setString(12, telcel);
             sentencia_preparada.setString(13, perfil);
-            sentencia_preparada.setString(14, null);
-            sentencia_preparada.setString(15, consideraciones);
+            sentencia_preparada.setString(14, consideraciones);
             resultado = sentencia_preparada.executeUpdate();
             sentencia_preparada.close();
             conexion.close();
@@ -137,7 +136,7 @@ public class Metodos_sql {
         int resultado = 0;
 
         conexion = null;
-        String guardar = "INSERT INTO usuario(id,programa,entidad,plantel,nombre,primerApellido,segundoApellido,correo,clave,curp,telfijo,telcel,perfil,permisos,consideraciones) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+        String guardar = "INSERT INTO usuario(id,programa,entidad,plantel,nombre,primerApellido,segundoApellido,correo,clave,curp,telfijo,telcel,perfil,consideraciones) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
         conexion = conector();
         try {
             sentencia_preparada = conexion.prepareStatement(guardar);
@@ -154,8 +153,7 @@ public class Metodos_sql {
             sentencia_preparada.setString(11, telfijo);
             sentencia_preparada.setString(12, telcel);
             sentencia_preparada.setString(13, perfil);
-            sentencia_preparada.setString(14, permisos);
-            sentencia_preparada.setString(15, null);
+            sentencia_preparada.setString(14, null);
 
             resultado = sentencia_preparada.executeUpdate();
             sentencia_preparada.close();
@@ -267,6 +265,7 @@ public class Metodos_sql {
         }
         return nombre;
     }//fin metodo buscar
+	
     
     public String buscarId(String rfc) {
         String id = null;
@@ -294,7 +293,7 @@ public class Metodos_sql {
     public String[] buscaradmin2(String rfc) {
         String nombre[] = new String[5];
         conexion = null;
-        String buscar = "SELECT * FROM usuario WHERE curp='" + rfc + "'";
+        String buscar = "SELECT * FROM usuario WHERE (perfil='A' || perfil='S') && curp='" + rfc + "'";
         conexion = conector();
         try {
             sentencia_preparada = conexion.prepareStatement(buscar);
@@ -304,7 +303,7 @@ public class Metodos_sql {
                 nombre[1] = resultado.getString("plantel");
                 nombre[2] = resultado.getString("nombre");
                 nombre[3] = resultado.getString("curp");
-                nombre[4] = resultado.getString("permisos");
+                nombre[4] = resultado.getString("id");
             }
             conexion.close();
         } catch (Exception e) {
@@ -475,6 +474,32 @@ public class Metodos_sql {
         }
         return usuario;
     }
+	
+	//-------BUSCAR PERMISOS, SERVLET INICIO DE SESION ADMINISRADOR*
+    public String[] buscarpermisos(int id_usuario) {
+        String permisos[] = new String[5];
+        int i = 0;
+        ResultSet rs = null;
+        conexion = null;
+        String buscar = "SELECT * FROM usuariopermiso WHERE idUsuario='" + id_usuario + "'";
+
+        conexion = conector();
+        try {
+            sentencia_preparada = conexion.prepareStatement(buscar);
+            resultado = sentencia_preparada.executeQuery();
+
+            rs = mostrar_usuarios(buscar);
+            while (rs.next()) {
+                permisos[i] = resultado.getString("idPermiso");
+                ++i;
+            }
+
+            conexion.close();
+        } catch (Exception e) {
+
+        }
+        return permisos;
+    }
 
 
     //--------------------------------------mostrar informacion a los combobox*
@@ -524,6 +549,94 @@ public class Metodos_sql {
 
         }
         return id;
+    }//fin metodo buscar
+	
+	//-----------BUSCAR RFC PARA INICIO DE SESION
+    public int buscarId(String rfc) {
+        int id = 0;
+        conexion = null;
+        String buscar = "SELECT id FROM usuario WHERE (perfil='A' || perfil='S') && curp='"+rfc+"'";
+        conexion = conector();
+        try {
+            sentencia_preparada = conexion.prepareStatement(buscar);
+            resultado = sentencia_preparada.executeQuery();
+            if (resultado.next()) {
+                id = resultado.getInt("id");
+            }
+            conexion.close();
+        } catch (Exception e) {
+
+        }
+        return id;
+    }//fin metodo buscar
+	
+	public String buscarentidad(String id_entidad) {
+        String entidad = "";
+        conexion = null;
+        conexion = conector();
+        try {
+            sentencia_preparada = conexion.prepareStatement(id_entidad);
+            resultado = sentencia_preparada.executeQuery();
+            if (resultado.next()) {
+                entidad = resultado.getString("entidad");
+            }
+            conexion.close();
+        } catch (Exception e) {
+
+        }
+        return entidad;
+    }//fin metodo buscar
+    
+    
+    public String buscarplantel(String id_plantel) {
+        String plantel = "";
+        conexion = null;
+        conexion = conector();
+        try {
+            sentencia_preparada = conexion.prepareStatement(id_plantel);
+            resultado = sentencia_preparada.executeQuery();
+            if (resultado.next()) {
+                plantel = resultado.getString("plantel");
+            }
+            conexion.close();
+        } catch (Exception e) {
+
+        }
+        return plantel;
+    }//fin metodo buscar
+
+    public String buscartipocategoria(String id_tipo) {
+        String tipo = "";
+        conexion = null;
+        conexion = conector();
+        try {
+            sentencia_preparada = conexion.prepareStatement(id_tipo);
+            resultado = sentencia_preparada.executeQuery();
+            if (resultado.next()) {
+                tipo = resultado.getString("categoria");
+            }
+            conexion.close();
+        } catch (Exception e) {
+
+        }
+        return tipo;
+    }//fin metodo buscar
+    
+    public String buscarjornada(String id_jornada) {
+        String jornada = "";
+        conexion = null;
+        conexion = conector();
+        try {
+            sentencia_preparada = conexion.prepareStatement(id_jornada);
+            resultado = sentencia_preparada.executeQuery();
+            if (resultado.next()) {
+                jornada = resultado.getString("jornada");
+            }
+            conexion.close();
+        } catch (Exception e) {
+
+        }
+        return jornada;
     }//fin metodo buscar
     
     private List convertir(ResultSet rs)
