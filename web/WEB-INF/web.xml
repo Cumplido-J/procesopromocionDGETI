@@ -7,12 +7,10 @@
     <servlet>
         <servlet-name>Servlet_guardarArchivo</servlet-name>
         <servlet-class>com.aplicacion.servlet.Servlet_guardarArchivo</servlet-class>
-        
     </servlet>
     <servlet>
         <servlet-name>Servlet_muestraArchivo</servlet-name>
         <servlet-class>com.aplicacion.servlet.Servlet_muestraArchivo</servlet-class>
-        
     </servlet>
     <servlet>
         <servlet-name>Servlet_generaPDF</servlet-name>
@@ -69,7 +67,10 @@
     <servlet>
         <servlet-name>Servlet_cbSesionDocente</servlet-name>
         <servlet-class>com.aplicacion.servlet.Servlet_cbSesionDocente</servlet-class>
-        
+    </servlet>
+    <servlet>
+        <servlet-name>Servlet_cbRegistro</servlet-name>
+        <servlet-class>com.aplicacion.servlet.Servlet_cbRegistro</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>Servlet_consultaCatalogos</servlet-name>
@@ -138,6 +139,10 @@
     <servlet-mapping>
         <servlet-name>Servlet_cbSesionDocente</servlet-name>
         <url-pattern>/Servlet_cbSesionDocente</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Servlet_cbRegistro</servlet-name>
+        <url-pattern>/Servlet_cbRegistro</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
