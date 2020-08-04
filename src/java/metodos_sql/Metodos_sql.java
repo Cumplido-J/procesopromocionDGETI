@@ -481,7 +481,7 @@ System.out.println(e.toString());
         ResultSet rs = null;
         conexion = null;
         String buscar = "SELECT * FROM usuariopermiso WHERE idUsuario='" + id_usuario + "'";
-
+        System.out.println(buscar);
         conexion = conector();
         try {
             sentencia_preparada = conexion.prepareStatement(buscar);

@@ -191,7 +191,7 @@
                     <h3>Carga de Convocatoria</h3>
                     <jsp:useBean id="cn" class="metodos_sql.Metodos_sql" scope="page"></jsp:useBean>
                         <form id="data" class="form-horizontal" role="form" method="POST" action="Servlet_buscar_convocatoria">
-                            <table  border="0" width="120%">   
+                            <table  border="0" >   
                                 <tr><td align="center">
 
                                         <input type="hidden" name="publicaciont" id="publicaciont" >
@@ -219,7 +219,7 @@
                             </div>
                             <br><br>
 
-                            <table  border="1" width="160%" id="tabla_usuarios" class="display">  
+                            <table  border="1"  id="tabla_usuarios" class="display">  
                                 <thead>
                                     <tr>
                                         <th>Nombre</th>
@@ -352,8 +352,8 @@
                                                 out.print("");
                                             } else {
                                                 out.print(rs2.getString("resultados"));
-                                                out.print(idUsuario);
-                                                out.print(rfc);
+                                                //out.print(idUsuario);
+                                                //out.print(rfc);
                                             }
                                         %>
                                     </div>

@@ -95,8 +95,8 @@
             if (session.getAttribute("idUsuario") != null && session.getAttribute("rfc") != null) {
                 idUsuario = session.getAttribute("idUsuario").toString();
                 rfc = session.getAttribute("rfc").toString();
-                session.setAttribute("idUsuario", idUsuario);
-                session.setAttribute("rfc", rfc);
+                //session.setAttribute("idUsuario", idUsuario);
+                //session.setAttribute("rfc", rfc);
         %>
         <div>
             <!--  para el framework del gobierno-->
