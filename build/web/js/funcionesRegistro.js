@@ -714,7 +714,9 @@ function mostrarSiguiente(id){
                     if($("#btnEvidencia7").val()=="Subir archivo"){
                         completo=false;
                     }
-                }  
+                } else{
+                    completo=false;
+                } 
             }
             if(completo){
                 $("#estatusInfoCompatibilidad").attr("class","glyphicon glyphicon-ok-sign completo");
@@ -777,7 +779,7 @@ function mostrarSiguiente(id){
         &&$("#estatusInfoCompatibilidad").attr("completo")=='true'
     ){
         $("#banderaCompleto").val("true");
-        $("#btnFinalizar").removeAttr("disabled");
+        $("#seccionNotas").removeAttr("hidden");
         /*$("#mensaje").html("Registro completo");
         $("#modalMensaje").modal("show");
         $(location).attr('href',"FichaRegistro");*/
@@ -995,21 +997,29 @@ function enviarConfirmacion(parametro){
                 case 1:
                     $("#btnEnviar2").attr("disabled","disabled");
                     $("#activoServicio").attr("disabled",true);
+                    $("#banderaCompleto").val("false");
+                    $("#seccionNotas").attr("hidden",true);
                     $("#btnFinalizar").removeAttr("disabled");
                     break;
                 case 2:
                     $("#btnEnviar2").attr("disabled","disabled");
                     $("#notaDesfavorable").attr("disabled",true);
+                    $("#banderaCompleto").val("false");
+                    $("#seccionNotas").attr("hidden",true);
                     $("#btnFinalizar").removeAttr("disabled");
                     break;
                 case 3:
                     $("#btnEnviar3").attr("disabled","disabled");
                     $("#frenteGrupo").attr("disabled",true);
+                    $("#banderaCompleto").val("false");
+                    $("#seccionNotas").attr("hidden",true);
                     $("#btnFinalizar").removeAttr("disabled");
                     break;
                 case 4:
                     $("#btnEnviar4").attr("disabled","disabled");
                     $("#compatibilidad").attr("disabled",true);
+                    $("#banderaCompleto").val("false");
+                    $("#seccionNotas").attr("hidden",true);
                     $("#btnFinalizar").removeAttr("disabled");
                     break;
                 case 5:
@@ -1054,4 +1064,11 @@ function rechazarHoraGrupo(id){
     $("#modalConfirmacion").modal("show");
 }
 
+function cambioProtesta(){
+    if($("#cbProtestaVerdad").is(':checked')){
+        $("#btnFinalizar").removeAttr("disabled");        
+    }else{
+        $("#btnFinalizar").attr("disabled","true");
+    }
+}
 
