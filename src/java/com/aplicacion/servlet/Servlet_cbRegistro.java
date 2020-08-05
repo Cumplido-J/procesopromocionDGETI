@@ -5,24 +5,26 @@
  */
 package com.aplicacion.servlet;
 
+import com.aplicacion.beans.Docente;
+import com.aplicacion.beans.HorasGrupo;
 import java.io.IOException;
 import java.io.PrintWriter;
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import metodos_sql.Metodos_sql;
 
 /**
  *
  * @author David Reyna
  */
-
-@WebServlet(name = "FinalizaRegistro", urlPatterns = {"/FinalizaRegistro"})
-public class Servlet_finalizaRegistro extends HttpServlet {
-
+@WebServlet(name = "Registro", urlPatterns = {"/Registro"})
+public class Servlet_cbregistro extends HttpServlet {
+    Docente docente;
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -41,10 +43,10 @@ public class Servlet_finalizaRegistro extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet Servlet_finalizaRegistro</title>");            
+            out.println("<title>Servlet Servlet_cbregistro</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet Servlet_finalizaRegistro at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet Servlet_cbregistro at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         } finally {
@@ -64,7 +66,38 @@ public class Servlet_finalizaRegistro extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        HttpSession session= (HttpSession) request.getSession();     
+        if(session.getAttribute("idUsuario")!=null&&session.getAttribute("rfc")!=null){
+            docente=new Docente();
+            docente.setIdUsuario(session.getAttribute("idUsuario").toString());
+            docente.setRfc(session.getAttribute("rfc").toString());
+            docente.consultaInfoAspirante();
+            String datos[]=docente.getInfoRegistro();
+            if(datos[61]==null){
+                docente.consultaDocumentos();
+                docente.consultaHoras();
+                if(docente.getListaHoras().isEmpty()){
+                    docente.consumeWSCatalogoDocentes();
+                    if(docente.getJsonHoras().length()>0){
+                        HorasGrupo[] horas=docente.getArrayHoras();                    
+                        for(HorasGrupo hora:horas){
+                            docente.registraHorasWS(hora.id_periodo, hora.clave_materia, hora.numero_horas, hora.grupo,hora.semestre);
+                        }
+                        docente.consultaHoras();
+                    }
+                } 
+                docente.actualizaBanderaIngles();
+                request.setAttribute("Docente", docente);
+                ServletContext sc = getServletContext();
+                RequestDispatcher rd = sc.getRequestDispatcher("/registro.jsp");
+                rd.forward(request,response);
+            }else{
+                response.sendRedirect("evidenciaRegistroDocentes.html");
+            }
+            
+        }else{
+            response.sendRedirect("login.jsp");
+        }
     }
 
     /**
@@ -78,29 +111,7 @@ public class Servlet_finalizaRegistro extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-         HttpSession session= (HttpSession) request.getSession();     
-        if(session.getAttribute("idUsuario")!=null){
-            String idUsuario=session.getAttribute("idUsuario").toString();
-            String completo=request.getParameter("k");
-            String publico="";
-            if(completo.equals("true")){
-                if(request.getParameter("cbPublico")!=null){
-                    publico="S";
-                }
-                else{
-                    publico="N";
-                }
-            }
-            Metodos_sql metodo=new Metodos_sql();
-            String[] parametros={idUsuario,publico};
-            metodo.ejecutaSP("sp_finRegistro",parametros);
-            response.sendRedirect("SesionDocente");
-            /*if(completo.equals("true")){
-                response.sendRedirect("evidenciaRegistroDocentes.html");
-            }else{
-                response.sendRedirect("FichaRegistroIncompleto");
-            }*/
-        }
+        processRequest(request, response);
     }
 
     /**

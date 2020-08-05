@@ -8,11 +8,16 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximun-scale=1.0, minimun-scale=1.0">
-        <link rel="stylesheet" href="css/estilos.css">         
+        <title></title>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">        
+        <link href="https://framework-gb.cdn.gob.mx/assets/styles/main.css" rel="stylesheet">
+        <link rel="stylesheet" href="css/estilosRegistro.css">   
     </head>
-    <body>    
+    <body>   
+        <main class="page">
+            <div class="container">   
         <%
             session = (HttpSession) request.getSession(true);
             String idUsuario = "";
@@ -26,9 +31,9 @@
         <%
             if (request.getAttribute("ver") != null) {%>
         <form class="form-horizontal" role="form" method="POST" action="Servlet_guardar_usuario">
-            <input type="checkbox" id="cerrar">
+           <!-- <input type="checkbox" id="cerrar">
 
-            <label for="ventana2" id="btn-cerrar">X</label>
+            <label for="ventana2" id="btn-cerrar">X</label>-->
             <div class="modal">
                 <div class="contenido">
                     <br>
@@ -49,8 +54,11 @@
                     <br><br>
                     <h2>El Usuario ha sido guardado</h2>
                 </div>
-            </div>  
+            </div> 
+                    <br/><br/>
+            <h2>El Usuario ha sido guardado</h2>
             <input type="submit" value="Continuar" name="guardar" id="ventana2" >
+            <br/>
         </form> <%
             } else {
                 response.sendRedirect("login.jsp");
@@ -62,7 +70,9 @@
                 response.sendRedirect("login.jsp");
             }
         %>
-        
+        </div>
+        </main>
+        <script src="https://framework-gb.cdn.gob.mx/gobmx.js"></script>
     </body>
 </html>
 

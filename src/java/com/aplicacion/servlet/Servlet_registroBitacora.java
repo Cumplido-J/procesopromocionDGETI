@@ -5,6 +5,7 @@
  */
 package com.aplicacion.servlet;
 
+import com.aplicacion.beans.Docente;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -80,13 +81,37 @@ public class Servlet_registroBitacora extends HttpServlet {
         PrintWriter out = response.getWriter();
         try {
             /* TODO output your page here. You may use following sample code. */
-            String id=request.getParameter("idUsuario");
-            String descripcion=request.getParameter("rfc")+":"+request.getParameter("descripcionBitacora");            
-            
-                    
+            String idUsuario=request.getParameter("idUsuario");
+            String descripcion=request.getParameter("rfc")+":"+request.getParameter("descripcionBitacora"); 
+            String idHora=request.getParameter("idHora");
+            String movimiento="A";
             Metodos_sql metodos=new Metodos_sql();
-            String[] parametros={id,"A",descripcion};
-            metodos.ejecutaSP("sp_insertBitacora", parametros);
+            System.out.println(idHora);
+            if(!idHora.isEmpty()){
+                String confirmacion;
+                movimiento="C";
+                if(idHora.contains("-")){
+                    idHora=idHora.replace("-","");
+                    confirmacion="F";
+                }else{
+                    confirmacion="V";
+                }
+                String[] parametros={idHora,confirmacion};
+                metodos.ejecutaSP("sp_registraConfirmacionHora", parametros);
+                descripcion+="idHora:"+idHora;
+                //out.println(idHora);                
+                Docente d=new Docente();
+                d.setIdUsuario(idUsuario);                
+                d.consultaHoras();
+                String respuesta="";
+                int horas=d.getTotalHoras();
+                int grupos=d.getNumGrupos();
+                respuesta=d.mostrarHoras();
+                respuesta+="|"+horas+"|"+grupos;
+                out.println(respuesta);                
+            }
+            String[] parametros2={idUsuario,movimiento,descripcion};
+            metodos.ejecutaSP("sp_insertBitacora", parametros2);
             //out.println(respuesta);
                       
         }catch(Exception e){

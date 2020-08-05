@@ -14,7 +14,6 @@
     <head>        
         <title>Ficha de registro incompleto</title>
         <meta charset="UTF-8">
-        <jsp:useBean id="docente" scope="session" class="com.aplicacion.beans.Docente" />
         <jsp:useBean id="fecha" class="herramientas.Fecha" /> 
         <jsp:useBean id="now" class="java.util.Date" />
         <style>
@@ -80,11 +79,21 @@
                 </tr>
                 <tr>
                     <td>CATEGORÍA A LA QUE ASPIRA</td>
-                    <td>:${Docente.infoRegistro[41]}-${Docente.infoRegistro[43]}-${Docente.infoRegistro[45]}</td>
+                    <c:if test="${Docente.infoRegistro[41]!=null}">
+                        <td>:${Docente.infoRegistro[41]}-${Docente.infoRegistro[43]}-${Docente.infoRegistro[45]}</td>
+                    </c:if>
+                    <c:if test="${Docente.infoRegistro[41]==null}">
+                        <td>:-------------------------------------</td>
+                    </c:if>
                 </tr>
                 <tr>
                     <td>GRADO ACADÉMICO REQUERIDO</td>
-                    <td>:${Docente.infoRegistro[47]}</td>
+                    <c:if test="${Docente.infoRegistro[47]!=null}">
+                        <td>:${Docente.infoRegistro[47]}</td>
+                    </c:if>
+                    <c:if test="${Docente.infoRegistro[47]==null}">
+                        <td>:-------------------------------------</td>
+                    </c:if>
                 </tr>
                 <tr>
                     <td>GRADO ACADÉMICO QUE OSTENTA</td>
@@ -99,43 +108,83 @@
                     <td>ASIGNATURA/COMPONENTE PROFESIONAL/LABORATORIO O TALLER</td>
                     <td>:</td>
                 </tr>-->
-                                
+                            
                 <tr>
                     <td>DOCENTE ACTIVO EN SERVICIO</td>
                     <td>:<c:out value="${Docente.infoRegistro[25] eq 'S' ? 'SI': 'NO'}"/></td>
                 </tr>
                 <tr>
                     <td>FECHA DE INGRESO AL SUBSISTEMA </td>
-                    <td>:${fecha.formatoImprimir(Docente.infoRegistro[26])}</td>
+                    <c:if test="${Docente.infoRegistro[26]!=null}">
+                        <td>:${fecha.formatoImprimir(Docente.infoRegistro[26])}</td>
+                    </c:if>
+                    <c:if test="${Docente.infoRegistro[26]==null}">
+                        <td>:-------------------------------------</td>
+                    </c:if>
                 </tr>
                 <tr>
                     <td>FECHA DE INGRESO AL PLANTEL</td>
-                    <td>:${fecha.formatoImprimir(Docente.infoRegistro[27])}</td>
+                    <c:if test="${Docente.infoRegistro[27]!=null}">
+                        <td>:${fecha.formatoImprimir(Docente.infoRegistro[27])}</td>
+                    </c:if>
+                    <c:if test="${Docente.infoRegistro[27]==null}">
+                        <td>:-------------------------------------</td>
+                    </c:if>
                 </tr>
                 <tr>
                     <td>CATEGORÍA/NIVEL QUE OSTENTA</td>
-                    <td>:${Docente.infoRegistro[29]}-${Docente.infoRegistro[31]}-${Docente.infoRegistro[33]}</td>
+                    <c:if test="${Docente.infoRegistro[29]!=null}">
+                        <td>:${Docente.infoRegistro[29]}-${Docente.infoRegistro[31]}-${Docente.infoRegistro[33]}</td>
+                    </c:if>
+                    <c:if test="${Docente.infoRegistro[29]==null}">
+                        <td>:-------------------------------------</td>
+                    </c:if>
                 </tr>
                 <tr>
                     <td>FECHA DE INGRESO A LA PLAZA QUE OSTENTA</td>
-                    <td>:${fecha.formatoImprimir(Docente.infoRegistro[34])}</td>
+                    <c:if test="${Docente.infoRegistro[34]!=null}">
+                        <td>:${fecha.formatoImprimir(Docente.infoRegistro[34])}</td>
+                    </c:if>
+                    <c:if test="${Docente.infoRegistro[34]==null}">
+                        <td>:-------------------------------------</td>
+                    </c:if>
                 </tr>
                 <tr>
                     <td>TIPO DE NOMBRAMIENTO QUE OSTENTA </td>
-                    <td>:${Docente.infoRegistro[36]}-${Docente.infoRegistro[37]}</td>
+                    <c:if test="${Docente.infoRegistro[36]!=null}">
+                        <td>:${Docente.infoRegistro[36]}-${Docente.infoRegistro[37]}</td>
+                    </c:if>
+                    <c:if test="${Docente.infoRegistro[36]==null}">
+                        <td>:-------------------------------------</td>
+                    </c:if>
                 </tr>                
                 <tr>
                     <td>FECHA DE SU ÚLTIMA_PROMOCIÓN</td>
-                    <td>:${fecha.formatoImprimir(Docente.infoRegistro[39])}</td>
+                    <c:if test="${Docente.infoRegistro[39]!=null}">
+                        <td>:${fecha.formatoImprimir(Docente.infoRegistro[39])}</td>
+                    </c:if>
+                    <c:if test="${Docente.infoRegistro[39]==null}">
+                        <td>:-------------------------------------</td>
+                    </c:if>
                 </tr>
                 <tr>
                     <td>NOTA DESF. o SANCIÓN_ADMINISTRATIVA</td>
-                    <td>:<c:out value="${Docente.infoRegistro[48] eq 'S' ? 'SI': 'NO'}"/></td>
+                    <c:if test="${Docente.infoRegistro[48]!=null}">
+                        <td>:<c:out value="${Docente.infoRegistro[48] eq 'S' ? 'SI': 'NO'}"/></td>
+                    </c:if>
+                    <c:if test="${Docente.infoRegistro[48]==null}">
+                        <td>:-------------------------------------</td>
+                    </c:if>
                 </tr>
                 <c:set var="horasOtro" value="${Docente.infoRegistro[60] eq 'S' ? 'SI': 'NO'}"></c:set>
                 <tr>
                     <td>DESEMPEÑA FUNCIONES EN OTRO SUBSISTEMA</td>
-                    <td>:<c:out value="${horasOtro}"/></td>
+                    <c:if test="${Docente.infoRegistro[60]!=null}">
+                        <td>:<c:out value="${horasOtro}"/></td>
+                    </c:if>
+                    <c:if test="${Docente.infoRegistro[60]==null}">
+                        <td>:-------------------------------------</td>
+                    </c:if>
                 </tr>
                 <c:if test="${horasOtro=='SI'}">
                     <tr>
@@ -161,7 +210,8 @@
                 <tr>
                     <td>CONSIDERACIONES PARTICULARES</td>
                     <td>:${Docente.infoRegistro[62]}</td>
-                </tr>                
+                </tr>  
+                <c:if test="${Docente.infoRegistro[25]=='S'}"> 
                 <tr>
                     <td colspan="2">
                         <table >
@@ -193,9 +243,27 @@
                         </table>
                     </td>
                 </tr>
+                </c:if>
             </table>
             <p>De acuerdo a la documentación comprobatoria que ha proporcionado como evidencia de los requisitos requeridos para su registro</p>
-            <p>
+            <c:if test="${Docente.infoRegistro[25]=='N'}">
+                <p>c. <b>Nombramiento definitivo:</b> documento expedido por la UEMSTIS.
+                   <br/>d. <b>Asistencia a las horas frente al grupo:</b> constancia expedida por el área administrativa o de personal, definida por la UEMSTIS.</p>
+            </c:if>
+            <c:if test = "${fn:length(Docente.infoRegistro[51])>0}">
+                <fmt:parseNumber var = "nivelCENNI" type = "number" value = "${Docente.infoRegistro[51]}" />
+                <c:if test = "${nivelCENNI<14}">
+                    <p>e. <b>Nivel 14 de CENNI:</b> certificado vigente o constancia que acredite el trámite de expedición en proceso, emitido por la Secretaría de Educación Pública, para los participantes de inglés que tengan una licenciatura distinta a la de enseñanza del inglés.</p>
+                </c:if>
+            </c:if>
+            <c:if test="${Docente.infoRegistro[48]=='S'}">
+                <p>f. <b>No contar con nota desfavorable:</b> constancia emitida por el Director del plantel, de que el participante no cuenta con nota desfavorable en los dos últimos ciclos escolares inmediatos a la publicación de la convocatoria, y carta del participante, bajo protesta de decir verdad, de que no cuenta con sanción administrativa que pueda limitar su desempeño en la función.</p>
+            </c:if>
+            <c:if test="${Docente.infoRegistro[49]=='N'}">
+                <p>g. <b>Compatibilidad de empleos:</b> constancia vigente emitida por la autoridad competente en apego a las reglas de compatibilidad.</p>
+            </c:if>
+            
+            <!--<p>
                 a. <b>Nivel académico:</b> documento acreditado por una instancia oficial que confirma el grado de estudios requerido para participar en el Programa, de acuerdo con el perfil profesional.
                 <br/>b. <b>Antigüedad:</b> constancia expedida por el área administrativa o de personal, definida por la DGETI.
                 <br/>c. <b>Nombramiento definitivo:</b> documento expedido por la UEMSTIS.
@@ -203,10 +271,10 @@
                 <br/>e. <b>Nivel 14 de CENNI:</b> certificado vigente o constancia que acredite el trámite de expedición en proceso, emitido por la Secretaría de Educación Pública, para los participantes de inglés que tengan una licenciatura distinta a la de enseñanza del inglés.
                 <br/>f. <b>No contar con nota desfavorable:</b> constancia emitida por el Director del plantel, de que el participante no cuenta con nota desfavorable en los dos últimos ciclos escolares inmediatos a la publicación de la convocatoria, y carta del participante, bajo protesta de decir verdad, de que no cuenta con sanción administrativa que pueda limitar su desempeño en la función.
                 <br/>g. <b>Compatibilidad de empleos:</b> constancia vigente emitida por la autoridad competente en apego a las reglas de compatibilidad.
-            </p>
+            </p>-->
             <p>Usted tiene su registro incompleto por lo que no es posible su participación en el proceso de promoción en el servicio docente por cambio de categoría en Educación Media Superior, Ciclo Escolar 2020-2021.</p>
             
-            <br/><br/><br/><center>Nombre del participante</center>
+            <br/><br/><br/><center>${Docente.infoRegistro[1]} ${Docente.infoRegistro[2]} ${Docente.infoRegistro[3]}</center>
         </div>
         <br/><br/>
         <center><input type="button" value="Imprimir" onclick="window.print()"></center>

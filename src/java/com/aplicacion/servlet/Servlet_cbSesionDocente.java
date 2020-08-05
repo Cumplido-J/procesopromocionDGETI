@@ -22,8 +22,8 @@ import javax.servlet.http.HttpSession;
  *
  * @author David Reyna
  */
-@WebServlet(name = "Registro", urlPatterns = {"/Registro"})
-public class Servlet_cbregistro extends HttpServlet {
+@WebServlet(name = "SesionDocente", urlPatterns = {"/SesionDocente"})
+public class Servlet_cbSesionDocente extends HttpServlet {
     Docente docente;
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,20 +37,17 @@ public class Servlet_cbregistro extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        PrintWriter out = response.getWriter();
-        try {
+        try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet Servlet_cbregistro</title>");            
+            out.println("<title>Servlet Servlet_cbSesionDocente</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet Servlet_cbregistro at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet Servlet_cbSesionDocente at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
-        } finally {
-            out.close();
         }
     }
 
@@ -71,28 +68,15 @@ public class Servlet_cbregistro extends HttpServlet {
             docente=new Docente();
             docente.setIdUsuario(session.getAttribute("idUsuario").toString());
             docente.setRfc(session.getAttribute("rfc").toString());
-            System.out.println("================================="+docente.getIdUsuario()+"\n"+docente.getRfc()+"==============");
             docente.consultaInfoAspirante();            
-            docente.consultaDocumentos();
-            docente.consultaHoras();
-            if(docente.getListaHoras().isEmpty()){
-                docente.consumeWSCatalogoDocentes();
-                if(docente.getJsonHoras().length()>0){
-                    HorasGrupo[] horas=docente.getArrayHoras();                    
-                    for(HorasGrupo hora:horas){
-                        docente.registraHorasWS(hora.id_periodo, hora.clave_materia, hora.numero_horas, hora.grupo,hora.semestre);
-                    }
-                    docente.consultaHoras();
-                }
-            } 
-            docente.actualizaBanderaIngles();
             request.setAttribute("Docente", docente);
             ServletContext sc = getServletContext();
-            RequestDispatcher rd = sc.getRequestDispatcher("/registro.jsp");
+            RequestDispatcher rd = sc.getRequestDispatcher("/ppsesion.jsp");
             rd.forward(request,response);
         }else{
             response.sendRedirect("login.jsp");
         }
+        //processRequest(request, response);
     }
 
     /**

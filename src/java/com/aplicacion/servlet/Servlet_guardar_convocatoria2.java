@@ -90,7 +90,7 @@ public class Servlet_guardar_convocatoria2 extends HttpServlet {
             HttpSession session = (HttpSession) request.getSession(true);
             String idUsuario = "";
             String rfc = "";
-            if (session.getAttribute("idUsuario") != null && session.getAttribute("rfc") != null) {
+            //if (session.getAttribute("idUsuario") != null && session.getAttribute("rfc") != null) {
                 idUsuario = session.getAttribute("idUsuario").toString();
                 rfc = session.getAttribute("rfc").toString();
 
@@ -116,16 +116,17 @@ public class Servlet_guardar_convocatoria2 extends HttpServlet {
                     request.setAttribute("per1", per1);
                     request.setAttribute("per3", per3);
                     request.setAttribute("per4", per4);
-                    session.setAttribute("idUsuario", idUsuario);
-                    session.setAttribute("rfc", rfc);
-                    RequestDispatcher rd = request.getRequestDispatcher("administracion_usuarios.jsp");
+                    //session.setAttribute("idUsuario", idUsuario);
+                    //session.setAttribute("rfc", rfc);
+                    //RequestDispatcher rd = request.getRequestDispatcher("administracion_usuarios.jsp");
+                    RequestDispatcher rd = request.getRequestDispatcher("convocatoria.jsp");
                     rd.forward(request, response);
                 } else {
                     out.print("Servidor en mantenimiento, Datos no Guardados");
                 }//fin presionar boton
-            } else {
+            /*} else {
                 response.sendRedirect("login.jsp");
-            }
+            }*/
             out.println("</body>");
             out.println("</html>");
 

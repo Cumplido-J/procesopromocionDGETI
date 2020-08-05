@@ -90,10 +90,10 @@ public class Servlet_borrarHoraGrupo extends HttpServlet {
             d.borraHoras(id);
             d.consultaHoras();
             
-            Metodos_sql metodos=new Metodos_sql();
+            /*Metodos_sql metodos=new Metodos_sql();
             String descripcion="El usuario con id "+idUsuario+" elimino la información de horas con id "+id;
             String[] parametros={idUsuario,"A",descripcion};
-            metodos.ejecutaSP("sp_insertBitacora", parametros);
+            metodos.ejecutaSP("sp_insertBitacora", parametros);*/
             
             String respuesta="";
             int horas=d.getTotalHoras();

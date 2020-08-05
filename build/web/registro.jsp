@@ -16,8 +16,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>        
         <link href="https://framework-gb.cdn.gob.mx/assets/styles/main.css" rel="stylesheet"/>        
-        <link href="css/estilosRegistro.css" rel="stylesheet"/>
-        <jsp:useBean id="docente" scope="session" class="com.aplicacion.beans.Docente" />
+        <link href="css/estilosRegistro.css" rel="stylesheet"/>        
         <jsp:useBean id="mensaje" class="com.aplicacion.beans.Mensaje" />
         <jsp:useBean id="catalogo" class="herramientas.Catalogos" />
         <jsp:useBean id="fecha" class="herramientas.Fecha" />
@@ -44,7 +43,8 @@
                     <a class="navbar-brand" href="/">UEMSTIS</a>
                   </div>
                   <div class="collapse navbar-collapse" id="subenlaces">
-                    <ul class="nav navbar-nav navbar-right">                      
+                    <ul class="nav navbar-nav navbar-right">      
+                      <li><a href="SesionDocente">Regresar</a></li>
                       <li><a href="Servlet_cerrarsesion">Cerrar sesión</a></li> 
                     </ul>
                   </div>
@@ -520,7 +520,7 @@
                         <c:set var="bandera" value="${Docente.verificaSeccion('4')}"></c:set>
                         <c:if test = "${bandera==true}">
                             <span class="glyphicon glyphicon-ok-sign completo" title="Sección completa" id="estatusInfoCompatibilidad" completo="true"></span>  
-                            <c:set var="in" value="in"></c:set>
+                            <c:set var="in" value=""></c:set>
                         </c:if>
                         <c:if test = "${bandera==false}">
                             <span class="glyphicon glyphicon-exclamation-sign incompleto" title="Sección incompleta" id="estatusInfoCompatibilidad" completo="false"></span>
@@ -586,10 +586,44 @@
                 </div>
                 
               </div>
+                                
               <!--FIN Paneles colapsables-->
+              <c:set var="banderaCompleto" value="true"></c:set>
+              <c:set var="hidden" value=""></c:set>
+              <c:if test="${Docente.verificaSeccion('1')==false}">
+                  <c:set var="banderaCompleto" value="false"></c:set>
+                  <c:set var="hidden" value="hidden"></c:set>
+              </c:if>
+              <c:if test="${Docente.verificaSeccion('2')==false}">
+                  <c:set var="banderaCompleto" value="false"></c:set>
+                  <c:set var="hidden" value="hidden"></c:set>
+              </c:if>
+              <c:if test="${Docente.verificaSeccion('3')==false}">
+                  <c:set var="banderaCompleto" value="false"></c:set>
+                  <c:set var="hidden" value="hidden"></c:set>
+              </c:if>
+              <c:if test="${Docente.verificaSeccion('4')==false}">
+                  <c:set var="banderaCompleto" value="false"></c:set>
+                  <c:set var="hidden" value="hidden"></c:set>
+              </c:if>
               <div class="container text-center" style="margin-bottom:15px;">
                   <form action="FinalizaRegistro" method="POST">
-                      <input type="hidden" name="k" value="false">
+                      <input type="hidden" id="banderaCompleto" name="k" value="${banderaCompleto}">
+                      <div id="seccionNotas" class="text-left" ${hidden}>
+                          <table>
+                              <tr>
+                                <td valign="top"><input type="checkbox" name="cbProtestaVerdad" id="cbProtestaVerdad" onClick="cambioProtesta()"><td>
+                                <td>Declara bajo protesta de decir verdad que cumple con los requisitos establecidos en la Convocatoria para el proceso de promoción en el servicio docente por cambio de categoría en Educación Media Superior, Ciclo Escolar 2020-2021. Para confirmar su dicho, las UEMSTIS podrá verificar la autenticidad de la documentación que proporciono, por lo que, en caso de alteración o falsificación de la misma, acepta la descalificación inmediata del proceso o, en su caso, la invalidación del nombramiento respectivo, sin perjuicio de las sanciones de tipo administrativo o penal en las que pudiera incurrir.</td>    
+                              </tr>
+                              <tr>
+                                  <td valign="top"><input type="checkbox" name="cbPublico" id="cbPublico" onchange="cambioProtesta()"><td>
+                                  <td>Acepta hacer públicos los resultados y recomendaciones individuales que se deriven de su valoración para el proceso de promoción en el servicio docente por cambio de categoría en Educación Media Superior ingreso a la Educación Media Superior, Ciclo Escolar 2020-2021.<td>
+                              </tr>
+                          </table>
+                          
+                        
+                      </div>
+                      <br/>
                       <input type="submit" disabled="true" class="btn btn-primary" value="Finalizar registro" id="btnFinalizar">
                   </form>
               </div>
@@ -775,6 +809,7 @@
                       <p id="mensajeConfirmacion"></p>
                       <input type="hidden" id="idUsuario" name="idUsuario" value="${Docente.idUsuario}">
                       <input type="hidden" id="rfc" name="rfc" value="${Docente.rfc}">
+                      <input type="hidden" id="idHora" name="idHora" value="">
                       <input type="hidden" value="" id="descripcionBitacora" name="descripcionBitacora">
                     </div>
                     <div class="modal-footer">
@@ -795,7 +830,7 @@
         <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>  
         <script src="https://framework-gb.cdn.gob.mx/assets/scripts/jquery-ui-datepicker.js"></script>
         <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.1/jquery.validate.min.js"></script>
-        <script src="js/funciones.js"></script> 
+        <script src="js/funcionesRegistro.js"></script> 
         <script>
             $( function() {
             var availableTags = [

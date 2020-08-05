@@ -8,11 +8,16 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximun-scale=1.0, minimun-scale=1.0">
-        <link rel="stylesheet" href="css/estilos.css">         
+        <title></title>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">        
+        <link href="https://framework-gb.cdn.gob.mx/assets/styles/main.css" rel="stylesheet">
+        <link rel="stylesheet" href="css/estilosRegistro.css">   
     </head>
-    <body>  
+    <body>   
+        <main class="page">
+            <div class="container">
         <%
             session = (HttpSession) request.getSession(true);
             String idUsuario = "";
@@ -26,9 +31,9 @@
         <%
             if (request.getAttribute("ver") != null) {%>
         <form class="form-horizontal" role="form" method="POST" action="Servlet_guardar_vacancia">
-            <input type="checkbox" id="cerrar">
+           <!-- <input type="checkbox" id="cerrar">
 
-            <label for="ventana3" id="btn-cerrar">X</label>
+            <label for="ventana3" id="btn-cerrar">X</label>-->
             <div class="modal">
                 <div class="contenido">
                     <br>
@@ -50,7 +55,10 @@
                     <h2>La Vacancia ha sido guardada</h2>
                 </div>
             </div>  
-            <input type="submit" value="Enviar" name="guardar" id="ventana3" >
+                    <br/><br/>
+            <h2>La Vacancia ha sido guardada</h2>
+            <input type="submit" value="Continuar" name="guardar" id="ventana3" >
+            <br/>
         </form> <%
             } else {
                 response.sendRedirect("login.jsp");
@@ -62,6 +70,9 @@
                 response.sendRedirect("login.jsp");
             }
         %>
+        </div>
+        </main>
+        <script src="https://framework-gb.cdn.gob.mx/gobmx.js"></script>
     </body>
 </html>
 

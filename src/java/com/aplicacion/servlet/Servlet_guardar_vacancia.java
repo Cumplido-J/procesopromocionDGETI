@@ -90,7 +90,7 @@ public class Servlet_guardar_vacancia extends HttpServlet {
             HttpSession session = (HttpSession) request.getSession(true);
             String idUsuario = "";
             String rfc = "";
-            if (session.getAttribute("idUsuario") != null && session.getAttribute("rfc") != null) {
+            //if (session.getAttribute("idUsuario") != null && session.getAttribute("rfc") != null) {
                 idUsuario = session.getAttribute("idUsuario").toString();
                 rfc = session.getAttribute("rfc").toString();
 
@@ -116,16 +116,16 @@ public class Servlet_guardar_vacancia extends HttpServlet {
                     request.setAttribute("dato_ent", ent1);
                     request.setAttribute("dato_pla", pla1);
                     request.setAttribute("dato_rfc", rfc1);
-                    session.setAttribute("idUsuario", idUsuario);
-                    session.setAttribute("rfc", rfc);
+                    //session.setAttribute("idUsuario", idUsuario);
+                    //session.setAttribute("rfc", rfc);
                     RequestDispatcher rd = request.getRequestDispatcher("vacantes.jsp");
                     rd.forward(request, response);
                 } else {
                     out.print("Servidor en mantenimiento, Datos no guardados");
                 }//fin presionar boton
-            } else {
+            /*} else {
                 response.sendRedirect("login.jsp");
-            }
+            }*/
             out.println("</body>");
             out.println("</html>");
 
