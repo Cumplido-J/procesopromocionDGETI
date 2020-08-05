@@ -16,8 +16,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>        
         <link href="https://framework-gb.cdn.gob.mx/assets/styles/main.css" rel="stylesheet"/>        
-        <link href="css/estilosRegistro.css" rel="stylesheet"/>
-        <jsp:useBean id="docente" scope="session" class="com.aplicacion.beans.Docente" />
+        <link href="css/estilosRegistro.css" rel="stylesheet"/>        
         <jsp:useBean id="mensaje" class="com.aplicacion.beans.Mensaje" />
         <jsp:useBean id="catalogo" class="herramientas.Catalogos" />
         <jsp:useBean id="fecha" class="herramientas.Fecha" />
@@ -590,27 +589,42 @@
                                 
               <!--FIN Paneles colapsables-->
               <c:set var="banderaCompleto" value="true"></c:set>
-              <c:set var="disabled" value=""></c:set>
+              <c:set var="hidden" value=""></c:set>
               <c:if test="${Docente.verificaSeccion('1')==false}">
                   <c:set var="banderaCompleto" value="false"></c:set>
-                  <c:set var="disabled" value="disabled"></c:set>
+                  <c:set var="hidden" value="hidden"></c:set>
               </c:if>
               <c:if test="${Docente.verificaSeccion('2')==false}">
                   <c:set var="banderaCompleto" value="false"></c:set>
-                  <c:set var="disabled" value="disabled"></c:set>
+                  <c:set var="hidden" value="hidden"></c:set>
               </c:if>
               <c:if test="${Docente.verificaSeccion('3')==false}">
                   <c:set var="banderaCompleto" value="false"></c:set>
-                  <c:set var="disabled" value="disabled"></c:set>
+                  <c:set var="hidden" value="hidden"></c:set>
               </c:if>
               <c:if test="${Docente.verificaSeccion('4')==false}">
                   <c:set var="banderaCompleto" value="false"></c:set>
-                  <c:set var="disabled" value="disabled"></c:set>
+                  <c:set var="hidden" value="hidden"></c:set>
               </c:if>
               <div class="container text-center" style="margin-bottom:15px;">
                   <form action="FinalizaRegistro" method="POST">
                       <input type="hidden" id="banderaCompleto" name="k" value="${banderaCompleto}">
-                      <input type="submit" ${disabled} class="btn btn-primary" value="Finalizar registro" id="btnFinalizar">
+                      <div id="seccionNotas" class="text-left" ${hidden}>
+                          <table>
+                              <tr>
+                                <td valign="top"><input type="checkbox" name="cbProtestaVerdad" id="cbProtestaVerdad" onClick="cambioProtesta()"><td>
+                                <td>Declara bajo protesta de decir verdad que cumple con los requisitos establecidos en la Convocatoria para el proceso de promoción en el servicio docente por cambio de categoría en Educación Media Superior, Ciclo Escolar 2020-2021. Para confirmar su dicho, las UEMSTIS podrá verificar la autenticidad de la documentación que proporciono, por lo que, en caso de alteración o falsificación de la misma, acepta la descalificación inmediata del proceso o, en su caso, la invalidación del nombramiento respectivo, sin perjuicio de las sanciones de tipo administrativo o penal en las que pudiera incurrir.</td>    
+                              </tr>
+                              <tr>
+                                  <td valign="top"><input type="checkbox" name="cbPublico" id="cbPublico" onchange="cambioProtesta()"><td>
+                                  <td>Acepta hacer públicos los resultados y recomendaciones individuales que se deriven de su valoración para el proceso de promoción en el servicio docente por cambio de categoría en Educación Media Superior ingreso a la Educación Media Superior, Ciclo Escolar 2020-2021.<td>
+                              </tr>
+                          </table>
+                          
+                        
+                      </div>
+                      <br/>
+                      <input type="submit" disabled="true" class="btn btn-primary" value="Finalizar registro" id="btnFinalizar">
                   </form>
               </div>
           </div>

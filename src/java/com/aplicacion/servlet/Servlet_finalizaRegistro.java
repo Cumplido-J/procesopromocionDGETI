@@ -82,14 +82,24 @@ public class Servlet_finalizaRegistro extends HttpServlet {
         if(session.getAttribute("idUsuario")!=null){
             String idUsuario=session.getAttribute("idUsuario").toString();
             String completo=request.getParameter("k");
-            Metodos_sql metodo=new Metodos_sql();
-            String[] parametros={idUsuario};
-            metodo.ejecutaSP("sp_finRegistro",parametros);
+            String publico="";
             if(completo.equals("true")){
+                if(request.getParameter("cbPublico")!=null){
+                    publico="S";
+                }
+                else{
+                    publico="N";
+                }
+            }
+            Metodos_sql metodo=new Metodos_sql();
+            String[] parametros={idUsuario,publico};
+            metodo.ejecutaSP("sp_finRegistro",parametros);
+            response.sendRedirect("SesionDocente");
+            /*if(completo.equals("true")){
                 response.sendRedirect("evidenciaRegistroDocentes.html");
             }else{
                 response.sendRedirect("FichaRegistroIncompleto");
-            }
+            }*/
         }
     }
 

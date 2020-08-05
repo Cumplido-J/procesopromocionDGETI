@@ -213,13 +213,13 @@
                         </div>
 
                         <div class="registro_cct_plantel">                         
-                            <div id="cct" style="text-indent: 1cm;">
+                            <div hidden id="cct" style="text-indent: 1cm;">
                                 <%
                                     String ent1 = String.valueOf(request.getAttribute("dato_ent"));
                                     out.print(ent1 + " - ");
                                 %>
                             </div>                          
-                            <div id="plantel">
+                            <div hidden id="plantel">
                                 <%
                                     String pla1 = String.valueOf(request.getAttribute("dato_pla"));
                                     out.print(pla1);

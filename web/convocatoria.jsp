@@ -188,9 +188,10 @@
             </div>
             <section class="sectionart">
                 <div class="articulosart">
-                    <h3>Carga de Convocatoria</h3>
+                    <center><h4>Carga de Convocatoria</h4></center>
                     <jsp:useBean id="cn" class="metodos_sql.Metodos_sql" scope="page"></jsp:useBean>
                         <form id="data" class="form-horizontal" role="form" method="POST" action="Servlet_buscar_convocatoria">
+                            <center>
                             <table  border="0" >   
                                 <tr><td align="center">
 
@@ -210,11 +211,15 @@
                                 </tr>
 
 
-                            </table><br><br>
+                            </table>
+                            </center>
+                                <br><br>
 
-                            <div class="form-group">
+                            <div class="col-sm-3 col-sm-offset-4">
+                                <center>
                                 <button class="btn btn-primary pull-right" type="submit" name="agregar_convocatoria" form="data2">Agregar</button>
                                 <button class="btn btn-primary pull-right" type="submit" name="buscar_convocatoria">Buscar</button>
+                                </center>
 
                             </div>
                             <br><br>

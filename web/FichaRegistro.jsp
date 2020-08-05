@@ -15,8 +15,7 @@
 <html>
     <head>        
         <title>Ficha de registro</title>
-        <meta charset="UTF-8">
-        <jsp:useBean id="docente" scope="session" class="com.aplicacion.beans.Docente" />
+        <meta charset="UTF-8">        
         <jsp:useBean id="fecha" class="herramientas.Fecha" />      
         <jsp:useBean id="now" class="java.util.Date" />
         <style>
@@ -199,7 +198,8 @@
             </table>
             <p style="text-align:justify">De acuerdo a la documentación comprobatoria que ha proporcionado como evidencia de cumplimiento de los requisitos requeridos para su registro y de las evidencias para los criterios de valoración, usted ha sido aceptado para participar en el proceso de promoción en el servicio docente por cambio de categoría en Educación Media Superior, Ciclo Escolar 2020-2021.</p>
             <p style="text-align:justify">Declara bajo protesta de decir verdad que cumple con los requisitos establecidos en la Convocatoria para el proceso de promoción en el servicio docente por cambio de categoría en Educación Media Superior, Ciclo Escolar 2020-2021. Para confirmar su dicho, las UEMSTIS podrá verificar la autenticidad de la documentación que proporciono, por lo que, en caso de alteración o falsificación de la misma, acepta la descalificación inmediata del proceso o, en su caso, la invalidación del nombramiento respectivo, sin perjuicio de las sanciones de tipo administrativo o penal en las que pudiera incurrir.</p>
-            <p style="text-align:justify">Acepta hacer públicos los resultados y recomendaciones individuales que se deriven de su valoración para el proceso de promoción en el servicio docente por cambio de categoría en Educación Media Superior ingreso a la Educación Media Superior, Ciclo Escolar 2020-2021.</p>
+            <c:set var="acepta" value="${Docente.infoRegistro[63] eq 'S' ? 'Acepta': 'No acepta'}"/>
+            <p style="text-align:justify">${acepta} hacer públicos los resultados y recomendaciones individuales que se deriven de su valoración para el proceso de promoción en el servicio docente por cambio de categoría en Educación Media Superior ingreso a la Educación Media Superior, Ciclo Escolar 2020-2021.</p>
             
             <br/><br/><br/><center>${Docente.infoRegistro[1]} ${Docente.infoRegistro[2]} ${Docente.infoRegistro[3]}</center>
         </div>

@@ -18,7 +18,7 @@
         <link href="/favicon.ico" rel="shortcut icon">
         <link href="https://framework-gb.cdn.gob.mx/assets/styles/main.css" rel="stylesheet">
         <%@page import='herramientas.Imagen'%>
-        <jsp:useBean id="docente" scope="session" class="com.aplicacion.beans.Docente" />
+        
     </head>
     <body>
         <div>
@@ -65,17 +65,25 @@
             </header>
 
             <div class="articulosses">
-                <c:if test = "${Docente.infoRegistro[61]==null}">
-                <article class="articleses">
-                    <a href="Registro"><img src="<%=Imagen.muestraImagen("C:/ArchivosPromocion/imagenes/EvidReg.jpg")%>" alt=""></a>
-                    <a href="Registro"><h3>Evidencias de registro</h3></a>
-                </article>
+                <c:if test = "${Docente.infoRegistro[61]==null}">                    
+                    <article class="articleses">
+                        <a href="Registro"><img src="<%=Imagen.muestraImagen("C:/ArchivosPromocion/imagenes/EvidReg.jpg")%>" alt=""></a>
+                        <a href="Registro"><h3>Registro de aspirante</h3></a>
+                    </article>                    
                 </c:if>
                 <c:if test = "${Docente.infoRegistro[61]!=null}">
-                <article class="articleses">
-                    <a href="evidenciaRegistroDocentes.html"><img src="<%=Imagen.muestraImagen("C:/ArchivosPromocion/imagenes/EvidVal.jpg")%>" alt=""></a>
-                    <a href="evidenciaRegistroDocentes.html"><h3>Evidencias de valoración</h3></a>
-                </article>
+                    <c:if test = "${Docente.infoRegistro[63]==null}">
+                        <article class="articleses">
+                            <a href="FichaRegistroIncompleto"><img src="<%=Imagen.muestraImagen("C:/ArchivosPromocion/imagenes/EvidVal.jpg")%>" alt=""></a>
+                            <a href="FichaRegistroIncompleto"><h3>Ficha de registro incompleto</h3></a>
+                        </article>
+                    </c:if>
+                    <c:if test = "${Docente.infoRegistro[63]!=null}">
+                        <article class="articleses">
+                            <a href="evidenciaRegistroDocentes.html"><img src="<%=Imagen.muestraImagen("C:/ArchivosPromocion/imagenes/EvidVal.jpg")%>" alt=""></a>
+                            <a href="evidenciaRegistroDocentes.html"><h3>Evidencias de valoración</h3></a>
+                        </article>
+                    </c:if>
                 </c:if>
                 <!--
                 <article class="articleses">

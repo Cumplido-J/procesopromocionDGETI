@@ -31,9 +31,9 @@
         <%
             if (request.getAttribute("ver") != null) {%>
         <form class="form-horizontal" role="form" method="POST" action="Servlet_guardar_vacancia">
-            <input type="checkbox" id="cerrar">
+           <!-- <input type="checkbox" id="cerrar">
 
-            <label for="ventana3" id="btn-cerrar">X</label>
+            <label for="ventana3" id="btn-cerrar">X</label>-->
             <div class="modal">
                 <div class="contenido">
                     <br>
@@ -55,7 +55,7 @@
                     <h2>La Vacancia ha sido guardada</h2>
                 </div>
             </div>  
-                    <br/><br/><br/>
+                    <br/><br/>
             <h2>La Vacancia ha sido guardada</h2>
             <input type="submit" value="Continuar" name="guardar" id="ventana3" >
             <br/>
