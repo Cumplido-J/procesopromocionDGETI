@@ -733,44 +733,62 @@ function mostrarSiguiente(id){
                     $("#mensajeConfirmacion").html($("#mensajeNoCompatibilidad").val());
                     //$(location).attr('href',"FichaRegistroIncompleto");
                     $("#modalConfirmacion").modal("show");
-                }else{
+                }
+                /*else{
                     if(
                         $("#estatusInfoAcademica").attr("completo")=='true'
                         &&$("#estatusInfoLaboral").attr("completo")=='true'
                         &&$("#estatusInfoHoras").attr("completo")=='true'
                         &&$("#estatusInfoCompatibilidad").attr("completo")=='true'
                     ){
-                        $("#mensaje").html($("#mensajeRegistroCompleto").val());
-                        $(location).attr('href',"FichaRegistro");
-                        $("#modalMensaje").modal("show");
+                        $("#banderaCompleto").val("true");
+                        $("#btnFinalizar").removeAttr("disabled");                        
                     }else{
                         $("#mensaje").html('Formulario incompleto revise los campos marcados con el icono <span class="glyphicon glyphicon-exclamation-sign incompleto" ></span>');
                         $("#modalMensaje").modal("show");
                     }
-                }
-            }else{
-                if(
+                }*/
+            }
+            /*else{
+             * if(
                     $("#estatusInfoAcademica").attr("completo")=='true'
                     &&$("#estatusInfoLaboral").attr("completo")=='true'
                     &&$("#estatusInfoHoras").attr("completo")=='true'
                     &&$("#estatusInfoCompatibilidad").attr("completo")=='true'
                 ){
                     $("#banderaCompleto").val("true");
-                    $("#btnFinalizar").removeAttr("disabled");
-                    /*$("#mensaje").html("Registro completo");
-                    $("#modalMensaje").modal("show");
-                    $(location).attr('href',"FichaRegistro");*/
+                    $("#btnFinalizar").removeAttr("disabled");                    
                 }else{
                     $("#mensaje").html('Formulario incompleto revise los campos marcados con <span class="glyphicon glyphicon-exclamation-sign incompleto" ></span>');
                     $("#modalMensaje").modal("show");
                 }
-            }
+                
+            }*/
             
                        
             break;
         default:
             break;
     }
+    if(
+        $("#estatusInfoAcademica").attr("completo")=='true'
+        &&$("#estatusInfoLaboral").attr("completo")=='true'
+        &&$("#estatusInfoHoras").attr("completo")=='true'
+        &&$("#estatusInfoCompatibilidad").attr("completo")=='true'
+    ){
+        $("#banderaCompleto").val("true");
+        $("#btnFinalizar").removeAttr("disabled");
+        /*$("#mensaje").html("Registro completo");
+        $("#modalMensaje").modal("show");
+        $(location).attr('href',"FichaRegistro");*/
+    }else{
+        $("#banderaCompleto").val("false");
+        $("#btnFinalizar").attr("disabled","true");
+    }
+    /*else{
+        $("#mensaje").html('Formulario incompleto revise los campos marcados con <span class="glyphicon glyphicon-exclamation-sign incompleto" ></span>');
+        $("#modalMensaje").modal("show");
+    }*/
 }
 
 function abrirModalArchivo(id){    

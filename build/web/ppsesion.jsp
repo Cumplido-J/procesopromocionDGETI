@@ -68,7 +68,7 @@
                 <c:if test = "${Docente.infoRegistro[61]==null}">
                 <article class="articleses">
                     <a href="Registro"><img src="<%=Imagen.muestraImagen("C:/ArchivosPromocion/imagenes/EvidReg.jpg")%>" alt=""></a>
-                    <a href="Registro"><h3>Evidencias de registro</h3></a>
+                    <a href="Registro"><h3>Registro de aspirante</h3></a>
                 </article>
                 </c:if>
                 <c:if test = "${Docente.infoRegistro[61]!=null}">
