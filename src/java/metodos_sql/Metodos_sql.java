@@ -5,7 +5,7 @@
  */
 package metodos_sql;
 
-import com.mysql.jdbc.Connection;
+import java.sql.Connection;
 import java.io.FileReader;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -32,12 +32,18 @@ public class Metodos_sql {
     private static Connection conexion;
     
     public static Connection conector() {
+        String os = new String("win");
         String driver,user,pass,url;
         Properties p = new Properties();        
         conexion = null;
         try {
-            p.load(new FileReader("C:/ArchivosPromocion/config.properties"));
+            if(os.equals(new String("win"))){
+                p.load(new FileReader("C:/ArchivosPromocion/config.properties"));
+            }else{
+                p.load(new FileReader("/Users/ja1000/ArchivosPromocion/config.properties"));
+            }
             
+
             driver=p.getProperty("driver");
             user=p.getProperty("user");
             pass=p.getProperty("pass");
