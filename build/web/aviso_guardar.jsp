@@ -35,9 +35,9 @@
                 //session.setAttribute("idUsuario", idUsuario);
                 //session.setAttribute("rfc", rfc);
             %>
-            <input type="checkbox" id="cerrar">
+            <!--<input type="checkbox" id="cerrar">
 
-            <label for="ventana2" id="btn-cerrar">X</label>
+            <label for="ventana2" id="btn-cerrar">X</label>-->
             <div class="modal">
                 <div class="contenido">
                     <br>
@@ -48,7 +48,7 @@
                     <h2>Tu información ha sido guardada</h2>
                 </div>
             </div>
-                    <br/>
+                    <br/><br/>
             <h2>Tu información ha sido guardada</h2>
             <input type="submit" value="Continuar" name="guardar" id="ventana2" >
             <br/>
