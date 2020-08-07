@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package domain;
+package com.convocatoria.domain;
 
 /**
  *
@@ -13,6 +13,14 @@ public class Convocatoria {
     int id;
     String nombre;
     String url;
+
+    @Override
+    public String toString() {
+        return "Convocatoria{" + "id=" + id + ", nombre=" + nombre + ", url=" + url + '}';
+    }
+
+    public Convocatoria() {
+    }
 
     public int getId() {
         return id;

@@ -3,14 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package reporte;
+package com.convocatoria.reporte;
 
-import datos.Conexion;
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.sql.Connection;
 
 import java.sql.SQLException;
 import java.util.HashMap;
@@ -19,25 +18,33 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.servlet.ServletContext;
-
+import static metodos_sql.Metodos_sql.conector;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperCompileManager;
 import net.sf.jasperreports.engine.JasperExportManager;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 
+/*
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperExportManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+ */
 /**
  *
  * @author ja1000
  */
 public class ReporteConvocatoria {
 
-    private static  final String pathr="/Users/ja1000/reportes/";
-    private static final String path_pdfs="/Users/ja1000/NetBeansProjects/convocatorias/web/recursos/archivos/";
+    Connection conn = null;
+    private static final String pathr = "/Users/ja1000/reportes/";
+    private static final String path_pdfs = "/Users/ja1000/NetBeansProjects/convocatorias/web/recursos/archivos/";
     Properties config = new Properties();
-    InputStream input=null;
-    
-    public ReporteConvocatoria(){
+    InputStream input = null;
+
+    public ReporteConvocatoria() {
         try {
             input = new FileInputStream("/Users/ja1000/config.properties");
             config.load(input);
@@ -49,7 +56,7 @@ public class ReporteConvocatoria {
             Logger.getLogger(ReporteConvocatoria.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+
     private static void compilarReporte() {
         try {
             String jrxmls[] = new String[17];
@@ -60,7 +67,7 @@ public class ReporteConvocatoria {
             }
             for (String s : jrxmls) {
                 String jrxmlfile = pathr + s + ".jrxml";
-                String jasperfile = pathr+ s + ".jasper";
+                String jasperfile = pathr + s + ".jasper";
 
                 JasperCompileManager.compileReportToFile(jrxmlfile, jasperfile);
             }
@@ -69,26 +76,28 @@ public class ReporteConvocatoria {
         }
     }
 
-    public void generar(ServletContext context,int plantel, int convocatoria, String nombre) {
+    public void generar(ServletContext context, int plantel, int convocatoria, String nombre) throws JRException {
         compilarReporte();
         String jasperFileName = "mainreport.jasper";
         String jasperFile = pathr + jasperFileName;
-
+        conn = conector();
         String pdfFileName = "convocatoria" + plantel + convocatoria + ".pdf";
         try {
             HashMap<String, Object> hm = new HashMap<>();
             hm.put("plantel", plantel);
             hm.put("convocatoria", convocatoria);
-            JasperPrint jprint = (JasperPrint) JasperFillManager.fillReport(jasperFile, hm, Conexion.getConnection());
+            JasperPrint jprint = (JasperPrint) JasperFillManager.fillReport(jasperFile, hm,conn);
             JasperExportManager.exportReportToPdfFile(jprint, path_pdfs + pdfFileName);
             System.out.println("Done exporting reports to pdf");
-        } catch (SQLException | JRException e) {
+        } catch (Exception e) {
             System.out.print("Exception:" + e);
         }
 
     }
-        public String pdf(int plantel, int convocatoria, String nombre) {
+
+    public String pdf(int plantel, int convocatoria, String nombre) {
         compilarReporte();
+               conn = conector();
         String jasperFileName = "mainreport.jasper";
         String jasperFile = pathr + jasperFileName;
         String pdfFileName = "convocatoria" + plantel + convocatoria + ".pdf";
@@ -96,14 +105,14 @@ public class ReporteConvocatoria {
             HashMap<String, Object> hm = new HashMap<>();
             hm.put("plantel", plantel);
             hm.put("convocatoria", convocatoria);
-            JasperPrint jprint = (JasperPrint) JasperFillManager.fillReport(jasperFile, hm, Conexion.getConnection());
+            JasperPrint jprint = (JasperPrint) JasperFillManager.fillReport(jasperFile, hm, conn);
             JasperExportManager.exportReportToPdfFile(jprint, path_pdfs + pdfFileName);
             System.out.println("Done exporting reports to pdf");
             return pdfFileName;
-        } catch (SQLException | JRException e) {
+        } catch (JRException e) {
             System.out.print("Exception:" + e);
         }
-        return path_pdfs+"404.pdf";
+        return path_pdfs + "404.pdf";
 
     }
 

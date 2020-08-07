@@ -3,16 +3,19 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package datos;
+package com.convocatoria.datos;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import domain.Entidad;
+import com.convocatoria.domain.Entidad;
+import java.sql.CallableStatement;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import metodos_sql.Metodos_sql;
+import static metodos_sql.Metodos_sql.conector;
+import static metodos_sql.Metodos_sql.resultado;
 
 /**
  *
@@ -20,61 +23,31 @@ import metodos_sql.Metodos_sql;
  */
 public class EntidadJDBC {
 
-    private static final String SQL_SELECT = "SELECT id, entidad FROM catEntidades";
+    PreparedStatement ps;
+    public static ResultSet rs;
+    private static final String SP_BUSCAR_ENTIDADES = "{ call sp_selectCatEntidades()} ";
 
-    /*public List<Entidad> select(){
-        Connection conn =null;
-        PreparedStatement ps = null;
-        ResultSet rs = null;
-        Entidad entidad = null;
-        List<Entidad> entidades = new ArrayList<Entidad>();
-        
-        try {
-            conn =  Conexion.getConnection();
-            conn= Metodos_sql.conector();
-            ps = conn.prepareStatement(SQL_SELECT);
-            rs = ps.executeQuery();
-            while(rs.next()){
-                int idEntidad = rs.getInt("id");
-                String nombreEntidad = rs.getString("entidad");
-                entidad = new Entidad(idEntidad, nombreEntidad);
-                entidades.add(entidad);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace(System.out);
-        }finally{
-            Conexion.close(rs);
-            Conexion.close(ps);
-            Conexion.close(conn);
-        }
-        return entidades;
-    }*/
-
-    public List<Entidad> select() {
+    public  List<Entidad> select() {
         Connection conn = null;
-        PreparedStatement ps = null;
-        ResultSet rs = null;
-        Entidad entidad = null;
         List<Entidad> entidades = new ArrayList<Entidad>();
-
+        conn = conector();
         try {
-            conn = Conexion.getConnection();
-            conn = Metodos_sql.conector();
-            ps = conn.prepareStatement(SQL_SELECT);
-            rs = ps.executeQuery();
+            CallableStatement stmt = conn.prepareCall(SP_BUSCAR_ENTIDADES);
+            rs = stmt.executeQuery();
             while (rs.next()) {
-                int idEntidad = rs.getInt("id");
-                String nombreEntidad = rs.getString("entidad");
-                entidad = new Entidad(idEntidad, nombreEntidad);
-                entidades.add(entidad);
+                int _id = rs.getInt("id");
+                String _entidad = rs.getString("entidad");
+                Entidad entidad = new Entidad();
+                entidad.setId(_id);
+                entidad.setEntidad(_entidad);
+                entidades.add(entidad); 
             }
-        } catch (SQLException e) {
-            e.printStackTrace(System.out);
-        } finally {
-            Conexion.close(rs);
-            Conexion.close(ps);
-            Conexion.close(conn);
+            conn.close();
+        } catch (Exception ex) {
+            System.out.println(ex.toString());
+
         }
+
         return entidades;
     }
 

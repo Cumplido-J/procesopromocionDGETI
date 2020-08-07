@@ -3,56 +3,46 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package datos;
+package com.vacancia.datos;
 
-
-import domain.Vacancia;
+import com.convocatoria.domain.Vacancia;
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import static metodos_sql.Metodos_sql.conector;
 
 /**
  *
  * @author ja1000
  */
 public class VacanciaJDBC {
-         private static final String SQL_SELECT = "SELECT vac.id, vac.vacancia, plantel.plantel, plaza.categoria, "
-                 + "carrera.carrera FROM vacancia vac INNER JOIN catPlanteles plantel ON vac.idPlantel= plantel.id "
-                 + "INNER JOIN catCategoriasPlaza plaza ON vac.idCategoria= plaza.id "
-                 + "INNER JOIN  catCarreras carrera ON vac.idCarrera= carrera.id "
-                 + "WHERE idPlantel=?;";
-         
-    public List<Vacancia> select(int idPlantel){
-        Connection conn =null;
-        PreparedStatement ps = null;
-        ResultSet rs = null;
+
+    public static ResultSet rs;
+    private static final String SP_BUSCAR_VACANCIAS = "{ call sp_selectVacanciaPlantelConvocatoriaVigente(?,?) } ";
+
+    public int selectPorConvocatoria(int _idConvocatoria, int _plantel) {
+        Connection conn = null;
         Vacancia vacancia = null;
-        List<Vacancia> vacancias = new ArrayList<Vacancia>();
-        
+        int total = 0;
+        conn = conector();
         try {
-            conn =  Conexion.getConnection();
-            ps = conn.prepareStatement(SQL_SELECT);
-            ps.setInt(1, idPlantel);
-            rs = ps.executeQuery();
-            while(rs.next()){
-                int id = rs.getInt("id");
-                int nvacancia = rs.getInt("vacancia");
-                String plantel = rs.getString("plantel");
-                String categoria = rs.getString("categoria");
-                String carrera = rs.getString("carrera");
-                vacancia = new Vacancia(id,nvacancia,plantel,categoria,carrera);
-                vacancias.add(vacancia);
+            CallableStatement stmt = conn.prepareCall(SP_BUSCAR_VACANCIAS);
+            stmt.setInt(1, _idConvocatoria);
+            stmt.setInt(2, _plantel);
+            rs = stmt.executeQuery();
+            if (rs.next()) {
+                total = rs.getInt("total");
+
             }
-        } catch (SQLException ex) {
-            ex.printStackTrace(System.out);
-        }finally{
-            Conexion.close(rs);
-            Conexion.close(ps);
-            Conexion.close(conn);
+            conn.close();
+        } catch (Exception ex) {
+            System.out.println(ex.toString());
+
         }
-        return vacancias;
+        return total;
     }
 }

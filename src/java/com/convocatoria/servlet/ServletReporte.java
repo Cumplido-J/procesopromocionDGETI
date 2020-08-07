@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package web;
+package com.convocatoria.servlet;
 
 import com.google.gson.Gson;
 import java.io.IOException;
@@ -13,7 +13,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import reporte.ReporteConvocatoria;
+import com.convocatoria.reporte.ReporteConvocatoria;
 
 /**
  *

@@ -1,14 +1,8 @@
-package web;
+package com.convocatoria.servlet;
 
 import com.google.gson.Gson;
-import datos.EntidadJDBC;
-import datos.PlantelJDBC;
-import datos.VacanciaJDBC;
-import domain.Entidad;
-import domain.Plantel;
-import domain.Vacancia;
+import com.convocatoria.datos.*;
 import java.io.IOException;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -34,9 +28,6 @@ public class ServletControlador extends HttpServlet {
 
     private void accionDefault(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException{
-        //List<Entidad> entidades = new EntidadJDBC().select();
-        //HttpSession sesion = request.getSession();
-        //sesion.setAttribute("entidades", entidades);
         response.sendRedirect("convocatorias.jsp");
     }
 

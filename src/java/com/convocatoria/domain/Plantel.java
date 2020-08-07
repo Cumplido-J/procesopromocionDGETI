@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package domain;
+package com.convocatoria.domain;
 
 /**
  *
@@ -16,11 +16,11 @@ public class Plantel {
     String planel;
     String nombre;
     String domicilio;
-    char altaMarginacion;
+    String altaMarginacion;
     
     public Plantel(){}
 
-    public Plantel(int id, int idEntidad, String cct, String planel, String nombre, String domicilio, char altaMarginacion) {
+    public Plantel(int id, int idEntidad, String cct, String planel, String nombre, String domicilio, String altaMarginacion) {
         this.id = id;
         this.idEntidad = idEntidad;
         this.cct = cct;
@@ -79,11 +79,11 @@ public class Plantel {
         this.domicilio = domicilio;
     }
 
-    public char getAltaMarginacion() {
+    public String getAltaMarginacion() {
         return altaMarginacion;
     }
 
-    public void setAltaMarginacion(char altaMarginacion) {
+    public void setAltaMarginacion(String altaMarginacion) {
         this.altaMarginacion = altaMarginacion;
     }
 

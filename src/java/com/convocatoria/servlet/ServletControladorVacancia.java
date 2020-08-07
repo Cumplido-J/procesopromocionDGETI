@@ -3,13 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package web;
+package com.convocatoria.servlet;
 
+import com.convocatoria.datos.ConvocatoriaJDBC;
+import com.convocatoria.domain.Convocatoria;
 import com.google.gson.Gson;
-import datos.ConvocatoriaJDBC;
-import datos.VacanciaJDBC;
-import domain.Convocatoria;
-import domain.Vacancia;
+import com.vacancia.datos.VacanciaJDBC;
+
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -22,7 +22,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-
 /**
  *
  * @author ja1000
@@ -34,35 +33,29 @@ public class ServletControladorVacancia extends HttpServlet {
             throws ServletException, IOException {
         PrintWriter out = response.getWriter();
         List<Integer> filtrar_convocatorias = null;
-        int idplantel = Integer.parseInt(request.getParameter("id"));
-        ServletContext ctx = request.getServletContext();
-        if (idplantel > 0) {
-            List<Vacancia> vacancias = new VacanciaJDBC().select(idplantel);
-            response.setContentType("application/json; charset=UTF-8");
-            if (vacancias.size() > 0) {
-                List<Convocatoria> convoc = new ArrayList<Convocatoria>();
-                filtrar_convocatorias = buscarVacancias(vacancias);
-                Convocatoria cv = null;
-                
-                for(int i=0;i<filtrar_convocatorias.size();i++){
-                    cv =  new ConvocatoriaJDBC().select(filtrar_convocatorias.get(i));
-                    convoc.add(cv);
-                }
-                Gson gson = new Gson();
-                out.print(gson.toJson(convoc));
+        String str_id = request.getParameter("id");
+        Gson gson = new Gson();
+        int id = Integer.parseInt(str_id);
+        //Todas ls convocatorias vigentes
+        List<Convocatoria> convocatorias_tmp = new ConvocatoriaJDBC().select();
 
-            } 
-            out.flush();
+        if (convocatorias_tmp != null) {
+            List<Convocatoria> convocatorias = new ArrayList<>();
+            //Filtrando vacancias de convocatorias vigentes
+            for(Convocatoria c : convocatorias_tmp){
+                System.out.println(c.getNombre());
+               int vac_tot = new VacanciaJDBC().selectPorConvocatoria(c.getId(), id);
+               if(vac_tot>0){
+                           
+                   convocatorias.add(c);
+               }
+            }
+                out.print(gson.toJson(convocatorias));
+
+        }else{
+        
+        out.print(gson.toJson("No convocatorias vigentes"));
         }
-    }
-
-    public List<Integer> buscarVacancias(List<Vacancia> vacancias) {
-        List<Integer> lista = new ArrayList<Integer>();
-        for (Vacancia vacancia : vacancias) {
-            System.out.printf("%d", vacancia.getVacancia());
-            lista.add(vacancia.getVacancia());
-        };
-        return lista.stream().distinct().collect(Collectors.toList());
     }
 
 }

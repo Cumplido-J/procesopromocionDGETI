@@ -3,46 +3,51 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package datos;
+package com.convocatoria.datos;
 
-
-import domain.Convocatoria;
+import com.convocatoria.domain.*;
+import java.sql.CallableStatement;
 import java.sql.Connection;
-import java.sql.PreparedStatement;
+import java.sql.Date;
 import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import static metodos_sql.Metodos_sql.conector;
 
 public class ConvocatoriaJDBC {
-         private static final String SQL_SELECT = "SELECT id,nombre from convocatoria where id=?;";
-         
-    public Convocatoria select(int idPlantel){
-        Connection conn =null;
-        PreparedStatement ps = null;
-        ResultSet rs = null;
+
+    public static ResultSet rs;
+    private static final String SP_BUSCAR_CONVOCATORIAS = "{ call sp_selectConvocatoriasVigentes(?) } ";
+
+    public List<Convocatoria> select() {
+       LocalDate _fecha = LocalDate.now();
+   
+        Connection conn = null;
+        List<Convocatoria> convocatorias = new ArrayList<Convocatoria>();
         Convocatoria convocatoria = null;
-        
-        
+        conn = conector();
         try {
-            conn =  Conexion.getConnection();
-            ps = conn.prepareStatement(SQL_SELECT);
-            ps.setInt(1, idPlantel);
-            rs = ps.executeQuery();
-            if(rs.next()){
+            CallableStatement stmt = conn.prepareCall(SP_BUSCAR_CONVOCATORIAS);
+            stmt.setString(1, _fecha.toString());
+            System.out.printf("%s", _fecha.toString());
+            rs = stmt.executeQuery();
+            while (rs.next()) {
+                convocatoria = new Convocatoria();
                 int id = rs.getInt("id");
                 String nombre = rs.getString("nombre");
-                convocatoria = new Convocatoria();
                 convocatoria.setId(id);
                 convocatoria.setNombre(nombre);
+                convocatorias.add(convocatoria);
             }
-        } catch (SQLException ex) {
-            ex.printStackTrace(System.out);
-        }finally{
-            Conexion.close(rs);
-            Conexion.close(ps);
-            Conexion.close(conn);
+            conn.close();
+        } catch (Exception ex) {
+            System.out.println(ex.toString());
+
         }
-        return convocatoria;
+        return convocatorias;
     }
+
 }

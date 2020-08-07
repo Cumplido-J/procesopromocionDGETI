@@ -32,7 +32,7 @@ public class Metodos_sql {
     private static Connection conexion;
     
     public static Connection conector() {
-        String os = new String("win");
+        String os = new String("mac");
         String driver,user,pass,url;
         Properties p = new Properties();        
         conexion = null;

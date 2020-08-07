@@ -1,4 +1,4 @@
-package domain;
+package com.convocatoria.domain;
 
 /**
  *
@@ -8,23 +8,11 @@ public class Vacancia {
     private int id;
     private int vacancia;
     private String plantel;
-    private String categoria;
-    private String carrera;
+    private int idVacancia;
+    private int entidad;
 
-
-    
-    public Vacancia(){}
-
-    public Vacancia(int id, int vacancia, String plantel, String categoria, String carrera) {
-        this.id = id;
-        this.vacancia = vacancia;
-        this.plantel = plantel;
-        this.categoria = categoria;
-        this.carrera = carrera;
-
+    public Vacancia() {
     }
-
-
 
     public int getId() {
         return id;
@@ -50,24 +38,28 @@ public class Vacancia {
         this.plantel = plantel;
     }
 
-    public String getCategoria() {
-        return categoria;
+    public int getIdVacancia() {
+        return idVacancia;
     }
 
-    public void setCategoria(String categoria) {
-        this.categoria = categoria;
+    public void setIdVacancia(int idVacancia) {
+        this.idVacancia = idVacancia;
     }
 
-    public String getCarrera() {
-        return carrera;
+    public int getEntidad() {
+        return entidad;
     }
 
-    public void setCarrera(String carrera) {
-        this.carrera = carrera;
+    public void setEntidad(int entidad) {
+        this.entidad = entidad;
+    }
+
+    @Override
+    public String toString() {
+        return "Vacancia{" + "id=" + id + ", vacancia=" + vacancia + ", plantel=" + plantel + ", idVacancia=" + idVacancia + ", entidad=" + entidad + '}';
     }
 
 
-
-
+  
 
 }

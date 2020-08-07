@@ -3,12 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package web;
+package com.convocatoria.servlet;
 
 import com.google.gson.Gson;
-import datos.PlantelJDBC;
-import domain.Entidad;
-import domain.Plantel;
+import com.convocatoria.datos.PlantelJDBC;
+import com.convocatoria.domain.Plantel;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -24,21 +23,20 @@ import javax.servlet.http.HttpServletResponse;
  */
 @WebServlet("/ServletControladorPlantel")
 public class ServletControladorPlantel extends HttpServlet {
-
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         PrintWriter out = response.getWriter();
         response.setContentType("application/json; charset=UTF-8");
         Gson gson = new Gson();
         List<Plantel> planteles = null;
-        Entidad entidad = null;
+        //Entidad entidad = null;
         String id_str = request.getParameter("id");
         int id = Integer.parseInt(id_str);
         if (id > 0) {
 
             try {
-                entidad = new Entidad(id);
-                planteles = new PlantelJDBC().select(entidad);
+                //entidad = new Entidad(id);
+                planteles = new PlantelJDBC().select(id);
                 if(planteles.size()>0){
                     
                 out.print(gson.toJson(planteles));

@@ -3,55 +3,54 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package datos;
+package com.convocatoria.datos;
 
-import domain.Entidad;
-import domain.Plantel;
+import com.convocatoria.domain.Plantel;
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import static metodos_sql.Metodos_sql.conector;
 
 /**
  *
  * @author ja1000
  */
 public class PlantelJDBC {
-     private static final String SQL_SELECT = "SELECT id, idEntidad, cct, plantel, nombre, domicilio, altaMarginacion FROM catPlanteles where idEntidad=?";
-    public List<Plantel> select(Entidad e){
-        Connection conn =null;
-        PreparedStatement ps = null;
-        ResultSet rs = null;
-        Plantel plantel = null;
+
+    public static ResultSet rs;
+    private static final String SP_BUSCAR_PLANTELES = "{ call sp_selectCatPlanteles(?) } ";
+
+    public List<Plantel> select(int _entidad) {
+        Connection conn = null;
         List<Plantel> planteles = new ArrayList<Plantel>();
-        
+        Plantel plantel = null;
+        conn = conector();
         try {
-            conn =  Conexion.getConnection();
-            ps = conn.prepareStatement(SQL_SELECT);
-            ps.setInt(1, e.getId());
-            rs = ps.executeQuery();
-            while(rs.next()){
+            CallableStatement stmt = conn.prepareCall(SP_BUSCAR_PLANTELES);
+            stmt.setInt(1, _entidad);
+            rs = stmt.executeQuery();
+            while (rs.next()) {
+                plantel = new Plantel();
                 int id = rs.getInt("id");
-                int nombreEntidad = rs.getInt("idEntidad");
                 String cct = rs.getString("cct");
                 String plantel_ = rs.getString("plantel");
-                String nombre = rs.getString("nombre");
-                String domicilio = rs.getString("domicilio");
-                String altaMarginacion_str =  rs.getString("altaMarginacion");
-                char altaMarginacion =  altaMarginacion_str.charAt(0);
-                plantel = new Plantel(id,nombreEntidad,cct,plantel_,nombre,domicilio,altaMarginacion);
+                String altaMarginacion_str = rs.getString("gradoMarginacion");
+                plantel.setId(id);
+                plantel.setCct(cct);
+                plantel.setPlanel(plantel_);
+                plantel.setAltaMarginacion(altaMarginacion_str);
                 planteles.add(plantel);
             }
-        } catch (SQLException ex) {
-            ex.printStackTrace(System.out);
-        }finally{
-            Conexion.close(rs);
-            Conexion.close(ps);
-            Conexion.close(conn);
+            conn.close();
+        } catch (Exception ex) {
+            System.out.println(ex.toString());
+
         }
         return planteles;
     }
-    
+
 }

@@ -3,13 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package web;
-
+package com.convocatoria.servlet;
+import com.convocatoria.datos.EntidadJDBC;
 import com.google.gson.Gson;
-import datos.EntidadJDBC;
-import datos.PlantelJDBC;
-import domain.Entidad;
-import domain.Plantel;
+import com.convocatoria.domain.Entidad;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
