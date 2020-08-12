@@ -1,1 +1,0 @@
-com.vacancia.datos.VacanciaJDBC
