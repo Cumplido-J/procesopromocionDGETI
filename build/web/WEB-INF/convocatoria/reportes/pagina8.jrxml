@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.13.0.final using JasperReports Library version 6.13.0-46ada4d1be8f3c5985fd0b6146f3ed44caed6f05  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="pagina8" pageWidth="572" pageHeight="792" whenNoDataType="AllSectionsNoDetail" columnWidth="572" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="2ab4038d-9d78-459e-927f-4f5c4dc4ad48">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="bdpromocion"/>
+	<property name="com.jaspersoft.studio.report.description" value=""/>
+	<subDataset name="Dataset1" uuid="a41bdb46-5d5e-41ef-ad00-4c46191ba2a6">
+		<queryString>
+			<![CDATA[]]>
+		</queryString>
+	</subDataset>
+	<parameter name="p8" class="java.lang.Integer"/>
+	<parameter name="c8" class="java.lang.Integer"/>
+	<queryString>
+		<![CDATA[SELECT  
+	vac.idPlantel, vac.idConvocatoria,conv.nombre, plantel.nombre as plantelnombre from vacancia vac
+INNER JOIN 
+    convocatoria conv
+ON
+	vac.idConvocatoria= conv.id
+INNER JOIN 
+    catPlanteles plantel
+ON
+	vac.idPlantel= plantel.id
+WHERE vac.idPlantel= $P{p8}  and vac.idConvocatoria= $P{c8} 
+
+GROUP BY vac.idConvocatoria]]>
+	</queryString>
+	<field name="idPlantel" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="idPlantel"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="vacancia"/>
+	</field>
+	<field name="idConvocatoria" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="idConvocatoria"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="vacancia"/>
+	</field>
+	<field name="nombre" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="nombre"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="convocatoria"/>
+	</field>
+	<field name="plantelnombre" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="plantelnombre"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="catplanteles"/>
+	</field>
+	<variable name="p1i" class="java.lang.String">
+		<variableExpression><![CDATA[$V{p1i}+"La Unidad de Educación Media Superior Tecnológica Industrial y de Servicios/"]]></variableExpression>
+		<initialValueExpression><![CDATA[""]]></initialValueExpression>
+	</variable>
+	<variable name="p1f" class="java.lang.String">
+		<variableExpression><![CDATA[$V{p1f}+"---, con fundamento en el artículo 3o., párrafos séptimo y octavo, de la Constitución Política de los Estados Unidos Mexicanos; 1, 16, fracción XIII, y 64 de la Ley General del Sistema para la Carrera de las Maestras y los Maestros; y el Programa de promoción en el servicio docente por cambio de categoría en educación media superior (Promoción horizontal)."]]></variableExpression>
+		<initialValueExpression><![CDATA[""]]></initialValueExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<summary>
+		<band height="172" splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<staticText>
+				<reportElement positionType="Float" x="1" y="22" width="571" height="26" uuid="55fa9fa8-0449-46c0-bb24-de6ca558a86c">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Justified">
+					<font fontName="Arial" size="9"/>
+				</textElement>
+				<text><![CDATA[Este proceso de selección se basará en la ponderación de las evidencias para cada uno de los elementos de valoración y el proceso será el siguiente:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" mode="Opaque" x="1" y="1" width="572" height="13" forecolor="#FFFFFF" backcolor="#730907" uuid="f5a539d9-cea6-4f20-97ca-3d4676735469">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Arial" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[SÉPTIMA. PROCESO DE VALORACIÓN]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="1" y="50" width="571" height="26" uuid="23b520c9-f4ed-4dd9-8d55-b325e345520d">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Justified">
+					<font fontName="Arial" size="9"/>
+				</textElement>
+				<text><![CDATA[1. El participante conocerá las bases de participación y se registrará en el proceso de selección para la Promoción en el servicio docente por cambio de categoría, de acuerdo a lo establecido en la presente convocatoria. ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="1" y="131" width="571" height="32" uuid="aed94a17-adcb-4b37-85fd-4004ac7ea721">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Justified">
+					<font fontName="Arial" size="9"/>
+				</textElement>
+				<text><![CDATA[3. La segunda etapa estará a cargo de un Consejo dictaminador, que será el órgano colegiado constituido por las áreas centrales de la UEMSTIS para ratificar o rectificar los resultados de las puntuaciones de los criterios de valoración y los predictámenes emitidos por el comité revisor.]]></text>
+			</staticText>
+			<textField>
+				<reportElement positionType="Float" x="1" y="78" width="571" height="50" uuid="5a9ec4f1-5394-4ec7-8b1e-cf033eb71b31">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Justified">
+					<font fontName="Arial" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA["2. La valoración del nivel de cumplimiento de los 10 criterios establecidos en la Base sexta de la presente convocatoria tendrá dos etapas, la primera la realizará un Comité de revisión, que será un órgano colegiado constituido en el "+$F{plantelnombre} + ", con la finalidad de verificar el cumplimiento de los requisitos, asignar una puntuación sobre los criterios de valoración y emitir el predictamen correspondiente. "]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>

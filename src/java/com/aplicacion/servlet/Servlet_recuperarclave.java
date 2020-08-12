@@ -6,6 +6,7 @@ package com.aplicacion.servlet;
  * and open the template in the editor.
  */
 import correos.Enviar_clave;
+import herramientas.Correo;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
@@ -79,7 +80,7 @@ public class Servlet_recuperarclave extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     Metodos_sql metodos = new Metodos_sql();
-    Enviar_clave mail = new Enviar_clave();
+    Correo mail = new Correo();
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -103,8 +104,11 @@ public class Servlet_recuperarclave extends HttpServlet {
                 else if (busquedacorreo.equals("USUARIO ENCONTRADO")) {
                     String busqueda_clave = metodos.buscarclave(correo);
                     String claveDesencriptada = Encriptar_Desencriptar.desencriptar(busqueda_clave);
-                    mail.enviar_correo(claveDesencriptada, correo);
-                    response.sendRedirect("login.jsp");
+                    mail.enviarCorreo("Recuperación de contraseña","Su contraseña es:"+claveDesencriptada, correo);
+                    //response.sendRedirect("login.jsp");
+                    request.setAttribute("error", "Contraseña enviada");
+                    RequestDispatcher rd = request.getRequestDispatcher("recuperar_contraseña.jsp");
+                    rd.forward(request, response);
                 } else {
                     request.setAttribute("error", "Correo No Registrado");
                     RequestDispatcher rd = request.getRequestDispatcher("recuperar_contraseña.jsp");

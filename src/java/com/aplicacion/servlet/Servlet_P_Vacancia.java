@@ -106,6 +106,7 @@ public class Servlet_P_Vacancia extends HttpServlet {
                     request.setAttribute("nom", nom1);
                     request.setAttribute("dato_ent", ent1);
                     request.setAttribute("dato_pla", pla1);
+                    System.out.println(pla1);
                     request.setAttribute("dato_rfc", rfc1);
                     request.setAttribute("per1", per1);
                     request.setAttribute("per3", per3);

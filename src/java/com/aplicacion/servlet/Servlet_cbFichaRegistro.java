@@ -6,7 +6,7 @@
 package com.aplicacion.servlet;
 
 import com.aplicacion.beans.Docente;
-import com.aplicacion.beans.HorasGrupo;
+import com.aplicacion.beans.HoraGrupo;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -80,7 +80,7 @@ public class Servlet_cbFichaRegistro extends HttpServlet {
             RequestDispatcher rd = sc.getRequestDispatcher("/FichaRegistro.jsp");
             rd.forward(request,response);
         }else{
-            response.sendRedirect("/index.html");
+            response.sendRedirect("login.jsp");
         }
     }
 

@@ -175,6 +175,9 @@ public class Servlet_iniciosesion_administrador extends HttpServlet {
                         request.setAttribute("consulta", "1");
                         request.setAttribute("dato_ent", busqueda_nombre[0]);
                         request.setAttribute("dato_pla", busqueda_nombre[1]);
+                        
+                        System.out.println(busqueda_nombre[1]);
+                        
                         request.setAttribute("nom", busqueda_nombre[2]);
                         request.setAttribute("dato_rfc", busqueda_nombre[3]);
 

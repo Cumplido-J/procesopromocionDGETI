@@ -106,7 +106,7 @@ public class Servlet_guardar_convocatoria extends HttpServlet {
 
 //            String logosems1 = request.getParameter("logo_sems");
 //            String logouemstis1 = request.getParameter("logo_uemstis");
-                String textarea1 = request.getParameter("textarea");
+                String programa = request.getParameter("programa");
                 Date publicacion1 = Date.valueOf(request.getParameter("publicacion"));
                 Date periodo_registro_inicio1 = Date.valueOf(request.getParameter("periodo_registro_inicio"));
                 Date periodo_registro_fin1 = Date.valueOf(request.getParameter("periodo_registro_fin"));
@@ -120,7 +120,7 @@ public class Servlet_guardar_convocatoria extends HttpServlet {
                 if (btnregresa != null) {
 //                out.print(logosems1);
 //                out.print(logouemstis1);
-                    out.print(textarea1);
+                    out.print(programa);
                     out.print(publicacion1);
                     out.print(periodo_registro_inicio1);
                     out.print(periodo_registro_fin1);
@@ -130,7 +130,7 @@ public class Servlet_guardar_convocatoria extends HttpServlet {
                     out.print(periodo_dictaminacion_fin1);
                     out.print(publicacion_resultados1);
 
-                    int datos6 = metodos.guardar7(0, 1, 1, textarea1, publicacion1, periodo_registro_inicio1, periodo_registro_fin1, periodo_valoracion_inicio1, periodo_valoracion_fin1, periodo_dictaminacion_inicio1, periodo_dictaminacion_fin1, publicacion_resultados1);
+                    int datos6 = metodos.guardar7( programa, publicacion1, periodo_registro_inicio1, periodo_registro_fin1, periodo_valoracion_inicio1, periodo_valoracion_fin1, periodo_dictaminacion_inicio1, periodo_dictaminacion_fin1, publicacion_resultados1,pla1);
 
                     if (datos6 > 0) {
                         request.setAttribute("opc", "1");
@@ -142,8 +142,8 @@ public class Servlet_guardar_convocatoria extends HttpServlet {
                         request.setAttribute("per3", per3);
                         request.setAttribute("per4", per4);
                         request.setAttribute("ver", "1");
-                        session.setAttribute("idUsuario", idUsuario);
-                        session.setAttribute("rfc", rfc);
+                        //session.setAttribute("idUsuario", idUsuario);
+                        //session.setAttribute("rfc", rfc);
                         RequestDispatcher rd = request.getRequestDispatcher("aviso_guardar_convocatoria.jsp");
                         rd.forward(request, response);
                     } else {

@@ -115,15 +115,18 @@ public class Servlet_guardarArchivo extends HttpServlet {
             }
             ous.close();
             is.close();
-            
-            Metodos_sql metodo = new Metodos_sql();
-            String[] parametros={idUsuario,idRequisito};
-            List<String[]> datos;                           
-            datos=metodo.ejecutaSP("sp_registroConstancia",parametros);            
-            if(!datos.isEmpty()){
-                out.print("ok");
+            if(Integer.parseInt(idRequisito)<9){
+                Metodos_sql metodo = new Metodos_sql();
+                String[] parametros={idUsuario,idRequisito};
+                List<String[]> datos;                           
+                datos=metodo.ejecutaSP("sp_registroConstancia",parametros);            
+                if(!datos.isEmpty()){
+                    out.print("ok");
+                }else{
+                    out.print("Error en almacenamiento de datos, intente nuevamente");
+                }
             }else{
-                out.print("Error en almacenamiento de datos, intente nuevamente");
+                out.print("ok");
             }
             
         }finally{

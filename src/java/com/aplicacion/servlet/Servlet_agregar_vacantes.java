@@ -115,13 +115,13 @@ public class Servlet_agregar_vacantes extends HttpServlet {
                 String jornadan = request.getParameter("n_plantel3");
                 String grado_academico = request.getParameter("campogrado1");
                 String vacancia = request.getParameter("tipovacancia");
-
+                String convocatoria = request.getParameter("convocatoria");
                 String btnvacantes = request.getParameter("agregarvacantes");
                 //out.println(estado);
 
                 if (btnvacantes != null) {
 
-                    int datos5 = metodos.guardar5(0, estadon, plantel, plaza, cantidad1, tipon, jornadan, grado_academico, vacancia);
+                    int datos5 = metodos.guardar5( estadon, plantel, plaza, cantidad1, tipon, jornadan, grado_academico, vacancia,convocatoria);
 
                     if (datos5 > 0) {
                         request.setAttribute("ver", "1");
@@ -134,8 +134,8 @@ public class Servlet_agregar_vacantes extends HttpServlet {
                         request.setAttribute("per1", per1);
                         request.setAttribute("per3", per3);
                         request.setAttribute("per4", per4);
-                        session.setAttribute("idUsuario", idUsuario);
-                        session.setAttribute("rfc", rfc);
+                        //session.setAttribute("idUsuario", idUsuario);
+                        //session.setAttribute("rfc", rfc);
                         RequestDispatcher rd = request.getRequestDispatcher("aviso_guardar_vacancia.jsp");
                         rd.forward(request, response);
                     } else {

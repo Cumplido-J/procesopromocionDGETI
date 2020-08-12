@@ -31,6 +31,7 @@ public class ServletControladorPlantel extends HttpServlet {
         List<Plantel> planteles = null;
         //Entidad entidad = null;
         String id_str = request.getParameter("id");
+        System.out.println(id_str);
         int id = Integer.parseInt(id_str);
         if (id > 0) {
 

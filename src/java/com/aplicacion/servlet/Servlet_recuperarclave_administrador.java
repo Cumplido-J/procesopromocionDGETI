@@ -6,6 +6,7 @@
 package com.aplicacion.servlet;
 
 import correos.Enviar_clave;
+import herramientas.Correo;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
@@ -78,7 +79,7 @@ public class Servlet_recuperarclave_administrador extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     Metodos_sql metodos = new Metodos_sql();
-    Enviar_clave mail = new Enviar_clave();
+    Correo mail = new Correo();
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -92,8 +93,9 @@ public class Servlet_recuperarclave_administrador extends HttpServlet {
             out.println("</head>");
             out.println("<body>");
             String correo = request.getParameter("correo");
-            String btnlogin = request.getParameter("recuperarclaveadmin");
-            if (btnlogin != null) {
+            System.out.println(correo);
+            //String btnlogin = request.getParameter("recuperarclaveadmin");
+            //if (btnlogin != null) {
                 String busquedacorreo = metodos.buscarcorreoadmin(correo);
                 if (correo.equals("root")) {
                     out.println("ADMINISTTRADOR");
@@ -101,16 +103,21 @@ public class Servlet_recuperarclave_administrador extends HttpServlet {
                 else if (busquedacorreo.equals("USUARIO ENCONTRADO")) {
                     String busqueda_clave = metodos.buscarclaveadmin(correo);
                     String claveDesencriptada = Encriptar_Desencriptar.desencriptar(busqueda_clave);
-                    mail.enviar_correo(claveDesencriptada, correo);
-                    response.sendRedirect("administradores.jsp");
-                } else {
+                    //mail.enviar_correo(claveDesencriptada, correo);
+                    mail.enviarCorreo("Recuperación de contraseña","Su contraseña es:"+claveDesencriptada, correo);
+                    //response.sendRedirect("administradores.jsp");
+                    request.setAttribute("error", "Contraseña enviada");
+                    RequestDispatcher rd = request.getRequestDispatcher("recuperar_contraseña_administrador.jsp");
+                    rd.forward(request, response);
+                } 
+                else {
                     request.setAttribute("error", "Correo No Registrado");
                     RequestDispatcher rd = request.getRequestDispatcher("recuperar_contraseña_administrador.jsp");
                     rd.forward(request, response);
                     //out.println("USUARIO NO REGISTRADO");
                 }
 
-            }
+            //}
             out.println("</body>");
             out.println("</html>");
         }

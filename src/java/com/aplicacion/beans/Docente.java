@@ -6,10 +6,13 @@
 package com.aplicacion.beans;
 
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import herramientas.WebService;
 import java.io.FileReader;
+import java.lang.reflect.Type;
 import java.util.List;
 import java.util.Properties;
+import java.util.Random;
 import metodos_sql.Metodos_sql;
 
 /**
@@ -17,32 +20,18 @@ import metodos_sql.Metodos_sql;
  * @author David Reyna
  */
 public class Docente {
-    private String idUsuario="";
-    /*private String nombre="";
-    private String primerApellido="";
-    private String segundoApellido="";
-    private String correo="";*/
-    private String rfc="";
-    /*private String idEntidad="";
-    private String idTipoInstitucion="";
-    private String idInstitucion="";
-    private String idCCT="";
-    private String idEscuela="";
-    private String idGrado="";
-    private String idCarrera="";
-    private String anioEgreso="";
-    private String idModalidadTitulacion="";
-    private String anioTitulacion="";
-    private String idComprobante="";
-    private String cedula="";
-    private Boolean cargaTitulo=false;
-    private Boolean cargaCedula=false;*/
+    private String idUsuario="";    
+    private String rfc="";    
     private String jsonHoras=null;
+    private String jsonPersonal=null;
     private List<String[]> listaHoras=null;
     private List<String[]> listaDocumentos=null;
     private Boolean banderaIngles=false;
     private String[]infoRegistro=null;
-    
+    private List<HoraGrupo> horas=null;
+    private List<Personal> personal=null;
+    private List<String[]> encuestados=null;
+    private int totalEncuestados=0;
     public Docente() {
     }
 
@@ -65,39 +54,7 @@ public class Docente {
 
     public void setIdUsuario(String idUsuario) {
         this.idUsuario = idUsuario;
-    }
-
-    /*public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public String getPrimerApellido() {
-        return primerApellido;
-    }
-
-    public void setPrimerApellido(String primerApellido) {
-        this.primerApellido = primerApellido;
-    }
-
-    public String getSegundoApellido() {
-        return segundoApellido;
-    }
-
-    public void setSegundoApellido(String segundoApellido) {
-        this.segundoApellido = segundoApellido;
-    }
-
-    public String getCorreo() {
-        return correo;
-    }
-
-    public void setCorreo(String correo) {
-        this.correo = correo;
-    }*/
+    }    
 
     public String getRfc() {
         return rfc;
@@ -106,119 +63,7 @@ public class Docente {
     public void setRfc(String rfc) {
         this.rfc = rfc;
     }
-
-    /*public String getIdEntidad() {
-        return idEntidad;
-    }
-
-    public void setIdEntidad(String idEntidad) {
-        this.idEntidad = idEntidad;
-    }
-
-    public String getIdTipoInstitucion() {
-        return idTipoInstitucion;
-    }
-
-    public void setIdTipoInstitucion(String idTipoInstitucion) {
-        this.idTipoInstitucion = idTipoInstitucion;
-    }
-
-    public String getIdInstitucion() {
-        return idInstitucion;
-    }
-
-    public void setIdInstitucion(String idInstitucion) {
-        this.idInstitucion = idInstitucion;
-    }
-
-    public String getIdCCT() {
-        return idCCT;
-    }
-
-    public void setIdCCT(String idCCT) {
-        this.idCCT = idCCT;
-    }
-
-    public String getIdEscuela() {
-        return idEscuela;
-    }
-
-    public void setIdEscuela(String idEscuela) {
-        this.idEscuela = idEscuela;
-    }
-
-    public String getIdGrado() {
-        return idGrado;
-    }
-
-    public void setIdGrado(String idGrado) {
-        this.idGrado = idGrado;
-    }
-
-    public String getIdCarrera() {
-        return idCarrera;
-    }
-
-    public void setIdCarrera(String idCarrera) {
-        this.idCarrera = idCarrera;
-    }
-
-    public String getAnioEgreso() {
-        return anioEgreso;
-    }
-
-    public void setAnioEgreso(String anioEgreso) {
-        this.anioEgreso = anioEgreso;
-    }
-
-    public String getIdModalidadTitulacion() {
-        return idModalidadTitulacion;
-    }
-
-    public void setIdModalidadTitulacion(String idModalidadTitulacion) {
-        this.idModalidadTitulacion = idModalidadTitulacion;
-    }
-
-    public String getAnioTitulacion() {
-        return anioTitulacion;
-    }
-
-    public void setAnioTitulacion(String anioTitulacion) {
-        this.anioTitulacion = anioTitulacion;
-    }
-
-    public String getIdComprobante() {
-        return idComprobante;
-    }
-
-    public void setIdComprobante(String idComprobante) {
-        this.idComprobante = idComprobante;
-    }
-
-    public String getCedula() {
-        return cedula;
-    }
-
-    public void setCedula(String cedula) {
-        this.cedula = cedula;
-    }
-
-    public Boolean getCargaTitulo() {
-        return cargaTitulo;
-    }
-
-    public void setCargaTitulo(Boolean cargaTitulo) {
-        this.cargaTitulo = cargaTitulo;
-    }
-
-    public Boolean getCargaCedula() {
-        return cargaCedula;
-    }
-
-    public void setCargaCedula(Boolean cargaCedula) {
-        this.cargaCedula = cargaCedula;
-    }*/
-
+    
     public String[] getInfoRegistro() {
         return infoRegistro;
     }
@@ -227,18 +72,7 @@ public class Docente {
         this.infoRegistro = infoRegistro;
     }
     
-    /*public void consultaPreRegistro(){
-        Metodos_sql metodo = new Metodos_sql();
-        String[] parametros={idUsuario};
-        List<String[]> datos=metodo.ejecutaSP("sp_selectUsuario",parametros);
-        if(!datos.isEmpty()){
-            nombre=datos.get(0)[0];
-            primerApellido=datos.get(0)[1];
-            segundoApellido=datos.get(0)[2];
-            correo=datos.get(0)[3];
-            rfc=datos.get(0)[4];
-        }
-    }*/
+    
     public void consumeWSCatalogoDocentes(){
         WebService ws;
         try{
@@ -248,18 +82,30 @@ public class Docente {
             ws=new WebService(url+rfc);
             ws.consumeWS(); 
             jsonHoras=ws.getData();  
+            jsonHoras=jsonHoras.toLowerCase();
+        }catch(Exception e){
+            System.out.println(e.toString());
+        }
+    }
+    public void consumeWSCatalogoPersonal(){
+        WebService ws;
+        try{
+            Properties p = new Properties();
+            p.load(new FileReader("C:/ArchivosPromocion/config.properties"));
+            String url=p.getProperty("urlWSPersonal");
+            ws=new WebService(url+rfc);
+            ws.consumeWS(); 
+            jsonPersonal=ws.getData();  
+            jsonPersonal=jsonPersonal.toLowerCase();
         }catch(Exception e){
             System.out.println(e.toString());
         }
     }
     
-    public HorasGrupo[] getArrayHoras() {        
-        HorasGrupo[] aux=null;
-        if(jsonHoras.length()>0){            
-            Gson gson = new Gson();
-            aux = gson.fromJson(jsonHoras,HorasGrupo[].class);            
-        }        
-        return aux;    
+    public void procesaJsonHoras() {         
+        Gson gson=new Gson();
+        Type tipo=new TypeToken<List<HoraGrupo>>(){}.getType();
+        horas=gson.fromJson(jsonHoras, tipo);
     }
     
     public int getTotalHoras(){
@@ -310,9 +156,10 @@ public class Docente {
                     respuesta+="<button type='button' class='btn btn-sm' title='Confirmar como correcta' onclick='confirmarHoraGrupo("+hora[0]+")'>";
                     respuesta+="<span class='glyphicon glyphicon-ok completo'></span>";
                     respuesta+="</button>";
-                    respuesta+="<button type='button' class='btn btn-sm' title='Confirmar como correcta' onclick='rechazarHoraGrupo("+hora[0]+")'>";
-                    respuesta+="<span class='glyphicon glyphicon-remove incompleto'></span>";
+                    respuesta+="<button type='button' class='btn btn-sm' title='Confirmar como incorrecta' onclick='rechazarHoraGrupo("+hora[0]+")'>";
+                    respuesta+="<span class='glyphicon glyphicon-remove incompleto'></span>";                    
                     respuesta+="</button>";
+                    respuesta+="<span class='glyphicon glyphicon-exclamation-sign incompleto' title='Sección incompleta'></span>";
                 }
                 else if(hora[11].equals("V")&&hora[12].equals("V")){
                     respuesta+="<button type='button' class='btn btn-sm' disabled title='Esta información no puede borrarse'>";
@@ -322,6 +169,13 @@ public class Docente {
                 respuesta+="</td></tr>";                
             }
         return respuesta;
+    }
+    public void registraHorasWS(){
+        if(horas!=null){                        
+            for(HoraGrupo hora:horas){
+                registraHorasWS(hora.getId_periodo(), hora.getClave_materia(), hora.getNumero_horas(), hora.getGrupo(),hora.getSemestre());
+            }            
+        }
     }
     public void registraHorasWS(String idPeriodo,String claveAsignatura,String horas,String grupo,String semestre){
         Metodos_sql metodo = new Metodos_sql();
@@ -406,7 +260,7 @@ public class Docente {
                 }
                 break;
             case "3":
-                if(listaHoras.size()>0){
+                if(listaHoras.size()>0){                    
                     if(documentoCargado("4")){//Si ya se registró la información de horas frente a grupo  y se cargo la constancia                       
                         if(infoRegistro[52]==null){//Si no requiere registrar CENNI
                             retorno=true;                            
@@ -415,6 +269,12 @@ public class Docente {
                                 retorno=true;
                             }
                         }  
+                    }
+                    for(String[]dato:listaHoras){
+                        if(dato[12]==null){
+                            retorno=false;
+                            break;
+                        }
                     }
                 }
                 break;
@@ -435,6 +295,67 @@ public class Docente {
                 break;
         }
         return retorno;
+    }   
+    public void procesaJsonPersonal(){        
+        Gson gson=new Gson();
+        Type tipo=new TypeToken<List<Personal>>(){}.getType();
+        personal=gson.fromJson(jsonPersonal, tipo);        
     }
+
+    public String getJsonPersonal() {
+        return jsonPersonal;
+    }
+
+    public List<Personal> getPersonal() {
+        return personal;
+    }
+
+    public List<HoraGrupo> getHoras() {
+        return horas;
+    }
+    
+    public void consultaEncuestados(){
+        Metodos_sql metodos=new Metodos_sql();
+        String[] parametros={rfc};
+        encuestados= metodos.ejecutaSPEncuestas("sp_selectLecturaUrlRFC",parametros);
+        totalEncuestados=encuestados.size();
+    }
+
+    public int getTotalEncuestados() {
+        return totalEncuestados;
+    }
+    
+    
+    public String[][] generaFilasEncuestados(){
+        String[][] retorno={{"","0"},{"","0"},{"","0"}};
+        String fila="";
+        int c1=0,c2=0,c3=0;
+        if(totalEncuestados>0){
+            for(String[] encuestado:encuestados){
+                fila="<tr><td>"+encuestado[2]+"</td><td>"+encuestado[4]+"</td></tr>";
+                switch(encuestado[3]){
+                    case "1":
+                        retorno[0][0]+=fila;
+                        c1++;
+                        break;
+                    case "2":
+                        retorno[1][0]+=fila;
+                        c2++;
+                        break;
+                    case "3":
+                        retorno[2][0]+=fila;
+                        c3++;
+                        break;
+                    default:
+                        break;                
+                }
+            }            
+        }
+        retorno[0][1]=""+c1;
+        retorno[1][1]=""+c2;
+        retorno[2][1]=""+c3;
+        return retorno;
+    }
+    
     
 }

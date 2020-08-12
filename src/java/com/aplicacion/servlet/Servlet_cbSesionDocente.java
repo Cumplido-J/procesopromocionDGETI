@@ -6,7 +6,7 @@
 package com.aplicacion.servlet;
 
 import com.aplicacion.beans.Docente;
-import com.aplicacion.beans.HorasGrupo;
+import com.aplicacion.beans.HoraGrupo;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
@@ -68,7 +68,8 @@ public class Servlet_cbSesionDocente extends HttpServlet {
             docente=new Docente();
             docente.setIdUsuario(session.getAttribute("idUsuario").toString());
             docente.setRfc(session.getAttribute("rfc").toString());
-            docente.consultaInfoAspirante();            
+            docente.consultaInfoAspirante(); 
+            docente.consultaEncuestados();            
             request.setAttribute("Docente", docente);
             ServletContext sc = getServletContext();
             RequestDispatcher rd = sc.getRequestDispatcher("/ppsesion.jsp");

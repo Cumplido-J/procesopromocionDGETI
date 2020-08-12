@@ -1,0 +1,1 @@
+com.convocatoria.reporte.ReporteConvocatoria

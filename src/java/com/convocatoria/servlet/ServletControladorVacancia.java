@@ -8,7 +8,7 @@ package com.convocatoria.servlet;
 import com.convocatoria.datos.ConvocatoriaJDBC;
 import com.convocatoria.domain.Convocatoria;
 import com.google.gson.Gson;
-import com.vacancia.datos.VacanciaJDBC;
+import com.convocatoria.datos.VacanciaJDBC;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -37,7 +37,7 @@ public class ServletControladorVacancia extends HttpServlet {
         Gson gson = new Gson();
         int id = Integer.parseInt(str_id);
         //Todas ls convocatorias vigentes
-        List<Convocatoria> convocatorias_tmp = new ConvocatoriaJDBC().select();
+        List<Convocatoria> convocatorias_tmp = new ConvocatoriaJDBC().select(""+id);
 
         if (convocatorias_tmp != null) {
             List<Convocatoria> convocatorias = new ArrayList<>();

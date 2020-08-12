@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.convocatoria.reporte;
+package com.convocatoria.reportes;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -24,6 +24,7 @@ import net.sf.jasperreports.engine.JasperCompileManager;
 import net.sf.jasperreports.engine.JasperExportManager;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.*;
 
 /*
 import net.sf.jasperreports.engine.JRException;
@@ -39,17 +40,19 @@ import net.sf.jasperreports.engine.JasperPrint;
 public class ReporteConvocatoria {
 
     Connection conn = null;
-    private static final String pathr = "/Users/ja1000/reportes/";
-    private static final String path_pdfs = "/Users/ja1000/NetBeansProjects/convocatorias/web/recursos/archivos/";
+    //private static final String pathr = "/Users/ja1000/reportes/";
+    //private static final String path_pdfs = "/Users/ja1000/NetBeansProjects/convocatorias/web/recursos/archivos/";
+    private static String pathr;
+    private static  String path_pdfs;
     Properties config = new Properties();
     InputStream input = null;
 
     public ReporteConvocatoria() {
         try {
-            input = new FileInputStream("/Users/ja1000/config.properties");
+            input = new FileInputStream("C:/ArchivosPromocion/config.properties");
             config.load(input);
-            //pathr=config.getProperty("ruta.jrxml");
-            //path_pdfs=config.getProperty("ruta.pdfs");
+            pathr=config.getProperty("pathr");
+            path_pdfs=config.getProperty("path_pdfs");
         } catch (FileNotFoundException ex) {
             ex.printStackTrace();
         } catch (IOException ex) {
@@ -102,18 +105,19 @@ public class ReporteConvocatoria {
         String jasperFile = pathr + jasperFileName;
         String pdfFileName = "convocatoria" + plantel + convocatoria + ".pdf";
         try {
+            //System.out.println("Entre");
             HashMap<String, Object> hm = new HashMap<>();
             hm.put("plantel", plantel);
             hm.put("convocatoria", convocatoria);
             JasperPrint jprint = (JasperPrint) JasperFillManager.fillReport(jasperFile, hm, conn);
             JasperExportManager.exportReportToPdfFile(jprint, path_pdfs + pdfFileName);
-            System.out.println("Done exporting reports to pdf");
+            System.out.println("Done exporting reports to pdf");            
             return pdfFileName;
         } catch (JRException e) {
             System.out.print("Exception:" + e);
         }
-        return path_pdfs + "404.pdf";
-
+        //return path_pdfs + "404.pdf";
+        return "404.pdf";
     }
 
 }

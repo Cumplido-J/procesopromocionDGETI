@@ -6,9 +6,10 @@
 package com.aplicacion.servlet;
 
 import com.aplicacion.beans.Docente;
-import com.aplicacion.beans.HorasGrupo;
+import com.aplicacion.beans.HoraGrupo;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -78,13 +79,9 @@ public class Servlet_cbRegistro extends HttpServlet {
                 docente.consultaHoras();
                 if(docente.getListaHoras().isEmpty()){
                     docente.consumeWSCatalogoDocentes();
-                    if(docente.getJsonHoras().length()>0){
-                        HorasGrupo[] horas=docente.getArrayHoras();                    
-                        for(HorasGrupo hora:horas){
-                            docente.registraHorasWS(hora.id_periodo, hora.clave_materia, hora.numero_horas, hora.grupo,hora.semestre);
-                        }
-                        docente.consultaHoras();
-                    }
+                    docente.procesaJsonHoras();
+                    docente.registraHorasWS();
+                    docente.consultaHoras();                    
                 } 
                 docente.actualizaBanderaIngles();
                 request.setAttribute("Docente", docente);
