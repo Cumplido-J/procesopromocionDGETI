@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.13.0.final using JasperReports Library version 6.13.0-46ada4d1be8f3c5985fd0b6146f3ed44caed6f05  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="pagina8" pageWidth="572" pageHeight="792" whenNoDataType="AllSectionsNoDetail" columnWidth="572" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="2ab4038d-9d78-459e-927f-4f5c4dc4ad48">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="bdpromocion"/>
+	<property name="com.jaspersoft.studio.report.description" value=""/>
+	<subDataset name="Dataset1" uuid="a41bdb46-5d5e-41ef-ad00-4c46191ba2a6">
+		<queryString>
+			<![CDATA[]]>
+		</queryString>
+	</subDataset>
+	<parameter name="p7" class="java.lang.Integer"/>
+	<parameter name="c7" class="java.lang.Integer"/>
+	<queryString>
+		<![CDATA[SELECT
+	vac.plantel, vac.idConvocatoria,conv.idPrograma, plantel.nombre as plantelnombre,
+DATE_FORMAT(conv.publicacion, '%d de %M de %Y') as publicacion
+from vacancia vac
+INNER JOIN 
+    convocatoria conv
+ON
+	vac.idConvocatoria= conv.id
+INNER JOIN 
+    catPlanteles plantel
+ON
+	vac.plantel= plantel.id
+WHERE vac.plantel=  $P{p7}  and vac.idConvocatoria= $P{c7} 
+
+GROUP BY vac.idConvocatoria]]>
+	</queryString>
+	<field name="plantel" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="plantel"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="vacancia"/>
+	</field>
+	<field name="idConvocatoria" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="idConvocatoria"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="vacancia"/>
+	</field>
+	<field name="idPrograma" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="idPrograma"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="convocatoria"/>
+	</field>
+	<field name="plantelnombre" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="plantelnombre"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="catplanteles"/>
+	</field>
+	<field name="publicacion" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="publicacion"/>
+	</field>
+	<variable name="p1i" class="java.lang.String">
+		<variableExpression><![CDATA[$V{p1i}+"La Unidad de Educación Media Superior Tecnológica Industrial y de Servicios/"]]></variableExpression>
+		<initialValueExpression><![CDATA[""]]></initialValueExpression>
+	</variable>
+	<variable name="p1f" class="java.lang.String">
+		<variableExpression><![CDATA[$V{p1f}+"---, con fundamento en el artículo 3o., párrafos séptimo y octavo, de la Constitución Política de los Estados Unidos Mexicanos; 1, 16, fracción XIII, y 64 de la Ley General del Sistema para la Carrera de las Maestras y los Maestros; y el Programa de promoción en el servicio docente por cambio de categoría en educación media superior (Promoción horizontal)."]]></variableExpression>
+		<initialValueExpression><![CDATA[""]]></initialValueExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<summary>
+		<band height="677" splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<staticText>
+				<reportElement positionType="Float" x="0" y="110" width="571" height="17" uuid="ba4a051b-8638-4029-8b3f-1d729402fcf1">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Justified">
+					<font fontName="Montserrat" size="9"/>
+				</textElement>
+				<text><![CDATA[Lo no previsto en la presente será resuelto por la UEMSTIS, de acuerdo con su ámbito de competencia.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="0" y="224" width="571" height="20" uuid="0a9039e4-1a53-49ed-b551-09ccbfbdc79e">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center">
+					<font fontName="Montserrat" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[RAFAEL SÁNCHEZ ANDRADE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="0" y="238" width="571" height="13" uuid="f0d1c652-3b3a-4d12-99f6-13deba46d0ff">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center">
+					<font fontName="Montserrat" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[TITULAR DE LA UNIDAD]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="0" y="227" width="571" height="20" uuid="4b5d0902-e554-42ae-857d-322f560ef585">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center">
+					<font fontName="Montserrat" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[___________________________________]]></text>
+			</staticText>
+			<textField>
+				<reportElement positionType="Float" x="0" y="154" width="571" height="18" uuid="61375f57-715e-4394-9b27-32682657744c">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center">
+					<font fontName="Montserrat" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Ciudad de México, a "+$F{publicacion} + "."]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement positionType="Float" mode="Opaque" x="0" y="0" width="572" height="13" forecolor="#FFFFFF" backcolor="#730907" uuid="6e763f17-11e8-47af-8e67-c66e666a3165">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Montserrat" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[DÉCIMA CUARTA. CONSIDERACIONES GENERALES]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="0" y="24" width="571" height="40" uuid="19e82a17-c388-4e7c-8668-d35f2a55026a">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Justified">
+					<font fontName="Montserrat" size="9"/>
+				</textElement>
+				<text><![CDATA[Las vías de comunicación entre la UEMSTIS y quienes participen en el proceso de selección para la promoción en el servicio docente por cambio de categoría en el Ciclo Escolar 2020-2021, serán el correo electrónico y los números telefónicos (celular o fijo) que aporte cada aspirante, desde el momento de su registro. ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="0" y="67" width="571" height="35" uuid="8899f39f-fbd7-4bab-8ceb-3b4b7addeea0">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Justified">
+					<font fontName="Montserrat" size="9"/>
+				</textElement>
+				<text><![CDATA[Para la aclaración de dudas o información adicional relacionada con este proceso de selección, el aspirante podrá dirigirse a la UEMSTIS en la dirección de correo electrónico promociondocente@uemstis.sems.gob.mx o a los números telefónicos 5536017599 y 8002886688.]]></text>
+			</staticText>
+		</band>
+	</summary>
+</jasperReport>

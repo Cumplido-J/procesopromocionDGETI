@@ -1,0 +1,149 @@
+*{
+	margin:0px;
+	padding:0px;
+	box-sizing: border-box;
+}
+body{
+	font-family: 'Montserrat', sans-serif;
+}
+/*a{
+	text-decoration: none;
+}*/
+.padre{
+	display: flex;
+	flex-flow: column nowrap;
+}
+.margen-interno{
+	padding: 0 50px;
+}
+.registrop1{
+	
+  /*display: inline-flex;*/
+  display: flex;
+  flex-flow: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: stretch; 
+  /*background: #649d66;*/
+  margin: 0px 10px 0px 10px;
+  font-family: Montserrat, "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+				font-size: 15px;
+				color: #000;
+				font-weight: bold;
+				text-align: left;
+				line-height: 1.6;
+}
+.registroh{
+	
+  /*display: inline-flex;*/
+  display: flex;
+  flex-flow: column;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: stretch; 
+  /*background: #f6f578;*/
+  margin: 0px 10px 0px 10px;
+  font-family: Montserrat, "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+				font-size: 15px;
+				color: #000;
+				font-weight: bold;
+				text-align: left;
+				line-height: 1.6;
+}
+
+.registroh3{
+	
+  /*display: inline-flex;*/
+  display: flex;
+  flex-flow: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: center; 
+  /*background: #00909e;*/
+  margin: 0px 10px 0px 10px;
+  font-family: Montserrat, "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+				font-size: 15px;
+				color: #000;
+				font-weight: bold;
+				text-align: left;
+				line-height: 1.6;
+}
+.registron{
+  /*display: inline-flex;*/
+  display: flex;
+  flex-flow: column;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center; 
+  /*background: #00909e;*/
+  margin: 0px;
+  font-family: Montserrat, "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+				font-size: 15px;
+				color: #000;
+				font-weight: bold;
+				text-align: left;
+				line-height: 1.6;
+}
+
+.caja{
+	flex: 1 1 auto;
+	width: 300px;
+	padding: 0px;
+	margin: 10px;
+	/*background: #00005c;*/
+}
+.cajan{
+	flex: 1 1 auto;
+	width: 65px;
+	padding: 0px;
+	margin: 0px 10px;
+	/*background: #00005c;*/
+}
+.cajanbtn{
+	flex: 1 1 auto;
+	width: 65px;
+	padding: 0px;
+	margin: 0px 10px;
+	/*background: #00005c;*/
+}
+
+
+		
+@media all and (max-width: 1200px){
+	.section{
+		flex-direction: column;
+	}
+	.menu{
+		flex-direction: column;
+		height: auto;
+	}
+	.aside{
+		display: flex;
+		justify-content: center;
+	}
+	h1{
+		font-size: 15px;
+	}
+	.texto principal{
+		height: 450px;
+	}
+	.registro{
+		flex-flow: column;
+	}
+
+   }
+
+@media all and (max-width: 695px){
+	.articulos{
+		flex-direction: column;
+	}
+}
+@media all and (max-width: 650px){
+	.off{display: none; }
+	.nav a{font-size: 25px;}	
+}
+@media all and (max-width: 400px){
+	.aside{
+		flex-direction: column;
+	}
+}

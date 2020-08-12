@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.13.0.final using JasperReports Library version 6.13.0-46ada4d1be8f3c5985fd0b6146f3ed44caed6f05  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="pagina6" pageWidth="572" pageHeight="792" whenNoDataType="AllSectionsNoDetail" columnWidth="572" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="2ab4038d-9d78-459e-927f-4f5c4dc4ad48">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="bdpromocion"/>
+	<property name="com.jaspersoft.studio.report.description" value=""/>
+	<property name="com.jaspersoft.studio.unit." value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageHeight" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.topMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.bottomMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.leftMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.rightMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnSpacing" value="pixel"/>
+	<parameter name="p6" class="java.lang.Integer"/>
+	<parameter name="c6" class="java.lang.Integer"/>
+	<queryString>
+		<![CDATA[SELECT  
+vacancia.plantel, vacancia.idConvocatoria,convocatoria.idPrograma, catplanteles.nombre as plantelnombre,
+DATE_FORMAT(convocatoria.inicioRegistro, '%d de %M de %Y') as inicioRegistro,
+DATE_FORMAT(convocatoria.finRegistro, '%d de %M de %Y') as finRegistro,
+DATE_FORMAT(convocatoria.publicacion, '%d de %M de %Y') as publicacion,
+DATE_FORMAT(convocatoria.inicioValoracion, '%d de %M de %Y') as inicioValoracion,
+DATE_FORMAT(convocatoria.finValoracion, '%d de %M de %Y') as finValoracion,
+DATE_FORMAT(convocatoria.inicioDictaminacion, '%d de %M de %Y') as inicioDictaminacion,
+DATE_FORMAT(convocatoria.finDictaminacion, '%d de %M de %Y') as finDictaminacion,
+DATE_FORMAT(convocatoria.resultados, '%d de %M de %Y') as resultados
+from vacancia
+INNER JOIN 
+    convocatoria
+ON
+	vacancia.idConvocatoria= convocatoria.id
+INNER JOIN 
+    catplanteles
+ON
+	vacancia.plantel= catplanteles.id
+WHERE vacancia.plantel=  $P{p6}  and vacancia.idConvocatoria= $P{c6} 
+
+GROUP BY vacancia.idConvocatoria]]>
+	</queryString>
+	<field name="plantel" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="plantel"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="vacancia"/>
+	</field>
+	<field name="idConvocatoria" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="idConvocatoria"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="vacancia"/>
+	</field>
+	<field name="idPrograma" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="idPrograma"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="convocatoria"/>
+	</field>
+	<field name="plantelnombre" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="plantelnombre"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="catplanteles"/>
+	</field>
+	<field name="inicioRegistro" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="inicioRegistro"/>
+	</field>
+	<field name="finRegistro" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="finRegistro"/>
+	</field>
+	<field name="publicacion" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="publicacion"/>
+	</field>
+	<field name="inicioValoracion" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="inicioValoracion"/>
+	</field>
+	<field name="finValoracion" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="finValoracion"/>
+	</field>
+	<field name="inicioDictaminacion" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="inicioDictaminacion"/>
+	</field>
+	<field name="finDictaminacion" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="finDictaminacion"/>
+	</field>
+	<field name="resultados" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="resultados"/>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<summary>
+		<band height="677" splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<staticText>
+				<reportElement positionType="Float" mode="Opaque" x="1" y="377" width="572" height="13" forecolor="#FFFFFF" backcolor="#730907" uuid="974e0f3b-c96a-40fd-a201-1124b66a3526">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Montserrat" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[NOVENA. MESA DE REGISTRO (ubicación y proceso)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="1" y="401" width="571" height="36" uuid="48e58ec0-588b-403d-8384-2e73fae31541">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Justified">
+					<font fontName="Montserrat" size="9"/>
+				</textElement>
+				<text><![CDATA[Todo aspirante deberá registrarse para participar en el proceso de Promoción en el servicio docente por cambio de categoría en Educación Media Superior, a través de la plataforma electrónica que la UEMSTIS ha definido para este proceso: http://www.promociondocente.uemstis.sems.gob.mx. ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="1" y="441" width="571" height="40" uuid="f3ae0615-bb93-4786-9372-94bd29facf7f">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Justified">
+					<font fontName="Montserrat" size="9"/>
+				</textElement>
+				<text><![CDATA[En la plataforma electrónica se solicitará la CURP y, deberá ingresar un correo electrónico, a través del cual se le proporcionará una contraseña de acceso. La CURP y la contraseña proporcionada constituyen el medio para ingresar a la plataforma electrónica y realizar su registro electrónico.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="1" y="482" width="571" height="45" uuid="d72af018-33e2-4e30-9549-adf6dd4e74a3">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Justified">
+					<font fontName="Montserrat" size="9"/>
+				</textElement>
+				<text><![CDATA[El aspirante deberá proporcionar sus datos personales y elegir la entidad federativa y plantel en el que labora, categoría a la que aspira, campo disciplinar, actividad paraescolar o módulo profesional, así como la información que corresponda a los requisitos y evidencias de los criterios de valoración establecidos en el Programa de Promoción en el servicio docente por cambio de categoría en Educación Media Superior. ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="1" y="535" width="571" height="19" uuid="cac837ae-862e-4065-ac64-e10a498cbf75">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Justified">
+					<font fontName="Montserrat" size="9"/>
+				</textElement>
+				<text><![CDATA[La precisión y certeza de la información proporcionada será responsabilidad de cada aspirante.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="1" y="553" width="571" height="35" uuid="6bbe17f2-1568-483e-8e58-be7f487c1aa4">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Justified">
+					<font fontName="Montserrat" size="9"/>
+				</textElement>
+				<text><![CDATA[Al concluir este trámite, en la plataforma electrónica se le generará la ficha para el Registro que deberá imprimir, donde se indicará fecha, hora y sede de registro y verificación documental, en la que tendrá que presentar la evidencia documental de la información proporcionada.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="1" y="593" width="571" height="35" uuid="8a9edf08-0573-49c2-9a11-3377787eb0f1">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Justified">
+					<font fontName="Montserrat" size="9"/>
+				</textElement>
+				<text><![CDATA[El Responsable de Mesa de Registro y Verificación Documental (Responsable de mesa) deberá cotejar los documentos presentados por cada aspirante y verificar que correspondan con la información registrada por el aspirante en la plataforma digital. ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="1" y="632" width="571" height="29" uuid="05bb925b-3e01-48f2-b2c4-0b0200ac3ef5">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Justified">
+					<font fontName="Montserrat" size="9"/>
+				</textElement>
+				<text><![CDATA[Una vez verificada y confirmada la información por el aspirante y el Responsable de mesa, a través de la plataforma digital de la UEMSTIS se generará el comprobante de registro. ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="0" y="293" width="571" height="19" uuid="28c433dc-0281-43b7-a22d-74152985f072">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Justified">
+					<font fontName="Montserrat" size="9"/>
+				</textElement>
+				<text><![CDATA[Proceso de valoración:]]></text>
+			</staticText>
+			<textField>
+				<reportElement positionType="Float" x="0" y="312" width="571" height="55" uuid="ac6041f5-a781-4940-a2ab-5a4c1b5eb058">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Justified">
+					<font fontName="Montserrat" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Del "+$F{inicioValoracion} + " al "+$F{finValoracion} + ", el Comité de revisión realizará el análisis de las evidencias de los elementos de valoración señalados en la Base sexta de la presente convocatoria y a partir de ello emitirá el predictamen correspondiente; y del "+$F{inicioDictaminacion} + " al "+$F{finDictaminacion} + " el Consejo dictaminador analizará, rectificará o ratificará la información emitida por el Comité de revisión y emitirá los dictámenes correspondientes y las listas ordenadas de resultados."]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement positionType="Float" x="0" y="136" width="571" height="33" uuid="2bdc256d-62c6-43ce-9324-35f2e7ef4d80">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Justified">
+					<font fontName="Montserrat" size="9"/>
+				</textElement>
+				<text><![CDATA[3. La segunda etapa estará a cargo de un Consejo dictaminador, que será el órgano colegiado constituido por las áreas centrales de la UEMSTIS para ratificar o rectificar los resultados de las puntuaciones de los criterios de valoración y los predictámenes emitidos por el comité revisor.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="0" y="200" width="571" height="17" uuid="201e8913-5aa4-4ff1-ad18-41ec4b3fbe54">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Justified">
+					<font fontName="Montserrat" size="9"/>
+				</textElement>
+				<text><![CDATA[Las fechas de estos procesos se describen a continuación:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" mode="Opaque" x="0" y="177" width="572" height="13" forecolor="#FFFFFF" backcolor="#730907" uuid="7fe01e62-d691-49c1-b834-a7cfb27b467b">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Montserrat" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[OCTAVA. FECHAS DE REGISTRO Y DEL PROCESO DE VALORACIÓN]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="0" y="217" width="571" height="19" uuid="eba5c4b0-a09f-435a-b9b8-e3460094a537">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Justified">
+					<font fontName="Montserrat" size="9"/>
+				</textElement>
+				<text><![CDATA[Registro:]]></text>
+			</staticText>
+			<textField>
+				<reportElement positionType="Float" x="0" y="234" width="571" height="55" uuid="bddf3cad-ca4c-4849-993a-f748fb75cca8">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Justified">
+					<font fontName="Montserrat" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Del "+$F{inicioRegistro} + " al "+$F{finRegistro} + ", el aspirante acudirá a la sede de registro y verificación documental correspondiente a su plantel, en la cual deberá presentar la documentación especificada en la Base tercera de esta Convocatoria, así como las evidencias documentales de cada uno de los elementos de valoración asentados en la Base sexta, de conformidad con lo establecido en el Programa de Promoción en el servicio docente por cambio de categoría en Educación Media Superior."]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement positionType="Float" x="1" y="53" width="571" height="26" uuid="57d0053a-dbe6-4124-ba07-b6b522e406dc">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Justified">
+					<font fontName="Montserrat" size="9"/>
+				</textElement>
+				<text><![CDATA[1. El participante conocerá las bases de participación y se registrará en el proceso de selección para la Promoción en el servicio docente por cambio de categoría, de acuerdo a lo establecido en la presente convocatoria. ]]></text>
+			</staticText>
+			<textField>
+				<reportElement positionType="Float" x="1" y="85" width="571" height="50" uuid="b94c3cf8-43d2-4c8b-a32b-3dad579cb7a4">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Justified">
+					<font fontName="Montserrat" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA["2. La valoración del nivel de cumplimiento de los 10 criterios establecidos en la Base sexta de la presente convocatoria tendrá dos etapas, la primera la realizará un Comité de revisión, que será un órgano colegiado constituido en el "+$F{plantelnombre} + " con la finalidad de verificar el cumplimiento de los requisitos, asignar una puntuación sobre los criterios de valoración y emitir el predictamen correspondiente. "]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement positionType="Float" x="0" y="23" width="571" height="26" uuid="5d3efa0d-22f4-42d2-b266-39f38b78d8fe">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Justified">
+					<font fontName="Montserrat" size="9"/>
+				</textElement>
+				<text><![CDATA[Este proceso de selección se basará en la ponderación de las evidencias para cada uno de los elementos de valoración y el proceso será el siguiente:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" mode="Opaque" x="0" y="1" width="572" height="13" forecolor="#FFFFFF" backcolor="#730907" uuid="d39ba646-783f-4927-a964-5fac3964872c">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Montserrat" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[SÉPTIMA. PROCESO DE VALORACIÓN]]></text>
+			</staticText>
+		</band>
+	</summary>
+</jasperReport>

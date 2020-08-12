@@ -1,0 +1,358 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.13.0.final using JasperReports Library version 6.13.0-46ada4d1be8f3c5985fd0b6146f3ed44caed6f05  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="pagina1" pageWidth="572" pageHeight="792" whenNoDataType="AllSectionsNoDetail" columnWidth="572" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="2ab4038d-9d78-459e-927f-4f5c4dc4ad48">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="bdpromocion"/>
+	<property name="com.jaspersoft.studio.unit." value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageHeight" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.topMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.bottomMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.leftMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.rightMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnSpacing" value="pixel"/>
+	<parameter name="p1" class="java.lang.Integer"/>
+	<parameter name="c1" class="java.lang.Integer"/>
+	<queryString>
+		<![CDATA[SELECT  
+	vac.idPlantel, vac.idConvocatoria,conv.nombre, plantel.nombre as plantelnombre from vacancia vac
+INNER JOIN 
+    convocatoria conv
+ON
+	vac.idConvocatoria= conv.id
+INNER JOIN 
+    catPlanteles plantel
+ON
+	vac.idPlantel= plantel.id
+WHERE vac.idPlantel= $P{p1}  and vac.idConvocatoria= $P{c1} 
+
+GROUP BY vac.idConvocatoria]]>
+	</queryString>
+	<field name="idPlantel" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="idPlantel"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="vacancia"/>
+	</field>
+	<field name="idConvocatoria" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="idConvocatoria"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="vacancia"/>
+	</field>
+	<field name="nombre" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="nombre"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="convocatoria"/>
+	</field>
+	<field name="plantelnombre" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="plantelnombre"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="catplanteles"/>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<summary>
+		<band height="617" splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<staticText>
+				<reportElement positionType="Float" x="0" y="102" width="571" height="22" uuid="02554dd7-b543-4df4-803c-d662f3633007"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CONVOCA]]></text>
+			</staticText>
+			<textField>
+				<reportElement positionType="Float" x="0" y="61" width="571" height="50" uuid="0b99d2af-79a2-44f4-8559-8eda8b620364">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Justified">
+					<font fontName="Arial" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA["La Unidad de Educación Media Superior Tecnológica Industrial y de Servicios/"+$F{plantelnombre} + ", con fundamento en el artículo 3o., párrafos séptimo y octavo, de la Constitución Política de los Estados Unidos Mexicanos; 1, 16, fracción XIII, y 64 de la Ley General del Sistema para la Carrera de las Maestras y los Maestros; y el Programa de promoción en el servicio docente por cambio de categoría en educación media superior (Promoción horizontal). "]]></textFieldExpression>
+			</textField>
+			<textField textAdjust="StretchHeight">
+				<reportElement positionType="Float" x="0" y="127" width="571" height="43" uuid="e4e995c1-9a8f-498e-881e-6e98469730b7">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Justified">
+					<font fontName="Arial" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Al personal docente frente a grupo, que preste sus servicios en la Unidad de Educación Media Superior Tecnológica Industrial y de Servicios (UEMSTIS), en el "+$F{plantelnombre}+", a participar en el proceso de selección para la promoción en el servicio docente por cambio de categoría, correspondiente al Ciclo Escolar 2020-2021, de conformidad con las siguientes"]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement positionType="Float" x="0" y="160" width="571" height="22" uuid="813c39b7-7535-4148-bc32-3a8cee660c06"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[BASES]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" mode="Opaque" x="0" y="189" width="570" height="13" forecolor="#FFFFFF" backcolor="#730907" uuid="196636de-b2b7-4ad3-80f7-7628fbbe00d5">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Arial" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[PRIMERA. PARTICIPANTES]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="0" y="214" width="570" height="38" uuid="42fd83df-06a9-4b74-a6a7-66e0e4868556">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Justified">
+					<font fontName="Arial" size="9"/>
+				</textElement>
+				<text><![CDATA[En el proceso de selección para la promoción en el servicio docente por cambio de categoría en Educación Media Superior podrán participar, de manera individual y voluntaria:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="0" y="241" width="570" height="38" uuid="843775c6-a2b1-4a3a-adc8-e008e8da2d4b">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Justified">
+					<font fontName="Arial" size="9"/>
+				</textElement>
+				<text><![CDATA[Personal docente y técnico docente en activo en funciones frente a grupo, con experiencia mínima de tres años en la función docente con nombramiento definitivo, que ocupe plaza de jornada o por horas-semana-mes.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="0" y="267" width="570" height="38" uuid="55fa9fa8-0449-46c0-bb24-de6ca558a86c">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Justified">
+					<font fontName="Arial" size="9"/>
+				</textElement>
+				<text><![CDATA[No es objeto de la presente Convocatoria el personal directivo y de supervisión.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" mode="Opaque" x="0" y="292" width="570" height="13" forecolor="#FFFFFF" backcolor="#730907" uuid="f5a539d9-cea6-4f20-97ca-3d4676735469">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Arial" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[SEGUNDA. REQUISITOS DE PARTICIPACIÓN]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="47" y="321" width="520" height="19" uuid="c45e875a-89ef-4149-8a46-1c0f5fb8cd0c"/>
+				<textElement textAlignment="Left">
+					<font fontName="Arial" size="9"/>
+				</textElement>
+				<text><![CDATA[Cumplir con todas y cada una de las bases de la presente Convocatoria.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="47" y="341" width="520" height="19" uuid="880776d0-7ade-4a53-89b4-a83c12f2076b"/>
+				<textElement textAlignment="Left">
+					<font fontName="Arial" size="9"/>
+				</textElement>
+				<text><![CDATA[Contar con nombramiento definitivo en la plaza docente o técnico docente que ostenta; ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="47" y="419" width="520" height="12" uuid="78d93e87-de8e-4d3b-8adb-2c36e189b794"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Arial" size="9"/>
+				</textElement>
+				<text><![CDATA[Acreditar que ha ocupado la categoría que ostenta al momento de emitirse la convocatoria, por un periodo de al menos dos años.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="47" y="438" width="520" height="30" uuid="66942df3-75a3-41cf-a002-d482b7e1f034">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Justified">
+					<font fontName="Arial" size="9"/>
+				</textElement>
+				<text><![CDATA[Haber transcurrido al menos dos años a partir de su última promoción en el servicio docente por asignación de horas adicionales definitivas, para los docentes y técnicos docentes de asignatura.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="47" y="466" width="520" height="30" uuid="629f2a82-306a-47af-b7a2-3328ea20a9cc">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Justified">
+					<font fontName="Arial" size="9"/>
+				</textElement>
+				<text><![CDATA[Contar con el perfil profesional afín al campo disciplinar, actividad paraescolar o módulo profesional, para la plaza vacante que desea participar. ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="47" y="492" width="520" height="30" uuid="2a632c16-e72c-475f-a9c2-83ad7f0d6947">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Justified">
+					<font fontName="Arial" size="9"/>
+				</textElement>
+				<text><![CDATA[Acreditar el grado académico establecido por la Unidad de Educación Media Superior Tecnológica Industrial y de Servicios, para la categoría inmediata superior, respecto a la que actualmente ostenta; ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="47" y="519" width="520" height="30" uuid="b2376380-7bbb-4835-bf5c-606b44f2aa9f">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Justified">
+					<font fontName="Arial" size="9"/>
+				</textElement>
+				<text><![CDATA[Los docentes que imparten la asignatura de inglés deben contar con título y cédula profesional de la licenciatura en la enseñanza del inglés o equivalente. Quienes tengan una licenciatura distinta, deberán presentar además la Certificación Nacional de Nivel de Idioma (CENNI) vigente, al menos en el nivel 14;]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="47" y="545" width="520" height="30" uuid="5a8c3d0b-af75-4a38-9428-ae86eb12b56f">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Justified">
+					<font fontName="Arial" size="9"/>
+				</textElement>
+				<text><![CDATA[No contar en su expediente con nota desfavorable expedida durante los dos ciclos escolares inmediatos anteriores a la emisión de la convocatoria.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="47" y="572" width="520" height="30" uuid="f4eebbb4-f71b-415d-8b83-df0bb240f99f">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Justified">
+					<font fontName="Arial" size="9"/>
+				</textElement>
+				<text><![CDATA[Cumplir con las reglas de compatibilidad que emitió la USICAMM, si cuenta con más de una plaza, tanto previo a su participación en el proceso de selección a para la promoción en el servicio docente por cambio de categoría, como al promo¬verse, si es el caso, y ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="47" y="597" width="520" height="19" uuid="341a8314-d5bb-4cf7-bde1-e4c776a1697f">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Justified">
+					<font fontName="Arial" size="9"/>
+				</textElement>
+				<text><![CDATA[Participar exclusivamente en un proceso de selección para la promoción horizontal.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="0" y="322" width="30" height="19" uuid="9d45b9c7-6ed3-4707-a6d8-557d8907b2f5">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left">
+					<font fontName="Arial" size="9"/>
+				</textElement>
+				<text><![CDATA[1.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="0" y="341" width="30" height="19" uuid="0fc37e56-453d-4f26-9fd3-1b7d4a8e53fd">
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left">
+					<font fontName="Arial" size="9"/>
+				</textElement>
+				<text><![CDATA[2.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="0" y="360" width="30" height="19" uuid="eeec6302-0734-4b4d-95ed-27c5fa0ef2db">
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left">
+					<font fontName="Arial" size="9"/>
+				</textElement>
+				<text><![CDATA[3.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="0" y="384" width="30" height="19" uuid="6cb040ab-8fe4-4972-93e6-8762a65b5e63">
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left">
+					<font fontName="Arial" size="9"/>
+				</textElement>
+				<text><![CDATA[4.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="0" y="419" width="30" height="19" uuid="e3e1a790-7d04-4e52-bc81-f76a3686e513">
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left">
+					<font fontName="Arial" size="9"/>
+				</textElement>
+				<text><![CDATA[5.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="0" y="438" width="30" height="19" uuid="10b1d976-3ce3-4340-8cdc-dce61af4d1c5">
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left">
+					<font fontName="Arial" size="9"/>
+				</textElement>
+				<text><![CDATA[6.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="0" y="466" width="30" height="19" uuid="5d833c5f-4df3-4fe4-83da-2cb1d0c2258f">
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left">
+					<font fontName="Arial" size="9"/>
+				</textElement>
+				<text><![CDATA[7.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="0" y="492" width="30" height="19" uuid="2122a90a-5305-4c86-a9bd-47822ede72f6">
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left">
+					<font fontName="Arial" size="9"/>
+				</textElement>
+				<text><![CDATA[8.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="0" y="519" width="30" height="19" uuid="b82f54f3-6237-49c3-9c1f-8599cb79f537">
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left">
+					<font fontName="Arial" size="9"/>
+				</textElement>
+				<text><![CDATA[9.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="0" y="545" width="30" height="19" uuid="8deadaee-36f1-442b-9598-4ecf8f7ef7bc">
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left">
+					<font fontName="Arial" size="9"/>
+				</textElement>
+				<text><![CDATA[10.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="0" y="572" width="30" height="19" uuid="0345e775-4a15-4f31-99d7-c3ef1d0c868a">
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left">
+					<font fontName="Arial" size="9"/>
+				</textElement>
+				<text><![CDATA[11.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="0" y="597" width="30" height="19" uuid="1f0f942a-b3f5-461d-aed4-ea011bb27b4d">
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left">
+					<font fontName="Arial" size="9"/>
+				</textElement>
+				<text><![CDATA[12.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="0" y="30" width="571" height="22" uuid="bf3c3d97-3573-4ff8-94b3-c8414f8b4e88"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CONVOCATORIA BASE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="0" y="3" width="571" height="22" uuid="6b646ddb-14d9-4228-a530-1251c1b0b5de"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[PCC-UEMSTIS]]></text>
+			</staticText>
+			<textField textAdjust="StretchHeight">
+				<reportElement positionType="Float" x="47" y="386" width="520" height="33" uuid="8a5e9a74-c336-43a2-a735-dfff9e101916">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Justified">
+					<font fontName="Arial" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Acreditar haber ejercido la función docente o técnico docente dentro de la Unidad de Educación Media Superior Tecnológica Industrial y de Servicios, en el "+$F{plantelnombre}+" por un periodo mínimo de tres años al momento del registro de su participación en el proceso de selección;"]]></textFieldExpression>
+			</textField>
+			<textField textAdjust="StretchHeight">
+				<reportElement positionType="Float" x="47" y="360" width="520" height="24" uuid="624fbff6-d743-4270-8225-23be56bc122a">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Justified">
+					<font fontName="Arial" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Estar activo y frente a grupo en el servicio dentro de la Unidad de Educación Media Superior Tecnológica Industrial y de Servicios, en el "+$F{plantelnombre}+" al momento del registro en el proceso de selección."]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>

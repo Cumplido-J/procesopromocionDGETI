@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html lang="es">
+    <head>
+        <title>Evidencias Registro</title>
+        <meta charset="UTF-8"/>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>        
+        <link href="https://framework-gb.cdn.gob.mx/assets/styles/main.css" rel="stylesheet"/>
+        <!--<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+        <link rel="stylesheet" href="/resources/demos/style.css">-->
+        <link href="css/estilos.css" rel="stylesheet"/>
+    </head>
+    <body>
+        <main class="page">            
+            <!--Barra navegación UEMSTIS-->
+            <nav class="navbar navbar-inverse sub-navbar navbar-fixed-top">
+                <div class="container">
+                  <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#subenlaces">
+                      <span class="sr-only">Interruptor de Navegación</span>
+                      <span class="icon-bar"></span>
+                      <span class="icon-bar"></span>
+                      <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="/">UEMSTIS</a>
+                  </div>
+                  <div class="collapse navbar-collapse" id="subenlaces">
+                    <ul class="nav navbar-nav navbar-right">
+                      <li><a href="#">Inicio</a></li>                          
+                    </ul>
+                  </div>
+                </div>
+            </nav>
+            <!--FIN Barra navegación UEMSTIS-->                
+            <!--Barra encabezado-->
+            <div class="encabezado row text-center">
+                <p>Unidad de Educación Media Superior Tecnológica Industrial y de Servicios</p>
+            </div>
+            <!--FIN Barra encabezado-->
+            <div class="container">
+              <div class="text-center">
+                  <h4>Programa de Promoción en el Servicio Docente en Educación Media Superior</h4>
+              </div>
+              <!--Breadcrumbs-->
+              <ol class="breadcrumb">
+                <li><a href="#">UEMSTIS</a></li>
+                <li><a href="#">Promoción Docente</a></li>
+                <li class="active">Registro de aspirante</li>
+              </ol>
+              <!--FIN Breadcrumbs-->
+              <div class="text-center">
+                <h4>Registro de requisitos para participar en el:</h4>
+                <h4>Programa de Promoción en el Servicio Docente por Cambio de Categoría en Educación Media Superior</h4>
+              </div>
+              <!--Paneles colapsables-->
+              <div class="panel-group ficha-collapse" id="accordion">
+                <div class="panel panel-default">
+                  <div class="panel-heading">
+                    <h4 class="panel-title">
+                      <a data-parent="#accordion" data-toggle="collapse" href="#infoAcademica" aria-expanded="true" aria-controls="infoAcademica">
+                      Información Académica
+                      </a>
+                    </h4>
+                    <button type="button" class="collpase-button collapsed" data-parent="#accordion" data-toggle="collapse" href="#infoAcademica"></button>
+                  </div>
+                  <div class="panel-collapse collapse in" id="infoAcademica">
+                    <div class="panel-body">
+                      <form id="formInfoAcademica" role="form" action="RegistroInfoAcademica" method="POST">
+                        <div class="form-group col-md-3">
+                          <label class="control-label" for="entidad">Entidad de estudio:</label>
+                          <select class="form-control input-sm" id="entidad" name="entidad" onchange="actualizarInstituciones()">
+                            <option>-Seleccione-</option>
+                          </select>
+                        </div>
+                        <div class="form-group col-md-3">
+                          <label class="control-label" for="sostenimiento">Tipo de Sostenimiento:</label>
+                          <select class="form-control input-sm" id="sostenimiento" name="sostenimiento">
+                            <option>-Seleccione-</option>
+                            <option value="PU">Público</option>
+                            <option value="PR">Privado</option>
+                          </select>
+                        </div>
+                        <div class="form-group col-md-3">
+                          <label class="control-label" for="institucion">Institución:</label>
+                          <select class="form-control input-sm" id="institucion" name="institucion" onchange="cambioInstitucion()">
+                            <option>-Seleccione-</option>
+                          </select>
+                        </div>
+                        <div class="form-group col-md-3">
+                          <label class="control-label" for="cct">CCT:</label>
+                          <input type="text" class="form-control input-sm" id="cct" name="cct" placeholder="CCT" disabled="true" readonly="true">
+                        </div>
+                        <div class="form-group col-md-3">
+                          <label class="control-label" for="escuela">Escuela o Facultad:</label>
+                          <select class="form-control input-sm" id="escuela" name="escuela">
+                            <option>-Seleccione-</option>
+                          </select>
+                        </div>
+                        <div class="form-group col-md-3">
+                          <label class="control-label" for="grado">Grado Académico:</label>
+                          <select class="form-control input-sm" id="grado" name="grado">
+                            <option>-Seleccione-</option>
+                          </select>
+                        </div>
+                        <div class="form-group col-md-3">
+                          <label class="control-label" for="carrera">Carrera:</label>
+                          <select class="form-control input-sm" id="carrera" name="carrera">
+                            <option>-Seleccione-</option>
+                          </select>
+                        </div>
+                        <div class="form-group col-md-3">
+                          <label class="control-label" for="egreso">Año de egreso:</label>
+                          <input type="text" class="form-control input-sm" id="egreso" name="egreso" >
+                        </div>
+                        <div class="form-group col-md-3">
+                          <label class="control-label" for="modalidad">Modalidad de Titulación:</label>
+                          <select class="form-control input-sm" id="modalidad" name="modalidad">
+                            <option>-Seleccione-</option>
+                            <option value='1'>Examen Profesional</option>
+                            <option value='2'>Promedio</option>
+                            <option value='3'>Seminario de Titulación</option>
+                            <option value='4'>Experiencia Laboral</option>
+                            <option value='5'>Titulación con doble especialidad</option>
+                            <option value='6'>Acuerdo 286 y Acuerdo 357</option>
+                            <option value='7'>Titulación por Ampliación y Profundización de Conocimientos</option>
+                            <option value='8'>No aplica</option>
+                            <option value='9'>Posgrado</option>
+                            <option value='10'>Materias de Maestría con opción a Titulo</option>
+                            <option value='11'>Titulación por el mecanismo establecido para la Universidad Mundial</option>
+
+                          </select>
+                        </div>
+                        <div class="form-group col-md-3">
+                          <label class="control-label" for="titulacion">Año de titulación:</label>
+                          <input type="text" class="form-control input-sm" id="titulacion" name="titulacion" >
+                        </div>
+                        <div class="form-group col-md-3">
+                          <label class="control-label" for="cedula">Número de Cédula:</label>
+                          <input type="text" class="form-control input-sm" id="cedula" name="cedula" >
+                        </div>
+                                                
+                        <div class="form-group col-md-3">
+                          <label class="control-label" for="nivelCENNI">Nivel de Inglés CENNI:</label>
+                          <input type="text" class="form-control input-sm" id="nivelCENNI" name="nivelCENNI" >
+                        </div>
+                        <div class="form-group col-md-3">
+                          <label class="control-label" for="folio">Folio CENNI:</label>
+                          <input type="text" class="form-control input-sm" id="folio" name="folio" >
+                        </div>
+                      </form>
+                        <form>
+                            <div class="form-group col-md-3">
+                                <label class="control-label" for="evidencia1">Carga de título y cédula:</label>
+                                <input type="file" class="form-control input-sm" id="evidencia1" name="evidencia1" >
+                            </div>
+                        </form>
+                        <form>
+                            <div class="form-group col-md-3">
+                                <label class="control-label" for="evidencia2">Carga de constancia CENNI:</label>
+                                <input type="file" class="form-control input-sm" id="evidencia2" name="evidencia2" >
+                              </div>
+                        </form>
+                        <div class="col-xs-12 text-right">
+                            <button class="btn btn-sm btn-primary" onclick="limpiar('academica')" >Limpiar</button>
+                          <button class="btn btn-sm btn-primary" onclick="enviar('academica')">Guardar y continuar</button>
+                        </div>
+                        
+                        
+                    </div>
+                  </div>
+                </div>
+
+                <div class="panel panel-default">
+                  <div class="panel-heading">
+                    <h4 class="panel-title">
+                      <a data-parent="#accordion" data-toggle="collapse" href="#infoLaboral" aria-expanded="true" aria-controls="infoLaboral">
+                      Información Laboral
+                      </a>
+                    </h4>
+                    <button type="button" class="collpase-button collapsed" data-parent="#accordion" data-toggle="collapse" href="#infoLaboral"></button>
+                  </div>
+                  <div class="panel-collapse collapse" id="infoLaboral">
+                    <div class="panel-body">
+                      <form role="form">
+                        <div class="row">
+                        <div class="checkbox col-xs-12">
+                          <label><input type="checkbox" checked="true" name="activoServicio">Activo en Servicio</label>
+                        </div>
+                        <div class="form-group col-md-3 datepicker-group">
+                          <label class="control-label" for="ingresoSubsistema">Fecha de ingreso al subsistema:</label>
+                          <input type="text" class="form-control input-sm" id="ingresoSubsistema" name="ingresoSubsistema" >
+                          <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
+                        </div>
+                        <div class="form-group col-md-3 datepicker-group">
+                          <label class="control-label" for="ingresoPlantel">Fecha de ingreso al plantel:</label>
+                          <input class="form-control input-sm" id="ingresoPlantel" name="ingresoPlantel" type="text">
+                          <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
+                        </div>
+                        <div class="form-group col-md-4">
+                          <label class="control-label" for="plantel">Plantel:</label>
+                          <select class="form-control input-sm" id="plantel" name="plantel">
+                            <option>-Seleccione-</option>
+                          </select>
+                        </div>
+                        <div class="form-group col-md-2">
+                          <br/>
+                          <span style="color:red;">Alta marginación</span>
+                        </div>
+                        <div class="form-group col-md-3">
+                          <label class="control-label" for="categoria">Categoría actual:</label>
+                          <select class="form-control input-sm" id="categoria" name="categoria">
+                            <option>-Seleccione-</option>
+                          </select>                          
+                        </div>
+                        <div class="form-group col-md-3 datepicker-group">
+                          <label class="control-label" for="fechaPlaza" style="font-size: 12px;">Fecha desde que ostenta la plaza:</label>
+                          <input class="form-control input-sm" id="fechaPlaza" name="fechaPlaza" type="text">
+                          <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
+                        </div>
+                        <div class="form-group col-md-3">
+                          <label class="control-label" for="tipoNombramiento">Tipo de nombramiento:</label>
+                          <select class="form-control input-sm" id="tipoNombramiento" name="tipoNombramiento">
+                            <option>-Seleccione-</option>
+                          </select>                          
+                        </div>
+                        <div class="form-group col-md-3 datepicker-group">
+                          <label class="control-label" for="fechaPromocion">Fecha de su última promoción:</label>
+                          <input class="form-control input-sm" id="fechaPromocion" name="fechaPromocion" type="text">
+                          <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
+                        </div>
+                      </div>
+                        <div class="row">
+                          <div class="form-group col-md-3">
+                            <label class="control-label" for="categoriaAspirada">Categoría a la que aspira:</label>
+                            <select class="form-control input-sm" id="categoriaAspirada" name="categoriaAspirada">
+                              <option>-Seleccione-</option>
+                            </select>                          
+                          </div>                                               
+                          <div class="checkbox col-md-9">
+                            <br/>
+                            <label><input type="checkbox" name="notaDesfavorable">Marque la casilla si cuenta con nota desfavorable o sanción administrativa</label>
+                          </div>
+                        </div>
+                        <div class="row">
+                        <div class="form-group col-md-4">
+                          <label class="control-label" for="evidencia3">Carga de constancia de antigüedad:</label>
+                          <input type="file" class="form-control input-sm" id="evidencia3" name="evidencia3" >
+                        </div> 
+                        <div class="form-group col-md-4">
+                          <label class="control-label" for="evidencia4">Carga de constancia de nombramiento definitivo:</label>
+                          <input type="file" class="form-control input-sm" id="evidencia4" name="evidencia4" >
+                        </div> 
+                        <div class="form-group col-md-4">
+                          <label class="control-label" for="evidencia5">Carga de constancias de no nota desfavorable y no sanción administrativa:</label>
+                          <input type="file" class="form-control input-sm" id="evidencia5" name="evidencia5" >
+                        </div> 
+                      </div>
+                        <div class="col-xs-12 text-right">
+                          <button class="btn btn-sm btn-primary" type="reset">Limpiar</button>
+                          <button class="btn btn-sm btn-primary" type="submit">Guardar y continuar</button>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="panel panel-default">
+                  <div class="panel-heading">
+                    <h4 class="panel-title">
+                      <a data-parent="#accordion" data-toggle="collapse" href="#infoHoras" aria-expanded="true" aria-controls="infoHoras">
+                      Horas frente a grupo
+                      </a>
+                    </h4>
+                    <button type="button" class="collpase-button collapsed" data-parent="#accordion" data-toggle="collapse" href="#infoHoras"></button>
+                  </div>
+                  <div class="panel-collapse collapse" id="infoHoras">
+                    <div class="panel-body">
+                      <form role="form">
+                        <div class="checkbox col-md-6">
+                          <label><input type="checkbox" checked="true" name="frenteGrupo">Marque la casilla si actualmente se encuentra frente a grupo</label>
+                        </div>
+                        <div class="form-group col-md-3">
+                          <label class="control-label" for="numHoras">Horas frente a grupo:</label>
+                          <input type="text" class="form-control input-sm" id="numHoras" name="numHoras" >
+                        </div>
+                        <div class="form-group col-md-3">
+                          <label class="control-label" for="numGrupos">Número de grupos:</label>
+                          <input type="text" class="form-control input-sm" id="numGrupos" name="numGrupos" >
+                        </div>
+                        <div class="text-center">
+                          <input type="button" class="btn btn-link btn-sm" value="(+) Agregar información" />
+                        </div>
+                        <div class="table-responsive">
+                          <table class="table table-striped table-bordered">
+                            <tr>
+                              <th>Semestre</th>
+                              <th>Componente básico</th>   
+                              <th>Componente propedeutico</th> 
+                              <th>Componente profesional</th>
+                              <th>Opciones</th>                        
+                            </tr>
+                            <tr>
+                              <td></td>
+                              <td></td>
+                              <td></td>
+                              <td></td>
+                              <td>
+                                <input type="button" class="btn btn-link btn-sm" value="Editar" />
+                                <input type="button" class="btn btn-link btn-sm" value="Borrar" />
+                              </td>
+                            </tr>
+                          </table>
+                        </div>
+                        <div class="form-group col-md-4">
+                          <label class="control-label" for="evidencia6">Carga de constancia de horas frente a grupo:</label>
+                          <input type="file" class="form-control input-sm" id="evidencia6" name="evidencia6" >
+                        </div> 
+                        <div class="col-xs-12 text-right">
+                          <button class="btn btn-sm btn-primary" type="reset">Limpiar</button>
+                          <button class="btn btn-sm btn-primary" type="submit">Guardar y continuar</button>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+                <div class="panel panel-default">
+                  <div class="panel-heading">
+                    <h4 class="panel-title">
+                      <a data-parent="#accordion" data-toggle="collapse" href="#infoCompatibilidad" aria-expanded="true" aria-controls="infoCompatibilidad">
+                      Compatibilidad
+                      </a>
+                    </h4>
+                    <button type="button" class="collpase-button collapsed" data-parent="#accordion" data-toggle="collapse" href="#infoCompatibilidad"></button>
+                  </div>
+                  <div class="panel-collapse collapse" id="infoCompatibilidad">
+                    <div class="panel-body">
+                      <form role="form">                        
+                        <div class="checkbox col-xs-12">
+                          <label><input type="checkbox" checked="true" name="funcionesOtro">Marque la casilla si desempeña funciones en otro subsistema</label>
+                        </div>
+                        <div class="form-group col-md-3">
+                          <label class="control-label" for="numHorasOtro">Número de horas:</label>
+                          <input type="text" class="form-control input-sm" id="numHorasOtro" name="numHorasOtro" >
+                        </div>
+                        <div class="checkbox col-md-4">
+                          <label><input type="checkbox" checked="true" name="compatibilidad">Marque la casilla si cuenta con la compatibilidad requerida</label>
+                        </div>
+                        <div class="form-group col-md-4">
+                          <label class="control-label" for="evidencia7">Carga de constancia de compatibilidad:</label>
+                          <input type="file" class="form-control input-sm" id="evidencia7" name="evidencia7" >
+                        </div> 
+                        <div class="col-xs-12 text-right">
+                          <button class="btn btn-sm btn-primary" type="reset">Limpiar</button>
+                          <button class="btn btn-sm btn-primary" type="submit">Guardar y continuar</button>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+                
+              </div>
+              <!--FIN Paneles colapsables-->
+          </div>
+                
+        </main>
+        <script src="https://framework-gb.cdn.gob.mx/gobmx.js"></script>        
+        <script src="https://code.jquery.com/jquery-1.12.4.js"></script>      
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>  
+        <script src="https://framework-gb.cdn.gob.mx/assets/scripts/jquery-ui-datepicker.js"></script>
+        <script src="js/funciones.js"></script> 
+    </body>
+</html>
