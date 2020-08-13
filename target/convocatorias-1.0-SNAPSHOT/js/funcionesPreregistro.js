@@ -167,14 +167,17 @@ function consultaWS(){
                         $("#plantel").attr("style", "pointer-events: none;");
                         $("#plantel").attr("readOnly","readOnly");
                     }else{
-                        $("#entidad").val("");
-                        $("#entidad").removeAttr("style");
-                        $("#entidad").removeAttr("readOnly");
-                        $("#plantel").html("<option value=''>-Seleccione-</option>");
-                        $("#plantel").removeAttr("style");
-                        $("#plantel").removeAttr("readOnly");
+                        $("#mensaje").html("El RFC ingresado no se encuentra asignado a plantel, contacte al personal de recursos humanos");            
+                        $("#modalMensaje").modal("show");
+                        $("#btnEnviar").attr("disabled",true);
+                        $("#btnContinuar").attr("style","display:none;");
                     }
 
+                }else{
+                    $("#mensaje").html("El RFC ingresado no se encuentra registrado en la institución, contacte al personal de recursos humanos de su plantel");            
+                    $("#modalMensaje").modal("show");
+                    $("#btnEnviar").attr("disabled",true);
+                    $("#btnContinuar").attr("style","display:none;");
                 }
             });
         }

@@ -332,7 +332,19 @@ public class Docente {
         int c1=0,c2=0,c3=0;
         if(totalEncuestados>0){
             for(String[] encuestado:encuestados){
-                fila="<tr><td>"+encuestado[2]+"</td><td>"+encuestado[4]+"</td></tr>";
+                fila="<tr><td>"+encuestado[2]+"</td><td>"+encuestado[4]+"</td><td>";
+                System.out.println(encuestado[5]);
+                if(encuestado[5].equals("PENDIENTE")){
+                    fila+="<button type='button' class='btn btn-sm' title='Borrar' onclick='borrarEncuestado("+encuestado[0]+")'>";
+                    fila+="<span class='glyphicon glyphicon-trash'></span>";
+                    fila+="</button>";
+                }else if(encuestado[5].equals("CONCLUIDO")){
+                    fila+="<button type='button' class='btn btn-sm' disabled title='Esta información no puede borrarse'>";
+                    fila+="<span class='glyphicon glyphicon-trash'></span>";
+                    fila+="</button>";
+                }
+                
+                fila+="<td></tr>";
                 switch(encuestado[3]){
                     case "1":
                         retorno[0][0]+=fila;

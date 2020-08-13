@@ -230,7 +230,7 @@ public class Metodos_sql {
         int resultado = 0;
         conexion = null;
         Date fecha = new Date(20, 05, 31);
-         String guardar = "INSERT INTO convocatoria(idPrograma,publicacion,inicioRegistro,finRegistro,inicioValoracion,finValoracion,inicioDictaminacion,finDictaminacion,resultados,idPlantel) VALUES(?,?,?,?,?,?,?,?,?,?)";
+         String guardar = "INSERT INTO convocatoria(idPrograma,publicacion,inicioRegistro,finRegistro,inicioValoracion,finValoracion,inicioDictaminacion,finDictaminacion,resultados,idPlantel,estatus) VALUES(?,?,?,?,?,?,?,?,?,?,?)";
         //String guardar = "INSERT INTO convocatoria(id,nombre,publicacion,inicioRegistro,finRegistro,inicioValoracion,finValoracion,inicioDictaminacion,finDictaminacion,resultados,idPlantel) VALUES(?,?,?,?,?,?,?,?,?,?)";
 
         conexion = conector();
@@ -246,6 +246,7 @@ public class Metodos_sql {
             sentencia_preparada.setDate(8, periodo_dictaminacion_fin1);
             sentencia_preparada.setDate(9, publicacion_resultados1);
             sentencia_preparada.setInt(10, Integer.parseInt(pla1));
+            sentencia_preparada.setString(11, "TEMPORAL");
             resultado = sentencia_preparada.executeUpdate();
             sentencia_preparada.close();
             conexion.close();
@@ -768,7 +769,7 @@ System.out.println(e.toString());
             aux = aux.substring(0, aux.length() - 1);
         }          
         String buscar = "call "+sp+"("+aux+");";
-        //System.out.println(buscar);
+        System.out.println(buscar);
         conexion = conectorEncuestas();        
         try {
             sentencia_preparada = conexion.prepareStatement(buscar);

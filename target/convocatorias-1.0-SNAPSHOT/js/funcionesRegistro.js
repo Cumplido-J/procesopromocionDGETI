@@ -3,7 +3,7 @@ $(document).ready(function () {
     $( "#ingresoPlantel" ).datepicker({changeMonth:true, changeYear: true});     
     $( "#fechaPlaza" ).datepicker({changeMonth:true, changeYear: true});         
     $( "#fechaPromocion" ).datepicker({changeMonth:true, changeYear: true});  
-    
+        
     $('#formInfoAcademica').submit(function(e) {
         e.preventDefault();
     }).validate({        
@@ -88,8 +88,8 @@ $(document).ready(function () {
     
     $('#formInfoLaboral').submit(function(e) {
         e.preventDefault();
-    }).validate({  
-        messages: {
+    }).validate({          
+        messages: {            
             'ingresoSubsistema': {
                 required: "Campo requerido"
             },
@@ -342,12 +342,10 @@ function actualizarInstitucion() {
 }
 function cambioInstitucion() {
     id=$("#institucion").val(); 
-    $.get("ConsultaCatalogos", {k: "12",i:id}, function(respuesta){
-        $("#cct").html(respuesta);
-    });
-    $.get("ConsultaCatalogos", {k: "2",i:id}, function(respuesta){
-        $("#escuela").html(respuesta);
-    });
+    $.get("ConsultaCatalogos", {k: "12",i:id}, function(){        
+    }).done(function(respuesta){$("#cct").html(respuesta);});
+    $.get("ConsultaCatalogos", {k: "2",i:id}, function(){        
+    }).done(function(respuesta){$("#escuela").html(respuesta);});
 }
 function cambioPlantel() {
     id=$("#plantel").val();
@@ -648,8 +646,16 @@ function mostrarSiguiente(id){
                 $("#estatusInfoLaboral").attr("completo",false);
             } 
             
-            if($("#activoServicio").is(':checked')){
-                if($("#notaDesfavorable").is(':checked')){
+            if($("#activoServicio").is(':checked')){                
+                if (!$("input[name='opReqCat']:checked").val()) {
+                    $("#btnConfirmacion").attr("onClick","enviarConfirmacion(7)");
+                    $("#idHora").val("");
+                    $("#descripcionBitacora").val("El usuario confirma que: no cumple ningun requisito de la plaza que aspira");
+                    $("#mensajeConfirmacion").html("Confirma que no cumple ningun requisito de la plaza que aspira");
+                    $("#tituloConfirmacion").html("Aviso");
+                    $("#modalConfirmacion").modal("show");                    
+                }
+                else if($("#notaDesfavorable").is(':checked')){
                     $("#btnConfirmacion").attr("onClick","enviarConfirmacion(2)");
                     $("#idHora").val("");
                     $("#descripcionBitacora").val("El usuario confirma que:"+$("#mensajeNotaDesfavorable").val());
@@ -943,12 +949,13 @@ function cambioCategoria() {
 }
 function cambioCategoriaAspira() {
     id=$("#categoriaAspira").val(); 
-    $.get("ConsultaCatalogos", {k: "9",i:id}, function(respuesta){
-        $("#jornadaAspira").html(respuesta);
-    });
-    $.get("ConsultaCatalogos", {k: "10",i:id}, function(respuesta){
-        $("#rbRequisitos").html(respuesta);
-    }); 
+    idPrograma=$("#programa").val(); 
+    idPlantel=$("#plantel").val(); 
+    $.get("ConsultaCatalogos", {k: "14",i:id,pr:idPrograma,pl:idPlantel}, function(){        
+    }).done(function(respuesta){$("#jornadaAspira").html(respuesta);});
+    $.get("ConsultaCatalogos", {k: "10",i:id}, function(){        
+    }).done(function(respuesta){$("#rbRequisitos").html(respuesta);}); 
+    
 }
 
 function borrarHoraGrupo(id){
@@ -1046,6 +1053,13 @@ function enviarConfirmacion(parametro){
                         $("#numGrupos").val(datos[2]);
                     }
                     break;
+                case 7:
+                    $("#btnEnviar2").attr("disabled","disabled");
+                    //$("#notaDesfavorable").attr("disabled",true);
+                    $("#banderaCompleto").val("false");
+                    //$("#seccionNotas").attr("hidden",true);
+                    $("#btnFinalizar").removeAttr("disabled");
+                    break;
                 default:
                     break;
             }            
@@ -1079,6 +1093,15 @@ function cambioProtesta(){
         $("#btnFinalizar").removeAttr("disabled");        
     }else{
         $("#btnFinalizar").attr("disabled","true");
+    }
+}
+function cambioCarrera(){
+    var carrera=$("#carrera").val();
+    var catalogo=$("#catCarreras").html();
+    if(!catalogo.includes(carrera)){
+        $("#mensaje").html("Seleccione una carrera de la lista desplegable");
+        $("#modalMensaje").modal("show");
+        $("#carrera").val("");
     }
 }
 
