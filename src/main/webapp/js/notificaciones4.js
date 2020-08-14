@@ -1,14 +1,15 @@
-const titulo1 = document.getElementById("textarea");
+
+const titulo1 = document.getElementById("programa");
 
 titulo1.addEventListener("input", function (event) {
-    var publi1 = document.getElementById("textarea").value;
+    var prog1 = document.getElementById("programa").value;
 
-    if (publi1 == "") {
-        $("#c1").text("Campo TITULO CONVOCATORIA vacio").css("color", "red");
-        $("#textarea").css("border", "1px solid red");
+    if (prog1 == "") {
+        $("#c1").text("Campo PROGRAMA vacio").css("color", "red");
+        $("#programa").css("border", "1px solid red");
     } else {
         $("#c1").text("").css("color", "red");
-        $("#textarea").css("border", "1px solid black");
+        $("#programa").css("border", "1px solid black");
     }
 });
 
@@ -128,11 +129,10 @@ publicacion_resultados1.addEventListener("input", function (event) {
 
 
 function  validar_datos() {
-
-    var tituloconvocatoria1 = document.getElementById("textarea").value;
-    if (tituloconvocatoria1 == "") {
-        $("#c1").text("Campo TITULO CONVOCATORIA vacio").css("color", "red");
-        $("#textarea").css("border", "1px solid red");
+var programa1 = document.getElementById("programa").value;
+    if (programa1 == 0) {
+        $("#c1").text("Campo PROGRAMA vacio").css("color", "red");
+        $("#programa").css("border", "1px solid red");
     }
 
     var publicacion1 = document.getElementById("publicacion").value;
@@ -183,12 +183,12 @@ function  validar_datos() {
         $("#publicacion_resultados").css("border", "1px solid red");
     }
 //----------------------------------------------------------------------------
-
-    if (document.getElementById("textarea").value === "")
+if (document.getElementById("programa").value === "")
     {
         return false;
     } else {
     }
+   
 //----------------------------------------------------------------------------
 
     if (document.getElementById("publicacion").value === "")

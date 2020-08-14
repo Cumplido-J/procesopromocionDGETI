@@ -57,7 +57,7 @@ function jornada1() {
 
 
 function convocatoria1() {
- 
+
 
     var combo = document.getElementById("convocatoria");
     var selected = combo.options[combo.selectedIndex].text;
@@ -122,26 +122,27 @@ cantidad1.addEventListener("input", function (event) {
     } else if (usu1 == "") {
         $("#n100").text("Campo CANTIDAD PLAZAS vacio").css("color", "red");
         $("#cantidad").css("border", "1px solid red");
-    }  else {
+    } else {
         $("#n100").text("Campo CANTIDAD PLAZAS solo acepta numeros").css("color", "red");
         $("#cantidad").css("border", "1px solid red");
     }
 });
 
 function  validate() {
-
     var ent1 = document.getElementById("entidad").value;
-    if (ent1 == "0") {
+    var control_combobox = document.getElementById("control_combobox").value;
+
+    if (ent1 === "0" && control_combobox === "false") {
         $("#n8").text("Campo ENTIDAD vacio").css("color", "red");
         $("#entidad").css("border", "1px solid red");
     }
 
     var pla1 = document.getElementById("i_plantel").value;
-    if (pla1 == "0") {
+    if (pla1 === "0" && control_combobox === "false") {
         $("#n7").text("Campo PLANTEL vacio").css("color", "red");
         $("#i_plantel").css("border", "1px solid red");
     }
-
+    
     var plaz1 = document.getElementById("plaza1").value;
     if (plaz1 == "0") {
         $("#n30").text("Campo CATEGORIA PLAZA vacio").css("color", "red");
@@ -166,6 +167,11 @@ function  validate() {
         $("#i_plantel3").css("border", "1px solid red");
     }
 
+    var con1 = document.getElementById("convocatoria").value;
+    if (con1 == "0") {
+        $("#n80").text("Campo CONVOCATORIA vacio").css("color", "red");
+        $("#convocatoria").css("border", "1px solid red");
+    }
 //    var gra1 = document.getElementById("i_plantel4").value;
 //    if (gra1 == "0") {
 //        $("#n60").text("Campo GRADO ACADEMICO vacio").css("color", "red");
@@ -179,14 +185,14 @@ function  validate() {
     }
 
 //----------------------------------------------------------------------------
-    if (document.getElementById("entidad").value == "0")
+   if (document.getElementById("i_plantel").value === "0" && control_combobox === "false")
     {
         return false;
     } else {
     }
 
 //----------------------------------------------------------------------------
-    if (document.getElementById("i_plantel").value == "0")
+    if (document.getElementById("entidad").value === "0" && control_combobox === "false")
     {
         return false;
     } else {
@@ -233,7 +239,7 @@ function  validate() {
     }
 
 //----------------------------------------------------------------------------
-if (document.getElementById("convocatoria").value == "0")
+    if (document.getElementById("convocatoria").value == "0")
     {
         return false;
     } else {

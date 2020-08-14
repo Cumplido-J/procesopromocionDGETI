@@ -233,13 +233,15 @@ function  validate() {
 
 //------------------------------------------------------------------------------
     var ent1 = document.getElementById("entidad").value;
-    if (ent1 == "0") {
+    var control_combobox = document.getElementById("control_combobox").value;
+    
+    if (ent1 == "0" && control_combobox == "false") {
         $("#n8").text("Campo ENTIDAD vacio").css("color", "red");
         $("#entidad").css("border", "1px solid red");
     }
 
     var pla1 = document.getElementById("i_plantel").value;
-    if (pla1 == "0") {
+    if (pla1 == "0" && control_combobox == "false") {
         $("#n7").text("Campo PLANTEL vacio").css("color", "red");
         $("#i_plantel").css("border", "1px solid red");
     }
@@ -304,6 +306,12 @@ function  validate() {
   
     }
 
+    var p1 = document.getElementById("pass1").value;
+    var p2 = document.getElementById("pass2").value;
+    if (p1 == cadenavacia && p2 == cadenavacia) {
+        return false;
+    }
+    
 //----------------------------------------------------------------------------
     var nom = document.getElementById("nombre_nom").value;
     if (nom == cadenavacia)
@@ -393,14 +401,14 @@ function  validate() {
     }
 //----------------------------------------------------------------------------
 
-    if (document.getElementById("i_plantel").value == "0")
+ if (document.getElementById("i_plantel").value == "0" && control_combobox == "false")
     {
         return false;
     } else {
     }
 
 //----------------------------------------------------------------------------
-    if (document.getElementById("entidad").value == "0")
+      if (document.getElementById("entidad").value == "0" && control_combobox == "false")
     {
         return false;
     } else {
