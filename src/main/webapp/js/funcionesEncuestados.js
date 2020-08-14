@@ -106,7 +106,9 @@ function enviar(){
                 }
             }else{                
                 $("#respuesta").html(data);
-                //$("#modalRegistro").modal("show");
+                $("#seccionBotonesConfirmacion").attr("hidden",true);
+                $("#seccionConfirmacion").attr("hidden",true);
+                $("#seccionBotones").removeAttr("hidden");
             }
         },error:function(){
 

@@ -106,12 +106,13 @@
                         <tr>
                           <th>CURP</th>
                           <th>Correo</th>
+                          <th>Opciones</th>
                         </tr>                        
                       </thead>
                       <tbody id="tabla1">
                           <c:if test="${filas[0][0]==''}">
                             <tr>
-                                <td colspan="2">Sin información</td>
+                                <td colspan="3">Sin información</td>
                             </tr> 
                           </c:if>
                           <c:if test="${filas[0][0]!=''}">
@@ -129,12 +130,13 @@
                         <tr>
                           <th>CURP</th>
                           <th>Correo</th>
+                          <th>Opciones</th>
                         </tr>                        
                       </thead>
                       <tbody id="tabla2">
                           <c:if test="${filas[1][0]==''}">
                             <tr>
-                                <td colspan="2">Sin información</td>
+                                <td colspan="3">Sin información</td>
                             </tr> 
                           </c:if>
                           <c:if test="${filas[1][0]!=''}">
@@ -152,12 +154,13 @@
                         <tr>
                           <th>CURP</th>
                           <th>Correo</th>
+                          <th>Opciones</th>
                         </tr>                        
                       </thead>
                       <tbody id="tabla3">
                           <c:if test="${filas[2][0]==''}">
                             <tr>
-                                <td colspan="2">Sin información</td>
+                                <td colspan="3">Sin información</td>
                             </tr> 
                           </c:if>
                           <c:if test="${filas[2][0]!=''}">
@@ -207,12 +210,12 @@
                             <div class="text-center"><h4 class="text-danger" id="respuesta"></h4></div>
                             <div class="form-group col-md-6">
                                 <label class="control-label" for="curp">CURP encuestado:</label>
-                                <input type="text" class="form-control input-sm" id="curp" name="curp" maxlength="18" required>                                                                 
+                                <input type="text" class="form-control input-sm" id="curp" name="curp" maxlength="18" onChange="cambioEncuesta()" required>                                                                 
                                 <label class="error" id="alertaCURP" hidden >CURP inválido, verifique en <a href="https://www.gob.mx/curp/" target="_blank">RENAPO</a></label>
                             </div>
                             <div class="form-group col-md-6">
                                 <label class="control-label" for="correo">Correo encuestado:</label>
-                                <input type="text" class="form-control input-sm" id="correo" name="correo" required>  
+                                <input type="text" class="form-control input-sm" id="correo" name="correo" onChange="cambioEncuesta()" required>  
                                 <label class="error" id="alertaCorreo" hidden >Correo inválido</label>
                             </div>
                         </div>

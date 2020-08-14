@@ -38,16 +38,15 @@ public class Metodos_sql {
 //        Properties p = new Properties();        
         conexion = null;
         try {
-//            p.load(new FileReader("C:/ArchivosPromocion/config.properties"));
-//            
-//            driver=p.getProperty("driver");
-//            user=p.getProperty("user");
-//            pass=p.getProperty("pass");
-//            url=p.getProperty("url");            
-//            Class.forName(driver);
-//            conexion = (Connection) DriverManager.getConnection(url, user, pass);
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            conexion = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/bdpromocion?useTimeZone=true&serverTimezone=UTC&autoReconnect=true&useSSL=false", "root", "1234567");
+            p.load(new FileReader("C:/ArchivosPromocion/config.properties"));
+            
+            driver=p.getProperty("driver");
+            user=p.getProperty("user");
+            pass=p.getProperty("pass");
+            url=p.getProperty("url");            
+            Class.forName(driver);
+            conexion = (Connection) DriverManager.getConnection(url, user, pass);
+            
             if (conexion != null) {
                 System.out.println("conexion establecida");
             }
@@ -231,13 +230,13 @@ public class Metodos_sql {
         int resultado = 0;
         conexion = null;
         Date fecha = new Date(20, 05, 31);
-        String guardar = "INSERT INTO convocatoria(id,publicacion,inicioRegistro,finRegistro,inicioValoracion,finValoracion,inicioDictaminacion,finDictaminacion,resultados,idPlantel,idPrograma,estatus) VALUES(?,?,?,?,?,?,?,?,?,?,?,?)";
+        String guardar = "INSERT INTO convocatoria(idPrograma,publicacion,inicioRegistro,finRegistro,inicioValoracion,finValoracion,inicioDictaminacion,finDictaminacion,resultados,idPlantel,estatus) VALUES(?,?,?,?,?,?,?,?,?,?,?,?)";
         //String guardar = "INSERT INTO convocatoria(id,nombre,publicacion,inicioRegistro,finRegistro,inicioValoracion,finValoracion,inicioDictaminacion,finDictaminacion,resultados,idPlantel) VALUES(?,?,?,?,?,?,?,?,?,?)";
 
         conexion = conector();
         try {
             sentencia_preparada = conexion.prepareStatement(guardar);
-            sentencia_preparada.setString(1, String.valueOf(0));
+            sentencia_preparada.setInt(1, Integer.parseInt(programa));
             sentencia_preparada.setDate(2, publicacion1);
             sentencia_preparada.setDate(3, periodo_registro_inicio1);
             sentencia_preparada.setDate(4, periodo_registro_fin1);
@@ -247,8 +246,7 @@ public class Metodos_sql {
             sentencia_preparada.setDate(8, periodo_dictaminacion_fin1);
             sentencia_preparada.setDate(9, publicacion_resultados1);
             sentencia_preparada.setInt(10, Integer.parseInt(pla1));
-            sentencia_preparada.setInt(11, Integer.parseInt(programa));
-            sentencia_preparada.setString(12, "null");
+            sentencia_preparada.setInt(11, "TEMPORAL");
             resultado = sentencia_preparada.executeUpdate();
             sentencia_preparada.close();
             conexion.close();

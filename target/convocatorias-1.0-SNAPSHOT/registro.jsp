@@ -29,6 +29,8 @@
         <input type="hidden" id="mensajeNoCompatibilidad" value="${mensaje.noCompatibilidad}" />
         <input type="hidden" id="mensajeConfirmacionHora" value="${mensaje.confirmacionHora}" />
         <input type="hidden" id="mensajeRechazoHora" value="${mensaje.rechazoHora}" />
+        <input type="hidden" id="programa" value="${Docente.infoRegistro[64]}" />
+        <input type="hidden" id="plantel" value="${Docente.infoRegistro[6]}" />
         <main class="page">            
             <!--Barra navegación UEMSTIS-->
             <nav class="navbar navbar-inverse sub-navbar navbar-fixed-top">
@@ -96,6 +98,11 @@
                     <div class="panel-body">
                       <form id="formInfoAcademica" role="form" action="RegistroInfoAcademica" method="POST">
                         <div class="row">
+                            <div class="col-xs-12">
+                            <label class="text-warning"><span class="glyphicon glyphicon-warning-sign"></span>&nbsp;Si la información de Institucion, Escuela o Facultad y/o Carrera no está disponible para seleccionar, comuníquese con Mesa de Ayuda.</label>
+                            </div>
+                        </div>
+                        <div class="row">
                             <div class="form-group col-md-3">
                               <!--<input type="text" value="${Docente.rfc}" />-->                                
                               <label class="control-label" for="entidad">Entidad de estudio:</label>
@@ -137,7 +144,8 @@
                             </div>
                             <div class="form-group col-md-3">
                               <label class="control-label" for="carrera">Carrera:</label>                              
-                              <input type="text" class="form-control input-sm" id="carrera" name="carrera" value="${Docente.infoRegistro[17]}" required>                                                            
+                              <input type="text" class="form-control input-sm" id="carrera" name="carrera" value="${Docente.infoRegistro[17]}" required onchange="cambioCarrera()">
+                              <textarea id="catCarreras" hidden>${catalogo.consultarCarreras()}</textarea>
                             </div>
                             <div class="form-group col-md-3">
                               <label class="control-label" for="egreso">Año de egreso:</label>
@@ -251,15 +259,15 @@
                       <form id="formInfoLaboral" role="form" action="RegistroInfoLaboral" method="POST">                      
                         <div class="row">
                             <div class="checkbox col-xs-12">
-                              <c:if test = "${Docente.infoRegistro[25]=='S'}">
+                              <c:if test = "${Docente.infoRegistro[25]=='N'}">
+                                    <c:set var="checked" value="'"></c:set>
+                                    <c:set var="in" value=""></c:set>
+                              </c:if>
+                              <c:if test = "${Docente.infoRegistro[25]!='N'}">
                                     <c:set var="checked" value="checked='true'"></c:set>
                                     <c:set var="in" value="in"></c:set>
                               </c:if>
-                              <c:if test = "${Docente.infoRegistro[25]!='S'}">
-                                    <c:set var="checked" value=""></c:set>
-                                    <c:set var="in" value=""></c:set>
-                              </c:if>
-                              <label><input type="checkbox" ${checked} id="activoServicio" name="activoServicio" data-toggle="collapse" data-target="#seccionActivoServicio">Activo en Servicio</label>
+                              <label><input type="checkbox" ${checked} id="activoServicio" name="activoServicio" data-toggle="collapse" data-target="#seccionActivoServicio">Activo en Servicio en Plantel</label>
                             </div>
                         </div>
                         <div id="seccionActivoServicio" class="collapse ${in}">
@@ -344,13 +352,13 @@
                                 <div class="form-group col-md-3">
                                   <label class="control-label" for="categoriaAspira">Categoría a la que aspira:</label>
                                   <select class="form-control input-sm" id="categoriaAspira" name="categoriaAspira" onchange="cambioCategoriaAspira()" required>                                     
-                                     ${catalogo.desplegarOpcionesCategorias(Docente.infoRegistro[42])}
+                                     ${catalogo.desplegarOpcionesCategoriasVacantes(Docente.infoRegistro[6],Docente.infoRegistro[64],Docente.infoRegistro[42])}
                                   </select>                          
                                 </div>
                                 <div class="form-group col-md-3">
                                   <label class="control-label" for="jornadaAspira">Tipo de jornada:</label>
                                   <select class="form-control input-sm" id="jornadaAspira" name="jornadaAspira" required>
-                                      ${catalogo.desplegarOpcionesJornada(Docente.infoRegistro[42],Docente.infoRegistro[40])}
+                                      ${catalogo.desplegarOpcionesJornadaVacante(Docente.infoRegistro[42],Docente.infoRegistro[6],Docente.infoRegistro[64],Docente.infoRegistro[40])}
                                   </select>                          
                                 </div>
                                 <div class="form-group col-md-6">
@@ -425,14 +433,14 @@
                   <div class="panel-collapse collapse ${in}" id="infoHoras" >
                     <div class="panel-body">
                       <form role="form" id="formInfoHorasGrupo" action="RegistroInfoHoras" method="POST">
-                        <div class="checkbox col-md-6">
-                            <c:if test="${Docente.infoRegistro[59]=='S'}">
-                                <c:set var="checked" value='checked'></c:set>
-                                <c:set var="in" value='in'></c:set>
-                            </c:if>
-                            <c:if test="${Docente.infoRegistro[59]!='S'}">
+                        <div class="checkbox col-md-6">                            
+                            <c:if test="${Docente.infoRegistro[59]=='N'}">
                                 <c:set var="checked" value=''></c:set>
                                 <c:set var="in" value=''></c:set>
+                            </c:if>
+                            <c:if test="${Docente.infoRegistro[59]!='N'}">
+                                <c:set var="checked" value='checked'></c:set>
+                                <c:set var="in" value='in'></c:set>
                             </c:if>
                           <label><input type="checkbox" ${checked} name="frenteGrupo" id="frenteGrupo" data-toggle="collapse" data-target="#seccionHoras">Marque la casilla si actualmente se encuentra frente a grupo</label>
                         </div>  
@@ -466,14 +474,22 @@
                                 </tbody>                                
                               </table>
                             </div>
-                            <div class="row" id="seccionCENNI" hidden>
+                            <c:if test="${Docente.getBanderaIngles()==true}">
+                                <c:set var="hidden" value=""></c:set>
+                                <c:set var="required" value="required"></c:set>
+                            </c:if>
+                            <c:if test="${Docente.getBanderaIngles()!=true}">
+                                <c:set var="hidden" value="hidden"></c:set>
+                                <c:set var="required" value=""></c:set>
+                            </c:if>
+                            <div class="row" id="seccionCENNI" ${hidden}>
                                 <div class="form-group col-md-3">
                                   <label class="control-label" for="nivelCENNI">Nivel de Inglés CENNI:</label>
-                                  <input type="text" class="form-control input-sm" id="nivelCENNI" name="nivelCENNI" maxlength="2" pattern="[0-9]+" value="${Docente.infoRegistro[51]}">                          
+                                  <input type="text" class="form-control input-sm" id="nivelCENNI" name="nivelCENNI" maxlength="2" pattern="[0-9]+" value="${Docente.infoRegistro[51]}" ${required}>                          
                                 </div>
                                 <div class="form-group col-md-3">
                                   <label class="control-label" for="folio">Folio CENNI:</label>
-                                  <input type="text" class="form-control input-sm" id="folio" name="folio" maxlength='15' value="${Docente.infoRegistro[52]}">
+                                  <input type="text" class="form-control input-sm" id="folio" name="folio" maxlength='15' value="${Docente.infoRegistro[52]}" ${required}>
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label class="control-label" for="btnEvidencia5">Constancia CENNI:</label>
@@ -837,24 +853,13 @@
         <script src="js/funcionesRegistro.js"></script> 
         <script>
             $( function() {
-            var availableTags = [
-              <%=new Catalogos().consultarCarreras()%>
-            ];
-            $( "#carrera" ).autocomplete({
-              source: availableTags
+                var availableTags = [
+                    ${catalogo.consultarCarreras()}
+                ];
+                $( "#carrera" ).autocomplete({
+                  source: availableTags
+                });
             });
-            if(${Docente.getBanderaIngles()==true}){
-                $("#seccionCENNI").removeAttr("hidden");
-                $("#nivelCENNI").attr("required","true");
-                $("#folio").attr("required","true");
-            }else{
-                $("#seccionCENNI").attr("hidden","true");
-                $("#nivelCENNI").removeAttr("required");
-                $("#nivelCENNI").val("");
-                $("#folio").removeAttr("required");
-                $("#folio").val("");
-            } 
-          } );
         </script>
     </body>
 </html>
