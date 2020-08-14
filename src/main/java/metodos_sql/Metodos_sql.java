@@ -229,7 +229,7 @@ public class Metodos_sql {
     public int guardar7(Date publicacion1, Date periodo_registro_inicio1, Date periodo_registro_fin1, Date periodo_valoracion_inicio1, Date periodo_valoracion_fin1, Date periodo_dictaminacion_inicio1, Date periodo_dictaminacion_fin1, Date publicacion_resultados1, String pla1, String programa) {
         int resultado = 0;
         conexion = null;
-        String guardar = "INSERT INTO convocatoria(idPrograma,publicacion,inicioRegistro,finRegistro,inicioValoracion,finValoracion,inicioDictaminacion,finDictaminacion,resultados,idPlantel,estatus) VALUES(?,?,?,?,?,?,?,?,?,?,?,?)";
+        String guardar = "INSERT INTO convocatoria(idPrograma,publicacion,inicioRegistro,finRegistro,inicioValoracion,finValoracion,inicioDictaminacion,finDictaminacion,resultados,idPlantel,estatus) VALUES(?,?,?,?,?,?,?,?,?,?,?)";
         
         conexion = conector();
         try {
