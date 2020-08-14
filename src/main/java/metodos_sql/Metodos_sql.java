@@ -29,33 +29,34 @@ public class Metodos_sql {
 
     public Metodos_sql() {
     }
-    
-    
 
 //------------------------------------------------------- CONEXION BASE DE DATOS    
     private static Connection conexion;
-    
+
     public static Connection conector() {
-        String driver,user,pass,url;
-        Properties p = new Properties();        
+        String driver, user, pass, url;
+//        Properties p = new Properties();        
         conexion = null;
         try {
-            p.load(new FileReader("C:/ArchivosPromocion/config.properties"));
-            
-            driver=p.getProperty("driver");
-            user=p.getProperty("user");
-            pass=p.getProperty("pass");
-            url=p.getProperty("url");            
-            Class.forName(driver);
-            conexion = (Connection) DriverManager.getConnection(url, user, pass);
+//            p.load(new FileReader("C:/ArchivosPromocion/config.properties"));
+//            
+//            driver=p.getProperty("driver");
+//            user=p.getProperty("user");
+//            pass=p.getProperty("pass");
+//            url=p.getProperty("url");            
+//            Class.forName(driver);
+//            conexion = (Connection) DriverManager.getConnection(url, user, pass);
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            conexion = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/bdpromocion?useTimeZone=true&serverTimezone=UTC&autoReconnect=true&useSSL=false", "root", "1234567");
             if (conexion != null) {
-                //System.out.println("conexion establecida");
+                System.out.println("conexion establecida");
             }
         } catch (Exception ex) {
-            System.out.println("Error de conexion:"+ex.toString());
-        } 
+            System.out.println("Error de conexion:" + ex.toString());
+        }
         return conexion;
     }
+
     //----------GUARDAR DATOS WORKBENCH, SERVLET CREAR CUENTA*
     public int guardar2(int id, String programa, String entidad, String plantel, String nombre, String primerApellido, String segundoApellido, String correo, String clave, String rfc, String telfijo, String telcel, String perfil, String consideraciones) {
         int resultado = 0;
@@ -138,7 +139,7 @@ public class Metodos_sql {
     }//fin metodo guardar 
 
     //----------GUARDAR DATOS, SERVLET AGREGAR USUARIO*
-    public int guardar4(int id, String entidad, String plantel, String usuario, String nombre, String primerApellido, String segundoApellido, String telfijo, String telcel, String correo, String clave, String perfil,String permisos) {
+    public int guardar4(int id, String entidad, String plantel, String nombre, String primerApellido, String segundoApellido, String correo, String clave, String usuario, String telfijo, String telcel, String perfil) {
         int resultado = 0;
 
         conexion = null;
@@ -159,19 +160,19 @@ public class Metodos_sql {
             sentencia_preparada.setString(11, telfijo);
             sentencia_preparada.setString(12, telcel);
             sentencia_preparada.setString(13, perfil);
+//            sentencia_preparada.setString(14, permisos);
             sentencia_preparada.setString(14, null);
-            //System.out.println(sentencia_preparada.toString());
+
             resultado = sentencia_preparada.executeUpdate();
             sentencia_preparada.close();
             conexion.close();
         } catch (Exception ex) {
-            System.out.println(ex.toString());
         }
         return resultado;
     }//fin metodo guardar
 
     //----------- GUARDAR VACANTES, SERVLET AGREGAR VACANTES*
-    public int guardar5( String entidad, String plantel, String plaza, String cantidad, String tipo, String jornada, String grado_academico, String vacancia1, String convocatoria) {
+    public int guardar5(String entidad, String plantel, String plaza, String cantidad, String tipo, String jornada, String grado_academico, String vacancia1, String convocatoria) {
         int resultado = 0;
         conexion = null;
 
@@ -226,17 +227,17 @@ public class Metodos_sql {
     }//fin metodo guardar 
 
     //----------- GUARDAR CONVOCATORIA, SERVLET GIARDAR CONVOCATORIA*
-    public int guardar7(String programa, Date publicacion1, Date periodo_registro_inicio1, Date periodo_registro_fin1, Date periodo_valoracion_inicio1, Date periodo_valoracion_fin1, Date periodo_dictaminacion_inicio1, Date periodo_dictaminacion_fin1, Date publicacion_resultados1,String pla1) {
+    public int guardar7(Date publicacion1, Date periodo_registro_inicio1, Date periodo_registro_fin1, Date periodo_valoracion_inicio1, Date periodo_valoracion_fin1, Date periodo_dictaminacion_inicio1, Date periodo_dictaminacion_fin1, Date publicacion_resultados1, String pla1, String programa) {
         int resultado = 0;
         conexion = null;
         Date fecha = new Date(20, 05, 31);
-         String guardar = "INSERT INTO convocatoria(idPrograma,publicacion,inicioRegistro,finRegistro,inicioValoracion,finValoracion,inicioDictaminacion,finDictaminacion,resultados,idPlantel) VALUES(?,?,?,?,?,?,?,?,?,?)";
+        String guardar = "INSERT INTO convocatoria(id,publicacion,inicioRegistro,finRegistro,inicioValoracion,finValoracion,inicioDictaminacion,finDictaminacion,resultados,idPlantel,idPrograma,estatus) VALUES(?,?,?,?,?,?,?,?,?,?,?,?)";
         //String guardar = "INSERT INTO convocatoria(id,nombre,publicacion,inicioRegistro,finRegistro,inicioValoracion,finValoracion,inicioDictaminacion,finDictaminacion,resultados,idPlantel) VALUES(?,?,?,?,?,?,?,?,?,?)";
 
         conexion = conector();
         try {
-            sentencia_preparada = conexion.prepareStatement(guardar);            
-            sentencia_preparada.setString(1, programa);
+            sentencia_preparada = conexion.prepareStatement(guardar);
+            sentencia_preparada.setString(1, String.valueOf(0));
             sentencia_preparada.setDate(2, publicacion1);
             sentencia_preparada.setDate(3, periodo_registro_inicio1);
             sentencia_preparada.setDate(4, periodo_registro_fin1);
@@ -246,6 +247,8 @@ public class Metodos_sql {
             sentencia_preparada.setDate(8, periodo_dictaminacion_fin1);
             sentencia_preparada.setDate(9, publicacion_resultados1);
             sentencia_preparada.setInt(10, Integer.parseInt(pla1));
+            sentencia_preparada.setInt(11, Integer.parseInt(programa));
+            sentencia_preparada.setString(12, "null");
             resultado = sentencia_preparada.executeUpdate();
             sentencia_preparada.close();
             conexion.close();
@@ -255,7 +258,7 @@ public class Metodos_sql {
         return resultado;
     }//fin metodo guardar 
 
-   //----------BUSCAR NOMBRE REGISTRADO, SERVLET INICIO SESION* 
+    //----------BUSCAR NOMBRE REGISTRADO, SERVLET INICIO SESION* 
     public String buscar(String rfc) {
         String nombre = null;
         conexion = null;
@@ -274,19 +277,12 @@ public class Metodos_sql {
         }
         return nombre;
     }//fin metodo buscar
-	
-    
-    
-    
-    
-
-    
 
     //----------BUSCAR RFC ADMINISTRADOR REGISTRADO, SERVLET INICIO SESION ADMINISTRADOR* 
     public String[] buscaradmin2(String rfc) {
-        String nombre[] = new String[5];
+        String nombre[] = new String[6];
         conexion = null;
-        String buscar = "SELECT * FROM usuario WHERE (perfil='A' || perfil='S') && curp='" + rfc + "'";
+        String buscar = "SELECT * FROM usuario WHERE curp='" + rfc + "'";
         conexion = conector();
         try {
             sentencia_preparada = conexion.prepareStatement(buscar);
@@ -297,16 +293,16 @@ public class Metodos_sql {
                 nombre[2] = resultado.getString("nombre");
                 nombre[3] = resultado.getString("curp");
                 nombre[4] = resultado.getString("id");
+                nombre[5] = resultado.getString("perfil");
             }
             conexion.close();
-        } catch (Exception ex) {
-            System.out.println(ex.toString());
+        } catch (Exception e) {
 
         }
         return nombre;
     }//fin metodo buscar
 
-   //----------BUSCAR RFC VACANCIA REGISTRADO, SERVLET INICIO SESION VACANCIA*  
+    //----------BUSCAR RFC VACANCIA REGISTRADO, SERVLET INICIO SESION VACANCIA*  
     public String buscarvacancia(String rfc) {
         String nombre = null;
         conexion = null;
@@ -325,6 +321,49 @@ public class Metodos_sql {
         }
         return nombre;
     }//fin metodo buscar
+
+    //----------BUSCAR RFC PARA VER SI ESTA REGISTRADO, SERVLET INICIO DE SESION ADMINISTRADOR*
+    public String buscar_rfc(String rfc) {
+        String usuario = null;
+        conexion = null;
+        String buscar = "SELECT * FROM usuario WHERE curp='" + rfc + "'";
+        conexion = conector();
+        try {
+            sentencia_preparada = conexion.prepareStatement(buscar);
+            resultado = sentencia_preparada.executeQuery();
+            if (resultado.next()) {
+                usuario = "RFC ENCONTRADO";
+            } else {
+                usuario = "RFC NO ENCONTRADO";
+            }
+            conexion.close();
+        } catch (Exception e) {
+
+        }
+        return usuario;
+    }
+
+    //----------BUSCAR USUARIO Y CLAVE PARA VER SI ESTA REGISTRADO, SERVLET INICIO DE SESION ADMINISTRADOR*
+    public String[] buscar_clave(String rfc, String clave) {
+        String usuario[] = new String[2];
+        conexion = null;
+        String buscar = "SELECT * FROM usuario WHERE curp='" + rfc + "' && clave='" + clave + "'";
+        conexion = conector();
+        try {
+            sentencia_preparada = conexion.prepareStatement(buscar);
+            resultado = sentencia_preparada.executeQuery();
+            if (resultado.next()) {
+                usuario[0] = "USUARIO ENCONTRADO";
+                usuario[1] = resultado.getString("id");
+            } else {
+                usuario[0] = "USUARIO NO ENCONTRADO";
+            }
+            conexion.close();
+        } catch (Exception e) {
+
+        }
+        return usuario;
+    }
 
     //----------BUSCAR CORREO REGISTRADO, SERVLET RECUEPRAR CLAVE* 
     public String buscarclave(String correo) {
@@ -383,7 +422,7 @@ public class Metodos_sql {
             }
             conexion.close();
         } catch (Exception e) {
-System.out.println(e.toString());
+            System.out.println(e.toString());
         }
         return usuario;
     }
@@ -392,6 +431,7 @@ System.out.println(e.toString());
     public String buscaradmin(String rfc, String clave) {
         String usuario = null;
         conexion = null;
+
         String buscar = "SELECT nombre,primerApellido,clave FROM usuario WHERE (perfil='A' || perfil='S') && curp='" + rfc + "' && clave='" + clave + "'";
         conexion = conector();
         try {
@@ -404,13 +444,13 @@ System.out.println(e.toString());
             }
             conexion.close();
         } catch (Exception ex) {
-            System.out.println(ex.toString());
+            System.out.println(ex.toString() + "NO HAY CONEXION");
 
         }
         return usuario;
     }
 
-     //----------BUSCAR RFC Y CLAVE VACANCIA, SERVLET INICIO SESION VACANCIA* 
+    //----------BUSCAR RFC Y CLAVE VACANCIA, SERVLET INICIO SESION VACANCIA* 
     public String buscarvacancia(String rfc, String clave) {
         String usuario = null;
         conexion = null;
@@ -432,8 +472,7 @@ System.out.println(e.toString());
         return usuario;
     }
 
-   
-     //----------BUSCAR CORREO REGISTRADO, SERVLET RECUPERAR CLAVE* 
+    //----------BUSCAR CORREO REGISTRADO, SERVLET RECUPERAR CLAVE* 
     public String buscarcorreo(String correo) {
         String usuario = null;
         conexion = null;
@@ -476,8 +515,8 @@ System.out.println(e.toString());
         }
         return usuario;
     }
-	
-	//-------BUSCAR PERMISOS, SERVLET INICIO DE SESION ADMINISRADOR*
+
+    //-------BUSCAR PERMISOS, SERVLET INICIO DE SESION ADMINISRADOR*
     public String[] buscarpermisos(int id_usuario) {
         String permisos[] = new String[5];
         int i = 0;
@@ -503,7 +542,6 @@ System.out.println(e.toString());
         }
         return permisos;
     }
-
 
     //--------------------------------------mostrar informacion a los combobox*
     public ResultSet mostrar(String buscar) {
@@ -556,12 +594,12 @@ System.out.println(e.toString());
         }
         return id;
     }//fin metodo buscar
-	    
+
     //-----------BUSCAR RFC PARA INICIO DE SESION
     public int buscarId(String rfc) {
         int id = 0;
         conexion = null;
-        String buscar = "SELECT id FROM usuario WHERE curp='"+rfc+"'";
+        String buscar = "SELECT id FROM usuario WHERE curp='" + rfc + "'";
         //System.out.println(buscar);
         conexion = conector();
         try {
@@ -577,8 +615,8 @@ System.out.println(e.toString());
         }
         return id;
     }//fin metodo buscar
-	
-	public String buscarentidad(String id_entidad) {
+
+    public String buscarentidad(String id_entidad) {
         String entidad = "";
         conexion = null;
         conexion = conector();
@@ -595,8 +633,7 @@ System.out.println(e.toString());
         }
         return entidad;
     }//fin metodo buscar
-    
-    
+
     public String buscarplantel(String id_plantel) {
         String plantel = "";
         conexion = null;
@@ -632,7 +669,7 @@ System.out.println(e.toString());
         }
         return tipo;
     }//fin metodo buscar
-    
+
     public String buscarjornada(String id_jornada) {
         String jornada = "";
         conexion = null;
@@ -650,47 +687,41 @@ System.out.println(e.toString());
         }
         return jornada;
     }//fin metodo buscar
-    
-    private List convertir(ResultSet rs)
-    {
-        List<String[]> datos = null; 
-        String[] tupla=null;
-        try
-        { 
+
+    private List convertir(ResultSet rs) {
+        List<String[]> datos = null;
+        String[] tupla = null;
+        try {
             //rs.last();
-            ResultSetMetaData rsmd = rs.getMetaData();             
-            int numCols = rsmd.getColumnCount(); 
-            datos=new ArrayList<String[]>();   
+            ResultSetMetaData rsmd = rs.getMetaData();
+            int numCols = rsmd.getColumnCount();
+            datos = new ArrayList<String[]>();
             //rs.beforeFirst(); 
-            while (rs.next())
-            {
-                tupla=new String[numCols];
-                for (int i=0;i<numCols;i++)
-                {
-                    tupla[i]=rs.getString(i+1);
-                }   
+            while (rs.next()) {
+                tupla = new String[numCols];
+                for (int i = 0; i < numCols; i++) {
+                    tupla[i] = rs.getString(i + 1);
+                }
                 datos.add(tupla);
-            } 
-        }
-        catch(Exception e)
-        {
+            }
+        } catch (Exception e) {
             System.out.println(e.toString());
-        }         
+        }
         return datos;
-        
+
     }
-    
-    public List ejecutaSP(String sp){
+
+    public List ejecutaSP(String sp) {
         List<String[]> datos = new ArrayList<String[]>();
         String[] tupla;
         conexion = null;
-        
-        String buscar = "call "+sp+"();";
+
+        String buscar = "call " + sp + "();";
         conexion = conector();
         try {
             sentencia_preparada = conexion.prepareStatement(buscar);
             resultado = sentencia_preparada.executeQuery();
-            datos=convertir(resultado);
+            datos = convertir(resultado);
             sentencia_preparada.close();
             conexion.close();
         } catch (Exception e) {
@@ -698,30 +729,30 @@ System.out.println(e.toString());
         }
         return datos;
     }
-    
-    public List ejecutaSP(String sp,String[] parametros){
+
+    public List ejecutaSP(String sp, String[] parametros) {
         List<String[]> datos = new ArrayList<String[]>();
         String[] tupla;
         conexion = null;
-        String aux="";    
+        String aux = "";
         //System.out.println(parametros.length);
-        for(String parametro:parametros){
-            if(!parametro.equals("")){
-                aux+="'"+parametro+"',";
-            }else{
-                aux+="NULL,";
-            }            
+        for (String parametro : parametros) {
+            if (!parametro.equals("")) {
+                aux += "'" + parametro + "',";
+            } else {
+                aux += "NULL,";
+            }
         }
-        if(aux!=""){
+        if (aux != "") {
             aux = aux.substring(0, aux.length() - 1);
-        }          
-        String buscar = "call "+sp+"("+aux+");";
+        }
+        String buscar = "call " + sp + "(" + aux + ");";
         System.out.println(buscar);
         conexion = conector();
         try {
             sentencia_preparada = conexion.prepareStatement(buscar);
             resultado = sentencia_preparada.executeQuery();
-            datos=convertir(resultado);            
+            datos = convertir(resultado);
             sentencia_preparada.close();
             conexion.close();
         } catch (Exception e) {
@@ -729,51 +760,52 @@ System.out.println(e.toString());
         }
         return datos;
     }
-    
+
     public static Connection conectorEncuestas() {
-        String driver,user,pass,url;
-        Properties p = new Properties();        
+        String driver, user, pass, url;
+        Properties p = new Properties();
         conexion = null;
         try {
             p.load(new FileReader("C:/ArchivosPromocion/config.properties"));
-            
-            driver=p.getProperty("driver");
-            user=p.getProperty("userEncuestas");
-            pass=p.getProperty("passEncuestas");
-            url=p.getProperty("urlEncuestas");            
+
+            driver = p.getProperty("driver");
+            user = p.getProperty("userEncuestas");
+            pass = p.getProperty("passEncuestas");
+            url = p.getProperty("urlEncuestas");
             Class.forName(driver);
             conexion = (Connection) DriverManager.getConnection(url, user, pass);
             if (conexion != null) {
                 //System.out.println("conexion establecida");
             }
         } catch (Exception ex) {
-            System.out.println("Error de conexion:"+ex.toString());
-        } 
+            System.out.println("Error de conexion:" + ex.toString());
+        }
         return conexion;
     }
-    public List ejecutaSPEncuestas(String sp,String[] parametros){
+
+    public List ejecutaSPEncuestas(String sp, String[] parametros) {
         List<String[]> datos = new ArrayList<String[]>();
         String[] tupla;
         conexion = null;
-        String aux="";    
+        String aux = "";
         //System.out.println(parametros.length);
-        for(String parametro:parametros){
-            if(!parametro.equals("")){
-                aux+="'"+parametro+"',";
-            }else{
-                aux+="NULL,";
-            }            
+        for (String parametro : parametros) {
+            if (!parametro.equals("")) {
+                aux += "'" + parametro + "',";
+            } else {
+                aux += "NULL,";
+            }
         }
-        if(aux!=""){
+        if (aux != "") {
             aux = aux.substring(0, aux.length() - 1);
-        }          
-        String buscar = "call "+sp+"("+aux+");";
+        }
+        String buscar = "call " + sp + "(" + aux + ");";
         //System.out.println(buscar);
-        conexion = conectorEncuestas();        
+        conexion = conectorEncuestas();
         try {
             sentencia_preparada = conexion.prepareStatement(buscar);
             resultado = sentencia_preparada.executeQuery();
-            datos=convertir(resultado);            
+            datos = convertir(resultado);
             sentencia_preparada.close();
             conexion.close();
         } catch (Exception e) {
@@ -781,6 +813,7 @@ System.out.println(e.toString());
         }
         return datos;
     }
+
     public int guardarAntiguedad(int id, String idusuario, String idpermiso) {
         int resultado = 0;
         conexion = null;
@@ -802,5 +835,5 @@ System.out.println(e.toString());
         }
         return resultado;
     }
-    
+
 }//fin clase metodos_sql
