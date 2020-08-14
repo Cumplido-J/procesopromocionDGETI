@@ -29,10 +29,10 @@
         <script type="text/javascript">
             function habilitar() {
                 var camp1 = document.getElementById("permiso1");
-                var camp3 = document.getElementById("permiso3");
+                var camp2 = document.getElementById("permiso2");
                 var camp4 = document.getElementById("permiso4");
                 var boton1 = document.getElementById("activado_usuario");
-                var boton3 = document.getElementById("activado_convocatoria");
+                var boton2 = document.getElementById("activado_convocatoria");
                 var boton4 = document.getElementById("activado_vacancia");
 
                 if (camp1.value == "true") {
@@ -44,13 +44,13 @@
                     boton1.style.color = "#FFFFFF";
                 }
 
-                if (camp3.value == "true") {
-                    boton3.disabled = true;
-                    boton3.style.color = "#FF3000";
+                if (camp2.value == "true") {
+                    boton2.disabled = true;
+                    boton2.style.color = "#FF3000";
                 } else
                 {
-                    boton3.disabled = false;
-                    boton3.style.color = "#FFFFFF";
+                    boton2.disabled = false;
+                    boton2.style.color = "#FFFFFF";
                 }
 
                 if (camp4.value == "true") {
@@ -119,8 +119,9 @@
                                                         session.setAttribute("idUsuario", idUsuario);
                                                         session.setAttribute("rfc", rfc);
                                                     %>
+                                                    <input type="hidden" name="control_combobox" id="control_combobox" value="<%=request.getAttribute("control_combobox")%>">
                                                     <input type="hidden" name="permiso1" id="permiso1" value="<%=request.getAttribute("per1")%>">
-                                                    <input type="hidden" name="permiso3" id="permiso3" value="<%=request.getAttribute("per3")%>">
+                                                    <input type="hidden" name="permiso2" id="permiso2" value="<%=request.getAttribute("per2")%>">
                                                     <input type="hidden" name="permiso4" id="permiso4" value="<%=request.getAttribute("per4")%>">
                                                     <input type="hidden" name="nombre" id="nombre" value="<%=request.getAttribute("nom")%>">
                                                     <input type="hidden" name="dato_ent" id="dato_ent" value="<%=request.getAttribute("dato_ent")%>">
@@ -135,8 +136,9 @@
                                                         session.setAttribute("idUsuario", idUsuario);
                                                         session.setAttribute("rfc", rfc);
                                                     %>
+                                                    <input type="hidden" name="control_combobox" id="control_combobox" value="<%=request.getAttribute("control_combobox")%>">
                                                     <input type="hidden" name="permiso1" id="permiso1" value="<%=request.getAttribute("per1")%>">
-                                                    <input type="hidden" name="permiso3" id="permiso3" value="<%=request.getAttribute("per3")%>">
+                                                    <input type="hidden" name="permiso2" id="permiso2" value="<%=request.getAttribute("per2")%>">
                                                     <input type="hidden" name="permiso4" id="permiso4" value="<%=request.getAttribute("per4")%>">
                                                     <input type="hidden" name="nombre" id="nombre" value="<%=request.getAttribute("nom")%>">
                                                     <input type="hidden" name="dato_ent" id="dato_ent" value="<%=request.getAttribute("dato_ent")%>">
@@ -151,8 +153,9 @@
                                                         session.setAttribute("idUsuario", idUsuario);
                                                         session.setAttribute("rfc", rfc);
                                                     %>
+                                                    <input type="hidden" name="control_combobox" id="control_combobox" value="<%=request.getAttribute("control_combobox")%>">
                                                     <input type="hidden" name="permiso1" id="permiso1" value="<%=request.getAttribute("per1")%>">
-                                                    <input type="hidden" name="permiso3" id="permiso3" value="<%=request.getAttribute("per3")%>">
+                                                    <input type="hidden" name="permiso2" id="permiso2" value="<%=request.getAttribute("per2")%>">
                                                     <input type="hidden" name="permiso4" id="permiso4" value="<%=request.getAttribute("per4")%>">
                                                     <input type="hidden" name="nombre" id="nombre" value="<%=request.getAttribute("nom")%>">
                                                     <input type="hidden" name="dato_ent" id="dato_ent" value="<%=request.getAttribute("dato_ent")%>">
@@ -189,36 +192,36 @@
             <section class="sectionart">
                 <div class="articulosart">
                     <center><h4>Carga de Convocatoria</h4></center>
-                    <jsp:useBean id="cn" class="metodos_sql.Metodos_sql" scope="page"></jsp:useBean>
+                        <jsp:useBean id="cn" class="metodos_sql.Metodos_sql" scope="page"></jsp:useBean>
                         <form id="data" class="form-horizontal" role="form" method="POST" action="Servlet_buscar_convocatoria">
                             <center>
-                            <table  border="0" >   
-                                <tr><td align="center">
+                                <table  border="0" >   
+                                    <tr><td align="center">
 
-                                        <input type="hidden" name="publicaciont" id="publicaciont" >
-                                        <label>Publicación</label><br>
-                                        <input type="date" id="publicacion" name="publicacion" value="" min="2020-01-01" max="2020-12-31">
+                                            <input type="hidden" name="publicaciont" id="publicaciont" >
+                                            <label>Publicación</label><br>
+                                            <input type="date" id="publicacion" name="publicacion" value="" min="2020-01-01" max="2020-12-31">
 
-                                    </td>
-                                    <td align="center">
+                                        </td>
+                                        <td align="center">
 
-                                        <input type="hidden" name="resultadost" id="resultadost" >
-                                        <label>Resultados</label><br>
-                                        <input type="date" id="resultados" name="resultados" value="" min="2020-01-01" max="2020-12-31">
+                                            <input type="hidden" name="resultadost" id="resultadost" >
+                                            <label>Resultados</label><br>
+                                            <input type="date" id="resultados" name="resultados" value="" min="2020-01-01" max="2020-12-31">
 
-                                    </td>
+                                        </td>
 
-                                </tr>
+                                    </tr>
 
 
-                            </table>
+                                </table>
                             </center>
-                                <br><br>
+                            <br><br>
 
                             <div class="col-sm-3 col-sm-offset-4">
                                 <center>
-                                <button class="btn btn-primary pull-right" type="submit" name="agregar_convocatoria" form="data2">Agregar</button>
-                                <button class="btn btn-primary pull-right" type="submit" name="buscar_convocatoria">Buscar</button>
+                                    <button class="btn btn-primary pull-right" type="submit" name="agregar_convocatoria" form="data2">Agregar</button>
+                                    <button class="btn btn-primary pull-right" type="submit" name="buscar_convocatoria">Buscar</button>
                                 </center>
 
                             </div>

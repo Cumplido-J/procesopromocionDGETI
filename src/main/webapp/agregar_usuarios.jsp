@@ -65,7 +65,7 @@
         </script>
     </head>
     <body>
-         <%
+        <%
             session = (HttpSession) request.getSession(true);
             String idUsuario = "";
             String rfc = "";
@@ -105,7 +105,7 @@
 
 
                                     </li>
-                                    <li><a href="login.jsp">Inicio</a></li>
+                                    <li><a href="index.html">Inicio</a></li>
                                 </ul>
                             </nav>
                         </ul>
@@ -133,11 +133,131 @@
                 <p>Alta de Usuarios </p>
                 <jsp:useBean id="cn" class="metodos_sql.Metodos_sql" scope="page"></jsp:useBean>
                     <form id="data"   name="data" method="POST" action="Servlet_agregar_usuario" onSubmit="return validate();">
-                        <div class="registro">
-                            <div class="caja">
-                                <input type="hidden" name="f_opc" id="i_opc">
-                                <input type="hidden" name="campoentidad" id="campoentidad" >
-                                <p>Entidad
+                    <%-------------------------------------------------------------------OPCION VERDADERA COMBO BOX----------------------------%>   
+                    <%if (request.getAttribute("control_combobox").equals("true")) { %>
+                    <div class="registro">
+                        <div class="caja">
+                            <input type="hidden" name="f_opc" id="i_opc">
+                            <input type="hidden" name="campoentidad" id="campoentidad" >
+                            <p>Entidad
+
+                                <%
+                                    ResultSet rs = cn.mostrar("Select id, entidad from catentidades");
+                                %>
+
+                                <select class="form-control" name="entidad" id="entidad" disabled="true">
+                                    <option value="0">Escoge una opcion</option>
+                                    <%
+                                        while (rs.next()) {
+                                    %>
+                                    <option value="<%=rs.getString("id")%>"><%=rs.getString("entidad")%></option>
+
+                                    <%//              regresa del combobox         muestra en el combo box
+                                        }
+                                    %>                                              
+                                </select>           
+                            </p>
+                            <div id="n8"></div>
+                        </div>
+
+                        <div class="caja">
+                            <p>Plantel
+                                <select class="form-control" name="n_plantel" id="i_plantel" disabled="true">
+                                    <option value="0">Escoge una opcion</option>                                     
+                                </select>
+                            </p>
+                            <div id="n7"></div>
+
+                        </div>
+
+                        <div class="caja">
+                            <p>Usuario
+                                <input  class="form-control" id="usuario" placeholder="Usuario" type="text" name="usuario" maxlength="13">
+                            <div id="n10"></div>
+                            </p>
+                        </div>
+                    </div>
+
+
+                    <div class="registro">
+                        <div class="caja">
+                            <p>Nombre<input id="nombre_nom" class="form-control" type="text" name="Nombre" size="33" placeholder="Nombre" ></p>
+                            <div id="n"></div>
+                        </div>
+
+
+                        <div class="caja">
+                            <p>Primer Apellido<input id="ap" class="form-control" type="text" name="primerApellido" size="33" placeholder="Apellido Paterno" ></p>
+                            <div id="n1"></div>
+                        </div>
+                        <div class="caja">
+                            <p>Segundo Apellido(opcional)<input id="am" class="form-control" type="text" name="segundoApellido" size="33" placeholder="Apellido Materno" ></p>
+                            <div id="n2"></div>
+                        </div>
+                    </div>
+
+                    <div class="registro">
+
+                        <div class="caja">
+                            <p>Teléfono fijo<input id="tel" class="form-control" type="tel" name="telfijo" size="10" placeholder="Teléfono fijo" maxlength="10"></p>
+                            <div id="n4"></div>
+                        </div>
+                        <div class="caja">
+                            <p>Teléfono celular<input id="cel" class="form-control" type="tel" name="telcel" size="10" placeholder="Teléfono celular" maxlength="10"></p>
+                            <div id="n5"></div>
+                        </div>
+                        <div class="caja">
+                            <p>Correo electrónico<input id="correo" class="form-control" type="email" name="correo" size="50" placeholder="usuario@servidor.com"></p>
+                            <div id="n6"></div>
+                        </div>
+                    </div>
+
+
+
+                    <div class="registro">
+                        <div class="caja">
+                            <p>Contraseña<input class="form-control" type="password" name="clave" placeholder="Escribir contraseña"  id="pass1" ></p>    
+                            <div id="error1"></div>
+                        </div>
+
+
+                        <div class="caja">
+                            <p>Repetir contraseña<input class="form-control" type="password" name="clave2" placeholder="Repetir contraseña" id="pass2" ></p>
+                            <div id="error2"></div>
+                        </div>
+
+                    </div>
+
+
+
+
+
+
+                    <div class="registro">
+                        <div class="caja">
+                            <p> 
+                                Permisos:<br><br>
+                                <%
+                                    int i = 1;
+                                    String listado[] = new String[10];
+                                    ResultSet rs3 = null;
+                                    rs3 = cn.mostrar_usuarios("SELECT permiso FROM catpermisos");
+                                    while (rs3.next()) {
+                                %>
+
+                                <input type="checkbox" id="ckl" name="ckl" value="<%=i++%>" > <label for="ckl"><% out.print(rs3.getString("permiso"));%></label>  <br> <%} %>
+
+                            </p>
+                            <div id="n11"></div>
+                        </div>
+                    </div>
+                    <% } //FIN OPCION VERDADERA COMBOBOX
+                    else {%> <%--OPCION FALSA COMBOBOX --%>
+                    <div class="registro">
+                        <div class="caja">
+                            <input type="hidden" name="f_opc" id="i_opc">
+                            <input type="hidden" name="campoentidad" id="campoentidad" >
+                            <p>Entidad
 
                                 <%
                                     ResultSet rs = cn.mostrar("Select id, entidad from catentidades");
@@ -250,6 +370,8 @@
                         </div>
                     </div>
 
+                    <%}%> 
+                    <%-------------------------------------------------------------------FIN OPCION VERDADERA COMBO BOX----------------------------%>   
 
                     <div class="error"> 
                         <% if (request.getAttribute("error") == null) {
@@ -268,12 +390,13 @@
 
 
                     <div class="form-group">
-                          <%
+                        <%
                             session.setAttribute("idUsuario", idUsuario);
                             session.setAttribute("rfc", rfc);
                         %>
+                        <input type="hidden" name="control_combobox" id="control_combobox" value="<%=request.getAttribute("control_combobox")%>">
                         <input type="hidden" name="permiso1" id="permiso1" value="<%=request.getAttribute("per1")%>">
-                        <input type="hidden" name="permiso3" id="permiso3" value="<%=request.getAttribute("per3")%>">
+                        <input type="hidden" name="permiso2" id="permiso2" value="<%=request.getAttribute("per2")%>">
                         <input type="hidden" name="permiso4" id="permiso4" value="<%=request.getAttribute("per4")%>">
                         <input type="hidden" name="nombre" id="nombre" value="<%=request.getAttribute("nom")%>">
                         <input type="hidden" name="dato_ent" id="dato_ent" value="<%=request.getAttribute("dato_ent")%>">
@@ -287,12 +410,13 @@
             <form id="data2" class="form-horizontal" role="form" method="POST" action="Servlet_regresar">
                 <div class="posision1">   
                     <button class="btn btn-primary pull-right posision2" type="submit" name="regresa" id="check">Regresar</button>
-                      <%
-                            session.setAttribute("idUsuario", idUsuario);
-                            session.setAttribute("rfc", rfc);
-                        %>
+                    <%
+                        session.setAttribute("idUsuario", idUsuario);
+                        session.setAttribute("rfc", rfc);
+                    %>
+                    <input type="hidden" name="control_combobox" id="control_combobox" value="<%=request.getAttribute("control_combobox")%>">
                     <input type="hidden" name="permiso1" id="permiso1" value="<%=request.getAttribute("per1")%>">
-                    <input type="hidden" name="permiso3" id="permiso3" value="<%=request.getAttribute("per3")%>">
+                    <input type="hidden" name="permiso2" id="permiso2" value="<%=request.getAttribute("per2")%>">
                     <input type="hidden" name="permiso4" id="permiso4" value="<%=request.getAttribute("per4")%>">
                     <input type="hidden" name="nombre" id="nombre" value="<%=request.getAttribute("nom")%>">
                     <input type="hidden" name="dato_ent" id="dato_ent" value="<%=request.getAttribute("dato_ent")%>">
@@ -308,7 +432,7 @@
             <script src="https://framework-gb.cdn.gob.mx/gobmx.js"></script>
             <script src="js/notificaciones.js"></script>
         </div>
-                 <%
+        <%
             } else {
                 response.sendRedirect("login.jsp");
             }

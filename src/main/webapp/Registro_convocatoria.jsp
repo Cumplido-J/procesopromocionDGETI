@@ -15,10 +15,10 @@
         <script type="text/javascript">
             function habilitar() {
                 var camp1 = document.getElementById("permiso1");
-                var camp3 = document.getElementById("permiso3");
+                var camp2 = document.getElementById("permiso2");
                 var camp4 = document.getElementById("permiso4");
                 var boton1 = document.getElementById("activado_usuario");
-                var boton3 = document.getElementById("activado_convocatoria");
+                var boton2 = document.getElementById("activado_convocatoria");
                 var boton4 = document.getElementById("activado_vacancia");
 
                 if (camp1.value == "true") {
@@ -30,13 +30,13 @@
                     boton1.style.color = "#FFFFFF";
                 }
 
-                if (camp3.value == "true") {
-                    boton3.disabled = true;
-                    boton3.style.color = "#FF3000";
+                if (camp2.value == "true") {
+                    boton2.disabled = true;
+                    boton2.style.color = "#FF3000";
                 } else
                 {
-                    boton3.disabled = false;
-                    boton3.style.color = "#FFFFFF";
+                    boton2.disabled = false;
+                    boton2.style.color = "#FFFFFF";
                 }
 
                 if (camp4.value == "true") {
@@ -98,6 +98,13 @@
                             <nav class="navegacion">
                                 <ul class="menu">
 
+                                     <li aling="navbar-center">
+                                        <%
+                                            String nom1 = String.valueOf(request.getAttribute("nom"));
+                                            out.print(nom1);
+                                        %>
+
+                                    </li> 
                                     <li><a href="#">Administrador</a>
                                         <ul class="submenu">
                                             <li>
@@ -107,8 +114,9 @@
                                                         session.setAttribute("idUsuario", idUsuario);
                                                         session.setAttribute("rfc", rfc);
                                                     %>
+                                                    <input type="hidden" name="control_combobox" id="control_combobox" value="<%=request.getAttribute("control_combobox")%>">
                                                     <input type="hidden" name="permiso1" id="permiso1" value="<%=request.getAttribute("per1")%>">
-                                                    <input type="hidden" name="permiso3" id="permiso3" value="<%=request.getAttribute("per3")%>">
+                                                    <input type="hidden" name="permiso2" id="permiso2" value="<%=request.getAttribute("per2")%>">
                                                     <input type="hidden" name="permiso4" id="permiso4" value="<%=request.getAttribute("per4")%>">
                                                     <input type="hidden" name="nombre" id="nombre" value="<%=request.getAttribute("nom")%>">
                                                     <input type="hidden" name="dato_ent" id="dato_ent" value="<%=request.getAttribute("dato_ent")%>">
@@ -123,8 +131,9 @@
                                                         session.setAttribute("idUsuario", idUsuario);
                                                         session.setAttribute("rfc", rfc);
                                                     %>
+                                                    <input type="hidden" name="control_combobox" id="control_combobox" value="<%=request.getAttribute("control_combobox")%>">
                                                     <input type="hidden" name="permiso1" id="permiso1" value="<%=request.getAttribute("per1")%>">
-                                                    <input type="hidden" name="permiso3" id="permiso3" value="<%=request.getAttribute("per3")%>">
+                                                    <input type="hidden" name="permiso2" id="permiso2" value="<%=request.getAttribute("per2")%>">
                                                     <input type="hidden" name="permiso4" id="permiso4" value="<%=request.getAttribute("per4")%>">
                                                     <input type="hidden" name="nombre" id="nombre" value="<%=request.getAttribute("nom")%>">
                                                     <input type="hidden" name="dato_ent" id="dato_ent" value="<%=request.getAttribute("dato_ent")%>">
@@ -139,8 +148,9 @@
                                                         session.setAttribute("idUsuario", idUsuario);
                                                         session.setAttribute("rfc", rfc);
                                                     %>
+                                                    <input type="hidden" name="control_combobox" id="control_combobox" value="<%=request.getAttribute("control_combobox")%>">
                                                     <input type="hidden" name="permiso1" id="permiso1" value="<%=request.getAttribute("per1")%>">
-                                                    <input type="hidden" name="permiso3" id="permiso3" value="<%=request.getAttribute("per3")%>">
+                                                    <input type="hidden" name="permiso2" id="permiso2" value="<%=request.getAttribute("per2")%>">
                                                     <input type="hidden" name="permiso4" id="permiso4" value="<%=request.getAttribute("per4")%>">
                                                     <input type="hidden" name="nombre" id="nombre" value="<%=request.getAttribute("nom")%>">
                                                     <input type="hidden" name="dato_ent" id="dato_ent" value="<%=request.getAttribute("dato_ent")%>">
@@ -194,7 +204,7 @@
                             <div class="caja">
                                 <h4>REGISTRO DE CONVOCATORIA</h4> 
                             </div>
-                            <div class="caja" align="right">
+                      <%--      <div class="caja" align="right">
                                 <div id="rfc_13digitos">
                                     <%
                                         String rfc1 = String.valueOf(request.getAttribute("dato_rfc"));
@@ -210,7 +220,7 @@
                                 <div id="cerrar_sesion">
                                     <input  class="boton_personalizado" type="submit" value="Cerrar Sesion" name="cerrar" form="data4">
                                 </div>
-                            </div>
+                            </div> --%>
                         </div>
 
                         <div class="registro_cct_plantel">                         
@@ -265,7 +275,7 @@
                         <div class="registro">    
                             <div class="caja">
                                 <p>Programa:<br>
-                                    <select class="form-control" name="programa">
+                                    <select class="form-control" name="programa" id="programa">
                                         ${catalogo.desplegarOpcionesProgramas()}
                                     </select>
                                 <div id="c1"></div>
@@ -332,8 +342,9 @@
                                     session.setAttribute("idUsuario", idUsuario);
                                     session.setAttribute("rfc", rfc);
                                 %>
+                                <input type="hidden" name="control_combobox" id="control_combobox" value="<%=request.getAttribute("control_combobox")%>">
                                 <input type="hidden" name="permiso1" id="permiso1" value="<%=request.getAttribute("per1")%>">
-                                <input type="hidden" name="permiso3" id="permiso3" value="<%=request.getAttribute("per3")%>">
+                                <input type="hidden" name="permiso2" id="permiso2" value="<%=request.getAttribute("per2")%>">
                                 <input type="hidden" name="permiso4" id="permiso4" value="<%=request.getAttribute("per4")%>">
                                 <input type="hidden" name="nombre" id="nombre" value="<%=request.getAttribute("nom")%>">
                                 <input type="hidden" name="dato_ent" id="dato_ent" value="<%=request.getAttribute("dato_ent")%>">

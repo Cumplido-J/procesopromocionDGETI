@@ -1,6 +1,6 @@
 <%-- 
-    Document   : aviso_guardar_vacancia
-    Created on : 30-jul-2020, 10:50:32
+    Document   : aviso_guardar_datos
+    Created on : 30-jul-2020, 21:26:26
     Author     : charl
 --%>
 
@@ -25,7 +25,7 @@
         %>
         <%
             if (request.getAttribute("ver") != null) {%>
-        <form class="form-horizontal" role="form" method="POST" action="Servlet_guardar_vacancia">
+        <form class="form-horizontal" role="form" method="POST" action="Servlet_guardar_datos2">
             <input type="checkbox" id="cerrar">
 
             <label for="ventana2" id="btn-cerrar">X</label>

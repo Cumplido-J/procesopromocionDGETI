@@ -66,7 +66,7 @@
             <section class="sectionart">
                 <div class="articulosart">
                     <h3>Iniciar sesión</h3>	
-                    <form class="form-horizontal" role="form" method="POST" action="Servlet_iniciosesion">
+                    <form class="form-horizontal" role="form" method="POST" action="Servlet_iniciosesion_administrador">
                         <div class="form-group">
                             <label class="col-sm-3 control-label" for="curp">RFC:</label>
                             <div class="col-sm-9">
@@ -96,16 +96,16 @@
                                     <divOlvide class="divOlvide">
                                         <a href="recuperar_contraseña.jsp">Olvidé mi contraseña</a>
                                     </divOlvide>
-                                    <divOlvide class="divOlvide">
+                                <%--     <divOlvide class="divOlvide">
                                         <a href="administradores.jsp">Inicia sesión como Administrador</a>
-                                    </divOlvide>
+                                    </divOlvide> --%>
                                 </divlog>
                             </div>
                         </div>
 
                         <div class="form-group">
                             <div class="col-sm-offset-3 col-sm-9">
-                                <button class="btn btn-primary" type="submit" name="iniciarsesion">Enviar</button>                            
+                                <button class="btn btn-primary" type="submit" name="iniciarsesionadmin">Enviar</button>                            
                                 <a href="preregistro.jsp"><button class="btn btn-primary" type="button">Regístrate aquí</button></a>
                             </div>
                         </div>

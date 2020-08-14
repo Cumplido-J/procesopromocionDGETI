@@ -8,16 +8,11 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title></title>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">        
-        <link href="https://framework-gb.cdn.gob.mx/assets/styles/main.css" rel="stylesheet">
-        <link rel="stylesheet" href="css/estilosRegistro.css">   
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximun-scale=1.0, minimun-scale=1.0">
+        <link rel="stylesheet" href="css/estilos.css">         
     </head>
-    <body>   
-        <main class="page">
-            <div class="container">   
+    <body>    
         <%
             session = (HttpSession) request.getSession(true);
             String idUsuario = "";
@@ -31,19 +26,20 @@
         <%
             if (request.getAttribute("ver") != null) {%>
         <form class="form-horizontal" role="form" method="POST" action="Servlet_guardar_convocatoria2">
-            <!--<input type="checkbox" id="cerrar">
+            <input type="checkbox" id="cerrar">
 
-            <label for="ventana2" id="btn-cerrar">X</label>-->
+            <label for="ventana2" id="btn-cerrar">X</label>
             <div class="modal">
                 <div class="contenido">
                     <br>
-                    <input class="aviso_guardar" type="text" name="aviso_guardar_usuario" id="aviso_guardar_usuario" value="<%=request.getAttribute("nom")%>">
+                    
                      <%
                             session.setAttribute("idUsuario", idUsuario);
                             session.setAttribute("rfc", rfc);
                         %>
+                    <input type="hidden" name="control_combobox" id="control_combobox" value="<%=request.getAttribute("control_combobox")%>">    
                     <input type="hidden" name="permiso1" id="permiso1" value="<%=request.getAttribute("per1")%>">
-                    <input type="hidden" name="permiso3" id="permiso3" value="<%=request.getAttribute("per3")%>">
+                    <input type="hidden" name="permiso2" id="permiso2" value="<%=request.getAttribute("per2")%>">
                     <input type="hidden" name="permiso4" id="permiso4" value="<%=request.getAttribute("per4")%>">
                     <input type="hidden" name="nombre" id="nombre" value="<%=request.getAttribute("nom")%>">
                     <input type="hidden" name="dato_ent" id="dato_ent" value="<%=request.getAttribute("dato_ent")%>">
@@ -52,13 +48,10 @@
                     <br><br>
                     <img src="imagenes/palomita.png">
                     <br><br>
-                    <h2>La convocatoria ha sido guardada</h2>
+                    <h2>Información Guardada</h2>
                 </div>
             </div>  
-                    <br/><br/>
-            <h2>La convocatoria ha sido guardada</h2>
-            <input type="submit" value="Continuar" name="guardar" id="ventana2" >
-            <br/>
+            <input type="submit" value="Enviar" name="guardar" id="ventana2" >
         </form> <%
             } else {
                 response.sendRedirect("login.jsp");
@@ -70,9 +63,6 @@
                 response.sendRedirect("login.jsp");
             }
         %>
-        </div>
-        </main>
-        <script src="https://framework-gb.cdn.gob.mx/gobmx.js"></script>
     </body>
 </html>
 

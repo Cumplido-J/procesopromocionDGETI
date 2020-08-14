@@ -28,10 +28,10 @@
         <script type="text/javascript">
             function habilitar() {
                 var camp1 = document.getElementById("permiso1");
-                var camp3 = document.getElementById("permiso3");
+                var camp2 = document.getElementById("permiso2");
                 var camp4 = document.getElementById("permiso4");
                 var boton1 = document.getElementById("activado_usuario");
-                var boton3 = document.getElementById("activado_convocatoria");
+                var boton2 = document.getElementById("activado_convocatoria");
                 var boton4 = document.getElementById("activado_vacancia");
 
                 if (camp1.value == "true") {
@@ -43,13 +43,13 @@
                     boton1.style.color = "#FFFFFF";
                 }
 
-                if (camp3.value == "true") {
-                    boton3.disabled = true;
-                    boton3.style.color = "#FF3000";
+                if (camp2.value == "true") {
+                    boton2.disabled = true;
+                    boton2.style.color = "#FF3000";
                 } else
                 {
-                    boton3.disabled = false;
-                    boton3.style.color = "#FFFFFF";
+                    boton2.disabled = false;
+                    boton2.style.color = "#FFFFFF";
                 }
 
                 if (camp4.value == "true") {
@@ -88,11 +88,11 @@
         <!--Termina  para el framework del gobierno-->
     </head>
     <body>
-          <%
+        <%
             session = (HttpSession) request.getSession(true);
             String idUsuario = "";
             String rfc = "";
-            if (session.getAttribute("idUsuario") != null && session.getAttribute("rfc") != null) {
+            if (session.getAttribute("idUsuario").toString() != null && session.getAttribute("rfc").toString() != null) {
                 idUsuario = session.getAttribute("idUsuario").toString();
                 rfc = session.getAttribute("rfc").toString();
                 session.setAttribute("idUsuario", idUsuario);
@@ -127,12 +127,13 @@
                                             <li>
                                                 <form id="data3"  role="form" method="POST" action="Servlet_regresar">
                                                     <button class="propiedadesboton" type="submit" name="regresa" id="activado_usuario" onmouseover="habilitar();">Usuario</button>
-                                                     <%
-                            session.setAttribute("idUsuario", idUsuario);
-                            session.setAttribute("rfc", rfc);
-                        %>
+                                                    <%
+                                                        session.setAttribute("idUsuario", idUsuario);
+                                                        session.setAttribute("rfc", rfc);
+                                                    %>
+                                                    <input type="hidden" name="control_combobox" id="control_combobox" value="<%=request.getAttribute("control_combobox")%>">
                                                     <input type="hidden" name="permiso1" id="permiso1" value="<%=request.getAttribute("per1")%>">
-                                                    <input type="hidden" name="permiso3" id="permiso3" value="<%=request.getAttribute("per3")%>">
+                                                    <input type="hidden" name="permiso2" id="permiso2" value="<%=request.getAttribute("per2")%>">
                                                     <input type="hidden" name="permiso4" id="permiso4" value="<%=request.getAttribute("per4")%>">
                                                     <input type="hidden" name="nombre" id="nombre" value="<%=request.getAttribute("nom")%>">
                                                     <input type="hidden" name="dato_ent" id="dato_ent" value="<%=request.getAttribute("dato_ent")%>">
@@ -143,12 +144,13 @@
                                             <li>
                                                 <form id="data4"  role="form" method="POST" action="Servlet_convocatoria">
                                                     <button class="propiedadesboton" type="submit" name="convocatoria" id="activado_convocatoria" onmouseover="habilitar();">Convocatoria</button>
-                                                     <%
-                            session.setAttribute("idUsuario", idUsuario);
-                            session.setAttribute("rfc", rfc);
-                        %>
+                                                    <%
+                                                        session.setAttribute("idUsuario", idUsuario);
+                                                        session.setAttribute("rfc", rfc);
+                                                    %>
+                                                    <input type="hidden" name="control_combobox" id="control_combobox" value="<%=request.getAttribute("control_combobox")%>">
                                                     <input type="hidden" name="permiso1" id="permiso1" value="<%=request.getAttribute("per1")%>">
-                                                    <input type="hidden" name="permiso3" id="permiso3" value="<%=request.getAttribute("per3")%>">
+                                                    <input type="hidden" name="permiso2" id="permiso2" value="<%=request.getAttribute("per2")%>">
                                                     <input type="hidden" name="permiso4" id="permiso4" value="<%=request.getAttribute("per4")%>">
                                                     <input type="hidden" name="nombre" id="nombre" value="<%=request.getAttribute("nom")%>">
                                                     <input type="hidden" name="dato_ent" id="dato_ent" value="<%=request.getAttribute("dato_ent")%>">
@@ -159,12 +161,13 @@
                                             <li>
                                                 <form id="data3"  role="form" method="POST" action="Servlet_ir_a_vacantes">
                                                     <button class="propiedadesboton" type="submit" name="ir" id="activado_vacancia" onmouseover="habilitar();">Vacancia</button>
-                                                     <%
-                            session.setAttribute("idUsuario", idUsuario);
-                            session.setAttribute("rfc", rfc);
-                        %>
+                                                    <%
+                                                        session.setAttribute("idUsuario", idUsuario);
+                                                        session.setAttribute("rfc", rfc);
+                                                    %>
+                                                    <input type="hidden" name="control_combobox" id="control_combobox" value="<%=request.getAttribute("control_combobox")%>">
                                                     <input type="hidden" name="permiso1" id="permiso1" value="<%=request.getAttribute("per1")%>">
-                                                    <input type="hidden" name="permiso3" id="permiso3" value="<%=request.getAttribute("per3")%>">
+                                                    <input type="hidden" name="permiso2" id="permiso2" value="<%=request.getAttribute("per2")%>">
                                                     <input type="hidden" name="permiso4" id="permiso4" value="<%=request.getAttribute("per4")%>">
                                                     <input type="hidden" name="nombre" id="nombre" value="<%=request.getAttribute("nom")%>">
                                                     <input type="hidden" name="dato_ent" id="dato_ent" value="<%=request.getAttribute("dato_ent")%>">
@@ -174,7 +177,7 @@
                                             </li>
                                         </ul> 
                                     </li> 
-                                    <li><a href="login.jsp">Inicio</a></li>
+                                    <li><a href="index.html">Inicio</a></li>
                                 </ul>
                             </nav>
                         </ul>
@@ -203,7 +206,8 @@
                     <h3>Carga de vacancia en los planteles</h3>
                     <jsp:useBean id="cn" class="metodos_sql.Metodos_sql" scope="page"></jsp:useBean>
                         <form id="data" class="form-horizontal" role="form" method="POST" action="Servlet_buscar_vacancia">
-
+<%-------------------------------------------------------------------OPCION VERDADERA COMBO BOX----------------------------%>   
+                    <%if (request.getAttribute("control_combobox").equals("true")) { %>
                             <table  border="0" width="120%">   
                                 <tr><td align="center">
                                         <input type="hidden" name="f_opc" id="i_opc">
@@ -214,7 +218,7 @@
                                         ResultSet rs = cn.mostrar("Select id, entidad from catentidades");
                                     %>
 
-                                    <select class="select" name="entidad" id="entidad" onchange="plantel()">
+                                    <select class="select" name="entidad" id="entidad" onchange="plantel()" disabled="true">
                                         <option value="0">Escoge una opcion</option>
                                         <%
                                             while (rs.next()) {
@@ -228,7 +232,7 @@
                                 <td align="center">
                                     <label>Plantel</label><br>                                 
 
-                                    <select class="select" name="n_plantel" id="i_plantel">
+                                    <select class="select" name="n_plantel" id="i_plantel" disabled="true">
                                         <option value="0">Escoge una opcion</option>
                                     </select>
                                 </td>
@@ -281,6 +285,193 @@
                                 </tr>
                             </thead>
                             <%                                String elegir1 = "0";
+                                String nombre_entidad = "";
+                                String nombre_plantel = "";
+                                String tipo_categoria = "";
+                                String nombre_jornada = "";
+
+                                elegir1 = String.valueOf(request.getAttribute("opc"));
+
+                                if (elegir1.equals("1")) {
+                                    ResultSet rs2 = null;
+                                    if (request.getAttribute("consulta").equals("1")) {
+                                        rs2 = cn.mostrar_usuarios("SELECT * FROM vacancia WHERE entidad='"+ request.getAttribute("dato_ent") +"'");
+                                    }
+
+                                    if (request.getAttribute("consulta").equals("4")) {
+                                        rs2 = cn.mostrar_usuarios("SELECT * FROM vacancia WHERE entidad='"+ request.getAttribute("dato_ent") + "' && plaza='" + request.getAttribute("cat") + "'");
+                                    }
+
+                                    while (rs2.next()) {
+                            %>
+                            <tr>
+                                <td align="center">
+                                    <div class="datos_tabla"> 
+                                        <%
+                                            nombre_entidad = cn.buscarentidad("SELECT * FROM catentidades WHERE id='" + rs2.getString("entidad") + "'");
+                                            if (nombre_entidad == null) {
+                                                out.print("");
+                                            } else {
+                                                out.print(nombre_entidad);
+                                            }
+                                        %>
+                                    </div>
+                                </td>
+                                <td align="center">
+                                    <div class="datos_tabla"> 
+                                        <%
+                                            nombre_plantel = cn.buscarplantel("SELECT * FROM catplanteles WHERE id='" + rs2.getString("plantel") + "'");
+                                            if (nombre_plantel == null) {
+                                                out.print("");
+                                            } else {
+                                                out.print(nombre_plantel);
+                                            }
+                                        %>
+                                    </div>
+                                </td>
+                                <td align="center">
+                                    <div class="datos_tabla"> 
+                                        <% if (rs2.getString("plaza") == null) {
+                                                out.print("");
+                                            } else {
+                                                out.print(rs2.getString("plaza"));
+                                            }
+                                        %>
+                                    </div>
+                                </td>
+                                <td align="center">
+                                    <div class="datos_tabla"> 
+                                        <% if (rs2.getString("cantidadplazas") == null) {
+                                                out.print("");
+                                            } else {
+                                                out.print(rs2.getString("cantidadplazas"));
+                                            }
+                                        %>
+                                    </div>
+                                </td>
+                                <td align="center">
+                                    <div class="c_nom"> 
+                                        <%
+                                            tipo_categoria = cn.buscartipocategoria("SELECT * FROM catcategoriasplaza WHERE id='" + rs2.getString("tipocategoria") + "'");
+                                            if (tipo_categoria == null) {
+                                                out.print("");
+                                            } else {
+                                                out.print(tipo_categoria);
+                                            }
+
+
+                                        %>
+                                    </div>
+                                </td>
+                                <td align="center">
+                                    <div class="c_nom"> 
+                                        <%                                            nombre_jornada = cn.buscarjornada("SELECT * FROM catjornada WHERE id='" + rs2.getString("jornada") + "'");
+                                            if (nombre_jornada == null) {
+                                                out.print("");
+                                            } else {
+                                                out.print(nombre_jornada);
+                                            }
+                                        %>
+                                    </div>
+                                </td>
+
+                                <td align="center">
+                                    <div class="datos_tabla"> 
+                                        <% if (rs2.getString("vacancia") == null) {
+                                                out.print("");
+                                            } else {
+                                                out.print(rs2.getString("vacancia"));
+                                            }
+                                        %>
+                                    </div>
+                                </td>
+                            </tr>
+                            <%}
+                                }//fin if elegir
+                                else {
+                                    response.sendRedirect("login.jsp");
+                                }
+                            %>
+                        </table><br><br>
+                         <% } //FIN OPCION VERDADERA COMBOBOX
+                    else {%> <%--OPCION FALSA COMBOBOX --%>
+                    <table  border="0" width="120%">   
+                                <tr><td align="center">
+                                        <input type="hidden" name="f_opc" id="i_opc">
+                                        <input type="hidden" name="campoentidad70" id="campoentidad70" >
+                                        <label>Entidad</label><br>
+
+                                    <%
+                                        ResultSet rs = cn.mostrar("Select id, entidad from catentidades");
+                                    %>
+
+                                    <select class="select" name="entidad" id="entidad" onchange="plantel()" >
+                                        <option value="0">Escoge una opcion</option>
+                                        <%
+                                            while (rs.next()) {
+                                        %>
+                                        <option value="<%=rs.getString("id")%>"><%=rs.getString("entidad")%></option>
+                                        <%
+                                            }
+                                        %>
+                                    </select>
+                                </td>
+                                <td align="center">
+                                    <label>Plantel</label><br>                                 
+
+                                    <select class="select" name="n_plantel" id="i_plantel" >
+                                        <option value="0">Escoge una opcion</option>
+                                    </select>
+                                </td>
+                                <td align="center">
+                                    <label>Categoria Plaza</label><br>
+                                    <select class="select" name="categoria" id="i_plantel">
+                                        <option value="0">Escoge una opcion</option>
+                                        <option value="TD">Tecnico docente</option> 
+                                        <option value="D">Docente</option>
+                                    </select>
+
+                                </td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td>
+                                    <div class="error"> 
+                                        <% if (request.getAttribute("error") == null) {
+                                                out.print("");
+                                            } else {
+                                                out.print(request.getAttribute("error"));
+                                            }
+
+
+                                        %>
+                                    </div>
+                                </td>
+                            </tr>
+
+                        </table><br><br>
+
+                        <div class="form-group">
+                            <button class="btn btn-primary pull-right" type="submit" name="pVacancia" form="data2">Agregar</button>
+                            <button class="btn btn-primary pull-right" type="submit" name="buscarvacancia">Buscar</button>
+
+                        </div>
+                        <br><br>
+
+                        <table  border="1" width="160%" id="tabla_usuarios" class="display">  
+                            <thead>
+                                <tr>
+                                    <th>Estado</th>
+                                    <th>Plantel</th>
+                                    <th>Plaza</th>
+                                    <th>#Plazas</th>
+                                    <th>Tipo de Categoria</th>
+                                    <th>Jornada</th> 
+                                    <th>Vacancia</th>
+                                </tr>
+                            </thead>
+                            <%  String elegir1 = "0";
                                 String nombre_entidad = "";
                                 String nombre_plantel = "";
                                 String tipo_categoria = "";
@@ -377,8 +568,7 @@
                                 </td>
                                 <td align="center">
                                     <div class="c_nom"> 
-                                        <%                                            
-                                            nombre_jornada = cn.buscarjornada("SELECT * FROM catjornada WHERE id='" + rs2.getString("jornada") + "'");
+                                        <%                                            nombre_jornada = cn.buscarjornada("SELECT * FROM catjornada WHERE id='" + rs2.getString("jornada") + "'");
                                             if (nombre_jornada == null) {
                                                 out.print("");
                                             } else {
@@ -406,12 +596,17 @@
                                 }
                             %>
                         </table><br><br>
-                         <%
+                    <%}%>
+                        
+                        
+                        
+                        <%
                             session.setAttribute("idUsuario", idUsuario);
                             session.setAttribute("rfc", rfc);
                         %>
+                        <input type="hidden" name="control_combobox" id="control_combobox" value="<%=request.getAttribute("control_combobox")%>">
                         <input type="hidden" name="permiso1" id="permiso1" value="<%=request.getAttribute("per1")%>">
-                        <input type="hidden" name="permiso3" id="permiso3" value="<%=request.getAttribute("per3")%>">
+                        <input type="hidden" name="permiso2" id="permiso2" value="<%=request.getAttribute("per2")%>">
                         <input type="hidden" name="permiso4" id="permiso4" value="<%=request.getAttribute("per4")%>">
                         <input type="hidden" name="nombre" id="nombre" value="<%=request.getAttribute("nom")%>">
                         <input type="hidden" name="dato_ent" id="dato_ent" value="<%=request.getAttribute("dato_ent")%>">
@@ -424,12 +619,13 @@
                 </asideart>
             </section> 
             <form id="data2" class="form-horizontal" role="form" method="POST" action="Servlet_P_Vacancia">
-                 <%
-                            session.setAttribute("idUsuario", idUsuario);
-                            session.setAttribute("rfc", rfc);
-                        %>
+                <%
+                    session.setAttribute("idUsuario", idUsuario);
+                    session.setAttribute("rfc", rfc);
+                %>
+                <input type="hidden" name="control_combobox" id="control_combobox" value="<%=request.getAttribute("control_combobox")%>">
                 <input type="hidden" name="permiso1" id="permiso1" value="<%=request.getAttribute("per1")%>">
-                <input type="hidden" name="permiso3" id="permiso3" value="<%=request.getAttribute("per3")%>">
+                <input type="hidden" name="permiso2" id="permiso2" value="<%=request.getAttribute("per2")%>">
                 <input type="hidden" name="permiso4" id="permiso4" value="<%=request.getAttribute("per4")%>">
                 <input type="hidden" name="nombre" id="nombre" value="<%=request.getAttribute("nom")%>">
                 <input type="hidden" name="dato_ent" id="dato_ent" value="<%=request.getAttribute("dato_ent")%>">
@@ -444,7 +640,7 @@
             <!-- JS  para el framework del gobierno-->
             <script src="https://framework-gb.cdn.gob.mx/gobmx.js"></script>
         </div>
-                <%
+        <%
             } else {
                 response.sendRedirect("login.jsp");
             }

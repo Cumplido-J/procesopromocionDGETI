@@ -89,7 +89,7 @@
         </script>
     </head>
     <body>
-         <%
+        <%
             session = (HttpSession) request.getSession(true);
             String idUsuario = "";
             String rfc = "";
@@ -125,7 +125,7 @@
 
 
                                     </li>
-                                    <li><a href="login.jsp">Inicio</a></li>
+                                    <li><a href="index.html">Inicio</a></li>
                                 </ul>
                             </nav>
                         </ul>
@@ -153,18 +153,19 @@
                 <p>Alta de Vacancia </p>
                 <jsp:useBean id="cn" class="metodos_sql.Metodos_sql" scope="page"></jsp:useBean>
                     <form id="data"   name="data" method="POST" action="Servlet_agregar_vacantes" onSubmit="return validate();">
-                        <div class="registro">
-                            <div class="caja">
-                                <input type="hidden" name="f_opc" id="i_opc">
-                                <input type="hidden" name="campoentidad" id="campoentidad" >
-                                <p>Entidad
+                    <%if (request.getAttribute("control_combobox").equals("true")) { %>
+                    <div class="registro">
+                        <div class="caja">
+                            <input type="hidden" name="f_opc" id="i_opc">
+                            <input type="hidden" name="campoentidad" id="campoentidad" >
+                            <p>Entidad
 
                                 <%
-                                    ResultSet rs = cn.mostrar("Select id, entidad from catentidades where id="+request.getAttribute("dato_ent"));
+                                    ResultSet rs = cn.mostrar("Select id, entidad from catentidades");
                                 %>
 
-                                <select class="form-control" name="entidad" id="entidad" onchange="plantel()">
-                                    <!--<option value="0">Escoge una opcion</option>-->
+                                <select class="form-control" name="entidad" id="entidad" disabled="true">
+                                    <option value="0">Escoge una opcion</option>
                                     <%
                                         while (rs.next()) {
                                     %>
@@ -177,23 +178,11 @@
                             </p>
                             <div id="n8"></div>
                         </div>
-                                
-                        <%
-                            rs = cn.mostrar("Select id, plantel from catPlanteles where idEntidad="+request.getAttribute("dato_ent")+" and id="+request.getAttribute("dato_pla"));
-                        %>
 
                         <div class="caja">
                             <p>Plantel
-                                <select class="form-control" name="n_plantel" id="i_plantel" onchange="validarentrada3()">
-                                    <!--<option value="0">Escoge una opcion</option>  -->
-                                    <%
-                                        while (rs.next()) {
-                                    %>
-                                    <option value="<%=rs.getString("id")%>"><%=rs.getString("plantel")%></option>
-
-                                    <%//              regresa del combobox         muestra en el combo box
-                                        }
-                                    %> 
+                                <select class="form-control" name="n_plantel" id="i_plantel" disabled="true">
+                                    <option value="0">Escoge una opcion</option>                                     
                                 </select>
                             </p>
                             <div id="n7"></div>
@@ -216,7 +205,7 @@
 
                     <div class="registro">
                         <div class="caja">
-                            <p>Cantidad de Plazas<input id="cantidad" class="form-control" type="text" name="cantidad" size="33" placeholder="Número plazas" maxlength="3"></p>
+                            <p>Cantidad de Plazas<input id="cantidad" class="form-control" type="text" name="cantidad" size="33" placeholder="Nombre" maxlength="3"></p>
                             <div id="n100"></div>
                         </div>
                         <div class="caja">
@@ -264,30 +253,186 @@
                                 </select>
                             </p>
                             <div id="n70"></div>
-                        </div> 
-                        <div class="caja">
+                        </div>         
+
+
+                 <div class="caja">
                             <p>Programa                    
                                 <%
-                                    ResultSet rs4 = cn.mostrar("SELECT a.id,b.programa FROM convocatoria a join catProgramas b on a.idPrograma=b.id where idPlantel="+request.getAttribute("dato_pla"));
+                                    String h[] = {"", "", "", ""};
+                                    int i = 0;
+                                    ResultSet rs4 = cn.mostrar("Select * from convocatoria where idPlantel='" + request.getAttribute("dato_pla") + "'");
                                 %>
-                               <select class="form-control" name="convocatoria" id="convocatoria" onchange="convocatoria1()">
+                                <select class="form-control" name="convocatoria" id="convocatoria" onchange="convocatoria1()">
                                     <option value="0">Escoge una opcion</option>
                                     <%
                                         while (rs4.next()) {
+                                            if (rs4.getString("idPrograma") != "0") {
+                                                h[i] = rs4.getString("idPrograma");
+                                                i++;
+                                            }
+                                        }
+                                        String com2 = "Select * from catProgramas WHERE id= '" + h[0] + "' || id='" + h[1] + "' || id = '" + h[2] + "'";
+                                        ResultSet rs5 = cn.mostrar(com2);
+                                        while (rs5.next()) {
+
                                     %>
-                                    <option value="<%=rs4.getString("id")%>"><%=rs4.getString("programa")%></option>
+
+                                    <option value="<%=rs5.getString("id")%>"><%=rs5.getString("programa")%></option>
+
+                                    <%//              regresa del combobox         muestra en el combo box
+                                        }
+
+                                    %>                                              
+                                </select>           
+                            </p>                         
+
+                            <div id="n80"></div>
+                        </div>       
+                    </div>
+
+                    <% } //FIN OPCION VERDADERA COMBOBOX
+                    else {%> <%--OPCION FALSA COMBOBOX --%>
+                    <div class="registro">
+                        <div class="caja">
+                            <input type="hidden" name="f_opc" id="i_opc">
+                            <input type="hidden" name="campoentidad" id="campoentidad" >
+                            <p>Entidad
+
+                                <%
+                                    ResultSet rs = cn.mostrar("Select id, entidad from catentidades");
+                                %>
+
+                                <select class="form-control" name="entidad" id="entidad" onchange="plantel()">
+                                    <option value="0">Escoge una opcion</option>
+                                    <%
+                                        while (rs.next()) {
+                                    %>
+                                    <option value="<%=rs.getString("id")%>"><%=rs.getString("entidad")%></option>
 
                                     <%//              regresa del combobox         muestra en el combo box
                                         }
                                     %>                                              
                                 </select>           
-                            </p>                         
-                             
-                            <div id="n80"></div>
+                            </p>
+                            <div id="n8"></div>
                         </div>
+
+                        <div class="caja">
+                            <p>Plantel
+                                <select class="form-control" name="n_plantel" id="i_plantel" onchange="validarentrada3()">
+                                    <option value="0">Escoge una opcion</option>                                     
+                                </select>
+                            </p>
+                            <div id="n7"></div>
+
+                        </div>
+
+                        <div class="caja">
+                            <input type="hidden" name="f_opc2" id="i_opc2">
+                            <p>Categoria de Plaza                                    
+                                <select class="form-control" name="entidad2" onchange="plaza()" id="plaza1" >
+                                    <option value="0">Escoge una opcion</option>
+                                    <option value="TD">Tecnico docente</option> 
+                                    <option value="D">Docente</option>
+                                </select>
+                            </p>
+                            <div id="n30"></div>
+                        </div>    
                     </div>
 
 
+                    <div class="registro">
+                        <div class="caja">
+                            <p>Cantidad de Plazas<input id="cantidad" class="form-control" type="text" name="cantidad" size="33" placeholder="Nombre" maxlength="3"></p>
+                            <div id="n100"></div>
+                        </div>
+                        <div class="caja">
+                            <input type="hidden" name="campotipo" id="campotipo" >
+                            <p>Tipo de Categoria
+                                <select class="form-control" name="n_plantel2" id="i_plantel2" onchange="categoria()">
+                                    <option value="0">Escoge una opcion</option>                                       
+                                </select>
+                            </p>
+                            <div id="n40"></div>
+                        </div> 
+
+
+                    </div>
+
+                    <div class="registro">
+                        <div class="caja">
+                            <input type="hidden" name="f_opc3" id="i_opc3">
+                            <input type="hidden" name="campojornada" id="campojornada" >
+                            <p>Jornada
+                                <select class="form-control" name="n_plantel3" id="i_plantel3" onchange="jornada1()">
+                                    <option value="0">Escoge una opcion</option>                                                                       
+                                </select>           
+                            </p>
+                            <div id="n50"></div>
+                        </div>
+
+                        <!--       <div class="caja">
+                                    <input type="hidden" name="f_opc4" id="i_opc4">
+                                    <input type="hidden" name="campogrado1" id="campogrado1" >
+                                   <p>Grado Academico
+                                        <select class="form-control" name="n_plantel4" id="i_plantel4" onchange="grado1()">
+                                           <option value="0">Escoge una opcion</option>
+                                       </select>
+                                   </p>
+                                   <div id="n60"></div>
+                               </div>  -->
+
+                        <div class="caja">
+                            <p>Tipo de Vacancia
+                                <select class="form-control" name="tipovacancia" id="tipovacancia" onchange="vacancia1()">
+                                    <option value="0">Escoge una opcion</option>
+                                    <option value="Real">Real</option> 
+                                    <option value="Cadena">Cadena</option>
+                                </select>
+                            </p>
+                            <div id="n70"></div>
+                        </div>         
+
+
+                      <div class="caja">
+                            <p>Programa                    
+                                <%
+                                    String h[] = {"", "", "", ""};
+                                    int i = 0;
+                                    ResultSet rs4 = cn.mostrar("Select * from convocatoria where idPlantel='" + request.getAttribute("dato_pla") + "'");
+                                %>
+                                <select class="form-control" name="convocatoria" id="convocatoria" onchange="convocatoria1()">
+                                    <option value="0">Escoge una opcion</option>
+                                    <%
+                                        while (rs4.next()) {
+                                            if (rs4.getString("idPrograma") != "0") {
+                                                h[i] = rs4.getString("idPrograma");
+                                                i++;
+                                            }
+                                        }
+                                        String com2 = "Select * from catProgramas WHERE id= '" + h[0] + "' || id='" + h[1] + "' || id = '" + h[2] + "'";
+                                        ResultSet rs5 = cn.mostrar(com2);
+                                        while (rs5.next()) {
+
+                                    %>
+
+                                    <option value="<%=rs5.getString("id")%>"><%=rs5.getString("programa")%></option>
+
+                                    <%//              regresa del combobox         muestra en el combo box
+                                        }
+
+                                    %>                                              
+                                </select>           
+                            </p>                         
+
+                            <div id="n80"></div>
+                        </div>      
+                    </div>
+
+
+
+                    <%}%>
 
 
 
@@ -319,12 +464,13 @@
                         <button class="btn btn-primary pull-right" type="submit" name="agregarvacantes">Agregar</button>
 
                     </div>
-                      <%
-                            session.setAttribute("idUsuario", idUsuario);
-                            session.setAttribute("rfc", rfc);
-                        %>
+                    <%
+                        session.setAttribute("idUsuario", idUsuario);
+                        session.setAttribute("rfc", rfc);
+                    %>
+                    <input type="hidden" name="control_combobox" id="control_combobox" value="<%=request.getAttribute("control_combobox")%>">
                     <input type="hidden" name="permiso1" id="permiso1" value="<%=request.getAttribute("per1")%>">
-                    <input type="hidden" name="permiso3" id="permiso3" value="<%=request.getAttribute("per3")%>">
+                    <input type="hidden" name="permiso2" id="permiso2" value="<%=request.getAttribute("per2")%>">
                     <input type="hidden" name="permiso4" id="permiso4" value="<%=request.getAttribute("per4")%>">
                     <input type="hidden" name="nombre" id="nombre" value="<%=request.getAttribute("nom")%>">
                     <input type="hidden" name="dato_ent" id="dato_ent" value="<%=request.getAttribute("dato_ent")%>">
@@ -336,12 +482,13 @@
                 <div class="posision1">   
                     <button class="btn btn-primary pull-right posision2" type="submit" name="regresa2" id="check">Regresar</button></a>
                 </div>
-                  <%
-                            session.setAttribute("idUsuario", idUsuario);
-                            session.setAttribute("rfc", rfc);
-                        %>
+                <%
+                    session.setAttribute("idUsuario", idUsuario);
+                    session.setAttribute("rfc", rfc);
+                %>
+                <input type="hidden" name="control_combobox" id="control_combobox" value="<%=request.getAttribute("control_combobox")%>">
                 <input type="hidden" name="permiso1" id="permiso1" value="<%=request.getAttribute("per1")%>">
-                <input type="hidden" name="permiso3" id="permiso3" value="<%=request.getAttribute("per3")%>">
+                <input type="hidden" name="permiso2" id="permiso2" value="<%=request.getAttribute("per2")%>">
                 <input type="hidden" name="permiso4" id="permiso4" value="<%=request.getAttribute("per4")%>">
                 <input type="hidden" name="nombre" id="nombre" value="<%=request.getAttribute("nom")%>">
                 <input type="hidden" name="dato_ent" id="dato_ent" value="<%=request.getAttribute("dato_ent")%>">
@@ -356,7 +503,7 @@
             <script src="https://framework-gb.cdn.gob.mx/gobmx.js"></script>
             <script src="js/notificaciones3.js"></script>
         </div>
-            <%
+        <%
             } else {
                 response.sendRedirect("login.jsp");
             }
