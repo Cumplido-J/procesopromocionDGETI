@@ -97,6 +97,7 @@ public class Servlet_agregar_vacantes extends HttpServlet {
                 idUsuario = session.getAttribute("idUsuario").toString();
                 rfc = session.getAttribute("rfc").toString();
 
+                String control_combobox = request.getParameter("control_combobox");
                 String per1 = request.getParameter("permiso1");
                 String per3 = request.getParameter("permiso3");
                 String per4 = request.getParameter("permiso4");
@@ -124,6 +125,7 @@ public class Servlet_agregar_vacantes extends HttpServlet {
                     int datos5 = metodos.guardar5( estadon, plantel, plaza, cantidad1, tipon, jornadan, grado_academico, vacancia,convocatoria);
 
                     if (datos5 > 0) {
+                        request.setAttribute("control_combobox", control_combobox);
                         request.setAttribute("ver", "1");
                         request.setAttribute("opc", "1");
                         request.setAttribute("consulta", "1");

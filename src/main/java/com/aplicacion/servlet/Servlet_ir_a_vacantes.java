@@ -34,8 +34,7 @@ public class Servlet_ir_a_vacantes extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try {
-            PrintWriter out = response.getWriter();
+        try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");
             out.println("<html>");
@@ -47,8 +46,6 @@ public class Servlet_ir_a_vacantes extends HttpServlet {
             rd.forward(request, response);
             out.println("</body>");
             out.println("</html>");
-        }catch(Exception e){
-            System.out.println(e.toString());
         }
     }
 
@@ -93,8 +90,9 @@ public class Servlet_ir_a_vacantes extends HttpServlet {
                 idUsuario = session.getAttribute("idUsuario").toString();
                 rfc = session.getAttribute("rfc").toString();
 
+                String control_combobox = request.getParameter("control_combobox");
                 String per1 = request.getParameter("permiso1");
-                String per3 = request.getParameter("permiso3");
+                String per2 = request.getParameter("permiso2");
                 String per4 = request.getParameter("permiso4");
                 String nom1 = request.getParameter("nombre");
                 String ent1 = request.getParameter("dato_ent");
@@ -102,21 +100,20 @@ public class Servlet_ir_a_vacantes extends HttpServlet {
                 String rfc1 = request.getParameter("dato_rfc");
                 String btnir = request.getParameter("ir");
                 if (btnir != null) {
+                    request.setAttribute("control_combobox", control_combobox);
                     request.setAttribute("opc", "1");
                     request.setAttribute("consulta", "1");
                     request.setAttribute("nom", nom1);
                     request.setAttribute("dato_ent", ent1);
                     request.setAttribute("dato_pla", pla1);
-                    System.out.println(pla1);
                     request.setAttribute("dato_rfc", rfc1);
                     request.setAttribute("per1", per1);
-                    request.setAttribute("per3", per3);
+                    request.setAttribute("per2", per2);
                     request.setAttribute("per4", per4);
                     request.setAttribute("ver", "1");
                     session.setAttribute("idUsuario", idUsuario);
                     session.setAttribute("rfc", rfc);
-                    session.setAttribute("idUsuario", idUsuario);
-                    session.setAttribute("rfc", rfc);
+                  
                     RequestDispatcher rd = request.getRequestDispatcher("vacantes.jsp");
                     rd.forward(request, response);
                 }

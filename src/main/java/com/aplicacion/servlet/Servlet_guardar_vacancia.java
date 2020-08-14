@@ -87,15 +87,18 @@ public class Servlet_guardar_vacancia extends HttpServlet {
             //out.println("<title>Servlet Servlet_crearcuenta</title>");
             out.println("</head>");
             out.println("<body>");
-            HttpSession session = (HttpSession) request.getSession(true);
+           HttpSession session = (HttpSession) request.getSession(true);
             String idUsuario = "";
             String rfc = "";
-            //if (session.getAttribute("idUsuario") != null && session.getAttribute("rfc") != null) {
+            RequestDispatcher rd ;
+
+            if (session.getAttribute("idUsuario") != null && session.getAttribute("rfc") != null) {
                 idUsuario = session.getAttribute("idUsuario").toString();
                 rfc = session.getAttribute("rfc").toString();
 
+                String control_combobox = request.getParameter("control_combobox");
                 String per1 = request.getParameter("permiso1");
-                String per3 = request.getParameter("permiso3");
+                String per2 = request.getParameter("permiso2");
                 String per4 = request.getParameter("permiso4");
                 String nom1 = request.getParameter("nombre");
                 String ent1 = request.getParameter("dato_ent");
@@ -103,29 +106,44 @@ public class Servlet_guardar_vacancia extends HttpServlet {
                 String rfc1 = request.getParameter("dato_rfc");
 
                 String btnlogin = request.getParameter("guardar");
-
+                                                      
                 if (btnlogin != null) {
-
+//                    out.print(per1+" "+per2+" "+per4);
+                    request.setAttribute("control_combobox", control_combobox);
                     request.setAttribute("ver", "1");
                     request.setAttribute("opc", "1");
-                    request.setAttribute("per1", per1);
-                    request.setAttribute("per3", per3);
-                    request.setAttribute("per4", per4);
                     request.setAttribute("nom", nom1);
                     request.setAttribute("consulta", "1");
                     request.setAttribute("dato_ent", ent1);
                     request.setAttribute("dato_pla", pla1);
                     request.setAttribute("dato_rfc", rfc1);
-                    //session.setAttribute("idUsuario", idUsuario);
-                    //session.setAttribute("rfc", rfc);
-                    RequestDispatcher rd = request.getRequestDispatcher("vacantes.jsp");
+                    request.setAttribute("per1", per1);
+                    request.setAttribute("per2", per2);
+                    request.setAttribute("per4", per4);
+                    session.setAttribute("idUsuario", idUsuario);
+                    session.setAttribute("rfc", rfc);
+
+//                    if (per1.equals("false")) {
+//                    rd = request.getRequestDispatcher("administracion_usuarios.jsp");
+//                    rd.forward(request, response);                      
+//                    }
+//                    else if (per2.equals("false")) {
+//                    rd = request.getRequestDispatcher("convocatoria.jsp");
+//                    rd.forward(request, response);
+//////                        out.print(per2);
+//                    }
+                    if (per4.equals("false")) {
+                    rd = request.getRequestDispatcher("vacantes.jsp");
                     rd.forward(request, response);
+//                       
+                    }
+
                 } else {
-                    out.print("Servidor en mantenimiento, Datos no guardados");
+                    out.print("Servidor en mantenimiento, Datos no Guardados");
                 }//fin presionar boton
-            /*} else {
+            } else {
                 response.sendRedirect("login.jsp");
-            }*/
+            }
             out.println("</body>");
             out.println("</html>");
 

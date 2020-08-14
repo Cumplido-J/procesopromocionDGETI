@@ -49,7 +49,7 @@ public class Servlet_iniciosesion_administrador extends HttpServlet {
             rd.forward(request, response);
             out.println("</body>");
             out.println("</html>");
-        }catch(Exception e){
+        } catch (Exception e) {
             System.out.println(e.toString());
         }
     }
@@ -101,6 +101,7 @@ public class Servlet_iniciosesion_administrador extends HttpServlet {
             claveEncriptada = Encriptar_Desencriptar.encriptar(clave);
 
             String btnlogin = request.getParameter("iniciarsesionadmin");
+
             int boton1 = 0, boton2 = 0, boton3 = 0, boton4 = 0, boton5 = 0, boton6 = 0, boton7 = 0, boton8 = 0, boton9 = 0;
             int numero = 0;
 
@@ -111,22 +112,26 @@ public class Servlet_iniciosesion_administrador extends HttpServlet {
             String per5 = "true";
 
             if (btnlogin != null) {
-                String busquedaadmin = metodos.buscaradmin(rfc2, claveEncriptada);
+
+                String busquedaadmin = metodos.buscar_rfc(rfc2);
+
                 if (rfc2.equals("root") && clave.equals("root")) {
                     out.println("ADMINISTTRADOR");
                 }//fin if root
-                else if (busquedaadmin.equals("USUARIO ENCONTRADO")) {
-                    HttpSession session = (HttpSession) request.getSession(true);
-                    String idUsuario = "";
-                    String rfc = "";
-                  
-                        
-                        
-                        String busqueda_nombre[] = metodos.buscaradmin2(rfc2);
+                else if (busquedaadmin.equals("RFC ENCONTRADO")) {
 
+                    String busquedaclave[] = metodos.buscar_clave(rfc2, claveEncriptada);
+
+                    if (busquedaclave[0].equals("USUARIO ENCONTRADO")) {
+                        HttpSession session = (HttpSession) request.getSession(true);
+                        String idUsuario = busquedaclave[1].toString();
+                        String rfc = rfc2;
+
+                        String busqueda_nombre[] = metodos.buscaradmin2(rfc2);
+                       
                         String id_usuario = busqueda_nombre[4].toString();
                         String permisos[] = metodos.buscarpermisos(Integer.parseInt(id_usuario));
-
+                        
                         for (int i = 0; i < permisos.length; i++) {
                             if (permisos[i] != null) {
                                 numero++;
@@ -154,49 +159,66 @@ public class Servlet_iniciosesion_administrador extends HttpServlet {
                                 boton5 = 1;
                                 per5 = "false";
                             }
-
                         }
-
-//                 out.println(String.valueOf(boton1)+
-//                         String.valueOf(boton2)+
-//                         String.valueOf(boton3)+
-//                         String.valueOf(boton4)+
-//                         String.valueOf(boton5)+
-//                         String.valueOf(boton6)+
-//                         String.valueOf(boton7)+
-//                         String.valueOf(boton8)+
-//                         String.valueOf(boton9));
-//                 out.println(String.valueOf(per1)+
-//                         String.valueOf(per2)+
-//                         String.valueOf(per3)+
-//                         String.valueOf(per4)+
-//                         String.valueOf(per5));
+                  
                         request.setAttribute("opc", "1");
                         request.setAttribute("consulta", "1");
                         request.setAttribute("dato_ent", busqueda_nombre[0]);
                         request.setAttribute("dato_pla", busqueda_nombre[1]);
-                        
-                        System.out.println(busqueda_nombre[1]);
-                        
                         request.setAttribute("nom", busqueda_nombre[2]);
                         request.setAttribute("dato_rfc", busqueda_nombre[3]);
 
-                        request.setAttribute("per1", per1);
+                        request.setAttribute("per1", per1);//alta administradores
+                        request.setAttribute("per2", per2);//carga convocatoria
                         request.setAttribute("per3", per3);
-                        request.setAttribute("per4", per4);
+                        request.setAttribute("per4", per4);//carga vancancia
+                        request.setAttribute("per5", per5);
                         session.setAttribute("idUsuario", idUsuario);
                         session.setAttribute("rfc", rfc2);
-                        RequestDispatcher rd = request.getRequestDispatcher("administracion_usuarios.jsp");
-                        rd.forward(request, response);
-                    } else {
-                        request.setAttribute("error", "Administrador No Registrado");
-                        RequestDispatcher rd = request.getRequestDispatcher("administradores.jsp");
+
+                        if (busqueda_nombre[5].toString().equals("S")) {
+                            request.setAttribute("control_combobox", "false");
+                            RequestDispatcher rd = request.getRequestDispatcher("administracion_usuarios.jsp");
+                            rd.forward(request, response);
+                        }
+                        if (busqueda_nombre[5].toString().equals("A")) {
+                            if (per1.equals("false")) {
+                                request.setAttribute("control_combobox", "true");
+                                RequestDispatcher rd = request.getRequestDispatcher("administracion_usuarios.jsp");
+                                rd.forward(request, response);
+                            }
+                            if (per2.equals("false")) {
+                                request.setAttribute("control_combobox", "true");
+                                RequestDispatcher rd = request.getRequestDispatcher("convocatoria.jsp");
+                                rd.forward(request, response);
+                            }
+                            if (per4.equals("false")) {
+                                request.setAttribute("control_combobox", "true");
+                                RequestDispatcher rd = request.getRequestDispatcher("vacantes.jsp");
+                                rd.forward(request, response);
+                            }
+                        }
+                        if (busqueda_nombre[5].toString().equals("D")) {
+                            RequestDispatcher rd = request.getRequestDispatcher("ppsesion.jsp");
+                            rd.forward(request, response);
+                        }
+                    }//USUARIO ENCONTRADO
+                    else {
+                        request.setAttribute("error", "Contraseña incorrecta");
+                        RequestDispatcher rd = request.getRequestDispatcher("login.jsp");
                         rd.forward(request, response);
                         //out.println("USUARIO NO REGISTRADOs");
                     }
+                } //RFC ENCONTRADO
+                else {
+                    request.setAttribute("error", "El usuario no existe");
+                    RequestDispatcher rd = request.getRequestDispatcher("login.jsp");
+                    rd.forward(request, response);
+                    //out.println("USUARIO NO REGISTRADOs");
+                }
 
-                
-            } else {
+            }//BOTON
+            else {
                 response.sendRedirect("login.jsp");
             }
             //out.println("<h1>Servlet Servlet at " + request.getContextPath() + "</h1>");

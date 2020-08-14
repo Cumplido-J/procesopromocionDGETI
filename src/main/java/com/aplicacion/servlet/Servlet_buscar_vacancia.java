@@ -35,8 +35,7 @@ public class Servlet_buscar_vacancia extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try  {
-            PrintWriter out = response.getWriter();
+        try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");
             out.println("<html>");
@@ -48,8 +47,6 @@ public class Servlet_buscar_vacancia extends HttpServlet {
             rd.forward(request, response);
             out.println("</body>");
             out.println("</html>");
-        }catch(Exception e){
-            System.out.println(e.toString());
         }
     }
 
@@ -94,12 +91,13 @@ public class Servlet_buscar_vacancia extends HttpServlet {
             HttpSession session = (HttpSession) request.getSession(true);
             String idUsuario = "";
             String rfc = "";
-            if (session.getAttribute("idUsuario") != null && session.getAttribute("rfc") != null) {
+            if (session.getAttribute("idUsuario").toString() != null && session.getAttribute("rfc").toString() != null) {
                 idUsuario = session.getAttribute("idUsuario").toString();
                 rfc = session.getAttribute("rfc").toString();
 
+                String control_combobox = request.getParameter("control_combobox");
                 String per1 = request.getParameter("permiso1");
-                String per3 = request.getParameter("permiso3");
+                String per2 = request.getParameter("permiso2");
                 String per4 = request.getParameter("permiso4");
                 String nom1 = request.getParameter("nombre");
                 String ent1 = request.getParameter("dato_ent");
@@ -112,34 +110,47 @@ public class Servlet_buscar_vacancia extends HttpServlet {
 
                 String btnvacancia = request.getParameter("buscarvacancia");
                 if (btnvacancia != null) {
+              
+                    if (control_combobox.equals("false")) {
+                        if (entidad.equals("0") && n_plantel.equals("0") && categoria.equals("0")) {
+                            
+                            request.setAttribute("consulta", "1");
+//                            out.print("caso 1"); //nada
+                        } else if (entidad != ("0") && n_plantel != ("0") && categoria.equals("0")) {
+                            if (n_plantel.equals("0")) {
+                                request.setAttribute("consulta", "2");
+//                                out.print("caso 2");//entidad
+                            } else {
+                                request.setAttribute("consulta", "3");
+//                                out.print("caso 3"); //entidad y plantel  
+                            }
 
-                    if (entidad.equals("0") && n_plantel.equals("0") && categoria.equals("0")) {
-                        request.setAttribute("consulta", "1");
-                        //out.print("caso 1"); nada
-                    } else if (entidad != ("0") && n_plantel != ("0") && categoria.equals("0")) {
-                        if (n_plantel.equals("0")) {
-                            request.setAttribute("consulta", "2");
-                            //out.print("caso 2");//entidad
-                        } else {
-                            request.setAttribute("consulta", "3");
-                            //out.print("caso 3"); //entidad y plantel  
+                        } else if (entidad.equals("0") && n_plantel.equals("0") && categoria != "0") {
+                            request.setAttribute("consulta", "4");
+//                            out.print("caso 4");   //usuario
+                        } else if (entidad != "0" && n_plantel != ("0") && categoria != "0") {
+                            if (n_plantel.equals("0")) {
+                                request.setAttribute("consulta", "5");
+//                                out.print("caso 5");//entidad y usuario
+                            } else {
+                                request.setAttribute("consulta", "6");
+//                                out.print("caso 6"); //todos
+                            }
+
+                            //request.setAttribute("consulta", "4");
                         }
+                    }//fin comparacion combobox
+                    else {
 
-                    } else if (entidad.equals("0") && n_plantel.equals("0") && categoria != "0") {
-                        request.setAttribute("consulta", "4");
-                        //out.print("caso 4");   usuario
-                    } else if (entidad != "0" && n_plantel != ("0") && categoria != "0") {
-                        if (n_plantel.equals("0")) {
-                            request.setAttribute("consulta", "5");
-                            //out.print("caso 5");//entidad y usuario
-                        } else {
-                            request.setAttribute("consulta", "6");
-                            //out.print("caso 6"); //todos
+                        if (categoria.equals("0")) {
+                            request.setAttribute("consulta", "1");
+//                        out.print("caso 1");   //usuario
+                        } else if (categoria != "") {
+                            request.setAttribute("consulta", "4");
+//                        out.print("caso 4");   //usuario
                         }
-
-                        //request.setAttribute("consulta", "4");
                     }
-
+                    request.setAttribute("control_combobox", control_combobox);
                     request.setAttribute("est", entidad);
                     request.setAttribute("pla", n_plantel);
                     request.setAttribute("cat", categoria);
@@ -149,10 +160,11 @@ public class Servlet_buscar_vacancia extends HttpServlet {
                     request.setAttribute("dato_pla", pla1);
                     request.setAttribute("dato_rfc", rfc1);
                     request.setAttribute("per1", per1);
-                    request.setAttribute("per3", per3);
+                    request.setAttribute("per2", per2);
                     request.setAttribute("per4", per4);
                     session.setAttribute("idUsuario", idUsuario);
                     session.setAttribute("rfc", rfc);
+                    
                     RequestDispatcher rd = request.getRequestDispatcher("vacantes.jsp");
                     rd.forward(request, response);
                 } else {

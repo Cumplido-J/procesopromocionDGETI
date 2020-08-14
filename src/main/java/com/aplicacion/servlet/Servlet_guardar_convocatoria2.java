@@ -46,7 +46,7 @@ public class Servlet_guardar_convocatoria2 extends HttpServlet {
             out.println("<h1>Servlet Servlet_guardar_convocatoria2 at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
-        }catch(Exception e){
+        } catch (Exception e) {
             System.out.println(e.toString());
         }
     }
@@ -91,39 +91,41 @@ public class Servlet_guardar_convocatoria2 extends HttpServlet {
             String idUsuario = "";
             String rfc = "";
             //if (session.getAttribute("idUsuario") != null && session.getAttribute("rfc") != null) {
-                idUsuario = session.getAttribute("idUsuario").toString();
-                rfc = session.getAttribute("rfc").toString();
+            idUsuario = session.getAttribute("idUsuario").toString();
+            rfc = session.getAttribute("rfc").toString();
 
-                String per1 = request.getParameter("permiso1");
-                String per3 = request.getParameter("permiso3");
-                String per4 = request.getParameter("permiso4");
-                String nom1 = request.getParameter("nombre");
-                String ent1 = request.getParameter("dato_ent");
-                String pla1 = request.getParameter("dato_pla");
-                String rfc1 = request.getParameter("dato_rfc");
+            String control_combobox = request.getParameter("control_combobox");
+            String per1 = request.getParameter("permiso1");
+            String per3 = request.getParameter("permiso3");
+            String per4 = request.getParameter("permiso4");
+            String nom1 = request.getParameter("nombre");
+            String ent1 = request.getParameter("dato_ent");
+            String pla1 = request.getParameter("dato_pla");
+            String rfc1 = request.getParameter("dato_rfc");
 
-                String btnlogin = request.getParameter("guardar");
+            String btnlogin = request.getParameter("guardar");
 
-                if (btnlogin != null) {
+            if (btnlogin != null) {
 
-                    request.setAttribute("ver", "1");
-                    request.setAttribute("opc", "1");
-                    request.setAttribute("nom", nom1);
-                    request.setAttribute("consulta", "1");
-                    request.setAttribute("dato_ent", ent1);
-                    request.setAttribute("dato_pla", pla1);
-                    request.setAttribute("dato_rfc", rfc1);
-                    request.setAttribute("per1", per1);
-                    request.setAttribute("per3", per3);
-                    request.setAttribute("per4", per4);
-                    //session.setAttribute("idUsuario", idUsuario);
-                    //session.setAttribute("rfc", rfc);
-                    //RequestDispatcher rd = request.getRequestDispatcher("administracion_usuarios.jsp");
-                    RequestDispatcher rd = request.getRequestDispatcher("convocatoria.jsp");
-                    rd.forward(request, response);
-                } else {
-                    out.print("Servidor en mantenimiento, Datos no Guardados");
-                }//fin presionar boton
+                request.setAttribute("control_combobox", control_combobox);
+                request.setAttribute("ver", "1");
+                request.setAttribute("opc", "1");
+                request.setAttribute("nom", nom1);
+                request.setAttribute("consulta", "1");
+                request.setAttribute("dato_ent", ent1);
+                request.setAttribute("dato_pla", pla1);
+                request.setAttribute("dato_rfc", rfc1);
+                request.setAttribute("per1", per1);
+                request.setAttribute("per3", per3);
+                request.setAttribute("per4", per4);
+                //session.setAttribute("idUsuario", idUsuario);
+                //session.setAttribute("rfc", rfc);
+                //RequestDispatcher rd = request.getRequestDispatcher("administracion_usuarios.jsp");
+                RequestDispatcher rd = request.getRequestDispatcher("convocatoria.jsp");
+                rd.forward(request, response);
+            } else {
+                out.print("Servidor en mantenimiento, Datos no Guardados");
+            }//fin presionar boton
             /*} else {
                 response.sendRedirect("login.jsp");
             }*/

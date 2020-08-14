@@ -34,7 +34,7 @@ public class Servlet_convocatoria extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try  {
+        try {
             PrintWriter out = response.getWriter();
             /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");
@@ -47,7 +47,7 @@ public class Servlet_convocatoria extends HttpServlet {
             rd.forward(request, response);
             out.println("</body>");
             out.println("</html>");
-        }catch(Exception e){
+        } catch (Exception e) {
             System.out.println(e.toString());
         }
     }
@@ -93,6 +93,7 @@ public class Servlet_convocatoria extends HttpServlet {
                 idUsuario = session.getAttribute("idUsuario").toString();
                 rfc = session.getAttribute("rfc").toString();
 
+                String control_combobox = request.getParameter("control_combobox");
                 String per1 = request.getParameter("permiso1");
                 String per3 = request.getParameter("permiso3");
                 String per4 = request.getParameter("permiso4");
@@ -102,6 +103,7 @@ public class Servlet_convocatoria extends HttpServlet {
                 String rfc1 = request.getParameter("dato_rfc");
                 String btnregresa = request.getParameter("convocatoria");
                 if (btnregresa != null) {
+                    request.setAttribute("control_combobox", control_combobox);
                     request.setAttribute("opc", "1");
                     request.setAttribute("nom", nom1);
                     request.setAttribute("dato_ent", ent1);
@@ -117,25 +119,23 @@ public class Servlet_convocatoria extends HttpServlet {
                     RequestDispatcher rd = request.getRequestDispatcher("convocatoria.jsp");
                     rd.forward(request, response);
                 }
-                } else {
-                    response.sendRedirect("login.jsp");
-                }
-                //out.println("<h1>Servlet Servlet at " + request.getContextPath() + "</h1>");
-                out.println("</body>");
-                out.println("</html>");
+            } else {
+                response.sendRedirect("login.jsp");
             }
+            //out.println("<h1>Servlet Servlet at " + request.getContextPath() + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
         }
-
-        /**
-         * Returns a short description of the servlet.
-         *
-         * @return a String containing servlet description
-         */
-        @Override
-        public String getServletInfo
-        
-            () {
-        return "Short description";
-        }// </editor-fold>
-
     }
+
+    /**
+     * Returns a short description of the servlet.
+     *
+     * @return a String containing servlet description
+     */
+    @Override
+    public String getServletInfo() {
+        return "Short description";
+    }// </editor-fold>
+
+}

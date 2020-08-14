@@ -48,7 +48,7 @@ public class Servlet_guardar_convocatoria extends HttpServlet {
             out.println("<h1>Servlet Servlet_guardar_convocatoria at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
-        }catch(Exception e){
+        } catch (Exception e) {
             System.out.println(e.toString());
         }
     }
@@ -96,6 +96,7 @@ public class Servlet_guardar_convocatoria extends HttpServlet {
                 idUsuario = session.getAttribute("idUsuario").toString();
                 rfc = session.getAttribute("rfc").toString();
 
+                String control_combobox = request.getParameter("control_combobox");
                 String per1 = request.getParameter("permiso1");
                 String per3 = request.getParameter("permiso3");
                 String per4 = request.getParameter("permiso4");
@@ -120,19 +121,20 @@ public class Servlet_guardar_convocatoria extends HttpServlet {
                 if (btnregresa != null) {
 //                out.print(logosems1);
 //                out.print(logouemstis1);
-                    out.print(programa);
-                    out.print(publicacion1);
-                    out.print(periodo_registro_inicio1);
-                    out.print(periodo_registro_fin1);
-                    out.print(periodo_valoracion_inicio1);
-                    out.print(periodo_valoracion_fin1);
-                    out.print(periodo_dictaminacion_inicio1);
-                    out.print(periodo_dictaminacion_fin1);
-                    out.print(publicacion_resultados1);
+//                    out.print(programa);
+//                    out.print(publicacion1);
+//                    out.print(periodo_registro_inicio1);
+//                    out.print(periodo_registro_fin1);
+//                    out.print(periodo_valoracion_inicio1);
+//                    out.print(periodo_valoracion_fin1);
+//                    out.print(periodo_dictaminacion_inicio1);
+//                    out.print(periodo_dictaminacion_fin1);
+//                    out.print(publicacion_resultados1);
 
-                    int datos6 = metodos.guardar7( programa, publicacion1, periodo_registro_inicio1, periodo_registro_fin1, periodo_valoracion_inicio1, periodo_valoracion_fin1, periodo_dictaminacion_inicio1, periodo_dictaminacion_fin1, publicacion_resultados1,pla1);
+                    int datos6 = metodos.guardar7(publicacion1, periodo_registro_inicio1, periodo_registro_fin1, periodo_valoracion_inicio1, periodo_valoracion_fin1, periodo_dictaminacion_inicio1, periodo_dictaminacion_fin1, publicacion_resultados1, pla1, programa);
 
                     if (datos6 > 0) {
+                        request.setAttribute("control_combobox", control_combobox);
                         request.setAttribute("opc", "1");
                         request.setAttribute("nom", nom1);
                         request.setAttribute("dato_ent", ent1);
@@ -142,8 +144,8 @@ public class Servlet_guardar_convocatoria extends HttpServlet {
                         request.setAttribute("per3", per3);
                         request.setAttribute("per4", per4);
                         request.setAttribute("ver", "1");
-                        //session.setAttribute("idUsuario", idUsuario);
-                        //session.setAttribute("rfc", rfc);
+                        session.setAttribute("idUsuario", idUsuario);
+                        session.setAttribute("rfc", rfc);
                         RequestDispatcher rd = request.getRequestDispatcher("aviso_guardar_convocatoria.jsp");
                         rd.forward(request, response);
                     } else {

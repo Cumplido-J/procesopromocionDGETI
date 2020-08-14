@@ -36,8 +36,7 @@ public class Servlet_agregar_usuario extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try{
-            PrintWriter out = response.getWriter();
+        try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");
             out.println("<html>");
@@ -49,8 +48,6 @@ public class Servlet_agregar_usuario extends HttpServlet {
             rd.forward(request, response);
             out.println("</body>");
             out.println("</html>");
-        }catch(Exception e){
-            System.out.println(e.toString());
         }
     }
 
@@ -97,8 +94,10 @@ public class Servlet_agregar_usuario extends HttpServlet {
             if (session.getAttribute("idUsuario") != null && session.getAttribute("rfc") != null) {
                 idUsuario = session.getAttribute("idUsuario").toString();
                 rfc = session.getAttribute("rfc").toString();
+                
+                String control_combobox = request.getParameter("control_combobox");
                 String per1 = request.getParameter("permiso1");
-                String per3 = request.getParameter("permiso3");
+                String per2 = request.getParameter("permiso2");
                 String per4 = request.getParameter("permiso4");
                 String nom1 = request.getParameter("nombre");
                 String ent1 = request.getParameter("dato_ent");
@@ -121,7 +120,7 @@ public class Servlet_agregar_usuario extends HttpServlet {
                 claveEncriptada = Encriptar_Desencriptar.encriptar(clave);
 
                 int lon = check.length;
-                String permisos = "";                
+                String permisos = "";
                 if (lon == 1) {
                     permisos = check[0];
                 }
@@ -153,11 +152,16 @@ public class Servlet_agregar_usuario extends HttpServlet {
                 String btnlogin = request.getParameter("agregarusuario");
 
                 if (btnlogin != null) {
-
+                    int datos4=0;
                     int datos5 = 0;
-
-                    int datos4 = metodos.guardar4(0, id_estado, plantel, usuario, nombre, apellidopaterno, apellidomaterno, telfijo, telcel, correo, claveEncriptada, perfil, permisos);
-
+                    
+                    if(control_combobox.equals("true")){
+                    datos4 = metodos.guardar4(0,ent1, pla1, nombre, apellidopaterno, apellidomaterno, correo, claveEncriptada, usuario, telfijo,telcel,perfil);  
+                    }else
+                    {
+                    datos4 = metodos.guardar4(0,id_estado, plantel, nombre, apellidopaterno, apellidomaterno, correo, claveEncriptada, usuario, telfijo,telcel,perfil);
+                    }
+                    
                     int id = metodos.buscarid();
 
                     for (int n = 0; n < check.length; n++) {
@@ -166,6 +170,7 @@ public class Servlet_agregar_usuario extends HttpServlet {
                         }
                     }
                     if (datos4 > 0 && datos5 > 0) {
+                        request.setAttribute("control_combobox", control_combobox);
                         request.setAttribute("ver", "1");
                         request.setAttribute("opc", "1");
                         request.setAttribute("nom", nom1);
@@ -174,11 +179,11 @@ public class Servlet_agregar_usuario extends HttpServlet {
                         request.setAttribute("dato_pla", pla1);
                         request.setAttribute("dato_rfc", rfc1);
                         request.setAttribute("per1", per1);
-                        request.setAttribute("per3", per3);
+                        request.setAttribute("per2", per2);
                         request.setAttribute("per4", per4);
                         session.setAttribute("idUsuario", idUsuario);
                         session.setAttribute("rfc", rfc);
-                        RequestDispatcher rd = request.getRequestDispatcher("aviso_guardar_usuario.jsp");
+                        RequestDispatcher rd = request.getRequestDispatcher("aviso_guardar_datos.jsp");
                         rd.forward(request, response);
                     } else {
                         out.print("Servidor en mantenimiento, Datos no Guardados");
@@ -190,8 +195,6 @@ public class Servlet_agregar_usuario extends HttpServlet {
             }
             out.println("</body>");
             out.println("</html>");
-        }catch(Exception e){
-            System.out.println(e.toString());
         }
     }
 

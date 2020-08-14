@@ -34,8 +34,7 @@ public class Servlet_P_Agregar extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try{
-            PrintWriter out = response.getWriter();
+        try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");
             out.println("<html>");
@@ -47,8 +46,6 @@ public class Servlet_P_Agregar extends HttpServlet {
             rd.forward(request, response);
             out.println("</body>");
             out.println("</html>");
-        }catch(Exception e){
-            System.out.println(e.toString());
         }
     }
 
@@ -94,8 +91,9 @@ public class Servlet_P_Agregar extends HttpServlet {
                 idUsuario = session.getAttribute("idUsuario").toString();
                 rfc = session.getAttribute("rfc").toString();
 
+                String control_combobox = request.getParameter("control_combobox");
                 String per1 = request.getParameter("permiso1");
-                String per3 = request.getParameter("permiso3");
+                String per2 = request.getParameter("permiso2");
                 String per4 = request.getParameter("permiso4");
                 String nom1 = request.getParameter("nombre");
                 String ent1 = request.getParameter("dato_ent");
@@ -103,38 +101,37 @@ public class Servlet_P_Agregar extends HttpServlet {
                 String rfc1 = request.getParameter("dato_rfc");
                 String btnregresa = request.getParameter("pAgregar");
                 if (btnregresa != null) {
+                    request.setAttribute("control_combobox", control_combobox);
                     request.setAttribute("ver", "1");
                     request.setAttribute("nom", nom1);
                     request.setAttribute("dato_ent", ent1);
                     request.setAttribute("dato_pla", pla1);
                     request.setAttribute("dato_rfc", rfc1);
                     request.setAttribute("per1", per1);
-                    request.setAttribute("per3", per3);
+                    request.setAttribute("per2", per2);
                     request.setAttribute("per4", per4);
                     session.setAttribute("idUsuario", idUsuario);
                     session.setAttribute("rfc", rfc);
                     RequestDispatcher rd = request.getRequestDispatcher("agregar_usuarios.jsp");
                     rd.forward(request, response);
                 }
-                } else {
-                    response.sendRedirect("login.jsp");
-                }
-                //out.println("<h1>Servlet Servlet at " + request.getContextPath() + "</h1>");
-                out.println("</body>");
-                out.println("</html>");
+            } else {
+                response.sendRedirect("login.jsp");
             }
+            //out.println("<h1>Servlet Servlet at " + request.getContextPath() + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
         }
-
-        /**
-         * Returns a short description of the servlet.
-         *
-         * @return a String containing servlet description
-         */
-        @Override
-        public String getServletInfo
-        
-            () {
-        return "Short description";
-        }// </editor-fold>
-
     }
+
+    /**
+     * Returns a short description of the servlet.
+     *
+     * @return a String containing servlet description
+     */
+    @Override
+    public String getServletInfo() {
+        return "Short description";
+    }// </editor-fold>
+
+}
