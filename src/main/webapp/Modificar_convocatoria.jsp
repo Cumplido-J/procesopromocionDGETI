@@ -1,3 +1,9 @@
+<%-- 
+    Document   : Modificar_convocatoria
+    Created on : 16-ago-2020, 13:19:18
+    Author     : charl
+--%>
+
 <%@page import="java.sql.ResultSet"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -11,8 +17,18 @@
         <link rel="stylesheet" href="css/estilos.css">
 
         <link href="/favicon.ico" rel="shortcut icon">
-        <link href="https://framework-gb.cdn.gob.mx/assets/styles/main.css" rel="stylesheet">     
+        <link href="https://framework-gb.cdn.gob.mx/assets/styles/main.css" rel="stylesheet"> 
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+
+        <script src="sweetalert2.all.min.js"></script>
+        <!-- Optional: include a polyfill for ES6 Promises for IE11 -->
+        <script src="https://cdn.jsdelivr.net/npm/promise-polyfill"></script>
+
+        <style>
+            #mensaje { color: #FF0000; }
+        </style>
         <script type="text/javascript">
+
             function plantel() {
                 /* Para obtener el texto */
                 var combo = document.getElementById("entidad");
@@ -36,7 +52,7 @@
 
 
             }
-            
+
             function habilitar() {
                 var camp1 = document.getElementById("permiso1");
                 var camp2 = document.getElementById("permiso2");
@@ -215,19 +231,20 @@
             <section class="sectionreg">
                 <div class="articulosart">
                     <jsp:useBean id="cn" class="metodos_sql.Metodos_sql" scope="page"></jsp:useBean>
-                        <form  name="data" id="data" method="POST" action="Servlet_guardar_convocatoria" onSubmit="return validar_datos();">
+                        <form  name="data" id="data" method="POST" action="Servlet_cargar_convocatoria" onSubmit="return validar_datos();">
                             <br>
                             <br>
                         <%
                             String elegir1 = "0";
 
                             elegir1 = String.valueOf(request.getAttribute("opc"));
-
+                            ResultSet rs2 = null;
+                            String id_convocatoria = "";
                             if (elegir1.equals("1")) {
                         %>
                         <div class="registro">
                             <div class="caja">
-                                <h4>REGISTRO DE CONVOCATORIA</h4> 
+                                <h4>MODIFICAR CONVOCATORIA</h4> 
                             </div>
                             <%--      <div class="caja" align="right">
                                       <div id="rfc_13digitos">
@@ -338,12 +355,46 @@
                                         ${catalogo.desplegarOpcionesProgramas()}
                                     </select>
                                 <div id="c1"></div>
+                                <div id="mensaje"><%out.print(request.getAttribute("mensaje"));%></div>
                             </div>
 
                         </div>
 
+                        <input  class="btn btn-primary pull-right" type="submit" value="Buscar Convocatoria" name="buscar" onclick="valor()">       
 
+                        <br><br><br>
+                        <%-----------------------------------------------------------------------------------------------%>
+                        <div class="registro">    
+                            <div class="caja">
+
+                                <%
+                                    //String ent1 = String.valueOf(request.getAttribute("dato_ent"));
+                                    ResultSet rs6 = cn.mostrar("Select entidad from catentidades where id='" + request.getAttribute("entidad") + "'");
+                                    while (rs6.next()) {
+                                        out.print(rs6.getString("entidad") + " - ");
+                                    }
+                                %>                                 
+
+                                <%                                    //String pla1 = String.valueOf(request.getAttribute("dato_pla"));
+                                    ResultSet rs7 = cn.mostrar("Select plantel from catplanteles where id='" + request.getAttribute("plantel") + "'");
+                                    while (rs7.next()) {
+                                        out.print(rs7.getString("plantel"));
+                                    }
+                                %>
+                                <br>
+                                <%                                    //String pla1 = String.valueOf(request.getAttribute("dato_pla"));
+                                    ResultSet rs8 = cn.mostrar("Select programa from catprogramas where id='" + request.getAttribute("programa") + "'");
+                                    while (rs8.next()) {
+                                        out.print(rs8.getString("programa"));
+                                    }
+                                %>
+                            </div>
+                        </div> 
                         <br>
+
+
+                        <% if (request.getAttribute("ver").equals("0")) {%>
+
                         <div class="registro">    
                             <div class="caja">
                                 <p>Fecha de publicación de convocatoria
@@ -401,10 +452,159 @@
                                 <div id="c10"></div>
                             </div>
                         </div>
+                        <input  class="btn btn-primary pull-right" type="submit" value="Guardar Cambios" name="guardar" disabled="true">
+                        <% }//fin condicion verdadera = 0
+                        else if (request.getAttribute("ver").equals("1")) {%>
+                        <input type="hidden" name="id" id="id" value="<%=request.getAttribute("id")%>">
+
+                        <div class="registro">    
+                            <div class="caja">
+                                <p>Fecha de publicación de convocatoria
+                                    <input type="date" id="publicacion" name="publicacion" value="<%=request.getAttribute("publ")%>" >
+                                </p>
+                                <div id="c2"></div>
+                            </div>
+                        </div>
+
+                        <br>
+                        <div class="registro">    
+                            <div class="caja">
+                                <p>Periodo de registro</p>
+                                Inicio <input type="date" id="periodo_registro_inicio" name="periodo_registro_inicio" value="<%=request.getAttribute("ireg")%>" >
+                                <div id="c3"></div>
+                                <br>  Final &nbsp;<input type="date" id="periodo_registro_fin" name="periodo_registro_fin" value="<%=request.getAttribute("freg")%>" > 
+                                <div id="c4"></div>
+                            </div>
+
+                            <div class="caja">
+                                <p>Periodo de valoración</p>
+                                Inicio <input type="date" id="periodo_valoracion_inicio" name="periodo_valoracion_inicio" value="<%=request.getAttribute("ival")%>" >
+                                <div id="c5"></div>
+                                <br>  Final &nbsp;<input type="date" id="periodo_valoracion_fin" name="periodo_valoracion_fin" value="<%=request.getAttribute("fval")%>" > 
+                                <div id="c6"></div>
+                            </div>
+
+                            <div class="caja">
+                                <p>Periodo de dictaminación</p>
+                                Inicio <input type="date" id="periodo_dictaminacion_inicio" name="periodo_dictaminacion_inicio" value="<%=request.getAttribute("idic")%>">
+                                <div id="c7"></div>
+                                <br>  Final &nbsp;<input type="date" id="periodo_dictaminacion_fin" name="periodo_dictaminacion_fin" value="<%=request.getAttribute("fdic")%>"> 
+                                <div id="c8"></div>
+                            </div>
+                        </div>
+
+                        <br>
+                        <div class="registro">    
+                            <div class="caja">
+                                <p>Publicación de resultados
+                                    <input type="date" id="publicacion_resultados" name="publicacion_resultados" value="<%=request.getAttribute("resu")%>" >
+                                </p>
+                                <div id="c9"></div>
+                            </div>
+                        </div>
+
+                        <div class="registro">    
+                            <div class="caja">
+                                <p>Estatus
+                                    <%
+                                        rs2 = cn.mostrar_usuarios("SELECT idConvocatoria FROM vacancia WHERE idConvocatoria='" + request.getAttribute("id") + "'");
+                                        %>
+                                    <select class="form-control" name="estatus" id="estatus" onchange="mensaje()">
+                                        <option value="temporal">Temporal</option> 
+                                        <%                                            
+                                            while (rs2.next()) {
+                                                id_convocatoria = rs2.getString("idConvocatoria");
+                                            }
+
+                                            if (id_convocatoria.equals(request.getAttribute("id"))) {
+                                        %>
+                                        <option value="definitiva">Definitiva</option>
+                                        <%
+                                        } else {
+                                        %>
+                                        <option value="definitiva" disabled="true">Definitiva</option>
+                                        <%
+                                            }
+
+                                        %>
+                                    </select>
+                                </p>
+                                <div id="c10"></div>
+                            </div>
+                        </div>
+
+                        <input  class="btn btn-primary pull-right" type="submit" value="Guardar Cambios" name="guardar1">
+                        <% }//fin de la condicion ver= 1
+
+                        
+                        else if (request.getAttribute("ver").equals("2")) {%>
+                        <input type="hidden" name="id" id="id" value="<%=request.getAttribute("id")%>">
+
+                        <div class="registro">    
+                            <div class="caja">
+                                <p>Fecha de publicación de convocatoria
+                                    <input type="date" id="publicacion" name="publicacion" value="<%=request.getAttribute("publ")%>" disabled="true">
+                                </p>
+                                <div id="c2"></div>
+                            </div>
+                        </div>
+
+                        <br>
+                        <div class="registro">    
+                            <div class="caja">
+                                <p>Periodo de registro</p>
+                                Inicio <input type="date" id="periodo_registro_inicio" name="periodo_registro_inicio" value="<%=request.getAttribute("ireg")%>" disabled="true">
+                                <div id="c3"></div>
+                                <br>  Final &nbsp;<input type="date" id="periodo_registro_fin" name="periodo_registro_fin" value="<%=request.getAttribute("freg")%>" disabled="true"> 
+                                <div id="c4"></div>
+                            </div>
+
+                            <div class="caja">
+                                <p>Periodo de valoración</p>
+                                Inicio <input type="date" id="periodo_valoracion_inicio" name="periodo_valoracion_inicio" value="<%=request.getAttribute("ival")%>" disabled="true">
+                                <div id="c5"></div>
+                                <br>  Final &nbsp;<input type="date" id="periodo_valoracion_fin" name="periodo_valoracion_fin" value="<%=request.getAttribute("fval")%>" disabled="true"> 
+                                <div id="c6"></div>
+                            </div>
+
+                            <div class="caja">
+                                <p>Periodo de dictaminación</p>
+                                Inicio <input type="date" id="periodo_dictaminacion_inicio" name="periodo_dictaminacion_inicio" value="<%=request.getAttribute("idic")%>" disabled="true">
+                                <div id="c7"></div>
+                                <br>  Final &nbsp;<input type="date" id="periodo_dictaminacion_fin" name="periodo_dictaminacion_fin" value="<%=request.getAttribute("fdic")%>" disabled="true"> 
+                                <div id="c8"></div>
+                            </div>
+                        </div>
+
+                        <br>
+                        <div class="registro">    
+                            <div class="caja">
+                                <p>Publicación de resultados
+                                    <input type="date" id="publicacion_resultados" name="publicacion_resultados" value="<%=request.getAttribute("resu")%>" disabled="true">
+                                </p>
+                                <div id="c9"></div>
+                            </div>
+                        </div>
+
+                        <div class="registro">    
+                            <div class="caja">
+                                <p>Estatus
+                                    <select class="form-control" name="estatus" id="estatus" onchange="mensaje()" disabled="true">
+                                        <option value="definitiva">Definitiva</option>                                         
+                                    </select>
+                                </p>
+                                <div id="c10"></div>
+                            </div>
+                        </div>
+
+                        <input  class="btn btn-primary pull-right" type="submit" value="Guardar Cambios" name="guardar2" disabled="true">
+                        <% }//fin de la condicion ver=2%>
+                        
+                        
 
 
-                        <%                            }//fin if elegir    
-                            else {
+                        <%    
+                            } else {
                                 response.sendRedirect("login.jsp");
                             }
                         %>
@@ -423,19 +623,22 @@
                                 <input type="hidden" name="dato_ent" id="dato_ent" value="<%=request.getAttribute("dato_ent")%>">
                                 <input type="hidden" name="dato_pla" id="dato_pla" value="<%=request.getAttribute("dato_pla")%>">
                                 <input type="hidden" name="dato_rfc" id="dato_rfc" value="<%=request.getAttribute("dato_rfc")%>">
-                                <input  class="btn btn-primary pull-right" type="submit" value="Guardar" name="guardar" form="data">
+
 
 
                             </div>
                         </div>
                     </form>  
 
+
+
                 </div>
                 <asideart class="asideart">
 
                 </asideart>
 
-               
+
+
 
                 <form id="data4" class="form-horizontal" role="form" method="POST" action="Servlet_cerrarsesion">
 
@@ -448,7 +651,7 @@
             <!-- JS  para el framework del gobierno-->
             <script src="https://framework-gb.cdn.gob.mx/gobmx.js"></script>        
             <script src='https://code.jquery.com/jquery-1.12.4.min.js'></script>
-            <script src="js/notificaciones4.js"></script>
+            <script src="js/notificaciones5.js"></script>
         </div>
         <%
             } else {
