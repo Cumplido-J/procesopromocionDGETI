@@ -335,7 +335,7 @@ public class Docente {
                 fila="<tr><td>"+encuestado[2]+"</td><td>"+encuestado[4]+"</td><td>";
                 System.out.println(encuestado[5]);
                 if(encuestado[5].equals("PENDIENTE")){
-                    fila+="<button type='button' class='btn btn-sm' title='Borrar' onclick='borrarEncuestado("+encuestado[0]+")'>";
+                    fila+="<button type='button' class='btn btn-sm' title='Borrar' onclick='borrarEncuestado("+encuestado[0]+","+encuestado[3]+")'>";
                     fila+="<span class='glyphicon glyphicon-trash'></span>";
                     fila+="</button>";
                 }else if(encuestado[5].equals("CONCLUIDO")){
@@ -366,6 +366,33 @@ public class Docente {
         retorno[0][1]=""+c1;
         retorno[1][1]=""+c2;
         retorno[2][1]=""+c3;
+        return retorno;
+    }
+    
+    public String[] generaFilasEncuestados(String tipoEncuesta){
+        String[] retorno={"","0"};
+        String fila="";
+        int c=0;
+        if(totalEncuestados>0){
+            for(String[] encuestado:encuestados){
+                if(encuestado[3].equals(tipoEncuesta)){
+                    fila+="<tr><td>"+encuestado[2]+"</td><td>"+encuestado[4]+"</td><td>";
+                    if(encuestado[5].equals("PENDIENTE")){
+                        fila+="<button type='button' class='btn btn-sm' title='Borrar' onclick='borrarEncuestado("+encuestado[0]+","+encuestado[3]+")'>";
+                        fila+="<span class='glyphicon glyphicon-trash'></span>";
+                        fila+="</button>";
+                    }else if(encuestado[5].equals("CONCLUIDO")){
+                        fila+="<button type='button' class='btn btn-sm' disabled title='Esta información no puede borrarse'>";
+                        fila+="<span class='glyphicon glyphicon-trash'></span>";
+                        fila+="</button>";
+                    }                
+                    fila+="<td></tr>";
+                    c++;
+                }                
+            }            
+        }        
+        retorno[0]=fila;
+        retorno[1]=""+c;
         return retorno;
     }
     

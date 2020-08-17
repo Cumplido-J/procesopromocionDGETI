@@ -96,10 +96,10 @@
             </c:if>
             
             <div class="articulosses">
-                <article class="articleses ${disabled1}">
+                <article class="articleses">
                     <h3>Paso 1 <span class="glyphicon glyphicon-ok-sign completo ${hidden1}" title="Sección completa"></span></h3>
-                    <a  href="Registro" ><img src="<%=Imagen.muestraImagen("C:/ArchivosPromocion/imagenes/EvidReg.jpg")%>" alt=""></a>
-                    <a  href="Registro" ><h3>Registro de aspirante</h3></a>
+                    <a  href="Registro" class="${disabled1}"><img src="<%=Imagen.muestraImagen("C:/ArchivosPromocion/imagenes/EvidReg.jpg")%>" alt=""></a>
+                    <a  href="Registro" class="${disabled1}"><h3>Registro de aspirante</h3></a>
                 </article>                    
                 
                
@@ -123,10 +123,10 @@
                         <a href="evidenciaRegistro.jsp" ><img src="<%=Imagen.muestraImagen("C:/ArchivosPromocion/imagenes/EvidReg.jpg")%>" alt=""></a>
                         <a href="evidenciaRegistro.jsp" ><h3>Evidencias de los criterios de valoración</h3></a>
                     </article>
-                    <article class="articleses disabled">
+                    <article class="articleses">
                         <h3>Paso 4:<span class="glyphicon glyphicon-ok-sign completo hidden" title="Sección completa"></span></h3>
-                        <a href="FichaRegistro" target="_blank" ><img src="<%=Imagen.muestraImagen("C:/ArchivosPromocion/imagenes/EvidVal.jpg")%>" alt=""></a>
-                        <a href="FichaRegistro" target="_blank" ><h3>Ficha de <br/> registro </h3></a>
+                        <a href="FichaRegistro" class="disabled" target="_blank" ><img src="<%=Imagen.muestraImagen("C:/ArchivosPromocion/imagenes/EvidVal.jpg")%>" alt=""></a>
+                        <a href="FichaRegistro" class="disabled" target="_blank" ><h3>Ficha de <br/> registro </h3></a>
                     </article>
                 </c:if>
                 <!--
@@ -147,7 +147,7 @@
                   <button type="button" class="close" data-dismiss="modal">&times;</button>
                   <h4 class="modal-title">Criterios de valoración</h4>
                 </div>
-                <div class="modal-body" style="font-size:10px;">
+                <div class="modal-body" style="font-size:10px;text-align:justify">
                   <p >La Promoción en el servicio docente por cambio de categoría se llevará a cabo mediante un proceso de selección respecto al cumplimiento de los criterios de valoración establecidos por la Ley General del Sistema para la Carrera de las Maestras y los Maestros listados a continuación:</p>
                   <table class="table table-responsive">
                       <tr>

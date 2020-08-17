@@ -585,3 +585,26 @@ h3{
         
     }
 }
+
+.btn{
+    float:right;
+}
+.disabled {
+  pointer-events: none;
+  color: currentColor;
+  cursor: not-allowed;
+  opacity: 0.5;
+  text-decoration: none;
+  
+}
+
+span.incompleto{
+    color:red;
+}
+span.completo{
+    color:green;
+    pointer-events: all;
+}
+span.hidden{
+    display:none;
+}

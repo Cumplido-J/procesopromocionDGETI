@@ -5,6 +5,7 @@
  */
 package com.aplicacion.servlet;
 
+import com.aplicacion.beans.Docente;
 import correos.Enviar_clave;
 import herramientas.Correo;
 import herramientas.Pin;
@@ -104,7 +105,13 @@ public class Servlet_registroEncuestado extends HttpServlet {
                     if(retorno.get(0)[0].equals("ok")){                        
                         c.enviarCorreo("Envío de PIN","El PIN de acceso asignado es:"+parametros[0], correo);
                     }
-                    out.print(retorno.get(0)[0]);
+                    Docente d=new Docente();
+                    d.setIdUsuario(idUsuario);
+                    d.setRfc(rfc);
+                    d.consultaEncuestados();
+                    String[] datos=d.generaFilasEncuestados(tipoEncuesta);
+                    System.out.println(datos[0]+"|"+datos[1]);
+                    out.print(datos[0]+"|"+datos[1]); 
                 }else{
                     out.print("Error de almacenamiento, intente más tarde");
                 }

@@ -79,21 +79,25 @@ function enviar(){
            $("#btnSi").val("Si"); 
            $("#btnSi").removeAttr("disabled");
         },success:function(data){
-            if(data.toString()=="ok"){    
+            var aux=data.split("|");
+            if(aux.length==2){  
                 var id=$("#tipoEncuesta").val();
-                var fila="<tr><td>"+$("#curp").val()+"</td><td>"+$("#correo").val()+"</td></tr>";
+                //var fila="<tr><td>"+$("#curp").val()+"</td><td>"+$("#correo").val()+"</td></tr>";
+                var fila=aux[0];
                 var tabla="tabla"+id;
                 var contenido=$("#"+tabla).html();
-                if(contenido.includes("colspan")){
-                    $("#"+tabla).html(fila);
+                $("#"+tabla).html(fila);
+                /*if(contenido.includes("colspan")){
+                    
                 }else{
                     $("#"+tabla).html(contenido+fila);
-                } 
-                var contador=0;
+                } */
+                /*var contador=0;
                 contador=parseInt($("#c"+id).html());
-                contador++;
+                contador++;*/
+                var contador=aux[1];
                 $("#c"+id).html(contador);
-                if(contador==10){
+                if(contador=="10"){
                     $("#estatus"+id).attr("class","glyphicon glyphicon-ok-sign completo");
                     $("#estatus"+id).attr("title","Sección completa");
                     $("#estatus"+id).attr("completo",true);
@@ -124,5 +128,33 @@ function cancelar(){
 }
 function cambioEncuesta(){
     $("#respuesta").html("");
+}
+function borrarEncuestado(idEncuestado,idTipo){
+    $.post("CancelaPin", {i: idEncuestado,t:idTipo}, function(data){
+        var aux=data.split("|");
+        if(aux.length==2){  
+            var id=idTipo;
+            var fila=aux[0];
+            var contador=aux[1];
+            var tabla="tabla"+id;
+            var contenido=$("#"+tabla).html();
+            $("#"+tabla).html(fila);
+            $("#c"+id).html(contador);
+            if(contador=="10"){
+                $("#estatus"+id).attr("class","glyphicon glyphicon-ok-sign completo");
+                $("#estatus"+id).attr("title","Sección completa");
+                $("#estatus"+id).attr("completo",true);
+            }
+            $('.nav-tabs a[href="#seccion'+id+'"]').tab('show');
+            if($("#c1").html()=="10"&&$("#c2").html()=="10"&&$("#c3").html()=="10"){
+                $("#btnAgregar").attr("disabled",true);
+                $("#btnFinalizar").removeClass("disabled");
+            }
+        }else{                
+            $("#mensaje").html(data);
+            $("#modalMensaje").modal();
+            
+        }
+    });
 }
 

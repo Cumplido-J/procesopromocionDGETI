@@ -177,6 +177,23 @@
             </div> 
             
         </main>
+        <div id="modalConfirmacion" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  <h4 class="modal-title" >Confirmación</h4>
+                </div>
+                <div class="modal-body">
+                    <p>La información ingresada no podrá ser modificada.<br/>¿Confirma que los datos ingresados son correctos?</p>                  
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-sm btn-default" onclick="enviar()">Sí</button>
+                  <button type="button" class="btn btn-sm btn-default" onclick="cancelar()">No</button>
+                </div>
+              </div>
+            </div>
+        </div>
                 
         <div id="modalConfirmacion" class="modal fade" role="dialog">
             <div class="modal-dialog">
@@ -249,6 +266,25 @@
 
             </div>
           </div> 
+        <div class="modal fade" id="modalMensaje" role="dialog">
+            <div class="modal-dialog">
+
+              <!-- Modal content-->
+              <div class="modal-content panel">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  <h4 class="modal-title">Aviso</h4>
+                </div>
+                <div class="modal-body">
+                  <p id="mensaje">Registro exitoso.</p>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-sm btn-default" data-dismiss="modal">Cerrar</button>
+                </div>
+              </div>
+
+            </div>
+          </div>
 
         <script src="https://framework-gb.cdn.gob.mx/gobmx.js"></script>
         <script src="https://code.jquery.com/jquery-1.12.4.js"></script>   

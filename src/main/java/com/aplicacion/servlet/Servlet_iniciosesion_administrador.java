@@ -199,8 +199,7 @@ public class Servlet_iniciosesion_administrador extends HttpServlet {
                             }
                         }
                         if (busqueda_nombre[5].toString().equals("D")) {
-                            RequestDispatcher rd = request.getRequestDispatcher("ppsesion.jsp");
-                            rd.forward(request, response);
+                            response.sendRedirect("SesionDocente");                            
                         }
                     }//USUARIO ENCONTRADO
                     else {

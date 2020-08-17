@@ -76,6 +76,7 @@ com\convocatoria\servlet\ServletReporte.class
 seguridad\Encriptar_Desencriptar.class
 com\convocatoria\datos\VacanciaJDBC.class
 com\convocatoria\servlet\ServletControladorEntidad.class
+com\aplicacion\servlet\Servlet_cancelarPin.class
 com\aplicacion\servlet\Servlet_iniciosesion_vacancia.class
 com\aplicacion\servlet\Servlet_consultaWSPersonal.class
 herramientas\Correo.class
