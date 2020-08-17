@@ -96,7 +96,7 @@ public class Servlet_guardar_convocatoria2 extends HttpServlet {
 
             String control_combobox = request.getParameter("control_combobox");
             String per1 = request.getParameter("permiso1");
-            String per3 = request.getParameter("permiso3");
+            String per2 = request.getParameter("permiso2");
             String per4 = request.getParameter("permiso4");
             String nom1 = request.getParameter("nombre");
             String ent1 = request.getParameter("dato_ent");
@@ -116,7 +116,7 @@ public class Servlet_guardar_convocatoria2 extends HttpServlet {
                 request.setAttribute("dato_pla", pla1);
                 request.setAttribute("dato_rfc", rfc1);
                 request.setAttribute("per1", per1);
-                request.setAttribute("per3", per3);
+                request.setAttribute("per3", per2);
                 request.setAttribute("per4", per4);
                 //session.setAttribute("idUsuario", idUsuario);
                 //session.setAttribute("rfc", rfc);

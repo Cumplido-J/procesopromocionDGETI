@@ -98,15 +98,15 @@ public class Servlet_guardar_convocatoria extends HttpServlet {
 
                 String control_combobox = request.getParameter("control_combobox");
                 String per1 = request.getParameter("permiso1");
-                String per3 = request.getParameter("permiso3");
+                String per2 = request.getParameter("permiso2");
                 String per4 = request.getParameter("permiso4");
                 String nom1 = request.getParameter("nombre");
                 String ent1 = request.getParameter("dato_ent");
                 String pla1 = request.getParameter("dato_pla");
                 String rfc1 = request.getParameter("dato_rfc");
 
-//            String logosems1 = request.getParameter("logo_sems");
-//            String logouemstis1 = request.getParameter("logo_uemstis");
+                String entidad = request.getParameter("entidad");
+                String plantel = request.getParameter("n_plantel");
                 String programa = request.getParameter("programa");
                 Date publicacion1 = Date.valueOf(request.getParameter("publicacion"));
                 Date periodo_registro_inicio1 = Date.valueOf(request.getParameter("periodo_registro_inicio"));
@@ -116,6 +116,7 @@ public class Servlet_guardar_convocatoria extends HttpServlet {
                 Date periodo_dictaminacion_inicio1 = Date.valueOf(request.getParameter("periodo_dictaminacion_inicio"));
                 Date periodo_dictaminacion_fin1 = Date.valueOf(request.getParameter("periodo_dictaminacion_fin"));
                 Date publicacion_resultados1 = Date.valueOf(request.getParameter("publicacion_resultados"));
+                String estatus = request.getParameter("estatus");
 
                 String btnregresa = request.getParameter("guardar");
                 if (btnregresa != null) {
@@ -131,7 +132,7 @@ public class Servlet_guardar_convocatoria extends HttpServlet {
 //                    out.print(periodo_dictaminacion_fin1);
 //                    out.print(publicacion_resultados1);
 
-                    int datos6 = metodos.guardar7(publicacion1, periodo_registro_inicio1, periodo_registro_fin1, periodo_valoracion_inicio1, periodo_valoracion_fin1, periodo_dictaminacion_inicio1, periodo_dictaminacion_fin1, publicacion_resultados1, pla1, programa);
+                    int datos6 = metodos.guardar7(publicacion1, periodo_registro_inicio1, periodo_registro_fin1, periodo_valoracion_inicio1, periodo_valoracion_fin1, periodo_dictaminacion_inicio1, periodo_dictaminacion_fin1, publicacion_resultados1, plantel, programa, estatus);
 
                     if (datos6 > 0) {
                         request.setAttribute("control_combobox", control_combobox);
@@ -141,7 +142,7 @@ public class Servlet_guardar_convocatoria extends HttpServlet {
                         request.setAttribute("dato_pla", pla1);
                         request.setAttribute("dato_rfc", rfc1);
                         request.setAttribute("per1", per1);
-                        request.setAttribute("per3", per3);
+                        request.setAttribute("per2", per2);
                         request.setAttribute("per4", per4);
                         request.setAttribute("ver", "1");
                         session.setAttribute("idUsuario", idUsuario);
