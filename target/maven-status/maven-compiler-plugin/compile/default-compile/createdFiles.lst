@@ -35,8 +35,10 @@ com\aplicacion\beans\Docente$1.class
 com\aplicacion\servlet\Servlet_ir_a_vacantes.class
 com\aplicacion\servlet\Servlet_logouemstis.class
 com\aplicacion\servlet\Servlet_evidenciasRegistro.class
+com\aplicacion\servlet\Servlet_cargar_convocatoria.class
 com\aplicacion\servlet\Servlet_iniciosesion_administrador.class
 com\aplicacion\servlet\Servlet_cbRegistroEncuestados.class
+com\aplicacion\servlet\Servlet_modificar_convocatoria.class
 herramientas\Catalogos.class
 com\aplicacion\servlet\Servlet_agregar_vacantes.class
 com\convocatoria\datos\ConvocatoriaJDBC.class
@@ -46,6 +48,7 @@ com\aplicacion\beans\Docente$2.class
 com\aplicacion\servlet\Servlet_cbFichaRegistroIncompleto.class
 com\convocatoria\domain\Plantel.class
 com\aplicacion\servlet\Servlet_guardar_convocatoria2.class
+com\aplicacion\servlet\Servlet_modificar_convocatoria2.class
 com\aplicacion\servlet\Servlet_preregistro.class
 com\aplicacion\servlet\Servlet_guardar_convocatoria.class
 com\aplicacion\servlet\Servlet_registroInfoCompatibilidad.class

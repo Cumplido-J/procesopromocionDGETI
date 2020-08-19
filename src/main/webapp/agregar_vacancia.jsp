@@ -53,6 +53,7 @@
                 $("#i_opc").val("1");
                 $.post("combo1.jsp", $("#data").serialize(), function (data) {
                     $("#i_plantel").html(data);
+                    $("#convocatoria").html("<option value=''>-Seleccione-</option>");
                 });
             }
 
@@ -205,7 +206,7 @@
 
                     <div class="registro">
                         <div class="caja">
-                            <p>Cantidad de Plazas<input id="cantidad" class="form-control" type="text" name="cantidad" size="33" placeholder="Nombre" maxlength="3"></p>
+                            <p>Cantidad de Plazas<input id="cantidad" class="form-control" type="text" name="cantidad" size="33" placeholder="No. plazas vacantes" maxlength="3"></p>
                             <div id="n100"></div>
                         </div>
                         <div class="caja">
@@ -264,7 +265,7 @@
                                     ResultSet rs4 = cn.mostrar("Select * from convocatoria where idPlantel='" + request.getAttribute("dato_pla") + "'");
                                 %>
                                 <select class="form-control" name="convocatoria" id="convocatoria" onchange="convocatoria1()">
-                                    <option value="0">Escoge una opcion</option>
+                                    <option value="">Escoge una opcion</option>
                                     <%
                                         while (rs4.next()) {
                                             if (rs4.getString("idPrograma") != "0") {
@@ -344,7 +345,7 @@
 
                     <div class="registro">
                         <div class="caja">
-                            <p>Cantidad de Plazas<input id="cantidad" class="form-control" type="text" name="cantidad" size="33" placeholder="Nombre" maxlength="3"></p>
+                            <p>Cantidad de Plazas<input id="cantidad" class="form-control" type="text" name="cantidad" size="33" placeholder="No. plazas vacantes" maxlength="3"></p>
                             <div id="n100"></div>
                         </div>
                         <div class="caja">
@@ -400,29 +401,19 @@
                                 <%
                                     String h[] = {"", "", "", ""};
                                     int i = 0;
-                                    ResultSet rs4 = cn.mostrar("Select * from convocatoria where idPlantel='" + request.getAttribute("dato_pla") + "'");
+                                    ResultSet rs4 = cn.mostrar("SELECT c.id,p.programa FROM bdpromocion.convocatoria c inner join catprogramas p on c.idPrograma=p.id where c.idplantel='" + request.getAttribute("dato_pla") + "';");
                                 %>
                                 <select class="form-control" name="convocatoria" id="convocatoria" onchange="convocatoria1()">
-                                    <option value="0">Escoge una opcion</option>
+                                    <option value="">Escoge una opcion</option>
+                                    
                                     <%
                                         while (rs4.next()) {
-                                            if (rs4.getString("idPrograma") != "0") {
-                                                h[i] = rs4.getString("idPrograma");
-                                                i++;
-                                            }
+                                       out.print("<option value='"+rs4.getString("id")+"'>"+rs4.getString("programa")+"</option>");
+                                            
                                         }
-                                        String com2 = "Select * from catProgramas WHERE id= '" + h[0] + "' || id='" + h[1] + "' || id = '" + h[2] + "'";
-                                        ResultSet rs5 = cn.mostrar(com2);
-                                        while (rs5.next()) {
-
                                     %>
 
-                                    <option value="<%=rs5.getString("id")%>"><%=rs5.getString("programa")%></option>
-
-                                    <%//              regresa del combobox         muestra en el combo box
-                                        }
-
-                                    %>                                              
+                                                                                
                                 </select>           
                             </p>                         
 

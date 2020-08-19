@@ -130,6 +130,11 @@ function cambioEncuesta(){
     $("#respuesta").html("");
 }
 function borrarEncuestado(idEncuestado,idTipo){
+    $("#btnCancelaPin").attr("onClick","cancelaPin("+idEncuestado+","+idTipo+")");
+    $("#modalConfirmacion").modal("show");
+}
+function cancelaPin(idEncuestado,idTipo){
+    $("#modalConfirmacion").modal("hide");
     $.post("CancelaPin", {i: idEncuestado,t:idTipo}, function(data){
         var aux=data.split("|");
         if(aux.length==2){  

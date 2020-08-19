@@ -4,9 +4,17 @@
         <servlet-name>Servlet_cancelarPin</servlet-name>
         <servlet-class>com.aplicacion.servlet.Servlet_cancelarPin</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>Servlet_cbRegistroCriterios</servlet-name>
+        <servlet-class>com.aplicacion.servlet.Servlet_cbRegistroCriterios</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Servlet_cancelarPin</servlet-name>
         <url-pattern>/Servlet_cancelarPin</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Servlet_cbRegistroCriterios</servlet-name>
+        <url-pattern>/Servlet_cbRegistroCriterios</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

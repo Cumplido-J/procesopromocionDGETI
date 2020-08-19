@@ -394,8 +394,8 @@
                             <div class="caja">
                                 <p>Estatus
                                     <select class="form-control" name="estatus" id="estatus" >
-                                        <option value="temporal">Temporal</option> 
-                                        <option value="definitiva" disabled="true">Definitiva</option>
+                                        <option value="TEMPORAL">Temporal</option> 
+                                        <option value="DEFINITIVA" disabled="true">Definitiva</option>
                                     </select>
                                 </p>
                                 <div id="c10"></div>

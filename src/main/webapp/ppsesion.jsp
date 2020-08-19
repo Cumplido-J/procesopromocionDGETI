@@ -120,8 +120,8 @@
 
                     <article class="articleses ${disabled3}">
                         <h3>Paso 3: <span class="glyphicon glyphicon-ok-sign completo hidden" title="Sección completa"></span></h3>
-                        <a href="evidenciaRegistro.jsp" ><img src="<%=Imagen.muestraImagen("C:/ArchivosPromocion/imagenes/EvidReg.jpg")%>" alt=""></a>
-                        <a href="evidenciaRegistro.jsp" ><h3>Evidencias de los criterios de valoración</h3></a>
+                        <a href="RegistroCriterios" ><img src="<%=Imagen.muestraImagen("C:/ArchivosPromocion/imagenes/EvidReg.jpg")%>" alt=""></a>
+                        <a href="RegistroCriterios" ><h3>Evidencias de los criterios de valoración</h3></a>
                     </article>
                     <article class="articleses">
                         <h3>Paso 4:<span class="glyphicon glyphicon-ok-sign completo hidden" title="Sección completa"></span></h3>

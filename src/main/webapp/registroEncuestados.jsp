@@ -176,24 +176,7 @@
               </div>
             </div> 
             
-        </main>
-        <div id="modalConfirmacion" class="modal fade" role="dialog">
-            <div class="modal-dialog">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <button type="button" class="close" data-dismiss="modal">&times;</button>
-                  <h4 class="modal-title" >Confirmación</h4>
-                </div>
-                <div class="modal-body">
-                    <p>La información ingresada no podrá ser modificada.<br/>¿Confirma que los datos ingresados son correctos?</p>                  
-                </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-sm btn-default" onclick="enviar()">Sí</button>
-                  <button type="button" class="btn btn-sm btn-default" onclick="cancelar()">No</button>
-                </div>
-              </div>
-            </div>
-        </div>
+        </main>        
                 
         <div id="modalConfirmacion" class="modal fade" role="dialog">
             <div class="modal-dialog">
@@ -203,11 +186,11 @@
                   <h4 class="modal-title" >Confirmación</h4>
                 </div>
                 <div class="modal-body">
-                    <p>La información ingresada no podrá ser modificada.<br/>¿Confirma que los datos ingresados son correctos?</p>                  
+                    <p>La información seleccionada será borrada<br/>¿Desea continuar?</p>                  
                 </div>
                 <div class="modal-footer">
-                  <button type="button" class="btn btn-sm btn-default" onclick="enviar()">Sí</button>
-                  <button type="button" class="btn btn-sm btn-default" onclick="cancelar()">No</button>
+                  <button type="button" id="btnCancelaPin" class="btn btn-sm btn-default">Sí</button>
+                  <button type="button" class="btn btn-sm btn-default" data-dismiss="modal">No</button>
                 </div>
               </div>
             </div>

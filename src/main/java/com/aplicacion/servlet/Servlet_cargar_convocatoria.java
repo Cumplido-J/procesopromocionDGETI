@@ -150,8 +150,7 @@ public class Servlet_cargar_convocatoria extends HttpServlet {
                     
                 }
 
-                if (btnregresa != null) {
-                    
+                if (btnregresa != null) {                    
                     
                     String datosconvocatoria[] = metodos.buscar_convocatoria(entidad, plantel, programa);
                     if (datosconvocatoria[11] != null) {

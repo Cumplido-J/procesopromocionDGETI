@@ -13,36 +13,7 @@ function abrirModalArchivo(id){
         $("#ifArchivo").removeAttr("hidden");
     }
                
-    $("#idArchivo").val(id);
-    /*switch(id){
-        case 1: 
-            $("#tituloModal").html("Título");            
-            break;
-        case 2: 
-            $("#tituloModal").html("Constancia de antigüedad");
-                      
-            break;
-        case 3: 
-            $("#tituloModal").html("Nombramiento definitivo");     
-            break;  
-        case 4: 
-            $("#tituloModal").html("Constancia de horas frente a grupo");        
-            break;  
-        case 5: 
-            $("#tituloModal").html("Constancia CENNI");                         
-            break;      
-        case 6: 
-            $("#tituloModal").html("Nota favorable y sin sanción administrativa");        
-            break;
-        case 7: 
-            $("#tituloModal").html("Constancia de compatibilidad");            
-            break;        
-        case 8: 
-            $("#tituloModal").html("Cédula profesional");            
-            break;
-        default:
-            break;        
-    }*/
+    $("#idArchivo").val(id);    
     $("#modalArchivo").modal("show");
 }
 function subirArchivo(){

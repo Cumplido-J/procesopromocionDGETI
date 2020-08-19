@@ -226,7 +226,7 @@ public class Metodos_sql {
     }//fin metodo guardar 
 
     //----------- GUARDAR CONVOCATORIA, SERVLET GIARDAR CONVOCATORIA*
-    public int guardar7(Date publicacion1, Date periodo_registro_inicio1, Date periodo_registro_fin1, Date periodo_valoracion_inicio1, Date periodo_valoracion_fin1, Date periodo_dictaminacion_inicio1, Date periodo_dictaminacion_fin1, Date publicacion_resultados1, String pla1, String programa) {
+    public int guardar7(Date publicacion1, Date periodo_registro_inicio1, Date periodo_registro_fin1, Date periodo_valoracion_inicio1, Date periodo_valoracion_fin1, Date periodo_dictaminacion_inicio1, Date periodo_dictaminacion_fin1, Date publicacion_resultados1, String pla1, String programa,String estatus) {
         int resultado = 0;
         conexion = null;
         String guardar = "INSERT INTO convocatoria(idPrograma,publicacion,inicioRegistro,finRegistro,inicioValoracion,finValoracion,inicioDictaminacion,finDictaminacion,resultados,idPlantel,estatus) VALUES(?,?,?,?,?,?,?,?,?,?,?)";
@@ -244,7 +244,7 @@ public class Metodos_sql {
             sentencia_preparada.setDate(8, periodo_dictaminacion_fin1);
             sentencia_preparada.setDate(9, publicacion_resultados1);
             sentencia_preparada.setInt(10, Integer.parseInt(pla1));
-            sentencia_preparada.setString(11, "TEMPORAL");
+            sentencia_preparada.setString(11, estatus);
             resultado = sentencia_preparada.executeUpdate();
             sentencia_preparada.close();
             conexion.close();
@@ -831,5 +831,59 @@ public class Metodos_sql {
         }
         return resultado;
     }
+    public String[] buscar_convocatoria(String entidad,String plantel, String programa){
+       String datos[] = new String[12];
+        conexion = null;
+        String buscar = "SELECT * FROM convocatoria WHERE idPlantel='" + plantel + "' && idPrograma='"+programa +"'";
+        conexion = conector();
+        try {
+            sentencia_preparada = conexion.prepareStatement(buscar);
+            resultado = sentencia_preparada.executeQuery();
+            if (resultado.next()) {
+                datos[0] = resultado.getString("publicacion");
+                datos[1] = resultado.getString("inicioRegistro");
+                datos[2] = resultado.getString("finRegistro");
+                datos[3] = resultado.getString("inicioValoracion");
+                datos[4] = resultado.getString("finValoracion");
+                datos[5] = resultado.getString("inicioDictaminacion");
+                datos[6] = resultado.getString("finDictaminacion");
+                datos[7] = resultado.getString("resultados");
+                datos[8] = resultado.getString("idPlantel");
+                datos[9] = resultado.getString("idPrograma");
+                datos[10]= resultado.getString("estatus");  
+                datos[11]= resultado.getString("id");
+            }
+            conexion.close();
+        } catch (Exception e) {
+
+        }
+        return datos;        
+    }
+    
+    
+     public int modificar_convocatoria(String id, Date publicacion1, Date periodo_registro_inicio1, Date periodo_registro_fin1, Date periodo_valoracion_inicio1, Date periodo_valoracion_fin1, Date periodo_dictaminacion_inicio1, Date periodo_dictaminacion_fin1, Date publicacion_resultados1, String estatus) {
+        int resultado = 0;
+        conexion = null;
+        Date fecha = new Date(20, 05, 31);
+        String guardar = "UPDATE convocatoria SET publicacion='"+publicacion1+"',"
+                                            + "inicioRegistro='"+periodo_registro_inicio1+"',"
+                                               + "finRegistro='"+periodo_registro_fin1+"',"
+                                          + "inicioValoracion='"+periodo_valoracion_inicio1+"',"
+                                             + "finValoracion='"+periodo_valoracion_fin1+"',"
+                                       + "inicioDictaminacion='"+periodo_dictaminacion_inicio1+"',"
+                                          + "finDictaminacion='"+periodo_dictaminacion_fin1+"',"
+                                                + "resultados='"+publicacion_resultados1+"',"
+                                                   + "estatus='"+estatus+"' WHERE id='"+Integer.parseInt(id)+"'";
+        conexion = conector();
+        try {
+            sentencia_preparada = conexion.prepareStatement(guardar);
+            resultado = sentencia_preparada.executeUpdate();
+            sentencia_preparada.close();
+            conexion.close();
+        } catch (Exception ex) {
+            System.out.println(ex.toString());
+        }
+        return resultado;
+    }//fin metodo guardar 
 
 }//fin clase metodos_sql

@@ -31,6 +31,11 @@ function validarentrada3() {
     } else {
         document.getElementById("n7").innerHTML = "";
         $("#i_plantel").css("border", "none");
+        var idPlantel=$("#i_plantel").val();
+        
+        $.get("ConsultaCatalogos", {k: "15",i:idPlantel}, function(respuesta){
+            $("#convocatoria").html(respuesta);
+        });        
     }
 }
 
@@ -63,7 +68,7 @@ function convocatoria1() {
     var selected = combo.options[combo.selectedIndex].text;
     document.data.campojornada.value = selected;
 
-    if (document.getElementById("convocatoria").value == "0")
+    if (document.getElementById("convocatoria").value == "")
     {
         $("#n80").text("Selecciona una CONVOCATORIA").css("color", "red");
         $("#convocatoria").css("border", "1px solid red");

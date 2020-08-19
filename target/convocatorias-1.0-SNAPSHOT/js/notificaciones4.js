@@ -1,4 +1,16 @@
 
+function validarentrada3() {
+    if (document.getElementById("i_plantel").value == "0")
+    {
+        $("#n7").text("Selecciona un PLANTEL").css("color", "red");
+        $("#i_plantel").css("border", "1px solid red");
+
+    } else {
+        document.getElementById("n7").innerHTML = "";
+        $("#i_plantel").css("border", "none");
+    }
+}
+//------------------------------------------------------------------------------
 const titulo1 = document.getElementById("programa");
 
 titulo1.addEventListener("input", function (event) {
@@ -129,6 +141,19 @@ publicacion_resultados1.addEventListener("input", function (event) {
 
 
 function  validar_datos() {
+     var ent1 = document.getElementById("entidad").value;
+    
+    if (ent1 == "0") {
+        $("#n8").text("Campo ENTIDAD vacio").css("color", "red");
+        $("#entidad").css("border", "1px solid red");
+    }
+
+    var pla1 = document.getElementById("i_plantel").value;
+    if (pla1 == "0") {
+        $("#n7").text("Campo PLANTEL vacio").css("color", "red");
+        $("#i_plantel").css("border", "1px solid red");
+    }
+    
 var programa1 = document.getElementById("programa").value;
     if (programa1 == 0) {
         $("#c1").text("Campo PROGRAMA vacio").css("color", "red");
@@ -182,7 +207,22 @@ var programa1 = document.getElementById("programa").value;
         $("#c9").text("Campo PUBLICACION RESULTADOS vacio").css("color", "red");
         $("#publicacion_resultados").css("border", "1px solid red");
     }
+    
 //----------------------------------------------------------------------------
+   if (document.getElementById("entidad").value == "0")
+    {
+        return false;
+    } else {
+    }
+//----------------------------------------------------------------------------
+
+ if (document.getElementById("i_plantel").value == "0")
+    {
+        return false;
+    } else {
+    }
+//----------------------------------------------------------------------------
+
 if (document.getElementById("programa").value === "")
     {
         return false;

@@ -13,6 +13,30 @@
         <link href="/favicon.ico" rel="shortcut icon">
         <link href="https://framework-gb.cdn.gob.mx/assets/styles/main.css" rel="stylesheet">     
         <script type="text/javascript">
+            function plantel() {
+                /* Para obtener el texto */
+                var combo = document.getElementById("entidad");
+                var selected = combo.options[combo.selectedIndex].text;
+                document.data.campoentidad.value = selected;
+
+                if (document.getElementById("entidad").value == "0")
+                {
+                    $("#n8").text("Selecciona una ENTIDAD").css("color", "red");
+                    $("#entidad").css("border", "1px solid red");
+
+                } else {
+                    document.getElementById("n8").innerHTML = "";
+                    $("#entidad").css("border", "none");
+                }
+
+                $("#i_opc").val("1");
+                $.post("combo1.jsp", $("#data").serialize(), function (data) {
+                    $("#i_plantel").html(data);
+                });
+
+
+            }
+            
             function habilitar() {
                 var camp1 = document.getElementById("permiso1");
                 var camp2 = document.getElementById("permiso2");
@@ -63,6 +87,7 @@
             }
 
 
+
         </script> 
         <jsp:useBean id="catalogo" class="herramientas.Catalogos" />
     </head>
@@ -98,7 +123,7 @@
                             <nav class="navegacion">
                                 <ul class="menu">
 
-                                     <li aling="navbar-center">
+                                    <li aling="navbar-center">
                                         <%
                                             String nom1 = String.valueOf(request.getAttribute("nom"));
                                             out.print(nom1);
@@ -190,7 +215,7 @@
             <section class="sectionreg">
                 <div class="articulosart">
                     <jsp:useBean id="cn" class="metodos_sql.Metodos_sql" scope="page"></jsp:useBean>
-                        <form  name="regconv" id="regconv" method="POST" action="Servlet_guardar_convocatoria" onSubmit="return validar_datos();">
+                        <form  name="data" id="data" method="POST" action="Servlet_guardar_convocatoria" onSubmit="return validar_datos();">
                             <br>
                             <br>
                         <%
@@ -204,46 +229,45 @@
                             <div class="caja">
                                 <h4>REGISTRO DE CONVOCATORIA</h4> 
                             </div>
-                      <%--      <div class="caja" align="right">
-                                <div id="rfc_13digitos">
-                                    <%
-                                        String rfc1 = String.valueOf(request.getAttribute("dato_rfc"));
-                                        out.print(rfc1);
-                                    %>
-                                </div>
-                                <div id="nombre_completo">
-                                    <%
-                                        String nom1 = String.valueOf(request.getAttribute("nom"));
-                                        out.print(nom1);
-                                    %>
-                                </div> 
-                                <div id="cerrar_sesion">
-                                    <input  class="boton_personalizado" type="submit" value="Cerrar Sesion" name="cerrar" form="data4">
-                                </div>
-                            </div> --%>
+                            <%--      <div class="caja" align="right">
+                                      <div id="rfc_13digitos">
+                                          <%
+                                              String rfc1 = String.valueOf(request.getAttribute("dato_rfc"));
+                                              out.print(rfc1);
+                                          %>
+                                      </div>
+                                      <div id="nombre_completo">
+                                          <%
+                                              String nom1 = String.valueOf(request.getAttribute("nom"));
+                                              out.print(nom1);
+                                          %>
+                                      </div> 
+                                      <div id="cerrar_sesion">
+                                          <input  class="boton_personalizado" type="submit" value="Cerrar Sesion" name="cerrar" form="data4">
+                                      </div>
+                                  </div> --%>
                         </div>
 
-                        <div class="registro_cct_plantel">                         
-                            <div id="cct" style="text-indent: 1cm;">
-                                <%
-                                    //String ent1 = String.valueOf(request.getAttribute("dato_ent"));
-                                    ResultSet rs6 = cn.mostrar("Select entidad from catentidades where id='"+request.getAttribute("dato_ent")+"'");
-                                      while (rs6.next()) {
-                                      out.print(rs6.getString("entidad")+ " - ");
-                                      }
-                                   
+                        <%--     <div class="registro_cct_plantel">                         
+                                 <div id="cct" style="text-indent: 1cm;">
+                                     <%
+                                         //String ent1 = String.valueOf(request.getAttribute("dato_ent"));
+                                         ResultSet rs6 = cn.mostrar("Select entidad from catentidades where id='" + request.getAttribute("dato_ent") + "'");
+                                         while (rs6.next()) {
+                                             out.print(rs6.getString("entidad") + " - ");
+                                         }
+
                                 %>
                             </div>                          
                             <div id="plantel">
-                                <%
-                                     //String pla1 = String.valueOf(request.getAttribute("dato_pla"));
-                                     ResultSet rs7 = cn.mostrar("Select plantel from catplanteles where id='"+request.getAttribute("dato_pla")+"'");
-                                      while (rs7.next()) {
-                                      out.print(rs7.getString("plantel"));
-                                      }
+                                <%                                    //String pla1 = String.valueOf(request.getAttribute("dato_pla"));
+                                    ResultSet rs7 = cn.mostrar("Select plantel from catplanteles where id='" + request.getAttribute("dato_pla") + "'");
+                                    while (rs7.next()) {
+                                        out.print(rs7.getString("plantel"));
+                                    }
                                 %>
                             </div>
-                        </div>
+                        </div>  --%>
 
                         <br>
                         <!--         <input type="hidden" name="f_opc" id="i_opc">
@@ -272,6 +296,41 @@
                             </div>
                         </div>
 
+                        <div class="registro">
+                            <div class="caja">
+                                <input type="hidden" name="f_opc" id="i_opc">
+                                <input type="hidden" name="campoentidad" id="campoentidad" >
+                                <p>Entidad
+
+                                    <%
+                                        ResultSet rs = cn.mostrar("Select id, entidad from catentidades");
+                                    %>
+
+                                    <select class="form-control" name="entidad" id="entidad" onchange="plantel()">
+                                        <option value="0">Escoge una opcion</option>
+                                        <%
+                                            while (rs.next()) {
+                                        %>
+                                        <option value="<%=rs.getString("id")%>"><%=rs.getString("entidad")%></option>
+
+                                        <%//              regresa del combobox         muestra en el combo box
+                                            }
+                                        %>                                              
+                                    </select>           
+                                </p>
+                                <div id="n8"></div>
+                            </div>
+
+                            <div class="caja">
+                                <p>Plantel
+                                    <select class="form-control" name="n_plantel" id="i_plantel" onchange="validarentrada3()">
+                                        <option value="0">Escoge una opcion</option>                                     
+                                    </select>
+                                </p>
+                                <div id="n7"></div>
+
+                            </div>
+                        </div>
                         <div class="registro">    
                             <div class="caja">
                                 <p>Programa:<br>
@@ -282,6 +341,7 @@
                             </div>
 
                         </div>
+
 
                         <br>
                         <div class="registro">    
@@ -330,6 +390,19 @@
                             </div>
                         </div>
 
+                        <div class="registro">    
+                            <div class="caja">
+                                <p>Estatus
+                                    <select class="form-control" name="estatus" id="estatus" >
+                                        <option value="TEMPORAL">Temporal</option> 
+                                        <option value="DEFINITIVA" disabled="true">Definitiva</option>
+                                    </select>
+                                </p>
+                                <div id="c10"></div>
+                            </div>
+                        </div>
+
+
                         <%                            }//fin if elegir    
                             else {
                                 response.sendRedirect("login.jsp");
@@ -350,7 +423,7 @@
                                 <input type="hidden" name="dato_ent" id="dato_ent" value="<%=request.getAttribute("dato_ent")%>">
                                 <input type="hidden" name="dato_pla" id="dato_pla" value="<%=request.getAttribute("dato_pla")%>">
                                 <input type="hidden" name="dato_rfc" id="dato_rfc" value="<%=request.getAttribute("dato_rfc")%>">
-                                <input  class="btn btn-primary pull-right" type="submit" value="Guardar" name="guardar" form="regconv">
+                                <input  class="btn btn-primary pull-right" type="submit" value="Guardar" name="guardar" form="data">
 
 
                             </div>
@@ -362,19 +435,7 @@
 
                 </asideart>
 
-                <form id="data2" class="form-horizontal" role="form" method="POST" action="Servlet_regresar3">
-                    <%
-                        session.setAttribute("idUsuario", idUsuario);
-                        session.setAttribute("rfc", rfc);
-                    %>
-                    <input type="hidden" name="permiso1" id="permiso1" value="<%=request.getAttribute("per1")%>">
-                    <input type="hidden" name="permiso3" id="permiso3" value="<%=request.getAttribute("per3")%>">
-                    <input type="hidden" name="permiso4" id="permiso4" value="<%=request.getAttribute("per4")%>">
-                    <input type="hidden" name="nombre" id="nombre" value="<%=request.getAttribute("nom")%>">
-                    <input type="hidden" name="dato_ent" id="dato_ent" value="<%=request.getAttribute("dato_ent")%>">
-                    <input type="hidden" name="dato_pla" id="dato_pla" value="<%=request.getAttribute("dato_pla")%>">
-                    <input type="hidden" name="dato_rfc" id="dato_rfc" value="<%=request.getAttribute("dato_rfc")%>">
-                </form>
+               
 
                 <form id="data4" class="form-horizontal" role="form" method="POST" action="Servlet_cerrarsesion">
 

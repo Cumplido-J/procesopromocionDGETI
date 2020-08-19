@@ -17,6 +17,7 @@ C:\Users\David Reyna\Desktop\repo2\desarrollo\procesopromocion\src\main\java\com
 C:\Users\David Reyna\Desktop\repo2\desarrollo\procesopromocion\src\main\java\com\convocatoria\reportes\Reporteador.java
 C:\Users\David Reyna\Desktop\repo2\desarrollo\procesopromocion\src\main\java\herramientas\WebService.java
 C:\Users\David Reyna\Desktop\repo2\desarrollo\procesopromocion\src\main\java\correos\Validar_correo.java
+C:\Users\David Reyna\Desktop\repo2\desarrollo\procesopromocion\src\main\java\com\aplicacion\servlet\Servlet_modificar_convocatoria2.java
 C:\Users\David Reyna\Desktop\repo2\desarrollo\procesopromocion\src\main\java\com\aplicacion\beans\HoraGrupo.java
 C:\Users\David Reyna\Desktop\repo2\desarrollo\procesopromocion\src\main\java\herramientas\Correo.java
 C:\Users\David Reyna\Desktop\repo2\desarrollo\procesopromocion\src\main\java\com\convocatoria\domain\Entidad.java
@@ -38,6 +39,7 @@ C:\Users\David Reyna\Desktop\repo2\desarrollo\procesopromocion\src\main\java\com
 C:\Users\David Reyna\Desktop\repo2\desarrollo\procesopromocion\src\main\java\com\aplicacion\servlet\Servlet_convocatoria.java
 C:\Users\David Reyna\Desktop\repo2\desarrollo\procesopromocion\src\main\java\com\convocatoria\servlet\ServletControladorPlantel.java
 C:\Users\David Reyna\Desktop\repo2\desarrollo\procesopromocion\src\main\java\herramientas\Fecha.java
+C:\Users\David Reyna\Desktop\repo2\desarrollo\procesopromocion\src\main\java\com\aplicacion\servlet\Servlet_modificar_convocatoria.java
 C:\Users\David Reyna\Desktop\repo2\desarrollo\procesopromocion\src\main\java\herramientas\Imagen.java
 C:\Users\David Reyna\Desktop\repo2\desarrollo\procesopromocion\src\main\java\com\aplicacion\beans\CatalogoPersonal.java
 C:\Users\David Reyna\Desktop\repo2\desarrollo\procesopromocion\src\main\java\com\aplicacion\servlet\Servlet_recuperarclave_administrador.java
@@ -55,6 +57,7 @@ C:\Users\David Reyna\Desktop\repo2\desarrollo\procesopromocion\src\main\java\com
 C:\Users\David Reyna\Desktop\repo2\desarrollo\procesopromocion\src\main\java\com\aplicacion\beans\Grupo.java
 C:\Users\David Reyna\Desktop\repo2\desarrollo\procesopromocion\src\main\java\com\aplicacion\servlet\Servlet_finalizaRegistro.java
 C:\Users\David Reyna\Desktop\repo2\desarrollo\procesopromocion\src\main\java\com\convocatoria\domain\Convocatoria.java
+C:\Users\David Reyna\Desktop\repo2\desarrollo\procesopromocion\src\main\java\com\aplicacion\servlet\Servlet_cargar_convocatoria.java
 C:\Users\David Reyna\Desktop\repo2\desarrollo\procesopromocion\src\main\java\com\aplicacion\servlet\Servlet_agregar_usuario.java
 C:\Users\David Reyna\Desktop\repo2\desarrollo\procesopromocion\src\main\java\com\aplicacion\servlet\Servlet_registroHorasGrupo.java
 C:\Users\David Reyna\Desktop\repo2\desarrollo\procesopromocion\src\main\java\seguridad\Encriptar_Desencriptar.java

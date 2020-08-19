@@ -65,7 +65,12 @@ function crearVacancias(idplantel){
                 console.log(ajax.response);
                 const convocatorias =  ajax.response;
                 tbody.innerHTML = "";
-                var trs = [];
+                var trs = [];                
+                if(convocatorias.length==0){
+                    $("#mensaje").html("No hay convocatorias disponibles");
+                    $("#ifArchivo").attr("hidden",true);
+                    $("#modalMensaje").modal();
+                }
                 for(i=1;i<=convocatorias.length; i++){
                     console.log(convocatorias[i-1]);
                     var td1='<td>'+convocatorias[i-1].nombre+'</td>';

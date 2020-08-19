@@ -460,4 +460,18 @@ public class Catalogos {
         respuesta=respuesta.replaceFirst(aux, aux+" selected");        
         return respuesta;  
     }
+    public String desplegarOpcionesConvocatoria(String idPlantel){        
+        String respuesta="<option value=''>-Seleccione-</option>";
+        String[] parametros={idPlantel};
+        try{
+            List<String[]> datos=metodos.ejecutaSP("sp_consultaProgramasPlantel",parametros);
+            for(String[] dato:datos){
+                respuesta+="<option value='"+dato[0]+"' >"+dato[1]+"</option>";
+            }
+        }catch(Exception e){
+            respuesta=e.toString();
+        }finally{
+            return respuesta;        
+        }
+    }
 }
