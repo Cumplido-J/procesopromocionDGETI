@@ -420,6 +420,12 @@ public class Catalogos {
             return respuesta;        
         }
     }
+    public String desplegarOpcionesPuntaje(String idCriterio,String id){        
+        String respuesta=desplegarOpcionesPuntaje(idCriterio);
+        String aux="value='"+id+"'";
+        respuesta=respuesta.replaceFirst(aux, aux+" selected");
+        return respuesta;  
+    }
     public String desplegarOpcionesCategoriasVacantes(String idPlantel,String idPrograma){        
         String respuesta="<option value=''>-Seleccione-</option>";
         try{

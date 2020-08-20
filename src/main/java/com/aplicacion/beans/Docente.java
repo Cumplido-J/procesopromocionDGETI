@@ -32,6 +32,7 @@ public class Docente {
     private List<Personal> personal=null;
     private List<String[]> encuestados=null;
     private int totalEncuestados=0;
+    private String idConvocatoria=null;
     public Docente() {
     }
 
@@ -212,7 +213,8 @@ public class Docente {
         String[] parametros={idUsuario};
         List<String[]> datos=metodo.ejecutaSP("sp_consultaRegistro",parametros);
         if(!datos.isEmpty()){
-            infoRegistro=datos.get(0);            
+            infoRegistro=datos.get(0);
+            idConvocatoria=infoRegistro[65];
         }
     }
     public void consultaDocumentos(){
@@ -394,6 +396,10 @@ public class Docente {
         retorno[0]=fila;
         retorno[1]=""+c;
         return retorno;
+    }
+
+    public String getIdConvocatoria() {
+        return idConvocatoria;
     }
     
     

@@ -74,6 +74,8 @@ public class Servlet_cbRegistroCriterios extends HttpServlet {
             docente=new Docente();
             docente.setIdUsuario(session.getAttribute("idUsuario").toString());
             docente.setRfc(session.getAttribute("rfc").toString());
+            docente.consultaInfoAspirante();             
+            docente.consultaDocumentos();
             request.setAttribute("docente", docente);
             request.setAttribute("criterios", criterios);
             ServletContext sc = getServletContext();

@@ -3,8 +3,177 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+$(document).ready(function () {
+    $( "#inicioCurso" ).datepicker({changeMonth:true, changeYear: true});
+    $( "#finCurso" ).datepicker({changeMonth:true, changeYear: true});
+    $('#form1').submit(function(e) {
+        e.preventDefault();
+    }).validate({
+        messages: {
+            'puntaje': {
+                required: "Seleccione una opción"
+            }
+        },
+        submitHandler:function(){
+            $.ajax({
+                type:$('#form1').attr("method"),
+                url:$('#form1').attr("action"),
+                data:$('#form1').serialize(),
+                beforeSend:function(){
+                    $("#btnEnviar1").val("Guardando...");
+                    $("#btnEnviar1").attr("disabled","disabled");
+                },
+                complete:function(){
+                   $("#btnEnviar1").val("Guardar y continuar"); 
+                   $("#btnEnviar1").removeAttr("disabled");
+                },success:function(data){
+                    if(isNaN(data)){
+                        $("#mensaje").html(data);            
+                        $("#modalMensaje").modal("show");
+                    }
+                    else{                        
+                        $("#p1").html(data); 
+                        $("#mensaje").html("Información guardada correctamente");            
+                        $("#modalMensaje").modal("show");
+                    }
+                }
+            });
+            return false;
+        }
+    });
+    $('#form2').submit(function(e) {
+        e.preventDefault();
+    }).validate({
+        messages: {
+            'puntaje': {
+                required: "Seleccione una opción"
+            }
+        },
+        submitHandler:function(){
+            $.ajax({
+                type:$('#form2').attr("method"),
+                url:$('#form2').attr("action"),
+                data:$('#form2').serialize(),
+                beforeSend:function(){
+                    $("#btnEnviar2").val("Guardando...");
+                    $("#btnEnviar2").attr("disabled","disabled");
+                },
+                complete:function(){
+                   $("#btnEnviar2").val("Guardar y continuar"); 
+                   $("#btnEnviar2").removeAttr("disabled");
+                },success:function(data){
+                    if(isNaN(data)){
+                        $("#mensaje").html(data);            
+                        $("#modalMensaje").modal("show");
+                    }
+                    else{                        
+                        $("#p2").html(data); 
+                        $("#mensaje").html("Información guardada correctamente");            
+                        $("#modalMensaje").modal("show");
+                    }
+                }
+            });
+            return false;
+        }
+    });
+    $('#form4').submit(function(e) {
+        e.preventDefault();
+    }).validate({
+        messages: {
+            'puntaje': {
+                required: "Seleccione una opción"
+            }
+        },
+        submitHandler:function(){
+            $.ajax({
+                type:$('#form4').attr("method"),
+                url:$('#form4').attr("action"),
+                data:$('#form4').serialize(),
+                beforeSend:function(){
+                    $("#btnEnviar4").val("Guardando...");
+                    $("#btnEnviar4").attr("disabled","disabled");
+                },
+                complete:function(){
+                   $("#btnEnviar4").val("Guardar y continuar"); 
+                   $("#btnEnviar4").removeAttr("disabled");
+                },success:function(data){
+                    if(isNaN(data)){
+                        $("#mensaje").html(data);            
+                        $("#modalMensaje").modal("show");
+                    }
+                    else{                        
+                        $("#p4").html(data); 
+                        $("#mensaje").html("Información guardada correctamente");            
+                        $("#modalMensaje").modal("show");
+                    }
+                }
+            });
+            return false;
+        }
+    });
+    $('#formCursos').submit(function(e) {
+        e.preventDefault();
+    }).validate({
+        rules:{            
+            'horasCurso': {
+                number: true
+            }
+        },
+        messages: {
+            'tipo': {
+                required: "Seleccione una opción"
+            },
+            'nombreCurso': {
+                required: "Campo requerido"
+            },
+            'inicioCurso': {
+                required: "Campo requerido"
+            },
+            'finCurso': {
+                required: "Campo requerido"
+            },
+            'institucionCurso': {
+                required: "Campo requerido"
+            },
+            'horasCurso': {
+                required: "Campo requerido",
+                number:"Ingrese sólo números"
+            }
+        },
+        submitHandler:function(){
+            $.ajax({
+                type:$('#formCursos').attr("method"),
+                url:$('#formCursos').attr("action"),
+                data:$('#formCursos').serialize(),
+                beforeSend:function(){
+                    $("#btnEnviarCurso").val("Guardando...");
+                    $("#btnEnviarCurso").attr("disabled","disabled");
+                },
+                complete:function(){
+                   $("#btnEnviarCurso").val("Guardar"); 
+                   $("#btnEnviarCurso").removeAttr("disabled");
+                   $("#modalCursos").modal("hide");
+                },success:function(data){
+                    if(data.includes("<tr>")){
+                        $("#tablaCursos").html(data);   
+                    }
+                    else{
+                        $("#mensaje").html(data);            
+                        $("#modalMensaje").modal("show");
+                    }                    
+                }
+            });
+            return false;
+        }
+    });
+});
 
-function abrirModalArchivo(id){    
+function abrirModalArchivo(id){  
+    if(id<9){
+        $("#seccionCarga").addClass("disabled");
+    }else{
+        $("#seccionCarga").removeClass("disabled");
+    }
     $("#archivo").val("");
     if($("#btnEvidencia"+id).attr("value")=="Subir archivo"){        
         $("#ifArchivo").attr("hidden","true");
@@ -71,4 +240,14 @@ function pmultiple(){
     p+=parseInt($("#sp104 option:selected").attr("puntaje"));
     p+=parseInt($("#sp105 option:selected").attr("puntaje"));
     $("#p10").html("Puntaje:"+p);
+}
+
+function abrirModalCursos(){
+    $("#formCursos")[0].reset();
+    $("#modalCursos").modal("show");
+}
+
+function abrirModalAportaciones(){
+    $("#formAportacion")[0].reset();
+    $("#modalAportaciones").modal("show");
 }

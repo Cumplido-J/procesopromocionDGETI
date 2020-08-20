@@ -131,11 +131,19 @@
                             <label class="control-label" for="pass2">Confirme contraseña:</label>
                             <input required class="form-control input-sm" type="password" id="pass2" name="pass2" />
                         </div>
+                        <div style="padding-top:30px;">
+                            <table>
+                              <tr>
+                                <td valign="top"><input type="checkbox" name="cbAviso" id="cbAviso" onClick="cambioAviso()"><td>
+                                <td>He leído y acepto el aviso de privacidad disponible <a target="_blank" href="Convocatoria?k=avisoPrivacidad.pdf">aquí</a></td>    
+                              </tr>                              
+                            </table>
+                        </div>
                     </div>
-                    <div class="row">
+                    <div class="row">                        
                         <div class="col-xs-12 text-right">
                             <input   class="btn btn-sm btn-primary" type="reset" value="Limpiar"/>
-                            <input  class="btn btn-sm btn-primary" id="btnEnviar" type="submit" value='Guardar'/>
+                            <input  class="btn btn-sm btn-primary" id="btnEnviar" type="submit" value='Guardar' disabled/>
                             <!--<input required type="button" class="btn btn-sm btn-primary" value="Guardar y continuar" onclick="mostrarSiguiente(1)"/>-->
                         </div>
                     </div>

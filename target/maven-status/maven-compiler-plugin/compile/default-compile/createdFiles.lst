@@ -4,6 +4,7 @@ com\aplicacion\servlet\Servlet_generaSesion.class
 com\aplicacion\servlet\Servlet_crearcuenta.class
 com\aplicacion\servlet\Servlet_descargaConvocatoria.class
 com\aplicacion\servlet\Servlet_finalizaRegistro.class
+com\aplicacion\servlet\Servlet_cbRegistroCriterios.class
 com\convocatoria\datos\PlantelJDBC.class
 com\aplicacion\servlet\Servlet_regresar3.class
 com\convocatoria\servlet\ServletControladorVacancia.class

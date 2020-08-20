@@ -10,11 +10,11 @@ $(document).ready(function () {
         rules: {
             'egreso':{
                 min:1920,
-                max:2020
+                number: true
             },
             'titulacion':{
                 min:1920,
-                max:2020
+                number: true
             }
         },
         messages: {
@@ -42,7 +42,7 @@ $(document).ready(function () {
             'egreso':{
                 required: "Campo requerido",
                 min:"Ingrese un valor válido",
-                max:"Ingrese un valor válido"
+                number:"Ingrese un valor válido"
             },
             'modalidad':{
                 required: "Seleccione una opción"
@@ -50,7 +50,7 @@ $(document).ready(function () {
             'titulacion':{
                 required: "Campo requerido",
                 min:"Ingrese un valor válido",
-                max:"Ingrese un valor válido"
+                number:"Ingrese un valor válido"
             },
             'documento':{
                 required: "Seleccione una opción"

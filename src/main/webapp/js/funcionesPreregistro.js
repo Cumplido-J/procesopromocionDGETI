@@ -8,12 +8,14 @@ $(document).ready(function () {
     $('#correo').on('keypress keydown keyup',function(){
         if (!$(this).val().match($regex)) {         
             $('#alertaCorreo').removeAttr('hidden');    
+            $("#cbAviso").attr("disabled",true);
+            $("#cbAviso").removeAttr("checked");
             $("#btnEnviar").attr("disabled",true);
             $('#correo').addClass('error'); 
         }
         else{
            $('#alertaCorreo').attr('hidden',true);
-           $("#btnEnviar").removeAttr("disabled");
+           $("#cbAviso").removeAttr("disabled");
            $('#correo').removeClass('error'); 
         }
     });
@@ -129,12 +131,14 @@ function consultaWS(){
         if (!rfc.match($regexRFC)) {
             $('#alertaRFC').removeAttr('hidden'); 
             $('#rfc').addClass('error'); 
+            $("#cbAviso").attr("disabled",true);
+            $("#cbAviso").removeAttr("checked");
             $("#btnEnviar").attr("disabled",true);
         }
         else{
              $('#alertaRFC').attr('hidden',true);
              $('#rfc').removeClass('error'); 
-             $("#btnEnviar").removeAttr("disabled");
+             $("#cbAviso").removeAttr("disabled");
              $.post("ConsultaWSPersonal", {rfc: rfc}, function(respuesta){
                 var aux=respuesta.split("|");
                 if(aux.length==5){
@@ -169,6 +173,8 @@ function consultaWS(){
                     }else{
                         $("#mensaje").html("El RFC ingresado no se encuentra asignado a plantel, contacte al personal de recursos humanos");            
                         $("#modalMensaje").modal("show");
+                        $("#cbAviso").attr("disabled",true);
+                        $("#cbAviso").removeAttr("checked");
                         $("#btnEnviar").attr("disabled",true);
                         $("#btnContinuar").attr("style","display:none;");
                     }
@@ -176,6 +182,8 @@ function consultaWS(){
                 }else{
                     $("#mensaje").html("El RFC ingresado no se encuentra registrado en la institución, contacte al personal de recursos humanos de su plantel");            
                     $("#modalMensaje").modal("show");
+                    $("#cbAviso").attr("disabled",true);
+                    $("#cbAviso").removeAttr("checked");
                     $("#btnEnviar").attr("disabled",true);
                     $("#btnContinuar").attr("style","display:none;");
                 }
@@ -195,4 +203,10 @@ function actualizarPlanteles(idPlantel) {
         }
     });  
 }
-
+function cambioAviso(){
+    if($("#cbAviso").is(':checked')){
+        $("#btnEnviar").removeAttr("disabled");        
+    }else{
+        $("#btnEnviar").attr("disabled","true");
+    }
+}

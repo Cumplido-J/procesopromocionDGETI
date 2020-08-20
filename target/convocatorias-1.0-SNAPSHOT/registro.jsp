@@ -636,7 +636,7 @@
                                 <td>Declara bajo protesta de decir verdad que cumple con los requisitos establecidos en la Convocatoria para el proceso de promoción en el servicio docente por cambio de categoría en Educación Media Superior, Ciclo Escolar 2020-2021. Para confirmar su dicho, las UEMSTIS podrá verificar la autenticidad de la documentación que proporciono, por lo que, en caso de alteración o falsificación de la misma, acepta la descalificación inmediata del proceso o, en su caso, la invalidación del nombramiento respectivo, sin perjuicio de las sanciones de tipo administrativo o penal en las que pudiera incurrir.</td>    
                               </tr>
                               <tr>
-                                  <td valign="top"><input type="checkbox" name="cbPublico" id="cbPublico" onchange="cambioProtesta()"><td>
+                                  <td valign="top"><input type="checkbox" name="cbPublico" id="cbPublico" ><td>
                                   <td>Acepta hacer públicos los resultados y recomendaciones individuales que se deriven de su valoración para el proceso de promoción en el servicio docente por cambio de categoría en Educación Media Superior ingreso a la Educación Media Superior, Ciclo Escolar 2020-2021.<td>
                               </tr>
                           </table>

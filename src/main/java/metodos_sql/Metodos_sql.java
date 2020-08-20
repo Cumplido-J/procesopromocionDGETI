@@ -730,8 +730,7 @@ public class Metodos_sql {
         List<String[]> datos = new ArrayList<String[]>();
         String[] tupla;
         conexion = null;
-        String aux = "";
-        //System.out.println(parametros.length);
+        String aux = "";        
         for (String parametro : parametros) {
             if (!parametro.equals("")) {
                 aux += "'" + parametro + "',";
