@@ -96,6 +96,7 @@ public class Servlet_buscar_vacancia extends HttpServlet {
                 rfc = session.getAttribute("rfc").toString();
 
                 String control_combobox = request.getParameter("control_combobox");
+                String nac1 = request.getParameter("nacional");//AGREGAR----------------------------------
                 String per1 = request.getParameter("permiso1");
                 String per2 = request.getParameter("permiso2");
                 String per4 = request.getParameter("permiso4");
@@ -110,10 +111,10 @@ public class Servlet_buscar_vacancia extends HttpServlet {
 
                 String btnvacancia = request.getParameter("buscarvacancia");
                 if (btnvacancia != null) {
-              
-                    if (control_combobox.equals("false")) {
+
+                    if (control_combobox.equals("false") || control_combobox.equals("true") && nac1.equals("1")) {
                         if (entidad.equals("0") && n_plantel.equals("0") && categoria.equals("0")) {
-                            
+
                             request.setAttribute("consulta", "1");
 //                            out.print("caso 1"); //nada
                         } else if (entidad != ("0") && n_plantel != ("0") && categoria.equals("0")) {
@@ -140,17 +141,39 @@ public class Servlet_buscar_vacancia extends HttpServlet {
                             //request.setAttribute("consulta", "4");
                         }
                     }//fin comparacion combobox
-                    else {
-
-                        if (categoria.equals("0")) {
+                     if (control_combobox.equals("true") && nac1.equals("2")) {
+                        if (n_plantel.equals("0") && categoria.equals("0")) {
                             request.setAttribute("consulta", "1");
-//                        out.print("caso 1");   //usuario
-                        } else if (categoria != "") {
-                            request.setAttribute("consulta", "4");
-//                        out.print("caso 4");   //usuario
+                            //out.print("caso 1"); //nada
+                        }
+                        else if (n_plantel != ("0") && categoria.equals("0")) {
+                            request.setAttribute("consulta", "3");
+                            //out.print("caso 1"); //nada
+                        }
+                         else if (n_plantel.equals("0") && categoria != ("0")) {
+                            request.setAttribute("consulta", "5");
+                            //out.print("caso 1"); //nada
+                        }
+                        else if (n_plantel != ("0") && categoria != ("0")) {
+                            request.setAttribute("consulta", "6");
+                            //out.print("caso 1"); //nada
                         }
                     }
+                     
+                     if (control_combobox.equals("true") && nac1.equals("3")) {
+                        if (categoria.equals("0")) {
+                            request.setAttribute("consulta", "1");
+                            //out.print("caso 1"); //nada
+                        }
+                        else if (categoria != ("0")) {
+                            request.setAttribute("consulta", "2");
+                            //out.print("caso 1"); //nada
+                        }
+                        
+                    }
+//----------------------------------------------------------AGREGAR-------------------------------------------------
                     request.setAttribute("control_combobox", control_combobox);
+                    request.setAttribute("nacional", nac1);
                     request.setAttribute("est", entidad);
                     request.setAttribute("pla", n_plantel);
                     request.setAttribute("cat", categoria);
@@ -164,7 +187,7 @@ public class Servlet_buscar_vacancia extends HttpServlet {
                     request.setAttribute("per4", per4);
                     session.setAttribute("idUsuario", idUsuario);
                     session.setAttribute("rfc", rfc);
-                    
+
                     RequestDispatcher rd = request.getRequestDispatcher("vacantes.jsp");
                     rd.forward(request, response);
                 } else {
