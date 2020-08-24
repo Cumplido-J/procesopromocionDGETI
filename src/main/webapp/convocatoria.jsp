@@ -147,6 +147,7 @@
                                                         session.setAttribute("rfc", rfc);
                                                     %>
                                                     <input type="hidden" name="control_combobox" id="control_combobox" value="<%=request.getAttribute("control_combobox")%>">
+                                                    <input type="hidden" name="nacional" id="nacional" value="<%=request.getAttribute("nacional")%>"> <%--AGREGAR--%>
                                                     <input type="hidden" name="permiso1" id="permiso1" value="<%=request.getAttribute("per1")%>">
                                                     <input type="hidden" name="permiso2" id="permiso2" value="<%=request.getAttribute("per2")%>">
                                                     <input type="hidden" name="permiso4" id="permiso4" value="<%=request.getAttribute("per4")%>">
@@ -164,6 +165,7 @@
                                                         session.setAttribute("rfc", rfc);
                                                     %>
                                                     <input type="hidden" name="control_combobox" id="control_combobox" value="<%=request.getAttribute("control_combobox")%>">
+                                                    <input type="hidden" name="nacional" id="nacional" value="<%=request.getAttribute("nacional")%>"> <%--AGREGAR--%>
                                                     <input type="hidden" name="permiso1" id="permiso1" value="<%=request.getAttribute("per1")%>">
                                                     <input type="hidden" name="permiso2" id="permiso2" value="<%=request.getAttribute("per2")%>">
                                                     <input type="hidden" name="permiso4" id="permiso4" value="<%=request.getAttribute("per4")%>">
@@ -181,6 +183,7 @@
                                                         session.setAttribute("rfc", rfc);
                                                     %>
                                                     <input type="hidden" name="control_combobox" id="control_combobox" value="<%=request.getAttribute("control_combobox")%>">
+                                                    <input type="hidden" name="nacional" id="nacional" value="<%=request.getAttribute("nacional")%>"> <%--AGREGAR--%>
                                                     <input type="hidden" name="permiso1" id="permiso1" value="<%=request.getAttribute("per1")%>">
                                                     <input type="hidden" name="permiso2" id="permiso2" value="<%=request.getAttribute("per2")%>">
                                                     <input type="hidden" name="permiso4" id="permiso4" value="<%=request.getAttribute("per4")%>">
@@ -222,14 +225,16 @@
                     <br>
                     <jsp:useBean id="cn" class="metodos_sql.Metodos_sql" scope="page"></jsp:useBean>
                         <form id="data" class="form-horizontal" role="form" method="POST" action="Servlet_buscar_convocatoria">
-                            <center>
-                                <div class="registro">
-                                    <div class="caja">
+                        <%-------------------------------------------------------------------OPCION super usuario nacional COMBO BOX----------------------------%>   
+                        <%if (request.getAttribute("control_combobox").equals("false") && request.getAttribute("nacional").equals("1")) { %> <%--SUPER USUARIO--%>
+                        <center>
+                            <div class="registro">
+                                <div class="caja">
 
 
-                                        <input type="hidden" name="f_opc" id="i_opc">
-                                        <input type="hidden" name="campoentidad" id="campoentidad" >
-                                        <label>Entidad</label><br>
+                                    <input type="hidden" name="f_opc" id="i_opc">
+                                    <input type="hidden" name="campoentidad" id="campoentidad" >
+                                    <label>Entidad</label><br>
 
                                     <%
                                         ResultSet rs = cn.mostrar("Select id, entidad from catentidades");
@@ -281,12 +286,12 @@
                         <br><br>
 
                         <div class="registro">
-                             
-                                <button class="btn btn-primary pull-right" type="submit" name="buscar_convocatoria">Buscar</button>
-                                <button class="btn btn-primary pull-right" type="submit" name="agregar_convocatoria" form="data2">Agregar</button>
-                                <button class="btn btn-primary pull-right" type="submit" name="modificar_convocatoria" form="data6">Modificar</button>
-                               
-                            
+
+                            <button class="btn btn-primary pull-right" type="submit" name="buscar_convocatoria">Buscar</button>
+                            <button class="btn btn-primary pull-right" type="submit" name="agregar_convocatoria" form="data2">Agregar</button>
+                            <button class="btn btn-primary pull-right" type="submit" name="modificar_convocatoria" form="data6">Modificar</button>
+
+
 
                         </div>
                         <br><br>
@@ -500,12 +505,886 @@
                                 }
                             %>
                         </table><br><br>
+                        <%}//FIN SUPER USUARIO NACIONAL
+                        else if (request.getAttribute("control_combobox").equals("true") && request.getAttribute("nacional").equals("1")) {//ADMINISTRADOR NACIONA
+                        %>
+                        <center>
+                            <div class="registro">
+                                <div class="caja">
+
+
+                                    <input type="hidden" name="f_opc" id="i_opc">
+                                    <input type="hidden" name="campoentidad" id="campoentidad" >
+                                    <label>Entidad</label><br>
+
+                                    <%
+                                        ResultSet rs = cn.mostrar("Select id, entidad from catentidades");
+                                    %>
+
+                                    <select class="form-control" name="entidad" id="entidad" onchange="plantel()">
+                                        <option value="0">Escoge una opcion</option>
+                                        <%
+                                            while (rs.next()) {
+                                        %>
+                                        <option value="<%=rs.getString("id")%>"><%=rs.getString("entidad")%></option>
+
+                                        <%//              regresa del combobox         muestra en el combo box
+                                            }
+                                        %>                                              
+                                    </select>           
+                                    <div id="n8"></div>
+                                </div>
+
+                                <div class="caja">   
+                                    <label>Plantel</label><br>
+                                    <select class="form-control" name="n_plantel" id="i_plantel" onchange="plantel2()">
+                                        <option value="0">Escoge una opcion</option>                                     
+                                    </select>
+                                    </td></div>
+
+                                <div class="caja"> 
+                                    <label>Estatus</label><br>
+                                    <select class="form-control" name="estatus" id="estatus" >
+                                        <option value="0">Escoge una opcion</option>
+                                        <option value="temporal">Temporal</option>
+                                        <option value="definitiva">Definitiva</option>
+                                    </select>
+                                    </td></div>
+
+                                <div class="caja">                                          
+                                    <input type="hidden" name="publicaciont" id="publicaciont" >
+                                    <label>Publicación</label><br>
+                                    <input class="form-control" type="date" id="publicacion" name="publicacion" value="" min="2020-01-01" max="2020-12-31">
+                                </div>>
+
+                                <div class="caja">
+                                    <input type="hidden" name="resultadost" id="resultadost" >
+                                    <label>Resultados</label><br>
+                                    <input class="form-control" type="date" id="resultados" name="resultados" value="" min="2020-01-01" max="2020-12-31">
+                                </div>
+                            </div>
+                        </center>
+                        <br><br>
+
+                        <div class="registro">
+
+                            <button class="btn btn-primary pull-right" type="submit" name="buscar_convocatoria">Buscar</button>
+                            <button class="btn btn-primary pull-right" type="submit" name="agregar_convocatoria" form="data2">Agregar</button>
+                            <button class="btn btn-primary pull-right" type="submit" name="modificar_convocatoria" form="data6">Modificar</button>
+
+
+
+                        </div>
+                        <br><br>
+
+                        <table  border="1"  id="tabla_usuarios" class="display">  
+                            <thead>
+                                <tr>
+                                    <th>Nombre</th>
+                                    <th>Publicacion</th>
+                                    <th>Inicio Registro</th>
+                                    <th>Fin Registro</th>
+                                    <th>Inicio Valoracion</th>
+                                    <th>Fin Valoracion</th> 
+                                    <th>Inicio Dictaminación</th>
+                                    <th>Fin Dictaminación</th>
+                                    <th>Resultados</th>
+                                    <th>Estatus</th>
+                                </tr>
+                            </thead>
+                            <%
+                                String elegir1 = "0";
+                                String nombre_entidad = "";
+                                String nombre_plantel = "";
+                                String tipo_categoria = "";
+                                String nombre_jornada = "";
+
+                                elegir1 = String.valueOf(request.getAttribute("opc"));
+
+                                if (elegir1.equals("1")) {
+                                    ResultSet rs2 = null;
+                                    if (request.getAttribute("consulta").equals("0")) {
+                                        //rs2 = cn.mostrar_usuarios("SELECT * FROM convocatoria WHERE estatus='temporal'");
+                                        rs2 = cn.mostrar_usuarios("SELECT a.*,b.programa FROM convocatoria a join catProgramas b on a.idPrograma=b.id;");
+                                    }
+
+                                    if (request.getAttribute("consulta").equals("1")) {
+                                        rs2 = cn.mostrar_usuarios("SELECT a.*,b.programa FROM convocatoria a join catProgramas b on a.idPrograma=b.id WHERE resultados='" + request.getAttribute("res") + "'");
+                                    }
+
+                                    if (request.getAttribute("consulta").equals("2")) {
+                                        rs2 = cn.mostrar_usuarios("SELECT a.*,b.programa FROM convocatoria a join catProgramas b on a.idPrograma=b.id WHERE publicacion='" + request.getAttribute("pub") + "'");
+                                    }
+
+                                    if (request.getAttribute("consulta").equals("3")) {
+                                        rs2 = cn.mostrar_usuarios("SELECT a.*,b.programa FROM convocatoria a join catProgramas b on a.idPrograma=b.id WHERE publicacion='" + request.getAttribute("pub") + "' && resultados='" + request.getAttribute("res") + "'");
+                                    }
+
+                                    if (request.getAttribute("consulta").equals("4")) {
+                                        rs2 = cn.mostrar_usuarios("SELECT a.*,b.programa FROM convocatoria a join catProgramas b on a.idPrograma=b.id WHERE estatus='" + request.getAttribute("est") + "'");
+                                    }
+
+                                    if (request.getAttribute("consulta").equals("5")) {
+                                        rs2 = cn.mostrar_usuarios("SELECT a.*,b.programa FROM convocatoria a join catProgramas b on a.idPrograma=b.id WHERE estatus='" + request.getAttribute("est") + "' && resultados='" + request.getAttribute("res") + "'");
+                                    }
+
+                                    if (request.getAttribute("consulta").equals("6")) {
+                                        rs2 = cn.mostrar_usuarios("SELECT a.*,b.programa FROM convocatoria a join catProgramas b on a.idPrograma=b.id WHERE estatus='" + request.getAttribute("est") + "' && publicacion='" + request.getAttribute("pub") + "'");
+                                    }
+
+                                    if (request.getAttribute("consulta").equals("7")) {
+                                        rs2 = cn.mostrar_usuarios("SELECT a.*,b.programa FROM convocatoria a join catProgramas b on a.idPrograma=b.id WHERE estatus='" + request.getAttribute("est") + "' && publicacion='" + request.getAttribute("pub") + "' && resultados='" + request.getAttribute("res") + "'");
+                                    }
+
+                                    if (request.getAttribute("consulta").equals("8")) {
+                                        rs2 = cn.mostrar_usuarios("SELECT a.*,b.programa FROM convocatoria a join catProgramas b on a.idPrograma=b.id WHERE idPlantel='" + request.getAttribute("pla") + "'");
+                                    }
+
+                                    if (request.getAttribute("consulta").equals("9")) {
+                                        rs2 = cn.mostrar_usuarios("SELECT a.*,b.programa FROM convocatoria a join catProgramas b on a.idPrograma=b.id WHERE idPlantel='" + request.getAttribute("pla") + "' && resultados='" + request.getAttribute("res") + "'");
+                                    }
+
+                                    if (request.getAttribute("consulta").equals("10")) {
+                                        rs2 = cn.mostrar_usuarios("SELECT a.*,b.programa FROM convocatoria a join catProgramas b on a.idPrograma=b.id WHERE idPlantel='" + request.getAttribute("pla") + "' && publicacion='" + request.getAttribute("pub") + "'");
+                                    }
+
+                                    if (request.getAttribute("consulta").equals("11")) {
+                                        rs2 = cn.mostrar_usuarios("SELECT a.*,b.programa FROM convocatoria a join catProgramas b on a.idPrograma=b.id WHERE idPlantel='" + request.getAttribute("pla") + "' && publicacion='" + request.getAttribute("pub") + "' && resultados='" + request.getAttribute("res") + "'");
+                                    }
+
+                                    if (request.getAttribute("consulta").equals("12")) {
+                                        rs2 = cn.mostrar_usuarios("SELECT a.*,b.programa FROM convocatoria a join catProgramas b on a.idPrograma=b.id WHERE idPlantel='" + request.getAttribute("pla") + "' && estatus='" + request.getAttribute("est") + "'");
+                                    }
+
+                                    if (request.getAttribute("consulta").equals("13")) {
+                                        rs2 = cn.mostrar_usuarios("SELECT a.*,b.programa FROM convocatoria a join catProgramas b on a.idPrograma=b.id WHERE idPlantel='" + request.getAttribute("pla") + "' && estatus='" + request.getAttribute("est") + "' && resultados='" + request.getAttribute("res") + "'");
+                                    }
+
+                                    if (request.getAttribute("consulta").equals("14")) {
+                                        rs2 = cn.mostrar_usuarios("SELECT a.*,b.programa FROM convocatoria a join catProgramas b on a.idPrograma=b.id WHERE idPlantel='" + request.getAttribute("pla") + "' && estatus='" + request.getAttribute("est") + "' && publicacion='" + request.getAttribute("pub") + "'");
+                                    }
+
+                                    if (request.getAttribute("consulta").equals("15")) {
+                                        rs2 = cn.mostrar_usuarios("SELECT a.*,b.programa FROM convocatoria a join catProgramas b on a.idPrograma=b.id WHERE idPlantel='" + request.getAttribute("pla") + "' && estatus='" + request.getAttribute("est") + "' && publicacion='" + request.getAttribute("pub") + "' && resultados='" + request.getAttribute("res") + "'");
+                                    }
+                                    while (rs2.next()) {
+                            %>
+                            <tr>
+                                <td align="center">
+                                    <div class="datos_tabla"> 
+                                        <% if (rs2.getString("programa") == null) {
+                                                out.print("");
+                                            } else {
+                                                out.print(rs2.getString("programa"));
+                                            }
+                                        %>
+                                    </div>
+                                </td>
+                                <td align="center">
+                                    <div class="datos_tabla"> 
+                                        <% if (rs2.getString("publicacion") == null) {
+                                                out.print("");
+                                            } else {
+                                                out.print(rs2.getString("publicacion"));
+                                            }
+                                        %>
+                                    </div>
+                                </td>
+                                <td align="center">
+                                    <div class="datos_tabla"> 
+                                        <% if (rs2.getString("inicioRegistro") == null) {
+                                                out.print("");
+                                            } else {
+                                                out.print(rs2.getString("inicioRegistro"));
+                                            }
+                                        %>
+                                    </div>
+                                </td>
+                                <td align="center">
+                                    <div class="datos_tabla"> 
+                                        <% if (rs2.getString("finRegistro") == null) {
+                                                out.print("");
+                                            } else {
+                                                out.print(rs2.getString("finRegistro"));
+                                            }
+                                        %>
+                                    </div>
+                                </td>
+                                <td align="center">
+                                    <div class="datos_tabla"> 
+                                        <% if (rs2.getString("inicioValoracion") == null) {
+                                                out.print("");
+                                            } else {
+                                                out.print(rs2.getString("inicioValoracion"));
+                                            }
+                                        %>
+                                    </div>
+                                </td>
+                                <td align="center">
+                                    <div class="datos_tabla"> 
+                                        <% if (rs2.getString("finValoracion") == null) {
+                                                out.print("");
+                                            } else {
+                                                out.print(rs2.getString("finValoracion"));
+                                            }
+                                        %>
+                                    </div>
+                                </td>
+
+                                <td align="center">
+                                    <div class="datos_tabla"> 
+                                        <% if (rs2.getString("inicioDictaminacion") == null) {
+                                                out.print("");
+                                            } else {
+                                                out.print(rs2.getString("inicioDictaminacion"));
+                                            }
+                                        %>
+                                    </div>
+                                </td>
+
+                                <td align="center">
+                                    <div class="datos_tabla"> 
+                                        <% if (rs2.getString("finDictaminacion") == null) {
+                                                out.print("");
+                                            } else {
+                                                out.print(rs2.getString("finDictaminacion"));
+                                            }
+                                        %>
+                                    </div>
+                                </td>
+
+                                <td align="center">
+                                    <div class="datos_tabla"> 
+                                        <% if (rs2.getString("resultados") == null) {
+                                                out.print("");
+                                            } else {
+                                                out.print(rs2.getString("resultados"));
+                                                //out.print(idUsuario);
+                                                //out.print(rfc);
+                                            }
+                                        %>
+                                    </div>
+                                </td>
+
+                                <td align="center">
+                                    <div class="datos_tabla"> 
+                                        <% if (rs2.getString("estatus") == null) {
+                                                out.print("");
+                                            } else {
+                                                out.print(rs2.getString("estatus"));
+                                            }
+                                        %>
+
+                                    </div>
+                                </td>
+                            </tr>
+                            <%
+                                    }
+                                }//fin if elegir
+                                else {
+                                    response.sendRedirect("login.jsp");
+                                }
+                            %>
+                        </table><br><br>
+
+                        <%}//FIN ADMINISTRADOR NACIONAL
+                        else if (request.getAttribute("control_combobox").equals("true") && request.getAttribute("nacional").equals("2")) {//ADMINISTRADOR ESTATAL
+                        %>
+                        <center>
+                            <div class="registro">
+                                <div class="caja">
+
+
+                                    <input type="hidden" name="f_opc" id="i_opc">
+                                    <input type="hidden" name="campoentidad" id="campoentidad" >
+                                    <label>Entidad</label><br>
+
+                                    <%
+                                        ResultSet rs = cn.mostrar("Select id, entidad from catentidades WHERE id='" + request.getAttribute("dato_ent") + "'");
+                                    %>
+
+                                    <select class="form-control" name="entidad" id="entidad" onchange="plantel()" disabled="true">
+
+                                        <%
+                                            while (rs.next()) {
+                                        %>
+                                        <option value="<%=rs.getString("id")%>"><%=rs.getString("entidad")%></option>
+
+                                        <%//              regresa del combobox         muestra en el combo box
+                                            }
+                                        %>                                              
+                                    </select>           
+                                    <div id="n8"></div>
+                                </div>
+
+                                <div class="caja">   
+                                    <label>Plantel</label><br>
+                                    <%
+                                        ResultSet rs10 = cn.mostrar("Select * from catplanteles WHERE idEntidad='" + request.getAttribute("dato_ent") + "'");
+                                    %>
+                                    <select class="form-control" name="n_plantel" id="i_plantel">
+                                        <option value="0">Escoge una opcion</option>
+                                        <%
+                                            while (rs10.next()) {
+                                        %>                 
+                                        <option value="<%=rs10.getString("id")%>"><%=rs10.getString("plantel")%></option>
+                                        <%
+                                            }
+                                        %>
+                                    </select>
+
+                                    </td></div>
+
+                                <div class="caja"> 
+                                    <label>Estatus</label><br>
+                                    <select class="form-control" name="estatus" id="estatus" >
+                                        <option value="0">Escoge una opcion</option>
+                                        <option value="temporal">Temporal</option>
+                                        <option value="definitiva">Definitiva</option>
+                                    </select>
+                                    </td></div>
+
+                                <div class="caja">                                          
+                                    <input type="hidden" name="publicaciont" id="publicaciont" >
+                                    <label>Publicación</label><br>
+                                    <input class="form-control" type="date" id="publicacion" name="publicacion" value="" min="2020-01-01" max="2020-12-31">
+                                </div>>
+
+                                <div class="caja">
+                                    <input type="hidden" name="resultadost" id="resultadost" >
+                                    <label>Resultados</label><br>
+                                    <input class="form-control" type="date" id="resultados" name="resultados" value="" min="2020-01-01" max="2020-12-31">
+                                </div>
+                            </div>
+                        </center>
+                        <br><br>
+
+                        <div class="registro">
+
+                            <button class="btn btn-primary pull-right" type="submit" name="buscar_convocatoria">Buscar</button>
+                            <button class="btn btn-primary pull-right" type="submit" name="agregar_convocatoria" form="data2">Agregar</button>
+                            <button class="btn btn-primary pull-right" type="submit" name="modificar_convocatoria" form="data6">Modificar</button>
+
+
+
+                        </div>
+                        <br><br>
+
+                        <table  border="1"  id="tabla_usuarios" class="display">  
+                            <thead>
+                                <tr>
+                                    <th>Nombre</th>
+                                    <th>Publicacion</th>
+                                    <th>Inicio Registro</th>
+                                    <th>Fin Registro</th>
+                                    <th>Inicio Valoracion</th>
+                                    <th>Fin Valoracion</th> 
+                                    <th>Inicio Dictaminación</th>
+                                    <th>Fin Dictaminación</th>
+                                    <th>Resultados</th>
+                                    <th>Estatus</th>
+                                </tr>
+                            </thead>
+                            <%
+                                String elegir1 = "0";
+                                String nombre_entidad = "";
+                                String nombre_plantel = "";
+                                String tipo_categoria = "";
+                                String nombre_jornada = "";
+
+                                elegir1 = String.valueOf(request.getAttribute("opc"));
+
+                                if (elegir1.equals("1")) {
+                                    ResultSet rs2 = null;
+                                    if (request.getAttribute("consulta").equals("0")) {
+
+                                        rs2 = cn.mostrar_usuarios("SELECT a.*,b.programa FROM convocatoria a join catProgramas b on a.idPrograma=b.id;");
+                                        //rs2 = cn.mostrar_usuarios("SELECT a.* FROM convocatoria a join catplanteles b on a.idPlantel=b.id WHERE b.idEntidad=15");
+                                    }
+
+                                    if (request.getAttribute("consulta").equals("1")) {
+                                        rs2 = cn.mostrar_usuarios("SELECT a.*,b.programa FROM convocatoria a join catProgramas b on a.idPrograma=b.id WHERE resultados='" + request.getAttribute("res") + "'");
+                                    }
+
+                                    if (request.getAttribute("consulta").equals("2")) {
+                                        rs2 = cn.mostrar_usuarios("SELECT a.*,b.programa FROM convocatoria a join catProgramas b on a.idPrograma=b.id WHERE publicacion='" + request.getAttribute("pub") + "'");
+                                    }
+
+                                    if (request.getAttribute("consulta").equals("3")) {
+                                        rs2 = cn.mostrar_usuarios("SELECT a.*,b.programa FROM convocatoria a join catProgramas b on a.idPrograma=b.id WHERE publicacion='" + request.getAttribute("pub") + "' && resultados='" + request.getAttribute("res") + "'");
+                                    }
+
+                                    if (request.getAttribute("consulta").equals("4")) {
+                                        rs2 = cn.mostrar_usuarios("SELECT a.*,b.programa FROM convocatoria a join catProgramas b on a.idPrograma=b.id WHERE estatus='" + request.getAttribute("est") + "'");
+                                    }
+
+                                    if (request.getAttribute("consulta").equals("5")) {
+                                        rs2 = cn.mostrar_usuarios("SELECT a.*,b.programa FROM convocatoria a join catProgramas b on a.idPrograma=b.id WHERE estatus='" + request.getAttribute("est") + "' && resultados='" + request.getAttribute("res") + "'");
+                                    }
+
+                                    if (request.getAttribute("consulta").equals("6")) {
+                                        rs2 = cn.mostrar_usuarios("SELECT a.*,b.programa FROM convocatoria a join catProgramas b on a.idPrograma=b.id WHERE estatus='" + request.getAttribute("est") + "' && publicacion='" + request.getAttribute("pub") + "'");
+                                    }
+
+                                    if (request.getAttribute("consulta").equals("7")) {
+                                        rs2 = cn.mostrar_usuarios("SELECT a.*,b.programa FROM convocatoria a join catProgramas b on a.idPrograma=b.id WHERE estatus='" + request.getAttribute("est") + "' && publicacion='" + request.getAttribute("pub") + "' && resultados='" + request.getAttribute("res") + "'");
+                                    }
+
+                                    if (request.getAttribute("consulta").equals("8")) {
+                                        rs2 = cn.mostrar_usuarios("SELECT a.*,b.programa FROM convocatoria a join catProgramas b on a.idPrograma=b.id WHERE idPlantel='" + request.getAttribute("pla") + "'");
+                                    }
+
+                                    if (request.getAttribute("consulta").equals("9")) {
+                                        rs2 = cn.mostrar_usuarios("SELECT a.*,b.programa FROM convocatoria a join catProgramas b on a.idPrograma=b.id WHERE idPlantel='" + request.getAttribute("pla") + "' && resultados='" + request.getAttribute("res") + "'");
+                                    }
+
+                                    if (request.getAttribute("consulta").equals("10")) {
+                                        rs2 = cn.mostrar_usuarios("SELECT a.*,b.programa FROM convocatoria a join catProgramas b on a.idPrograma=b.id WHERE idPlantel='" + request.getAttribute("pla") + "' && publicacion='" + request.getAttribute("pub") + "'");
+                                    }
+
+                                    if (request.getAttribute("consulta").equals("11")) {
+                                        rs2 = cn.mostrar_usuarios("SELECT a.*,b.programa FROM convocatoria a join catProgramas b on a.idPrograma=b.id WHERE idPlantel='" + request.getAttribute("pla") + "' && publicacion='" + request.getAttribute("pub") + "' && resultados='" + request.getAttribute("res") + "'");
+                                    }
+
+                                    if (request.getAttribute("consulta").equals("12")) {
+                                        rs2 = cn.mostrar_usuarios("SELECT a.*,b.programa FROM convocatoria a join catProgramas b on a.idPrograma=b.id WHERE idPlantel='" + request.getAttribute("pla") + "' && estatus='" + request.getAttribute("est") + "'");
+                                    }
+
+                                    if (request.getAttribute("consulta").equals("13")) {
+                                        rs2 = cn.mostrar_usuarios("SELECT a.*,b.programa FROM convocatoria a join catProgramas b on a.idPrograma=b.id WHERE idPlantel='" + request.getAttribute("pla") + "' && estatus='" + request.getAttribute("est") + "' && resultados='" + request.getAttribute("res") + "'");
+                                    }
+
+                                    if (request.getAttribute("consulta").equals("14")) {
+                                        rs2 = cn.mostrar_usuarios("SELECT a.*,b.programa FROM convocatoria a join catProgramas b on a.idPrograma=b.id WHERE idPlantel='" + request.getAttribute("pla") + "' && estatus='" + request.getAttribute("est") + "' && publicacion='" + request.getAttribute("pub") + "'");
+                                    }
+
+                                    if (request.getAttribute("consulta").equals("15")) {
+                                        rs2 = cn.mostrar_usuarios("SELECT a.*,b.programa FROM convocatoria a join catProgramas b on a.idPrograma=b.id WHERE idPlantel='" + request.getAttribute("pla") + "' && estatus='" + request.getAttribute("est") + "' && publicacion='" + request.getAttribute("pub") + "' && resultados='" + request.getAttribute("res") + "'");
+                                    }
+                                    while (rs2.next()) {
+                            %>
+                            <tr>
+                                <td align="center">
+                                    <div class="datos_tabla"> 
+                                        <% if (rs2.getString("programa") == null) {
+                                                out.print("");
+                                            } else {
+                                                out.print(rs2.getString("programa"));
+                                            }
+                                        %>
+                                    </div>
+                                </td>
+                                <td align="center">
+                                    <div class="datos_tabla"> 
+                                        <% if (rs2.getString("publicacion") == null) {
+                                                out.print("");
+                                            } else {
+                                                out.print(rs2.getString("publicacion"));
+                                            }
+                                        %>
+                                    </div>
+                                </td>
+                                <td align="center">
+                                    <div class="datos_tabla"> 
+                                        <% if (rs2.getString("inicioRegistro") == null) {
+                                                out.print("");
+                                            } else {
+                                                out.print(rs2.getString("inicioRegistro"));
+                                            }
+                                        %>
+                                    </div>
+                                </td>
+                                <td align="center">
+                                    <div class="datos_tabla"> 
+                                        <% if (rs2.getString("finRegistro") == null) {
+                                                out.print("");
+                                            } else {
+                                                out.print(rs2.getString("finRegistro"));
+                                            }
+                                        %>
+                                    </div>
+                                </td>
+                                <td align="center">
+                                    <div class="datos_tabla"> 
+                                        <% if (rs2.getString("inicioValoracion") == null) {
+                                                out.print("");
+                                            } else {
+                                                out.print(rs2.getString("inicioValoracion"));
+                                            }
+                                        %>
+                                    </div>
+                                </td>
+                                <td align="center">
+                                    <div class="datos_tabla"> 
+                                        <% if (rs2.getString("finValoracion") == null) {
+                                                out.print("");
+                                            } else {
+                                                out.print(rs2.getString("finValoracion"));
+                                            }
+                                        %>
+                                    </div>
+                                </td>
+
+                                <td align="center">
+                                    <div class="datos_tabla"> 
+                                        <% if (rs2.getString("inicioDictaminacion") == null) {
+                                                out.print("");
+                                            } else {
+                                                out.print(rs2.getString("inicioDictaminacion"));
+                                            }
+                                        %>
+                                    </div>
+                                </td>
+
+                                <td align="center">
+                                    <div class="datos_tabla"> 
+                                        <% if (rs2.getString("finDictaminacion") == null) {
+                                                out.print("");
+                                            } else {
+                                                out.print(rs2.getString("finDictaminacion"));
+                                            }
+                                        %>
+                                    </div>
+                                </td>
+
+                                <td align="center">
+                                    <div class="datos_tabla"> 
+                                        <% if (rs2.getString("resultados") == null) {
+                                                out.print("");
+                                            } else {
+                                                out.print(rs2.getString("resultados"));
+                                                //out.print(idUsuario);
+                                                //out.print(rfc);
+                                            }
+                                        %>
+                                    </div>
+                                </td>
+
+                                <td align="center">
+                                    <div class="datos_tabla"> 
+                                        <% if (rs2.getString("estatus") == null) {
+                                                out.print("");
+                                            } else {
+                                                out.print(rs2.getString("estatus"));
+                                            }
+                                        %>
+
+                                    </div>
+                                </td>
+                            </tr>
+                            <%
+                                    }
+                                }//fin if elegir
+                                else {
+                                    response.sendRedirect("login.jsp");
+                                }
+                            %>
+                        </table><br><br>
+                        <%}//FIN ADMINISTRADOR ESTATAL
+                        else if (request.getAttribute("control_combobox").equals("true") && request.getAttribute("nacional").equals("3")) {//ADMINISTRADOR PLANTEL   
+                        %>
+                        <center>
+                            <div class="registro">
+                                <div class="caja">
+
+
+                                    <input type="hidden" name="f_opc" id="i_opc">
+                                    <input type="hidden" name="campoentidad" id="campoentidad" >
+                                    <label>Entidad</label><br>
+
+                                    <%
+                                        ResultSet rs = cn.mostrar("Select id, entidad from catentidades WHERE id='" + request.getAttribute("dato_ent") + "'");
+                                    %>
+
+                                    <select class="form-control" name="entidad" id="entidad" onchange="plantel()" disabled="true">
+
+                                        <%
+                                            while (rs.next()) {
+                                        %>
+                                        <option value="<%=rs.getString("id")%>"><%=rs.getString("entidad")%></option>
+
+                                        <%//              regresa del combobox         muestra en el combo box
+                                            }
+                                        %>                                              
+                                    </select>           
+                                    <div id="n8"></div>
+                                </div>
+
+                                <div class="caja">   
+                                    <label>Plantel</label><br>
+                                    <%
+                                        ResultSet rs10 = cn.mostrar("Select * from catplanteles WHERE idEntidad='" + request.getAttribute("dato_ent") + "'");
+                                    %>
+                                    <select class="form-control" name="n_plantel" id="i_plantel">
+                                        <option value="0">Escoge una opcion</option>
+                                        <%
+                                            while (rs10.next()) {
+                                        %>                 
+                                        <option value="<%=rs10.getString("id")%>"><%=rs10.getString("plantel")%></option>
+                                        <%
+                                            }
+                                        %>
+                                    </select>
+
+                                    </td></div>
+
+                                <div class="caja"> 
+                                    <label>Estatus</label><br>
+                                    <select class="form-control" name="estatus" id="estatus" >
+                                        <option value="0">Escoge una opcion</option>
+                                        <option value="temporal">Temporal</option>
+                                        <option value="definitiva">Definitiva</option>
+                                    </select>
+                                    </td></div>
+
+                                <div class="caja">                                          
+                                    <input type="hidden" name="publicaciont" id="publicaciont" >
+                                    <label>Publicación</label><br>
+                                    <input class="form-control" type="date" id="publicacion" name="publicacion" value="" min="2020-01-01" max="2020-12-31">
+                                </div>>
+
+                                <div class="caja">
+                                    <input type="hidden" name="resultadost" id="resultadost" >
+                                    <label>Resultados</label><br>
+                                    <input class="form-control" type="date" id="resultados" name="resultados" value="" min="2020-01-01" max="2020-12-31">
+                                </div>
+                            </div>
+                        </center>
+                        <br><br>
+
+                        <div class="registro">
+
+                            <button class="btn btn-primary pull-right" type="submit" name="buscar_convocatoria">Buscar</button>
+                            <button class="btn btn-primary pull-right" type="submit" name="agregar_convocatoria" form="data2">Agregar</button>
+                            <button class="btn btn-primary pull-right" type="submit" name="modificar_convocatoria" form="data6">Modificar</button>
+
+
+
+                        </div>
+                        <br><br>
+
+                        <table  border="1"  id="tabla_usuarios" class="display">  
+                            <thead>
+                                <tr>
+                                    <th>Nombre</th>
+                                    <th>Publicacion</th>
+                                    <th>Inicio Registro</th>
+                                    <th>Fin Registro</th>
+                                    <th>Inicio Valoracion</th>
+                                    <th>Fin Valoracion</th> 
+                                    <th>Inicio Dictaminación</th>
+                                    <th>Fin Dictaminación</th>
+                                    <th>Resultados</th>
+                                    <th>Estatus</th>
+                                </tr>
+                            </thead>
+                            <%
+                                String elegir1 = "0";
+                                String nombre_entidad = "";
+                                String nombre_plantel = "";
+                                String tipo_categoria = "";
+                                String nombre_jornada = "";
+
+                                elegir1 = String.valueOf(request.getAttribute("opc"));
+
+                                if (elegir1.equals("1")) {
+                                    ResultSet rs2 = null;
+                                    if (request.getAttribute("consulta").equals("0")) {
+
+                                        rs2 = cn.mostrar_usuarios("SELECT a.*,b.programa FROM convocatoria a join catProgramas b on a.idPrograma=b.id;");
+                                        //rs2 = cn.mostrar_usuarios("SELECT a.* FROM convocatoria a join catplanteles b on a.idPlantel=b.id WHERE b.idEntidad=15");
+                                    }
+
+                                    if (request.getAttribute("consulta").equals("1")) {
+                                        rs2 = cn.mostrar_usuarios("SELECT a.*,b.programa FROM convocatoria a join catProgramas b on a.idPrograma=b.id WHERE resultados='" + request.getAttribute("res") + "'");
+                                    }
+
+                                    if (request.getAttribute("consulta").equals("2")) {
+                                        rs2 = cn.mostrar_usuarios("SELECT a.*,b.programa FROM convocatoria a join catProgramas b on a.idPrograma=b.id WHERE publicacion='" + request.getAttribute("pub") + "'");
+                                    }
+
+                                    if (request.getAttribute("consulta").equals("3")) {
+                                        rs2 = cn.mostrar_usuarios("SELECT a.*,b.programa FROM convocatoria a join catProgramas b on a.idPrograma=b.id WHERE publicacion='" + request.getAttribute("pub") + "' && resultados='" + request.getAttribute("res") + "'");
+                                    }
+
+                                    if (request.getAttribute("consulta").equals("4")) {
+                                        rs2 = cn.mostrar_usuarios("SELECT a.*,b.programa FROM convocatoria a join catProgramas b on a.idPrograma=b.id WHERE estatus='" + request.getAttribute("est") + "'");
+                                    }
+
+                                    if (request.getAttribute("consulta").equals("5")) {
+                                        rs2 = cn.mostrar_usuarios("SELECT a.*,b.programa FROM convocatoria a join catProgramas b on a.idPrograma=b.id WHERE estatus='" + request.getAttribute("est") + "' && resultados='" + request.getAttribute("res") + "'");
+                                    }
+
+                                    if (request.getAttribute("consulta").equals("6")) {
+                                        rs2 = cn.mostrar_usuarios("SELECT a.*,b.programa FROM convocatoria a join catProgramas b on a.idPrograma=b.id WHERE estatus='" + request.getAttribute("est") + "' && publicacion='" + request.getAttribute("pub") + "'");
+                                    }
+
+                                    if (request.getAttribute("consulta").equals("7")) {
+                                        rs2 = cn.mostrar_usuarios("SELECT a.*,b.programa FROM convocatoria a join catProgramas b on a.idPrograma=b.id WHERE estatus='" + request.getAttribute("est") + "' && publicacion='" + request.getAttribute("pub") + "' && resultados='" + request.getAttribute("res") + "'");
+                                    }
+
+                                    if (request.getAttribute("consulta").equals("8")) {
+                                        rs2 = cn.mostrar_usuarios("SELECT a.*,b.programa FROM convocatoria a join catProgramas b on a.idPrograma=b.id WHERE idPlantel='" + request.getAttribute("pla") + "'");
+                                    }
+
+                                    if (request.getAttribute("consulta").equals("9")) {
+                                        rs2 = cn.mostrar_usuarios("SELECT a.*,b.programa FROM convocatoria a join catProgramas b on a.idPrograma=b.id WHERE idPlantel='" + request.getAttribute("pla") + "' && resultados='" + request.getAttribute("res") + "'");
+                                    }
+
+                                    if (request.getAttribute("consulta").equals("10")) {
+                                        rs2 = cn.mostrar_usuarios("SELECT a.*,b.programa FROM convocatoria a join catProgramas b on a.idPrograma=b.id WHERE idPlantel='" + request.getAttribute("pla") + "' && publicacion='" + request.getAttribute("pub") + "'");
+                                    }
+
+                                    if (request.getAttribute("consulta").equals("11")) {
+                                        rs2 = cn.mostrar_usuarios("SELECT a.*,b.programa FROM convocatoria a join catProgramas b on a.idPrograma=b.id WHERE idPlantel='" + request.getAttribute("pla") + "' && publicacion='" + request.getAttribute("pub") + "' && resultados='" + request.getAttribute("res") + "'");
+                                    }
+
+                                    if (request.getAttribute("consulta").equals("12")) {
+                                        rs2 = cn.mostrar_usuarios("SELECT a.*,b.programa FROM convocatoria a join catProgramas b on a.idPrograma=b.id WHERE idPlantel='" + request.getAttribute("pla") + "' && estatus='" + request.getAttribute("est") + "'");
+                                    }
+
+                                    if (request.getAttribute("consulta").equals("13")) {
+                                        rs2 = cn.mostrar_usuarios("SELECT a.*,b.programa FROM convocatoria a join catProgramas b on a.idPrograma=b.id WHERE idPlantel='" + request.getAttribute("pla") + "' && estatus='" + request.getAttribute("est") + "' && resultados='" + request.getAttribute("res") + "'");
+                                    }
+
+                                    if (request.getAttribute("consulta").equals("14")) {
+                                        rs2 = cn.mostrar_usuarios("SELECT a.*,b.programa FROM convocatoria a join catProgramas b on a.idPrograma=b.id WHERE idPlantel='" + request.getAttribute("pla") + "' && estatus='" + request.getAttribute("est") + "' && publicacion='" + request.getAttribute("pub") + "'");
+                                    }
+
+                                    if (request.getAttribute("consulta").equals("15")) {
+                                        rs2 = cn.mostrar_usuarios("SELECT a.*,b.programa FROM convocatoria a join catProgramas b on a.idPrograma=b.id WHERE idPlantel='" + request.getAttribute("pla") + "' && estatus='" + request.getAttribute("est") + "' && publicacion='" + request.getAttribute("pub") + "' && resultados='" + request.getAttribute("res") + "'");
+                                    }
+                                    while (rs2.next()) {
+                            %>
+                            <tr>
+                                <td align="center">
+                                    <div class="datos_tabla"> 
+                                        <% if (rs2.getString("programa") == null) {
+                                                out.print("");
+                                            } else {
+                                                out.print(rs2.getString("programa"));
+                                            }
+                                        %>
+                                    </div>
+                                </td>
+                                <td align="center">
+                                    <div class="datos_tabla"> 
+                                        <% if (rs2.getString("publicacion") == null) {
+                                                out.print("");
+                                            } else {
+                                                out.print(rs2.getString("publicacion"));
+                                            }
+                                        %>
+                                    </div>
+                                </td>
+                                <td align="center">
+                                    <div class="datos_tabla"> 
+                                        <% if (rs2.getString("inicioRegistro") == null) {
+                                                out.print("");
+                                            } else {
+                                                out.print(rs2.getString("inicioRegistro"));
+                                            }
+                                        %>
+                                    </div>
+                                </td>
+                                <td align="center">
+                                    <div class="datos_tabla"> 
+                                        <% if (rs2.getString("finRegistro") == null) {
+                                                out.print("");
+                                            } else {
+                                                out.print(rs2.getString("finRegistro"));
+                                            }
+                                        %>
+                                    </div>
+                                </td>
+                                <td align="center">
+                                    <div class="datos_tabla"> 
+                                        <% if (rs2.getString("inicioValoracion") == null) {
+                                                out.print("");
+                                            } else {
+                                                out.print(rs2.getString("inicioValoracion"));
+                                            }
+                                        %>
+                                    </div>
+                                </td>
+                                <td align="center">
+                                    <div class="datos_tabla"> 
+                                        <% if (rs2.getString("finValoracion") == null) {
+                                                out.print("");
+                                            } else {
+                                                out.print(rs2.getString("finValoracion"));
+                                            }
+                                        %>
+                                    </div>
+                                </td>
+
+                                <td align="center">
+                                    <div class="datos_tabla"> 
+                                        <% if (rs2.getString("inicioDictaminacion") == null) {
+                                                out.print("");
+                                            } else {
+                                                out.print(rs2.getString("inicioDictaminacion"));
+                                            }
+                                        %>
+                                    </div>
+                                </td>
+
+                                <td align="center">
+                                    <div class="datos_tabla"> 
+                                        <% if (rs2.getString("finDictaminacion") == null) {
+                                                out.print("");
+                                            } else {
+                                                out.print(rs2.getString("finDictaminacion"));
+                                            }
+                                        %>
+                                    </div>
+                                </td>
+
+                                <td align="center">
+                                    <div class="datos_tabla"> 
+                                        <% if (rs2.getString("resultados") == null) {
+                                                out.print("");
+                                            } else {
+                                                out.print(rs2.getString("resultados"));
+                                                //out.print(idUsuario);
+                                                //out.print(rfc);
+                                            }
+                                        %>
+                                    </div>
+                                </td>
+
+                                <td align="center">
+                                    <div class="datos_tabla"> 
+                                        <% if (rs2.getString("estatus") == null) {
+                                                out.print("");
+                                            } else {
+                                                out.print(rs2.getString("estatus"));
+                                            }
+                                        %>
+
+                                    </div>
+                                </td>
+                            </tr>
+                            <%
+                                    }
+                                }//fin if elegir
+                                else {
+                                    response.sendRedirect("login.jsp");
+                                }
+                            %>
+                        </table><br><br>
+
+                        <%
+                            }//FIN ADMINISTRADOR PLANTEL
+                        %>
+
                         <%
                             session.setAttribute("idUsuario", idUsuario);
                             session.setAttribute("rfc", rfc);
                         %>
 
                         <input type="hidden" name="control_combobox" id="control_combobox" value="<%=request.getAttribute("control_combobox")%>">
+                        <input type="hidden" name="nacional" id="nacional" value="<%=request.getAttribute("nacional")%>"> <%--AGREGAR--%>
                         <input type="hidden" name="permiso1" id="permiso1" value="<%=request.getAttribute("per1")%>">
                         <input type="hidden" name="permiso2" id="permiso2" value="<%=request.getAttribute("per2")%>">
                         <input type="hidden" name="permiso4" id="permiso4" value="<%=request.getAttribute("per4")%>">
@@ -526,6 +1405,7 @@
                     session.setAttribute("rfc", rfc);
                 %>
                 <input type="hidden" name="control_combobox" id="control_combobox" value="<%=request.getAttribute("control_combobox")%>">
+                <input type="hidden" name="nacional" id="nacional" value="<%=request.getAttribute("nacional")%>"> <%--AGREGAR--%>
                 <input type="hidden" name="permiso1" id="permiso1" value="<%=request.getAttribute("per1")%>">
                 <input type="hidden" name="permiso2" id="permiso2" value="<%=request.getAttribute("per2")%>">
                 <input type="hidden" name="permiso4" id="permiso4" value="<%=request.getAttribute("per4")%>">
@@ -541,6 +1421,7 @@
                     session.setAttribute("rfc", rfc);
                 %>
                 <input type="hidden" name="control_combobox" id="control_combobox" value="<%=request.getAttribute("control_combobox")%>">
+                <input type="hidden" name="nacional" id="nacional" value="<%=request.getAttribute("nacional")%>"> <%--AGREGAR--%>
                 <input type="hidden" name="permiso1" id="permiso1" value="<%=request.getAttribute("per1")%>">
                 <input type="hidden" name="permiso2" id="permiso2" value="<%=request.getAttribute("per2")%>">
                 <input type="hidden" name="permiso4" id="permiso4" value="<%=request.getAttribute("per4")%>">

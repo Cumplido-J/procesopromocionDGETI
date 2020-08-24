@@ -53,7 +53,7 @@
                 $("#i_opc").val("1");
                 $.post("combo1.jsp", $("#data").serialize(), function (data) {
                     $("#i_plantel").html(data);
-                    $("#convocatoria").html("<option value=''>-Seleccione-</option>");
+                    //  $("#convocatoria").html("<option value=''>-Seleccione-</option>");
                 });
             }
 
@@ -154,146 +154,8 @@
                 <p>Alta de Vacancia </p>
                 <jsp:useBean id="cn" class="metodos_sql.Metodos_sql" scope="page"></jsp:useBean>
                     <form id="data"   name="data" method="POST" action="Servlet_agregar_vacantes" onSubmit="return validate();">
-                    <%if (request.getAttribute("control_combobox").equals("true")) { %>
-                    <div class="registro">
-                        <div class="caja">
-                            <input type="hidden" name="f_opc" id="i_opc">
-                            <input type="hidden" name="campoentidad" id="campoentidad" >
-                            <p>Entidad
-
-                                <%
-                                    ResultSet rs = cn.mostrar("Select id, entidad from catentidades");
-                                %>
-
-                                <select class="form-control" name="entidad" id="entidad" disabled="true">
-                                    <option value="0">Escoge una opcion</option>
-                                    <%
-                                        while (rs.next()) {
-                                    %>
-                                    <option value="<%=rs.getString("id")%>"><%=rs.getString("entidad")%></option>
-
-                                    <%//              regresa del combobox         muestra en el combo box
-                                        }
-                                    %>                                              
-                                </select>           
-                            </p>
-                            <div id="n8"></div>
-                        </div>
-
-                        <div class="caja">
-                            <p>Plantel
-                                <select class="form-control" name="n_plantel" id="i_plantel" disabled="true">
-                                    <option value="0">Escoge una opcion</option>                                     
-                                </select>
-                            </p>
-                            <div id="n7"></div>
-
-                        </div>
-
-                        <div class="caja">
-                            <input type="hidden" name="f_opc2" id="i_opc2">
-                            <p>Categoria de Plaza                                    
-                                <select class="form-control" name="entidad2" onchange="plaza()" id="plaza1" >
-                                    <option value="0">Escoge una opcion</option>
-                                    <option value="TD">Tecnico docente</option> 
-                                    <option value="D">Docente</option>
-                                </select>
-                            </p>
-                            <div id="n30"></div>
-                        </div>    
-                    </div>
-
-
-                    <div class="registro">
-                        <div class="caja">
-                            <p>Cantidad de Plazas<input id="cantidad" class="form-control" type="text" name="cantidad" size="33" placeholder="No. plazas vacantes" maxlength="3"></p>
-                            <div id="n100"></div>
-                        </div>
-                        <div class="caja">
-                            <input type="hidden" name="campotipo" id="campotipo" >
-                            <p>Tipo de Categoria
-                                <select class="form-control" name="n_plantel2" id="i_plantel2" onchange="categoria()">
-                                    <option value="0">Escoge una opcion</option>                                       
-                                </select>
-                            </p>
-                            <div id="n40"></div>
-                        </div> 
-
-
-                    </div>
-
-                    <div class="registro">
-                        <div class="caja">
-                            <input type="hidden" name="f_opc3" id="i_opc3">
-                            <input type="hidden" name="campojornada" id="campojornada" >
-                            <p>Jornada
-                                <select class="form-control" name="n_plantel3" id="i_plantel3" onchange="jornada1()">
-                                    <option value="0">Escoge una opcion</option>                                                                       
-                                </select>           
-                            </p>
-                            <div id="n50"></div>
-                        </div>
-
-                        <!--       <div class="caja">
-                                    <input type="hidden" name="f_opc4" id="i_opc4">
-                                    <input type="hidden" name="campogrado1" id="campogrado1" >
-                                   <p>Grado Academico
-                                        <select class="form-control" name="n_plantel4" id="i_plantel4" onchange="grado1()">
-                                           <option value="0">Escoge una opcion</option>
-                                       </select>
-                                   </p>
-                                   <div id="n60"></div>
-                               </div>  -->
-
-                        <div class="caja">
-                            <p>Tipo de Vacancia
-                                <select class="form-control" name="tipovacancia" id="tipovacancia" onchange="vacancia1()">
-                                    <option value="0">Escoge una opcion</option>
-                                    <option value="Real">Real</option> 
-                                    <option value="Cadena">Cadena</option>
-                                </select>
-                            </p>
-                            <div id="n70"></div>
-                        </div>         
-
-
-                 <div class="caja">
-                            <p>Programa                    
-                                <%
-                                    String h[] = {"", "", "", ""};
-                                    int i = 0;
-                                    ResultSet rs4 = cn.mostrar("Select * from convocatoria where idPlantel='" + request.getAttribute("dato_pla") + "'");
-                                %>
-                                <select class="form-control" name="convocatoria" id="convocatoria" onchange="convocatoria1()">
-                                    <option value="">Escoge una opcion</option>
-                                    <%
-                                        while (rs4.next()) {
-                                            if (rs4.getString("idPrograma") != "0") {
-                                                h[i] = rs4.getString("idPrograma");
-                                                i++;
-                                            }
-                                        }
-                                        String com2 = "Select * from catProgramas WHERE id= '" + h[0] + "' || id='" + h[1] + "' || id = '" + h[2] + "'";
-                                        ResultSet rs5 = cn.mostrar(com2);
-                                        while (rs5.next()) {
-
-                                    %>
-
-                                    <option value="<%=rs5.getString("id")%>"><%=rs5.getString("programa")%></option>
-
-                                    <%//              regresa del combobox         muestra en el combo box
-                                        }
-
-                                    %>                                              
-                                </select>           
-                            </p>                         
-
-                            <div id="n80"></div>
-                        </div>       
-                    </div>
-
-                    <% } //FIN OPCION VERDADERA COMBOBOX
-                    else {%> <%--OPCION FALSA COMBOBOX --%>
+                    <%if (request.getAttribute("control_combobox").equals("false") && request.getAttribute("nacional").equals("1")) { //super usuario nacional
+                    %>
                     <div class="registro">
                         <div class="caja">
                             <input type="hidden" name="f_opc" id="i_opc">
@@ -314,7 +176,7 @@
                                     <%//              regresa del combobox         muestra en el combo box
                                         }
                                     %>                                              
-                                </select>           
+                                </select>            
                             </p>
                             <div id="n8"></div>
                         </div>
@@ -328,102 +190,227 @@
                             <div id="n7"></div>
 
                         </div>
+                        <% } //FIN OPCION VERDADERA COMBOBOX
+                        else if (request.getAttribute("control_combobox").equals("true") && request.getAttribute("nacional").equals("1")) {%> <%--ADMINISTRADOR NACIONAL --%>
+                        <div class="registro">
+                            <div class="caja">
+                                <input type="hidden" name="f_opc" id="i_opc">
+                                <input type="hidden" name="campoentidad" id="campoentidad" >
+                                <p>Entidad
 
-                        <div class="caja">
-                            <input type="hidden" name="f_opc2" id="i_opc2">
-                            <p>Categoria de Plaza                                    
-                                <select class="form-control" name="entidad2" onchange="plaza()" id="plaza1" >
-                                    <option value="0">Escoge una opcion</option>
-                                    <option value="TD">Tecnico docente</option> 
-                                    <option value="D">Docente</option>
-                                </select>
-                            </p>
-                            <div id="n30"></div>
-                        </div>    
-                    </div>
-
-
-                    <div class="registro">
-                        <div class="caja">
-                            <p>Cantidad de Plazas<input id="cantidad" class="form-control" type="text" name="cantidad" size="33" placeholder="No. plazas vacantes" maxlength="3"></p>
-                            <div id="n100"></div>
-                        </div>
-                        <div class="caja">
-                            <input type="hidden" name="campotipo" id="campotipo" >
-                            <p>Tipo de Categoria
-                                <select class="form-control" name="n_plantel2" id="i_plantel2" onchange="categoria()">
-                                    <option value="0">Escoge una opcion</option>                                       
-                                </select>
-                            </p>
-                            <div id="n40"></div>
-                        </div> 
-
-
-                    </div>
-
-                    <div class="registro">
-                        <div class="caja">
-                            <input type="hidden" name="f_opc3" id="i_opc3">
-                            <input type="hidden" name="campojornada" id="campojornada" >
-                            <p>Jornada
-                                <select class="form-control" name="n_plantel3" id="i_plantel3" onchange="jornada1()">
-                                    <option value="0">Escoge una opcion</option>                                                                       
-                                </select>           
-                            </p>
-                            <div id="n50"></div>
-                        </div>
-
-                        <!--       <div class="caja">
-                                    <input type="hidden" name="f_opc4" id="i_opc4">
-                                    <input type="hidden" name="campogrado1" id="campogrado1" >
-                                   <p>Grado Academico
-                                        <select class="form-control" name="n_plantel4" id="i_plantel4" onchange="grado1()">
-                                           <option value="0">Escoge una opcion</option>
-                                       </select>
-                                   </p>
-                                   <div id="n60"></div>
-                               </div>  -->
-
-                        <div class="caja">
-                            <p>Tipo de Vacancia
-                                <select class="form-control" name="tipovacancia" id="tipovacancia" onchange="vacancia1()">
-                                    <option value="0">Escoge una opcion</option>
-                                    <option value="Real">Real</option> 
-                                    <option value="Cadena">Cadena</option>
-                                </select>
-                            </p>
-                            <div id="n70"></div>
-                        </div>         
-
-
-                      <div class="caja">
-                            <p>Programa                    
-                                <%
-                                    String h[] = {"", "", "", ""};
-                                    int i = 0;
-                                    ResultSet rs4 = cn.mostrar("SELECT c.id,p.programa FROM bdpromocion.convocatoria c inner join catprogramas p on c.idPrograma=p.id where c.idplantel='" + request.getAttribute("dato_pla") + "';");
-                                %>
-                                <select class="form-control" name="convocatoria" id="convocatoria" onchange="convocatoria1()">
-                                    <option value="">Escoge una opcion</option>
-                                    
                                     <%
-                                        while (rs4.next()) {
-                                       out.print("<option value='"+rs4.getString("id")+"'>"+rs4.getString("programa")+"</option>");
-                                            
-                                        }
+                                        ResultSet rs = cn.mostrar("Select id, entidad from catentidades");
                                     %>
 
-                                                                                
-                                </select>           
-                            </p>                         
+                                    <select class="form-control" name="entidad" id="entidad" onchange="plantel()">
+                                        <option value="0">Escoge una opcion</option>
+                                        <%
+                                            while (rs.next()) {
+                                        %>
+                                        <option value="<%=rs.getString("id")%>"><%=rs.getString("entidad")%></option>
 
-                            <div id="n80"></div>
-                        </div>      
-                    </div>
+                                        <%//              regresa del combobox         muestra en el combo box
+                                            }
+                                        %>                                              
+                                    </select>            
+                                </p>
+                                <div id="n8"></div>
+                            </div>
+
+                            <div class="caja">
+                                <p>Plantel
+                                    <select class="form-control" name="n_plantel" id="i_plantel" onchange="validarentrada3()">
+                                        <option value="0">Escoge una opcion</option>                                     
+                                    </select>
+                                </p>
+                                <div id="n7"></div>
+
+                            </div>
+                            <%} else if (request.getAttribute("control_combobox").equals("true") && request.getAttribute("nacional").equals("2")) {%> <%--ADMINISTRADOR NACIONAL --%>
+                            <div class="registro">
+                                <div class="caja">
+                                    <input type="hidden" name="f_opc" id="i_opc">
+                                    <input type="hidden" name="campoentidad" id="campoentidad" >
+                                   <p>Entidad
+
+                                        <%
+                                            ResultSet rs = cn.mostrar("Select id, entidad from catentidades WHERE id='" + request.getAttribute("dato_ent") + "'");
+                                        %>
+
+                                        <select class="form-control" name="entidad" id="entidad" onchange="plantel()" disabled="true">
+
+                                            <%
+                                                while (rs.next()) {
+                                            %>
+                                            <option value="<%=rs.getString("id")%>"><%=rs.getString("entidad")%></option>
+
+                                            <%//              regresa del combobox         muestra en el combo box
+                                                }
+                                            %>                                              
+                                        </select>           
+                                    </p>
+                                    <div id="n8"></div>
+                                </div>
+
+                                <div class="caja">
+                                    <p>Plantel
+                                        <%
+                                            ResultSet rs1 = cn.mostrar("Select * from catplanteles WHERE idEntidad='" + request.getAttribute("dato_ent") + "'");
+                                        %>
+                                        <select class="form-control" name="n_plantel" id="i_plantel" onchange="validarentrada3()">
+                                            <option value="0">Escoge una opcion</option>   
+                                            <%
+                                                while (rs1.next()) {
+                                            %>
+                                            <option value="<%=rs1.getString("id")%>"><%=rs1.getString("plantel")%></option>
+
+                                            <%//              regresa del combobox         muestra en el combo box
+                                                }
+                                            %>   
+                                        </select>
+                                    </p>
+                                    <div id="n7"></div>
+                                </div>
+                                <%}
+                                else if (request.getAttribute("control_combobox").equals("true") && request.getAttribute("nacional").equals("3")) {%> <%--ADMINISTRADOR NACIONAL --%>
+                            <div class="registro">
+                                <div class="caja">
+                                    <input type="hidden" name="f_opc" id="i_opc">
+                                    <input type="hidden" name="campoentidad" id="campoentidad" >
+                                   <p>Entidad
+
+                                        <%
+                                            ResultSet rs = cn.mostrar("Select id, entidad from catentidades WHERE id='" + request.getAttribute("dato_ent") + "'");
+                                        %>
+
+                                        <select class="form-control" name="entidad" id="entidad" onchange="plantel()" disabled="true">
+
+                                            <%
+                                                while (rs.next()) {
+                                            %>
+                                            <option value="<%=rs.getString("id")%>"><%=rs.getString("entidad")%></option>
+
+                                            <%//              regresa del combobox         muestra en el combo box
+                                                }
+                                            %>                                              
+                                        </select>           
+                                    </p>
+                                    <div id="n8"></div>
+                                </div>
+
+                                <div class="caja">
+                                    <p>Plantel
+                                            <%
+                                                ResultSet rs1 = cn.mostrar("Select * from catplanteles WHERE id='" + request.getAttribute("dato_pla") + "'");
+                                            %>
+                                            <select class="form-control" name="n_plantel" id="i_plantel" onchange="validarentrada3()" disabled="true">
+                                                 
+                                                <%
+                                                    while (rs1.next()) {
+                                                %>
+                                                <option value="<%=rs1.getString("id")%>"><%=rs1.getString("plantel")%></option>
+
+                                                <%//              regresa del combobox         muestra en el combo box
+                                                    }
+                                                %>   
+                                            </select>
+                                        </p>
+                                    <div id="n7"></div>
+                                </div>
+                                <%}%>
+                                
+
+                                <div class="caja">
+                                    <input type="hidden" name="f_opc2" id="i_opc2">
+                                    <p>Categoria de Plaza                                    
+                                        <select class="form-control" name="entidad2" onchange="plaza()" id="plaza1" >
+                                            <option value="0">Escoge una opcion</option>
+                                            <option value="TD">Tecnico docente</option> 
+                                            <option value="D">Docente</option>
+                                        </select>
+                                    </p>
+                                    <div id="n30"></div>
+                                </div>    
+                            </div>
+
+
+                            <div class="registro">
+                                <div class="caja">
+                                    <p>Cantidad de Plazas<input id="cantidad" class="form-control" type="text" name="cantidad" size="33" placeholder="No. plazas vacantes" maxlength="3"></p>
+                                    <div id="n100"></div>
+                                </div>
+                                <div class="caja">
+                                    <input type="hidden" name="campotipo" id="campotipo" >
+                                    <p>Tipo de Categoria
+                                        <select class="form-control" name="n_plantel2" id="i_plantel2" onchange="categoria()">
+                                            <option value="0">Escoge una opcion</option>                                       
+                                        </select>
+                                    </p>
+                                    <div id="n40"></div>
+                                </div> 
+
+
+                            </div>
+
+                            <div class="registro">
+                                <div class="caja">
+                                    <input type="hidden" name="f_opc3" id="i_opc3">
+                                    <input type="hidden" name="campojornada" id="campojornada" >
+                                    <p>Jornada
+                                        <select class="form-control" name="n_plantel3" id="i_plantel3" onchange="jornada1()">
+                                            <option value="0">Escoge una opcion</option>                                                                       
+                                        </select>           
+                                    </p>
+                                    <div id="n50"></div>
+                                </div>
+
+                                <!--       <div class="caja">
+                                            <input type="hidden" name="f_opc4" id="i_opc4">
+                                            <input type="hidden" name="campogrado1" id="campogrado1" >
+                                           <p>Grado Academico
+                                                <select class="form-control" name="n_plantel4" id="i_plantel4" onchange="grado1()">
+                                                   <option value="0">Escoge una opcion</option>
+                                               </select>
+                                           </p>
+                                           <div id="n60"></div>
+                                       </div>  -->
+
+                                <div class="caja">
+                                    <p>Tipo de Vacancia
+                                        <select class="form-control" name="tipovacancia" id="tipovacancia" onchange="vacancia1()">
+                                            <option value="0">Escoge una opcion</option>
+                                            <option value="Real">Real</option> 
+                                            <option value="Cadena">Cadena</option>
+                                        </select>
+                                    </p>
+                                    <div id="n70"></div>
+                                </div>         
+
+
+                                <div class="caja">
+                                    <p>Programa                    
+                                        <%
+                                            ResultSet rs4 = cn.mostrar("SELECT c.id,p.programa FROM bdpromocion.convocatoria c inner join catprogramas p on c.idPrograma=p.id WHERE c.idPlantel='" + request.getAttribute("dato_pla") + "'");
+                                        %>
+                                        <select class="form-control" name="convocatoria" id="convocatoria" onchange="convocatoria1()">
+                                            <option value="0">Escoge una opcion</option>
+
+                                            <%
+                                            while (rs4.next()) {%>
+                                            <option value="<%=rs4.getString("id")%>"><%=rs4.getString("programa")%></option>
+                                            <%  }
+                                            %>
+
+
+                                        </select>           
+                                    </p>                            
+
+                                    <div id="n80"></div>
+                                </div>       
+                            </div>
 
 
 
-                    <%}%>
 
 
 
@@ -433,71 +420,72 @@
 
 
 
+                            <div class="error"> 
+                                <% if (request.getAttribute("error") == null) {
+                                        out.print("");
+                                    } else {
+                                        out.print(request.getAttribute("error"));
+                                    }
 
-                    <div class="error"> 
-                        <% if (request.getAttribute("error") == null) {
-                                out.print("");
-                            } else {
-                                out.print(request.getAttribute("error"));
-                            }
+                                    if (request.getAttribute("ver") != null) {
+                                        out.print("");
+                                    } else {
+                                        response.sendRedirect("login.jsp");
+                                    }
+                                %>
+                            </div>
 
-                            if (request.getAttribute("ver") != null) {
-                                out.print("");
+
+                            <div class="form-group">
+
+                                <button class="btn btn-primary pull-right" type="submit" name="agregarvacantes">Agregar</button>
+
+                            </div>
+                            <%
+                                session.setAttribute("idUsuario", idUsuario);
+                                session.setAttribute("rfc", rfc);
+                            %>
+                            <input type="hidden" name="control_combobox" id="control_combobox" value="<%=request.getAttribute("control_combobox")%>">
+                            <input type="hidden" name="nacional" id="nacional" value="<%=request.getAttribute("nacional")%>"> <%--AGREGAR--%>
+                            <input type="hidden" name="permiso1" id="permiso1" value="<%=request.getAttribute("per1")%>">
+                            <input type="hidden" name="permiso2" id="permiso2" value="<%=request.getAttribute("per2")%>">
+                            <input type="hidden" name="permiso4" id="permiso4" value="<%=request.getAttribute("per4")%>">
+                            <input type="hidden" name="nombre" id="nombre" value="<%=request.getAttribute("nom")%>">
+                            <input type="hidden" name="dato_ent" id="dato_ent" value="<%=request.getAttribute("dato_ent")%>">
+                            <input type="hidden" name="dato_pla" id="dato_pla" value="<%=request.getAttribute("dato_pla")%>">
+                            <input type="hidden" name="dato_rfc" id="dato_rfc" value="<%=request.getAttribute("dato_rfc")%>">
+                            </form>
+                            </section>
+                            <form id="data2" class="form-horizontal" role="form" method="POST" action="Servlet_regresar2">
+                                <div class="posision1">   
+                                    <button class="btn btn-primary pull-right posision2" type="submit" name="regresa2" id="check">Regresar</button></a>
+                                </div>
+                                <%
+                                    session.setAttribute("idUsuario", idUsuario);
+                                    session.setAttribute("rfc", rfc);
+                                %>
+                                <input type="hidden" name="control_combobox" id="control_combobox" value="<%=request.getAttribute("control_combobox")%>">
+                                <input type="hidden" name="nacional" id="nacional" value="<%=request.getAttribute("nacional")%>"> <%--AGREGAR--%>
+                                <input type="hidden" name="permiso1" id="permiso1" value="<%=request.getAttribute("per1")%>">
+                                <input type="hidden" name="permiso2" id="permiso2" value="<%=request.getAttribute("per2")%>">
+                                <input type="hidden" name="permiso4" id="permiso4" value="<%=request.getAttribute("per4")%>">
+                                <input type="hidden" name="nombre" id="nombre" value="<%=request.getAttribute("nom")%>">
+                                <input type="hidden" name="dato_ent" id="dato_ent" value="<%=request.getAttribute("dato_ent")%>">
+                                <input type="hidden" name="dato_pla" id="dato_pla" value="<%=request.getAttribute("dato_pla")%>">
+                                <input type="hidden" name="dato_rfc" id="dato_rfc" value="<%=request.getAttribute("dato_rfc")%>">
+                            </form>
+
+
+
+
+                            <!-- JS  para el framework del gobierno-->
+                            <script src="https://framework-gb.cdn.gob.mx/gobmx.js"></script>
+                            <script src="js/notificaciones3.js"></script>
+                        </div>
+                        <%
                             } else {
                                 response.sendRedirect("login.jsp");
                             }
                         %>
-                    </div>
-
-
-                    <div class="form-group">
-
-                        <button class="btn btn-primary pull-right" type="submit" name="agregarvacantes">Agregar</button>
-
-                    </div>
-                    <%
-                        session.setAttribute("idUsuario", idUsuario);
-                        session.setAttribute("rfc", rfc);
-                    %>
-                    <input type="hidden" name="control_combobox" id="control_combobox" value="<%=request.getAttribute("control_combobox")%>">
-                    <input type="hidden" name="permiso1" id="permiso1" value="<%=request.getAttribute("per1")%>">
-                    <input type="hidden" name="permiso2" id="permiso2" value="<%=request.getAttribute("per2")%>">
-                    <input type="hidden" name="permiso4" id="permiso4" value="<%=request.getAttribute("per4")%>">
-                    <input type="hidden" name="nombre" id="nombre" value="<%=request.getAttribute("nom")%>">
-                    <input type="hidden" name="dato_ent" id="dato_ent" value="<%=request.getAttribute("dato_ent")%>">
-                    <input type="hidden" name="dato_pla" id="dato_pla" value="<%=request.getAttribute("dato_pla")%>">
-                    <input type="hidden" name="dato_rfc" id="dato_rfc" value="<%=request.getAttribute("dato_rfc")%>">
-                </form>
-            </section>
-            <form id="data2" class="form-horizontal" role="form" method="POST" action="Servlet_regresar2">
-                <div class="posision1">   
-                    <button class="btn btn-primary pull-right posision2" type="submit" name="regresa2" id="check">Regresar</button></a>
-                </div>
-                <%
-                    session.setAttribute("idUsuario", idUsuario);
-                    session.setAttribute("rfc", rfc);
-                %>
-                <input type="hidden" name="control_combobox" id="control_combobox" value="<%=request.getAttribute("control_combobox")%>">
-                <input type="hidden" name="permiso1" id="permiso1" value="<%=request.getAttribute("per1")%>">
-                <input type="hidden" name="permiso2" id="permiso2" value="<%=request.getAttribute("per2")%>">
-                <input type="hidden" name="permiso4" id="permiso4" value="<%=request.getAttribute("per4")%>">
-                <input type="hidden" name="nombre" id="nombre" value="<%=request.getAttribute("nom")%>">
-                <input type="hidden" name="dato_ent" id="dato_ent" value="<%=request.getAttribute("dato_ent")%>">
-                <input type="hidden" name="dato_pla" id="dato_pla" value="<%=request.getAttribute("dato_pla")%>">
-                <input type="hidden" name="dato_rfc" id="dato_rfc" value="<%=request.getAttribute("dato_rfc")%>">
-            </form>
-
-
-
-
-            <!-- JS  para el framework del gobierno-->
-            <script src="https://framework-gb.cdn.gob.mx/gobmx.js"></script>
-            <script src="js/notificaciones3.js"></script>
-        </div>
-        <%
-            } else {
-                response.sendRedirect("login.jsp");
-            }
-        %>
-    </body>
-</html>
+                        </body>
+                        </html>
