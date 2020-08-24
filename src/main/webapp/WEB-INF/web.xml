@@ -16,6 +16,26 @@
         <servlet-name>Servlet_registrarCurso</servlet-name>
         <servlet-class>com.aplicacion.servlet.Servlet_registrarCurso</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>Servlet_registrarAportacion</servlet-name>
+        <servlet-class>com.aplicacion.servlet.Servlet_registrarAportacion</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Servlet_registrarParticipacion</servlet-name>
+        <servlet-class>com.aplicacion.servlet.Servlet_registrarParticipacion</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Servlet_registrarTutoria</servlet-name>
+        <servlet-class>com.aplicacion.servlet.Servlet_registrarTutoria</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Servlet_registrarPublicacion</servlet-name>
+        <servlet-class>com.aplicacion.servlet.Servlet_registrarPublicacion</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Servlet_registrarResultado</servlet-name>
+        <servlet-class>com.aplicacion.servlet.Servlet_registrarResultado</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Servlet_cancelarPin</servlet-name>
         <url-pattern>/Servlet_cancelarPin</url-pattern>
@@ -31,6 +51,26 @@
     <servlet-mapping>
         <servlet-name>Servlet_registrarCurso</servlet-name>
         <url-pattern>/Servlet_registrarCurso</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Servlet_registrarAportacion</servlet-name>
+        <url-pattern>/Servlet_registrarAportacion</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Servlet_registrarParticipacion</servlet-name>
+        <url-pattern>/Servlet_registrarParticipacion</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Servlet_registrarTutoria</servlet-name>
+        <url-pattern>/Servlet_registrarTutoria</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Servlet_registrarPublicacion</servlet-name>
+        <url-pattern>/Servlet_registrarPublicacion</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Servlet_registrarResultado</servlet-name>
+        <url-pattern>/Servlet_registrarResultado</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

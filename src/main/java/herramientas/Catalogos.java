@@ -480,4 +480,32 @@ public class Catalogos {
             return respuesta;        
         }
     }
+    public String desplegarOpcionesAportacion(){        
+        String respuesta="<option value=''>-Seleccione-</option>";        
+        try{
+            List<String[]> datos=metodos.ejecutaSP("sp_selectCatAportacion");
+            for(String[] dato:datos){
+                respuesta+="<option value='"+dato[0]+"' >"+dato[1]+"</option>";
+            }
+            respuesta+="<option value='-1'>Otra</option>";
+        }catch(Exception e){
+            respuesta=e.toString();
+        }finally{
+            return respuesta;        
+        }
+    }
+    public String desplegarOpcionesParticipacion(){        
+        String respuesta="<option value=''>-Seleccione-</option>";        
+        try{
+            List<String[]> datos=metodos.ejecutaSP("sp_selectCatParticipacion");
+            for(String[] dato:datos){
+                respuesta+="<option value='"+dato[0]+"' >"+dato[1]+"</option>";
+            }
+            respuesta+="<option value='-1'>Otra</option>";
+        }catch(Exception e){
+            respuesta=e.toString();
+        }finally{
+            return respuesta;        
+        }
+    }
 }

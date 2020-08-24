@@ -22,8 +22,8 @@ import metodos_sql.Metodos_sql;
  *
  * @author David Reyna
  */
-@WebServlet(name = "RegistrarCurso", urlPatterns = {"/RegistrarCurso"})
-public class Servlet_registrarCurso extends HttpServlet {
+@WebServlet(name = "RegistrarPublicacion", urlPatterns = {"/RegistrarPublicacion"})
+public class Servlet_registrarPublicacion extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -42,10 +42,10 @@ public class Servlet_registrarCurso extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet Servlet_registrarCurso</title>");            
+            out.println("<title>Servlet Servlet_registrarPublicacion</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet Servlet_registrarCurso at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet Servlet_registrarPublicacion at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -85,30 +85,30 @@ public class Servlet_registrarCurso extends HttpServlet {
             String idUsuario=session.getAttribute("idUsuario").toString();            
             Metodos_sql metodo = new Metodos_sql(); 
             if(request.getParameter("id")==null){
+                String nombre=request.getParameter("nombre");
                 String tipo=request.getParameter("tipo");
-                String nombreCurso=request.getParameter("nombreCurso");  
-                String inicioCurso=fecha.formatoAlmacenar(request.getParameter("inicioCurso"));  
-                String finCurso=fecha.formatoAlmacenar(request.getParameter("finCurso"));  
-                String institucionCurso=request.getParameter("institucionCurso");  
-                String horasCurso=request.getParameter("horasCurso");  
-                String[] parametros={idUsuario,tipo,nombreCurso,inicioCurso,finCurso,institucionCurso,horasCurso};
+                String fechaPublicacion=fecha.formatoAlmacenar(request.getParameter("fecha"));  
+                String ISSN=request.getParameter("ISSN");
+                String[] parametros={idUsuario,nombre,tipo,fechaPublicacion,ISSN};
                 List<String[]> datos;                           
-                datos=metodo.ejecutaSP("sp_insertCursos",parametros);            
+                datos=metodo.ejecutaSP("sp_insertPublicaciones",parametros);            
                 if(!datos.isEmpty()){
                     if(datos.get(0)[0].equals("ok")){
-                        out.print(new CriteriosValoracion().getFilasCursos(idUsuario));                    
+                        out.print(new CriteriosValoracion().getFilasPublicaciones(idUsuario));                    
+                    }else{
+                        out.print(datos.get(0)[0]);
                     }
                 }else{
                     out.print("Error en almacenamiento de datos, intente nuevamente");
                 }
             }else{
-                String idCurso=request.getParameter("id");
-                String[] parametros={idCurso};
+                String id=request.getParameter("id");
+                String[] parametros={id};
                 List<String[]> datos;                           
-                datos=metodo.ejecutaSP("sp_deleteCursos",parametros);            
+                datos=metodo.ejecutaSP("sp_deletePublicaciones",parametros);            
                 if(!datos.isEmpty()){
                     if(datos.get(0)[0].equals("ok")){
-                        out.print(new CriteriosValoracion().getFilasCursos(idUsuario));                    
+                        out.print(new CriteriosValoracion().getFilasPublicaciones(idUsuario));                    
                     }
                 }else{
                     out.print("Error al eliminar la información, intente nuevamente");

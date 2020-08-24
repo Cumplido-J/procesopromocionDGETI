@@ -16,6 +16,7 @@
         <link href="https://framework-gb.cdn.gob.mx/assets/styles/main.css" rel="stylesheet">
         <link href="css/estilosRegistro.css" rel="stylesheet"/> 
         <jsp:useBean id="catalogo" class="herramientas.Catalogos" />
+        <jsp:useBean id="criteriosValoracion" class="herramientas.CriteriosValoracion" />
     </head>
     <body>
         <main class="page">
@@ -214,9 +215,9 @@
                             </div>
                             <div class='table-responsive'>
                                 <table class='table table-bordered table-condensed'>
-                                    <tr><th>Nombre del curso</th><th>Periodo o Fecha de realización</th><th>Institución educativa con reconocimiento oficial que emite constancia</th><th>Total de horas que acredita el curso</th><th>Borrar</th></tr>
+                                    <tr><th>Tipo</th><th>Nombre del curso</th><th>Periodo o Fecha de realización</th><th>Institución educativa con reconocimiento oficial que emite constancia</th><th>Total de horas que acredita el curso</th><th>Borrar</th></tr>
                                     <tbody id="tablaCursos">
-                                        <tr><td colspan='5'>Sin información</td></tr>
+                                        ${criteriosValoracion.getFilasCursos(docente.idUsuario)}
                                     </tbody>
                                 </table>
                             </div>
@@ -252,7 +253,9 @@
                             <div class='table-responsive'>
                                 <table class='table table-bordered table-condensed'>
                                     <tr><th>Nombre de la aportación en materia de mejora continua</th><th>Periodo o Fecha de realización</th><th>Institución educativa con reconocimiento oficial que emite constancia</th><th>Borrar</th></tr>
-                                    <tr><td colspan='4'>Sin información</td></tr>
+                                    <tbody id="tablaAportaciones">
+                                        ${criteriosValoracion.getFilasAportaciones(docente.idUsuario)}
+                                    </tbody>
                                 </table>
                             </div>
                             <form id="form1" role="form" action="RegistrarCriterio" method="POST">
@@ -282,12 +285,14 @@
                       <div class="panel-collapse collapse" id="panel7">
                         <div class="panel-body">
                             <div class='text-center'>
-                                <input type='button' class='btn btn-sm btn-link' value='(+) Agregar información' data-toggle="modal" data-target="#modalEventos"/>
+                                <input type='button' class='btn btn-sm btn-link' value='(+) Agregar información' onclick="abrirModalParticipaciones()"/>
                             </div>
                             <div class='table-responsive'>
                                 <table class='table table-bordered table-condensed'>
                                     <tr><th>Nombre de la participación en eventos y actividades de fortalecimiento académico y formación integral del educando</th><th>Periodo o Fecha de realización</th><th>Institución educativa con reconocimiento oficial que emite constancia</th><th>Borrar</th></tr>
-                                    <tr><td colspan='4'>Sin información</td></tr>
+                                    <tbody id="tablaParticipaciones">
+                                        ${criteriosValoracion.getFilasParticipaciones(docente.idUsuario)}
+                                    </tbody>
                                 </table>
                             </div>
                             <form id="form1" role="form" action="RegistrarCriterio" method="POST">
@@ -317,12 +322,14 @@
                       <div class="panel-collapse collapse" id="panel8">
                         <div class="panel-body">
                             <div class='text-center'>
-                                <input type='button' class='btn btn-sm btn-link' value='(+) Agregar información' data-toggle="modal" data-target="#modalTutorias" />
+                                <input type='button' class='btn btn-sm btn-link' value='(+) Agregar información' onClick="abrirModalTutorias()" />
                             </div>
                             <div class='table-responsive'>
                                 <table class='table table-bordered table-condensed'>
                                     <tr><th>Periodo o Fecha de realización</th><th>Borrar</th></tr>
-                                    <tr><td colspan='2'>Sin información</td></tr>
+                                    <tbody id="tablaTutorias">
+                                        ${criteriosValoracion.getFilasTutorias(docente.idUsuario)}
+                                    </tbody>
                                 </table>
                             </div>
                             <form id="form1" role="form" action="RegistrarCriterio" method="POST">
@@ -352,12 +359,14 @@
                       <div class="panel-collapse collapse" id="panel9">
                         <div class="panel-body">
                             <div class='text-center'>
-                                <input type='button' class='btn btn-sm btn-link' value='(+) Agregar información' data-toggle="modal" data-target="#modalPublicacion"/>
+                                <input type='button' class='btn btn-sm btn-link' value='(+) Agregar información' onClick="abrirModalPublicacion()"/>
                             </div>
                             <div class='table-responsive'>
                                 <table class='table table-bordered table-condensed'>
                                     <tr><th>Nombre de  la publicación</th><th>Medio en el que se publicó</th><th>Fecha de publicación</th><th>ISSN</th><th>Borrar</th></tr>
-                                    <tr><td colspan='5'>Sin información</td></tr>
+                                    <tbody id="tablaPublicaciones">
+                                        ${criteriosValoracion.getFilasPublicaciones(docente.idUsuario)}
+                                    </tbody>
                                 </table>
                             </div>
                             <form id="form1" role="form" action="RegistrarCriterio" method="POST">
@@ -431,12 +440,14 @@
                                 <div class="col-xs-12">
                                     <label class="control-label">Evidencias de resultados educativos</label>
                                     <div class='text-center'>
-                                        <input type='button' class='btn btn-sm btn-link' value='(+) Agregar información' data-toggle="modal" data-target="#modalResultados"/>
+                                        <input type='button' class='btn btn-sm btn-link' value='(+) Agregar información' onClick="abrirModalResultado()"/>
                                     </div>
                                     <div class='table-responsive'>
                                         <table class='table table-bordered table-condensed'>
                                             <tr><th>Periodo o Fecha de realización</th><th>Borrar</th></tr>
-                                            <tr><td colspan='2'>Sin información</td></tr>
+                                            <tbody id="tablaResultados">
+                                                ${criteriosValoracion.getFilasResultados(docente.idUsuario)}
+                                            </tbody>
                                         </table>
                                     </div>
                                 </div>
@@ -500,8 +511,8 @@
                                 <label class="control-label">Tipo:</label>
                                 <select class="form-control input-sm" name="tipo" required>   
                                     <option value="">-Seleccione-</option>
-                                    <option value="certificado">Certificación vigente laboral o de idiomas</option>
-                                    <option value="curso">Curso de actualización</option>
+                                    <option value="CE">Certificación vigente laboral o de idiomas</option>
+                                    <option value="CU">Curso de actualización</option>
                                 </select>  
                             </div> 
                             <div class="form-group col-md-6">                                                             
@@ -555,20 +566,20 @@
                         <div class="row">                            
                             <div class="form-group col-md-6">                                                             
                                 <label class="control-label">Nombre de la aportacion:</label>
-                                <select class="form-control input-sm"  name="idAportacion" required>                                  
-                                    <option value="">-Seleccione-</option>
-                                    <option value="1">Realización y registro en la plataforma de secuencia didáctica al inicio del semestre y aprobadas por el Departamento correspondiente</option>
+                                <select class="form-control input-sm" id="idAportacion" name="idAportacion" onChange="cambioAportacion()" required>                                  
+                                    ${catalogo.desplegarOpcionesAportacion()}
                                 </select>
+                                <input type="text" class="form-control input-sm hidden" id="aportacion" name="aportacion" placeHolder="Especifíque" maxlength="500"/>
                             </div>   
                             <div class="form-group col-md-6">                                                             
                                 <label class="control-label">Fecha de inicio:</label>
-                                <input type="text" class="form-control input-sm" id="inicioCurso" name="inicioAportacion" required/>
+                                <input type="text" class="form-control input-sm" id="inicioAportacion" name="inicioAportacion" required/>
                             </div>
                         </div>
                         <div class="row">                            
                             <div class="form-group col-md-6">                                                             
                                 <label class="control-label">Fecha de término:</label>
-                                <input type="text" class="form-control input-sm" id="finCurso" name="finAportacion" required/>
+                                <input type="text" class="form-control input-sm" id="finAportacion" name="finAportacion" required/>
                             </div>  
                             <div class="form-group col-md-6">                                                             
                                 <label class="control-label">Institución:</label>
@@ -587,12 +598,12 @@
             </div>
           </div>
                       
-        <div class="modal fade" id="modalEventos" role="dialog">
+        <div class="modal fade" id="modalParticipacion" role="dialog">
             <div class="modal-dialog">
 
               <!-- Modal content-->
               <div class="modal-content panel">
-                <form id="formAportacion" role="form" action="RegistrarEvento" method="POST">
+                <form id="formParticipacion" role="form" action="RegistrarParticipacion" method="POST">
                 <div class="modal-header">
                   <button type="button" class="close" data-dismiss="modal">&times;</button>
                   <h4 class="modal-title">Registro de información</h4>
@@ -602,43 +613,42 @@
                         <div class="row">                            
                             <div class="form-group col-md-6">                                                             
                                 <label class="control-label">Nombre de la participación:</label>
-                                <select class="form-control input-sm"  name="idParticipacion" required>                                  
-                                    <option value="">-Seleccione-</option>
-                                    <option value="1">Asesoría a alumnos en proyectos específicos o para su participación en concursos estatales o nacionales, en el ámbito académico</option>
+                                <select class="form-control input-sm" id="idParticipacion" name="idParticipacion" onChange="cambioParticipacion()" required>
+                                    ${catalogo.desplegarOpcionesParticipacion()}
                                 </select>
+                                <input type="text" class="form-control input-sm" id="participacion" name="participacion" maxlength="300" placeholder="Especifíque" required/>
                             </div>   
                             <div class="form-group col-md-6">                                                             
                                 <label class="control-label">Fecha de inicio:</label>
-                                <input type="text" class="form-control input-sm" id="inicioCurso" name="inicioAportacion" required/>
+                                <input type="text" class="form-control input-sm" id="inicioParticipacion" name="inicioParticipacion" required/>
                             </div>
                         </div>
                         <div class="row">                            
                             <div class="form-group col-md-6">                                                             
                                 <label class="control-label">Fecha de término:</label>
-                                <input type="text" class="form-control input-sm" id="finCurso" name="finAportacion" required/>
+                                <input type="text" class="form-control input-sm" id="finParticipacion" name="finParticipacion" required/>
                             </div>  
                             <div class="form-group col-md-6">                                                             
                                 <label class="control-label">Institución:</label>
-                                <input type="text" class="form-control input-sm" name="institucionAportacion" maxlength="200" required/>
+                                <input type="text" class="form-control input-sm" name="institucionParticipacion" maxlength="200" required/>
                             </div>  
                         </div>           
                 </div> 
                 <div class="modal-footer">
-                    <input class="btn btn-sm btn-primary" id="btnEnviarAportacion" type="submit" value='Guardar'/>                                    
+                    <input class="btn btn-sm btn-primary" id="btnEnviarParticipacion" type="submit" value='Guardar'/>                                    
                     <button type="button" class="btn btn-sm btn-default" data-dismiss="modal">Cancelar</button>
-                        
                 </div>
                 </form>
               </div>
               
             </div>
           </div>
-        <div class="modal fade" id="modalTutorias" role="dialog">
+        <div class="modal fade" id="modalTutoria" role="dialog">
             <div class="modal-dialog">
 
               <!-- Modal content-->
               <div class="modal-content panel">
-                <form id="formAportacion" role="form" action="RegistrarEvento" method="POST">
+                <form id="formTutoria" role="form" action="RegistrarTutoria" method="POST">
                 <div class="modal-header">
                   <button type="button" class="close" data-dismiss="modal">&times;</button>
                   <h4 class="modal-title">Registro de información</h4>
@@ -649,17 +659,17 @@
                                
                             <div class="form-group col-md-6">                                                             
                                 <label class="control-label">Fecha de inicio:</label>
-                                <input type="text" class="form-control input-sm" id="inicioCurso" name="inicioAportacion" required/>
+                                <input type="text" class="form-control input-sm" id="inicioTutoria" name="inicioTutoria" required/>
                             </div>
                             <div class="form-group col-md-6">                                                             
                                 <label class="control-label">Fecha de término:</label>
-                                <input type="text" class="form-control input-sm" id="finCurso" name="finAportacion" required/>
+                                <input type="text" class="form-control input-sm" id="finTutoria" name="finTutoria" required/>
                             </div>
                         </div>
                                   
                 </div> 
                 <div class="modal-footer">
-                    <input class="btn btn-sm btn-primary" id="btnEnviarAportacion" type="submit" value='Guardar'/>                                    
+                    <input class="btn btn-sm btn-primary" id="btnEnviarTutoria" type="submit" value='Guardar'/>                                    
                     <button type="button" class="btn btn-sm btn-default" data-dismiss="modal">Cancelar</button>
                         
                 </div>
@@ -673,41 +683,40 @@
 
               <!-- Modal content-->
               <div class="modal-content panel">
-                <form id="formAportacion" role="form" action="RegistrarEvento" method="POST">
+                <form id="formPublicacion" role="form" action="RegistrarPublicacion" method="POST">
                 <div class="modal-header">
                   <button type="button" class="close" data-dismiss="modal">&times;</button>
                   <h4 class="modal-title">Registro de información</h4>
                 </div>
-                <div class="modal-body">
-                    
+                <div class="modal-body">                    
                         <div class="row">
                             <div class="form-group col-md-6">                                                             
                                 <label class="control-label">Nombre publicación:</label>
-                                <input type="text" class="form-control input-sm" id="inicioCurso" name="inicioAportacion" required/>
+                                <input type="text" class="form-control input-sm" name="nombre" maxlength="200" required/>
                             </div>
                             <div class="form-group col-md-6">                                                             
                                 <label class="control-label">Medio publicación:</label>
                                 <select class="form-control input-sm" name="tipo" required>   
                                     <option value="">-Seleccione-</option>
-                                    <option value="impreso">Impreso</option>
-                                    <option value="electronico">Electrónico</option>
+                                    <option value="I">Impreso</option>
+                                    <option value="E">Electrónico</option>
                                 </select>
                             </div>                            
                         </div>
                         <div class="row">
                             <div class="form-group col-md-6">                                                             
                                 <label class="control-label">Fecha de publicación:</label>
-                                <input type="text" class="form-control input-sm" id="fechaPublicacion" name="finAportacion" required/>
+                                <input type="text" class="form-control input-sm" id="fechaPublicacion" name="fecha" required/>
                             </div>
                             <div class="form-group col-md-6">                                                             
                                 <label class="control-label">ISSN:</label>
-                                <input type="text" class="form-control input-sm" id="fechaPublicacion" name="finAportacion" required/>
+                                <input type="text" class="form-control input-sm" name="ISSN" maxlength="50" required/>
                             </div>
                         </div>
                                   
                 </div> 
                 <div class="modal-footer">
-                    <input class="btn btn-sm btn-primary" id="btnEnviarAportacion" type="submit" value='Guardar'/>                                    
+                    <input class="btn btn-sm btn-primary" id="btnEnviarPublicacion" type="submit" value='Guardar'/>                                    
                     <button type="button" class="btn btn-sm btn-default" data-dismiss="modal">Cancelar</button>
                         
                 </div>
@@ -716,12 +725,11 @@
               
             </div>
           </div> 
-        <div class="modal fade" id="modalResultados" role="dialog">
+        <div class="modal fade" id="modalResultado" role="dialog">
             <div class="modal-dialog">
-
               <!-- Modal content-->
               <div class="modal-content panel">
-                <form id="formAportacion" role="form" action="RegistrarEvento" method="POST">
+                <form id="formResultado" role="form" action="RegistrarResultado" method="POST">
                 <div class="modal-header">
                   <button type="button" class="close" data-dismiss="modal">&times;</button>
                   <h4 class="modal-title">Registro de información</h4>
@@ -732,17 +740,17 @@
                                
                             <div class="form-group col-md-6">                                                             
                                 <label class="control-label">Fecha de inicio:</label>
-                                <input type="text" class="form-control input-sm" id="inicioCurso" name="inicioAportacion" required/>
+                                <input type="text" class="form-control input-sm" id="inicioResultado" name="inicioResultado" required/>
                             </div>
                             <div class="form-group col-md-6">                                                             
                                 <label class="control-label">Fecha de término:</label>
-                                <input type="text" class="form-control input-sm" id="finCurso" name="finAportacion" required/>
+                                <input type="text" class="form-control input-sm" id="finResultado" name="finResultado" required/>
                             </div>
                         </div>
                                   
                 </div> 
                 <div class="modal-footer">
-                    <input class="btn btn-sm btn-primary" id="btnEnviarAportacion" type="submit" value='Guardar'/>                                    
+                    <input class="btn btn-sm btn-primary" id="btnEnviarResultado" type="submit" value='Guardar'/>                                    
                     <button type="button" class="btn btn-sm btn-default" data-dismiss="modal">Cancelar</button>
                         
                 </div>
@@ -776,6 +784,23 @@
               </div>
             </div>
           </div>
+        <div id="modalConfirmacion" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  <h4 class="modal-title" >Confirmación</h4>
+                </div>
+                <div class="modal-body">
+                    <p id="mensajeConfirmacion">La información seleccionada será borrada<br/>¿Desea continuar?</p>                  
+                </div>
+                <div class="modal-footer">
+                  <button type="button" id="btnConfirmar" class="btn btn-sm btn-default">Sí</button>
+                  <button type="button" class="btn btn-sm btn-default" data-dismiss="modal">No</button>
+                </div>
+              </div>
+            </div>
+        </div>
         <script src="https://framework-gb.cdn.gob.mx/gobmx.js"></script>        
         <script src="https://code.jquery.com/jquery-1.12.4.js"></script>      
         <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>  
