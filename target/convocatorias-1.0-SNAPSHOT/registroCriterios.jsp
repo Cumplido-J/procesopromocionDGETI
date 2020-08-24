@@ -64,7 +64,7 @@
                           <a data-parent="#accordion" data-toggle="collapse" href="#panel1" aria-expanded="true" aria-controls="panel1">
                               ${criterios[0][0]} - ${criterios[0][1]}
                           </a>
-                          <p class="text-danger">Puntaje: <span id="p1">0</span></p>
+                          <p class="text-danger">Puntaje: <span id="p1">${puntajes[0][4]}</span></p>
                         </h4>
                         <button type="button" class="collpase-button collapsed" data-parent="#accordion" data-toggle="collapse" href="#panel1"></button>
                       </div>
@@ -75,7 +75,7 @@
                                 <div class="form-group col-md-6">                                                             
                                   <label class="control-label">Antigüedad:</label>
                                   <select class="form-control input-sm" id="puntaje1" name="puntaje" required>                                  
-                                      ${catalogo.desplegarOpcionesPuntaje(criterios[0][0])}
+                                      ${catalogo.desplegarOpcionesPuntaje(criterios[0][0],puntajes[0][3])}
                                   </select>
                                 </div>
                                 <div class="form-group col-md-6">
@@ -106,7 +106,7 @@
                           <a data-parent="#accordion" data-toggle="collapse" href="#panel2" aria-expanded="false" aria-controls="panel2">
                           ${criterios[1][0]} - ${criterios[1][1]}
                           </a>
-                          <p class="text-danger">Puntaje: <span id="p2">0</span></p>
+                          <p class="text-danger">Puntaje: <span id="p2">${puntajes[1][4]}</span></p>
                         </h4>
                         <button type="button" class="collpase-button collapsed" data-parent="#accordion" data-toggle="collapse" href="#panel2"></button>
                       </div>
@@ -117,7 +117,7 @@
                                 <div class="form-group col-md-6">                                                             
                                   <label class="control-label">Experiencia:</label>
                                   <select class="form-control input-sm" id="puntaje2" name="puntaje" required>                                  
-                                      ${catalogo.desplegarOpcionesPuntaje(criterios[1][0])}
+                                      ${catalogo.desplegarOpcionesPuntaje(criterios[1][0],puntajes[1][3])}
                                   </select>
                                 </div>
                                 <div class="form-group col-md-6">
@@ -138,7 +138,7 @@
                           <a data-parent="#accordion" data-toggle="collapse" href="#panel3" aria-expanded="false" aria-controls="panel3">
                           ${criterios[2][0]} - ${criterios[2][1]}
                           </a>
-                          <p class="text-danger">Puntaje: <span id="p3">0</span></p>
+                          <p class="text-danger">Puntaje: <span id="p3">${puntajeEncuestas[5]}</span></p>
                         </h4>
                         <button type="button" class="collpase-button collapsed" data-parent="#accordion" data-toggle="collapse" href="#panel3"></button>
                       </div>
@@ -147,9 +147,9 @@
                             <div class='table-responsive'>
                                 <table class='table table-condensed table-bordered'>
                                     <tr><th>Encuesta</th><th>Estatus</th></tr>
-                                    <tr><td>A madres y padres de familia o tutores</td><td>Pendiente</td></tr>
-                                    <tr><td>A alumnos</td><td>Evaluado</td></tr>
-                                    <tr><td>A compañeros de trabajo</td><td>Pendiente</td></tr>
+                                    <tr><td>A madres y padres de familia o tutores</td><td>${puntajeEncuestas[2]}</td></tr>
+                                    <tr><td>A alumnos</td><td>${puntajeEncuestas[3]}</td></tr>
+                                    <tr><td>A compañeros de trabajo</td><td>${puntajeEncuestas[4]}</td></tr>
                                 </table>
                             </div>
                         </div>
@@ -161,7 +161,7 @@
                           <a data-parent="#accordion" data-toggle="collapse" href="#panel4" aria-expanded="false" aria-controls="panel4">
                           ${criterios[3][0]} - ${criterios[3][1]}
                           </a>
-                          <p class="text-danger">Puntaje: <span id="p4">0</span></p>
+                          <p class="text-danger">Puntaje: <span id="p4">${puntajes[3][4]}</span></p>
                         </h4>
                         <button type="button" class="collpase-button collapsed" data-parent="#accordion" data-toggle="collapse" href="#panel4"></button>
                       </div>
@@ -201,7 +201,7 @@
                           <a data-parent="#accordion" data-toggle="collapse" href="#panel5" aria-expanded="false" aria-controls="panel5">
                           ${criterios[4][0]} - ${criterios[4][1]}
                           </a>
-                          <p class="text-danger">Puntaje: <span id="p5">0</span></p>
+                          <p class="text-danger">Puntaje: <span id="p5">${cursos[1]}</span></p>
                         </h4>
                         <button type="button" class="collpase-button collapsed" data-parent="#accordion" data-toggle="collapse" href="#panel5"></button>
                       </div>
@@ -217,7 +217,7 @@
                                 <table class='table table-bordered table-condensed'>
                                     <tr><th>Tipo</th><th>Nombre del curso</th><th>Periodo o Fecha de realización</th><th>Institución educativa con reconocimiento oficial que emite constancia</th><th>Total de horas que acredita el curso</th><th>Borrar</th></tr>
                                     <tbody id="tablaCursos">
-                                        ${criteriosValoracion.getFilasCursos(docente.idUsuario)}
+                                        ${cursos[0]}
                                     </tbody>
                                 </table>
                             </div>
@@ -241,7 +241,7 @@
                           <a data-parent="#accordion" data-toggle="collapse" href="#panel6" aria-expanded="false" aria-controls="panel6">
                           ${criterios[5][0]} - ${criterios[5][1]}
                           </a>
-                          <p class="text-danger">Puntaje: <span id="p6">0</span></p>
+                          <p class="text-danger">Puntaje: <span id="p6">${aportaciones[1]}</span></p>
                         </h4>
                         <button type="button" class="collpase-button collapsed" data-parent="#accordion" data-toggle="collapse" href="#panel6"></button>
                       </div>
@@ -254,7 +254,7 @@
                                 <table class='table table-bordered table-condensed'>
                                     <tr><th>Nombre de la aportación en materia de mejora continua</th><th>Periodo o Fecha de realización</th><th>Institución educativa con reconocimiento oficial que emite constancia</th><th>Borrar</th></tr>
                                     <tbody id="tablaAportaciones">
-                                        ${criteriosValoracion.getFilasAportaciones(docente.idUsuario)}
+                                        ${aportaciones[0]}
                                     </tbody>
                                 </table>
                             </div>
@@ -278,7 +278,7 @@
                           <a data-parent="#accordion" data-toggle="collapse" href="#panel7" aria-expanded="false" aria-controls="panel7">
                           ${criterios[6][0]} - ${criterios[6][1]}
                           </a>
-                          <p class="text-danger">Puntaje: <span id="p7">0</span></p>
+                          <p class="text-danger">Puntaje: <span id="p7">${participaciones[1]}</span></p>
                         </h4>
                         <button type="button" class="collpase-button collapsed" data-parent="#accordion" data-toggle="collapse" href="#panel7"></button>
                       </div>
@@ -291,7 +291,7 @@
                                 <table class='table table-bordered table-condensed'>
                                     <tr><th>Nombre de la participación en eventos y actividades de fortalecimiento académico y formación integral del educando</th><th>Periodo o Fecha de realización</th><th>Institución educativa con reconocimiento oficial que emite constancia</th><th>Borrar</th></tr>
                                     <tbody id="tablaParticipaciones">
-                                        ${criteriosValoracion.getFilasParticipaciones(docente.idUsuario)}
+                                        ${participaciones[0]}
                                     </tbody>
                                 </table>
                             </div>
@@ -315,7 +315,7 @@
                           <a data-parent="#accordion" data-toggle="collapse" href="#panel8" aria-expanded="false" aria-controls="panel8">
                           ${criterios[7][0]} - ${criterios[7][1]}
                           </a>
-                          <p class="text-danger">Puntaje: <span id="p8">0</span></p>
+                          <p class="text-danger">Puntaje: <span id="p8">${tutorias[1]}</span></p>
                         </h4>
                         <button type="button" class="collpase-button collapsed" data-parent="#accordion" data-toggle="collapse" href="#panel8"></button>
                       </div>
@@ -328,7 +328,7 @@
                                 <table class='table table-bordered table-condensed'>
                                     <tr><th>Periodo o Fecha de realización</th><th>Borrar</th></tr>
                                     <tbody id="tablaTutorias">
-                                        ${criteriosValoracion.getFilasTutorias(docente.idUsuario)}
+                                        ${tutorias[0]}
                                     </tbody>
                                 </table>
                             </div>
@@ -352,7 +352,7 @@
                           <a data-parent="#accordion" data-toggle="collapse" href="#panel9" aria-expanded="false" aria-controls="panel9">
                           ${criterios[8][0]} - ${criterios[8][1]}
                           </a>
-                          <p class="text-danger">Puntaje: <span id="p9">0</span></p>
+                          <p class="text-danger">Puntaje: <span id="p9">${publicaciones[1]}</span></p>
                         </h4>
                         <button type="button" class="collpase-button collapsed" data-parent="#accordion" data-toggle="collapse" href="#panel9"></button>
                       </div>
@@ -365,7 +365,7 @@
                                 <table class='table table-bordered table-condensed'>
                                     <tr><th>Nombre de  la publicación</th><th>Medio en el que se publicó</th><th>Fecha de publicación</th><th>ISSN</th><th>Borrar</th></tr>
                                     <tbody id="tablaPublicaciones">
-                                        ${criteriosValoracion.getFilasPublicaciones(docente.idUsuario)}
+                                        ${publicaciones[0]}
                                     </tbody>
                                 </table>
                             </div>
@@ -389,7 +389,7 @@
                           <a data-parent="#accordion" data-toggle="collapse" href="#panel10" aria-expanded="false" aria-controls="panel10">
                           ${criterios[9][0]} - ${criterios[9][1]}
                           </a>
-                          <p class="text-danger">Puntaje: <span id="p10">0</span></p>
+                          <p class="text-danger">Puntaje: <span id="p10">${puntajes[9][4]}</span></p>
                         </h4>
                         <button type="button" class="collpase-button collapsed" data-parent="#accordion" data-toggle="collapse" href="#panel10"></button>
                       </div>
@@ -440,13 +440,14 @@
                                 <div class="col-xs-12">
                                     <label class="control-label">Evidencias de resultados educativos</label>
                                     <div class='text-center'>
+                                        <input type="hidden" id="pEvidencias" value="${resultados[1]}"/>
                                         <input type='button' class='btn btn-sm btn-link' value='(+) Agregar información' onClick="abrirModalResultado()"/>
                                     </div>
                                     <div class='table-responsive'>
                                         <table class='table table-bordered table-condensed'>
                                             <tr><th>Periodo o Fecha de realización</th><th>Borrar</th></tr>
                                             <tbody id="tablaResultados">
-                                                ${criteriosValoracion.getFilasResultados(docente.idUsuario)}
+                                                ${resultados[0]}
                                             </tbody>
                                         </table>
                                     </div>

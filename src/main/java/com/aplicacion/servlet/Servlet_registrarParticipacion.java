@@ -95,7 +95,8 @@ public class Servlet_registrarParticipacion extends HttpServlet {
                 datos=metodo.ejecutaSP("sp_insertParticipaciones",parametros);            
                 if(!datos.isEmpty()){
                     if(datos.get(0)[0].equals("ok")){
-                        out.print(new CriteriosValoracion().getFilasParticipaciones(idUsuario));                    
+                        String[] info=new CriteriosValoracion().getFilasParticipaciones(idUsuario);
+                        out.print(info[0]+"||"+info[1]);                    
                     }else{
                         out.print(datos.get(0)[0]);
                     }
@@ -109,7 +110,8 @@ public class Servlet_registrarParticipacion extends HttpServlet {
                 datos=metodo.ejecutaSP("sp_deleteParticipaciones",parametros);            
                 if(!datos.isEmpty()){
                     if(datos.get(0)[0].equals("ok")){
-                        out.print(new CriteriosValoracion().getFilasParticipaciones(idUsuario));                    
+                        String[] info=new CriteriosValoracion().getFilasParticipaciones(idUsuario);
+                        out.print(info[0]+"||"+info[1]);                     
                     }
                 }else{
                     out.print("Error al eliminar la información, intente nuevamente");

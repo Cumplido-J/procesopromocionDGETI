@@ -92,7 +92,8 @@ public class Servlet_registrarResultado extends HttpServlet {
                 datos=metodo.ejecutaSP("sp_insertResultados",parametros);            
                 if(!datos.isEmpty()){
                     if(datos.get(0)[0].equals("ok")){
-                        out.print(new CriteriosValoracion().getFilasResultados(idUsuario));                    
+                        String[] info=new CriteriosValoracion().getFilasResultados(idUsuario);
+                        out.print(info[0]+"||"+info[1]);                    
                     }else{
                         out.print(datos.get(0)[0]);
                     }
@@ -106,7 +107,8 @@ public class Servlet_registrarResultado extends HttpServlet {
                 datos=metodo.ejecutaSP("sp_deleteResultados",parametros);            
                 if(!datos.isEmpty()){
                     if(datos.get(0)[0].equals("ok")){
-                        out.print(new CriteriosValoracion().getFilasResultados(idUsuario));                    
+                        String[] info=new CriteriosValoracion().getFilasResultados(idUsuario);
+                        out.print(info[0]+"||"+info[1]);  
                     }
                 }else{
                     out.print("Error al eliminar la información, intente nuevamente");

@@ -164,7 +164,9 @@ $(document).ready(function () {
                    $("#modalCursos").modal("hide");
                 },success:function(data){
                     if(data.includes("<tr>")){
-                        $("#tablaCursos").html(data);   
+                        var aux=data.split("||");
+                        $("#tablaCursos").html(aux[0]);
+                        $("#p5").html(aux[1]);
                     }
                     else{
                         $("#mensaje").html(data);            
@@ -210,7 +212,9 @@ $(document).ready(function () {
                    $("#modalAportaciones").modal("hide");
                 },success:function(data){
                     if(data.includes("<tr>")){
-                        $("#tablaAportaciones").html(data);   
+                        var aux=data.split("||");
+                        $("#tablaAportaciones").html(aux[0]);
+                        $("#p6").html(aux[1]);
                     }
                     else{
                         $("#mensaje").html(data);            
@@ -256,7 +260,9 @@ $(document).ready(function () {
                    $("#modalParticipacion").modal("hide");
                 },success:function(data){
                     if(data.includes("<tr>")){
-                        $("#tablaParticipaciones").html(data);   
+                        var aux=data.split("||");
+                        $("#tablaParticipaciones").html(aux[0]);
+                        $("#p7").html(aux[1]);
                     }
                     else{
                         $("#mensaje").html(data);            
@@ -293,7 +299,9 @@ $(document).ready(function () {
                    $("#modalTutoria").modal("hide");
                 },success:function(data){
                     if(data.includes("<tr>")){
-                        $("#tablaTutorias").html(data);   
+                        var aux=data.split("||");
+                        $("#tablaTutorias").html(aux[0]);
+                        $("#p8").html(aux[1]);   
                     }
                     else{
                         $("#mensaje").html(data);            
@@ -336,7 +344,9 @@ $(document).ready(function () {
                    $("#modalPublicacion").modal("hide");
                 },success:function(data){
                     if(data.includes("<tr>")){
-                        $("#tablaPublicaciones").html(data);   
+                        var aux=data.split("||");
+                        $("#tablaPublicaciones").html(aux[0]);
+                        $("#p9").html(aux[1]);
                     }
                     else{
                         $("#mensaje").html(data);            
@@ -373,7 +383,9 @@ $(document).ready(function () {
                    $("#modalResultado").modal("hide");
                 },success:function(data){
                     if(data.includes("<tr>")){
-                        $("#tablaResultados").html(data);   
+                        var aux=data.split("||");
+                        $("#tablaResultados").html(aux[0]);
+                        $("#pEvidencias").val(aux[1]);  
                     }
                     else{
                         $("#mensaje").html(data);            
@@ -476,7 +488,9 @@ function borrarCurso(id){
     $("#modalConfirmacion").modal("hide");
     $.post("RegistrarCurso", {id: id}, function(data){
         if(data.includes("<tr>")){
-            $("#tablaCursos").html(data);   
+            var aux=data.split("||");
+            $("#tablaCursos").html(aux[0]);
+            $("#p5").html(aux[1]);  
         }
         else{
             $("#mensaje").html(data);            
@@ -505,7 +519,9 @@ function borrarAportacion(id){
     $("#modalConfirmacion").modal("hide");
     $.post("RegistrarAportacion", {id: id}, function(data){
         if(data.includes("<tr>")){
-            $("#tablaAportaciones").html(data);   
+            var aux=data.split("||");
+            $("#tablaAportaciones").html(aux[0]);
+            $("#p6").html(aux[1]);
         }
         else{
             $("#mensaje").html(data);            
@@ -533,7 +549,9 @@ function borrarParticipacion(id){
     $("#modalConfirmacion").modal("hide");
     $.post("RegistrarParticipacion", {id: id}, function(data){
         if(data.includes("<tr>")){
-            $("#tablaParticipaciones").html(data);   
+            var aux=data.split("||");
+            $("#tablaParticipaciones").html(aux[0]);
+            $("#p7").html(aux[1]);
         }
         else{
             $("#mensaje").html(data);            
@@ -549,7 +567,9 @@ function borrarTutoria(id){
     $("#modalConfirmacion").modal("hide");
     $.post("RegistrarTutoria", {id: id}, function(data){
         if(data.includes("<tr>")){
-            $("#tablaTutorias").html(data);   
+            var aux=data.split("||");
+            $("#tablaTutorias").html(aux[0]);
+            $("#p8").html(aux[1]);
         }
         else{
             $("#mensaje").html(data);            
@@ -565,7 +585,9 @@ function borrarPublicacion(id){
     $("#modalConfirmacion").modal("hide");
     $.post("RegistrarPublicacion", {id: id}, function(data){
         if(data.includes("<tr>")){
-            $("#tablaPublicaciones").html(data);   
+            var aux=data.split("||");
+            $("#tablaPublicaciones").html(aux[0]);
+            $("#p9").html(aux[1]);   
         }
         else{
             $("#mensaje").html(data);            
@@ -581,7 +603,9 @@ function borrarResultado(id){
     $("#modalConfirmacion").modal("hide");
     $.post("RegistrarResultado", {id: id}, function(data){
         if(data.includes("<tr>")){
-            $("#tablaResultados").html(data);   
+            var aux=data.split("||");
+            $("#tablaResultados").html(aux[0]);
+            $("#pEvidencias").val(aux[1]);
         }
         else{
             $("#mensaje").html(data);            

@@ -95,7 +95,8 @@ public class Servlet_registrarAportacion extends HttpServlet {
                 datos=metodo.ejecutaSP("sp_insertAportaciones",parametros);            
                 if(!datos.isEmpty()){
                     if(datos.get(0)[0].equals("ok")){
-                        out.print(new CriteriosValoracion().getFilasAportaciones(idUsuario));                    
+                        String[] infoAportaciones=new CriteriosValoracion().getFilasAportaciones(idUsuario);
+                        out.print(infoAportaciones[0]+"||"+infoAportaciones[1]);                    
                     }else{
                         out.print(datos.get(0)[0]);
                     }
@@ -109,7 +110,8 @@ public class Servlet_registrarAportacion extends HttpServlet {
                 datos=metodo.ejecutaSP("sp_deleteAportaciones",parametros);            
                 if(!datos.isEmpty()){
                     if(datos.get(0)[0].equals("ok")){
-                        out.print(new CriteriosValoracion().getFilasAportaciones(idUsuario));                    
+                        String[] infoAportaciones=new CriteriosValoracion().getFilasAportaciones(idUsuario);
+                        out.print(infoAportaciones[0]+"||"+infoAportaciones[1]);                   
                     }
                 }else{
                     out.print("Error al eliminar la información, intente nuevamente");

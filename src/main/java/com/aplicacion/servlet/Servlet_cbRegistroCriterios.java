@@ -6,6 +6,7 @@
 package com.aplicacion.servlet;
 
 import com.aplicacion.beans.Docente;
+import herramientas.CriteriosValoracion;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -68,16 +69,29 @@ public class Servlet_cbRegistroCriterios extends HttpServlet {
         if(session.getAttribute("idUsuario")!=null&&session.getAttribute("rfc")!=null){            
             Docente docente;  
             Metodos_sql metodos=new Metodos_sql();
+            CriteriosValoracion cv=new CriteriosValoracion();
             String[] parametros={""};
+            String idUsuario=session.getAttribute("idUsuario").toString();
+            String rfc=session.getAttribute("rfc").toString();
             List<String[]>criterios=metodos.ejecutaSP("sp_selectCatCriteriosValoracion", parametros);
             
             docente=new Docente();
-            docente.setIdUsuario(session.getAttribute("idUsuario").toString());
-            docente.setRfc(session.getAttribute("rfc").toString());
+            docente.setIdUsuario(idUsuario);
+            docente.setRfc(rfc);
             docente.consultaInfoAspirante();             
             docente.consultaDocumentos();
+            String[][] puntajes=cv.consultaPuntajes(idUsuario); 
+            String[] puntajeEncuestas=cv.consultaPuntajeEncuestas(rfc);
             request.setAttribute("docente", docente);
             request.setAttribute("criterios", criterios);
+            request.setAttribute("puntajes", puntajes);
+            request.setAttribute("puntajeEncuestas", puntajeEncuestas);            
+            request.setAttribute("cursos", cv.getFilasCursos(idUsuario));
+            request.setAttribute("aportaciones", cv.getFilasAportaciones(idUsuario));
+            request.setAttribute("participaciones", cv.getFilasParticipaciones(idUsuario));
+            request.setAttribute("tutorias", cv.getFilasTutorias(idUsuario));
+            request.setAttribute("publicaciones", cv.getFilasPublicaciones(idUsuario));
+            request.setAttribute("resultados", cv.getFilasResultados(idUsuario));
             ServletContext sc = getServletContext();
             RequestDispatcher rd = sc.getRequestDispatcher("/registroCriterios.jsp");
             rd.forward(request,response);

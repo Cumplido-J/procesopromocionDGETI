@@ -96,7 +96,8 @@ public class Servlet_registrarCurso extends HttpServlet {
                 datos=metodo.ejecutaSP("sp_insertCursos",parametros);            
                 if(!datos.isEmpty()){
                     if(datos.get(0)[0].equals("ok")){
-                        out.print(new CriteriosValoracion().getFilasCursos(idUsuario));                    
+                        String[] infoCursos=new CriteriosValoracion().getFilasCursos(idUsuario);
+                        out.print(infoCursos[0]+"||"+infoCursos[1]);                     
                     }
                 }else{
                     out.print("Error en almacenamiento de datos, intente nuevamente");
@@ -108,7 +109,8 @@ public class Servlet_registrarCurso extends HttpServlet {
                 datos=metodo.ejecutaSP("sp_deleteCursos",parametros);            
                 if(!datos.isEmpty()){
                     if(datos.get(0)[0].equals("ok")){
-                        out.print(new CriteriosValoracion().getFilasCursos(idUsuario));                    
+                        String[] infoCursos=new CriteriosValoracion().getFilasCursos(idUsuario);
+                        out.print(infoCursos[0]+"||"+infoCursos[1]);                    
                     }
                 }else{
                     out.print("Error al eliminar la información, intente nuevamente");
