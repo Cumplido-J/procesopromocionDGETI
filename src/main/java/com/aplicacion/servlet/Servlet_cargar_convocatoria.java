@@ -95,7 +95,7 @@ public class Servlet_cargar_convocatoria extends HttpServlet {
                 rfc = session.getAttribute("rfc").toString();
 
                 String control_combobox = request.getParameter("control_combobox");
-          
+                String nac1 = request.getParameter("nacional");//AGREGAR---------------------------
                 String entidad = request.getParameter("entidad");
                 String plantel = request.getParameter("n_plantel");
                 String programa = request.getParameter("programa");
@@ -112,25 +112,25 @@ public class Servlet_cargar_convocatoria extends HttpServlet {
                 String btnguardar = request.getParameter("guardar1");
 
                 if (btnguardar != null) {
-                   
-                String id = request.getParameter("id");  
-                Date publicacion1 = Date.valueOf(request.getParameter("publicacion"));
-                Date periodo_registro_inicio1 = Date.valueOf(request.getParameter("periodo_registro_inicio"));
-                Date periodo_registro_fin1 = Date.valueOf(request.getParameter("periodo_registro_fin"));
-                Date periodo_valoracion_inicio1 = Date.valueOf(request.getParameter("periodo_valoracion_inicio"));
-                Date periodo_valoracion_fin1 = Date.valueOf(request.getParameter("periodo_valoracion_fin"));
-                Date periodo_dictaminacion_inicio1 = Date.valueOf(request.getParameter("periodo_dictaminacion_inicio"));
-                Date periodo_dictaminacion_fin1 = Date.valueOf(request.getParameter("periodo_dictaminacion_fin"));
-                Date publicacion_resultados1 = Date.valueOf(request.getParameter("publicacion_resultados"));
-                String estatus = request.getParameter("estatus");
-                      
-                
-                int datos7=0;
-                
-                datos7= metodos.modificar_convocatoria(id,publicacion1, periodo_registro_inicio1, periodo_registro_fin1, periodo_valoracion_inicio1, periodo_valoracion_fin1, periodo_dictaminacion_inicio1, periodo_dictaminacion_fin1, publicacion_resultados1, estatus);
-                
-                if (datos7 > 0) {
-                        request.setAttribute("control_combobox", control_combobox);                       
+
+                    String id = request.getParameter("id");
+                    Date publicacion1 = Date.valueOf(request.getParameter("publicacion"));
+                    Date periodo_registro_inicio1 = Date.valueOf(request.getParameter("periodo_registro_inicio"));
+                    Date periodo_registro_fin1 = Date.valueOf(request.getParameter("periodo_registro_fin"));
+                    Date periodo_valoracion_inicio1 = Date.valueOf(request.getParameter("periodo_valoracion_inicio"));
+                    Date periodo_valoracion_fin1 = Date.valueOf(request.getParameter("periodo_valoracion_fin"));
+                    Date periodo_dictaminacion_inicio1 = Date.valueOf(request.getParameter("periodo_dictaminacion_inicio"));
+                    Date periodo_dictaminacion_fin1 = Date.valueOf(request.getParameter("periodo_dictaminacion_fin"));
+                    Date publicacion_resultados1 = Date.valueOf(request.getParameter("publicacion_resultados"));
+                    String estatus = request.getParameter("estatus");
+
+                    int datos7 = 0;
+
+                    datos7 = metodos.modificar_convocatoria(id, publicacion1, periodo_registro_inicio1, periodo_registro_fin1, periodo_valoracion_inicio1, periodo_valoracion_fin1, periodo_dictaminacion_inicio1, periodo_dictaminacion_fin1, publicacion_resultados1, estatus);
+
+                    if (datos7 > 0) {
+                        request.setAttribute("control_combobox", control_combobox);
+                        request.setAttribute("nacional", nac1);//AGREGAR-------------------------------
                         request.setAttribute("nom", nom1);
                         request.setAttribute("dato_ent", ent1);
                         request.setAttribute("dato_pla", pla1);
@@ -141,33 +141,31 @@ public class Servlet_cargar_convocatoria extends HttpServlet {
                         request.setAttribute("ver", "1");
                         session.setAttribute("idUsuario", idUsuario);
                         session.setAttribute("rfc", rfc);
-                       
+
                         RequestDispatcher rd = request.getRequestDispatcher("aviso_modificar_convocatoria.jsp");
                         rd.forward(request, response);
                     } else {
                         out.print("Servidor en mantenimiento, Datos no Guardados");
                     }
-                    
+
                 }
 
-                if (btnregresa != null) {                    
-                    
+                if (btnregresa != null) {
+
                     String datosconvocatoria[] = metodos.buscar_convocatoria(entidad, plantel, programa);
                     if (datosconvocatoria[11] != null) {
                         request.setAttribute("mensaje", "");
                         if (datosconvocatoria[10].equals("temporal")) {
                             request.setAttribute("ver", "1");
-                        }
-                        else
-                        {
-                             request.setAttribute("ver", "2");
+                        } else {
+                            request.setAttribute("ver", "2");
                         }
                     } else {
                         request.setAttribute("mensaje", "No se encuentra la convocatoria");
                         request.setAttribute("ver", "0");
                     }
                     request.setAttribute("control_combobox", control_combobox);
-
+                    request.setAttribute("nacional", nac1);//AGREGAR-------------------------------
                     request.setAttribute("entidad", entidad);
                     request.setAttribute("plantel", plantel);
                     request.setAttribute("programa", programa);

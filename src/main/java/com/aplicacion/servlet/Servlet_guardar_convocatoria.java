@@ -97,6 +97,7 @@ public class Servlet_guardar_convocatoria extends HttpServlet {
                 rfc = session.getAttribute("rfc").toString();
 
                 String control_combobox = request.getParameter("control_combobox");
+                String nac1 = request.getParameter("nacional");//AGREGAR---------------------------
                 String per1 = request.getParameter("permiso1");
                 String per2 = request.getParameter("permiso2");
                 String per4 = request.getParameter("permiso4");
@@ -131,11 +132,16 @@ public class Servlet_guardar_convocatoria extends HttpServlet {
 //                    out.print(periodo_dictaminacion_inicio1);
 //                    out.print(periodo_dictaminacion_fin1);
 //                    out.print(publicacion_resultados1);
-
-                    int datos6 = metodos.guardar7(publicacion1, periodo_registro_inicio1, periodo_registro_fin1, periodo_valoracion_inicio1, periodo_valoracion_fin1, periodo_dictaminacion_inicio1, periodo_dictaminacion_fin1, publicacion_resultados1, plantel, programa, estatus);
+                    int datos6 = 0;
+                    if ((control_combobox.equals("true") || control_combobox.equals("false")) && (nac1.equals("1") || nac1.equals("2"))) {
+                        datos6 = metodos.guardar7(publicacion1, periodo_registro_inicio1, periodo_registro_fin1, periodo_valoracion_inicio1, periodo_valoracion_fin1, periodo_dictaminacion_inicio1, periodo_dictaminacion_fin1, publicacion_resultados1, plantel, programa, estatus);
+                    } else {
+                        datos6 = metodos.guardar7(publicacion1, periodo_registro_inicio1, periodo_registro_fin1, periodo_valoracion_inicio1, periodo_valoracion_fin1, periodo_dictaminacion_inicio1, periodo_dictaminacion_fin1, publicacion_resultados1, pla1, programa, estatus);
+                    }
 
                     if (datos6 > 0) {
                         request.setAttribute("control_combobox", control_combobox);
+                        request.setAttribute("nacional", nac1);//AGREGAR-------------------------------
                         request.setAttribute("opc", "1");
                         request.setAttribute("nom", nom1);
                         request.setAttribute("dato_ent", ent1);
