@@ -29,15 +29,6 @@
         <script type="text/javascript">
 
             function plantel() {
-                if (document.getElementById("entidad").value == "0")
-                {
-                    $("#n8").text("").css("color", "red");
-                    $("#entidad").css("border", "none");
-
-                } else {
-                    $("#n8").text("Selecciona un plantel").css("color", "green");
-                }
-
                 $("#i_opc").val("1");
                 $.post("combo1.jsp", $("#data").serialize(), function (data) {
                     $("#i_plantel").html(data);
@@ -321,141 +312,165 @@
                                 elegir1 = String.valueOf(request.getAttribute("opc"));
 
                                 if (elegir1.equals("1")) {
-                                    ResultSet rs2 = null;
+                                    ResultSet rs20 = null;
                                     if (request.getAttribute("consulta").equals("0")) {
                                         //rs2 = cn.mostrar_usuarios("SELECT * FROM convocatoria WHERE estatus='temporal'");
-                                        rs2 = cn.mostrar_usuarios("SELECT a.*,b.programa FROM convocatoria a join catProgramas b on a.idPrograma=b.id;");
+                                        rs20 = cn.mostrar_usuarios("SELECT a.*,b.programa FROM convocatoria a join catProgramas b on a.idPrograma=b.id WHERE a.id != 0");
                                     }
 
                                     if (request.getAttribute("consulta").equals("1")) {
-                                        rs2 = cn.mostrar_usuarios("SELECT a.*,b.programa FROM convocatoria a join catProgramas b on a.idPrograma=b.id WHERE resultados='" + request.getAttribute("res") + "'");
+                                        rs20 = cn.mostrar_usuarios("SELECT a.*,b.programa FROM convocatoria a join catProgramas b on a.idPrograma=b.id WHERE resultados='" + request.getAttribute("res") + "'");
                                     }
 
                                     if (request.getAttribute("consulta").equals("2")) {
-                                        rs2 = cn.mostrar_usuarios("SELECT a.*,b.programa FROM convocatoria a join catProgramas b on a.idPrograma=b.id WHERE publicacion='" + request.getAttribute("pub") + "'");
+                                        rs20 = cn.mostrar_usuarios("SELECT a.*,b.programa FROM convocatoria a join catProgramas b on a.idPrograma=b.id WHERE publicacion='" + request.getAttribute("pub") + "'");
                                     }
 
                                     if (request.getAttribute("consulta").equals("3")) {
-                                        rs2 = cn.mostrar_usuarios("SELECT a.*,b.programa FROM convocatoria a join catProgramas b on a.idPrograma=b.id WHERE publicacion='" + request.getAttribute("pub") + "' && resultados='" + request.getAttribute("res") + "'");
+                                        rs20 = cn.mostrar_usuarios("SELECT a.*,b.programa FROM convocatoria a join catProgramas b on a.idPrograma=b.id WHERE publicacion='" + request.getAttribute("pub") + "' && resultados='" + request.getAttribute("res") + "'");
                                     }
 
                                     if (request.getAttribute("consulta").equals("4")) {
-                                        rs2 = cn.mostrar_usuarios("SELECT a.*,b.programa FROM convocatoria a join catProgramas b on a.idPrograma=b.id WHERE estatus='" + request.getAttribute("est") + "'");
+                                        rs20 = cn.mostrar_usuarios("SELECT a.*,b.programa FROM convocatoria a join catProgramas b on a.idPrograma=b.id WHERE estatus='" + request.getAttribute("est") + "'");
                                     }
 
                                     if (request.getAttribute("consulta").equals("5")) {
-                                        rs2 = cn.mostrar_usuarios("SELECT a.*,b.programa FROM convocatoria a join catProgramas b on a.idPrograma=b.id WHERE estatus='" + request.getAttribute("est") + "' && resultados='" + request.getAttribute("res") + "'");
+                                        rs20 = cn.mostrar_usuarios("SELECT a.*,b.programa FROM convocatoria a join catProgramas b on a.idPrograma=b.id WHERE estatus='" + request.getAttribute("est") + "' && resultados='" + request.getAttribute("res") + "'");
                                     }
 
                                     if (request.getAttribute("consulta").equals("6")) {
-                                        rs2 = cn.mostrar_usuarios("SELECT a.*,b.programa FROM convocatoria a join catProgramas b on a.idPrograma=b.id WHERE estatus='" + request.getAttribute("est") + "' && publicacion='" + request.getAttribute("pub") + "'");
+                                        rs20 = cn.mostrar_usuarios("SELECT a.*,b.programa FROM convocatoria a join catProgramas b on a.idPrograma=b.id WHERE estatus='" + request.getAttribute("est") + "' && publicacion='" + request.getAttribute("pub") + "'");
                                     }
 
                                     if (request.getAttribute("consulta").equals("7")) {
-                                        rs2 = cn.mostrar_usuarios("SELECT a.*,b.programa FROM convocatoria a join catProgramas b on a.idPrograma=b.id WHERE estatus='" + request.getAttribute("est") + "' && publicacion='" + request.getAttribute("pub") + "' && resultados='" + request.getAttribute("res") + "'");
+                                        rs20 = cn.mostrar_usuarios("SELECT a.*,b.programa FROM convocatoria a join catProgramas b on a.idPrograma=b.id WHERE estatus='" + request.getAttribute("est") + "' && publicacion='" + request.getAttribute("pub") + "' && resultados='" + request.getAttribute("res") + "'");
                                     }
 
                                     if (request.getAttribute("consulta").equals("8")) {
-                                        rs2 = cn.mostrar_usuarios("SELECT a.*,b.programa FROM convocatoria a join catProgramas b on a.idPrograma=b.id WHERE idPlantel='" + request.getAttribute("pla") + "'");
+                                        rs20 = cn.mostrar_usuarios("SELECT a.*,b.programa FROM convocatoria a join catProgramas b on a.idPrograma=b.id WHERE idPlantel='" + request.getAttribute("pla") + "'");
                                     }
 
                                     if (request.getAttribute("consulta").equals("9")) {
-                                        rs2 = cn.mostrar_usuarios("SELECT a.*,b.programa FROM convocatoria a join catProgramas b on a.idPrograma=b.id WHERE idPlantel='" + request.getAttribute("pla") + "' && resultados='" + request.getAttribute("res") + "'");
+                                        rs20 = cn.mostrar_usuarios("SELECT a.*,b.programa FROM convocatoria a join catProgramas b on a.idPrograma=b.id WHERE idPlantel='" + request.getAttribute("pla") + "' && resultados='" + request.getAttribute("res") + "'");
                                     }
 
                                     if (request.getAttribute("consulta").equals("10")) {
-                                        rs2 = cn.mostrar_usuarios("SELECT a.*,b.programa FROM convocatoria a join catProgramas b on a.idPrograma=b.id WHERE idPlantel='" + request.getAttribute("pla") + "' && publicacion='" + request.getAttribute("pub") + "'");
+                                        rs20 = cn.mostrar_usuarios("SELECT a.*,b.programa FROM convocatoria a join catProgramas b on a.idPrograma=b.id WHERE idPlantel='" + request.getAttribute("pla") + "' && publicacion='" + request.getAttribute("pub") + "'");
                                     }
 
                                     if (request.getAttribute("consulta").equals("11")) {
-                                        rs2 = cn.mostrar_usuarios("SELECT a.*,b.programa FROM convocatoria a join catProgramas b on a.idPrograma=b.id WHERE idPlantel='" + request.getAttribute("pla") + "' && publicacion='" + request.getAttribute("pub") + "' && resultados='" + request.getAttribute("res") + "'");
+                                        rs20 = cn.mostrar_usuarios("SELECT a.*,b.programa FROM convocatoria a join catProgramas b on a.idPrograma=b.id WHERE idPlantel='" + request.getAttribute("pla") + "' && publicacion='" + request.getAttribute("pub") + "' && resultados='" + request.getAttribute("res") + "'");
                                     }
 
                                     if (request.getAttribute("consulta").equals("12")) {
-                                        rs2 = cn.mostrar_usuarios("SELECT a.*,b.programa FROM convocatoria a join catProgramas b on a.idPrograma=b.id WHERE idPlantel='" + request.getAttribute("pla") + "' && estatus='" + request.getAttribute("est") + "'");
+                                        rs20 = cn.mostrar_usuarios("SELECT a.*,b.programa FROM convocatoria a join catProgramas b on a.idPrograma=b.id WHERE idPlantel='" + request.getAttribute("pla") + "' && estatus='" + request.getAttribute("est") + "'");
                                     }
 
                                     if (request.getAttribute("consulta").equals("13")) {
-                                        rs2 = cn.mostrar_usuarios("SELECT a.*,b.programa FROM convocatoria a join catProgramas b on a.idPrograma=b.id WHERE idPlantel='" + request.getAttribute("pla") + "' && estatus='" + request.getAttribute("est") + "' && resultados='" + request.getAttribute("res") + "'");
+                                        rs20 = cn.mostrar_usuarios("SELECT a.*,b.programa FROM convocatoria a join catProgramas b on a.idPrograma=b.id WHERE idPlantel='" + request.getAttribute("pla") + "' && estatus='" + request.getAttribute("est") + "' && resultados='" + request.getAttribute("res") + "'");
                                     }
 
                                     if (request.getAttribute("consulta").equals("14")) {
-                                        rs2 = cn.mostrar_usuarios("SELECT a.*,b.programa FROM convocatoria a join catProgramas b on a.idPrograma=b.id WHERE idPlantel='" + request.getAttribute("pla") + "' && estatus='" + request.getAttribute("est") + "' && publicacion='" + request.getAttribute("pub") + "'");
+                                        rs20 = cn.mostrar_usuarios("SELECT a.*,b.programa FROM convocatoria a join catProgramas b on a.idPrograma=b.id WHERE idPlantel='" + request.getAttribute("pla") + "' && estatus='" + request.getAttribute("est") + "' && publicacion='" + request.getAttribute("pub") + "'");
                                     }
 
                                     if (request.getAttribute("consulta").equals("15")) {
-                                        rs2 = cn.mostrar_usuarios("SELECT a.*,b.programa FROM convocatoria a join catProgramas b on a.idPrograma=b.id WHERE idPlantel='" + request.getAttribute("pla") + "' && estatus='" + request.getAttribute("est") + "' && publicacion='" + request.getAttribute("pub") + "' && resultados='" + request.getAttribute("res") + "'");
+                                        rs20 = cn.mostrar_usuarios("SELECT a.*,b.programa FROM convocatoria a join catProgramas b on a.idPrograma=b.id WHERE idPlantel='" + request.getAttribute("pla") + "' && estatus='" + request.getAttribute("est") + "' && publicacion='" + request.getAttribute("pub") + "' && resultados='" + request.getAttribute("res") + "'");
                                     }
-                                    while (rs2.next()) {
+
+                                    if (request.getAttribute("consulta").equals("16")) {
+                                        rs20 = cn.mostrar_usuarios("SELECT a.*,b.programa, d.idEntidad FROM convocatoria a join catProgramas b on a.idPrograma=b.id join catplanteles d on a.idPlantel=d.id where d.idEntidad='" + request.getAttribute("ent") + "'");
+                                    }
+
+                                    if (request.getAttribute("consulta").equals("17")) {
+                                        rs20 = cn.mostrar_usuarios("SELECT a.*,b.programa, d.idEntidad FROM convocatoria a join catProgramas b on a.idPrograma=b.id join catplanteles d on a.idPlantel=d.id where d.idEntidad='" + request.getAttribute("ent") + "' && resultados='" + request.getAttribute("res") + "'");
+                                    }
+
+                                    if (request.getAttribute("consulta").equals("18")) {
+                                        rs20 = cn.mostrar_usuarios("SELECT a.*,b.programa, d.idEntidad FROM convocatoria a join catProgramas b on a.idPrograma=b.id join catplanteles d on a.idPlantel=d.id where d.idEntidad='" + request.getAttribute("ent") + "' && publicacion='" + request.getAttribute("pub") + "'");
+                                    }
+
+                                    if (request.getAttribute("consulta").equals("19")) {
+                                        rs20 = cn.mostrar_usuarios("SELECT a.*,b.programa, d.idEntidad FROM convocatoria a join catProgramas b on a.idPrograma=b.id join catplanteles d on a.idPlantel=d.id where d.idEntidad='" + request.getAttribute("ent") + "' && publicacion='" + request.getAttribute("pub") + "' && resultados='" + request.getAttribute("res") + "'");
+                                    }
+
+                                    if (request.getAttribute("consulta").equals("20")) {
+                                        rs20 = cn.mostrar_usuarios("SELECT a.*,b.programa, d.idEntidad FROM convocatoria a join catProgramas b on a.idPrograma=b.id join catplanteles d on a.idPlantel=d.id where d.idEntidad='" + request.getAttribute("ent") + "' && estatus='" + request.getAttribute("est") + "'");
+                                    }
+
+                                    if (request.getAttribute("consulta").equals("21")) {
+                                        rs20 = cn.mostrar_usuarios("SELECT a.*,b.programa, d.idEntidad FROM convocatoria a join catProgramas b on a.idPrograma=b.id join catplanteles d on a.idPlantel=d.id where d.idEntidad='" + request.getAttribute("ent") + "' && estatus='" + request.getAttribute("est") + "' && resultados='" + request.getAttribute("res") + "'");
+                                    }
+
+                                    if (request.getAttribute("consulta").equals("22")) {
+                                        rs20 = cn.mostrar_usuarios("SELECT a.*,b.programa, d.idEntidad FROM convocatoria a join catProgramas b on a.idPrograma=b.id join catplanteles d on a.idPlantel=d.id where d.idEntidad='" + request.getAttribute("ent") + "' && estatus='" + request.getAttribute("est") + "' && publicacion='" + request.getAttribute("pub") + "'");
+                                    }
+
+                                    if (request.getAttribute("consulta").equals("23")) {
+                                        rs20 = cn.mostrar_usuarios("SELECT a.*,b.programa, d.idEntidad FROM convocatoria a join catProgramas b on a.idPrograma=b.id join catplanteles d on a.idPlantel=d.id where d.idEntidad='" + request.getAttribute("ent") + "' && estatus='" + request.getAttribute("est") + "' && publicacion='" + request.getAttribute("pub") + "' && resultados='" + request.getAttribute("res") + "'");
+                                    }
+
+                                   
+
+                                    while (rs20.next()) {
                             %>
                             <tr>
                                 <td align="center">
                                     <div class="datos_tabla"> 
-                                        <% if (rs2.getString("programa") == null) {
+                                        <% if (rs20.getString("programa") == null) {
                                                 out.print("");
                                             } else {
-                                                out.print(rs2.getString("programa"));
+                                                out.print(rs20.getString("programa"));
                                             }
                                         %>
                                     </div>
                                 </td>
                                 <td align="center">
                                     <div class="datos_tabla"> 
-                                        <% if (rs2.getString("publicacion") == null) {
+                                        <% if (rs20.getString("publicacion") == null) {
                                                 out.print("");
                                             } else {
-                                                out.print(rs2.getString("publicacion"));
+                                                out.print(rs20.getString("publicacion"));
                                             }
                                         %>
                                     </div>
                                 </td>
                                 <td align="center">
                                     <div class="datos_tabla"> 
-                                        <% if (rs2.getString("inicioRegistro") == null) {
+                                        <% if (rs20.getString("inicioRegistro") == null) {
                                                 out.print("");
                                             } else {
-                                                out.print(rs2.getString("inicioRegistro"));
+                                                out.print(rs20.getString("inicioRegistro"));
                                             }
                                         %>
                                     </div>
                                 </td>
                                 <td align="center">
                                     <div class="datos_tabla"> 
-                                        <% if (rs2.getString("finRegistro") == null) {
+                                        <% if (rs20.getString("finRegistro") == null) {
                                                 out.print("");
                                             } else {
-                                                out.print(rs2.getString("finRegistro"));
+                                                out.print(rs20.getString("finRegistro"));
                                             }
                                         %>
                                     </div>
                                 </td>
                                 <td align="center">
                                     <div class="datos_tabla"> 
-                                        <% if (rs2.getString("inicioValoracion") == null) {
+                                        <% if (rs20.getString("inicioValoracion") == null) {
                                                 out.print("");
                                             } else {
-                                                out.print(rs2.getString("inicioValoracion"));
+                                                out.print(rs20.getString("inicioValoracion"));
                                             }
                                         %>
                                     </div>
                                 </td>
                                 <td align="center">
                                     <div class="datos_tabla"> 
-                                        <% if (rs2.getString("finValoracion") == null) {
+                                        <% if (rs20.getString("finValoracion") == null) {
                                                 out.print("");
                                             } else {
-                                                out.print(rs2.getString("finValoracion"));
-                                            }
-                                        %>
-                                    </div>
-                                </td>
-
-                                <td align="center">
-                                    <div class="datos_tabla"> 
-                                        <% if (rs2.getString("inicioDictaminacion") == null) {
-                                                out.print("");
-                                            } else {
-                                                out.print(rs2.getString("inicioDictaminacion"));
+                                                out.print(rs20.getString("finValoracion"));
                                             }
                                         %>
                                     </div>
@@ -463,10 +478,10 @@
 
                                 <td align="center">
                                     <div class="datos_tabla"> 
-                                        <% if (rs2.getString("finDictaminacion") == null) {
+                                        <% if (rs20.getString("inicioDictaminacion") == null) {
                                                 out.print("");
                                             } else {
-                                                out.print(rs2.getString("finDictaminacion"));
+                                                out.print(rs20.getString("inicioDictaminacion"));
                                             }
                                         %>
                                     </div>
@@ -474,10 +489,21 @@
 
                                 <td align="center">
                                     <div class="datos_tabla"> 
-                                        <% if (rs2.getString("resultados") == null) {
+                                        <% if (rs20.getString("finDictaminacion") == null) {
                                                 out.print("");
                                             } else {
-                                                out.print(rs2.getString("resultados"));
+                                                out.print(rs20.getString("finDictaminacion"));
+                                            }
+                                        %>
+                                    </div>
+                                </td>
+
+                                <td align="center">
+                                    <div class="datos_tabla"> 
+                                        <% if (rs20.getString("resultados") == null) {
+                                                out.print("");
+                                            } else {
+                                                out.print(rs20.getString("resultados"));
                                                 //out.print(idUsuario);
                                                 //out.print(rfc);
                                             }
@@ -487,10 +513,10 @@
 
                                 <td align="center">
                                     <div class="datos_tabla"> 
-                                        <% if (rs2.getString("estatus") == null) {
+                                        <% if (rs20.getString("estatus") == null) {
                                                 out.print("");
                                             } else {
-                                                out.print(rs2.getString("estatus"));
+                                                out.print(rs20.getString("estatus"));
                                             }
                                         %>
 
@@ -605,7 +631,7 @@
                                     ResultSet rs2 = null;
                                     if (request.getAttribute("consulta").equals("0")) {
                                         //rs2 = cn.mostrar_usuarios("SELECT * FROM convocatoria WHERE estatus='temporal'");
-                                        rs2 = cn.mostrar_usuarios("SELECT a.*,b.programa FROM convocatoria a join catProgramas b on a.idPrograma=b.id;");
+                                        rs2 = cn.mostrar_usuarios("SELECT a.*,b.programa FROM convocatoria a join catProgramas b on a.idPrograma=b.id WHERE a.id != 0");
                                     }
 
                                     if (request.getAttribute("consulta").equals("1")) {
@@ -667,6 +693,40 @@
                                     if (request.getAttribute("consulta").equals("15")) {
                                         rs2 = cn.mostrar_usuarios("SELECT a.*,b.programa FROM convocatoria a join catProgramas b on a.idPrograma=b.id WHERE idPlantel='" + request.getAttribute("pla") + "' && estatus='" + request.getAttribute("est") + "' && publicacion='" + request.getAttribute("pub") + "' && resultados='" + request.getAttribute("res") + "'");
                                     }
+
+                                    if (request.getAttribute("consulta").equals("16")) {
+                                        rs2 = cn.mostrar_usuarios("SELECT a.*,b.programa, d.idEntidad FROM convocatoria a join catProgramas b on a.idPrograma=b.id join catplanteles d on a.idPlantel=d.id where d.idEntidad='" + request.getAttribute("ent") + "'");
+                                    }
+
+                                    if (request.getAttribute("consulta").equals("17")) {
+                                        rs2 = cn.mostrar_usuarios("SELECT a.*,b.programa, d.idEntidad FROM convocatoria a join catProgramas b on a.idPrograma=b.id join catplanteles d on a.idPlantel=d.id where d.idEntidad='" + request.getAttribute("ent") + "' && resultados='" + request.getAttribute("res") + "'");
+                                    }
+
+                                    if (request.getAttribute("consulta").equals("18")) {
+                                        rs2 = cn.mostrar_usuarios("SELECT a.*,b.programa, d.idEntidad FROM convocatoria a join catProgramas b on a.idPrograma=b.id join catplanteles d on a.idPlantel=d.id where d.idEntidad='" + request.getAttribute("ent") + "' && publicacion='" + request.getAttribute("pub") + "'");
+                                    }
+
+                                    if (request.getAttribute("consulta").equals("19")) {
+                                        rs2 = cn.mostrar_usuarios("SELECT a.*,b.programa, d.idEntidad FROM convocatoria a join catProgramas b on a.idPrograma=b.id join catplanteles d on a.idPlantel=d.id where d.idEntidad='" + request.getAttribute("ent") + "' && publicacion='" + request.getAttribute("pub") + "' && resultados='" + request.getAttribute("res") + "'");
+                                    }
+
+                                    if (request.getAttribute("consulta").equals("20")) {
+                                        rs2 = cn.mostrar_usuarios("SELECT a.*,b.programa, d.idEntidad FROM convocatoria a join catProgramas b on a.idPrograma=b.id join catplanteles d on a.idPlantel=d.id where d.idEntidad='" + request.getAttribute("ent") + "' && estatus='" + request.getAttribute("est") + "'");
+                                    }
+
+                                    if (request.getAttribute("consulta").equals("21")) {
+                                        rs2 = cn.mostrar_usuarios("SELECT a.*,b.programa, d.idEntidad FROM convocatoria a join catProgramas b on a.idPrograma=b.id join catplanteles d on a.idPlantel=d.id where d.idEntidad='" + request.getAttribute("ent") + "' && estatus='" + request.getAttribute("est") + "' && resultados='" + request.getAttribute("res") + "'");
+                                    }
+
+                                    if (request.getAttribute("consulta").equals("22")) {
+                                        rs2 = cn.mostrar_usuarios("SELECT a.*,b.programa, d.idEntidad FROM convocatoria a join catProgramas b on a.idPrograma=b.id join catplanteles d on a.idPlantel=d.id where d.idEntidad='" + request.getAttribute("ent") + "' && estatus='" + request.getAttribute("est") + "' && publicacion='" + request.getAttribute("pub") + "'");
+                                    }
+
+                                    if (request.getAttribute("consulta").equals("23")) {
+                                        rs2 = cn.mostrar_usuarios("SELECT a.*,b.programa, d.idEntidad FROM convocatoria a join catProgramas b on a.idPrograma=b.id join catplanteles d on a.idPlantel=d.id where d.idEntidad='" + request.getAttribute("ent") + "' && estatus='" + request.getAttribute("est") + "' && publicacion='" + request.getAttribute("pub") + "' && resultados='" + request.getAttribute("res") + "'");
+                                    }                              
+
+                                   
                                     while (rs2.next()) {
                             %>
                             <tr>
@@ -896,71 +956,70 @@
 
                                 if (elegir1.equals("1")) {
                                     ResultSet rs2 = null;
+                                                     
                                     if (request.getAttribute("consulta").equals("0")) {
-
-                                        rs2 = cn.mostrar_usuarios("SELECT a.*,b.programa FROM convocatoria a join catProgramas b on a.idPrograma=b.id;");
-                                        //rs2 = cn.mostrar_usuarios("SELECT a.* FROM convocatoria a join catplanteles b on a.idPlantel=b.id WHERE b.idEntidad=15");
+                                        rs2 = cn.mostrar_usuarios("SELECT a.*,b.programa, d.idEntidad FROM convocatoria a join catProgramas b on a.idPrograma=b.id join catplanteles d on a.idPlantel=d.id where d.idEntidad='" + request.getAttribute("dato_ent") + "'");
                                     }
 
                                     if (request.getAttribute("consulta").equals("1")) {
-                                        rs2 = cn.mostrar_usuarios("SELECT a.*,b.programa FROM convocatoria a join catProgramas b on a.idPrograma=b.id WHERE resultados='" + request.getAttribute("res") + "'");
+                                        rs2 = cn.mostrar_usuarios("SELECT a.*,b.programa, d.idEntidad FROM convocatoria a join catProgramas b on a.idPrograma=b.id join catplanteles d on a.idPlantel=d.id where d.idEntidad='" + request.getAttribute("dato_ent") + "' && resultados='" + request.getAttribute("res") + "'");
                                     }
 
                                     if (request.getAttribute("consulta").equals("2")) {
-                                        rs2 = cn.mostrar_usuarios("SELECT a.*,b.programa FROM convocatoria a join catProgramas b on a.idPrograma=b.id WHERE publicacion='" + request.getAttribute("pub") + "'");
+                                        rs2 = cn.mostrar_usuarios("SELECT a.*,b.programa, d.idEntidad FROM convocatoria a join catProgramas b on a.idPrograma=b.id join catplanteles d on a.idPlantel=d.id where d.idEntidad='" + request.getAttribute("dato_ent") + "' && publicacion='" + request.getAttribute("pub") + "'");
                                     }
 
                                     if (request.getAttribute("consulta").equals("3")) {
-                                        rs2 = cn.mostrar_usuarios("SELECT a.*,b.programa FROM convocatoria a join catProgramas b on a.idPrograma=b.id WHERE publicacion='" + request.getAttribute("pub") + "' && resultados='" + request.getAttribute("res") + "'");
+                                        rs2 = cn.mostrar_usuarios("SELECT a.*,b.programa, d.idEntidad FROM convocatoria a join catProgramas b on a.idPrograma=b.id join catplanteles d on a.idPlantel=d.id where d.idEntidad='" + request.getAttribute("dato_ent") + "' && publicacion='" + request.getAttribute("pub") + "' && resultados='" + request.getAttribute("res") + "'");
                                     }
 
                                     if (request.getAttribute("consulta").equals("4")) {
-                                        rs2 = cn.mostrar_usuarios("SELECT a.*,b.programa FROM convocatoria a join catProgramas b on a.idPrograma=b.id WHERE estatus='" + request.getAttribute("est") + "'");
+                                        rs2 = cn.mostrar_usuarios("SELECT a.*,b.programa, d.idEntidad FROM convocatoria a join catProgramas b on a.idPrograma=b.id join catplanteles d on a.idPlantel=d.id where d.idEntidad='" + request.getAttribute("dato_ent") + "' && estatus='" + request.getAttribute("est") + "'");
                                     }
 
                                     if (request.getAttribute("consulta").equals("5")) {
-                                        rs2 = cn.mostrar_usuarios("SELECT a.*,b.programa FROM convocatoria a join catProgramas b on a.idPrograma=b.id WHERE estatus='" + request.getAttribute("est") + "' && resultados='" + request.getAttribute("res") + "'");
+                                        rs2 = cn.mostrar_usuarios("SELECT a.*,b.programa, d.idEntidad FROM convocatoria a join catProgramas b on a.idPrograma=b.id join catplanteles d on a.idPlantel=d.id where d.idEntidad='" + request.getAttribute("dato_ent") + "' && estatus='" + request.getAttribute("est") + "' && resultados='" + request.getAttribute("res") + "'");
                                     }
 
                                     if (request.getAttribute("consulta").equals("6")) {
-                                        rs2 = cn.mostrar_usuarios("SELECT a.*,b.programa FROM convocatoria a join catProgramas b on a.idPrograma=b.id WHERE estatus='" + request.getAttribute("est") + "' && publicacion='" + request.getAttribute("pub") + "'");
+                                        rs2 = cn.mostrar_usuarios("SELECT a.*,b.programa, d.idEntidad FROM convocatoria a join catProgramas b on a.idPrograma=b.id join catplanteles d on a.idPlantel=d.id where d.idEntidad='" + request.getAttribute("dato_ent") + "' && estatus='" + request.getAttribute("est") + "' && publicacion='" + request.getAttribute("pub") + "'");
                                     }
 
                                     if (request.getAttribute("consulta").equals("7")) {
-                                        rs2 = cn.mostrar_usuarios("SELECT a.*,b.programa FROM convocatoria a join catProgramas b on a.idPrograma=b.id WHERE estatus='" + request.getAttribute("est") + "' && publicacion='" + request.getAttribute("pub") + "' && resultados='" + request.getAttribute("res") + "'");
+                                        rs2 = cn.mostrar_usuarios("SELECT a.*,b.programa, d.idEntidad FROM convocatoria a join catProgramas b on a.idPrograma=b.id join catplanteles d on a.idPlantel=d.id where d.idEntidad='" + request.getAttribute("dato_ent") + "' && estatus='" + request.getAttribute("est") + "' && publicacion='" + request.getAttribute("pub") + "' && resultados='" + request.getAttribute("res") + "'");
+                                    }        
+                                    
+                                     if (request.getAttribute("consulta").equals("8")) {
+                                        rs2 = cn.mostrar_usuarios("SELECT a.*,b.programa, d.idEntidad FROM convocatoria a join catProgramas b on a.idPrograma=b.id join catplanteles d on a.idPlantel=d.id where d.idEntidad='" + request.getAttribute("dato_ent") + "' && idPlantel='" + request.getAttribute("pla")+"'");
                                     }
-
-                                    if (request.getAttribute("consulta").equals("8")) {
-                                        rs2 = cn.mostrar_usuarios("SELECT a.*,b.programa FROM convocatoria a join catProgramas b on a.idPrograma=b.id WHERE idPlantel='" + request.getAttribute("pla") + "'");
-                                    }
-
-                                    if (request.getAttribute("consulta").equals("9")) {
-                                        rs2 = cn.mostrar_usuarios("SELECT a.*,b.programa FROM convocatoria a join catProgramas b on a.idPrograma=b.id WHERE idPlantel='" + request.getAttribute("pla") + "' && resultados='" + request.getAttribute("res") + "'");
+                                     
+                                      if (request.getAttribute("consulta").equals("9")) {
+                                        rs2 = cn.mostrar_usuarios("SELECT a.*,b.programa, d.idEntidad FROM convocatoria a join catProgramas b on a.idPrograma=b.id join catplanteles d on a.idPlantel=d.id where d.idEntidad='" + request.getAttribute("dato_ent") + "' && idPlantel='" + request.getAttribute("pla")+ "' && resultados='" + request.getAttribute("res") + "'");
                                     }
 
                                     if (request.getAttribute("consulta").equals("10")) {
-                                        rs2 = cn.mostrar_usuarios("SELECT a.*,b.programa FROM convocatoria a join catProgramas b on a.idPrograma=b.id WHERE idPlantel='" + request.getAttribute("pla") + "' && publicacion='" + request.getAttribute("pub") + "'");
+                                        rs2 = cn.mostrar_usuarios("SELECT a.*,b.programa, d.idEntidad FROM convocatoria a join catProgramas b on a.idPrograma=b.id join catplanteles d on a.idPlantel=d.id where d.idEntidad='" + request.getAttribute("dato_ent") + "' && idPlantel='" + request.getAttribute("pla")+ "' && publicacion='" + request.getAttribute("pub") + "'");
                                     }
 
                                     if (request.getAttribute("consulta").equals("11")) {
-                                        rs2 = cn.mostrar_usuarios("SELECT a.*,b.programa FROM convocatoria a join catProgramas b on a.idPrograma=b.id WHERE idPlantel='" + request.getAttribute("pla") + "' && publicacion='" + request.getAttribute("pub") + "' && resultados='" + request.getAttribute("res") + "'");
+                                        rs2 = cn.mostrar_usuarios("SELECT a.*,b.programa, d.idEntidad FROM convocatoria a join catProgramas b on a.idPrograma=b.id join catplanteles d on a.idPlantel=d.id where d.idEntidad='" + request.getAttribute("dato_ent") + "' && idPlantel='" + request.getAttribute("pla")+ "' && publicacion='" + request.getAttribute("pub") + "' && resultados='" + request.getAttribute("res") + "'");
                                     }
 
                                     if (request.getAttribute("consulta").equals("12")) {
-                                        rs2 = cn.mostrar_usuarios("SELECT a.*,b.programa FROM convocatoria a join catProgramas b on a.idPrograma=b.id WHERE idPlantel='" + request.getAttribute("pla") + "' && estatus='" + request.getAttribute("est") + "'");
+                                        rs2 = cn.mostrar_usuarios("SELECT a.*,b.programa, d.idEntidad FROM convocatoria a join catProgramas b on a.idPrograma=b.id join catplanteles d on a.idPlantel=d.id where d.idEntidad='" + request.getAttribute("dato_ent") + "' && idPlantel='" + request.getAttribute("pla")+ "' && estatus='" + request.getAttribute("est") + "'");
                                     }
 
                                     if (request.getAttribute("consulta").equals("13")) {
-                                        rs2 = cn.mostrar_usuarios("SELECT a.*,b.programa FROM convocatoria a join catProgramas b on a.idPrograma=b.id WHERE idPlantel='" + request.getAttribute("pla") + "' && estatus='" + request.getAttribute("est") + "' && resultados='" + request.getAttribute("res") + "'");
+                                        rs2 = cn.mostrar_usuarios("SELECT a.*,b.programa, d.idEntidad FROM convocatoria a join catProgramas b on a.idPrograma=b.id join catplanteles d on a.idPlantel=d.id where d.idEntidad='" + request.getAttribute("dato_ent") + "' && idPlantel='" + request.getAttribute("pla")+ "' && estatus='" + request.getAttribute("est") + "' && resultados='" + request.getAttribute("res") + "'");
                                     }
 
                                     if (request.getAttribute("consulta").equals("14")) {
-                                        rs2 = cn.mostrar_usuarios("SELECT a.*,b.programa FROM convocatoria a join catProgramas b on a.idPrograma=b.id WHERE idPlantel='" + request.getAttribute("pla") + "' && estatus='" + request.getAttribute("est") + "' && publicacion='" + request.getAttribute("pub") + "'");
+                                        rs2 = cn.mostrar_usuarios("SELECT a.*,b.programa, d.idEntidad FROM convocatoria a join catProgramas b on a.idPrograma=b.id join catplanteles d on a.idPlantel=d.id where d.idEntidad='" + request.getAttribute("dato_ent") + "' && idPlantel='" + request.getAttribute("pla")+ "' && estatus='" + request.getAttribute("est") + "' && publicacion='" + request.getAttribute("pub") + "'");
                                     }
 
                                     if (request.getAttribute("consulta").equals("15")) {
-                                        rs2 = cn.mostrar_usuarios("SELECT a.*,b.programa FROM convocatoria a join catProgramas b on a.idPrograma=b.id WHERE idPlantel='" + request.getAttribute("pla") + "' && estatus='" + request.getAttribute("est") + "' && publicacion='" + request.getAttribute("pub") + "' && resultados='" + request.getAttribute("res") + "'");
-                                    }
+                                        rs2 = cn.mostrar_usuarios("SELECT a.*,b.programa, d.idEntidad FROM convocatoria a join catProgramas b on a.idPrograma=b.id join catplanteles d on a.idPlantel=d.id where d.idEntidad='" + request.getAttribute("dato_ent") + "' && idPlantel='" + request.getAttribute("pla")+ "' && estatus='" + request.getAttribute("est") + "' && publicacion='" + request.getAttribute("pub") + "' && resultados='" + request.getAttribute("res") + "'");
+                                    }  
                                     while (rs2.next()) {
                             %>
                             <tr>
@@ -1112,19 +1171,19 @@
 
                                 <div class="caja">   
                                     <label>Plantel</label><br>
+                                   <%
+                                    ResultSet rs10 = cn.mostrar("Select * from catplanteles WHERE id='" + request.getAttribute("dato_pla") + "'");
+                                %>
+
+                                <select class="form-control" name="n_plantel" id="i_plantel" disabled="true">
                                     <%
-                                        ResultSet rs10 = cn.mostrar("Select * from catplanteles WHERE idEntidad='" + request.getAttribute("dato_ent") + "'");
+                                        while (rs10.next()) {
                                     %>
-                                    <select class="form-control" name="n_plantel" id="i_plantel">
-                                        <option value="0">Escoge una opcion</option>
-                                        <%
-                                            while (rs10.next()) {
-                                        %>                 
-                                        <option value="<%=rs10.getString("id")%>"><%=rs10.getString("plantel")%></option>
-                                        <%
-                                            }
-                                        %>
-                                    </select>
+                                    <option value="<%=rs10.getString("id")%>"><%=rs10.getString("plantel")%></option>
+                                    <%
+                                        }
+                                    %>
+                                </select>
 
                                     </td></div>
 
@@ -1188,72 +1247,39 @@
                                 elegir1 = String.valueOf(request.getAttribute("opc"));
 
                                 if (elegir1.equals("1")) {
-                                    ResultSet rs2 = null;
-                                    if (request.getAttribute("consulta").equals("0")) {
+                                    ResultSet rs2 = null;                               
 
-                                        rs2 = cn.mostrar_usuarios("SELECT a.*,b.programa FROM convocatoria a join catProgramas b on a.idPrograma=b.id;");
-                                        //rs2 = cn.mostrar_usuarios("SELECT a.* FROM convocatoria a join catplanteles b on a.idPlantel=b.id WHERE b.idEntidad=15");
+                                     if (request.getAttribute("consulta").equals("0")) {
+                                        rs2 = cn.mostrar_usuarios("SELECT a.*,b.programa, d.idEntidad FROM convocatoria a join catProgramas b on a.idPrograma=b.id join catplanteles d on a.idPlantel=d.id where d.idEntidad='" + request.getAttribute("dato_ent") + "' && idPlantel='" + request.getAttribute("dato_pla")+"'");
                                     }
-
-                                    if (request.getAttribute("consulta").equals("1")) {
-                                        rs2 = cn.mostrar_usuarios("SELECT a.*,b.programa FROM convocatoria a join catProgramas b on a.idPrograma=b.id WHERE resultados='" + request.getAttribute("res") + "'");
+                                     
+                                      if (request.getAttribute("consulta").equals("1")) {
+                                        rs2 = cn.mostrar_usuarios("SELECT a.*,b.programa, d.idEntidad FROM convocatoria a join catProgramas b on a.idPrograma=b.id join catplanteles d on a.idPlantel=d.id where d.idEntidad='" + request.getAttribute("dato_ent") + "' && idPlantel='" + request.getAttribute("dato_pla")+ "' && resultados='" + request.getAttribute("res") + "'");
                                     }
 
                                     if (request.getAttribute("consulta").equals("2")) {
-                                        rs2 = cn.mostrar_usuarios("SELECT a.*,b.programa FROM convocatoria a join catProgramas b on a.idPrograma=b.id WHERE publicacion='" + request.getAttribute("pub") + "'");
+                                        rs2 = cn.mostrar_usuarios("SELECT a.*,b.programa, d.idEntidad FROM convocatoria a join catProgramas b on a.idPrograma=b.id join catplanteles d on a.idPlantel=d.id where d.idEntidad='" + request.getAttribute("dato_ent") + "' && idPlantel='" + request.getAttribute("dato_pla")+ "' && publicacion='" + request.getAttribute("pub") + "'");
                                     }
 
                                     if (request.getAttribute("consulta").equals("3")) {
-                                        rs2 = cn.mostrar_usuarios("SELECT a.*,b.programa FROM convocatoria a join catProgramas b on a.idPrograma=b.id WHERE publicacion='" + request.getAttribute("pub") + "' && resultados='" + request.getAttribute("res") + "'");
+                                        rs2 = cn.mostrar_usuarios("SELECT a.*,b.programa, d.idEntidad FROM convocatoria a join catProgramas b on a.idPrograma=b.id join catplanteles d on a.idPlantel=d.id where d.idEntidad='" + request.getAttribute("dato_ent") + "' && idPlantel='" + request.getAttribute("dato_pla")+ "' && publicacion='" + request.getAttribute("pub") + "' && resultados='" + request.getAttribute("res") + "'");
                                     }
 
                                     if (request.getAttribute("consulta").equals("4")) {
-                                        rs2 = cn.mostrar_usuarios("SELECT a.*,b.programa FROM convocatoria a join catProgramas b on a.idPrograma=b.id WHERE estatus='" + request.getAttribute("est") + "'");
+                                        rs2 = cn.mostrar_usuarios("SELECT a.*,b.programa, d.idEntidad FROM convocatoria a join catProgramas b on a.idPrograma=b.id join catplanteles d on a.idPlantel=d.id where d.idEntidad='" + request.getAttribute("dato_ent") + "' && idPlantel='" + request.getAttribute("dato_pla")+ "' && estatus='" + request.getAttribute("est") + "'");
                                     }
 
                                     if (request.getAttribute("consulta").equals("5")) {
-                                        rs2 = cn.mostrar_usuarios("SELECT a.*,b.programa FROM convocatoria a join catProgramas b on a.idPrograma=b.id WHERE estatus='" + request.getAttribute("est") + "' && resultados='" + request.getAttribute("res") + "'");
+                                        rs2 = cn.mostrar_usuarios("SELECT a.*,b.programa, d.idEntidad FROM convocatoria a join catProgramas b on a.idPrograma=b.id join catplanteles d on a.idPlantel=d.id where d.idEntidad='" + request.getAttribute("dato_ent") + "' && idPlantel='" + request.getAttribute("dato_pla")+ "' && estatus='" + request.getAttribute("est") + "' && resultados='" + request.getAttribute("res") + "'");
                                     }
 
                                     if (request.getAttribute("consulta").equals("6")) {
-                                        rs2 = cn.mostrar_usuarios("SELECT a.*,b.programa FROM convocatoria a join catProgramas b on a.idPrograma=b.id WHERE estatus='" + request.getAttribute("est") + "' && publicacion='" + request.getAttribute("pub") + "'");
+                                        rs2 = cn.mostrar_usuarios("SELECT a.*,b.programa, d.idEntidad FROM convocatoria a join catProgramas b on a.idPrograma=b.id join catplanteles d on a.idPlantel=d.id where d.idEntidad='" + request.getAttribute("dato_ent") + "' && idPlantel='" + request.getAttribute("dato_pla")+ "' && estatus='" + request.getAttribute("est") + "' && publicacion='" + request.getAttribute("pub") + "'");
                                     }
 
                                     if (request.getAttribute("consulta").equals("7")) {
-                                        rs2 = cn.mostrar_usuarios("SELECT a.*,b.programa FROM convocatoria a join catProgramas b on a.idPrograma=b.id WHERE estatus='" + request.getAttribute("est") + "' && publicacion='" + request.getAttribute("pub") + "' && resultados='" + request.getAttribute("res") + "'");
-                                    }
-
-                                    if (request.getAttribute("consulta").equals("8")) {
-                                        rs2 = cn.mostrar_usuarios("SELECT a.*,b.programa FROM convocatoria a join catProgramas b on a.idPrograma=b.id WHERE idPlantel='" + request.getAttribute("pla") + "'");
-                                    }
-
-                                    if (request.getAttribute("consulta").equals("9")) {
-                                        rs2 = cn.mostrar_usuarios("SELECT a.*,b.programa FROM convocatoria a join catProgramas b on a.idPrograma=b.id WHERE idPlantel='" + request.getAttribute("pla") + "' && resultados='" + request.getAttribute("res") + "'");
-                                    }
-
-                                    if (request.getAttribute("consulta").equals("10")) {
-                                        rs2 = cn.mostrar_usuarios("SELECT a.*,b.programa FROM convocatoria a join catProgramas b on a.idPrograma=b.id WHERE idPlantel='" + request.getAttribute("pla") + "' && publicacion='" + request.getAttribute("pub") + "'");
-                                    }
-
-                                    if (request.getAttribute("consulta").equals("11")) {
-                                        rs2 = cn.mostrar_usuarios("SELECT a.*,b.programa FROM convocatoria a join catProgramas b on a.idPrograma=b.id WHERE idPlantel='" + request.getAttribute("pla") + "' && publicacion='" + request.getAttribute("pub") + "' && resultados='" + request.getAttribute("res") + "'");
-                                    }
-
-                                    if (request.getAttribute("consulta").equals("12")) {
-                                        rs2 = cn.mostrar_usuarios("SELECT a.*,b.programa FROM convocatoria a join catProgramas b on a.idPrograma=b.id WHERE idPlantel='" + request.getAttribute("pla") + "' && estatus='" + request.getAttribute("est") + "'");
-                                    }
-
-                                    if (request.getAttribute("consulta").equals("13")) {
-                                        rs2 = cn.mostrar_usuarios("SELECT a.*,b.programa FROM convocatoria a join catProgramas b on a.idPrograma=b.id WHERE idPlantel='" + request.getAttribute("pla") + "' && estatus='" + request.getAttribute("est") + "' && resultados='" + request.getAttribute("res") + "'");
-                                    }
-
-                                    if (request.getAttribute("consulta").equals("14")) {
-                                        rs2 = cn.mostrar_usuarios("SELECT a.*,b.programa FROM convocatoria a join catProgramas b on a.idPrograma=b.id WHERE idPlantel='" + request.getAttribute("pla") + "' && estatus='" + request.getAttribute("est") + "' && publicacion='" + request.getAttribute("pub") + "'");
-                                    }
-
-                                    if (request.getAttribute("consulta").equals("15")) {
-                                        rs2 = cn.mostrar_usuarios("SELECT a.*,b.programa FROM convocatoria a join catProgramas b on a.idPrograma=b.id WHERE idPlantel='" + request.getAttribute("pla") + "' && estatus='" + request.getAttribute("est") + "' && publicacion='" + request.getAttribute("pub") + "' && resultados='" + request.getAttribute("res") + "'");
-                                    }
+                                        rs2 = cn.mostrar_usuarios("SELECT a.*,b.programa, d.idEntidad FROM convocatoria a join catProgramas b on a.idPrograma=b.id join catplanteles d on a.idPlantel=d.id where d.idEntidad='" + request.getAttribute("dato_ent") + "' && idPlantel='" + request.getAttribute("dato_pla")+ "' && estatus='" + request.getAttribute("est") + "' && publicacion='" + request.getAttribute("pub") + "' && resultados='" + request.getAttribute("res") + "'");
+                                    } 
                                     while (rs2.next()) {
                             %>
                             <tr>
