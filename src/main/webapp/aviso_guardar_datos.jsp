@@ -38,6 +38,7 @@
                             session.setAttribute("rfc", rfc);
                         %>
                     <input type="hidden" name="control_combobox" id="control_combobox" value="<%=request.getAttribute("control_combobox")%>">    
+                    <input type="hidden" name="nacional" id="nacional" value="<%=request.getAttribute("nacional")%>"> <%--AGREGAR--%>
                     <input type="hidden" name="permiso1" id="permiso1" value="<%=request.getAttribute("per1")%>">
                     <input type="hidden" name="permiso2" id="permiso2" value="<%=request.getAttribute("per2")%>">
                     <input type="hidden" name="permiso4" id="permiso4" value="<%=request.getAttribute("per4")%>">

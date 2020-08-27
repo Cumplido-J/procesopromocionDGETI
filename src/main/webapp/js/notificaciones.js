@@ -1,3 +1,5 @@
+
+
 function validarentrada1() {
     if (document.getElementById("i_plantel").value == "0")
     {
@@ -234,14 +236,16 @@ function  validate() {
 //------------------------------------------------------------------------------
     var ent1 = document.getElementById("entidad").value;
     var control_combobox = document.getElementById("control_combobox").value;
+    var nivel = document.getElementById("nivel").value;
+    var pla1 = document.getElementById("i_plantel").value;
     
-    if (ent1 == "0" && control_combobox == "false") {
-        $("#n8").text("Campo ENTIDAD vacio").css("color", "red");
-        $("#entidad").css("border", "1px solid red");
+    if (pla1 == "0" && control_combobox == "true" && nivel == "2") {
+        $("#n7").text("Campo PLANTEL vacio").css("color", "red");
+        $("#i_plantel").css("border", "1px solid red");
     }
 
-    var pla1 = document.getElementById("i_plantel").value;
-    if (pla1 == "0" && control_combobox == "false") {
+
+    if (pla1 == "0" && control_combobox == "false" && nivel == "2") {
         $("#n7").text("Campo PLANTEL vacio").css("color", "red");
         $("#i_plantel").css("border", "1px solid red");
     }
@@ -264,7 +268,7 @@ function  validate() {
         $("#ap").css("border", "1px solid red");
     }
 
-    
+
 
     var tel1 = document.getElementById("tel").value;
     if (tel1 == "") {
@@ -303,7 +307,7 @@ function  validate() {
         $("#n11").text("Selecciona por lo menos un PERMISO").css("color", "red");
         return false;
     } else {
-  
+
     }
 
     var p1 = document.getElementById("pass1").value;
@@ -311,7 +315,7 @@ function  validate() {
     if (p1 == cadenavacia && p2 == cadenavacia) {
         return false;
     }
-    
+
 //----------------------------------------------------------------------------
     var nom = document.getElementById("nombre_nom").value;
     if (nom == cadenavacia)
@@ -401,14 +405,21 @@ function  validate() {
     }
 //----------------------------------------------------------------------------
 
- if (document.getElementById("i_plantel").value == "0" && control_combobox == "false")
+    if (document.getElementById("i_plantel").value == "0" && control_combobox == "false" && nivel == "2")
     {
         return false;
     } else {
     }
 
 //----------------------------------------------------------------------------
-      if (document.getElementById("entidad").value == "0" && control_combobox == "false")
+
+    if (document.getElementById("i_plantel").value == "0" && control_combobox == "true" && nivel == "2")
+    {
+        return false;
+    } else {
+    }
+//----------------------------------------------------------------------------
+    if (document.getElementById("entidad").value == "0" && control_combobox == "false" && nivel == "0")
     {
         return false;
     } else {

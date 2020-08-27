@@ -36,7 +36,7 @@
 
 
             }
-            
+
             function habilitar() {
                 var camp1 = document.getElementById("permiso1");
                 var camp2 = document.getElementById("permiso2");
@@ -140,6 +140,7 @@
                                                         session.setAttribute("rfc", rfc);
                                                     %>
                                                     <input type="hidden" name="control_combobox" id="control_combobox" value="<%=request.getAttribute("control_combobox")%>">
+                                                    <input type="hidden" name="nacional" id="nacional" value="<%=request.getAttribute("nacional")%>"> <%--AGREGAR--%>
                                                     <input type="hidden" name="permiso1" id="permiso1" value="<%=request.getAttribute("per1")%>">
                                                     <input type="hidden" name="permiso2" id="permiso2" value="<%=request.getAttribute("per2")%>">
                                                     <input type="hidden" name="permiso4" id="permiso4" value="<%=request.getAttribute("per4")%>">
@@ -157,6 +158,7 @@
                                                         session.setAttribute("rfc", rfc);
                                                     %>
                                                     <input type="hidden" name="control_combobox" id="control_combobox" value="<%=request.getAttribute("control_combobox")%>">
+                                                    <input type="hidden" name="nacional" id="nacional" value="<%=request.getAttribute("nacional")%>"> <%--AGREGAR--%>
                                                     <input type="hidden" name="permiso1" id="permiso1" value="<%=request.getAttribute("per1")%>">
                                                     <input type="hidden" name="permiso2" id="permiso2" value="<%=request.getAttribute("per2")%>">
                                                     <input type="hidden" name="permiso4" id="permiso4" value="<%=request.getAttribute("per4")%>">
@@ -174,6 +176,7 @@
                                                         session.setAttribute("rfc", rfc);
                                                     %>
                                                     <input type="hidden" name="control_combobox" id="control_combobox" value="<%=request.getAttribute("control_combobox")%>">
+                                                    <input type="hidden" name="nacional" id="nacional" value="<%=request.getAttribute("nacional")%>"> <%--AGREGAR--%>
                                                     <input type="hidden" name="permiso1" id="permiso1" value="<%=request.getAttribute("per1")%>">
                                                     <input type="hidden" name="permiso2" id="permiso2" value="<%=request.getAttribute("per2")%>">
                                                     <input type="hidden" name="permiso4" id="permiso4" value="<%=request.getAttribute("per4")%>">
@@ -296,6 +299,8 @@
                             </div>
                         </div>
 
+                        <%if (request.getAttribute("control_combobox").equals("false") && request.getAttribute("nacional").equals("1")) { %> <%--SUPER USUARIO--%>
+
                         <div class="registro">
                             <div class="caja">
                                 <input type="hidden" name="f_opc" id="i_opc">
@@ -331,6 +336,146 @@
 
                             </div>
                         </div>
+                        <%
+                        } else if (request.getAttribute("control_combobox").equals("true") && request.getAttribute("nacional").equals("1")) { %> <%--SUPER USUARIO--%>
+
+                        <div class="registro">
+                            <div class="caja">
+                                <input type="hidden" name="f_opc" id="i_opc">
+                                <input type="hidden" name="campoentidad" id="campoentidad" >
+                                <p>Entidad
+
+                                    <%
+                                        ResultSet rs = cn.mostrar("Select id, entidad from catentidades");
+                                    %>
+
+                                    <select class="form-control" name="entidad" id="entidad" onchange="plantel()">
+                                        <option value="0">Escoge una opcion</option>
+                                        <%
+                                            while (rs.next()) {
+                                        %>
+                                        <option value="<%=rs.getString("id")%>"><%=rs.getString("entidad")%></option>
+
+                                        <%//              regresa del combobox         muestra en el combo box
+                                            }
+                                        %>                                              
+                                    </select>           
+                                </p>
+                                <div id="n8"></div>
+                            </div>
+
+                            <div class="caja">
+                                <p>Plantel
+                                    <select class="form-control" name="n_plantel" id="i_plantel" onchange="validarentrada3()">
+                                        <option value="0">Escoge una opcion</option>                                     
+                                    </select>
+                                </p>
+                                <div id="n7"></div>
+
+                            </div>
+                        </div>
+                        <%
+                        } else if (request.getAttribute("control_combobox").equals("true") && request.getAttribute("nacional").equals("2")) { %> <%--SUPER USUARIO--%>
+
+                        <div class="registro">
+                            <div class="caja">
+                                <input type="hidden" name="f_opc" id="i_opc">
+                                <input type="hidden" name="campoentidad" id="campoentidad" >
+                                <p>Entidad
+
+                                    <%
+                                        ResultSet rs = cn.mostrar("Select id, entidad from catentidades WHERE id='" + request.getAttribute("dato_ent") + "'");
+                                    %>
+
+                                    <select class="form-control" name="entidad" id="entidad" onchange="plantel()" disabled="true">
+
+                                        <%
+                                            while (rs.next()) {
+                                        %>
+                                        <option value="<%=rs.getString("id")%>"><%=rs.getString("entidad")%></option>
+
+                                        <%//              regresa del combobox         muestra en el combo box
+                                            }
+                                        %>                                              
+                                    </select>          
+                                </p>
+                                <div id="n8"></div>
+                            </div>
+
+                            <div class="caja">
+                                <p>Plantel
+                                    <%
+                                        ResultSet rs10 = cn.mostrar("Select * from catplanteles WHERE idEntidad='" + request.getAttribute("dato_ent") + "'");
+                                    %>
+                                    <select class="form-control" name="n_plantel" id="i_plantel" onchange="validarentrada3()">
+                                        <option value="0">Escoge una opcion</option>
+                                        <%
+                                            while (rs10.next()) {
+                                        %>                 
+                                        <option value="<%=rs10.getString("id")%>"><%=rs10.getString("plantel")%></option>
+                                        <%
+                                            }
+                                        %>
+                                    </select>
+                                </p>
+                                <div id="n7"></div>
+
+                            </div>
+                        </div>
+                        <%
+                        } else if (request.getAttribute("control_combobox").equals("true") && request.getAttribute("nacional").equals("3")) { %> <%--SUPER USUARIO--%>
+
+                        <div class="registro">
+                            <div class="caja">
+                                <input type="hidden" name="f_opc" id="i_opc">
+                                <input type="hidden" name="campoentidad" id="campoentidad" >
+                                <p>Entidad
+
+                                    <%
+                                        ResultSet rs = cn.mostrar("Select id, entidad from catentidades WHERE id='" + request.getAttribute("dato_ent") + "'");
+                                    %>
+
+                                    <select class="form-control" name="entidad" id="entidad" onchange="plantel()" disabled="true">
+
+                                        <%
+                                            while (rs.next()) {
+                                        %>
+                                        <option value="<%=rs.getString("id")%>"><%=rs.getString("entidad")%></option>
+
+                                        <%//              regresa del combobox         muestra en el combo box
+                                            }
+                                        %>                                              
+                                    </select>          
+                                </p>
+                                <div id="n8"></div>
+                            </div>
+
+                            <div class="caja">
+                                <p>Plantel
+                                   <%
+                                    ResultSet rs10 = cn.mostrar("Select * from catplanteles WHERE id='" + request.getAttribute("dato_pla") + "'");
+                                %>
+
+                                <select class="form-control" name="n_plantel" id="i_plantel" disabled="true">
+                                    <%
+                                        while (rs10.next()) {
+                                    %>
+                                    <option value="<%=rs10.getString("id")%>"><%=rs10.getString("plantel")%></option>
+                                    <%
+                                        }
+                                    %>
+                                </select>
+                                </p>
+                                <div id="n7"></div>
+
+                            </div>
+                        </div>
+                        <%
+                            }
+                        %>
+
+
+
                         <div class="registro">    
                             <div class="caja">
                                 <p>Programa:<br>
@@ -416,6 +561,7 @@
                                     session.setAttribute("rfc", rfc);
                                 %>
                                 <input type="hidden" name="control_combobox" id="control_combobox" value="<%=request.getAttribute("control_combobox")%>">
+                                <input type="hidden" name="nacional" id="nacional" value="<%=request.getAttribute("nacional")%>"> <%--AGREGAR--%>
                                 <input type="hidden" name="permiso1" id="permiso1" value="<%=request.getAttribute("per1")%>">
                                 <input type="hidden" name="permiso2" id="permiso2" value="<%=request.getAttribute("per2")%>">
                                 <input type="hidden" name="permiso4" id="permiso4" value="<%=request.getAttribute("per4")%>">
@@ -435,7 +581,7 @@
 
                 </asideart>
 
-               
+
 
                 <form id="data4" class="form-horizontal" role="form" method="POST" action="Servlet_cerrarsesion">
 

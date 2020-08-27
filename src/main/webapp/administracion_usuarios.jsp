@@ -140,6 +140,7 @@
                                                 %>
 
                                                 <input type="hidden" name="control_combobox" id="control_combobox" value="<%=request.getAttribute("control_combobox")%>">
+                                                <input type="hidden" name="nacional" id="nacional" value="<%=request.getAttribute("nacional")%>"> <%--AGREGAR--%>
                                                 <input type="hidden" name="permiso1" id="permiso1" value="<%=request.getAttribute("per1")%>">
                                                 <input type="hidden" name="permiso2" id="permiso2" value="<%=request.getAttribute("per2")%>">
                                                 <input type="hidden" name="permiso4" id="permiso4" value="<%=request.getAttribute("per4")%>">
@@ -157,6 +158,7 @@
                                                     session.setAttribute("rfc", rfc);
                                                 %>
                                                 <input type="hidden" name="control_combobox" id="control_combobox" value="<%=request.getAttribute("control_combobox")%>">
+                                                <input type="hidden" name="nacional" id="nacional" value="<%=request.getAttribute("nacional")%>"> <%--AGREGAR--%>
                                                 <input type="hidden" name="permiso1" id="permiso1" value="<%=request.getAttribute("per1")%>">
                                                 <input type="hidden" name="permiso2" id="permiso2" value="<%=request.getAttribute("per2")%>">
                                                 <input type="hidden" name="permiso4" id="permiso4" value="<%=request.getAttribute("per4")%>">
@@ -174,6 +176,7 @@
                                                     session.setAttribute("rfc", rfc);
                                                 %>
                                                 <input type="hidden" name="control_combobox" id="control_combobox" value="<%=request.getAttribute("control_combobox")%>">
+                                                <input type="hidden" name="nacional" id="nacional" value="<%=request.getAttribute("nacional")%>"> <%--AGREGAR--%>
                                                 <input type="hidden" name="permiso1" id="permiso1" value="<%=request.getAttribute("per1")%>">
                                                 <input type="hidden" name="permiso2" id="permiso2" value="<%=request.getAttribute("per2")%>">
                                                 <input type="hidden" name="permiso4" id="permiso4" value="<%=request.getAttribute("per4")%>">
@@ -215,8 +218,8 @@
                 <h3>Administración de Usuarios </h3>
                 <jsp:useBean id="cn" class="metodos_sql.Metodos_sql" scope="page"></jsp:useBean>
                     <form id="data" class="form-horizontal" role="form" method="POST" action="Servlet_buscar_usuario">
-                    <%-------------------------------------------------------------------OPCION VERDADERA COMBO BOX----------------------------%>   
-                    <%if (request.getAttribute("control_combobox").equals("true")) { %>
+                    <%-------------------------------------------------------------------OPCION super usuario nacional COMBO BOX----------------------------%>   
+                    <%if (request.getAttribute("control_combobox").equals("false") && request.getAttribute("nacional").equals("1")) { %> <%--SUPER USUARIO--%>
                     <table  border="0" width="120%">   
                         <tr><td align="center">
                                 <input type="hidden" name="f_opc" id="i_opc">
@@ -227,7 +230,7 @@
                                     ResultSet rs = cn.mostrar("Select id, entidad from catentidades");
                                 %>
 
-                                <select class="select" name="entidad" id="entidad" onchange="plantel()" disabled="true">
+                                <select class="select" name="entidad" id="entidad" onchange="plantel()">
                                     <option value="0">Escoge una opcion</option>
                                     <%
                                         while (rs.next()) {
@@ -238,13 +241,15 @@
                                     %>
                                 </select>
                             </td>
+
                             <td align="center">
                                 <label>Plantel</label><br>                                 
 
-                                <select class="select" name="n_plantel" id="i_plantel" disabled="true">
+                                <select class="select" name="n_plantel" id="i_plantel">
                                     <option value="0">Escoge una opcion</option>
                                 </select>
                             </td>
+
                             <td align="center">
                                 <label>Usuario</label><br>
 
@@ -295,11 +300,29 @@
                             if (elegir1.equals("1")) {
                                 ResultSet rs2 = null;
                                 if (request.getAttribute("consulta").equals("1")) {
-                                    rs2 = cn.mostrar_usuarios("SELECT * FROM usuario WHERE perfil='A' && entidad='" + request.getAttribute("dato_ent") + "'");
+                                    rs2 = cn.mostrar_usuarios("SELECT * FROM usuario WHERE perfil='A'");
+                                }
+
+                                if (request.getAttribute("consulta").equals("3")) {
+                                    rs2 = cn.mostrar_usuarios("SELECT * FROM usuario WHERE perfil='A' && entidad='" + request.getAttribute("est") + "' && plantel='" + request.getAttribute("pla") + "'");
+
+                                }
+
+                                if (request.getAttribute("consulta").equals("2")) {
+                                    rs2 = cn.mostrar_usuarios("SELECT * FROM usuario WHERE perfil='A' && entidad='" + request.getAttribute("est") + "'");
+
                                 }
 
                                 if (request.getAttribute("consulta").equals("4")) {
-                                    rs2 = cn.mostrar_usuarios("SELECT * FROM usuario WHERE perfil='A' && entidad='" + request.getAttribute("dato_ent") + "' &&" + "curp='" + request.getAttribute("usu") + "'");
+                                    rs2 = cn.mostrar_usuarios("SELECT * FROM usuario WHERE perfil='A' && curp='" + request.getAttribute("usu") + "'");
+                                }
+
+                                if (request.getAttribute("consulta").equals("5")) {
+                                    rs2 = cn.mostrar_usuarios("SELECT * FROM usuario WHERE perfil='A' && entidad='" + request.getAttribute("est") + "' && curp='" + request.getAttribute("usu") + "'");
+                                }
+
+                                if (request.getAttribute("consulta").equals("6")) {
+                                    rs2 = cn.mostrar_usuarios("SELECT * FROM usuario WHERE perfil='A' && entidad='" + request.getAttribute("est") + "' && plantel='" + request.getAttribute("pla") + "' && curp='" + request.getAttribute("usu") + "'");
                                 }
 
                                 while (rs2.next()) {
@@ -379,8 +402,8 @@
                         %>
                     </table><br><br>
 
-                    <% } //FIN OPCION VERDADERA COMBOBOX
-                    else {%> <%--OPCION FALSA COMBOBOX --%>
+                    <% } //FIN OPCION SUPER ADMINISTRADOR NACIONAL COMBOBOX
+                    else if (request.getAttribute("control_combobox").equals("true") && request.getAttribute("nacional").equals("1")) { %> <%--ADMINISTRADOR --%>
                     <table  border="0" width="120%">   
                         <tr><td align="center">
                                 <input type="hidden" name="f_opc" id="i_opc">
@@ -562,9 +585,362 @@
                         %>
                     </table><br><br>
 
-                    <%}%>
+                    <%} //FIN OPCION ADMIN NACIONAL COMBOBOX
+                    else if (request.getAttribute("control_combobox").equals("true") && request.getAttribute("nacional").equals("2")) { %> <%--ADMINISTRADOR --%>
+                    <table  border="0" width="120%">   
+                        <tr><td align="center">
+                                <input type="hidden" name="f_opc" id="i_opc">
+                                <input type="hidden" name="campoentidad7" id="campoentidad7" >
+                                <label>Entidad</label><br>
 
-                    <%-------------------------------------------------------------------FIN OPCION VERDADERA COMBO BOX----------------------------%>   
+                                <%
+                                    ResultSet rs = cn.mostrar("Select id, entidad from catentidades WHERE id='" + request.getAttribute("dato_ent") + "'");
+                                %>
+
+                                <select class="select" name="entidad" id="entidad" disabled="true">
+                                    <%
+                                        while (rs.next()) {
+                                    %>
+                                    <option value="<%=rs.getString("id")%>"><%=rs.getString("entidad")%></option>
+                                    <%
+                                        }
+                                    %>
+                                </select>
+                            </td>
+                            <td align="center">
+                                <label>Plantel</label><br>                                 
+                                <%
+                                    ResultSet rs10 = cn.mostrar("Select * from catplanteles WHERE idEntidad='" + request.getAttribute("dato_ent") + "'");
+                                %>
+                                <select class="select" name="n_plantel" id="i_plantel">
+                                    <option value="0">Escoge una opcion</option>
+                                    <%
+                                        while (rs10.next()) {
+                                    %>                 
+                                    <option value="<%=rs10.getString("id")%>"><%=rs10.getString("plantel")%></option>
+                                    <%
+                                        }
+                                    %>
+                                </select>
+                            </td>
+                            <td align="center">
+                                <label>Usuario</label><br>
+
+                                <input  id="password-03" placeholder="Usuario" type="text" name="usuario" value="">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td>
+                                <div class="error"> 
+                                    <% if (request.getAttribute("error") == null) {
+                                            out.print("");
+                                        } else {
+                                            out.print(request.getAttribute("error"));
+                                        }
+                                    %>
+                                </div>
+                            </td>
+                        </tr>
+
+                    </table><br><br>
+
+                    <div class="form-group">
+                        <button class="btn btn-primary pull-right" type="submit" name="pAgregar" form="data2">Agregar</button>
+                        <button class="btn btn-primary pull-right" type="submit" name="buscarusuario">Buscar</button>                            
+                    </div>
+                    <br><br>
+
+                    <table  border="1" width="160%" id="tabla_usuarios" class="display">  
+                        <thead>
+                            <tr>
+                                <th>Estado</th>
+                                <th>Plantel</th>
+                                <th>Usuario</th>
+                                <th>Nombre</th>
+                                <th>A. Paterno</th>
+                                <th>A. Materno</th>
+                            </tr>
+                        </thead>
+                        <%
+                            String elegir1 = "0";
+                            String nombre_entidad = "";
+                            String nombre_plantel = "";
+
+                            elegir1 = String.valueOf(request.getAttribute("opc"));
+
+                            if (elegir1.equals("1")) {
+                                ResultSet rs2 = null;
+                                if (request.getAttribute("consulta").equals("1")) {
+                                    rs2 = cn.mostrar_usuarios("SELECT * FROM usuario WHERE perfil='A' && entidad='" + request.getAttribute("dato_ent") + "'");
+                                }
+
+                                if (request.getAttribute("consulta").equals("3")) {
+                                    rs2 = cn.mostrar_usuarios("SELECT * FROM usuario WHERE perfil='A' && entidad='" + request.getAttribute("dato_ent") + "' && plantel='" + request.getAttribute("pla") + "'");
+                                }
+                                if (request.getAttribute("consulta").equals("5")) {
+                                    rs2 = cn.mostrar_usuarios("SELECT * FROM usuario WHERE perfil='A' && entidad='" + request.getAttribute("dato_ent") + "' && curp='" + request.getAttribute("usu") + "'");
+                                }
+                                if (request.getAttribute("consulta").equals("6")) {
+                                    rs2 = cn.mostrar_usuarios("SELECT * FROM usuario WHERE perfil='A' && entidad='" + request.getAttribute("dato_ent") + "' && plantel='" + request.getAttribute("pla") + "' && curp='" + request.getAttribute("usu") + "'");
+                                }
+
+                                while (rs2.next()) {
+                        %>
+                        <tr>
+                            <td align="center">
+                                <div class="datos_tabla"> 
+                                    <%
+                                        nombre_entidad = cn.buscarentidad("SELECT * FROM catentidades WHERE id='" + rs2.getString("entidad") + "'");
+                                        if (nombre_entidad == null) {
+                                            out.print("");
+                                        } else {
+                                            out.print(nombre_entidad);
+                                        }
+                                    %>
+                                </div>
+                            </td>
+                            <td align="center">
+                                <div class="datos_tabla"> 
+                                    <%
+                                        nombre_plantel = cn.buscarplantel("SELECT * FROM catplanteles WHERE id='" + rs2.getString("plantel") + "'");
+                                        if (nombre_plantel == null) {
+                                            out.print("");
+                                        } else {
+                                            out.print(nombre_plantel);
+                                        }
+                                    %>
+                                </div>
+                            </td>
+                            <td align="center">
+                                <div class="datos_tabla"> 
+                                    <% if (rs2.getString("curp") == null) {
+                                            out.print("");
+                                        } else {
+                                            out.print(rs2.getString("curp"));
+                                        }
+                                    %>
+                                </div>
+                            </td>
+                            <td align="center">
+                                <div class="c_nom"> 
+                                    <% if (rs2.getString("nombre") == null) {
+                                            out.print("");
+                                        } else {
+                                            out.print(rs2.getString("nombre"));
+                                        }
+                                    %>
+                                </div>
+                            </td>
+                            <td align="center">
+                                <div class="datos_tabla"> 
+                                    <% if (rs2.getString("primerApellido") == null) {
+                                            out.print("");
+                                        } else {
+                                            out.print(rs2.getString("primerApellido"));
+                                        }
+                                    %>
+                                </div>
+                            </td>
+                            <td align="center">
+                                <div class="datos_tabla"> 
+                                    <% if (rs2.getString("segundoApellido") == null) {
+                                            out.print("");
+                                        } else {
+                                            out.print(rs2.getString("segundoApellido"));
+                                            //out.println(idUsuario);
+
+                                        }
+                                    %>
+                                </div>
+                            </td>
+                        </tr>
+                        <%}
+                            }//fin if elegir
+                            else {
+                                response.sendRedirect("login.jsp");
+                            }
+                        %>
+                    </table><br><br>
+
+                    <%}//FIN OPCION ADMIN ESTATAL COMBOBOX
+                    else if (request.getAttribute("control_combobox").equals("true") && request.getAttribute("nacional").equals("3")) { %> <%--ADMINISTRADOR --%>
+                    <table  border="0" width="120%">   
+                        <tr><td align="center">
+                                <input type="hidden" name="f_opc" id="i_opc">
+                                <input type="hidden" name="campoentidad7" id="campoentidad7" >
+                                <label>Entidad</label><br>
+                                <%
+                                    ResultSet rs = cn.mostrar("Select id, entidad from catentidades WHERE id='" + request.getAttribute("dato_ent") + "'");
+                                %>
+
+                                <select class="select" name="entidad" id="entidad" onchange="plantel()" disabled="true">
+                                    <%
+                                        while (rs.next()) {
+                                    %>
+                                    <option value="<%=rs.getString("id")%>"><%=rs.getString("entidad")%></option>
+                                    <%
+                                        }
+                                    %>
+                                </select>
+                            </td>
+                            <td align="center">
+                                <label>Plantel</label><br>                                 
+                                <%
+                                    ResultSet rs10 = cn.mostrar("Select * from catplanteles WHERE id='" + request.getAttribute("dato_pla") + "'");
+                                %>
+
+                                <select class="select" name="n_plantel" id="i_plantel" disabled="true">
+                                    <%
+                                        while (rs10.next()) {
+                                    %>
+                                    <option value="<%=rs10.getString("id")%>"><%=rs10.getString("plantel")%></option>
+                                    <%
+                                        }
+                                    %>
+                                </select>
+                            </td>
+                            <td align="center">
+                                <label>Usuario</label><br>
+
+                                <input  id="password-03" placeholder="Usuario" type="text" name="usuario" value="">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td>
+                                <div class="error"> 
+                                    <% if (request.getAttribute("error") == null) {
+                                            out.print("");
+                                        } else {
+                                            out.print(request.getAttribute("error"));
+                                        }
+                                    %>
+                                </div>
+                            </td>
+                        </tr>
+
+                    </table><br><br>
+
+                    <div class="form-group">
+                        <button class="btn btn-primary pull-right" type="submit" name="pAgregar" form="data2">Agregar</button>
+                        <button class="btn btn-primary pull-right" type="submit" name="buscarusuario">Buscar</button>                            
+                    </div>
+                    <br><br>
+
+                    <table  border="1" width="160%" id="tabla_usuarios" class="display">  
+                        <thead>
+                            <tr>
+                                <th>Estado</th>
+                                <th>Plantel</th>
+                                <th>Usuario</th>
+                                <th>Nombre</th>
+                                <th>A. Paterno</th>
+                                <th>A. Materno</th>
+                            </tr>
+                        </thead>
+                        <%
+                            String elegir1 = "0";
+                            String nombre_entidad = "";
+                            String nombre_plantel = "";
+
+                            elegir1 = String.valueOf(request.getAttribute("opc"));
+
+                            if (elegir1.equals("1")) {
+                                ResultSet rs2 = null;                               
+
+                                if (request.getAttribute("consulta").equals("1")) {
+                                    rs2 = cn.mostrar_usuarios("SELECT * FROM usuario WHERE perfil='A' && entidad='" + request.getAttribute("dato_ent") + "' && plantel='" + request.getAttribute("dato_pla") + "'");
+                                }
+
+                                if (request.getAttribute("consulta").equals("2")) {
+                                    rs2 = cn.mostrar_usuarios("SELECT * FROM usuario WHERE perfil='A' && entidad='" + request.getAttribute("dato_ent") + "' && plantel='" + request.getAttribute("dato_pla") + "' && curp='" + request.getAttribute("usu") + "'");
+                                }
+
+                                while (rs2.next()) {
+                        %>
+                        <tr>
+                            <td align="center">
+                                <div class="datos_tabla"> 
+                                    <%
+                                        nombre_entidad = cn.buscarentidad("SELECT * FROM catentidades WHERE id='" + rs2.getString("entidad") + "'");
+                                        if (nombre_entidad == null) {
+                                            out.print("");
+                                        } else {
+                                            out.print(nombre_entidad);
+                                        }
+                                    %>
+                                </div>
+                            </td>
+                            <td align="center">
+                                <div class="datos_tabla"> 
+                                    <%
+                                        nombre_plantel = cn.buscarplantel("SELECT * FROM catplanteles WHERE id='" + rs2.getString("plantel") + "'");
+                                        if (nombre_plantel == null) {
+                                            out.print("");
+                                        } else {
+                                            out.print(nombre_plantel);
+                                        }
+                                    %>
+                                </div>
+                            </td>
+                            <td align="center">
+                                <div class="datos_tabla"> 
+                                    <% if (rs2.getString("curp") == null) {
+                                            out.print("");
+                                        } else {
+                                            out.print(rs2.getString("curp"));
+                                        }
+                                    %>
+                                </div>
+                            </td>
+                            <td align="center">
+                                <div class="c_nom"> 
+                                    <% if (rs2.getString("nombre") == null) {
+                                            out.print("");
+                                        } else {
+                                            out.print(rs2.getString("nombre"));
+                                        }
+                                    %>
+                                </div>
+                            </td>
+                            <td align="center">
+                                <div class="datos_tabla"> 
+                                    <% if (rs2.getString("primerApellido") == null) {
+                                            out.print("");
+                                        } else {
+                                            out.print(rs2.getString("primerApellido"));
+                                        }
+                                    %>
+                                </div>
+                            </td>
+                            <td align="center">
+                                <div class="datos_tabla"> 
+                                    <% if (rs2.getString("segundoApellido") == null) {
+                                            out.print("");
+                                        } else {
+                                            out.print(rs2.getString("segundoApellido"));
+                                            //out.println(idUsuario);
+
+                                        }
+                                    %>
+                                </div>
+                            </td>
+                        </tr>
+                        <%}
+                            }//fin if elegir
+                            else {
+                                response.sendRedirect("login.jsp");
+                            }
+                        %>
+                    </table><br><br>
+
+                    <%}//FIN OPCION ADMIN PLANTEL COMBOBOX%>
+
+
+
 
 
                     <%
@@ -572,6 +948,7 @@
                         session.setAttribute("rfc", rfc);
                     %>
                     <input type="hidden" name="control_combobox" id="control_combobox" value="<%=request.getAttribute("control_combobox")%>">
+                    <input type="hidden" name="nacional" id="nacional" value="<%=request.getAttribute("nacional")%>"> <%--AGREGAR--%>
                     <input type="hidden" name="permiso1" id="permiso1" value="<%=request.getAttribute("per1")%>">
                     <input type="hidden" name="permiso2" id="permiso2" value="<%=request.getAttribute("per2")%>">
                     <input type="hidden" name="permiso4" id="permiso4" value="<%=request.getAttribute("per4")%>">
@@ -586,6 +963,7 @@
                         session.setAttribute("rfc", rfc);
                     %>
                     <input type="hidden" name="control_combobox" id="control_combobox" value="<%=request.getAttribute("control_combobox")%>">
+                    <input type="hidden" name="nacional" id="nacional" value="<%=request.getAttribute("nacional")%>"> <%--AGREGAR--%>
                     <input type="hidden" name="permiso1" id="permiso1" value="<%=request.getAttribute("per1")%>">
                     <input type="hidden" name="permiso2" id="permiso2" value="<%=request.getAttribute("per2")%>">
                     <input type="hidden" name="permiso4" id="permiso4" value="<%=request.getAttribute("per4")%>">

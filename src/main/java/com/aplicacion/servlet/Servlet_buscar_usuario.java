@@ -101,6 +101,7 @@ public class Servlet_buscar_usuario extends HttpServlet {
                 String usuario = "";
 
                 String control_combobox = request.getParameter("control_combobox");
+                String nac1 = request.getParameter("nacional");//AGREGAR----------------------------------
                 String per1 = request.getParameter("permiso1");
                 String per2 = request.getParameter("permiso2");
                 String per4 = request.getParameter("permiso4");
@@ -115,47 +116,70 @@ public class Servlet_buscar_usuario extends HttpServlet {
 
                 String btnlogin = request.getParameter("buscarusuario");
                 if (btnlogin != null) {
+//AGREGAR-------------------------------------------------------------------------------------------------------------
+                    if (control_combobox.equals("false") || control_combobox.equals("true") && nac1.equals("1")) {
+                        if (entidad.equals("0") && n_plantel.equals("0") && usuario.equals("")) {
+                            request.setAttribute("consulta", "1");
+                            //out.print("caso 1"); //nada
 
-                  if(control_combobox.equals("false")){
-                    if (entidad.equals("0") && n_plantel.equals("0") && usuario.equals("")) {
-                        request.setAttribute("consulta", "1");
-                        //out.print("caso 1"); //nada
+                        } else if (entidad != ("0") && n_plantel != ("0") && usuario.equals("")) {
+                            if (n_plantel.equals("0")) {
+                                request.setAttribute("consulta", "2");
+                                //out.print("caso 2");//entidad
+                            } else {
+                                request.setAttribute("consulta", "3");
+                                //out.print("caso 3"); //entidad y plantel  
+                            }
 
-                    } else if (entidad != ("0") && n_plantel != ("0") && usuario.equals("")) {
-                        if (n_plantel.equals("0")) {
-                            request.setAttribute("consulta", "2");
-                            //out.print("caso 2");//entidad
-                        } else {
-                            request.setAttribute("consulta", "3");
-                            //out.print("caso 3"); //entidad y plantel  
+                        } else if (entidad.equals("0") && n_plantel.equals("0") && usuario != "") {
+                            request.setAttribute("consulta", "4");
+                            //out.print("caso 4");   //usuario
+                        } else if (entidad != "0" && n_plantel != ("0") && usuario != "") {
+                            if (n_plantel.equals("0")) {
+                                request.setAttribute("consulta", "5");
+                                //out.print("caso 5");//entidad y usuario
+                            } else {
+                                request.setAttribute("consulta", "6");
+                                //out.print("caso 6"); //todos
+                            }
                         }
+                    }//fin comparacion combobox
 
-                    } else if (entidad.equals("0") && n_plantel.equals("0") && usuario != "") {
-                        request.setAttribute("consulta", "4");
-                        //out.print("caso 4");   //usuario
-                    } else if (entidad != "0" && n_plantel != ("0") && usuario != "") {
-                        if (n_plantel.equals("0")) {
+                    if (control_combobox.equals("true") && nac1.equals("2")) {
+                        if (n_plantel.equals("0") && usuario.equals("")) {
+                            request.setAttribute("consulta", "1");
+                            //out.print("caso 1"); //nada
+                        }
+                        else if (n_plantel != ("0") && usuario.equals("")) {
+                            request.setAttribute("consulta", "3");
+                            //out.print("caso 1"); //nada
+                        }
+                         else if (n_plantel.equals("0") && usuario != ("")) {
                             request.setAttribute("consulta", "5");
-                            //out.print("caso 5");//entidad y usuario
-                        } else {
+                            //out.print("caso 1"); //nada
+                        }
+                        else if (n_plantel != ("") && usuario != ("")) {
                             request.setAttribute("consulta", "6");
-                            //out.print("caso 6"); //todos
+                            //out.print("caso 1"); //nada
                         }
                     }
-                  }//fin comparacion combobox
-                  else{
-                     
-                      if (usuario.equals("")) {
-                        request.setAttribute("consulta", "1");
-//                        out.print("caso 1");   //usuario
-                    } 
-                      else if (usuario != "") {
-                        request.setAttribute("consulta", "4");
-//                        out.print("caso 4");   //usuario
-                    } 
-                  }
-                  
+
+                    
+                     if (control_combobox.equals("true") && nac1.equals("3")) {
+                        if (usuario.equals("")) {
+                            request.setAttribute("consulta", "1");
+                            //out.print("caso 1"); //nada
+                        }
+                        else if (usuario != ("")) {
+                            request.setAttribute("consulta", "2");
+                            //out.print("caso 1"); //nada
+                        }
+                        
+                    }
+//----------------------------------------------------------AGREGAR-------------------------------------------------
+                    
                     request.setAttribute("control_combobox", control_combobox);
+                    request.setAttribute("nacional", nac1);
                     request.setAttribute("est", entidad);
                     request.setAttribute("pla", n_plantel);
                     request.setAttribute("usu", usuario);

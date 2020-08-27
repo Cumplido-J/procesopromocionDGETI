@@ -121,7 +121,8 @@ public class Servlet_iniciosesion_administrador extends HttpServlet {
                 else if (busquedaadmin.equals("RFC ENCONTRADO")) {
 
                     String busquedaclave[] = metodos.buscar_clave(rfc2, claveEncriptada);
-
+                    String nacional = busquedaclave[2];// AGREGAR---------------------------------------------
+                    
                     if (busquedaclave[0].equals("USUARIO ENCONTRADO")) {
                         HttpSession session = (HttpSession) request.getSession(true);
                         String idUsuario = busquedaclave[1].toString();
@@ -178,22 +179,26 @@ public class Servlet_iniciosesion_administrador extends HttpServlet {
 
                         if (busqueda_nombre[5].toString().equals("S")) {
                             request.setAttribute("control_combobox", "false");
+                            request.setAttribute("nacional", nacional);//AGREGAR-----------------------------
                             RequestDispatcher rd = request.getRequestDispatcher("administracion_usuarios.jsp");
                             rd.forward(request, response);
                         }
                         if (busqueda_nombre[5].toString().equals("A")) {
                             if (per1.equals("false")) {
                                 request.setAttribute("control_combobox", "true");
+                                request.setAttribute("nacional", nacional);//AGREGAR-------------------------
                                 RequestDispatcher rd = request.getRequestDispatcher("administracion_usuarios.jsp");
                                 rd.forward(request, response);
                             }
                             if (per2.equals("false")) {
                                 request.setAttribute("control_combobox", "true");
+                                request.setAttribute("nacional", nacional);//AGREGAR-------------------------
                                 RequestDispatcher rd = request.getRequestDispatcher("convocatoria.jsp");
                                 rd.forward(request, response);
                             }
                             if (per4.equals("false")) {
                                 request.setAttribute("control_combobox", "true");
+                                request.setAttribute("nacional", nacional);//AGREGAR-------------------------
                                 RequestDispatcher rd = request.getRequestDispatcher("vacantes.jsp");
                                 rd.forward(request, response);
                             }

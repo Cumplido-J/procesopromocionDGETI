@@ -92,6 +92,7 @@ public class Servlet_P_Agregar extends HttpServlet {
                 rfc = session.getAttribute("rfc").toString();
 
                 String control_combobox = request.getParameter("control_combobox");
+                String nac1 = request.getParameter("nacional");//AGREGAR---------------------------
                 String per1 = request.getParameter("permiso1");
                 String per2 = request.getParameter("permiso2");
                 String per4 = request.getParameter("permiso4");
@@ -102,6 +103,7 @@ public class Servlet_P_Agregar extends HttpServlet {
                 String btnregresa = request.getParameter("pAgregar");
                 if (btnregresa != null) {
                     request.setAttribute("control_combobox", control_combobox);
+                    request.setAttribute("nacional", nac1);//AGREGAR-------------------------------
                     request.setAttribute("ver", "1");
                     request.setAttribute("nom", nom1);
                     request.setAttribute("dato_ent", ent1);

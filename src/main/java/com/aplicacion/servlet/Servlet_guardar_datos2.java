@@ -94,6 +94,7 @@ public class Servlet_guardar_datos2 extends HttpServlet {
                 rfc = session.getAttribute("rfc").toString();
 
                 String control_combobox = request.getParameter("control_combobox");
+                String nac1 = request.getParameter("nacional");//AGREGAR---------------------------
                 String per1 = request.getParameter("permiso1");
                 String per2 = request.getParameter("permiso2");
                 String per4 = request.getParameter("permiso4");
@@ -107,6 +108,7 @@ public class Servlet_guardar_datos2 extends HttpServlet {
                 if (btnlogin != null) {
 //                    out.print(per1+" "+per2+" "+per4);
                     request.setAttribute("control_combobox", control_combobox);
+                    request.setAttribute("nacional", nac1);//AGREGAR-------------------------------
                     request.setAttribute("ver", "1");
                     request.setAttribute("opc", "1");
                     request.setAttribute("nom", nom1);

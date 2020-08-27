@@ -98,6 +98,7 @@ public class Servlet_buscar_convocatoria extends HttpServlet {
                 rfc = session.getAttribute("rfc").toString();
 
                 String control_combobox = request.getParameter("control_combobox");
+                String nac1 = request.getParameter("nacional");//AGREGAR---------------------------
                 String per1 = request.getParameter("permiso1");
                 String per2 = request.getParameter("permiso2");
                 String per4 = request.getParameter("permiso4");
@@ -110,61 +111,168 @@ public class Servlet_buscar_convocatoria extends HttpServlet {
                 String publicacion = request.getParameter("publicacion");
                 String resultados = request.getParameter("resultados");
                 String estatus = request.getParameter("estatus");
-                out.print(estatus);
                 String btnconvocatoria = request.getParameter("buscar_convocatoria");
                 if (btnconvocatoria != null) {
 
-                    if (entidad.equals("0") && plantel.equals("0") && estatus.equals("0") && publicacion.equals("") && resultados.equals("")) {
-                        request.setAttribute("consulta", "0");
+                    if (control_combobox.equals("false") || control_combobox.equals("true") && nac1.equals("1")) {
+                        if (entidad.equals("0") && plantel.equals("0") && estatus.equals("0") && publicacion.equals("") && resultados.equals("")) {
+                            request.setAttribute("consulta", "0");
 //                        out.print("caso 0"); //nada
-                    } else if (entidad.equals("0") && plantel.equals("0") && estatus.equals("0") && publicacion.equals("") && resultados != ("")) {
-                        request.setAttribute("consulta", "1");
+                        } else if (entidad.equals("0") && plantel.equals("0") && estatus.equals("0") && publicacion.equals("") && resultados != ("")) {
+                            request.setAttribute("consulta", "1");
 //                        out.print("caso 1");//
-                    } else if (entidad.equals("0") && plantel.equals("0") && estatus.equals("0") && publicacion != ("") && resultados.equals("")) {
-                        request.setAttribute("consulta", "2");
+                        } else if (entidad.equals("0") && plantel.equals("0") && estatus.equals("0") && publicacion != ("") && resultados.equals("")) {
+                            request.setAttribute("consulta", "2");
 //                        out.print("caso 2");//
-                    } else if (entidad.equals("0") && plantel.equals("0") && estatus.equals("0") && publicacion != ("") && resultados != ("")) {
-                        request.setAttribute("consulta", "3");
+                        } else if (entidad.equals("0") && plantel.equals("0") && estatus.equals("0") && publicacion != ("") && resultados != ("")) {
+                            request.setAttribute("consulta", "3");
 //                        out.print("caso 3");//
-                    } else if (entidad.equals("0") && plantel.equals("0") && estatus != ("0") && publicacion.equals("") && resultados.equals("")) {
-                        request.setAttribute("consulta", "4");
+                        } else if (entidad.equals("0") && plantel.equals("0") && estatus != ("0") && publicacion.equals("") && resultados.equals("")) {
+                            request.setAttribute("consulta", "4");
 //                        out.print("caso 4");//
-                    } else if (entidad.equals("0") && plantel.equals("0") && estatus != ("0") && publicacion.equals("") && resultados != ("")) {
-                        request.setAttribute("consulta", "5");
+                        } else if (entidad.equals("0") && plantel.equals("0") && estatus != ("0") && publicacion.equals("") && resultados != ("")) {
+                            request.setAttribute("consulta", "5");
 //                        out.print("caso 5");//
-                    } else if (entidad.equals("0") && plantel.equals("0") && estatus != ("0") && publicacion != ("") && resultados.equals("")) {
-                        request.setAttribute("consulta", "6");
+                        } else if (entidad.equals("0") && plantel.equals("0") && estatus != ("0") && publicacion != ("") && resultados.equals("")) {
+                            request.setAttribute("consulta", "6");
 //                        out.print("caso 6");//
-                    } else if (entidad.equals("0") && plantel.equals("0") && estatus != ("0") && publicacion != ("") && resultados != ("")) {
-                        request.setAttribute("consulta", "7");
+                        } else if (entidad.equals("0") && plantel.equals("0") && estatus != ("0") && publicacion != ("") && resultados != ("")) {
+                            request.setAttribute("consulta", "7");
 //                        out.print("caso 7");//
-                    } else if (entidad != ("0") && plantel != ("0") && estatus.equals("0") && publicacion.equals("") && resultados.equals("")) {
-                        request.setAttribute("consulta", "8");
+                        } else if (entidad != ("0") && Integer.parseInt(plantel) != 0 && estatus.equals("0") && publicacion.equals("") && resultados.equals("")) {
+                            request.setAttribute("consulta", "8");
 //                        out.print("caso 8");//
-                    } else if (entidad != ("0") && plantel != ("0") && estatus.equals("0") && publicacion.equals("") && resultados != ("")) {
-                        request.setAttribute("consulta", "9");
+                        } else if (entidad != ("0") && Integer.parseInt(plantel) != 0  && estatus.equals("0") && publicacion.equals("") && resultados != ("")) {
+                            request.setAttribute("consulta", "9");
 //                        out.print("caso 9");//
-                    } else if (entidad != ("0") && plantel != ("0") && estatus.equals("0") && publicacion != ("") && resultados.equals("")) {
-                        request.setAttribute("consulta", "10");
+                        } else if (entidad != ("0") && Integer.parseInt(plantel) != 0  && estatus.equals("0") && publicacion != ("") && resultados.equals("")) {
+                            request.setAttribute("consulta", "10");
 //                        out.print("caso 10");//
-                    } else if (entidad != ("0") && plantel != ("0") && estatus.equals("0") && publicacion != ("") && resultados != ("")) {
-                        request.setAttribute("consulta", "11");
+                        } else if (entidad != ("0") && Integer.parseInt(plantel) != 0  && estatus.equals("0") && publicacion != ("") && resultados != ("")) {
+                            request.setAttribute("consulta", "11");
 //                        out.print("caso 11");//
-                    } else if (entidad != ("0") && plantel != ("0") && estatus != ("0") && publicacion.equals("") && resultados.equals("")) {
-                        request.setAttribute("consulta", "12");
+                        } else if (entidad != ("0") && Integer.parseInt(plantel) != 0  && estatus != ("0") && publicacion.equals("") && resultados.equals("")) {
+                            request.setAttribute("consulta", "12");
 //                        out.print("caso 12");//
-                    } else if (entidad != ("0") && plantel != ("0") && estatus != ("0") && publicacion.equals("") && resultados != ("")) {
-                        request.setAttribute("consulta", "13");
+                        } else if (entidad != ("0") && Integer.parseInt(plantel) != 0  && estatus != ("0") && publicacion.equals("") && resultados != ("")) {
+                            request.setAttribute("consulta", "13");
 //                        out.print("caso 13");//
-                    } else if (entidad != ("0") && plantel != ("0") && estatus != ("0") && publicacion != ("") && resultados.equals("")) {
-                        request.setAttribute("consulta", "14");
+                        } else if (entidad != ("0") && Integer.parseInt(plantel) != 0  && estatus != ("0") && publicacion != ("") && resultados.equals("")) {
+                            request.setAttribute("consulta", "14");
 //                        out.print("caso 14");//
-                    } else if (entidad != ("0") && plantel != ("0") && estatus != ("0") && publicacion != ("") && resultados != ("")) {
-                        request.setAttribute("consulta", "15");
+                        } else if (entidad != ("0") && Integer.parseInt(plantel) != 0  && estatus != ("0") && publicacion != ("") && resultados != ("")) {
+                            request.setAttribute("consulta", "15");
 //                        out.print("caso 15");//
-                    } 
+                        } else if (entidad != ("0") && plantel.equals("0") && estatus.equals("0") && publicacion.equals("") && resultados.equals("")) {
+                            request.setAttribute("consulta", "16");
+//                        out.print("caso 16");//
+                        } else if (entidad != ("0") && plantel.equals("0") && estatus.equals("0") && publicacion.equals("") && resultados != ("")) {
+                            request.setAttribute("consulta", "17");
+//                        out.print("caso 17");//
+                        } else if (entidad != ("0") && plantel.equals("0") && estatus.equals("0") && publicacion != ("") && resultados.equals("")) {
+                            request.setAttribute("consulta", "18");
+//                        out.print("caso 17");//
+                        } else if (entidad != ("0") && plantel.equals("0") && estatus.equals("0") && publicacion != ("") && resultados != ("")) {
+                            request.setAttribute("consulta", "19");
+//                        out.print("caso 17");//
+                        } else if (entidad != ("0") && plantel.equals("0") && estatus != ("0") && publicacion.equals("") && resultados.equals("")) {
+                            request.setAttribute("consulta", "20");
+//                        out.print("caso 16");//
+                        } else if (entidad != ("0") && plantel.equals("0") && estatus != ("0") && publicacion.equals("") && resultados != ("")) {
+                            request.setAttribute("consulta", "21");
+//                        out.print("caso 16");//
+                        } else if (entidad != ("0") && plantel.equals("0") && estatus != ("0") && publicacion != ("") && resultados.equals("")) {
+                            request.setAttribute("consulta", "22");
+//                        out.print("caso 16");//
+                        } else if (entidad != ("0") && plantel.equals("0") && estatus != ("0") && publicacion != ("") && resultados != ("")) {
+                            request.setAttribute("consulta", "23");
+//                        out.print("caso 16");//
+                        }
+                    }//fin opcion super usuario y administrador nacionales
 
+                    if (control_combobox.equals("true") && nac1.equals("2")) {
+                         if (plantel.equals("0") && estatus.equals("0") && publicacion.equals("") && resultados.equals("")) {
+                            request.setAttribute("consulta", "0");
+//                        out.print("caso 0"); //nada
+                        } else if (plantel.equals("0") && estatus.equals("0") && publicacion.equals("") && resultados != ("")) {
+                            request.setAttribute("consulta", "1");
+//                        out.print("caso 1");//
+                        } else if (plantel.equals("0") && estatus.equals("0") && publicacion != ("") && resultados.equals("")) {
+                            request.setAttribute("consulta", "2");
+//                        out.print("caso 2");//
+                        } else if (plantel.equals("0") && estatus.equals("0") && publicacion != ("") && resultados != ("")) {
+                            request.setAttribute("consulta", "3");
+//                        out.print("caso 3");//
+                        } else if (plantel.equals("0") && estatus != ("0") && publicacion.equals("") && resultados.equals("")) {
+                            request.setAttribute("consulta", "4");
+//                        out.print("caso 4");//
+                        } else if (plantel.equals("0") && estatus != ("0") && publicacion.equals("") && resultados != ("")) {
+                            request.setAttribute("consulta", "5");
+//                        out.print("caso 5");//
+                        } else if (plantel.equals("0") && estatus != ("0") && publicacion != ("") && resultados.equals("")) {
+                            request.setAttribute("consulta", "6");
+//                        out.print("caso 6");//
+                        } else if (plantel.equals("0") && estatus != ("0") && publicacion != ("") && resultados != ("")) {
+                            request.setAttribute("consulta", "7");
+//                        out.print("caso 7");//
+                        } else if (Integer.parseInt(plantel) != 0 && estatus.equals("0") && publicacion.equals("") && resultados.equals("")) {
+                            request.setAttribute("consulta", "8");
+//                        out.print("caso 8");//
+                        } else if (Integer.parseInt(plantel) != 0  && estatus.equals("0") && publicacion.equals("") && resultados != ("")) {
+                            request.setAttribute("consulta", "9");
+//                        out.print("caso 9");//
+                        } else if (Integer.parseInt(plantel) != 0  && estatus.equals("0") && publicacion != ("") && resultados.equals("")) {
+                            request.setAttribute("consulta", "10");
+//                        out.print("caso 10");//
+                        } else if (Integer.parseInt(plantel) != 0  && estatus.equals("0") && publicacion != ("") && resultados != ("")) {
+                            request.setAttribute("consulta", "11");
+//                        out.print("caso 11");//
+                        } else if (Integer.parseInt(plantel) != 0  && estatus != ("0") && publicacion.equals("") && resultados.equals("")) {
+                            request.setAttribute("consulta", "12");
+//                        out.print("caso 12");//
+                        } else if (Integer.parseInt(plantel) != 0  && estatus != ("0") && publicacion.equals("") && resultados != ("")) {
+                            request.setAttribute("consulta", "13");
+//                        out.print("caso 13");//
+                        } else if (Integer.parseInt(plantel) != 0  && estatus != ("0") && publicacion != ("") && resultados.equals("")) {
+                            request.setAttribute("consulta", "14");
+//                        out.print("caso 14");//
+                        } else if (Integer.parseInt(plantel) != 0  && estatus != ("0") && publicacion != ("") && resultados != ("")) {
+                            request.setAttribute("consulta", "15");
+//                        out.print("caso 15");//
+                        }
+                    }
+
+                    if (control_combobox.equals("true") && nac1.equals("3")) {
+                         if (estatus.equals("0") && publicacion.equals("") && resultados.equals("")) {
+                            request.setAttribute("consulta", "0");
+//                        out.print("caso 0"); //nada
+                        } else if (estatus.equals("0") && publicacion.equals("") && resultados != ("")) {
+                            request.setAttribute("consulta", "1");
+//                        out.print("caso 1");//
+                        } else if (estatus.equals("0") && publicacion != ("") && resultados.equals("")) {
+                            request.setAttribute("consulta", "2");
+//                        out.print("caso 2");//
+                        } else if (estatus.equals("0") && publicacion != ("") && resultados != ("")) {
+                            request.setAttribute("consulta", "3");
+//                        out.print("caso 3");//
+                        } else if (estatus != ("0") && publicacion.equals("") && resultados.equals("")) {
+                            request.setAttribute("consulta", "4");
+//                        out.print("caso 4");//
+                        } else if (estatus != ("0") && publicacion.equals("") && resultados != ("")) {
+                            request.setAttribute("consulta", "5");
+//                        out.print("caso 5");//
+                        } else if (estatus != ("0") && publicacion != ("") && resultados.equals("")) {
+                            request.setAttribute("consulta", "6");
+//                        out.print("caso 6");//
+                        } else if (estatus != ("0") && publicacion != ("") && resultados != ("")) {
+                            request.setAttribute("consulta", "7");
+//                        out.print("caso 7");//
+                        } 
+                    }
+                    
+                    
                     request.setAttribute("control_combobox", control_combobox);
+                    request.setAttribute("nacional", nac1);//AGREGAR-------------------------------
                     request.setAttribute("opc", "1");
                     request.setAttribute("nom", nom1);
                     request.setAttribute("dato_ent", ent1);
@@ -173,7 +281,7 @@ public class Servlet_buscar_convocatoria extends HttpServlet {
                     request.setAttribute("per1", per1);
                     request.setAttribute("per2", per2);
                     request.setAttribute("per4", per4);
-                    
+
                     request.setAttribute("ent", entidad);
                     request.setAttribute("pla", plantel);
                     request.setAttribute("est", estatus);
