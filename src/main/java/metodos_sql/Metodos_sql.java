@@ -341,7 +341,7 @@ public class Metodos_sql {
 
     //----------BUSCAR USUARIO Y CLAVE PARA VER SI ESTA REGISTRADO, SERVLET INICIO DE SESION ADMINISTRADOR*
     public String[] buscar_clave(String rfc, String clave) {
-        String usuario[] = new String[2];
+        String usuario[] = new String[3];
         conexion = null;
         String buscar = "SELECT * FROM usuario WHERE curp='" + rfc + "' && clave='" + clave + "'";
         conexion = conector();
@@ -351,6 +351,7 @@ public class Metodos_sql {
             if (resultado.next()) {
                 usuario[0] = "USUARIO ENCONTRADO";
                 usuario[1] = resultado.getString("id");
+                usuario[2] = resultado.getString("nacional");//AGREGAR
             } else {
                 usuario[0] = "USUARIO NO ENCONTRADO";
             }

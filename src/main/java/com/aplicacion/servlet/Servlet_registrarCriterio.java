@@ -83,15 +83,58 @@ public class Servlet_registrarCriterio extends HttpServlet {
             String idConvocatoria=session.getAttribute("idConvocatoria").toString();
             String idCriterio=request.getParameter("idCriterio");
             Metodos_sql metodo = new Metodos_sql();
-            
-            String idPuntaje=request.getParameter("puntaje");                    
-            String[] parametros={idUsuario,idConvocatoria,idCriterio,idPuntaje};
-            List<String[]> datos;                           
-            datos=metodo.ejecutaSP("sp_insertConstanciasProceso",parametros);            
-            if(!datos.isEmpty()){
-                out.print(datos.get(0)[0]);
+            String[] parametros=new String[3];
+            List<String[]> datos;
+            if(!idCriterio.equals("10")){            
+                String idPuntaje=request.getParameter("puntaje");                    
+                parametros[0]=idUsuario;
+                parametros[1]=idCriterio;
+                parametros[2]=idPuntaje;                           
+                datos=metodo.ejecutaSP("sp_insertConstanciasProceso",parametros);            
+                if(!datos.isEmpty()){
+                    out.print(datos.get(0)[0]);
+                }else{
+                    out.print("Error en almacenamiento de datos, intente nuevamente");
+                }
             }else{
-                out.print("Error en almacenamiento de datos, intente nuevamente");
+                int puntaje=0;
+                String idPuntaje10=request.getParameter("puntaje10"); 
+                String idPuntaje11=request.getParameter("puntaje11"); 
+                String idPuntaje12=request.getParameter("puntaje12"); 
+                String idPuntaje13=request.getParameter("puntaje13"); 
+                String idPuntaje14=request.getParameter("puntaje14");               
+                parametros[0]=idUsuario;
+                parametros[1]="10";
+                parametros[2]=idPuntaje10;                                           
+                datos=metodo.ejecutaSP("sp_insertConstanciasProceso",parametros);
+                if(!datos.isEmpty()){
+                    puntaje+=Integer.parseInt(datos.get(0)[0]);
+                }
+                parametros[1]="11";
+                parametros[2]=idPuntaje11;                                           
+                datos=metodo.ejecutaSP("sp_insertConstanciasProceso",parametros);
+                if(!datos.isEmpty()){
+                    puntaje+=Integer.parseInt(datos.get(0)[0]);
+                }
+                parametros[1]="12";
+                parametros[2]=idPuntaje12;                                           
+                datos=metodo.ejecutaSP("sp_insertConstanciasProceso",parametros);
+                if(!datos.isEmpty()){
+                    puntaje+=Integer.parseInt(datos.get(0)[0]);
+                }
+                parametros[1]="13";
+                parametros[2]=idPuntaje13;                                           
+                datos=metodo.ejecutaSP("sp_insertConstanciasProceso",parametros);
+                if(!datos.isEmpty()){
+                    puntaje+=Integer.parseInt(datos.get(0)[0]);
+                }
+                parametros[1]="14";
+                parametros[2]=idPuntaje14;                                           
+                datos=metodo.ejecutaSP("sp_insertConstanciasProceso",parametros);
+                if(!datos.isEmpty()){
+                    puntaje+=Integer.parseInt(datos.get(0)[0]);
+                }
+                out.print(puntaje);
             }
         } finally {
             out.close();

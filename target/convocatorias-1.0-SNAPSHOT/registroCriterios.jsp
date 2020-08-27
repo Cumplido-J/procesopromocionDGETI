@@ -207,6 +207,13 @@
                       </div>
                       <div class="panel-collapse collapse" id="panel5">
                         <div class="panel-body">
+                            <form>
+                            <div class="row">
+                                <div class="checkbox col-xs-12">                                  
+                                  <label><input type="checkbox" id="activoCursos" name="activoCursos" data-toggle="collapse" data-target="#seccionCursos">Marque la casilla si no cuenta con evidencias de este criterio</label>
+                                </div>
+                            </div>
+                            <div id="seccionCursos" class="collapse in">
                             <div class="text-left">
                                 <label class="control-label">Cursos de actualización relacionados con la asignatura y/o módulo que imparte, o mejora pedagógica en los 2 años anteriores</label>
                             </div>
@@ -221,16 +228,19 @@
                                     </tbody>
                                 </table>
                             </div>
-                            <form id="form1" role="form" action="RegistrarCriterio" method="POST">
-                                <input type='hidden' name='idCriterio' value='${criterios[4][0]}'>                                
-                                <div class="form-group col-xs-12">
-                                    <label class="control-label">Carga de evidencia documental:</label>
-                                    <br/><input id="btnEvidencia13" type="button" class="btn btn-sm btn-link" value="Subir archivo" onclick="abrirModalArchivo(13)"/>
-                                </div>
-                                <div class="col-xs-12 text-right">
-                                    <input  class="btn btn-sm btn-primary" type="reset" value="Limpiar"/>
-                                    <input class="btn btn-sm btn-primary" id="btnEnviar5" type="submit" value='Guardar y continuar'/>                                    
-                                </div>
+                            
+                            <input type='hidden' name='idCriterio' value='${criterios[4][0]}'>                                
+                            <div class="form-group col-xs-12">
+                                <label class="control-label">Carga de evidencia documental:</label>
+                                <br/><input id="btnEvidencia13" type="button" class="btn btn-sm btn-link" value="Subir archivo" onclick="abrirModalArchivo(13)"/>
+                            </div>
+                                
+                            
+                            </div>
+                            <div class="col-xs-12 text-right">
+                                <input  class="btn btn-sm btn-primary" type="reset" value="Limpiar"/>
+                                <input class="btn btn-sm btn-primary" id="btnEnviar5" type="submit" value='Guardar y continuar'/>                                    
+                            </div>
                             </form>
                         </div>
                       </div>
@@ -247,6 +257,13 @@
                       </div>
                       <div class="panel-collapse collapse" id="panel6">
                         <div class="panel-body">
+                            <form>
+                            <div class="row">
+                                <div class="checkbox col-xs-12">                                  
+                                  <label><input type="checkbox" data-toggle="collapse" data-target="#seccionAportaciones">Marque la casilla si no cuenta con evidencias de este criterio</label>
+                                </div>
+                            </div>
+                            <div id="seccionAportaciones" class="collapse in">
                             <div class='text-center'>
                                 <input type='button' class='btn btn-sm btn-link' value='(+) Agregar información' onClick="abrirModalAportaciones()"/>
                             </div>
@@ -258,18 +275,21 @@
                                     </tbody>
                                 </table>
                             </div>
-                            <form id="form1" role="form" action="RegistrarCriterio" method="POST">
-                                <input type='hidden' name='idCriterio' value='${criterios[5][0]}'>                                
-                                <div class="form-group col-xs-12">
-                                    <label class="control-label">Carga de evidencia documental:</label>
-                                    <br/><input id="btnEvidencia14" type="button" class="btn btn-sm btn-link" value="Subir archivo" onclick="abrirModalArchivo(14)"/>
-                                </div>
-                                <div class="col-xs-12 text-right">
-                                    <input  class="btn btn-sm btn-primary" type="reset" value="Limpiar"/>
-                                    <input class="btn btn-sm btn-primary" id="btnEnviar6" type="submit" value='Guardar y continuar'/>                                    
-                                </div>
-                            </form>
+                            
+                            <input type='hidden' name='idCriterio' value='${criterios[5][0]}'>                                
+                            <div class="form-group col-xs-12">
+                                <label class="control-label">Carga de evidencia documental:</label>
+                                <br/><input id="btnEvidencia14" type="button" class="btn btn-sm btn-link" value="Subir archivo" onclick="abrirModalArchivo(14)"/>
+                            </div>
+                                
+                            
                         </div>
+                            <div class="col-xs-12 text-right">
+                                <input  class="btn btn-sm btn-primary" type="reset" value="Limpiar"/>
+                                <input class="btn btn-sm btn-primary" id="btnEnviar6" type="submit" value='Guardar y continuar'/>                                    
+                            </div>
+                            </form>
+                        </div>        
                       </div>
                     </div>
                     <div class="panel panel-default">
@@ -284,6 +304,13 @@
                       </div>
                       <div class="panel-collapse collapse" id="panel7">
                         <div class="panel-body">
+                            <form>
+                            <div class="row">
+                                <div class="checkbox col-xs-12">                                  
+                                  <label><input type="checkbox" data-toggle="collapse" data-target="#seccionParticipaciones">Marque la casilla si no cuenta con evidencias de este criterio</label>
+                                </div>
+                            </div>
+                            <div id="seccionParticipaciones" class="collapse in">
                             <div class='text-center'>
                                 <input type='button' class='btn btn-sm btn-link' value='(+) Agregar información' onclick="abrirModalParticipaciones()"/>
                             </div>
@@ -295,13 +322,15 @@
                                     </tbody>
                                 </table>
                             </div>
-                            <form id="form1" role="form" action="RegistrarCriterio" method="POST">
+                            
                                 <input type='hidden' name='idCriterio' value='${criterios[6][0]}'>                                
                                 <div class="form-group col-xs-12">
                                     <label class="control-label">Carga de evidencia documental:</label>
                                     <br/><input id="btnEvidencia15" type="button" class="btn btn-sm btn-link" value="Subir archivo" onclick="abrirModalArchivo(15)"/>
                                 </div>
-                                <div class="col-xs-12 text-right">
+                                
+                            </div>
+                            <div class="col-xs-12 text-right">
                                     <input  class="btn btn-sm btn-primary" type="reset" value="Limpiar"/>
                                     <input class="btn btn-sm btn-primary" id="btnEnviar7" type="submit" value='Guardar y continuar'/>                                    
                                 </div>
@@ -321,6 +350,13 @@
                       </div>
                       <div class="panel-collapse collapse" id="panel8">
                         <div class="panel-body">
+                            <form>
+                            <div class="row">
+                                    <div class="checkbox col-xs-12">                                  
+                                      <label><input type="checkbox" data-toggle="collapse" data-target="#seccionTutorias">Marque la casilla si no cuenta con evidencias de este criterio</label>
+                                    </div>
+                            </div>
+                            <div id="seccionTutorias" class="collapse in">
                             <div class='text-center'>
                                 <input type='button' class='btn btn-sm btn-link' value='(+) Agregar información' onClick="abrirModalTutorias()" />
                             </div>
@@ -332,12 +368,15 @@
                                     </tbody>
                                 </table>
                             </div>
-                            <form id="form1" role="form" action="RegistrarCriterio" method="POST">
+                            
                                 <input type='hidden' name='idCriterio' value='${criterios[7][0]}'>                                
                                 <div class="form-group col-xs-12">
                                     <label class="control-label">Carga de evidencia documental:</label>
                                     <br/><input id="btnEvidencia16" type="button" class="btn btn-sm btn-link" value="Subir archivo" onclick="abrirModalArchivo(16)"/>
                                 </div>
+                                
+                            
+                        </div>
                                 <div class="col-xs-12 text-right">
                                     <input  class="btn btn-sm btn-primary" type="reset" value="Limpiar"/>
                                     <input class="btn btn-sm btn-primary" id="btnEnviar8" type="submit" value='Guardar y continuar'/>                                    
@@ -358,6 +397,13 @@
                       </div>
                       <div class="panel-collapse collapse" id="panel9">
                         <div class="panel-body">
+                            <form>
+                            <div class="row">
+                                    <div class="checkbox col-xs-12">                                  
+                                      <label><input type="checkbox" data-toggle="collapse" data-target="#seccionPublicaciones">Marque la casilla si no cuenta con evidencias de este criterio</label>
+                                    </div>
+                            </div>
+                            <div id="seccionPublicaciones" class="collapse in">
                             <div class='text-center'>
                                 <input type='button' class='btn btn-sm btn-link' value='(+) Agregar información' onClick="abrirModalPublicacion()"/>
                             </div>
@@ -369,13 +415,16 @@
                                     </tbody>
                                 </table>
                             </div>
-                            <form id="form1" role="form" action="RegistrarCriterio" method="POST">
+                            
                                 <input type='hidden' name='idCriterio' value='${criterios[8][0]}'>                                
                                 <div class="form-group col-xs-12">
                                     <label class="control-label">Carga de evidencia documental:</label>
                                     <br/><input id="btnEvidencia17" type="button" class="btn btn-sm btn-link" value="Subir archivo" onclick="abrirModalArchivo(17)"/>
                                 </div>
-                                <div class="col-xs-12 text-right">
+                                
+                            
+                        </div>
+                        <div class="col-xs-12 text-right">
                                     <input  class="btn btn-sm btn-primary" type="reset" value="Limpiar"/>
                                     <input class="btn btn-sm btn-primary" id="btnEnviar9" type="submit" value='Guardar y continuar'/>                                    
                                 </div>
@@ -389,25 +438,25 @@
                           <a data-parent="#accordion" data-toggle="collapse" href="#panel10" aria-expanded="false" aria-controls="panel10">
                           ${criterios[9][0]} - ${criterios[9][1]}
                           </a>
-                          <p class="text-danger">Puntaje: <span id="p10">${puntajes[9][4]}</span></p>
+                          <p class="text-danger">Puntaje: <span id="p10">${puntajes[9][4]+puntajes[10][4]+puntajes[11][4]+puntajes[12][4]+puntajes[13][4]+resultados[1]}</span></p>
                         </h4>
                         <button type="button" class="collpase-button collapsed" data-parent="#accordion" data-toggle="collapse" href="#panel10"></button>
                       </div>
                       <div class="panel-collapse collapse" id="panel10">
                         <div class="panel-body">
-                            <form id="form1" role="form" action="RegistrarCriterio" method="POST">
+                            <form id="form10" role="form" action="RegistrarCriterio" method="POST">
                                 <input type='hidden' name='idCriterio' value='${criterios[9][0]}'> 
                                 <div class="row">
                                     <div class="form-group col-md-6">
                                         <label class="control-label">10.1A Planeación didáctica: Docente</label>
                                         <select class="form-control input-sm" id="puntaje10" name="puntaje10" required>                                  
-                                          ${catalogo.desplegarOpcionesPuntaje(10)}
+                                          ${catalogo.desplegarOpcionesPuntaje(10,puntajes[9][3])}
                                       </select>
                                     </div>
                                     <div class="form-group col-md-6">
                                         <label class="control-label">10.1AB Portafolio de evidencias de Evaluación del aprendizaje</label>
                                         <select class="form-control input-sm" id="puntaje11" name="puntaje11" required>                                  
-                                          ${catalogo.desplegarOpcionesPuntaje(11)}
+                                          ${catalogo.desplegarOpcionesPuntaje(11,puntajes[10][3])}
                                         </select>
                                     </div>
                                 </div>
@@ -417,13 +466,13 @@
                                           <br/>Nivel de desempeño en la observación de clase en aula (práctica docente)
                                       </label>
                                       <select class="form-control input-sm" id="puntaje12" name="puntaje12" required>                                  
-                                          ${catalogo.desplegarOpcionesPuntaje(12)}
+                                          ${catalogo.desplegarOpcionesPuntaje(12,puntajes[11][3])}
                                       </select>
                                     </div>
                                     <div class="form-group col-md-6">                                                             
                                       <label class="control-label">10.3A Porcentaje de aprobación escolar (Resultados educativos) por asignatura, actividad paraescolar o módulo profesional:<br/><br/></label>
                                       <select class="form-control input-sm" id="puntaje13" name="puntaje13" required>                                  
-                                          ${catalogo.desplegarOpcionesPuntaje(13)}
+                                          ${catalogo.desplegarOpcionesPuntaje(13,puntajes[12][3])}
                                       </select>
                                     </div>
                                 </div>
@@ -433,7 +482,7 @@
                                       <br/>Nivel de Desempeño(resultados educativos): 
                                       </label>
                                       <select class="form-control input-sm" id="puntaje13" name="puntaje14" required>                                  
-                                          ${catalogo.desplegarOpcionesPuntaje(14)}
+                                          ${catalogo.desplegarOpcionesPuntaje(14,puntajes[13][3])}
                                       </select>
                                     </div>
                                 </div>
@@ -771,20 +820,22 @@
                 <div class="modal-body">
                     <iframe name="ifRespuesta" hidden></iframe>
                     <iframe style="width:100%;" id="ifArchivo" name="ifArchivo" src="" hidden></iframe>
-                    <form id="formArchivo" name="formArchivo" method="POST" enctype="multipart/form-data" >
-                        <div class="form-group" id="seccionCarga">
-                            <label class="control-label" for="archivo">Seleccione el archivo a cargar:</label>
-                            <input type="hidden" id="idArchivo" name="idArchivo" value="" />
-                            <input type="file" class="form-control input-sm" id="archivo" name="archivo" onchange="subirArchivo()" accept=".pdf" />
-                        </div>
-                    </form>                    
+                    <div id="seccionCarga">
+                        <form id="formArchivo" name="formArchivo" method="POST" enctype="multipart/form-data" >
+                                <label class="text-warning" id="alertaCarga"><span class="glyphicon glyphicon-warning-sign"></span>&nbsp;Cárgue todas las evidencias documentales del criterio en un solo archivo PDF</label>
+                                <label class="control-label" for="archivo">Seleccione el archivo a cargar:</label>
+                                <input type="hidden" id="idArchivo" name="idArchivo" value="" />
+                                <input type="file" class="form-control input-sm" id="archivo" name="archivo" onchange="subirArchivo()" accept=".pdf" />
+
+                        </form>  
+                    </div>
                 </div>
                 <div class="modal-footer">
                   <button type="button" class="btn btn-sm btn-default" data-dismiss="modal">Cerrar</button>
                 </div>
               </div>
             </div>
-          </div>
+        </div>
         <div id="modalConfirmacion" class="modal fade" role="dialog">
             <div class="modal-dialog">
               <div class="modal-content">

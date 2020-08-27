@@ -120,6 +120,54 @@ $(document).ready(function () {
             return false;
         }
     });
+    $('#form10').submit(function(e) {
+        e.preventDefault();
+    }).validate({
+        messages: {
+            'puntaje10': {
+                required: "Seleccione una opción"
+            },
+            'puntaje11': {
+                required: "Seleccione una opción"
+            },
+            'puntaje12': {
+                required: "Seleccione una opción"
+            },
+            'puntaje13': {
+                required: "Seleccione una opción"
+            },
+            'puntaje14': {
+                required: "Seleccione una opción"
+            }
+        },
+        submitHandler:function(){
+            $.ajax({
+                type:$('#form10').attr("method"),
+                url:$('#form10').attr("action"),
+                data:$('#form10').serialize(),
+                beforeSend:function(){
+                    $("#btnEnviar10").val("Guardando...");
+                    $("#btnEnviar10").attr("disabled","disabled");
+                },
+                complete:function(){
+                   $("#btnEnviar10").val("Guardar y continuar"); 
+                   $("#btnEnviar10").removeAttr("disabled");
+                },success:function(data){
+                    if(isNaN(data)){
+                        $("#mensaje").html(data);            
+                        $("#modalMensaje").modal("show");
+                    }
+                    else{
+                        var puntaje=parseInt(data)+parseInt($("#pEvidencias").val());                        
+                        $("#p10").html(puntaje); 
+                        $("#mensaje").html("Información guardada correctamente");            
+                        $("#modalMensaje").modal("show");
+                    }
+                }
+            });
+            return false;
+        }
+    });
     $('#formCursos').submit(function(e) {
         e.preventDefault();
     }).validate({
@@ -401,8 +449,10 @@ $(document).ready(function () {
 function abrirModalArchivo(id){  
     if(id<9){
         $("#seccionCarga").addClass("disabled");
+        $("#alertaCarga").addClass("hidden");
     }else{
         $("#seccionCarga").removeClass("disabled");
+        $("#alertaCarga").removeClass("hidden");
     }
     $("#archivo").val("");
     if($("#btnEvidencia"+id).attr("value")=="Subir archivo"){        

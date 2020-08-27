@@ -119,8 +119,9 @@
                                 <tr>
                                     <td><%= rs.getString("entidad")%></td>
                                     <td><%= rs.getString("plantel")%></td>
-                                    <td><%= rs.getString("nombre")%></td>
                                     <td><%= rs.getString("curp")%></td>
+                                    <td><%= rs.getString("nombre")%></td>
+                                    <td><%= rs.getString("idConvocatoria")%></td>
                                     <td><%= rs.getInt("id")%></td>
                                     <td><button class="btn btn-sm btn-primary" type="submit" id="enviarDatos"name="enviarDatos">Enviar</button></td>
                                     <%
