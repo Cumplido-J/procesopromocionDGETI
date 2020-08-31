@@ -176,7 +176,7 @@ public class Servlet_iniciosesion_administrador extends HttpServlet {
                         request.setAttribute("per5", per5);
                         session.setAttribute("idUsuario", idUsuario);
                         session.setAttribute("rfc", rfc2);
-
+                        
                         if (busqueda_nombre[5].toString().equals("S")) {
                             request.setAttribute("control_combobox", "false");
                             request.setAttribute("nacional", nacional);//AGREGAR-----------------------------

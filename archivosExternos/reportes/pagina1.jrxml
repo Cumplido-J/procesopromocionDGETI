@@ -350,7 +350,7 @@ GROUP BY vac.idConvocatoria]]>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Montserrat" isBold="true"/>
 				</textElement>
-				<text><![CDATA[CONVOCATORIA BASE]]></text>
+				<text><![CDATA[CONVOCATORIA]]></text>
 			</staticText>
 			<staticText>
 				<reportElement positionType="Float" x="0" y="0" width="571" height="22" uuid="6b646ddb-14d9-4228-a530-1251c1b0b5de"/>

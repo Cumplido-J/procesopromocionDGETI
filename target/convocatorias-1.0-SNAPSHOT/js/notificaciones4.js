@@ -141,20 +141,31 @@ publicacion_resultados1.addEventListener("input", function (event) {
 
 
 function  validar_datos() {
-     var ent1 = document.getElementById("entidad").value;
-    
-    if (ent1 == "0") {
+    var ent1 = document.getElementById("entidad").value;
+    var control_combobox = document.getElementById("control_combobox").value;
+
+    if (ent1 === "0" && control_combobox === "false") {
+        $("#n8").text("Campo ENTIDAD vacio").css("color", "red");
+        $("#entidad").css("border", "1px solid red");
+    }
+
+    if (ent1 === "0" && control_combobox === "true") {
         $("#n8").text("Campo ENTIDAD vacio").css("color", "red");
         $("#entidad").css("border", "1px solid red");
     }
 
     var pla1 = document.getElementById("i_plantel").value;
-    if (pla1 == "0") {
+    if (pla1 === "0" && control_combobox === "false") {
         $("#n7").text("Campo PLANTEL vacio").css("color", "red");
         $("#i_plantel").css("border", "1px solid red");
     }
     
-var programa1 = document.getElementById("programa").value;
+    if (pla1 == "0" && control_combobox == "true") {
+        $("#n7").text("Campo PLANTEL vacio").css("color", "red");
+        $("#i_plantel").css("border", "1px solid red");
+    }
+
+    var programa1 = document.getElementById("programa").value;
     if (programa1 == 0) {
         $("#c1").text("Campo PROGRAMA vacio").css("color", "red");
         $("#programa").css("border", "1px solid red");
@@ -207,28 +218,28 @@ var programa1 = document.getElementById("programa").value;
         $("#c9").text("Campo PUBLICACION RESULTADOS vacio").css("color", "red");
         $("#publicacion_resultados").css("border", "1px solid red");
     }
-    
+
 //----------------------------------------------------------------------------
-   if (document.getElementById("entidad").value == "0")
+    if (document.getElementById("entidad").value == "0")
     {
         return false;
     } else {
     }
 //----------------------------------------------------------------------------
 
- if (document.getElementById("i_plantel").value == "0")
+    if (document.getElementById("i_plantel").value == "0")
     {
         return false;
     } else {
     }
 //----------------------------------------------------------------------------
 
-if (document.getElementById("programa").value === "")
+    if (document.getElementById("programa").value === "")
     {
         return false;
     } else {
     }
-   
+
 //----------------------------------------------------------------------------
 
     if (document.getElementById("publicacion").value === "")

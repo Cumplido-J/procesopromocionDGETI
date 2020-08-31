@@ -138,11 +138,11 @@ public class Metodos_sql {
     }//fin metodo guardar 
 
     //----------GUARDAR DATOS, SERVLET AGREGAR USUARIO*
-    public int guardar4(int id, String entidad, String plantel, String nombre, String primerApellido, String segundoApellido, String correo, String clave, String usuario, String telfijo, String telcel, String perfil) {
+    public int guardar4(int id, String entidad, String plantel, String nombre, String primerApellido, String segundoApellido, String correo, String clave, String usuario, String telfijo, String telcel, String perfil, String nivel) {
         int resultado = 0;
 
         conexion = null;
-        String guardar = "INSERT INTO usuario(id,programa,entidad,plantel,nombre,primerApellido,segundoApellido,correo,clave,curp,telfijo,telcel,perfil,consideraciones) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+        String guardar = "INSERT INTO usuario(id,programa,entidad,plantel,nombre,primerApellido,segundoApellido,correo,clave,curp,telfijo,telcel,perfil,consideraciones,nacional) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
         conexion = conector();
         try {
             sentencia_preparada = conexion.prepareStatement(guardar);
@@ -161,6 +161,7 @@ public class Metodos_sql {
             sentencia_preparada.setString(13, perfil);
 //            sentencia_preparada.setString(14, permisos);
             sentencia_preparada.setString(14, null);
+            sentencia_preparada.setString(15, nivel);
 
             resultado = sentencia_preparada.executeUpdate();
             sentencia_preparada.close();
@@ -171,7 +172,7 @@ public class Metodos_sql {
     }//fin metodo guardar
 
     //----------- GUARDAR VACANTES, SERVLET AGREGAR VACANTES*
-    public int guardar5(String entidad, String plantel, String plaza, String cantidad, String tipo, String jornada, String grado_academico, String vacancia1, String convocatoria) {
+    public int guardar5(String entidad, String plantel, String plaza, String cantidad, String tipo, String jornada,String vacancia1, String convocatoria) {
         int resultado = 0;
         conexion = null;
 
@@ -341,7 +342,7 @@ public class Metodos_sql {
 
     //----------BUSCAR USUARIO Y CLAVE PARA VER SI ESTA REGISTRADO, SERVLET INICIO DE SESION ADMINISTRADOR*
     public String[] buscar_clave(String rfc, String clave) {
-        String usuario[] = new String[3];
+        String usuario[] = new String[3];//AGREGAR
         conexion = null;
         String buscar = "SELECT * FROM usuario WHERE curp='" + rfc + "' && clave='" + clave + "'";
         conexion = conector();
@@ -731,7 +732,8 @@ public class Metodos_sql {
         List<String[]> datos = new ArrayList<String[]>();
         String[] tupla;
         conexion = null;
-        String aux = "";        
+        String aux = "";
+        //System.out.println(parametros.length);
         for (String parametro : parametros) {
             if (!parametro.equals("")) {
                 aux += "'" + parametro + "',";

@@ -31,11 +31,11 @@ function validarentrada3() {
     } else {
         document.getElementById("n7").innerHTML = "";
         $("#i_plantel").css("border", "none");
-        var idPlantel=$("#i_plantel").val();
-        
-        $.get("ConsultaCatalogos", {k: "15",i:idPlantel}, function(respuesta){
-            $("#convocatoria").html(respuesta);
-        });        
+        var idPlantel = $("#i_plantel").val();
+
+//        $.get("ConsultaCatalogos", {k: "15", i: idPlantel}, function (respuesta) {
+//            $("#convocatoria").html(respuesta);
+//        });
     }
 }
 
@@ -68,7 +68,7 @@ function convocatoria1() {
     var selected = combo.options[combo.selectedIndex].text;
     document.data.campojornada.value = selected;
 
-    if (document.getElementById("convocatoria").value == "")
+    if (document.getElementById("convocatoria").value == "0")
     {
         $("#n80").text("Selecciona una CONVOCATORIA").css("color", "red");
         $("#convocatoria").css("border", "1px solid red");
@@ -142,12 +142,22 @@ function  validate() {
         $("#entidad").css("border", "1px solid red");
     }
 
+    if (ent1 === "0" && control_combobox === "true") {
+        $("#n8").text("Campo ENTIDAD vacio").css("color", "red");
+        $("#entidad").css("border", "1px solid red");
+    }
+
     var pla1 = document.getElementById("i_plantel").value;
     if (pla1 === "0" && control_combobox === "false") {
         $("#n7").text("Campo PLANTEL vacio").css("color", "red");
         $("#i_plantel").css("border", "1px solid red");
     }
     
+    if (pla1 == "0" && control_combobox == "true") {
+        $("#n7").text("Campo PLANTEL vacio").css("color", "red");
+        $("#i_plantel").css("border", "1px solid red");
+    }
+
     var plaz1 = document.getElementById("plaza1").value;
     if (plaz1 == "0") {
         $("#n30").text("Campo CATEGORIA PLAZA vacio").css("color", "red");
@@ -190,12 +200,26 @@ function  validate() {
     }
 
 //----------------------------------------------------------------------------
-   if (document.getElementById("i_plantel").value === "0" && control_combobox === "false")
+    if (document.getElementById("i_plantel").value === "0" && control_combobox === "true")
+    {
+        return false;
+    } else {
+    }
+    
+//----------------------------------------------------------------------------
+    if (document.getElementById("i_plantel").value === "0" && control_combobox === "false")
     {
         return false;
     } else {
     }
 
+//----------------------------------------------------------------------------
+    if (document.getElementById("entidad").value === "0" && control_combobox === "true")
+    {
+        return false;
+    } else {
+    }
+    
 //----------------------------------------------------------------------------
     if (document.getElementById("entidad").value === "0" && control_combobox === "false")
     {

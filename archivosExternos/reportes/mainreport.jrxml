@@ -18,7 +18,7 @@
 	<parameter name="convocatoria" class="java.lang.Integer"/>
 	<queryString>
 		<![CDATA[SELECT  
-	vac.plantel, vac.idConvocatoria,conv.idprograma, plantel.nombre as plantelnombre, catprogramas.programa,
+	vac.plantel, vac.idConvocatoria,conv.idprograma, conv.estatus, plantel.nombre as plantelnombre, catprogramas.programa,
 
 DATE_FORMAT(conv.inicioRegistro, '%d-%m-%Y') as inicioRegistro,
 DATE_FORMAT(conv.finRegistro, '%d-%m-%Y') as finRegistro,
@@ -57,6 +57,10 @@ GROUP BY vac.idConvocatoria]]>
 		<property name="com.jaspersoft.studio.field.label" value="idprograma"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="convocatoria"/>
 	</field>
+	<field name="estatus" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="estatus"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="convocatoria"/>
+	</field>
 	<field name="plantelnombre" class="java.lang.String">
 		<property name="com.jaspersoft.studio.field.label" value="plantelnombre"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="catplanteles"/>
@@ -92,8 +96,21 @@ GROUP BY vac.idConvocatoria]]>
 		<variableExpression><![CDATA[$V{p1f}+"---, con fundamento en el artículo 3o., párrafos séptimo y octavo, de la Constitución Política de los Estados Unidos Mexicanos; 1, 16, fracción XIII, y 64 de la Ley General del Sistema para la Carrera de las Maestras y los Maestros; y el Programa de promoción en el servicio docente por cambio de categoría en educación media superior (Promoción horizontal)."]]></variableExpression>
 		<initialValueExpression><![CDATA[""]]></initialValueExpression>
 	</variable>
+	<variable name="estatus" class="java.lang.Boolean">
+		<initialValueExpression><![CDATA[1]]></initialValueExpression>
+	</variable>
 	<background>
-		<band splitType="Stretch"/>
+		<band height="752" splitType="Stretch">
+			<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.grid.JSSGridBagLayout"/>
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<printWhenExpression><![CDATA[!$F{estatus}.equals( "DEFINITIVA" )]]></printWhenExpression>
+			<image>
+				<reportElement stretchType="ContainerHeight" x="0" y="0" width="572" height="752" uuid="273e2b05-17da-4862-a7a9-ec8f208b8a6f">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<imageExpression><![CDATA["/dsvo.png"]]></imageExpression>
+			</image>
+		</band>
 	</background>
 	<pageHeader>
 		<band height="75">

@@ -13,7 +13,7 @@
 	<parameter name="c7" class="java.lang.Integer"/>
 	<queryString>
 		<![CDATA[SELECT
-	vac.plantel, vac.idConvocatoria,conv.idPrograma, plantel.nombre as plantelnombre,
+	vac.plantel, vac.idConvocatoria,conv.idPrograma, conv.estatus, plantel.nombre as plantelnombre,
 DATE_FORMAT(conv.publicacion, '%d de %M de %Y') as publicacion
 from vacancia vac
 INNER JOIN 
@@ -38,6 +38,10 @@ GROUP BY vac.idConvocatoria]]>
 	</field>
 	<field name="idPrograma" class="java.lang.Integer">
 		<property name="com.jaspersoft.studio.field.label" value="idPrograma"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="convocatoria"/>
+	</field>
+	<field name="estatus" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="estatus"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="convocatoria"/>
 	</field>
 	<field name="plantelnombre" class="java.lang.String">
@@ -136,6 +140,12 @@ GROUP BY vac.idConvocatoria]]>
 				</textElement>
 				<text><![CDATA[Para la aclaración de dudas o información adicional relacionada con este proceso de selección, el aspirante podrá dirigirse a la UEMSTIS en la dirección de correo electrónico promociondocente@uemstis.sems.gob.mx o a los números telefónicos 5536017599 y 8002886688.]]></text>
 			</staticText>
+			<image>
+				<reportElement x="213" y="177" width="145" height="84" uuid="2f87f997-ab9a-410c-ba50-48a06a5dd05b">
+					<printWhenExpression><![CDATA[!$F{estatus}.equals( "TEMPORAL" )]]></printWhenExpression>
+				</reportElement>
+				<imageExpression><![CDATA["firma.png"]]></imageExpression>
+			</image>
 		</band>
 	</summary>
 </jasperReport>
