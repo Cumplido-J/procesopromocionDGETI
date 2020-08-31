@@ -103,6 +103,7 @@
                                 <%=
                                     new Catalogos().desplegarConvocatorio(nombre, _idEntidad, _idPlantel, _idEstatus)
                                 %>
+<<<<<<< HEAD
                                 <tr>
                                     <td><%= rs.getString("entidad")%></td>
                                     <td><%= rs.getString("plantel")%></td>
@@ -120,6 +121,8 @@
         %>
                                 </tr>
                                 <%}%>
+=======
+>>>>>>> ef835fd8f0da49d601527ed61050a9cb00e3f9c9
                             </thead>
                             <tbody id="vacanciaData">
 
