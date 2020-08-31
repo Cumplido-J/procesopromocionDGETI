@@ -508,21 +508,6 @@ public class Catalogos {
             return respuesta;        
         }
     }
-    
-    public String desplegarOpcionesConvocatoria(String idPlantel){        
-        String respuesta="<option value=''>-Seleccione-</option>";
-        String[] parametros={idPlantel};
-        try{
-            List<String[]> datos=metodos.ejecutaSP("sp_consultaProgramasPlantel",parametros);
-            for(String[] dato:datos){
-                respuesta+="<option value='"+dato[0]+"' >"+dato[1]+"</option>";
-            }
-        }catch(Exception e){
-            respuesta=e.toString();
-        }finally{
-            return respuesta;        
-        }
-    }
     public String desplegarPlanteles(String idPlantel){        
         String respuesta="<option value=''>-Seleccione-</option>";
         String[] parametros={idPlantel};
@@ -549,5 +534,105 @@ public class Catalogos {
         }finally{
             return respuesta;        
         }
+    }
+    
+     public String desplegarConvocatorio(String nombreUsuario, String _idEntidad, String _idPlantel, String _idEstatus){        
+        String respuesta="\"<tr>\\n\" +\n" +
+"\"                                    <th>Estado</th>\\n\" +\n" +
+"\"                                    <th>Plantel</th>\\n\" +\n" +
+"\"                                    <th>RFC</th>\\n\" +\n" +
+"\"                                    <th>Nombre</th>\\n\" +\n" +
+"\"                                    <th>Primer apellido</th>\\n\" +\n" +
+"\"                                    <th>Tipo de Convocatoria</th>\\n\" +\n" +
+"\"                                    <th>Estatus</th>\\n\" +\n" +
+"\"                                    <th>Opciones</th>\\n\" +\n" +
+"\"                                </tr>\"\n" +
+"                        + \"<tr>\\n\"";
+        String[] parametros={nombreUsuario, _idEntidad, _idPlantel, _idEstatus};
+        try{
+            int cont= 1;
+            List<String[]> datos=metodos.ejecutaSP("sp_consultaConvocatoriasUsuarios",parametros);
+            for(String[] dato:datos){
+                
+                String valor9 = dato[9]==null?"Aun no hay ningun registro":dato[10];
+                String valor10 = dato[10]==null?"Aun no hay ningun registro":dato[10];
+                
+                String enviarD = "enviar" + cont++;
+                
+                respuesta=
+"                                    <td>"+dato[2]+"</td>\n" +
+"                                    <td>"+dato[4]+"</td>\n" +
+"                                    <td>"+dato[8]+"</td>\n" +
+"                                    <td>"+dato[5]+"</td>\n" +
+"                                    <td>"+dato[6]+"</td>\n" +
+"                                    <td>"+valor9+"</td>\n"+
+"                                    <td>"+valor10+"</td>\n"+
+"                        <td><button class='btn btn-sm btn-primary' type='submit' id='"+enviarD+"'name='"+enviarD+"'->Enviar</button></td>"
+                        + "</tr>";
+            }
+        }catch(Exception e){
+            respuesta=e.toString();
+        }finally{
+            return respuesta;        
+        }
+    }
+    public  String desplegarProgramasPlanteles(){        
+        String respuesta="<option value=''>-Seleccione-</option>";        
+        try{
+            List<String[]> datos=metodos.ejecutaSP("sp_selectCatProgramas");
+            for(String[] dato:datos)
+            {
+                respuesta+="<option value='"+dato[0]+"'>"+dato[1]+"</option>";
+            }
+        }catch(Exception e){
+            respuesta=e.toString();
+        }finally{
+            return respuesta;        
+        }
+    }
+    public String desplegarComite(String _idEntidad, String _idPlantel, String _idPrograma, String _tipoComite){        
+        String respuesta="";
+        int cont = 0;
+        String[] parametros={_idEntidad, _idPlantel, _idPrograma, _tipoComite};
+        try{
+            
+            List<String[]> datosBuscar=metodos.ejecutaSP("sp_consultarComites",parametros);
+            if(datosBuscar.size()==0){
+               String valor9 = "";
+            List<String[]> datos=metodos.ejecutaSP("sp_insertComites",parametros);
+            for(String[] dato:datos){
+                
+                valor9 = dato[0];
+            }
+            return respuesta = valor9; 
+            }
+            
+            for(String[] datos:datosBuscar){
+                
+                String enviarD = "enviar" + cont++;
+                String eliminarD = "eliminar" + cont++;
+                
+                respuesta+="<tr>\n" +
+"                                    <td>"+datos[2]+"</td>\n" +
+"                                    <td>"+datos[4]+"</td>\n" +
+"                                    <td>"+datos[8]+"</td>\n" +
+"                                    <td>"+datos[7]+"</td>\n" +
+"                                    <td>"+datos[6]+"</td>\n" +
+"                        <td><button class='btn btn-sm btn-primary' type='button' data-toggle='modal' data-target='#exampleModalCenter' id='"+enviarD+"'name='"+enviarD+"'-><span class='glyphicon glyphicon-pencil'></span></button>"
+                        + "<button class='btn btn-sm btn-primary' type='button' onclick='msg()' id='"+enviarD+"'name='"+enviarD+"'-><span class='glyphicon glyphicon-search'></span></button>"
+                        + "<button class='btn btn-sm btn-primary' type='button' onclick='borrarComite("+datos[1]+","+datos[3]+","+datos[5]+","+datos[6]+","+datos[0]+")' id='"+eliminarD+"'name='"+eliminarD+"'-><span class='glyphicon glyphicon-trash'></span></button></td>"
+                        + "</tr>";
+            }
+            
+        }catch(Exception e){
+            respuesta=e.toString();
+        }finally{
+            return respuesta;        
+        }
+    }
+    public void borraComites(String _idEntidad,String _idPlantel,String _idPrograma,String _tipo,String _idComite){
+        Metodos_sql metodo = new Metodos_sql();
+        String[] parametros={_idEntidad,_idPlantel,_idPrograma,_tipo,_idComite};
+        List<String[]> datos=metodo.ejecutaSP("sp_deleteComites",parametros);          
     }
 }

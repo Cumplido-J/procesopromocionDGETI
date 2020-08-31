@@ -883,6 +883,34 @@ public class Metodos_sql {
             System.out.println(ex.toString());
         }
         return resultado;
+    }
+     
+    public ResultSet ejecutaSP2(String sp, String[] parametros) {
+        conexion = null;
+        String aux = "";
+        //System.out.println(parametros.length);
+        for (String parametro : parametros) {
+            if (!parametro.equals("")) {
+                aux += "'" + parametro + "',";
+            } else {
+                aux += "NULL,";
+            }
+        }
+        if (aux != "") {
+            aux = aux.substring(0, aux.length() - 1);
+        }
+        String buscar = "call " + sp + "(" + aux + ");";
+        System.out.println(buscar);
+        conexion = conector();
+        try {
+            sentencia_preparada = conexion.prepareStatement(buscar);
+            resultado = sentencia_preparada.executeQuery();
+            sentencia_preparada.close();
+            conexion.close();
+        } catch (Exception e) {
+            System.out.println(e.toString());
+        }
+        return resultado;
     }//fin metodo guardar 
 
 }//fin clase metodos_sql
