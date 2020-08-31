@@ -1,9 +1,12 @@
 com\aplicacion\servlet\Servlet_guardar_usuario.class
 com\aplicacion\servlet\Servlet_crearcuenta.class
+com\convocatoria\domain\ProgramasPlantel.class
 com\aplicacion\servlet\Servlet_cbRegistroCriterios.class
+com\convocatoria\servlet\ServletControladorProgramasPlantel.class
 com\aplicacion\servlet\Servlet_registroHorasGrupo.class
 com\aplicacion\servlet\Servlet_registrarCriterio.class
 herramientas\WebService.class
+com\convocatoria\domain\Comites.class
 com\convocatoria\reportes\ReporteConvocatoria.class
 com\aplicacion\servlet\Servlet_buscar_usuario.class
 com\convocatoria\servlet\ServletControladorPlantel.class
@@ -13,6 +16,8 @@ com\aplicacion\servlet\Servlet_recuperarclave_administrador.class
 com\aplicacion\beans\Docente$1.class
 com\aplicacion\servlet\Servlet_ir_a_vacantes.class
 com\aplicacion\servlet\Servlet_cargar_convocatoria.class
+com\convocatoria\servlet\ServletControladorConsultarComite.class
+com\aplicacion\servlet\Servlet_borrarComites.class
 com\aplicacion\servlet\Servlet_iniciosesion_administrador.class
 com\aplicacion\servlet\Servlet_cbRegistroEncuestados.class
 com\aplicacion\servlet\Servlet_agregar_vacantes.class
@@ -31,6 +36,7 @@ com\aplicacion\beans\Mensaje.class
 com\aplicacion\beans\Plaza.class
 com\aplicacion\beans\HoraGrupo.class
 com\convocatoria\domain\Vacancia.class
+com\aplicacion\servlet\Servlet_buscar_buscar_convocatoria.class
 com\aplicacion\servlet\Servlet_registrarPublicacion.class
 com\aplicacion\servlet\Servlet_registroInfoAcademica.class
 com\aplicacion\beans\CatalogoPersonal.class
@@ -41,6 +47,7 @@ com\aplicacion\servlet\Servlet_registroEncuestado.class
 com\convocatoria\datos\VacanciaJDBC.class
 com\aplicacion\servlet\Servlet_cancelarPin.class
 com\aplicacion\servlet\Servlet_iniciosesion_vacancia.class
+com\convocatoria\datos\ProgramasPlantelJDBC.class
 com\aplicacion\servlet\Servlet_consultaWSPersonal.class
 herramientas\Correo.class
 com\aplicacion\servlet\Servlet_cbSesionDocente.class
@@ -73,6 +80,8 @@ com\aplicacion\servlet\Servlet_logouemstis.class
 com\aplicacion\servlet\Servlet_registrarCurso.class
 com\aplicacion\servlet\Servlet_evidenciasRegistro.class
 com\aplicacion\servlet\Servlet_registrarResultado.class
+com\convocatoria\datos\ConsultarComitesJDBC.class
+com\aplicacion\beans\ConvoctoriaBean.class
 com\aplicacion\servlet\Servlet_modificar_convocatoria.class
 herramientas\Catalogos.class
 com\convocatoria\datos\ConvocatoriaJDBC.class

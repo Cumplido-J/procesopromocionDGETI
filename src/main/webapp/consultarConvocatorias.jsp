@@ -103,23 +103,6 @@
                                 <%=
                                     new Catalogos().desplegarConvocatorio(nombre, _idEntidad, _idPlantel, _idEstatus)
                                 %>
-                                <tr>
-                                    <td><%= rs.getString("entidad")%></td>
-                                    <td><%= rs.getString("plantel")%></td>
-                                    <td><%= rs.getString("curp")%></td>
-                                    <td><%= rs.getString("nombre")%></td>
-                                    <td><%= rs.getString("idConvocatoria")%></td>
-                                    <td><%= rs.getInt("id")%></td>
-                                    <td><button class="btn btn-sm btn-primary" type="submit" id="enviarDatos"name="enviarDatos">Enviar</button></td>
-                                    <%
-            session = (HttpSession) request.getSession(true);
-            String entidad = "";
-            String plantel = "";
-                session.setAttribute("entidad", request.getParameter(entidad));
-                session.setAttribute("plantel", request.getParameter(plantel));
-        %>
-                                </tr>
-                                <%}%>
                             </thead>
                             <tbody id="vacanciaData">
 
@@ -166,7 +149,6 @@
     return xhr;
 }
 var ajax = AJAX();
-
 function listarProgramasPlanteles(id){
      var cboconvocatoria = document.getElementById('cboconvocatoria');
     if(id>0){
@@ -198,7 +180,6 @@ function listarProgramasPlanteles(id){
         cboconvocatoria.appendChild(opt);
         alert("Seleccione una Entidad");
     }
-
 }
             </script>
     </body>

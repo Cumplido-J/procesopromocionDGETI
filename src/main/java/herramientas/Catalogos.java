@@ -508,8 +508,21 @@ public class Catalogos {
             return respuesta;        
         }
     }
-        
     public String desplegarPlanteles(String idPlantel){        
+        String respuesta="<option value=''>-Seleccione-</option>";
+        String[] parametros={idPlantel};
+        try{
+            List<String[]> datos=metodos.ejecutaSP("sp_selectCatPlanteles",parametros);
+            for(String[] dato:datos){
+                respuesta+="<option value='"+dato[0]+"'>"+dato[2]+"</option>";
+            }
+        }catch(Exception e){
+            respuesta=e.toString();
+        }finally{
+            return respuesta;        
+        }
+    }
+    public String desplegarCatalogosEstatus(){        
         String respuesta="<option value=''>-Seleccione-</option>";
         try{
             List<String[]> datos=metodos.ejecutaSP("sp_selectCatEstatus");
