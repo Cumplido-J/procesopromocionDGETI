@@ -35,18 +35,18 @@ public class Metodos_sql {
 
     public static Connection conector() {
         String driver, user, pass, url;
-        Properties p = new Properties();        
+//        Properties p = new Properties();        
         conexion = null;
         try {
-            p.load(new FileReader("C:/ArchivosPromocion/config.properties"));
-            
-            driver=p.getProperty("driver");
-            user=p.getProperty("user");
-            pass=p.getProperty("pass");
-            url=p.getProperty("url");            
-            Class.forName(driver);
-            conexion = (Connection) DriverManager.getConnection(url, user, pass);
-            
+//            p.load(new FileReader("C:/ArchivosPromocion/config.properties"));
+//            
+//            driver=p.getProperty("driver");
+//            user=p.getProperty("user");
+//            pass=p.getProperty("pass");
+//            url=p.getProperty("url");            
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            conexion = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/bdpromocion?useTimeZone=true&serverTimezone=UTC&autoReconnect=true&useSSL=false", "root", "1234567");
+
             if (conexion != null) {
                 System.out.println("conexion establecida");
             }
@@ -172,7 +172,7 @@ public class Metodos_sql {
     }//fin metodo guardar
 
     //----------- GUARDAR VACANTES, SERVLET AGREGAR VACANTES*
-    public int guardar5(String entidad, String plantel, String plaza, String cantidad, String tipo, String jornada,String vacancia1, String convocatoria) {
+    public int guardar5(String entidad, String plantel, String plaza, String cantidad, String tipo, String jornada, String grado_academico, String vacancia1, String convocatoria) {
         int resultado = 0;
         conexion = null;
 
@@ -227,11 +227,11 @@ public class Metodos_sql {
     }//fin metodo guardar 
 
     //----------- GUARDAR CONVOCATORIA, SERVLET GIARDAR CONVOCATORIA*
-    public int guardar7(Date publicacion1, Date periodo_registro_inicio1, Date periodo_registro_fin1, Date periodo_valoracion_inicio1, Date periodo_valoracion_fin1, Date periodo_dictaminacion_inicio1, Date periodo_dictaminacion_fin1, Date publicacion_resultados1, String pla1, String programa,String estatus) {
+    public int guardar7(Date publicacion1, Date periodo_registro_inicio1, Date periodo_registro_fin1, Date periodo_valoracion_inicio1, Date periodo_valoracion_fin1, Date periodo_dictaminacion_inicio1, Date periodo_dictaminacion_fin1, Date publicacion_resultados1, String pla1, String programa, String estatus) {
         int resultado = 0;
         conexion = null;
         String guardar = "INSERT INTO convocatoria(idPrograma,publicacion,inicioRegistro,finRegistro,inicioValoracion,finValoracion,inicioDictaminacion,finDictaminacion,resultados,idPlantel,estatus) VALUES(?,?,?,?,?,?,?,?,?,?,?)";
-        
+
         conexion = conector();
         try {
             sentencia_preparada = conexion.prepareStatement(guardar);
@@ -733,7 +733,6 @@ public class Metodos_sql {
         String[] tupla;
         conexion = null;
         String aux = "";
-        //System.out.println(parametros.length);
         for (String parametro : parametros) {
             if (!parametro.equals("")) {
                 aux += "'" + parametro + "',";
@@ -833,10 +832,11 @@ public class Metodos_sql {
         }
         return resultado;
     }
-    public String[] buscar_convocatoria(String entidad,String plantel, String programa){
-       String datos[] = new String[12];
+
+    public String[] buscar_convocatoria(String entidad, String plantel, String programa) {
+        String datos[] = new String[12];
         conexion = null;
-        String buscar = "SELECT * FROM convocatoria WHERE idPlantel='" + plantel + "' && idPrograma='"+programa +"'";
+        String buscar = "SELECT * FROM convocatoria WHERE idPlantel='" + plantel + "' && idPrograma='" + programa + "'";
         conexion = conector();
         try {
             sentencia_preparada = conexion.prepareStatement(buscar);
@@ -852,30 +852,29 @@ public class Metodos_sql {
                 datos[7] = resultado.getString("resultados");
                 datos[8] = resultado.getString("idPlantel");
                 datos[9] = resultado.getString("idPrograma");
-                datos[10]= resultado.getString("estatus");  
-                datos[11]= resultado.getString("id");
+                datos[10] = resultado.getString("estatus");
+                datos[11] = resultado.getString("id");
             }
             conexion.close();
         } catch (Exception e) {
 
         }
-        return datos;        
+        return datos;
     }
-    
-    
-     public int modificar_convocatoria(String id, Date publicacion1, Date periodo_registro_inicio1, Date periodo_registro_fin1, Date periodo_valoracion_inicio1, Date periodo_valoracion_fin1, Date periodo_dictaminacion_inicio1, Date periodo_dictaminacion_fin1, Date publicacion_resultados1, String estatus) {
+
+    public int modificar_convocatoria(String id, Date publicacion1, Date periodo_registro_inicio1, Date periodo_registro_fin1, Date periodo_valoracion_inicio1, Date periodo_valoracion_fin1, Date periodo_dictaminacion_inicio1, Date periodo_dictaminacion_fin1, Date publicacion_resultados1, String estatus) {
         int resultado = 0;
         conexion = null;
         Date fecha = new Date(20, 05, 31);
-        String guardar = "UPDATE convocatoria SET publicacion='"+publicacion1+"',"
-                                            + "inicioRegistro='"+periodo_registro_inicio1+"',"
-                                               + "finRegistro='"+periodo_registro_fin1+"',"
-                                          + "inicioValoracion='"+periodo_valoracion_inicio1+"',"
-                                             + "finValoracion='"+periodo_valoracion_fin1+"',"
-                                       + "inicioDictaminacion='"+periodo_dictaminacion_inicio1+"',"
-                                          + "finDictaminacion='"+periodo_dictaminacion_fin1+"',"
-                                                + "resultados='"+publicacion_resultados1+"',"
-                                                   + "estatus='"+estatus+"' WHERE id='"+Integer.parseInt(id)+"'";
+        String guardar = "UPDATE convocatoria SET publicacion='" + publicacion1 + "',"
+                + "inicioRegistro='" + periodo_registro_inicio1 + "',"
+                + "finRegistro='" + periodo_registro_fin1 + "',"
+                + "inicioValoracion='" + periodo_valoracion_inicio1 + "',"
+                + "finValoracion='" + periodo_valoracion_fin1 + "',"
+                + "inicioDictaminacion='" + periodo_dictaminacion_inicio1 + "',"
+                + "finDictaminacion='" + periodo_dictaminacion_fin1 + "',"
+                + "resultados='" + publicacion_resultados1 + "',"
+                + "estatus='" + estatus + "' WHERE id='" + Integer.parseInt(id) + "'";
         conexion = conector();
         try {
             sentencia_preparada = conexion.prepareStatement(guardar);
@@ -886,32 +885,77 @@ public class Metodos_sql {
             System.out.println(ex.toString());
         }
         return resultado;
-    }
-     
-    public ResultSet ejecutaSP2(String sp, String[] parametros) {
+    }//fin metodo guardar 
+
+    public int modificar_usuarios_A(String id, String entidad, String plantel, String nombre, String primerApellido, String segundoApellido, String correo, String clave, String usuario, String telfijo, String telcel, String perfil, String nivel) {
+        int resultado = 0;
         conexion = null;
-        String aux = "";
-        //System.out.println(parametros.length);
-        for (String parametro : parametros) {
-            if (!parametro.equals("")) {
-                aux += "'" + parametro + "',";
-            } else {
-                aux += "NULL,";
-            }
-        }
-        if (aux != "") {
-            aux = aux.substring(0, aux.length() - 1);
-        }
-        String buscar = "call " + sp + "(" + aux + ");";
-        System.out.println(buscar);
+    String guardar2 = "UPDATE usuario SET programa="+ null +", entidad ="+entidad+", plantel ="+plantel+", nombre = '"+nombre+"', primerApellido='"+primerApellido+"',segundoApellido='"+segundoApellido+"',correo='"+correo+"',clave='"+clave+"',curp='"+usuario+"',telfijo='"+telfijo+"',telcel='"+telcel+"',perfil='"+perfil+"',consideraciones='null',nacional='"+nivel+"' WHERE id = '"+id+"'";
+//        String guardar2 = "UPDATE usuario SET programa='" + null + "',"
+//                + "entidad='" + entidad + "',"
+//                + "plantel='" + 158 + "',"
+//                + "nombre='" + nombre + "',"
+//                + "primerApellido='" + primerApellido + "',"
+//                + "segundoApellido='" + segundoApellido + "',"
+//                + "correo='" + correo + "',"
+//                + "clave='" + clave + "',"
+//                + "curp='" + usuario + "',"
+//                + "telfijo='" + telfijo + "',"
+//                + "telcel='" + telcel + "',"
+//                + "perfil='" + perfil + "',"
+//                + "consideraciones='" + null + "',"
+//                + "nacional='" + nivel + "' WHERE id='" + 29 + "'";
+        
+//    String guardar2 = "UPDATE usuario SET programa= null, entidad = 15, plantel = null, nombre = CARLOS, primerApellido=MADRID,segundoApellido=TREJO,correo=CHARLYC2K@HOTMAIL.COM,clave=1,curp=HOLA,telfijo=1111111111,telcel=1111111111,perfil=A,consideraciones=null,nacional=1 WHERE id = 29";
+
+        
+        
         conexion = conector();
         try {
-            sentencia_preparada = conexion.prepareStatement(buscar);
-            resultado = sentencia_preparada.executeQuery();
+            sentencia_preparada = conexion.prepareStatement(guardar2);
+            resultado = sentencia_preparada.executeUpdate();
             sentencia_preparada.close();
             conexion.close();
-        } catch (Exception e) {
-            System.out.println(e.toString());
+        } catch (Exception ex) {
+        }
+        return resultado;
+    }//fin metodo guardar
+
+    
+//    public int modificar_usuarios_B() {
+//        int resultado = 0;
+//        conexion = null;  
+//              
+//String guardar2 = "UPDATE usuario SET programa= null, entidad = 1, plantel = '2', nombre = 'CARLOS', primerApellido='MADRID',segundoApellido='TREJO',correo='CHARLYC2K@HOTMAIL.COM',clave='1',curp='HOLA',telfijo='1111111111',telcel='1111111111',perfil='A',consideraciones='null',nacional='1' WHERE id = '29'";
+//
+//        conexion = conector();
+//        try {
+//            sentencia_preparada = conexion.prepareStatement(guardar2);
+//            resultado = sentencia_preparada.executeUpdate();
+//            sentencia_preparada.close();
+//            conexion.close();
+//        } catch (Exception ex) {
+//        }
+//        return resultado;
+//    }//fin metodo guardar
+    
+    
+       
+    //----------- GUARDAR PERMISOS, SERVLET AGREGAR USUARIO*
+    public int borrar_permisos_usuarios(int id, String idusuario) {
+        int resultado = 0;
+        conexion = null;
+
+        String guardar = "DELETE FROM usuariopermiso WHERE idUsuario ='"+idusuario+"'";
+
+        conexion = conector();
+        try {
+            sentencia_preparada = conexion.prepareStatement(guardar);
+            resultado = sentencia_preparada.executeUpdate();
+            sentencia_preparada.close();
+            conexion.close();
+        } catch (Exception ex) {
+            System.out.println(ex.toString());
         }
         return resultado;
     }//fin metodo guardar 
