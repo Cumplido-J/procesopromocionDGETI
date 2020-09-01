@@ -288,6 +288,7 @@
                                 <th>Nombre</th>
                                 <th>A. Paterno</th>
                                 <th>A. Materno</th>
+                                <th>Editar</th>
                             </tr>
                         </thead>
                         <%
@@ -393,6 +394,18 @@
                                     %>
                                 </div>
                             </td>
+
+                            <td align="center">
+                                <div class="datos_tabla"> 
+                                    <% if (rs2.getString("id") == null) {
+                                            out.print("");
+                                        } else {%>
+                                    <a href="modificar_usuarios.jsp?id=<%= rs2.getString("id")%> <%=request.getAttribute("control_combobox")%> <%=request.getAttribute("nacional")%> <%=request.getAttribute("per1")%> <%=request.getAttribute("per2")%> <%=request.getAttribute("per4")%> <%=request.getAttribute("dato_ent")%> <%=request.getAttribute("dato_pla")%> <%=request.getAttribute("dato_rfc")%> <%=request.getAttribute("nom")%> 1" class="btn btn-primary">Editar</a>
+                                    <%
+                                        }
+                                    %>
+                                </div>
+                            </td>
                         </tr>
                         <%}
                             }//fin if elegir
@@ -470,6 +483,7 @@
                                 <th>Nombre</th>
                                 <th>A. Paterno</th>
                                 <th>A. Materno</th>
+                                <th>Editar</th>
                             </tr>
                         </thead>
                         <%
@@ -576,6 +590,17 @@
                                     %>
                                 </div>
                             </td>
+                             <td align="center">
+                                <div class="datos_tabla"> 
+                                    <% if (rs2.getString("id") == null) {
+                                            out.print("");
+                                        } else {%>
+                                    <a href="modificar_usuarios.jsp?id=<%= rs2.getString("id")%> <%=request.getAttribute("control_combobox")%> <%=request.getAttribute("nacional")%> <%=request.getAttribute("per1")%> <%=request.getAttribute("per2")%> <%=request.getAttribute("per4")%> <%=request.getAttribute("dato_ent")%> <%=request.getAttribute("dato_pla")%> <%=request.getAttribute("dato_rfc")%> 1" class="btn btn-primary">Editar</a>
+                                    <%
+                                        }
+                                    %>
+                                </div>
+                            </td>
                         </tr>
                         <%}
                             }//fin if elegir
@@ -661,6 +686,7 @@
                                 <th>Nombre</th>
                                 <th>A. Paterno</th>
                                 <th>A. Materno</th>
+                                <th>Editar</th>
                             </tr>
                         </thead>
                         <%
@@ -755,6 +781,17 @@
                                     %>
                                 </div>
                             </td>
+                             <td align="center">
+                                <div class="datos_tabla"> 
+                                    <% if (rs2.getString("id") == null) {
+                                            out.print("");
+                                        } else {%>
+                                    <a href="modificar_usuarios.jsp?id=<%= rs2.getString("id")%> <%=request.getAttribute("control_combobox")%> <%=request.getAttribute("nacional")%> <%=request.getAttribute("per1")%> <%=request.getAttribute("per2")%> <%=request.getAttribute("per4")%> <%=request.getAttribute("dato_ent")%> <%=request.getAttribute("dato_pla")%> <%=request.getAttribute("dato_rfc")%> 1" class="btn btn-primary">Editar</a>
+                                    <%
+                                        }
+                                    %>
+                                </div>
+                            </td>
                         </tr>
                         <%}
                             }//fin if elegir
@@ -825,7 +862,7 @@
                     </table><br><br>
 
                     <div class="form-group">
-                        <button class="btn btn-primary pull-right" type="submit" name="pAgregar" form="data2">Agregar</button>
+                        <%--  <button class="btn btn-primary pull-right" type="submit" name="pAgregar" form="data2" disabled="true">Agregar</button> --%>
                         <button class="btn btn-primary pull-right" type="submit" name="buscarusuario">Buscar</button>                            
                     </div>
                     <br><br>
@@ -839,6 +876,7 @@
                                 <th>Nombre</th>
                                 <th>A. Paterno</th>
                                 <th>A. Materno</th>
+                                <%--<th>Editar</th> --%>
                             </tr>
                         </thead>
                         <%
@@ -849,7 +887,7 @@
                             elegir1 = String.valueOf(request.getAttribute("opc"));
 
                             if (elegir1.equals("1")) {
-                                ResultSet rs2 = null;                               
+                                ResultSet rs2 = null;
 
                                 if (request.getAttribute("consulta").equals("1")) {
                                     rs2 = cn.mostrar_usuarios("SELECT * FROM usuario WHERE perfil='A' && entidad='" + request.getAttribute("dato_ent") + "' && plantel='" + request.getAttribute("dato_pla") + "'");
@@ -928,6 +966,17 @@
                                     %>
                                 </div>
                             </td>
+                            <%--    <td align="center">
+                                <div class="datos_tabla"> 
+                                    <% if (rs2.getString("id") == null) {
+                                            out.print("");
+                                        } else {%>
+                                    <a href="modificar_usuarios.jsp?id=<%= rs2.getString("id")%> <%=request.getAttribute("control_combobox")%> <%=request.getAttribute("nacional")%> <%=request.getAttribute("per1")%> <%=request.getAttribute("per2")%> <%=request.getAttribute("per4")%> <%=request.getAttribute("dato_ent")%> <%=request.getAttribute("dato_pla")%> <%=request.getAttribute("dato_rfc")%> 1" class="btn btn-primary">Editar</a>
+                                    <%
+                                        }
+                                    %>
+                                </div>
+                            </td>  --%>
                         </tr>
                         <%}
                             }//fin if elegir

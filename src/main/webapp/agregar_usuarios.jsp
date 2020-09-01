@@ -36,36 +36,36 @@
         <script type="text/javascript">
 
             function seleccion_nivel() {
-                var dato_ent = document.getElementById("dato_ent").value;
-                var dato_pla = document.getElementById("dato_pla").value;
+
                 if (document.getElementById("nivel").value == "1") {
-                    document.getElementById("entidad").disabled = false;
-                    document.getElementById("i_plantel").disabled = false;
+                    document.getElementById("entidad").disabled = true;
+                    document.getElementById("i_plantel").disabled = true;
                     $("#entidad").val(0);
-                    $("#entidad").change();
+                    //$("#entidad").change();
                     $("#entidad").css("border", "none");
                     $("#n8").text("").css("color", "red");
                     $("#i_plantel").css("border", "none");
                     $("#n7").text("").css("color", "red");
                 } else if (document.getElementById("nivel").value == "2") {
-                    document.getElementById("entidad").disabled = true;
-                    document.getElementById("i_plantel").disabled = false;
+                    document.getElementById("entidad").disabled = false;
+                    document.getElementById("i_plantel").disabled = true;
                     $("#i_opc").val("1");
                     $.post("combo5.jsp", $("#data").serialize(), function (data) {
                         $("#i_plantel").html(data);
                     });
-                    $("#entidad").val(dato_ent);
+                    //$("#entidad").val(dato_ent);
 
                     $("#entidad").css("border", "none");
                     $("#n8").text("").css("color", "red");
                     $("#i_plantel").css("border", "none");
                     $("#n7").text("").css("color", "red");
                 } else if (document.getElementById("nivel").value == "3") {
-                    document.getElementById("entidad").disabled = true;
-                    document.getElementById("i_plantel").disabled = true;
-                    $("#entidad").val(dato_ent);
+                    document.getElementById("entidad").disabled = false;
+                    document.getElementById("i_plantel").disabled = false;
+                    $("#entidad").val(0);
                     $("#i_opc").val("1");
-                    $.post("combo6.jsp", $("#data").serialize(), function (data) {
+                    //$.post("combo6.jsp", $("#data").serialize(), function (data) {
+                    $.post("combo1.jsp", $("#data").serialize(), function (data) {
                         $("#i_plantel").html(data);
                     });
 
@@ -183,7 +183,7 @@
                         <div class="caja">
                             <p>Nivel
                                 <select class="form-control" name="nivel" id="nivel" onchange="seleccion_nivel()">
-                                    <option value="1">Nacional</option> 
+                                    <option value="1" selected="true">Nacional</option> 
                                     <option value="2">Estatal</option>
                                     <option value="3">Plantel</option>
                                 </select>
@@ -203,7 +203,7 @@
                                     ResultSet rs = cn.mostrar("Select id, entidad from catentidades");
                                 %>
 
-                                <select class="form-control" name="entidad" id="entidad" onchange="plantel()">
+                                <select class="form-control" name="entidad" id="entidad" onchange="plantel()" disabled="true">
                                     <option value="0">Escoge una opcion</option>
                                     <%
                                         while (rs.next()) {
@@ -220,7 +220,7 @@
 
                         <div class="caja">
                             <p>Plantel
-                                <select class="form-control" name="n_plantel" id="i_plantel" onchange="validarentrada3()">
+                                <select class="form-control" name="n_plantel" id="i_plantel" onchange="validarentrada3()" disabled="true">
                                     <option value="0">Escoge una opcion</option>                                     
                                 </select>
                             </p>
@@ -233,7 +233,7 @@
                             <div class="caja">
                                 <p>Nivel
                                     <select class="form-control" name="nivel" id="nivel" onchange="seleccion_nivel()">
-                                        <option value="1">Nacional</option> 
+                                        <option value="1" selected="true">Nacional</option> 
                                         <option value="2">Estatal</option>
                                         <option value="3">Plantel</option>
                                     </select>
@@ -253,7 +253,7 @@
                                         ResultSet rs = cn.mostrar("Select id, entidad from catentidades");
                                     %>
 
-                                    <select class="form-control" name="entidad" id="entidad" onchange="plantel()">
+                                    <select class="form-control" name="entidad" id="entidad" onchange="plantel()" disabled="true">
                                         <option value="0">Escoge una opcion</option>
                                         <%
                                             while (rs.next()) {
@@ -270,26 +270,28 @@
 
                             <div class="caja">
                                 <p>Plantel
-                                    <select class="form-control" name="n_plantel" id="i_plantel" onchange="validarentrada3()">
+                                    <select class="form-control" name="n_plantel" id="i_plantel" onchange="validarentrada3()" disabled="true">
                                         <option value="0">Escoge una opcion</option>                                     
                                     </select>
                                 </p>
                                 <div id="n7"></div>
+
                             </div>
                             <%}//OPCION ADMINISTRADOR ESTATAL COMBO BOX
                             else if (request.getAttribute("control_combobox").equals("true") && request.getAttribute("nacional").equals("2")) {%> 
-                            <div class="registro">
-                                <div class="caja">
-                                    <p>Nivel
-                                        <select class="form-control" name="nivel" id="nivel" onchange="seleccion_nivel()" disabled="true">
-                                            <option value="1">Nacional</option> 
-                                            <option value="2" selected="true">Estatal</option>
-                                            <option value="3">Plantel</option>
-                                        </select>
-                                    </p>
-                                    <div id="nnivel"></div>
-                                </div>
+                           <div class="registro">
+                            <div class="caja">
+                                <p>Nivel
+                                    <select class="form-control" name="nivel" id="nivel" onchange="seleccion_nivel()" disabled="true">
+                                        <option value="1">Nacional</option> 
+                                        <option value="2">Estatal</option>
+                                        <option value="3" selected="true">Plantel</option>
+                                    </select>
+                                </p>
+                                <input type="hidden" name="nivel_plantel" id="nivel_plantel" value="3">
+                                <div id="nnivel"></div>
                             </div>
+                        </div>
 
                             <div class="registro">
 
@@ -384,7 +386,7 @@
                                                 ResultSet rs1 = cn.mostrar("Select * from catplanteles WHERE id='" + request.getAttribute("dato_pla") + "'");
                                             %>
                                             <select class="form-control" name="n_plantel" id="i_plantel" onchange="validarentrada3()" disabled="true">
-                                                 
+
                                                 <%
                                                     while (rs1.next()) {
                                                 %>
@@ -517,7 +519,7 @@
                                     <input type="hidden" name="dato_ent" id="dato_ent" value="<%=request.getAttribute("dato_ent")%>">
                                     <input type="hidden" name="dato_pla" id="dato_pla" value="<%=request.getAttribute("dato_pla")%>">
                                     <input type="hidden" name="dato_rfc" id="dato_rfc" value="<%=request.getAttribute("dato_rfc")%>">
-                                    <button class="btn btn-primary pull-right" type="submit" name="agregarusuario">Agregar</button>
+                                    <button class="btn btn-primary pull-right" type="submit" name="agregarusuario">Guardar</button>
 
                                 </div>
                                 </form>
