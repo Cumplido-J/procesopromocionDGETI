@@ -35,17 +35,17 @@ public class Metodos_sql {
 
     public static Connection conector() {
         String driver, user, pass, url;
-//        Properties p = new Properties();        
+        Properties p = new Properties();        
         conexion = null;
         try {
-//            p.load(new FileReader("C:/ArchivosPromocion/config.properties"));
-//            
-//            driver=p.getProperty("driver");
-//            user=p.getProperty("user");
-//            pass=p.getProperty("pass");
-//            url=p.getProperty("url");            
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            conexion = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/bdpromocion?useTimeZone=true&serverTimezone=UTC&autoReconnect=true&useSSL=false", "root", "1234567");
+            p.load(new FileReader("C:/ArchivosPromocion/config.properties"));
+            
+            driver=p.getProperty("driver");
+            user=p.getProperty("user");
+            pass=p.getProperty("pass");
+            url=p.getProperty("url");            
+            Class.forName(driver);
+            conexion = (Connection) DriverManager.getConnection(url, user,pass);
 
             if (conexion != null) {
                 System.out.println("conexion establecida");
@@ -172,7 +172,7 @@ public class Metodos_sql {
     }//fin metodo guardar
 
     //----------- GUARDAR VACANTES, SERVLET AGREGAR VACANTES*
-    public int guardar5(String entidad, String plantel, String plaza, String cantidad, String tipo, String jornada, String grado_academico, String vacancia1, String convocatoria) {
+    public int guardar5(String entidad, String plantel, String plaza, String cantidad, String tipo, String jornada, String vacancia1, String convocatoria) {
         int resultado = 0;
         conexion = null;
 

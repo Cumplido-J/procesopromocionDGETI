@@ -80,23 +80,48 @@ public class Servlet_registrarCriterio extends HttpServlet {
         try {
             HttpSession session= (HttpSession) request.getSession();
             String idUsuario=session.getAttribute("idUsuario").toString();
-            String idConvocatoria=session.getAttribute("idConvocatoria").toString();
+            //String idConvocatoria=session.getAttribute("idConvocatoria").toString();
             String idCriterio=request.getParameter("idCriterio");
             Metodos_sql metodo = new Metodos_sql();
-            String[] parametros=new String[3];
+            String[] parametros;
             List<String[]> datos;
-            if(!idCriterio.equals("10")){            
-                String idPuntaje=request.getParameter("puntaje");                    
-                parametros[0]=idUsuario;
-                parametros[1]=idCriterio;
-                parametros[2]=idPuntaje;                           
-                datos=metodo.ejecutaSP("sp_insertConstanciasProceso",parametros);            
-                if(!datos.isEmpty()){
-                    out.print(datos.get(0)[0]);
+            if(!idCriterio.equals("10")){ 
+                String idPuntaje=null;
+                if(Integer.parseInt(idCriterio)<5){
+                    idPuntaje=request.getParameter("puntaje");    
                 }else{
-                    out.print("Error en almacenamiento de datos, intente nuevamente");
+                    if(request.getParameter("cbConstancia")!=null){
+                        idPuntaje="0";
+                    }else{
+                        idPuntaje="-1";
+                    }
+                }  
+                if(Integer.parseInt(idPuntaje)>=0){
+                    parametros=new String[3];
+                    parametros[0]=idUsuario;
+                    parametros[1]=idCriterio;
+                    parametros[2]=idPuntaje;                           
+                    datos=metodo.ejecutaSP("sp_insertConstanciasProceso",parametros);            
+                    if(!datos.isEmpty()){
+                        out.print(datos.get(0)[0]);
+                    }else{
+                        out.print("Error en almacenamiento de datos, intente nuevamente");
+                    }
+                }else{
+                    parametros=new String[2];
+                    parametros[0]=idUsuario;
+                    parametros[1]=idCriterio;                          
+                    datos=metodo.ejecutaSP("sp_deleteConstanciasProceso",parametros);            
+                    if(!datos.isEmpty()){
+                        if(datos.get(0)[0].equals("ok")){
+                            out.print("Información almacenada correctamente");
+                        }
+                    }else{
+                        out.print("Error en almacenamiento de datos, intente nuevamente");
+                    }
                 }
             }else{
+                parametros=new String[3];
                 int puntaje=0;
                 String idPuntaje10=request.getParameter("puntaje10"); 
                 String idPuntaje11=request.getParameter("puntaje11"); 

@@ -15,6 +15,7 @@ $(document).ready(function () {
     $( "#fechaPublicacion" ).datepicker({changeMonth:true, changeYear: true,endDate: new Date()});
     $( "#inicioResultado" ).datepicker({changeMonth:true, changeYear: true,endDate: new Date()});
     $( "#finResultado" ).datepicker({changeMonth:true, changeYear: true,endDate: new Date()});
+    
     $('#form1').submit(function(e) {
         e.preventDefault();
     }).validate({
@@ -120,6 +121,156 @@ $(document).ready(function () {
             return false;
         }
     });
+    $('#form5').submit(function(e) {
+        e.preventDefault();
+    }).validate({        
+        submitHandler:function(){
+            $.ajax({
+                type:$('#form5').attr("method"),
+                url:$('#form5').attr("action"),
+                data:$('#form5').serialize(),
+                beforeSend:function(){
+                    $("#btnEnviar5").val("Guardando...");
+                    $("#btnEnviar5").attr("disabled","disabled");
+                },
+                complete:function(){
+                   $("#btnEnviar5").val("Guardar y continuar"); 
+                   $("#btnEnviar5").removeAttr("disabled");
+                },success:function(data){
+                    if(isNaN(data)){
+                        $("#mensaje").html(data);            
+                        $("#modalMensaje").modal("show");
+                    }
+                    else{                        
+                        $("#p5").html(data); 
+                        $("#mensaje").html("Información guardada correctamente");            
+                        $("#modalMensaje").modal("show");
+                    }
+                }
+            });
+            return false;
+        }
+    });
+    $('#form6').submit(function(e) {
+        e.preventDefault();
+    }).validate({        
+        submitHandler:function(){
+            $.ajax({
+                type:$('#form6').attr("method"),
+                url:$('#form6').attr("action"),
+                data:$('#form6').serialize(),
+                beforeSend:function(){
+                    $("#btnEnviar6").val("Guardando...");
+                    $("#btnEnviar6").attr("disabled","disabled");
+                },
+                complete:function(){
+                   $("#btnEnviar6").val("Guardar y continuar"); 
+                   $("#btnEnviar6").removeAttr("disabled");
+                },success:function(data){
+                    if(isNaN(data)){
+                        $("#mensaje").html(data);            
+                        $("#modalMensaje").modal("show");
+                    }
+                    else{                        
+                        $("#p6").html(data); 
+                        $("#mensaje").html("Información guardada correctamente");            
+                        $("#modalMensaje").modal("show");
+                    }
+                }
+            });
+            return false;
+        }
+    });
+    $('#form7').submit(function(e) {
+        e.preventDefault();
+    }).validate({        
+        submitHandler:function(){
+            $.ajax({
+                type:$('#form7').attr("method"),
+                url:$('#form7').attr("action"),
+                data:$('#form7').serialize(),
+                beforeSend:function(){
+                    $("#btnEnviar7").val("Guardando...");
+                    $("#btnEnviar7").attr("disabled","disabled");
+                },
+                complete:function(){
+                   $("#btnEnviar7").val("Guardar y continuar"); 
+                   $("#btnEnviar7").removeAttr("disabled");
+                },success:function(data){
+                    if(isNaN(data)){
+                        $("#mensaje").html(data);            
+                        $("#modalMensaje").modal("show");
+                    }
+                    else{                        
+                        $("#p7").html(data); 
+                        $("#mensaje").html("Información guardada correctamente");            
+                        $("#modalMensaje").modal("show");
+                    }
+                }
+            });
+            return false;
+        }
+    });
+    $('#form8').submit(function(e) {
+        e.preventDefault();
+    }).validate({        
+        submitHandler:function(){
+            $.ajax({
+                type:$('#form8').attr("method"),
+                url:$('#form8').attr("action"),
+                data:$('#form8').serialize(),
+                beforeSend:function(){
+                    $("#btnEnviar8").val("Guardando...");
+                    $("#btnEnviar8").attr("disabled","disabled");
+                },
+                complete:function(){
+                   $("#btnEnviar8").val("Guardar y continuar"); 
+                   $("#btnEnviar8").removeAttr("disabled");
+                },success:function(data){
+                    if(isNaN(data)){
+                        $("#mensaje").html(data);            
+                        $("#modalMensaje").modal("show");
+                    }
+                    else{                        
+                        $("#p8").html(data); 
+                        $("#mensaje").html("Información guardada correctamente");            
+                        $("#modalMensaje").modal("show");
+                    }
+                }
+            });
+            return false;
+        }
+    });
+    $('#form9').submit(function(e) {
+        e.preventDefault();
+    }).validate({        
+        submitHandler:function(){
+            $.ajax({
+                type:$('#form9').attr("method"),
+                url:$('#form9').attr("action"),
+                data:$('#form9').serialize(),
+                beforeSend:function(){
+                    $("#btnEnviar9").val("Guardando...");
+                    $("#btnEnviar9").attr("disabled","disabled");
+                },
+                complete:function(){
+                   $("#btnEnviar9").val("Guardar y continuar"); 
+                   $("#btnEnviar9").removeAttr("disabled");
+                },success:function(data){
+                    if(isNaN(data)){
+                        $("#mensaje").html(data);            
+                        $("#modalMensaje").modal("show");
+                    }
+                    else{                        
+                        $("#p9").html(data); 
+                        $("#mensaje").html("Información guardada correctamente");            
+                        $("#modalMensaje").modal("show");
+                    }
+                }
+            });
+            return false;
+        }
+    });
     $('#form10').submit(function(e) {
         e.preventDefault();
     }).validate({
@@ -195,6 +346,9 @@ $(document).ready(function () {
             'horasCurso': {
                 required: "Campo requerido",
                 number:"Ingrese sólo números"
+            },
+            'documento': {
+                required: "Campo requerido"
             }
         },
         submitHandler:function(){
@@ -242,6 +396,9 @@ $(document).ready(function () {
                 required: "Campo requerido"
             },
             'institucionAportacion': {
+                required: "Campo requerido"
+            },
+            'documento': {
                 required: "Campo requerido"
             }
         },
@@ -291,6 +448,9 @@ $(document).ready(function () {
             },
             'institucionParticipacion': {
                 required: "Campo requerido"
+            },
+            'documento': {
+                required: "Campo requerido"
             }
         },
         submitHandler:function(){
@@ -329,6 +489,9 @@ $(document).ready(function () {
                 required: "Campo requerido"
             },
             'finTutoria': {
+                required: "Campo requerido"
+            },
+            'documento': {
                 required: "Campo requerido"
             }
         },
@@ -408,7 +571,16 @@ $(document).ready(function () {
     $('#formResultado').submit(function(e) {
         e.preventDefault();
     }).validate({
-        messages: {            
+        messages: {  
+            'idResultado': {
+                required: "Seleccione una opción"
+            },
+            'resultado': {
+                required: "Campo requerido"
+            },
+            'documento': {
+                required: "Campo requerido"
+            },
             'inicioResultado': {
                 required: "Campo requerido"
             },
@@ -526,7 +698,8 @@ function abrirModalPublicacion(){
     $("#modalPublicacion").modal("show");
 }
 function abrirModalResultado(){
-    $("#formResultado")[0].reset();    
+    $("#formResultado")[0].reset(); 
+    $("#resultado").addClass("hidden");
     $("#modalResultado").modal("show");
 }
 
@@ -662,4 +835,15 @@ function borrarResultado(id){
             $("#modalMensaje").modal("show");
         } 
     });
+}
+function cambioResultado(){
+    var id=$("#idResultado").val();
+    if(id=='-1'){
+        $("#resultado").removeClass("hidden");
+        $("#resultado").attr("required",true);
+    }else{
+        $("#resultado").removeAttr("required");
+        $("#resultado").addClass("hidden");
+        $("#resultado").val("");
+    }
 }

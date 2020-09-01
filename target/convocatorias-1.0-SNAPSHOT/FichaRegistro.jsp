@@ -201,6 +201,55 @@
                     </td>
                 </tr>
             </table>
+            <hr/>            
+            <p>CRITERIOS DE VALORACIÓN:</p>
+            <c:forEach items="${puntajes}" var="info">
+                <c:if test="${info[2]<=10}">
+                    <c:out value="${info[2]}"/>&nbsp; 
+                </c:if>
+                <c:out value="${info[5]}"/> :
+                <c:if test="${info[6]!=null}">
+                    <c:out value="${info[6]}"/>
+                </c:if>                
+                <br/>
+                <c:if test="${info[2]=='5'&&info[3]==null}">
+                    <table>
+                        <tr><th class='borde'>Tipo</th><th class='borde'>Nombre del curso</th><th class='borde'>Periodo o Fecha de realización</th><th class='borde'>Institución educativa con reconocimiento oficial que emite constancia</th><th class='borde'>Total de horas que acredita el curso</th><th class='borde'>Constancia o documento probatorio</th></tr>
+                        ${cursos}
+                    </table>
+                </c:if>
+                <c:if test="${info[2]=='6'&&info[3]==null}">
+                    <table>
+                        <tr><th class='borde'>Nombre de la aportación en materia de mejora continua</th><th class='borde'>Periodo o Fecha de realización</th><th class='borde'>Institución educativa con reconocimiento oficial que emite constancia</th><th class='borde'>Constancia o documento probatorio</th></tr>
+                        ${aportaciones}
+                    </table>
+                </c:if>
+                <c:if test="${info[2]=='7'&&info[3]==null}">
+                    <table>
+                        <tr><th class='borde'>Nombre de la participación en eventos y actividades de fortalecimiento académico y formación integral del educando</th><th class='borde'>Periodo o Fecha de realización</th><th class='borde'>Institución educativa con reconocimiento oficial que emite constancia</th><th class='borde'>Constancia o documento probatorio</th></tr>
+                        ${participaciones}
+                    </table>
+                </c:if>
+                <c:if test="${info[2]=='8'&&info[3]==null}">
+                    <table>
+                        <tr><th class='borde'>Periodo o Fecha de realización</th><th class='borde'>Constancia o documento probatorio</th></tr>
+                        ${tutorias}
+                    </table>
+                </c:if>
+                <c:if test="${info[2]=='9'&&info[3]==null}">
+                    <table>
+                        <tr><th class='borde'>Nombre de  la publicación</th><th class='borde'>Medio en el que se publicó</th><th class='borde'>Fecha de publicación</th><th class='borde'>ISSN</th></tr>
+                        ${publicaciones}
+                    </table>
+                </c:if>
+                <c:if test="${info[2]=='15'&&info[3]==null}">
+                    <table>
+                        <tr><tr><th class='borde'>Tipo de evidencia</th><th class='borde'>Periodo o Fecha de realización</th><th class='borde'>Constancia o documento probatorio</th></tr>
+                        ${resultados}
+                    </table>
+                </c:if>
+
+            </c:forEach>
             <p style="text-align:justify">De acuerdo a la documentación comprobatoria que ha proporcionado como evidencia de cumplimiento de los requisitos requeridos para su registro y de las evidencias para los criterios de valoración, usted ha sido aceptado para participar en el proceso de promoción en el servicio docente por cambio de categoría en Educación Media Superior, Ciclo Escolar 2020-2021.</p>
             <p style="text-align:justify">Declara bajo protesta de decir verdad que cumple con los requisitos establecidos en la Convocatoria para el proceso de promoción en el servicio docente por cambio de categoría en Educación Media Superior, Ciclo Escolar 2020-2021. Para confirmar su dicho, las UEMSTIS podrá verificar la autenticidad de la documentación que proporciono, por lo que, en caso de alteración o falsificación de la misma, acepta la descalificación inmediata del proceso o, en su caso, la invalidación del nombramiento respectivo, sin perjuicio de las sanciones de tipo administrativo o penal en las que pudiera incurrir.</p>
             <c:set var="acepta" value="${Docente.infoRegistro[63] eq 'S' ? 'Acepta': 'No acepta'}"/>

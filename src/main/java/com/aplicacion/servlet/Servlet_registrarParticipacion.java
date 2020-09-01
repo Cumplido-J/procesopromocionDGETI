@@ -89,8 +89,9 @@ public class Servlet_registrarParticipacion extends HttpServlet {
                 String nombre=request.getParameter("participacion");
                 String inicio=fecha.formatoAlmacenar(request.getParameter("inicioParticipacion"));  
                 String fin=fecha.formatoAlmacenar(request.getParameter("finParticipacion"));  
-                String institucion=request.getParameter("institucionParticipacion");                 
-                String[] parametros={idUsuario,idParticipacion,inicio,fin,institucion,nombre};
+                String institucion=request.getParameter("institucionParticipacion"); 
+                String documento=request.getParameter("documento");                 
+                String[] parametros={idUsuario,idParticipacion,inicio,fin,institucion,nombre,documento};
                 List<String[]> datos;                           
                 datos=metodo.ejecutaSP("sp_insertParticipaciones",parametros);            
                 if(!datos.isEmpty()){

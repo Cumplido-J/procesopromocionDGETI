@@ -201,19 +201,31 @@
                           <a data-parent="#accordion" data-toggle="collapse" href="#panel5" aria-expanded="false" aria-controls="panel5">
                           ${criterios[4][0]} - ${criterios[4][1]}
                           </a>
-                          <p class="text-danger">Puntaje: <span id="p5">${cursos[1]}</span></p>
+                          <p class="text-danger">Puntaje: 
+                              <span id="p5">
+                                  <c:if test="${puntajes[4][3]!=null}">
+                                      ${puntajes[4][4]}
+                                      <c:set var="checked" value="checked"></c:set>
+                                      <c:set var="in" value=""></c:set>
+                                  </c:if>
+                                  <c:if test="${puntajes[4][3]==null}">
+                                      ${cursos[1]}
+                                      <c:set var="checked" value=""></c:set>
+                                      <c:set var="in" value="in"></c:set>
+                                  </c:if>
+                              </span></p>
                         </h4>
                         <button type="button" class="collpase-button collapsed" data-parent="#accordion" data-toggle="collapse" href="#panel5"></button>
                       </div>
                       <div class="panel-collapse collapse" id="panel5">
                         <div class="panel-body">
-                            <form>
+                            <form id="form5" role="form" action="RegistrarCriterio" method="POST">
                             <div class="row">
                                 <div class="checkbox col-xs-12">                                  
-                                  <label><input type="checkbox" id="activoCursos" name="activoCursos" data-toggle="collapse" data-target="#seccionCursos">Marque la casilla si no cuenta con evidencias de este criterio</label>
+                                  <label><input type="checkbox" name="cbConstancia" data-toggle="collapse" data-target="#seccionCursos" ${checked}>Marque la casilla si no cuenta con evidencias de este criterio</label>
                                 </div>
                             </div>
-                            <div id="seccionCursos" class="collapse in">
+                            <div id="seccionCursos" class="collapse ${in}">
                             <div class="text-left">
                                 <label class="control-label">Cursos de actualización relacionados con la asignatura y/o módulo que imparte, o mejora pedagógica en los 2 años anteriores</label>
                             </div>
@@ -222,7 +234,7 @@
                             </div>
                             <div class='table-responsive'>
                                 <table class='table table-bordered table-condensed'>
-                                    <tr><th>Tipo</th><th>Nombre del curso</th><th>Periodo o Fecha de realización</th><th>Institución educativa con reconocimiento oficial que emite constancia</th><th>Total de horas que acredita el curso</th><th>Borrar</th></tr>
+                                    <tr><th>Tipo</th><th>Nombre del curso</th><th>Periodo o Fecha de realización</th><th>Institución educativa con reconocimiento oficial que emite constancia</th><th>Total de horas que acredita el curso</th><th>Constancia o documento probatorio</th><th>Borrar</th></tr>
                                     <tbody id="tablaCursos">
                                         ${cursos[0]}
                                     </tbody>
@@ -251,25 +263,38 @@
                           <a data-parent="#accordion" data-toggle="collapse" href="#panel6" aria-expanded="false" aria-controls="panel6">
                           ${criterios[5][0]} - ${criterios[5][1]}
                           </a>
-                          <p class="text-danger">Puntaje: <span id="p6">${aportaciones[1]}</span></p>
+                          <p class="text-danger">Puntaje: 
+                              <span id="p6">
+                                  <c:if test="${puntajes[5][3]!=null}">
+                                      ${puntajes[5][4]}
+                                      <c:set var="checked" value="checked"></c:set>
+                                      <c:set var="in" value=""></c:set>
+                                  </c:if>
+                                  <c:if test="${puntajes[5][3]==null}">
+                                      ${aportaciones[1]}
+                                      <c:set var="checked" value=""></c:set>
+                                      <c:set var="in" value="in"></c:set>
+                                  </c:if>
+                                  
+                              </span></p>
                         </h4>
                         <button type="button" class="collpase-button collapsed" data-parent="#accordion" data-toggle="collapse" href="#panel6"></button>
                       </div>
                       <div class="panel-collapse collapse" id="panel6">
                         <div class="panel-body">
-                            <form>
+                            <form id="form6" role="form" action="RegistrarCriterio" method="POST">
                             <div class="row">
                                 <div class="checkbox col-xs-12">                                  
-                                  <label><input type="checkbox" data-toggle="collapse" data-target="#seccionAportaciones">Marque la casilla si no cuenta con evidencias de este criterio</label>
+                                  <label><input type="checkbox" ${checked} name="cbConstancia" data-toggle="collapse" data-target="#seccionAportaciones">Marque la casilla si no cuenta con evidencias de este criterio</label>
                                 </div>
                             </div>
-                            <div id="seccionAportaciones" class="collapse in">
+                            <div id="seccionAportaciones" class="collapse ${in}">
                             <div class='text-center'>
                                 <input type='button' class='btn btn-sm btn-link' value='(+) Agregar información' onClick="abrirModalAportaciones()"/>
                             </div>
                             <div class='table-responsive'>
                                 <table class='table table-bordered table-condensed'>
-                                    <tr><th>Nombre de la aportación en materia de mejora continua</th><th>Periodo o Fecha de realización</th><th>Institución educativa con reconocimiento oficial que emite constancia</th><th>Borrar</th></tr>
+                                    <tr><th>Nombre de la aportación en materia de mejora continua</th><th>Periodo o Fecha de realización</th><th>Institución educativa con reconocimiento oficial que emite constancia</th><th>Constancia o documento probatorio</th><th>Borrar</th></tr>
                                     <tbody id="tablaAportaciones">
                                         ${aportaciones[0]}
                                     </tbody>
@@ -298,25 +323,37 @@
                           <a data-parent="#accordion" data-toggle="collapse" href="#panel7" aria-expanded="false" aria-controls="panel7">
                           ${criterios[6][0]} - ${criterios[6][1]}
                           </a>
-                          <p class="text-danger">Puntaje: <span id="p7">${participaciones[1]}</span></p>
+                          <p class="text-danger">Puntaje: 
+                              <span id="p7">
+                                  <c:if test="${puntajes[6][3]!=null}">
+                                      ${puntajes[6][4]}
+                                      <c:set var="checked" value="checked"></c:set>
+                                      <c:set var="in" value=""></c:set>
+                                  </c:if>
+                                  <c:if test="${puntajes[6][3]==null}">
+                                      ${participaciones[1]}
+                                      <c:set var="checked" value=""></c:set>
+                                      <c:set var="in" value="in"></c:set>
+                                  </c:if>                                  
+                              </span></p>
                         </h4>
                         <button type="button" class="collpase-button collapsed" data-parent="#accordion" data-toggle="collapse" href="#panel7"></button>
                       </div>
                       <div class="panel-collapse collapse" id="panel7">
                         <div class="panel-body">
-                            <form>
+                            <form id="form7" role="form" action="RegistrarCriterio" method="POST">
                             <div class="row">
                                 <div class="checkbox col-xs-12">                                  
-                                  <label><input type="checkbox" data-toggle="collapse" data-target="#seccionParticipaciones">Marque la casilla si no cuenta con evidencias de este criterio</label>
+                                  <label><input type="checkbox" ${checked} name="cbConstancia" data-toggle="collapse" data-target="#seccionParticipaciones">Marque la casilla si no cuenta con evidencias de este criterio</label>
                                 </div>
                             </div>
-                            <div id="seccionParticipaciones" class="collapse in">
+                            <div id="seccionParticipaciones" class="collapse ${in}">
                             <div class='text-center'>
                                 <input type='button' class='btn btn-sm btn-link' value='(+) Agregar información' onclick="abrirModalParticipaciones()"/>
                             </div>
                             <div class='table-responsive'>
                                 <table class='table table-bordered table-condensed'>
-                                    <tr><th>Nombre de la participación en eventos y actividades de fortalecimiento académico y formación integral del educando</th><th>Periodo o Fecha de realización</th><th>Institución educativa con reconocimiento oficial que emite constancia</th><th>Borrar</th></tr>
+                                    <tr><th>Nombre de la participación en eventos y actividades de fortalecimiento académico y formación integral del educando</th><th>Periodo o Fecha de realización</th><th>Institución educativa con reconocimiento oficial que emite constancia</th><th>Constancia o documento probatorio</th><th>Borrar</th></tr>
                                     <tbody id="tablaParticipaciones">
                                         ${participaciones[0]}
                                     </tbody>
@@ -344,25 +381,38 @@
                           <a data-parent="#accordion" data-toggle="collapse" href="#panel8" aria-expanded="false" aria-controls="panel8">
                           ${criterios[7][0]} - ${criterios[7][1]}
                           </a>
-                          <p class="text-danger">Puntaje: <span id="p8">${tutorias[1]}</span></p>
+                          <p class="text-danger">Puntaje: 
+                              <span id="p8">
+                                  <c:if test="${puntajes[7][3]!=null}">
+                                      ${puntajes[7][4]}
+                                      <c:set var="checked" value="checked"></c:set>
+                                      <c:set var="in" value=""></c:set>
+                                  </c:if>
+                                  <c:if test="${puntajes[7][3]==null}">
+                                      ${tutorias[1]}
+                                      <c:set var="checked" value=""></c:set>
+                                      <c:set var="in" value="in"></c:set>
+                                  </c:if> 
+                              </span></p>
                         </h4>
                         <button type="button" class="collpase-button collapsed" data-parent="#accordion" data-toggle="collapse" href="#panel8"></button>
                       </div>
                       <div class="panel-collapse collapse" id="panel8">
                         <div class="panel-body">
-                            <form>
+                            <form id="form8" role="form" action="RegistrarCriterio" method="POST">
+                            
                             <div class="row">
                                     <div class="checkbox col-xs-12">                                  
-                                      <label><input type="checkbox" data-toggle="collapse" data-target="#seccionTutorias">Marque la casilla si no cuenta con evidencias de este criterio</label>
+                                      <label><input type="checkbox" ${checked} name="cbConstancia" data-toggle="collapse" data-target="#seccionTutorias">Marque la casilla si no cuenta con evidencias de este criterio</label>
                                     </div>
                             </div>
-                            <div id="seccionTutorias" class="collapse in">
+                            <div id="seccionTutorias" class="collapse ${in}">
                             <div class='text-center'>
                                 <input type='button' class='btn btn-sm btn-link' value='(+) Agregar información' onClick="abrirModalTutorias()" />
                             </div>
                             <div class='table-responsive'>
                                 <table class='table table-bordered table-condensed'>
-                                    <tr><th>Periodo o Fecha de realización</th><th>Borrar</th></tr>
+                                    <tr><th>Periodo o Fecha de realización</th><th>Constancia o documento probatorio</th><th>Borrar</th></tr>
                                     <tbody id="tablaTutorias">
                                         ${tutorias[0]}
                                     </tbody>
@@ -391,19 +441,32 @@
                           <a data-parent="#accordion" data-toggle="collapse" href="#panel9" aria-expanded="false" aria-controls="panel9">
                           ${criterios[8][0]} - ${criterios[8][1]}
                           </a>
-                          <p class="text-danger">Puntaje: <span id="p9">${publicaciones[1]}</span></p>
+                          <p class="text-danger">Puntaje: 
+                              <span id="p9">
+                                  <c:if test="${puntajes[8][3]!=null}">
+                                      ${puntajes[8][4]}
+                                      <c:set var="checked" value="checked"></c:set>
+                                      <c:set var="in" value=""></c:set>
+                                  </c:if>
+                                  <c:if test="${puntajes[8][3]==null}">
+                                      ${publicaciones[1]}
+                                      <c:set var="checked" value=""></c:set>
+                                      <c:set var="in" value="in"></c:set>
+                                  </c:if> 
+                              </span></p>
                         </h4>
                         <button type="button" class="collpase-button collapsed" data-parent="#accordion" data-toggle="collapse" href="#panel9"></button>
                       </div>
                       <div class="panel-collapse collapse" id="panel9">
                         <div class="panel-body">
-                            <form>
+                            <form id="form9" role="form" action="RegistrarCriterio" method="POST">
+                            
                             <div class="row">
                                     <div class="checkbox col-xs-12">                                  
-                                      <label><input type="checkbox" data-toggle="collapse" data-target="#seccionPublicaciones">Marque la casilla si no cuenta con evidencias de este criterio</label>
+                                      <label><input type="checkbox" ${checked} name="cbConstancia" data-toggle="collapse" data-target="#seccionPublicaciones">Marque la casilla si no cuenta con evidencias de este criterio</label>
                                     </div>
                             </div>
-                            <div id="seccionPublicaciones" class="collapse in">
+                            <div id="seccionPublicaciones" class="collapse ${in}">
                             <div class='text-center'>
                                 <input type='button' class='btn btn-sm btn-link' value='(+) Agregar información' onClick="abrirModalPublicacion()"/>
                             </div>
@@ -494,7 +557,7 @@
                                     </div>
                                     <div class='table-responsive'>
                                         <table class='table table-bordered table-condensed'>
-                                            <tr><th>Periodo o Fecha de realización</th><th>Borrar</th></tr>
+                                            <tr><th>Tipo de evidencia</th><th>Periodo o Fecha de realización</th><th>Constancia o documento probatorio</th><th>Borrar</th></tr>
                                             <tbody id="tablaResultados">
                                                 ${resultados[0]}
                                             </tbody>
@@ -589,7 +652,13 @@
                                 <label class="control-label">Total de horas:</label>
                                 <input type="text" class="form-control input-sm" name="horasCurso" required/>
                             </div>
-                        </div>                    
+                        </div>  
+                        <div class="row">
+                            <div class="form-group col-md-6">                                                             
+                                <label class="control-label">Constancia o documento probatorio:</label>                               
+                                <input type="text" class="form-control input-sm" name="documento" placeholder="Constancia/Diploma/Reconocimiento" maxlength="100" required/>
+                            </div>
+                        </div>
                 </div> 
                 <div class="modal-footer">
                     <input class="btn btn-sm btn-primary" id="btnEnviarCurso" type="submit" value='Guardar'/>                                    
@@ -635,7 +704,13 @@
                                 <label class="control-label">Institución:</label>
                                 <input type="text" class="form-control input-sm" name="institucionAportacion" maxlength="200" required/>
                             </div>  
-                        </div>           
+                        </div>   
+                        <div class="row">
+                            <div class="form-group col-md-6">                                                             
+                                <label class="control-label">Constancia o documento probatorio:</label>                               
+                                <input type="text" class="form-control input-sm" name="documento" placeholder="Constancia/Diploma/Reconocimiento" maxlength="100" required/>
+                            </div>
+                        </div>        
                 </div> 
                 <div class="modal-footer">
                     <input class="btn btn-sm btn-primary" id="btnEnviarAportacion" type="submit" value='Guardar'/>                                    
@@ -682,7 +757,13 @@
                                 <label class="control-label">Institución:</label>
                                 <input type="text" class="form-control input-sm" name="institucionParticipacion" maxlength="200" required/>
                             </div>  
-                        </div>           
+                        </div>   
+                        <div class="row">
+                            <div class="form-group col-md-6">                                                             
+                                <label class="control-label">Constancia o documento probatorio:</label>                               
+                                <input type="text" class="form-control input-sm" name="documento" placeholder="Constancia/Diploma/Reconocimiento" maxlength="100" required/>
+                            </div>
+                        </div>
                 </div> 
                 <div class="modal-footer">
                     <input class="btn btn-sm btn-primary" id="btnEnviarParticipacion" type="submit" value='Guardar'/>                                    
@@ -714,6 +795,12 @@
                             <div class="form-group col-md-6">                                                             
                                 <label class="control-label">Fecha de término:</label>
                                 <input type="text" class="form-control input-sm" id="finTutoria" name="finTutoria" required/>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-md-6">                                                             
+                                <label class="control-label">Constancia o documento probatorio:</label>                               
+                                <input type="text" class="form-control input-sm" name="documento" placeholder="Constancia/Diploma/Reconocimiento" maxlength="100" required/>
                             </div>
                         </div>
                                   
@@ -785,9 +872,20 @@
                   <h4 class="modal-title">Registro de información</h4>
                 </div>
                 <div class="modal-body">
-                    
-                        <div class="row">                            
-                               
+                        <div class="row">
+                            <div class="form-group col-md-6">                                                             
+                                <label class="control-label">Tipo de evidencia de Resultados Educativos:</label>
+                                <select class="form-control input-sm" id="idResultado" name="idResultado" onChange="cambioResultado()" required>                                  
+                                    ${catalogo.desplegarOpcionesResultados()}
+                                </select>
+                                <input type="text" class="form-control input-sm hidden" id="resultado" name="resultado" placeHolder="Especifíque" maxlength="200"/>
+                            </div>
+                            <div class="form-group col-md-6">                                                             
+                                <label class="control-label">Constancia o documento probatorio:</label>                               
+                                <input type="text" class="form-control input-sm" id="documentoResultado" name="documento" placeholder="Constancia/Diploma/Reconocimiento" maxlength="100" required/>
+                            </div>
+                        </div>                    
+                        <div class="row">
                             <div class="form-group col-md-6">                                                             
                                 <label class="control-label">Fecha de inicio:</label>
                                 <input type="text" class="form-control input-sm" id="inicioResultado" name="inicioResultado" required/>

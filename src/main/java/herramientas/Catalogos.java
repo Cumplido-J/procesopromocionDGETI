@@ -635,4 +635,18 @@ public class Catalogos {
         String[] parametros={_idEntidad,_idPlantel,_idPrograma,_tipo,_idComite};
         List<String[]> datos=metodo.ejecutaSP("sp_deleteComites",parametros);          
     }
+    public String desplegarOpcionesResultados(){        
+        String respuesta="<option value=''>-Seleccione-</option>";        
+        try{
+            List<String[]> datos=metodos.ejecutaSP("sp_selectCatResultado");
+            for(String[] dato:datos){
+                respuesta+="<option value='"+dato[0]+"' >"+dato[1]+"</option>";
+            }
+            respuesta+="<option value='-1'>Otra</option>";
+        }catch(Exception e){
+            respuesta=e.toString();
+        }finally{
+            return respuesta;        
+        }
+    }
 }

@@ -86,8 +86,11 @@ public class Servlet_registrarResultado extends HttpServlet {
             Metodos_sql metodo = new Metodos_sql(); 
             if(request.getParameter("id")==null){
                 String inicio=fecha.formatoAlmacenar(request.getParameter("inicioResultado"));  
-                String fin=fecha.formatoAlmacenar(request.getParameter("finResultado"));  
-                String[] parametros={idUsuario,inicio,fin};
+                String fin=fecha.formatoAlmacenar(request.getParameter("finResultado")); 
+                String idResultado=request.getParameter("idResultado");
+                String resultado=request.getParameter("resultado"); 
+                String documento=request.getParameter("documento"); 
+                String[] parametros={idUsuario,idResultado,inicio,fin,resultado,documento};
                 List<String[]> datos;                           
                 datos=metodo.ejecutaSP("sp_insertResultados",parametros);            
                 if(!datos.isEmpty()){

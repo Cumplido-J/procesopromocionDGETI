@@ -1,5 +1,6 @@
 com\aplicacion\servlet\Servlet_guardar_usuario.class
 com\aplicacion\servlet\Servlet_crearcuenta.class
+com\aplicacion\servlet\Servlet_modificar_usuario.class
 com\convocatoria\domain\ProgramasPlantel.class
 com\aplicacion\servlet\Servlet_cbRegistroCriterios.class
 com\convocatoria\servlet\ServletControladorProgramasPlantel.class

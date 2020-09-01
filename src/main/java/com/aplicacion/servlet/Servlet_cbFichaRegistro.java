@@ -7,6 +7,7 @@ package com.aplicacion.servlet;
 
 import com.aplicacion.beans.Docente;
 import com.aplicacion.beans.HoraGrupo;
+import herramientas.CriteriosValoracion;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -70,12 +71,25 @@ public class Servlet_cbFichaRegistro extends HttpServlet {
             throws ServletException, IOException {
         HttpSession session= (HttpSession) request.getSession();     
         if(session.getAttribute("idUsuario")!=null){
+            String idUsuario=session.getAttribute("idUsuario").toString();
+            String rfc=session.getAttribute("rfc").toString();
+            CriteriosValoracion cv=new CriteriosValoracion();
             docente=new Docente();
-            docente.setIdUsuario(session.getAttribute("idUsuario").toString());
+            docente.setIdUsuario(idUsuario);
             docente.consultaInfoAspirante();
             docente.consultaHoras();            
             docente.actualizaBanderaIngles();
+            String[][] puntajes=cv.consultaPuntajes(idUsuario); 
+            String[] puntajeEncuestas=cv.consultaPuntajeEncuestas(rfc);
             request.setAttribute("Docente", docente);
+            request.setAttribute("puntajes", puntajes);
+            request.setAttribute("puntajeEncuestas", puntajeEncuestas);            
+            request.setAttribute("cursos", cv.getFilasCursosFicha(idUsuario));
+            request.setAttribute("aportaciones", cv.getFilasAportacionesFicha(idUsuario));
+            request.setAttribute("participaciones", cv.getFilasParticipacionesFicha(idUsuario));
+            request.setAttribute("tutorias", cv.getFilasTutoriasFicha(idUsuario));
+            request.setAttribute("publicaciones", cv.getFilasPublicacionesFicha(idUsuario));
+            request.setAttribute("resultados", cv.getFilasResultadosFicha(idUsuario));
             ServletContext sc = getServletContext();
             RequestDispatcher rd = sc.getRequestDispatcher("/FichaRegistro.jsp");
             rd.forward(request,response);

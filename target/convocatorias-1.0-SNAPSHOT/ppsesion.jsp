@@ -126,7 +126,7 @@
                     <article class="articleses">
                         <h3>Paso 4:<span class="glyphicon glyphicon-ok-sign completo hidden" title="Sección completa"></span></h3>
                         <a href="FichaRegistro" class="disabled" target="_blank" ><img src="<%=Imagen.muestraImagen("C:/ArchivosPromocion/imagenes/EvidVal.jpg")%>" alt=""></a>
-                        <a href="FichaRegistro" class="disabled" target="_blank" ><h3>Ficha de <br/> registro </h3></a>
+                        <a href="FichaRegistro"  target="_blank" ><h3>Ficha de <br/> registro </h3></a>
                     </article>
                 </c:if>
                 <!--

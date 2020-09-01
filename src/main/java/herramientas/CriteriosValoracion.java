@@ -27,7 +27,7 @@ public class CriteriosValoracion {
         String[] parametros={idUsuario};
         List<String[]> datos=metodo.ejecutaSP("sp_selectCursos",parametros);
         if(datos.isEmpty()){
-            respuesta[0]="<tr><td colspan='6'>Sin información</td></tr>";
+            respuesta[0]="<tr><td colspan='7'>Sin información</td></tr>";
         }else{
             respuesta[0]="";
             for(String[] dato:datos){
@@ -48,6 +48,7 @@ public class CriteriosValoracion {
                 }
                 respuesta[0]+="<td>"+dato[6]+"</td>";
                 respuesta[0]+="<td>"+dato[7]+"</td>";
+                respuesta[0]+="<td>"+dato[8]+"</td>";
                 respuesta[0]+="<td>";
                 respuesta[0]+="<button type='button' class='btn btn-sm' title='Borrar' onclick='confirmarCurso("+dato[0]+")'>";
                 respuesta[0]+="<span class='glyphicon glyphicon-trash'></span>";
@@ -73,7 +74,7 @@ public class CriteriosValoracion {
         String[] parametros={idUsuario};
         List<String[]> datos=metodo.ejecutaSP("sp_consultaAportaciones",parametros);
         if(datos.isEmpty()){
-            respuesta="<tr><td colspan='4'>Sin información</td></tr>";
+            respuesta="<tr><td colspan='5'>Sin información</td></tr>";
             puntaje="0";
         }else{
             respuesta="";
@@ -86,6 +87,7 @@ public class CriteriosValoracion {
                     respuesta+="<td>"+fecha.formatoImprimir(dato[4])+"-"+fecha.formatoImprimir(dato[5])+"</td>";
                 }
                 respuesta+="<td>"+dato[6]+"</td>";
+                respuesta+="<td>"+dato[7]+"</td>";
                 respuesta+="<td>";
                 respuesta+="<button type='button' class='btn btn-sm' title='Borrar' onclick='confirmarAportacion("+dato[0]+")'>";
                 respuesta+="<span class='glyphicon glyphicon-trash'></span>";
@@ -122,7 +124,7 @@ public class CriteriosValoracion {
         String[] parametros={idUsuario};
         List<String[]> datos=metodo.ejecutaSP("sp_consultaParticipaciones",parametros);
         if(datos.isEmpty()){
-            respuesta="<tr><td colspan='4'>Sin información</td></tr>";
+            respuesta="<tr><td colspan='5'>Sin información</td></tr>";
             puntaje="0";
         }else{
             respuesta="";
@@ -135,6 +137,7 @@ public class CriteriosValoracion {
                     respuesta+="<td>"+fecha.formatoImprimir(dato[4])+"-"+fecha.formatoImprimir(dato[5])+"</td>";
                 }
                 respuesta+="<td>"+dato[6]+"</td>";
+                respuesta+="<td>"+dato[7]+"</td>";
                 respuesta+="<td>";
                 respuesta+="<button type='button' class='btn btn-sm' title='Borrar' onclick='confirmarParticipacion("+dato[0]+")'>";
                 respuesta+="<span class='glyphicon glyphicon-trash'></span>";
@@ -171,7 +174,7 @@ public class CriteriosValoracion {
         String[] parametros={idUsuario};
         List<String[]> datos=metodo.ejecutaSP("sp_selectTutorias",parametros);
         if(datos.isEmpty()){
-            respuesta="<tr><td colspan='2'>Sin información</td></tr>";
+            respuesta="<tr><td colspan='3'>Sin información</td></tr>";
             puntaje="0";
         }else{
             respuesta="";
@@ -182,6 +185,7 @@ public class CriteriosValoracion {
                 }else{
                     respuesta+="<td>"+fecha.formatoImprimir(dato[2])+"-"+fecha.formatoImprimir(dato[3])+"</td>";
                 }
+                respuesta+="<td>"+dato[4]+"</td>";
                 respuesta+="<td>";
                 respuesta+="<button type='button' class='btn btn-sm' title='Borrar' onclick='confirmarTutoria("+dato[0]+")'>";
                 respuesta+="<span class='glyphicon glyphicon-trash'></span>";
@@ -238,19 +242,21 @@ public class CriteriosValoracion {
         String puntaje="0";
         String[] retorno=new String[2];
         String[] parametros={idUsuario};
-        List<String[]> datos=metodo.ejecutaSP("sp_selectResultados",parametros);
+        List<String[]> datos=metodo.ejecutaSP("sp_consultaResultados",parametros);
         if(datos.isEmpty()){
-            respuesta="<tr><td colspan='2'>Sin información</td></tr>";
+            respuesta="<tr><td colspan='4'>Sin información</td></tr>";
             puntaje="0";
         }else{
             respuesta="";
-            for(String[] dato:datos){
-                respuesta+="<tr>";                  
-                if(dato[2].equals(dato[3])){
-                    respuesta+="<td>"+fecha.formatoImprimir(dato[2])+"</td>";                                
+            for(String[] dato:datos){                
+                respuesta+="<tr>"; 
+                respuesta+="<td>"+dato[3]+"</td>";
+                if(dato[4].equals(dato[5])){
+                    respuesta+="<td>"+fecha.formatoImprimir(dato[4])+"</td>";                                
                 }else{
-                    respuesta+="<td>"+fecha.formatoImprimir(dato[2])+"-"+fecha.formatoImprimir(dato[3])+"</td>";
+                    respuesta+="<td>"+fecha.formatoImprimir(dato[4])+"-"+fecha.formatoImprimir(dato[5])+"</td>";
                 }
+                respuesta+="<td>"+dato[6]+"</td>";
                 respuesta+="<td>";
                 respuesta+="<button type='button' class='btn btn-sm' title='Borrar' onclick='confirmarResultado("+dato[0]+")'>";
                 respuesta+="<span class='glyphicon glyphicon-trash'></span>";
@@ -278,14 +284,14 @@ public class CriteriosValoracion {
         return retorno;
     }
     public String[][] consultaPuntajes(String idUsuario){
-        String[][] respuesta=new String[15][5];
+        String[][] respuesta=new String[15][7];
         int c,d;
-        for(c=0;c<15;c++){
-            for(d=0;d<4;d++){
+        /*for(c=0;c<15;c++){
+            for(d=0;d<7;d++){
                 respuesta[c][d]="";
             }
             respuesta[c][4]="0";
-        }
+        }*/
         String[] parametros={idUsuario};
         List<String[]> datos=metodo.ejecutaSP("sp_consultaConstanciasProceso",parametros);
         if(!datos.isEmpty()){             
@@ -302,6 +308,166 @@ public class CriteriosValoracion {
         List<String[]> datos=metodo.ejecutaSPEncuestas("sp_selectConsultaResultado",parametros);
         if(!datos.isEmpty()){ 
             respuesta=datos.get(0);
+        }
+        return respuesta;
+    }
+    public String getFilasCursosFicha(String idUsuario){   
+        String retorno="";      
+        int puntaje=0;
+        int horas=0;
+        String[] parametros={idUsuario};
+        List<String[]> datos=metodo.ejecutaSP("sp_selectCursos",parametros);
+        if(datos.isEmpty()){
+            retorno="<tr><td class='borde' colspan='6'>Sin información</td></tr>";
+        }else{
+            for(String[] dato:datos){
+                retorno+="<tr>";
+                if(dato[2].equals("CU")){
+                    horas+=Integer.parseInt(dato[7]);
+                    
+                    retorno+="<td class='borde'>Curso de actualización</td>"; 
+                }else if(dato[2].equals("CE")){
+                    
+                    retorno+="<td class='borde'>Certificación</td>"; 
+                }
+               retorno+="<td class='borde'>"+dato[3]+"</td>";  
+                if(dato[4].equals(dato[5])){
+                    retorno+="<td class='borde'>"+fecha.formatoImprimir(dato[4])+"</td>";                                
+                }else{
+                    retorno+="<td class='borde'>"+fecha.formatoImprimir(dato[4])+"-"+fecha.formatoImprimir(dato[5])+"</td>";
+                }
+                retorno+="<td class='borde'>"+dato[6]+"</td>";
+                retorno+="<td class='borde'>"+dato[7]+"</td>";
+                retorno+="<td class='borde'>"+dato[8]+"</td>";
+                
+                retorno+="</tr>";
+            }            
+        }        
+        return retorno;
+    }
+    public String getFilasAportacionesFicha(String idUsuario){   
+        String respuesta;
+        String puntaje;
+        String[] retorno={"","0"};
+        String[] parametros={idUsuario};
+        List<String[]> datos=metodo.ejecutaSP("sp_consultaAportaciones",parametros);
+        if(datos.isEmpty()){
+            respuesta="<tr><td class='borde' colspan='4'>Sin información</td></tr>";
+            
+        }else{
+            respuesta="";
+            for(String[] dato:datos){
+                respuesta+="<tr>"; 
+                respuesta+="<td class='borde'>"+dato[3]+"</td>";  
+                if(dato[4].equals(dato[5])){
+                    respuesta+="<td class='borde'>"+fecha.formatoImprimir(dato[4])+"</td>";                                
+                }else{
+                    respuesta+="<td class='borde'>"+fecha.formatoImprimir(dato[4])+"-"+fecha.formatoImprimir(dato[5])+"</td>";
+                }
+                respuesta+="<td class='borde'>"+dato[6]+"</td>";
+                respuesta+="<td class='borde'>"+dato[7]+"</td>";
+               
+                respuesta+="</tr>";
+            }          
+        }
+        return respuesta;
+    }
+    public String getFilasParticipacionesFicha(String idUsuario){ 
+        String respuesta;
+        String puntaje;
+        String[] parametros={idUsuario};
+        List<String[]> datos=metodo.ejecutaSP("sp_consultaParticipaciones",parametros);
+        if(datos.isEmpty()){
+            respuesta="<tr><td class='borde' colspan='4'>Sin información</td></tr>";
+            
+        }else{
+            respuesta="";
+            for(String[] dato:datos){
+                respuesta+="<tr>"; 
+                respuesta+="<td class='borde'>"+dato[3]+"</td>";  
+                if(dato[4].equals(dato[5])){
+                    respuesta+="<td class='borde'>"+fecha.formatoImprimir(dato[4])+"</td>";                                
+                }else{
+                    respuesta+="<td class='borde'>"+fecha.formatoImprimir(dato[4])+"-"+fecha.formatoImprimir(dato[5])+"</td>";
+                }
+                respuesta+="<td class='borde'>"+dato[6]+"</td>";
+                respuesta+="<td class='borde'>"+dato[7]+"</td>";
+                
+                respuesta+="</tr>";
+            }           
+        } 
+        return respuesta;
+    }
+    public String getFilasTutoriasFicha(String idUsuario){   
+        String respuesta;
+        
+        String puntaje;
+        String[] parametros={idUsuario};
+        List<String[]> datos=metodo.ejecutaSP("sp_selectTutorias",parametros);
+        if(datos.isEmpty()){
+            respuesta="<tr><td class='borde' colspan='2'>Sin información</td></tr>";            
+        }else{
+            respuesta="";
+            for(String[] dato:datos){
+                respuesta+="<tr>";                  
+                if(dato[2].equals(dato[3])){
+                    respuesta+="<td class='borde'>"+fecha.formatoImprimir(dato[2])+"</td>";                                
+                }else{
+                    respuesta+="<td class='borde'>"+fecha.formatoImprimir(dato[2])+"-"+fecha.formatoImprimir(dato[3])+"</td>";
+                }
+                respuesta+="<td class='borde'>"+dato[4]+"</td>";                
+                respuesta+="</tr>";
+            } 
+            
+        }
+        
+        return respuesta;
+    }
+    public String getFilasPublicacionesFicha(String idUsuario){   
+        String respuesta;
+        String puntaje="0";
+        String[] parametros={idUsuario};
+        List<String[]> datos=metodo.ejecutaSP("sp_selectPublicaciones",parametros);
+        if(datos.isEmpty()){
+            respuesta="<tr><td class='borde' colspan='4'>Sin información</td></tr>";
+            
+        }else{
+            respuesta="";
+            for(String[] dato:datos){
+                respuesta+="<tr>"; 
+                respuesta+="<td class='borde'>"+dato[2]+"</td>";
+                respuesta+="<td class='borde'>"+dato[3]+"</td>";
+                respuesta+="<td class='borde'>"+fecha.formatoImprimir(dato[4])+"</td>"; 
+                respuesta+="<td class='borde'>"+dato[5]+"</td>";                
+                respuesta+="</tr>";
+            }           
+            
+        }
+        
+        return respuesta;
+    }
+    public String getFilasResultadosFicha(String idUsuario){   
+        String respuesta;
+        
+        String[] parametros={idUsuario};
+        List<String[]> datos=metodo.ejecutaSP("sp_consultaResultados",parametros);
+        if(datos.isEmpty()){
+            respuesta="<tr><td class='borde' colspan='3'>Sin información</td></tr>";
+            
+        }else{
+            respuesta="";
+            for(String[] dato:datos){                
+                respuesta+="<tr>"; 
+                respuesta+="<td class='borde'>"+dato[3]+"</td>";
+                if(dato[4].equals(dato[5])){
+                    respuesta+="<td class='borde'>"+fecha.formatoImprimir(dato[4])+"</td>";                                
+                }else{
+                    respuesta+="<td class='borde'>"+fecha.formatoImprimir(dato[4])+"-"+fecha.formatoImprimir(dato[5])+"</td>";
+                }
+                respuesta+="<td class='borde'>"+dato[6]+"</td>";
+                
+                respuesta+="</tr>";
+            }
         }
         return respuesta;
     }

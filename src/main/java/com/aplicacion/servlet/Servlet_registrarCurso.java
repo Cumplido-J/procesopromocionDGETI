@@ -90,8 +90,9 @@ public class Servlet_registrarCurso extends HttpServlet {
                 String inicioCurso=fecha.formatoAlmacenar(request.getParameter("inicioCurso"));  
                 String finCurso=fecha.formatoAlmacenar(request.getParameter("finCurso"));  
                 String institucionCurso=request.getParameter("institucionCurso");  
-                String horasCurso=request.getParameter("horasCurso");  
-                String[] parametros={idUsuario,tipo,nombreCurso,inicioCurso,finCurso,institucionCurso,horasCurso};
+                String horasCurso=request.getParameter("horasCurso"); 
+                String documento=request.getParameter("documento"); 
+                String[] parametros={idUsuario,tipo,nombreCurso,inicioCurso,finCurso,institucionCurso,horasCurso,documento};
                 List<String[]> datos;                           
                 datos=metodo.ejecutaSP("sp_insertCursos",parametros);            
                 if(!datos.isEmpty()){

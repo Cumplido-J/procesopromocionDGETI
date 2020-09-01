@@ -86,8 +86,9 @@ public class Servlet_registrarTutoria extends HttpServlet {
             Metodos_sql metodo = new Metodos_sql(); 
             if(request.getParameter("id")==null){
                 String inicio=fecha.formatoAlmacenar(request.getParameter("inicioTutoria"));  
-                String fin=fecha.formatoAlmacenar(request.getParameter("finTutoria"));  
-                String[] parametros={idUsuario,inicio,fin};
+                String fin=fecha.formatoAlmacenar(request.getParameter("finTutoria")); 
+                String documento=request.getParameter("documento"); 
+                String[] parametros={idUsuario,inicio,fin,documento};
                 List<String[]> datos;                           
                 datos=metodo.ejecutaSP("sp_insertTutorias",parametros);            
                 if(!datos.isEmpty()){
