@@ -92,12 +92,11 @@
         session = (HttpSession) request.getSession(true);
         String idUsuario = "";
         String rfc = "";
-        if (session.getAttribute("idUsuario").toString() != null && session.getAttribute("rfc").toString() != null) {
+       if (session.getAttribute("idUsuario").toString() != null && session.getAttribute("rfc").toString() != null) {
             idUsuario = session.getAttribute("idUsuario").toString();
-            rfc = session.getAttribute("rfc").toString();
+            rfc = session.getAttribute("rfc").toString();           
             session.setAttribute("idUsuario", idUsuario);
-            session.setAttribute("rfc", rfc);
-
+            session.setAttribute("rfc", rfc);          
     %>
     <div>
         <!--  para el framework del gobierno-->
@@ -400,7 +399,7 @@
                                     <% if (rs2.getString("id") == null) {
                                             out.print("");
                                         } else {%>
-                                    <a href="modificar_usuarios.jsp?id=<%= rs2.getString("id")%> <%=request.getAttribute("control_combobox")%> <%=request.getAttribute("nacional")%> <%=request.getAttribute("per1")%> <%=request.getAttribute("per2")%> <%=request.getAttribute("per4")%> <%=request.getAttribute("dato_ent")%> <%=request.getAttribute("dato_pla")%> <%=request.getAttribute("dato_rfc")%> <%=request.getAttribute("nom")%> 1" class="btn btn-primary">Editar</a>
+                                    <button class="btn btn-primary pull-right" type="submit" name="modificar" id="modificar" form="data30" value="<%=rs2.getString("id")%>">Editar</button>
                                     <%
                                         }
                                     %>
@@ -590,12 +589,12 @@
                                     %>
                                 </div>
                             </td>
-                             <td align="center">
+                            <td align="center">
                                 <div class="datos_tabla"> 
                                     <% if (rs2.getString("id") == null) {
                                             out.print("");
                                         } else {%>
-                                    <a href="modificar_usuarios.jsp?id=<%= rs2.getString("id")%> <%=request.getAttribute("control_combobox")%> <%=request.getAttribute("nacional")%> <%=request.getAttribute("per1")%> <%=request.getAttribute("per2")%> <%=request.getAttribute("per4")%> <%=request.getAttribute("dato_ent")%> <%=request.getAttribute("dato_pla")%> <%=request.getAttribute("dato_rfc")%> 1" class="btn btn-primary">Editar</a>
+                                     <button class="btn btn-primary pull-right" type="submit" name="modificar" id="modificar" form="data30" value="<%=rs2.getString("id")%>">Editar</button>
                                     <%
                                         }
                                     %>
@@ -781,12 +780,12 @@
                                     %>
                                 </div>
                             </td>
-                             <td align="center">
+                            <td align="center">
                                 <div class="datos_tabla"> 
                                     <% if (rs2.getString("id") == null) {
                                             out.print("");
                                         } else {%>
-                                    <a href="modificar_usuarios.jsp?id=<%= rs2.getString("id")%> <%=request.getAttribute("control_combobox")%> <%=request.getAttribute("nacional")%> <%=request.getAttribute("per1")%> <%=request.getAttribute("per2")%> <%=request.getAttribute("per4")%> <%=request.getAttribute("dato_ent")%> <%=request.getAttribute("dato_pla")%> <%=request.getAttribute("dato_rfc")%> 1" class="btn btn-primary">Editar</a>
+                                      <button class="btn btn-primary pull-right" type="submit" name="modificar" id="modificar" form="data30" value="<%=rs2.getString("id")%>">Editar</button>
                                     <%
                                         }
                                     %>
@@ -876,7 +875,7 @@
                                 <th>Nombre</th>
                                 <th>A. Paterno</th>
                                 <th>A. Materno</th>
-                                <%--<th>Editar</th> --%>
+                                    <%--<th>Editar</th> --%>
                             </tr>
                         </thead>
                         <%
@@ -1007,6 +1006,22 @@
                     <input type="hidden" name="dato_rfc" id="dato_rfc" value="<%=request.getAttribute("dato_rfc")%>">
                 </form>
                 <form id="data2" class="form-horizontal" role="form" method="POST" action="Servlet_P_Agregar">
+                    <%
+                        session.setAttribute("idUsuario", idUsuario);
+                        session.setAttribute("rfc", rfc);
+                    %>
+                    <input type="hidden" name="control_combobox" id="control_combobox" value="<%=request.getAttribute("control_combobox")%>">
+                    <input type="hidden" name="nacional" id="nacional" value="<%=request.getAttribute("nacional")%>"> <%--AGREGAR--%>
+                    <input type="hidden" name="permiso1" id="permiso1" value="<%=request.getAttribute("per1")%>">
+                    <input type="hidden" name="permiso2" id="permiso2" value="<%=request.getAttribute("per2")%>">
+                    <input type="hidden" name="permiso4" id="permiso4" value="<%=request.getAttribute("per4")%>">
+                    <input type="hidden" name="nombre" id="nombre" value="<%=request.getAttribute("nom")%>">
+                    <input type="hidden" name="dato_ent" id="dato_ent" value="<%=request.getAttribute("dato_ent")%>">
+                    <input type="hidden" name="dato_pla" id="dato_pla" value="<%=request.getAttribute("dato_pla")%>">
+                    <input type="hidden" name="dato_rfc" id="dato_rfc" value="<%=request.getAttribute("dato_rfc")%>">
+                </form>
+
+                <form id="data30" class="form-horizontal" role="form" method="POST" action="Servlet_modificar_usuario2">
                     <%
                         session.setAttribute("idUsuario", idUsuario);
                         session.setAttribute("rfc", rfc);
