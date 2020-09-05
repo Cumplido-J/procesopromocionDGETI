@@ -155,7 +155,7 @@ public class Servlet_cargar_convocatoria extends HttpServlet {
                     String datosconvocatoria[] = metodos.buscar_convocatoria(entidad, plantel, programa);
                     if (datosconvocatoria[11] != null) {
                         request.setAttribute("mensaje", "");
-                        if (datosconvocatoria[10].equals("temporal")) {
+                        if (datosconvocatoria[10].equals("TEMPORAL")) {
                             request.setAttribute("ver", "1");
                         } else {
                             request.setAttribute("ver", "2");
