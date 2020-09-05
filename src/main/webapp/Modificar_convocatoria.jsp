@@ -141,7 +141,10 @@
 
                                     <li aling="navbar-center">
                                         <%
+                                            String ent1 = String.valueOf(request.getAttribute("dato_ent"));
+                                            String pla1 = String.valueOf(request.getAttribute("dato_pla"));
                                             String nom1 = String.valueOf(request.getAttribute("nom"));
+                                            String rfc1 = String.valueOf(request.getAttribute("dato_rfc"));
                                             out.print(nom1);
                                         %>
 
@@ -156,6 +159,7 @@
                                                         session.setAttribute("rfc", rfc);
                                                     %>
                                                     <input type="hidden" name="control_combobox" id="control_combobox" value="<%=request.getAttribute("control_combobox")%>">
+                                                    <input type="hidden" name="nacional" id="nacional" value="<%=request.getAttribute("nacional")%>"> <%--AGREGAR--%>
                                                     <input type="hidden" name="permiso1" id="permiso1" value="<%=request.getAttribute("per1")%>">
                                                     <input type="hidden" name="permiso2" id="permiso2" value="<%=request.getAttribute("per2")%>">
                                                     <input type="hidden" name="permiso4" id="permiso4" value="<%=request.getAttribute("per4")%>">
@@ -173,6 +177,7 @@
                                                         session.setAttribute("rfc", rfc);
                                                     %>
                                                     <input type="hidden" name="control_combobox" id="control_combobox" value="<%=request.getAttribute("control_combobox")%>">
+                                                    <input type="hidden" name="nacional" id="nacional" value="<%=request.getAttribute("nacional")%>"> <%--AGREGAR--%>
                                                     <input type="hidden" name="permiso1" id="permiso1" value="<%=request.getAttribute("per1")%>">
                                                     <input type="hidden" name="permiso2" id="permiso2" value="<%=request.getAttribute("per2")%>">
                                                     <input type="hidden" name="permiso4" id="permiso4" value="<%=request.getAttribute("per4")%>">
@@ -190,6 +195,7 @@
                                                         session.setAttribute("rfc", rfc);
                                                     %>
                                                     <input type="hidden" name="control_combobox" id="control_combobox" value="<%=request.getAttribute("control_combobox")%>">
+                                                    <input type="hidden" name="nacional" id="nacional" value="<%=request.getAttribute("nacional")%>"> <%--AGREGAR--%>
                                                     <input type="hidden" name="permiso1" id="permiso1" value="<%=request.getAttribute("per1")%>">
                                                     <input type="hidden" name="permiso2" id="permiso2" value="<%=request.getAttribute("per2")%>">
                                                     <input type="hidden" name="permiso4" id="permiso4" value="<%=request.getAttribute("per4")%>">
@@ -312,13 +318,14 @@
                                 <iframe style="display:none" id="frame" width="310" height=150" frameborder="0"></iframe>
                             </div>
                         </div>
-
+                        <%
+                            if (request.getAttribute("nacional").equals("1")) {
+                        %>
                         <div class="registro">
                             <div class="caja">
                                 <input type="hidden" name="f_opc" id="i_opc">
                                 <input type="hidden" name="campoentidad" id="campoentidad" >
                                 <p>Entidad
-
                                     <%
                                         ResultSet rs = cn.mostrar("Select id, entidad from catentidades");
                                     %>
@@ -357,8 +364,132 @@
                                 <div id="c1"></div>
                                 <div id="mensaje"><%out.print(request.getAttribute("mensaje"));%></div>
                             </div>
-
                         </div>
+                        <%
+                            }
+                            if (request.getAttribute("nacional").equals("2")) {
+                        %>
+                            <div class="registro">
+                            <div class="caja">
+                                <input type="hidden" name="f_opc" id="i_opc">
+                                <input type="hidden" name="campoentidad" id="campoentidad" >
+                                <p>Entidad
+                                    <%
+                                        ResultSet rs = cn.mostrar("Select id, entidad from catentidades WHERE id='"+ent1+"'");
+                                    %>
+
+                                    <select class="form-control" name="entidad" id="entidad" onchange="plantel()">
+                                   <%--     <option value="0">Escoge una opcion</option>  --%>
+                                        <%
+                                            while (rs.next()) {
+                                        %>
+                                        <option value="<%=rs.getString("id")%>" ><%=rs.getString("entidad")%></option>
+
+                                        <%//              regresa del combobox         muestra en el combo box
+                                            }
+                                        %>                                              
+                                    </select>           
+                                </p>
+                                <div id="n8"></div>
+                            </div>
+
+                            <div class="caja">
+                                  <p>Plantel
+                                        <%
+                                            ResultSet rs1 = cn.mostrar("Select * from catplanteles WHERE idEntidad='" + ent1 + "'");
+                                        %>
+                                        <select class="form-control" name="n_plantel" id="i_plantel" onchange="validarentrada3()">
+                                            <option value="0">Escoge una opcion</option>   
+                                            <%
+                                                while (rs1.next()) {
+                                            %>
+                                            <option value="<%=rs1.getString("id")%>"><%=rs1.getString("plantel")%></option>
+
+                                            <%//              regresa del combobox         muestra en el combo box
+                                                }
+                                            %>   
+                                        </select>
+                                    </p>
+                                <div id="n7"></div>
+
+                            </div>
+                        </div>
+                        <div class="registro">    
+                            <div class="caja">
+                                <p>Programa:<br>
+                                    <select class="form-control" name="programa" id="programa">
+                                        ${catalogo.desplegarOpcionesProgramas()}
+                                    </select>
+                                <div id="c1"></div>
+                                <div id="mensaje"><%out.print(request.getAttribute("mensaje"));%></div>
+                            </div>
+                        </div>
+                        <%
+                            }
+                            if (request.getAttribute("nacional").equals("3")) {
+                        %>
+                         <div class="registro">
+                            <div class="caja">
+                                <input type="hidden" name="f_opc" id="i_opc">
+                                <input type="hidden" name="campoentidad" id="campoentidad" >
+                                <p>Entidad
+                                    <%
+                                        ResultSet rs = cn.mostrar("Select id, entidad from catentidades WHERE id='"+ent1+"'");
+                                    %>
+
+                                    <select class="form-control" name="entidad" id="entidad" onchange="plantel()">
+                                   <%--     <option value="0">Escoge una opcion</option>  --%>
+                                        <%
+                                            while (rs.next()) {
+                                        %>
+                                        <option value="<%=rs.getString("id")%>" ><%=rs.getString("entidad")%></option>
+
+                                        <%//              regresa del combobox         muestra en el combo box
+                                            }
+                                        %>                                              
+                                    </select>           
+                                </p>
+                                <div id="n8"></div>
+                            </div>
+
+                            <div class="caja">
+                                  <p>Plantel
+                                        <%
+                                            ResultSet rs1 = cn.mostrar("Select * from catplanteles WHERE id='" + pla1 + "'");
+                                        %>
+                                        <select class="form-control" name="n_plantel" id="i_plantel" onchange="validarentrada3()">
+                                           <%--  <option value="0">Escoge una opcion</option>   --%>
+                                            <%
+                                                while (rs1.next()) {
+                                            %>
+                                            <option value="<%=rs1.getString("id")%>"><%=rs1.getString("plantel")%></option>
+
+                                            <%//              regresa del combobox         muestra en el combo box
+                                                }
+                                            %>   
+                                        </select>
+                                    </p>
+                                <div id="n7"></div>
+
+                            </div>
+                        </div>
+                        <div class="registro">    
+                            <div class="caja">
+                                <p>Programa:<br>
+                                    <select class="form-control" name="programa" id="programa">
+                                        ${catalogo.desplegarOpcionesProgramas()}
+                                    </select>
+                                <div id="c1"></div>
+                                <div id="mensaje"><%out.print(request.getAttribute("mensaje"));%></div>
+                            </div>
+                        </div>
+                        <%
+                            }
+                        %>
+                        
+
+
+
 
                         <input  class="btn btn-primary pull-right" type="submit" value="Buscar Convocatoria" name="buscar" onclick="valor()">       
 
@@ -398,7 +529,7 @@
                         <div class="registro">    
                             <div class="caja">
                                 <p>Fecha de publicación de convocatoria
-                                    <input type="date" id="publicacion" name="publicacion" value="" min="2020-01-01" max="2020-12-31">
+                                    <input type="date" id="publicacion" name="publicacion" value="" min="2020-01-01" max="2020-12-31" disabled="true">
                                 </p>
                                 <div id="c2"></div>
                             </div>
@@ -408,25 +539,25 @@
                         <div class="registro">    
                             <div class="caja">
                                 <p>Periodo de registro</p>
-                                Inicio <input type="date" id="periodo_registro_inicio" name="periodo_registro_inicio" value="" min="2020-01-01" max="2020-12-31">
+                                Inicio <input type="date" id="periodo_registro_inicio" name="periodo_registro_inicio" value="" min="2020-01-01" max="2020-12-31" disabled="true">
                                 <div id="c3"></div>
-                                <br>  Final &nbsp;<input type="date" id="periodo_registro_fin" name="periodo_registro_fin" value="" min="2020-01-01" max="2020-12-31"> 
+                                <br>  Final &nbsp;<input type="date" id="periodo_registro_fin" name="periodo_registro_fin" value="" min="2020-01-01" max="2020-12-31" disabled="true"> 
                                 <div id="c4"></div>
                             </div>
 
                             <div class="caja">
                                 <p>Periodo de valoración</p>
-                                Inicio <input type="date" id="periodo_valoracion_inicio" name="periodo_valoracion_inicio" value="" min="2020-01-01" max="2020-12-31">
+                                Inicio <input type="date" id="periodo_valoracion_inicio" name="periodo_valoracion_inicio" value="" min="2020-01-01" max="2020-12-31" disabled="true">
                                 <div id="c5"></div>
-                                <br>  Final &nbsp;<input type="date" id="periodo_valoracion_fin" name="periodo_valoracion_fin" value="" min="2020-01-01" max="2020-12-31"> 
+                                <br>  Final &nbsp;<input type="date" id="periodo_valoracion_fin" name="periodo_valoracion_fin" value="" min="2020-01-01" max="2020-12-31" disabled="true"> 
                                 <div id="c6"></div>
                             </div>
 
                             <div class="caja">
                                 <p>Periodo de dictaminación</p>
-                                Inicio <input type="date" id="periodo_dictaminacion_inicio" name="periodo_dictaminacion_inicio" value="" min="2020-01-01" max="2020-12-31">
+                                Inicio <input type="date" id="periodo_dictaminacion_inicio" name="periodo_dictaminacion_inicio" value="" min="2020-01-01" max="2020-12-31" disabled="true">
                                 <div id="c7"></div>
-                                <br>  Final &nbsp;<input type="date" id="periodo_dictaminacion_fin" name="periodo_dictaminacion_fin" value="" min="2020-01-01" max="2020-12-31"> 
+                                <br>  Final &nbsp;<input type="date" id="periodo_dictaminacion_fin" name="periodo_dictaminacion_fin" value="" min="2020-01-01" max="2020-12-31" disabled="true"> 
                                 <div id="c8"></div>
                             </div>
                         </div>
@@ -435,7 +566,7 @@
                         <div class="registro">    
                             <div class="caja">
                                 <p>Publicación de resultados
-                                    <input type="date" id="publicacion_resultados" name="publicacion_resultados" value="" min="2020-01-01" max="2020-12-31">
+                                    <input type="date" id="publicacion_resultados" name="publicacion_resultados" value="" min="2020-01-01" max="2020-12-31" disabled="true">
                                 </p>
                                 <div id="c9"></div>
                             </div>
@@ -444,9 +575,9 @@
                         <div class="registro">    
                             <div class="caja">
                                 <p>Estatus
-                                    <select class="form-control" name="estatus" id="estatus" >
-                                        <option value="temporal">Temporal</option> 
-                                        <option value="definitiva" disabled="true">Definitiva</option>
+                                    <select class="form-control" name="estatus" id="estatus" disabled="true">
+                                        <option value="TEMPORAL">TEMPORAL</option> 
+                                        <%-- <option value="definitiva" disabled="true">Definitiva</option> --%>
                                     </select>
                                 </p>
                                 <div id="c10"></div>
@@ -508,21 +639,21 @@
                                 <p>Estatus
                                     <%
                                         rs2 = cn.mostrar_usuarios("SELECT idConvocatoria FROM vacancia WHERE idConvocatoria='" + request.getAttribute("id") + "'");
-                                        %>
+                                    %>
                                     <select class="form-control" name="estatus" id="estatus" onchange="mensaje()">
-                                        <option value="temporal">Temporal</option> 
-                                        <%                                            
+                                        <option value="TEMPORAL">TEMPORAL</option> 
+                                        <%
                                             while (rs2.next()) {
                                                 id_convocatoria = rs2.getString("idConvocatoria");
                                             }
 
                                             if (id_convocatoria.equals(request.getAttribute("id"))) {
                                         %>
-                                        <option value="definitiva">Definitiva</option>
+                                        <option value="DEFINITIVA">DEFINITIVA</option>
                                         <%
                                         } else {
                                         %>
-                                        <option value="definitiva" disabled="true">Definitiva</option>
+                                        <option value="DEFINITIVA" disabled="true">DEFINITIVA</option>
                                         <%
                                             }
 
@@ -534,10 +665,8 @@
                         </div>
 
                         <input  class="btn btn-primary pull-right" type="submit" value="Guardar Cambios" name="guardar1">
-                        <% }//fin de la condicion ver= 1
-
-                        
-                        else if (request.getAttribute("ver").equals("2")) {%>
+                        <% }//fin de la condicion ver= 1                        
+                        else if (request.getAttribute("ver").equals("2") && (request.getAttribute("nacional").equals("2") || request.getAttribute("nacional").equals("3"))) {%>
                         <input type="hidden" name="id" id="id" value="<%=request.getAttribute("id")%>">
 
                         <div class="registro">    
@@ -590,7 +719,7 @@
                             <div class="caja">
                                 <p>Estatus
                                     <select class="form-control" name="estatus" id="estatus" onchange="mensaje()" disabled="true">
-                                        <option value="DEFINITIVA">Definitiva</option>                                         
+                                        <option value="DEFINITIVA">DEFINITIVA</option>                                         
                                     </select>
                                 </p>
                                 <div id="c10"></div>
@@ -598,12 +727,94 @@
                         </div>
 
                         <input  class="btn btn-primary pull-right" type="submit" value="Guardar Cambios" name="guardar2" disabled="true">
-                        <% }//fin de la condicion ver=2%>
-                        
-                        
+                        <% }//fin de la condicion ver=2
+                        else if (request.getAttribute("ver").equals("2") && request.getAttribute("nacional").equals("1")) {
+                        %>
+                        <input type="hidden" name="id" id="id" value="<%=request.getAttribute("id")%>">
+
+                        <div class="registro">    
+                            <div class="caja">
+                                <p>Fecha de publicación de convocatoria
+                                    <input type="date" id="publicacion" name="publicacion" value="<%=request.getAttribute("publ")%>" >
+                                </p>
+                                <div id="c2"></div>
+                            </div>
+                        </div>
+
+                        <br>
+                        <div class="registro">    
+                            <div class="caja">
+                                <p>Periodo de registro</p>
+                                Inicio <input type="date" id="periodo_registro_inicio" name="periodo_registro_inicio" value="<%=request.getAttribute("ireg")%>" >
+                                <div id="c3"></div>
+                                <br>  Final &nbsp;<input type="date" id="periodo_registro_fin" name="periodo_registro_fin" value="<%=request.getAttribute("freg")%>" > 
+                                <div id="c4"></div>
+                            </div>
+
+                            <div class="caja">
+                                <p>Periodo de valoración</p>
+                                Inicio <input type="date" id="periodo_valoracion_inicio" name="periodo_valoracion_inicio" value="<%=request.getAttribute("ival")%>" >
+                                <div id="c5"></div>
+                                <br>  Final &nbsp;<input type="date" id="periodo_valoracion_fin" name="periodo_valoracion_fin" value="<%=request.getAttribute("fval")%>" > 
+                                <div id="c6"></div>
+                            </div>
+
+                            <div class="caja">
+                                <p>Periodo de dictaminación</p>
+                                Inicio <input type="date" id="periodo_dictaminacion_inicio" name="periodo_dictaminacion_inicio" value="<%=request.getAttribute("idic")%>">
+                                <div id="c7"></div>
+                                <br>  Final &nbsp;<input type="date" id="periodo_dictaminacion_fin" name="periodo_dictaminacion_fin" value="<%=request.getAttribute("fdic")%>"> 
+                                <div id="c8"></div>
+                            </div>
+                        </div>
+
+                        <br>
+                        <div class="registro">    
+                            <div class="caja">
+                                <p>Publicación de resultados
+                                    <input type="date" id="publicacion_resultados" name="publicacion_resultados" value="<%=request.getAttribute("resu")%>" >
+                                </p>
+                                <div id="c9"></div>
+                            </div>
+                        </div>
+
+                        <div class="registro">    
+                            <div class="caja">
+                                <p>Estatus
+                                    <%
+                                        rs2 = cn.mostrar_usuarios("SELECT idConvocatoria FROM vacancia WHERE idConvocatoria='" + request.getAttribute("id") + "'");
+                                    %>
+                                    <select class="form-control" name="estatus" id="estatus" onchange="mensaje()">
+                                        <option value="TEMPORAL">TEMPORAL</option> 
+                                        <%
+                                            while (rs2.next()) {
+                                                id_convocatoria = rs2.getString("idConvocatoria");
+                                            }
+
+                                            if (id_convocatoria.equals(request.getAttribute("id"))) {
+                                        %>
+                                        <option value="DEFINITIVA" selected="true">DEFINITIVA</option>
+                                        <%
+                                        } else {
+                                        %>
+                                        <option value="DEFINITIVA" disabled="true">DEFINITIVA</option>
+                                        <%
+                                            }
+
+                                        %>
+                                    </select>
+                                </p>
+                                <div id="c10"></div>
+                            </div>
+                        </div>
+
+                        <input  class="btn btn-primary pull-right" type="submit" value="Guardar Cambios" name="guardar1">
+                        <%                            }
+                        %>
 
 
-                        <%    
+
+                        <%
                             } else {
                                 response.sendRedirect("login.jsp");
                             }
@@ -616,6 +827,7 @@
                                     session.setAttribute("rfc", rfc);
                                 %>
                                 <input type="hidden" name="control_combobox" id="control_combobox" value="<%=request.getAttribute("control_combobox")%>">
+                                <input type="hidden" name="nacional" id="nacional" value="<%=request.getAttribute("nacional")%>"> <%--AGREGAR--%>
                                 <input type="hidden" name="permiso1" id="permiso1" value="<%=request.getAttribute("per1")%>">
                                 <input type="hidden" name="permiso2" id="permiso2" value="<%=request.getAttribute("per2")%>">
                                 <input type="hidden" name="permiso4" id="permiso4" value="<%=request.getAttribute("per4")%>">

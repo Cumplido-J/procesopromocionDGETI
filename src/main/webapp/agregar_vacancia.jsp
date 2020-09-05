@@ -380,7 +380,7 @@
                                         <select class="form-control" name="tipovacancia" id="tipovacancia" onchange="vacancia1()">
                                             <option value="0">Escoge una opcion</option>
                                             <option value="Real">Real</option> 
-                                            <option value="Cadena">Cadena</option>
+                                            <option value="Cadena">corrimiento natural</option>
                                         </select>
                                     </p>
                                     <div id="n70"></div>
