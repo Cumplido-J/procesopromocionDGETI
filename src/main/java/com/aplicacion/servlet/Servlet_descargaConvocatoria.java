@@ -10,6 +10,7 @@ import java.io.FileInputStream;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Enumeration;
 import java.util.Properties;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -63,9 +64,9 @@ public class Servlet_descargaConvocatoria extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
+        try {            
             Properties p = new Properties();
-            p.load(new FileReader("C:/ArchivosPromocion/config.properties"));
+            p.load(new FileReader(request.getServletContext().getInitParameter("rutaConfig")));
             String ruta=p.getProperty("path_pdfs");
             /*HttpSession session= (HttpSession) request.getSession();
             String idUsuario=session.getAttribute("idUsuario").toString();

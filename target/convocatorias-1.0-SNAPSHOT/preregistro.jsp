@@ -61,10 +61,18 @@
             <div class="container" style="margin-bottom: 20px;">
                 <form id="formPreregistro" method="POST" action="Preregistro">
                     <div class="row">
-                        <div class="form-group col-xs-12">                               
+                        <div class="form-group col-md-6">                               
                             <label class="control-label" for="programa">Programa por el que participa:</label>
                             <select class="form-control input-sm" id="programa" name="programa" required>                                  
                                 ${catalogo.desplegarOpcionesProgramas()}
+                            </select>
+                        </div>
+                        <div class="form-group col-md-6">                               
+                            <label class="control-label" for="programa">Subsistema:</label>
+                            <select class="form-control input-sm" id="subsistema" name="subsistema" required>                                  
+                                <option value=''>-Seleccione-</option>
+                                <option value='1'>UEMSTIS</option>
+                                <option value='2'>CECyTE</option>
                             </select>
                         </div>
                     </div>

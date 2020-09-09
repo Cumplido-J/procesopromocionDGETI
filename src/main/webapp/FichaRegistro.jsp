@@ -212,6 +212,14 @@
                     <c:out value="${info[6]}"/>
                 </c:if>                
                 <br/>
+                <c:if test="${info[2]=='3'&&info[3]==null}">
+                    <table>
+                        <tr><th class='borde'>Encuesta</th><th class='borde'>Estatus</th></tr>
+                        <tr><td class='borde'>A madres y padres de familia o tutores</td><td class='borde'>Evaluado</td></tr>
+                        <tr><td class='borde'>A alumnos</td><td class='borde'>Evaluado</td></tr>
+                        <tr><td class='borde'>A compañeros de trabajo</td><td class='borde'>Evaluado</td></tr>
+                    </table>
+                </c:if>
                 <c:if test="${info[2]=='5'&&info[3]==null}">
                     <table>
                         <tr><th class='borde'>Tipo</th><th class='borde'>Nombre del curso</th><th class='borde'>Periodo o Fecha de realización</th><th class='borde'>Institución educativa con reconocimiento oficial que emite constancia</th><th class='borde'>Total de horas que acredita el curso</th><th class='borde'>Constancia o documento probatorio</th></tr>

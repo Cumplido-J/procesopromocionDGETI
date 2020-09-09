@@ -5,6 +5,7 @@
  */
 package metodos_sql;
 
+import herramientas.RutaConfig;
 import java.io.FileReader;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -21,7 +22,7 @@ import java.sql.Connection;
  * @author charl
  */
 public class Metodos_sql {
-
+    private final static String rutaConfig=RutaConfig.getRutaConfig();
     PreparedStatement sentencia_preparada;
     public static ResultSet resultado;
     public static String sql;
@@ -38,7 +39,7 @@ public class Metodos_sql {
         Properties p = new Properties();        
         conexion = null;
         try {
-            p.load(new FileReader("C:/ArchivosPromocion/config.properties"));
+            p.load(new FileReader(rutaConfig));
             
             driver=p.getProperty("driver");
             user=p.getProperty("user");
@@ -763,7 +764,7 @@ public class Metodos_sql {
         Properties p = new Properties();
         conexion = null;
         try {
-            p.load(new FileReader("C:/ArchivosPromocion/config.properties"));
+            p.load(new FileReader(rutaConfig));
 
             driver = p.getProperty("driver");
             user = p.getProperty("userEncuestas");

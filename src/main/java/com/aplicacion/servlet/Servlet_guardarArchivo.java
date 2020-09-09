@@ -91,7 +91,7 @@ public class Servlet_guardarArchivo extends HttpServlet {
         try{
             Properties p = new Properties();
             
-            p.load(new FileReader("C:/ArchivosPromocion/config.properties"));
+            p.load(new FileReader(request.getServletContext().getInitParameter("rutaConfig")));
             String ruta=p.getProperty("rutaEvidenciasRegistro");
             HttpSession session= (HttpSession) request.getSession();
             String idUsuario=session.getAttribute("idUsuario").toString();

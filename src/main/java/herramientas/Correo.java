@@ -18,7 +18,8 @@ import javax.mail.internet.MimeMessage;
  * @author David Reyna
  */
 public class Correo {
-    	private final Properties properties = new Properties();	
+        private final static String rutaConfig=RutaConfig.getRutaConfig();
+        private final Properties properties = new Properties();	
 	private Session session; 
         private String correo;
         private String contrasena;
@@ -26,7 +27,7 @@ public class Correo {
         public void inicializar() {
             Properties p = new Properties(); 
             try {
-                p.load(new FileReader("C:/ArchivosPromocion/config.properties"));
+                p.load(new FileReader(rutaConfig));
                 correo=p.getProperty("correoNotificacion");
                 contrasena=p.getProperty("passNotificacion");
                 String[] aux=correo.split("@");

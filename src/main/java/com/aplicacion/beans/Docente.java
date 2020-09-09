@@ -7,6 +7,7 @@ package com.aplicacion.beans;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import herramientas.RutaConfig;
 import herramientas.WebService;
 import java.io.FileReader;
 import java.lang.reflect.Type;
@@ -20,6 +21,7 @@ import metodos_sql.Metodos_sql;
  * @author David Reyna
  */
 public class Docente {
+    private final static String rutaConfig=RutaConfig.getRutaConfig();
     private String idUsuario="";    
     private String rfc="";    
     private String jsonHoras=null;
@@ -78,7 +80,7 @@ public class Docente {
         WebService ws;
         try{
             Properties p = new Properties();
-            p.load(new FileReader("C:/ArchivosPromocion/config.properties"));
+            p.load(new FileReader(rutaConfig));
             String url=p.getProperty("urlWSHoras");
             ws=new WebService(url+rfc);
             ws.consumeWS(); 
@@ -92,7 +94,7 @@ public class Docente {
         WebService ws;
         try{
             Properties p = new Properties();
-            p.load(new FileReader("C:/ArchivosPromocion/config.properties"));
+            p.load(new FileReader(rutaConfig));
             String url=p.getProperty("urlWSPersonal");
             ws=new WebService(url+rfc);
             ws.consumeWS(); 

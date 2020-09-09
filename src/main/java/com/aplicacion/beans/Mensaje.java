@@ -5,6 +5,7 @@
  */
 package com.aplicacion.beans;
 
+import herramientas.RutaConfig;
 import java.io.FileReader;
 import java.util.Properties;
 
@@ -13,6 +14,7 @@ import java.util.Properties;
  * @author David Reyna
  */
 public class Mensaje {
+    private final static String rutaConfig=RutaConfig.getRutaConfig();
     private String registroCompleto;
     private String notaDesfavorable;
     private String inactivoServicio;
@@ -25,7 +27,7 @@ public class Mensaje {
     public Mensaje() {
         try{
             Properties p = new Properties();
-            p.load(new FileReader("C:/ArchivosPromocion/config.properties"));            
+            p.load(new FileReader(rutaConfig));            
             this.registroCompleto = p.getProperty("mensajeRegistroCompleto");
             this.notaDesfavorable = p.getProperty("mensajeNotaDesfavorable");
             this.inactivoServicio = p.getProperty("mensajeInactivoServicio");

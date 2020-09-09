@@ -5,6 +5,7 @@
  */
 package com.convocatoria.reportes;
 
+import herramientas.RutaConfig;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -38,7 +39,7 @@ import net.sf.jasperreports.engine.JasperPrint;
  * @author ja1000
  */
 public class ReporteConvocatoria {
-
+    private final static String rutaConfig=RutaConfig.getRutaConfig();
     Connection conn = null;
     //private static final String pathr = "/Users/ja1000/reportes/";
     //private static final String path_pdfs = "/Users/ja1000/NetBeansProjects/convocatorias/web/recursos/archivos/";
@@ -49,7 +50,7 @@ public class ReporteConvocatoria {
 
     public ReporteConvocatoria() {
         try {
-            input = new FileInputStream("C:/ArchivosPromocion/config.properties");
+            input = new FileInputStream(rutaConfig);
             config.load(input);
             pathr=config.getProperty("pathr");
             path_pdfs=config.getProperty("path_pdfs");

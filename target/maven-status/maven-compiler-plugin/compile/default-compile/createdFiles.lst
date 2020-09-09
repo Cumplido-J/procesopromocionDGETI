@@ -98,6 +98,7 @@ com\aplicacion\servlet\Servlet_regresar.class
 metodos_sql\Metodos_sql.class
 com\aplicacion\servlet\Servlet_registroBitacora.class
 herramientas\Pin.class
+herramientas\RutaConfig.class
 com\aplicacion\servlet\Servlet_regresar2.class
 com\convocatoria\servlet\ServletReporte.class
 seguridad\Encriptar_Desencriptar.class

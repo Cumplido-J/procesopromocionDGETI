@@ -14,12 +14,12 @@ import java.util.Random;
  * @author David Reyna
  */
 public class Pin {
-       
+    private final static String rutaConfig=RutaConfig.getRutaConfig();
     public static String generaPin(){
         String pin="";
         try{            
             Properties p = new Properties();
-            p.load(new FileReader("C:/ArchivosPromocion/config.properties"));            
+            p.load(new FileReader(rutaConfig));            
             int longitudPin=Integer.parseInt(p.getProperty("longitudPin"));
             for(int c=0;c<longitudPin;c++){
                 pin+=generaDigito();
