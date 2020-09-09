@@ -224,9 +224,12 @@ public class Servlet_agregar_usuario extends HttpServlet {
                     request.setAttribute("per1", per1);
                     request.setAttribute("per2", per2);
                     request.setAttribute("per4", per4);
+                    request.setAttribute("modal", 1);
                     session.setAttribute("idUsuario", idUsuario);
                     session.setAttribute("rfc", rfc);
-                    RequestDispatcher rd = request.getRequestDispatcher("aviso_guardar_datos.jsp");
+                    //RequestDispatcher rd = request.getRequestDispatcher("aviso_guardar_datos.jsp");
+                    RequestDispatcher rd = request.getRequestDispatcher("administracion_usuarios.jsp");
+                    //RequestDispatcher rd = request.getRequestDispatcher("mensaje1.jsp");
                     rd.forward(request, response);
                 } else {
                     out.print("Servidor en mantenimiento, Datos no Guardados");

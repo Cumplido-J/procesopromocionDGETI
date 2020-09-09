@@ -148,9 +148,10 @@ public class Servlet_agregar_vacantes extends HttpServlet {
                         request.setAttribute("per1", per1);
                         request.setAttribute("per3", per3);
                         request.setAttribute("per4", per4);
+                        request.setAttribute("modal", 1);
                         //session.setAttribute("idUsuario", idUsuario);
                         //session.setAttribute("rfc", rfc);
-                        RequestDispatcher rd = request.getRequestDispatcher("aviso_guardar_vacancia.jsp");
+                        RequestDispatcher rd = request.getRequestDispatcher("vacantes.jsp");
                         rd.forward(request, response);
                     } else {
                         out.print("Servidor en mantenimiento, Datos no guardados");
