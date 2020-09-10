@@ -144,16 +144,18 @@ public class Servlet_guardar_convocatoria extends HttpServlet {
                         request.setAttribute("nacional", nac1);//AGREGAR-------------------------------
                         request.setAttribute("opc", "1");
                         request.setAttribute("nom", nom1);
+                        request.setAttribute("consulta", "1");
                         request.setAttribute("dato_ent", ent1);
                         request.setAttribute("dato_pla", pla1);
                         request.setAttribute("dato_rfc", rfc1);
                         request.setAttribute("per1", per1);
                         request.setAttribute("per2", per2);
                         request.setAttribute("per4", per4);
+                        request.setAttribute("modal", 1);
                         request.setAttribute("ver", "1");
                         session.setAttribute("idUsuario", idUsuario);
                         session.setAttribute("rfc", rfc);
-                        RequestDispatcher rd = request.getRequestDispatcher("aviso_guardar_convocatoria.jsp");
+                        RequestDispatcher rd = request.getRequestDispatcher("convocatoria.jsp");
                         rd.forward(request, response);
                     } else {
                         out.print("Servidor en mantenimiento, Datos no Guardados");
