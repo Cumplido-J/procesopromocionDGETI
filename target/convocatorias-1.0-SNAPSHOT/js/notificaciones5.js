@@ -139,10 +139,10 @@ titulo1.addEventListener("input", function (event) {
 //    }
 //});
 function  mensaje() {
-    if (document.getElementById("estatus").value == "definitiva")
+    if (document.getElementById("estatus").value == "DEFINITIVA")
     {
         Swal.fire({
-            title: '¿Deseas pasar la convocatoria a definitiva?',
+            title: '¿Deseas pasar la convocatoria a DEFINITIVA?',
             text: "Al Guardar los cambios, Ya no se podra editar la convocatoria ",
             icon: 'warning',
             showCancelButton: true,
@@ -155,7 +155,7 @@ function  mensaje() {
                         'Haz clic en el Boton Guardar Cambios!',
                         ''
                         )
-                $("#estatus").val("definitiva");
+                $("#estatus").val("DEFINITIVA");
 //                $("#estatus").prop("disabled",true);
                // document.getElementById("estatus").disabled=true;
 //                document.getElementById("publicacion").readonly=true;
@@ -170,11 +170,49 @@ function  mensaje() {
             }
             else
             {
-               $("#estatus").val("temporal");
+               $("#estatus").val("TEMPORAL");
             }
         })
 
     }
+    
+        if (document.getElementById("estatus").value == "TEMPORAL")
+    {
+        Swal.fire({
+            title: '¿Deseas pasar la convocatoria a TEMPORAL?',
+            text: "Al Guardar los cambios, Ya no se podra editar la convocatoria ",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Aceptar'
+        }).then((result) => {
+            if (result.value) {
+                Swal.fire(
+                        'Haz clic en el Boton Guardar Cambios!',
+                        ''
+                        )
+                $("#estatus").val("TEMPORAL");
+//                $("#estatus").prop("disabled",true);
+               // document.getElementById("estatus").disabled=true;
+//                document.getElementById("publicacion").readonly=true;
+//                document.getElementById("periodo_registro_inicio").disabled=true;
+//                document.getElementById("periodo_registro_fin").disabled=true;
+//                document.getElementById("periodo_valoracion_inicio").disabled=true;
+//                document.getElementById("periodo_valoracion_fin").disabled=true;
+//                document.getElementById("periodo_dictaminacion_inicio").disabled=true;
+//                document.getElementById("periodo_dictaminacion_fin").disabled=true;
+//                document.getElementById("publicacion_resultados").disabled=true;
+                
+            }
+            else
+            {
+               $("#estatus").val("DEFINITIVA");
+            }
+        })
+
+    }
+    
 }
 
 

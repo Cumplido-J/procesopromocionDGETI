@@ -15,15 +15,17 @@
         <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="css/estilos.css">
 
+        <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.css">
+        <script src="js/jquery-3.1.1.min.js"></script>
+        <script src="bootstrap/js/bootstrap.js"></script>
         <!-- para el framework del gobierno-->
         <!-- CSS -->
         <link href="/favicon.ico" rel="shortcut icon">
         <link href="https://framework-gb.cdn.gob.mx/assets/styles/main.css" rel="stylesheet">
 
-
-        <script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
+        <%-- <script type="text/javascript" src="js/jquery-1.11.1.min.js"></script> --%>
         <link rel="stylesheet" href="css/jquery.dataTables.min.css">
-        <script src="js/jquery-3.5.1.min.js"></script>
+        <%-- <script src="js/jquery-3.5.1.min.js"></script> --%>
         <script src="js/jquery.dataTables.min.js"></script>
         <script type="text/javascript">
             function habilitar() {
@@ -78,6 +80,19 @@
             $(document).ready(function () {
                 $('#tabla_usuarios').DataTable();
             });
+
+
+            $(document).ready(function ()
+            {
+                var modal = document.getElementById("modal").value;
+                //alert(modal);
+                if (modal == "1") {
+                    $("#modalMensaje").modal("show");
+                } else
+                {
+
+                }
+            });
         </script>    
         <!-- Respond.js soporte de media queries para Internet Explorer 8 -->
         <!-- ie8.js EventTarget para cada nodo en Internet Explorer 8 -->
@@ -88,6 +103,7 @@
         <!--Termina  para el framework del gobierno-->
     </head>
     <body>
+        <main class="page">
         <%
             session = (HttpSession) request.getSession(true);
             String idUsuario = "";
@@ -209,6 +225,7 @@
                     <h3>Carga de vacancia en los planteles</h3>
                     <jsp:useBean id="cn" class="metodos_sql.Metodos_sql" scope="page"></jsp:useBean>
                         <form id="data" class="form-horizontal" role="form" method="POST" action="Servlet_buscar_vacancia">
+                            <input type="hidden" name="modal" id="modal" value="<%=request.getAttribute("modal")%>">
                         <%-------------------------------------------------------------------OPCION VERDADERA COMBO BOX----------------------------%>   
                         <%if (request.getAttribute("control_combobox").equals("false") && request.getAttribute("nacional").equals("1")) { %>
                         <table  border="0" width="120%">   
@@ -914,15 +931,15 @@
                                 if (elegir1.equals("1")) {
                                     ResultSet rs2 = null;
                                     if (request.getAttribute("consulta").equals("1")) {
-                                       rs2 = cn.mostrar_usuarios("SELECT * FROM vacancia WHERE entidad='" + request.getAttribute("dato_ent") + "' && plantel='" + request.getAttribute("dato_pla") + "'"); 
+                                        rs2 = cn.mostrar_usuarios("SELECT * FROM vacancia WHERE entidad='" + request.getAttribute("dato_ent") + "' && plantel='" + request.getAttribute("dato_pla") + "'");
                                     }
 
                                     if (request.getAttribute("consulta").equals("2")) {
-                                        
-                                        rs2 = cn.mostrar_usuarios("SELECT * FROM vacancia WHERE entidad='" + request.getAttribute("dato_ent") + "' && plantel='"+request.getAttribute("dato_pla") +"' && plaza='" + request.getAttribute("cat") + "'");
+
+                                        rs2 = cn.mostrar_usuarios("SELECT * FROM vacancia WHERE entidad='" + request.getAttribute("dato_ent") + "' && plantel='" + request.getAttribute("dato_pla") + "' && plaza='" + request.getAttribute("cat") + "'");
                                     }
 
-                                                       while (rs2.next()) {
+                                    while (rs2.next()) {
                             %>
                             <tr>
                                 <td align="center">
@@ -1064,5 +1081,29 @@
                 response.sendRedirect("login.jsp");
             }
         %>
+        <!-- Modal -->
+        <div class="modal fade" id="modalMensaje" role="dialog">
+            <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content panel">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Aviso</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p id="mensaje">Datos Guardados</p>
+                    </div>
+                    <div class="modal-footer">
+                      <%--  <a id="btnContinuar" href="login.jsp" class="btn btn-sm btn-default">Continuar</a> --%>
+                        <button id="btnCerrar" type="button" class="btn btn-sm btn-default" data-dismiss="modal">Cerrar</button>
+                    </div>
+                </div>
+
+            </div>
+        </div> 
+
+
+    </main>
     </body>
 </html>

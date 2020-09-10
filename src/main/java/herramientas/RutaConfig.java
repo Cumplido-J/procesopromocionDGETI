@@ -11,7 +11,7 @@ package herramientas;
  */
 public class RutaConfig {
     //private static final String rutaConfig="C:/ArchivosPromocion/config.properties";
-    private final static String rutaConfig="/home/david/configDocente/ArchivosPromocion/configLinuxLocal.properties";
+    private final static String rutaConfig="/home/pdadmin/configDocente/ArchivosPromocion/configLinuxLocal.properties";
     
     public static String getRutaConfig() {
         return rutaConfig;

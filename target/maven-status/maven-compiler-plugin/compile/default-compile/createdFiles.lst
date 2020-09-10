@@ -4,6 +4,7 @@ com\aplicacion\servlet\Servlet_modificar_usuario.class
 com\convocatoria\domain\ProgramasPlantel.class
 com\aplicacion\servlet\Servlet_cbRegistroCriterios.class
 com\convocatoria\servlet\ServletControladorProgramasPlantel.class
+com\aplicacion\servlet\Servlet_modificar_usuario2.class
 com\aplicacion\servlet\Servlet_registroHorasGrupo.class
 com\aplicacion\servlet\Servlet_registrarCriterio.class
 herramientas\WebService.class
