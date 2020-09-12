@@ -136,58 +136,69 @@ function consultaWS(){
             $("#btnEnviar").attr("disabled",true);
         }
         else{
+            
              $('#alertaRFC').attr('hidden',true);
              $('#rfc').removeClass('error'); 
              $("#cbAviso").removeAttr("disabled");
-             $.post("ConsultaWSPersonal", {rfc: rfc}, function(respuesta){
-                var aux=respuesta.split("|");
-                if(aux.length==5){
-                    if(aux[0]!=""){
-                        $("#nombre").val(aux[0]);
-                        $("#nombre").attr("readOnly","readOnly");
-                    }else{
-                       $("#nombre").val("");
-                       $("#nombre").removeAttr("readOnly"); 
-                    }
-                    if(aux[1]!=""){
-                        $("#apellido1").val(aux[1]);
-                        $("#apellido1").attr("readOnly","readOnly");
-                    }else{
-                        $("#apellido1").val("");
-                        $("#apellido1").removeAttr("readOnly");
-                    }
-                    if(aux[2]!=""){
-                        $("#apellido2").val(aux[2]);
-                        $("#apellido2").attr("readOnly","readOnly");
-                    }else{
-                        $("#apellido2").val("");
-                        $("#apellido2").removeAttr("readOnly");
-                    }
-                    if(aux[3]!=""){
-                        $("#entidad").val(aux[3]);
-                        $("#entidad").attr("style", "pointer-events: none;");
-                        $("#entidad").attr("readOnly","readOnly");
-                        actualizarPlanteles(aux[4]);
-                        $("#plantel").attr("style", "pointer-events: none;");
-                        $("#plantel").attr("readOnly","readOnly");
-                    }else{
-                        $("#mensaje").html("El RFC ingresado no se encuentra asignado a plantel, contacte al personal de recursos humanos");            
-                        $("#modalMensaje").modal("show");
-                        $("#cbAviso").attr("disabled",true);
-                        $("#cbAviso").removeAttr("checked");
-                        $("#btnEnviar").attr("disabled",true);
-                        $("#btnContinuar").attr("style","display:none;");
-                    }
+             if($('#subsistema').val()=='1'){
+                $.post("ConsultaWSPersonal", {rfc: rfc}, function(respuesta){
+                   var aux=respuesta.split("|");
+                   if(aux.length==5){
+                       if(aux[0]!=""){
+                           $("#nombre").val(aux[0]);
+                           $("#nombre").attr("readOnly","readOnly");
+                       }else{
+                          $("#nombre").val("");
+                          $("#nombre").removeAttr("readOnly"); 
+                       }
+                       if(aux[1]!=""){
+                           $("#apellido1").val(aux[1]);
+                           $("#apellido1").attr("readOnly","readOnly");
+                       }else{
+                           $("#apellido1").val("");
+                           $("#apellido1").removeAttr("readOnly");
+                       }
+                       if(aux[2]!=""){
+                           $("#apellido2").val(aux[2]);
+                           $("#apellido2").attr("readOnly","readOnly");
+                       }else{
+                           $("#apellido2").val("");
+                           $("#apellido2").removeAttr("readOnly");
+                       }
+                       if(aux[3]!=""){
+                           $("#entidad").val(aux[3]);
+                           $("#entidad").attr("style", "pointer-events: none;");
+                           $("#entidad").attr("readOnly","readOnly");
+                           actualizarPlanteles(aux[4]);
+                           $("#plantel").attr("style", "pointer-events: none;");
+                           $("#plantel").attr("readOnly","readOnly");
+                       }else{
+                           $("#mensaje").html("El RFC ingresado no se encuentra asignado a plantel, contacte al personal de recursos humanos");            
+                           $("#modalMensaje").modal("show");
+                           $("#cbAviso").attr("disabled",true);
+                           $("#cbAviso").removeAttr("checked");
+                           $("#btnEnviar").attr("disabled",true);
+                           $("#btnContinuar").attr("style","display:none;");
+                       }
 
-                }else{
-                    $("#mensaje").html("El RFC ingresado no se encuentra registrado en la institución, contacte al personal de recursos humanos de su plantel");            
-                    $("#modalMensaje").modal("show");
-                    $("#cbAviso").attr("disabled",true);
-                    $("#cbAviso").removeAttr("checked");
-                    $("#btnEnviar").attr("disabled",true);
-                    $("#btnContinuar").attr("style","display:none;");
-                }
-            });
+                   }else{
+                       $("#mensaje").html("El RFC ingresado no se encuentra registrado en la institución, contacte al personal de recursos humanos de su plantel");            
+                       $("#modalMensaje").modal("show");
+                       $("#cbAviso").attr("disabled",true);
+                       $("#cbAviso").removeAttr("checked");
+                       $("#btnEnviar").attr("disabled",true);
+                       $("#btnContinuar").attr("style","display:none;");
+                   }
+               });
+            }else{
+                $("#nombre").removeAttr("readOnly"); 
+                $("#apellido1").removeAttr("readOnly"); 
+                $("#apellido2").removeAttr("readOnly"); 
+                $("#entidad").removeAttr("readOnly"); 
+                $("#plantel").removeAttr("readOnly");
+                $("#entidad").removeAttr("style"); 
+                $("#plantel").removeAttr("style");
+            }
         }
     }else{
         $('#alertaRFC').attr('hidden',true);
@@ -195,13 +206,17 @@ function consultaWS(){
            
 }
 function actualizarPlanteles(idPlantel) {
-    idEntidad=$("#entidad").val();
-    $.get("ConsultaCatalogos", {k: "13",i:idEntidad}, function(respuesta){
-        $("#plantel").html(respuesta);
-        if(idPlantel!=null){
-            $("#plantel").val(idPlantel);
-        }
-    });  
+    if($('#subsistema').val()=='1'){
+        idEntidad=$("#entidad").val();
+        $.get("ConsultaCatalogos", {k: "13",i:idEntidad}, function(respuesta){
+            $("#plantel").html(respuesta);
+            if(idPlantel!=null){
+                $("#plantel").val(idPlantel);
+            }
+        });  
+    }else{
+        $("#plantel").html("<option value=''>-Seleccione-</option>");
+    }
 }
 function cambioAviso(){
     if($("#cbAviso").is(':checked')){

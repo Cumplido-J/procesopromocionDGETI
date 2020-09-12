@@ -62,7 +62,7 @@ public class Metodos_sql {
         int resultado = 0;
 
         conexion = null;
-        String guardar = "INSERT INTO usuario(id,programa,entidad,plantel,nombre,primerApellido,segundoApellido,correo,clave,curp,telfijo,telcel,perfil,consideraciones) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+        String guardar = "INSERT INTO usuario(id,idConvocatoria,entidad,plantel,nombre,primerApellido,segundoApellido,correo,clave,curp,telfijo,telcel,perfil,consideraciones) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
         conexion = conector();
         try {
             sentencia_preparada = conexion.prepareStatement(guardar);
@@ -143,11 +143,11 @@ public class Metodos_sql {
         int resultado = 0;
 
         conexion = null;
-        String guardar = "INSERT INTO usuario(id,programa,entidad,plantel,nombre,primerApellido,segundoApellido,correo,clave,curp,telfijo,telcel,perfil,consideraciones,nacional) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+        String guardar = "INSERT INTO usuario(idSubsistema,idConvocatoria,entidad,plantel,nombre,primerApellido,segundoApellido,correo,clave,curp,telfijo,telcel,perfil,consideraciones,nacional) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
         conexion = conector();
         try {
             sentencia_preparada = conexion.prepareStatement(guardar);
-            sentencia_preparada.setString(1, String.valueOf(id));
+            sentencia_preparada.setString(1, "1");
             sentencia_preparada.setString(2, null);
             sentencia_preparada.setString(3, entidad);
             sentencia_preparada.setString(4, plantel);
@@ -163,6 +163,8 @@ public class Metodos_sql {
 //            sentencia_preparada.setString(14, permisos);
             sentencia_preparada.setString(14, null);
             sentencia_preparada.setString(15, nivel);
+            
+            System.out.print(sentencia_preparada.toString());
 
             resultado = sentencia_preparada.executeUpdate();
             sentencia_preparada.close();
@@ -891,7 +893,7 @@ public class Metodos_sql {
     public int modificar_usuarios_A(String id, String entidad, String plantel, String nombre, String primerApellido, String segundoApellido, String correo, String clave, String usuario, String telfijo, String telcel, String perfil, String nivel) {
         int resultado = 0;
         conexion = null;
-    String guardar2 = "UPDATE usuario SET programa="+ null +", entidad ="+entidad+", plantel ="+plantel+", nombre = '"+nombre+"', primerApellido='"+primerApellido+"',segundoApellido='"+segundoApellido+"',correo='"+correo+"',clave='"+clave+"',curp='"+usuario+"',telfijo='"+telfijo+"',telcel='"+telcel+"',perfil='"+perfil+"',consideraciones='null',nacional='"+nivel+"' WHERE id = '"+id+"'";
+    String guardar2 = "UPDATE usuario SET idConvocatoria="+ null +", entidad ="+entidad+", plantel ="+plantel+", nombre = '"+nombre+"', primerApellido='"+primerApellido+"',segundoApellido='"+segundoApellido+"',correo='"+correo+"',clave='"+clave+"',curp='"+usuario+"',telfijo='"+telfijo+"',telcel='"+telcel+"',perfil='"+perfil+"',consideraciones='null',nacional='"+nivel+"' WHERE id = '"+id+"'";
 //        String guardar2 = "UPDATE usuario SET programa='" + null + "',"
 //                + "entidad='" + entidad + "',"
 //                + "plantel='" + 158 + "',"

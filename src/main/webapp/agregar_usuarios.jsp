@@ -476,11 +476,11 @@
                                                 int i = 1;
                                                 String listado[] = new String[10];
                                                 ResultSet rs3 = null;
-                                                rs3 = cn.mostrar_usuarios("SELECT permiso FROM catpermisos");
+                                                rs3 = cn.mostrar_usuarios("SELECT id,permiso FROM catpermisos");
                                                 while (rs3.next()) {
                                             %>
 
-                                            <input type="checkbox" id="ckl" name="ckl" value="<%=i++%>" > <label for="ckl"><% out.print(rs3.getString("permiso"));%></label>  <br> <%} %>
+                                            <input type="checkbox" id="ckl" name="ckl" value="<% out.print(rs3.getString("id"));%>" > <label for="ckl"><% out.print(rs3.getString("permiso"));%></label>  <br> <%} %>
 
                                         </p>
                                         <div id="n11"></div>

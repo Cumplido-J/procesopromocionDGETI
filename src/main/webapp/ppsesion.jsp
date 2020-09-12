@@ -17,6 +17,7 @@
         <link href="/favicon.ico" rel="shortcut icon">
         <link href="https://framework-gb.cdn.gob.mx/assets/styles/main.css" rel="stylesheet">
         <%@page import='herramientas.Imagen'%>
+        <%@page import='herramientas.RutaConfig'%>
         
     </head>
     <body>
@@ -98,7 +99,7 @@
             <div class="articulosses">
                 <article class="articleses">
                     <h3>Paso 1 <span class="glyphicon glyphicon-ok-sign completo ${hidden1}" title="Sección completa"></span></h3>
-                    <a  href="Registro" class="${disabled1}"><img src="<%=Imagen.muestraImagen("C:/ArchivosPromocion/imagenes/EvidReg.jpg")%>" alt=""></a>
+                    <a  href="Registro" class="${disabled1}"><img src="<%=Imagen.muestraImagen(RutaConfig.getRutaCarpeta()+"imagenes/EvidReg.jpg")%>" alt=""></a>
                     <a  href="Registro" class="${disabled1}"><h3>Registro de aspirante</h3></a>
                 </article>                    
                 
@@ -107,32 +108,32 @@
                     <c:set var="finIncompleto" value="true"></c:set>
                     <article class="articleses ">
                         <h3>Paso 2:</h3>
-                        <a href="FichaRegistroIncompleto" target="_blank"><img src="<%=Imagen.muestraImagen("C:/ArchivosPromocion/imagenes/EvidVal.jpg")%>" alt=""></a>
+                        <a href="FichaRegistroIncompleto" target="_blank"><img src="<%=Imagen.muestraImagen(RutaConfig.getRutaCarpeta()+"imagenes/EvidVal.jpg")%>" alt=""></a>
                         <a href="FichaRegistroIncompleto" target="_blank"><h3>Ficha de registro incompleto</h3></a>
                     </article>
                 </c:if>
                 <c:if test = "${!finIncompleto}">
                     <article class="articleses ${disabled2}">
                         <h3>Paso 2: <span class="glyphicon glyphicon-ok-sign completo ${hidden2}" title="Sección completa"></span></h3>
-                        <a href="RegistroEncuestados"><img src="<%=Imagen.muestraImagen("C:/ArchivosPromocion/imagenes/EvidReg.jpg")%>" alt=""></a>
+                        <a href="RegistroEncuestados"><img src="<%=Imagen.muestraImagen(RutaConfig.getRutaCarpeta()+"imagenes/EvidReg.jpg")%>" alt=""></a>
                         <a href="RegistroEncuestados"><h3>Registro encuestados</h3></a>
                     </article>
 
                     <article class="articleses ${disabled3}">
                         <h3>Paso 3: <span class="glyphicon glyphicon-ok-sign completo hidden" title="Sección completa"></span></h3>
-                        <a href="RegistroCriterios" ><img src="<%=Imagen.muestraImagen("C:/ArchivosPromocion/imagenes/EvidReg.jpg")%>" alt=""></a>
+                        <a href="RegistroCriterios" ><img src="<%=Imagen.muestraImagen(RutaConfig.getRutaCarpeta()+"imagenes/EvidReg.jpg")%>" alt=""></a>
                         <a href="RegistroCriterios" ><h3>Evidencias de los criterios de valoración</h3></a>
                     </article>
                     <article class="articleses">
                         <h3>Paso 4:<span class="glyphicon glyphicon-ok-sign completo hidden" title="Sección completa"></span></h3>
-                        <a href="FichaRegistro" class="disabled" target="_blank" ><img src="<%=Imagen.muestraImagen("C:/ArchivosPromocion/imagenes/EvidVal.jpg")%>" alt=""></a>
+                        <a href="FichaRegistro" class="disabled" target="_blank" ><img src="<%=Imagen.muestraImagen(RutaConfig.getRutaCarpeta()+"imagenes/EvidVal.jpg")%>" alt=""></a>
                         <a href="FichaRegistro"  target="_blank" ><h3>Ficha de <br/> registro </h3></a>
                     </article>
                 </c:if>
                 <!--
                 <article class="articleses">
                     <h3>Paso 5:<span class="glyphicon glyphicon-ok-sign completo hidden" title="Sección completa"></span></h3>
-                    <a href="articulo.html" class="disabled"><img src="<%=Imagen.muestraImagen("C:/ArchivosPromocion/imagenes/Resultados.jpg")%>" alt=""></a>
+                    <a href="articulo.html" class="disabled"><img src="<%=Imagen.muestraImagen(RutaConfig.getRutaCarpeta()+"imagenes/Resultados.jpg")%>" alt=""></a>
                     <a href="articulo.html" class="disabled"><h3>Emisión de Resultados</h3></a>
                 </article>-->
                   

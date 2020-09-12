@@ -582,6 +582,7 @@
                   <form action="#" method="POST">
                       <input type="hidden" id="banderaCompleto" name="k" value="${banderaCompleto}">                      
                       <br/>
+                      <a href="FichaRegistroPrevia"  target="_blank" class="btn btn-default" >Vista previa Ficha de registro</a>
                       <input type="submit" disabled="true" class="btn btn-primary" value="Finalizar registro" id="btnFinalizar">
                   </form>
               </div>

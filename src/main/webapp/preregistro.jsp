@@ -69,7 +69,7 @@
                         </div>
                         <div class="form-group col-md-6">                               
                             <label class="control-label" for="programa">Subsistema:</label>
-                            <select class="form-control input-sm" id="subsistema" name="subsistema" required>                                  
+                            <select class="form-control input-sm" id="subsistema" name="subsistema" onChange="$('#rfc').val('')" required>                                  
                                 <option value=''>-Seleccione-</option>
                                 <option value='1'>UEMSTIS</option>
                                 <option value='2'>CECyTE</option>

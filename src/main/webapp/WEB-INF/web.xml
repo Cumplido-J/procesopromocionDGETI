@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
-    <!--<context-param>
-        <param-name>rutaConfig</param-name>
-        <param-value>C:/ArchivosPromocion/config.properties</param-value>
-    </context-param>-->
     <context-param>
         <param-name>rutaConfig</param-name>
-        <param-value>/home/pdadmin/configDocente/ArchivosPromocion/configLinuxLocal.properties</param-value>
+        <param-value>C:/ArchivosPromocion/config.properties</param-value>
     </context-param>
+    <!--<context-param>
+        <param-name>rutaConfig</param-name>
+        <param-value>/home/pdadmin/configDocente/ArchivosPromocion/configLinux.properties</param-value>
+    </context-param>-->
     <servlet>
         <servlet-name>Servlet_cancelarPin</servlet-name>
         <servlet-class>com.aplicacion.servlet.Servlet_cancelarPin</servlet-class>
@@ -44,6 +44,10 @@
         <servlet-name>Servlet_registrarResultado</servlet-name>
         <servlet-class>com.aplicacion.servlet.Servlet_registrarResultado</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>Servlet_cbFichaRegistroPrevia</servlet-name>
+        <servlet-class>com.aplicacion.servlet.Servlet_cbFichaRegistroPrevia</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Servlet_cancelarPin</servlet-name>
         <url-pattern>/Servlet_cancelarPin</url-pattern>
@@ -79,6 +83,10 @@
     <servlet-mapping>
         <servlet-name>Servlet_registrarResultado</servlet-name>
         <url-pattern>/Servlet_registrarResultado</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Servlet_cbFichaRegistroPrevia</servlet-name>
+        <url-pattern>/Servlet_cbFichaRegistroPrevia</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

@@ -63,6 +63,7 @@ com\aplicacion\servlet\Servlet_agregar_usuario.class
 com\aplicacion\servlet\Servlet_registroInfoHoras.class
 com\aplicacion\servlet\Servlet_muestraArchivo.class
 com\aplicacion\servlet\Servlet_consultaCatalogos.class
+com\aplicacion\servlet\Servlet_cbFichaRegistroPrevia.class
 com\aplicacion\beans\Personal.class
 correos\Validar_correo.class
 herramientas\CriteriosValoracion.class

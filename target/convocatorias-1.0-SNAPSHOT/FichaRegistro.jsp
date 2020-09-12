@@ -8,6 +8,7 @@
 <%@page import="metodos_sql.Metodos_sql"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import='herramientas.Imagen'%>
+<%@page import='herramientas.RutaConfig'%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix ="fmt"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
@@ -27,14 +28,14 @@
     <body style="width:800px; font-family:Verdana;">
         <table >
             <tr>
-                <td valign="top"><img width="200" src="<%=Imagen.muestraImagen("C:/ArchivosPromocion/logos/logoSepSems.jpg")%>"></td>
+                <td valign="top"><img width="200" src="<%=Imagen.muestraImagen(RutaConfig.getRutaCarpeta()+"logos/logoSepSems.jpg")%>"></td>
                 <td style="text-align:center;">
                     Convocatoria para el proceso de promoción en el servicio docente por cambio de categoría en Educación Media Superior 
                     <br/>(Promoción horizontal)
                     <br/>Ciclo Escolar 2020-2021
                         
                 </td>
-                <td valign="top"><img width="200" src="<%=Imagen.muestraImagen("C:/ArchivosPromocion/logos/logoUemstis.jpg")%>"></td>
+                <td valign="top"><img width="200" src="<%=Imagen.muestraImagen(RutaConfig.getRutaCarpeta()+"logos/logoUemstis.jpg")%>"></td>
             </tr>
         </table> 
         <center><p>FICHA DE REGISTRO</p></center>

@@ -238,7 +238,7 @@
                             <input type="hidden" name="modal" id="modal" value="<%=request.getAttribute("modal")%>">
                         <%-------------------------------------------------------------------OPCION super usuario nacional COMBO BOX----------------------------%>   
                         <%if (request.getAttribute("control_combobox").equals("false") && request.getAttribute("nacional").equals("1")) { %> <%--SUPER USUARIO--%>
-                        <table  border="0" width="120%">   
+                        <table  border="0" width="100%">   
                             <tr><td align="center">
                                     <input type="hidden" name="f_opc" id="i_opc">
                                     <input type="hidden" name="campoentidad7" id="campoentidad7" >
@@ -297,7 +297,7 @@
                         </div>
                         <br><br>
 
-                        <table  border="1" width="160%" id="tabla_usuarios" class="display">  
+                        <table  border="1" width="100%" id="tabla_usuarios" class="display">  
                             <thead>
                                 <tr>
                                     <th>Estado</th>
@@ -1057,9 +1057,7 @@
                     </form>
 
                 </div>
-                <asideart class="asideart">
-
-                </asideart>
+                
             </section>		
             <!-- JS  para el framework del gobierno-->   
 
