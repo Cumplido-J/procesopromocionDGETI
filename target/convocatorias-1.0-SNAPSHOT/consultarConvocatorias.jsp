@@ -40,7 +40,7 @@
                         </div>
                             <div>
                                 <select name="cboplantel" id="cboplantel" onchange="listarProgramasPlanteles(this.value);" class="form-control">
-                                    <option value='-1'>Seleccione un plantel</option>
+                                    <option value=''>Seleccione un plantel</option>
                                 </select>
                             </div>
                         </div>
@@ -50,7 +50,7 @@
                             </div>
                             <div>
                                 <select name="cboconvocatoria" id="cboconvocatoria" class="form-control">
-                                    <option value='-1'>Seleccione un programa</option>
+                                    <option value=''>Seleccione un programa</option>
                                 </select>
                             </div>
                         </div>
@@ -86,26 +86,35 @@
                                     
                     <jsp:useBean id="cn" class="metodos_sql.Metodos_sql" scope="page"></jsp:useBean>
                     <div>
+                        <%
+                            String nombre = "";
+                            String _idEntidad = "";
+                            String _idPlantel = "";
+                            String _idEstatus = "";
+                            nombre = request.getParameter("rfcNombre");
+                            _idEntidad = request.getParameter("cboentidad");
+                            _idPlantel = request.getParameter("cboplantel");
+                            _idEstatus = request.getParameter("cboestatus");
+                        %>
                         <h4><span id="nombrePlantel"></span></h4>
-                        <form id="data1" class="form-horizontal" role="form" method="POST" action="editarConsultarConvocatoria.jsp">
+                        <form id="data1" class="form-horizontal" role="form" method="POST" action="VistaDocente">
                         <table class="table table-responsive table-bordered table-striped">
-                            <thead>
-                                <%
-                                    String nombre = "";
-                                    String _idEntidad = "";
-                                    String _idPlantel = "";
-                                    String _idEstatus = "";
-                                    nombre = request.getParameter("rfcNombre");
-                                    _idEntidad = request.getParameter("cboentidad");
-                                    _idPlantel = request.getParameter("cboplantel");
-                                    _idEstatus = request.getParameter("cboestatus");
-                                %>
+                            <thead>                                
+                                <tr>
+                                    <th>Estado</th>
+                                    <th>Plantel</th>
+                                    <th>RFC</th>
+                                    <th>Nombre</th>
+                                    <th>Primer apellido</th>
+                                    <th>Segundo apellido</th>
+                                    <th>Estatus</th>
+                                    <th>Opciones</th>
+                                </tr>
+                            </thead>
+                            <tbody id="vacanciaData">
                                 <%=
                                     new Catalogos().desplegarConvocatorio(nombre, _idEntidad, _idPlantel, _idEstatus)
                                 %>
-                            </thead>
-                            <tbody id="vacanciaData">
-
                             </tbody>
                         </table>
                         </form>
@@ -159,7 +168,7 @@ function listarProgramasPlanteles(id){
             if (ajax.readyState === 4){
                 limpiarSelect(cboconvocatoria);
                 var opt = document.createElement("option");
-                opt.value="-1";
+                opt.value="";
                 opt.text="Seleccione un programa";
                 cboconvocatoria.appendChild(opt);
                 const planteles =  ajax.response;
@@ -175,7 +184,7 @@ function listarProgramasPlanteles(id){
     }else{
         limpiarSelect(cboconvocatoria);
         var opt = document.createElement("option");
-        opt.value="-1";
+        opt.value="";
         opt.text="Seleccione un plantel";
         cboconvocatoria.appendChild(opt);
         alert("Seleccione una Entidad");

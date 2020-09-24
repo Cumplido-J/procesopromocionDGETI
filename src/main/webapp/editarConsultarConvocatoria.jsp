@@ -13,10 +13,10 @@
     </head>
     <body>
         <p>Me ha llegado <%
-            session.getAttribute("entidad");
+            request.getParameter("idUsuario");
         %></p>
         
-        <input type="text" value="<%=session.getAttribute("entidad")%>"/>
+        <input type="text" value="<%=request.getParameter("idUsuario")%>"/>
         
         
     </body>

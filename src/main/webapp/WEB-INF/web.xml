@@ -48,6 +48,14 @@
         <servlet-name>Servlet_cbFichaRegistroPrevia</servlet-name>
         <servlet-class>com.aplicacion.servlet.Servlet_cbFichaRegistroPrevia</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>Servlet_cbVistaDocente</servlet-name>
+        <servlet-class>com.aplicacion.servlet.Servlet_cbVistaDocente</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Servlet_registroIntegranteComite</servlet-name>
+        <servlet-class>com.aplicacion.servlet.Servlet_registroIntegranteComite</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Servlet_cancelarPin</servlet-name>
         <url-pattern>/Servlet_cancelarPin</url-pattern>
@@ -87,6 +95,14 @@
     <servlet-mapping>
         <servlet-name>Servlet_cbFichaRegistroPrevia</servlet-name>
         <url-pattern>/Servlet_cbFichaRegistroPrevia</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Servlet_cbVistaDocente</servlet-name>
+        <url-pattern>/Servlet_cbVistaDocente</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Servlet_registroIntegranteComite</servlet-name>
+        <url-pattern>/Servlet_registroIntegranteComite</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

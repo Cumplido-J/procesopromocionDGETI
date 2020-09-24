@@ -84,7 +84,7 @@ public class Catalogos {
     public String desplegarOpcionesPlanteles(String idEstado){        
         String respuesta="<option value=''>-Seleccione-</option>";
         try{
-            String[] parametros={idEstado};
+            String[] parametros={"1",idEstado};
             List<String[]> datos=metodos.ejecutaSP("sp_selectCatPlanteles",parametros);
             for(String[] dato:datos){
                 respuesta+="<option marginacion='"+dato[3]+"' cct='"+dato[1]+"' value='"+dato[0]+"'>"+dato[2]+"</option>";
@@ -102,6 +102,7 @@ public class Catalogos {
         respuesta=respuesta.replaceFirst(aux, aux+" selected");
         return respuesta;  
     }
+    
     
     public String desplegarOpcionesTipoInstitucion(String idEstado){        
         String respuesta="<option value=''>-Seleccione-</option>";
@@ -510,7 +511,7 @@ public class Catalogos {
     }
     public String desplegarPlanteles(String idPlantel){        
         String respuesta="<option value=''>-Seleccione-</option>";
-        String[] parametros={idPlantel};
+        String[] parametros={"1",idPlantel};
         try{
             List<String[]> datos=metodos.ejecutaSP("sp_selectCatPlanteles",parametros);
             for(String[] dato:datos){
@@ -537,17 +538,7 @@ public class Catalogos {
     }
     
      public String desplegarConvocatorio(String nombreUsuario, String _idEntidad, String _idPlantel, String _idEstatus){        
-        String respuesta="\"<tr>\\n\" +\n" +
-"\"                                    <th>Estado</th>\\n\" +\n" +
-"\"                                    <th>Plantel</th>\\n\" +\n" +
-"\"                                    <th>RFC</th>\\n\" +\n" +
-"\"                                    <th>Nombre</th>\\n\" +\n" +
-"\"                                    <th>Primer apellido</th>\\n\" +\n" +
-"\"                                    <th>Tipo de Convocatoria</th>\\n\" +\n" +
-"\"                                    <th>Estatus</th>\\n\" +\n" +
-"\"                                    <th>Opciones</th>\\n\" +\n" +
-"\"                                </tr>\"\n" +
-"                        + \"<tr>\\n\"";
+        String respuesta="";
         String[] parametros={nombreUsuario, _idEntidad, _idPlantel, _idEstatus};
         try{
             int cont= 1;
@@ -560,14 +551,14 @@ public class Catalogos {
                 String enviarD = "enviar" + cont++;
                 
                 respuesta=
-"                                    <td>"+dato[2]+"</td>\n" +
-"                                    <td>"+dato[4]+"</td>\n" +
-"                                    <td>"+dato[8]+"</td>\n" +
-"                                    <td>"+dato[5]+"</td>\n" +
-"                                    <td>"+dato[6]+"</td>\n" +
-"                                    <td>"+valor9+"</td>\n"+
-"                                    <td>"+valor10+"</td>\n"+
-"                        <td><button class='btn btn-sm btn-primary' type='submit' id='"+enviarD+"'name='"+enviarD+"'->Enviar</button></td>"
+"                                    <td>"+dato[2]+"</td>" +
+"                                    <td>"+dato[4]+"</td>" +
+"                                    <td><input type='hidden' value='"+dato[8]+"' name='rfc'>"+dato[8]+"</td>" +
+"                                    <td>"+dato[5]+"</td>" +
+"                                    <td>"+dato[6]+"</td>" +
+"                                     <td>"+dato[7]+"</td>" +
+"                                    <td>"+valor9+"</td>"+
+"                        <td><input type='hidden' value='"+dato[0]+"' name='idUsuario'><button class='btn btn-sm btn-primary' type='submit'>Enviar</button></td>"
                         + "</tr>";
             }
         }catch(Exception e){
@@ -649,4 +640,33 @@ public class Catalogos {
             return respuesta;        
         }
     }
+    public String desplegarOpcionesPlanteles2(String idSubsistema,String idEstado){        
+        String respuesta="<option value=''>-Seleccione-</option>";
+        try{
+            String[] parametros={idSubsistema, idEstado};
+            List<String[]> datos=metodos.ejecutaSP("sp_selectCatPlanteles",parametros);
+            for(String[] dato:datos){
+                respuesta+="<option marginacion='"+dato[3]+"' cct='"+dato[1]+"' value='"+dato[0]+"'>"+dato[2]+"</option>";
+            }
+        }catch(Exception e){
+            respuesta=e.toString();
+        }finally{
+            return respuesta;        
+        }
+    }
+    public String desplegarOpcionesRolComite(){        
+        String respuesta="<option value=''>-Seleccione-</option>";
+        try{            
+            List<String[]> datos=metodos.ejecutaSP("sp_selectCatRolComite");
+            for(String[] dato:datos){
+                respuesta+="<option value='"+dato[0]+"'>"+dato[1]+"</option>";
+            }
+        }catch(Exception e){
+            respuesta=e.toString();
+        }finally{
+            return respuesta;        
+        }
+    }
+    
+    
 }
