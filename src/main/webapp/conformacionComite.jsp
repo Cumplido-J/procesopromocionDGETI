@@ -16,6 +16,7 @@
         <link href="css/estilosRegistro.css" rel="stylesheet"/>   
         <jsp:useBean id="catalogo" class="herramientas.Catalogos" />
         <jsp:useBean id="comite" class="herramientas.Comite" />
+        <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
     </head>
     <body>
         <main class="page">
@@ -50,15 +51,17 @@
                     <h4>Conformación de comité</h4>                    
                 </div>
                 <div class="row">
-                    <div class="form-group col-md-3">                               
+                    <div class="form-group col-xs-12">                               
                         <label class="control-label" for="programa">Programa:</label>
-                        <select class="form-control input-sm" id="programa" name="programa" required>                                  
+                        <select class="form-control input-sm disabled" id="programa" name="programa">                                  
                             ${catalogo.desplegarOpcionesProgramas()}
                         </select>
                     </div>
+                </div>
+                <div class="row">
                     <div class="form-group col-md-3">                               
-                        <label class="control-label" for="programa">Subsistema:</label>
-                        <select class="form-control input-sm" id="subsistema" name="subsistema" onchange="actualizarPlanteles()" required>                                  
+                        <label class="control-label" for="subsistema">Subsistema:</label>
+                        <select class="form-control input-sm disabled" id="subsistema" name="subsistema" onchange="actualizarPlanteles()" required>                                  
                             <option value=''>-Seleccione-</option>
                             <option value='1'>UEMSTIS</option>
                             <option value='2'>CECyTE</option>
@@ -66,16 +69,24 @@
                     </div>
                     <div class="form-group col-md-3">                                               
                       <label class="control-label" for="entidad">Entidad</label>
-                      <select class="form-control input-sm" id="entidad" name="entidad" onchange="actualizarPlanteles()" required>                                  
+                      <select class="form-control input-sm disabled" id="entidad" name="entidad" onchange="actualizarPlanteles()" required>                                  
                           ${catalogo.desplegarOpcionesEstado()}
                       </select>
                     </div>
                     <div class="form-group col-md-3">                               
                         <label class="control-label" for="plantel">Plantel:</label>
-                        <select class="form-control input-sm" id="plantel" name="plantel" required>                                  
-                            <option value=''>-Seleccione-</option>
+                        <select class="form-control input-sm disabled" id="plantel" name="plantel" required>                                  
+                            ${catalogo.desplegarOpcionesPlanteles2(datos[1],datos[2])};
                         </select>
                     </div>   
+                    <div class="form-group col-md-3">                               
+                        <label class="control-label" for="tipo">Tipo:</label>
+                        <select class="form-control input-sm disabled" id="tipo" name="tipo" required>                                  
+                            <option value=''>-Seleccione-</option>
+                            <option value='R'>Comité revisor</option>
+                            <option value='D'>Consejo dictaminador</option>
+                        </select>
+                    </div>
                 </div>
                 <div class="row text-center">
                     <input  class="btn btn-sm btn-link" id="btnAgregar" type="button" value='(+) Agregar miembro' onclick="mostrarModalRegistro()"/>
@@ -92,7 +103,7 @@
                             <th>Opciones</th>
                         </thead>
                         <tbody id="seccionEditable">
-                            ${comite.desplegarIntegrantesComite(3)}
+                            ${comite.desplegarIntegrantesComite(datos[0])}
                         </tbody>
                     </table>
                 </div>
@@ -135,7 +146,7 @@
                         </div>
                         <div class="modal-body">
                             <p id="respuesta" class="text-danger"></p>
-                            <input type="hidden" value="3" name="idComite" id="idComite">
+                            <input type="hidden" value="${datos[0]}" name="idComite" id="idComite">
                             <div class="row">
                                 <div class="form-group col-md-6">                               
                                     <label class="control-label">RFC:</label>
@@ -212,5 +223,16 @@
         <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
         <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.1/jquery.validate.min.js"></script>
         <script src="js/funcionesConformacionComite.js"></script>
+        
+        <c:if test="${datos[0]!=null}">
+            <script>
+                $("#programa").val(${datos[1]});
+                $("#subsistema").val(${datos[2]});
+                $("#entidad").val(${datos[3]});
+                $("#plantel").val(${datos[4]});
+                $("#tipo").val('${datos[5]}');
+            </script>
+        </c:if>
+        
     </body>
 </html>

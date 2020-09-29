@@ -106,6 +106,7 @@ public class Servlet_guardarArchivo extends HttpServlet {
                 carpeta.mkdirs();                    
             }
             ruta+="/"+idUsuario+"_"+idRequisito+".pdf";
+            System.out.println(ruta);
             File f=new File(ruta);
             FileOutputStream ous=new FileOutputStream(f);
             int dato=is.read();

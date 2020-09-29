@@ -28,6 +28,7 @@ com\aplicacion\beans\Docente$2.class
 com\aplicacion\servlet\Servlet_cbFichaRegistroIncompleto.class
 com\aplicacion\servlet\Servlet_guardar_convocatoria2.class
 com\aplicacion\servlet\Servlet_modificar_convocatoria2.class
+com\aplicacion\servlet\Servlet_cbVistaDocente.class
 com\aplicacion\servlet\Servlet_guardar_convocatoria.class
 com\aplicacion\servlet\Servlet_registroInfoCompatibilidad.class
 com\convocatoria\datos\EntidadJDBC.class
@@ -56,6 +57,7 @@ com\aplicacion\servlet\Servlet_cbSesionDocente.class
 com\aplicacion\servlet\Servlet_generaSesion.class
 com\aplicacion\servlet\Servlet_descargaConvocatoria.class
 com\aplicacion\servlet\Servlet_finalizaRegistro.class
+com\aplicacion\servlet\Servlet_registroComite.class
 com\convocatoria\datos\PlantelJDBC.class
 com\aplicacion\servlet\Servlet_regresar3.class
 com\convocatoria\servlet\ServletControladorVacancia.class
@@ -84,7 +86,9 @@ com\aplicacion\servlet\Servlet_registrarCurso.class
 com\aplicacion\servlet\Servlet_evidenciasRegistro.class
 com\aplicacion\servlet\Servlet_registrarResultado.class
 com\convocatoria\datos\ConsultarComitesJDBC.class
+com\aplicacion\servlet\Servlet_buscarComite.class
 com\aplicacion\beans\ConvoctoriaBean.class
+herramientas\Comite.class
 com\aplicacion\servlet\Servlet_modificar_convocatoria.class
 herramientas\Catalogos.class
 com\convocatoria\datos\ConvocatoriaJDBC.class
@@ -94,6 +98,7 @@ com\convocatoria\domain\Plantel.class
 com\aplicacion\servlet\Servlet_preregistro.class
 com\convocatoria\reportes\Reporteador.class
 com\convocatoria\servlet\ServletControlador.class
+com\aplicacion\servlet\Servlet_registroIntegranteComite.class
 correos\Enviar_clave.class
 com\aplicacion\servlet\Servlet_P_Vacancia.class
 com\aplicacion\servlet\Servlet_regresar.class

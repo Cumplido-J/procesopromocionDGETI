@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
-    <context-param>
-        <param-name>rutaConfig</param-name>
-        <param-value>C:/ArchivosPromocion/config.properties</param-value>
-    </context-param>
     <!--<context-param>
         <param-name>rutaConfig</param-name>
-        <param-value>/home/pdadmin/configDocente/ArchivosPromocion/configLinux.properties</param-value>
+        <param-value>C:/ArchivosPromocion/config.properties</param-value>
     </context-param>-->
+    <context-param>
+        <param-name>rutaConfig</param-name>
+        <param-value>/home/pdadmin/configDocente/ArchivosPromocion/configLinux.properties</param-value>
+    </context-param>
     <servlet>
         <servlet-name>Servlet_cancelarPin</servlet-name>
         <servlet-class>com.aplicacion.servlet.Servlet_cancelarPin</servlet-class>
@@ -56,6 +56,14 @@
         <servlet-name>Servlet_registroIntegranteComite</servlet-name>
         <servlet-class>com.aplicacion.servlet.Servlet_registroIntegranteComite</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>Servlet_buscarComite</servlet-name>
+        <servlet-class>com.aplicacion.servlet.Servlet_buscarComite</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Servlet_registroComite</servlet-name>
+        <servlet-class>com.aplicacion.servlet.Servlet_registroComite</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Servlet_cancelarPin</servlet-name>
         <url-pattern>/Servlet_cancelarPin</url-pattern>
@@ -103,6 +111,14 @@
     <servlet-mapping>
         <servlet-name>Servlet_registroIntegranteComite</servlet-name>
         <url-pattern>/Servlet_registroIntegranteComite</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Servlet_buscarComite</servlet-name>
+        <url-pattern>/Servlet_buscarComite</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Servlet_registroComite</servlet-name>
+        <url-pattern>/Servlet_registroComite</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

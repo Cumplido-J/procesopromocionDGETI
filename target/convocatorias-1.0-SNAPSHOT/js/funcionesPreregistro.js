@@ -206,17 +206,15 @@ function consultaWS(){
            
 }
 function actualizarPlanteles(idPlantel) {
-    if($('#subsistema').val()=='1'){
-        idEntidad=$("#entidad").val();
-        $.get("ConsultaCatalogos", {k: "13",i:idEntidad}, function(respuesta){
-            $("#plantel").html(respuesta);
-            if(idPlantel!=null){
-                $("#plantel").val(idPlantel);
-            }
-        });  
-    }else{
-        $("#plantel").html("<option value=''>-Seleccione-</option>");
-    }
+    var idSubsistema=$('#subsistema').val();    
+    var idEntidad=$("#entidad").val();
+    if(idSubsistema!="" &&  idEntidad!="")
+    $.get("ConsultaCatalogos", {k: "16",e:idEntidad,s:idSubsistema}, function(respuesta){
+        $("#plantel").html(respuesta);
+        if(idPlantel!=null){
+            $("#plantel").val(idPlantel);
+        }
+    });
 }
 function cambioAviso(){
     if($("#cbAviso").is(':checked')){
