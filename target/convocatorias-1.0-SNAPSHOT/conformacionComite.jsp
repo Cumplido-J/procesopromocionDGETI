@@ -76,7 +76,7 @@
                     <div class="form-group col-md-3">                               
                         <label class="control-label" for="plantel">Plantel:</label>
                         <select class="form-control input-sm disabled" id="plantel" name="plantel" required>                                  
-                            ${catalogo.desplegarOpcionesPlanteles2(datos[1],datos[2])};
+                            ${catalogo.desplegarOpcionesPlanteles2(datos[2],datos[3])};
                         </select>
                     </div>   
                     <div class="form-group col-md-3">                               

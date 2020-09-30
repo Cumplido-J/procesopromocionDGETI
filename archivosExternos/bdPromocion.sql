@@ -1544,7 +1544,7 @@ CREATE TABLE `usuariopermiso` (
   KEY `idPermisoUP_idx` (`idPermiso`),
   CONSTRAINT `idPermisoUP` FOREIGN KEY (`idPermiso`) REFERENCES `catpermisos` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `idUsuarioUP` FOREIGN KEY (`idUsuario`) REFERENCES `usuario` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE=InnoDB AUTO_INCREMENT=88 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=89 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1553,7 +1553,7 @@ CREATE TABLE `usuariopermiso` (
 
 LOCK TABLES `usuariopermiso` WRITE;
 /*!40000 ALTER TABLE `usuariopermiso` DISABLE KEYS */;
-INSERT INTO `usuariopermiso` VALUES (42,1,1),(43,1,2),(45,1,4),(51,31,1),(52,31,2),(54,31,4),(55,31,1),(56,31,2),(58,31,1),(59,31,2),(60,31,4),(61,31,1),(62,31,2),(63,31,4),(64,31,1),(65,31,2),(66,31,4),(84,32,1),(85,32,4),(86,33,1),(87,33,4);
+INSERT INTO `usuariopermiso` VALUES (42,1,1),(43,1,2),(45,1,4),(51,31,1),(52,31,2),(54,31,4),(55,31,1),(56,31,2),(58,31,1),(59,31,2),(60,31,4),(61,31,1),(62,31,2),(63,31,4),(64,31,1),(65,31,2),(66,31,4),(84,32,1),(85,32,4),(86,33,1),(87,33,4),(88,33,1);
 /*!40000 ALTER TABLE `usuariopermiso` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -2038,7 +2038,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_consultarComites`(in _idEntidad int,in _idPlantel int,in _idPrograma int, in _tipo int)
+CREATE PROCEDURE `sp_consultarComites`(in _idEntidad int,in _idPlantel int,in _idPrograma int, in _tipo int)
 BEGIN
 	select c.id,c.idEntidad,e.entidad,c.idPlantel,p.plantel,c.idPrograma,c.tipo,mc.nombre,cp.programa
     from comite c
@@ -2349,7 +2349,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_deleteComites`(in _idEntidad int,in _idPlantel int,in _idPrograma int,in _tipo varchar(50),_idComite int)
+CREATE PROCEDURE `sp_deleteComites`(in _idEntidad int,in _idPlantel int,in _idPrograma int,in _tipo varchar(50),_idComite int)
 BEGIN
 	delete from miembrocomite
     where _idComite=_idComite;
@@ -2605,7 +2605,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_insertComite`(in _idPlantel int,in _idPrograma int, in _tipo char(2))
+CREATE PROCEDURE `sp_insertComite`(in _idPlantel int,in _idPrograma int, in _tipo char(2))
 BEGIN
 	declare _id int default null;
     
@@ -3645,7 +3645,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_selectComite`(in _idPrograma int)
+CREATE PROCEDURE `sp_selectComite`(in _idPrograma int)
 BEGIN
 	select id,tipo 
     from comite 
@@ -3829,4 +3829,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-09-28 19:16:14
+-- Dump completed on 2020-09-30 13:21:57

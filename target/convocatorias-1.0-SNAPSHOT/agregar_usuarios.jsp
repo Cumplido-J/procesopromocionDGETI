@@ -35,44 +35,64 @@
         <script src="js/jquery.dataTables.min.js"></script>
         <script type="text/javascript">
 
+            function seleccion_subsistema() {
+                document.getElementById("entidad").disabled = true;
+                document.getElementById("i_plantel").disabled = true;
+                $("#nivel").val(1);
+                $("#entidad").val(0);
+                $("#i_plantel").val(0);
+            }
+
+            function seleccion_subsistema2() {
+                document.getElementById("i_plantel").disabled = false;
+                $("#i_plantel").val(0);
+
+                $("#i_opc").val("1");
+                $.post("combo8.jsp", $("#data").serialize(), function (data) {
+                    $("#i_plantel").html(data);
+                });
+            }
+
+         
+
             function seleccion_nivel() {
 
-                if (document.getElementById("nivel").value == "1") {
-                    document.getElementById("entidad").disabled = true;
-                    document.getElementById("i_plantel").disabled = true;
-                    $("#entidad").val(0);
-                    //$("#entidad").change();
-                    $("#entidad").css("border", "none");
-                    $("#n8").text("").css("color", "red");
-                    $("#i_plantel").css("border", "none");
-                    $("#n7").text("").css("color", "red");
-                } else if (document.getElementById("nivel").value == "2") {
-                    document.getElementById("entidad").disabled = false;
-                    document.getElementById("i_plantel").disabled = true;
-                    $("#i_opc").val("1");
-                    $.post("combo5.jsp", $("#data").serialize(), function (data) {
-                        $("#i_plantel").html(data);
-                    });
-                    //$("#entidad").val(dato_ent);
+            if (document.getElementById("nivel").value == "1") {
+                document.getElementById("entidad").disabled = true;
+                document.getElementById("i_plantel").disabled = true;
+                $("#entidad").val(0);
+                //$("#entidad").change();
+                $("#entidad").css("border", "none");
+                $("#n8").text("").css("color", "red");
+                $("#i_plantel").css("border", "none");
+                $("#n7").text("").css("color", "red");
+            } else if (document.getElementById("nivel").value == "2") {
+                document.getElementById("entidad").disabled = false;
+                document.getElementById("i_plantel").disabled = true;
+                $("#i_opc").val("1");
+                $.post("combo5.jsp", $("#data").serialize(), function (data) {
+                    $("#i_plantel").html(data);
+                });
+                //$("#entidad").val(dato_ent);
 
-                    $("#entidad").css("border", "none");
-                    $("#n8").text("").css("color", "red");
-                    $("#i_plantel").css("border", "none");
-                    $("#n7").text("").css("color", "red");
-                } else if (document.getElementById("nivel").value == "3") {
-                    document.getElementById("entidad").disabled = false;
-                    document.getElementById("i_plantel").disabled = false;
-                    $("#entidad").val(0);
-                    $("#i_opc").val("1");
-                    //$.post("combo6.jsp", $("#data").serialize(), function (data) {
-                    $.post("combo1.jsp", $("#data").serialize(), function (data) {
-                        $("#i_plantel").html(data);
-                    });
+                $("#entidad").css("border", "none");
+                $("#n8").text("").css("color", "red");
+                $("#i_plantel").css("border", "none");
+                $("#n7").text("").css("color", "red");
+            } else if (document.getElementById("nivel").value == "3") {
+                document.getElementById("entidad").disabled = false;
+                document.getElementById("i_plantel").disabled = false;
+                $("#entidad").val(0);
+                $("#i_opc").val("1");
+                //$.post("combo6.jsp", $("#data").serialize(), function (data) {
+                $.post("combo1.jsp", $("#data").serialize(), function (data) {
+                    $("#i_plantel").html(data);
+                });
 
-                    $("#entidad").css("border", "none");
-                    $("#n8").text("").css("color", "red");
-                    $("#i_plantel").css("border", "none");
-                    $("#n7").text("").css("color", "red");
+                $("#entidad").css("border", "none");
+                $("#n8").text("").css("color", "red");
+                $("#i_plantel").css("border", "none");
+                $("#n7").text("").css("color", "red");
                 }
             }
 
@@ -94,7 +114,7 @@
                 }
 
                 $("#i_opc").val("1");
-                $.post("combo1.jsp", $("#data").serialize(), function (data) {
+                $.post("combo7.jsp", $("#data").serialize(), function (data) {
                     $("#i_plantel").html(data);
                 });
 
@@ -109,6 +129,8 @@
     </head>
     <body>
         <%
+            ResultSet rs8;
+
             session = (HttpSession) request.getSession(true);
             String idUsuario = "";
             String rfc = "";
@@ -148,7 +170,7 @@
 
 
                                     </li>
-                                    <li><a href="index.html">Inicio</a></li>
+                                    <li><a href="login.jsp">Inicio</a></li>
                                 </ul>
                             </nav>
                         </ul>
@@ -180,6 +202,25 @@
                     <%if (request.getAttribute("control_combobox").equals("false") && request.getAttribute("nacional").equals("1")) {%>
 
                     <div class="registro">
+                        <div class="caja">
+                            <p>Subsistema
+                                <%
+                                    ResultSet rs9 = cn.mostrar("Select id, subsistema from catsubsistema");
+                                %>
+
+                                <select class="form-control" name="subsistema" id="subsistema" onchange="seleccion_subsistema()">
+                                    <%
+                                        while (rs9.next()) {
+                                    %>
+                                    <option value="<%=rs9.getString("id")%>"><%=rs9.getString("subsistema")%></option>
+
+                                    <%//              regresa del combobox         muestra en el combo box
+                                        }
+                                    %>                                              
+                                </select>   
+                            </p>
+                            <div id="nnivel"></div>
+                        </div>
                         <div class="caja">
                             <p>Nivel
                                 <select class="form-control" name="nivel" id="nivel" onchange="seleccion_nivel()">
@@ -231,6 +272,25 @@
                         else if (request.getAttribute("control_combobox").equals("true") && request.getAttribute("nacional").equals("1")) {%> <%--OPCION FALSA COMBOBOX --%>             
                         <div class="registro">
                             <div class="caja">
+                                <p>Subsistema
+                                    <%
+                                        ResultSet rs9 = cn.mostrar("Select id, subsistema from catsubsistema");
+                                    %>
+
+                                    <select class="form-control" name="subsistema" id="subsistema" onchange="seleccion_subsistema()">
+                                        <%
+                                            while (rs9.next()) {
+                                        %>
+                                        <option value="<%=rs9.getString("id")%>"><%=rs9.getString("subsistema")%></option>
+
+                                        <%//              regresa del combobox         muestra en el combo box
+                                            }
+                                        %>                                              
+                                    </select>   
+                                </p>
+                                <div id="nnivel"></div>
+                            </div>
+                            <div class="caja">
                                 <p>Nivel
                                     <select class="form-control" name="nivel" id="nivel" onchange="seleccion_nivel()">
                                         <option value="1" selected="true">Nacional</option> 
@@ -279,19 +339,41 @@
                             </div>
                             <%}//OPCION ADMINISTRADOR ESTATAL COMBO BOX
                             else if (request.getAttribute("control_combobox").equals("true") && request.getAttribute("nacional").equals("2")) {%> 
-                           <div class="registro">
-                            <div class="caja">
-                                <p>Nivel
-                                    <select class="form-control" name="nivel" id="nivel" onchange="seleccion_nivel()" disabled="true">
-                                        <option value="1">Nacional</option> 
-                                        <option value="2">Estatal</option>
-                                        <option value="3" selected="true">Plantel</option>
-                                    </select>
-                                </p>
-                                <input type="hidden" name="nivel_plantel" id="nivel_plantel" value="3">
-                                <div id="nnivel"></div>
+                            <div class="registro">
+                                <div class="caja">
+                                    <input type="hidden" name="f_opc" id="i_opc">
+                                    <p>Subsistema
+                                        <%
+                                            rs8 = cn.mostrar("Select id, subsistema from catsubsistema");
+                                        %>
+
+                                        <select class="form-control" name="subsistema" id="subsistema" onchange="seleccion_subsistema2()">
+                                            <%
+                                                while (rs8.next()) {
+                                            %>
+                                            <option value="<%=rs8.getString("id")%>"><%=rs8.getString("subsistema")%></option>
+
+                                            <%//              regresa del combobox         muestra en el combo box
+
+                                                }
+
+                                            %>                                              
+                                        </select>   
+                                    </p>
+                                    <div id="nnivel"></div>
+                                </div>
+                                <div class="caja">
+                                    <p>Nivel
+                                        <select class="form-control" name="nivel" id="nivel" onchange="seleccion_nivel()" disabled="true">
+                                            <option value="1">Nacional</option> 
+                                            <option value="2">Estatal</option>
+                                            <option value="3" selected="true">Plantel</option>
+                                        </select>
+                                    </p>
+                                    <input type="hidden" name="nivel_plantel" id="nivel_plantel" value="3">
+                                    <div id="nnivel"></div>
+                                </div>
                             </div>
-                        </div>
 
                             <div class="registro">
 
@@ -300,8 +382,7 @@
                                     <input type="hidden" name="campoentidad" id="campoentidad" >
                                     <p>Entidad
 
-                                        <%
-                                            ResultSet rs = cn.mostrar("Select id, entidad from catentidades WHERE id='" + request.getAttribute("dato_ent") + "'");
+                                        <%                                            ResultSet rs = cn.mostrar("Select id, entidad from catentidades WHERE id='" + request.getAttribute("dato_ent") + "'");
                                         %>
 
                                         <select class="form-control" name="entidad" id="entidad" onchange="plantel()" disabled="true">
@@ -321,19 +402,8 @@
 
                                 <div class="caja">
                                     <p>Plantel
-                                        <%
-                                            ResultSet rs1 = cn.mostrar("Select * from catplanteles WHERE idEntidad='" + request.getAttribute("dato_ent") + "'");
-                                        %>
                                         <select class="form-control" name="n_plantel" id="i_plantel" onchange="validarentrada3()">
-                                            <option value="0">Escoge una opcion</option>   
-                                            <%
-                                                while (rs1.next()) {
-                                            %>
-                                            <option value="<%=rs1.getString("id")%>"><%=rs1.getString("plantel")%></option>
-
-                                            <%//              regresa del combobox         muestra en el combo box
-                                                }
-                                            %>   
+                                            <option value="0">Escoge una opcion</option>                                     
                                         </select>
                                     </p>
                                     <div id="n7"></div>
@@ -549,6 +619,13 @@
                                 <!-- JS  para el framework del gobierno-->
                                 <script src="https://framework-gb.cdn.gob.mx/gobmx.js"></script>
                                 <script src="js/notificaciones.js"></script>
+  <script type="text/javascript">
+            $("#i_opc").val("1");
+                    $.post("combo8.jsp", $("#data").serialize(), function (data) {
+                    $("#i_plantel").html(data);
+                    });
+            </script>
+
                             </div>
                             <%
                                 } else {
@@ -556,4 +633,5 @@
                                 }
                             %>
                             </body>
+
                             </html>

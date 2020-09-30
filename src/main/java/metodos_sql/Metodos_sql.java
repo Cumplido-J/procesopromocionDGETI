@@ -139,11 +139,11 @@ public class Metodos_sql {
     }//fin metodo guardar 
 
     //----------GUARDAR DATOS, SERVLET AGREGAR USUARIO*
-    public int guardar4(int id, String entidad, String plantel, String nombre, String primerApellido, String segundoApellido, String correo, String clave, String usuario, String telfijo, String telcel, String perfil, String nivel) {
+    public int guardar4(int id, String entidad, String plantel, String nombre, String primerApellido, String segundoApellido, String correo, String clave, String usuario, String telfijo, String telcel, String perfil, String nivel, String subsistema) {
         int resultado = 0;
 
         conexion = null;
-        String guardar = "INSERT INTO usuario(idSubsistema,idConvocatoria,entidad,plantel,nombre,primerApellido,segundoApellido,correo,clave,curp,telfijo,telcel,perfil,consideraciones,nacional) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+        String guardar = "INSERT INTO usuario(id,idConvocatoria,entidad,plantel,nombre,primerApellido,segundoApellido,correo,clave,curp,telfijo,telcel,perfil,consideraciones,nacional,idSubsistema) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
         conexion = conector();
         try {
             sentencia_preparada = conexion.prepareStatement(guardar);
@@ -163,7 +163,9 @@ public class Metodos_sql {
 //            sentencia_preparada.setString(14, permisos);
             sentencia_preparada.setString(14, null);
             sentencia_preparada.setString(15, nivel);
-            
+//            sentencia_preparada.setInt(16, Integer.parseInt(subsistema));
+            sentencia_preparada.setString(16, subsistema);
+
             System.out.print(sentencia_preparada.toString());
 
             resultado = sentencia_preparada.executeUpdate();
@@ -893,7 +895,7 @@ public class Metodos_sql {
     public int modificar_usuarios_A(String id, String entidad, String plantel, String nombre, String primerApellido, String segundoApellido, String correo, String clave, String usuario, String telfijo, String telcel, String perfil, String nivel) {
         int resultado = 0;
         conexion = null;
-    String guardar2 = "UPDATE usuario SET idConvocatoria="+ null +", entidad ="+entidad+", plantel ="+plantel+", nombre = '"+nombre+"', primerApellido='"+primerApellido+"',segundoApellido='"+segundoApellido+"',correo='"+correo+"',clave='"+clave+"',curp='"+usuario+"',telfijo='"+telfijo+"',telcel='"+telcel+"',perfil='"+perfil+"',consideraciones='null',nacional='"+nivel+"' WHERE id = '"+id+"'";
+        String guardar2 = "UPDATE usuario SET idConvocatoria=" + null + ", entidad =" + entidad + ", plantel =" + plantel + ", nombre = '" + nombre + "', primerApellido='" + primerApellido + "',segundoApellido='" + segundoApellido + "',correo='" + correo + "',clave='" + clave + "',curp='" + usuario + "',telfijo='" + telfijo + "',telcel='" + telcel + "',perfil='" + perfil + "',consideraciones='null',nacional='" + nivel + "' WHERE id = '" + id + "'";
 //        String guardar2 = "UPDATE usuario SET programa='" + null + "',"
 //                + "entidad='" + entidad + "',"
 //                + "plantel='" + 158 + "',"
@@ -908,11 +910,8 @@ public class Metodos_sql {
 //                + "perfil='" + perfil + "',"
 //                + "consideraciones='" + null + "',"
 //                + "nacional='" + nivel + "' WHERE id='" + 29 + "'";
-        
-//    String guardar2 = "UPDATE usuario SET programa= null, entidad = 15, plantel = null, nombre = CARLOS, primerApellido=MADRID,segundoApellido=TREJO,correo=CHARLYC2K@HOTMAIL.COM,clave=1,curp=HOLA,telfijo=1111111111,telcel=1111111111,perfil=A,consideraciones=null,nacional=1 WHERE id = 29";
 
-        
-        
+//    String guardar2 = "UPDATE usuario SET programa= null, entidad = 15, plantel = null, nombre = CARLOS, primerApellido=MADRID,segundoApellido=TREJO,correo=CHARLYC2K@HOTMAIL.COM,clave=1,curp=HOLA,telfijo=1111111111,telcel=1111111111,perfil=A,consideraciones=null,nacional=1 WHERE id = 29";
         conexion = conector();
         try {
             sentencia_preparada = conexion.prepareStatement(guardar2);
@@ -924,7 +923,6 @@ public class Metodos_sql {
         return resultado;
     }//fin metodo guardar
 
-    
 //    public int modificar_usuarios_B() {
 //        int resultado = 0;
 //        conexion = null;  
@@ -941,15 +939,12 @@ public class Metodos_sql {
 //        }
 //        return resultado;
 //    }//fin metodo guardar
-    
-    
-       
     //----------- GUARDAR PERMISOS, SERVLET AGREGAR USUARIO*
     public int borrar_permisos_usuarios(int id, String idusuario) {
         int resultado = 0;
         conexion = null;
 
-        String guardar = "DELETE FROM usuariopermiso WHERE idUsuario ='"+idusuario+"'";
+        String guardar = "DELETE FROM usuariopermiso WHERE idUsuario ='" + idusuario + "'";
 
         conexion = conector();
         try {
@@ -962,5 +957,6 @@ public class Metodos_sql {
         }
         return resultado;
     }//fin metodo guardar 
+
 
 }//fin clase metodos_sql

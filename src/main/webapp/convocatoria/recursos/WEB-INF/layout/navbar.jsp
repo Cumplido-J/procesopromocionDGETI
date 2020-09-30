@@ -13,7 +13,7 @@
 				    </div>
 				    <div class="collapse navbar-collapse" id="subenlaces">
 				      <ul class="nav navbar-nav navbar-right">
-				      	<li><a href="index.html">Inicio</a></li>
+				      	<li><a href="login.jsp">Inicio</a></li>
 				      </ul>
 				    </div>
 				  </div>
