@@ -95,7 +95,7 @@ public class Servlet_agregar_usuario extends HttpServlet {
                 idUsuario = session.getAttribute("idUsuario").toString();
                 rfc = session.getAttribute("rfc").toString();
 
-                String control_combobox = request.getParameter("control_combobox");
+                String control_combobox = request.getParameter("control_combobox");                
                 String nac1 = request.getParameter("nacional");//AGREGAR---------------------------
                 String per1 = request.getParameter("permiso1");
                 String per2 = request.getParameter("permiso2");
@@ -104,6 +104,7 @@ public class Servlet_agregar_usuario extends HttpServlet {
                 String ent1 = request.getParameter("dato_ent");
                 String pla1 = request.getParameter("dato_pla");
                 String rfc1 = request.getParameter("dato_rfc");
+                String subsistema = request.getParameter("subsistema");//AGREGAR2
                 String nivel = request.getParameter("nivel");//AGREGAR---------------------------
                 String nivel_plantel = request.getParameter("nivel_plantel");//AGREGAR---------------------------
                 String estado = request.getParameter("campoentidad");
@@ -167,14 +168,14 @@ public class Servlet_agregar_usuario extends HttpServlet {
                             //if (plantel.equals("0")) {
                             plantel = null;
                             //}
-                            datos4 = metodos.guardar4(0, id_estado, plantel, nombre, apellidopaterno, apellidomaterno, correo, claveEncriptada, usuario, telfijo, telcel, perfil, nivel);
+                            datos4 = metodos.guardar4(0, id_estado, plantel, nombre, apellidopaterno, apellidomaterno, correo, claveEncriptada, usuario, telfijo, telcel, perfil, nivel,subsistema);
                         } else if (nivel.equals("2")) {
 //                            if (plantel.equals("0")) {
                             plantel = null;
 //                              }
-                            datos4 = metodos.guardar4(0, id_estado, plantel, nombre, apellidopaterno, apellidomaterno, correo, claveEncriptada, usuario, telfijo, telcel, perfil, nivel);
+                            datos4 = metodos.guardar4(0, id_estado, plantel, nombre, apellidopaterno, apellidomaterno, correo, claveEncriptada, usuario, telfijo, telcel, perfil, nivel,subsistema);
                         } else if (nivel.equals("3")) {
-                            datos4 = metodos.guardar4(0, id_estado, plantel, nombre, apellidopaterno, apellidomaterno, correo, claveEncriptada, usuario, telfijo, telcel, perfil, nivel);
+                            datos4 = metodos.guardar4(0, id_estado, plantel, nombre, apellidopaterno, apellidomaterno, correo, claveEncriptada, usuario, telfijo, telcel, perfil, nivel,subsistema);
                         }
                     
                 } else if (control_combobox.equals("false") && nac1.equals("1")) {
@@ -186,24 +187,26 @@ public class Servlet_agregar_usuario extends HttpServlet {
                         //if (plantel.equals("0")) {
                         plantel = null;
                         //}
-                        datos4 = metodos.guardar4(0, id_estado, plantel, nombre, apellidopaterno, apellidomaterno, correo, claveEncriptada, usuario, telfijo, telcel, perfil, nivel);
+                        out.print(subsistema);
+                        datos4 = metodos.guardar4(0, id_estado, plantel, nombre, apellidopaterno, apellidomaterno, correo, claveEncriptada, usuario, telfijo, telcel, perfil, nivel,subsistema);
                     } else if (nivel.equals("2")) {
 //                            if (plantel.equals("0")) {
                         plantel = null;
 //                              }
-                        datos4 = metodos.guardar4(0, id_estado, plantel, nombre, apellidopaterno, apellidomaterno, correo, claveEncriptada, usuario, telfijo, telcel, perfil, nivel);
+                        datos4 = metodos.guardar4(0, id_estado, plantel, nombre, apellidopaterno, apellidomaterno, correo, claveEncriptada, usuario, telfijo, telcel, perfil, nivel,subsistema);
                     } else if (nivel.equals("3")) {
-                        datos4 = metodos.guardar4(0, id_estado, plantel, nombre, apellidopaterno, apellidomaterno, correo, claveEncriptada, usuario, telfijo, telcel, perfil, nivel);
+                        datos4 = metodos.guardar4(0, id_estado, plantel, nombre, apellidopaterno, apellidomaterno, correo, claveEncriptada, usuario, telfijo, telcel, perfil, nivel,subsistema);
                     }
                 }//fin super usuario---------------------------------------------------------------------
                 else if (control_combobox.equals("true") && nac1.equals("2")) {
                     //administrador estatal--------------------------------------------------------------                       
-                    datos4 = metodos.guardar4(0, ent1, plantel, nombre, apellidopaterno, apellidomaterno, correo, claveEncriptada, usuario, telfijo, telcel, perfil, nivel_plantel);
+                    datos4 = metodos.guardar4(0, ent1, plantel, nombre, apellidopaterno, apellidomaterno, correo, claveEncriptada, usuario, telfijo, telcel, perfil, nivel_plantel,subsistema);
                 } else if (control_combobox.equals("true") && nac1.equals("3")) {
                     //administrador plantel--------------------------------------------------------------                       
-                    datos4 = metodos.guardar4(0, ent1, pla1, nombre, apellidopaterno, apellidomaterno, correo, claveEncriptada, usuario, telfijo, telcel, perfil, nivel);
+                    datos4 = metodos.guardar4(0, ent1, pla1, nombre, apellidopaterno, apellidomaterno, correo, claveEncriptada, usuario, telfijo, telcel, perfil, nivel,subsistema);
                 }
 
+                    
                 int id = metodos.buscarid();
 
                 for (int n = 0; n < check.length; n++) {
@@ -211,6 +214,8 @@ public class Servlet_agregar_usuario extends HttpServlet {
                         datos5 = metodos.guardar6(0, id, Integer.parseInt(check[n]));
                     }
                 }
+                out.print(datos4);
+                out.print(datos5);
                 if (datos4 > 0 && datos5 > 0) {
                     request.setAttribute("control_combobox", control_combobox);
                     request.setAttribute("nacional", nac1);//AGREGAR-------------------------------
