@@ -22,7 +22,8 @@ import java.sql.Connection;
  * @author charl
  */
 public class Metodos_sql {
-    private final static String rutaConfig=RutaConfig.getRutaConfig();
+
+    private final static String rutaConfig = RutaConfig.getRutaConfig();
     PreparedStatement sentencia_preparada;
     public static ResultSet resultado;
     public static String sql;
@@ -35,18 +36,21 @@ public class Metodos_sql {
     private static Connection conexion;
 
     public static Connection conector() {
-        String driver, user, pass, url;
-        Properties p = new Properties();        
+//        String driver, user, pass, url;
+//        Properties p = new Properties();        
         conexion = null;
         try {
-            p.load(new FileReader(rutaConfig));
-            
-            driver=p.getProperty("driver");
-            user=p.getProperty("user");
-            pass=p.getProperty("pass");
-            url=p.getProperty("url");            
-            Class.forName(driver);
-            conexion = (Connection) DriverManager.getConnection(url, user,pass);
+//            p.load(new FileReader(rutaConfig));
+//            
+//            driver=p.getProperty("driver");
+//            user=p.getProperty("user");
+//            pass=p.getProperty("pass");
+//            url=p.getProperty("url");            
+//            Class.forName(driver);
+//            conexion = (Connection) DriverManager.getConnection(url, user,pass);
+
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            conexion = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/bdpromocion?useTimeZone=true&serverTimezone=UTC&autoReconnect=true&useSSL=false", "root", "1234567");
 
             if (conexion != null) {
                 System.out.println("conexion establecida");
@@ -282,7 +286,7 @@ public class Metodos_sql {
 
     //----------BUSCAR RFC ADMINISTRADOR REGISTRADO, SERVLET INICIO SESION ADMINISTRADOR* 
     public String[] buscaradmin2(String rfc) {
-        String nombre[] = new String[6];
+        String nombre[] = new String[7];
         conexion = null;
         String buscar = "SELECT * FROM usuario WHERE curp='" + rfc + "'";
         conexion = conector();
@@ -296,6 +300,7 @@ public class Metodos_sql {
                 nombre[3] = resultado.getString("curp");
                 nombre[4] = resultado.getString("id");
                 nombre[5] = resultado.getString("perfil");
+                nombre[6] = resultado.getString("idSubsistema");
             }
             conexion.close();
         } catch (Exception e) {
@@ -637,6 +642,25 @@ public class Metodos_sql {
         return entidad;
     }//fin metodo buscar
 
+    public String buscarsubsistema(String id_subsistema) {
+        String subsistema = "";
+        conexion = null;
+        conexion = conector();
+        try {
+            sentencia_preparada = conexion.prepareStatement(id_subsistema);
+            resultado = sentencia_preparada.executeQuery();
+            if (resultado.next()) {
+                subsistema = resultado.getString("subsistema");
+            }
+            conexion.close();
+        } catch (Exception ex) {
+            System.out.println(ex.toString());
+
+        }
+        return subsistema;
+    }//fin metodo buscar
+    
+    
     public String buscarplantel(String id_plantel) {
         String plantel = "";
         conexion = null;
@@ -957,6 +981,5 @@ public class Metodos_sql {
         }
         return resultado;
     }//fin metodo guardar 
-
 
 }//fin clase metodos_sql
