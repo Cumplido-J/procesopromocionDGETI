@@ -95,10 +95,12 @@ public class Servlet_buscar_usuario extends HttpServlet {
                 idUsuario = session.getAttribute("idUsuario").toString();
                 rfc = session.getAttribute("rfc").toString();
 
+                String subsistema= "";
                 String entidadt = "";
                 String entidad = "";
                 String n_plantel = "";
                 String usuario = "";
+
 
                 String control_combobox = request.getParameter("control_combobox");
                 String nac1 = request.getParameter("nacional");//AGREGAR----------------------------------
@@ -109,6 +111,7 @@ public class Servlet_buscar_usuario extends HttpServlet {
                 String ent1 = request.getParameter("dato_ent");
                 String pla1 = request.getParameter("dato_pla");
                 String rfc1 = request.getParameter("dato_rfc");
+                subsistema = request.getParameter("subsistema");
                 entidadt = request.getParameter("campoentidad7");
                 entidad = request.getParameter("entidad");
                 n_plantel = request.getParameter("n_plantel");
@@ -180,6 +183,7 @@ public class Servlet_buscar_usuario extends HttpServlet {
                     
                     request.setAttribute("control_combobox", control_combobox);
                     request.setAttribute("nacional", nac1);
+                    request.setAttribute("subsistema", subsistema);
                     request.setAttribute("est", entidad);
                     request.setAttribute("pla", n_plantel);
                     request.setAttribute("usu", usuario);
