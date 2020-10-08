@@ -64,6 +64,26 @@
         <servlet-name>Servlet_registroComite</servlet-name>
         <servlet-class>com.aplicacion.servlet.Servlet_registroComite</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>Servlet_borrarComite</servlet-name>
+        <servlet-class>com.aplicacion.servlet.Servlet_borrarComite</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Servlet_borrarIntegrante</servlet-name>
+        <servlet-class>com.aplicacion.servlet.Servlet_borrarIntegrante</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Servlet_finalizarConformacion</servlet-name>
+        <servlet-class>com.aplicacion.servlet.Servlet_finalizarConformacion</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Login</servlet-name>
+        <servlet-class>com.aplicacion.servlet.Servlet_login</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SesionAdministrador</servlet-name>
+        <servlet-class>com.aplicacion.servlet.Servlet_cbSesionAdministrador</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Servlet_cancelarPin</servlet-name>
         <url-pattern>/Servlet_cancelarPin</url-pattern>
@@ -119,6 +139,26 @@
     <servlet-mapping>
         <servlet-name>Servlet_registroComite</servlet-name>
         <url-pattern>/Servlet_registroComite</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Servlet_borrarComite</servlet-name>
+        <url-pattern>/Servlet_borrarComite</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Servlet_borrarIntegrante</servlet-name>
+        <url-pattern>/Servlet_borrarIntegrante</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Servlet_finalizarConformacion</servlet-name>
+        <url-pattern>/Servlet_finalizarConformacion</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Login</servlet-name>
+        <url-pattern>/Login</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SesionAdministrador</servlet-name>
+        <url-pattern>/SesionAdministrador</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

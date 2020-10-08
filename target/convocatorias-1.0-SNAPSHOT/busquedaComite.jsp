@@ -33,7 +33,7 @@
                   </div>
                   <div class="collapse navbar-collapse" id="subenlaces">
                     <ul class="nav navbar-nav navbar-right">      
-                      <li><a href="SesionDocente">Regresar</a></li>
+                      <li><a href="SesionAdministrador">Regresar</a></li>
                       <li><a href="Servlet_cerrarsesion">Cerrar sesión</a></li> 
                     </ul>
                   </div>
@@ -98,18 +98,18 @@
                 <div class="table-responsive">
                     <table class="table table-condensed table-striped">
                         <thead>
-                            <th>Programa</th>
-                            <th>Subsistema</th>
-                            <th>Entidad</th>
-                            <th>Plantel</th>
-                            <th>Tipo</th>
-                            <th>Presidente</th>
-                            <th>Estatus</th>
-                            <th>Opciones</th>
+                            <tr>
+                                <th>Programa</th>
+                                <th>Subsistema</th>
+                                <th>Entidad</th>
+                                <th>Plantel</th>
+                                <th>Tipo</th>
+                                <th>Presidente</th>
+                                <th>Estatus</th>
+                                <th>Opciones</th>
+                            </tr>
                         </thead>
-                        <tbody id="seccionEditable">
-                             ${comite.desplegarComite()}
-                        </tbody>
+                        <tbody id="seccionEditable">${comite.desplegarComite()}</tbody>
                     </table>
                 </div>
             </div>
@@ -159,32 +159,30 @@
 
                 </div>
             </div>
-            <div id="modalArchivo" class="modal fade" role="dialog">
+            <div class="modal fade" id="modalConfirmacion2" role="dialog">
                 <div class="modal-dialog">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <button type="button" class="close" data-dismiss="modal">&times;</button>
-                      <h4 class="modal-title" id="tituloModal">Carga de Acta Constitutiva del Comité</h4>
-                    </div>
-                    <div class="modal-body">
-                        <iframe name="ifRespuesta" hidden></iframe>
-                        <iframe style="width:100%;" id="ifArchivo" name="ifArchivo" src="" hidden></iframe>
-                        <div id="seccionCarga">
-                            <form id="formArchivo" name="formArchivo" method="POST" enctype="multipart/form-data" >
-                                    <!--<label class="text-warning" id="alertaCarga"><span class="glyphicon glyphicon-warning-sign"></span>&nbsp;Cárgue todas las evidencias documentales del criterio en un solo archivo PDF</label>-->
-                                    <label class="control-label" for="archivo">Seleccione el archivo a cargar:</label>
-                                    <input type="hidden" id="idArchivo" name="idArchivo" value="" />
-                                    <input type="file" class="form-control input-sm" id="archivo" name="archivo" onchange="subirArchivo()" accept=".pdf" />
 
-                            </form>  
+                  <!-- Modal content-->
+                  <div class="modal-content panel">
+                    <form id="formBorrarComite" role="form" method="POST" action="BorrarComite">
+                        <div class="modal-header">
+                          <button type="button" class="close" data-dismiss="modal">&times;</button>
+                          <h4 class="modal-title">Confirmación</h4>
                         </div>
-                    </div>
-                    <div class="modal-footer">
-                      <button type="button" class="btn btn-sm btn-default" data-dismiss="modal">Cerrar</button>
-                    </div>
+                        <div class="modal-body">
+                            <label>Esta acción eliminará la información del comité, así como la de los integrantes del mismo ¿desea continuar?</label>
+                            <input type="hidden" name="idComite" id="idComiteBorrar">
+                        </div>
+                        <div class="modal-footer">
+                            <input class="btn btn-sm btn-primary" type="submit" value='Sí'/>
+                            <input type="button" class="btn btn-primary btn-sm" value="No" data-dismiss="modal"/>
+                        </div>
+                    </form>
                   </div>
+
                 </div>
             </div>
+            
         </main>
         <script src="https://framework-gb.cdn.gob.mx/gobmx.js"></script>
         <script src="https://code.jquery.com/jquery-1.12.4.js"></script>

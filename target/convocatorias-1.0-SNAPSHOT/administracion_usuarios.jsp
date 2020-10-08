@@ -73,7 +73,7 @@
             $("#campoentidad7").val(selected7);
 
             $("#i_opc").val("1");
-            $.post("combo1.jsp", $("#data").serialize(), function (data) {
+            $.post("combo9.jsp", $("#data").serialize(), function (data) {
                 $("#i_plantel").html(data);
             });
         }
@@ -205,7 +205,7 @@
                                             </li>
                                         </ul> 
                                     </li> 
-                                    <li><a href="login.jsp">Inicio</a></li>
+                                    <li><a href="index.html">Inicio</a></li>
                                 </ul>
                             </nav>                         
                         </ul>
@@ -239,7 +239,29 @@
                         <%-------------------------------------------------------------------OPCION super usuario nacional COMBO BOX----------------------------%>   
                         <%if (request.getAttribute("control_combobox").equals("false") && request.getAttribute("nacional").equals("1")) { %> <%--SUPER USUARIO--%>
                         <table  border="0" width="100%">   
-                            <tr><td align="center">
+                            <tr>
+                                <td align="center">
+                                     <label>Subsistema</label><br>
+                                <%
+                                    ResultSet rs9 = cn.mostrar("Select id, subsistema from catsubsistema");
+                                %>
+
+                                <select name="subsistema" id="subsistema" onchange="seleccion_subsistema()">
+                                     <option value="0">Escoge una opcion</option>
+                                    <%
+                                        while (rs9.next()) {
+                                    %>
+                                    <option value="<%=rs9.getString("id")%>"><%=rs9.getString("subsistema")%></option>
+
+                                    <%//              regresa del combobox         muestra en el combo box
+                                        }
+                                    %>                                              
+                                </select>   
+                           
+                            <div id="nsub"></div>
+                                </td>
+                                
+                                <td align="center">
                                     <input type="hidden" name="f_opc" id="i_opc">
                                     <input type="hidden" name="campoentidad7" id="campoentidad7" >
                                     <label>Entidad</label><br>
@@ -300,6 +322,7 @@
                         <table  border="1" width="100%" id="tabla_usuarios" class="display">  
                             <thead>
                                 <tr>
+                                    <th>Subsistema</th>
                                     <th>Estado</th>
                                     <th>Plantel</th>
                                     <th>Usuario</th>
@@ -311,6 +334,7 @@
                             </thead>
                             <%
                                 String elegir1 = "0";
+                                String nombre_subsistema= "";
                                 String nombre_entidad = "";
                                 String nombre_plantel = "";
 
@@ -319,7 +343,7 @@
                                 if (elegir1.equals("1")) {
                                     ResultSet rs2 = null;
                                     if (request.getAttribute("consulta").equals("1")) {
-                                        rs2 = cn.mostrar_usuarios("SELECT * FROM usuario WHERE perfil='A'");
+                                        rs2 = cn.mostrar_usuarios("SELECT * FROM usuario WHERE perfil='A' && idSubsistema='"+request.getAttribute("subsistema")+"'");
                                     }
 
                                     if (request.getAttribute("consulta").equals("3")) {
@@ -328,25 +352,36 @@
                                     }
 
                                     if (request.getAttribute("consulta").equals("2")) {
-                                        rs2 = cn.mostrar_usuarios("SELECT * FROM usuario WHERE perfil='A' && entidad='" + request.getAttribute("est") + "'");
+                                        rs2 = cn.mostrar_usuarios("SELECT * FROM usuario WHERE perfil='A' && entidad='" + request.getAttribute("est") + "' && idSubsistema='"+request.getAttribute("subsistema")+"'");
 
                                     }
 
                                     if (request.getAttribute("consulta").equals("4")) {
-                                        rs2 = cn.mostrar_usuarios("SELECT * FROM usuario WHERE perfil='A' && curp='" + request.getAttribute("usu") + "'");
+                                        rs2 = cn.mostrar_usuarios("SELECT * FROM usuario WHERE perfil='A' && curp='" + request.getAttribute("usu") + "' && idSubsistema='"+request.getAttribute("subsistema")+"'");
                                     }
 
                                     if (request.getAttribute("consulta").equals("5")) {
-                                        rs2 = cn.mostrar_usuarios("SELECT * FROM usuario WHERE perfil='A' && entidad='" + request.getAttribute("est") + "' && curp='" + request.getAttribute("usu") + "'");
+                                        rs2 = cn.mostrar_usuarios("SELECT * FROM usuario WHERE perfil='A' && entidad='" + request.getAttribute("est") + "' && curp='" + request.getAttribute("usu") + "'&& idSubsistema='"+request.getAttribute("subsistema")+"'");
                                     }
 
                                     if (request.getAttribute("consulta").equals("6")) {
-                                        rs2 = cn.mostrar_usuarios("SELECT * FROM usuario WHERE perfil='A' && entidad='" + request.getAttribute("est") + "' && plantel='" + request.getAttribute("pla") + "' && curp='" + request.getAttribute("usu") + "'");
+                                        rs2 = cn.mostrar_usuarios("SELECT * FROM usuario WHERE perfil='A' && entidad='" + request.getAttribute("est") + "' && plantel='" + request.getAttribute("pla") + "' && curp='" + request.getAttribute("usu") + "'&& idSubsistema='"+request.getAttribute("subsistema")+"'");
                                     }
 
                                     while (rs2.next()) {
                             %>
                             <tr>
+                                 <td align="center">
+                                    <div class="datos_tabla"> 
+                                       <%
+                                            nombre_subsistema = cn.buscarsubsistema("SELECT * FROM catsubsistema WHERE id='" + rs2.getString("idSubsistema") + "'");
+                                            if (nombre_subsistema == null) {
+                                                out.print("");
+                                            } else {
+                                                out.print(nombre_subsistema);
+                                            }
+                                        %>
+                                </td>
                                 <td align="center">
                                     <div class="datos_tabla"> 
                                         <%
@@ -362,7 +397,7 @@
                                 <td align="center">
                                     <div class="datos_tabla"> 
                                         <%
-                                            nombre_plantel = cn.buscarplantel("SELECT * FROM catplanteles WHERE id='" + rs2.getString("plantel") + "'");
+                                            nombre_plantel = cn.buscarplantel("SELECT * FROM catplanteles WHERE id='" + rs2.getString("plantel") + "' && idSubsistema='"+request.getAttribute("subsistema")+"'");
                                             if (nombre_plantel == null) {
                                                 out.print("");
                                             } else {
@@ -436,7 +471,28 @@
                         <% } //FIN OPCION SUPER ADMINISTRADOR NACIONAL COMBOBOX
                         else if (request.getAttribute("control_combobox").equals("true") && request.getAttribute("nacional").equals("1")) { %> <%--ADMINISTRADOR --%>
                         <table  border="0" width="120%">   
-                            <tr><td align="center">
+                            <tr>
+                                <td align="center">
+                                     <label>Subsistema</label><br>
+                                <%
+                                    ResultSet rs9 = cn.mostrar("Select id, subsistema from catsubsistema");
+                                %>
+
+                                <select name="subsistema" id="subsistema" onchange="seleccion_subsistema()">
+                                     <option value="0">Escoge una opcion</option>
+                                    <%
+                                        while (rs9.next()) {
+                                    %>
+                                    <option value="<%=rs9.getString("id")%>"><%=rs9.getString("subsistema")%></option>
+
+                                    <%//              regresa del combobox         muestra en el combo box
+                                        }
+                                    %>                                              
+                                </select>   
+                           
+                            <div id="nsub"></div>
+                                </td>
+                                <td align="center">
                                     <input type="hidden" name="f_opc" id="i_opc">
                                     <input type="hidden" name="campoentidad7" id="campoentidad7" >
                                     <label>Entidad</label><br>
@@ -495,6 +551,7 @@
                         <table  border="1" width="160%" id="tabla_usuarios" class="display">  
                             <thead>
                                 <tr>
+                                    <th>Subsistema</th>
                                     <th>Estado</th>
                                     <th>Plantel</th>
                                     <th>Usuario</th>
@@ -506,6 +563,7 @@
                             </thead>
                             <%
                                 String elegir1 = "0";
+                                String nombre_subsistema= "";
                                 String nombre_entidad = "";
                                 String nombre_plantel = "";
 
@@ -514,7 +572,7 @@
                                 if (elegir1.equals("1")) {
                                     ResultSet rs2 = null;
                                     if (request.getAttribute("consulta").equals("1")) {
-                                        rs2 = cn.mostrar_usuarios("SELECT * FROM usuario WHERE perfil='A'");
+                                        rs2 = cn.mostrar_usuarios("SELECT * FROM usuario WHERE perfil='A' && idSubsistema='"+request.getAttribute("subsistema")+"'");
                                     }
 
                                     if (request.getAttribute("consulta").equals("3")) {
@@ -523,25 +581,36 @@
                                     }
 
                                     if (request.getAttribute("consulta").equals("2")) {
-                                        rs2 = cn.mostrar_usuarios("SELECT * FROM usuario WHERE perfil='A' && entidad='" + request.getAttribute("est") + "'");
+                                        rs2 = cn.mostrar_usuarios("SELECT * FROM usuario WHERE perfil='A' && entidad='" + request.getAttribute("est") + "' && idSubsistema='"+request.getAttribute("subsistema")+"'");
 
                                     }
 
                                     if (request.getAttribute("consulta").equals("4")) {
-                                        rs2 = cn.mostrar_usuarios("SELECT * FROM usuario WHERE perfil='A' && curp='" + request.getAttribute("usu") + "'");
+                                        rs2 = cn.mostrar_usuarios("SELECT * FROM usuario WHERE perfil='A' && curp='" + request.getAttribute("usu") + "' && idSubsistema='"+request.getAttribute("subsistema")+"'");
                                     }
 
                                     if (request.getAttribute("consulta").equals("5")) {
-                                        rs2 = cn.mostrar_usuarios("SELECT * FROM usuario WHERE perfil='A' && entidad='" + request.getAttribute("est") + "' && curp='" + request.getAttribute("usu") + "'");
+                                        rs2 = cn.mostrar_usuarios("SELECT * FROM usuario WHERE perfil='A' && entidad='" + request.getAttribute("est") + "' && curp='" + request.getAttribute("usu") + "'&& idSubsistema='"+request.getAttribute("subsistema")+"'");
                                     }
 
                                     if (request.getAttribute("consulta").equals("6")) {
-                                        rs2 = cn.mostrar_usuarios("SELECT * FROM usuario WHERE perfil='A' && entidad='" + request.getAttribute("est") + "' && plantel='" + request.getAttribute("pla") + "' && curp='" + request.getAttribute("usu") + "'");
+                                        rs2 = cn.mostrar_usuarios("SELECT * FROM usuario WHERE perfil='A' && entidad='" + request.getAttribute("est") + "' && plantel='" + request.getAttribute("pla") + "' && curp='" + request.getAttribute("usu") + "' && idSubsistema='"+request.getAttribute("subsistema")+"'");
                                     }
 
                                     while (rs2.next()) {
                             %>
                             <tr>
+                                <td align="center">
+                                    <div class="datos_tabla"> 
+                                       <%
+                                            nombre_subsistema = cn.buscarsubsistema("SELECT * FROM catsubsistema WHERE id='" + rs2.getString("idSubsistema") + "'");
+                                            if (nombre_subsistema == null) {
+                                                out.print("");
+                                            } else {
+                                                out.print(nombre_subsistema);
+                                            }
+                                        %>
+                                </td>
                                 <td align="center">
                                     <div class="datos_tabla"> 
                                         <%
@@ -629,9 +698,43 @@
                         </table><br><br>
 
                         <%} //FIN OPCION ADMIN NACIONAL COMBOBOX
-                        else if (request.getAttribute("control_combobox").equals("true") && request.getAttribute("nacional").equals("2")) { %> <%--ADMINISTRADOR --%>
+                        else if (request.getAttribute("control_combobox").equals("true") && request.getAttribute("nacional").equals("2")) { 
+                        String sub="1";
+                        %> <%--ADMINISTRADOR --%>
                         <table  border="0" width="120%">   
-                            <tr><td align="center">
+                            <tr>
+                                <td align="center">
+                                     <label>Subsistema</label><br>
+                                <%                                    
+                                    ResultSet rs9 = cn.mostrar("Select * from usuario WHERE entidad='"+request.getAttribute("dato_ent")+"' && plantel='"+request.getAttribute("dato_pla")+"' && nombre='"+request.getAttribute("nom")+"' && curp='"+request.getAttribute("dato_rfc")+"'");
+                                %>
+
+                                <select name="subsistema" id="subsistema" disabled="true" onchange="seleccion_subsistema()">
+                                    <%
+                                        while (rs9.next()) {
+                                            if(rs9.getString("idSubsistema").equals("1"))
+                                            { sub="1";
+                                            %>
+                                            <option value="UEMSTIS">UEMSTIS</option> 
+                                            <%}
+                                            else
+                                            {
+                                             sub="2";
+                                            %>
+                                           
+                                             <option value="CECyTE">CECyTE</option>
+                                           <% }
+                                    %>
+                                   
+
+                                    <%//              regresa del combobox         muestra en el combo box
+                                        }
+                                    %>                                              
+                                </select>   
+                           
+                            <div id="nsub"></div>
+                                </td>
+                                <td align="center">
                                     <input type="hidden" name="f_opc" id="i_opc">
                                     <input type="hidden" name="campoentidad7" id="campoentidad7" >
                                     <label>Entidad</label><br>
@@ -653,7 +756,7 @@
                                 <td align="center">
                                     <label>Plantel</label><br>                                 
                                     <%
-                                        ResultSet rs10 = cn.mostrar("Select * from catplanteles WHERE idEntidad='" + request.getAttribute("dato_ent") + "'");
+                                        ResultSet rs10 = cn.mostrar("Select * from catplanteles WHERE idEntidad='" + request.getAttribute("dato_ent") + "' && idSubsistema='"+sub+"'");
                                     %>
                                     <select class="select" name="n_plantel" id="i_plantel">
                                         <option value="0">Escoge una opcion</option>
@@ -698,6 +801,7 @@
                         <table  border="1" width="160%" id="tabla_usuarios" class="display">  
                             <thead>
                                 <tr>
+                                    <th>Subsistema</th>
                                     <th>Estado</th>
                                     <th>Plantel</th>
                                     <th>Usuario</th>
@@ -709,6 +813,7 @@
                             </thead>
                             <%
                                 String elegir1 = "0";
+                                String nombre_subsistema= "";
                                 String nombre_entidad = "";
                                 String nombre_plantel = "";
 
@@ -717,22 +822,33 @@
                                 if (elegir1.equals("1")) {
                                     ResultSet rs2 = null;
                                     if (request.getAttribute("consulta").equals("1")) {
-                                        rs2 = cn.mostrar_usuarios("SELECT * FROM usuario WHERE perfil='A' && entidad='" + request.getAttribute("dato_ent") + "'");
+                                        rs2 = cn.mostrar_usuarios("SELECT * FROM usuario WHERE perfil='A' && entidad='" + request.getAttribute("dato_ent") + "' && idSubsistema='"+sub+"'");
                                     }
 
                                     if (request.getAttribute("consulta").equals("3")) {
                                         rs2 = cn.mostrar_usuarios("SELECT * FROM usuario WHERE perfil='A' && entidad='" + request.getAttribute("dato_ent") + "' && plantel='" + request.getAttribute("pla") + "'");
                                     }
                                     if (request.getAttribute("consulta").equals("5")) {
-                                        rs2 = cn.mostrar_usuarios("SELECT * FROM usuario WHERE perfil='A' && entidad='" + request.getAttribute("dato_ent") + "' && curp='" + request.getAttribute("usu") + "'");
+                                        rs2 = cn.mostrar_usuarios("SELECT * FROM usuario WHERE perfil='A' && entidad='" + request.getAttribute("dato_ent") + "' && curp='" + request.getAttribute("usu") + "' && idSubsistema='"+sub+"'");
                                     }
                                     if (request.getAttribute("consulta").equals("6")) {
-                                        rs2 = cn.mostrar_usuarios("SELECT * FROM usuario WHERE perfil='A' && entidad='" + request.getAttribute("dato_ent") + "' && plantel='" + request.getAttribute("pla") + "' && curp='" + request.getAttribute("usu") + "'");
+                                        rs2 = cn.mostrar_usuarios("SELECT * FROM usuario WHERE perfil='A' && entidad='" + request.getAttribute("dato_ent") + "' && plantel='" + request.getAttribute("pla") + "' && curp='" + request.getAttribute("usu") + "' && idSubsistema='"+sub+"'");
                                     }
 
                                     while (rs2.next()) {
                             %>
                             <tr>
+                                <td align="center">
+                                    <div class="datos_tabla"> 
+                                       <%
+                                            nombre_subsistema = cn.buscarsubsistema("SELECT * FROM catsubsistema WHERE id='" + rs2.getString("idSubsistema") + "'");
+                                            if (nombre_subsistema == null) {
+                                                out.print("");
+                                            } else {
+                                                out.print(nombre_subsistema);
+                                            }
+                                        %>
+                                </td>
                                 <td align="center">
                                     <div class="datos_tabla"> 
                                         <%
@@ -748,7 +864,7 @@
                                 <td align="center">
                                     <div class="datos_tabla"> 
                                         <%
-                                            nombre_plantel = cn.buscarplantel("SELECT * FROM catplanteles WHERE id='" + rs2.getString("plantel") + "'");
+                                            nombre_plantel = cn.buscarplantel("SELECT * FROM catplanteles WHERE id='" + rs2.getString("plantel") + "' && idSubsistema='"+sub+"'");
                                             if (nombre_plantel == null) {
                                                 out.print("");
                                             } else {
@@ -820,9 +936,43 @@
                         </table><br><br>
 
                         <%}//FIN OPCION ADMIN ESTATAL COMBOBOX
-                        else if (request.getAttribute("control_combobox").equals("true") && request.getAttribute("nacional").equals("3")) { %> <%--ADMINISTRADOR --%>
+                        else if (request.getAttribute("control_combobox").equals("true") && request.getAttribute("nacional").equals("3")) { 
+                         String sub="1";%> <%--ADMINISTRADOR --%>
+                        
                         <table  border="0" width="120%">   
-                            <tr><td align="center">
+                            <tr>
+                                <td align="center">
+                                     <label>Subsistema</label><br>
+                                <%                                    
+                                    ResultSet rs9 = cn.mostrar("Select * from usuario WHERE entidad='"+request.getAttribute("dato_ent")+"' && plantel='"+request.getAttribute("dato_pla")+"' && nombre='"+request.getAttribute("nom")+"' && curp='"+request.getAttribute("dato_rfc")+"'");
+                                %>
+
+                                <select name="subsistema" id="subsistema" disabled="true" onchange="seleccion_subsistema()">
+                                    <%
+                                        while (rs9.next()) {
+                                            if(rs9.getString("idSubsistema").equals("1"))
+                                            { sub="1";
+                                            %>
+                                            <option value="UEMSTIS">UEMSTIS</option> 
+                                            <%}
+                                            else
+                                            {
+                                             sub="2";
+                                            %>
+                                           
+                                             <option value="CECyTE">CECyTE</option>
+                                           <% }
+                                    %>
+                                   
+
+                                    <%//              regresa del combobox         muestra en el combo box
+                                        }
+                                    %>                                              
+                                </select>   
+                           
+                            <div id="nsub"></div>
+                                </td>
+                                <td align="center">
                                     <input type="hidden" name="f_opc" id="i_opc">
                                     <input type="hidden" name="campoentidad7" id="campoentidad7" >
                                     <label>Entidad</label><br>
@@ -888,6 +1038,7 @@
                         <table  border="1" width="160%" id="tabla_usuarios" class="display">  
                             <thead>
                                 <tr>
+                                    <th>Subsistema</th>
                                     <th>Estado</th>
                                     <th>Plantel</th>
                                     <th>Usuario</th>
@@ -899,6 +1050,7 @@
                             </thead>
                             <%
                                 String elegir1 = "0";
+                                String nombre_subsistema= "";
                                 String nombre_entidad = "";
                                 String nombre_plantel = "";
 
@@ -908,16 +1060,27 @@
                                     ResultSet rs2 = null;
 
                                     if (request.getAttribute("consulta").equals("1")) {
-                                        rs2 = cn.mostrar_usuarios("SELECT * FROM usuario WHERE perfil='A' && entidad='" + request.getAttribute("dato_ent") + "' && plantel='" + request.getAttribute("dato_pla") + "'");
+                                        rs2 = cn.mostrar_usuarios("SELECT * FROM usuario WHERE perfil='A' && entidad='" + request.getAttribute("dato_ent") + "' && plantel='" + request.getAttribute("dato_pla") + "' && idSubsistema='"+sub+"'");
                                     }
 
                                     if (request.getAttribute("consulta").equals("2")) {
-                                        rs2 = cn.mostrar_usuarios("SELECT * FROM usuario WHERE perfil='A' && entidad='" + request.getAttribute("dato_ent") + "' && plantel='" + request.getAttribute("dato_pla") + "' && curp='" + request.getAttribute("usu") + "'");
+                                        rs2 = cn.mostrar_usuarios("SELECT * FROM usuario WHERE perfil='A' && entidad='" + request.getAttribute("dato_ent") + "' && plantel='" + request.getAttribute("dato_pla") + "' && curp='" + request.getAttribute("usu") + "' && idSubsistema='"+sub+"'");
                                     }
 
                                     while (rs2.next()) {
                             %>
                             <tr>
+                                <td align="center">
+                                    <div class="datos_tabla"> 
+                                       <%
+                                            nombre_subsistema = cn.buscarsubsistema("SELECT * FROM catsubsistema WHERE id='" + rs2.getString("idSubsistema") + "'");
+                                            if (nombre_subsistema == null) {
+                                                out.print("");
+                                            } else {
+                                                out.print(nombre_subsistema);
+                                            }
+                                        %>
+                                </td>
                                 <td align="center">
                                     <div class="datos_tabla"> 
                                         <%

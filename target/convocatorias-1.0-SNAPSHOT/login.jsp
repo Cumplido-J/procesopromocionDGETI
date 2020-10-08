@@ -66,7 +66,8 @@
             <section class="sectionart">
                 <div class="articulosart">
                     <h3>Iniciar sesión</h3>	
-                    <form class="form-horizontal" role="form" method="POST" action="Servlet_iniciosesion_administrador">
+                    <form class="form-horizontal" role="form" method="POST" action="Login">
+                    <!-- <form class="form-horizontal" role="form" method="POST" action="Servlet_iniciosesion_administrador">-->    
                         <div class="form-group">
                             <label class="col-sm-3 control-label" for="curp">RFC:</label>
                             <div class="col-sm-9">

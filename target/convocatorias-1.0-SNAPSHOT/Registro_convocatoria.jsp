@@ -13,6 +13,11 @@
         <link href="/favicon.ico" rel="shortcut icon">
         <link href="https://framework-gb.cdn.gob.mx/assets/styles/main.css" rel="stylesheet">     
         <script type="text/javascript">
+             function seleccion_subsistema() {
+                $("#entidad").val("0");
+                $("#i_plantel").val("0");
+            }
+            
             function plantel() {
                 /* Para obtener el texto */
                 var combo = document.getElementById("entidad");
@@ -30,7 +35,7 @@
                 }
 
                 $("#i_opc").val("1");
-                $.post("combo1.jsp", $("#data").serialize(), function (data) {
+                $.post("combo9.jsp", $("#data").serialize(), function (data) {
                     $("#i_plantel").html(data);
                 });
 
@@ -302,6 +307,28 @@
                         <%if (request.getAttribute("control_combobox").equals("false") && request.getAttribute("nacional").equals("1")) { %> <%--SUPER USUARIO--%>
 
                         <div class="registro">
+                            
+                            <div class="caja">
+                                        <label>Subsistema</label><br>
+                                        <%
+                                            ResultSet rs9 = cn.mostrar("Select id, subsistema from catsubsistema");
+                                        %>
+
+                                        <select class="form-control" name="subsistema" id="subsistema" onchange="seleccion_subsistema()">
+                                            <option value="0">Escoge una opcion</option>
+                                            <%
+                                                while (rs9.next()) {
+                                            %>
+                                            <option value="<%=rs9.getString("id")%>"><%=rs9.getString("subsistema")%></option>
+
+                                            <%//              regresa del combobox         muestra en el combo box
+                                                }
+                                            %>                                              
+                                        </select>   
+
+                                        <div id="nsub"></div>
+                                    </div>
+                            
                             <div class="caja">
                                 <input type="hidden" name="f_opc" id="i_opc">
                                 <input type="hidden" name="campoentidad" id="campoentidad" >
@@ -340,6 +367,28 @@
                         } else if (request.getAttribute("control_combobox").equals("true") && request.getAttribute("nacional").equals("1")) { %> <%--SUPER USUARIO--%>
 
                         <div class="registro">
+                            
+                            <div class="caja">
+                                        <label>Subsistema</label><br>
+                                        <%
+                                            ResultSet rs9 = cn.mostrar("Select id, subsistema from catsubsistema");
+                                        %>
+
+                                        <select class="form-control" name="subsistema" id="subsistema" onchange="seleccion_subsistema()">
+                                            <option value="0">Escoge una opcion</option>
+                                            <%
+                                                while (rs9.next()) {
+                                            %>
+                                            <option value="<%=rs9.getString("id")%>"><%=rs9.getString("subsistema")%></option>
+
+                                            <%//              regresa del combobox         muestra en el combo box
+                                                }
+                                            %>                                              
+                                        </select>   
+
+                                        <div id="nsub"></div>
+                                    </div>
+                            
                             <div class="caja">
                                 <input type="hidden" name="f_opc" id="i_opc">
                                 <input type="hidden" name="campoentidad" id="campoentidad" >
@@ -378,6 +427,28 @@
                         } else if (request.getAttribute("control_combobox").equals("true") && request.getAttribute("nacional").equals("2")) { %> <%--SUPER USUARIO--%>
 
                         <div class="registro">
+                            
+                            <div class="caja">
+                                        <label>Subsistema</label><br>
+                                        <%
+                                            ResultSet rs9 = cn.mostrar("Select id, subsistema from catsubsistema");
+                                        %>
+
+                                        <select class="form-control" name="subsistema" id="subsistema" onchange="seleccion_subsistema()" disabled="true">
+                                            <option value="0">Escoge una opcion</option>
+                                            <%
+                                                while (rs9.next()) {
+                                            %>
+                                            <option value="<%=rs9.getString("id")%>"><%=rs9.getString("subsistema")%></option>
+
+                                            <%//              regresa del combobox         muestra en el combo box
+                                                }
+                                            %>                                              
+                                        </select>   
+
+                                        <div id="nsub"></div>
+                                    </div>
+                            
                             <div class="caja">
                                 <input type="hidden" name="f_opc" id="i_opc">
                                 <input type="hidden" name="campoentidad" id="campoentidad" >
@@ -426,6 +497,28 @@
                         } else if (request.getAttribute("control_combobox").equals("true") && request.getAttribute("nacional").equals("3")) { %> <%--SUPER USUARIO--%>
 
                         <div class="registro">
+                            
+                            <div class="caja">
+                                        <label>Subsistema</label><br>
+                                        <%
+                                            ResultSet rs9 = cn.mostrar("Select id, subsistema from catsubsistema");
+                                        %>
+
+                                        <select class="form-control" name="subsistema" id="subsistema" onchange="seleccion_subsistema()" disabled="true">
+                                            <option value="0">Escoge una opcion</option>
+                                            <%
+                                                while (rs9.next()) {
+                                            %>
+                                            <option value="<%=rs9.getString("id")%>"><%=rs9.getString("subsistema")%></option>
+
+                                            <%//              regresa del combobox         muestra en el combo box
+                                                }
+                                            %>                                              
+                                        </select>   
+
+                                        <div id="nsub"></div>
+                                    </div>
+                            
                             <div class="caja">
                                 <input type="hidden" name="f_opc" id="i_opc">
                                 <input type="hidden" name="campoentidad" id="campoentidad" >

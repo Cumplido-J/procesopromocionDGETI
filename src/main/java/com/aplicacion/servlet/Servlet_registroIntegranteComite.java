@@ -85,11 +85,11 @@ public class Servlet_registroIntegranteComite extends HttpServlet {
             /*HttpSession session= (HttpSession) request.getSession();     
             if(session.getAttribute("idUsuario")!=null&&session.getAttribute("rfc")!=null){*/
                 String idComite=request.getParameter("idComite");
-                String rfc=request.getParameter("rfc");
-                String nombre=request.getParameter("nombre");
-                String paterno=request.getParameter("apPaterno");
-                String materno=request.getParameter("apMaterno");
-                String correo=request.getParameter("correo");
+                String rfc=request.getParameter("rfc").toUpperCase();
+                String nombre=request.getParameter("nombre").toUpperCase();
+                String paterno=request.getParameter("apPaterno").toUpperCase();
+                String materno=request.getParameter("apMaterno").toUpperCase();
+                String correo=request.getParameter("correo").toLowerCase();
                 String rol=request.getParameter("rol");
                 //String[] p2={idUsuario,curp,correo,tipoEncuesta};
                 Metodos_sql metodos=new Metodos_sql(); 

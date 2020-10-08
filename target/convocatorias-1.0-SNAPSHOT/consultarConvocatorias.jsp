@@ -113,7 +113,7 @@
                             </thead>
                             <tbody id="vacanciaData">
                                 <%=
-                                    new Catalogos().desplegarConvocatorio(nombre, _idEntidad, _idPlantel, _idEstatus)
+                                    new Catalogos().desplegarConvocatorio(nombre, session.getAttribute("estado").toString(), session.getAttribute("plantel").toString(), _idEstatus)
                                 %>
                             </tbody>
                         </table>

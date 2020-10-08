@@ -15,6 +15,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import metodos_sql.Metodos_sql;
 
 /**
@@ -78,8 +79,8 @@ public class Servlet_registroComite extends HttpServlet {
             throws ServletException, IOException {
         try{
             PrintWriter out = response.getWriter();
-            /*HttpSession session= (HttpSession) request.getSession();     
-            if(session.getAttribute("idUsuario")!=null&&session.getAttribute("rfc")!=null){*/
+            HttpSession session= (HttpSession) request.getSession();     
+            /*if(session.getAttribute("idUsuario")!=null&&session.getAttribute("rfc")!=null){*/
                 String[] datos=new String[6];
                 Comite c=new Comite();
                 if(request.getParameter("idComite")!=null){
@@ -96,7 +97,7 @@ public class Servlet_registroComite extends HttpServlet {
                     datos[5]=request.getParameter("idTipo");
                     
                 }
-                
+                session.setAttribute("idComite", datos[0]);
                 request.setAttribute("datos", datos);
                 ServletContext sc = getServletContext();
                 RequestDispatcher rd = sc.getRequestDispatcher("/conformacionComite.jsp");

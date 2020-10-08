@@ -36,21 +36,21 @@ public class Metodos_sql {
     private static Connection conexion;
 
     public static Connection conector() {
-//        String driver, user, pass, url;
-//        Properties p = new Properties();        
+        String driver, user, pass, url;
+        Properties p = new Properties();        
         conexion = null;
         try {
-//            p.load(new FileReader(rutaConfig));
-//            
-//            driver=p.getProperty("driver");
-//            user=p.getProperty("user");
-//            pass=p.getProperty("pass");
-//            url=p.getProperty("url");            
-//            Class.forName(driver);
-//            conexion = (Connection) DriverManager.getConnection(url, user,pass);
+            p.load(new FileReader(rutaConfig));
+            
+            driver=p.getProperty("driver");
+            user=p.getProperty("user");
+            pass=p.getProperty("pass");
+            url=p.getProperty("url");            
+            Class.forName(driver);
+            conexion = (Connection) DriverManager.getConnection(url, user,pass);
 
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            conexion = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/bdpromocion?useTimeZone=true&serverTimezone=UTC&autoReconnect=true&useSSL=false", "root", "1234567");
+            //Class.forName("com.mysql.cj.jdbc.Driver");
+            //conexion = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/bdpromocion?useTimeZone=true&serverTimezone=UTC&autoReconnect=true&useSSL=false", "root", "1234567");
 
             if (conexion != null) {
                 System.out.println("conexion establecida");
@@ -66,11 +66,11 @@ public class Metodos_sql {
         int resultado = 0;
 
         conexion = null;
-        String guardar = "INSERT INTO usuario(id,idConvocatoria,entidad,plantel,nombre,primerApellido,segundoApellido,correo,clave,curp,telfijo,telcel,perfil,consideraciones) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+        String guardar = "INSERT INTO usuario(consideraciones,idConvocatoria,entidad,plantel,nombre,primerApellido,segundoApellido,correo,clave,curp,telfijo,telcel,perfil) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
         conexion = conector();
         try {
             sentencia_preparada = conexion.prepareStatement(guardar);
-            sentencia_preparada.setString(1, String.valueOf(id));
+            //sentencia_preparada.setString(1, String.valueOf(id));
             sentencia_preparada.setString(2, programa);
             sentencia_preparada.setString(3, entidad);
             sentencia_preparada.setString(4, plantel);
@@ -83,7 +83,7 @@ public class Metodos_sql {
             sentencia_preparada.setString(11, telfijo);
             sentencia_preparada.setString(12, telcel);
             sentencia_preparada.setString(13, perfil);
-            sentencia_preparada.setString(14, consideraciones);
+            sentencia_preparada.setString(1, consideraciones);
             resultado = sentencia_preparada.executeUpdate();
             sentencia_preparada.close();
             conexion.close();
@@ -147,11 +147,11 @@ public class Metodos_sql {
         int resultado = 0;
 
         conexion = null;
-        String guardar = "INSERT INTO usuario(id,idConvocatoria,entidad,plantel,nombre,primerApellido,segundoApellido,correo,clave,curp,telfijo,telcel,perfil,consideraciones,nacional,idSubsistema) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+        String guardar = "INSERT INTO usuario(idSubsistema,idConvocatoria,entidad,plantel,nombre,primerApellido,segundoApellido,correo,clave,curp,telfijo,telcel,perfil,consideraciones,nacional) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
         conexion = conector();
         try {
             sentencia_preparada = conexion.prepareStatement(guardar);
-            sentencia_preparada.setString(1, "1");
+            //sentencia_preparada.setString(1, "1");
             sentencia_preparada.setString(2, null);
             sentencia_preparada.setString(3, entidad);
             sentencia_preparada.setString(4, plantel);
@@ -168,7 +168,7 @@ public class Metodos_sql {
             sentencia_preparada.setString(14, null);
             sentencia_preparada.setString(15, nivel);
 //            sentencia_preparada.setInt(16, Integer.parseInt(subsistema));
-            sentencia_preparada.setString(16, subsistema);
+            sentencia_preparada.setString(1, subsistema);
 
             System.out.print(sentencia_preparada.toString());
 
@@ -217,14 +217,14 @@ public class Metodos_sql {
         int resultado = 0;
         conexion = null;
 
-        String guardar = "INSERT INTO usuariopermiso(id,idUsuario,idPermiso) VALUES(?,?,?)";
+        String guardar = "INSERT INTO usuariopermiso(idUsuario,idPermiso) VALUES(?,?)";
 
         conexion = conector();
         try {
             sentencia_preparada = conexion.prepareStatement(guardar);
-            sentencia_preparada.setString(1, String.valueOf(id));
-            sentencia_preparada.setInt(2, idusuario);
-            sentencia_preparada.setInt(3, idpermiso);
+            //sentencia_preparada.setString(1, String.valueOf(id));
+            sentencia_preparada.setInt(1, idusuario);
+            sentencia_preparada.setInt(2, idpermiso);
 
             resultado = sentencia_preparada.executeUpdate();
             sentencia_preparada.close();
@@ -840,7 +840,7 @@ public class Metodos_sql {
         return datos;
     }
 
-    public int guardarAntiguedad(int id, String idusuario, String idpermiso) {
+    /*public int guardarAntiguedad(int id, String idusuario, String idpermiso) {
         int resultado = 0;
         conexion = null;
 
@@ -860,7 +860,7 @@ public class Metodos_sql {
             System.out.println(ex.toString());
         }
         return resultado;
-    }
+    }*/
 
     public String[] buscar_convocatoria(String entidad, String plantel, String programa) {
         String datos[] = new String[12];

@@ -62,7 +62,7 @@ $(document).ready(function () {
                    $("#btnRegistrar").val("Registrar"); 
                    $("#btnRegistrar").removeAttr("disabled");
                 },success:function(data){
-                    if(data.includes("<tr>")){ 
+                    if(data.includes("<tr")){ 
                         $("#seccionEditable").html(data);            
                         $("#modalRegistro").modal("hide");
                         $("#respuesta").html("");
@@ -75,6 +75,50 @@ $(document).ready(function () {
             });
             return false;
         }
+    });
+    $("#formBorrar").submit(function(event){
+	event.preventDefault(); //prevent default action 
+	var post_url = $(this).attr("action"); //get form action url
+	var request_method = $(this).attr("method"); //get form GET/POST method
+	var form_data = $(this).serialize(); //Encode form elements for submission
+	
+	$.ajax({
+		url : post_url,
+		type: request_method,
+		data : form_data
+	}).done(function(response){ //
+                $("#modalConfirmacion").modal("hide");
+		if(response=="ok"){
+                    var id=$("#idIntegrante").val();
+                    $("#integrante"+id).remove();
+                    if($('#seccionEditable').is(':empty')){
+                        $("#seccionEditable").html("<tr><td colspan='6' class='text-center'>Sin informaci&oacute;n</td></tr>");
+                    }
+                }else{
+                    $("#mensaje").html(response);
+                    $("#modalMensaje").modal("show");
+                }
+	});
+    });
+    $("#formFinalizar").submit(function(event){
+	event.preventDefault(); //prevent default action 
+	var post_url = $(this).attr("action"); //get form action url
+	var request_method = $(this).attr("method"); //get form GET/POST method
+	var form_data = $(this).serialize(); //Encode form elements for submission
+	
+	$.ajax({
+		url : post_url,
+		type: request_method,
+		data : form_data
+	}).done(function(response){ //
+                $("#modalConfirmacion2").modal("hide");
+                if(response=="ok"){
+                    $("#mensaje").html("Información registrada correctamente");
+                }else{
+                   $("#mensaje").html(response); 
+                }
+                $("#modalMensaje").modal("show");
+	});
     });
 });
 function actualizarPlanteles(idPlantel) {
@@ -140,6 +184,33 @@ function validaArchivo(){
             }            
     }
     return retorno;
+}
+function confirmacion(id) {
+    $("#idIntegrante").val(id);
+    $("#modalConfirmacion").modal("show");
+}
+function finalizaRegistro(){
+    var mensaje="";
+    if($("#btnEvidencia19").val().includes("Subir")){
+        mensaje+="Debe cargar el acta constitutiva primero <br/>";
+        
+    }
+    if($("#seccionEditable tr").length!=6){
+        mensaje+="Debe registrar a todos los integrantes del comit&eacute;<br/>";
+    }
+    if($("#rolUsuario").val()==""){
+        mensaje+="Seleccione el rol al que se le asignar&aacute; usuario<br/>";
+    }else{
+        $("#idRol").val($("#rolUsuario").val());
+    }
+    if(mensaje.length>0){
+        $("#mensaje").html(mensaje);
+        $("#modalMensaje").modal("show");
+    }
+    
+    else{        
+        $("#modalConfirmacion2").modal("show");
+    }
 }
 
 

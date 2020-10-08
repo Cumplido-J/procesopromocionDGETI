@@ -79,10 +79,10 @@ public class Servlet_muestraArchivo extends HttpServlet {
             File documento;
             if(request.getParameter("k")!=null){
                 idDocumento=request.getParameter("k").toString();
-                ruta+="/"+idUsuario+"_"+idDocumento+".PDF";
+                ruta+="/"+idUsuario+"_"+idDocumento+".pdf";
             }else if(request.getParameter("e")!=null){
                 idDocumento=request.getParameter("e").toString();
-                ruta+="/ejemplos/"+idDocumento+".PDF";
+                ruta+="/ejemplos/"+idDocumento+".pdf";
             }
             documento=new File(ruta);
             if(documento.exists()){

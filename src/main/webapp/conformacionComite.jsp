@@ -34,7 +34,7 @@
                   </div>
                   <div class="collapse navbar-collapse" id="subenlaces">
                     <ul class="nav navbar-nav navbar-right">      
-                      <li><a href="SesionDocente">Regresar</a></li>
+                      <li><a href="busquedaComite.jsp">Regresar</a></li>
                       <li><a href="Servlet_cerrarsesion">Cerrar sesión</a></li> 
                     </ul>
                   </div>
@@ -46,7 +46,7 @@
                 <p>Unidad de Educación Media Superior Tecnológica Industrial y de Servicios</p>
             </div>
             <!--FIN Barra encabezado-->
-            <div class="container">
+            <div class="container">                
                 <div class="text-center">
                     <h4>Conformación de comité</h4>                    
                 </div>
@@ -88,7 +88,8 @@
                         </select>
                     </div>
                 </div>
-                <div class="row text-center">
+                <div class="row text-center">                    
+                    <!--<input  class="btn btn-sm btn-link" id="btnEditar" type="button" value='Modificar información comité'/>-->
                     <input  class="btn btn-sm btn-link" id="btnAgregar" type="button" value='(+) Agregar miembro' onclick="mostrarModalRegistro()"/>
                 </div>
                 <div class="table-responsive">
@@ -102,17 +103,23 @@
                             <th>Rol</th>
                             <th>Opciones</th>
                         </thead>
-                        <tbody id="seccionEditable">
-                            ${comite.desplegarIntegrantesComite(datos[0])}
-                        </tbody>
+                        <tbody id="seccionEditable">${comite.desplegarIntegrantesComite(datos[0])}</tbody>
                     </table>
                 </div>
-                <div class="form-group col-xs-6">
-                    <label class="control-label" for="btnEvidencia19">Acta constitutiva:</label>                    
+                <div class="form-group col-md-4">
+                    <label class="control-label" for="btnEvidencia19">Acta constitutiva:</label><br/>               
                     <input id="btnEvidencia19" type="button" class="btn btn-sm btn-link" value="Subir archivo" onclick="abrirModalArchivo(19)"/>                                    
                 </div>
-                <div class="col-xs-6 text-center">
-                    <input class="btn btn-sm btn-primary" value='Finalizar registro de comité'/>                          
+                <div class="form-group col-md-4">                               
+                    <label class="control-label">Rol al que se le asignará usuario:</label>
+                    <select class="form-control input-sm" id="rolUsuario">                                  
+                        ${catalogo.desplegarOpcionesRolComite()}
+                    </select>
+                    
+                </div>
+                <div class="col-md-4 text-center">
+                    <br/>
+                    <input type="button" class="btn btn-sm btn-primary" value='Finalizar registro de comité' onclick="finalizaRegistro()"/>                          
                 </div>
             </div>
             <div class="modal fade" id="modalMensaje" role="dialog">
@@ -150,28 +157,28 @@
                             <div class="row">
                                 <div class="form-group col-md-6">                               
                                     <label class="control-label">RFC:</label>
-                                    <input type="text" id="rfc" name="rfc" class="form-control input-sm" required>
+                                    <input type="text" id="rfc" name="rfc" class="form-control input-sm text-uppercase" required>
                                     <label class="error" id="alertaRFC" hidden >Ingrese un RFC válido</label>
                                 </div>
                                 <div class="form-group col-md-6">                               
                                     <label class="control-label">Nombre:</label>
-                                    <input type="text" id="nombre" name="nombre" class="form-control input-sm" required>
+                                    <input type="text" id="nombre" name="nombre" class="form-control input-sm text-uppercase" required>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="form-group col-md-6">                               
                                     <label class="control-label">Primer Apellido:</label>
-                                    <input type="text" id="apPaterno" name="apPaterno" class="form-control input-sm" required>
+                                    <input type="text" id="apPaterno" name="apPaterno" class="form-control input-sm text-uppercase" required>
                                 </div>
                                 <div class="form-group col-md-6">                               
                                     <label class="control-label">Segundo Apellido:</label>
-                                    <input type="text" id="apMaterno" name="apMaterno" class="form-control input-sm">
+                                    <input type="text" id="apMaterno" name="apMaterno" class="form-control input-sm text-uppercase">
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="form-group col-md-6">                               
                                     <label class="control-label">Correo:</label>
-                                    <input type="text" id="correo" name="correo" class="form-control input-sm" required>
+                                    <input type="text" id="correo" name="correo" class="form-control input-sm text-lowercase" required>
                                     <label class="error" id="alertaCorreo" hidden >Ingrese una dirección de correo válida</label>
                                 </div>
                                 <div class="form-group col-md-6">                               
@@ -218,6 +225,53 @@
                   </div>
                 </div>
             </div>
+            
+            <div class="modal fade" id="modalConfirmacion" role="dialog">
+                <div class="modal-dialog">
+
+                  <!-- Modal content-->
+                  <div class="modal-content panel">
+                    <form id="formBorrar" role="form" method="POST" action="BorrarIntegrante">
+                        <div class="modal-header">
+                          <button type="button" class="close" data-dismiss="modal">&times;</button>
+                          <h4 class="modal-title">Confirmación</h4>
+                        </div>
+                        <div class="modal-body">
+                            <label>Se eliminará la información del integrante seleccionado ¿Desea continuar?</label>
+                            <input type="hidden" name="idIntegrante" id="idIntegrante">
+                        </div>
+                        <div class="modal-footer">
+                            <input class="btn btn-sm btn-primary" type="submit" value='Sí'/>
+                            <input type="button" class="btn btn-primary btn-sm" value="No" data-dismiss="modal"/>
+                        </div>
+                    </form>
+                  </div>
+
+                </div>
+            </div>     
+            <div class="modal fade" id="modalConfirmacion2" role="dialog">
+                <div class="modal-dialog">
+
+                  <!-- Modal content-->
+                  <div class="modal-content panel">
+                    <form id="formFinalizar" role="form" method="POST" action="FinalizarConformacion">
+                        <div class="modal-header">
+                          <button type="button" class="close" data-dismiss="modal">&times;</button>
+                          <h4 class="modal-title">Confirmación</h4>
+                        </div>
+                        <div class="modal-body">
+                            <label>La información registrada no podrá ser modificada ¿Desea continuar?</label>
+                            <input type="hidden" name="idRol" id="idRol">
+                        </div>
+                        <div class="modal-footer">
+                            <input class="btn btn-sm btn-primary" type="submit" value='Sí'/>
+                            <input type="button" class="btn btn-primary btn-sm" value="No" data-dismiss="modal"/>
+                        </div>
+                    </form>
+                  </div>
+
+                </div>
+            </div>                        
         </main>
         <script src="https://framework-gb.cdn.gob.mx/gobmx.js"></script>
         <script src="https://code.jquery.com/jquery-1.12.4.js"></script>

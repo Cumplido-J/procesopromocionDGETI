@@ -754,7 +754,7 @@ CREATE TABLE `catpermisos` (
 
 LOCK TABLES `catpermisos` WRITE;
 /*!40000 ALTER TABLE `catpermisos` DISABLE KEYS */;
-INSERT INTO `catpermisos` VALUES (1,'Alta administradores','-'),(2,'Carga convocatoria','-'),(4,'Carga vacancia','-');
+INSERT INTO `catpermisos` VALUES (1,'Alta administradores','administracion_usuarios.jsp'),(2,'Carga convocatoria','convocatoria.jsp'),(4,'Carga vacancia','vacantes.jsp'),(5,'Registro comite','busquedaComite.jsp'),(6,'Consulta docentes','busquedaDocente.jsp');
 /*!40000 ALTER TABLE `catpermisos` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1107,7 +1107,7 @@ CREATE TABLE `comite` (
   KEY `fkProgramaComite_idx` (`idPrograma`),
   CONSTRAINT `fkPlantelComite` FOREIGN KEY (`idPlantel`) REFERENCES `catplanteles` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `fkProgramaComite` FOREIGN KEY (`idPrograma`) REFERENCES `catprogramas` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1116,7 +1116,7 @@ CREATE TABLE `comite` (
 
 LOCK TABLES `comite` WRITE;
 /*!40000 ALTER TABLE `comite` DISABLE KEYS */;
-INSERT INTO `comite` VALUES (16,7,1,'R','F');
+INSERT INTO `comite` VALUES (27,7,1,'R','V');
 /*!40000 ALTER TABLE `comite` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1344,7 +1344,7 @@ CREATE TABLE `miembrocomite` (
   KEY `fkMiembroComite_idx` (`idComite`),
   CONSTRAINT `fkMiembroComite` FOREIGN KEY (`idComite`) REFERENCES `comite` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `fkMiembroRol` FOREIGN KEY (`idRolComite`) REFERENCES `catrolcomite` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1353,7 +1353,7 @@ CREATE TABLE `miembrocomite` (
 
 LOCK TABLES `miembrocomite` WRITE;
 /*!40000 ALTER TABLE `miembrocomite` DISABLE KEYS */;
-INSERT INTO `miembrocomite` VALUES (7,16,'rema940831ba1','SAMUEL','reyna','guzman','correo@mail.com',1);
+INSERT INTO `miembrocomite` VALUES (11,27,'REMA940831BA2','NOMBRE ','PATERNO','MATERNO','correo2@mail.com',2),(12,27,'REMA940831BA3','NOMBRE ','REYNA','MATERNO','correo3@mail.com',3),(13,27,'REMA940831BA4','NOMBRE','PATERNO','MATERNO','correo4@mail.com',4),(14,27,'REMA940831BA5','NOMBRE','PATERNO','MATERNO','correo5@mail.com',5),(17,27,'REMA940831BA6','NOMBRE','PATERNO',NULL,'correo6@mail.com',6),(18,27,'REMA940831BA7','ANTONIO DAVID','REYNA','MARTINEZ','david.reyna31@gmail.com',1);
 /*!40000 ALTER TABLE `miembrocomite` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1500,8 +1500,8 @@ CREATE TABLE `usuario` (
   `correo` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
   `clave` varchar(200) COLLATE utf8_spanish_ci NOT NULL,
   `curp` varchar(18) COLLATE utf8_spanish_ci NOT NULL,
-  `telfijo` varchar(10) COLLATE utf8_spanish_ci NOT NULL,
-  `telcel` varchar(10) COLLATE utf8_spanish_ci NOT NULL,
+  `telfijo` varchar(10) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `telcel` varchar(10) COLLATE utf8_spanish_ci DEFAULT NULL,
   `perfil` varchar(1) COLLATE utf8_spanish_ci NOT NULL,
   `consideraciones` varchar(200) COLLATE utf8_spanish_ci DEFAULT NULL,
   `nacional` char(1) COLLATE utf8_spanish_ci DEFAULT NULL,
@@ -1515,7 +1515,7 @@ CREATE TABLE `usuario` (
   CONSTRAINT `fkUsuarioPlantel` FOREIGN KEY (`plantel`) REFERENCES `catplanteles` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `fkUsuarioPrograma` FOREIGN KEY (`idConvocatoria`) REFERENCES `convocatoria` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `fkUsuarioSubsistema` FOREIGN KEY (`idSubsistema`) REFERENCES `catsubsistema` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=38 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1524,7 +1524,7 @@ CREATE TABLE `usuario` (
 
 LOCK TABLES `usuario` WRITE;
 /*!40000 ALTER TABLE `usuario` DISABLE KEYS */;
-INSERT INTO `usuario` VALUES (1,NULL,NULL,NULL,'ANTONIO DAVID','REYNA','MARTINEZ','tony310894@hotmail.com','cGFzcw==','REMA940831BA1','111111111','1111111111','S',NULL,'1',1),(29,15,12,193,'SAMUEL ','ALVARADO','AGAMA','david.reyna31@gmail.com','cGFzcw==','AAAS860114A5A','1111111111','1111111111','D',NULL,'1',1),(31,NULL,1,1,'david','reyna','martinez','correo2@mail.com','cGFzcw==','rema940831ba2','1111111111','1111111111','A',NULL,'1',1),(32,NULL,NULL,NULL,'nombre','paterno','materno','correo@mail.com','cGFzcw==','nacional1','1111111111','1111111111','A','null','1',1),(33,NULL,1,NULL,'nombre','paterno','materno','david.reyna31@gmail.com','cGFzcw==','estatal1','1111111111','1111111111','A','null','2',1);
+INSERT INTO `usuario` VALUES (1,NULL,NULL,NULL,'ANTONIO DAVID','REYNA','MARTINEZ','tony310894@hotmail.com','cGFzcw==','REMA940831BA1','111111111','1111111111','S',NULL,'1',1),(29,15,12,193,'SAMUEL ','ALVARADO','AGAMA','david.reyna31@gmail.com','cGFzcw==','AAAS860114A5A','1111111111','1111111111','D',NULL,'1',1),(31,NULL,1,1,'david','reyna','martinez','correo2@mail.com','cGFzcw==','rema940831ba2','1111111111','1111111111','A',NULL,'1',1),(32,NULL,NULL,NULL,'nombre','paterno','materno','correo@mail.com','cGFzcw==','nacional1','1111111111','1111111111','A','null','1',1),(33,NULL,1,NULL,'nombre','paterno','materno','david.reyna31@gmail.com','cGFzcw==','estatal1','1111111111','1111111111','A','null','2',1),(36,NULL,1,7,'ANTONIO DAVID','REYNA','MARTINEZ','david.reyna31@gmail.com','cGFzcw==','REMA940831BA7',NULL,NULL,'A',NULL,'3',1),(37,NULL,1,1,'DAVID','REYNA','MARTINEZ','correo@mail.com','cGFzcw==','REMA940831BA8','1111111111','1111111111','A',NULL,'3',1);
 /*!40000 ALTER TABLE `usuario` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1544,7 +1544,7 @@ CREATE TABLE `usuariopermiso` (
   KEY `idPermisoUP_idx` (`idPermiso`),
   CONSTRAINT `idPermisoUP` FOREIGN KEY (`idPermiso`) REFERENCES `catpermisos` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `idUsuarioUP` FOREIGN KEY (`idUsuario`) REFERENCES `usuario` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE=InnoDB AUTO_INCREMENT=89 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=93 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1553,7 +1553,7 @@ CREATE TABLE `usuariopermiso` (
 
 LOCK TABLES `usuariopermiso` WRITE;
 /*!40000 ALTER TABLE `usuariopermiso` DISABLE KEYS */;
-INSERT INTO `usuariopermiso` VALUES (42,1,1),(43,1,2),(45,1,4),(51,31,1),(52,31,2),(54,31,4),(55,31,1),(56,31,2),(58,31,1),(59,31,2),(60,31,4),(61,31,1),(62,31,2),(63,31,4),(64,31,1),(65,31,2),(66,31,4),(84,32,1),(85,32,4),(86,33,1),(87,33,4),(88,33,1);
+INSERT INTO `usuariopermiso` VALUES (42,1,1),(43,1,2),(45,1,4),(51,31,1),(52,31,2),(54,31,4),(55,31,1),(56,31,2),(58,31,1),(59,31,2),(60,31,4),(61,31,1),(62,31,2),(63,31,4),(64,31,1),(65,31,2),(66,31,4),(84,32,1),(85,32,4),(86,33,1),(87,33,4),(88,33,1),(91,37,5),(92,36,6);
 /*!40000 ALTER TABLE `usuariopermiso` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1721,7 +1721,8 @@ BEGIN
     case 
      when f.nombre is null then 'Sin información'
      when f.nombre is not null then concat(f.nombre,' ',f.primerApellido,' ',f.segundoApellido)
-	end as presidente
+	end as presidente,
+    a.finalizado
     from comite a
     join catplanteles b on a.idPlantel=b.id
     join catsubsistema c on b.idSubsistema=c.id
@@ -1826,46 +1827,6 @@ DELIMITER ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;
 /*!50003 SET character_set_results = @saved_cs_results */ ;
 /*!50003 SET collation_connection  = @saved_col_connection */ ;
-/*!50003 DROP PROCEDURE IF EXISTS `sp_consultaConvocatoriasUsuarios` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8mb4 */ ;
-/*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
-DELIMITER ;;
-CREATE DEFINER=`admin`@`localhost` PROCEDURE `sp_consultaConvocatoriasUsuarios`(in _nombre varchar(200), in _idEntidad int, in _idPlantel int, in _idEstatus int)
-BEGIN
-	set @consulta="select u.id,u.entidad as idEntidad,e.entidad,u.plantel as idPlantel,p.plantel,u.nombre,u.primerApellido,u.segundoApellido,u.curp,a.idEstatus,ce.estatus
-	from usuario u
-	join catplanteles p on u.plantel=p.id
-	join catentidades e on u.entidad=e.id
-	left join aspirantes a on u.id=a.idUsuario
-	left join catestatus ce on ce.id=a.idEstatus where u.perfil='D' ";
-	
-    if(_nombre is not null) then
-		set @consulta=concat(@consulta," and (u.curp like '%",_nombre,"%' or concat(u.nombre,' ',u.primerApellido,' ',u.segundoApellido) like '%",_nombre,"%') ");
-    end if;
-    if(_idEntidad >0) then
-		set @consulta=concat(@consulta," and u.entidad = ",_idEntidad);
-    end if;
-    if(_idPlantel >0) then
-		set @consulta=concat(@consulta," and u.plantel = ",_idPlantel);
-    end if;
-    if(_idEstatus is not null) then
-		set @consulta=concat(@consulta," and a.idEstatus =", _idEstatus);
-    end if;
-    set @consulta=concat(@consulta,';');
-    PREPARE instruccion FROM @consulta;
-	EXECUTE instruccion;
-END ;;
-DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `sp_consultaConvocatoriasVigentes` */;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
@@ -1883,6 +1844,78 @@ from convocatoria c
 inner join catprogramas p on c.idPrograma=p.id
 where c.idPlantel=_idPlantel and
 NOW() between c.publicacion and c.resultados;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `sp_consultaDocentes` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`admin`@`localhost` PROCEDURE `sp_consultaDocentes`(in _idPrograma int, in _idSubsistema int, in _idEntidad int, in _idPlantel int,in _nombre varchar(200), in _idEstatus int)
+BEGIN
+	set @consulta="select u.id,u.entidad as idEntidad,e.entidad,u.plantel as idPlantel,p.plantel,concat(u.nombre,' ',u.primerApellido,' ',u.segundoApellido) as nombre,u.curp,a.idEstatus,ce.estatus,s.id,s.subsistema,pr.id,pr.programa
+	from usuario u
+	join catplanteles p on u.plantel=p.id
+    join catsubsistema s on u.idSubsistema=s.id
+	join catentidades e on u.entidad=e.id
+	left join aspirantes a on u.id=a.idUsuario
+	left join catestatus ce on ce.id=a.idEstatus 
+    join convocatoria c on u.idConvocatoria=c.id
+    join catprogramas pr on c.idPrograma=pr.id
+    where u.perfil='D' ";
+	if(_idPrograma is not null) then
+		set @consulta=concat(@consulta," and pr.id = ",_idPrograma);
+    end if;
+    if(_idSubsistema is not null) then
+		set @consulta=concat(@consulta," and s.id = ",_idSubsistema);
+    end if;    
+    if(_idEntidad is not null) then
+		set @consulta=concat(@consulta," and u.entidad = ",_idEntidad);
+    end if;
+    if(_idPlantel is not null) then
+		set @consulta=concat(@consulta," and u.plantel = ",_idPlantel);
+    end if;
+    if(_nombre is not null) then
+		set @consulta=concat(@consulta," and (u.curp like '%",_nombre,"%' or concat(u.nombre,' ',u.primerApellido,' ',u.segundoApellido) like '%",_nombre,"%') ");
+    end if;
+    if(_idEstatus is not null) then
+		set @consulta=concat(@consulta," and a.idEstatus =", _idEstatus);
+    end if;
+    set @consulta=concat(@consulta,';');
+    PREPARE instruccion FROM @consulta;
+	EXECUTE instruccion;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `sp_consultaInfoLogin` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`admin`@`localhost` PROCEDURE `sp_consultaInfoLogin`(in _rfc varchar(18))
+BEGIN
+	select u.id,u.entidad,u.plantel,concat(u.nombre," ",u.primerApellido," ",u.segundoApellido) as nombre,cast(from_base64(u.clave) AS CHAR(200) CHARACTER SET utf8) as clave,u.curp,u.perfil,up.idPermiso,cp.permiso,cp.url
+	from usuario u
+	left join usuariopermiso up on u.id=up.idUsuario
+	left join catpermisos cp on up.idPermiso=cp.id
+	where u.curp=(select _rfc COLLATE utf8_spanish_ci);
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -1946,7 +1979,12 @@ DELIMITER ;
 DELIMITER ;;
 CREATE DEFINER=`admin`@`localhost` PROCEDURE `sp_consultaMiembrosComite`(in _idComite int)
 BEGIN
-	select a.id,a.rfc,a.nombre,a.primerApellido,a.segundoApellido,a.correo,a.idRolComite,b.rol
+	select a.id,a.rfc,a.nombre,a.primerApellido,
+    CASE 
+		WHEN a.segundoApellido IS NULL THEN ''
+		ELSE a.segundoApellido
+	END AS segundoApellido
+    ,a.correo,a.idRolComite,b.rol
     from miembrocomite a
     inner join catrolcomite b on a.idRolComite=b.id
     where a.idComite=_idComite
@@ -2339,7 +2377,7 @@ DELIMITER ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;
 /*!50003 SET character_set_results = @saved_cs_results */ ;
 /*!50003 SET collation_connection  = @saved_col_connection */ ;
-/*!50003 DROP PROCEDURE IF EXISTS `sp_deleteComites` */;
+/*!50003 DROP PROCEDURE IF EXISTS `sp_deleteComite` */;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
 /*!50003 SET @saved_col_connection = @@collation_connection */ ;
@@ -2349,12 +2387,12 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE PROCEDURE `sp_deleteComites`(in _idEntidad int,in _idPlantel int,in _idPrograma int,in _tipo varchar(50),_idComite int)
+CREATE PROCEDURE `sp_deleteComite`(in _idComite int)
 BEGIN
 	delete from miembrocomite
-    where _idComite=_idComite;
+    where idComite=_idComite and id>0;
     
-	delete from comite where idEntidad = _idEntidad and idPlantel = _idPlantel and idPrograma = _idPrograma and tipo = _tipo;
+	delete from comite where id=_idComite;
     select "ok" as respuesta;
 END ;;
 DELIMITER ;
@@ -2417,6 +2455,27 @@ BEGIN
 	delete from horasgrupo 
     where id=_id;
     select 'ok';
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `sp_deleteMiembroComite` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE PROCEDURE `sp_deleteMiembroComite`(in _id int)
+BEGIN
+	delete from miembrocomite
+    where  id=_id;
+    select "ok" as respuesta;
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -2496,6 +2555,37 @@ DELIMITER ;;
 CREATE DEFINER=`admin`@`localhost` PROCEDURE `sp_deleteTutorias`(in _id int)
 BEGIN
 	delete from tutorias where id=_id;
+    select "ok" as respuesta;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `sp_finalizarComite` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`admin`@`localhost` PROCEDURE `sp_finalizarComite`(in _idComite int, in _idRol int)
+BEGIN
+	update comite set finalizado='V' where id=_idComite;
+    
+    INSERT INTO usuario (entidad,plantel,nombre,primerApellido,segundoApellido,correo,clave,curp,perfil,nacional,idSubsistema)        
+	select p.idEntidad,c.idPlantel,mc.nombre,mc.primerApellido,mc.segundoApellido,mc.correo,TO_BASE64("pass"),mc.rfc,"A","7",p.idSubsistema
+	from miembrocomite mc
+	join comite c on mc.idComite=c.id
+	join catplanteles p on c.idPlantel=p.id
+	where mc.idComite=_idComite and mc.idRolComite=_idRol;
+    
+    insert into usuariopermiso (idUsuario,idPermiso)
+    SELECT id,'6'  FROM usuario  order by id desc limit 1;
+    
     select "ok" as respuesta;
 END ;;
 DELIMITER ;
@@ -2704,21 +2794,28 @@ BEGIN
 		select "RFC previamente registrado" as respuesta;
 	else
 		select id into _idAux 
-		from miembrocomite 
-		where correo=_correo;
+		from usuario 
+		where curp like concat("%",(select _rfc COLLATE utf8_spanish_ci),"%");
         if(_idAux is not null) then
-			select "Correo previamente registrado" as respuesta;
+			select "RFC previamente registrado" as respuesta;
 		else
 			select id into _idAux 
 			from miembrocomite 
-			where idComite=_idComite and idRolComite=_idRolComite;
-            if(_idAux is not null) then
-				select "Rol previamente registrado" as respuesta;
+			where correo=_correo;
+			if(_idAux is not null) then
+				select "Correo previamente registrado" as respuesta;
 			else
-				insert into miembrocomite (idComite,rfc,nombre,primerApellido,segundoApellido,correo,idRolComite)
-				values (_idComite,_rfc,_nombre,_primerApellido,_segundoApellido,_correo,_idRolComite);
-                select "ok" as respuesta;
-            end if;
+				select id into _idAux 
+				from miembrocomite 
+				where idComite=_idComite and idRolComite=_idRolComite;
+				if(_idAux is not null) then
+					select "Rol previamente registrado" as respuesta;
+				else
+					insert into miembrocomite (idComite,rfc,nombre,primerApellido,segundoApellido,correo,idRolComite)
+					values (_idComite,_rfc,_nombre,_primerApellido,_segundoApellido,_correo,_idRolComite);
+					select "ok" as respuesta;
+				end if;
+			end if;
 		end if;
     end if;
 END ;;
@@ -3829,4 +3926,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-09-30 13:21:57
+-- Dump completed on 2020-10-07 20:37:01

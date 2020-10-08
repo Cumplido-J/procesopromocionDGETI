@@ -37,7 +37,7 @@ $(document).ready(function () {
                    $("#btnBuscar").val("Buscar"); 
                    $("#btnBuscar").removeAttr("disabled");
                 },success:function(data){
-                    if(data.includes("<tr>")){ 
+                    if(data.includes("<tr")){ 
                         $("#seccionEditable").html(data);
                         if(data.includes("colspan")){
                             $("#idPrograma").val($("#programa").val());
@@ -58,6 +58,30 @@ $(document).ready(function () {
             return false;
         }
     });
+    $("#formBorrarComite").submit(function(event){
+	event.preventDefault(); //prevent default action 
+	var post_url = $(this).attr("action"); //get form action url
+	var request_method = $(this).attr("method"); //get form GET/POST method
+	var form_data = $(this).serialize(); //Encode form elements for submission
+	
+	$.ajax({
+		url : post_url,
+		type: request_method,
+		data : form_data
+	}).done(function(response){ //
+                $("#modalConfirmacion2").modal("hide");
+		if(response=="ok"){
+                    var id=$("#idComiteBorrar").val();
+                    $("#comite"+id).remove();
+                    if($('#seccionEditable').is(':empty')){
+                        $("#seccionEditable").html("<tr><td colspan='8' class='text-center'>Sin información</td></tr>");
+                    }
+                }else{
+                    $("#mensaje").html(response);
+                    $("#modalMensaje").modal("show");
+                }
+	});
+    });
 });
 function actualizarPlanteles(idPlantel) {
     var idSubsistema=$('#subsistema').val();    
@@ -69,5 +93,9 @@ function actualizarPlanteles(idPlantel) {
             $("#plantel").val(idPlantel);
         }
     });
+}
+function confirmacion(idComite) {
+    $("#idComiteBorrar").val(idComite);
+    $("#modalConfirmacion2").modal("show");
 }
 

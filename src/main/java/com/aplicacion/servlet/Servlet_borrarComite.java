@@ -5,23 +5,23 @@
  */
 package com.aplicacion.servlet;
 
-import com.aplicacion.beans.Docente;
-import herramientas.Catalogos;
+import herramientas.Comite;
 import java.io.IOException;
 import java.io.PrintWriter;
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author Jonathan
+ * @author David Reyna
  */
-@WebServlet(name = "Servlet_borrarComites", urlPatterns = {"/Servlet_borrarComites"})
-public class Servlet_borrarComites extends HttpServlet {
+@WebServlet(name = "BorrarComite", urlPatterns = {"/BorrarComite"})
+public class Servlet_borrarComite extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -40,10 +40,10 @@ public class Servlet_borrarComites extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet Servlet_borrarComites</title>");            
+            out.println("<title>Servlet Servlet_borrarComite</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet Servlet_borrarComites at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet Servlet_borrarComite at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -75,21 +75,16 @@ public class Servlet_borrarComites extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        //processRequest(request, response);
-        response.setContentType("text/html;charset=UTF-8");
-        PrintWriter out = response.getWriter();
-        HttpSession session= (HttpSession) request.getSession();
-        
-            String _idEntidad=request.getParameter("i");
-            String _idPlantel=request.getParameter("j");
-            String _idPrograma=request.getParameter("k");
-            String _tipo=request.getParameter("l");
-            String _idComite=request.getParameter("m");
-            
-            Catalogos c=new Catalogos();
-            c.borraComites(_idEntidad, _idPlantel, _idPrograma, _tipo, _idComite);
-            out.println("ok");    
-        out.close();
+        try{
+            PrintWriter out = response.getWriter();
+            /*HttpSession session= (HttpSession) request.getSession();     
+            if(session.getAttribute("idUsuario")!=null&&session.getAttribute("rfc")!=null){*/
+            String id=request.getParameter("idComite");  
+            Comite c=new Comite();
+            out.print(c.borrarComite(id));
+        }catch(Exception e){
+            System.out.println(e.toString());
+        }
     }
 
     /**
