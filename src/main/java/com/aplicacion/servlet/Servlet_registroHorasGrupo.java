@@ -80,8 +80,16 @@ public class Servlet_registroHorasGrupo extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         HttpSession session= (HttpSession) request.getSession();     
-        if(session.getAttribute("idUsuario")!=null){
-            String idUsuario=session.getAttribute("idUsuario").toString();
+        if(session.getAttribute("rol")!=null){
+            String idUsuario,rfc;
+            if(session.getAttribute("rol").toString().equals("D")){
+                idUsuario=session.getAttribute("idUsuario").toString();
+                rfc=session.getAttribute("rfc").toString();
+            }else{
+                idUsuario=session.getAttribute("idDocente").toString();                
+                rfc=session.getAttribute("rfcDocente").toString();
+            }
+            
             String idPeriodo=request.getParameter("periodo");
             String tipoInfo=request.getParameter("tipoInfo");
             String idAsignatura="0";

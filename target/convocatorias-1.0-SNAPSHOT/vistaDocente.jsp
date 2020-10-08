@@ -42,8 +42,9 @@
                                 &nbsp;
                                 ${Docente.infoRegistro[2]}
                                 &nbsp;
-                                ${Docente.infoRegistro[3]}</a>
+                                ${Docente.infoRegistro[3]} (Consulta información)</a>
                             </li>
+                            <li><a href="busquedaDocente.jsp">Regresar</a></li>
                             <li><a href="Servlet_cerrarsesion">Cerrar Sesión</a></li>
                         </ul>
                     </div>
@@ -114,18 +115,18 @@
                 </c:if>
                 <c:if test = "${!finIncompleto}">
                     <article class="articleses">
-                        <h3>Paso 2: <span class="glyphicon glyphicon-ok-sign completo ${hidden2}" title="Sección completa"></span></h3>
+                        <h3>Paso 2: </h3>
                         <a href="RegistroEncuestados"><img src="<%=Imagen.muestraImagen(RutaConfig.getRutaCarpeta()+"imagenes/EvidReg.jpg")%>" alt=""></a>
                         <a href="RegistroEncuestados"><h3>Registro encuestados</h3></a>
                     </article>
 
                     <article class="articleses ">
-                        <h3>Paso 3: <span class="glyphicon glyphicon-ok-sign completo hidden" title="Sección completa"></span></h3>
+                        <h3>Paso 3: </h3>
                         <a href="RegistroCriterios" ><img src="<%=Imagen.muestraImagen(RutaConfig.getRutaCarpeta()+"imagenes/EvidReg.jpg")%>" alt=""></a>
                         <a href="RegistroCriterios" ><h3>Evidencias de los criterios de valoración</h3></a>
                     </article>
                     <article class="articleses">
-                        <h3>Paso 4:<span class="glyphicon glyphicon-ok-sign completo hidden" title="Sección completa"></span></h3>
+                        <h3>Paso 4:</h3>
                         <a href="FichaRegistro" target="_blank" ><img src="<%=Imagen.muestraImagen(RutaConfig.getRutaCarpeta()+"imagenes/EvidVal.jpg")%>" alt=""></a>
                         <a href="FichaRegistro"  target="_blank" ><h3>Ficha de <br/> registro </h3></a>
                     </article>

@@ -9,11 +9,14 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import herramientas.RutaConfig;
 import herramientas.WebService;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileReader;
 import java.lang.reflect.Type;
 import java.util.List;
 import java.util.Properties;
 import java.util.Random;
+import javax.servlet.http.HttpSession;
 import metodos_sql.Metodos_sql;
 
 /**
@@ -403,6 +406,22 @@ public class Docente {
     public String getIdConvocatoria() {
         return idConvocatoria;
     }
-    
+    public boolean documentoCargado2(String idDocumento){
+        boolean retorno=false;
+        try{        
+            String rutaConfig = RutaConfig.getRutaConfig();
+            Properties p = new Properties();
+            p.load(new FileReader(rutaConfig));
+            String ruta=p.getProperty("rutaEvidenciasRegistro");
+            ruta+="/"+idUsuario+"_"+idDocumento+".pdf";    
+            File documento;            
+            documento=new File(ruta);
+            retorno= documento.exists();
+        }catch(Exception e){
+            System.out.println(e.toString());
+        }finally{
+            return retorno;
+        }
+    }
     
 }

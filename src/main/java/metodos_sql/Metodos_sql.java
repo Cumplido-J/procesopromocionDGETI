@@ -147,7 +147,7 @@ public class Metodos_sql {
         int resultado = 0;
 
         conexion = null;
-        String guardar = "INSERT INTO usuario(idSubsistema,idConvocatoria,entidad,plantel,nombre,primerApellido,segundoApellido,correo,clave,curp,telfijo,telcel,perfil,consideraciones,nacional) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+        String guardar = "INSERT INTO usuario(idSubsistema,idConvocatoria,entidad,plantel,nombre,primerApellido,segundoApellido,correo,clave,curp,telfijo,telcel,perfil,consideraciones,nacional) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
         conexion = conector();
         try {
             sentencia_preparada = conexion.prepareStatement(guardar);

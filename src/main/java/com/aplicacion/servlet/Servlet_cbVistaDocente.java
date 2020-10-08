@@ -62,8 +62,23 @@ public class Servlet_cbVistaDocente extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        HttpSession session= (HttpSession) request.getSession();     
+        if(session.getAttribute("idDocente")!=null&&session.getAttribute("rfcDocente")!=null){
+            docente=new Docente();
+            docente.setIdUsuario(session.getAttribute("idDocente").toString());
+            docente.setRfc(session.getAttribute("rfcDocente").toString());
+            docente.consultaInfoAspirante(); 
+            session.setAttribute("idConvocatoria",docente.getIdConvocatoria());
+            docente.consultaEncuestados();            
+            request.setAttribute("Docente", docente);
+            ServletContext sc = getServletContext();
+            RequestDispatcher rd = sc.getRequestDispatcher("/vistaDocente.jsp");
+            rd.forward(request,response);
+        }else{
+            response.sendRedirect("login.jsp");
+        }
     }
+    
 
     /**
      * Handles the HTTP <code>POST</code> method.
@@ -78,8 +93,8 @@ public class Servlet_cbVistaDocente extends HttpServlet {
             throws ServletException, IOException {
         HttpSession session= (HttpSession) request.getSession();     
         //if(session.getAttribute("idUsuario")!=null&&session.getAttribute("rfc")!=null){
-            session.setAttribute("idUsuario",request.getParameter("idUsuario"));
-            session.setAttribute("rfc",request.getParameter("rfc"));
+            session.setAttribute("idDocente",request.getParameter("idUsuario"));
+            session.setAttribute("rfcDocente",request.getParameter("rfc"));
             docente=new Docente();
             docente.setIdUsuario(request.getParameter("idUsuario"));
             docente.setRfc(request.getParameter("rfc"));

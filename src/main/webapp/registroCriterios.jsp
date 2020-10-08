@@ -34,8 +34,15 @@
                   </div>
                   <div class="collapse navbar-collapse" id="subenlaces">
                     <ul class="nav navbar-nav navbar-right">      
-                      <li><a href="SesionDocente">Regresar</a></li>
-                      <li><a href="Servlet_cerrarsesion">Cerrar sesión</a></li> 
+                        <c:if test="${!vistaAdmin}">
+                            <li><a href="SesionDocente">Regresar </a></li>
+                            <c:set var="hidden" value="hidden"></c:set>
+                        </c:if>
+                        <c:if test="${vistaAdmin}">
+                            <li><a href="VistaDocente">Regresar</a></li>
+                            <c:set var="hidden" value=""></c:set>
+                        </c:if>
+                        <li><a href="Servlet_cerrarsesion">Cerrar sesión</a></li> 
                     </ul>
                   </div>
                 </div>
@@ -64,7 +71,7 @@
                           <a data-parent="#accordion" data-toggle="collapse" href="#panel1" aria-expanded="true" aria-controls="panel1">
                               ${criterios[0][0]} - ${criterios[0][1]}
                           </a>
-                          <p class="text-danger">Puntaje: <span id="p1">${puntajes[0][4]}</span></p>
+                          <p class="text-danger ${hidden}">Puntaje: <span id="p1">${puntajes[0][4]}</span></p>
                         </h4>
                         <button type="button" class="collpase-button collapsed" data-parent="#accordion" data-toggle="collapse" href="#panel1"></button>
                       </div>
@@ -81,12 +88,12 @@
                                 <div class="form-group col-md-6">
                                     <label class="control-label">Carga de evidencia documental:</label>
                                     <br/>
-                                    <c:if test = "${docente.documentoCargado('2')==true}">
+                                    <c:if test = "${docente.documentoCargado2('2')==true}">
                                         <input id="btnEvidencia2" type="button" class="btn btn-sm btn-link" value="Ver archivo" onclick="abrirModalArchivo(2)"/>                                    
                                     </c:if>
-                                    <c:if test = "${docente.documentoCargado('2')==false}">
+                                    <c:if test = "${docente.documentoCargado2('2')==false}">
                                         <input id="btnEvidencia2" type="button" class="btn btn-sm btn-link incompleto" value="Subir archivo" onclick="abrirModalArchivo(2)"/>
-                                        <span class="glyphicon glyphicon-exclamation-sign incompleto" title="Sección incompleta" id="alertaBtnEvidencia2"></span>
+                                        
                                     </c:if> 
                                 </div>
                                 <div class="col-xs-12 text-right">
@@ -106,7 +113,7 @@
                           <a data-parent="#accordion" data-toggle="collapse" href="#panel2" aria-expanded="false" aria-controls="panel2">
                           ${criterios[1][0]} - ${criterios[1][1]}
                           </a>
-                          <p class="text-danger">Puntaje: <span id="p2">${puntajes[1][4]}</span></p>
+                          <p class="text-danger ${hidden}">Puntaje: <span id="p2">${puntajes[1][4]}</span></p>
                         </h4>
                         <button type="button" class="collpase-button collapsed" data-parent="#accordion" data-toggle="collapse" href="#panel2"></button>
                       </div>
@@ -121,8 +128,15 @@
                                   </select>
                                 </div>
                                 <div class="form-group col-md-6">
-                                    <label class="control-label">Carga de evidencia documental:</label>
-                                    <br/><input id="btnEvidencia10" type="button" class="btn btn-sm btn-link" value="Subir archivo" onclick="abrirModalArchivo(10)"/>
+                                    <label class="control-label">Carga de evidencia documental:</label><br/>
+                                    <c:if test = "${docente.documentoCargado2('10')==true}">
+                                        <input id="btnEvidencia10" type="button" class="btn btn-sm btn-link" value="Ver archivo" onclick="abrirModalArchivo(10)"/>                                                                            
+                                    </c:if>
+                                    <c:if test = "${docente.documentoCargado2('10')==false}">
+                                        <input id="btnEvidencia10" type="button" class="btn btn-sm btn-link incompleto" value="Subir archivo" onclick="abrirModalArchivo(10)"/>
+                                        
+                                    </c:if>
+                                    
                                 </div>
                                 <div class="col-xs-12 text-right">
                                     <input  class="btn btn-sm btn-primary" type="reset" value="Limpiar"/>
@@ -138,7 +152,7 @@
                           <a data-parent="#accordion" data-toggle="collapse" href="#panel3" aria-expanded="false" aria-controls="panel3">
                           ${criterios[2][0]} - ${criterios[2][1]}
                           </a>
-                          <p class="text-danger">Puntaje: <span id="p3">${puntajeEncuestas[5]}</span></p>
+                          <p class="text-danger ${hidden}">Puntaje: <span id="p3">${puntajeEncuestas[5]}</span></p>
                         </h4>
                         <button type="button" class="collpase-button collapsed" data-parent="#accordion" data-toggle="collapse" href="#panel3"></button>
                       </div>
@@ -146,10 +160,10 @@
                         <div class="panel-body">
                             <div class='table-responsive'>
                                 <table class='table table-condensed table-bordered'>
-                                    <tr><th>Encuesta</th><th>Estatus</th></tr>
-                                    <tr><td>A madres y padres de familia o tutores</td><td>${puntajeEncuestas[2]}</td></tr>
-                                    <tr><td>A alumnos</td><td>${puntajeEncuestas[3]}</td></tr>
-                                    <tr><td>A compañeros de trabajo</td><td>${puntajeEncuestas[4]}</td></tr>
+                                    <tr><th>Encuesta</th><th><c:if test="${vistaAdmin}">Puntaje</c:if><c:if test="${!vistaAdmin}">Estatus</c:if></th></tr>
+                                    <tr><td>A madres y padres de familia o tutores</td><td><c:if test="${vistaAdmin}">${puntajeEncuestas[2]}</c:if><c:if test="${!vistaAdmin}">Evaluado</c:if></td></tr>
+                                    <tr><td>A alumnos</td><td><c:if test="${vistaAdmin}">${puntajeEncuestas[3]}</c:if><c:if test="${!vistaAdmin}">Evaluado</c:if></td></tr>
+                                    <tr><td>A compañeros de trabajo</td><td><c:if test="${vistaAdmin}">${puntajeEncuestas[4]}</c:if><c:if test="${!vistaAdmin}">Evaluado</c:if></td></tr>
                                 </table>
                             </div>
                         </div>
@@ -161,7 +175,7 @@
                           <a data-parent="#accordion" data-toggle="collapse" href="#panel4" aria-expanded="false" aria-controls="panel4">
                           ${criterios[3][0]} - ${criterios[3][1]}
                           </a>
-                          <p class="text-danger">Puntaje: <span id="p4">${puntajes[3][4]}</span></p>
+                          <p class="text-danger ${hidden}">Puntaje: <span id="p4">${puntajes[3][4]}</span></p>
                         </h4>
                         <button type="button" class="collpase-button collapsed" data-parent="#accordion" data-toggle="collapse" href="#panel4"></button>
                       </div>
@@ -179,11 +193,12 @@
                                 <div class="form-group col-md-6">
                                     <label class="control-label">Carga de evidencia documental:</label>
                                     <br/>
-                                    <c:if test = "${docente.documentoCargado('1')==true}">
+                                    <c:if test = "${docente.documentoCargado2('1')==true}">
                                         <input id="btnEvidencia1" type="button" class="btn btn-sm btn-link" value="Ver archivo" onclick="abrirModalArchivo(1)"/>                                                                            
                                     </c:if>
-                                    <c:if test = "${docente.documentoCargado('1')==false}">
-                                        <input id="btnEvidencia1" type="button" class="btn btn-sm btn-link incompleto" value="Subir archivo" onclick="abrirModalArchivo(1)"/>                                        
+                                    <c:if test = "${docente.documentoCargado2('1')==false}">
+                                        <input id="btnEvidencia1" type="button" class="btn btn-sm btn-link incompleto" value="Subir archivo" onclick="abrirModalArchivo(1)"/>  
+                                        
                                     </c:if>
                                     
                                 </div>
@@ -201,7 +216,7 @@
                           <a data-parent="#accordion" data-toggle="collapse" href="#panel5" aria-expanded="false" aria-controls="panel5">
                           ${criterios[4][0]} - ${criterios[4][1]}
                           </a>
-                          <p class="text-danger">Puntaje: 
+                          <p class="text-danger ${hidden}">Puntaje: 
                               <span id="p5">
                                   <c:if test="${puntajes[4][3]!=null}">
                                       ${puntajes[4][4]}
@@ -243,8 +258,15 @@
                             
                             <input type='hidden' name='idCriterio' value='${criterios[4][0]}'>                                
                             <div class="form-group col-xs-12">
-                                <label class="control-label">Carga de evidencia documental:</label>
-                                <br/><input id="btnEvidencia13" type="button" class="btn btn-sm btn-link" value="Subir archivo" onclick="abrirModalArchivo(13)"/>
+                                <label class="control-label">Carga de evidencia documental:</label><br/>
+                                    <c:if test = "${docente.documentoCargado2('13')==true}">
+                                        <input id="btnEvidencia13" type="button" class="btn btn-sm btn-link" value="Ver archivo" onclick="abrirModalArchivo(13)"/>                                                                            
+                                    </c:if>
+                                    <c:if test = "${docente.documentoCargado2('13')==false}">
+                                        <input id="btnEvidencia13" type="button" class="btn btn-sm btn-link incompleto" value="Subir archivo" onclick="abrirModalArchivo(13)"/>  
+                                        
+                                    </c:if>
+                                
                             </div>
                                 
                             
@@ -263,7 +285,7 @@
                           <a data-parent="#accordion" data-toggle="collapse" href="#panel6" aria-expanded="false" aria-controls="panel6">
                           ${criterios[5][0]} - ${criterios[5][1]}
                           </a>
-                          <p class="text-danger">Puntaje: 
+                          <p class="text-danger ${hidden}">Puntaje: 
                               <span id="p6">
                                   <c:if test="${puntajes[5][3]!=null}">
                                       ${puntajes[5][4]}
@@ -304,7 +326,14 @@
                             <input type='hidden' name='idCriterio' value='${criterios[5][0]}'>                                
                             <div class="form-group col-xs-12">
                                 <label class="control-label">Carga de evidencia documental:</label>
-                                <br/><input id="btnEvidencia14" type="button" class="btn btn-sm btn-link" value="Subir archivo" onclick="abrirModalArchivo(14)"/>
+                                <br/>
+                                    <c:if test = "${docente.documentoCargado2('14')==true}">
+                                        <input id="btnEvidencia14" type="button" class="btn btn-sm btn-link" value="Ver archivo" onclick="abrirModalArchivo(14)"/>                                                                            
+                                    </c:if>
+                                    <c:if test = "${docente.documentoCargado2('14')==false}">
+                                        <input id="btnEvidencia14" type="button" class="btn btn-sm btn-link incompleto" value="Subir archivo" onclick="abrirModalArchivo(14)"/>  
+                                        
+                                    </c:if>
                             </div>
                                 
                             
@@ -323,7 +352,7 @@
                           <a data-parent="#accordion" data-toggle="collapse" href="#panel7" aria-expanded="false" aria-controls="panel7">
                           ${criterios[6][0]} - ${criterios[6][1]}
                           </a>
-                          <p class="text-danger">Puntaje: 
+                          <p class="text-danger ${hidden}">Puntaje: 
                               <span id="p7">
                                   <c:if test="${puntajes[6][3]!=null}">
                                       ${puntajes[6][4]}
@@ -363,7 +392,14 @@
                                 <input type='hidden' name='idCriterio' value='${criterios[6][0]}'>                                
                                 <div class="form-group col-xs-12">
                                     <label class="control-label">Carga de evidencia documental:</label>
-                                    <br/><input id="btnEvidencia15" type="button" class="btn btn-sm btn-link" value="Subir archivo" onclick="abrirModalArchivo(15)"/>
+                                    <br/>
+                                    <c:if test = "${docente.documentoCargado2('15')==true}">
+                                        <input id="btnEvidencia15" type="button" class="btn btn-sm btn-link" value="Ver archivo" onclick="abrirModalArchivo(15)"/>                                                                            
+                                    </c:if>
+                                    <c:if test = "${docente.documentoCargado2('15')==false}">
+                                        <input id="btnEvidencia15" type="button" class="btn btn-sm btn-link incompleto" value="Subir archivo" onclick="abrirModalArchivo(15)"/>  
+                                        
+                                    </c:if>
                                 </div>
                                 
                             </div>
@@ -381,7 +417,7 @@
                           <a data-parent="#accordion" data-toggle="collapse" href="#panel8" aria-expanded="false" aria-controls="panel8">
                           ${criterios[7][0]} - ${criterios[7][1]}
                           </a>
-                          <p class="text-danger">Puntaje: 
+                          <p class="text-danger ${hidden}">Puntaje: 
                               <span id="p8">
                                   <c:if test="${puntajes[7][3]!=null}">
                                       ${puntajes[7][4]}
@@ -422,7 +458,14 @@
                                 <input type='hidden' name='idCriterio' value='${criterios[7][0]}'>                                
                                 <div class="form-group col-xs-12">
                                     <label class="control-label">Carga de evidencia documental:</label>
-                                    <br/><input id="btnEvidencia16" type="button" class="btn btn-sm btn-link" value="Subir archivo" onclick="abrirModalArchivo(16)"/>
+                                    <br/>
+                                    <c:if test = "${docente.documentoCargado2('16')==true}">
+                                        <input id="btnEvidencia16" type="button" class="btn btn-sm btn-link" value="Ver archivo" onclick="abrirModalArchivo(16)"/>                                                                            
+                                    </c:if>
+                                    <c:if test = "${docente.documentoCargado2('16')==false}">
+                                        <input id="btnEvidencia16" type="button" class="btn btn-sm btn-link incompleto" value="Subir archivo" onclick="abrirModalArchivo(16)"/>  
+                                        
+                                    </c:if>
                                 </div>
                                 
                             
@@ -441,7 +484,7 @@
                           <a data-parent="#accordion" data-toggle="collapse" href="#panel9" aria-expanded="false" aria-controls="panel9">
                           ${criterios[8][0]} - ${criterios[8][1]}
                           </a>
-                          <p class="text-danger">Puntaje: 
+                          <p class="text-danger ${hidden}">Puntaje: 
                               <span id="p9">
                                   <c:if test="${puntajes[8][3]!=null}">
                                       ${puntajes[8][4]}
@@ -482,7 +525,14 @@
                                 <input type='hidden' name='idCriterio' value='${criterios[8][0]}'>                                
                                 <div class="form-group col-xs-12">
                                     <label class="control-label">Carga de evidencia documental:</label>
-                                    <br/><input id="btnEvidencia17" type="button" class="btn btn-sm btn-link" value="Subir archivo" onclick="abrirModalArchivo(17)"/>
+                                    <br/>
+                                    <c:if test = "${docente.documentoCargado2('17')==true}">
+                                        <input id="btnEvidencia17" type="button" class="btn btn-sm btn-link" value="Ver archivo" onclick="abrirModalArchivo(17)"/>                                                                            
+                                    </c:if>
+                                    <c:if test = "${docente.documentoCargado2('17')==false}">
+                                        <input id="btnEvidencia17" type="button" class="btn btn-sm btn-link incompleto" value="Subir archivo" onclick="abrirModalArchivo(17)"/>  
+                                        
+                                    </c:if>
                                 </div>
                                 
                             
@@ -501,7 +551,7 @@
                           <a data-parent="#accordion" data-toggle="collapse" href="#panel10" aria-expanded="false" aria-controls="panel10">
                           ${criterios[9][0]} - ${criterios[9][1]}
                           </a>
-                          <p class="text-danger">Puntaje: <span id="p10">${puntajes[9][4]+puntajes[10][4]+puntajes[11][4]+puntajes[12][4]+puntajes[13][4]+resultados[1]}</span></p>
+                          <p class="text-danger ${hidden}">Puntaje: <span id="p10">${puntajes[9][4]+puntajes[10][4]+puntajes[11][4]+puntajes[12][4]+puntajes[13][4]+resultados[1]}</span></p>
                         </h4>
                         <button type="button" class="collpase-button collapsed" data-parent="#accordion" data-toggle="collapse" href="#panel10"></button>
                       </div>
@@ -566,7 +616,14 @@
                                 </div>
                                 <div class="form-group col-md-12">
                                     <label class="control-label">Carga de evidencia documental:</label>
-                                    <br/><input id="btnEvidencia18" type="button" class="btn btn-sm btn-link" value="Subir archivo" onclick="abrirModalArchivo(18)"/>
+                                    <br/>
+                                    <c:if test = "${docente.documentoCargado2('18')==true}">
+                                        <input id="btnEvidencia18" type="button" class="btn btn-sm btn-link" value="Ver archivo" onclick="abrirModalArchivo(18)"/>                                                                            
+                                    </c:if>
+                                    <c:if test = "${docente.documentoCargado2('18')==false}">
+                                        <input id="btnEvidencia18" type="button" class="btn btn-sm btn-link incompleto" value="Subir archivo" onclick="abrirModalArchivo(18)"/>  
+                                        
+                                    </c:if>
                                 </div>
                                 <div class="col-xs-12 text-right">
                                     <input  class="btn btn-sm btn-primary" type="reset" value="Limpiar"/>
@@ -578,13 +635,13 @@
                     </div>
                       
                   </div>
-              <div class="container text-center" style="margin-bottom:15px;">
-                  <form action="#" method="POST">
-                      <input type="hidden" id="banderaCompleto" name="k" value="${banderaCompleto}">                      
+              <div class="container text-center" style="margin-bottom:15px;">                  
                       <br/>
+                      <c:if test="${!vistaAdmin}">
                       <a href="FichaRegistroPrevia"  target="_blank" class="btn btn-default" >Vista previa Ficha de registro</a>
-                      <input type="submit" disabled="true" class="btn btn-primary" value="Finalizar registro" id="btnFinalizar">
-                  </form>
+                      </c:if>
+                      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalConfirmacion2">Finalizar registro</button>
+                  
               </div>
               
         </main>
@@ -952,12 +1009,32 @@
               </div>
             </div>
         </div>
+        <div id="modalConfirmacion2" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  <h4 class="modal-title" >Confirmación</h4>
+                </div>
+                <div class="modal-body">
+                    <p id="mensajeConfirmacion">Una vez finalizado el proceso, la información no podra ser modificada<br/>¿Desea continuar?</p>                  
+                </div>
+                <div class="modal-footer">
+                  <form action="FinalizaProceso" method="POST">
+                    <input class="btn btn-sm btn-default" type="submit" value='Sí'/>
+                    <button type="button" class="btn btn-sm btn-default" data-dismiss="modal">No</button>
+                  </form>
+                  
+                </div>
+              </div>
+            </div>
+        </div>                       
         <script src="https://framework-gb.cdn.gob.mx/gobmx.js"></script>        
         <script src="https://code.jquery.com/jquery-1.12.4.js"></script>      
         <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>  
         <script src="https://framework-gb.cdn.gob.mx/assets/scripts/jquery-ui-datepicker.js"></script>
         <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.1/jquery.validate.min.js"></script>
         <script type="text/javascript" src="js/jquery.ui.datepicker.validation.js"></script>
-        <script src="js/funcionesEvidencias.js"></script> 
+        <script src="js/funcionesEvidencias.js?v=1"></script> 
     </body>
 </html>

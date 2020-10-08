@@ -66,13 +66,22 @@ public class Servlet_cbRegistroCriterios extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession session= (HttpSession) request.getSession();     
-        if(session.getAttribute("idUsuario")!=null&&session.getAttribute("rfc")!=null){            
+        if(session.getAttribute("rol")!=null){
+            String idUsuario,rfc;
+            boolean vistaAdmin;
+            if(session.getAttribute("rol").toString().equals("D")){
+                idUsuario=session.getAttribute("idUsuario").toString();
+                rfc=session.getAttribute("rfc").toString();
+                vistaAdmin=false;
+            }else{
+                idUsuario=session.getAttribute("idDocente").toString();                
+                rfc=session.getAttribute("rfcDocente").toString();
+                vistaAdmin=true;
+            }           
             Docente docente;  
             Metodos_sql metodos=new Metodos_sql();
             CriteriosValoracion cv=new CriteriosValoracion();
-            String[] parametros={""};
-            String idUsuario=session.getAttribute("idUsuario").toString();
-            String rfc=session.getAttribute("rfc").toString();
+            String[] parametros={""};            
             List<String[]>criterios=metodos.ejecutaSP("sp_selectCatCriteriosValoracion", parametros);
             
             docente=new Docente();
@@ -92,6 +101,7 @@ public class Servlet_cbRegistroCriterios extends HttpServlet {
             request.setAttribute("tutorias", cv.getFilasTutorias(idUsuario));
             request.setAttribute("publicaciones", cv.getFilasPublicaciones(idUsuario));
             request.setAttribute("resultados", cv.getFilasResultados(idUsuario));
+            request.setAttribute("vistaAdmin", vistaAdmin);
             ServletContext sc = getServletContext();
             RequestDispatcher rd = sc.getRequestDispatcher("/registroCriterios.jsp");
             rd.forward(request,response);

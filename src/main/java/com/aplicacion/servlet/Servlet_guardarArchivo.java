@@ -94,7 +94,16 @@ public class Servlet_guardarArchivo extends HttpServlet {
             p.load(new FileReader(request.getServletContext().getInitParameter("rutaConfig")));
             String ruta=p.getProperty("rutaEvidenciasRegistro");
             HttpSession session= (HttpSession) request.getSession();
-            String idUsuario=session.getAttribute("idUsuario").toString();
+            
+            String idUsuario,rfc;
+            if(session.getAttribute("rol").toString().equals("D")){
+                idUsuario=session.getAttribute("idUsuario").toString();
+                rfc=session.getAttribute("rfc").toString();
+            }else{
+                idUsuario=session.getAttribute("idDocente").toString();                
+                rfc=session.getAttribute("rfcDocente").toString();
+            }
+            
             
             String idRequisito=request.getParameter("idArchivo");
             

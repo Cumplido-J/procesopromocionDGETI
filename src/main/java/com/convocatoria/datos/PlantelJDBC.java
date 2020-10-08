@@ -60,8 +60,9 @@ public class PlantelJDBC {
         Plantel plantel = null;
         //conn = conector();
         try {
-            String[] parametros=new String[1];
-            parametros[0]=""+_entidad;
+            String[] parametros=new String[2];
+            parametros[0]="1";
+            parametros[1]=""+_entidad;
             List<String[]>datos=metodos.ejecutaSP("sp_selectCatPlanteles", parametros);
             /*CallableStatement stmt = conn.prepareCall(SP_BUSCAR_PLANTELES);
             stmt.setInt(1, _entidad);

@@ -70,9 +70,16 @@ public class Servlet_cbFichaRegistro extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession session= (HttpSession) request.getSession();     
-        if(session.getAttribute("idUsuario")!=null){
-            String idUsuario=session.getAttribute("idUsuario").toString();
-            String rfc=session.getAttribute("rfc").toString();
+        if(session.getAttribute("rol")!=null){
+            String idUsuario,rfc;
+            if(session.getAttribute("rol").toString().equals("D")){
+                idUsuario=session.getAttribute("idUsuario").toString();
+                rfc=session.getAttribute("rfc").toString();
+            }else{
+                idUsuario=session.getAttribute("idDocente").toString();                
+                rfc=session.getAttribute("rfcDocente").toString();
+            }
+            
             CriteriosValoracion cv=new CriteriosValoracion();
             docente=new Docente();
             docente.setIdUsuario(idUsuario);

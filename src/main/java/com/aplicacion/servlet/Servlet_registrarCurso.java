@@ -82,7 +82,14 @@ public class Servlet_registrarCurso extends HttpServlet {
         try {
             Fecha fecha=new Fecha();
             HttpSession session= (HttpSession) request.getSession();
-            String idUsuario=session.getAttribute("idUsuario").toString();            
+            String idUsuario,rfc;
+            if(session.getAttribute("rol").toString().equals("D")){
+                idUsuario=session.getAttribute("idUsuario").toString();
+                rfc=session.getAttribute("rfc").toString();
+            }else{
+                idUsuario=session.getAttribute("idDocente").toString();                
+                rfc=session.getAttribute("rfcDocente").toString();
+            }           
             Metodos_sql metodo = new Metodos_sql(); 
             if(request.getParameter("id")==null){
                 String tipo=request.getParameter("tipo");

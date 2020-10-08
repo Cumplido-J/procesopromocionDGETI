@@ -33,8 +33,13 @@
                     <a class="navbar-brand" href="/">UEMSTIS</a>
                   </div>
                   <div class="collapse navbar-collapse" id="subenlaces">
-                    <ul class="nav navbar-nav navbar-right">      
-                      <li><a href="SesionDocente">Regresar</a></li>
+                    <ul class="nav navbar-nav navbar-right"> 
+                      <c:if test="${!vistaAdmin}">
+                        <li><a href="SesionDocente">Regresar</a></li>
+                      </c:if>
+                      <c:if test="${vistaAdmin}">
+                        <li><a href="VistaDocente">Regresar</a></li>
+                      </c:if>
                       <li><a href="Servlet_cerrarsesion">Cerrar sesión</a></li> 
                     </ul>
                   </div>
@@ -61,10 +66,12 @@
                   A continuación se muestran tres secciones, en cada una deberá registrar el CURP y correo de diez personas para la aplicación de encuestas.
                   <br/><br/>
               </div>
+              <c:if test="${!vistaAdmin}">
               <div class="text-center">
                 <input type="button" class="btn btn-link btn-sm" id="btnAgregar" value="(+) Agregar información" onClick="mostrarModal()"/>
                 <br/><br/>
               </div>
+              </c:if>
               <ul class="nav nav-tabs">                  
                 <li class="active">
                     <a data-toggle="tab" href="#seccion1">Alumnos
@@ -171,9 +178,11 @@
                   <div class="text-right"><span id="c3"><c:out value="${filas[2][1]}"></c:out></span> de 10 registrados</div>
                 </div>
               </div>
+              <c:if test="${!vistaAdmin}">
               <div class="text-center">
                   <a href="evidenciaRegistro.jsp" class="btn btn-primary disabled" id="btnFinalizar">Continuar</a>
               </div>
+              </c:if>
             </div> 
             
         </main>        
@@ -183,15 +192,27 @@
               <div class="modal-content">
                 <div class="modal-header">
                   <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  <c:if test="${!vistaAdmin}">
                   <h4 class="modal-title" >Confirmación</h4>
+                  </c:if>
+                  <c:if test="${vistaAdmin}">
+                  <h4 class="modal-title" >Aviso</h4>
+                  </c:if>
                 </div>
-                <div class="modal-body">
-                    <p>La información seleccionada será borrada<br/>¿Desea continuar?</p>                  
+                <c:if test="${!vistaAdmin}">
+                    <div class="modal-body">
+                        <p>La información seleccionada será borrada<br/>¿Desea continuar?</p>                  
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" id="btnCancelaPin" class="btn btn-sm btn-default">Sí</button>
+                      <button type="button" class="btn btn-sm btn-default" data-dismiss="modal">No</button>
+                    </div>
+                </c:if>
+              <c:if test="${vistaAdmin}">
+                  <div class="modal-body">
+                    <p>La información seleccionada no puede ser borrada</p>                  
                 </div>
-                <div class="modal-footer">
-                  <button type="button" id="btnCancelaPin" class="btn btn-sm btn-default">Sí</button>
-                  <button type="button" class="btn btn-sm btn-default" data-dismiss="modal">No</button>
-                </div>
+              </c:if>
               </div>
             </div>
         </div>

@@ -98,7 +98,10 @@ public class Servlet_registroComite extends HttpServlet {
                     
                 }
                 session.setAttribute("idComite", datos[0]);
+                session.setAttribute("idDocente", "comite"+datos[0]);
+                session.setAttribute("rfcDocente", "-");
                 request.setAttribute("datos", datos);
+                request.setAttribute("aux", "comite"+datos[0]+"_19");
                 ServletContext sc = getServletContext();
                 RequestDispatcher rd = sc.getRequestDispatcher("/conformacionComite.jsp");
                 rd.forward(request,response);

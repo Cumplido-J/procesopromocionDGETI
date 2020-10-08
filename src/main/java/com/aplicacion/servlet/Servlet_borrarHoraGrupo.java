@@ -82,8 +82,13 @@ public class Servlet_borrarHoraGrupo extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         HttpSession session= (HttpSession) request.getSession();     
-        if(session.getAttribute("idUsuario")!=null){
-            String idUsuario=session.getAttribute("idUsuario").toString();
+        if(session.getAttribute("rol")!=null){
+            String idUsuario;
+            if(session.getAttribute("rol").toString().equals("D")){
+                idUsuario=session.getAttribute("idUsuario").toString();
+            }else{
+                idUsuario=session.getAttribute("idDocente").toString();
+            }
             String id=request.getParameter("i");
             Docente d=new Docente();
             d.setIdUsuario(idUsuario);

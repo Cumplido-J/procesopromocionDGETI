@@ -6,7 +6,6 @@ C:\Users\David Reyna\Desktop\repo2\desarrollo\procesopromocion\src\main\java\com
 C:\Users\David Reyna\Desktop\repo2\desarrollo\procesopromocion\src\main\java\com\convocatoria\datos\ConsultarComitesJDBC.java
 C:\Users\David Reyna\Desktop\repo2\desarrollo\procesopromocion\src\main\java\com\aplicacion\servlet\Servlet_generaSesion.java
 C:\Users\David Reyna\Desktop\repo2\desarrollo\procesopromocion\src\main\java\metodos_sql\Metodos_sql.java
-C:\Users\David Reyna\Desktop\repo2\desarrollo\procesopromocion\src\main\java\com\aplicacion\servlet\Servlet_evidenciasRegistro.java
 C:\Users\David Reyna\Desktop\repo2\desarrollo\procesopromocion\src\main\java\com\aplicacion\servlet\Servlet_regresar.java
 C:\Users\David Reyna\Desktop\repo2\desarrollo\procesopromocion\src\main\java\com\aplicacion\servlet\Servlet_cbSesionDocente.java
 C:\Users\David Reyna\Desktop\repo2\desarrollo\procesopromocion\src\main\java\com\convocatoria\datos\EntidadJDBC.java
@@ -17,6 +16,7 @@ C:\Users\David Reyna\Desktop\repo2\desarrollo\procesopromocion\src\main\java\com
 C:\Users\David Reyna\Desktop\repo2\desarrollo\procesopromocion\src\main\java\com\aplicacion\servlet\Servlet_registrarCriterio.java
 C:\Users\David Reyna\Desktop\repo2\desarrollo\procesopromocion\src\main\java\herramientas\Correo.java
 C:\Users\David Reyna\Desktop\repo2\desarrollo\procesopromocion\src\main\java\com\aplicacion\servlet\Servlet_iniciosesion_vacancia.java
+C:\Users\David Reyna\Desktop\repo2\desarrollo\procesopromocion\src\main\java\com\aplicacion\servlet\Servlet_login.java
 C:\Users\David Reyna\Desktop\repo2\desarrollo\procesopromocion\src\main\java\com\convocatoria\domain\Comites.java
 C:\Users\David Reyna\Desktop\repo2\desarrollo\procesopromocion\src\main\java\com\aplicacion\servlet\Servlet_recuperarclave.java
 C:\Users\David Reyna\Desktop\repo2\desarrollo\procesopromocion\src\main\java\herramientas\CriteriosValoracion.java
@@ -25,12 +25,13 @@ C:\Users\David Reyna\Desktop\repo2\desarrollo\procesopromocion\src\main\java\com
 C:\Users\David Reyna\Desktop\repo2\desarrollo\procesopromocion\src\main\java\com\convocatoria\servlet\ServletControladorProgramasPlantel.java
 C:\Users\David Reyna\Desktop\repo2\desarrollo\procesopromocion\src\main\java\com\convocatoria\reportes\ReporteConvocatoria.java
 C:\Users\David Reyna\Desktop\repo2\desarrollo\procesopromocion\src\main\java\com\aplicacion\servlet\Servlet_cbRegistro.java
+C:\Users\David Reyna\Desktop\repo2\desarrollo\procesopromocion\src\main\java\com\aplicacion\servlet\Servlet_borrarComite.java
 C:\Users\David Reyna\Desktop\repo2\desarrollo\procesopromocion\src\main\java\com\aplicacion\servlet\Servlet_cbFichaRegistro.java
 C:\Users\David Reyna\Desktop\repo2\desarrollo\procesopromocion\src\main\java\com\convocatoria\datos\PlantelJDBC.java
-C:\Users\David Reyna\Desktop\repo2\desarrollo\procesopromocion\src\main\java\com\aplicacion\servlet\Servlet_borrarComites.java
 C:\Users\David Reyna\Desktop\repo2\desarrollo\procesopromocion\src\main\java\com\aplicacion\servlet\Servlet_buscarComite.java
 C:\Users\David Reyna\Desktop\repo2\desarrollo\procesopromocion\src\main\java\com\aplicacion\servlet\Servlet_convocatoria.java
 C:\Users\David Reyna\Desktop\repo2\desarrollo\procesopromocion\src\main\java\com\aplicacion\servlet\Servlet_registrarCurso.java
+C:\Users\David Reyna\Desktop\repo2\desarrollo\procesopromocion\src\main\java\com\aplicacion\servlet\Servlet_finalizaProceso.java
 C:\Users\David Reyna\Desktop\repo2\desarrollo\procesopromocion\src\main\java\com\convocatoria\servlet\ServletControladorPlantel.java
 C:\Users\David Reyna\Desktop\repo2\desarrollo\procesopromocion\src\main\java\herramientas\Fecha.java
 C:\Users\David Reyna\Desktop\repo2\desarrollo\procesopromocion\src\main\java\herramientas\Imagen.java
@@ -66,12 +67,14 @@ C:\Users\David Reyna\Desktop\repo2\desarrollo\procesopromocion\src\main\java\com
 C:\Users\David Reyna\Desktop\repo2\desarrollo\procesopromocion\src\main\java\com\aplicacion\servlet\Servlet_registrarAportacion.java
 C:\Users\David Reyna\Desktop\repo2\desarrollo\procesopromocion\src\main\java\com\aplicacion\servlet\Servlet_recuperarclave_vacancia.java
 C:\Users\David Reyna\Desktop\repo2\desarrollo\procesopromocion\src\main\java\com\convocatoria\domain\Vacancia.java
+C:\Users\David Reyna\Desktop\repo2\desarrollo\procesopromocion\src\main\java\com\aplicacion\servlet\Servlet_buscarDocente.java
 C:\Users\David Reyna\Desktop\repo2\desarrollo\procesopromocion\src\main\java\com\convocatoria\reportes\Reporteador.java
 C:\Users\David Reyna\Desktop\repo2\desarrollo\procesopromocion\src\main\java\herramientas\WebService.java
 C:\Users\David Reyna\Desktop\repo2\desarrollo\procesopromocion\src\main\java\com\aplicacion\servlet\Servlet_registrarTutoria.java
 C:\Users\David Reyna\Desktop\repo2\desarrollo\procesopromocion\src\main\java\com\convocatoria\domain\Entidad.java
 C:\Users\David Reyna\Desktop\repo2\desarrollo\procesopromocion\src\main\java\com\aplicacion\servlet\Servlet_consultaWSPersonal.java
 C:\Users\David Reyna\Desktop\repo2\desarrollo\procesopromocion\src\main\java\com\aplicacion\servlet\Servlet_registroBitacora.java
+C:\Users\David Reyna\Desktop\repo2\desarrollo\procesopromocion\src\main\java\herramientas\Archivo.java
 C:\Users\David Reyna\Desktop\repo2\desarrollo\procesopromocion\src\main\java\com\aplicacion\servlet\Servlet_buscar_vacancia.java
 C:\Users\David Reyna\Desktop\repo2\desarrollo\procesopromocion\src\main\java\com\aplicacion\servlet\Servlet_P_Vacancia.java
 C:\Users\David Reyna\Desktop\repo2\desarrollo\procesopromocion\src\main\java\com\aplicacion\beans\Docente.java
@@ -92,8 +95,10 @@ C:\Users\David Reyna\Desktop\repo2\desarrollo\procesopromocion\src\main\java\com
 C:\Users\David Reyna\Desktop\repo2\desarrollo\procesopromocion\src\main\java\com\convocatoria\datos\ProgramasPlantelJDBC.java
 C:\Users\David Reyna\Desktop\repo2\desarrollo\procesopromocion\src\main\java\com\aplicacion\servlet\Servlet_agregar_usuario.java
 C:\Users\David Reyna\Desktop\repo2\desarrollo\procesopromocion\src\main\java\com\aplicacion\servlet\Servlet_registroHorasGrupo.java
+C:\Users\David Reyna\Desktop\repo2\desarrollo\procesopromocion\src\main\java\com\aplicacion\servlet\Servlet_borrarIntegrante.java
 C:\Users\David Reyna\Desktop\repo2\desarrollo\procesopromocion\src\main\java\com\aplicacion\servlet\Servlet_guardar_convocatoria.java
 C:\Users\David Reyna\Desktop\repo2\desarrollo\procesopromocion\src\main\java\com\aplicacion\beans\Plaza.java
+C:\Users\David Reyna\Desktop\repo2\desarrollo\procesopromocion\src\main\java\com\aplicacion\servlet\Servlet_cbSesionAdministrador.java
 C:\Users\David Reyna\Desktop\repo2\desarrollo\procesopromocion\src\main\java\com\aplicacion\servlet\Servlet_cerrarsesion.java
 C:\Users\David Reyna\Desktop\repo2\desarrollo\procesopromocion\src\main\java\com\aplicacion\servlet\Servlet_regresar3.java
 C:\Users\David Reyna\Desktop\repo2\desarrollo\procesopromocion\src\main\java\com\convocatoria\datos\VacanciaJDBC.java
@@ -105,6 +110,7 @@ C:\Users\David Reyna\Desktop\repo2\desarrollo\procesopromocion\src\main\java\com
 C:\Users\David Reyna\Desktop\repo2\desarrollo\procesopromocion\src\main\java\com\aplicacion\servlet\Servlet_cbRegistroCriterios.java
 C:\Users\David Reyna\Desktop\repo2\desarrollo\procesopromocion\src\main\java\com\aplicacion\servlet\Servlet_cbVistaDocente.java
 C:\Users\David Reyna\Desktop\repo2\desarrollo\procesopromocion\src\main\java\com\aplicacion\servlet\Servlet_borrarHoraGrupo.java
+C:\Users\David Reyna\Desktop\repo2\desarrollo\procesopromocion\src\main\java\com\aplicacion\servlet\Servlet_finalizarConformacion.java
 C:\Users\David Reyna\Desktop\repo2\desarrollo\procesopromocion\src\main\java\com\aplicacion\servlet\Servlet_logouemstis.java
 C:\Users\David Reyna\Desktop\repo2\desarrollo\procesopromocion\src\main\java\com\aplicacion\servlet\Servlet_modificar_usuario2.java
 C:\Users\David Reyna\Desktop\repo2\desarrollo\procesopromocion\src\main\java\com\aplicacion\beans\Personal.java

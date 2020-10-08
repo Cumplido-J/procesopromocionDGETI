@@ -19,7 +19,6 @@ com\aplicacion\beans\Docente$1.class
 com\aplicacion\servlet\Servlet_ir_a_vacantes.class
 com\aplicacion\servlet\Servlet_cargar_convocatoria.class
 com\convocatoria\servlet\ServletControladorConsultarComite.class
-com\aplicacion\servlet\Servlet_borrarComites.class
 com\aplicacion\servlet\Servlet_iniciosesion_administrador.class
 com\aplicacion\servlet\Servlet_cbRegistroEncuestados.class
 com\aplicacion\servlet\Servlet_agregar_vacantes.class
@@ -43,6 +42,7 @@ com\aplicacion\servlet\Servlet_buscar_buscar_convocatoria.class
 com\aplicacion\servlet\Servlet_registrarPublicacion.class
 com\aplicacion\servlet\Servlet_registroInfoAcademica.class
 com\aplicacion\beans\CatalogoPersonal.class
+com\aplicacion\servlet\Servlet_borrarComite.class
 herramientas\Imagen.class
 com\aplicacion\servlet\Servlet_buscar_convocatoria.class
 com\aplicacion\servlet\Servlet_guardar_vacancia.class
@@ -63,6 +63,7 @@ com\aplicacion\servlet\Servlet_regresar3.class
 com\convocatoria\servlet\ServletControladorVacancia.class
 com\aplicacion\servlet\Servlet_agregar_usuario.class
 com\aplicacion\servlet\Servlet_registroInfoHoras.class
+com\aplicacion\servlet\Servlet_buscarDocente.class
 com\aplicacion\servlet\Servlet_muestraArchivo.class
 com\aplicacion\servlet\Servlet_consultaCatalogos.class
 com\aplicacion\servlet\Servlet_cbFichaRegistroPrevia.class
@@ -70,6 +71,7 @@ com\aplicacion\beans\Personal.class
 correos\Validar_correo.class
 herramientas\CriteriosValoracion.class
 com\aplicacion\servlet\Servlet_borrarHoraGrupo.class
+com\aplicacion\servlet\Servlet_login.class
 com\aplicacion\servlet\Servlet_cbRegistro.class
 com\aplicacion\servlet\Servlet_agregar_convocatoria.class
 com\aplicacion\beans\Grupo.class
@@ -83,7 +85,6 @@ com\aplicacion\servlet\Servlet_recuperarclave_vacancia.class
 com\convocatoria\domain\Convocatoria.class
 com\aplicacion\servlet\Servlet_logouemstis.class
 com\aplicacion\servlet\Servlet_registrarCurso.class
-com\aplicacion\servlet\Servlet_evidenciasRegistro.class
 com\aplicacion\servlet\Servlet_registrarResultado.class
 com\convocatoria\datos\ConsultarComitesJDBC.class
 com\aplicacion\servlet\Servlet_buscarComite.class
@@ -93,6 +94,7 @@ com\aplicacion\servlet\Servlet_modificar_convocatoria.class
 herramientas\Catalogos.class
 com\convocatoria\datos\ConvocatoriaJDBC.class
 com\aplicacion\servlet\Servlet_guardarArchivo.class
+com\aplicacion\servlet\Servlet_finalizaProceso.class
 com\aplicacion\servlet\Servlet_registrarParticipacion.class
 com\convocatoria\domain\Plantel.class
 com\aplicacion\servlet\Servlet_preregistro.class
@@ -100,6 +102,7 @@ com\convocatoria\reportes\Reporteador.class
 com\convocatoria\servlet\ServletControlador.class
 com\aplicacion\servlet\Servlet_registroIntegranteComite.class
 correos\Enviar_clave.class
+herramientas\Archivo.class
 com\aplicacion\servlet\Servlet_P_Vacancia.class
 com\aplicacion\servlet\Servlet_regresar.class
 metodos_sql\Metodos_sql.class
@@ -109,7 +112,10 @@ herramientas\RutaConfig.class
 com\aplicacion\servlet\Servlet_regresar2.class
 com\convocatoria\servlet\ServletReporte.class
 seguridad\Encriptar_Desencriptar.class
+com\aplicacion\servlet\Servlet_borrarIntegrante.class
+com\aplicacion\servlet\Servlet_finalizarConformacion.class
 com\convocatoria\servlet\ServletControladorEntidad.class
 com\aplicacion\servlet\Servlet_guardar_datos2.class
+com\aplicacion\servlet\Servlet_cbSesionAdministrador.class
 com\aplicacion\servlet\Servlet_convocatoria.class
 com\aplicacion\servlet\Servlet_guardar.class

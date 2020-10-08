@@ -67,25 +67,39 @@ public class Servlet_cbRegistroEncuestados extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        HttpSession session= (HttpSession) request.getSession();     
-        if(session.getAttribute("idUsuario")!=null&&session.getAttribute("rfc")!=null){            
+        HttpSession session= (HttpSession) request.getSession();  
+        String id="",rfc="";
+        boolean vistaAdmin=false;
+        if(session.getAttribute("rol").toString().equals("A")){            
+            id=session.getAttribute("idDocente").toString();
+            rfc=session.getAttribute("rfcDocente").toString();
+            vistaAdmin=true;
+        }else{   
+            id=session.getAttribute("idUsuario").toString();
+            rfc=session.getAttribute("rfc").toString();
+            vistaAdmin=false;            
+        }
+        
+        if(!id.equals("")&&!rfc.equals("")){           
             Docente docente;           
             docente=new Docente();
-            docente.setIdUsuario(session.getAttribute("idUsuario").toString());
-            docente.setRfc(session.getAttribute("rfc").toString());
+            docente.setIdUsuario(id);
+            docente.setRfc(rfc);
             docente.consultaInfoAspirante();
             docente.consultaEncuestados();
             String[][] filas=docente.generaFilasEncuestados();
             //String datos[]=docente.getInfoRegistro();
-            if(docente.getTotalEncuestados()<30){
+            //if(docente.getTotalEncuestados()<30){
+                
                 request.setAttribute("docente", docente);            
                 request.setAttribute("filas", filas);  
                 ServletContext sc = getServletContext();
+                request.setAttribute("vistaAdmin", vistaAdmin);
                 RequestDispatcher rd = sc.getRequestDispatcher("/registroEncuestados.jsp");
                 rd.forward(request,response);
-            }else{
-                response.sendRedirect("SesionDocente");
-            }            
+            //}else{
+                //response.sendRedirect("SesionDocente");
+            //}            
         }else{
             response.sendRedirect("login.jsp");
         }

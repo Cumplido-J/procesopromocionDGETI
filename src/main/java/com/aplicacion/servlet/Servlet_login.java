@@ -90,6 +90,7 @@ public class Servlet_login extends HttpServlet {
                     session.setAttribute("plantel", datos.get(0)[2]);
                     session.setAttribute("rfc", datos.get(0)[5]);
                     session.setAttribute("nombre", datos.get(0)[3]);
+                    session.setAttribute("rol", datos.get(0)[6]);
                     if(datos.get(0)[6].equals("D")){
                         response.sendRedirect("SesionDocente"); 
                     }else{                        

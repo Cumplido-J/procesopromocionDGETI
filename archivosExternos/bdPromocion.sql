@@ -119,7 +119,7 @@ CREATE TABLE `aspirantes` (
 
 LOCK TABLES `aspirantes` WRITE;
 /*!40000 ALTER TABLE `aspirantes` DISABLE KEYS */;
-INSERT INTO `aspirantes` VALUES (36,29,3534,44,2000,12,1,2001,'1111111','S','2019-09-01','2020-01-01',26,'2020-10-01',1,'S','2020-01-01',35,6,'N','N','N',0,NULL,NULL,995,'2020-08-17 11:28:43','N',4);
+INSERT INTO `aspirantes` VALUES (36,29,3534,44,2000,12,1,2001,'1111111','S','2019-09-01','2020-01-01',26,'2020-10-01',1,'S','2020-01-01',35,6,'N','N','N',0,NULL,NULL,995,'2020-10-08 14:31:54','N',4);
 /*!40000 ALTER TABLE `aspirantes` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -139,7 +139,7 @@ CREATE TABLE `bitacora` (
   PRIMARY KEY (`id`),
   KEY `fk_idUsuarioBitacora_idx` (`idUsuario`),
   CONSTRAINT `fk_idUsuarioBitacora` FOREIGN KEY (`idUsuario`) REFERENCES `usuario` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE=InnoDB AUTO_INCREMENT=123 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=126 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -148,7 +148,7 @@ CREATE TABLE `bitacora` (
 
 LOCK TABLES `bitacora` WRITE;
 /*!40000 ALTER TABLE `bitacora` DISABLE KEYS */;
-INSERT INTO `bitacora` VALUES (111,29,'A','AAAS860114A5A:El usuario confirma que: no cumple ningun requisito de la plaza que aspira','2020-08-12 18:41:57'),(112,29,'A','El usuario finalizó el registro','2020-08-12 18:42:16'),(113,29,'A','AAAS860114A5A:El usuario confirma que: no cumple ningun requisito de la plaza que aspira','2020-08-12 18:44:19'),(114,29,'C','AAAS860114A5A:El usuario confirma que:¿Deseas confirmar que la información es correcta?idHora:285','2020-08-12 18:48:17'),(115,29,'C','AAAS860114A5A:El usuario confirma que:¿Deseas confirmar que la información es correcta?idHora:284','2020-08-12 18:48:19'),(116,29,'C','AAAS860114A5A:El usuario confirma que:¿Deseas confirmar que la información es correcta?idHora:287','2020-08-12 18:48:23'),(117,29,'C','AAAS860114A5A:El usuario confirma que:¿Deseas confirmar que la información es correcta?idHora:289','2020-08-12 18:48:25'),(118,29,'C','AAAS860114A5A:El usuario confirma que:¿Deseas confirmar que la información es correcta?idHora:288','2020-08-12 18:48:28'),(119,29,'C','AAAS860114A5A:El usuario confirma que:¿Deseas confirmar que la información es correcta?idHora:286','2020-08-12 18:48:30'),(120,29,'A','El usuario finalizó el registro','2020-08-12 18:50:20'),(121,29,'A','El usuario finalizó el registro','2020-08-12 20:20:15'),(122,29,'A','El usuario finalizó el registro','2020-08-17 11:28:43');
+INSERT INTO `bitacora` VALUES (111,29,'A','AAAS860114A5A:El usuario confirma que: no cumple ningun requisito de la plaza que aspira','2020-08-12 18:41:57'),(112,29,'A','El usuario finalizó el registro','2020-08-12 18:42:16'),(113,29,'A','AAAS860114A5A:El usuario confirma que: no cumple ningun requisito de la plaza que aspira','2020-08-12 18:44:19'),(114,29,'C','AAAS860114A5A:El usuario confirma que:¿Deseas confirmar que la información es correcta?idHora:285','2020-08-12 18:48:17'),(115,29,'C','AAAS860114A5A:El usuario confirma que:¿Deseas confirmar que la información es correcta?idHora:284','2020-08-12 18:48:19'),(116,29,'C','AAAS860114A5A:El usuario confirma que:¿Deseas confirmar que la información es correcta?idHora:287','2020-08-12 18:48:23'),(117,29,'C','AAAS860114A5A:El usuario confirma que:¿Deseas confirmar que la información es correcta?idHora:289','2020-08-12 18:48:25'),(118,29,'C','AAAS860114A5A:El usuario confirma que:¿Deseas confirmar que la información es correcta?idHora:288','2020-08-12 18:48:28'),(119,29,'C','AAAS860114A5A:El usuario confirma que:¿Deseas confirmar que la información es correcta?idHora:286','2020-08-12 18:48:30'),(120,29,'A','El usuario finalizó el registro','2020-08-12 18:50:20'),(121,29,'A','El usuario finalizó el registro','2020-08-12 20:20:15'),(122,29,'A','El usuario finalizó el registro','2020-08-17 11:28:43'),(123,29,'A','El usuario finalizó el proceso','2020-10-08 10:42:58'),(124,29,'A','El usuario finalizó el proceso','2020-10-08 10:44:18'),(125,29,'A','El usuario finalizó el proceso','2020-10-08 14:31:56');
 /*!40000 ALTER TABLE `bitacora` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1107,7 +1107,7 @@ CREATE TABLE `comite` (
   KEY `fkProgramaComite_idx` (`idPrograma`),
   CONSTRAINT `fkPlantelComite` FOREIGN KEY (`idPlantel`) REFERENCES `catplanteles` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `fkProgramaComite` FOREIGN KEY (`idPrograma`) REFERENCES `catprogramas` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1116,7 +1116,7 @@ CREATE TABLE `comite` (
 
 LOCK TABLES `comite` WRITE;
 /*!40000 ALTER TABLE `comite` DISABLE KEYS */;
-INSERT INTO `comite` VALUES (27,7,1,'R','V');
+INSERT INTO `comite` VALUES (27,7,1,'R','V'),(28,291,1,'R','V');
 /*!40000 ALTER TABLE `comite` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1147,7 +1147,7 @@ CREATE TABLE `constanciasproceso` (
   CONSTRAINT `fkCatPuntaje3` FOREIGN KEY (`idCatPuntaje3`) REFERENCES `catpuntaje` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `fkCriterioConstancia` FOREIGN KEY (`idCriterio`) REFERENCES `catcriteriosvaloracion` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `fkUsuario` FOREIGN KEY (`idUsuario`) REFERENCES `usuario` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1156,7 +1156,7 @@ CREATE TABLE `constanciasproceso` (
 
 LOCK TABLES `constanciasproceso` WRITE;
 /*!40000 ALTER TABLE `constanciasproceso` DISABLE KEYS */;
-INSERT INTO `constanciasproceso` VALUES (21,29,1,1,NULL,NULL,'P',NULL),(22,29,2,6,NULL,NULL,'P',NULL),(23,29,4,12,NULL,NULL,'P',NULL);
+INSERT INTO `constanciasproceso` VALUES (21,29,1,2,NULL,NULL,'P',NULL),(22,29,2,7,NULL,NULL,'P',NULL),(23,29,4,12,NULL,NULL,'P',NULL),(24,29,10,34,NULL,NULL,'P',NULL),(25,29,11,36,NULL,NULL,'P',NULL),(26,29,12,38,NULL,NULL,'P',NULL),(27,29,13,41,NULL,NULL,'P',NULL),(28,29,14,46,NULL,NULL,'P',NULL);
 /*!40000 ALTER TABLE `constanciasproceso` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1178,7 +1178,7 @@ CREATE TABLE `constanciasregistro` (
   KEY `fkRequisito_idx` (`idRequisito`),
   CONSTRAINT `fkRequisito` FOREIGN KEY (`idRequisito`) REFERENCES `catrequisitosregistro` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `fkUsuario3` FOREIGN KEY (`idUsuario`) REFERENCES `usuario` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE=InnoDB AUTO_INCREMENT=102 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=103 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1187,7 +1187,7 @@ CREATE TABLE `constanciasregistro` (
 
 LOCK TABLES `constanciasregistro` WRITE;
 /*!40000 ALTER TABLE `constanciasregistro` DISABLE KEYS */;
-INSERT INTO `constanciasregistro` VALUES (96,29,1,'F',NULL),(97,29,8,'F',NULL),(98,29,2,'F',NULL),(99,29,3,'F',NULL),(100,29,6,'F',NULL),(101,29,4,'F',NULL);
+INSERT INTO `constanciasregistro` VALUES (96,29,1,'F',NULL),(97,29,8,'F',NULL),(98,29,2,'F',NULL),(99,29,3,'F',NULL),(100,29,6,'F',NULL),(101,29,4,'F',NULL),(102,39,1,'F',NULL);
 /*!40000 ALTER TABLE `constanciasregistro` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1216,7 +1216,7 @@ CREATE TABLE `convocatoria` (
   KEY `fkConvPrograma_idx` (`idPrograma`),
   CONSTRAINT `fkConvPlantel` FOREIGN KEY (`idPlantel`) REFERENCES `catplanteles` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `fkConvPrograma` FOREIGN KEY (`idPrograma`) REFERENCES `catprogramas` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1225,7 +1225,7 @@ CREATE TABLE `convocatoria` (
 
 LOCK TABLES `convocatoria` WRITE;
 /*!40000 ALTER TABLE `convocatoria` DISABLE KEYS */;
-INSERT INTO `convocatoria` VALUES (15,'2020-08-01','2020-08-03','2020-08-07','2020-08-10','2020-08-14','2020-08-17','2020-08-21','2020-08-31',193,1,'DEFINITIVA'),(16,'2020-08-14','2020-08-15','2020-08-15','2020-08-17','2020-08-18','2020-08-19','2020-08-20','2020-08-21',193,2,'DEFINITIVA'),(17,'2020-08-01','2020-08-03','2020-08-07','2020-08-10','2020-08-14','2020-08-17','2020-08-21','2020-08-24',193,3,'DEFINITIVA'),(18,'2020-07-01','2020-07-03','2020-09-07','2020-07-10','2020-09-14','2020-07-17','2020-09-21','2020-09-30',1,1,'DEFINITIVA'),(19,'2020-08-01','2020-08-03','2020-08-04','2020-08-05','2020-08-06','2020-08-07','2020-08-10','2020-08-31',89,1,'DEFINITIVA'),(20,'2020-08-01','2020-08-03','2020-08-07','2020-08-10','2020-08-14','2020-08-17','2020-08-21','2020-08-31',1,3,'DEFINITIVA'),(21,'2020-08-01','2020-08-03','2020-08-07','2020-08-10','2020-08-14','2020-08-17','2020-08-21','2020-08-31',98,1,'DEFINITIVA');
+INSERT INTO `convocatoria` VALUES (15,'2020-08-01','2020-08-03','2020-08-07','2020-08-10','2020-08-14','2020-08-17','2020-08-21','2020-08-31',193,1,'DEFINITIVA'),(16,'2020-08-14','2020-08-15','2020-08-15','2020-08-17','2020-08-18','2020-08-19','2020-08-20','2020-08-21',193,2,'DEFINITIVA'),(17,'2020-08-01','2020-08-03','2020-08-07','2020-08-10','2020-08-14','2020-08-17','2020-08-21','2020-08-24',193,3,'DEFINITIVA'),(18,'2020-07-01','2020-07-03','2020-09-07','2020-07-10','2020-09-14','2020-07-17','2020-09-21','2020-09-30',1,1,'DEFINITIVA'),(19,'2020-08-01','2020-08-03','2020-08-04','2020-08-05','2020-08-06','2020-08-07','2020-08-10','2020-08-31',89,1,'DEFINITIVA'),(20,'2020-08-01','2020-08-03','2020-08-07','2020-08-10','2020-08-14','2020-08-17','2020-08-21','2020-08-31',1,3,'DEFINITIVA'),(21,'2020-08-01','2020-08-03','2020-08-07','2020-08-10','2020-08-14','2020-08-17','2020-08-21','2020-08-31',98,1,'DEFINITIVA'),(22,'2020-10-08','2020-10-08','2020-10-15','2020-10-16','2020-10-22','2020-10-23','2020-10-29','2020-10-30',291,1,'TEMPORAL');
 /*!40000 ALTER TABLE `convocatoria` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1286,7 +1286,7 @@ CREATE TABLE `horasgrupo` (
   CONSTRAINT `fkIdAsignaturaHoras` FOREIGN KEY (`idAsignatura`) REFERENCES `catasignatura` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `fkIdPeriodoHoras` FOREIGN KEY (`idPeriodo`) REFERENCES `catperiodos` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `fkIdUsuarioHoras` FOREIGN KEY (`idUsuario`) REFERENCES `usuario` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE=InnoDB AUTO_INCREMENT=290 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=293 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1344,7 +1344,7 @@ CREATE TABLE `miembrocomite` (
   KEY `fkMiembroComite_idx` (`idComite`),
   CONSTRAINT `fkMiembroComite` FOREIGN KEY (`idComite`) REFERENCES `comite` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `fkMiembroRol` FOREIGN KEY (`idRolComite`) REFERENCES `catrolcomite` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1353,7 +1353,7 @@ CREATE TABLE `miembrocomite` (
 
 LOCK TABLES `miembrocomite` WRITE;
 /*!40000 ALTER TABLE `miembrocomite` DISABLE KEYS */;
-INSERT INTO `miembrocomite` VALUES (11,27,'REMA940831BA2','NOMBRE ','PATERNO','MATERNO','correo2@mail.com',2),(12,27,'REMA940831BA3','NOMBRE ','REYNA','MATERNO','correo3@mail.com',3),(13,27,'REMA940831BA4','NOMBRE','PATERNO','MATERNO','correo4@mail.com',4),(14,27,'REMA940831BA5','NOMBRE','PATERNO','MATERNO','correo5@mail.com',5),(17,27,'REMA940831BA6','NOMBRE','PATERNO',NULL,'correo6@mail.com',6),(18,27,'REMA940831BA7','ANTONIO DAVID','REYNA','MARTINEZ','david.reyna31@gmail.com',1);
+INSERT INTO `miembrocomite` VALUES (11,27,'REMA940831BA2','NOMBRE ','PATERNO','MATERNO','correo2@mail.com',2),(12,27,'REMA940831BA3','NOMBRE ','REYNA','MATERNO','correo3@mail.com',3),(13,27,'REMA940831BA4','NOMBRE','PATERNO','MATERNO','correo4@mail.com',4),(14,27,'REMA940831BA5','NOMBRE','PATERNO','MATERNO','correo5@mail.com',5),(17,27,'REMA940831BA6','NOMBRE','PATERNO',NULL,'correo6@mail.com',6),(18,27,'REMA940831BA7','ANTONIO DAVID','REYNA','MARTINEZ','david.reyna31@gmail.com',1),(19,28,'REMA940831BA9','DAVID','REYNA','MARTINEZ','dvid@mail.com',1),(20,28,'REMA940831B10','DAVID','REYNA','MARTINEZ','dvid10@mail.com',2),(21,28,'REMA940831B11','DAVID','REYNA','MARTINEZ','dvid11@mail.com',3),(22,28,'REMA940831B12','DAVID','REYNA','MARTINEZ','dvid12@mail.com',4),(23,28,'REMA940831B13','DAVID','REYNA','MARTINEZ','dvid13@mail.com',5),(24,28,'REMA940831B14','DAVID','REYNA','MARTINEZ','dvid14@mail.com',6);
 /*!40000 ALTER TABLE `miembrocomite` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1515,7 +1515,7 @@ CREATE TABLE `usuario` (
   CONSTRAINT `fkUsuarioPlantel` FOREIGN KEY (`plantel`) REFERENCES `catplanteles` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `fkUsuarioPrograma` FOREIGN KEY (`idConvocatoria`) REFERENCES `convocatoria` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `fkUsuarioSubsistema` FOREIGN KEY (`idSubsistema`) REFERENCES `catsubsistema` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE=InnoDB AUTO_INCREMENT=38 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=43 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1524,7 +1524,7 @@ CREATE TABLE `usuario` (
 
 LOCK TABLES `usuario` WRITE;
 /*!40000 ALTER TABLE `usuario` DISABLE KEYS */;
-INSERT INTO `usuario` VALUES (1,NULL,NULL,NULL,'ANTONIO DAVID','REYNA','MARTINEZ','tony310894@hotmail.com','cGFzcw==','REMA940831BA1','111111111','1111111111','S',NULL,'1',1),(29,15,12,193,'SAMUEL ','ALVARADO','AGAMA','david.reyna31@gmail.com','cGFzcw==','AAAS860114A5A','1111111111','1111111111','D',NULL,'1',1),(31,NULL,1,1,'david','reyna','martinez','correo2@mail.com','cGFzcw==','rema940831ba2','1111111111','1111111111','A',NULL,'1',1),(32,NULL,NULL,NULL,'nombre','paterno','materno','correo@mail.com','cGFzcw==','nacional1','1111111111','1111111111','A','null','1',1),(33,NULL,1,NULL,'nombre','paterno','materno','david.reyna31@gmail.com','cGFzcw==','estatal1','1111111111','1111111111','A','null','2',1),(36,NULL,1,7,'ANTONIO DAVID','REYNA','MARTINEZ','david.reyna31@gmail.com','cGFzcw==','REMA940831BA7',NULL,NULL,'A',NULL,'3',1),(37,NULL,1,1,'DAVID','REYNA','MARTINEZ','correo@mail.com','cGFzcw==','REMA940831BA8','1111111111','1111111111','A',NULL,'3',1);
+INSERT INTO `usuario` VALUES (1,NULL,NULL,NULL,'ANTONIO DAVID','REYNA','MARTINEZ','tony310894@hotmail.com','cGFzcw==','REMA940831BA1','111111111','1111111111','S',NULL,'1',1),(29,15,12,193,'SAMUEL ','ALVARADO','AGAMA','david.reyna31@gmail.com','cGFzcw==','AAAS860114A5A','1111111111','1111111111','D',NULL,'1',1),(31,NULL,1,1,'david','reyna','martinez','correo2@mail.com','cGFzcw==','rema940831ba2','1111111111','1111111111','A',NULL,'1',1),(32,NULL,NULL,NULL,'nombre','paterno','materno','correo@mail.com','cGFzcw==','nacional1','1111111111','1111111111','A','null','1',1),(33,NULL,1,NULL,'nombre','paterno','materno','david.reyna31@gmail.com','cGFzcw==','estatal1','1111111111','1111111111','A','null','2',1),(36,NULL,1,7,'ANTONIO DAVID','REYNA','MARTINEZ','david.reyna31@gmail.com','cGFzcw==','REMA940831BA7',NULL,NULL,'A',NULL,'3',1),(37,NULL,1,1,'DAVID','REYNA','MARTINEZ','correo@mail.com','cGFzcw==','REMA940831BA8','1111111111','1111111111','A',NULL,'3',1),(39,22,20,291,'KARLA MONSERRAT','ARAGON','ALARCON','correo@mail.com','cGFzcw==','AAAK800917ME1','1111111111','1111111111','D',NULL,NULL,1),(40,NULL,NULL,NULL,'prueba','prueba','prueba','prueba@mil.com','cGFzcw==','prueba1','1111111111','1111111111','A',NULL,'1',1),(41,NULL,NULL,NULL,'prueba','prueba','prueba','prueba@mil.com','cGFzcw==','prueba2','1111111111','1111111111','A',NULL,'1',1),(42,NULL,20,291,'DAVID','REYNA','MARTINEZ','dvid10@mail.com','cGFzcw==','REMA940831B10',NULL,NULL,'A',NULL,'7',1);
 /*!40000 ALTER TABLE `usuario` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1544,7 +1544,7 @@ CREATE TABLE `usuariopermiso` (
   KEY `idPermisoUP_idx` (`idPermiso`),
   CONSTRAINT `idPermisoUP` FOREIGN KEY (`idPermiso`) REFERENCES `catpermisos` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `idUsuarioUP` FOREIGN KEY (`idUsuario`) REFERENCES `usuario` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE=InnoDB AUTO_INCREMENT=93 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=97 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1553,7 +1553,7 @@ CREATE TABLE `usuariopermiso` (
 
 LOCK TABLES `usuariopermiso` WRITE;
 /*!40000 ALTER TABLE `usuariopermiso` DISABLE KEYS */;
-INSERT INTO `usuariopermiso` VALUES (42,1,1),(43,1,2),(45,1,4),(51,31,1),(52,31,2),(54,31,4),(55,31,1),(56,31,2),(58,31,1),(59,31,2),(60,31,4),(61,31,1),(62,31,2),(63,31,4),(64,31,1),(65,31,2),(66,31,4),(84,32,1),(85,32,4),(86,33,1),(87,33,4),(88,33,1),(91,37,5),(92,36,6);
+INSERT INTO `usuariopermiso` VALUES (42,1,1),(43,1,2),(45,1,4),(51,31,1),(52,31,2),(54,31,4),(55,31,1),(56,31,2),(58,31,1),(59,31,2),(60,31,4),(61,31,1),(62,31,2),(63,31,4),(64,31,1),(65,31,2),(66,31,4),(84,32,1),(85,32,4),(86,33,1),(87,33,4),(88,33,1),(91,37,5),(92,36,6),(93,39,5),(94,40,5),(95,41,5),(96,42,6);
 /*!40000 ALTER TABLE `usuariopermiso` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1585,7 +1585,7 @@ CREATE TABLE `vacancia` (
   CONSTRAINT `fk3` FOREIGN KEY (`tipocategoria`) REFERENCES `catcategoriasplaza` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `fk4` FOREIGN KEY (`jornada`) REFERENCES `catjornada` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `fk5` FOREIGN KEY (`idConvocatoria`) REFERENCES `convocatoria` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1594,7 +1594,7 @@ CREATE TABLE `vacancia` (
 
 LOCK TABLES `vacancia` WRITE;
 /*!40000 ALTER TABLE `vacancia` DISABLE KEYS */;
-INSERT INTO `vacancia` VALUES (13,12,193,'TD','10',15,4,'Real',15),(15,12,193,'TD','1',10,1,'Real',15),(16,1,1,'TD','1',10,1,'Real',18);
+INSERT INTO `vacancia` VALUES (13,12,193,'TD','10',15,4,'Real',15),(15,12,193,'TD','1',10,1,'Real',15),(16,1,1,'TD','1',10,1,'Real',18),(18,20,291,'TD','10',10,1,'Real',22),(19,20,291,'TD','1',15,2,'Real',22);
 /*!40000 ALTER TABLE `vacancia` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1607,11 +1607,11 @@ UNLOCK TABLES;
 /*!50003 SET @saved_col_connection = @@collation_connection */ ;
 /*!50003 SET character_set_client  = utf8mb4 */ ;
 /*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`admin`@`localhost` PROCEDURE `sp_consultaAportaciones`(in _idUsuario int)
+CREATE  PROCEDURE `sp_consultaAportaciones`(in _idUsuario int)
 BEGIN
 	select a.id,a.idUsuario,a.idAportacion,b.aportacion,a.fechaInicio,a.fechaFin,a.institucion,a.documento
     from aportaciones a
@@ -1630,11 +1630,11 @@ DELIMITER ;
 /*!50003 SET @saved_col_connection = @@collation_connection */ ;
 /*!50003 SET character_set_client  = utf8mb4 */ ;
 /*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`admin`@`localhost` PROCEDURE `sp_consultaAsignaturaCBP`(in _idVersion int,in _semestre char(2))
+CREATE  PROCEDURE `sp_consultaAsignaturaCBP`(in _idVersion int,in _semestre char(2))
 BEGIN
 	SELECT c.id,c.nombre,c.clave,c.semestre,c.horas,c.tipo,c.optativa
 	FROM catcomponentebasprop a 
@@ -1653,11 +1653,11 @@ DELIMITER ;
 /*!50003 SET @saved_col_connection = @@collation_connection */ ;
 /*!50003 SET character_set_client  = utf8mb4 */ ;
 /*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`admin`@`localhost` PROCEDURE `sp_consultaCarreraCP`(in _idVersion int,in _semestre char(2))
+CREATE  PROCEDURE `sp_consultaCarreraCP`(in _idVersion int,in _semestre char(2))
 BEGIN
 	SELECT a.idCarreraCP,b.carrera,b.clave
 	FROM catcomponenteprofesional a 
@@ -1678,11 +1678,11 @@ DELIMITER ;
 /*!50003 SET @saved_col_connection = @@collation_connection */ ;
 /*!50003 SET character_set_client  = utf8mb4 */ ;
 /*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`admin`@`localhost` PROCEDURE `sp_consultaCategoriasVacantes`(in _idPlantel int,in _idPrograma int)
+CREATE  PROCEDURE `sp_consultaCategoriasVacantes`(in _idPlantel int,in _idPrograma int)
 BEGIN
 	SELECT c.id,c.categoria,c.tipo
 	FROM vacancia a
@@ -1701,11 +1701,11 @@ DELIMITER ;
 /*!50003 SET @saved_col_connection = @@collation_connection */ ;
 /*!50003 SET character_set_client  = utf8mb4 */ ;
 /*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`admin`@`localhost` PROCEDURE `sp_consultaComite`(in _idPlantel int, in _idPrograma int, in _tipo char(2))
+CREATE  PROCEDURE `sp_consultaComite`(in _idPlantel int, in _idPrograma int, in _tipo char(2))
 BEGIN
 	set @consulta="select a.id,b.idEntidad,d.entidad,b.idSubsistema,c.subsistema,a.idPlantel,b.plantel,a.idPrograma,e.programa,
 	case 
@@ -1755,11 +1755,11 @@ DELIMITER ;
 /*!50003 SET @saved_col_connection = @@collation_connection */ ;
 /*!50003 SET character_set_client  = utf8mb4 */ ;
 /*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`admin`@`localhost` PROCEDURE `sp_consultaComitePorId`(in _id int)
+CREATE  PROCEDURE `sp_consultaComitePorId`(in _id int)
 BEGIN
 	select a.id,b.idEntidad,b.idSubsistema,a.idPlantel,a.idPrograma,a.tipo,a.finalizado
     from comite a
@@ -1778,11 +1778,11 @@ DELIMITER ;
 /*!50003 SET @saved_col_connection = @@collation_connection */ ;
 /*!50003 SET character_set_client  = utf8mb4 */ ;
 /*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`admin`@`localhost` PROCEDURE `sp_consultaComitesRegistrados`(in _idEntidad int, in _idPlantel int, in _idEstatus int)
+CREATE  PROCEDURE `sp_consultaComitesRegistrados`(in _idEntidad int, in _idPlantel int, in _idEstatus int)
 BEGIN
 	select u.id,u.entidad as idEntidad,e.entidad,u.plantel as idPlantel,p.plantel,u.nombre,u.primerApellido,u.segundoApellido,u.curp,a.idEstatus,ce.estatus,co.tipo
 	from usuario u
@@ -1804,11 +1804,11 @@ DELIMITER ;
 /*!50003 SET @saved_col_connection = @@collation_connection */ ;
 /*!50003 SET character_set_client  = utf8mb4 */ ;
 /*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`admin`@`localhost` PROCEDURE `sp_consultaConstanciasProceso`(in _idUsuario int)
+CREATE  PROCEDURE `sp_consultaConstanciasProceso`(in _idUsuario int)
 BEGIN
 	select a.id,a.idUsuario,c.id as idCriterio,a.idCatPuntaje1,
 		CASE
@@ -1833,11 +1833,11 @@ DELIMITER ;
 /*!50003 SET @saved_col_connection = @@collation_connection */ ;
 /*!50003 SET character_set_client  = utf8mb4 */ ;
 /*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`admin`@`localhost` PROCEDURE `sp_consultaConvocatoriasVigentes`(in _idPlantel int)
+CREATE  PROCEDURE `sp_consultaConvocatoriasVigentes`(in _idPlantel int)
 BEGIN
 select c.id,p.programa
 from convocatoria c
@@ -1856,13 +1856,13 @@ DELIMITER ;
 /*!50003 SET @saved_col_connection = @@collation_connection */ ;
 /*!50003 SET character_set_client  = utf8mb4 */ ;
 /*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`admin`@`localhost` PROCEDURE `sp_consultaDocentes`(in _idPrograma int, in _idSubsistema int, in _idEntidad int, in _idPlantel int,in _nombre varchar(200), in _idEstatus int)
+CREATE  PROCEDURE `sp_consultaDocentes`(in _idPrograma int, in _idSubsistema int, in _idEntidad int, in _idPlantel int,in _nombre varchar(200), in _idEstatus int)
 BEGIN
-	set @consulta="select u.id,u.entidad as idEntidad,e.entidad,u.plantel as idPlantel,p.plantel,concat(u.nombre,' ',u.primerApellido,' ',u.segundoApellido) as nombre,u.curp,a.idEstatus,ce.estatus,s.id,s.subsistema,pr.id,pr.programa
+	set @consulta="select u.id,u.entidad as idEntidad,e.entidad,u.plantel as idPlantel,p.plantel,concat(u.nombre,' ',u.primerApellido,' ',u.segundoApellido) as nombre,u.curp,a.idEstatus, case when ce.estatus is null then 'Pre-registro' else ce.estatus end as estatus,s.id,s.subsistema,pr.id,pr.programa
 	from usuario u
 	join catplanteles p on u.plantel=p.id
     join catsubsistema s on u.idSubsistema=s.id
@@ -1905,11 +1905,11 @@ DELIMITER ;
 /*!50003 SET @saved_col_connection = @@collation_connection */ ;
 /*!50003 SET character_set_client  = utf8mb4 */ ;
 /*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`admin`@`localhost` PROCEDURE `sp_consultaInfoLogin`(in _rfc varchar(18))
+CREATE  PROCEDURE `sp_consultaInfoLogin`(in _rfc varchar(18))
 BEGIN
 	select u.id,u.entidad,u.plantel,concat(u.nombre," ",u.primerApellido," ",u.segundoApellido) as nombre,cast(from_base64(u.clave) AS CHAR(200) CHARACTER SET utf8) as clave,u.curp,u.perfil,up.idPermiso,cp.permiso,cp.url
 	from usuario u
@@ -1928,11 +1928,11 @@ DELIMITER ;
 /*!50003 SET @saved_col_connection = @@collation_connection */ ;
 /*!50003 SET character_set_client  = utf8mb4 */ ;
 /*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`admin`@`localhost` PROCEDURE `sp_consultaJornadas`(in _idCategoria int)
+CREATE  PROCEDURE `sp_consultaJornadas`(in _idCategoria int)
 BEGIN
 	SELECT a.id,a.clave,b.jornada FROM catcategoriajornada a 
         inner join catjornada b on a.idJornada=b.id 
@@ -1949,11 +1949,11 @@ DELIMITER ;
 /*!50003 SET @saved_col_connection = @@collation_connection */ ;
 /*!50003 SET character_set_client  = utf8mb4 */ ;
 /*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`admin`@`localhost` PROCEDURE `sp_consultaJornadaVacante`(in _idCategoria int, in _idPlantel int, in _idPrograma int)
+CREATE  PROCEDURE `sp_consultaJornadaVacante`(in _idCategoria int, in _idPlantel int, in _idPrograma int)
 BEGIN
 	SELECT d.id,d.clave,c.jornada
 	FROM vacancia a
@@ -1973,11 +1973,11 @@ DELIMITER ;
 /*!50003 SET @saved_col_connection = @@collation_connection */ ;
 /*!50003 SET character_set_client  = utf8mb4 */ ;
 /*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`admin`@`localhost` PROCEDURE `sp_consultaMiembrosComite`(in _idComite int)
+CREATE  PROCEDURE `sp_consultaMiembrosComite`(in _idComite int)
 BEGIN
 	select a.id,a.rfc,a.nombre,a.primerApellido,
     CASE 
@@ -2001,11 +2001,11 @@ DELIMITER ;
 /*!50003 SET @saved_col_connection = @@collation_connection */ ;
 /*!50003 SET character_set_client  = utf8mb4 */ ;
 /*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`admin`@`localhost` PROCEDURE `sp_consultaModuloCP`(in _idVersion int,in _semestre char(2),in _idCarrera int)
+CREATE  PROCEDURE `sp_consultaModuloCP`(in _idVersion int,in _semestre char(2),in _idCarrera int)
 BEGIN
     SELECT d.id,d.modulo,d.clave	
 	FROM catcomponenteprofesional a 
@@ -2027,11 +2027,11 @@ DELIMITER ;
 /*!50003 SET @saved_col_connection = @@collation_connection */ ;
 /*!50003 SET character_set_client  = utf8mb4 */ ;
 /*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`admin`@`localhost` PROCEDURE `sp_consultaParticipaciones`(in _idUsuario int)
+CREATE  PROCEDURE `sp_consultaParticipaciones`(in _idUsuario int)
 BEGIN
 	select a.id,a.idUsuario,a.idParticipacion,b.participacion,a.fechaInicio,a.fechaFin,a.institucion,a.documento
     from participaciones a
@@ -2050,11 +2050,11 @@ DELIMITER ;
 /*!50003 SET @saved_col_connection = @@collation_connection */ ;
 /*!50003 SET character_set_client  = utf8mb4 */ ;
 /*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`admin`@`localhost` PROCEDURE `sp_consultaProgramasPlantel`(in _idPlantel int)
+CREATE  PROCEDURE `sp_consultaProgramasPlantel`(in _idPlantel int)
 BEGIN
 	SELECT c.id,p.programa
 	FROM convocatoria c
@@ -2072,7 +2072,7 @@ DELIMITER ;
 /*!50003 SET @saved_col_connection = @@collation_connection */ ;
 /*!50003 SET character_set_client  = utf8mb4 */ ;
 /*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
@@ -2097,11 +2097,11 @@ DELIMITER ;
 /*!50003 SET @saved_col_connection = @@collation_connection */ ;
 /*!50003 SET character_set_client  = utf8mb4 */ ;
 /*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`admin`@`localhost` PROCEDURE `sp_consultaRegistro`(in _idUsuario int)
+CREATE  PROCEDURE `sp_consultaRegistro`(in _idUsuario int)
 BEGIN
 	SELECT 
 		u.id,
@@ -2203,11 +2203,11 @@ DELIMITER ;
 /*!50003 SET @saved_col_connection = @@collation_connection */ ;
 /*!50003 SET character_set_client  = utf8mb4 */ ;
 /*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`admin`@`localhost` PROCEDURE `sp_consultaRequisitosCategoria`(in _idCategoria int)
+CREATE  PROCEDURE `sp_consultaRequisitosCategoria`(in _idCategoria int)
 BEGIN
 	SELECT b.id,b.requisito FROM catcategoriarequisitoplaza a
     inner join catrequisitosplaza b on a.idRequisitoPlaza=b.id
@@ -2224,11 +2224,11 @@ DELIMITER ;
 /*!50003 SET @saved_col_connection = @@collation_connection */ ;
 /*!50003 SET character_set_client  = utf8mb4 */ ;
 /*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`admin`@`localhost` PROCEDURE `sp_consultaResultados`(in _idUsuario int)
+CREATE  PROCEDURE `sp_consultaResultados`(in _idUsuario int)
 BEGIN
 	select r.id,r.idUsuario,r.idResultado,cr.resultado,r.fechaInicio,r.fechaFin,r.documento
     from resultados r
@@ -2247,11 +2247,11 @@ DELIMITER ;
 /*!50003 SET @saved_col_connection = @@collation_connection */ ;
 /*!50003 SET character_set_client  = utf8mb4 */ ;
 /*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`admin`@`localhost` PROCEDURE `sp_consultaSubModuloCP`(in _idVersion int,in _semestre char(2),in _idCarrera int,in _idModulo int)
+CREATE  PROCEDURE `sp_consultaSubModuloCP`(in _idVersion int,in _semestre char(2),in _idCarrera int,in _idModulo int)
 BEGIN    
     SELECT e.id,e.nombre,e.clave,e.semestre,e.horas,e.tipo	
 	FROM catcomponenteprofesional a 
@@ -2271,11 +2271,11 @@ DELIMITER ;
 /*!50003 SET @saved_col_connection = @@collation_connection */ ;
 /*!50003 SET character_set_client  = utf8mb4 */ ;
 /*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`admin`@`localhost` PROCEDURE `sp_consultaTiposInstitucion`(in _idEntidad int)
+CREATE  PROCEDURE `sp_consultaTiposInstitucion`(in _idEntidad int)
 BEGIN
 	SELECT b.id,b.tipo
 	FROM catinstituciones a
@@ -2295,11 +2295,11 @@ DELIMITER ;
 /*!50003 SET @saved_col_connection = @@collation_connection */ ;
 /*!50003 SET character_set_client  = utf8mb4 */ ;
 /*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`admin`@`localhost` PROCEDURE `sp_consultaVersionCBP`()
+CREATE  PROCEDURE `sp_consultaVersionCBP`()
 BEGIN
     SELECT b.id,b.version
 	FROM catcomponentebasprop a 
@@ -2318,11 +2318,11 @@ DELIMITER ;
 /*!50003 SET @saved_col_connection = @@collation_connection */ ;
 /*!50003 SET character_set_client  = utf8mb4 */ ;
 /*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`admin`@`localhost` PROCEDURE `sp_consultaVersionCP`()
+CREATE  PROCEDURE `sp_consultaVersionCP`()
 BEGIN
 	SELECT c.id,c.version	
 	FROM catcomponenteprofesional a 	
@@ -2341,11 +2341,11 @@ DELIMITER ;
 /*!50003 SET @saved_col_connection = @@collation_connection */ ;
 /*!50003 SET character_set_client  = utf8mb4 */ ;
 /*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`admin`@`localhost` PROCEDURE `sp_countRegistrosVacancia`(in _idPlantel int, in _idPrograma int)
+CREATE  PROCEDURE `sp_countRegistrosVacancia`(in _idPlantel int, in _idPrograma int)
 BEGIN
 	SELECT count(*)
 	FROM convocatoria c
@@ -2363,11 +2363,11 @@ DELIMITER ;
 /*!50003 SET @saved_col_connection = @@collation_connection */ ;
 /*!50003 SET character_set_client  = utf8mb4 */ ;
 /*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`admin`@`localhost` PROCEDURE `sp_deleteAportaciones`(in _id int)
+CREATE  PROCEDURE `sp_deleteAportaciones`(in _id int)
 BEGIN
 	delete from aportaciones where id=_id;
     select "ok" as respuesta;
@@ -2383,7 +2383,7 @@ DELIMITER ;
 /*!50003 SET @saved_col_connection = @@collation_connection */ ;
 /*!50003 SET character_set_client  = utf8mb4 */ ;
 /*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
@@ -2406,11 +2406,11 @@ DELIMITER ;
 /*!50003 SET @saved_col_connection = @@collation_connection */ ;
 /*!50003 SET character_set_client  = utf8mb4 */ ;
 /*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`admin`@`localhost` PROCEDURE `sp_deleteConstanciasProceso`(in _idUsuario int, in _idCriterio int)
+CREATE  PROCEDURE `sp_deleteConstanciasProceso`(in _idUsuario int, in _idCriterio int)
 BEGIN
 	delete from constanciasproceso where idUsuario=_idUsuario and idCriterio=_idCriterio;
     select "ok" as respuesta;
@@ -2426,11 +2426,11 @@ DELIMITER ;
 /*!50003 SET @saved_col_connection = @@collation_connection */ ;
 /*!50003 SET character_set_client  = utf8mb4 */ ;
 /*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`admin`@`localhost` PROCEDURE `sp_deleteCursos`(in _id int)
+CREATE  PROCEDURE `sp_deleteCursos`(in _id int)
 BEGIN
 	delete from cursos where id=_id;
     select "ok" as respuesta;
@@ -2446,11 +2446,11 @@ DELIMITER ;
 /*!50003 SET @saved_col_connection = @@collation_connection */ ;
 /*!50003 SET character_set_client  = utf8mb4 */ ;
 /*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`admin`@`localhost` PROCEDURE `sp_deleteHorasGrupo`(in _id int)
+CREATE  PROCEDURE `sp_deleteHorasGrupo`(in _id int)
 BEGIN
 	delete from horasgrupo 
     where id=_id;
@@ -2467,7 +2467,7 @@ DELIMITER ;
 /*!50003 SET @saved_col_connection = @@collation_connection */ ;
 /*!50003 SET character_set_client  = utf8mb4 */ ;
 /*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
@@ -2488,11 +2488,11 @@ DELIMITER ;
 /*!50003 SET @saved_col_connection = @@collation_connection */ ;
 /*!50003 SET character_set_client  = utf8mb4 */ ;
 /*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`admin`@`localhost` PROCEDURE `sp_deleteParticipaciones`(in _id int)
+CREATE  PROCEDURE `sp_deleteParticipaciones`(in _id int)
 BEGIN
 	delete from participaciones where id=_id;
     select "ok" as respuesta;
@@ -2508,11 +2508,11 @@ DELIMITER ;
 /*!50003 SET @saved_col_connection = @@collation_connection */ ;
 /*!50003 SET character_set_client  = utf8mb4 */ ;
 /*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`admin`@`localhost` PROCEDURE `sp_deletePublicaciones`(in _id int)
+CREATE  PROCEDURE `sp_deletePublicaciones`(in _id int)
 BEGIN
 	delete from publicaciones where id=_id;
     select "ok" as respuesta;
@@ -2528,11 +2528,11 @@ DELIMITER ;
 /*!50003 SET @saved_col_connection = @@collation_connection */ ;
 /*!50003 SET character_set_client  = utf8mb4 */ ;
 /*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`admin`@`localhost` PROCEDURE `sp_deleteResultados`(in _id int)
+CREATE  PROCEDURE `sp_deleteResultados`(in _id int)
 BEGIN
 	delete from resultados where id=_id;
     select "ok" as respuesta;
@@ -2548,11 +2548,11 @@ DELIMITER ;
 /*!50003 SET @saved_col_connection = @@collation_connection */ ;
 /*!50003 SET character_set_client  = utf8mb4 */ ;
 /*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`admin`@`localhost` PROCEDURE `sp_deleteTutorias`(in _id int)
+CREATE  PROCEDURE `sp_deleteTutorias`(in _id int)
 BEGIN
 	delete from tutorias where id=_id;
     select "ok" as respuesta;
@@ -2568,11 +2568,11 @@ DELIMITER ;
 /*!50003 SET @saved_col_connection = @@collation_connection */ ;
 /*!50003 SET character_set_client  = utf8mb4 */ ;
 /*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`admin`@`localhost` PROCEDURE `sp_finalizarComite`(in _idComite int, in _idRol int)
+CREATE  PROCEDURE `sp_finalizarComite`(in _idComite int, in _idRol int)
 BEGIN
 	update comite set finalizado='V' where id=_idComite;
     
@@ -2593,17 +2593,41 @@ DELIMITER ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;
 /*!50003 SET character_set_results = @saved_cs_results */ ;
 /*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `sp_finProceso` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE  PROCEDURE `sp_finProceso`(in _idUsuario int)
+BEGIN
+	
+	update aspirantes
+    set finRegistro=now()
+    where idUsuario=_idUsuario;
+    
+    call sp_insertBitacora(_idUsuario, 'A', 'El usuario finalizó el proceso');
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `sp_finRegistro` */;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
 /*!50003 SET @saved_col_connection = @@collation_connection */ ;
 /*!50003 SET character_set_client  = utf8mb4 */ ;
 /*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`admin`@`localhost` PROCEDURE `sp_finRegistro`(in _idUsuario int,in _publico char(1))
+CREATE  PROCEDURE `sp_finRegistro`(in _idUsuario int,in _publico char(1))
 BEGIN
 	declare _idEstatus int default null;
     if _publico is not null then
@@ -2612,12 +2636,12 @@ BEGIN
 		set _idEstatus=3;
     end if;
 	update aspirantes
-    set finRegistro=now(),
+    set 
     publico=_publico,
     idEstatus=_idEstatus
     where idUsuario=_idUsuario;
     
-    call sp_insertBitacora(_idUsuario, 'A', 'El usuario finalizó el registro');
+    call sp_insertBitacora(_idUsuario, 'A', 'El usuario finalizó el registro de información');
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -2630,11 +2654,11 @@ DELIMITER ;
 /*!50003 SET @saved_col_connection = @@collation_connection */ ;
 /*!50003 SET character_set_client  = utf8mb4 */ ;
 /*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`admin`@`localhost` PROCEDURE `sp_insertAportaciones`(in _idUsuario int,in _idAportacion int,in _fechaInicio date,in _fechaFin date,in _institucion varchar(200),in _aportacion varchar(500),in _documento varchar(100))
+CREATE  PROCEDURE `sp_insertAportaciones`(in _idUsuario int,in _idAportacion int,in _fechaInicio date,in _fechaFin date,in _institucion varchar(200),in _aportacion varchar(500),in _documento varchar(100))
 BEGIN
 	declare _idAux int default null;
 	if _idAportacion <1  then
@@ -2669,11 +2693,11 @@ DELIMITER ;
 /*!50003 SET @saved_col_connection = @@collation_connection */ ;
 /*!50003 SET character_set_client  = utf8mb4 */ ;
 /*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`admin`@`localhost` PROCEDURE `sp_insertBitacora`(in _idUsuario int,in _tipo char(1),in _descripcion varchar(200))
+CREATE  PROCEDURE `sp_insertBitacora`(in _idUsuario int,in _tipo char(1),in _descripcion varchar(200))
 BEGIN
 	insert into bitacora (idUsuario,tipo,descripcion,fechaHora)
     values(_idUsuario,_tipo,_descripcion,now());
@@ -2691,7 +2715,7 @@ DELIMITER ;
 /*!50003 SET @saved_col_connection = @@collation_connection */ ;
 /*!50003 SET character_set_client  = utf8mb4 */ ;
 /*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
@@ -2724,11 +2748,11 @@ DELIMITER ;
 /*!50003 SET @saved_col_connection = @@collation_connection */ ;
 /*!50003 SET character_set_client  = utf8mb4 */ ;
 /*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`admin`@`localhost` PROCEDURE `sp_insertConstanciasProceso`(in _idUsuario int, in _idCriterio int, in _idCatPuntaje int)
+CREATE  PROCEDURE `sp_insertConstanciasProceso`(in _idUsuario int, in _idCriterio int, in _idCatPuntaje int)
 BEGIN
 	declare _aux int default null;
     select id into _aux
@@ -2758,11 +2782,11 @@ DELIMITER ;
 /*!50003 SET @saved_col_connection = @@collation_connection */ ;
 /*!50003 SET character_set_client  = utf8mb4 */ ;
 /*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`admin`@`localhost` PROCEDURE `sp_insertCursos`(in _idUsuario int,in _tipo char(2),in _nombreCurso varchar(200), in _fechaInicio date,in _fechaFin date,in _institucion varchar(200), in _totalHoras int,in _documento varchar(100))
+CREATE  PROCEDURE `sp_insertCursos`(in _idUsuario int,in _tipo char(2),in _nombreCurso varchar(200), in _fechaInicio date,in _fechaFin date,in _institucion varchar(200), in _totalHoras int,in _documento varchar(100))
 BEGIN
 	insert into cursos (idUsuario,tipo,nombreCurso,fechaInicio,fechaFin,institucion,totalHoras,documento)
     values (_idUsuario,_tipo,_nombreCurso,_fechaInicio,_fechaFin,_institucion,_totalHoras,_documento);
@@ -2780,16 +2804,16 @@ DELIMITER ;
 /*!50003 SET @saved_col_connection = @@collation_connection */ ;
 /*!50003 SET character_set_client  = utf8mb4 */ ;
 /*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`admin`@`localhost` PROCEDURE `sp_insertMiembroComite`(in _idComite int,in _rfc varchar(20),in _nombre varchar(50),in _primerApellido varchar(50),in _segundoApellido varchar(50),in _correo varchar(50),in _idRolComite int)
+CREATE  PROCEDURE `sp_insertMiembroComite`(in _idComite int,in _rfc varchar(20),in _nombre varchar(50),in _primerApellido varchar(50),in _segundoApellido varchar(50),in _correo varchar(50),in _idRolComite int)
 BEGIN
 	declare _idAux int default null;
     select id into _idAux 
     from miembrocomite 
-    where rfc=_rfc;
+    where rfc=(select _rfc COLLATE utf8_spanish_ci);
     if(_idAux is not null) then
 		select "RFC previamente registrado" as respuesta;
 	else
@@ -2830,11 +2854,11 @@ DELIMITER ;
 /*!50003 SET @saved_col_connection = @@collation_connection */ ;
 /*!50003 SET character_set_client  = utf8mb4 */ ;
 /*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`admin`@`localhost` PROCEDURE `sp_insertParticipaciones`(in _idUsuario int,in _idParticipacion int,in _fechaInicio date,in _fechaFin date,in _institucion varchar(200),in _participacion varchar(300),in _documento varchar(100))
+CREATE  PROCEDURE `sp_insertParticipaciones`(in _idUsuario int,in _idParticipacion int,in _fechaInicio date,in _fechaFin date,in _institucion varchar(200),in _participacion varchar(300),in _documento varchar(100))
 BEGIN
 	declare _idAux int default null;
 	if _idParticipacion <1  then
@@ -2869,11 +2893,11 @@ DELIMITER ;
 /*!50003 SET @saved_col_connection = @@collation_connection */ ;
 /*!50003 SET character_set_client  = utf8mb4 */ ;
 /*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`admin`@`localhost` PROCEDURE `sp_insertPublicaciones`( in _idUsuario int,in _nombre varchar(200),in _medio char(1),in _fecha date,in _ISSN varchar(50))
+CREATE  PROCEDURE `sp_insertPublicaciones`( in _idUsuario int,in _nombre varchar(200),in _medio char(1),in _fecha date,in _ISSN varchar(50))
 BEGIN
 	declare _idAux int default null;
     select id into _idAux
@@ -2899,11 +2923,11 @@ DELIMITER ;
 /*!50003 SET @saved_col_connection = @@collation_connection */ ;
 /*!50003 SET character_set_client  = utf8mb4 */ ;
 /*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`admin`@`localhost` PROCEDURE `sp_insertResultados`(in _idUsuario int,in _idResultado int, in _fechaInicio date, in _fechaFin date,in _resultado varchar(200),in _documento varchar(100))
+CREATE  PROCEDURE `sp_insertResultados`(in _idUsuario int,in _idResultado int, in _fechaInicio date, in _fechaFin date,in _resultado varchar(200),in _documento varchar(100))
 BEGIN
 	declare _idAux int default null;
 	if _idResultado <1  then
@@ -2938,11 +2962,11 @@ DELIMITER ;
 /*!50003 SET @saved_col_connection = @@collation_connection */ ;
 /*!50003 SET character_set_client  = utf8mb4 */ ;
 /*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`admin`@`localhost` PROCEDURE `sp_insertTutorias`(in _idUsuario int, in _fechaInicio date, in _fechaFin date,in _documento varchar(200))
+CREATE  PROCEDURE `sp_insertTutorias`(in _idUsuario int, in _fechaInicio date, in _fechaFin date,in _documento varchar(200))
 BEGIN
 	insert into tutorias (idUsuario,fechaInicio,fechaFin,documento)
     values(_idUsuario,_fechaInicio,_fechaFin,_documento);
@@ -2959,11 +2983,11 @@ DELIMITER ;
 /*!50003 SET @saved_col_connection = @@collation_connection */ ;
 /*!50003 SET character_set_client  = utf8mb4 */ ;
 /*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`admin`@`localhost` PROCEDURE `sp_insertUsuario`(in _programa int,in _curp varchar(18),in _nombre varchar(50),in _primerApellido varchar(50),in _segundoApellido varchar(50),in _entidad int,in _plantel int,in _telfijo varchar(10),in _telcel varchar(10),in _correo varchar(50),in _consideraciones varchar(200),in _pass varchar(200),in _perfil varchar(1))
+CREATE  PROCEDURE `sp_insertUsuario`(in _programa int,in _curp varchar(18),in _nombre varchar(50),in _primerApellido varchar(50),in _segundoApellido varchar(50),in _entidad int,in _plantel int,in _telfijo varchar(10),in _telcel varchar(10),in _correo varchar(50),in _consideraciones varchar(200),in _pass varchar(200),in _perfil varchar(1))
 BEGIN
 	declare _idAux int default null;
     declare _idConvocatoria int default null;
@@ -2998,11 +3022,11 @@ DELIMITER ;
 /*!50003 SET @saved_col_connection = @@collation_connection */ ;
 /*!50003 SET character_set_client  = utf8mb4 */ ;
 /*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`admin`@`localhost` PROCEDURE `sp_registraConfirmacionHora`(in _id int,in _confirmada char(1))
+CREATE  PROCEDURE `sp_registraConfirmacionHora`(in _id int,in _confirmada char(1))
 BEGIN
 	update horasgrupo
     set confirmada=_confirmada
@@ -3021,11 +3045,11 @@ DELIMITER ;
 /*!50003 SET @saved_col_connection = @@collation_connection */ ;
 /*!50003 SET character_set_client  = utf8mb4 */ ;
 /*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`admin`@`localhost` PROCEDURE `sp_registroConstancia`(in _idUsuario int, in _idRequisito int)
+CREATE  PROCEDURE `sp_registroConstancia`(in _idUsuario int, in _idRequisito int)
 BEGIN
 	declare _idAux int default null;
     
@@ -3059,11 +3083,11 @@ DELIMITER ;
 /*!50003 SET @saved_col_connection = @@collation_connection */ ;
 /*!50003 SET character_set_client  = utf8mb4 */ ;
 /*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`admin`@`localhost` PROCEDURE `sp_registroHorasGrupo`(in _idUsuario int, in _idPeriodo int, in _idAsignatura int,in _horas int,in _grupo varchar(5),in _semestre int)
+CREATE  PROCEDURE `sp_registroHorasGrupo`(in _idUsuario int, in _idPeriodo int, in _idAsignatura int,in _horas int,in _grupo varchar(5),in _semestre int)
 BEGIN
 	declare _idAux int default null;
     
@@ -3102,11 +3126,11 @@ DELIMITER ;
 /*!50003 SET @saved_col_connection = @@collation_connection */ ;
 /*!50003 SET character_set_client  = utf8mb4 */ ;
 /*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`admin`@`localhost` PROCEDURE `sp_registroHorasGrupoWS`(in _idUsuario int, in _idPeriodo int, in _claveAsignatura varchar(20),in _horas int,in _grupo varchar(5),in _semestre int)
+CREATE  PROCEDURE `sp_registroHorasGrupoWS`(in _idUsuario int, in _idPeriodo int, in _claveAsignatura varchar(20),in _horas int,in _grupo varchar(5),in _semestre int)
 BEGIN
 	declare _idAux int default null;
 	declare _idAsignatura int default null;
@@ -3151,11 +3175,11 @@ DELIMITER ;
 /*!50003 SET @saved_col_connection = @@collation_connection */ ;
 /*!50003 SET character_set_client  = utf8mb4 */ ;
 /*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`admin`@`localhost` PROCEDURE `sp_registroInfoAcademica`(in _idUsuario int,in _idEscuelaEstudio int, in _carrera varchar(300),in _anioEgreso int,in _idGradoAcademico int, in _idModalidadTitulacion int,in _anioTitulacion int,in _cedula varchar(20),in _idCCT int)
+CREATE  PROCEDURE `sp_registroInfoAcademica`(in _idUsuario int,in _idEscuelaEstudio int, in _carrera varchar(300),in _anioEgreso int,in _idGradoAcademico int, in _idModalidadTitulacion int,in _anioTitulacion int,in _cedula varchar(20),in _idCCT int)
 BEGIN
 	declare _idCarrera int default NULL;
     declare _idUsuarioAux int default NULL;
@@ -3197,11 +3221,11 @@ DELIMITER ;
 /*!50003 SET @saved_col_connection = @@collation_connection */ ;
 /*!50003 SET character_set_client  = utf8mb4 */ ;
 /*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`admin`@`localhost` PROCEDURE `sp_registroInfoCompatibilidad`(in _idUsuario int,in _funcionesOtro char(1), in _compatibilidad char(1),in _horasOtroSubsistema int)
+CREATE  PROCEDURE `sp_registroInfoCompatibilidad`(in _idUsuario int,in _funcionesOtro char(1), in _compatibilidad char(1),in _horasOtroSubsistema int)
 BEGIN
 	declare _idUsuarioAux int default null;
     
@@ -3232,11 +3256,11 @@ DELIMITER ;
 /*!50003 SET @saved_col_connection = @@collation_connection */ ;
 /*!50003 SET character_set_client  = utf8mb4 */ ;
 /*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`admin`@`localhost` PROCEDURE `sp_registroInfoHoras`(in _idUsuario int,in _frenteGrupo char(1),in _nivelCENNI int, in _folioCENNI varchar(15))
+CREATE  PROCEDURE `sp_registroInfoHoras`(in _idUsuario int,in _frenteGrupo char(1),in _nivelCENNI int, in _folioCENNI varchar(15))
 BEGIN
 	declare _idUsuarioAux int default null;
     
@@ -3267,11 +3291,11 @@ DELIMITER ;
 /*!50003 SET @saved_col_connection = @@collation_connection */ ;
 /*!50003 SET character_set_client  = utf8mb4 */ ;
 /*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`admin`@`localhost` PROCEDURE `sp_registroInfoLaboral`(in _idUsuario int,in _activo char(1),in _ingresoSubsistema date,in _ingresoPlantel date,in _idCategoriaJornada int,in _fechaPlaza date,in _idTipoNombramiento int,in _fechaUltimaPromocion date,in _idCategoriaJornadaAspira int ,in _idPerfilRequerido int,in _notaSancion char(1))
+CREATE  PROCEDURE `sp_registroInfoLaboral`(in _idUsuario int,in _activo char(1),in _ingresoSubsistema date,in _ingresoPlantel date,in _idCategoriaJornada int,in _fechaPlaza date,in _idTipoNombramiento int,in _fechaUltimaPromocion date,in _idCategoriaJornadaAspira int ,in _idPerfilRequerido int,in _notaSancion char(1))
 BEGIN
 	declare _idUsuarioAux int default null;
     
@@ -3312,11 +3336,11 @@ DELIMITER ;
 /*!50003 SET @saved_col_connection = @@collation_connection */ ;
 /*!50003 SET character_set_client  = utf8mb4 */ ;
 /*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`admin`@`localhost` PROCEDURE `sp_selectCatAportacion`()
+CREATE  PROCEDURE `sp_selectCatAportacion`()
 BEGIN
 	select id,aportacion from cataportacion;
 END ;;
@@ -3331,11 +3355,11 @@ DELIMITER ;
 /*!50003 SET @saved_col_connection = @@collation_connection */ ;
 /*!50003 SET character_set_client  = utf8mb4 */ ;
 /*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`admin`@`localhost` PROCEDURE `sp_selectCatCarreras`()
+CREATE  PROCEDURE `sp_selectCatCarreras`()
 BEGIN
 	SELECT id,carrera FROM catcarreras;
 END ;;
@@ -3350,11 +3374,11 @@ DELIMITER ;
 /*!50003 SET @saved_col_connection = @@collation_connection */ ;
 /*!50003 SET character_set_client  = utf8mb4 */ ;
 /*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`admin`@`localhost` PROCEDURE `sp_selectCatCategoriasPlaza`()
+CREATE  PROCEDURE `sp_selectCatCategoriasPlaza`()
 BEGIN
 	SELECT id,categoria,tipo FROM catcategoriasplaza;
 END ;;
@@ -3369,11 +3393,11 @@ DELIMITER ;
 /*!50003 SET @saved_col_connection = @@collation_connection */ ;
 /*!50003 SET character_set_client  = utf8mb4 */ ;
 /*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`admin`@`localhost` PROCEDURE `sp_selectCatCriteriosValoracion`(in _id int)
+CREATE  PROCEDURE `sp_selectCatCriteriosValoracion`(in _id int)
 BEGIN
 	if _id is null then
 		SELECT id,criterio,puntajeMaximo,tablaAuxiliar  FROM catcriteriosvaloracion;
@@ -3392,11 +3416,11 @@ DELIMITER ;
 /*!50003 SET @saved_col_connection = @@collation_connection */ ;
 /*!50003 SET character_set_client  = utf8mb4 */ ;
 /*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`admin`@`localhost` PROCEDURE `sp_selectCatEntidades`()
+CREATE  PROCEDURE `sp_selectCatEntidades`()
 BEGIN
 	SELECT id,entidad FROM catentidades;
 END ;;
@@ -3411,11 +3435,11 @@ DELIMITER ;
 /*!50003 SET @saved_col_connection = @@collation_connection */ ;
 /*!50003 SET character_set_client  = utf8mb4 */ ;
 /*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`admin`@`localhost` PROCEDURE `sp_selectCatEscuelas`(in _idInstitucion int)
+CREATE  PROCEDURE `sp_selectCatEscuelas`(in _idInstitucion int)
 BEGIN
 	SELECT id,clave,escuela,tipo FROM catescuelas where idInstitucion=_idInstitucion;
 END ;;
@@ -3430,11 +3454,11 @@ DELIMITER ;
 /*!50003 SET @saved_col_connection = @@collation_connection */ ;
 /*!50003 SET character_set_client  = utf8mb4 */ ;
 /*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`admin`@`localhost` PROCEDURE `sp_selectCatEstatus`()
+CREATE  PROCEDURE `sp_selectCatEstatus`()
 BEGIN
 	select id,estatus from catestatus;
 END ;;
@@ -3449,11 +3473,11 @@ DELIMITER ;
 /*!50003 SET @saved_col_connection = @@collation_connection */ ;
 /*!50003 SET character_set_client  = utf8mb4 */ ;
 /*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`admin`@`localhost` PROCEDURE `sp_selectCatGradosAcademicos`()
+CREATE  PROCEDURE `sp_selectCatGradosAcademicos`()
 BEGIN
 	SELECT id,grado FROM catgradosacademicos;
 END ;;
@@ -3468,11 +3492,11 @@ DELIMITER ;
 /*!50003 SET @saved_col_connection = @@collation_connection */ ;
 /*!50003 SET character_set_client  = utf8mb4 */ ;
 /*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`admin`@`localhost` PROCEDURE `sp_selectCatInstitucionCCT`(in _idInstitucion int)
+CREATE  PROCEDURE `sp_selectCatInstitucionCCT`(in _idInstitucion int)
 BEGIN
 	SELECT id,cct
 	FROM catinstitucioncct 
@@ -3489,11 +3513,11 @@ DELIMITER ;
 /*!50003 SET @saved_col_connection = @@collation_connection */ ;
 /*!50003 SET character_set_client  = utf8mb4 */ ;
 /*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`admin`@`localhost` PROCEDURE `sp_selectCatInstituciones`(in _idEntidad int,in _idTipoInstitucion int)
+CREATE  PROCEDURE `sp_selectCatInstituciones`(in _idEntidad int,in _idTipoInstitucion int)
 BEGIN
 	SELECT id,institucion
     FROM catinstituciones 
@@ -3510,11 +3534,11 @@ DELIMITER ;
 /*!50003 SET @saved_col_connection = @@collation_connection */ ;
 /*!50003 SET character_set_client  = utf8mb4 */ ;
 /*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`admin`@`localhost` PROCEDURE `sp_selectCatModalidadesTitulacion`()
+CREATE  PROCEDURE `sp_selectCatModalidadesTitulacion`()
 BEGIN
 	SELECT id,modalidad FROM catmodalidadestitulacion;
 END ;;
@@ -3529,11 +3553,11 @@ DELIMITER ;
 /*!50003 SET @saved_col_connection = @@collation_connection */ ;
 /*!50003 SET character_set_client  = utf8mb4 */ ;
 /*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`admin`@`localhost` PROCEDURE `sp_selectCatParticipacion`()
+CREATE  PROCEDURE `sp_selectCatParticipacion`()
 BEGIN
 	select id,participacion from catparticipacion;
 END ;;
@@ -3548,11 +3572,11 @@ DELIMITER ;
 /*!50003 SET @saved_col_connection = @@collation_connection */ ;
 /*!50003 SET character_set_client  = utf8mb4 */ ;
 /*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`admin`@`localhost` PROCEDURE `sp_selectCatPeriodos`()
+CREATE  PROCEDURE `sp_selectCatPeriodos`()
 BEGIN
 	select id, periodo 
 	from catperiodos
@@ -3570,11 +3594,11 @@ DELIMITER ;
 /*!50003 SET @saved_col_connection = @@collation_connection */ ;
 /*!50003 SET character_set_client  = utf8mb4 */ ;
 /*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`admin`@`localhost` PROCEDURE `sp_selectCatPlantelCCTs`(in _cct1 varchar(20),in _cct2 varchar(20))
+CREATE  PROCEDURE `sp_selectCatPlantelCCTs`(in _cct1 varchar(20),in _cct2 varchar(20))
 BEGIN
 	select id,idEntidad,cct,plantel,nombre,domicilio,gradoMarginacion
     from catplanteles 
@@ -3592,11 +3616,11 @@ DELIMITER ;
 /*!50003 SET @saved_col_connection = @@collation_connection */ ;
 /*!50003 SET character_set_client  = utf8mb4 */ ;
 /*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`admin`@`localhost` PROCEDURE `sp_selectCatPlanteles`(in _idSubsistema int,in _idEntidad int)
+CREATE  PROCEDURE `sp_selectCatPlanteles`(in _idSubsistema int,in _idEntidad int)
 BEGIN
 	if (_idEntidad is null and _idSubsistema is null) then    
 		SELECT id,cct,plantel,gradoMarginacion 
@@ -3620,11 +3644,11 @@ DELIMITER ;
 /*!50003 SET @saved_col_connection = @@collation_connection */ ;
 /*!50003 SET character_set_client  = utf8mb4 */ ;
 /*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`admin`@`localhost` PROCEDURE `sp_selectCatProgramas`()
+CREATE  PROCEDURE `sp_selectCatProgramas`()
 BEGIN
 	select id,programa
     from catprogramas;
@@ -3640,11 +3664,11 @@ DELIMITER ;
 /*!50003 SET @saved_col_connection = @@collation_connection */ ;
 /*!50003 SET character_set_client  = utf8mb4 */ ;
 /*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`admin`@`localhost` PROCEDURE `sp_selectCatPuntaje`(in _idCriterio int)
+CREATE  PROCEDURE `sp_selectCatPuntaje`(in _idCriterio int)
 BEGIN
 	select id,descripcion,puntaje,multiple,puntajeFijo
     from catpuntaje 
@@ -3661,11 +3685,11 @@ DELIMITER ;
 /*!50003 SET @saved_col_connection = @@collation_connection */ ;
 /*!50003 SET character_set_client  = utf8mb4 */ ;
 /*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`admin`@`localhost` PROCEDURE `sp_selectCatResultado`()
+CREATE  PROCEDURE `sp_selectCatResultado`()
 BEGIN
 	select id,resultado from catresultado;
 END ;;
@@ -3680,11 +3704,11 @@ DELIMITER ;
 /*!50003 SET @saved_col_connection = @@collation_connection */ ;
 /*!50003 SET character_set_client  = utf8mb4 */ ;
 /*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`admin`@`localhost` PROCEDURE `sp_selectCatRolComite`()
+CREATE  PROCEDURE `sp_selectCatRolComite`()
 BEGIN
 	select id,rol from catrolcomite;
 END ;;
@@ -3699,11 +3723,11 @@ DELIMITER ;
 /*!50003 SET @saved_col_connection = @@collation_connection */ ;
 /*!50003 SET character_set_client  = utf8mb4 */ ;
 /*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`admin`@`localhost` PROCEDURE `sp_selectCatTalleresLaboratorios`()
+CREATE  PROCEDURE `sp_selectCatTalleresLaboratorios`()
 BEGIN
 	SELECT id,nombre FROM catasignatura
     where tipo="T";
@@ -3719,11 +3743,11 @@ DELIMITER ;
 /*!50003 SET @saved_col_connection = @@collation_connection */ ;
 /*!50003 SET character_set_client  = utf8mb4 */ ;
 /*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`admin`@`localhost` PROCEDURE `sp_selectCatTiposNombramiento`()
+CREATE  PROCEDURE `sp_selectCatTiposNombramiento`()
 BEGIN
 	SELECT id,codigo,descripcion,tipo FROM cattiposnombramiento;
 END ;;
@@ -3738,7 +3762,7 @@ DELIMITER ;
 /*!50003 SET @saved_col_connection = @@collation_connection */ ;
 /*!50003 SET character_set_client  = utf8mb4 */ ;
 /*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
@@ -3759,11 +3783,11 @@ DELIMITER ;
 /*!50003 SET @saved_col_connection = @@collation_connection */ ;
 /*!50003 SET character_set_client  = utf8mb4 */ ;
 /*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`admin`@`localhost` PROCEDURE `sp_selectConstanciasRegistro`(in _idUsuario int,in _idRequisito int)
+CREATE  PROCEDURE `sp_selectConstanciasRegistro`(in _idUsuario int,in _idRequisito int)
 BEGIN
 	if _idRequisito is null then
 		SELECT id,idUsuario,idRequisito,aceptado,observacion
@@ -3786,11 +3810,11 @@ DELIMITER ;
 /*!50003 SET @saved_col_connection = @@collation_connection */ ;
 /*!50003 SET character_set_client  = utf8mb4 */ ;
 /*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`admin`@`localhost` PROCEDURE `sp_selectCursos`(in _idUsuario int)
+CREATE  PROCEDURE `sp_selectCursos`(in _idUsuario int)
 BEGIN
 	select id,idUsuario,tipo,nombreCurso,fechaInicio,fechaFin,institucion,totalHoras,documento
     from cursos where idUsuario=_idUsuario
@@ -3807,11 +3831,11 @@ DELIMITER ;
 /*!50003 SET @saved_col_connection = @@collation_connection */ ;
 /*!50003 SET character_set_client  = utf8mb4 */ ;
 /*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`admin`@`localhost` PROCEDURE `sp_selectHorasGrupo`(in _idUsuario int)
+CREATE  PROCEDURE `sp_selectHorasGrupo`(in _idUsuario int)
 BEGIN
 	select a.id,a.idPeriodo,b.periodo,a.idAsignatura,c.nombre,c.clave,a.semestre,c.tipo,c.optativa,a.horas,a.grupo,a.ws,a.confirmada
     from horasgrupo a
@@ -3832,11 +3856,11 @@ DELIMITER ;
 /*!50003 SET @saved_col_connection = @@collation_connection */ ;
 /*!50003 SET character_set_client  = utf8mb4 */ ;
 /*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`admin`@`localhost` PROCEDURE `sp_selectPublicaciones`(in _idUsuario int)
+CREATE  PROCEDURE `sp_selectPublicaciones`(in _idUsuario int)
 BEGIN
 	select id,idUsuario,nombre,
     CASE
@@ -3859,11 +3883,11 @@ DELIMITER ;
 /*!50003 SET @saved_col_connection = @@collation_connection */ ;
 /*!50003 SET character_set_client  = utf8mb4 */ ;
 /*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`admin`@`localhost` PROCEDURE `sp_selectTutorias`(in _idUsuario int)
+CREATE  PROCEDURE `sp_selectTutorias`(in _idUsuario int)
 BEGIN
 	select id,idUsuario,fechaInicio,fechaFin,documento
     from tutorias 
@@ -3881,11 +3905,11 @@ DELIMITER ;
 /*!50003 SET @saved_col_connection = @@collation_connection */ ;
 /*!50003 SET character_set_client  = utf8mb4 */ ;
 /*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`admin`@`localhost` PROCEDURE `sp_selectUsuario`(in _id int)
+CREATE  PROCEDURE `sp_selectUsuario`(in _id int)
 BEGIN
 	select nombre,primerApellido,segundoApellido,correo,curp 
     from usuario 
@@ -3902,11 +3926,11 @@ DELIMITER ;
 /*!50003 SET @saved_col_connection = @@collation_connection */ ;
 /*!50003 SET character_set_client  = utf8mb4 */ ;
 /*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`admin`@`localhost` PROCEDURE `sp_selectVacanciaPlantelConvocatoriaVigente`(in _idConvocatoria int, in _plantel int)
+CREATE  PROCEDURE `sp_selectVacanciaPlantelConvocatoriaVigente`(in _idConvocatoria int, in _plantel int)
 BEGIN
 select count(*) as total from vacancia where 
 	idConvocatoria=_idConvocatoria and plantel=_plantel;
@@ -3926,4 +3950,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-10-07 20:37:01
+-- Dump completed on 2020-10-08 16:01:18

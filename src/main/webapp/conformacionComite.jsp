@@ -15,8 +15,10 @@
         <link href="https://framework-gb.cdn.gob.mx/assets/styles/main.css" rel="stylesheet">
         <link href="css/estilosRegistro.css" rel="stylesheet"/>   
         <jsp:useBean id="catalogo" class="herramientas.Catalogos" />
+        <jsp:useBean id="archivo" class="herramientas.Archivo" />
         <jsp:useBean id="comite" class="herramientas.Comite" />
         <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+        <%@taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
     </head>
     <body>
         <main class="page">
@@ -107,8 +109,17 @@
                     </table>
                 </div>
                 <div class="form-group col-md-4">
-                    <label class="control-label" for="btnEvidencia19">Acta constitutiva:</label><br/>               
-                    <input id="btnEvidencia19" type="button" class="btn btn-sm btn-link" value="Subir archivo" onclick="abrirModalArchivo(19)"/>                                    
+                    <label class="control-label" for="btnEvidencia19">Acta constitutiva:</label><br/>                    
+                    <c:if test = "${archivo.documentoCargado(aux)==true}">
+                        <input id="btnEvidencia19" type="button" class="btn btn-sm btn-link" value="Ver archivo" onclick="abrirModalArchivo(19)"/>                                    
+                        
+                    </c:if>
+                    <c:if test = "${archivo.documentoCargado(aux)==false}">
+                        <input id="btnEvidencia19" type="button" class="btn btn-sm btn-link incompleto" value="Subir archivo" onclick="abrirModalArchivo(19)"/>
+                        
+                    </c:if>
+                    
+                                                       
                 </div>
                 <div class="form-group col-md-4">                               
                     <label class="control-label">Rol al que se le asignará usuario:</label>

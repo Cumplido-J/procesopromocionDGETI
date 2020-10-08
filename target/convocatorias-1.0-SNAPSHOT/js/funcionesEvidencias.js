@@ -619,13 +619,13 @@ $(document).ready(function () {
 });
 
 function abrirModalArchivo(id){  
-    if(id<9){
+    /*if(id<9){
         $("#seccionCarga").addClass("disabled");
         $("#alertaCarga").addClass("hidden");
     }else{
         $("#seccionCarga").removeClass("disabled");
         $("#alertaCarga").removeClass("hidden");
-    }
+    }*/
     $("#archivo").val("");
     if($("#btnEvidencia"+id).attr("value")=="Subir archivo"){        
         $("#ifArchivo").attr("hidden","true");

@@ -83,7 +83,14 @@ public class Servlet_registroInfoLaboral extends HttpServlet {
         PrintWriter out = response.getWriter();
         try {
             HttpSession session= (HttpSession) request.getSession();
-            String idUsuario=session.getAttribute("idUsuario").toString();
+            String idUsuario,rfc;
+            if(session.getAttribute("rol").toString().equals("D")){
+                idUsuario=session.getAttribute("idUsuario").toString();
+                rfc=session.getAttribute("rfc").toString();
+            }else{
+                idUsuario=session.getAttribute("idDocente").toString();                
+                rfc=session.getAttribute("rfcDocente").toString();
+            }
             //out.println(idUsuario);
             Fecha fecha=new Fecha();
             String activo,ingresoSubsistema="",ingresoPlantel="",idCategoriaJornada="",fechaPlaza="",idTipoNombramiento="",fechaUltimaPromocion="",idCategoriaJornadaAspira="",idPerfilRequerido="",notaSancion="N";

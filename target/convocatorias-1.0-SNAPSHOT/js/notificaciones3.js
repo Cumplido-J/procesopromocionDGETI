@@ -33,9 +33,9 @@ function validarentrada3() {
         $("#i_plantel").css("border", "none");
         var idPlantel = $("#i_plantel").val();
 
-//        $.get("ConsultaCatalogos", {k: "15", i: idPlantel}, function (respuesta) {
-//            $("#convocatoria").html(respuesta);
-//        });
+       $.get("ConsultaCatalogos", {k: "15", i: idPlantel}, function (respuesta) {
+           $("#convocatoria").html(respuesta);
+       });
     }
 }
 

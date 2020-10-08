@@ -7,9 +7,12 @@ package com.aplicacion.servlet;
 
 import com.aplicacion.beans.Docente;
 import com.aplicacion.beans.HoraGrupo;
+import herramientas.RutaConfig;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
+import java.util.Properties;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -67,17 +70,33 @@ public class Servlet_cbRegistro extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        HttpSession session= (HttpSession) request.getSession();     
-        if(session.getAttribute("idUsuario")!=null&&session.getAttribute("rfc")!=null){
+        HttpSession session= (HttpSession) request.getSession();
+        String id="",rfc="";
+        boolean vistaAdmin=false;        
+        if(session.getAttribute("rol").toString().equals("D")){
+            id=session.getAttribute("idUsuario").toString();
+            rfc=session.getAttribute("rfc").toString();
+            vistaAdmin=false; 
+            
+        }else{
+            id=session.getAttribute("idDocente").toString();
+            rfc=session.getAttribute("rfcDocente").toString();
+            vistaAdmin=true;                       
+        }
+        if(!id.equals("")&&!rfc.equals("")){
             docente=new Docente();
-            docente.setIdUsuario(session.getAttribute("idUsuario").toString());
-            docente.setRfc(session.getAttribute("rfc").toString());
+            docente.setIdUsuario(id);
+            docente.setRfc(rfc);
             docente.consultaInfoAspirante();
             String datos[]=docente.getInfoRegistro();            
             //if(datos[61]==null){
                 docente.consultaDocumentos();
                 docente.consultaHoras();
-                if(docente.getListaHoras().isEmpty()){
+                String rutaConfig = RutaConfig.getRutaConfig();
+                Properties p = new Properties(); 
+                p.load(new FileReader(rutaConfig));            
+                Boolean consultarWS= Boolean.parseBoolean(p.getProperty("consultarWS"));
+                if(docente.getListaHoras().isEmpty() && consultarWS){
                     docente.consumeWSCatalogoDocentes();
                     docente.procesaJsonHoras();
                     docente.registraHorasWS();
@@ -85,17 +104,19 @@ public class Servlet_cbRegistro extends HttpServlet {
                 } 
                 docente.actualizaBanderaIngles();
                 request.setAttribute("Docente", docente);
+                request.setAttribute("vistaAdmin", vistaAdmin);
                 ServletContext sc = getServletContext();
                 RequestDispatcher rd = sc.getRequestDispatcher("/registro.jsp");
                 rd.forward(request,response);
             /*}else{
                 response.sendRedirect("evidenciaRegistroDocentes.html");
             }*/
-            
+
         }else{
             response.sendRedirect("login.jsp");
         }
     }
+    
 
     /**
      * Handles the HTTP <code>POST</code> method.

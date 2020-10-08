@@ -3,6 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+var consultarWS=true;
 $(document).ready(function () {
     var $regex=/^([a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?)$/;
     $('#correo').on('keypress keydown keyup',function(){
@@ -140,7 +141,7 @@ function consultaWS(){
              $('#alertaRFC').attr('hidden',true);
              $('#rfc').removeClass('error'); 
              $("#cbAviso").removeAttr("disabled");
-             if($('#subsistema').val()=='1'){
+             if($('#subsistema').val()=='1' && consultarWS){
                 $.post("ConsultaWSPersonal", {rfc: rfc}, function(respuesta){
                    var aux=respuesta.split("|");
                    if(aux.length==5){
