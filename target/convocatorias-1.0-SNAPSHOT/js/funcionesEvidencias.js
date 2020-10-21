@@ -45,6 +45,15 @@ $(document).ready(function () {
                         $("#p1").html(data); 
                         $("#mensaje").html("Información guardada correctamente");            
                         $("#modalMensaje").modal("show");
+                        if($("#btnEvidencia2").val().includes("Ver")){
+                            $("#estatus1").attr("class","glyphicon glyphicon-ok-sign completo");
+                            $("#estatus1").attr("title","Sección completa");
+                            $("#estatus1").attr("completo",true);
+                        }else{
+                            $("#estatus1").attr("class","glyphicon glyphicon-exclamation-sign incompleto");
+                            $("#estatus1").attr("title","Sección incompleta");
+                            $("#estatus1").attr("completo",false);                            
+                        }
                     }
                 }
             });
@@ -80,6 +89,15 @@ $(document).ready(function () {
                         $("#p2").html(data); 
                         $("#mensaje").html("Información guardada correctamente");            
                         $("#modalMensaje").modal("show");
+                        if($("#btnEvidencia10").val().includes("Ver")){
+                            $("#estatus2").attr("class","glyphicon glyphicon-ok-sign completo");
+                            $("#estatus2").attr("title","Sección completa");
+                            $("#estatus2").attr("completo",true);
+                        }else{
+                            $("#estatus2").attr("class","glyphicon glyphicon-exclamation-sign incompleto");
+                            $("#estatus2").attr("title","Sección incompleta");
+                            $("#estatus2").attr("completo",false);                            
+                        }
                     }
                 }
             });
@@ -115,6 +133,15 @@ $(document).ready(function () {
                         $("#p4").html(data); 
                         $("#mensaje").html("Información guardada correctamente");            
                         $("#modalMensaje").modal("show");
+                        if($("#btnEvidencia1").val().includes("Ver")){
+                            $("#estatus4").attr("class","glyphicon glyphicon-ok-sign completo");
+                            $("#estatus4").attr("title","Sección completa");
+                            $("#estatus4").attr("completo",true);
+                        }else{
+                            $("#estatus4").attr("class","glyphicon glyphicon-exclamation-sign incompleto");
+                            $("#estatus4").attr("title","Sección incompleta");
+                            $("#estatus4").attr("completo",false);                            
+                        }
                     }
                 }
             });
@@ -125,29 +152,48 @@ $(document).ready(function () {
         e.preventDefault();
     }).validate({        
         submitHandler:function(){
-            $.ajax({
-                type:$('#form5').attr("method"),
-                url:$('#form5').attr("action"),
-                data:$('#form5').serialize(),
-                beforeSend:function(){
-                    $("#btnEnviar5").val("Guardando...");
-                    $("#btnEnviar5").attr("disabled","disabled");
-                },
-                complete:function(){
-                   $("#btnEnviar5").val("Guardar y continuar"); 
-                   $("#btnEnviar5").removeAttr("disabled");
-                },success:function(data){
-                    if(isNaN(data)){
-                        $("#mensaje").html(data);            
-                        $("#modalMensaje").modal("show");
+            if($("#cb5").is(':checked')||!$("#tablaCursos").html().includes("colspan")){
+                $.ajax({
+                    type:$('#form5').attr("method"),
+                    url:$('#form5').attr("action"),
+                    data:$('#form5').serialize(),
+                    beforeSend:function(){
+                        $("#btnEnviar5").val("Guardando...");
+                        $("#btnEnviar5").attr("disabled","disabled");
+                    },
+                    complete:function(){
+                       $("#btnEnviar5").val("Guardar y continuar"); 
+                       $("#btnEnviar5").removeAttr("disabled");
+                    },success:function(data){
+                            if(isNaN(data)) {
+                                $("#mensaje").html(data); 
+                            }else{                
+                                $("#p5").html(data); 
+                                $("#mensaje").html("Información almacenada correctamente"); 
+                            }                                        
+                            $("#modalMensaje").modal("show");
+                            if(!$("#cb5").is(':checked')){
+                                if($("#btnEvidencia13").val().includes("Ver")){
+                                    $("#estatus5").attr("class","glyphicon glyphicon-ok-sign completo");
+                                    $("#estatus5").attr("title","Sección completa");
+                                    $("#estatus5").attr("completo",true);
+                                }else{
+                                    $("#estatus5").attr("class","glyphicon glyphicon-exclamation-sign incompleto");
+                                    $("#estatus5").attr("title","Sección incompleta");
+                                    $("#estatus5").attr("completo",false);                            
+                                }
+                            }else{
+                                $("#estatus5").attr("class","glyphicon glyphicon-ok-sign completo");
+                                $("#estatus5").attr("title","Sección completa");
+                                $("#estatus5").attr("completo",true);
+                            }
+                        
                     }
-                    else{                        
-                        $("#p5").html(data); 
-                        $("#mensaje").html("Información guardada correctamente");            
-                        $("#modalMensaje").modal("show");
-                    }
-                }
-            });
+                });
+            }else{
+                $("#mensaje").html("Debe registrar la información de al menos un curso");            
+                $("#modalMensaje").modal("show");
+            }
             return false;
         }
     });
@@ -155,6 +201,7 @@ $(document).ready(function () {
         e.preventDefault();
     }).validate({        
         submitHandler:function(){
+            if($("#cb6").is(':checked')||!$("#tablaAportaciones").html().includes("colspan")){
             $.ajax({
                 type:$('#form6').attr("method"),
                 url:$('#form6').attr("action"),
@@ -167,17 +214,39 @@ $(document).ready(function () {
                    $("#btnEnviar6").val("Guardar y continuar"); 
                    $("#btnEnviar6").removeAttr("disabled");
                 },success:function(data){
-                    if(isNaN(data)){
-                        $("#mensaje").html(data);            
-                        $("#modalMensaje").modal("show");
-                    }
-                    else{                        
+                    if(isNaN(data)) {
+                        $("#mensaje").html(data); 
+                    }else{                
                         $("#p6").html(data); 
-                        $("#mensaje").html("Información guardada correctamente");            
+                        $("#mensaje").html("Información almacenada correctamente"); 
+                    }  
+                                           
+                                  
                         $("#modalMensaje").modal("show");
+                        if(!$("#cb6").is(':checked')){
+                            if($("#btnEvidencia14").val().includes("Ver")){
+                                $("#estatus6").attr("class","glyphicon glyphicon-ok-sign completo");
+                                $("#estatus6").attr("title","Sección completa");
+                                $("#estatus6").attr("completo",true);
+                            }else{
+                                $("#estatus6").attr("class","glyphicon glyphicon-exclamation-sign incompleto");
+                                $("#estatus6").attr("title","Sección incompleta");
+                                $("#estatus6").attr("completo",false);                            
+                            }
+                        }else{
+                            $("#estatus6").attr("class","glyphicon glyphicon-ok-sign completo");
+                            $("#estatus6").attr("title","Sección completa");
+                            $("#estatus6").attr("completo",true);
+                        }
                     }
-                }
+                
             });
+            }
+            else{
+                $("#mensaje").html("Debe registrar la información de al menos una aportación");            
+                $("#modalMensaje").modal("show");
+            }
+        
             return false;
         }
     });
@@ -185,6 +254,7 @@ $(document).ready(function () {
         e.preventDefault();
     }).validate({        
         submitHandler:function(){
+            if($("#cb7").is(':checked')||!$("#tablaParticipaciones").html().includes("colspan")){
             $.ajax({
                 type:$('#form7').attr("method"),
                 url:$('#form7').attr("action"),
@@ -197,17 +267,37 @@ $(document).ready(function () {
                    $("#btnEnviar7").val("Guardar y continuar"); 
                    $("#btnEnviar7").removeAttr("disabled");
                 },success:function(data){
-                    if(isNaN(data)){
-                        $("#mensaje").html(data);            
-                        $("#modalMensaje").modal("show");
-                    }
-                    else{                        
+                    if(isNaN(data)) {
+                        $("#mensaje").html(data); 
+                    }else{                
                         $("#p7").html(data); 
-                        $("#mensaje").html("Información guardada correctamente");            
+                        $("#mensaje").html("Información almacenada correctamente"); 
+                    }                       
+                                  
                         $("#modalMensaje").modal("show");
+                        if(!$("#cb7").is(':checked')){
+                            if($("#btnEvidencia15").val().includes("Ver")){
+                                $("#estatus7").attr("class","glyphicon glyphicon-ok-sign completo");
+                                $("#estatus7").attr("title","Sección completa");
+                                $("#estatus7").attr("completo",true);
+                            }else{
+                                $("#estatus7").attr("class","glyphicon glyphicon-exclamation-sign incompleto");
+                                $("#estatus7").attr("title","Sección incompleta");
+                                $("#estatus7").attr("completo",false);                            
+                            }
+                        }else{
+                            $("#estatus7").attr("class","glyphicon glyphicon-ok-sign completo");
+                            $("#estatus7").attr("title","Sección completa");
+                            $("#estatus7").attr("completo",true);
+                        }
                     }
-                }
+                    
+                
             });
+        }else{
+                $("#mensaje").html("Debe registrar la información de al menos una participación");            
+                $("#modalMensaje").modal("show");
+            }
             return false;
         }
     });
@@ -215,6 +305,7 @@ $(document).ready(function () {
         e.preventDefault();
     }).validate({        
         submitHandler:function(){
+            if($("#cb8").is(':checked')||!$("#tablaTutorias").html().includes("colspan")){
             $.ajax({
                 type:$('#form8').attr("method"),
                 url:$('#form8').attr("action"),
@@ -227,17 +318,35 @@ $(document).ready(function () {
                    $("#btnEnviar8").val("Guardar y continuar"); 
                    $("#btnEnviar8").removeAttr("disabled");
                 },success:function(data){
-                    if(isNaN(data)){
-                        $("#mensaje").html(data);            
-                        $("#modalMensaje").modal("show");
-                    }
-                    else{                        
+                    if(isNaN(data)) {
+                        $("#mensaje").html(data); 
+                    }else{                
                         $("#p8").html(data); 
-                        $("#mensaje").html("Información guardada correctamente");            
+                        $("#mensaje").html("Información almacenada correctamente"); 
+                    }         
                         $("#modalMensaje").modal("show");
+                        if(!$("#cb8").is(':checked')){
+                            if($("#btnEvidencia16").val().includes("Ver")){
+                                $("#estatus8").attr("class","glyphicon glyphicon-ok-sign completo");
+                                $("#estatus8").attr("title","Sección completa");
+                                $("#estatus8").attr("completo",true);
+                            }else{
+                                $("#estatus8").attr("class","glyphicon glyphicon-exclamation-sign incompleto");
+                                $("#estatus8").attr("title","Sección incompleta");
+                                $("#estatus8").attr("completo",false);                            
+                            }
+                        }else{
+                            $("#estatus8").attr("class","glyphicon glyphicon-ok-sign completo");
+                            $("#estatus8").attr("title","Sección completa");
+                            $("#estatus8").attr("completo",true);
+                        }
                     }
-                }
+                
             });
+        }else{
+                $("#mensaje").html("Debe registrar la información de al menos una tutoría");            
+                $("#modalMensaje").modal("show");
+            }
             return false;
         }
     });
@@ -245,6 +354,7 @@ $(document).ready(function () {
         e.preventDefault();
     }).validate({        
         submitHandler:function(){
+            if($("#cb9").is(':checked')||!$("#tablaPublicaciones").html().includes("colspan")){
             $.ajax({
                 type:$('#form9').attr("method"),
                 url:$('#form9').attr("action"),
@@ -257,17 +367,35 @@ $(document).ready(function () {
                    $("#btnEnviar9").val("Guardar y continuar"); 
                    $("#btnEnviar9").removeAttr("disabled");
                 },success:function(data){
-                    if(isNaN(data)){
-                        $("#mensaje").html(data);            
-                        $("#modalMensaje").modal("show");
-                    }
-                    else{                        
+                    if(isNaN(data)) {
+                        $("#mensaje").html(data); 
+                    }else{                
                         $("#p9").html(data); 
-                        $("#mensaje").html("Información guardada correctamente");            
+                        $("#mensaje").html("Información almacenada correctamente"); 
+                    }             
                         $("#modalMensaje").modal("show");
+                        if(!$("#cb9").is(':checked')){
+                            if($("#btnEvidencia17").val().includes("Ver")){
+                                $("#estatus9").attr("class","glyphicon glyphicon-ok-sign completo");
+                                $("#estatus9").attr("title","Sección completa");
+                                $("#estatus9").attr("completo",true);
+                            }else{
+                                $("#estatus9").attr("class","glyphicon glyphicon-exclamation-sign incompleto");
+                                $("#estatus9").attr("title","Sección incompleta");
+                                $("#estatus9").attr("completo",false);                            
+                            }
+                        }else{
+                            $("#estatus9").attr("class","glyphicon glyphicon-ok-sign completo");
+                            $("#estatus9").attr("title","Sección completa");
+                            $("#estatus9").attr("completo",true);
+                        }
                     }
-                }
+                
             });
+            }else{
+                $("#mensaje").html("Debe registrar la información de al menos una publicación");            
+                $("#modalMensaje").modal("show");
+            }
             return false;
         }
     });
@@ -292,6 +420,7 @@ $(document).ready(function () {
             }
         },
         submitHandler:function(){
+            if(!$("#tablaResultados").html().includes("colspan")){
             $.ajax({
                 type:$('#form10').attr("method"),
                 url:$('#form10').attr("action"),
@@ -312,10 +441,24 @@ $(document).ready(function () {
                         var puntaje=parseInt(data)+parseInt($("#pEvidencias").val());                        
                         $("#p10").html(puntaje); 
                         $("#mensaje").html("Información guardada correctamente");            
-                        $("#modalMensaje").modal("show");
+                        $("#modalMensaje").modal("show");                        
+                        if($("#btnEvidencia18").val().includes("Ver")){
+                            $("#estatus10").attr("class","glyphicon glyphicon-ok-sign completo");
+                            $("#estatus10").attr("title","Sección completa");
+                            $("#estatus10").attr("completo",true);
+                        }else{
+                            $("#estatus10").attr("class","glyphicon glyphicon-exclamation-sign incompleto");
+                            $("#estatus10").attr("title","Sección incompleta");
+                            $("#estatus10").attr("completo",false);                            
+                        }
+                        
                     }
                 }
             });
+        }else{
+                $("#mensaje").html("Debe registrar la información de al menos un resultado educativo");            
+                $("#modalMensaje").modal("show");
+            }
             return false;
         }
     });
@@ -845,5 +988,13 @@ function cambioResultado(){
         $("#resultado").removeAttr("required");
         $("#resultado").addClass("hidden");
         $("#resultado").val("");
+    }
+}
+function finalizar(){
+    if($("#estatus1").attr("completo").includes("true")&&$("#estatus2").attr("completo").includes("true")&&$("#estatus3").attr("completo").includes("true")&&$("#estatus4").attr("completo").includes("true")&&$("#estatus5").attr("completo").includes("true")&&$("#estatus6").attr("completo").includes("true")&&$("#estatus7").attr("completo").includes("true")&&$("#estatus8").attr("completo").includes("true")&&$("#estatus9").attr("completo").includes("true")&&$("#estatus10").attr("completo").includes("true")){
+        $("#modalConfirmacion2").modal("show");
+    }else{
+        $("#mensaje").html("Hay información pendiente de registrar");            
+        $("#modalMensaje").modal("show");
     }
 }

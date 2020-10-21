@@ -103,6 +103,7 @@ public class Servlet_registrarCriterio extends HttpServlet {
                         idPuntaje="-1";
                     }
                 }  
+                System.out.println("puntaje="+idPuntaje);
                 if(Integer.parseInt(idPuntaje)>=0){
                     parametros=new String[3];
                     parametros[0]=idUsuario;

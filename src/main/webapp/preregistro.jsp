@@ -84,17 +84,17 @@
                         </div>
                         <div class="form-group col-md-4">                               
                             <label class="control-label" for="nombre">Nombre(s):</label>
-                            <input required class="form-control input-sm" type="text" id="nombre" name="nombre" maxlength="50"/>
+                            <input required class="form-control input-sm text-uppercase" type="text" id="nombre" name="nombre" maxlength="50"/>
                         </div>
                         <div class="form-group col-md-4">                               
                             <label class="control-label" for="apellido1">Primer apellido:</label>
-                            <input required class="form-control input-sm" type="text" id="apellido1" name="apellido1" maxlength="50"/>
+                            <input required class="form-control input-sm text-uppercase" type="text" id="apellido1" name="apellido1" maxlength="50"/>
                         </div>
                     </div>
                     <div class="row">
                         <div class="form-group col-md-4">                               
                             <label class="control-label" for="apellido2">Segundo apellido:</label>
-                            <input required class="form-control input-sm" type="text" id="apellido2" name="apellido2" maxlength="50"/>
+                            <input required class="form-control input-sm text-uppercase" type="text" id="apellido2" name="apellido2" maxlength="50"/>
                         </div>
                         <div class="form-group col-md-4">                               
                             <label class="control-label" for="entidad">Entidad:</label>
@@ -120,14 +120,14 @@
                         </div>
                         <div class="form-group col-md-4">                               
                             <label class="control-label" for="correo">Correo electrónico:</label>
-                            <input required class="form-control input-sm" type="mail" id="correo" name="correo" maxlength="50"/>
+                            <input required class="form-control input-sm text-lowercase" type="mail" id="correo" name="correo" maxlength="50"/>
                             <label class="error" id="alertaCorreo" hidden >Ingrese una dirección de correo válida</label>
                         </div>
                     </div>
                     <div class="row">
                         <div class="form-group col-md-12">                               
                             <label class="control-label" for="consideraciones">Consideraciones particulares:</label>
-                            <textarea class="form-control" id="consideraciones" name="consideraciones" maxlength="200"></textarea>
+                            <textarea class="form-control text-uppercase" id="consideraciones" name="consideraciones" maxlength="200"></textarea>
                         </div>
                     </div>
                     <div class="row">

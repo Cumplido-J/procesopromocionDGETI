@@ -360,7 +360,8 @@
                                   <label class="control-label" for="categoriaAspira">Categoría a la que aspira:</label>
                                   <select class="form-control input-sm" id="categoriaAspira" name="categoriaAspira" onchange="cambioCategoriaAspira()" required>                                     
                                      ${catalogo.desplegarOpcionesCategoriasVacantes(Docente.infoRegistro[6],Docente.infoRegistro[64],Docente.infoRegistro[42])}
-                                  </select>                          
+                                  </select>  
+                                  <label class="error" id="alertaCategoria" hidden >No puede participar a esta categoría</label>
                                 </div>
                                 <div class="form-group col-md-3">
                                   <label class="control-label" for="jornadaAspira">Tipo de jornada:</label>

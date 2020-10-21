@@ -6,6 +6,8 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -69,7 +71,13 @@
                       <div class="panel-heading">
                         <h4 class="panel-title">
                           <a data-parent="#accordion" data-toggle="collapse" href="#panel1" aria-expanded="true" aria-controls="panel1">
-                              ${criterios[0][0]} - ${criterios[0][1]}
+                              ${criterios[0][0]} - ${criterios[0][1]}                                
+                                <c:if test = "${puntajes[0][3]!=null && docente.documentoCargado2('2')==true}">
+                                    <span class="glyphicon glyphicon-ok-sign completo" title="Sección completa" id="estatus1" completo="true"></span>                                      
+                                </c:if>
+                                <c:if test = "${puntajes[0][3]==null || docente.documentoCargado2('2')==false}">
+                                    <span class="glyphicon glyphicon-exclamation-sign incompleto" title="Sección incompleta" id="estatus1" completo="false"></span>                                    
+                                </c:if>
                           </a>
                           <p class="text-danger ${hidden}">Puntaje: <span id="p1">${puntajes[0][4]}</span></p>
                         </h4>
@@ -93,7 +101,7 @@
                                     </c:if>
                                     <c:if test = "${docente.documentoCargado2('2')==false}">
                                         <input id="btnEvidencia2" type="button" class="btn btn-sm btn-link incompleto" value="Subir archivo" onclick="abrirModalArchivo(2)"/>
-                                        
+                                        <span class="glyphicon glyphicon-exclamation-sign incompleto" id="alertaBtnEvidencia2" title="Sección incompleta"></span>  
                                     </c:if> 
                                 </div>
                                 <div class="col-xs-12 text-right">
@@ -111,7 +119,13 @@
                       <div class="panel-heading">
                         <h4 class="panel-title">
                           <a data-parent="#accordion" data-toggle="collapse" href="#panel2" aria-expanded="false" aria-controls="panel2">
-                          ${criterios[1][0]} - ${criterios[1][1]}
+                            ${criterios[1][0]} - ${criterios[1][1]}
+                            <c:if test = "${puntajes[1][3]!=null && docente.documentoCargado2('10')==true}">
+                                <span class="glyphicon glyphicon-ok-sign completo" title="Sección completa" id="estatus2" completo="true"></span>                                      
+                            </c:if>
+                            <c:if test = "${puntajes[1][3]==null || docente.documentoCargado2('10')==false}">
+                                <span class="glyphicon glyphicon-exclamation-sign incompleto" title="Sección incompleta" id="estatus2" completo="false"></span>                                    
+                            </c:if>
                           </a>
                           <p class="text-danger ${hidden}">Puntaje: <span id="p2">${puntajes[1][4]}</span></p>
                         </h4>
@@ -134,7 +148,7 @@
                                     </c:if>
                                     <c:if test = "${docente.documentoCargado2('10')==false}">
                                         <input id="btnEvidencia10" type="button" class="btn btn-sm btn-link incompleto" value="Subir archivo" onclick="abrirModalArchivo(10)"/>
-                                        
+                                        <span class="glyphicon glyphicon-exclamation-sign incompleto" id="alertaBtnEvidencia10" title="Sección incompleta"></span>  
                                     </c:if>
                                     
                                 </div>
@@ -151,6 +165,7 @@
                         <h4 class="panel-title">
                           <a data-parent="#accordion" data-toggle="collapse" href="#panel3" aria-expanded="false" aria-controls="panel3">
                           ${criterios[2][0]} - ${criterios[2][1]}
+                            <span class="glyphicon glyphicon-ok-sign completo" title="Sección completa" id="estatus3" completo="true"></span>                                      
                           </a>
                           <p class="text-danger ${hidden}">Puntaje: <span id="p3">${puntajeEncuestas[5]}</span></p>
                         </h4>
@@ -173,7 +188,14 @@
                       <div class="panel-heading">
                         <h4 class="panel-title">
                           <a data-parent="#accordion" data-toggle="collapse" href="#panel4" aria-expanded="false" aria-controls="panel4">
-                          ${criterios[3][0]} - ${criterios[3][1]}
+                            ${criterios[3][0]} - ${criterios[3][1]}                               
+                                <c:if test = "${puntajes[3][3]!=null && docente.documentoCargado2('1')==true}">
+                                    <span class="glyphicon glyphicon-ok-sign completo" title="Sección completa" id="estatus4" completo="true"></span>                                      
+                                </c:if>
+                                <c:if test = "${puntajes[3][3]==null || docente.documentoCargado2('1')==false}">
+                                    <span class="glyphicon glyphicon-exclamation-sign incompleto" title="Sección incompleta" id="estatus4" completo="false"></span>                                    
+                                </c:if>
+                          
                           </a>
                           <p class="text-danger ${hidden}">Puntaje: <span id="p4">${puntajes[3][4]}</span></p>
                         </h4>
@@ -198,7 +220,7 @@
                                     </c:if>
                                     <c:if test = "${docente.documentoCargado2('1')==false}">
                                         <input id="btnEvidencia1" type="button" class="btn btn-sm btn-link incompleto" value="Subir archivo" onclick="abrirModalArchivo(1)"/>  
-                                        
+                                        <span class="glyphicon glyphicon-exclamation-sign incompleto" id="alertaBtnEvidencia1" title="Sección incompleta"></span>  
                                     </c:if>
                                     
                                 </div>
@@ -215,6 +237,17 @@
                         <h4 class="panel-title">
                           <a data-parent="#accordion" data-toggle="collapse" href="#panel5" aria-expanded="false" aria-controls="panel5">
                           ${criterios[4][0]} - ${criterios[4][1]}
+                            <c:if test="${puntajes[4][3]==null}">
+                                <c:if test = "${!fn:contains(cursos[0], 'colspan') && docente.documentoCargado2('13')==true}">
+                                    <span class="glyphicon glyphicon-ok-sign completo" title="Sección completa" id="estatus5" completo="true"></span>                                      
+                                </c:if>
+                                <c:if test = "${fn:contains(cursos[0], 'colspan') || docente.documentoCargado2('13')==false}">
+                                    <span class="glyphicon glyphicon-exclamation-sign incompleto" title="Sección incompleta" id="estatus5" completo="false"></span>                                    
+                                </c:if>
+                            </c:if>
+                            <c:if test="${puntajes[4][3]!=null}">
+                                <span class="glyphicon glyphicon-ok-sign completo" title="Sección completa" id="estatus5" completo="true"></span>
+                            </c:if>
                           </a>
                           <p class="text-danger ${hidden}">Puntaje: 
                               <span id="p5">
@@ -237,7 +270,7 @@
                             <form id="form5" role="form" action="RegistrarCriterio" method="POST">
                             <div class="row">
                                 <div class="checkbox col-xs-12">                                  
-                                  <label><input type="checkbox" name="cbConstancia" data-toggle="collapse" data-target="#seccionCursos" ${checked}>Marque la casilla si no cuenta con evidencias de este criterio</label>
+                                  <label><input type="checkbox" name="cbConstancia" id="cb5" data-toggle="collapse" data-target="#seccionCursos" ${checked}>Marque la casilla si no cuenta con evidencias de este criterio</label>
                                 </div>
                             </div>
                             <div id="seccionCursos" class="collapse ${in}">
@@ -264,7 +297,7 @@
                                     </c:if>
                                     <c:if test = "${docente.documentoCargado2('13')==false}">
                                         <input id="btnEvidencia13" type="button" class="btn btn-sm btn-link incompleto" value="Subir archivo" onclick="abrirModalArchivo(13)"/>  
-                                        
+                                        <span class="glyphicon glyphicon-exclamation-sign incompleto" id="alertaBtnEvidencia13" title="Sección incompleta"></span>  
                                     </c:if>
                                 
                             </div>
@@ -283,7 +316,18 @@
                       <div class="panel-heading">
                         <h4 class="panel-title">
                           <a data-parent="#accordion" data-toggle="collapse" href="#panel6" aria-expanded="false" aria-controls="panel6">
-                          ${criterios[5][0]} - ${criterios[5][1]}
+                          ${criterios[5][0]} - ${criterios[5][1]}                               
+                            <c:if test="${puntajes[5][3]==null}">
+                                <c:if test = "${!fn:contains(aportaciones[0], 'colspan') && docente.documentoCargado2('14')==true}">
+                                    <span class="glyphicon glyphicon-ok-sign completo" title="Sección completa" id="estatus6" completo="true"></span>                                      
+                                </c:if>
+                                <c:if test = "${fn:contains(aportaciones[0], 'colspan') || docente.documentoCargado2('14')==false}">
+                                    <span class="glyphicon glyphicon-exclamation-sign incompleto" title="Sección incompleta" id="estatus6" completo="false"></span>                                    
+                                </c:if>
+                            </c:if>
+                            <c:if test="${puntajes[5][3]!=null}">
+                                <span class="glyphicon glyphicon-ok-sign completo" title="Sección completa" id="estatus6" completo="true"></span>
+                            </c:if>
                           </a>
                           <p class="text-danger ${hidden}">Puntaje: 
                               <span id="p6">
@@ -307,7 +351,7 @@
                             <form id="form6" role="form" action="RegistrarCriterio" method="POST">
                             <div class="row">
                                 <div class="checkbox col-xs-12">                                  
-                                  <label><input type="checkbox" ${checked} name="cbConstancia" data-toggle="collapse" data-target="#seccionAportaciones">Marque la casilla si no cuenta con evidencias de este criterio</label>
+                                  <label><input type="checkbox" ${checked} id="cb6" name="cbConstancia" data-toggle="collapse" data-target="#seccionAportaciones">Marque la casilla si no cuenta con evidencias de este criterio</label>
                                 </div>
                             </div>
                             <div id="seccionAportaciones" class="collapse ${in}">
@@ -332,7 +376,7 @@
                                     </c:if>
                                     <c:if test = "${docente.documentoCargado2('14')==false}">
                                         <input id="btnEvidencia14" type="button" class="btn btn-sm btn-link incompleto" value="Subir archivo" onclick="abrirModalArchivo(14)"/>  
-                                        
+                                        <span class="glyphicon glyphicon-exclamation-sign incompleto" id="alertaBtnEvidencia14" title="Sección incompleta"></span>  
                                     </c:if>
                             </div>
                                 
@@ -350,7 +394,18 @@
                       <div class="panel-heading">
                         <h4 class="panel-title">
                           <a data-parent="#accordion" data-toggle="collapse" href="#panel7" aria-expanded="false" aria-controls="panel7">
-                          ${criterios[6][0]} - ${criterios[6][1]}
+                          ${criterios[6][0]} - ${criterios[6][1]}                              
+                            <c:if test="${puntajes[6][3]==null}">
+                                <c:if test = "${!fn:contains(participaciones[0], 'colspan') && docente.documentoCargado2('15')==true}">
+                                    <span class="glyphicon glyphicon-ok-sign completo" title="Sección completa" id="estatus7" completo="true"></span>                                      
+                                </c:if>
+                                <c:if test = "${fn:contains(participaciones[0], 'colspan') || docente.documentoCargado2('15')==false}">
+                                    <span class="glyphicon glyphicon-exclamation-sign incompleto" title="Sección incompleta" id="estatus7" completo="false"></span>                                    
+                                </c:if>
+                            </c:if>
+                            <c:if test="${puntajes[6][3]!=null}">
+                                <span class="glyphicon glyphicon-ok-sign completo" title="Sección completa" id="estatus7" completo="true"></span>
+                            </c:if>
                           </a>
                           <p class="text-danger ${hidden}">Puntaje: 
                               <span id="p7">
@@ -373,7 +428,7 @@
                             <form id="form7" role="form" action="RegistrarCriterio" method="POST">
                             <div class="row">
                                 <div class="checkbox col-xs-12">                                  
-                                  <label><input type="checkbox" ${checked} name="cbConstancia" data-toggle="collapse" data-target="#seccionParticipaciones">Marque la casilla si no cuenta con evidencias de este criterio</label>
+                                  <label><input type="checkbox" ${checked} id="cb7" name="cbConstancia" data-toggle="collapse" data-target="#seccionParticipaciones">Marque la casilla si no cuenta con evidencias de este criterio</label>
                                 </div>
                             </div>
                             <div id="seccionParticipaciones" class="collapse ${in}">
@@ -398,7 +453,7 @@
                                     </c:if>
                                     <c:if test = "${docente.documentoCargado2('15')==false}">
                                         <input id="btnEvidencia15" type="button" class="btn btn-sm btn-link incompleto" value="Subir archivo" onclick="abrirModalArchivo(15)"/>  
-                                        
+                                        <span class="glyphicon glyphicon-exclamation-sign incompleto" id="alertaBtnEvidencia15" title="Sección incompleta"></span>  
                                     </c:if>
                                 </div>
                                 
@@ -415,7 +470,18 @@
                       <div class="panel-heading">
                         <h4 class="panel-title">
                           <a data-parent="#accordion" data-toggle="collapse" href="#panel8" aria-expanded="false" aria-controls="panel8">
-                          ${criterios[7][0]} - ${criterios[7][1]}
+                          ${criterios[7][0]} - ${criterios[7][1]}                              
+                            <c:if test="${puntajes[7][3]==null}">
+                                <c:if test = "${!fn:contains(tutorias[0], 'colspan') && docente.documentoCargado2('16')==true}">
+                                    <span class="glyphicon glyphicon-ok-sign completo" title="Sección completa" id="estatus8" completo="true"></span>                                      
+                                </c:if>
+                                <c:if test = "${fn:contains(tutorias[0], 'colspan') || docente.documentoCargado2('16')==false}">
+                                    <span class="glyphicon glyphicon-exclamation-sign incompleto" title="Sección incompleta" id="estatus8" completo="false"></span>                                    
+                                </c:if>
+                            </c:if>
+                            <c:if test="${puntajes[7][3]!=null}">
+                                <span class="glyphicon glyphicon-ok-sign completo" title="Sección completa" id="estatus8" completo="true"></span>
+                            </c:if>
                           </a>
                           <p class="text-danger ${hidden}">Puntaje: 
                               <span id="p8">
@@ -439,7 +505,7 @@
                             
                             <div class="row">
                                     <div class="checkbox col-xs-12">                                  
-                                      <label><input type="checkbox" ${checked} name="cbConstancia" data-toggle="collapse" data-target="#seccionTutorias">Marque la casilla si no cuenta con evidencias de este criterio</label>
+                                      <label><input type="checkbox" id="cb8" ${checked} name="cbConstancia" data-toggle="collapse" data-target="#seccionTutorias">Marque la casilla si no cuenta con evidencias de este criterio</label>
                                     </div>
                             </div>
                             <div id="seccionTutorias" class="collapse ${in}">
@@ -464,7 +530,7 @@
                                     </c:if>
                                     <c:if test = "${docente.documentoCargado2('16')==false}">
                                         <input id="btnEvidencia16" type="button" class="btn btn-sm btn-link incompleto" value="Subir archivo" onclick="abrirModalArchivo(16)"/>  
-                                        
+                                        <span class="glyphicon glyphicon-exclamation-sign incompleto" id="alertaBtnEvidencia16" title="Sección incompleta"></span>  
                                     </c:if>
                                 </div>
                                 
@@ -482,7 +548,18 @@
                       <div class="panel-heading">
                         <h4 class="panel-title">
                           <a data-parent="#accordion" data-toggle="collapse" href="#panel9" aria-expanded="false" aria-controls="panel9">
-                          ${criterios[8][0]} - ${criterios[8][1]}
+                          ${criterios[8][0]} - ${criterios[8][1]}                              
+                            <c:if test="${puntajes[8][3]==null}">
+                                <c:if test = "${!fn:contains(publicaciones[0], 'colspan') && docente.documentoCargado2('18')==true}">
+                                    <span class="glyphicon glyphicon-ok-sign completo" title="Sección completa" id="estatus9" completo="true"></span>                                      
+                                </c:if>
+                                <c:if test = "${fn:contains(publicaciones[0], 'colspan') || docente.documentoCargado2('18')==false}">
+                                    <span class="glyphicon glyphicon-exclamation-sign incompleto" title="Sección incompleta" id="estatus9" completo="false"></span>                                    
+                                </c:if>
+                            </c:if>
+                            <c:if test="${puntajes[8][3]!=null}">
+                                <span class="glyphicon glyphicon-ok-sign completo" title="Sección completa" id="estatus9" completo="true"></span>
+                            </c:if>
                           </a>
                           <p class="text-danger ${hidden}">Puntaje: 
                               <span id="p9">
@@ -506,7 +583,7 @@
                             
                             <div class="row">
                                     <div class="checkbox col-xs-12">                                  
-                                      <label><input type="checkbox" ${checked} name="cbConstancia" data-toggle="collapse" data-target="#seccionPublicaciones">Marque la casilla si no cuenta con evidencias de este criterio</label>
+                                      <label><input type="checkbox" id="cb9" ${checked} name="cbConstancia" data-toggle="collapse" data-target="#seccionPublicaciones">Marque la casilla si no cuenta con evidencias de este criterio</label>
                                     </div>
                             </div>
                             <div id="seccionPublicaciones" class="collapse ${in}">
@@ -531,7 +608,7 @@
                                     </c:if>
                                     <c:if test = "${docente.documentoCargado2('17')==false}">
                                         <input id="btnEvidencia17" type="button" class="btn btn-sm btn-link incompleto" value="Subir archivo" onclick="abrirModalArchivo(17)"/>  
-                                        
+                                        <span class="glyphicon glyphicon-exclamation-sign incompleto" id="alertaBtnEvidencia17" title="Sección incompleta"></span>  
                                     </c:if>
                                 </div>
                                 
@@ -549,7 +626,13 @@
                       <div class="panel-heading">
                         <h4 class="panel-title">
                           <a data-parent="#accordion" data-toggle="collapse" href="#panel10" aria-expanded="false" aria-controls="panel10">
-                          ${criterios[9][0]} - ${criterios[9][1]}
+                          ${criterios[9][0]} - ${criterios[9][1]}                              
+                            <c:if test = "${puntajes[9][3]!=null && docente.documentoCargado2('18')==true}">
+                                <span class="glyphicon glyphicon-ok-sign completo" title="Sección completa" id="estatus10" completo="true"></span>                                      
+                            </c:if>
+                            <c:if test = "${puntajes[9][3]==null || docente.documentoCargado2('18')==false}">
+                                <span class="glyphicon glyphicon-exclamation-sign incompleto" title="Sección incompleta" id="estatus10" completo="false"></span>                                    
+                            </c:if>
                           </a>
                           <p class="text-danger ${hidden}">Puntaje: <span id="p10">${puntajes[9][4]+puntajes[10][4]+puntajes[11][4]+puntajes[12][4]+puntajes[13][4]+resultados[1]}</span></p>
                         </h4>
@@ -622,7 +705,7 @@
                                     </c:if>
                                     <c:if test = "${docente.documentoCargado2('18')==false}">
                                         <input id="btnEvidencia18" type="button" class="btn btn-sm btn-link incompleto" value="Subir archivo" onclick="abrirModalArchivo(18)"/>  
-                                        
+                                        <span class="glyphicon glyphicon-exclamation-sign incompleto" id="alertaBtnEvidencia18" title="Sección incompleta"></span>  
                                     </c:if>
                                 </div>
                                 <div class="col-xs-12 text-right">
@@ -640,7 +723,8 @@
                       <c:if test="${!vistaAdmin}">
                       <a href="FichaRegistroPrevia"  target="_blank" class="btn btn-default" >Vista previa Ficha de registro</a>
                       </c:if>
-                      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalConfirmacion2">Finalizar registro</button>
+                      <!--<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalConfirmacion2">Finalizar registro</button>-->
+                      <button type="button" class="btn btn-primary" onClick="finalizar()">Finalizar registro</button>
                   
               </div>
               

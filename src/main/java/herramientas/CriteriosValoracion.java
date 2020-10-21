@@ -75,7 +75,7 @@ public class CriteriosValoracion {
         List<String[]> datos=metodo.ejecutaSP("sp_consultaAportaciones",parametros);
         if(datos.isEmpty()){
             respuesta="<tr><td colspan='5'>Sin información</td></tr>";
-            puntaje="0";
+            puntaje=null;
         }else{
             respuesta="";
             for(String[] dato:datos){

@@ -122,6 +122,7 @@ $(document).ready(function () {
             }
         },
         submitHandler:function(){
+           
             $.ajax({
                 type:$('#formInfoLaboral').attr("method"),
                 url:$('#formInfoLaboral').attr("action"),
@@ -141,10 +142,10 @@ $(document).ready(function () {
                         $("#modalMensaje").modal("show");
                     }
                 },error:function(){
-                    
+
                 }
             });
-            return false;
+            return false;            
         }
     });
     $('#formInfoHorasGrupo').submit(function(e) {
@@ -945,17 +946,40 @@ function cambioCategoria() {
     id=$("#categoria").val(); 
     $.get("ConsultaCatalogos", {k: "9",i:id}, function(respuesta){
         $("#jornada").html(respuesta);
-    });    
+    });
+    if($("#categoriaAspira").val()!=""){
+        var categoria=parseInt($("#categoria").val());
+        var categoriaAspira=parseInt($("#categoriaAspira").val());
+        //var aux=categoria+1;
+
+        if(categoriaAspira==categoria+1){
+            $("#alertaCategoria").attr("hidden",true);
+            $("#btnEnviar2").removeClass("disabled");
+        }else{
+            $("#alertaCategoria").removeAttr("hidden");
+            $("#btnEnviar2").addClass("disabled");
+        }
+    }
 }
 function cambioCategoriaAspira() {
-    id=$("#categoriaAspira").val(); 
-    idPrograma=$("#programa").val(); 
-    idPlantel=$("#plantel").val(); 
-    $.get("ConsultaCatalogos", {k: "14",i:id,pr:idPrograma,pl:idPlantel}, function(){        
-    }).done(function(respuesta){$("#jornadaAspira").html(respuesta);});
-    $.get("ConsultaCatalogos", {k: "10",i:id}, function(){        
-    }).done(function(respuesta){$("#rbRequisitos").html(respuesta);}); 
+    var categoria=parseInt($("#categoria").val());
+    var categoriaAspira=parseInt($("#categoriaAspira").val());
+    //var aux=categoria+1;
     
+    if(categoriaAspira==categoria+1){
+        $("#alertaCategoria").attr("hidden",true);
+        $("#btnEnviar2").removeClass("disabled");
+        id=$("#categoriaAspira").val(); 
+        idPrograma=$("#programa").val(); 
+        idPlantel=$("#plantel").val(); 
+        $.get("ConsultaCatalogos", {k: "14",i:id,pr:idPrograma,pl:idPlantel}, function(){        
+        }).done(function(respuesta){$("#jornadaAspira").html(respuesta);});
+        $.get("ConsultaCatalogos", {k: "10",i:id}, function(){        
+        }).done(function(respuesta){$("#rbRequisitos").html(respuesta);}); 
+    }else{
+        $("#alertaCategoria").removeAttr("hidden");
+        $("#btnEnviar2").addClass("disabled");
+    }
 }
 
 function borrarHoraGrupo(id){
