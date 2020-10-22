@@ -7,6 +7,8 @@ package com.aplicacion.servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -119,6 +121,35 @@ public class Servlet_iniciosesion_administrador extends HttpServlet {
                     out.println("ADMINISTTRADOR");
                 }//fin if root
                 else if (busquedaadmin.equals("RFC ENCONTRADO")) {
+                    Metodos_sql metodos=new Metodos_sql();
+                    String[] parametros={rfc2};
+                    List<String[]> datos=metodos.ejecutaSP("sp_consultaInfoLogin",parametros);
+                    if(!datos.isEmpty()){
+                        if(datos.get(0)[4].equals(clave)){
+                            HttpSession session = (HttpSession) request.getSession(true);
+                            session.setAttribute("idUsuario", datos.get(0)[0]);
+                            session.setAttribute("estado", datos.get(0)[1]);
+                            session.setAttribute("plantel", datos.get(0)[2]);
+                            session.setAttribute("rfc", datos.get(0)[5]);
+                            session.setAttribute("nombre", datos.get(0)[3]);
+                            session.setAttribute("rol", datos.get(0)[6]);
+                            if(!datos.get(0)[6].equals("D")){                                                        
+                                List<String[]> vinculos = new ArrayList<String[]>();
+                                String[] vinculo = null;
+                                for(String[] dato:datos){
+                                    System.out.println(dato[7]+"-"+dato[8]+"-"+dato[9]);
+                                    vinculo=new String[3];
+                                    vinculo[0]=dato[7];
+                                    vinculo[1]=dato[8];
+                                    vinculo[2]=dato[9];
+                                    vinculos.add(vinculo);
+                                }
+                                session.setAttribute("vinculos",vinculos);
+                                //response.sendRedirect("SesionAdministrador");
+                            }
+                        }
+                    }
+                    
 
                     String busquedaclave[] = metodos.buscar_clave(rfc2, claveEncriptada);
                     String nacional = busquedaclave[2];// AGREGAR---------------------------------------------
@@ -202,6 +233,7 @@ public class Servlet_iniciosesion_administrador extends HttpServlet {
                                 RequestDispatcher rd = request.getRequestDispatcher("vacantes.jsp");
                                 rd.forward(request, response);
                             }
+                            response.sendRedirect("SesionAdministrador");
                         }
                         if (busqueda_nombre[5].toString().equals("D")) {
                             response.sendRedirect("SesionDocente");                            
