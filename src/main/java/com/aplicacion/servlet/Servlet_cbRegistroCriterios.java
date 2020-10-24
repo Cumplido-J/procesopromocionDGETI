@@ -103,7 +103,12 @@ public class Servlet_cbRegistroCriterios extends HttpServlet {
             request.setAttribute("resultados", cv.getFilasResultados(idUsuario));
             request.setAttribute("vistaAdmin", vistaAdmin);
             ServletContext sc = getServletContext();
-            RequestDispatcher rd = sc.getRequestDispatcher("/registroCriterios.jsp");
+            RequestDispatcher rd;
+            if(vistaAdmin){
+                rd= sc.getRequestDispatcher("/revisionCriterios.jsp");
+            }else{
+                rd= sc.getRequestDispatcher("/registroCriterios.jsp");
+            }
             rd.forward(request,response);
         }else{
             response.sendRedirect("login.jsp");

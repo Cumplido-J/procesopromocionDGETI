@@ -427,13 +427,34 @@ public class Catalogos {
         respuesta=respuesta.replaceFirst(aux, aux+" selected");
         return respuesta;  
     }
+    public String desplegarOpcionesPuntajeAdmin(String idCriterio){        
+        String respuesta="<option value='' puntaje='0'>-Seleccione-</option>";
+        respuesta+="<option value='0' puntaje='0'>No cumple el criterio</option>";
+        try{
+            String[] parametros={idCriterio};
+            List<String[]> datos=metodos.ejecutaSP("sp_selectCatPuntaje",parametros);
+            for(String[] dato:datos){
+                respuesta+="<option value='"+dato[0]+"' puntaje='"+dato[2]+"'>"+dato[1]+"</option>";
+            }
+        }catch(Exception e){
+            respuesta=e.toString();
+        }finally{
+            return respuesta;        
+        }
+    }
+    public String desplegarOpcionesPuntajeAdmin(String idCriterio,String id){        
+        String respuesta=desplegarOpcionesPuntajeAdmin(idCriterio);
+        String aux="value='"+id+"'";
+        respuesta=respuesta.replaceFirst(aux, aux+" selected");
+        return respuesta;  
+    }
     public String desplegarOpcionesCategoriasVacantes(String idPlantel,String idPrograma){        
         String respuesta="<option value=''>-Seleccione-</option>";
         try{
             String[] parametros={idPlantel,idPrograma};
             List<String[]> datos=metodos.ejecutaSP("sp_consultaCategoriasVacantes",parametros);
             for(String[] dato:datos){
-                respuesta+="<option tipo='"+dato[2]+"' value='"+dato[0]+"'>"+dato[1]+"</option>";
+                respuesta+="<option tipo='"+dato[2]+"' aux='"+dato[3]+"' value='"+dato[0]+"'>"+dato[1]+"-"+dato[3]+"</option>";
             }
         }catch(Exception e){
             respuesta=e.toString();

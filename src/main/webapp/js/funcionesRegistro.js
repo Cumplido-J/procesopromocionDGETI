@@ -947,7 +947,8 @@ function cambioCategoria() {
     $.get("ConsultaCatalogos", {k: "9",i:id}, function(respuesta){
         $("#jornada").html(respuesta);
     });
-    if($("#categoriaAspira").val()!=""){
+    $("#categoriaAspira").val("");
+    /*if($("#categoriaAspira").val()!=""){
         var categoria=parseInt($("#categoria").val());
         var categoriaAspira=parseInt($("#categoriaAspira").val());
         //var aux=categoria+1;
@@ -959,11 +960,17 @@ function cambioCategoria() {
             $("#alertaCategoria").removeAttr("hidden");
             $("#btnEnviar2").addClass("disabled");
         }
-    }
+    }*/
 }
 function cambioCategoriaAspira() {
     var categoria=parseInt($("#categoria").val());
     var categoriaAspira=parseInt($("#categoriaAspira").val());
+    var tipo=$("#categoriaAspira option:selected").attr("aux");
+    if(!tipo.includes("Real")){
+        $("#categoriaAspira").attr("title","Se dará siempre y cuando un aspirante cumpla todos los requisitos y resulte ganador de una plaza de vacancia real, dejando desocupada la plaza que ostenta y ésta podrá asignarse a otro participante.");
+    }else{
+        $("#categoriaAspira").removeAttr("title");
+    }
     //var aux=categoria+1;
     
     if(categoriaAspira==categoria+1){

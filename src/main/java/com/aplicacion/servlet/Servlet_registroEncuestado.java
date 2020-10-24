@@ -9,6 +9,8 @@ import com.aplicacion.beans.Docente;
 import correos.Enviar_clave;
 import herramientas.Correo;
 import herramientas.Pin;
+import herramientas.RutaConfig;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -108,7 +110,13 @@ public class Servlet_registroEncuestado extends HttpServlet {
                 String[] parametros2={rfc,curp,parametros[0],tipoEncuesta,correo};
                 retorno=metodos.ejecutaSPEncuestas("sp_insertLecturaUrl",parametros2);
                 if(!retorno.isEmpty()){                    
-                    if(retorno.get(0)[0].equals("ok")){                        
+                    if(retorno.get(0)[0].equals("ok")){   
+                        FileWriter fichero = null;
+                        PrintWriter pw = null;
+                        fichero = new FileWriter(RutaConfig.getRutaCarpeta()+"pines.txt",true);
+                        pw = new PrintWriter(fichero);                        
+                        pw.println("RFC:"+rfc+" PIN:" + parametros[0]);
+                        fichero.close();
                         c.enviarCorreo("Envío de PIN","El PIN de acceso asignado es:"+parametros[0], correo);
                     }
                     Docente d=new Docente();

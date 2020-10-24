@@ -79,13 +79,18 @@ public class Servlet_registrarCriterio extends HttpServlet {
         PrintWriter out = response.getWriter();
         try {
             HttpSession session= (HttpSession) request.getSession();
-            String idUsuario,rfc;
+            String idUsuario,rfc,estatus;
+            boolean vistaAdmin;
             if(session.getAttribute("rol").toString().equals("D")){
                 idUsuario=session.getAttribute("idUsuario").toString();
                 rfc=session.getAttribute("rfc").toString();
+                vistaAdmin=false;
+                estatus="P";
             }else{
                 idUsuario=session.getAttribute("idDocente").toString();                
                 rfc=session.getAttribute("rfcDocente").toString();
+                vistaAdmin=true;
+                estatus="R";
             }
             //String idConvocatoria=session.getAttribute("idConvocatoria").toString();
             String idCriterio=request.getParameter("idCriterio");
@@ -105,10 +110,11 @@ public class Servlet_registrarCriterio extends HttpServlet {
                 }  
                 System.out.println("puntaje="+idPuntaje);
                 if(Integer.parseInt(idPuntaje)>=0){
-                    parametros=new String[3];
+                    parametros=new String[4];
                     parametros[0]=idUsuario;
                     parametros[1]=idCriterio;
-                    parametros[2]=idPuntaje;                           
+                    parametros[2]=idPuntaje; 
+                    parametros[3]=estatus; 
                     datos=metodo.ejecutaSP("sp_insertConstanciasProceso",parametros);            
                     if(!datos.isEmpty()){
                         out.print(datos.get(0)[0]);
@@ -129,7 +135,7 @@ public class Servlet_registrarCriterio extends HttpServlet {
                     }
                 }
             }else{
-                parametros=new String[3];
+                parametros=new String[4];
                 int puntaje=0;
                 String idPuntaje10=request.getParameter("puntaje10"); 
                 String idPuntaje11=request.getParameter("puntaje11"); 
@@ -138,7 +144,8 @@ public class Servlet_registrarCriterio extends HttpServlet {
                 String idPuntaje14=request.getParameter("puntaje14");               
                 parametros[0]=idUsuario;
                 parametros[1]="10";
-                parametros[2]=idPuntaje10;                                           
+                parametros[2]=idPuntaje10;   
+                parametros[3]=estatus;   
                 datos=metodo.ejecutaSP("sp_insertConstanciasProceso",parametros);
                 if(!datos.isEmpty()){
                     puntaje+=Integer.parseInt(datos.get(0)[0]);

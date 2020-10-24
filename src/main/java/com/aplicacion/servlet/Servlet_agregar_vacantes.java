@@ -7,6 +7,7 @@ package com.aplicacion.servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -122,20 +123,49 @@ public class Servlet_agregar_vacantes extends HttpServlet {
                 //out.println(estado);
 
                 if (btnvacantes != null) {
+                    List<String[]> datos=null; 
                     int datos5=0;
                     if (control_combobox.equals("true") && nac1.equals("1")) { //administrador nacional
                         
                     }else if (control_combobox.equals("false") && nac1.equals("1")) { //super usuario
-                        datos5 = metodos.guardar5( estadon, plantel, plaza, cantidad1, tipon, jornadan, vacancia,convocatoria);
+                        
+                        String[] parametros={estadon, plantel, plaza, cantidad1, tipon, jornadan,convocatoria};
+                        datos=metodos.ejecutaSP("sp_insertVacancia",parametros);            
+                        
+                        //datos5 = metodos.guardar5( estadon, plantel, plaza, cantidad1, tipon, jornadan, vacancia,convocatoria);
                     }else if (control_combobox.equals("true") && nac1.equals("2")) {//administrador estatal
                         
                     }else if (control_combobox.equals("true") && nac1.equals("3")) {//administrador plantel
                         
                     }
                     
-                    
+                    if(!datos.isEmpty()){
+                        if(datos.get(0)[0].equals("ok")){
+                            request.setAttribute("control_combobox", control_combobox);
+                            request.setAttribute("nacional", nac1);//AGREGAR-------------------------------
+                            request.setAttribute("ver", "1");
+                            request.setAttribute("opc", "1");
+                            request.setAttribute("consulta", "1");
+                            request.setAttribute("nom", nom1);
+                            request.setAttribute("dato_ent", ent1);
+                            request.setAttribute("dato_pla", pla1);
+                            request.setAttribute("dato_rfc", rfc1);
+                            request.setAttribute("per1", per1);
+                            request.setAttribute("per3", per3);
+                            request.setAttribute("per4", per4);
+                            request.setAttribute("modal", 1);
+                            //session.setAttribute("idUsuario", idUsuario);
+                            //session.setAttribute("rfc", rfc);
+                            RequestDispatcher rd = request.getRequestDispatcher("vacantes.jsp");
+                            rd.forward(request, response);
+                        }else {
+                            out.print("Servidor en mantenimiento, Datos no guardados");
+                        }
+                    }else {
+                        out.print("Servidor en mantenimiento, Datos no guardados");
+                    }
 
-                    if (datos5 > 0) {
+                    /*if (datos5 > 0) {
                         request.setAttribute("control_combobox", control_combobox);
                         request.setAttribute("nacional", nac1);//AGREGAR-------------------------------
                         request.setAttribute("ver", "1");
@@ -155,7 +185,7 @@ public class Servlet_agregar_vacantes extends HttpServlet {
                         rd.forward(request, response);
                     } else {
                         out.print("Servidor en mantenimiento, Datos no guardados");
-                    }
+                    }*/
 
                 }//fin presionar boton
             } else {

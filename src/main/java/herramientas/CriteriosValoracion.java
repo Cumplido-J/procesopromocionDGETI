@@ -284,7 +284,7 @@ public class CriteriosValoracion {
         return retorno;
     }
     public String[][] consultaPuntajes(String idUsuario){
-        String[][] respuesta=new String[15][7];
+        String[][] respuesta=new String[15][8];
         int c,d;
         /*for(c=0;c<15;c++){
             for(d=0;d<7;d++){

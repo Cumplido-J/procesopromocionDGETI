@@ -65,21 +65,23 @@
             </header>
             
             <c:set var="finIncompleto" value="false"></c:set>            
-            <c:if test = "${Docente.infoRegistro[61]==null}">  <!--Si no ha finalizado el registro-->
+            <c:if test = "${Docente.infoRegistro[66]=='1'}">  <!--Si no ha finalizado el registro-->
                 <c:set var="disabled1" value=""></c:set>
                 <c:set var="hidden1" value="hidden"></c:set>
                 <c:set var="disabled2" value="disabled"></c:set>
                 <c:set var="hidden2" value="hidden"></c:set>
                 <c:set var="disabled3" value="disabled"></c:set>
                 <c:set var="hidden3" value="hidden"></c:set>
+                <c:set var="disabled4" value="disabled"></c:set>
+                
             </c:if>
-            <c:if test = "${Docente.infoRegistro[61]!=null}">  <!--Si ya finalizó el registro-->
+            <c:if test = "${Docente.infoRegistro[66]!='1'}">  <!--Si ya finalizó el registro-->
                 <c:set var="disabled1" value="disabled"></c:set>
                 <c:set var="hidden1" value=""></c:set>
-                <c:if test = "${Docente.infoRegistro[63]==null}"><!--Si el registro finalizó como incompleto-->
+                <c:if test = "${Docente.infoRegistro[66]=='3'}"><!--Si el registro finalizó como incompleto-->
                     <c:set var="finIncompleto" value="true"></c:set>
                 </c:if>
-                <c:if test = "${Docente.infoRegistro[63]!=null}"><!--Si el registro finalizó como completo-->
+                <c:if test = "${Docente.infoRegistro[63]=='2'}"><!--Si el registro finalizó como completo-->
                     <c:set var="finCompleto" value="true"></c:set>
                 </c:if>
                 <c:if test = "${Docente.totalEncuestados<30}"> <!--Si no ha registrado a 30 encuestados-->
@@ -94,13 +96,18 @@
                     <c:set var="disabled3" value=""></c:set>
                     <c:set var="hidden3" value="hidden"></c:set>
                 </c:if>
+                <c:if test = "${Docente.infoRegistro[66]=='6'||Docente.infoRegistro[66]=='7'}"><!--Si el registro finalizó como incompleto-->
+                    <c:set var="disabled3" value="disabled"></c:set>
+                    <c:set var="hidden3" value=""></c:set>
+                    <c:set var="disabled4" value=""></c:set>                    
+                </c:if>
             </c:if>
             
             <div class="articulosses">
-                <article class="articleses">
+                <article class="articleses ${disabled1}">
                     <h3>Paso 1 <span class="glyphicon glyphicon-ok-sign completo ${hidden1}" title="Sección completa"></span></h3>
-                    <a  href="Registro" class="${disabled1}"><img src="<%=Imagen.muestraImagen(RutaConfig.getRutaCarpeta()+"imagenes/EvidReg.jpg")%>" alt=""></a>
-                    <a  href="Registro" class="${disabled1}"><h3>Registro de aspirante</h3></a>
+                    <a  href="Registro"><img src="<%=Imagen.muestraImagen(RutaConfig.getRutaCarpeta()+"imagenes/EvidReg.jpg")%>" alt=""></a>
+                    <a  href="Registro"><h3>Registro de aspirante</h3></a>
                 </article>                    
                 
                
@@ -120,13 +127,13 @@
                     </article>
 
                     <article class="articleses ${disabled3}">
-                        <h3>Paso 3: <span class="glyphicon glyphicon-ok-sign completo hidden" title="Sección completa"></span></h3>
+                        <h3>Paso 3: <span class="glyphicon glyphicon-ok-sign completo ${hidden3}" title="Sección completa"></span></h3>
                         <a href="RegistroCriterios" ><img src="<%=Imagen.muestraImagen(RutaConfig.getRutaCarpeta()+"imagenes/EvidReg.jpg")%>" alt=""></a>
                         <a href="RegistroCriterios" ><h3>Evidencias de los criterios de valoración</h3></a>
                     </article>
-                    <article class="articleses">
-                        <h3>Paso 4:<span class="glyphicon glyphicon-ok-sign completo hidden" title="Sección completa"></span></h3>
-                        <a href="FichaRegistro" class="disabled" target="_blank" ><img src="<%=Imagen.muestraImagen(RutaConfig.getRutaCarpeta()+"imagenes/EvidVal.jpg")%>" alt=""></a>
+                    <article class="articleses ${disabled4}">
+                        <h3>Paso 4:</h3>
+                        <a href="FichaRegistro" target="_blank" ><img src="<%=Imagen.muestraImagen(RutaConfig.getRutaCarpeta()+"imagenes/EvidVal.jpg")%>" alt=""></a>
                         <a href="FichaRegistro"  target="_blank" ><h3>Ficha de <br/> registro </h3></a>
                     </article>
                 </c:if>
@@ -210,7 +217,7 @@
         <script src="https://framework-gb.cdn.gob.mx/gobmx.js"></script>        
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-        <c:if test = "${Docente.totalEncuestados<30 && finCompleto==true}">
+        <c:if test = "${Docente.totalEncuestados<30 && Docente.infoRegistro[66]!='1'}">
         <script>
             $("#modalCriterios").modal();
         </script>

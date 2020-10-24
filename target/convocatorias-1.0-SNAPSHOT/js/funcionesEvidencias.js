@@ -25,24 +25,31 @@ $(document).ready(function () {
             }
         },
         submitHandler:function(){
+            var aux=$("#btnEnviar1").val();
+            var total=0;
+            //var total=parseFloat($("#total").html());
+            var p1=parseFloat($("#p1").html());
             $.ajax({
                 type:$('#form1').attr("method"),
                 url:$('#form1').attr("action"),
                 data:$('#form1').serialize(),
-                beforeSend:function(){
+                beforeSend:function(){                    
                     $("#btnEnviar1").val("Guardando...");
                     $("#btnEnviar1").attr("disabled","disabled");
                 },
                 complete:function(){
-                   $("#btnEnviar1").val("Guardar y continuar"); 
+                   $("#btnEnviar1").val(aux); 
                    $("#btnEnviar1").removeAttr("disabled");
                 },success:function(data){
                     if(isNaN(data)){
                         $("#mensaje").html(data);            
                         $("#modalMensaje").modal("show");
                     }
-                    else{                        
+                    else{   
+                        total=total-parseFloat($("#p1").html());
                         $("#p1").html(data); 
+                        total=total+parseFloat($("#p1").html());
+                        //$("#total").html(total); 
                         $("#mensaje").html("Información guardada correctamente");            
                         $("#modalMensaje").modal("show");
                         if($("#btnEvidencia2").val().includes("Ver")){
@@ -69,6 +76,7 @@ $(document).ready(function () {
             }
         },
         submitHandler:function(){
+            var aux=$("#btnEnviar2").val();
             $.ajax({
                 type:$('#form2').attr("method"),
                 url:$('#form2').attr("action"),
@@ -78,7 +86,7 @@ $(document).ready(function () {
                     $("#btnEnviar2").attr("disabled","disabled");
                 },
                 complete:function(){
-                   $("#btnEnviar2").val("Guardar y continuar"); 
+                   $("#btnEnviar2").val(aux); 
                    $("#btnEnviar2").removeAttr("disabled");
                 },success:function(data){
                     if(isNaN(data)){
@@ -113,6 +121,7 @@ $(document).ready(function () {
             }
         },
         submitHandler:function(){
+            var aux=$("#btnEnviar4").val();
             $.ajax({
                 type:$('#form4').attr("method"),
                 url:$('#form4').attr("action"),
@@ -122,7 +131,7 @@ $(document).ready(function () {
                     $("#btnEnviar4").attr("disabled","disabled");
                 },
                 complete:function(){
-                   $("#btnEnviar4").val("Guardar y continuar"); 
+                   $("#btnEnviar4").val(aux); 
                    $("#btnEnviar4").removeAttr("disabled");
                 },success:function(data){
                     if(isNaN(data)){
@@ -152,6 +161,7 @@ $(document).ready(function () {
         e.preventDefault();
     }).validate({        
         submitHandler:function(){
+            var aux=$("#btnEnviar5").val();
             if($("#cb5").is(':checked')||!$("#tablaCursos").html().includes("colspan")){
                 $.ajax({
                     type:$('#form5').attr("method"),
@@ -162,7 +172,7 @@ $(document).ready(function () {
                         $("#btnEnviar5").attr("disabled","disabled");
                     },
                     complete:function(){
-                       $("#btnEnviar5").val("Guardar y continuar"); 
+                       $("#btnEnviar5").val(aux); 
                        $("#btnEnviar5").removeAttr("disabled");
                     },success:function(data){
                             if(isNaN(data)) {
@@ -191,7 +201,7 @@ $(document).ready(function () {
                     }
                 });
             }else{
-                $("#mensaje").html("Debe registrar la información de al menos un curso");            
+                $("#mensaje").html("Debe registrar la información de al menos un curso o marcar la casilla para indicar que no cuenta con evidencias de este criterio.");            
                 $("#modalMensaje").modal("show");
             }
             return false;
@@ -201,6 +211,7 @@ $(document).ready(function () {
         e.preventDefault();
     }).validate({        
         submitHandler:function(){
+            var aux=$("#btnEnviar6").val();
             if($("#cb6").is(':checked')||!$("#tablaAportaciones").html().includes("colspan")){
             $.ajax({
                 type:$('#form6').attr("method"),
@@ -211,7 +222,7 @@ $(document).ready(function () {
                     $("#btnEnviar6").attr("disabled","disabled");
                 },
                 complete:function(){
-                   $("#btnEnviar6").val("Guardar y continuar"); 
+                   $("#btnEnviar6").val(aux); 
                    $("#btnEnviar6").removeAttr("disabled");
                 },success:function(data){
                     if(isNaN(data)) {
@@ -243,7 +254,7 @@ $(document).ready(function () {
             });
             }
             else{
-                $("#mensaje").html("Debe registrar la información de al menos una aportación");            
+                $("#mensaje").html("Debe registrar la información de al menos una aportación o marcar la casilla para indicar que no cuenta con evidencias de este criterio.");            
                 $("#modalMensaje").modal("show");
             }
         
@@ -254,6 +265,7 @@ $(document).ready(function () {
         e.preventDefault();
     }).validate({        
         submitHandler:function(){
+            var aux=$("#btnEnviar7").val();
             if($("#cb7").is(':checked')||!$("#tablaParticipaciones").html().includes("colspan")){
             $.ajax({
                 type:$('#form7').attr("method"),
@@ -264,7 +276,7 @@ $(document).ready(function () {
                     $("#btnEnviar7").attr("disabled","disabled");
                 },
                 complete:function(){
-                   $("#btnEnviar7").val("Guardar y continuar"); 
+                   $("#btnEnviar7").val(aux); 
                    $("#btnEnviar7").removeAttr("disabled");
                 },success:function(data){
                     if(isNaN(data)) {
@@ -295,7 +307,7 @@ $(document).ready(function () {
                 
             });
         }else{
-                $("#mensaje").html("Debe registrar la información de al menos una participación");            
+                $("#mensaje").html("Debe registrar la información de al menos una participación o marcar la casilla para indicar que no cuenta con evidencias de este criterio.");            
                 $("#modalMensaje").modal("show");
             }
             return false;
@@ -305,6 +317,7 @@ $(document).ready(function () {
         e.preventDefault();
     }).validate({        
         submitHandler:function(){
+            var aux=$("#btnEnviar8").val();
             if($("#cb8").is(':checked')||!$("#tablaTutorias").html().includes("colspan")){
             $.ajax({
                 type:$('#form8').attr("method"),
@@ -315,7 +328,7 @@ $(document).ready(function () {
                     $("#btnEnviar8").attr("disabled","disabled");
                 },
                 complete:function(){
-                   $("#btnEnviar8").val("Guardar y continuar"); 
+                   $("#btnEnviar8").val(aux); 
                    $("#btnEnviar8").removeAttr("disabled");
                 },success:function(data){
                     if(isNaN(data)) {
@@ -344,7 +357,7 @@ $(document).ready(function () {
                 
             });
         }else{
-                $("#mensaje").html("Debe registrar la información de al menos una tutoría");            
+                $("#mensaje").html("Debe registrar la información de al menos una tutoría o marcar la casilla para indicar que no cuenta con evidencias de este criterio.");            
                 $("#modalMensaje").modal("show");
             }
             return false;
@@ -354,6 +367,7 @@ $(document).ready(function () {
         e.preventDefault();
     }).validate({        
         submitHandler:function(){
+            var aux=$("#btnEnviar9").val();
             if($("#cb9").is(':checked')||!$("#tablaPublicaciones").html().includes("colspan")){
             $.ajax({
                 type:$('#form9').attr("method"),
@@ -364,7 +378,7 @@ $(document).ready(function () {
                     $("#btnEnviar9").attr("disabled","disabled");
                 },
                 complete:function(){
-                   $("#btnEnviar9").val("Guardar y continuar"); 
+                   $("#btnEnviar9").val(aux); 
                    $("#btnEnviar9").removeAttr("disabled");
                 },success:function(data){
                     if(isNaN(data)) {
@@ -393,7 +407,7 @@ $(document).ready(function () {
                 
             });
             }else{
-                $("#mensaje").html("Debe registrar la información de al menos una publicación");            
+                $("#mensaje").html("Debe registrar la información de al menos una publicación o marcar la casilla para indicar que no cuenta con evidencias de este criterio");            
                 $("#modalMensaje").modal("show");
             }
             return false;
@@ -420,6 +434,7 @@ $(document).ready(function () {
             }
         },
         submitHandler:function(){
+            var aux=$("#btnEnviar10").val();
             if(!$("#tablaResultados").html().includes("colspan")){
             $.ajax({
                 type:$('#form10').attr("method"),
@@ -430,7 +445,7 @@ $(document).ready(function () {
                     $("#btnEnviar10").attr("disabled","disabled");
                 },
                 complete:function(){
-                   $("#btnEnviar10").val("Guardar y continuar"); 
+                   $("#btnEnviar10").val(aux); 
                    $("#btnEnviar10").removeAttr("disabled");
                 },success:function(data){
                     if(isNaN(data)){
@@ -438,7 +453,7 @@ $(document).ready(function () {
                         $("#modalMensaje").modal("show");
                     }
                     else{
-                        var puntaje=parseInt(data)+parseInt($("#pEvidencias").val());                        
+                        var puntaje=parseFloat(data)+parseFloat($("#pEvidencias").val());                        
                         $("#p10").html(puntaje); 
                         $("#mensaje").html("Información guardada correctamente");            
                         $("#modalMensaje").modal("show");                        
@@ -995,6 +1010,15 @@ function finalizar(){
         $("#modalConfirmacion2").modal("show");
     }else{
         $("#mensaje").html("Hay información pendiente de registrar");            
+        $("#modalMensaje").modal("show");
+    }
+}
+function finalizarRevision(){
+    if($("#estatus1").attr("completo").includes("true")&&$("#estatus2").attr("completo").includes("true")&&$("#estatus3").attr("completo").includes("true")&&$("#estatus4").attr("completo").includes("true")&&$("#estatus5").attr("completo").includes("true")&&$("#estatus6").attr("completo").includes("true")&&$("#estatus7").attr("completo").includes("true")&&$("#estatus8").attr("completo").includes("true")&&$("#estatus9").attr("completo").includes("true")&&$("#estatus10").attr("completo").includes("true")){
+        $("#observaciones").val($("#aux").val())
+        $("#modalConfirmacion2").modal("show");
+    }else{
+        $("#mensaje").html("Hay información pendiente de revisar");            
         $("#modalMensaje").modal("show");
     }
 }

@@ -70,7 +70,8 @@ public class Servlet_cbSesionDocente extends HttpServlet {
             docente.setRfc(session.getAttribute("rfc").toString());
             docente.consultaInfoAspirante(); 
             session.setAttribute("idConvocatoria",docente.getIdConvocatoria());
-            docente.consultaEncuestados();            
+            docente.consultaEncuestados();      
+            session.setAttribute("totalEncuestados",docente.getTotalEncuestados());
             request.setAttribute("Docente", docente);
             ServletContext sc = getServletContext();
             RequestDispatcher rd = sc.getRequestDispatcher("/ppsesion.jsp");

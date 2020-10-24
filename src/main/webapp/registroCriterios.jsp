@@ -11,7 +11,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title></title>
+        <title>Registro de criterios de valoración</title>
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">        
@@ -105,7 +105,7 @@
                                     </c:if> 
                                 </div>
                                 <div class="col-xs-12 text-right">
-                                    <input  class="btn btn-sm btn-primary" type="reset" value="Limpiar"/>
+                                    
                                     <input class="btn btn-sm btn-primary" id="btnEnviar1" type="submit" value='Guardar y continuar'/>                                    
                                 </div>
                             </form>
@@ -120,11 +120,16 @@
                         <h4 class="panel-title">
                           <a data-parent="#accordion" data-toggle="collapse" href="#panel2" aria-expanded="false" aria-controls="panel2">
                             ${criterios[1][0]} - ${criterios[1][1]}
+                            <c:if test="${docente.infoRegistro[58]!=null}">
                             <c:if test = "${puntajes[1][3]!=null && docente.documentoCargado2('10')==true}">
                                 <span class="glyphicon glyphicon-ok-sign completo" title="Sección completa" id="estatus2" completo="true"></span>                                      
                             </c:if>
                             <c:if test = "${puntajes[1][3]==null || docente.documentoCargado2('10')==false}">
                                 <span class="glyphicon glyphicon-exclamation-sign incompleto" title="Sección incompleta" id="estatus2" completo="false"></span>                                    
+                            </c:if>
+                            </c:if>
+                            <c:if test="${docente.infoRegistro[58]==null}">
+                                <span class="glyphicon glyphicon-ok-sign completo" title="Sección completa" id="estatus2" completo="true"></span>                                      
                             </c:if>
                           </a>
                           <p class="text-danger ${hidden}">Puntaje: <span id="p2">${puntajes[1][4]}</span></p>
@@ -153,7 +158,7 @@
                                     
                                 </div>
                                 <div class="col-xs-12 text-right">
-                                    <input  class="btn btn-sm btn-primary" type="reset" value="Limpiar"/>
+                                    
                                     <input class="btn btn-sm btn-primary" id="btnEnviar2" type="submit" value='Guardar y continuar'/>                                    
                                 </div>
                             </form>
@@ -225,7 +230,7 @@
                                     
                                 </div>
                                 <div class="col-xs-12 text-right">
-                                    <input  class="btn btn-sm btn-primary" type="reset" value="Limpiar"/>
+                                    
                                     <input class="btn btn-sm btn-primary" id="btnEnviar4" type="submit" value='Guardar y continuar'/>                                    
                                 </div>
                             </form>
@@ -305,7 +310,7 @@
                             
                             </div>
                             <div class="col-xs-12 text-right">
-                                <input  class="btn btn-sm btn-primary" type="reset" value="Limpiar"/>
+                                
                                 <input class="btn btn-sm btn-primary" id="btnEnviar5" type="submit" value='Guardar y continuar'/>                                    
                             </div>
                             </form>
@@ -383,7 +388,7 @@
                             
                         </div>
                             <div class="col-xs-12 text-right">
-                                <input  class="btn btn-sm btn-primary" type="reset" value="Limpiar"/>
+                                
                                 <input class="btn btn-sm btn-primary" id="btnEnviar6" type="submit" value='Guardar y continuar'/>                                    
                             </div>
                             </form>
@@ -459,7 +464,7 @@
                                 
                             </div>
                             <div class="col-xs-12 text-right">
-                                    <input  class="btn btn-sm btn-primary" type="reset" value="Limpiar"/>
+                                    
                                     <input class="btn btn-sm btn-primary" id="btnEnviar7" type="submit" value='Guardar y continuar'/>                                    
                                 </div>
                             </form>
@@ -537,7 +542,7 @@
                             
                         </div>
                                 <div class="col-xs-12 text-right">
-                                    <input  class="btn btn-sm btn-primary" type="reset" value="Limpiar"/>
+                                    
                                     <input class="btn btn-sm btn-primary" id="btnEnviar8" type="submit" value='Guardar y continuar'/>                                    
                                 </div>
                             </form>
@@ -615,7 +620,7 @@
                             
                         </div>
                         <div class="col-xs-12 text-right">
-                                    <input  class="btn btn-sm btn-primary" type="reset" value="Limpiar"/>
+                                    
                                     <input class="btn btn-sm btn-primary" id="btnEnviar9" type="submit" value='Guardar y continuar'/>                                    
                                 </div>
                             </form>
@@ -709,7 +714,7 @@
                                     </c:if>
                                 </div>
                                 <div class="col-xs-12 text-right">
-                                    <input  class="btn btn-sm btn-primary" type="reset" value="Limpiar"/>
+                                    
                                     <input class="btn btn-sm btn-primary" id="btnEnviar10" type="submit" value='Guardar y continuar'/>                                    
                                 </div>
                             </form>

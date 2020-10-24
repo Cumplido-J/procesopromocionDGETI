@@ -378,9 +378,9 @@
                                 <div class="caja">
                                     <p>Tipo de Vacancia
                                         <select class="form-control" name="tipovacancia" id="tipovacancia" onchange="vacancia1()">
-                                            <option value="0">Escoge una opcion</option>
+                                            <!--<option value="0">Escoge una opcion</option>-->
                                             <option value="Real">Real</option> 
-                                            <option value="Cadena">corrimiento natural</option>
+                                            <!--<option value="Cadena">corrimiento natural</option>-->
                                         </select>
                                     </p>
                                     <div id="n70"></div>

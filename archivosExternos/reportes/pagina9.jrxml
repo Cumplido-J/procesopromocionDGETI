@@ -39,10 +39,12 @@
 		<queryString language="SQL">
 			<![CDATA[SELECT vacancia.tipocategoria,
 	vacancia.cantidadplazas,
-	catcategoriasplaza.categoria
+	concat(catcategoriasplaza.categoria,"-",catjornada.jornada,"-",vacancia.vacancia) as categoria
 FROM vacancia
 	inner join catcategoriasplaza ON 
 	 vacancia.tipocategoria = catcategoriasplaza.id 
+    inner join catjornada on
+     vacancia.jornada=catjornada.id
 WHERE 
 	 vacancia.idConvocatoria =  $P{convocatoria} 
 	 AND vacancia.plantel =  $P{plantel} 

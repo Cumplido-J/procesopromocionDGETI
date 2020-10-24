@@ -100,7 +100,8 @@ public class Servlet_cbVistaDocente extends HttpServlet {
             docente.setRfc(request.getParameter("rfc"));
             docente.consultaInfoAspirante(); 
             session.setAttribute("idConvocatoria",docente.getIdConvocatoria());
-            docente.consultaEncuestados();            
+            docente.consultaEncuestados(); 
+            session.setAttribute("totalEncuestados",docente.getTotalEncuestados());
             request.setAttribute("Docente", docente);
             ServletContext sc = getServletContext();
             RequestDispatcher rd = sc.getRequestDispatcher("/vistaDocente.jsp");
