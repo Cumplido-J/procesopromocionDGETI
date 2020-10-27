@@ -10,7 +10,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Unidad de Educación Media Superior Tecnológica Industrial y de Servicios | gob.mx</title>
+        <title>Dirección General de Educación Tecnológica Industrial y de Servicios | gob.mx</title>
         <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximun-scale=1.0, minimun-scale=1.0">
         <link rel="stylesheet" href="css/all.css">
         <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap" rel="stylesheet">
@@ -127,7 +127,7 @@
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </button>
-                        <a class="navbar-brand" href="/">UEMSTIS</a>
+                        <a class="navbar-brand" href="/">DGETI</a>
                     </div>
                     <div class="collapse navbar-collapse" id="subenlaces">
                         <ul class="nav navbar-nav navbar-right">
@@ -221,14 +221,14 @@
 
             <header class="headerart">
                 <div class="titulo">
-                    <p>Unidad de Educación Media Superior Tecnológica Industrial y de Servicios</p>
+                    <p>Dirección General de Educación Tecnológica Industrial y de Servicios</p>
                 </div>
                 <div class="texto-principalart margen-interno">
                     <p>Programa de Promoción en el Servicio Docente en Educación Media Superior</p>
                 </div>
             </header>
             <div class="ruta">
-                <p> UEMSTIS > Promoción Docente > Administracion de Usuarios</p>
+                <p> DGETI > Promoción Docente > Administracion de Usuarios</p>
             </div>
             <section class="sectionart">
                 <div class="articulosart">
@@ -715,7 +715,7 @@
                                             if(rs9.getString("idSubsistema").equals("1"))
                                             { sub="1";
                                             %>
-                                            <option value="UEMSTIS">UEMSTIS</option> 
+                                            <option value="UEMSTIS">DGETI</option> 
                                             <%}
                                             else
                                             {
@@ -953,7 +953,7 @@
                                             if(rs9.getString("idSubsistema").equals("1"))
                                             { sub="1";
                                             %>
-                                            <option value="UEMSTIS">UEMSTIS</option> 
+                                            <option value="UEMSTIS">DGETI</option> 
                                             <%}
                                             else
                                             {

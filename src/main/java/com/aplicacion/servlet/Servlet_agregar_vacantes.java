@@ -130,7 +130,7 @@ public class Servlet_agregar_vacantes extends HttpServlet {
                     }else if (control_combobox.equals("false") && nac1.equals("1")) { //super usuario
                         
                         String[] parametros={estadon, plantel, plaza, cantidad1, tipon, jornadan,convocatoria};
-                        datos=metodos.ejecutaSP("sp_insertVacancia",parametros);            
+                        datos=metodos.ejecutaSP("sp_registraVacancia",parametros);            
                         
                         //datos5 = metodos.guardar5( estadon, plantel, plaza, cantidad1, tipon, jornadan, vacancia,convocatoria);
                     }else if (control_combobox.equals("true") && nac1.equals("2")) {//administrador estatal

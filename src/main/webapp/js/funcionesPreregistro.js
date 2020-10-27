@@ -6,7 +6,8 @@
 var consultarWS=false;
 $(document).ready(function () {
     var $regex=/^([a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?)$/;
-    $('#correo').on('keypress keydown keyup',function(){
+    //$('#correo').on('keypress keydown keyup change',function(){
+    $('#correo').on('change',function(){
         if (!$(this).val().match($regex)) {         
             $('#alertaCorreo').removeAttr('hidden');    
             $("#cbAviso").attr("disabled",true);

@@ -65,7 +65,7 @@
             </header>
             
             <c:set var="finIncompleto" value="false"></c:set>            
-            <c:if test = "${Docente.infoRegistro[66]=='1'}">  <!--Si no ha finalizado el registro-->
+            <c:if test = "${Docente.infoRegistro[61]==null}">  <!--Si no ha finalizado el registro-->
                 <c:set var="disabled1" value=""></c:set>
                 <c:set var="hidden1" value="hidden"></c:set>
                 <c:set var="disabled2" value="disabled"></c:set>

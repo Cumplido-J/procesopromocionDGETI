@@ -29,7 +29,7 @@
                       <span class="icon-bar"></span>
                       <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="/">UEMSTIS</a>
+                    <a class="navbar-brand" href="/">DGETI</a>
                   </div>
                   <div class="collapse navbar-collapse" id="subenlaces">
                     <ul class="nav navbar-nav navbar-right">      
@@ -41,7 +41,7 @@
             <!--FIN Barra navegación UEMSTIS-->                
             <!--Barra encabezado-->
             <div class="encabezado row text-center">
-                <p>Unidad de Educación Media Superior Tecnológica Industrial y de Servicios</p>
+                <p>Dirección General de Educación Tecnológica Industrial y de Servicios</p>
             </div>
             <!--FIN Barra encabezado-->
             <div class="container">
@@ -71,7 +71,7 @@
                             <label class="control-label" for="programa">Subsistema:</label>
                             <select class="form-control input-sm" id="subsistema" name="subsistema" onChange="$('#rfc').val('')" required>                                  
                                 <option value=''>-Seleccione-</option>
-                                <option value='1'>UEMSTIS</option>
+                                <option value='1'>DGETI</option>
                                 <option value='2'>CECyTE</option>
                             </select>
                         </div>
