@@ -91,10 +91,13 @@ public class Servlet_buscar_vacancia extends HttpServlet {
             HttpSession session = (HttpSession) request.getSession(true);
             String idUsuario = "";
             String rfc = "";
+            String subsistema = "";
             if (session.getAttribute("idUsuario").toString() != null && session.getAttribute("rfc").toString() != null) {
                 idUsuario = session.getAttribute("idUsuario").toString();
                 rfc = session.getAttribute("rfc").toString();
 
+                String cadena = "";
+                String num_sub = "";
                 String control_combobox = request.getParameter("control_combobox");
                 String nac1 = request.getParameter("nacional");//AGREGAR----------------------------------
                 String per1 = request.getParameter("permiso1");
@@ -104,76 +107,135 @@ public class Servlet_buscar_vacancia extends HttpServlet {
                 String ent1 = request.getParameter("dato_ent");
                 String pla1 = request.getParameter("dato_pla");
                 String rfc1 = request.getParameter("dato_rfc");
+                num_sub = request.getParameter("num_sub");
+                subsistema = request.getParameter("subsistema");
                 String entidadt = request.getParameter("campoentidad70");
                 String entidad = request.getParameter("entidad");
                 String n_plantel = request.getParameter("n_plantel");
                 String categoria = request.getParameter("categoria");
-
+                
                 String btnvacancia = request.getParameter("buscarvacancia");
                 if (btnvacancia != null) {
 
                     if (control_combobox.equals("false") || control_combobox.equals("true") && nac1.equals("1")) {
                         if (entidad.equals("0") && n_plantel.equals("0") && categoria.equals("0")) {
-
                             request.setAttribute("consulta", "1");
+                            if (subsistema.equals("1")) {
+                                cadena = "SELECT * FROM vacancia WHERE plantel < 462";
+                            } else if (subsistema.equals("2")) {
+                                cadena = "SELECT * FROM vacancia WHERE plantel >= 462";
+                            }
 //                            out.print("caso 1"); //nada
                         } else if (entidad != ("0") && n_plantel != ("0") && categoria.equals("0")) {
                             if (n_plantel.equals("0")) {
                                 request.setAttribute("consulta", "2");
 //                                out.print("caso 2");//entidad
+                                if (subsistema.equals("1")) {
+                                    cadena = "SELECT * FROM vacancia WHERE plantel < 462 && entidad='" + entidad + "'";
+                                } else if (subsistema.equals("2")) {
+                                    cadena = "SELECT * FROM vacancia WHERE plantel >= 462 && entidad='" + entidad + "'";
+                                }
                             } else {
                                 request.setAttribute("consulta", "3");
 //                                out.print("caso 3"); //entidad y plantel  
+                                if (subsistema.equals("1")) {
+                                    cadena = "SELECT * FROM vacancia WHERE plantel < 462 && entidad='" + entidad + "' && plantel='" + n_plantel + "'";
+                                } else if (subsistema.equals("2")) {
+                                    cadena = "SELECT * FROM vacancia WHERE plantel >= 462 && entidad='" + entidad + "' && plantel='" + n_plantel + "'";
+                                }
                             }
 
                         } else if (entidad.equals("0") && n_plantel.equals("0") && categoria != "0") {
                             request.setAttribute("consulta", "4");
 //                            out.print("caso 4");   //usuario
+                            if (subsistema.equals("1")) {
+                                cadena = "SELECT * FROM vacancia WHERE plantel < 462 && plaza='" + categoria + "'";
+                            } else if (subsistema.equals("2")) {
+                                cadena = "SELECT * FROM vacancia WHERE plantel >= 462 && plaza='" + categoria + "'";
+                            }
                         } else if (entidad != "0" && n_plantel != ("0") && categoria != "0") {
                             if (n_plantel.equals("0")) {
                                 request.setAttribute("consulta", "5");
 //                                out.print("caso 5");//entidad y usuario
+                                if (subsistema.equals("1")) {
+                                    cadena = "SELECT * FROM vacancia WHERE plantel < 462 && entidad='" + entidad + "' && plaza='" + categoria + "'";
+                                } else if (subsistema.equals("2")) {
+                                    cadena = "SELECT * FROM vacancia WHERE plantel >= 462 && entidad='" + entidad + "' && plaza='" + categoria + "'";
+                                }
                             } else {
                                 request.setAttribute("consulta", "6");
 //                                out.print("caso 6"); //todos
+                                if (subsistema.equals("1")) {
+                                    cadena = "SELECT * FROM vacancia WHERE plantel < 462 && entidad='" + entidad + "' && plantel='"+ n_plantel +"' && plaza='" + categoria + "'";
+                                } else if (subsistema.equals("2")) {
+                                    cadena = "SELECT * FROM vacancia WHERE plantel >= 462 && entidad='" + entidad + "' && plantel='"+ n_plantel +"' && plaza='" + categoria + "'";
+                                }
                             }
 
                             //request.setAttribute("consulta", "4");
                         }
                     }//fin comparacion combobox
-                     if (control_combobox.equals("true") && nac1.equals("2")) {
+                    if (control_combobox.equals("true") && nac1.equals("2")) {
                         if (n_plantel.equals("0") && categoria.equals("0")) {
                             request.setAttribute("consulta", "1");
-                            //out.print("caso 1"); //nada
-                        }
-                        else if (n_plantel != ("0") && categoria.equals("0")) {
+                            //out.print("caso 1"); //nada                            
+                             if (num_sub.equals("1")) {                                
+                                    cadena = "SELECT * FROM vacancia WHERE entidad='" + ent1 + "' && plantel < 462";
+                                } else if (num_sub.equals("2")) {
+                                    cadena = "SELECT * FROM vacancia WHERE entidad='" + ent1 + "' && plantel >= 462";
+                                }
+                        } else if (n_plantel != ("0") && categoria.equals("0")) {
                             request.setAttribute("consulta", "3");
-                            //out.print("caso 1"); //nada
-                        }
-                         else if (n_plantel.equals("0") && categoria != ("0")) {
+                            //out.print("caso 1"); //nada                            
+                             if (num_sub.equals("1")) {
+                                    cadena = "SELECT * FROM vacancia WHERE entidad='" + ent1 + "' && plantel='" + n_plantel + "' && plantel < 462";
+                                } else if (num_sub.equals("2")) {
+                                    cadena = "SELECT * FROM vacancia WHERE entidad='" + ent1 + "' && plantel='" + n_plantel + "' && plantel >= 462"; 
+                                }
+                        } else if (n_plantel.equals("0") && categoria != ("0")) {
                             request.setAttribute("consulta", "5");
                             //out.print("caso 1"); //nada
-                        }
-                        else if (n_plantel != ("0") && categoria != ("0")) {
+                             if (num_sub.equals("1")) {
+                                    cadena = "SELECT * FROM vacancia WHERE entidad='" + ent1 + "' && plaza='" + categoria + "' && plantel < 462";
+                                } else if (num_sub.equals("2")) {
+                                    cadena = "SELECT * FROM vacancia WHERE entidad='" + ent1 + "' && plaza='" + categoria + "' && plantel >= 462";
+                                }
+                        } else if (n_plantel != ("0") && categoria != ("0")) {
                             request.setAttribute("consulta", "6");
                             //out.print("caso 1"); //nada
+                             if (num_sub.equals("1")) {
+                                    cadena = "SELECT * FROM vacancia WHERE entidad='" + ent1 + "' && plantel='" + n_plantel + "' && plaza='" + categoria + "' && plantel < 462";
+                                } else if (num_sub.equals("2")) {
+                                    cadena = "SELECT * FROM vacancia WHERE entidad='" + ent1 + "' && plantel='" + n_plantel + "' && plaza='" + categoria + "' && plantel >= 462";
+                                }
                         }
                     }
-                     
-                     if (control_combobox.equals("true") && nac1.equals("3")) {
+
+                    if (control_combobox.equals("true") && nac1.equals("3")) {
                         if (categoria.equals("0")) {
                             request.setAttribute("consulta", "1");
                             //out.print("caso 1"); //nada
-                        }
-                        else if (categoria != ("0")) {
+                             if (num_sub.equals("1")) {
+                                    cadena = "SELECT * FROM vacancia WHERE entidad='" + ent1 + "' && plantel='" + pla1 + "' && plantel < 462";
+                                } else if (num_sub.equals("2")) {
+                                    cadena = "SELECT * FROM vacancia WHERE entidad='" + ent1 + "' && plantel='" + pla1 + "' && plantel >= 462";
+                                }
+                        } else if (categoria != ("0")) {
                             request.setAttribute("consulta", "2");
                             //out.print("caso 1"); //nada
+                             if (num_sub.equals("1")) {
+                                    cadena = "SELECT * FROM vacancia WHERE entidad='" + ent1 + "' && plantel='" + pla1 + "' && plaza='"+ categoria +"' && plantel < 462";
+                                } else if (num_sub.equals("2")) {
+                                    cadena = "SELECT * FROM vacancia WHERE entidad='" + ent1 + "' && plantel='" + pla1 + "' && plaza='"+ categoria +"' && plantel >= 462";
+                                }
                         }
-                        
+
                     }
 //----------------------------------------------------------AGREGAR-------------------------------------------------
                     request.setAttribute("control_combobox", control_combobox);
                     request.setAttribute("nacional", nac1);
+                    request.setAttribute("subsistema", subsistema);
+                    request.setAttribute("cadena", cadena);
                     request.setAttribute("est", entidad);
                     request.setAttribute("pla", n_plantel);
                     request.setAttribute("cat", categoria);
