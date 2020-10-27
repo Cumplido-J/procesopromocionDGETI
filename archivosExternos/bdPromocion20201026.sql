@@ -987,7 +987,7 @@ CREATE TABLE `catsubsistema` (
 
 LOCK TABLES `catsubsistema` WRITE;
 /*!40000 ALTER TABLE `catsubsistema` DISABLE KEYS */;
-INSERT INTO `catsubsistema` VALUES (1,'UEMSTIS'),(2,'CECyTE');
+INSERT INTO `catsubsistema` VALUES (1,'DGETI'),(2,'CECyTE');
 /*!40000 ALTER TABLE `catsubsistema` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1216,7 +1216,7 @@ CREATE TABLE `convocatoria` (
   KEY `fkConvPrograma_idx` (`idPrograma`),
   CONSTRAINT `fkConvPlantel` FOREIGN KEY (`idPlantel`) REFERENCES `catplanteles` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `fkConvPrograma` FOREIGN KEY (`idPrograma`) REFERENCES `catprogramas` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1225,7 +1225,7 @@ CREATE TABLE `convocatoria` (
 
 LOCK TABLES `convocatoria` WRITE;
 /*!40000 ALTER TABLE `convocatoria` DISABLE KEYS */;
-INSERT INTO `convocatoria` VALUES (15,'2020-08-01','2020-08-03','2020-08-07','2020-08-10','2020-08-14','2020-08-17','2020-08-21','2020-08-31',193,1,'DEFINITIVA'),(16,'2020-08-14','2020-08-15','2020-08-15','2020-08-17','2020-08-18','2020-08-19','2020-08-20','2020-08-21',193,2,'DEFINITIVA'),(17,'2020-08-01','2020-08-03','2020-08-07','2020-08-10','2020-08-14','2020-08-17','2020-08-21','2020-08-24',193,3,'DEFINITIVA'),(18,'2020-07-01','2020-07-03','2020-09-07','2020-07-10','2020-09-14','2020-07-17','2020-09-21','2020-09-30',1,1,'DEFINITIVA'),(19,'2020-08-01','2020-08-03','2020-08-04','2020-08-05','2020-08-06','2020-08-07','2020-08-10','2020-08-31',89,1,'DEFINITIVA'),(20,'2020-08-01','2020-08-03','2020-08-07','2020-08-10','2020-08-14','2020-08-17','2020-08-21','2020-08-31',1,3,'DEFINITIVA'),(21,'2020-08-01','2020-08-03','2020-08-07','2020-08-10','2020-08-14','2020-08-17','2020-08-21','2020-08-31',98,1,'DEFINITIVA'),(22,'2020-10-08','2020-10-08','2020-10-15','2020-10-16','2020-10-22','2020-10-23','2020-10-29','2020-10-30',291,1,'TEMPORAL');
+INSERT INTO `convocatoria` VALUES (15,'2020-08-01','2020-08-03','2020-08-07','2020-08-10','2020-08-14','2020-08-17','2020-08-21','2020-08-31',193,1,'DEFINITIVA'),(16,'2020-08-14','2020-08-15','2020-08-15','2020-08-17','2020-08-18','2020-08-19','2020-08-20','2020-08-21',193,2,'DEFINITIVA'),(17,'2020-08-01','2020-08-03','2020-08-07','2020-08-10','2020-08-14','2020-08-17','2020-08-21','2020-08-24',193,3,'DEFINITIVA'),(18,'2020-07-01','2020-07-03','2020-09-07','2020-07-10','2020-09-14','2020-07-17','2020-09-21','2020-09-30',1,1,'DEFINITIVA'),(19,'2020-08-01','2020-08-03','2020-08-04','2020-08-05','2020-08-06','2020-08-07','2020-08-10','2020-08-31',89,1,'DEFINITIVA'),(20,'2020-08-01','2020-08-03','2020-08-07','2020-08-10','2020-08-14','2020-08-17','2020-08-21','2020-08-31',1,3,'DEFINITIVA'),(21,'2020-08-01','2020-08-03','2020-08-07','2020-08-10','2020-08-14','2020-08-17','2020-08-21','2020-08-31',98,1,'DEFINITIVA'),(22,'2020-10-08','2020-10-08','2020-10-15','2020-10-16','2020-10-22','2020-10-23','2020-10-29','2020-10-30',291,1,'TEMPORAL'),(23,'2020-10-01','2020-10-05','2020-10-09','2020-10-12','2020-10-16','2020-10-19','2020-10-23','2020-10-30',89,1,'TEMPORAL');
 /*!40000 ALTER TABLE `convocatoria` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1568,7 +1568,7 @@ CREATE TABLE `vacancia` (
   `entidad` int NOT NULL,
   `plantel` int NOT NULL,
   `plaza` varchar(200) NOT NULL,
-  `cantidadplazas` varchar(3) NOT NULL,
+  `cantidadplazas` int NOT NULL,
   `tipocategoria` int NOT NULL,
   `jornada` int NOT NULL,
   `vacancia` varchar(200) NOT NULL,
@@ -1579,12 +1579,8 @@ CREATE TABLE `vacancia` (
   KEY `fkVacanciaCategoria_idx` (`tipocategoria`),
   KEY `fkVacanciaJornada_idx` (`jornada`),
   KEY `fkVacanciaConvocatoria_idx` (`idConvocatoria`),
-  CONSTRAINT `fk1` FOREIGN KEY (`entidad`) REFERENCES `catentidades` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
-  CONSTRAINT `fk2` FOREIGN KEY (`plantel`) REFERENCES `catplanteles` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
-  CONSTRAINT `fk3` FOREIGN KEY (`tipocategoria`) REFERENCES `catcategoriasplaza` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
-  CONSTRAINT `fk4` FOREIGN KEY (`jornada`) REFERENCES `catjornada` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `fk5` FOREIGN KEY (`idConvocatoria`) REFERENCES `convocatoria` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE=InnoDB AUTO_INCREMENT=44 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=92 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1593,7 +1589,7 @@ CREATE TABLE `vacancia` (
 
 LOCK TABLES `vacancia` WRITE;
 /*!40000 ALTER TABLE `vacancia` DISABLE KEYS */;
-INSERT INTO `vacancia` VALUES (13,12,193,'TD','10',15,4,'Real',15),(15,12,193,'TD','1',10,1,'Real',15),(16,1,1,'TD','1',10,1,'Real',18),(39,20,291,'TD','10',10,1,'Real',22),(40,20,291,'D','3',4,2,'Real',22),(41,20,291,'D','3',1,1,'Cadena',22),(42,20,291,'D','3',2,1,'Cadena',22),(43,20,291,'D','3',3,1,'Cadena',22);
+INSERT INTO `vacancia` VALUES (81,9,89,'TD',12,10,1,'Corrimiento natural',23),(82,9,89,'TD',12,11,1,'Corrimiento natural',23),(83,9,89,'TD',10,12,2,'Corrimiento natural',23),(84,9,89,'TD',10,12,3,'Corrimiento natural',23),(85,9,89,'TD',10,12,4,'Corrimiento natural',23),(86,9,89,'TD',10,13,2,'Corrimiento natural',23),(87,9,89,'TD',10,13,3,'Corrimiento natural',23),(88,9,89,'TD',10,13,4,'Corrimiento natural',23),(89,9,89,'TD',10,14,2,'Real',23),(90,9,89,'TD',1,10,1,'Real',23),(91,9,89,'TD',2,12,2,'Real',23);
 /*!40000 ALTER TABLE `vacancia` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -3033,26 +3029,35 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`admin`@`localhost` PROCEDURE `sp_insertVacancia`(in _entidad int,in _plantel int,in _plaza varchar(200),in _cantidadplazas varchar(3),in _tipocategoria int,in _jornada int,in _idConvocatoria int)
+CREATE DEFINER=`admin`@`localhost` PROCEDURE `sp_insertVacancia`(in _entidad int,in _plantel int,in _plaza varchar(200),in _cantidadplazas int,in _tipocategoria int,in _jornada int,in _vacancia varchar(200),in _idConvocatoria int)
 BEGIN
-	INSERT INTO vacancia(entidad,plantel,plaza,cantidadplazas,tipocategoria,jornada,vacancia,idConvocatoria) 
-    VALUES(_entidad,_plantel,_plaza,_cantidadplazas,_tipocategoria,_jornada,'Real',_idConvocatoria);
+	declare _idAux int default null;
     
-    if(_plaza='D' and _tipocategoria >1) then
+    select id into _idAux
+    from vacancia 
+    where entidad=_entidad 
+		and plantel=_plantel 
+		and plaza=_plaza
+		and tipocategoria=_tipocategoria
+		and jornada=_jornada
+		and vacancia=_vacancia
+		and idConvocatoria =_idConvocatoria;
+    
+    if(_idAux is null) then
 		INSERT INTO vacancia(entidad,plantel,plaza,cantidadplazas,tipocategoria,jornada,vacancia,idConvocatoria) 
-		select _entidad,_plantel,_plaza,_cantidadplazas,idCategoria,idJornada,'Cadena',_idConvocatoria
-        from catcategoriajornada
-        where idCategoria<_tipocategoria;
+		VALUES(_entidad,_plantel,_plaza,_cantidadplazas,_tipocategoria,_jornada,_vacancia,_idConvocatoria);
     else
-		if(_tipocategoria >10) then
-			INSERT INTO vacancia(entidad,plantel,plaza,cantidadplazas,tipocategoria,jornada,vacancia,idConvocatoria) 
-			select _entidad,_plantel,_plaza,_cantidadplazas,idCategoria,idJornada,'Cadena',_idConvocatoria
-			from catcategoriajornada
-            where idCategoria>9 and idCategoria<_tipocategoria ;   
-		end if;
-    end if;
-    
-    select 'ok' as respuesta;
+		update vacancia 
+        set entidad=_entidad, 
+		 plantel=_plantel ,
+		 plaza=_plaza,
+         cantidadplazas=cantidadplazas+_cantidadplazas,
+		 tipocategoria=_tipocategoria,
+		 jornada=_jornada,
+		 vacancia=_vacancia,
+		 idConvocatoria =_idConvocatoria
+         where id=_idAux;
+    end if;       
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -3076,6 +3081,52 @@ BEGIN
     where id=_id;
     
     select "ok";
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `sp_registraVacancia` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`admin`@`localhost` PROCEDURE `sp_registraVacancia`(in _entidad int,in _plantel int,in _plaza varchar(200),in _cantidadplazas int,in _tipocategoria int,in _jornada int,in _idConvocatoria int)
+BEGIN
+	declare _idCategoria int;
+    declare _idJornada int;    
+    declare fin integer default 0;     
+    declare cursorCategoriaJornada cursor for 
+		select idCategoria,idJornada
+        from catcategoriajornada;
+	declare continue handler for not found set fin=1;
+    
+    open cursorCategoriaJornada;
+    ciclo:loop
+		fetch cursorCategoriaJornada into _idCategoria,_idJornada;
+		if fin = 1 then 
+			leave ciclo;
+		end if;
+        
+        if(_plaza='D') then
+			if(_idCategoria<_tipoCategoria) then
+				call sp_insertVacancia(_entidad,_plantel,_plaza,_cantidadplazas,_idCategoria,_idJornada,'Corrimiento natural',_idConvocatoria);
+			end if;
+        else
+			if(_idCategoria>9 and _idCategoria<_tipoCategoria) then
+				call sp_insertVacancia(_entidad,_plantel,_plaza,_cantidadplazas,_idCategoria,_idJornada,'Corrimiento natural',_idConvocatoria);
+			end if;
+        end if;
+	end loop ciclo;
+    close cursorCategoriaJornada;
+	call sp_insertVacancia(_entidad,_plantel,_plaza,_cantidadplazas,_tipocategoria,_jornada,'Real',_idConvocatoria);    
+    select 'ok' as respuesta;
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -3993,4 +4044,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-10-23 19:41:54
+-- Dump completed on 2020-10-26 19:56:56
