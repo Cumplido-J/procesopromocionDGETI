@@ -1216,7 +1216,7 @@ CREATE TABLE `convocatoria` (
   KEY `fkConvPrograma_idx` (`idPrograma`),
   CONSTRAINT `fkConvPlantel` FOREIGN KEY (`idPlantel`) REFERENCES `catplanteles` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `fkConvPrograma` FOREIGN KEY (`idPrograma`) REFERENCES `catprogramas` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1225,7 +1225,7 @@ CREATE TABLE `convocatoria` (
 
 LOCK TABLES `convocatoria` WRITE;
 /*!40000 ALTER TABLE `convocatoria` DISABLE KEYS */;
-INSERT INTO `convocatoria` VALUES (15,'2020-08-01','2020-08-03','2020-08-07','2020-08-10','2020-08-14','2020-08-17','2020-08-21','2020-08-31',193,1,'DEFINITIVA'),(16,'2020-08-14','2020-08-15','2020-08-15','2020-08-17','2020-08-18','2020-08-19','2020-08-20','2020-08-21',193,2,'DEFINITIVA'),(17,'2020-08-01','2020-08-03','2020-08-07','2020-08-10','2020-08-14','2020-08-17','2020-08-21','2020-08-24',193,3,'DEFINITIVA'),(18,'2020-07-01','2020-07-03','2020-09-07','2020-07-10','2020-09-14','2020-07-17','2020-09-21','2020-09-30',1,1,'DEFINITIVA'),(19,'2020-08-01','2020-08-03','2020-08-04','2020-08-05','2020-08-06','2020-08-07','2020-08-10','2020-08-31',89,1,'DEFINITIVA'),(20,'2020-08-01','2020-08-03','2020-08-07','2020-08-10','2020-08-14','2020-08-17','2020-08-21','2020-08-31',1,3,'DEFINITIVA'),(21,'2020-08-01','2020-08-03','2020-08-07','2020-08-10','2020-08-14','2020-08-17','2020-08-21','2020-08-31',98,1,'DEFINITIVA'),(22,'2020-10-08','2020-10-08','2020-10-15','2020-10-16','2020-10-22','2020-10-23','2020-10-29','2020-10-30',291,1,'TEMPORAL'),(23,'2020-10-01','2020-10-05','2020-10-09','2020-10-12','2020-10-16','2020-10-19','2020-10-23','2020-10-30',89,1,'TEMPORAL');
+INSERT INTO `convocatoria` VALUES (15,'2020-08-01','2020-08-03','2020-08-07','2020-08-10','2020-08-14','2020-08-17','2020-08-21','2020-12-31',193,1,'DEFINITIVA'),(16,'2020-08-14','2020-08-15','2020-08-15','2020-08-17','2020-08-18','2020-08-19','2020-08-20','2020-12-21',193,2,'DEFINITIVA'),(17,'2020-08-01','2020-08-03','2020-08-07','2020-08-10','2020-08-14','2020-08-17','2020-08-21','2020-12-24',193,3,'DEFINITIVA'),(18,'2020-07-01','2020-07-03','2020-09-07','2020-07-10','2020-09-14','2020-07-17','2020-09-21','2020-09-30',1,1,'DEFINITIVA'),(19,'2020-08-01','2020-08-03','2020-08-04','2020-08-05','2020-08-06','2020-08-07','2020-08-10','2020-08-31',89,1,'DEFINITIVA'),(20,'2020-08-01','2020-08-03','2020-08-07','2020-08-10','2020-08-14','2020-08-17','2020-08-21','2020-08-31',1,3,'DEFINITIVA'),(21,'2020-08-01','2020-08-03','2020-08-07','2020-08-10','2020-08-14','2020-08-17','2020-08-21','2020-08-31',98,1,'DEFINITIVA'),(22,'2020-10-08','2020-10-08','2020-10-15','2020-10-16','2020-10-22','2020-10-23','2020-10-29','2020-10-30',291,1,'TEMPORAL'),(23,'2020-10-01','2020-10-05','2020-10-09','2020-10-12','2020-10-16','2020-10-19','2020-10-23','2020-10-30',89,1,'TEMPORAL'),(24,'2020-10-01','2020-10-05','2020-10-09','2020-10-12','2020-10-16','2020-10-19','2020-10-23','2020-10-30',90,1,'TEMPORAL'),(25,'2020-10-01','2020-10-05','2020-10-09','2020-10-12','2020-10-16','2020-10-19','2020-10-23','2020-10-30',91,1,'TEMPORAL');
 /*!40000 ALTER TABLE `convocatoria` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1514,7 +1514,7 @@ CREATE TABLE `usuario` (
   CONSTRAINT `fkUsuarioPlantel` FOREIGN KEY (`plantel`) REFERENCES `catplanteles` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `fkUsuarioPrograma` FOREIGN KEY (`idConvocatoria`) REFERENCES `convocatoria` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `fkUsuarioSubsistema` FOREIGN KEY (`idSubsistema`) REFERENCES `catsubsistema` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE=InnoDB AUTO_INCREMENT=46 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=47 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1523,7 +1523,7 @@ CREATE TABLE `usuario` (
 
 LOCK TABLES `usuario` WRITE;
 /*!40000 ALTER TABLE `usuario` DISABLE KEYS */;
-INSERT INTO `usuario` VALUES (1,NULL,NULL,NULL,'ANTONIO DAVID','REYNA','MARTINEZ','tony310894@hotmail.com','cGFzcw==','REMA940831BA1','111111111','1111111111','S',NULL,'1',1),(29,15,12,193,'SAMUEL ','ALVARADO','AGAMA','david.reyna31@gmail.com','cGFzcw==','AAAS860114A5A','1111111111','1111111111','D',NULL,'1',1),(31,NULL,1,1,'david','reyna','martinez','correo2@mail.com','cGFzcw==','rema940831ba2','1111111111','1111111111','A',NULL,'1',1),(32,NULL,NULL,NULL,'nombre','paterno','materno','correo@mail.com','cGFzcw==','nacional1','1111111111','1111111111','A','null','1',1),(33,NULL,1,NULL,'nombre','paterno','materno','david.reyna31@gmail.com','cGFzcw==','estatal1','1111111111','1111111111','A','null','2',1),(36,NULL,1,7,'ANTONIO DAVID','REYNA','MARTINEZ','david.reyna31@gmail.com','cGFzcw==','REMA940831BA7',NULL,NULL,'A',NULL,'3',1),(37,NULL,1,1,'DAVID','REYNA','MARTINEZ','correo@mail.com','cGFzcw==','REMA940831BA8','1111111111','1111111111','A',NULL,'3',1),(44,22,20,291,'KARLA MONSERRAT ','ARAGON','ALARCON','correo@mail.com','cGFzcw==','AAAK800917ME1','1111111111','1111111111','D',NULL,NULL,1),(45,22,20,291,'ANTONIO DAVID','REYNA','MARTINEZ','correo@mail.com','UEFTUw==','rema940831ba9','1111111111','1111111111','D',NULL,NULL,1);
+INSERT INTO `usuario` VALUES (1,NULL,NULL,NULL,'ANTONIO DAVID','REYNA','MARTINEZ','tony310894@hotmail.com','cGFzcw==','REMA940831BA1','111111111','1111111111','S',NULL,'1',1),(29,15,12,193,'SAMUEL ','ALVARADO','AGAMA','david.reyna31@gmail.com','cGFzcw==','AAAS860114A5A','1111111111','1111111111','D',NULL,'1',1),(31,NULL,1,1,'david','reyna','martinez','correo2@mail.com','cGFzcw==','rema940831ba2','1111111111','1111111111','A',NULL,'1',1),(32,NULL,NULL,NULL,'nombre','paterno','materno','correo@mail.com','cGFzcw==','nacional1','1111111111','1111111111','A','null','1',1),(33,NULL,1,NULL,'nombre','paterno','materno','david.reyna31@gmail.com','cGFzcw==','estatal1','1111111111','1111111111','A','null','2',1),(36,NULL,1,7,'ANTONIO DAVID','REYNA','MARTINEZ','david.reyna31@gmail.com','cGFzcw==','REMA940831BA7',NULL,NULL,'A',NULL,'3',1),(37,NULL,1,1,'DAVID','REYNA','MARTINEZ','correo@mail.com','cGFzcw==','REMA940831BA8','1111111111','1111111111','A',NULL,'3',1),(44,22,20,291,'KARLA MONSERRAT ','ARAGON','ALARCON','correo@mail.com','cGFzcw==','AAAK800917ME1','1111111111','1111111111','D',NULL,NULL,1),(45,22,20,291,'ANTONIO DAVID','REYNA','MARTINEZ','correo@mail.com','UEFTUw==','rema940831ba9','1111111111','1111111111','D',NULL,NULL,1),(46,NULL,NULL,NULL,'david','reyna','martinez','david.reyna31@gmail.com','cGFzcw==','convocatorias','1111111111','1111111111','A',NULL,'1',1);
 /*!40000 ALTER TABLE `usuario` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1543,7 +1543,7 @@ CREATE TABLE `usuariopermiso` (
   KEY `idPermisoUP_idx` (`idPermiso`),
   CONSTRAINT `idPermisoUP` FOREIGN KEY (`idPermiso`) REFERENCES `catpermisos` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `idUsuarioUP` FOREIGN KEY (`idUsuario`) REFERENCES `usuario` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE=InnoDB AUTO_INCREMENT=97 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=98 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1552,7 +1552,7 @@ CREATE TABLE `usuariopermiso` (
 
 LOCK TABLES `usuariopermiso` WRITE;
 /*!40000 ALTER TABLE `usuariopermiso` DISABLE KEYS */;
-INSERT INTO `usuariopermiso` VALUES (42,1,1),(43,1,2),(45,1,4),(51,31,1),(52,31,2),(54,31,4),(55,31,1),(56,31,2),(58,31,1),(59,31,2),(60,31,4),(61,31,1),(62,31,2),(63,31,4),(64,31,1),(65,31,2),(66,31,4),(84,32,1),(85,32,4),(86,33,1),(87,33,4),(88,33,1),(91,36,5),(92,37,6);
+INSERT INTO `usuariopermiso` VALUES (42,1,1),(43,1,2),(45,1,4),(51,31,1),(52,31,2),(54,31,4),(55,31,1),(56,31,2),(58,31,1),(59,31,2),(60,31,4),(61,31,1),(62,31,2),(63,31,4),(64,31,1),(65,31,2),(66,31,4),(84,32,1),(85,32,4),(86,33,1),(87,33,4),(88,33,1),(91,36,5),(92,37,6),(97,46,2);
 /*!40000 ALTER TABLE `usuariopermiso` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1580,7 +1580,7 @@ CREATE TABLE `vacancia` (
   KEY `fkVacanciaJornada_idx` (`jornada`),
   KEY `fkVacanciaConvocatoria_idx` (`idConvocatoria`),
   CONSTRAINT `fk5` FOREIGN KEY (`idConvocatoria`) REFERENCES `convocatoria` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE=InnoDB AUTO_INCREMENT=92 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=108 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1589,7 +1589,7 @@ CREATE TABLE `vacancia` (
 
 LOCK TABLES `vacancia` WRITE;
 /*!40000 ALTER TABLE `vacancia` DISABLE KEYS */;
-INSERT INTO `vacancia` VALUES (81,9,89,'TD',12,10,1,'Corrimiento natural',23),(82,9,89,'TD',12,11,1,'Corrimiento natural',23),(83,9,89,'TD',10,12,2,'Corrimiento natural',23),(84,9,89,'TD',10,12,3,'Corrimiento natural',23),(85,9,89,'TD',10,12,4,'Corrimiento natural',23),(86,9,89,'TD',10,13,2,'Corrimiento natural',23),(87,9,89,'TD',10,13,3,'Corrimiento natural',23),(88,9,89,'TD',10,13,4,'Corrimiento natural',23),(89,9,89,'TD',10,14,2,'Real',23),(90,9,89,'TD',1,10,1,'Real',23),(91,9,89,'TD',2,12,2,'Real',23);
+INSERT INTO `vacancia` VALUES (102,12,193,'TD',1,10,1,'Corrimiento natural',15),(103,12,193,'TD',1,11,1,'Corrimiento natural',15),(104,12,193,'TD',1,12,2,'Corrimiento natural',15),(105,12,193,'TD',1,12,3,'Corrimiento natural',15),(106,12,193,'TD',1,12,4,'Corrimiento natural',15),(107,12,193,'TD',1,13,2,'Real',15);
 /*!40000 ALTER TABLE `vacancia` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -2773,6 +2773,37 @@ BEGIN
 		where id=_aux;
     end if;
     select puntaje from catpuntaje where id=_idCatPuntaje;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `sp_insertConvocatoria` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`admin`@`localhost` PROCEDURE `sp_insertConvocatoria`(in _publicacion date,in _inicioRegistro date,in _finRegistro date,in _inicioValoracion date,in _finValoracion date,in _inicioDictaminacion date,in _finDictaminacion date, in _resultados date,in _idPlantel int,in _idPrograma int,in _estatus varchar(15))
+BEGIN
+	declare _aux int default null;
+    
+    select id into _aux
+    from convocatoria 
+    where idPlantel=_idPlantel and idPrograma=_idPrograma;
+    
+    if(_aux is null) then
+		INSERT INTO convocatoria(publicacion,inicioRegistro,finRegistro,inicioValoracion,finValoracion,inicioDictaminacion,finDictaminacion,resultados,idPlantel,idPrograma,estatus) 
+		VALUES(_publicacion,_inicioRegistro,_finRegistro,_inicioValoracion,_finValoracion,_inicioDictaminacion,_finDictaminacion,_resultados,_idPlantel,_idPrograma,_estatus);
+        select 'ok' as resultado;
+	else
+		select 'Convocatoria previamente registrada' as resultado;
+	end if;		
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -4044,4 +4075,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-10-26 19:56:56
+-- Dump completed on 2020-10-28 21:00:11

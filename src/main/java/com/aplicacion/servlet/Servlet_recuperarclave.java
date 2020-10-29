@@ -105,7 +105,7 @@ public class Servlet_recuperarclave extends HttpServlet {
                     String busqueda_clave = metodos.buscarclave(correo);
                     String claveDesencriptada = Encriptar_Desencriptar.desencriptar(busqueda_clave);
                     mail.enviarCorreo("Recuperación de contraseña","Su contraseña es:"+claveDesencriptada, correo);
-                    //response.sendRedirect("login.jsp");
+                    
                     request.setAttribute("error", "Contraseña enviada");
                     RequestDispatcher rd = request.getRequestDispatcher("recuperar_contraseña.jsp");
                     rd.forward(request, response);

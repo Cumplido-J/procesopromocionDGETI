@@ -31,6 +31,7 @@ public class ServletControladorVacancia extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         List<Integer> filtrar_convocatorias = null;
         String str_id = request.getParameter("id");

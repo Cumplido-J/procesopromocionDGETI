@@ -108,102 +108,103 @@
     </head>
     <body>
         <main class="page">
-        <%
-            session = (HttpSession) request.getSession(true);
-            String idUsuario = "";
-            String rfc = "";
-            if (session.getAttribute("idUsuario").toString() != null && session.getAttribute("rfc").toString() != null) {
-                idUsuario = session.getAttribute("idUsuario").toString();
-                rfc = session.getAttribute("rfc").toString();
-                session.setAttribute("idUsuario", idUsuario);
-                session.setAttribute("rfc", rfc);
-        %>
-        <div>
-            <!--  para el framework del gobierno-->
-            <nav class="navbar navbar-inverse sub-navbar navbar-fixed-top">
-                <div class="container">
-                    <div class="navbar-header">
-                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#subenlaces">
-                            <span class="sr-only">Interruptor de Navegación</span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                        </button>
-                        <a class="navbar-brand" href="/">DGETI</a>
-                    </div>
-                    <div class="collapse navbar-collapse" id="subenlaces">
-                        <ul class="nav navbar-nav navbar-right">
-                            <nav class="navegacion">
-                                <ul class="menu">
-                                    <li aling="navbar-center">
-                                        <%
-                                            String nom1 = String.valueOf(request.getAttribute("nom"));
-                                            out.print(nom1);
-                                        %>
+            <%
+                session = (HttpSession) request.getSession(true);
+                String idUsuario = "";
+                String rfc = "";
+                if (session.getAttribute("idUsuario").toString() != null && session.getAttribute("rfc").toString() != null) {
+                    idUsuario = session.getAttribute("idUsuario").toString();
+                    rfc = session.getAttribute("rfc").toString();
+                    session.setAttribute("idUsuario", idUsuario);
+                    session.setAttribute("rfc", rfc);
+            %>
+            <div>
+                <!--  para el framework del gobierno-->
+                <nav class="navbar navbar-inverse sub-navbar navbar-fixed-top">
+                    <div class="container">
+                        <div class="navbar-header">
+                            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#subenlaces">
+                                <span class="sr-only">Interruptor de Navegación</span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                            </button>
+                            <a class="navbar-brand" href="/">UEMSTIS</a>
+                        </div>
+                        <div class="collapse navbar-collapse" id="subenlaces">
+                            <ul class="nav navbar-nav navbar-right">
+                                <nav class="navegacion">
+                                    <ul class="menu">
+                                        <li aling="navbar-center">
+                                            <%
+                                                String nom1 = String.valueOf(request.getAttribute("nom"));
+                                                out.print(nom1);
+                                            %>
 
-                                    </li>                                    
-                                    <li><a href="#">Administrador</a>
-                                        <ul class="submenu">
-                                            <li>
-                                                <form id="data3"  role="form" method="POST" action="Servlet_regresar">
-                                                    <button class="propiedadesboton" type="submit" name="regresa" id="activado_usuario" onmouseover="habilitar();">Usuario</button>
-                                                    <%
-                                                        session.setAttribute("idUsuario", idUsuario);
-                                                        session.setAttribute("rfc", rfc);
-                                                    %>
-                                                    <input type="hidden" name="control_combobox" id="control_combobox" value="<%=request.getAttribute("control_combobox")%>">
-                                                    <input type="hidden" name="nacional" id="nacional" value="<%=request.getAttribute("nacional")%>"> <%--AGREGAR--%>
-                                                    <input type="hidden" name="permiso1" id="permiso1" value="<%=request.getAttribute("per1")%>">
-                                                    <input type="hidden" name="permiso2" id="permiso2" value="<%=request.getAttribute("per2")%>">
-                                                    <input type="hidden" name="permiso4" id="permiso4" value="<%=request.getAttribute("per4")%>">
-                                                    <input type="hidden" name="nombre" id="nombre" value="<%=request.getAttribute("nom")%>">
-                                                    <input type="hidden" name="dato_ent" id="dato_ent" value="<%=request.getAttribute("dato_ent")%>">
-                                                    <input type="hidden" name="dato_pla" id="dato_pla" value="<%=request.getAttribute("dato_pla")%>">
-                                                    <input type="hidden" name="dato_rfc" id="dato_rfc" value="<%=request.getAttribute("dato_rfc")%>">
-                                                </form>
-                                            </li>   
-                                            <li>
-                                                <form id="data4"  role="form" method="POST" action="Servlet_convocatoria">
-                                                    <button class="propiedadesboton" type="submit" name="convocatoria" id="activado_convocatoria" onmouseover="habilitar();">Convocatoria</button>
-                                                    <%
-                                                        session.setAttribute("idUsuario", idUsuario);
-                                                        session.setAttribute("rfc", rfc);
-                                                    %>
-                                                    <input type="hidden" name="control_combobox" id="control_combobox" value="<%=request.getAttribute("control_combobox")%>">
-                                                    <input type="hidden" name="nacional" id="nacional" value="<%=request.getAttribute("nacional")%>"> <%--AGREGAR--%>
-                                                    <input type="hidden" name="permiso1" id="permiso1" value="<%=request.getAttribute("per1")%>">
-                                                    <input type="hidden" name="permiso2" id="permiso2" value="<%=request.getAttribute("per2")%>">
-                                                    <input type="hidden" name="permiso4" id="permiso4" value="<%=request.getAttribute("per4")%>">
-                                                    <input type="hidden" name="nombre" id="nombre" value="<%=request.getAttribute("nom")%>">
-                                                    <input type="hidden" name="dato_ent" id="dato_ent" value="<%=request.getAttribute("dato_ent")%>">
-                                                    <input type="hidden" name="dato_pla" id="dato_pla" value="<%=request.getAttribute("dato_pla")%>">
-                                                    <input type="hidden" name="dato_rfc" id="dato_rfc" value="<%=request.getAttribute("dato_rfc")%>">
-                                                </form>
-                                            </li>
-                                            <li>
-                                                <form id="data3"  role="form" method="POST" action="Servlet_ir_a_vacantes">
-                                                    <button class="propiedadesboton" type="submit" name="ir" id="activado_vacancia" onmouseover="habilitar();">Vacancia</button>
-                                                    <%
-                                                        session.setAttribute("idUsuario", idUsuario);
-                                                        session.setAttribute("rfc", rfc);
-                                                    %>
-                                                    <input type="hidden" name="control_combobox" id="control_combobox" value="<%=request.getAttribute("control_combobox")%>">
-                                                    <input type="hidden" name="nacional" id="nacional" value="<%=request.getAttribute("nacional")%>"> <%--AGREGAR--%>
-                                                    <input type="hidden" name="permiso1" id="permiso1" value="<%=request.getAttribute("per1")%>">
-                                                    <input type="hidden" name="permiso2" id="permiso2" value="<%=request.getAttribute("per2")%>">
-                                                    <input type="hidden" name="permiso4" id="permiso4" value="<%=request.getAttribute("per4")%>">
-                                                    <input type="hidden" name="nombre" id="nombre" value="<%=request.getAttribute("nom")%>">
-                                                    <input type="hidden" name="dato_ent" id="dato_ent" value="<%=request.getAttribute("dato_ent")%>">
-                                                    <input type="hidden" name="dato_pla" id="dato_pla" value="<%=request.getAttribute("dato_pla")%>">
-                                                    <input type="hidden" name="dato_rfc" id="dato_rfc" value="<%=request.getAttribute("dato_rfc")%>">
-                                                </form>
-                                            </li>
-                                        </ul> 
-                                    </li> 
-                                    <li><a href="login.jsp">Inicio</a></li>
-                                </ul>
-                            </nav>
-                        </ul>
+                                        </li>                                    
+                                        <li><a href="#">Administrador</a>
+                                            <ul class="submenu">
+                                                <li>
+                                                    <form id="data3"  role="form" method="POST" action="Servlet_regresar">
+                                                        <button class="propiedadesboton" type="submit" name="regresa" id="activado_usuario" onmouseover="habilitar();">Usuario</button>
+                                                        <%
+                                                            session.setAttribute("idUsuario", idUsuario);
+                                                            session.setAttribute("rfc", rfc);
+                                                        %>
+                                                        <input type="hidden" name="control_combobox" id="control_combobox" value="<%=request.getAttribute("control_combobox")%>">
+                                                        <input type="hidden" name="nacional" id="nacional" value="<%=request.getAttribute("nacional")%>"> <%--AGREGAR--%>
+                                                        <input type="hidden" name="permiso1" id="permiso1" value="<%=request.getAttribute("per1")%>">
+                                                        <input type="hidden" name="permiso2" id="permiso2" value="<%=request.getAttribute("per2")%>">
+                                                        <input type="hidden" name="permiso4" id="permiso4" value="<%=request.getAttribute("per4")%>">
+                                                        <input type="hidden" name="nombre" id="nombre" value="<%=request.getAttribute("nom")%>">
+                                                        <input type="hidden" name="dato_ent" id="dato_ent" value="<%=request.getAttribute("dato_ent")%>">
+                                                        <input type="hidden" name="dato_pla" id="dato_pla" value="<%=request.getAttribute("dato_pla")%>">
+                                                        <input type="hidden" name="dato_rfc" id="dato_rfc" value="<%=request.getAttribute("dato_rfc")%>">
+                                                    </form>
+                                                </li>   
+                                                <li>
+                                                    <form id="data4"  role="form" method="POST" action="Servlet_convocatoria">
+                                                        <button class="propiedadesboton" type="submit" name="convocatoria" id="activado_convocatoria" onmouseover="habilitar();">Convocatoria</button>
+                                                        <%
+                                                            session.setAttribute("idUsuario", idUsuario);
+                                                            session.setAttribute("rfc", rfc);
+                                                        %>
+                                                        <input type="hidden" name="control_combobox" id="control_combobox" value="<%=request.getAttribute("control_combobox")%>">
+                                                        <input type="hidden" name="nacional" id="nacional" value="<%=request.getAttribute("nacional")%>"> <%--AGREGAR--%>
+                                                        <input type="hidden" name="permiso1" id="permiso1" value="<%=request.getAttribute("per1")%>">
+                                                        <input type="hidden" name="permiso2" id="permiso2" value="<%=request.getAttribute("per2")%>">
+                                                        <input type="hidden" name="permiso4" id="permiso4" value="<%=request.getAttribute("per4")%>">
+                                                        <input type="hidden" name="nombre" id="nombre" value="<%=request.getAttribute("nom")%>">
+                                                        <input type="hidden" name="dato_ent" id="dato_ent" value="<%=request.getAttribute("dato_ent")%>">
+                                                        <input type="hidden" name="dato_pla" id="dato_pla" value="<%=request.getAttribute("dato_pla")%>">
+                                                        <input type="hidden" name="dato_rfc" id="dato_rfc" value="<%=request.getAttribute("dato_rfc")%>">
+                                                    </form>
+                                                </li>
+                                                <li>
+                                                    <form id="data3"  role="form" method="POST" action="Servlet_ir_a_vacantes">
+                                                        <button class="propiedadesboton" type="submit" name="ir" id="activado_vacancia" onmouseover="habilitar();">Vacancia</button>
+                                                        <%
+                                                            session.setAttribute("idUsuario", idUsuario);
+                                                            session.setAttribute("rfc", rfc);
+                                                        %>
+                                                        <input type="hidden" name="control_combobox" id="control_combobox" value="<%=request.getAttribute("control_combobox")%>">
+                                                        <input type="hidden" name="nacional" id="nacional" value="<%=request.getAttribute("nacional")%>"> <%--AGREGAR--%>
+                                                        <input type="hidden" name="permiso1" id="permiso1" value="<%=request.getAttribute("per1")%>">
+                                                        <input type="hidden" name="permiso2" id="permiso2" value="<%=request.getAttribute("per2")%>">
+                                                        <input type="hidden" name="permiso4" id="permiso4" value="<%=request.getAttribute("per4")%>">
+                                                        <input type="hidden" name="nombre" id="nombre" value="<%=request.getAttribute("nom")%>">
+                                                        <input type="hidden" name="dato_ent" id="dato_ent" value="<%=request.getAttribute("dato_ent")%>">
+                                                        <input type="hidden" name="dato_pla" id="dato_pla" value="<%=request.getAttribute("dato_pla")%>">
+                                                        <input type="hidden" name="dato_rfc" id="dato_rfc" value="<%=request.getAttribute("dato_rfc")%>">
+                                                    </form>
+                                                </li>
+                                            </ul> 
+                                        </li> 
+                                        <li><a href="login.jsp">Cerrar sesión</a></li>
+                                    </ul>
+                                </nav>
+                            </ul>
+                        </div>
                     </div>
                 </nav>
             </div>
@@ -212,41 +213,29 @@
 
             <div class="padre">
 
-            <header class="headerart">
-                <div class="titulo">
-                    <p>Dirección General de Educación Tecnológica Industrial y de Servicios</p>
+                <header class="headerart">
+                    <div class="titulo">
+                        <p>Unidad de Educación Media Superior Tecnológica Industrial y de Servicios</p>
+                    </div>
+                    <div class="texto-principalart margen-interno">
+                        <p>Programa de Promoción en el Servicio Docente en Educación Media Superior</p>
+                    </div>
+                </header>
+                <div class="ruta">
+                    <p> UEMSTIS > Promoción Docente > Vacantes</p>
                 </div>
-                <div class="texto-principalart margen-interno">
-                    <p>Programa de Promoción en el Servicio Docente en Educación Media Superior</p>
-                </div>
-            </header>
-            <div class="ruta">
-                <p> DGETI > Promoción Docente > Vacantes</p>
-            </div>
-            <section class="sectionart">
-                <div class="articulosart">
-                    <h3>Carga de vacancia en los planteles</h3>
-                    <jsp:useBean id="cn" class="metodos_sql.Metodos_sql" scope="page"></jsp:useBean>
-                        <form id="data" class="form-horizontal" role="form" method="POST" action="Servlet_buscar_vacancia">
-                            <input type="hidden" name="modal" id="modal" value="<%=request.getAttribute("modal")%>">
-                        <%-------------------------------------------------------------------OPCION VERDADERA COMBO BOX----------------------------%>   
-                        <%if (request.getAttribute("control_combobox").equals("false") && request.getAttribute("nacional").equals("1")) { %>
-                        <table  border="0" width="120%">   
-                            <tr><td align="center">
-                                    <input type="hidden" name="f_opc" id="i_opc">
-                                    <input type="hidden" name="campoentidad70" id="campoentidad70" >
-                                    <label>Entidad</label><br>
-
-                                    <%
-                                        ResultSet rs = cn.mostrar("Select id, entidad from catentidades");
-                                    %>
-
-                                    <select class="select" name="entidad" id="entidad" onchange="plantel()">
-                                        <option value="0">Escoge una opcion</option>
-                                        <%
-                                            while (rs.next()) {
-                                        %>
-                                        <option value="<%=rs.getString("id")%>"><%=rs.getString("entidad")%></option>
+                <section class="sectionart">
+                    <div class="articulosart">
+                        <h3>Carga de vacancia en los planteles</h3>
+                        <jsp:useBean id="cn" class="metodos_sql.Metodos_sql" scope="page"></jsp:useBean>
+                            <form id="data" class="form-horizontal" role="form" method="POST" action="Servlet_buscar_vacancia">
+                                <input type="hidden" name="modal" id="modal" value="<%=request.getAttribute("modal")%>">
+                            <%-------------------------------------------------------------------OPCION VERDADERA COMBO BOX----------------------------%>   
+                            <%if (request.getAttribute("control_combobox").equals("false") && request.getAttribute("nacional").equals("1")) { %>
+                            <table  border="0" width="120%">   
+                                <tr>
+                                    <td align="center">
+                                        <label>Subsistema</label><br>
                                         <%
                                             ResultSet rs9 = cn.mostrar("Select id, subsistema from catsubsistema");
                                         %>

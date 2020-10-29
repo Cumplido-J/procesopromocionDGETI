@@ -11,8 +11,8 @@ import javax.mail.internet.MimeMessage;
 public class Enviar_clave {
 
     public void enviar_correo(String claveDesencriptada, String correo) {
-        String remitente = "videoclasesipn@gmail.com";
-        String clave = "nzolrnllrrmtgaev";
+        String remitente = "notificaciones1@cecyte.edu.mx";
+        String clave = "R6qUC6Sv7JCfUn9";
         String destino = correo;
 
         Properties props = new Properties();
@@ -27,6 +27,7 @@ public class Enviar_clave {
         MimeMessage mensaje = new MimeMessage(session);
 
         try {
+            System.out.println("Enviando clave");
             mensaje.addRecipient(Message.RecipientType.TO, new InternetAddress(destino));
             mensaje.setSubject("Recuperacion de Contraseña");
             mensaje.setText("Tu contraseña es: "+claveDesencriptada);
@@ -34,6 +35,7 @@ public class Enviar_clave {
             transport.connect("smtp.gmail.com", remitente, clave);
             transport.sendMessage(mensaje, mensaje.getAllRecipients());
             transport.close();
+            System.out.println("Fin Enviando clave");
         } catch (Exception e) {
             e.printStackTrace();
         }

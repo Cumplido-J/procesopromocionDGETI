@@ -91,18 +91,12 @@
 
             $(document).ready(function () {
                 $('#tabla_usuarios').DataTable();
-            });
-
-            $(document).ready(function ()
-            {
+            
                 var modal = document.getElementById("modal").value;
                 //alert(modal);
                 if (modal == "1") {
                     $("#modalMensaje").modal("show");
-                } else
-                {
-
-                }
+                } 
             });
         </script>    
         <!-- Respond.js soporte de media queries para Internet Explorer 8 -->
@@ -207,7 +201,7 @@
                                                 </li>
                                             </ul> 
                                         </li> 
-                                        <li><a href="login.jsp">Inicio</a></li>
+                                        <li><a href="login.jsp">Cerrar sesión</a></li>
                                     </ul>
                                 </nav>
                             </ul>
@@ -309,7 +303,7 @@
                                         <input type="hidden" name="publicaciont" id="publicaciont" >
                                         <label>Publicación</label><br>
                                         <input class="form-control" type="date" id="publicacion" name="publicacion" value="" min="2020-01-01" max="2020-12-31">
-                                    </div>>
+                                    </div>
 
                                     <div class="caja">
                                         <input type="hidden" name="resultadost" id="resultadost" >
@@ -724,7 +718,7 @@
                                 </thead>
                                 <%
                                     String elegir1 = "0";
-                                    String cadena = "";
+                                    String cadena = "SELECT a.*,b.programa FROM convocatoria a join catProgramas b on a.idPrograma=b.id WHERE a.id != 0";
                                     String nombre_subsistema = "";
                                     String nombre_entidad = "";
                                     String nombre_plantel = "";

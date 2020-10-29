@@ -5,9 +5,11 @@
  */
 package com.aplicacion.servlet;
 
+import herramientas.Fecha;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Date;
+import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -84,11 +86,6 @@ public class Servlet_guardar_convocatoria extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("</head>");
-            out.println("<body>");
             HttpSession session = (HttpSession) request.getSession(true);
             String idUsuario = "";
             String rfc = "";
@@ -109,7 +106,7 @@ public class Servlet_guardar_convocatoria extends HttpServlet {
                 String entidad = request.getParameter("entidad");
                 String plantel = request.getParameter("n_plantel");
                 String programa = request.getParameter("programa");
-                Date publicacion1 = Date.valueOf(request.getParameter("publicacion"));
+                /*Date publicacion1 = Date.valueOf(request.getParameter("publicacion"));
                 Date periodo_registro_inicio1 = Date.valueOf(request.getParameter("periodo_registro_inicio"));
                 Date periodo_registro_fin1 = Date.valueOf(request.getParameter("periodo_registro_fin"));
                 Date periodo_valoracion_inicio1 = Date.valueOf(request.getParameter("periodo_valoracion_inicio"));
@@ -117,6 +114,17 @@ public class Servlet_guardar_convocatoria extends HttpServlet {
                 Date periodo_dictaminacion_inicio1 = Date.valueOf(request.getParameter("periodo_dictaminacion_inicio"));
                 Date periodo_dictaminacion_fin1 = Date.valueOf(request.getParameter("periodo_dictaminacion_fin"));
                 Date publicacion_resultados1 = Date.valueOf(request.getParameter("publicacion_resultados"));
+                */
+                Fecha fecha=new Fecha();                
+                String publicacion1 = request.getParameter("publicacion");                
+                String periodo_registro_inicio1 = request.getParameter("periodo_registro_inicio");
+                String periodo_registro_fin1 = request.getParameter("periodo_registro_fin");
+                String periodo_valoracion_inicio1 = request.getParameter("periodo_valoracion_inicio");
+                String periodo_valoracion_fin1 = request.getParameter("periodo_valoracion_fin");
+                String periodo_dictaminacion_inicio1 = request.getParameter("periodo_dictaminacion_inicio");
+                String periodo_dictaminacion_fin1 = request.getParameter("periodo_dictaminacion_fin");
+                String publicacion_resultados1 = request.getParameter("publicacion_resultados");
+                
                 String estatus = request.getParameter("estatus");
 
                 String btnregresa = request.getParameter("guardar");
@@ -132,14 +140,18 @@ public class Servlet_guardar_convocatoria extends HttpServlet {
 //                    out.print(periodo_dictaminacion_inicio1);
 //                    out.print(periodo_dictaminacion_fin1);
 //                    out.print(publicacion_resultados1);
-                    int datos6 = 0;
+                    /*int datos6 = 0;
                     if ((control_combobox.equals("true") || control_combobox.equals("false")) && (nac1.equals("1") || nac1.equals("2"))) {
                         datos6 = metodos.guardar7(publicacion1, periodo_registro_inicio1, periodo_registro_fin1, periodo_valoracion_inicio1, periodo_valoracion_fin1, periodo_dictaminacion_inicio1, periodo_dictaminacion_fin1, publicacion_resultados1, plantel, programa, estatus);
                     } else {
                         datos6 = metodos.guardar7(publicacion1, periodo_registro_inicio1, periodo_registro_fin1, periodo_valoracion_inicio1, periodo_valoracion_fin1, periodo_dictaminacion_inicio1, periodo_dictaminacion_fin1, publicacion_resultados1, pla1, programa, estatus);
-                    }
-
-                    if (datos6 > 0) {
+                    }*/
+                    
+                    List<String[]> retorno=null;
+                    String[] parametros={publicacion1, periodo_registro_inicio1, periodo_registro_fin1, periodo_valoracion_inicio1, periodo_valoracion_fin1, periodo_dictaminacion_inicio1, periodo_dictaminacion_fin1, publicacion_resultados1, plantel, programa, estatus};
+                    retorno=metodos.ejecutaSP("sp_insertConvocatoria",parametros);
+                    if(!retorno.isEmpty()){                    
+                    if(retorno.get(0)[0].equals("ok")){                    
                         request.setAttribute("control_combobox", control_combobox);
                         request.setAttribute("nacional", nac1);//AGREGAR-------------------------------
                         request.setAttribute("opc", "1");
@@ -153,20 +165,17 @@ public class Servlet_guardar_convocatoria extends HttpServlet {
                         request.setAttribute("per4", per4);
                         request.setAttribute("modal", 1);
                         request.setAttribute("ver", "1");
-                        session.setAttribute("idUsuario", idUsuario);
-                        session.setAttribute("rfc", rfc);
+                        
                         RequestDispatcher rd = request.getRequestDispatcher("convocatoria.jsp");
                         rd.forward(request, response);
                     } else {
-                        out.print("Servidor en mantenimiento, Datos no Guardados");
+                        out.print(retorno.get(0)[0]);
+                    }
                     }
                 }
-            } else {
-                response.sendRedirect("login.jsp");
-            }
+            } 
             //out.println("<h1>Servlet Servlet at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+            
         }
     }
 

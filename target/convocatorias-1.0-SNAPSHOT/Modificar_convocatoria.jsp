@@ -10,7 +10,7 @@
 <html lang="es">
     <head>
         <meta charset="utf-8">
-        <title>Unidad de Educación Media Superior Tecnológica Industrial y de Servicios | gob.mx</title>
+        <title>Dirección General de Educación Tecnológica Industrial y de Servicios | gob.mx</title>
         <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximun-scale=1.0, minimun-scale=1.0">
         <link rel="stylesheet" href="css/all.css">
         <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap" rel="stylesheet">
@@ -130,7 +130,7 @@
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </button>
-                        <a class="navbar-brand" href="/">UEMSTIS</a>
+                        <a class="navbar-brand" href="/">DGETI</a>
                     </div>
 
                     <div class="collapse navbar-collapse" id="subenlaces">
@@ -207,7 +207,7 @@
                                             </li>
                                         </ul> 
                                     </li> 
-                                    <li><a href="login.jsp">Inicio</a></li>
+                                    <li><a href="login.jsp">Cerrar sesión</a></li>
                                 </ul>
                             </nav>                         
                         </ul>
@@ -223,14 +223,14 @@
 
             <!--<header class="headerart">
                 <div class="titulo">
-                    <p>Unidad de Educación Media Superior Tecnológica Industrial y de Servicios</p>
+                    <p>Dirección General de Educación Tecnológica Industrial y de Servicios</p>
                 </div> 
                 <div class="texto-principalart margen-interno">
                     <p>Programa de Promoción en el Servicio Docente en Educación Media Superior</p>
                 </div> 
             </header>
             <div class="ruta">
-                <p> UEMSTIS > Promoción Docente > Registro de Convocatoria</p>
+                <p> DGETI > Promoción Docente > Registro de Convocatoria</p>
             </div>-->
 
 
@@ -300,7 +300,7 @@
                                              <select class="form-control" id="selectbox" name="selectbox" id="logo" onChange="changecontent(this)" >
                                                  <option value="0">Escoge una opcion</option>
                                                  <option value="1">Logo SEMS</option>
-                                                 <option value="2">Logo UEMSTIS</option>                                            
+                                                 <option value="2">Logo DGETI</option>                                            
                                              </select>	
                                          </p>
                                          <div id="n100"></div>

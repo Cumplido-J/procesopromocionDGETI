@@ -170,7 +170,7 @@
 
 
                                     </li>
-                                    <li><a href="login.jsp">Inicio</a></li>
+                                    <li><a href="login.jsp">Cerrar sesión</a></li>
                                 </ul>
                             </nav>
                         </ul>

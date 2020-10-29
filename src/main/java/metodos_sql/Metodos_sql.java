@@ -574,6 +574,7 @@ public class Metodos_sql {
         conexion = conector();
         try {
             sentencia_preparada = conexion.prepareStatement(buscar);
+            System.out.println(sentencia_preparada);
             resultado = sentencia_preparada.executeQuery();
 
         } catch (Exception ex) {

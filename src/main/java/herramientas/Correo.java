@@ -19,12 +19,41 @@ import javax.mail.internet.MimeMessage;
  */
 public class Correo {
         private final static String rutaConfig=RutaConfig.getRutaConfig();
-        private final Properties properties = new Properties();	
-	private Session session; 
-        private String correo;
-        private String contrasena;
+        
+        
+        public void enviarCorreo(String asunto,String cuerpo,String destino) {
+            Properties p = new Properties();     
+            try {
+                p.load(new FileReader(rutaConfig));
+                String remitente = p.getProperty("correoNotificacion");
+                String clave = p.getProperty("passNotificacion");
+                //String destino = destinatario;
 
-        public void inicializar() {
+                Properties props = new Properties();
+                props.put("mail.smtp.host", "smtp.gmail.com");
+                props.put("mail.smtp.port", "587");
+                props.put("mail.smtp.auth", "true");
+                props.put("mail.smtp.starttls.enable", "true");
+                props.put("mail.smtp.user", remitente);
+                props.put("mail.smtp.clave", clave);
+
+                Session session = Session.getDefaultInstance(props);
+                session.setDebug(true);
+                MimeMessage mensaje = new MimeMessage(session);
+
+                mensaje.addRecipient(Message.RecipientType.TO, new InternetAddress(destino));
+                mensaje.setSubject(asunto);
+                mensaje.setText(cuerpo);
+                Transport transport = session.getTransport("smtp");
+                transport.connect("smtp.gmail.com", remitente, clave);
+                transport.sendMessage(mensaje, mensaje.getAllRecipients());
+                transport.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+        /*public void inicializar() {
             Properties p = new Properties(); 
             try {
                 p.load(new FileReader(rutaConfig));
@@ -65,7 +94,7 @@ public class Correo {
                 return;
             }
 		
-	}
+	}*/
  
 }    
     
