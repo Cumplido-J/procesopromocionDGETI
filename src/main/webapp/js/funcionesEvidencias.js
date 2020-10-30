@@ -46,10 +46,11 @@ $(document).ready(function () {
                         $("#modalMensaje").modal("show");
                     }
                     else{   
-                        total=total-parseFloat($("#p1").html());
+                        //total=total-parseFloat($("#p1").html());
                         $("#p1").html(data); 
-                        total=total+parseFloat($("#p1").html());
+                        //total=total+parseFloat($("#p1").html());
                         //$("#total").html(total); 
+                        calculaTotal();
                         $("#mensaje").html("Información guardada correctamente");            
                         $("#modalMensaje").modal("show");
                         if($("#btnEvidencia2").val().includes("Ver")){
@@ -95,6 +96,7 @@ $(document).ready(function () {
                     }
                     else{                        
                         $("#p2").html(data); 
+                        calculaTotal();
                         $("#mensaje").html("Información guardada correctamente");            
                         $("#modalMensaje").modal("show");
                         if($("#btnEvidencia10").val().includes("Ver")){
@@ -140,6 +142,7 @@ $(document).ready(function () {
                     }
                     else{                        
                         $("#p4").html(data); 
+                        calculaTotal();
                         $("#mensaje").html("Información guardada correctamente");            
                         $("#modalMensaje").modal("show");
                         if($("#btnEvidencia1").val().includes("Ver")){
@@ -179,6 +182,7 @@ $(document).ready(function () {
                                 $("#mensaje").html(data); 
                             }else{                
                                 $("#p5").html(data); 
+                                calculaTotal();
                                 $("#mensaje").html("Información almacenada correctamente"); 
                             }                                        
                             $("#modalMensaje").modal("show");
@@ -229,6 +233,7 @@ $(document).ready(function () {
                         $("#mensaje").html(data); 
                     }else{                
                         $("#p6").html(data); 
+                        calculaTotal();
                         $("#mensaje").html("Información almacenada correctamente"); 
                     }  
                                            
@@ -283,6 +288,7 @@ $(document).ready(function () {
                         $("#mensaje").html(data); 
                     }else{                
                         $("#p7").html(data); 
+                        calculaTotal();
                         $("#mensaje").html("Información almacenada correctamente"); 
                     }                       
                                   
@@ -335,6 +341,7 @@ $(document).ready(function () {
                         $("#mensaje").html(data); 
                     }else{                
                         $("#p8").html(data); 
+                        calculaTotal();
                         $("#mensaje").html("Información almacenada correctamente"); 
                     }         
                         $("#modalMensaje").modal("show");
@@ -385,6 +392,7 @@ $(document).ready(function () {
                         $("#mensaje").html(data); 
                     }else{                
                         $("#p9").html(data); 
+                        calculaTotal();
                         $("#mensaje").html("Información almacenada correctamente"); 
                     }             
                         $("#modalMensaje").modal("show");
@@ -455,6 +463,7 @@ $(document).ready(function () {
                     else{
                         var puntaje=parseFloat(data)+parseFloat($("#pEvidencias").val());                        
                         $("#p10").html(puntaje); 
+                        calculaTotal();
                         $("#mensaje").html("Información guardada correctamente");            
                         $("#modalMensaje").modal("show");                        
                         if($("#btnEvidencia18").val().includes("Ver")){
@@ -527,6 +536,7 @@ $(document).ready(function () {
                         var aux=data.split("||");
                         $("#tablaCursos").html(aux[0]);
                         $("#p5").html(aux[1]);
+                        calculaTotal();
                     }
                     else{
                         $("#mensaje").html(data);            
@@ -578,6 +588,7 @@ $(document).ready(function () {
                         var aux=data.split("||");
                         $("#tablaAportaciones").html(aux[0]);
                         $("#p6").html(aux[1]);
+                        calculaTotal();
                     }
                     else{
                         $("#mensaje").html(data);            
@@ -629,6 +640,7 @@ $(document).ready(function () {
                         var aux=data.split("||");
                         $("#tablaParticipaciones").html(aux[0]);
                         $("#p7").html(aux[1]);
+                        calculaTotal();
                     }
                     else{
                         $("#mensaje").html(data);            
@@ -670,7 +682,8 @@ $(document).ready(function () {
                     if(data.includes("<tr>")){
                         var aux=data.split("||");
                         $("#tablaTutorias").html(aux[0]);
-                        $("#p8").html(aux[1]);   
+                        $("#p8").html(aux[1]); 
+                        calculaTotal();
                     }
                     else{
                         $("#mensaje").html(data);            
@@ -716,6 +729,7 @@ $(document).ready(function () {
                         var aux=data.split("||");
                         $("#tablaPublicaciones").html(aux[0]);
                         $("#p9").html(aux[1]);
+                        calculaTotal();
                     }
                     else{
                         $("#mensaje").html(data);            
@@ -871,7 +885,8 @@ function borrarCurso(id){
         if(data.includes("<tr>")){
             var aux=data.split("||");
             $("#tablaCursos").html(aux[0]);
-            $("#p5").html(aux[1]);  
+            $("#p5").html(aux[1]); 
+            calculaTotal();
         }
         else{
             $("#mensaje").html(data);            
@@ -903,6 +918,7 @@ function borrarAportacion(id){
             var aux=data.split("||");
             $("#tablaAportaciones").html(aux[0]);
             $("#p6").html(aux[1]);
+            calculaTotal();
         }
         else{
             $("#mensaje").html(data);            
@@ -933,6 +949,7 @@ function borrarParticipacion(id){
             var aux=data.split("||");
             $("#tablaParticipaciones").html(aux[0]);
             $("#p7").html(aux[1]);
+            calculaTotal();
         }
         else{
             $("#mensaje").html(data);            
@@ -951,6 +968,7 @@ function borrarTutoria(id){
             var aux=data.split("||");
             $("#tablaTutorias").html(aux[0]);
             $("#p8").html(aux[1]);
+            calculaTotal();
         }
         else{
             $("#mensaje").html(data);            
@@ -969,6 +987,7 @@ function borrarPublicacion(id){
             var aux=data.split("||");
             $("#tablaPublicaciones").html(aux[0]);
             $("#p9").html(aux[1]);   
+            calculaTotal();
         }
         else{
             $("#mensaje").html(data);            
@@ -1014,11 +1033,21 @@ function finalizar(){
     }
 }
 function finalizarRevision(){
-    if($("#estatus1").attr("completo").includes("true")&&$("#estatus2").attr("completo").includes("true")&&$("#estatus3").attr("completo").includes("true")&&$("#estatus4").attr("completo").includes("true")&&$("#estatus5").attr("completo").includes("true")&&$("#estatus6").attr("completo").includes("true")&&$("#estatus7").attr("completo").includes("true")&&$("#estatus8").attr("completo").includes("true")&&$("#estatus9").attr("completo").includes("true")&&$("#estatus10").attr("completo").includes("true")){
-        $("#observaciones").val($("#aux").val())
-        $("#modalConfirmacion2").modal("show");
+    if($("#aux").val()!=""){
+        if($("#estatus1").attr("completo").includes("true")&&$("#estatus2").attr("completo").includes("true")&&$("#estatus3").attr("completo").includes("true")&&$("#estatus4").attr("completo").includes("true")&&$("#estatus5").attr("completo").includes("true")&&$("#estatus6").attr("completo").includes("true")&&$("#estatus7").attr("completo").includes("true")&&$("#estatus8").attr("completo").includes("true")&&$("#estatus9").attr("completo").includes("true")&&$("#estatus10").attr("completo").includes("true")){
+            $("#observaciones").val($("#aux").val());
+            $("#evaluacion").val($("#total").html());
+            $("#modalConfirmacion2").modal("show");
+        }else{
+            $("#mensaje").html("Hay información pendiente de revisar");            
+            $("#modalMensaje").modal("show");
+        }
     }else{
-        $("#mensaje").html("Hay información pendiente de revisar");            
+        $("#mensaje").html("Es necesario registrar observaciones");            
         $("#modalMensaje").modal("show");
     }
+}
+function calculaTotal(){
+    var total=parseFloat($("#p1").html())+parseFloat($("#p2").html())+parseFloat($("#p3").html())+parseFloat($("#p4").html())+parseFloat($("#p5").html())+parseFloat($("#p6").html())+parseFloat($("#p7").html())+parseFloat($("#p8").html())+parseFloat($("#p9").html())+parseFloat($("#p10").html());
+    $("#total").html(total);
 }

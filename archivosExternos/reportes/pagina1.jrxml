@@ -22,7 +22,7 @@ INNER JOIN
 ON
 	vac.idConvocatoria= conv.id
 INNER JOIN 
-    catPlanteles plantel
+    catplanteles plantel
 ON
 	vac.plantel= plantel.id
 WHERE vac.plantel= $P{p1}    and vac.idConvocatoria=  $P{c1} 
@@ -66,7 +66,7 @@ GROUP BY vac.idConvocatoria]]>
 				<textElement textAlignment="Justified">
 					<font fontName="Montserrat" size="9"/>
 				</textElement>
-				<textFieldExpression><![CDATA["La Unidad de Educación Media Superior Tecnológica Industrial y de Servicios/"+$F{plantelnombre}+ ", con fundamento en el artículo 3o., párrafos séptimo y octavo, de la Constitución Política de los Estados Unidos Mexicanos; 1, 16, fracción XIII, y 64 de la Ley General del Sistema para la Carrera de las Maestras y los Maestros; y el Programa de promoción en el servicio docente por cambio de categoría en educación media superior (Promoción horizontal). "]]></textFieldExpression>
+				<textFieldExpression><![CDATA["La Dirección General de Educación Tecnológica Industrial y de Servicios/"+$F{plantelnombre}+ ", con fundamento en el artículo 3o., párrafos séptimo y octavo, de la Constitución Política de los Estados Unidos Mexicanos; 1, 16, fracción XIII, y 64 de la Ley General del Sistema para la Carrera de las Maestras y los Maestros; y el Programa de promoción en el servicio docente por cambio de categoría en educación media superior (Promoción horizontal). "]]></textFieldExpression>
 			</textField>
 			<textField textAdjust="StretchHeight">
 				<reportElement positionType="Float" x="0" y="116" width="571" height="43" uuid="e4e995c1-9a8f-498e-881e-6e98469730b7">
@@ -75,7 +75,7 @@ GROUP BY vac.idConvocatoria]]>
 				<textElement textAlignment="Justified">
 					<font fontName="Montserrat" size="9"/>
 				</textElement>
-				<textFieldExpression><![CDATA["Al personal docente frente a grupo, que preste sus servicios en la Unidad de Educación Media Superior Tecnológica Industrial y de Servicios (UEMSTIS), en el "+$F{plantelnombre}+", a participar en el proceso de selección para la promoción en el servicio docente por cambio de categoría, correspondiente al Ciclo Escolar 2020-2021, de conformidad con las siguientes"]]></textFieldExpression>
+				<textFieldExpression><![CDATA["Al personal docente frente a grupo, que preste sus servicios en la Dirección General de Educación Tecnológica Industrial y de Servicios (UEMSTIS), en el "+$F{plantelnombre}+", a participar en el proceso de selección para la promoción en el servicio docente por cambio de categoría, correspondiente al Ciclo Escolar 2020-2021, de conformidad con las siguientes"]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement positionType="Float" x="0" y="158" width="571" height="22" uuid="813c39b7-7535-4148-bc32-3a8cee660c06"/>
@@ -184,7 +184,7 @@ GROUP BY vac.idConvocatoria]]>
 				<textElement textAlignment="Justified">
 					<font fontName="Montserrat" size="9"/>
 				</textElement>
-				<text><![CDATA[Acreditar el grado académico establecido por la Unidad de Educación Media Superior Tecnológica Industrial y de Servicios, para la categoría inmediata superior, respecto a la que actualmente ostenta;]]></text>
+				<text><![CDATA[Acreditar el grado académico establecido por la Dirección General de Educación Tecnológica Industrial y de Servicios, para la categoría inmediata superior, respecto a la que actualmente ostenta;]]></text>
 			</staticText>
 			<staticText>
 				<reportElement positionType="Float" x="47" y="528" width="520" height="34" uuid="b2376380-7bbb-4835-bf5c-606b44f2aa9f">
@@ -366,7 +366,7 @@ GROUP BY vac.idConvocatoria]]>
 				<textElement textAlignment="Justified">
 					<font fontName="Montserrat" size="9"/>
 				</textElement>
-				<textFieldExpression><![CDATA["Acreditar haber ejercido la función docente o técnico docente dentro de la Unidad de Educación Media Superior Tecnológica Industrial y de Servicios, en el "+$F{plantelnombre}+" por un periodo mínimo de tres años al momento del registro de su participación en el proceso de selección;"]]></textFieldExpression>
+				<textFieldExpression><![CDATA["Acreditar haber ejercido la función docente o técnico docente dentro de la Dirección General de Educación Tecnológica Industrial y de Servicios, en el "+$F{plantelnombre}+" por un periodo mínimo de tres años al momento del registro de su participación en el proceso de selección;"]]></textFieldExpression>
 			</textField>
 			<textField textAdjust="StretchHeight">
 				<reportElement positionType="Float" x="47" y="341" width="520" height="24" uuid="624fbff6-d743-4270-8225-23be56bc122a">
@@ -376,7 +376,7 @@ GROUP BY vac.idConvocatoria]]>
 				<textElement textAlignment="Justified">
 					<font fontName="Montserrat" size="9"/>
 				</textElement>
-				<textFieldExpression><![CDATA["Estar activo y frente a grupo en el servicio dentro de la Unidad de Educación Media Superior Tecnológica Industrial y de Servicios, en el "+$F{plantelnombre}+" al momento del registro en el proceso de selección;"]]></textFieldExpression>
+				<textFieldExpression><![CDATA["Estar activo y frente a grupo en el servicio dentro de la Dirección General de Educación Tecnológica Industrial y de Servicios, en el "+$F{plantelnombre}+" al momento del registro en el proceso de selección;"]]></textFieldExpression>
 			</textField>
 		</band>
 	</summary>

@@ -26,13 +26,13 @@
     <body style="width:800px; font-family:Verdana;">
         <table >
             <tr>
-                <td valign="top"><img width="200" src="<%=Imagen.muestraImagen(RutaConfig.getRutaCarpeta()+"logos/logoSepSems.jpg")%>"></td>
+                <td valign="top"><img width="200" src="<%=Imagen.muestraImagen(RutaConfig.getRutaCarpeta()+"logos/sems.png")%>"></td>
                 <td style="text-align:center;">                    
                         Convocatoria para el proceso de promoción en el servicio docente por cambio de categoría en Educación Media Superior 
                         <br/>(Promoción horizontal)
                         <br/>Ciclo Escolar 2020-2021                                            
                 </td>
-                <td valign="top"><img width="200" src="<%=Imagen.muestraImagen(RutaConfig.getRutaCarpeta()+"logos/logoUemstis.jpg")%>"></td>
+                <td valign="top"><img width="200" src="<%=Imagen.muestraImagen(RutaConfig.getRutaCarpeta()+"logos/logo_dgeti.jpg")%>"></td>
             </tr>
         </table> 
         <center><p>FICHA DE REGISTRO INCOMPLETO</p></center>
@@ -253,8 +253,8 @@
             </table>
             <p>De acuerdo a la documentación comprobatoria que ha proporcionado como evidencia de los requisitos requeridos para su registro</p>
             <c:if test="${Docente.infoRegistro[25]=='N'}">
-                <p>c. <b>Nombramiento definitivo:</b> documento expedido por la UEMSTIS.
-                   <br/>d. <b>Asistencia a las horas frente al grupo:</b> constancia expedida por el área administrativa o de personal, definida por la UEMSTIS.</p>
+                <p>c. <b>Nombramiento definitivo:</b> documento expedido por la DGETI.
+                   <br/>d. <b>Asistencia a las horas frente al grupo:</b> constancia expedida por el área administrativa o de personal, definida por la DGETI.</p>
             </c:if>
             <c:if test = "${fn:length(Docente.infoRegistro[51])>0}">
                 <fmt:parseNumber var = "nivelCENNI" type = "number" value = "${Docente.infoRegistro[51]}" />

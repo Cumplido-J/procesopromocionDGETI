@@ -97,7 +97,7 @@ public class Servlet_buscar_convocatoria extends HttpServlet {
                 idUsuario = session.getAttribute("idUsuario").toString();
                 rfc = session.getAttribute("rfc").toString();
                 
-                String cadena="";
+                String cadena="SELECT a.*,b.programa, d.idEntidad,e.subsistema,f.entidad,d.plantel FROM convocatoria a join catprogramas b on a.idPrograma=b.id join catplanteles d on a.idPlantel=d.id join catsubsistema e on d.idSubsistema=e.id join catentidades f on d.idEntidad=f.id;";
                 String control_combobox = request.getParameter("control_combobox");
                 String nac1 = request.getParameter("nacional");//AGREGAR---------------------------
                 String per1 = request.getParameter("permiso1");
@@ -123,193 +123,193 @@ public class Servlet_buscar_convocatoria extends HttpServlet {
                         if (entidad.equals("0") && plantel.equals("0") && estatus.equals("0") && publicacion.equals("") && resultados.equals("")) {
                             request.setAttribute("consulta", "0");
                             if(subsistema.equals("1")){
-                                cadena="SELECT a.*,b.programa FROM convocatoria a join catProgramas b on a.idPrograma=b.id WHERE a.idPlantel < 462";
+                                cadena="SELECT a.*,b.programa, d.idEntidad,e.subsistema,f.entidad,d.plantel FROM convocatoria a join catprogramas b on a.idPrograma=b.id join catplanteles d on a.idPlantel=d.id join catsubsistema e on d.idSubsistema=e.id join catentidades f on d.idEntidad=f.id WHERE a.idPlantel < 462";
                             }else if(subsistema.equals("2")){
-                                cadena="SELECT a.*,b.programa FROM convocatoria a join catProgramas b on a.idPrograma=b.id WHERE a.idPlantel >= 462";
+                                cadena="SELECT a.*,b.programa, d.idEntidad,e.subsistema,f.entidad,d.plantel FROM convocatoria a join catprogramas b on a.idPrograma=b.id join catplanteles d on a.idPlantel=d.id join catsubsistema e on d.idSubsistema=e.id join catentidades f on d.idEntidad=f.id WHERE a.idPlantel >= 462";
                             }
 //                        out.print("caso 0"); //nada
                         } else if (entidad.equals("0") && plantel.equals("0") && estatus.equals("0") && publicacion.equals("") && resultados != ("")) {
                             request.setAttribute("consulta", "1");
                              if(subsistema.equals("1")){
-                                cadena="SELECT a.*,b.programa FROM convocatoria a join catProgramas b on a.idPrograma=b.id WHERE a.idPlantel < 462 && resultados='"+ resultados + "'";
+                                cadena="SELECT a.*,b.programa, d.idEntidad,e.subsistema,f.entidad,d.plantel FROM convocatoria a join catprogramas b on a.idPrograma=b.id join catplanteles d on a.idPlantel=d.id join catsubsistema e on d.idSubsistema=e.id join catentidades f on d.idEntidad=f.id WHERE a.idPlantel < 462 && resultados='"+ resultados + "'";
                             }else if(subsistema.equals("2")){
-                                cadena="SELECT a.*,b.programa FROM convocatoria a join catProgramas b on a.idPrograma=b.id WHERE a.idPlantel >= 462 && resultados='" + resultados + "'";
+                                cadena="SELECT a.*,b.programa, d.idEntidad,e.subsistema,f.entidad,d.plantel FROM convocatoria a join catprogramas b on a.idPrograma=b.id join catplanteles d on a.idPlantel=d.id join catsubsistema e on d.idSubsistema=e.id join catentidades f on d.idEntidad=f.id WHERE a.idPlantel >= 462 && resultados='" + resultados + "'";
                             }
 //                        out.print("caso 1");//
                         } else if (entidad.equals("0") && plantel.equals("0") && estatus.equals("0") && publicacion != ("") && resultados.equals("")) {
                             request.setAttribute("consulta", "2");
                             if(subsistema.equals("1")){
-                                cadena="SELECT a.*,b.programa FROM convocatoria a join catProgramas b on a.idPrograma=b.id WHERE a.idPlantel < 462 && publicacion='" + publicacion + "'";
+                                cadena="SELECT a.*,b.programa, d.idEntidad,e.subsistema,f.entidad,d.plantel FROM convocatoria a join catprogramas b on a.idPrograma=b.id join catplanteles d on a.idPlantel=d.id join catsubsistema e on d.idSubsistema=e.id join catentidades f on d.idEntidad=f.id WHERE a.idPlantel < 462 && publicacion='" + publicacion + "'";
                             }else if(subsistema.equals("2")){
-                                cadena="SELECT a.*,b.programa FROM convocatoria a join catProgramas b on a.idPrograma=b.id WHERE a.idPlantel >= 462 && publicacion='" + publicacion + "'";
+                                cadena="SELECT a.*,b.programa, d.idEntidad,e.subsistema,f.entidad,d.plantel FROM convocatoria a join catprogramas b on a.idPrograma=b.id join catplanteles d on a.idPlantel=d.id join catsubsistema e on d.idSubsistema=e.id join catentidades f on d.idEntidad=f.id WHERE a.idPlantel >= 462 && publicacion='" + publicacion + "'";
                             }
 //                        out.print("caso 2");//
                         } else if (entidad.equals("0") && plantel.equals("0") && estatus.equals("0") && publicacion != ("") && resultados != ("")) {
                             request.setAttribute("consulta", "3");
                              if(subsistema.equals("1")){
-                                cadena="SELECT a.*,b.programa FROM convocatoria a join catProgramas b on a.idPrograma=b.id WHERE a.idPlantel < 462 && publicacion='" + publicacion + "' && resultados='" + resultados + "'";
+                                cadena="SELECT a.*,b.programa, d.idEntidad,e.subsistema,f.entidad,d.plantel FROM convocatoria a join catprogramas b on a.idPrograma=b.id join catplanteles d on a.idPlantel=d.id join catsubsistema e on d.idSubsistema=e.id join catentidades f on d.idEntidad=f.id WHERE a.idPlantel < 462 && publicacion='" + publicacion + "' && resultados='" + resultados + "'";
                             }else if(subsistema.equals("2")){
-                                cadena="SELECT a.*,b.programa FROM convocatoria a join catProgramas b on a.idPrograma=b.id WHERE a.idPlantel >= 462 && publicacion='" + publicacion + "' && resultados='" + resultados + "'";
+                                cadena="SELECT a.*,b.programa, d.idEntidad,e.subsistema,f.entidad,d.plantel FROM convocatoria a join catprogramas b on a.idPrograma=b.id join catplanteles d on a.idPlantel=d.id join catsubsistema e on d.idSubsistema=e.id join catentidades f on d.idEntidad=f.id WHERE a.idPlantel >= 462 && publicacion='" + publicacion + "' && resultados='" + resultados + "'";
                             }
 //                        out.print("caso 3");//
                         } else if (entidad.equals("0") && plantel.equals("0") && estatus != ("0") && publicacion.equals("") && resultados.equals("")) {
                             request.setAttribute("consulta", "4");
                             if(subsistema.equals("1")){
-                                cadena="SELECT a.*,b.programa FROM convocatoria a join catProgramas b on a.idPrograma=b.id WHERE a.idPlantel < 462 && estatus='" + estatus + "'";
+                                cadena="SELECT a.*,b.programa, d.idEntidad,e.subsistema,f.entidad,d.plantel FROM convocatoria a join catprogramas b on a.idPrograma=b.id join catplanteles d on a.idPlantel=d.id join catsubsistema e on d.idSubsistema=e.id join catentidades f on d.idEntidad=f.id WHERE a.idPlantel < 462 && estatus='" + estatus + "'";
                             }else if(subsistema.equals("2")){
-                                cadena="SELECT a.*,b.programa FROM convocatoria a join catProgramas b on a.idPrograma=b.id WHERE a.idPlantel >= 462 && estatus='" + estatus + "'";
+                                cadena="SELECT a.*,b.programa, d.idEntidad,e.subsistema,f.entidad,d.plantel FROM convocatoria a join catprogramas b on a.idPrograma=b.id join catplanteles d on a.idPlantel=d.id join catsubsistema e on d.idSubsistema=e.id join catentidades f on d.idEntidad=f.id WHERE a.idPlantel >= 462 && estatus='" + estatus + "'";
                             }
 //                        out.print("caso 4");//
                         } else if (entidad.equals("0") && plantel.equals("0") && estatus != ("0") && publicacion.equals("") && resultados != ("")) {
                             request.setAttribute("consulta", "5");
                             if(subsistema.equals("1")){
-                                cadena="SELECT a.*,b.programa FROM convocatoria a join catProgramas b on a.idPrograma=b.id WHERE a.idPlantel < 462 && estatus='" + estatus + "' && resultados='" + resultados + "'";
+                                cadena="SELECT a.*,b.programa, d.idEntidad,e.subsistema,f.entidad,d.plantel FROM convocatoria a join catprogramas b on a.idPrograma=b.id join catplanteles d on a.idPlantel=d.id join catsubsistema e on d.idSubsistema=e.id join catentidades f on d.idEntidad=f.id WHERE a.idPlantel < 462 && estatus='" + estatus + "' && resultados='" + resultados + "'";
                             }else if(subsistema.equals("2")){
-                                cadena="SELECT a.*,b.programa FROM convocatoria a join catProgramas b on a.idPrograma=b.id WHERE a.idPlantel >= 462 && estatus='" + estatus + "' && resultados='" + resultados + "'";
+                                cadena="SELECT a.*,b.programa, d.idEntidad,e.subsistema,f.entidad,d.plantel FROM convocatoria a join catprogramas b on a.idPrograma=b.id join catplanteles d on a.idPlantel=d.id join catsubsistema e on d.idSubsistema=e.id join catentidades f on d.idEntidad=f.id WHERE a.idPlantel >= 462 && estatus='" + estatus + "' && resultados='" + resultados + "'";
                             }
 //                        out.print("caso 5");//
                         } else if (entidad.equals("0") && plantel.equals("0") && estatus != ("0") && publicacion != ("") && resultados.equals("")) {
                             request.setAttribute("consulta", "6");
                              if(subsistema.equals("1")){
-                                cadena="SELECT a.*,b.programa FROM convocatoria a join catProgramas b on a.idPrograma=b.id WHERE a.idPlantel < 462 && estatus='" + estatus + "' && publicacion='" + publicacion + "'";
+                                cadena="SELECT a.*,b.programa, d.idEntidad,e.subsistema,f.entidad,d.plantel FROM convocatoria a join catprogramas b on a.idPrograma=b.id join catplanteles d on a.idPlantel=d.id join catsubsistema e on d.idSubsistema=e.id join catentidades f on d.idEntidad=f.id WHERE a.idPlantel < 462 && estatus='" + estatus + "' && publicacion='" + publicacion + "'";
                             }else if(subsistema.equals("2")){
-                                cadena="SELECT a.*,b.programa FROM convocatoria a join catProgramas b on a.idPrograma=b.id WHERE a.idPlantel >= 462 && estatus='" + estatus + "' && publicacion='" + publicacion + "'";
+                                cadena="SELECT a.*,b.programa, d.idEntidad,e.subsistema,f.entidad,d.plantel FROM convocatoria a join catprogramas b on a.idPrograma=b.id join catplanteles d on a.idPlantel=d.id join catsubsistema e on d.idSubsistema=e.id join catentidades f on d.idEntidad=f.id WHERE a.idPlantel >= 462 && estatus='" + estatus + "' && publicacion='" + publicacion + "'";
                             }
 //                        out.print("caso 6");//
                         } else if (entidad.equals("0") && plantel.equals("0") && estatus != ("0") && publicacion != ("") && resultados != ("")) {
                             request.setAttribute("consulta", "7");
                              if(subsistema.equals("1")){
-                                cadena="SELECT a.*,b.programa FROM convocatoria a join catProgramas b on a.idPrograma=b.id WHERE a.idPlantel < 462 && estatus='" + estatus + "' && publicacion='" + publicacion + "' && resultados='" + resultados + "'";
+                                cadena="SELECT a.*,b.programa, d.idEntidad,e.subsistema,f.entidad,d.plantel FROM convocatoria a join catprogramas b on a.idPrograma=b.id join catplanteles d on a.idPlantel=d.id join catsubsistema e on d.idSubsistema=e.id join catentidades f on d.idEntidad=f.id WHERE a.idPlantel < 462 && estatus='" + estatus + "' && publicacion='" + publicacion + "' && resultados='" + resultados + "'";
                             }else if(subsistema.equals("2")){
-                                cadena="SELECT a.*,b.programa FROM convocatoria a join catProgramas b on a.idPrograma=b.id WHERE a.idPlantel >= 462 && estatus='" + estatus + "' && publicacion='" + publicacion + "' && resultados='" + resultados + "'";
+                                cadena="SELECT a.*,b.programa, d.idEntidad,e.subsistema,f.entidad,d.plantel FROM convocatoria a join catprogramas b on a.idPrograma=b.id join catplanteles d on a.idPlantel=d.id join catsubsistema e on d.idSubsistema=e.id join catentidades f on d.idEntidad=f.id WHERE a.idPlantel >= 462 && estatus='" + estatus + "' && publicacion='" + publicacion + "' && resultados='" + resultados + "'";
                             }
 //                        out.print("caso 7");//
                         } else if (entidad != ("0") && Integer.parseInt(plantel) != 0 && estatus.equals("0") && publicacion.equals("") && resultados.equals("")) {
                             request.setAttribute("consulta", "8");
                             if(subsistema.equals("1")){
-                                cadena="SELECT a.*,b.programa FROM convocatoria a join catProgramas b on a.idPrograma=b.id WHERE a.idPlantel < 462 && idPlantel='" + plantel + "'";
+                                cadena="SELECT a.*,b.programa, d.idEntidad,e.subsistema,f.entidad,d.plantel FROM convocatoria a join catprogramas b on a.idPrograma=b.id join catplanteles d on a.idPlantel=d.id join catsubsistema e on d.idSubsistema=e.id join catentidades f on d.idEntidad=f.id WHERE a.idPlantel < 462 && idPlantel='" + plantel + "'";
                             }else if(subsistema.equals("2")){
-                                cadena="SELECT a.*,b.programa FROM convocatoria a join catProgramas b on a.idPrograma=b.id WHERE a.idPlantel >= 462 && idPlantel='" + plantel + "'";
+                                cadena="SELECT a.*,b.programa, d.idEntidad,e.subsistema,f.entidad,d.plantel FROM convocatoria a join catprogramas b on a.idPrograma=b.id join catplanteles d on a.idPlantel=d.id join catsubsistema e on d.idSubsistema=e.id join catentidades f on d.idEntidad=f.id WHERE a.idPlantel >= 462 && idPlantel='" + plantel + "'";
                             }
 //                        out.print("caso 8");//
                         } else if (entidad != ("0") && Integer.parseInt(plantel) != 0  && estatus.equals("0") && publicacion.equals("") && resultados != ("")) {
                             request.setAttribute("consulta", "9");
                             if(subsistema.equals("1")){
-                                cadena="SELECT a.*,b.programa FROM convocatoria a join catProgramas b on a.idPrograma=b.id WHERE a.idPlantel < 462 && idPlantel='" + plantel + "' && resultados='" + resultados + "'";
+                                cadena="SELECT a.*,b.programa, d.idEntidad,e.subsistema,f.entidad,d.plantel FROM convocatoria a join catprogramas b on a.idPrograma=b.id join catplanteles d on a.idPlantel=d.id join catsubsistema e on d.idSubsistema=e.id join catentidades f on d.idEntidad=f.id WHERE a.idPlantel < 462 && idPlantel='" + plantel + "' && resultados='" + resultados + "'";
                             }else if(subsistema.equals("2")){
-                                cadena="SELECT a.*,b.programa FROM convocatoria a join catProgramas b on a.idPrograma=b.id WHERE a.idPlantel >= 462 && idPlantel='" + plantel + "' && resultados='" + resultados + "'";
+                                cadena="SELECT a.*,b.programa, d.idEntidad,e.subsistema,f.entidad,d.plantel FROM convocatoria a join catprogramas b on a.idPrograma=b.id join catplanteles d on a.idPlantel=d.id join catsubsistema e on d.idSubsistema=e.id join catentidades f on d.idEntidad=f.id WHERE a.idPlantel >= 462 && idPlantel='" + plantel + "' && resultados='" + resultados + "'";
                             }
 //                        out.print("caso 9");//
                         } else if (entidad != ("0") && Integer.parseInt(plantel) != 0  && estatus.equals("0") && publicacion != ("") && resultados.equals("")) {
                             request.setAttribute("consulta", "10");
                             if(subsistema.equals("1")){
-                                cadena="SELECT a.*,b.programa FROM convocatoria a join catProgramas b on a.idPrograma=b.id WHERE a.idPlantel < 462 && idPlantel='" + plantel + "' && publicacion='" + publicacion + "'";
+                                cadena="SELECT a.*,b.programa, d.idEntidad,e.subsistema,f.entidad,d.plantel FROM convocatoria a join catprogramas b on a.idPrograma=b.id join catplanteles d on a.idPlantel=d.id join catsubsistema e on d.idSubsistema=e.id join catentidades f on d.idEntidad=f.id WHERE a.idPlantel < 462 && idPlantel='" + plantel + "' && publicacion='" + publicacion + "'";
                             }else if(subsistema.equals("2")){
-                                cadena="SELECT a.*,b.programa FROM convocatoria a join catProgramas b on a.idPrograma=b.id WHERE a.idPlantel >= 462 && idPlantel='" + plantel + "' && publicacion='" + publicacion + "'";
+                                cadena="SELECT a.*,b.programa, d.idEntidad,e.subsistema,f.entidad,d.plantel FROM convocatoria a join catprogramas b on a.idPrograma=b.id join catplanteles d on a.idPlantel=d.id join catsubsistema e on d.idSubsistema=e.id join catentidades f on d.idEntidad=f.id WHERE a.idPlantel >= 462 && idPlantel='" + plantel + "' && publicacion='" + publicacion + "'";
                             }
 //                        out.print("caso 10");//
                         } else if (entidad != ("0") && Integer.parseInt(plantel) != 0  && estatus.equals("0") && publicacion != ("") && resultados != ("")) {
                             request.setAttribute("consulta", "11");
                             if(subsistema.equals("1")){
-                                cadena="SELECT a.*,b.programa FROM convocatoria a join catProgramas b on a.idPrograma=b.id WHERE a.idPlantel < 462 && idPlantel='" + plantel + "' && publicacion='" + publicacion + "' && resultados='" + resultados + "'";
+                                cadena="SELECT a.*,b.programa, d.idEntidad,e.subsistema,f.entidad,d.plantel FROM convocatoria a join catprogramas b on a.idPrograma=b.id join catplanteles d on a.idPlantel=d.id join catsubsistema e on d.idSubsistema=e.id join catentidades f on d.idEntidad=f.id WHERE a.idPlantel < 462 && idPlantel='" + plantel + "' && publicacion='" + publicacion + "' && resultados='" + resultados + "'";
                             }else if(subsistema.equals("2")){
-                                cadena="SELECT a.*,b.programa FROM convocatoria a join catProgramas b on a.idPrograma=b.id WHERE a.idPlantel >= 462 && idPlantel='" + plantel + "' && publicacion='" + publicacion + "' && resultados='" + resultados + "'";
+                                cadena="SELECT a.*,b.programa, d.idEntidad,e.subsistema,f.entidad,d.plantel FROM convocatoria a join catprogramas b on a.idPrograma=b.id join catplanteles d on a.idPlantel=d.id join catsubsistema e on d.idSubsistema=e.id join catentidades f on d.idEntidad=f.id WHERE a.idPlantel >= 462 && idPlantel='" + plantel + "' && publicacion='" + publicacion + "' && resultados='" + resultados + "'";
                             }
 //                        out.print("caso 11");//
                         } else if (entidad != ("0") && Integer.parseInt(plantel) != 0  && estatus != ("0") && publicacion.equals("") && resultados.equals("")) {
                             request.setAttribute("consulta", "12");
                             if(subsistema.equals("1")){
-                                cadena="SELECT a.*,b.programa FROM convocatoria a join catProgramas b on a.idPrograma=b.id WHERE a.idPlantel < 462 && idPlantel='" + plantel + "' && estatus='" + estatus + "'";
+                                cadena="SELECT a.*,b.programa, d.idEntidad,e.subsistema,f.entidad,d.plantel FROM convocatoria a join catprogramas b on a.idPrograma=b.id join catplanteles d on a.idPlantel=d.id join catsubsistema e on d.idSubsistema=e.id join catentidades f on d.idEntidad=f.id WHERE a.idPlantel < 462 && idPlantel='" + plantel + "' && estatus='" + estatus + "'";
                             }else if(subsistema.equals("2")){
-                                cadena="SELECT a.*,b.programa FROM convocatoria a join catProgramas b on a.idPrograma=b.id WHERE a.idPlantel >= 462 && idPlantel='" + plantel + "' && estatus='" + estatus + "'";
+                                cadena="SELECT a.*,b.programa, d.idEntidad,e.subsistema,f.entidad,d.plantel FROM convocatoria a join catprogramas b on a.idPrograma=b.id join catplanteles d on a.idPlantel=d.id join catsubsistema e on d.idSubsistema=e.id join catentidades f on d.idEntidad=f.id WHERE a.idPlantel >= 462 && idPlantel='" + plantel + "' && estatus='" + estatus + "'";
                             }
 //                        out.print("caso 12");//
                         } else if (entidad != ("0") && Integer.parseInt(plantel) != 0  && estatus != ("0") && publicacion.equals("") && resultados != ("")) {
                             request.setAttribute("consulta", "13");
                             if(subsistema.equals("1")){
-                                cadena="SELECT a.*,b.programa FROM convocatoria a join catProgramas b on a.idPrograma=b.id WHERE a.idPlantel < 462 && idPlantel='" + plantel + "' && estatus='" + estatus + "' && resultados='" + resultados + "'";
+                                cadena="SELECT a.*,b.programa, d.idEntidad,e.subsistema,f.entidad,d.plantel FROM convocatoria a join catprogramas b on a.idPrograma=b.id join catplanteles d on a.idPlantel=d.id join catsubsistema e on d.idSubsistema=e.id join catentidades f on d.idEntidad=f.id WHERE a.idPlantel < 462 && idPlantel='" + plantel + "' && estatus='" + estatus + "' && resultados='" + resultados + "'";
                             }else if(subsistema.equals("2")){
-                                cadena="SELECT a.*,b.programa FROM convocatoria a join catProgramas b on a.idPrograma=b.id WHERE a.idPlantel >= 462 && idPlantel='" + plantel + "' && estatus='" + estatus + "' && resultados='" + resultados + "'";
+                                cadena="SELECT a.*,b.programa, d.idEntidad,e.subsistema,f.entidad,d.plantel FROM convocatoria a join catprogramas b on a.idPrograma=b.id join catplanteles d on a.idPlantel=d.id join catsubsistema e on d.idSubsistema=e.id join catentidades f on d.idEntidad=f.id WHERE a.idPlantel >= 462 && idPlantel='" + plantel + "' && estatus='" + estatus + "' && resultados='" + resultados + "'";
                             }
 //                        out.print("caso 13");//
                         } else if (entidad != ("0") && Integer.parseInt(plantel) != 0  && estatus != ("0") && publicacion != ("") && resultados.equals("")) {
                             request.setAttribute("consulta", "14");
                             if(subsistema.equals("1")){
-                                cadena="SELECT a.*,b.programa FROM convocatoria a join catProgramas b on a.idPrograma=b.id WHERE a.idPlantel < 462 && idPlantel='" + plantel + "' && estatus='" + estatus + "' && publicacion='" + publicacion + "'";
+                                cadena="SELECT a.*,b.programa, d.idEntidad,e.subsistema,f.entidad,d.plantel FROM convocatoria a join catprogramas b on a.idPrograma=b.id join catplanteles d on a.idPlantel=d.id join catsubsistema e on d.idSubsistema=e.id join catentidades f on d.idEntidad=f.id WHERE a.idPlantel < 462 && idPlantel='" + plantel + "' && estatus='" + estatus + "' && publicacion='" + publicacion + "'";
                             }else if(subsistema.equals("2")){
-                                cadena="SELECT a.*,b.programa FROM convocatoria a join catProgramas b on a.idPrograma=b.id WHERE a.idPlantel >= 462 && idPlantel='" + plantel + "' && estatus='" + estatus + "' && publicacion='" + publicacion + "'";
+                                cadena="SELECT a.*,b.programa, d.idEntidad,e.subsistema,f.entidad,d.plantel FROM convocatoria a join catprogramas b on a.idPrograma=b.id join catplanteles d on a.idPlantel=d.id join catsubsistema e on d.idSubsistema=e.id join catentidades f on d.idEntidad=f.id WHERE a.idPlantel >= 462 && idPlantel='" + plantel + "' && estatus='" + estatus + "' && publicacion='" + publicacion + "'";
                             }
 //                        out.print("caso 14");//
                         } else if (entidad != ("0") && Integer.parseInt(plantel) != 0  && estatus != ("0") && publicacion != ("") && resultados != ("")) {
                             request.setAttribute("consulta", "15");
                             if(subsistema.equals("1")){
-                                cadena="SELECT a.*,b.programa FROM convocatoria a join catProgramas b on a.idPrograma=b.id WHERE a.idPlantel < 462 && idPlantel='" + plantel + "' && estatus='" + estatus + "' && publicacion='" + publicacion + "' && resultados='" + resultados + "'";
+                                cadena="SELECT a.*,b.programa, d.idEntidad,e.subsistema,f.entidad,d.plantel FROM convocatoria a join catprogramas b on a.idPrograma=b.id join catplanteles d on a.idPlantel=d.id join catsubsistema e on d.idSubsistema=e.id join catentidades f on d.idEntidad=f.id WHERE a.idPlantel < 462 && idPlantel='" + plantel + "' && estatus='" + estatus + "' && publicacion='" + publicacion + "' && resultados='" + resultados + "'";
                             }else if(subsistema.equals("2")){
-                                cadena="SELECT a.*,b.programa FROM convocatoria a join catProgramas b on a.idPrograma=b.id WHERE a.idPlantel >= 462 && idPlantel='" + plantel + "' && estatus='" + estatus + "' && publicacion='" + publicacion + "' && resultados='" + resultados + "'";
+                                cadena="SELECT a.*,b.programa, d.idEntidad,e.subsistema,f.entidad,d.plantel FROM convocatoria a join catprogramas b on a.idPrograma=b.id join catplanteles d on a.idPlantel=d.id join catsubsistema e on d.idSubsistema=e.id join catentidades f on d.idEntidad=f.id WHERE a.idPlantel >= 462 && idPlantel='" + plantel + "' && estatus='" + estatus + "' && publicacion='" + publicacion + "' && resultados='" + resultados + "'";
                             }
 //                        out.print("caso 15");//
                         } else if (entidad != ("0") && plantel.equals("0") && estatus.equals("0") && publicacion.equals("") && resultados.equals("")) {
                             request.setAttribute("consulta", "16");
                             if(subsistema.equals("1")){
-                                cadena="SELECT a.*,b.programa, d.idEntidad FROM convocatoria a join catProgramas b on a.idPrograma=b.id join catplanteles d on a.idPlantel=d.id where a.idPlantel < 462 && d.idEntidad='" + entidad + "'";
+                                cadena="SELECT a.*,b.programa, d.idEntidad,e.subsistema,f.entidad,d.plantel FROM convocatoria a join catprogramas b on a.idPrograma=b.id join catplanteles d on a.idPlantel=d.id join catsubsistema e on d.idSubsistema=e.id join catentidades f on d.idEntidad=f.id where a.idPlantel < 462 && d.idEntidad='" + entidad + "'";
                             }else if(subsistema.equals("2")){
-                                cadena="SELECT a.*,b.programa, d.idEntidad FROM convocatoria a join catProgramas b on a.idPrograma=b.id join catplanteles d on a.idPlantel=d.id where a.idPlantel >= 462 && d.idEntidad='" + entidad + "'";
+                                cadena="SELECT a.*,b.programa, d.idEntidad,e.subsistema,f.entidad,d.plantel FROM convocatoria a join catprogramas b on a.idPrograma=b.id join catplanteles d on a.idPlantel=d.id join catsubsistema e on d.idSubsistema=e.id join catentidades f on d.idEntidad=f.id where a.idPlantel >= 462 && d.idEntidad='" + entidad + "'";
                             }
 //                        out.print("caso 16");//
                         } else if (entidad != ("0") && plantel.equals("0") && estatus.equals("0") && publicacion.equals("") && resultados != ("")) {
                             request.setAttribute("consulta", "17");
                             if(subsistema.equals("1")){
-                                cadena="SELECT a.*,b.programa, d.idEntidad FROM convocatoria a join catProgramas b on a.idPrograma=b.id join catplanteles d on a.idPlantel=d.id where a.idPlantel < 462 && d.idEntidad='" + entidad + "' && resultados='" + resultados + "'";
+                                cadena="SELECT a.*,b.programa, d.idEntidad,e.subsistema,f.entidad,d.plantel FROM convocatoria a join catprogramas b on a.idPrograma=b.id join catplanteles d on a.idPlantel=d.id join catsubsistema e on d.idSubsistema=e.id join catentidades f on d.idEntidad=f.id where a.idPlantel < 462 && d.idEntidad='" + entidad + "' && resultados='" + resultados + "'";
                             }else if(subsistema.equals("2")){
-                                cadena="SELECT a.*,b.programa, d.idEntidad FROM convocatoria a join catProgramas b on a.idPrograma=b.id join catplanteles d on a.idPlantel=d.id where a.idPlantel >= 462 && d.idEntidad='" + entidad + "' && resultados='" + resultados + "'";
+                                cadena="SELECT a.*,b.programa, d.idEntidad,e.subsistema,f.entidad,d.plantel FROM convocatoria a join catprogramas b on a.idPrograma=b.id join catplanteles d on a.idPlantel=d.id join catsubsistema e on d.idSubsistema=e.id join catentidades f on d.idEntidad=f.id where a.idPlantel >= 462 && d.idEntidad='" + entidad + "' && resultados='" + resultados + "'";
                             }
 //                        out.print("caso 17");//
                         } else if (entidad != ("0") && plantel.equals("0") && estatus.equals("0") && publicacion != ("") && resultados.equals("")) {
                             request.setAttribute("consulta", "18");
                             if(subsistema.equals("1")){
-                                cadena="SELECT a.*,b.programa, d.idEntidad FROM convocatoria a join catProgramas b on a.idPrograma=b.id join catplanteles d on a.idPlantel=d.id where a.idPlantel < 462 && d.idEntidad='" + entidad + "' && publicacion='" + publicacion + "'";
+                                cadena="SELECT a.*,b.programa, d.idEntidad,e.subsistema,f.entidad,d.plantel FROM convocatoria a join catprogramas b on a.idPrograma=b.id join catplanteles d on a.idPlantel=d.id join catsubsistema e on d.idSubsistema=e.id join catentidades f on d.idEntidad=f.id where a.idPlantel < 462 && d.idEntidad='" + entidad + "' && publicacion='" + publicacion + "'";
                             }else if(subsistema.equals("2")){
-                                cadena="SELECT a.*,b.programa, d.idEntidad FROM convocatoria a join catProgramas b on a.idPrograma=b.id join catplanteles d on a.idPlantel=d.id where a.idPlantel >= 462 && d.idEntidad='" + entidad + "' && publicacion='" + publicacion + "'";
+                                cadena="SELECT a.*,b.programa, d.idEntidad,e.subsistema,f.entidad,d.plantel FROM convocatoria a join catprogramas b on a.idPrograma=b.id join catplanteles d on a.idPlantel=d.id join catsubsistema e on d.idSubsistema=e.id join catentidades f on d.idEntidad=f.id where a.idPlantel >= 462 && d.idEntidad='" + entidad + "' && publicacion='" + publicacion + "'";
                             }
 //                        out.print("caso 17");//
                         } else if (entidad != ("0") && plantel.equals("0") && estatus.equals("0") && publicacion != ("") && resultados != ("")) {
                             request.setAttribute("consulta", "19");
                             if(subsistema.equals("1")){
-                                cadena="SELECT a.*,b.programa, d.idEntidad FROM convocatoria a join catProgramas b on a.idPrograma=b.id join catplanteles d on a.idPlantel=d.id where a.idPlantel < 462 && d.idEntidad='" + entidad + "' && publicacion='" + publicacion + "' && resultados='" + resultados + "'";
+                                cadena="SELECT a.*,b.programa, d.idEntidad,e.subsistema,f.entidad,d.plantel FROM convocatoria a join catprogramas b on a.idPrograma=b.id join catplanteles d on a.idPlantel=d.id join catsubsistema e on d.idSubsistema=e.id join catentidades f on d.idEntidad=f.id where a.idPlantel < 462 && d.idEntidad='" + entidad + "' && publicacion='" + publicacion + "' && resultados='" + resultados + "'";
                             }else if(subsistema.equals("2")){
-                                cadena="SELECT a.*,b.programa, d.idEntidad FROM convocatoria a join catProgramas b on a.idPrograma=b.id join catplanteles d on a.idPlantel=d.id where a.idPlantel >= 462 && d.idEntidad='" + entidad + "' && publicacion='" + publicacion + "' && resultados='" + resultados + "'";
+                                cadena="SELECT a.*,b.programa, d.idEntidad,e.subsistema,f.entidad,d.plantel FROM convocatoria a join catprogramas b on a.idPrograma=b.id join catplanteles d on a.idPlantel=d.id join catsubsistema e on d.idSubsistema=e.id join catentidades f on d.idEntidad=f.id where a.idPlantel >= 462 && d.idEntidad='" + entidad + "' && publicacion='" + publicacion + "' && resultados='" + resultados + "'";
                             }
 //                        out.print("caso 17");//
                         } else if (entidad != ("0") && plantel.equals("0") && estatus != ("0") && publicacion.equals("") && resultados.equals("")) {
                             request.setAttribute("consulta", "20");
                             if(subsistema.equals("1")){
-                                cadena="SELECT a.*,b.programa, d.idEntidad FROM convocatoria a join catProgramas b on a.idPrograma=b.id join catplanteles d on a.idPlantel=d.id where a.idPlantel < 462 && d.idEntidad='" + entidad + "' && estatus='" + estatus + "'";
+                                cadena="SELECT a.*,b.programa, d.idEntidad,e.subsistema,f.entidad,d.plantel FROM convocatoria a join catprogramas b on a.idPrograma=b.id join catplanteles d on a.idPlantel=d.id join catsubsistema e on d.idSubsistema=e.id join catentidades f on d.idEntidad=f.id where a.idPlantel < 462 && d.idEntidad='" + entidad + "' && estatus='" + estatus + "'";
                             }else if(subsistema.equals("2")){
-                                cadena="SELECT a.*,b.programa, d.idEntidad FROM convocatoria a join catProgramas b on a.idPrograma=b.id join catplanteles d on a.idPlantel=d.id where a.idPlantel >= 462 && d.idEntidad='" + entidad + "' && estatus='" + estatus + "'";
+                                cadena="SELECT a.*,b.programa, d.idEntidad,e.subsistema,f.entidad,d.plantel FROM convocatoria a join catprogramas b on a.idPrograma=b.id join catplanteles d on a.idPlantel=d.id join catsubsistema e on d.idSubsistema=e.id join catentidades f on d.idEntidad=f.id where a.idPlantel >= 462 && d.idEntidad='" + entidad + "' && estatus='" + estatus + "'";
                             }
 //                        out.print("caso 16");//
                         } else if (entidad != ("0") && plantel.equals("0") && estatus != ("0") && publicacion.equals("") && resultados != ("")) {
                             request.setAttribute("consulta", "21");
                             if(subsistema.equals("1")){
-                                cadena="SELECT a.*,b.programa, d.idEntidad FROM convocatoria a join catProgramas b on a.idPrograma=b.id join catplanteles d on a.idPlantel=d.id where a.idPlantel < 462 && d.idEntidad='" + entidad + "' && estatus='" + estatus + "' && resultados='" + resultados + "'";
+                                cadena="SELECT a.*,b.programa, d.idEntidad,e.subsistema,f.entidad,d.plantel FROM convocatoria a join catprogramas b on a.idPrograma=b.id join catplanteles d on a.idPlantel=d.id join catsubsistema e on d.idSubsistema=e.id join catentidades f on d.idEntidad=f.id where a.idPlantel < 462 && d.idEntidad='" + entidad + "' && estatus='" + estatus + "' && resultados='" + resultados + "'";
                             }else if(subsistema.equals("2")){
-                                cadena="SELECT a.*,b.programa, d.idEntidad FROM convocatoria a join catProgramas b on a.idPrograma=b.id join catplanteles d on a.idPlantel=d.id where a.idPlantel >= 462 && d.idEntidad='" + entidad + "' && estatus='" + estatus + "' && resultados='" + resultados + "'";
+                                cadena="SELECT a.*,b.programa, d.idEntidad,e.subsistema,f.entidad,d.plantel FROM convocatoria a join catprogramas b on a.idPrograma=b.id join catplanteles d on a.idPlantel=d.id join catsubsistema e on d.idSubsistema=e.id join catentidades f on d.idEntidad=f.id where a.idPlantel >= 462 && d.idEntidad='" + entidad + "' && estatus='" + estatus + "' && resultados='" + resultados + "'";
                             }
 //                        out.print("caso 16");//
                         } else if (entidad != ("0") && plantel.equals("0") && estatus != ("0") && publicacion != ("") && resultados.equals("")) {
                             request.setAttribute("consulta", "22");
                             if(subsistema.equals("1")){
-                                cadena="SELECT a.*,b.programa, d.idEntidad FROM convocatoria a join catProgramas b on a.idPrograma=b.id join catplanteles d on a.idPlantel=d.id where a.idPlantel < 462 && d.idEntidad='" + entidad + "' && estatus='" + estatus + "' && publicacion='" + publicacion + "'";
+                                cadena="SELECT a.*,b.programa, d.idEntidad,e.subsistema,f.entidad,d.plantel FROM convocatoria a join catprogramas b on a.idPrograma=b.id join catplanteles d on a.idPlantel=d.id join catsubsistema e on d.idSubsistema=e.id join catentidades f on d.idEntidad=f.id where a.idPlantel < 462 && d.idEntidad='" + entidad + "' && estatus='" + estatus + "' && publicacion='" + publicacion + "'";
                             }else if(subsistema.equals("2")){
-                                cadena="SELECT a.*,b.programa, d.idEntidad FROM convocatoria a join catProgramas b on a.idPrograma=b.id join catplanteles d on a.idPlantel=d.id where a.idPlantel >= 462 && d.idEntidad='" + entidad + "' && estatus='" + estatus + "' && publicacion='" + publicacion + "'";
+                                cadena="SELECT a.*,b.programa, d.idEntidad,e.subsistema,f.entidad,d.plantel FROM convocatoria a join catprogramas b on a.idPrograma=b.id join catplanteles d on a.idPlantel=d.id join catsubsistema e on d.idSubsistema=e.id join catentidades f on d.idEntidad=f.id where a.idPlantel >= 462 && d.idEntidad='" + entidad + "' && estatus='" + estatus + "' && publicacion='" + publicacion + "'";
                             }
 //                        out.print("caso 16");//
                         } else if (entidad != ("0") && plantel.equals("0") && estatus != ("0") && publicacion != ("") && resultados != ("")) {
                             request.setAttribute("consulta", "23");
                             if(subsistema.equals("1")){
-                                cadena="SELECT a.*,b.programa, d.idEntidad FROM convocatoria a join catProgramas b on a.idPrograma=b.id join catplanteles d on a.idPlantel=d.id where a.idPlantel < 462 && d.idEntidad='" + entidad + "' && estatus='" + estatus + "' && publicacion='" + publicacion + "' && resultados='" + resultados + "'";
+                                cadena="SELECT a.*,b.programa, d.idEntidad,e.subsistema,f.entidad,d.plantel FROM convocatoria a join catprogramas b on a.idPrograma=b.id join catplanteles d on a.idPlantel=d.id join catsubsistema e on d.idSubsistema=e.id join catentidades f on d.idEntidad=f.id where a.idPlantel < 462 && d.idEntidad='" + entidad + "' && estatus='" + estatus + "' && publicacion='" + publicacion + "' && resultados='" + resultados + "'";
                             }else if(subsistema.equals("2")){
-                                cadena="SELECT a.*,b.programa, d.idEntidad FROM convocatoria a join catProgramas b on a.idPrograma=b.id join catplanteles d on a.idPlantel=d.id where a.idPlantel >= 462 && d.idEntidad='" + entidad + "' && estatus='" + estatus + "' && publicacion='" + publicacion + "' && resultados='" + resultados + "'";
+                                cadena="SELECT a.*,b.programa, d.idEntidad,e.subsistema,f.entidad,d.plantel FROM convocatoria a join catprogramas b on a.idPrograma=b.id join catplanteles d on a.idPlantel=d.id join catsubsistema e on d.idSubsistema=e.id join catentidades f on d.idEntidad=f.id where a.idPlantel >= 462 && d.idEntidad='" + entidad + "' && estatus='" + estatus + "' && publicacion='" + publicacion + "' && resultados='" + resultados + "'";
                             }
 //                        out.print("caso 16");//
                         }
@@ -319,129 +319,129 @@ public class Servlet_buscar_convocatoria extends HttpServlet {
                          if (plantel.equals("0") && estatus.equals("0") && publicacion.equals("") && resultados.equals("")) {
                             request.setAttribute("consulta", "0");
                              if(sub.equals("1")){
-                                cadena="SELECT a.*,b.programa, d.idEntidad FROM convocatoria a join catProgramas b on a.idPrograma=b.id join catplanteles d on a.idPlantel=d.id where a.idPlantel < 462 && d.idEntidad='" + ent1 + "'";
+                                cadena="SELECT a.*,b.programa, d.idEntidad,e.subsistema,f.entidad,d.plantel FROM convocatoria a join catprogramas b on a.idPrograma=b.id join catplanteles d on a.idPlantel=d.id join catsubsistema e on d.idSubsistema=e.id join catentidades f on d.idEntidad=f.id where a.idPlantel < 462 && d.idEntidad='" + ent1 + "'";
                             }else if(sub.equals("2")){
-                                cadena="SELECT a.*,b.programa, d.idEntidad FROM convocatoria a join catProgramas b on a.idPrograma=b.id join catplanteles d on a.idPlantel=d.id where a.idPlantel >= 462 && d.idEntidad='" + ent1 + "'";
+                                cadena="SELECT a.*,b.programa, d.idEntidad,e.subsistema,f.entidad,d.plantel FROM convocatoria a join catprogramas b on a.idPrograma=b.id join catplanteles d on a.idPlantel=d.id join catsubsistema e on d.idSubsistema=e.id join catentidades f on d.idEntidad=f.id where a.idPlantel >= 462 && d.idEntidad='" + ent1 + "'";
                             }
 //                        out.print("caso 0"); //nada
                         } else if (plantel.equals("0") && estatus.equals("0") && publicacion.equals("") && resultados != ("")) {
                             request.setAttribute("consulta", "1");
                             if(sub.equals("1")){
-                                cadena="SELECT a.*,b.programa, d.idEntidad FROM convocatoria a join catProgramas b on a.idPrograma=b.id join catplanteles d on a.idPlantel=d.id where a.idPlantel < 462 && d.idEntidad='" + ent1 + "' && resultados='" + resultados + "'";
+                                cadena="SELECT a.*,b.programa, d.idEntidad,e.subsistema,f.entidad,d.plantel FROM convocatoria a join catprogramas b on a.idPrograma=b.id join catplanteles d on a.idPlantel=d.id join catsubsistema e on d.idSubsistema=e.id join catentidades f on d.idEntidad=f.id where a.idPlantel < 462 && d.idEntidad='" + ent1 + "' && resultados='" + resultados + "'";
                             }else if(sub.equals("2")){
-                                cadena="SELECT a.*,b.programa, d.idEntidad FROM convocatoria a join catProgramas b on a.idPrograma=b.id join catplanteles d on a.idPlantel=d.id where a.idPlantel >= 462 && d.idEntidad='" + ent1 + "' && resultados='" + resultados + "'";
+                                cadena="SELECT a.*,b.programa, d.idEntidad,e.subsistema,f.entidad,d.plantel FROM convocatoria a join catprogramas b on a.idPrograma=b.id join catplanteles d on a.idPlantel=d.id join catsubsistema e on d.idSubsistema=e.id join catentidades f on d.idEntidad=f.id where a.idPlantel >= 462 && d.idEntidad='" + ent1 + "' && resultados='" + resultados + "'";
                             }
 //                        out.print("caso 1");//
                         } else if (plantel.equals("0") && estatus.equals("0") && publicacion != ("") && resultados.equals("")) {
                             request.setAttribute("consulta", "2");
                             if(sub.equals("1")){
-                                cadena="SELECT a.*,b.programa, d.idEntidad FROM convocatoria a join catProgramas b on a.idPrograma=b.id join catplanteles d on a.idPlantel=d.id where a.idPlantel < 462 && d.idEntidad='" + ent1 + "' && publicacion='" + publicacion + "'";
+                                cadena="SELECT a.*,b.programa, d.idEntidad,e.subsistema,f.entidad,d.plantel FROM convocatoria a join catprogramas b on a.idPrograma=b.id join catplanteles d on a.idPlantel=d.id join catsubsistema e on d.idSubsistema=e.id join catentidades f on d.idEntidad=f.id where a.idPlantel < 462 && d.idEntidad='" + ent1 + "' && publicacion='" + publicacion + "'";
                             }else if(sub.equals("2")){
-                                cadena="SELECT a.*,b.programa, d.idEntidad FROM convocatoria a join catProgramas b on a.idPrograma=b.id join catplanteles d on a.idPlantel=d.id where a.idPlantel >= 462 && d.idEntidad='" + ent1 + "' && publicacion='" + publicacion + "'";
+                                cadena="SELECT a.*,b.programa, d.idEntidad,e.subsistema,f.entidad,d.plantel FROM convocatoria a join catprogramas b on a.idPrograma=b.id join catplanteles d on a.idPlantel=d.id join catsubsistema e on d.idSubsistema=e.id join catentidades f on d.idEntidad=f.id where a.idPlantel >= 462 && d.idEntidad='" + ent1 + "' && publicacion='" + publicacion + "'";
                             }
 //                        out.print("caso 2");//
                         } else if (plantel.equals("0") && estatus.equals("0") && publicacion != ("") && resultados != ("")) {
                             request.setAttribute("consulta", "3");
                             if(sub.equals("1")){
-                                cadena="SELECT a.*,b.programa, d.idEntidad FROM convocatoria a join catProgramas b on a.idPrograma=b.id join catplanteles d on a.idPlantel=d.id where a.idPlantel < 462 && d.idEntidad='" + ent1 + "' && publicacion='" + publicacion + "' && resultados='" + resultados + "'";
+                                cadena="SELECT a.*,b.programa, d.idEntidad,e.subsistema,f.entidad,d.plantel FROM convocatoria a join catprogramas b on a.idPrograma=b.id join catplanteles d on a.idPlantel=d.id join catsubsistema e on d.idSubsistema=e.id join catentidades f on d.idEntidad=f.id where a.idPlantel < 462 && d.idEntidad='" + ent1 + "' && publicacion='" + publicacion + "' && resultados='" + resultados + "'";
                             }else if(sub.equals("2")){
-                                cadena="SELECT a.*,b.programa, d.idEntidad FROM convocatoria a join catProgramas b on a.idPrograma=b.id join catplanteles d on a.idPlantel=d.id where a.idPlantel >= 462 && d.idEntidad='" + ent1 + "' && publicacion='" + publicacion + "' && resultados='" + resultados + "'";
+                                cadena="SELECT a.*,b.programa, d.idEntidad,e.subsistema,f.entidad,d.plantel FROM convocatoria a join catprogramas b on a.idPrograma=b.id join catplanteles d on a.idPlantel=d.id join catsubsistema e on d.idSubsistema=e.id join catentidades f on d.idEntidad=f.id where a.idPlantel >= 462 && d.idEntidad='" + ent1 + "' && publicacion='" + publicacion + "' && resultados='" + resultados + "'";
                             }
 //                        out.print("caso 3");//
                         } else if (plantel.equals("0") && estatus != ("0") && publicacion.equals("") && resultados.equals("")) {
                             request.setAttribute("consulta", "4");
                             if(sub.equals("1")){
-                                cadena="SELECT a.*,b.programa, d.idEntidad FROM convocatoria a join catProgramas b on a.idPrograma=b.id join catplanteles d on a.idPlantel=d.id where a.idPlantel < 462 && d.idEntidad='" + ent1 + "' && estatus='" + estatus + "'";
+                                cadena="SELECT a.*,b.programa, d.idEntidad,e.subsistema,f.entidad,d.plantel FROM convocatoria a join catprogramas b on a.idPrograma=b.id join catplanteles d on a.idPlantel=d.id join catsubsistema e on d.idSubsistema=e.id join catentidades f on d.idEntidad=f.id where a.idPlantel < 462 && d.idEntidad='" + ent1 + "' && estatus='" + estatus + "'";
                             }else if(sub.equals("2")){
-                                cadena="SELECT a.*,b.programa, d.idEntidad FROM convocatoria a join catProgramas b on a.idPrograma=b.id join catplanteles d on a.idPlantel=d.id where a.idPlantel >= 462 && d.idEntidad='" + ent1 + "' && estatus='" + estatus + "'";
+                                cadena="SELECT a.*,b.programa, d.idEntidad,e.subsistema,f.entidad,d.plantel FROM convocatoria a join catprogramas b on a.idPrograma=b.id join catplanteles d on a.idPlantel=d.id join catsubsistema e on d.idSubsistema=e.id join catentidades f on d.idEntidad=f.id where a.idPlantel >= 462 && d.idEntidad='" + ent1 + "' && estatus='" + estatus + "'";
                             }
 //                        out.print("caso 4");//
                         } else if (plantel.equals("0") && estatus != ("0") && publicacion.equals("") && resultados != ("")) {
                             request.setAttribute("consulta", "5");
                             if(sub.equals("1")){
-                                cadena="SELECT a.*,b.programa, d.idEntidad FROM convocatoria a join catProgramas b on a.idPrograma=b.id join catplanteles d on a.idPlantel=d.id where a.idPlantel < 462 && d.idEntidad='" + ent1 + "' && estatus='" + estatus + "' && resultados='" + resultados + "'";
+                                cadena="SELECT a.*,b.programa, d.idEntidad,e.subsistema,f.entidad,d.plantel FROM convocatoria a join catprogramas b on a.idPrograma=b.id join catplanteles d on a.idPlantel=d.id join catsubsistema e on d.idSubsistema=e.id join catentidades f on d.idEntidad=f.id where a.idPlantel < 462 && d.idEntidad='" + ent1 + "' && estatus='" + estatus + "' && resultados='" + resultados + "'";
                             }else if(sub.equals("2")){
-                                cadena="SELECT a.*,b.programa, d.idEntidad FROM convocatoria a join catProgramas b on a.idPrograma=b.id join catplanteles d on a.idPlantel=d.id where a.idPlantel >= 462 && d.idEntidad='" + ent1 + "' && estatus='" + estatus + "' && resultados='" + resultados + "'";
+                                cadena="SELECT a.*,b.programa, d.idEntidad,e.subsistema,f.entidad,d.plantel FROM convocatoria a join catprogramas b on a.idPrograma=b.id join catplanteles d on a.idPlantel=d.id join catsubsistema e on d.idSubsistema=e.id join catentidades f on d.idEntidad=f.id where a.idPlantel >= 462 && d.idEntidad='" + ent1 + "' && estatus='" + estatus + "' && resultados='" + resultados + "'";
                             }
 //                        out.print("caso 5");//
                         } else if (plantel.equals("0") && estatus != ("0") && publicacion != ("") && resultados.equals("")) {
                             request.setAttribute("consulta", "6");
                             if(sub.equals("1")){
-                                cadena="SELECT a.*,b.programa, d.idEntidad FROM convocatoria a join catProgramas b on a.idPrograma=b.id join catplanteles d on a.idPlantel=d.id where a.idPlantel < 462 && d.idEntidad='" + ent1 + "' && estatus='" + estatus + "' && publicacion='" + publicacion + "'";
+                                cadena="SELECT a.*,b.programa, d.idEntidad,e.subsistema,f.entidad,d.plantel FROM convocatoria a join catprogramas b on a.idPrograma=b.id join catplanteles d on a.idPlantel=d.id join catsubsistema e on d.idSubsistema=e.id join catentidades f on d.idEntidad=f.id where a.idPlantel < 462 && d.idEntidad='" + ent1 + "' && estatus='" + estatus + "' && publicacion='" + publicacion + "'";
                             }else if(sub.equals("2")){
-                                cadena="SELECT a.*,b.programa, d.idEntidad FROM convocatoria a join catProgramas b on a.idPrograma=b.id join catplanteles d on a.idPlantel=d.id where a.idPlantel >= 462 && d.idEntidad='" + ent1 + "' && estatus='" + estatus + "' && publicacion='" + publicacion + "'";
+                                cadena="SELECT a.*,b.programa, d.idEntidad,e.subsistema,f.entidad,d.plantel FROM convocatoria a join catprogramas b on a.idPrograma=b.id join catplanteles d on a.idPlantel=d.id join catsubsistema e on d.idSubsistema=e.id join catentidades f on d.idEntidad=f.id where a.idPlantel >= 462 && d.idEntidad='" + ent1 + "' && estatus='" + estatus + "' && publicacion='" + publicacion + "'";
                             }
 //                        out.print("caso 6");//
                         } else if (plantel.equals("0") && estatus != ("0") && publicacion != ("") && resultados != ("")) {
                             request.setAttribute("consulta", "7");
                             if(sub.equals("1")){
-                                cadena="SELECT a.*,b.programa, d.idEntidad FROM convocatoria a join catProgramas b on a.idPrograma=b.id join catplanteles d on a.idPlantel=d.id where a.idPlantel < 462 && d.idEntidad='" + ent1 + "' && estatus='" + estatus + "' && publicacion='" + publicacion + "' && resultados='" + resultados + "'";
+                                cadena="SELECT a.*,b.programa, d.idEntidad,e.subsistema,f.entidad,d.plantel FROM convocatoria a join catprogramas b on a.idPrograma=b.id join catplanteles d on a.idPlantel=d.id join catsubsistema e on d.idSubsistema=e.id join catentidades f on d.idEntidad=f.id where a.idPlantel < 462 && d.idEntidad='" + ent1 + "' && estatus='" + estatus + "' && publicacion='" + publicacion + "' && resultados='" + resultados + "'";
                             }else if(sub.equals("2")){
-                                cadena="SELECT a.*,b.programa, d.idEntidad FROM convocatoria a join catProgramas b on a.idPrograma=b.id join catplanteles d on a.idPlantel=d.id where a.idPlantel >= 462 && d.idEntidad='" + ent1 + "' && estatus='" + estatus + "' && publicacion='" + publicacion + "' && resultados='" + resultados + "'";
+                                cadena="SELECT a.*,b.programa, d.idEntidad,e.subsistema,f.entidad,d.plantel FROM convocatoria a join catprogramas b on a.idPrograma=b.id join catplanteles d on a.idPlantel=d.id join catsubsistema e on d.idSubsistema=e.id join catentidades f on d.idEntidad=f.id where a.idPlantel >= 462 && d.idEntidad='" + ent1 + "' && estatus='" + estatus + "' && publicacion='" + publicacion + "' && resultados='" + resultados + "'";
                             }
 //                        out.print("caso 7");//
                         } else if (Integer.parseInt(plantel) != 0 && estatus.equals("0") && publicacion.equals("") && resultados.equals("")) {
                             request.setAttribute("consulta", "8");
                             if(sub.equals("1")){
-                                cadena="SELECT a.*,b.programa, d.idEntidad FROM convocatoria a join catProgramas b on a.idPrograma=b.id join catplanteles d on a.idPlantel=d.id where a.idPlantel < 462 && d.idEntidad='" + ent1 + "' && idPlantel='" + plantel + "'";
+                                cadena="SELECT a.*,b.programa, d.idEntidad,e.subsistema,f.entidad,d.plantel FROM convocatoria a join catprogramas b on a.idPrograma=b.id join catplanteles d on a.idPlantel=d.id join catsubsistema e on d.idSubsistema=e.id join catentidades f on d.idEntidad=f.id where a.idPlantel < 462 && d.idEntidad='" + ent1 + "' && idPlantel='" + plantel + "'";
                             }else if(sub.equals("2")){
-                                cadena="SELECT a.*,b.programa, d.idEntidad FROM convocatoria a join catProgramas b on a.idPrograma=b.id join catplanteles d on a.idPlantel=d.id where a.idPlantel >= 462 && d.idEntidad='" + ent1 + "' && idPlantel='" + plantel + "'";
+                                cadena="SELECT a.*,b.programa, d.idEntidad,e.subsistema,f.entidad,d.plantel FROM convocatoria a join catprogramas b on a.idPrograma=b.id join catplanteles d on a.idPlantel=d.id join catsubsistema e on d.idSubsistema=e.id join catentidades f on d.idEntidad=f.id where a.idPlantel >= 462 && d.idEntidad='" + ent1 + "' && idPlantel='" + plantel + "'";
                             }
 //                        out.print("caso 8");//
                         } else if (Integer.parseInt(plantel) != 0  && estatus.equals("0") && publicacion.equals("") && resultados != ("")) {
                             request.setAttribute("consulta", "9");
                             if(sub.equals("1")){
-                                cadena="SELECT a.*,b.programa, d.idEntidad FROM convocatoria a join catProgramas b on a.idPrograma=b.id join catplanteles d on a.idPlantel=d.id where a.idPlantel < 462 && d.idEntidad='" + ent1 + "' && idPlantel='" + plantel + "' && resultados='" + resultados + "'";
+                                cadena="SELECT a.*,b.programa, d.idEntidad,e.subsistema,f.entidad,d.plantel FROM convocatoria a join catprogramas b on a.idPrograma=b.id join catplanteles d on a.idPlantel=d.id join catsubsistema e on d.idSubsistema=e.id join catentidades f on d.idEntidad=f.id where a.idPlantel < 462 && d.idEntidad='" + ent1 + "' && idPlantel='" + plantel + "' && resultados='" + resultados + "'";
                             }else if(sub.equals("2")){
-                                cadena="SELECT a.*,b.programa, d.idEntidad FROM convocatoria a join catProgramas b on a.idPrograma=b.id join catplanteles d on a.idPlantel=d.id where a.idPlantel >= 462 && d.idEntidad='" + ent1 + "' && idPlantel='" + plantel + "' && resultados='" + resultados + "'";
+                                cadena="SELECT a.*,b.programa, d.idEntidad,e.subsistema,f.entidad,d.plantel FROM convocatoria a join catprogramas b on a.idPrograma=b.id join catplanteles d on a.idPlantel=d.id join catsubsistema e on d.idSubsistema=e.id join catentidades f on d.idEntidad=f.id where a.idPlantel >= 462 && d.idEntidad='" + ent1 + "' && idPlantel='" + plantel + "' && resultados='" + resultados + "'";
                             }
 //                        out.print("caso 9");//
                         } else if (Integer.parseInt(plantel) != 0  && estatus.equals("0") && publicacion != ("") && resultados.equals("")) {
                             request.setAttribute("consulta", "10");
                             if(sub.equals("1")){
-                                cadena="SELECT a.*,b.programa, d.idEntidad FROM convocatoria a join catProgramas b on a.idPrograma=b.id join catplanteles d on a.idPlantel=d.id where a.idPlantel < 462 && d.idEntidad='" + ent1 + "' && idPlantel='" + plantel + "' && publicacion='" + publicacion + "'";
+                                cadena="SELECT a.*,b.programa, d.idEntidad,e.subsistema,f.entidad,d.plantel FROM convocatoria a join catprogramas b on a.idPrograma=b.id join catplanteles d on a.idPlantel=d.id join catsubsistema e on d.idSubsistema=e.id join catentidades f on d.idEntidad=f.id where a.idPlantel < 462 && d.idEntidad='" + ent1 + "' && idPlantel='" + plantel + "' && publicacion='" + publicacion + "'";
                             }else if(sub.equals("2")){
-                                cadena="SELECT a.*,b.programa, d.idEntidad FROM convocatoria a join catProgramas b on a.idPrograma=b.id join catplanteles d on a.idPlantel=d.id where a.idPlantel >= 462 && d.idEntidad='" + ent1 + "' && idPlantel='" + plantel + "' && publicacion='" + publicacion + "'";
+                                cadena="SELECT a.*,b.programa, d.idEntidad,e.subsistema,f.entidad,d.plantel FROM convocatoria a join catprogramas b on a.idPrograma=b.id join catplanteles d on a.idPlantel=d.id join catsubsistema e on d.idSubsistema=e.id join catentidades f on d.idEntidad=f.id where a.idPlantel >= 462 && d.idEntidad='" + ent1 + "' && idPlantel='" + plantel + "' && publicacion='" + publicacion + "'";
                             }
 //                        out.print("caso 10");//
                         } else if (Integer.parseInt(plantel) != 0  && estatus.equals("0") && publicacion != ("") && resultados != ("")) {
                             request.setAttribute("consulta", "11");
                             if(sub.equals("1")){
-                                cadena="SELECT a.*,b.programa, d.idEntidad FROM convocatoria a join catProgramas b on a.idPrograma=b.id join catplanteles d on a.idPlantel=d.id where a.idPlantel < 462 && d.idEntidad='" + ent1 + "' && idPlantel='" + plantel + "' && publicacion='" + publicacion + "' && resultados='" + resultados + "'";
+                                cadena="SELECT a.*,b.programa, d.idEntidad,e.subsistema,f.entidad,d.plantel FROM convocatoria a join catprogramas b on a.idPrograma=b.id join catplanteles d on a.idPlantel=d.id join catsubsistema e on d.idSubsistema=e.id join catentidades f on d.idEntidad=f.id where a.idPlantel < 462 && d.idEntidad='" + ent1 + "' && idPlantel='" + plantel + "' && publicacion='" + publicacion + "' && resultados='" + resultados + "'";
                             }else if(sub.equals("2")){
-                                cadena="SELECT a.*,b.programa, d.idEntidad FROM convocatoria a join catProgramas b on a.idPrograma=b.id join catplanteles d on a.idPlantel=d.id where a.idPlantel >= 462 && d.idEntidad='" + ent1 + "' && idPlantel='" + plantel + "' && publicacion='" + publicacion + "' && resultados='" + resultados + "'";
+                                cadena="SELECT a.*,b.programa, d.idEntidad,e.subsistema,f.entidad,d.plantel FROM convocatoria a join catprogramas b on a.idPrograma=b.id join catplanteles d on a.idPlantel=d.id join catsubsistema e on d.idSubsistema=e.id join catentidades f on d.idEntidad=f.id where a.idPlantel >= 462 && d.idEntidad='" + ent1 + "' && idPlantel='" + plantel + "' && publicacion='" + publicacion + "' && resultados='" + resultados + "'";
                             }
 //                        out.print("caso 11");//
                         } else if (Integer.parseInt(plantel) != 0  && estatus != ("0") && publicacion.equals("") && resultados.equals("")) {
                             request.setAttribute("consulta", "12");
                             if(sub.equals("1")){
-                                cadena="SELECT a.*,b.programa, d.idEntidad FROM convocatoria a join catProgramas b on a.idPrograma=b.id join catplanteles d on a.idPlantel=d.id where a.idPlantel < 462 && d.idEntidad='" + ent1 + "' && idPlantel='" + plantel + "' && estatus='" + estatus + "'";
+                                cadena="SELECT a.*,b.programa, d.idEntidad,e.subsistema,f.entidad,d.plantel FROM convocatoria a join catprogramas b on a.idPrograma=b.id join catplanteles d on a.idPlantel=d.id join catsubsistema e on d.idSubsistema=e.id join catentidades f on d.idEntidad=f.id where a.idPlantel < 462 && d.idEntidad='" + ent1 + "' && idPlantel='" + plantel + "' && estatus='" + estatus + "'";
                             }else if(sub.equals("2")){
-                                cadena="SELECT a.*,b.programa, d.idEntidad FROM convocatoria a join catProgramas b on a.idPrograma=b.id join catplanteles d on a.idPlantel=d.id where a.idPlantel >= 462 && d.idEntidad='" + ent1 + "' && idPlantel='" + plantel + "' && estatus='" + estatus + "'";
+                                cadena="SELECT a.*,b.programa, d.idEntidad,e.subsistema,f.entidad,d.plantel FROM convocatoria a join catprogramas b on a.idPrograma=b.id join catplanteles d on a.idPlantel=d.id join catsubsistema e on d.idSubsistema=e.id join catentidades f on d.idEntidad=f.id where a.idPlantel >= 462 && d.idEntidad='" + ent1 + "' && idPlantel='" + plantel + "' && estatus='" + estatus + "'";
                             }
 //                        out.print("caso 12");//
                         } else if (Integer.parseInt(plantel) != 0  && estatus != ("0") && publicacion.equals("") && resultados != ("")) {
                             request.setAttribute("consulta", "13");
                             if(sub.equals("1")){
-                                cadena="SELECT a.*,b.programa, d.idEntidad FROM convocatoria a join catProgramas b on a.idPrograma=b.id join catplanteles d on a.idPlantel=d.id where a.idPlantel < 462 && d.idEntidad='" + ent1 + "' && idPlantel='" + plantel + "' && estatus='" + estatus + "' && resultados='" + resultados + "'";
+                                cadena="SELECT a.*,b.programa, d.idEntidad,e.subsistema,f.entidad,d.plantel FROM convocatoria a join catprogramas b on a.idPrograma=b.id join catplanteles d on a.idPlantel=d.id join catsubsistema e on d.idSubsistema=e.id join catentidades f on d.idEntidad=f.id where a.idPlantel < 462 && d.idEntidad='" + ent1 + "' && idPlantel='" + plantel + "' && estatus='" + estatus + "' && resultados='" + resultados + "'";
                             }else if(sub.equals("2")){
-                                cadena="SELECT a.*,b.programa, d.idEntidad FROM convocatoria a join catProgramas b on a.idPrograma=b.id join catplanteles d on a.idPlantel=d.id where a.idPlantel >= 462 && d.idEntidad='" + ent1 + "' && idPlantel='" + plantel + "' && estatus='" + estatus + "' && resultados='" + resultados + "'";
+                                cadena="SELECT a.*,b.programa, d.idEntidad,e.subsistema,f.entidad,d.plantel FROM convocatoria a join catprogramas b on a.idPrograma=b.id join catplanteles d on a.idPlantel=d.id join catsubsistema e on d.idSubsistema=e.id join catentidades f on d.idEntidad=f.id where a.idPlantel >= 462 && d.idEntidad='" + ent1 + "' && idPlantel='" + plantel + "' && estatus='" + estatus + "' && resultados='" + resultados + "'";
                             }
 //                        out.print("caso 13");//
                         } else if (Integer.parseInt(plantel) != 0  && estatus != ("0") && publicacion != ("") && resultados.equals("")) {
                             request.setAttribute("consulta", "14");
                             if(sub.equals("1")){
-                                cadena="SELECT a.*,b.programa, d.idEntidad FROM convocatoria a join catProgramas b on a.idPrograma=b.id join catplanteles d on a.idPlantel=d.id where a.idPlantel < 462 && d.idEntidad='" + ent1 + "' && idPlantel='" + plantel + "' && estatus='" + estatus + "' && publicacion='" + publicacion + "'";
+                                cadena="SELECT a.*,b.programa, d.idEntidad,e.subsistema,f.entidad,d.plantel FROM convocatoria a join catprogramas b on a.idPrograma=b.id join catplanteles d on a.idPlantel=d.id join catsubsistema e on d.idSubsistema=e.id join catentidades f on d.idEntidad=f.id where a.idPlantel < 462 && d.idEntidad='" + ent1 + "' && idPlantel='" + plantel + "' && estatus='" + estatus + "' && publicacion='" + publicacion + "'";
                             }else if(sub.equals("2")){
-                                cadena="SELECT a.*,b.programa, d.idEntidad FROM convocatoria a join catProgramas b on a.idPrograma=b.id join catplanteles d on a.idPlantel=d.id where a.idPlantel >= 462 && d.idEntidad='" + ent1 + "' && idPlantel='" + plantel + "' && estatus='" + estatus + "' && publicacion='" + publicacion + "'";
+                                cadena="SELECT a.*,b.programa, d.idEntidad,e.subsistema,f.entidad,d.plantel FROM convocatoria a join catprogramas b on a.idPrograma=b.id join catplanteles d on a.idPlantel=d.id join catsubsistema e on d.idSubsistema=e.id join catentidades f on d.idEntidad=f.id where a.idPlantel >= 462 && d.idEntidad='" + ent1 + "' && idPlantel='" + plantel + "' && estatus='" + estatus + "' && publicacion='" + publicacion + "'";
                             }
 //                        out.print("caso 14");//
                         } else if (Integer.parseInt(plantel) != 0  && estatus != ("0") && publicacion != ("") && resultados != ("")) {
                             request.setAttribute("consulta", "15");
                             if(sub.equals("1")){
-                                cadena="SELECT a.*,b.programa, d.idEntidad FROM convocatoria a join catProgramas b on a.idPrograma=b.id join catplanteles d on a.idPlantel=d.id where a.idPlantel < 462 && d.idEntidad='" + ent1 + "' && idPlantel='" + plantel + "' && estatus='" + estatus + "' && publicacion='" + publicacion + "' && resultados='" + resultados + "'";
+                                cadena="SELECT a.*,b.programa, d.idEntidad,e.subsistema,f.entidad,d.plantel FROM convocatoria a join catprogramas b on a.idPrograma=b.id join catplanteles d on a.idPlantel=d.id join catsubsistema e on d.idSubsistema=e.id join catentidades f on d.idEntidad=f.id where a.idPlantel < 462 && d.idEntidad='" + ent1 + "' && idPlantel='" + plantel + "' && estatus='" + estatus + "' && publicacion='" + publicacion + "' && resultados='" + resultados + "'";
                             }else if(sub.equals("2")){
-                                cadena="SELECT a.*,b.programa, d.idEntidad FROM convocatoria a join catProgramas b on a.idPrograma=b.id join catplanteles d on a.idPlantel=d.id where a.idPlantel >= 462 && d.idEntidad='" + ent1 + "' && idPlantel='" + plantel + "' && estatus='" + estatus + "' && publicacion='" + publicacion + "' && resultados='" + resultados + "'";
+                                cadena="SELECT a.*,b.programa, d.idEntidad,e.subsistema,f.entidad,d.plantel FROM convocatoria a join catprogramas b on a.idPrograma=b.id join catplanteles d on a.idPlantel=d.id join catsubsistema e on d.idSubsistema=e.id join catentidades f on d.idEntidad=f.id where a.idPlantel >= 462 && d.idEntidad='" + ent1 + "' && idPlantel='" + plantel + "' && estatus='" + estatus + "' && publicacion='" + publicacion + "' && resultados='" + resultados + "'";
                             }
 //                        out.print("caso 15");//
                         }
@@ -451,65 +451,65 @@ public class Servlet_buscar_convocatoria extends HttpServlet {
                          if (estatus.equals("0") && publicacion.equals("") && resultados.equals("")) {
                             request.setAttribute("consulta", "0");
                              if(sub.equals("1")){
-                                cadena="SELECT a.*,b.programa, d.idEntidad FROM convocatoria a join catProgramas b on a.idPrograma=b.id join catplanteles d on a.idPlantel=d.id where a.idPlantel < 462 && d.idEntidad='" + ent1 + "' && idPlantel='" + pla1 + "'";
+                                cadena="SELECT a.*,b.programa, d.idEntidad,e.subsistema,f.entidad,d.plantel FROM convocatoria a join catprogramas b on a.idPrograma=b.id join catplanteles d on a.idPlantel=d.id join catsubsistema e on d.idSubsistema=e.id join catentidades f on d.idEntidad=f.id where a.idPlantel < 462 && d.idEntidad='" + ent1 + "' && idPlantel='" + pla1 + "'";
                             }else if(sub.equals("2")){
-                                cadena="SELECT a.*,b.programa, d.idEntidad FROM convocatoria a join catProgramas b on a.idPrograma=b.id join catplanteles d on a.idPlantel=d.id where a.idPlantel >= 462 && d.idEntidad='" + ent1 + "' && idPlantel='" + pla1 + "'";
+                                cadena="SELECT a.*,b.programa, d.idEntidad,e.subsistema,f.entidad,d.plantel FROM convocatoria a join catprogramas b on a.idPrograma=b.id join catplanteles d on a.idPlantel=d.id join catsubsistema e on d.idSubsistema=e.id join catentidades f on d.idEntidad=f.id where a.idPlantel >= 462 && d.idEntidad='" + ent1 + "' && idPlantel='" + pla1 + "'";
                             }
 //                        out.print("caso 0"); //nada
                         } else if (estatus.equals("0") && publicacion.equals("") && resultados != ("")) {
                             request.setAttribute("consulta", "1");
                             if(sub.equals("1")){
-                                cadena="SELECT a.*,b.programa, d.idEntidad FROM convocatoria a join catProgramas b on a.idPrograma=b.id join catplanteles d on a.idPlantel=d.id where a.idPlantel < 462 && d.idEntidad='" + ent1 + "' && idPlantel='" + pla1 + "' && resultados='" + resultados + "'";
+                                cadena="SELECT a.*,b.programa, d.idEntidad,e.subsistema,f.entidad,d.plantel FROM convocatoria a join catprogramas b on a.idPrograma=b.id join catplanteles d on a.idPlantel=d.id join catsubsistema e on d.idSubsistema=e.id join catentidades f on d.idEntidad=f.id where a.idPlantel < 462 && d.idEntidad='" + ent1 + "' && idPlantel='" + pla1 + "' && resultados='" + resultados + "'";
                             }else if(sub.equals("2")){
-                                cadena="SELECT a.*,b.programa, d.idEntidad FROM convocatoria a join catProgramas b on a.idPrograma=b.id join catplanteles d on a.idPlantel=d.id where a.idPlantel >= 462 && d.idEntidad='" + ent1 + "' && idPlantel='" + pla1 + "' && resultados='" + resultados + "'";
+                                cadena="SELECT a.*,b.programa, d.idEntidad,e.subsistema,f.entidad,d.plantel FROM convocatoria a join catprogramas b on a.idPrograma=b.id join catplanteles d on a.idPlantel=d.id join catsubsistema e on d.idSubsistema=e.id join catentidades f on d.idEntidad=f.id where a.idPlantel >= 462 && d.idEntidad='" + ent1 + "' && idPlantel='" + pla1 + "' && resultados='" + resultados + "'";
                             }
 //                        out.print("caso 1");//
                         } else if (estatus.equals("0") && publicacion != ("") && resultados.equals("")) {
                             request.setAttribute("consulta", "2");
                              if(sub.equals("1")){
-                                cadena="SELECT a.*,b.programa, d.idEntidad FROM convocatoria a join catProgramas b on a.idPrograma=b.id join catplanteles d on a.idPlantel=d.id where a.idPlantel < 462 && d.idEntidad='" + ent1 + "' && idPlantel='" + pla1 + "' && publicacion='" + publicacion + "'";
+                                cadena="SELECT a.*,b.programa, d.idEntidad,e.subsistema,f.entidad,d.plantel FROM convocatoria a join catprogramas b on a.idPrograma=b.id join catplanteles d on a.idPlantel=d.id join catsubsistema e on d.idSubsistema=e.id join catentidades f on d.idEntidad=f.id where a.idPlantel < 462 && d.idEntidad='" + ent1 + "' && idPlantel='" + pla1 + "' && publicacion='" + publicacion + "'";
                             }else if(sub.equals("2")){
-                                cadena="SELECT a.*,b.programa, d.idEntidad FROM convocatoria a join catProgramas b on a.idPrograma=b.id join catplanteles d on a.idPlantel=d.id where a.idPlantel >= 462 && d.idEntidad='" + ent1 + "' && idPlantel='" + pla1 + "' && publicacion='" + publicacion + "'";
+                                cadena="SELECT a.*,b.programa, d.idEntidad,e.subsistema,f.entidad,d.plantel FROM convocatoria a join catprogramas b on a.idPrograma=b.id join catplanteles d on a.idPlantel=d.id join catsubsistema e on d.idSubsistema=e.id join catentidades f on d.idEntidad=f.id where a.idPlantel >= 462 && d.idEntidad='" + ent1 + "' && idPlantel='" + pla1 + "' && publicacion='" + publicacion + "'";
                             }
 //                        out.print("caso 2");//
                         } else if (estatus.equals("0") && publicacion != ("") && resultados != ("")) {
                             request.setAttribute("consulta", "3");
                              if(sub.equals("1")){
-                                cadena="SELECT a.*,b.programa, d.idEntidad FROM convocatoria a join catProgramas b on a.idPrograma=b.id join catplanteles d on a.idPlantel=d.id where a.idPlantel < 462 && d.idEntidad='" + ent1 + "' && idPlantel='" + pla1 + "' && publicacion='" + publicacion + "' && resultados='" + resultados + "'";
+                                cadena="SELECT a.*,b.programa, d.idEntidad,e.subsistema,f.entidad,d.plantel FROM convocatoria a join catprogramas b on a.idPrograma=b.id join catplanteles d on a.idPlantel=d.id join catsubsistema e on d.idSubsistema=e.id join catentidades f on d.idEntidad=f.id where a.idPlantel < 462 && d.idEntidad='" + ent1 + "' && idPlantel='" + pla1 + "' && publicacion='" + publicacion + "' && resultados='" + resultados + "'";
                             }else if(sub.equals("2")){
-                                cadena="SELECT a.*,b.programa, d.idEntidad FROM convocatoria a join catProgramas b on a.idPrograma=b.id join catplanteles d on a.idPlantel=d.id where a.idPlantel >= 462 && d.idEntidad='" + ent1 + "' && idPlantel='" + pla1 + "' && publicacion='" + publicacion + "' && resultados='" + resultados + "'";
+                                cadena="SELECT a.*,b.programa, d.idEntidad,e.subsistema,f.entidad,d.plantel FROM convocatoria a join catprogramas b on a.idPrograma=b.id join catplanteles d on a.idPlantel=d.id join catsubsistema e on d.idSubsistema=e.id join catentidades f on d.idEntidad=f.id where a.idPlantel >= 462 && d.idEntidad='" + ent1 + "' && idPlantel='" + pla1 + "' && publicacion='" + publicacion + "' && resultados='" + resultados + "'";
                             }
 //                        out.print("caso 3");//
                         } else if (estatus != ("0") && publicacion.equals("") && resultados.equals("")) {
                             request.setAttribute("consulta", "4");
                              if(sub.equals("1")){
-                                cadena="SELECT a.*,b.programa, d.idEntidad FROM convocatoria a join catProgramas b on a.idPrograma=b.id join catplanteles d on a.idPlantel=d.id where a.idPlantel < 462 && d.idEntidad='" + ent1 + "' && idPlantel='" + pla1 + "' && estatus='" + estatus + "'";
+                                cadena="SELECT a.*,b.programa, d.idEntidad,e.subsistema,f.entidad,d.plantel FROM convocatoria a join catprogramas b on a.idPrograma=b.id join catplanteles d on a.idPlantel=d.id join catsubsistema e on d.idSubsistema=e.id join catentidades f on d.idEntidad=f.id where a.idPlantel < 462 && d.idEntidad='" + ent1 + "' && idPlantel='" + pla1 + "' && estatus='" + estatus + "'";
                             }else if(sub.equals("2")){
-                                cadena="SELECT a.*,b.programa, d.idEntidad FROM convocatoria a join catProgramas b on a.idPrograma=b.id join catplanteles d on a.idPlantel=d.id where a.idPlantel >= 462 && d.idEntidad='" + ent1 + "' && idPlantel='" + pla1 + "' && estatus='" + estatus + "'";
+                                cadena="SELECT a.*,b.programa, d.idEntidad,e.subsistema,f.entidad,d.plantel FROM convocatoria a join catprogramas b on a.idPrograma=b.id join catplanteles d on a.idPlantel=d.id join catsubsistema e on d.idSubsistema=e.id join catentidades f on d.idEntidad=f.id where a.idPlantel >= 462 && d.idEntidad='" + ent1 + "' && idPlantel='" + pla1 + "' && estatus='" + estatus + "'";
                             }
 //                        out.print("caso 4");//
                         } else if (estatus != ("0") && publicacion.equals("") && resultados != ("")) {
                             request.setAttribute("consulta", "5");
                              if(sub.equals("1")){
-                                cadena="SELECT a.*,b.programa, d.idEntidad FROM convocatoria a join catProgramas b on a.idPrograma=b.id join catplanteles d on a.idPlantel=d.id where a.idPlantel < 462 && d.idEntidad='" + ent1 + "' && idPlantel='" + pla1 + "' && estatus='" + estatus + "' && resultados='" + resultados + "'";
+                                cadena="SELECT a.*,b.programa, d.idEntidad,e.subsistema,f.entidad,d.plantel FROM convocatoria a join catprogramas b on a.idPrograma=b.id join catplanteles d on a.idPlantel=d.id join catsubsistema e on d.idSubsistema=e.id join catentidades f on d.idEntidad=f.id where a.idPlantel < 462 && d.idEntidad='" + ent1 + "' && idPlantel='" + pla1 + "' && estatus='" + estatus + "' && resultados='" + resultados + "'";
                             }else if(sub.equals("2")){
-                                cadena="SELECT a.*,b.programa, d.idEntidad FROM convocatoria a join catProgramas b on a.idPrograma=b.id join catplanteles d on a.idPlantel=d.id where a.idPlantel >= 462 && d.idEntidad='" + ent1 + "' && idPlantel='" + pla1 + "' && estatus='" + estatus + "' && resultados='" + resultados + "'";
+                                cadena="SELECT a.*,b.programa, d.idEntidad,e.subsistema,f.entidad,d.plantel FROM convocatoria a join catprogramas b on a.idPrograma=b.id join catplanteles d on a.idPlantel=d.id join catsubsistema e on d.idSubsistema=e.id join catentidades f on d.idEntidad=f.id where a.idPlantel >= 462 && d.idEntidad='" + ent1 + "' && idPlantel='" + pla1 + "' && estatus='" + estatus + "' && resultados='" + resultados + "'";
                             }
 //                        out.print("caso 5");//
                         } else if (estatus != ("0") && publicacion != ("") && resultados.equals("")) {
                             request.setAttribute("consulta", "6");
                              if(sub.equals("1")){
-                                cadena="SELECT a.*,b.programa, d.idEntidad FROM convocatoria a join catProgramas b on a.idPrograma=b.id join catplanteles d on a.idPlantel=d.id where a.idPlantel < 462 && d.idEntidad='" + ent1 + "' && idPlantel='" + pla1 + "' && estatus='" + estatus + "' && publicacion='" + publicacion + "'";
+                                cadena="SELECT a.*,b.programa, d.idEntidad,e.subsistema,f.entidad,d.plantel FROM convocatoria a join catprogramas b on a.idPrograma=b.id join catplanteles d on a.idPlantel=d.id join catsubsistema e on d.idSubsistema=e.id join catentidades f on d.idEntidad=f.id where a.idPlantel < 462 && d.idEntidad='" + ent1 + "' && idPlantel='" + pla1 + "' && estatus='" + estatus + "' && publicacion='" + publicacion + "'";
                             }else if(sub.equals("2")){
-                                cadena="SELECT a.*,b.programa, d.idEntidad FROM convocatoria a join catProgramas b on a.idPrograma=b.id join catplanteles d on a.idPlantel=d.id where a.idPlantel >= 462 && d.idEntidad='" + ent1 + "' && idPlantel='" + pla1 + "' && estatus='" + estatus + "' && publicacion='" + publicacion + "'";
+                                cadena="SELECT a.*,b.programa, d.idEntidad,e.subsistema,f.entidad,d.plantel FROM convocatoria a join catprogramas b on a.idPrograma=b.id join catplanteles d on a.idPlantel=d.id join catsubsistema e on d.idSubsistema=e.id join catentidades f on d.idEntidad=f.id where a.idPlantel >= 462 && d.idEntidad='" + ent1 + "' && idPlantel='" + pla1 + "' && estatus='" + estatus + "' && publicacion='" + publicacion + "'";
                             }
 //                        out.print("caso 6");//
                         } else if (estatus != ("0") && publicacion != ("") && resultados != ("")) {
                             request.setAttribute("consulta", "7");
                              if(sub.equals("1")){
-                                cadena="SELECT a.*,b.programa, d.idEntidad FROM convocatoria a join catProgramas b on a.idPrograma=b.id join catplanteles d on a.idPlantel=d.id where a.idPlantel < 462 && d.idEntidad='" + ent1 + "' && idPlantel='" + pla1 + "' && estatus='" + estatus + "' && publicacion='" + publicacion + "' && resultados='" + resultados + "'";
+                                cadena="SELECT a.*,b.programa, d.idEntidad,e.subsistema,f.entidad,d.plantel FROM convocatoria a join catprogramas b on a.idPrograma=b.id join catplanteles d on a.idPlantel=d.id join catsubsistema e on d.idSubsistema=e.id join catentidades f on d.idEntidad=f.id where a.idPlantel < 462 && d.idEntidad='" + ent1 + "' && idPlantel='" + pla1 + "' && estatus='" + estatus + "' && publicacion='" + publicacion + "' && resultados='" + resultados + "'";
                             }else if(sub.equals("2")){
-                                cadena="SELECT a.*,b.programa, d.idEntidad FROM convocatoria a join catProgramas b on a.idPrograma=b.id join catplanteles d on a.idPlantel=d.id where a.idPlantel >= 462 && d.idEntidad='" + ent1 + "' && idPlantel='" + pla1 + "' && estatus='" + estatus + "' && publicacion='" + publicacion + "' && resultados='" + resultados + "'";
+                                cadena="SELECT a.*,b.programa, d.idEntidad,e.subsistema,f.entidad,d.plantel FROM convocatoria a join catprogramas b on a.idPrograma=b.id join catplanteles d on a.idPlantel=d.id join catsubsistema e on d.idSubsistema=e.id join catentidades f on d.idEntidad=f.id where a.idPlantel >= 462 && d.idEntidad='" + ent1 + "' && idPlantel='" + pla1 + "' && estatus='" + estatus + "' && publicacion='" + publicacion + "' && resultados='" + resultados + "'";
                             }
 //                        out.print("caso 7");//
                         } 

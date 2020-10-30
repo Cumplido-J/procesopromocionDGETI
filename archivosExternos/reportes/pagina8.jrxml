@@ -21,7 +21,7 @@ INNER JOIN
 ON
 	vac.idConvocatoria= conv.id
 INNER JOIN 
-    catPlanteles plantel
+    catplanteles plantel
 ON
 	vac.plantel= plantel.id
 WHERE vac.plantel=  $P{p7}  and vac.idConvocatoria= $P{c7} 
@@ -52,7 +52,7 @@ GROUP BY vac.idConvocatoria]]>
 		<property name="com.jaspersoft.studio.field.label" value="publicacion"/>
 	</field>
 	<variable name="p1i" class="java.lang.String">
-		<variableExpression><![CDATA[$V{p1i}+"La Unidad de Educación Media Superior Tecnológica Industrial y de Servicios/"]]></variableExpression>
+		<variableExpression><![CDATA[$V{p1i}+"La Dirección General de Educación Tecnológica Industrial y de Servicios/"]]></variableExpression>
 		<initialValueExpression><![CDATA[""]]></initialValueExpression>
 	</variable>
 	<variable name="p1f" class="java.lang.String">

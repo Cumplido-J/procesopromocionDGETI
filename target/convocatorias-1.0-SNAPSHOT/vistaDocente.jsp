@@ -11,7 +11,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Unidad de Educación Media Superior Tecnológica Industrial y de Servicios | gob.mx</title>
+        <title>DGETI | gob.mx</title>
         <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="css/estilos.css">
         <link href="/favicon.ico" rel="shortcut icon">
@@ -32,17 +32,15 @@
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </button>
-                        <a class="navbar-brand" href="/">UEMSTIS</a>
+                        <a class="navbar-brand" href="/">DGETI</a>
                     </div>
 
                     <div class="collapse navbar-collapse" id="subenlaces">
                         <ul class="nav navbar-nav navbar-right">
                             <li aling="navbar-center">
-                                <a class="text-uppercase">${Docente.infoRegistro[1]}
-                                &nbsp;
-                                ${Docente.infoRegistro[2]}
-                                &nbsp;
-                                ${Docente.infoRegistro[3]} (Consulta información)</a>
+                                <a class="text-uppercase">
+                                    <%=session.getAttribute("nombre").toString()%>                                    
+                                </a>
                             </li>
                             <li><a href="busquedaDocente.jsp">Regresar</a></li>
                             <li><a href="Servlet_cerrarsesion">Cerrar Sesión</a></li>
@@ -58,11 +56,17 @@
             
             <header class="headerart">
                 <div class="titulo">
-                    <p>Unidad de Educación Media Superior Tecnológica Industrial y de Servicios</p>
+                    <p>Dirección General de Educación Tecnológica Industrial y de Servicios</p>
                 </div>
                 <div class="texto-principalart margen-interno">
                     <p>Programa de Promoción en el Servicio Docente en Educación Media Superior</p>
+                    
                 </div>
+                <p>${Docente.infoRegistro[1]}
+                                &nbsp;
+                                ${Docente.infoRegistro[2]}
+                                &nbsp;
+                                ${Docente.infoRegistro[3]} (Consulta información)</p>
             </header>
             
             <c:set var="finIncompleto" value="false"></c:set>            

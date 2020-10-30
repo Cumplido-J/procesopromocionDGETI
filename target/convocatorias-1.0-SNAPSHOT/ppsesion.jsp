@@ -11,7 +11,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Unidad de Educación Media Superior Tecnológica Industrial y de Servicios | gob.mx</title>
+        <title>DGETI | gob.mx</title>
         <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="css/estilos.css">
         <link href="/favicon.ico" rel="shortcut icon">
@@ -32,7 +32,7 @@
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </button>
-                        <a class="navbar-brand" href="/">UEMSTIS</a>
+                        <a class="navbar-brand" href="/">DGETI</a>
                     </div>
 
                     <div class="collapse navbar-collapse" id="subenlaces">
@@ -57,7 +57,7 @@
             
             <header class="headerart">
                 <div class="titulo">
-                    <p>Unidad de Educación Media Superior Tecnológica Industrial y de Servicios</p>
+                    <p>Dirección General de Educación Tecnológica Industrial y de Servicios</p>
                 </div>
                 <div class="texto-principalart margen-interno">
                     <p>Programa de Promoción en el Servicio Docente en Educación Media Superior</p>
@@ -65,7 +65,7 @@
             </header>
             
             <c:set var="finIncompleto" value="false"></c:set>            
-            <c:if test = "${Docente.infoRegistro[61]==null}">  <!--Si no ha finalizado el registro-->
+            <c:if test = "${Docente.infoRegistro[61]==null||Docente.infoRegistro[66]=='1'}">  <!--Si no ha finalizado el registro-->
                 <c:set var="disabled1" value=""></c:set>
                 <c:set var="hidden1" value="hidden"></c:set>
                 <c:set var="disabled2" value="disabled"></c:set>
@@ -75,7 +75,7 @@
                 <c:set var="disabled4" value="disabled"></c:set>
                 
             </c:if>
-            <c:if test = "${Docente.infoRegistro[66]!='1'}">  <!--Si ya finalizó el registro-->
+            <c:if test = "${Docente.infoRegistro[61]!=null&&Docente.infoRegistro[66]!='1'}">  <!--Si ya finalizó el registro-->
                 <c:set var="disabled1" value="disabled"></c:set>
                 <c:set var="hidden1" value=""></c:set>
                 <c:if test = "${Docente.infoRegistro[66]=='3'}"><!--Si el registro finalizó como incompleto-->
@@ -96,7 +96,7 @@
                     <c:set var="disabled3" value=""></c:set>
                     <c:set var="hidden3" value="hidden"></c:set>
                 </c:if>
-                <c:if test = "${Docente.infoRegistro[66]=='6'||Docente.infoRegistro[66]=='7'}"><!--Si el registro finalizó como incompleto-->
+                <c:if test = "${Integer.parseInt(Docente.infoRegistro[66])>=6}"><!--Si el registro finalizó como incompleto-->
                     <c:set var="disabled3" value="disabled"></c:set>
                     <c:set var="hidden3" value=""></c:set>
                     <c:set var="disabled4" value=""></c:set>                    

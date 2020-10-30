@@ -10,7 +10,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Dirección General de Educación Tecnológica Industrial y de Servicios | gob.mx</title>
+        <title>DGETI | gob.mx</title>
         <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximun-scale=1.0, minimun-scale=1.0">
         <link rel="stylesheet" href="css/all.css">
         <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap" rel="stylesheet">
@@ -351,8 +351,10 @@
                                     String nombre_jornada = "";
 
                                     if (request.getAttribute("cadena") == null) {
+                                        cadena="SELECT a.*,b.programa, d.idEntidad,e.subsistema,f.entidad,d.plantel FROM convocatoria a join catprogramas b on a.idPrograma=b.id join catplanteles d on a.idPlantel=d.id join catsubsistema e on d.idSubsistema=e.id join catentidades f on d.idEntidad=f.id;";
                                     } else {
                                         cadena = request.getAttribute("cadena").toString();
+                                        System.out.println("cadena="+cadena);
                                     }
 
                                     elegir1 = String.valueOf(request.getAttribute("opc"));
@@ -484,21 +486,19 @@
                                     <td align="center">
                                         <div class="datos_tabla"> 
                                             <%
-                                                nombre_subsistema = cn.buscarsubsistema("SELECT * FROM catsubsistema WHERE id='" + request.getAttribute("subsistema") + "'");
-                                                if (nombre_subsistema == null) {
-                                                    out.print("");
-                                                } else {
-                                                    out.print(nombre_subsistema);
-                                                }
+                                                
+                                                out.print(rs20.getString("subsistema"));
                                             %>
                                     </td>
                                     <td align="center">
                                         <div class="datos_tabla"> 
-                                            <% if (rs20.getString("programa") == null) {
-                                                    out.print("");
+                                            <% 
+                                                out.println(rs20.getString("entidad")+"-"+rs20.getString("plantel")+"<br/>");
+                                                if (rs20.getString("programa") == null) {
+                                                    out.println("");
                                                 } else {
-                                                    out.print(rs20.getString("programa"));
-                                                }
+                                                    out.println(rs20.getString("programa"));
+                                                }                                                
                                             %>
                                         </div>
                                     </td>
@@ -718,7 +718,7 @@
                                 </thead>
                                 <%
                                     String elegir1 = "0";
-                                    String cadena = "SELECT a.*,b.programa FROM convocatoria a join catProgramas b on a.idPrograma=b.id WHERE a.id != 0";
+                                    String cadena = "";
                                     String nombre_subsistema = "";
                                     String nombre_entidad = "";
                                     String nombre_plantel = "";

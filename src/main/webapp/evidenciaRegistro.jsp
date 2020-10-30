@@ -14,7 +14,7 @@ and open the template in the editor.
 -->
 <html lang="es">
     <head>
-        <title>Evidencias Registro</title>
+        <title>DGETI | sep.gob.mx</title>
         <meta charset="UTF-8"/>
         <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>        
@@ -36,7 +36,7 @@ and open the template in the editor.
                       <span class="icon-bar"></span>
                       <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="/">UEMSTIS</a>
+                    <a class="navbar-brand" href="/">DGETI</a>
                   </div>
                   <div class="collapse navbar-collapse" id="subenlaces">
                     <ul class="nav navbar-nav navbar-right">
@@ -49,7 +49,7 @@ and open the template in the editor.
             <!--FIN Barra navegación UEMSTIS-->                
             <!--Barra encabezado-->
             <div class="encabezado row text-center">
-                <p>Unidad de Educación Media Superior Tecnológica Industrial y de Servicios</p>
+                <p>Dirección General de Educación Tecnológica Industrial y de Servicios</p>
             </div>
             <!--FIN Barra encabezado-->
             <div class="container">

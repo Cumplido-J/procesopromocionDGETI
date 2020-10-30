@@ -5,7 +5,7 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <title>Unidad de Educación Media Superior Tecnológica Industrial y de Servicios | gob.mx</title>
+        <title>DGETI | gob.mx</title>
         <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap" rel="stylesheet">
         <link href="/favicon.ico" rel="shortcut icon">
         <link href="https://framework-gb.cdn.gob.mx/assets/styles/main.css" rel="stylesheet">

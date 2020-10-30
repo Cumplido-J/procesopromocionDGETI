@@ -11,7 +11,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Revisión de criterios de valoración</title>
+        <title>DGETI | sep.gob.mx</title>
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">        
@@ -32,7 +32,7 @@
                       <span class="icon-bar"></span>
                       <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="/">UEMSTIS</a>
+                    <a class="navbar-brand" href="/">DGETI</a>
                   </div>
                   <div class="collapse navbar-collapse" id="subenlaces">
                     <ul class="nav navbar-nav navbar-right">      
@@ -52,7 +52,7 @@
             <!--FIN Barra navegación UEMSTIS-->                
             <!--Barra encabezado-->
             <div class="encabezado row text-center">
-                <p>Unidad de Educación Media Superior Tecnológica Industrial y de Servicios</p>
+                <p>Dirección General de Educación Tecnológica Industrial y de Servicios</p>
             </div>
             <!--FIN Barra encabezado-->
             <div class="container">
@@ -186,9 +186,9 @@
                             <div class='table-responsive'>
                                 <table class='table table-condensed table-bordered'>
                                     <tr><th>Encuesta</th><th><c:if test="${vistaAdmin}">Puntaje</c:if><c:if test="${!vistaAdmin}">Estatus</c:if></th></tr>
-                                    <tr><td>A madres y padres de familia o tutores</td><td><c:if test="${vistaAdmin}">${puntajeEncuestas[2]}</c:if><c:if test="${!vistaAdmin}">Evaluado</c:if></td></tr>
-                                    <tr><td>A alumnos</td><td><c:if test="${vistaAdmin}">${puntajeEncuestas[3]}</c:if><c:if test="${!vistaAdmin}">Evaluado</c:if></td></tr>
-                                    <tr><td>A compañeros de trabajo</td><td><c:if test="${vistaAdmin}">${puntajeEncuestas[4]}</c:if><c:if test="${!vistaAdmin}">Evaluado</c:if></td></tr>
+                                    <tr><td>A madres y padres de familia o tutores</td><td><c:if test="${vistaAdmin}">${puntajeEncuestas[4]}</c:if><c:if test="${!vistaAdmin}">Evaluado</c:if></td></tr>
+                                    <tr><td>A alumnos</td><td><c:if test="${vistaAdmin}">${puntajeEncuestas[2]}</c:if><c:if test="${!vistaAdmin}">Evaluado</c:if></td></tr>
+                                    <tr><td>A compañeros de trabajo</td><td><c:if test="${vistaAdmin}">${puntajeEncuestas[3]}</c:if><c:if test="${!vistaAdmin}">Evaluado</c:if></td></tr>
                                 </table>
                             </div>
                         </div>
@@ -717,7 +717,7 @@
                   </div>
               <div class="container text-center" style="margin-bottom:15px;"> 
                     <div class="form-group col-md-12 text-left"> 
-                        <!--<label class="control-label text-danger">Puntaje total:<span id="total">${total}</span></label><br/>-->
+                        <label class="control-label text-danger">Puntaje total:<span id="total">${total}</span></label><br/>
                         <label class="control-label">Observaciones:</label>
                         <textarea class="form-control text-uppercase" id="aux" name="observaciones" maxlength="200">${docente.infoRegistro[67]}</textarea>
                     </div>
@@ -1105,6 +1105,7 @@
                 <div class="modal-footer">
                   <form action="FinalizaProceso" method="POST">
                     <textarea class="form-control text-uppercase hidden" id="observaciones" name="observaciones" maxlength="200"></textarea>
+                    <input type="hidden" id="evaluacion" name="evaluacion" />
                     <input class="btn btn-sm btn-default" type="submit" value='Sí'/>
                     <button type="button" class="btn btn-sm btn-default" data-dismiss="modal">No</button>
                   </form>

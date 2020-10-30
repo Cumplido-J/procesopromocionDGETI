@@ -8,7 +8,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Conformación de comité</title>
+        <title>DGETI | sep.gob.mx</title>
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">        
@@ -32,7 +32,7 @@
                       <span class="icon-bar"></span>
                       <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="/">UEMSTIS</a>
+                    <a class="navbar-brand" href="/">DGETI</a>
                   </div>
                   <div class="collapse navbar-collapse" id="subenlaces">
                     <ul class="nav navbar-nav navbar-right">      
@@ -45,7 +45,7 @@
             <!--FIN Barra navegación UEMSTIS-->
             <!--Barra encabezado-->
             <div class="encabezado row text-center">
-                <p>Unidad de Educación Media Superior Tecnológica Industrial y de Servicios</p>
+                <p>Dirección General de Educación Tecnológica Industrial y de Servicios</p>
             </div>
             <!--FIN Barra encabezado-->
             <div class="container">                
@@ -65,7 +65,7 @@
                         <label class="control-label" for="subsistema">Subsistema:</label>
                         <select class="form-control input-sm disabled" id="subsistema" name="subsistema" onchange="actualizarPlanteles()" required>                                  
                             <option value=''>-Seleccione-</option>
-                            <option value='1'>UEMSTIS</option>
+                            <option value='1'>DGETI</option>
                             <option value='2'>CECyTE</option>
                         </select>
                     </div>
