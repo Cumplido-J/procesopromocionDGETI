@@ -7,12 +7,16 @@ package herramientas;
 
 import java.io.FileReader;
 import java.util.Properties;
+import javax.mail.BodyPart;
 import javax.mail.Message;
 import javax.mail.MessagingException;
+import javax.mail.Multipart;
 import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimeMultipart;
 /**
  *
  * @author David Reyna
@@ -40,10 +44,16 @@ public class Correo {
                 Session session = Session.getDefaultInstance(props);
                 session.setDebug(true);
                 MimeMessage mensaje = new MimeMessage(session);
-
+                BodyPart mbp = new MimeBodyPart();
+                mbp.setHeader("Content-Type", "text/html");
+                mbp.setContent(cuerpo, "text/html");
+                Multipart mp = new MimeMultipart();
+                mp.addBodyPart(mbp);                
+                
                 mensaje.addRecipient(Message.RecipientType.TO, new InternetAddress(destino));
                 mensaje.setSubject(asunto);
                 mensaje.setText(cuerpo);
+                mensaje.setContent(mp);
                 Transport transport = session.getTransport("smtp");
                 transport.connect("smtp.gmail.com", remitente, clave);
                 transport.sendMessage(mensaje, mensaje.getAllRecipients());

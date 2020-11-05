@@ -5,12 +5,8 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%
-    session = (HttpSession) request.getSession(true);    
-    if (session.getAttribute("idUsuario") == null) {
-        response.sendRedirect("login.jsp");
-    }        
-%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -19,6 +15,25 @@
         <!--Agregar estilos aquí-->
     </head>
     <body>
+        <c:set var="disabled1" value=""></c:set>
+        <c:set var="disabled2" value=""></c:set>
+        <c:set var="disabled3" value=""></c:set>
+        <c:set var="disabled4" value=""></c:set> 
+        
+        <c:if test='${sessionScope["rol"]!="S"}'>
+            <c:if test='${sessionScope["programa"]!=""}'>
+                <c:set var="disabled1" value="disabled"></c:set>
+            </c:if>
+            <c:if test='${sessionScope["subsistema"]!=""}'>
+                <c:set var="disabled2" value="disabled"></c:set>
+            </c:if>
+            <c:if test='${sessionScope["entidad"]!=null}'>
+                <c:set var="disabled3" value="disabled"></c:set>
+            </c:if>
+            <c:if test='${sessionScope["plantel"]!=null}'>
+                <c:set var="disabled4" value="disabled"></c:set>
+            </c:if>
+        </c:if>
         <main class="page">
             <jsp:include page="seccionesPlantilla/barraSuperior.jsp"/>
             <div class="container">
@@ -32,38 +47,51 @@
                 <form id="formRegistro" role="form" method="POST" action="RegistrarUsuario">
                 <div class="row">
                     <div class="form-group col-md-8"> 
+                        <input type="hidden" id="idUsuario" name="idUsuario"/>
                         <label class="control-label" for="programa">Programa:<span class="text-danger" title="Campo obligatorio">*</span></label>
-                        <select class="form-control input-sm" id="programa" name="programa" required>                                  
-                            ${catalogo.desplegarOpcionesProgramas()}
+                        <select class="form-control input-sm ${disabled1}" id="programa" name="programa" required>                                  
+                            ${catalogo.desplegarOpcionesProgramas(sessionScope["programa"])}
                         </select>
                     </div>
                     <div class="form-group col-md-4">                               
                         <label class="control-label" for="subsistema">Subsistema:<span class="text-danger" title="Campo obligatorio">*</span></label>
-                        <select class="form-control input-sm" id="subsistema" name="subsistema" onchange="actualizarPlanteles()" required>                                  
-                            ${catalogo.desplegarOpcionesSubsistema()}
+                        <select class="form-control input-sm ${disabled2}" id="subsistema" name="subsistema" onchange="actualizarPlanteles()" required>                                  
+                            ${catalogo.desplegarOpcionesSubsistema(sessionScope["subsistema"])}
                         </select>
                     </div>
                 </div>
                 <div class="row">
                     <div class="form-group col-md-4">                                               
                       <label class="control-label" for="nivel">Nivel:<span class="text-danger" title="Campo obligatorio">*</span></label>
-                      <select class="form-control input-sm" id="nivel" name="nivel" required>                                  
-                          <option value="">-Seleccione-</option>
-                          <option value="N">Nacional</option>
-                          <option value="E">Estatal</option>
-                          <option value="P">Plantel</option>
+                      <select class="form-control input-sm " id="nivel" name="nivel" required> 
+                          <c:if test='${sessionScope["rol"]=="S"}'>
+                            ${catalogo.desplegarOpcionesNivel()}
+                          </c:if>
+                          <c:if test='${sessionScope["rol"]!="S"}'>
+                            <c:if test='${sessionScope["nivel"]=="N"}'>
+                                <option value=''>-Seleccione-</option>                                
+                                <option value='E'>Estatal</option>
+                                <option value='P'>Plantel</option>
+                            </c:if>
+                            <c:if test='${sessionScope["nivel"]=="E"}'>
+                                <option value='P'>Plantel</option>
+                            </c:if>
+                            <c:if test='${sessionScope["nivel"]=="P"}'>
+                                <option value=''>-Seleccione-</option>
+                            </c:if>                                
+                          </c:if>
                       </select>
                     </div>
                     <div class="form-group col-md-4">                                               
                       <label class="control-label" for="entidad">Entidad:<span id="alertaEntidad" class="text-danger" title="Campo obligatorio"></span></label>
-                      <select class="form-control input-sm" id="entidad" name="entidad" onchange="actualizarPlanteles()" >                                  
-                          ${catalogo.desplegarOpcionesEstado()}
+                      <select class="form-control input-sm ${disabled3}" id="entidad" name="entidad" onchange="actualizarPlanteles()" >                                  
+                          ${catalogo.desplegarOpcionesEstado(sessionScope["entidad"])}
                       </select>
                     </div>                    
                     <div class="form-group col-md-4">                               
                         <label class="control-label" for="plantel">Plantel:<span id="alertaPlantel" class="text-danger" title="Campo obligatorio"></span></label>
-                        <select class="form-control input-sm" id="plantel" name="plantel" >                                  
-                            <option value=''>-Seleccione-</option>
+                        <select class="form-control input-sm ${disabled4}" id="plantel" name="plantel" >                                  
+                            ${catalogo.desplegarOpcionesPlanteles2(sessionScope["subsistema"],sessionScope["entidad"],sessionScope["plantel"])}
                         </select>
                     </div>
                 </div>
@@ -101,15 +129,7 @@
                         <label class="control-label">Correo electrónico:<span class="text-danger" title="Campo obligatorio">*</span></label>
                         <input type="text" class="form-control input-sm" name="correo" id="correo" required/>
                         <label class="error" id="alertaCorreo" hidden >Ingrese una dirección de correo válida</label>
-                    </div>
-                    <div class="form-group col-md-4">                               
-                        <label class="control-label">Contraseña:<span class="text-danger" title="Campo obligatorio">*</span></label>
-                        <input type="password" class="form-control input-sm" name="pass1" id="pass1" required/>
-                    </div>
-                    <div class="form-group col-md-4">                               
-                        <label class="control-label">Confirmar contraseña:<span class="text-danger" title="Campo obligatorio">*</span></label>
-                        <input type="password" class="form-control input-sm" name="pass2" required/>
-                    </div>
+                    </div>                    
                 </div>
                 <div class="row col-xs-12">
                     <label class="control-label">Permisos asignados:<span class="text-danger" title="Campo obligatorio">*</span></label><br/>  
@@ -139,7 +159,7 @@
                 </div>
                 <div class="modal-footer">
                   <a id="btnContinuar" href="busquedaUsuarios.jsp" class="btn btn-sm btn-default">Continuar</a>
-                  <button type="button" class="btn btn-sm btn-default" data-dismiss="modal">Cerrar</button>
+                  <button id="btnCerrar" type="button" class="btn btn-sm btn-default" data-dismiss="modal">Cerrar</button>
                 </div>
               </div>
 

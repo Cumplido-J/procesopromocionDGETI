@@ -407,6 +407,12 @@ public class Catalogos {
             return respuesta;        
         }
     }
+    public String desplegarOpcionesProgramas(String id){
+        String respuesta=desplegarOpcionesProgramas();
+        String aux="value='"+id+"'";
+        respuesta=respuesta.replaceFirst(aux, aux+" selected");
+        return respuesta; 
+    }
     public String desplegarOpcionesPuntaje(String idCriterio){        
         String respuesta="<option value='' puntaje='0'>-Seleccione-</option>";
         try{
@@ -675,6 +681,13 @@ public class Catalogos {
             return respuesta;        
         }
     }
+    public String desplegarOpcionesPlanteles2(String idSubsistema,String idEstado,String id){ 
+        String respuesta= desplegarOpcionesPlanteles2(idSubsistema,idEstado);
+        String aux="value='"+id+"'";
+        respuesta=respuesta.replaceFirst(aux, aux+" selected");
+        return respuesta;  
+    }
+    
     public String desplegarOpcionesRolComite(){        
         String respuesta="<option value=''>-Seleccione-</option>";
         try{            
@@ -726,6 +739,12 @@ public class Catalogos {
             return respuesta;        
         }
     }
+    public String desplegarOpcionesSubsistema(String id){ 
+        String respuesta=desplegarOpcionesSubsistema();
+        String aux="value='"+id+"'";
+        respuesta=respuesta.replaceFirst(aux, aux+" selected");
+        return respuesta;
+    }
     public String desplegarOpcionesPermisos(){        
         String respuesta="";
         try{            
@@ -739,5 +758,31 @@ public class Catalogos {
             return respuesta;        
         }
     }
-    
+    public String desplegarOpcionesPermisos(String idUsuario){        
+        String respuesta="";
+        try{      
+            String[] parametros={idUsuario};
+            List<String[]> datos=metodos.ejecutaSP("sp_consultaUsuarioPermiso",parametros);
+            for(String[] dato:datos){
+                respuesta+="<label class='checkbox-inline'><input type='checkbox' value='"+dato[0]+"' "+dato[2]+">"+dato[1]+"</label>";
+            }
+        }catch(Exception e){
+            respuesta=e.toString();
+        }finally{
+            return respuesta;        
+        }
+    }
+    public String desplegarOpcionesNivel(){ 
+        String respuesta="<option value=''>-Seleccione-</option>" +
+            "<option value='N'>Nacional</option>" +
+            "<option value='E'>Estatal</option>" +
+            "<option value='P'>Plantel</option>"; 
+        return respuesta;
+    }
+    public String desplegarOpcionesNivel(String id){ 
+        String respuesta=desplegarOpcionesNivel();
+        String aux="value='"+id+"'";
+        respuesta=respuesta.replaceFirst(aux, aux+" selected");
+        return respuesta;
+    }
 }

@@ -27,6 +27,7 @@ C:\Users\David Reyna\Desktop\repo2\desarrollo\procesopromocion\src\main\java\com
 C:\Users\David Reyna\Desktop\repo2\desarrollo\procesopromocion\src\main\java\com\aplicacion\servlet\Servlet_cbRegistro.java
 C:\Users\David Reyna\Desktop\repo2\desarrollo\procesopromocion\src\main\java\com\aplicacion\servlet\Servlet_borrarComite.java
 C:\Users\David Reyna\Desktop\repo2\desarrollo\procesopromocion\src\main\java\com\aplicacion\servlet\Servlet_cbFichaRegistro.java
+C:\Users\David Reyna\Desktop\repo2\desarrollo\procesopromocion\src\main\java\com\aplicacion\servlet\Servlet_buscarUsuario.java
 C:\Users\David Reyna\Desktop\repo2\desarrollo\procesopromocion\src\main\java\com\convocatoria\datos\PlantelJDBC.java
 C:\Users\David Reyna\Desktop\repo2\desarrollo\procesopromocion\src\main\java\com\aplicacion\servlet\Servlet_buscarComite.java
 C:\Users\David Reyna\Desktop\repo2\desarrollo\procesopromocion\src\main\java\com\aplicacion\servlet\Servlet_convocatoria.java
@@ -51,6 +52,7 @@ C:\Users\David Reyna\Desktop\repo2\desarrollo\procesopromocion\src\main\java\com
 C:\Users\David Reyna\Desktop\repo2\desarrollo\procesopromocion\src\main\java\herramientas\Pin.java
 C:\Users\David Reyna\Desktop\repo2\desarrollo\procesopromocion\src\main\java\com\convocatoria\servlet\ServletControladorEntidad.java
 C:\Users\David Reyna\Desktop\repo2\desarrollo\procesopromocion\src\main\java\com\aplicacion\servlet\Servlet_modificar_usuario.java
+C:\Users\David Reyna\Desktop\repo2\desarrollo\procesopromocion\src\main\java\herramientas\Datos.java
 C:\Users\David Reyna\Desktop\repo2\desarrollo\procesopromocion\src\main\java\correos\Enviar_clave.java
 C:\Users\David Reyna\Desktop\repo2\desarrollo\procesopromocion\src\main\java\com\aplicacion\servlet\Servlet_registroInfoLaboral.java
 C:\Users\David Reyna\Desktop\repo2\desarrollo\procesopromocion\src\main\java\com\convocatoria\servlet\ServletReporte.java
@@ -62,6 +64,7 @@ C:\Users\David Reyna\Desktop\repo2\desarrollo\procesopromocion\src\main\java\com
 C:\Users\David Reyna\Desktop\repo2\desarrollo\procesopromocion\src\main\java\com\aplicacion\servlet\Servlet_registroIntegranteComite.java
 C:\Users\David Reyna\Desktop\repo2\desarrollo\procesopromocion\src\main\java\com\aplicacion\servlet\Servlet_guardar_convocatoria2.java
 C:\Users\David Reyna\Desktop\repo2\desarrollo\procesopromocion\src\main\java\com\aplicacion\servlet\Servlet_descargaConvocatoria.java
+C:\Users\David Reyna\Desktop\repo2\desarrollo\procesopromocion\src\main\java\com\aplicacion\servlet\Servlet_cbAltaUsuario.java
 C:\Users\David Reyna\Desktop\repo2\desarrollo\procesopromocion\src\main\java\com\aplicacion\servlet\Servlet_iniciosesion.java
 C:\Users\David Reyna\Desktop\repo2\desarrollo\procesopromocion\src\main\java\com\aplicacion\servlet\Servlet_cbFichaRegistroIncompleto.java
 C:\Users\David Reyna\Desktop\repo2\desarrollo\procesopromocion\src\main\java\com\aplicacion\servlet\Servlet_registrarAportacion.java
@@ -92,6 +95,7 @@ C:\Users\David Reyna\Desktop\repo2\desarrollo\procesopromocion\src\main\java\her
 C:\Users\David Reyna\Desktop\repo2\desarrollo\procesopromocion\src\main\java\com\aplicacion\servlet\Servlet_muestraArchivo.java
 C:\Users\David Reyna\Desktop\repo2\desarrollo\procesopromocion\src\main\java\com\aplicacion\beans\Grupo.java
 C:\Users\David Reyna\Desktop\repo2\desarrollo\procesopromocion\src\main\java\com\aplicacion\servlet\Servlet_registrarParticipacion.java
+C:\Users\David Reyna\Desktop\repo2\desarrollo\procesopromocion\src\main\java\com\aplicacion\servlet\Servlet_registrarUsuario.java
 C:\Users\David Reyna\Desktop\repo2\desarrollo\procesopromocion\src\main\java\com\convocatoria\datos\ProgramasPlantelJDBC.java
 C:\Users\David Reyna\Desktop\repo2\desarrollo\procesopromocion\src\main\java\com\aplicacion\servlet\Servlet_agregar_usuario.java
 C:\Users\David Reyna\Desktop\repo2\desarrollo\procesopromocion\src\main\java\com\aplicacion\servlet\Servlet_registroHorasGrupo.java

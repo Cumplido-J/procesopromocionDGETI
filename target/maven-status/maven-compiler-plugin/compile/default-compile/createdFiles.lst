@@ -19,6 +19,8 @@ com\aplicacion\beans\Docente$1.class
 com\aplicacion\servlet\Servlet_ir_a_vacantes.class
 com\aplicacion\servlet\Servlet_cargar_convocatoria.class
 com\convocatoria\servlet\ServletControladorConsultarComite.class
+com\aplicacion\servlet\Servlet_registrarUsuario.class
+com\aplicacion\servlet\Servlet_buscarUsuario.class
 com\aplicacion\servlet\Servlet_iniciosesion_administrador.class
 com\aplicacion\servlet\Servlet_cbRegistroEncuestados.class
 com\aplicacion\servlet\Servlet_agregar_vacantes.class
@@ -92,6 +94,7 @@ com\aplicacion\beans\ConvoctoriaBean.class
 herramientas\Comite.class
 com\aplicacion\servlet\Servlet_modificar_convocatoria.class
 herramientas\Catalogos.class
+com\aplicacion\servlet\Servlet_cbAltaUsuario.class
 com\convocatoria\datos\ConvocatoriaJDBC.class
 com\aplicacion\servlet\Servlet_guardarArchivo.class
 com\aplicacion\servlet\Servlet_finalizaProceso.class
@@ -112,6 +115,7 @@ herramientas\RutaConfig.class
 com\aplicacion\servlet\Servlet_regresar2.class
 com\convocatoria\servlet\ServletReporte.class
 seguridad\Encriptar_Desencriptar.class
+herramientas\Datos.class
 com\aplicacion\servlet\Servlet_borrarIntegrante.class
 com\aplicacion\servlet\Servlet_finalizarConformacion.class
 com\convocatoria\servlet\ServletControladorEntidad.class

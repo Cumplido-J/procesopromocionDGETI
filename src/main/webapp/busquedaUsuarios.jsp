@@ -5,6 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%
     session = (HttpSession) request.getSession(true);    
     if (session.getAttribute("idUsuario") == null) {
@@ -19,41 +20,59 @@
         <jsp:useBean id="dato" class="herramientas.Datos" />
         <!--Agregar estilos aquí-->
     </head>
-    <body>
+    <body>        
+        <c:set var="disabled1" value=""></c:set>
+        <c:set var="disabled2" value=""></c:set>
+        <c:set var="disabled3" value=""></c:set>
+        <c:set var="disabled4" value=""></c:set>        
+        <c:if test='${sessionScope["rol"]!="S"}'>
+            <c:if test='${sessionScope["programa"]!=""}'>
+                <c:set var="disabled1" value="disabled"></c:set>
+            </c:if>
+            <c:if test='${sessionScope["subsistema"]!=""}'>
+                <c:set var="disabled2" value="disabled"></c:set>
+            </c:if>
+            <c:if test='${sessionScope["entidad"]!=null}'>
+                <c:set var="disabled3" value="disabled"></c:set>
+            </c:if>
+            <c:if test='${sessionScope["plantel"]!=null}'>
+                <c:set var="disabled4" value="disabled"></c:set>
+            </c:if>
+        </c:if>
         <main class="page">
             <jsp:include page="seccionesPlantilla/barraSuperior.jsp"/>
             <div class="container">
                 <!--Agregar contenido de página aquí-->
                 <div class="text-center">
-                    <h4>Búsqueda de administradores</h4>                    
+                    <h4>Consulta de administradores</h4>                    
                 </div>
                 <form id="formBusqueda" role="form" method="POST" action="BuscarUsuario">
                 <div class="row">
                     <div class="form-group col-xs-12">                               
                         <label class="control-label" for="programa">Programa:</label>
-                        <select class="form-control input-sm" id="programa" name="programa" >                                  
-                            ${catalogo.desplegarOpcionesProgramas()}
+                        <select class="form-control input-sm ${disabled1}" id="programa" name="programa" >                                  
+                            ${catalogo.desplegarOpcionesProgramas(sessionScope["programa"])}
                         </select>
                     </div>
                 </div>
                 <div class="row">
                     <div class="form-group col-md-3">                               
                         <label class="control-label" for="subsistema">Subsistema:</label>
-                        <select class="form-control input-sm" id="subsistema" name="subsistema" onchange="actualizarPlanteles()" >                                  
-                            ${catalogo.desplegarOpcionesSubsistema()}
+                        <select class="form-control input-sm ${disabled2}" id="subsistema" name="subsistema" onchange="actualizarPlanteles()" >                                  
+                            ${catalogo.desplegarOpcionesSubsistema(sessionScope["subsistema"])}
                         </select>
                     </div>
                     <div class="form-group col-md-3">                                               
                       <label class="control-label" for="entidad">Entidad</label>
-                      <select class="form-control input-sm" id="entidad" name="entidad" onchange="actualizarPlanteles()" >                                  
-                          ${catalogo.desplegarOpcionesEstado()}
+                      <select class="form-control input-sm ${disabled3}" id="entidad" name="entidad" onchange="actualizarPlanteles()" >                                  
+                          ${catalogo.desplegarOpcionesEstado(sessionScope["entidad"])}
                       </select>
                     </div>
                       
                     <div class="form-group col-md-3">                               
                         <label class="control-label" for="plantel">Plantel:</label>
-                        <select class="form-control input-sm" id="plantel" name="plantel" >                                  
-                            <option value=''>-Seleccione-</option>
+                        <select class="form-control input-sm ${disabled4}" id="plantel" name="plantel" >                                  
+                             ${catalogo.desplegarOpcionesPlanteles2(sessionScope["subsistema"],sessionScope["entidad"],sessionScope["plantel"])}
                         </select>
                     </div>
                     <div class="form-group col-md-3">                               
@@ -64,7 +83,7 @@
                 <div class="row">
                     <div class="form-group col-xs-12 text-center">                         
                         <input class="btn btn-sm btn-primary" id="btnBuscar" type="submit" value='Buscar'/> 
-                        <a href="altaUsuario.jsp" class="btn btn-sm btn-primary">Agregar</a>                        
+                        <a href="AltaUsuario" class="btn btn-sm btn-primary">Agregar</a>                        
                     </div>
                 </div>
                 </form>
@@ -81,7 +100,7 @@
                                 <th>Opciones</th>
                             </tr>
                         </thead>
-                        <tbody id="seccionEditable">${dato.desplegarUsuarios('','','','','')}</tbody>
+                        <tbody id="seccionEditable">${dato.desplegarUsuarios(sessionScope["programa"],sessionScope["subsistema"],sessionScope["entidad"],sessionScope["plantel"],'')}</tbody>
                     </table>
                 </div>
             </div>
@@ -108,6 +127,6 @@
         </div>
         <jsp:include page="seccionesPlantilla/scripts.jsp"/>
         <!--Agregar scripts aquí-->
-        <script src="js/funcionesBusquedaUsuarios.js"></script>
+        <script src="js/funcionesBusqueda.js"></script>
     </body>
 </html>

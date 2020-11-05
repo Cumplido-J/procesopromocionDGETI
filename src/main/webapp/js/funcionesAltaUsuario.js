@@ -38,7 +38,7 @@ $(document).ready(function () {
               $("#alertaPlantel").html("*");
               $("#plantel").attr("required","true");
               $("#plantel").removeClass("disabled");
-        } 
+        }
     });
     $('#correo').on('change',function(){
         if (!$("#correo").val().toLowerCase().match($regex)) {         
@@ -49,7 +49,7 @@ $(document).ready(function () {
            $('#alertaCorreo').attr('hidden',true);
            $('#correo').removeClass('error'); 
         }
-    });
+    });    
     $('#usuario').on('change',function(){        
         if (!$('#usuario').val().toUpperCase().match($regexRFC)) {         
             $('#alertaUsuario').removeAttr('hidden');
@@ -73,13 +73,6 @@ $(document).ready(function () {
                 number:true,
                 minlength:10,
                 maxlength:10
-            },
-            'pass1':{
-                minlength:4
-            },
-            'pass2':{
-                minlength:4,
-                equalTo:"#pass1"
             }
         },
         messages: {
@@ -124,15 +117,6 @@ $(document).ready(function () {
             },
             'correo':{
                 required: "Campo requerido"
-            },
-            'pass1':{
-                required: "Campo requerido",
-                minlength:"Ingrese al menos cuatro caracteres"
-            },
-            'pass2':{
-                required: "Campo requerido",
-                equalTo:"Las contraseñas no coinciden",
-                minlength:"Ingrese al menos cuatro caracteres"
             }
         },
         submitHandler:function(){
@@ -186,6 +170,7 @@ $(document).ready(function () {
         }
     });
 });
+
 
 
 

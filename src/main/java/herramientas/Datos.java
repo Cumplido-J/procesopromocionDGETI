@@ -22,13 +22,33 @@ public class Datos {
         String respuesta="<tr><td colspan='7' class='text-center'>Sin información</td></tr>";        
         try{
             String[] parametros={idPrograma,idSubsistema,idEntidad,idPlantel,usuario};
-            List<String[]> datos=metodos.ejecutaSP("sp_consultaUsuario",parametros);
+            List<String[]> datos=metodos.ejecutaSP("sp_consultaUsuarios",parametros);
             if(!datos.isEmpty()){
                 respuesta="";
                 for(String[] dato:datos)
                 {
                     respuesta+="<tr><td>"+dato[2]+"</td><td>"+dato[4]+"</td><td>"+dato[6]+"</td><td>"+dato[8]+"</td><td>"+dato[9]+"</td><td>"+dato[10]+"</td><td>"; 
                     respuesta+="<form method='POST' action='AltaUsuario'><input type='hidden' name='idUsuario' value='"+dato[0]+"'><input class='btn btn-sm btn-link' type='submit' value='Editar'/></form>";                                                                                  
+                    respuesta+="</td></tr>";
+                }
+            }
+        }catch(Exception e){
+            respuesta=e.toString();
+        }finally{
+            return respuesta;        
+        }
+    }
+    public  String desplegarConvocatorias(String idPrograma,String idSubsistema,String idEntidad,String idPlantel,String estatus){        
+        String respuesta="<tr><td colspan='6' class='text-center'>Sin información</td></tr>";        
+        try{
+            String[] parametros={idPrograma,idSubsistema,idEntidad,idPlantel,estatus};
+            List<String[]> datos=metodos.ejecutaSP("sp_consultaConvocatorias",parametros);
+            if(!datos.isEmpty()){
+                respuesta="";
+                for(String[] dato:datos)
+                {
+                    respuesta+="<tr><td>"+dato[2]+"</td><td>"+dato[4]+"</td><td>"+dato[6]+"</td><td>"+dato[8]+"</td><td>"+dato[9]+"</td><td>"; 
+                    respuesta+="<form method='POST' action='AltaConvocatoria'><input type='hidden' name='idConvocatoria' value='"+dato[0]+"'><input class='btn btn-sm btn-link' type='submit' value='Editar'/></form>";                                                                                  
                     respuesta+="</td></tr>";
                 }
             }

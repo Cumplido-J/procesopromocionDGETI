@@ -5,6 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -16,6 +17,9 @@
         <main class="page">
             <jsp:include page="seccionesPlantilla/barraSuperior.jsp"/>
             <div class="container">
+                <div class="text-center">
+                    <h4>Título</h4>                       
+                </div>
                 <!--Agregar contenido de página aquí-->
             </div>
         </main>

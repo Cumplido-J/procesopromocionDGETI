@@ -92,6 +92,14 @@
         <servlet-name>BuscarUsuario</servlet-name>
         <servlet-class>com.aplicacion.servlet.Servlet_buscarUsuario</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>AltaUsuario</servlet-name>
+        <servlet-class>com.aplicacion.servlet.Servlet_cbAltaUsuario</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>BuscarConvocatoria</servlet-name>
+        <servlet-class>com.aplicacion.servlet.Servlet_buscarConvocatoria</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Servlet_cancelarPin</servlet-name>
         <url-pattern>/Servlet_cancelarPin</url-pattern>
@@ -175,6 +183,14 @@
     <servlet-mapping>
         <servlet-name>BuscarUsuario</servlet-name>
         <url-pattern>/BuscarUsuario</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AltaUsuario</servlet-name>
+        <url-pattern>/AltaUsuario</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>BuscarConvocatoria</servlet-name>
+        <url-pattern>/BuscarConvocatoria</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

@@ -5,6 +5,8 @@
  */
 package com.aplicacion.servlet;
 
+import herramientas.Correo;
+import herramientas.Pin;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -76,7 +78,13 @@ public class Servlet_registrarUsuario extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
-        try {    
+        try {  
+            String id;
+            if(request.getParameter("idUsuario")!=null){
+                id=request.getParameter("idUsuario");
+            }else{
+                id="";
+            }            
             String programa=request.getParameter("programa");
             String subsistema=request.getParameter("subsistema");
             String nivel=request.getParameter("nivel");            
@@ -90,7 +98,12 @@ public class Servlet_registrarUsuario extends HttpServlet {
             String movil=request.getParameter("movil"); 
             String correo=request.getParameter("correo");
             String consideraciones=""; 
-            String pass1=request.getParameter("pass1"); 
+            String contrasena;
+            if(id.equals("")){
+                contrasena=Pin.generaPin();
+            }else{
+                contrasena="";
+            }
             String permisos=request.getParameter("permisos");
             String[] aux=permisos.split(";");
             
@@ -98,7 +111,7 @@ public class Servlet_registrarUsuario extends HttpServlet {
             String respuesta="Error en almacenamiento de datos, intente nuevamente";
             Metodos_sql metodo = new Metodos_sql();
             List<String[]> datos;            
-            String[] parametros={entidad,plantel,nombre,apellido1,apellido2,correo,pass1,usuario,fijo,movil,perfil,consideraciones,nivel,subsistema,programa};                                      
+            String[] parametros={entidad,plantel,nombre,apellido1,apellido2,correo,contrasena,usuario,fijo,movil,perfil,consideraciones,nivel,subsistema,programa,id};                                      
             datos=metodo.ejecutaSP("sp_insertUsuario",parametros);            
             if(!datos.isEmpty()){
                 respuesta=datos.get(0)[0]; 
@@ -106,6 +119,10 @@ public class Servlet_registrarUsuario extends HttpServlet {
                 parametros[0]="";
                 parametros[1]=usuario;                
                 if(respuesta.equals("ok")){
+                    if(id.equals("")){
+                        Correo c=new Correo();
+                        c.enviarCorreo("Envío de contraseña","Usted ha sido registrado en el Sistema de Promoción Docente. <br/> Sus datos de acceso son: <br/> Usuario: <b>"+usuario+"</b><br/>Contrase&ntilde;a:<b>"+contrasena+"</b>", correo);
+                    }
                     for (String i : aux) {
                         parametros[2]=i;
                         datos=metodo.ejecutaSP("sp_insertUsuarioPermiso",parametros);                        
