@@ -37,12 +37,8 @@
 
                     <div class="collapse navbar-collapse" id="subenlaces">
                         <ul class="nav navbar-nav navbar-right">
-                            <li aling="navbar-center">
-                                <a class="text-uppercase">
-                                    <%=session.getAttribute("nombre").toString()%>                                    
-                                </a>
-                            </li>
-                            <li><a href="busquedaDocente.jsp">Regresar</a></li>
+                            <li><a href="#"><%=session.getAttribute("nombre").toString()%></a></li>                            
+                            <li><a href="#" onclick="javascript:window.history.back();">Regresar</a></li>
                             <li><a href="Servlet_cerrarsesion">Cerrar Sesión</a></li>
                         </ul>
                     </div>

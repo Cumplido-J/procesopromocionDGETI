@@ -9,44 +9,13 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>DGETI | sep.gob.mx</title>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">        
-        <link href="https://framework-gb.cdn.gob.mx/assets/styles/main.css" rel="stylesheet">
-        <link href="css/estilosRegistro.css" rel="stylesheet"/> 
+        <jsp:include page="seccionesPlantilla/head.jsp"/>  
         <jsp:useBean id="catalogo" class="herramientas.Catalogos" />
        
     </head>
     <body>
         <main class="page">
-            <!--Barra navegación UEMSTIS-->
-            <nav class="navbar navbar-inverse sub-navbar navbar-fixed-top">
-                <div class="container">
-                  <div class="navbar-header">
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#subenlaces">
-                      <span class="sr-only">Interruptor de Navegación</span>
-                      <span class="icon-bar"></span>
-                      <span class="icon-bar"></span>
-                      <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand" href="/">DGETI</a>
-                  </div>
-                  <div class="collapse navbar-collapse" id="subenlaces">
-                    <ul class="nav navbar-nav navbar-right">
-                        <li><a href="#"><%=session.getAttribute("nombre").toString()%></a></li>
-                        <li><a href="SesionAdministrador">Regresar</a></li>
-                        <li><a href="Servlet_cerrarsesion">Cerrar sesión</a></li> 
-                    </ul>
-                  </div>
-                </div>
-            </nav>
-            <!--FIN Barra navegación UEMSTIS-->
-            <!--Barra encabezado-->
-            <div class="encabezado row text-center">
-                <p>Dirección General de Educación Tecnológica Industrial y de Servicios</p>
-            </div>
-            <!--FIN Barra encabezado-->
+           <jsp:include page="seccionesPlantilla/barraSuperior.jsp"/>
             <div class="container">
                 <div class="text-center">
                     <h4>Búsqueda de docente</h4>                    
@@ -64,9 +33,7 @@
                         <div class="form-group col-md-4">                               
                             <label class="control-label" for="subsistema">Subsistema:</label>
                             <select class="form-control input-sm" id="subsistema" name="subsistema" onchange="actualizarPlanteles()" >                                  
-                                <option value=''>-Seleccione-</option>
-                                <option value='1'>DGETI</option>
-                                <option value='2'>CECyTE</option>
+                                ${catalogo.desplegarOpcionesSubsistema()}
                             </select>
                         </div>
                         <div class="form-group col-md-4">                                               

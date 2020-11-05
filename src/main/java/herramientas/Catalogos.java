@@ -713,5 +713,31 @@ public class Catalogos {
             return respuesta;        
         }
     }
+    public String desplegarOpcionesSubsistema(){        
+        String respuesta="<option value=''>-Seleccione-</option>";
+        try{            
+            List<String[]> datos=metodos.ejecutaSP("sp_selectCatSubsistema");
+            for(String[] dato:datos){
+                respuesta+="<option value='"+dato[0]+"'>"+dato[1]+"</option>";
+            }
+        }catch(Exception e){
+            respuesta=e.toString();
+        }finally{
+            return respuesta;        
+        }
+    }
+    public String desplegarOpcionesPermisos(){        
+        String respuesta="";
+        try{            
+            List<String[]> datos=metodos.ejecutaSP("sp_selectCatPermisos");
+            for(String[] dato:datos){
+                respuesta+="<label class='checkbox-inline'><input type='checkbox' value='"+dato[0]+"'>"+dato[1]+"</label>";
+            }
+        }catch(Exception e){
+            respuesta=e.toString();
+        }finally{
+            return respuesta;        
+        }
+    }
     
 }

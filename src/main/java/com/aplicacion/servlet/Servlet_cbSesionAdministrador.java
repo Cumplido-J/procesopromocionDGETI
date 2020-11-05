@@ -8,6 +8,8 @@ package com.aplicacion.servlet;
 import com.aplicacion.beans.Docente;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -64,8 +66,14 @@ public class Servlet_cbSesionAdministrador extends HttpServlet {
         if(session.getAttribute("idUsuario")!=null&&session.getAttribute("rfc")!=null&&session.getAttribute("vinculos")!=null){            
             ServletContext sc = getServletContext();
             request.setAttribute("vinculos", session.getAttribute("vinculos"));
-            RequestDispatcher rd = sc.getRequestDispatcher("/sesionAdministrador.jsp");
-            rd.forward(request,response);
+            List<String[]> vinculos =(List<String[]>)request.getAttribute("vinculos");
+            if(vinculos.isEmpty()){
+                RequestDispatcher rd = sc.getRequestDispatcher("/sesionAdmin2.jsp");
+                rd.forward(request,response);
+            }else{
+                response.sendRedirect(vinculos.get(0)[2]);
+            }
+            
         }else{
             response.sendRedirect("login.jsp");
         }

@@ -88,6 +88,10 @@
         <servlet-name>FinalizaProceso</servlet-name>
         <servlet-class>com.aplicacion.servlet.Servlet_finalizaProceso</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>BuscarUsuario</servlet-name>
+        <servlet-class>com.aplicacion.servlet.Servlet_buscarUsuario</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Servlet_cancelarPin</servlet-name>
         <url-pattern>/Servlet_cancelarPin</url-pattern>
@@ -167,6 +171,10 @@
     <servlet-mapping>
         <servlet-name>FinalizaProceso</servlet-name>
         <url-pattern>/FinalizaProceso</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>BuscarUsuario</servlet-name>
+        <url-pattern>/BuscarUsuario</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

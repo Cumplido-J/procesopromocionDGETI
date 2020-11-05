@@ -79,6 +79,7 @@ public class Servlet_preregistro extends HttpServlet {
         PrintWriter out = response.getWriter();
         try {    
             String programa=request.getParameter("programa");
+            String subsistema=request.getParameter("subsistema");
             String rfc=request.getParameter("rfc");
             String nombre=request.getParameter("nombre");
             String apellido1=request.getParameter("apellido1");
@@ -98,7 +99,7 @@ public class Servlet_preregistro extends HttpServlet {
             datos=metodo.ejecutaSP("sp_countRegistrosVacancia",parametros1);
             if(!datos.isEmpty()){
                 if(!datos.get(0)[0].equals("0")){
-                    String[] parametros2={programa,rfc,nombre,apellido1,apellido2,entidad,plantel,fijo,movil,correo,consideraciones,pass1,perfil};                                      
+                    String[] parametros2={entidad,plantel,nombre,apellido1,apellido2,correo,pass1,rfc,fijo,movil,perfil,consideraciones,"P",subsistema,programa};                                      
                     datos=metodo.ejecutaSP("sp_insertUsuario",parametros2);            
                     if(!datos.isEmpty()){
                         respuesta=datos.get(0)[0];                    

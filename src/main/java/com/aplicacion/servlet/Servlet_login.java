@@ -83,25 +83,26 @@ public class Servlet_login extends HttpServlet {
             String[] parametros={rfc};
             List<String[]> datos=metodos.ejecutaSP("sp_consultaInfoLogin",parametros);
             if(!datos.isEmpty()){
-                if(datos.get(0)[4].equals(clave)){
+                if(datos.get(0)[5].equals(clave)){
                     HttpSession session = (HttpSession) request.getSession(true);
                     session.setAttribute("idUsuario", datos.get(0)[0]);
-                    session.setAttribute("estado", datos.get(0)[1]);
-                    session.setAttribute("plantel", datos.get(0)[2]);
-                    session.setAttribute("rfc", datos.get(0)[5]);
-                    session.setAttribute("nombre", datos.get(0)[3]);
-                    session.setAttribute("rol", datos.get(0)[6]);
-                    if(datos.get(0)[6].equals("D")){
+                    session.setAttribute("subsistema", datos.get(0)[1]);
+                    session.setAttribute("estado", datos.get(0)[2]);
+                    session.setAttribute("plantel", datos.get(0)[3]);
+                    session.setAttribute("rfc", datos.get(0)[6]);
+                    session.setAttribute("nombre", datos.get(0)[4]);
+                    session.setAttribute("rol", datos.get(0)[7]);
+                    if(datos.get(0)[7].equals("D")){
                         response.sendRedirect("SesionDocente"); 
                     }else{                        
                         List<String[]> vinculos = new ArrayList<String[]>();
                         String[] vinculo = null;
                         for(String[] dato:datos){
-                            System.out.println(dato[7]+"-"+dato[8]+"-"+dato[9]);
+                            //System.out.println(dato[8]+"-"+dato[9]+"-"+dato[10]);
                             vinculo=new String[3];
-                            vinculo[0]=dato[7];
-                            vinculo[1]=dato[8];
-                            vinculo[2]=dato[9];
+                            vinculo[0]=dato[8];
+                            vinculo[1]=dato[9];
+                            vinculo[2]=dato[10];
                             vinculos.add(vinculo);
                         }
                         session.setAttribute("vinculos",vinculos);
