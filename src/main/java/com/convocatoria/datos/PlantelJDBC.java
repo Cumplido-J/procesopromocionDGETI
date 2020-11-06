@@ -53,7 +53,7 @@ public class PlantelJDBC {
         }
         return planteles;
     }*/
-    public List<Plantel> select(int _entidad) {
+    public List<Plantel> select(int _entidad,int _subsistema) {
         Metodos_sql metodos=new Metodos_sql();
         Connection conn = null;
         List<Plantel> planteles = new ArrayList<Plantel>();
@@ -61,7 +61,7 @@ public class PlantelJDBC {
         //conn = conector();
         try {
             String[] parametros=new String[2];
-            parametros[0]="1";
+            parametros[0]=""+_subsistema;
             parametros[1]=""+_entidad;
             List<String[]>datos=metodos.ejecutaSP("sp_selectCatPlanteles", parametros);
             /*CallableStatement stmt = conn.prepareCall(SP_BUSCAR_PLANTELES);

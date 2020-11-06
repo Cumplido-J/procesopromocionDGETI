@@ -13,20 +13,19 @@
 	<parameter name="c7" class="java.lang.Integer"/>
 	<queryString>
 		<![CDATA[SELECT
-	vac.plantel, vac.idConvocatoria,conv.idPrograma, conv.estatus, plantel.nombre as plantelnombre,
+	vac.idPlantel as plantel, conv.id as idConvocatoria,conv.idPrograma, conv.estatus, plantel.nombre as plantelnombre,
 DATE_FORMAT(conv.publicacion, '%d de %M de %Y') as publicacion
 from vacancia vac
 INNER JOIN 
     convocatoria conv
-ON
-	vac.idConvocatoria= conv.id
+ON conv.idPlantel=vac.idPlantel and conv.idPrograma=vac.idPrograma
 INNER JOIN 
     catplanteles plantel
 ON
-	vac.plantel= plantel.id
-WHERE vac.plantel=  $P{p7}  and vac.idConvocatoria= $P{c7} 
+	vac.idPlantel= plantel.id
+WHERE vac.idPlantel=  $P{p7}  and conv.id= $P{c7} 
 
-GROUP BY vac.idConvocatoria]]>
+GROUP BY conv.id]]>
 	</queryString>
 	<field name="plantel" class="java.lang.Integer">
 		<property name="com.jaspersoft.studio.field.label" value="plantel"/>
@@ -72,7 +71,7 @@ GROUP BY vac.idConvocatoria]]>
 				<textElement textAlignment="Justified">
 					<font fontName="Montserrat" size="9"/>
 				</textElement>
-				<text><![CDATA[Lo no previsto en la presente será resuelto por la UEMSTIS, de acuerdo con su ámbito de competencia.]]></text>
+				<text><![CDATA[Lo no previsto en la presente será resuelto por la DGETI, de acuerdo con su ámbito de competencia.]]></text>
 			</staticText>
 			<staticText>
 				<reportElement positionType="Float" x="0" y="224" width="571" height="20" uuid="0a9039e4-1a53-49ed-b551-09ccbfbdc79e">
@@ -91,7 +90,7 @@ GROUP BY vac.idConvocatoria]]>
 				<textElement textAlignment="Center">
 					<font fontName="Montserrat" size="9" isBold="true"/>
 				</textElement>
-				<text><![CDATA[TITULAR DE LA UNIDAD]]></text>
+				<text><![CDATA[DIRECTOR GENERAL]]></text>
 			</staticText>
 			<staticText>
 				<reportElement positionType="Float" x="0" y="227" width="571" height="20" uuid="4b5d0902-e554-42ae-857d-322f560ef585">
@@ -128,7 +127,7 @@ GROUP BY vac.idConvocatoria]]>
 				<textElement textAlignment="Justified">
 					<font fontName="Montserrat" size="9"/>
 				</textElement>
-				<text><![CDATA[Las vías de comunicación entre la UEMSTIS y quienes participen en el proceso de selección para la promoción en el servicio docente por cambio de categoría en el Ciclo Escolar 2020-2021, serán el correo electrónico y los números telefónicos (celular o fijo) que aporte cada aspirante, desde el momento de su registro. ]]></text>
+				<text><![CDATA[Las vías de comunicación entre la DGETI y quienes participen en el proceso de selección para la promoción en el servicio docente por cambio de categoría en el Ciclo Escolar 2020-2021, serán el correo electrónico y los números telefónicos (celular o fijo) que aporte cada aspirante, desde el momento de su registro. ]]></text>
 			</staticText>
 			<staticText>
 				<reportElement positionType="Float" x="0" y="67" width="571" height="35" uuid="8899f39f-fbd7-4bab-8ceb-3b4b7addeea0">
@@ -138,7 +137,7 @@ GROUP BY vac.idConvocatoria]]>
 				<textElement textAlignment="Justified">
 					<font fontName="Montserrat" size="9"/>
 				</textElement>
-				<text><![CDATA[Para la aclaración de dudas o información adicional relacionada con este proceso de selección, el aspirante podrá dirigirse a la UEMSTIS en la dirección de correo electrónico promociondocente@uemstis.sems.gob.mx o a los números telefónicos 5536017599 y 8002886688.]]></text>
+				<text><![CDATA[Para la aclaración de dudas o información adicional relacionada con este proceso de selección, el aspirante podrá dirigirse a la DGETI en la dirección de correo electrónico promociondocente@dgeti.sems.gob.mx o a los números telefónicos 5536017599 y 8002886688.]]></text>
 			</staticText>
 			<image>
 				<reportElement x="213" y="177" width="145" height="84" uuid="2f87f997-ab9a-410c-ba50-48a06a5dd05b">

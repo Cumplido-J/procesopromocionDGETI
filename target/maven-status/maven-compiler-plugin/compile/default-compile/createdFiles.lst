@@ -11,6 +11,7 @@ herramientas\WebService.class
 com\convocatoria\domain\Comites.class
 com\convocatoria\reportes\ReporteConvocatoria.class
 com\aplicacion\servlet\Servlet_buscar_usuario.class
+com\aplicacion\servlet\Servlet_recuperacionContrasena.class
 com\convocatoria\servlet\ServletControladorPlantel.class
 com\aplicacion\servlet\Servlet_registrarAportacion.class
 com\aplicacion\beans\Docente.class
@@ -18,11 +19,14 @@ com\aplicacion\servlet\Servlet_recuperarclave_administrador.class
 com\aplicacion\beans\Docente$1.class
 com\aplicacion\servlet\Servlet_ir_a_vacantes.class
 com\aplicacion\servlet\Servlet_cargar_convocatoria.class
+com\aplicacion\servlet\Servlet_buscarVacancia.class
 com\convocatoria\servlet\ServletControladorConsultarComite.class
 com\aplicacion\servlet\Servlet_registrarUsuario.class
 com\aplicacion\servlet\Servlet_buscarUsuario.class
 com\aplicacion\servlet\Servlet_iniciosesion_administrador.class
 com\aplicacion\servlet\Servlet_cbRegistroEncuestados.class
+com\aplicacion\servlet\Servlet_cbAltaConvocatoria.class
+com\aplicacion\servlet\Servlet_buscarConvocatoria.class
 com\aplicacion\servlet\Servlet_agregar_vacantes.class
 herramientas\Fecha.class
 com\aplicacion\beans\Docente$2.class
@@ -37,6 +41,7 @@ com\aplicacion\servlet\Servlet_P_Agregar.class
 com\aplicacion\servlet\Servlet_cbFichaRegistro.class
 com\aplicacion\servlet\Servlet_iniciosesion.class
 com\aplicacion\beans\Mensaje.class
+com\aplicacion\servlet\Servlet_registrarConvocatoria.class
 com\aplicacion\beans\Plaza.class
 com\aplicacion\beans\HoraGrupo.class
 com\convocatoria\domain\Vacancia.class
@@ -69,6 +74,7 @@ com\aplicacion\servlet\Servlet_buscarDocente.class
 com\aplicacion\servlet\Servlet_muestraArchivo.class
 com\aplicacion\servlet\Servlet_consultaCatalogos.class
 com\aplicacion\servlet\Servlet_cbFichaRegistroPrevia.class
+com\aplicacion\servlet\Servlet_registrarVacancia.class
 com\aplicacion\beans\Personal.class
 correos\Validar_correo.class
 herramientas\CriteriosValoracion.class

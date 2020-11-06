@@ -6,6 +6,7 @@
 package com.aplicacion.servlet;
 
 import herramientas.Catalogos;
+import herramientas.Datos;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -84,8 +85,8 @@ public class Servlet_buscarDocente extends HttpServlet {
                 String plantel=request.getParameter("plantel");
                 String nombre=request.getParameter("rfcNombre");
                 String estatus=request.getParameter("estatus");
-                Catalogos c=new Catalogos();
-                out.print(c.desplegarDocentes(programa, subsistema, entidad, plantel, nombre, estatus));
+                Datos d=new Datos();
+                out.print(d.desplegarDocentes(programa, subsistema, entidad, plantel, nombre, estatus));
                 //out.print("-"+programa+"-"+ subsistema+"-"+ entidad+"-"+ plantel+"-"+ nombre+"-"+ estatus);                
         }catch(Exception e){
             System.out.println(e.toString());

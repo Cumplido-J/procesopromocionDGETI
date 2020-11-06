@@ -16,11 +16,11 @@
 	<parameter name="cc" class="java.lang.Integer"/>
 	<parameter name="cp" class="java.lang.Integer"/>
 	<queryString>
-		<![CDATA[SELECT count(catcategoriasplaza.categoria) as totalCategorias from vacancia
-
-inner join catcategoriasplaza 
-on vacancia.tipocategoria =catcategoriasplaza.id
-where vacancia.idConvocatoria= $P{cc}  and vacancia.plantel= $P{cp} 
+		<![CDATA[SELECT count(catcategoriasplaza.categoria) as totalCategorias 
+from vacancia
+inner join catcategoriasplaza on vacancia.idCategoria =catcategoriasplaza.id
+INNER JOIN convocatoria conv on conv.idPlantel=vacancia.idPlantel and conv.idPrograma=vacancia.idPrograma
+where conv.id= $P{cc}  and vacancia.idPlantel= $P{cp}
 order by catcategoriasplaza.categoria]]>
 	</queryString>
 	<field name="totalCategorias" class="java.lang.Long">
@@ -60,7 +60,7 @@ order by catcategoriasplaza.categoria]]>
 				<textElement textAlignment="Justified">
 					<font fontName="Montserrat" size="9"/>
 				</textElement>
-				<text><![CDATA[El personal que desee participar en este proceso de promoción deberá presentar la siguiente documentación en original y copia para su cotejo, misma que utilizará para ingresar la información en el módulo de registro y le será requerida en la mesa registro presencial, en la sede correspondiente.]]></text>
+				<text><![CDATA[El personal que desee participar en este proceso de promoción deberá presentar la siguiente documentación en original y copia para su cotejo, misma que utilizará para ingresar la información en el módulo de registro y le será requerida en la mesa de registro presencial, en la sede correspondiente.]]></text>
 			</staticText>
 			<staticText>
 				<reportElement positionType="Float" mode="Opaque" x="0" y="1" width="570" height="13" forecolor="#FFFFFF" backcolor="#730907" uuid="86238fb2-cac4-4a9c-a67f-68249f285d38">
@@ -82,7 +82,7 @@ order by catcategoriasplaza.categoria]]>
 				<text><![CDATA[Identificación oficial vigente: credencial de elector, cédula profesional o pasaporte.]]></text>
 			</staticText>
 			<staticText>
-				<reportElement positionType="Float" x="30" y="87" width="537" height="22" uuid="01cfc78b-79d5-497f-99a2-bb0ba1118a08">
+				<reportElement positionType="Float" x="30" y="89" width="537" height="22" uuid="01cfc78b-79d5-497f-99a2-bb0ba1118a08">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 					<property name="com.jaspersoft.studio.unit.x" value="px"/>
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
@@ -93,7 +93,7 @@ order by catcategoriasplaza.categoria]]>
 				<text><![CDATA[Clave Única de Registro de Población (CURP). Se puede consultar e imprimir en la dirección electrónica http://www.gob.mx/curp/]]></text>
 			</staticText>
 			<staticText>
-				<reportElement positionType="Float" x="30" y="117" width="537" height="22" uuid="da423b96-d641-45da-9565-fc2f2604c57f">
+				<reportElement positionType="Float" x="30" y="114" width="537" height="29" uuid="da423b96-d641-45da-9565-fc2f2604c57f">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 					<property name="com.jaspersoft.studio.unit.x" value="px"/>
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
@@ -104,7 +104,7 @@ order by catcategoriasplaza.categoria]]>
 				<text><![CDATA[Título Profesional o Cédula Profesional que acredite el grado de estudios requerido para la categoría a la que aspira, de acuerdo con el perfil profesional.]]></text>
 			</staticText>
 			<staticText>
-				<reportElement positionType="Float" x="30" y="146" width="537" height="22" uuid="c8c8a0ee-e66a-406d-9917-ccb3344b63c7">
+				<reportElement positionType="Float" x="30" y="145" width="537" height="30" uuid="c8c8a0ee-e66a-406d-9917-ccb3344b63c7">
 					<property name="com.jaspersoft.studio.unit.y" value="px"/>
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 					<property name="com.jaspersoft.studio.unit.x" value="px"/>
@@ -116,7 +116,7 @@ order by catcategoriasplaza.categoria]]>
 				<text><![CDATA[Constancia de servicio expedida por la autoridad educativa competente que acredite la antigüedad del aspirante, y el tiempo en el desempeño de la función docente.]]></text>
 			</staticText>
 			<staticText>
-				<reportElement positionType="Float" x="30" y="176" width="537" height="22" uuid="2895e1f9-0497-416f-bc46-ba375f28a33d">
+				<reportElement positionType="Float" x="30" y="177" width="537" height="22" uuid="2895e1f9-0497-416f-bc46-ba375f28a33d">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 					<property name="com.jaspersoft.studio.unit.x" value="px"/>
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
@@ -127,17 +127,17 @@ order by catcategoriasplaza.categoria]]>
 				<text><![CDATA[Formato Único de Personal o equivalente del nombramiento definitivo en plaza docente de jornada o por horas-semana-mes.]]></text>
 			</staticText>
 			<staticText>
-				<reportElement positionType="Float" x="30" y="204" width="537" height="12" uuid="732adddd-9188-41ab-9c00-192f7aca4ca7">
+				<reportElement positionType="Float" x="30" y="201" width="537" height="12" uuid="732adddd-9188-41ab-9c00-192f7aca4ca7">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 				</reportElement>
 				<textElement textAlignment="Justified">
 					<font fontName="Montserrat" size="9"/>
 				</textElement>
-				<text><![CDATA[Constancia de las horas frente al grupo expedida por el área administrativa o de personal, definida por la UEMSTIS.]]></text>
+				<text><![CDATA[Constancia de las horas frente al grupo expedida por el área administrativa o de personal, definida por la DGETI.]]></text>
 			</staticText>
 			<staticText>
-				<reportElement positionType="Float" x="30" y="220" width="537" height="22" uuid="5095b02c-89bb-4656-8730-7b729af4bc2c">
+				<reportElement positionType="Float" x="30" y="220" width="537" height="28" uuid="5095b02c-89bb-4656-8730-7b729af4bc2c">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 				</reportElement>
@@ -147,7 +147,7 @@ order by catcategoriasplaza.categoria]]>
 				<text><![CDATA[Constancia emitida por el Director del plantel, de que el participante no cuenta con nota desfavorable en los dos últimos ciclos escolares inmediatos a la publicación de la convocatoria.]]></text>
 			</staticText>
 			<staticText>
-				<reportElement positionType="Float" x="30" y="248" width="537" height="22" uuid="b6bb58b6-206a-4a9e-8a77-b1e76d43067f">
+				<reportElement positionType="Float" x="30" y="250" width="537" height="29" uuid="b6bb58b6-206a-4a9e-8a77-b1e76d43067f">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 				</reportElement>
@@ -157,7 +157,7 @@ order by catcategoriasplaza.categoria]]>
 				<text><![CDATA[Carta bajo protesta de decir verdad, donde manifieste que no cuenta con sanciones penales o administrativas que puedan limitar el desempeño de la función.]]></text>
 			</staticText>
 			<staticText>
-				<reportElement positionType="Float" x="30" y="277" width="537" height="22" uuid="005ef9ea-f7ab-4717-b132-4e99851087f9">
+				<reportElement positionType="Float" x="30" y="281" width="537" height="22" uuid="005ef9ea-f7ab-4717-b132-4e99851087f9">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 				</reportElement>
@@ -177,7 +177,7 @@ order by catcategoriasplaza.categoria]]>
 				<text><![CDATA[En su caso, certificado CENNI vigente mínimo Nivel 14, o constancia que acredite el trámite de expedición en proceso, emitido por la Secretaría de Educación Pública, para los participantes de inglés que tengan una licenciatura distinta a la de enseñanza del inglés.]]></text>
 			</staticText>
 			<staticText>
-				<reportElement positionType="Float" x="30" y="338" width="537" height="22" uuid="0bea7b6d-28d7-4a69-b3ea-04b314f462c0">
+				<reportElement positionType="Float" x="30" y="338" width="537" height="32" uuid="0bea7b6d-28d7-4a69-b3ea-04b314f462c0">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 				</reportElement>

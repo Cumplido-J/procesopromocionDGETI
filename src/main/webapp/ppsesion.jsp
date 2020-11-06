@@ -75,13 +75,15 @@
                 <c:set var="disabled4" value="disabled"></c:set>
                 
             </c:if>
+            
             <c:if test = "${Docente.infoRegistro[61]!=null&&Docente.infoRegistro[66]!='1'}">  <!--Si ya finalizó el registro-->
                 <c:set var="disabled1" value="disabled"></c:set>
                 <c:set var="hidden1" value=""></c:set>
+                <c:set var="disabled4" value="disabled"></c:set>                
                 <c:if test = "${Docente.infoRegistro[66]=='3'}"><!--Si el registro finalizó como incompleto-->
                     <c:set var="finIncompleto" value="true"></c:set>
                 </c:if>
-                <c:if test = "${Docente.infoRegistro[63]=='2'}"><!--Si el registro finalizó como completo-->
+                <c:if test = "${Docente.infoRegistro[66]=='2'}"><!--Si el registro finalizó como completo-->
                     <c:set var="finCompleto" value="true"></c:set>
                 </c:if>
                 <c:if test = "${Docente.totalEncuestados<30}"> <!--Si no ha registrado a 30 encuestados-->

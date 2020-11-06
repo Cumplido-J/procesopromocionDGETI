@@ -4,17 +4,17 @@
  * and open the template in the editor.
  */
 $(document).ready(function () {
-    $( "#inicioCurso" ).datepicker({changeMonth:true, changeYear: true,endDate: new Date()});
-    $( "#finCurso" ).datepicker({changeMonth:true, changeYear: true,endDate: new Date()});
-    $( "#inicioAportacion" ).datepicker({changeMonth:true, changeYear: true,endDate: new Date()});
-    $( "#finAportacion" ).datepicker({changeMonth:true, changeYear: true,endDate: new Date()});
-    $( "#inicioParticipacion" ).datepicker({changeMonth:true, changeYear: true,endDate: new Date()});
-    $( "#finParticipacion" ).datepicker({changeMonth:true, changeYear: true,endDate: new Date()});
-    $( "#inicioTutoria" ).datepicker({changeMonth:true, changeYear: true,endDate: new Date()});
-    $( "#finTutoria" ).datepicker({changeMonth:true, changeYear: true,endDate: new Date()});
-    $( "#fechaPublicacion" ).datepicker({changeMonth:true, changeYear: true,endDate: new Date()});
-    $( "#inicioResultado" ).datepicker({changeMonth:true, changeYear: true,endDate: new Date()});
-    $( "#finResultado" ).datepicker({changeMonth:true, changeYear: true,endDate: new Date()});
+    $( "#inicioCurso" ).datepicker({changeMonth:true, changeYear: true,endDate: new Date(),firstDay: 0});
+    $( "#finCurso" ).datepicker({changeMonth:true, changeYear: true,endDate: new Date(),firstDay: 0});
+    $( "#inicioAportacion" ).datepicker({changeMonth:true, changeYear: true,endDate: new Date(),firstDay: 0});
+    $( "#finAportacion" ).datepicker({changeMonth:true, changeYear: true,endDate: new Date(),firstDay: 0});
+    $( "#inicioParticipacion" ).datepicker({changeMonth:true, changeYear: true,endDate: new Date(),firstDay: 0});
+    $( "#finParticipacion" ).datepicker({changeMonth:true, changeYear: true,endDate: new Date(),firstDay: 0});
+    $( "#inicioTutoria" ).datepicker({changeMonth:true, changeYear: true,endDate: new Date(),firstDay: 0});
+    $( "#finTutoria" ).datepicker({changeMonth:true, changeYear: true,endDate: new Date(),firstDay: 0});
+    $( "#fechaPublicacion" ).datepicker({changeMonth:true, changeYear: true,endDate: new Date(),firstDay: 0});
+    $( "#inicioResultado" ).datepicker({changeMonth:true, changeYear: true,endDate: new Date(),firstDay: 0});
+    $( "#finResultado" ).datepicker({changeMonth:true, changeYear: true,endDate: new Date(),firstDay: 0});
     
     $('#form1').submit(function(e) {
         e.preventDefault();

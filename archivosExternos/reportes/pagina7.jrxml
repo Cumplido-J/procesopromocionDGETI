@@ -13,21 +13,20 @@
 	<parameter name="c7" class="java.lang.Integer"/>
 	<queryString>
 		<![CDATA[SELECT  
-	vac.plantel, vac.idConvocatoria,conv.idPrograma, plantel.nombre as plantelnombre,
+	vac.idPlantel as plantel, conv.id as idConvocatoria,conv.idPrograma, plantel.nombre as plantelnombre,
 DATE_FORMAT(conv.publicacion, '%d de %M de %Y') as publicacion,
 DATE_FORMAT(conv.resultados, '%d de %M de %Y') as resultados
 from vacancia vac
 INNER JOIN 
     convocatoria conv
-ON
-	vac.idConvocatoria= conv.id
+ON conv.idPlantel=vac.idPlantel and conv.idPrograma=vac.idPrograma
 INNER JOIN 
     catplanteles plantel
 ON
-	vac.plantel= plantel.id
-WHERE vac.plantel=  $P{p7}  and vac.idConvocatoria= $P{c7} 
+	vac.idPlantel= plantel.id
+WHERE vac.idPlantel=  $P{p7}  and conv.id=$P{c7} 
 
-GROUP BY vac.idConvocatoria]]>
+GROUP BY conv.id]]>
 	</queryString>
 	<field name="plantel" class="java.lang.Integer">
 		<property name="com.jaspersoft.studio.field.label" value="plantel"/>
@@ -92,7 +91,7 @@ GROUP BY vac.idConvocatoria]]>
 				<textElement textAlignment="Justified">
 					<font fontName="Montserrat" size="9"/>
 				</textElement>
-				<text><![CDATA[El Consejo dictaminador del proceso de promoción en el servicio docente por cambio de categoría en Educación Media Superior de la UEMSTIS, emitirá las listas de resultados obtenidos por los participantes, ordenados en forma descendente, de acuerdo con los elementos de valoración establecidos para este proceso de selección. Se conformarán listas de ordenamiento por plantel las cuales incluirán a todos los aspirantes.]]></text>
+				<text><![CDATA[El Consejo dictaminador del proceso de promoción en el servicio docente por cambio de categoría en Educación Media Superior de la DGETI, emitirá las listas de resultados obtenidos por los participantes, ordenados en forma descendente, de acuerdo con los elementos de valoración establecidos para este proceso de selección. Se conformarán listas de ordenamiento por plantel las cuales incluirán a todos los aspirantes.]]></text>
 			</staticText>
 			<staticText>
 				<reportElement positionType="Float" x="0" y="485" width="571" height="12" uuid="4b459b6b-a9bb-4ced-beb8-0caab4c2a412">
@@ -181,7 +180,7 @@ GROUP BY vac.idConvocatoria]]>
 				<textElement textAlignment="Justified">
 					<font fontName="Montserrat" size="9"/>
 				</textElement>
-				<textFieldExpression><![CDATA["Los resultados del proceso de selección para la promoción en el servicio docente por cambio de categoría en Educación Media Superior, Ciclo Escolar 2020-2021, se publicarán en la plataforma UEMSTIS en la siguiente dirección electrónica http://www.promociondocente.uemstis.gob.mx, el "+$F{resultados} + ". La vigencia de los resultados obtenidos será desde su publicación y hasta la emisión de la siguiente convocatoria."]]></textFieldExpression>
+				<textFieldExpression><![CDATA["Los resultados del proceso de selección para la promoción en el servicio docente por cambio de categoría en Educación Media Superior, Ciclo Escolar 2020-2021, se publicarán en la plataforma de la DGETI en la siguiente dirección electrónica http://www.promociondocente.dgeti.sep.gob.mx, el "+$F{resultados} + ". La vigencia de los resultados obtenidos será desde su publicación y hasta la emisión de la siguiente convocatoria."]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement positionType="Float" x="0" y="268" width="571" height="28" uuid="0db4591d-fca5-4e6b-9435-a689d6430f85">
@@ -237,7 +236,7 @@ GROUP BY vac.idConvocatoria]]>
 				<textElement textAlignment="Justified">
 					<font fontName="Montserrat" size="9"/>
 				</textElement>
-				<textFieldExpression><![CDATA["Los resultados del proceso de selección para el proceso de promoción en el servicio docente por cambio de categoría en Educación Media Superior, Ciclo Escolar 2020-2021, se publicarán a través de la plataforma electrónica de la UEMSTIS el "+$F{resultados} + "."]]></textFieldExpression>
+				<textFieldExpression><![CDATA["Los resultados del proceso de selección para el proceso de promoción en el servicio docente por cambio de categoría en Educación Media Superior, Ciclo Escolar 2020-2021, se publicarán a través de la plataforma electrónica de la DGETI el "+$F{resultados} + "."]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement positionType="Float" x="0" y="0" width="571" height="49" uuid="39c5eadd-2068-4cf0-a4ce-39af95692fe0">

@@ -247,7 +247,7 @@
                 </c:if>
                 <c:if test="${info[2]=='9'&&info[3]==null}">
                     <table>
-                        <tr><th class='borde'>Nombre de  la publicación</th><th class='borde'>Medio en el que se publicó</th><th class='borde'>Fecha de publicación</th><th class='borde'>ISSN</th></tr>
+                        <tr><th class='borde'>Nombre de  la publicación</th><th class='borde'>Medio en el que se publicó</th><th class='borde'>Fecha de publicación</th><th class='borde'>ISSN / ISBN</th></tr>
                         ${publicaciones}
                     </table>
                 </c:if>

@@ -6,7 +6,12 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-
+<%
+    session = (HttpSession) request.getSession(true);    
+    if (session.getAttribute("idUsuario") == null) {
+        response.sendRedirect("login.jsp");
+    }        
+%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -123,7 +128,7 @@
                 </div>
                 <div class="row" >
                     <div class="form-group col-xs-12 text-center" style="padding-top: 20px;">                         
-                        <input class="btn btn-primary" id="btnEnviar" type="submit" value='Registrar'/>                                                
+                        <input class="btn btn-primary" id="btnEnviar" type="submit" value='Guardar'/>                                                
                     </div>
                 </div>
                 </form>

@@ -180,7 +180,7 @@
               </div>
               <c:if test="${!vistaAdmin}">
               <div class="text-center">
-                  <a href="evidenciaRegistro.jsp" class="btn btn-primary disabled" id="btnFinalizar">Continuar</a>
+                  <a href="RegistroCriterios" class="btn btn-primary disabled" id="btnFinalizar">Continuar</a>
               </div>
               </c:if>
             </div> 

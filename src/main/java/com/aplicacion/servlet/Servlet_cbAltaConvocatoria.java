@@ -93,7 +93,7 @@ public class Servlet_cbAltaConvocatoria extends HttpServlet {
                 Metodos_sql metodo = new Metodos_sql();
                 List<String[]> datos;            
                 String[] parametros={id};                                      
-                datos=metodo.ejecutaSP("sp_selectConvocatoria",parametros);
+                datos=metodo.ejecutaSP("sp_consultaConvocatoria",parametros);
                 request.setAttribute("informacion", datos.get(0));
                 rd = sc.getRequestDispatcher("/cambioConvocatoria.jsp");
             }else{

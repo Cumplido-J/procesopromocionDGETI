@@ -1,8 +1,8 @@
 $(document).ready(function () {
-    $( "#ingresoSubsistema" ).datepicker({changeMonth:true, changeYear: true});  
-    $( "#ingresoPlantel" ).datepicker({changeMonth:true, changeYear: true});     
-    $( "#fechaPlaza" ).datepicker({changeMonth:true, changeYear: true});         
-    $( "#fechaPromocion" ).datepicker({changeMonth:true, changeYear: true});  
+    $( "#ingresoSubsistema" ).datepicker({changeMonth:true, changeYear: true,firstDay: 0});  
+    $( "#ingresoPlantel" ).datepicker({changeMonth:true, changeYear: true,firstDay: 0});     
+    $( "#fechaPlaza" ).datepicker({changeMonth:true, changeYear: true,firstDay: 0});         
+    $( "#fechaPromocion" ).datepicker({changeMonth:true, changeYear: true,firstDay: 0});  
         
     $('#formInfoAcademica').submit(function(e) {
         e.preventDefault();
@@ -967,25 +967,58 @@ function cambioCategoriaAspira() {
     var categoriaAspira=parseInt($("#categoriaAspira").val());
     var tipo=$("#categoriaAspira option:selected").attr("aux");
     if(!tipo.includes("Real")){
+        $("#avisoCategoria").removeClass("hidden");
+        $("#avisoCategoria").attr("title","Se dará siempre y cuando un aspirante cumpla todos los requisitos y resulte ganador de una plaza de vacancia real, dejando desocupada la plaza que ostenta y ésta podrá asignarse a otro participante.");
         $("#categoriaAspira").attr("title","Se dará siempre y cuando un aspirante cumpla todos los requisitos y resulte ganador de una plaza de vacancia real, dejando desocupada la plaza que ostenta y ésta podrá asignarse a otro participante.");
     }else{
+        $("#avisoCategoria").removeAttr("title");
+        $("#avisoCategoria").addClass("hidden");
         $("#categoriaAspira").removeAttr("title");
     }
     //var aux=categoria+1;
     
-    if(categoriaAspira==categoria+1){
+    if(categoriaAspira==categoria|| categoriaAspira==categoria+1){
         $("#alertaCategoria").attr("hidden",true);
         $("#btnEnviar2").removeClass("disabled");
         id=$("#categoriaAspira").val(); 
         idPrograma=$("#programa").val(); 
         idPlantel=$("#plantel").val(); 
-        $.get("ConsultaCatalogos", {k: "14",i:id,pr:idPrograma,pl:idPlantel}, function(){        
-        }).done(function(respuesta){$("#jornadaAspira").html(respuesta);});
-        $.get("ConsultaCatalogos", {k: "10",i:id}, function(){        
-        }).done(function(respuesta){$("#rbRequisitos").html(respuesta);}); 
+        $.get("ConsultaCatalogos", {k: "17",i:id,pr:idPrograma,pl:idPlantel}, function(){        
+        }).done(function(respuesta){
+            var aux=respuesta.split("|");
+            if(aux.length==2){
+                $("#jornadaAspira").html(aux[0]);
+                $("#rbRequisitos").html(aux[1]);
+            }
+        });
+         
     }else{
         $("#alertaCategoria").removeAttr("hidden");
         $("#btnEnviar2").addClass("disabled");
+    }
+}
+function cambioJornadaAspira() {
+    var categoria=parseInt($("#categoria").val());
+    var categoriaAspira=parseInt($("#categoriaAspira").val());
+    var jornada=parseInt($("#jornada").val());
+    var jornadaAspira=parseInt($("#jornadaAspira").val());
+     
+    if(categoria==categoriaAspira){
+        if(jornadaAspira==jornada+1){
+            $("#alertaJornada").attr("hidden",true);
+            $("#btnEnviar2").removeClass("disabled");         
+        }else{
+            $("#alertaJornada").removeAttr("hidden");
+            $("#btnEnviar2").addClass("disabled");
+        }
+    }else if(categoria==categoriaAspira-1){
+        if(jornadaAspira==jornada){
+            $("#alertaJornada").attr("hidden",true);
+            $("#btnEnviar2").removeClass("disabled");         
+        }else{
+            $("#alertaJornada").removeAttr("hidden");
+            $("#btnEnviar2").addClass("disabled");
+        }        
     }
 }
 

@@ -18,7 +18,7 @@
 	<parameter name="convocatoria" class="java.lang.Integer"/>
 	<queryString>
 		<![CDATA[SELECT  
-	vac.plantel, vac.idConvocatoria,conv.idprograma, conv.estatus, plantel.nombre as plantelnombre, catprogramas.programa,
+	vac.idPlantel as plantel, conv.id as idConvocatoria,conv.idprograma, conv.estatus, plantel.nombre as plantelnombre, catprogramas.programa,
 
 DATE_FORMAT(conv.inicioRegistro, '%d-%m-%Y') as inicioRegistro,
 DATE_FORMAT(conv.finRegistro, '%d-%m-%Y') as finRegistro,
@@ -30,20 +30,19 @@ DATE_FORMAT(conv.finDictaminacion, '%d-%m-%Y') as finDictaminacion
 	 from vacancia vac
 INNER JOIN 
     convocatoria conv
-ON
-	vac.idConvocatoria= conv.id
+on conv.idPlantel=vac.idPlantel and conv.idPrograma=vac.idPrograma
 INNER JOIN 
     catplanteles plantel
 ON
-	vac.plantel= plantel.id
+	vac.idPlantel= plantel.id
 INNER JOIN
 catprogramas catprogramas
 ON
 conv.idPrograma = catprogramas.id
 
-WHERE vac.plantel= $P{plantel}  and vac.idConvocatoria= $P{convocatoria} 
+WHERE vac.idPlantel= $P{plantel}  and conv.id= $P{convocatoria} 
 
-GROUP BY vac.idConvocatoria]]>
+GROUP BY conv.id]]>
 	</queryString>
 	<field name="plantel" class="java.lang.Integer">
 		<property name="com.jaspersoft.studio.field.label" value="plantel"/>
@@ -148,7 +147,7 @@ GROUP BY vac.idConvocatoria]]>
 				<reportElement x="469" y="20" width="99" height="30" uuid="aa40600b-1751-4661-94ff-37984db2ca4f">
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 				</reportElement>
-				<imageExpression><![CDATA["uemstis.png"]]></imageExpression>
+				<imageExpression><![CDATA["dgeti.png"]]></imageExpression>
 			</image>
 		</band>
 	</pageHeader>

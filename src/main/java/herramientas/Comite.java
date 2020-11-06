@@ -122,10 +122,10 @@ public class Comite {
             return respuesta;        
         }
     }
-    public  String finalizarComite(String idComite,String idRol){        
+    public  String finalizarComite(String idComite,String idRol,String pass){        
         String respuesta="";        
         try{
-            String[] parametros={idComite,idRol};
+            String[] parametros={idComite,idRol,pass};
             List<String[]> datos=metodos.ejecutaSP("sp_finalizarComite",parametros);
             if(!datos.isEmpty()){
                 respuesta=datos.get(0)[0];                

@@ -6,6 +6,7 @@
 package com.aplicacion.servlet;
 
 import herramientas.Comite;
+import herramientas.Pin;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -80,8 +81,9 @@ public class Servlet_finalizarConformacion extends HttpServlet {
             //if(session.getAttribute("idUsuario")!=null&&session.getAttribute("rfc")!=null){
             String idComite=session.getAttribute("idComite").toString();
             String idRol=request.getParameter("idRol"); 
+            String pass=Pin.generaPin();
             Comite c=new Comite();
-            out.print(c.finalizarComite(idComite,idRol));
+            out.print(c.finalizarComite(idComite,idRol,pass));
         }catch(Exception e){
             System.out.println(e.toString());
         }

@@ -79,7 +79,7 @@
 				<textElement textAlignment="Justified">
 					<font fontName="Montserrat" size="9" isBold="false" isItalic="true"/>
 				</textElement>
-				<text><![CDATA[Valoración a partir de: constancia o documento que acredite la participación en los eventos y actividades de fortalecimiento académico y formación integral del educando, expedida por UEMSTIS. ]]></text>
+				<text><![CDATA[Valoración a partir de: constancia o documento que acredite la participación en los eventos y actividades de fortalecimiento académico y formación integral del educando, expedida por la DGETI. ]]></text>
 			</staticText>
 			<staticText>
 				<reportElement positionType="Float" x="22" y="431" width="547" height="48" uuid="8fe53c96-a530-437f-b247-a0b1ee0e937e">

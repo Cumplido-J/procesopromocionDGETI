@@ -65,3 +65,7 @@ span.completo{
 .hidden{
     display:none;
 }
+.table-responsive{
+    max-height:200px;
+    overflow:auto;
+}

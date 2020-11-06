@@ -31,13 +31,15 @@ public class ServletControladorPlantel extends HttpServlet {
         List<Plantel> planteles = null;
         //Entidad entidad = null;
         String id_str = request.getParameter("id");
-        System.out.println(id_str);
+        String ids = request.getParameter("ids");
+        //System.out.println(id_str);
         int id = Integer.parseInt(id_str);
+        int id2 = Integer.parseInt(ids);
         if (id > 0) {
 
             try {
                 //entidad = new Entidad(id);
-                planteles = new PlantelJDBC().select(id);
+                planteles = new PlantelJDBC().select(id,id2);
                 if(planteles.size()>0){
                     
                 out.print(gson.toJson(planteles));

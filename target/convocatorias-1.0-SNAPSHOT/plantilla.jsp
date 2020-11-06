@@ -6,6 +6,12 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%
+    session = (HttpSession) request.getSession(true);    
+    if (session.getAttribute("idUsuario") == null) {
+        response.sendRedirect("login.jsp");
+    }        
+%>
 <!DOCTYPE html>
 <html>
     <head>

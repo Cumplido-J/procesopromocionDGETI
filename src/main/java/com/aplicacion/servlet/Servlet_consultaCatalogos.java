@@ -119,6 +119,10 @@ public class Servlet_consultaCatalogos extends HttpServlet {
                case "16":
                    respuesta=catalogo.desplegarOpcionesPlanteles2(request.getParameter("s"),request.getParameter("e"));                   
                break;
+               case "17":
+                   respuesta=catalogo.desplegarOpcionesJornadaVacante(request.getParameter("i"),request.getParameter("pl"),request.getParameter("pr"));
+                   respuesta+="|"+catalogo.desplegarRequisitosCategoria(request.getParameter("i"));
+               break;
                default : 
                    respuesta="<option value=''>-Seleccione-</option>";
                   break;

@@ -42,7 +42,7 @@
                     <h4>Alta de administrador</h4>                       
                 </div>
                 <div class="row col-xs-12">
-                    <p>Los campos marcados con <span class="text-danger" title="Campo obligatorio">*</span> son requeridos.</p>
+                    <p>Los campos marcados con <span class="text-danger" title="Campo obligatorio">*</span> son obligatorios.</p>
                 </div>
                 <form id="formRegistro" role="form" method="POST" action="RegistrarUsuario">
                 <div class="row">

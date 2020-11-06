@@ -37,18 +37,20 @@
 		<parameter name="plantel" class="java.lang.Integer"/>
 		<parameter name="convocatoria" class="java.lang.String"/>
 		<queryString language="SQL">
-			<![CDATA[SELECT vacancia.tipocategoria,
-	vacancia.cantidadplazas,
-	concat(catcategoriasplaza.categoria,"-",catjornada.jornada,"-",vacancia.vacancia) as categoria
+			<![CDATA[SELECT vacancia.idCategoria as tipocategoria,
+	vacancia.plazas as cantidadplazas,
+	concat(catcategoriasplaza.categoria,"-",catjornada.jornada,"-",vacancia.tipoVacancia) as categoria
 FROM vacancia
 	inner join catcategoriasplaza ON 
-	 vacancia.tipocategoria = catcategoriasplaza.id 
+	 vacancia.idCategoria = catcategoriasplaza.id 
     inner join catjornada on
-     vacancia.jornada=catjornada.id
+     vacancia.idJornada=catjornada.id
+	INNER JOIN convocatoria conv
+	ON conv.idPlantel=vacancia.idPlantel and conv.idPrograma=vacancia.idPrograma
 WHERE 
-	 vacancia.idConvocatoria =  $P{convocatoria} 
-	 AND vacancia.plantel =  $P{plantel} 
-ORDER BY catcategoriasplaza.categoria DESC]]>
+	 conv.id =  $P{convocatoria}
+	 AND vacancia.idPlantel =  $P{plantel} 
+ORDER BY catcategoriasplaza.categoria DESC, catjornada.id desc,vacancia.tipoVacancia DESC]]>
 		</queryString>
 		<field name="tipocategoria" class="java.lang.Integer">
 			<property name="com.jaspersoft.studio.field.label" value="tipocategoria"/>
@@ -69,11 +71,14 @@ ORDER BY catcategoriasplaza.categoria DESC]]>
 	<parameter name="cc" class="java.lang.Integer"/>
 	<parameter name="cp" class="java.lang.Integer"/>
 	<queryString>
-		<![CDATA[SELECT vacancia.tipocategoria, vacancia.cantidadplazas, catcategoriasplaza.categoria from vacancia
+		<![CDATA[SELECT vacancia.idCategoria as tipocategoria, vacancia.plazas as cantidadplazas, catcategoriasplaza.categoria from vacancia
 
 inner join catcategoriasplaza 
-on vacancia.tipocategoria =catcategoriasplaza.id
-where vacancia.idConvocatoria= $P{cc}  and vacancia.plantel= $P{cp} 
+on vacancia.idCategoria =catcategoriasplaza.id
+INNER JOIN 
+    convocatoria conv
+ON conv.idPlantel=vacancia.idPlantel and conv.idPrograma=vacancia.idPrograma
+where conv.id= $P{cc}  and vacancia.idPlantel= $P{cp} 
 order by catcategoriasplaza.categoria]]>
 	</queryString>
 	<field name="tipocategoria" class="java.lang.Integer">

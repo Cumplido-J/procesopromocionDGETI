@@ -312,7 +312,7 @@
                                 <div class="form-group col-md-3">
                                   <label class="control-label" for="jornada">Tipo de jornada:</label>
                                   <select class="form-control input-sm" id="jornada" name="jornada" required>
-                                      ${catalogo.desplegarOpcionesJornada(Docente.infoRegistro[30],Docente.infoRegistro[28])}
+                                      ${catalogo.desplegarOpcionesJornada(Docente.infoRegistro[30],Docente.infoRegistro[32])}
                                   </select>                          
                                 </div>
                                 <div class="form-group col-md-3 datepicker-group">
@@ -357,7 +357,7 @@
                             </div>
                             <div class="row">
                                 <div class="form-group col-md-6">
-                                  <label class="control-label" for="categoriaAspira">Categoría a la que aspira:</label>
+                                  <label class="control-label" for="categoriaAspira">Categoría a la que aspira: <span id="avisoCategoria" class="glyphicon glyphicon-warning-sign text-warning hidden"></span></label>
                                   <select class="form-control input-sm" id="categoriaAspira" name="categoriaAspira" onchange="cambioCategoriaAspira()" required>                                     
                                      ${catalogo.desplegarOpcionesCategoriasVacantes(Docente.infoRegistro[6],Docente.infoRegistro[64],Docente.infoRegistro[42])}
                                   </select>  
@@ -365,9 +365,10 @@
                                 </div>
                                 <div class="form-group col-md-3">
                                   <label class="control-label" for="jornadaAspira">Tipo de jornada:</label>
-                                  <select class="form-control input-sm" id="jornadaAspira" name="jornadaAspira" required>
-                                      ${catalogo.desplegarOpcionesJornadaVacante(Docente.infoRegistro[42],Docente.infoRegistro[6],Docente.infoRegistro[64],Docente.infoRegistro[40])}
-                                  </select>                          
+                                  <select class="form-control input-sm" id="jornadaAspira" name="jornadaAspira" onchange="cambioJornadaAspira()" required>
+                                      ${catalogo.desplegarOpcionesJornadaVacante(Docente.infoRegistro[42],Docente.infoRegistro[6],Docente.infoRegistro[64],Docente.infoRegistro[44])}
+                                  </select>  
+                                  <label class="error" id="alertaJornada" hidden >No puede participar para esta jornada</label>
                                 </div>
                                 <div class="form-group col-md-3">
                                     <label class="control-label">Seleccione el requisito cumplido de acuerdo a su situación:</label><br>
@@ -659,7 +660,7 @@
                         
                       </div>
                       <br/>
-                      <input type="submit" disabled="true" class="btn btn-primary" value="Finalizar registro" id="btnFinalizar">
+                      <input type="submit" disabled="true" class="btn btn-primary" value="Continuar" id="btnFinalizar">
                   </form>
               </div>
           </div>

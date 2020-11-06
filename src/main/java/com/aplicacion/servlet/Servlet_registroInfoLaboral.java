@@ -93,16 +93,18 @@ public class Servlet_registroInfoLaboral extends HttpServlet {
             }
             //out.println(idUsuario);
             Fecha fecha=new Fecha();
-            String activo,ingresoSubsistema="",ingresoPlantel="",idCategoriaJornada="",fechaPlaza="",idTipoNombramiento="",fechaUltimaPromocion="",idCategoriaJornadaAspira="",idPerfilRequerido="",notaSancion="N";
+            String activo,ingresoSubsistema="",ingresoPlantel="",idJornada="",fechaPlaza="",idTipoNombramiento="",fechaUltimaPromocion="",idJornadaAspira="",idPerfilRequerido="",notaSancion="N",idCategoria="",idCategoriaAspira="";
             if(request.getParameter("activoServicio")!=null){
                 activo="S";
                 ingresoSubsistema=fecha.formatoAlmacenar(request.getParameter("ingresoSubsistema"));
-                ingresoPlantel=fecha.formatoAlmacenar(request.getParameter("ingresoPlantel"));            
-                idCategoriaJornada=request.getParameter("jornada");
+                ingresoPlantel=fecha.formatoAlmacenar(request.getParameter("ingresoPlantel")); 
+                idCategoria=request.getParameter("categoria");
+                idJornada=request.getParameter("jornada");
                 fechaPlaza=fecha.formatoAlmacenar(request.getParameter("fechaPlaza"));
                 idTipoNombramiento=request.getParameter("tipoNombramiento");
                 fechaUltimaPromocion=fecha.formatoAlmacenar(request.getParameter("fechaPromocion"));
-                idCategoriaJornadaAspira=request.getParameter("jornadaAspira");
+                idCategoriaAspira=request.getParameter("categoriaAspira");
+                idJornadaAspira=request.getParameter("jornadaAspira");
                 idPerfilRequerido=request.getParameter("opReqCat");                
                 if(request.getParameter("notaDesfavorable")!=null){
                     notaSancion="S";
@@ -115,7 +117,7 @@ public class Servlet_registroInfoLaboral extends HttpServlet {
 
             //out.println(notaSancion);
             Metodos_sql metodo = new Metodos_sql();
-            String[] parametros={idUsuario,activo,ingresoSubsistema,ingresoPlantel,idCategoriaJornada,fechaPlaza,idTipoNombramiento,fechaUltimaPromocion,idCategoriaJornadaAspira,idPerfilRequerido,notaSancion};
+            String[] parametros={idUsuario,activo,ingresoSubsistema,ingresoPlantel,idCategoria,idJornada,fechaPlaza,idTipoNombramiento,fechaUltimaPromocion,idCategoriaAspira,idJornadaAspira,idPerfilRequerido,notaSancion};
             List<String[]> datos;                           
             datos=metodo.ejecutaSP("sp_registroInfoLaboral",parametros);            
             if(!datos.isEmpty()){

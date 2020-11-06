@@ -6,6 +6,12 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%
+    session = (HttpSession) request.getSession(true);    
+    if (session.getAttribute("idUsuario") == null) {
+        response.sendRedirect("login.jsp");
+    }        
+%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -72,9 +78,7 @@
                     <div class="form-group col-md-3">                               
                         <label class="control-label" for="estatus">Estatus:</label>
                         <select class="form-control input-sm" id="estatus" name="estatus" >                                  
-                            <option value="">-Seleccione-</option>
-                            <option value="TEMPORAL">Temporal</option>
-                            <option value="DEFINITIVA">Definitiva</option>
+                            ${catalogo.desplegarOpcionesEstatus()}
                         </select>
                     </div>
                     

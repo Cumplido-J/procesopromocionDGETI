@@ -17,7 +17,7 @@
 	<parameter name="c6" class="java.lang.Integer"/>
 	<queryString>
 		<![CDATA[SELECT  
-vacancia.plantel, vacancia.idConvocatoria,convocatoria.idPrograma, catplanteles.nombre as plantelnombre,
+vacancia.idPlantel as plantel, convocatoria.id as idConvocatoria,convocatoria.idPrograma, catplanteles.nombre as plantelnombre,
 DATE_FORMAT(convocatoria.inicioRegistro, '%d de %M de %Y') as inicioRegistro,
 DATE_FORMAT(convocatoria.finRegistro, '%d de %M de %Y') as finRegistro,
 DATE_FORMAT(convocatoria.publicacion, '%d de %M de %Y') as publicacion,
@@ -29,15 +29,14 @@ DATE_FORMAT(convocatoria.resultados, '%d de %M de %Y') as resultados
 from vacancia
 INNER JOIN 
     convocatoria
-ON
-	vacancia.idConvocatoria= convocatoria.id
+on convocatoria.idPlantel=vacancia.idPlantel and convocatoria.idPrograma=vacancia.idPrograma
 INNER JOIN 
     catplanteles
 ON
-	vacancia.plantel= catplanteles.id
-WHERE vacancia.plantel=  $P{p6}  and vacancia.idConvocatoria= $P{c6} 
+	vacancia.idPlantel= catplanteles.id
+WHERE vacancia.idPlantel=  $P{p6}  and convocatoria.id= $P{c6} 
 
-GROUP BY vacancia.idConvocatoria]]>
+GROUP BY convocatoria.id]]>
 	</queryString>
 	<field name="plantel" class="java.lang.Integer">
 		<property name="com.jaspersoft.studio.field.label" value="plantel"/>
@@ -102,7 +101,7 @@ GROUP BY vacancia.idConvocatoria]]>
 				<textElement textAlignment="Justified">
 					<font fontName="Montserrat" size="9"/>
 				</textElement>
-				<text><![CDATA[Todo aspirante deberá registrarse para participar en el proceso de Promoción en el servicio docente por cambio de categoría en Educación Media Superior, a través de la plataforma electrónica que la UEMSTIS ha definido para este proceso: http://www.promociondocente.uemstis.sems.gob.mx. ]]></text>
+				<text><![CDATA[Todo aspirante deberá registrarse para participar en el proceso de Promoción en el servicio docente por cambio de categoría en Educación Media Superior, a través de la plataforma electrónica que la DGETI ha definido para este proceso: http://www.promociondocente.dgeti.sep.gob.mx. ]]></text>
 			</staticText>
 			<staticText>
 				<reportElement positionType="Float" x="1" y="441" width="571" height="40" uuid="f3ae0615-bb93-4786-9372-94bd29facf7f">
@@ -114,7 +113,7 @@ GROUP BY vacancia.idConvocatoria]]>
 				<text><![CDATA[En la plataforma electrónica se solicitará la CURP y, deberá ingresar un correo electrónico, a través del cual se le proporcionará una contraseña de acceso. La CURP y la contraseña proporcionada constituyen el medio para ingresar a la plataforma electrónica y realizar su registro electrónico.]]></text>
 			</staticText>
 			<staticText>
-				<reportElement positionType="Float" x="1" y="482" width="571" height="45" uuid="d72af018-33e2-4e30-9549-adf6dd4e74a3">
+				<reportElement positionType="Float" x="1" y="482" width="571" height="53" uuid="d72af018-33e2-4e30-9549-adf6dd4e74a3">
 					<property name="com.jaspersoft.studio.unit.x" value="px"/>
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
@@ -159,7 +158,7 @@ GROUP BY vacancia.idConvocatoria]]>
 				<textElement textAlignment="Justified">
 					<font fontName="Montserrat" size="9"/>
 				</textElement>
-				<text><![CDATA[Una vez verificada y confirmada la información por el aspirante y el Responsable de mesa, a través de la plataforma digital de la UEMSTIS se generará el comprobante de registro. ]]></text>
+				<text><![CDATA[Una vez verificada y confirmada la información por el aspirante y el Responsable de mesa, a través de la plataforma digital de la DGETI se generará el comprobante de registro. ]]></text>
 			</staticText>
 			<staticText>
 				<reportElement positionType="Float" x="0" y="293" width="571" height="19" uuid="28c433dc-0281-43b7-a22d-74152985f072">
@@ -188,7 +187,7 @@ GROUP BY vacancia.idConvocatoria]]>
 				<textElement textAlignment="Justified">
 					<font fontName="Montserrat" size="9"/>
 				</textElement>
-				<text><![CDATA[3. La segunda etapa estará a cargo de un Consejo dictaminador, que será el órgano colegiado constituido por las áreas centrales de la UEMSTIS para ratificar o rectificar los resultados de las puntuaciones de los criterios de valoración y los predictámenes emitidos por el comité revisor.]]></text>
+				<text><![CDATA[3. La segunda etapa estará a cargo de un Consejo dictaminador, que será el órgano colegiado constituido por las áreas centrales de la DGETI para ratificar o rectificar los resultados de las puntuaciones de los criterios de valoración y los predictámenes emitidos por el comité revisor.]]></text>
 			</staticText>
 			<staticText>
 				<reportElement positionType="Float" x="0" y="200" width="571" height="17" uuid="201e8913-5aa4-4ff1-ad18-41ec4b3fbe54">

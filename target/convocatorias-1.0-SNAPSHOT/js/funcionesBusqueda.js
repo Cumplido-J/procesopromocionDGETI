@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-$(document).ready(function () {    
+$(document).ready(function () { 
     $("#formBusqueda").submit(function(event){
 	event.preventDefault(); //prevent default action 
 	var post_url = $(this).attr("action"); //get form action url

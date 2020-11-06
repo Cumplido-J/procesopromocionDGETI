@@ -14,12 +14,13 @@ function AJAX(){
 }
 var ajax = AJAX();
 function listarPlanteles(id){
-     var cboplanteles = document.getElementById('cboplantel')
-     var tbody = document.getElementById('vacanciaData')
+    var ids=document.getElementById('cbosubsistema').value;
+     var cboplanteles = document.getElementById('cboplantel');
+     var tbody = document.getElementById('vacanciaData');
     if(id>0){
         tbody.innerHTML = "";
         
-    ajax.open("GET",'ServletControladorPlantel?id='+id, true);
+    ajax.open("GET",'ServletControladorPlantel?id='+id+'&ids='+ids, true);
     ajax.responseType = "json";
         ajax.onreadystatechange=function(){
             if (ajax.readyState === 4){
@@ -150,7 +151,9 @@ function crearReporte(convocatoria){
         }
     ajax.send(null);        
 }
-
+function cambioSubsistema(){
+    $("#cboentidad").val("");
+}
 
 /*window.addEventListener('load', function() {
 

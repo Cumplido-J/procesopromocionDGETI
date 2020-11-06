@@ -84,7 +84,7 @@ public class Servlet_buscarComite extends HttpServlet {
                 String plantel=request.getParameter("plantel");
                 String tipo=request.getParameter("tipo");                
                 Comite c=new Comite();
-                out.print(c.desplegarComite(plantel,programa,tipo));
+                out.print(c.desplegarComite(programa,plantel,tipo));
                                 
         }catch(Exception e){
             System.out.println(e.toString());

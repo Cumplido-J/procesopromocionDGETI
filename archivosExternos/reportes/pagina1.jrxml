@@ -16,18 +16,17 @@
 	<parameter name="c1" class="java.lang.Integer"/>
 	<queryString>
 		<![CDATA[SELECT  
-	vac.plantel, vac.idConvocatoria,conv.idPrograma, plantel.nombre as plantelnombre from vacancia vac
+	vac.idPlantel as plantel, conv.id as idConvocatoria,conv.idPrograma, plantel.nombre as plantelnombre from vacancia vac
 INNER JOIN 
     convocatoria conv
-ON
-	vac.idConvocatoria= conv.id
+on conv.idPlantel=vac.idPlantel and conv.idPrograma=vac.idPrograma
 INNER JOIN 
     catplanteles plantel
 ON
-	vac.plantel= plantel.id
-WHERE vac.plantel= $P{p1}    and vac.idConvocatoria=  $P{c1} 
+	vac.idPlantel= plantel.id
+WHERE vac.idplantel= $P{p1}    and conv.id=  $P{c1} 
 
-GROUP BY vac.idConvocatoria]]>
+GROUP BY conv.id]]>
 	</queryString>
 	<field name="plantel" class="java.lang.Integer">
 		<property name="com.jaspersoft.studio.field.label" value="plantel"/>
@@ -59,7 +58,7 @@ GROUP BY vac.idConvocatoria]]>
 				<text><![CDATA[CONVOCA]]></text>
 			</staticText>
 			<textField>
-				<reportElement positionType="Float" x="0" y="44" width="571" height="45" uuid="0b99d2af-79a2-44f4-8559-8eda8b620364">
+				<reportElement positionType="Float" x="0" y="44" width="571" height="48" uuid="0b99d2af-79a2-44f4-8559-8eda8b620364">
 					<property name="com.jaspersoft.studio.unit.x" value="px"/>
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
@@ -75,7 +74,7 @@ GROUP BY vac.idConvocatoria]]>
 				<textElement textAlignment="Justified">
 					<font fontName="Montserrat" size="9"/>
 				</textElement>
-				<textFieldExpression><![CDATA["Al personal docente frente a grupo, que preste sus servicios en la Dirección General de Educación Tecnológica Industrial y de Servicios (UEMSTIS), en el "+$F{plantelnombre}+", a participar en el proceso de selección para la promoción en el servicio docente por cambio de categoría, correspondiente al Ciclo Escolar 2020-2021, de conformidad con las siguientes"]]></textFieldExpression>
+				<textFieldExpression><![CDATA["Al personal docente frente a grupo, que preste sus servicios en la Dirección General de Educación Tecnológica Industrial y de Servicios (DGETI), en el "+$F{plantelnombre}+", a participar en el proceso de selección para la promoción en el servicio docente por cambio de categoría, correspondiente al Ciclo Escolar 2020-2021, de conformidad con las siguientes"]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement positionType="Float" x="0" y="158" width="571" height="22" uuid="813c39b7-7535-4148-bc32-3a8cee660c06"/>
@@ -157,7 +156,7 @@ GROUP BY vac.idConvocatoria]]>
 				<text><![CDATA[Acreditar que ha ocupado la categoría que ostenta al momento de emitirse la convocatoria, por un periodo de al menos dos años;]]></text>
 			</staticText>
 			<staticText>
-				<reportElement positionType="Float" x="47" y="443" width="520" height="22" uuid="66942df3-75a3-41cf-a002-d482b7e1f034">
+				<reportElement positionType="Float" x="47" y="443" width="520" height="27" uuid="66942df3-75a3-41cf-a002-d482b7e1f034">
 					<property name="com.jaspersoft.studio.unit.x" value="px"/>
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
@@ -167,7 +166,7 @@ GROUP BY vac.idConvocatoria]]>
 				<text><![CDATA[Haber transcurrido al menos dos años a partir de su última promoción en el servicio docente por asignación de horas adicionales definitivas, para los docentes y técnicos docentes de asignatura;]]></text>
 			</staticText>
 			<staticText>
-				<reportElement positionType="Float" x="47" y="471" width="520" height="22" uuid="629f2a82-306a-47af-b7a2-3328ea20a9cc">
+				<reportElement positionType="Float" x="47" y="471" width="520" height="27" uuid="629f2a82-306a-47af-b7a2-3328ea20a9cc">
 					<property name="com.jaspersoft.studio.unit.x" value="px"/>
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
@@ -177,7 +176,7 @@ GROUP BY vac.idConvocatoria]]>
 				<text><![CDATA[Contar con el perfil profesional afín al campo disciplinar, actividad paraescolar o módulo profesional, para la plaza vacante que desea participar;]]></text>
 			</staticText>
 			<staticText>
-				<reportElement positionType="Float" x="47" y="499" width="520" height="22" uuid="2a632c16-e72c-475f-a9c2-83ad7f0d6947">
+				<reportElement positionType="Float" x="47" y="499" width="520" height="28" uuid="2a632c16-e72c-475f-a9c2-83ad7f0d6947">
 					<property name="com.jaspersoft.studio.unit.x" value="px"/>
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
@@ -197,7 +196,7 @@ GROUP BY vac.idConvocatoria]]>
 				<text><![CDATA[Los docentes que imparten la asignatura de inglés deben contar con título y cédula profesional de la licenciatura en la enseñanza del inglés o equivalente. Quienes tengan una licenciatura distinta, deberán presentar además la Certificación Nacional de Nivel de Idioma (CENNI) vigente, al menos en el nivel 14;]]></text>
 			</staticText>
 			<staticText>
-				<reportElement positionType="Float" x="47" y="568" width="520" height="22" uuid="5a8c3d0b-af75-4a38-9428-ae86eb12b56f">
+				<reportElement positionType="Float" x="47" y="568" width="520" height="27" uuid="5a8c3d0b-af75-4a38-9428-ae86eb12b56f">
 					<property name="com.jaspersoft.studio.unit.x" value="px"/>
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
@@ -213,7 +212,7 @@ GROUP BY vac.idConvocatoria]]>
 				<textElement textAlignment="Justified">
 					<font fontName="Montserrat" size="9"/>
 				</textElement>
-				<text><![CDATA[Cumplir con las reglas de compatibilidad que emitió la USICAMM, si cuenta con más de una plaza, tanto previo a su participación en el proceso de selección a para la promoción en el servicio docente por cambio de categoría, como al promoverse, si es el caso, y ]]></text>
+				<text><![CDATA[Cumplir con las reglas de compatibilidad que emitió la USICAMM, si cuenta con más de una plaza, tanto previo a su participación en el proceso de selección para la promoción en el servicio docente por cambio de categoría, como al promoverse, si es el caso, y ]]></text>
 			</staticText>
 			<staticText>
 				<reportElement positionType="Float" x="47" y="637" width="520" height="19" uuid="341a8314-d5bb-4cf7-bde1-e4c776a1697f">
@@ -357,10 +356,10 @@ GROUP BY vac.idConvocatoria]]>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Montserrat" isBold="true"/>
 				</textElement>
-				<text><![CDATA[PCC-UEMSTIS]]></text>
+				<text><![CDATA[PCC-DGETI]]></text>
 			</staticText>
 			<textField textAdjust="StretchHeight">
-				<reportElement positionType="Float" x="47" y="373" width="520" height="33" uuid="8a5e9a74-c336-43a2-a735-dfff9e101916">
+				<reportElement positionType="Float" x="47" y="373" width="520" height="37" uuid="8a5e9a74-c336-43a2-a735-dfff9e101916">
 					<property name="com.jaspersoft.studio.unit.x" value="px"/>
 				</reportElement>
 				<textElement textAlignment="Justified">

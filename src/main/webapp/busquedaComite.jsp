@@ -5,6 +5,12 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%
+    session = (HttpSession) request.getSession(true);    
+    if (session.getAttribute("idUsuario") == null) {
+        response.sendRedirect("login.jsp");
+    }        
+%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -13,6 +19,25 @@
         <jsp:useBean id="comite" class="herramientas.Comite" />
     </head>
     <body>
+        <c:set var="disabled1" value=""></c:set>
+        <c:set var="disabled2" value=""></c:set>
+        <c:set var="disabled3" value=""></c:set>
+        <c:set var="disabled4" value=""></c:set> 
+        
+        <c:if test='${sessionScope["rol"]!="S"}'>
+            <c:if test='${sessionScope["programa"]!=""}'>
+                <c:set var="disabled1" value="disabled"></c:set>
+            </c:if>
+            <c:if test='${sessionScope["subsistema"]!=""}'>
+                <c:set var="disabled2" value="disabled"></c:set>
+            </c:if>
+            <c:if test='${sessionScope["entidad"]!=null}'>
+                <c:set var="disabled3" value="disabled"></c:set>
+            </c:if>
+            <c:if test='${sessionScope["plantel"]!=null}'>
+                <c:set var="disabled4" value="disabled"></c:set>
+            </c:if>
+        </c:if>
         <main class="page">
             <jsp:include page="seccionesPlantilla/barraSuperior.jsp"/>
             <div class="container">
@@ -23,29 +48,29 @@
                 <div class="row">
                     <div class="form-group col-xs-12">                               
                         <label class="control-label" for="programa">Programa:</label>
-                        <select class="form-control input-sm" id="programa" name="programa" required>                                  
-                            ${catalogo.desplegarOpcionesProgramas()}
+                        <select class="form-control input-sm ${disabled1}" id="programa" name="programa" required>                                  
+                            ${catalogo.desplegarOpcionesProgramas(sessionScope["programa"])}
                         </select>
                     </div>
                 </div>
                 <div class="row">
                     <div class="form-group col-md-3">                               
                         <label class="control-label" for="subsistema">Subsistema:</label>
-                        <select class="form-control input-sm" id="subsistema" name="subsistema" onchange="actualizarPlanteles()" required>                                  
-                            ${catalogo.desplegarOpcionesSubsistema()}
+                        <select class="form-control input-sm ${disabled2}" id="subsistema" name="subsistema" onchange="actualizarPlanteles()" required>                                  
+                            ${catalogo.desplegarOpcionesSubsistema(sessionScope["subsistema"])}
                         </select>
                     </div>
                     <div class="form-group col-md-3">                                               
                       <label class="control-label" for="entidad">Entidad</label>
-                      <select class="form-control input-sm" id="entidad" name="entidad" onchange="actualizarPlanteles()" required>                                  
-                          ${catalogo.desplegarOpcionesEstado()}
+                      <select class="form-control input-sm ${disabled3}" id="entidad" name="entidad" onchange="actualizarPlanteles()" required>                                  
+                          ${catalogo.desplegarOpcionesEstado(sessionScope["entidad"])}
                       </select>
                     </div>
                       
                     <div class="form-group col-md-3">                               
                         <label class="control-label" for="plantel">Plantel:</label>
-                        <select class="form-control input-sm" id="plantel" name="plantel" required>                                  
-                            <option value=''>-Seleccione-</option>
+                        <select class="form-control input-sm ${disabled4}" id="plantel" name="plantel" required>                                  
+                            ${catalogo.desplegarOpcionesPlanteles2(sessionScope["subsistema"],sessionScope["entidad"],sessionScope["plantel"])}
                         </select>
                     </div>
                     <div class="form-group col-md-3">                               
@@ -53,7 +78,7 @@
                         <select class="form-control input-sm" id="tipo" name="tipo" required>                                  
                             <option value=''>-Seleccione-</option>
                             <option value='R'>Comité revisor</option>
-                            <option value='D'>Consejo dictaminador</option>
+                            <!--<option value='D'>Consejo dictaminador</option>-->
                         </select>
                     </div>
                 </div>
@@ -77,7 +102,7 @@
                                 <th>Opciones</th>
                             </tr>
                         </thead>
-                        <tbody id="seccionEditable">${comite.desplegarComite()}</tbody>
+                        <tbody id="seccionEditable">${comite.desplegarComite(sessionScope["programa"],sessionScope["plantel"],"")}</tbody>
                     </table>
                 </div>
             </div>

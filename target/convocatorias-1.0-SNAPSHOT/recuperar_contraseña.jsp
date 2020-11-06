@@ -69,11 +69,11 @@
             <section class="sectionart">
                 <div class="articulosart">
                     <h3>Recuperar Contraseña</h3>	
-                    <form class="form-horizontal" role="form" method="POST" action="Servlet_recuperarclave">
+                    <form class="form-horizontal" role="form" method="POST" action="RecuperacionContrasena">
                         <div class="form-group">
-                            <label class="col-sm-3 control-label" for="curp">Correo:</label>
+                            <label class="col-sm-3 control-label" for="rfc">Usuario:</label>
                             <div class="col-sm-9">
-                                <input class="form-control" id="correo" name="correo" placeholder="usuario@servidor.com" type="text">
+                                <input class="form-control" id="rfc" name="rfc"  type="text">
                             </div>
                         </div>
 

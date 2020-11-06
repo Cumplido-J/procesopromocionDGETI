@@ -597,7 +597,7 @@
                             </div>
                             <div class='table-responsive'>
                                 <table class='table table-bordered table-condensed'>
-                                    <tr><th>Nombre de  la publicación</th><th>Medio en el que se publicó</th><th>Fecha de publicación</th><th>ISSN</th><th>Borrar</th></tr>
+                                    <tr><th>Nombre de  la publicación</th><th>Medio en el que se publicó</th><th>Fecha de publicación</th><th>ISSN / ISBN</th><th>Borrar</th></tr>
                                     <tbody id="tablaPublicaciones">
                                         ${publicaciones[0]}
                                     </tbody>
@@ -994,7 +994,7 @@
                                 <input type="text" class="form-control input-sm" id="fechaPublicacion" name="fecha" required/>
                             </div>
                             <div class="form-group col-md-6">                                                             
-                                <label class="control-label">ISSN:</label>
+                                <label class="control-label">ISSN/ISBN:</label>
                                 <input type="text" class="form-control input-sm" name="ISSN" maxlength="50" required/>
                             </div>
                         </div>

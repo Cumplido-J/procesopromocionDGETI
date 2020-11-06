@@ -58,4 +58,49 @@ public class Datos {
             return respuesta;        
         }
     }
+    public  String desplegarVacancias(String idPrograma,String idSubsistema,String idEntidad,String idPlantel,String tipoCategoria){        
+        String respuesta="<tr><td colspan='6' class='text-center'>Sin información</td></tr>";        
+        try{
+            String[] parametros={idPrograma,idSubsistema,idEntidad,idPlantel,tipoCategoria};
+            List<String[]> datos=metodos.ejecutaSP("sp_consultaVacancias",parametros);
+            if(!datos.isEmpty()){
+                respuesta="";
+                for(String[] dato:datos)
+                {
+                    respuesta+="<tr><td>"+dato[2]+"</td><td>"+dato[4]+"</td><td>"+dato[6]+"</td><td>"+dato[8]+"</td><td>"+dato[10]+"</td><td>"+dato[12]+"</td><td>"+dato[13]+"</td><td>"+dato[14]+"</td>"; 
+                    //respuesta+="<form method='POST' action='AltaVacancia'><input type='hidden' name='idConvocatoria' value='"+dato[0]+"'><input class='btn btn-sm btn-link' type='submit' value='Editar'/></form>";                                                                                  
+                    respuesta+="</tr>";
+                }
+            }
+        }catch(Exception e){
+            respuesta=e.toString();
+        }finally{
+            return respuesta;        
+        }
+    }
+    public  String desplegarDocentes(String idPrograma,String idSubsistema,String idEntidad,String idPlantel,String nombreRFC,String estatus){        
+        String respuesta="<tr><td colspan='9' class='text-center'>Sin información</td></tr>";        
+        try{
+            String[] parametros={idPrograma,idSubsistema,idEntidad,idPlantel,nombreRFC,estatus};
+            List<String[]> datos=metodos.ejecutaSP("sp_consultaDocentes",parametros);
+            if(!datos.isEmpty()){
+                respuesta="";
+                for(String[] dato:datos)
+                {
+                    respuesta+="<tr><td>"+dato[12]+"</td><td>"+dato[10]+"</td><td>"+dato[2]+"</td><td>"+dato[4]+"</td><td>"+dato[6]+"</td><td>"+dato[5]+"</td><td>"+dato[8]+"</td><td>"+dato[13]+"</td><td>"; 
+                    if(!dato[13].equals("")){
+                        respuesta+="<span class='glyphicon glyphicon-ok-sign completo' title='Aspirante evaluado'></span>";
+                    }else{
+                        respuesta+="<form method='POST' action='VistaDocente'><input type='hidden' name='idUsuario' value='"+dato[0]+"'><input type='hidden' name='rfc' value='"+dato[6]+"'><input class='btn btn-sm btn-link' type='submit' value='Ver información'/></form>";                                                               
+                    }
+                    
+                    respuesta+="</td></tr>";
+                }
+            }
+        }catch(Exception e){
+            respuesta=e.toString();
+        }finally{
+            return respuesta;        
+        }
+    }
 }
