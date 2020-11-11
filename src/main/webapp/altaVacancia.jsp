@@ -52,35 +52,35 @@
                 <form id="formRegistro" role="form" method="POST" action="RegistrarVacancia">
                 <div class="row">
                     <div class="form-group col-xs-12">                               
-                        <label class="control-label" for="programa">Programa:</label>
-                        <select class="form-control input-sm ${disabled1}" id="programa" name="programa" >                                  
+                        <label class="control-label" for="programa">Programa:<span class="text-danger" title="Campo obligatorio">*</span></label>
+                        <select class="form-control input-sm ${disabled1}" id="programa" name="programa" required>                                  
                             ${catalogo.desplegarOpcionesProgramas(sessionScope["programa"])}
                         </select>
                     </div>
                 </div>
                 <div class="row">
                     <div class="form-group col-md-3">                               
-                        <label class="control-label" for="subsistema">Subsistema:</label>
-                        <select class="form-control input-sm ${disabled2}" id="subsistema" name="subsistema" onchange="actualizarPlanteles()" >                                  
+                        <label class="control-label" for="subsistema">Subsistema: <span class="text-danger" title="Campo obligatorio">*</span></label>
+                        <select class="form-control input-sm ${disabled2}" id="subsistema" name="subsistema" onchange="actualizarPlanteles()" required>                                  
                             ${catalogo.desplegarOpcionesSubsistema(sessionScope["subsistema"])}
                         </select>
                     </div>
                     <div class="form-group col-md-3">                                               
-                      <label class="control-label" for="entidad">Entidad</label>
-                      <select class="form-control input-sm ${disabled3}" id="entidad" name="entidad" onchange="actualizarPlanteles()" >                                  
+                      <label class="control-label" for="entidad">Entidad: <span class="text-danger" title="Campo obligatorio">*</span></label>
+                      <select class="form-control input-sm ${disabled3}" id="entidad" name="entidad" onchange="actualizarPlanteles()" required>                                  
                           ${catalogo.desplegarOpcionesEstado(sessionScope["entidad"])}
                       </select>
                     </div>
                       
                     <div class="form-group col-md-3">                               
-                        <label class="control-label" for="plantel">Plantel:</label>
-                        <select class="form-control input-sm ${disabled4}" id="plantel" name="plantel" >                                  
+                        <label class="control-label" for="plantel">Plantel:<span class="text-danger" title="Campo obligatorio">*</span></label>
+                        <select class="form-control input-sm ${disabled4}" id="plantel" name="plantel" required>                                  
                              ${catalogo.desplegarOpcionesPlanteles2(sessionScope["subsistema"],sessionScope["entidad"],sessionScope["plantel"])}
                         </select>
                     </div>                        
                     <div class="form-group col-md-3">                               
-                        <label class="control-label" for="categoria">Categoria:</label>
-                        <select class="form-control input-sm" id="categoria" name="categoria" onChange="cambioCategoria(this,'tipoCategoria','jornada')" >                                  
+                        <label class="control-label" for="categoria">Categoria:<span class="text-danger" title="Campo obligatorio">*</span></label>
+                        <select class="form-control input-sm" id="categoria" name="categoria" onChange="cambioCategoria(this,'tipoCategoria','jornada')" required>                                  
                             ${catalogo.desplegarOpcionesCategorias()}
                         </select>
                         <input type="hidden" id="tipoCategoria" name="tipoCategoria"/>
@@ -88,18 +88,22 @@
                 </div>
                 <div class="row">
                     <div class="form-group col-md-3">                               
-                        <label class="control-label" for="jornada">Jornada:</label>
-                        <select class="form-control input-sm" id="jornada" name="jornada" >                                  
+                        <label class="control-label" for="jornada">Jornada:<span class="text-danger" title="Campo obligatorio">*</span></label>
+                        <select class="form-control input-sm" id="jornada" name="jornada" onchange="cambioJornada(this)" required>                                  
                             ${catalogo.desplegarOpcionesJornada("")}
                         </select>
                     </div>
-                    <div class="form-group col-md-3">                               
-                        <label class="control-label" for="vacancia">Cantidad de plazas vacantes:</label>
-                        <input type="text" class="form-control input-sm" id="vacancia" name="vacancia"/>
+                    <div id="seccionHoras" class="form-group col-md-3 hidden">
+                        <label class="control-label">Cantidad de horas:<span class="text-danger" title="Campo obligatorio">*</span></label>
+                        <input type="text" class="form-control input-sm" id="horas" name="horas" maxlength="2"/>                        
                     </div>
                     <div class="form-group col-md-3">                               
-                        <label class="control-label" for="tipoVacancia">Tipo de vacancia:</label>
-                        <select class="form-control input-sm" id="tipoVacancia" name="tipoVacancia" >                                  
+                        <label class="control-label" for="vacancia">Cantidad de plazas vacantes:<span class="text-danger" title="Campo obligatorio">*</span></label>
+                        <input type="text" class="form-control input-sm" id="vacancia" name="vacancia" required/>
+                    </div>
+                    <div class="form-group col-md-3">                               
+                        <label class="control-label" for="tipoVacancia">Tipo de vacancia:<span class="text-danger" title="Campo obligatorio">*</span></label>
+                        <select class="form-control input-sm" id="tipoVacancia" name="tipoVacancia" required>                                  
                             <option value="Real">Real</option>
                         </select>
                     </div>

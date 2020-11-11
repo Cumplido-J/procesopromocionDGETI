@@ -112,6 +112,7 @@ com\convocatoria\servlet\ServletControlador.class
 com\aplicacion\servlet\Servlet_registroIntegranteComite.class
 correos\Enviar_clave.class
 herramientas\Archivo.class
+com\aplicacion\servlet\Servlet_administracionPlaza.class
 com\aplicacion\servlet\Servlet_P_Vacancia.class
 com\aplicacion\servlet\Servlet_regresar.class
 metodos_sql\Metodos_sql.class

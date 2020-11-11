@@ -7,6 +7,13 @@ $(document).ready(function () {
     $('#formRegistro').submit(function(e) {
         e.preventDefault();
     }).validate({  
+        rules: {
+            'horas':{
+                number:true,
+                min:1,
+                max:19
+            }
+        },
         messages: {
             'programa':{
                 required: "Seleccione una opción"
@@ -20,30 +27,24 @@ $(document).ready(function () {
             'plantel':{
                 required: "Seleccione una opción"
             },
-            'publicacion':{
-                required: "Campo requerido"
+            'categoria':{
+                required: "Seleccione una opción"
             },
-            'inicioRegistro':{
-                required: "Campo requerido"
+            'jornada':{
+                required: "Seleccione una opción"
             },
-            'finRegistro':{
+            'vacancia':{
                 required: "Campo requerido"
+            },            
+            'tipoVacancia':{
+                required: "Seleccione una opción"
             },
-            'inicioValoracion':{
-                required: "Campo requerido"
-            },
-            'finValoracion':{
-                required: "Campo requerido"
-            },
-            'inicioDictaminacion':{
-                required: "Campo requerido"
-            },
-            'finDictaminacion':{
-                required: "Campo requerido"
-            },
-            'resultados':{
-                required: "Campo requerido"
+            'horas':{
+                required: "Campo requerido",
+                min:"Ingrese un valor mayor a 0",
+                max:"Ingrese un valor menor a 20"
             }
+                    
         },
         submitHandler:function(){
             var aux=$("#btnEnviar").val();
@@ -89,5 +90,16 @@ function cambioCategoria() {
             $("#jornada").html(respuesta);
         });
         
+    }
+}
+
+function cambioJornada(objeto){
+    var jornada=objeto.value;
+    if(jornada=="1"){
+        $("#seccionHoras").removeClass("hidden");
+        $("#horas").attr("required",true);
+    }else{
+        $("#seccionHoras").addClass("hidden");
+        $("#horas").removeAttr("required");
     }
 }

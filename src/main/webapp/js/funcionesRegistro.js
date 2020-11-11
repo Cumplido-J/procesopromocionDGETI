@@ -41,16 +41,16 @@ $(document).ready(function () {
             },
             'egreso':{
                 required: "Campo requerido",
-                min:"Ingrese un valor válido",
-                number:"Ingrese un valor válido"
+                min:"Ingrese un año válido",
+                number:"Ingrese un año válido"
             },
             'modalidad':{
                 required: "Seleccione una opción"
             },
             'titulacion':{
                 required: "Campo requerido",
-                min:"Ingrese un valor válido",
-                number:"Ingrese un valor válido"
+                min:"Ingrese un año válido",
+                number:"Ingrese un año válido"
             },
             'documento':{
                 required: "Seleccione una opción"
@@ -98,19 +98,7 @@ $(document).ready(function () {
             },
             'plantel':{
                 required: "Seleccione una opción"
-            },
-            'categoria':{
-                required: "Seleccione una opción"
-            },
-            'jornada':{
-                required: "Seleccione una opción"
-            },
-            'fechaPlaza':{
-                required: "Campo requerido"
-            },
-            'tipoNombramiento':{
-                required: "Seleccione una opción"
-            },
+            },            
             'fechaPromocion':{
                 required: "Campo requerido"
             },
@@ -146,6 +134,62 @@ $(document).ready(function () {
                 }
             });
             return false;            
+        }
+    });    
+    $('#formPlaza').submit(function(e) {
+        e.preventDefault();
+    }).validate({
+        rules:{            
+            'horas': {
+                number: true,
+                min:1,
+                max:19
+            }
+        },
+        messages: {
+            'categoria':{
+                required: "Seleccione una opción"
+            },
+            'jornada':{
+                required: "Seleccione una opción"
+            },
+            'fechaPlaza':{
+                required: "Campo requerido"
+            },
+            'tipoNombramiento':{
+                required: "Seleccione una opción"
+            },
+            'horas': {
+                required: "Campo requerido",
+                number:"Ingrese sólo números",
+                min:"Ingrese un valor mayor a 0",
+                max:"Ingrese un valor menor a 20"
+            }
+        },
+        submitHandler:function(){
+            $.ajax({
+                type:$('#formPlaza').attr("method"),
+                url:$('#formPlaza').attr("action"),
+                data:$('#formPlaza').serialize(),
+                beforeSend:function(){
+                    $("#btnGuardarPlaza").val("Guardando...");
+                    $("#btnGuardarPlaza").attr("disabled","disabled");
+                },
+                complete:function(){
+                   $("#btnGuardarPlaza").val("Guardar"); 
+                   $("#btnGuardarPlaza").removeAttr("disabled");
+                   $("#modalPlazas").modal("hide");
+                },success:function(data){
+                    if(data.includes("<tr>")){                        
+                        $("#tablaPlazas").html(data);
+                    }
+                    else{
+                        $("#mensaje").html(data);            
+                        $("#modalMensaje").modal("show");
+                    }                    
+                }
+            });
+            return false;
         }
     });
     $('#formInfoHorasGrupo').submit(function(e) {
@@ -1168,4 +1212,17 @@ function cambioCarrera(){
         $("#carrera").val("");
     }
 }
-
+function abrirModalPlazas(){
+    $("#formPlaza")[0].reset();
+    $("#modalPlazas").modal("show");
+}
+function cambioJornada(objeto){
+    var jornada=objeto.value;
+    if(jornada=="1"){
+        $("#seccionHoras2").removeClass("hidden");
+        $("#horas2").attr("required",true);
+    }else{
+        $("#seccionHoras2").addClass("hidden");
+        $("#horas2").removeAttr("required");
+    }
+}

@@ -84,12 +84,13 @@ public class Servlet_registrarVacancia extends HttpServlet {
             String tipoCategoria=request.getParameter("tipoCategoria");
             String jornada=request.getParameter("jornada");
             String vacancia=request.getParameter("vacancia");
+            String horas=request.getParameter("horas");
             
             String respuesta="Error en almacenamiento de datos, intente nuevamente";
             Metodos_sql metodo = new Metodos_sql();
             List<String[]> datos;       
             //_idEntidad,_idPlantel,_tipoCategoria,_plazas,_idCategoriaAux,_idJornadaAux,'Real',_idPrograma,_idSubsistema
-            String[] parametros={entidad,plantel,tipoCategoria,vacancia,categoria,jornada,programa,subsistema};                                      
+            String[] parametros={entidad,plantel,tipoCategoria,vacancia,categoria,jornada,programa,subsistema,horas};                                      
             datos=metodo.ejecutaSP("sp_registraVacancia",parametros);            
             if(!datos.isEmpty()){
                 respuesta=datos.get(0)[0]; 

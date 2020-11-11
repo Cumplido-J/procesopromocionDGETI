@@ -20,6 +20,7 @@
         <jsp:useBean id="mensaje" class="com.aplicacion.beans.Mensaje" />
         <jsp:useBean id="catalogo" class="herramientas.Catalogos" />
         <jsp:useBean id="fecha" class="herramientas.Fecha" />
+        <jsp:useBean id="dato" class="herramientas.Datos" />
     </head>
     <body>
         <input type="hidden" id="mensajeRegistroCompleto" value="${mensaje.registroCompleto}" />
@@ -303,29 +304,17 @@
                                 </div>  
                             </div>
                             <div class="row">
-                                <div class="form-group col-md-3">
-                                  <label class="control-label" for="categoria">Categoría actual:</label>
-                                  <select class="form-control input-sm" id="categoria" name="categoria" onchange="cambioCategoria()" required>
-                                    ${catalogo.desplegarOpcionesCategorias(Docente.infoRegistro[30])}
-                                  </select>                          
+                                <div class='text-center'>
+                                    <input type='button' class='btn btn-sm btn-link' value='(+) Agregar información de plazas' onclick="abrirModalPlazas();" />
                                 </div>
-                                <div class="form-group col-md-3">
-                                  <label class="control-label" for="jornada">Tipo de jornada:</label>
-                                  <select class="form-control input-sm" id="jornada" name="jornada" required>
-                                      ${catalogo.desplegarOpcionesJornada(Docente.infoRegistro[30],Docente.infoRegistro[32])}
-                                  </select>                          
-                                </div>
-                                <div class="form-group col-md-3 datepicker-group">
-                                  <label class="control-label" for="fechaPlaza" style="font-size: 12px;">Fecha desde que ostenta la plaza:</label>
-                                  <input class="form-control input-sm" id="fechaPlaza" name="fechaPlaza" type="text" value="${fecha.formatoImprimir(Docente.infoRegistro[34])}" required>
-
-                                </div>
-                                <div class="form-group col-md-3">
-                                  <label class="control-label" for="tipoNombramiento">Tipo de nombramiento:</label>
-                                  <select class="form-control input-sm" id="tipoNombramiento" name="tipoNombramiento" required>                                    
-                                    ${catalogo.desplegarOpcionesTipoNombramiento(Docente.infoRegistro[35])}
-                                  </select>                          
-                                </div>                                
+                                <div class='table-responsive'>
+                                    <table class='table table-bordered table-condensed'>
+                                        <tr><th>Clave presupuestal</th><th>Fecha desde que ostenta la plaza</th><th>Tipo de nombramiento</th><th>Categoria</th><th>Jornada</th><th>Borrar</th></tr>
+                                        <tbody id="tablaPlazas">
+                                            ${dato.desplegarPlazas(Docente.infoRegistro[0])}
+                                        </tbody>
+                                    </table>
+                                </div>                              
                             </div>
                             <div class="row"> 
                                 <div class="form-group col-md-3 datepicker-group">
@@ -861,6 +850,63 @@
 
             </div>
           </div> 
+        
+          <div class="modal fade" id="modalPlazas" role="dialog">
+            <div class="modal-dialog">
+              <!-- Modal content-->
+              <div class="modal-content panel">
+                  <form id="formPlaza" action="AdministracionPlaza" method="POST">
+                    <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal">&times;</button>
+                      <h4 class="modal-title">Registro de plaza</h4>
+                    </div>
+                    <div class="modal-body">
+                      <div class="row">
+                        <div class="form-group col-md-6">
+                            <label class="control-label" for="tipoNombramiento">Clave presupuestal:</label>
+                            <input type="text" class="form-control input-sm" id="clave" name="clave" required /> 
+                        </div>    
+                        <div class="form-group col-md-6 datepicker-group">
+                          <label class="control-label" for="fechaPlaza" style="font-size: 12px;">Fecha desde que ostenta la plaza:</label>
+                          <input class="form-control input-sm" id="fechaPlaza" name="fechaPlaza" type="text"  required>
+                        </div>
+                      </div>
+                      <div class="row">  
+                        <div class="form-group col-md-6">
+                          <label class="control-label" for="tipoNombramiento">Tipo de nombramiento:</label>
+                          <select class="form-control input-sm" id="tipoNombramiento" name="tipoNombramiento" required>                                    
+                            ${catalogo.desplegarOpcionesTipoNombramiento()}
+                          </select>                          
+                        </div> 
+                      <div class="form-group col-md-6">
+                        <label class="control-label" for="categoria">Categoría:</label>
+                        <select class="form-control input-sm" id="categoria" name="categoria" onchange="cambioCategoria()" required>
+                          ${catalogo.desplegarOpcionesCategorias()}
+                        </select>                          
+                      </div>
+                      </div>
+                      <div class="row"> 
+                        <div class="form-group col-md-6">
+                          <label class="control-label" for="jornada">Tipo de jornada:</label>
+                          <select class="form-control input-sm" id="jornada" name="jornada" onChange="cambioJornada(this)" required>
+                              <option value="">-Seleccione-</option>
+                          </select>                          
+                        </div>
+                        <div class="form-group col-md-6 hidden" id="seccionHoras2">
+                            <label class="control-label" for="horas">Horas:</label>
+                            <input type="text" class="form-control input-sm" id="horas2" name="horas" maxlength="2" /> 
+                        </div>
+                      </div>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="submit" id="btnGuardarPlaza" class="btn btn-sm btn-default">Guardar</button>
+                      <button type="button" class="btn btn-sm btn-default" data-dismiss="modal">Cancelar</button>
+                    </div>
+                  </form>
+              </div>
+
+            </div>
+          </div>
          
          <!--FIN MODAL-->                   
                 

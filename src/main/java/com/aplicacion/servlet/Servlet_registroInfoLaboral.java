@@ -98,10 +98,10 @@ public class Servlet_registroInfoLaboral extends HttpServlet {
                 activo="S";
                 ingresoSubsistema=fecha.formatoAlmacenar(request.getParameter("ingresoSubsistema"));
                 ingresoPlantel=fecha.formatoAlmacenar(request.getParameter("ingresoPlantel")); 
-                idCategoria=request.getParameter("categoria");
+                /*idCategoria=request.getParameter("categoria");
                 idJornada=request.getParameter("jornada");
                 fechaPlaza=fecha.formatoAlmacenar(request.getParameter("fechaPlaza"));
-                idTipoNombramiento=request.getParameter("tipoNombramiento");
+                idTipoNombramiento=request.getParameter("tipoNombramiento");*/
                 fechaUltimaPromocion=fecha.formatoAlmacenar(request.getParameter("fechaPromocion"));
                 idCategoriaAspira=request.getParameter("categoriaAspira");
                 idJornadaAspira=request.getParameter("jornadaAspira");

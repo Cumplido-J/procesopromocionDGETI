@@ -72,7 +72,8 @@ public class Servlet_cbRegistro extends HttpServlet {
             throws ServletException, IOException {
         HttpSession session= (HttpSession) request.getSession();
         String id="",rfc="";
-        boolean vistaAdmin=false;        
+        boolean vistaAdmin=false;  
+        if(session.getAttribute("rol")!=null){
         if(session.getAttribute("rol").toString().equals("D")){
             id=session.getAttribute("idUsuario").toString();
             rfc=session.getAttribute("rfc").toString();
@@ -112,6 +113,9 @@ public class Servlet_cbRegistro extends HttpServlet {
                 response.sendRedirect("evidenciaRegistroDocentes.html");
             }*/
 
+        }else{
+            response.sendRedirect("login.jsp");
+        }
         }else{
             response.sendRedirect("login.jsp");
         }
