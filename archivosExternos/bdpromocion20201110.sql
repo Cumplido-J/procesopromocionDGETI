@@ -118,7 +118,7 @@ CREATE TABLE `aspirantes` (
 
 LOCK TABLES `aspirantes` WRITE;
 /*!40000 ALTER TABLE `aspirantes` DISABLE KEYS */;
-INSERT INTO `aspirantes` VALUES (36,29,3534,44,2000,12,1,2001,'1111111','S','2019-09-01','2020-01-01',26,'2020-10-01',1,'S','2020-01-01',35,6,'N','N','N',0,NULL,NULL,995,'2020-10-29 21:29:03','N',8,'Ninguna',170.50000,NULL,NULL),(37,44,5801,14,2020,12,1,2020,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,NULL,NULL,NULL,NULL),(38,45,5801,3,2000,11,1,2001,NULL,'S','2020-10-01','2020-10-01',30,'2020-10-01',1,'S','2020-10-01',33,6,'N','N','N',0,NULL,NULL,NULL,'2020-10-22 11:52:37','S',2,NULL,180.00000,NULL,NULL),(39,57,1423,526,2000,12,1,2000,NULL,'S','2020-11-01','2020-11-01',4,'2020-11-01',1,'S','2020-11-01',5,5,'N','N','N',0,NULL,NULL,NULL,'2020-11-06 04:35:29','S',8,'Correcto',230.00000,4,4);
+INSERT INTO `aspirantes` VALUES (36,29,3534,44,2000,12,1,2001,'1111111','S','2019-09-01','2020-01-01',26,'2020-10-01',1,'S','2020-01-01',35,6,'N','N','N',0,NULL,NULL,995,'2020-10-29 21:29:03','N',8,'Ninguna',170.50000,NULL,NULL),(37,44,5801,14,2020,12,1,2020,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,NULL,NULL,NULL,NULL),(38,45,5801,3,2000,11,1,2001,NULL,'S','2020-10-01','2020-10-01',30,'2020-10-01',1,'S','2020-10-01',33,6,'N','N','N',0,NULL,NULL,NULL,'2020-10-22 11:52:37','S',2,NULL,180.00000,NULL,NULL),(39,57,1423,526,2000,12,1,2000,NULL,'S','2020-11-01','2020-11-01',4,'2020-11-01',1,'S','2020-11-01',5,5,'N','N','N',0,NULL,NULL,NULL,NULL,'S',1,'Correcto',230.00000,4,4);
 /*!40000 ALTER TABLE `aspirantes` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -753,7 +753,7 @@ CREATE TABLE `catpermisos` (
 
 LOCK TABLES `catpermisos` WRITE;
 /*!40000 ALTER TABLE `catpermisos` DISABLE KEYS */;
-INSERT INTO `catpermisos` VALUES (1,'Alta administradores','busquedaUsuarios.jsp'),(2,'Carga convocatoria','busquedaConvocatoria.jsp'),(3,'Carga vacancia','busquedaVacancia.jsp'),(4,'Registro comite','busquedaComite.jsp'),(5,'Consulta docentes','busquedaDocente.jsp');
+INSERT INTO `catpermisos` VALUES (1,'Administradores','busquedaUsuarios.jsp'),(2,'Convocatoria','busquedaConvocatoria.jsp'),(3,'Vacancia','busquedaVacancia.jsp'),(4,'Comite','busquedaComite.jsp'),(5,'Consulta docentes','busquedaDocente.jsp');
 /*!40000 ALTER TABLE `catpermisos` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1224,7 +1224,7 @@ CREATE TABLE `convocatoria` (
 
 LOCK TABLES `convocatoria` WRITE;
 /*!40000 ALTER TABLE `convocatoria` DISABLE KEYS */;
-INSERT INTO `convocatoria` VALUES (15,'2020-08-01','2020-08-03','2020-08-07','2020-08-10','2020-08-14','2020-08-17','2020-08-21','2020-12-31',193,1,'DEFINITIVA'),(16,'2020-08-14','2020-08-15','2020-08-15','2020-08-17','2020-08-18','2020-08-19','2020-08-20','2020-12-21',193,2,'DEFINITIVA'),(17,'2020-08-01','2020-08-03','2020-08-07','2020-08-10','2020-08-14','2020-08-17','2020-08-21','2020-12-24',193,3,'DEFINITIVA'),(18,'2020-11-01','2020-11-03','2020-11-07','2020-11-10','2020-11-14','2020-11-17','2020-11-21','2020-11-30',1,1,'DEFINITIVA'),(19,'2020-08-01','2020-08-03','2020-08-04','2020-08-05','2020-08-06','2020-08-07','2020-08-10','2020-08-31',89,1,'DEFINITIVA'),(20,'2020-08-01','2020-08-03','2020-08-07','2020-08-10','2020-08-14','2020-08-17','2020-08-21','2020-08-31',1,3,'DEFINITIVA'),(21,'2020-08-01','2020-08-03','2020-08-07','2020-08-10','2020-08-14','2020-08-17','2020-08-21','2020-08-31',98,1,'DEFINITIVA'),(22,'2020-10-08','2020-10-08','2020-10-15','2020-10-16','2020-10-22','2020-10-23','2020-10-29','2020-10-30',291,1,'TEMPORAL'),(23,'2020-10-01','2020-10-05','2020-10-09','2020-10-12','2020-10-16','2020-10-19','2020-10-23','2020-10-30',89,1,'TEMPORAL'),(24,'2020-10-01','2020-10-05','2020-10-09','2020-10-12','2020-10-16','2020-10-19','2020-10-23','2020-10-30',90,1,'TEMPORAL'),(25,'2020-10-01','2020-10-05','2020-10-09','2020-10-12','2020-10-16','2020-10-19','2020-10-23','2020-10-30',91,1,'TEMPORAL'),(26,'2020-11-01','2020-11-02','2020-11-06','2020-11-09','2020-11-13','2020-11-16','2020-11-20','2020-11-30',252,1,'DEFINITIVA');
+INSERT INTO `convocatoria` VALUES (15,'2020-08-01','2020-08-03','2020-08-07','2020-08-10','2020-08-14','2020-08-17','2020-08-21','2020-12-31',193,1,'DEFINITIVA'),(16,'2020-08-14','2020-08-15','2020-08-15','2020-08-17','2020-08-18','2020-08-19','2020-08-20','2020-12-21',193,2,'DEFINITIVA'),(17,'2020-08-01','2020-08-03','2020-08-07','2020-08-10','2020-08-14','2020-08-17','2020-08-21','2020-12-24',193,3,'DEFINITIVA'),(18,'2020-11-01','2020-11-03','2020-11-07','2020-11-10','2020-11-14','2020-11-17','2020-11-21','2020-11-30',1,1,'DEFINITIVA'),(19,'2020-08-01','2020-08-03','2020-08-04','2020-08-05','2020-08-06','2020-08-07','2020-08-10','2020-11-30',89,1,'DEFINITIVA'),(20,'2020-08-01','2020-08-03','2020-08-07','2020-08-10','2020-08-14','2020-08-17','2020-08-21','2020-08-31',1,3,'DEFINITIVA'),(22,'2020-10-08','2020-10-08','2020-10-15','2020-10-16','2020-10-22','2020-10-23','2020-10-29','2020-10-30',291,1,'TEMPORAL'),(24,'2020-10-01','2020-10-05','2020-10-09','2020-10-12','2020-10-16','2020-10-19','2020-10-23','2020-10-30',90,1,'TEMPORAL'),(25,'2020-10-01','2020-10-05','2020-10-09','2020-10-12','2020-10-16','2020-10-19','2020-10-23','2020-10-30',91,1,'TEMPORAL'),(26,'2020-11-01','2020-11-02','2020-11-06','2020-11-09','2020-11-13','2020-11-16','2020-11-20','2020-11-30',252,1,'DEFINITIVA');
 /*!40000 ALTER TABLE `convocatoria` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1556,6 +1556,45 @@ INSERT INTO `usuariopermiso` VALUES (121,1,1),(122,1,2),(123,1,3),(124,1,4),(125
 UNLOCK TABLES;
 
 --
+-- Table structure for table `usuarioplaza`
+--
+
+DROP TABLE IF EXISTS `usuarioplaza`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `usuarioplaza` (
+  `id` int unsigned NOT NULL AUTO_INCREMENT,
+  `idCategoria` int NOT NULL,
+  `idJornada` int NOT NULL,
+  `horas` int DEFAULT NULL,
+  `fecha` date NOT NULL,
+  `idTipoNombramiento` int NOT NULL,
+  `clave` varchar(25) NOT NULL,
+  `idUsuario` int NOT NULL,
+  `actual` char(1) NOT NULL DEFAULT 'F',
+  PRIMARY KEY (`id`),
+  KEY `fkUPUsuario_idx` (`idUsuario`),
+  KEY `fkUPCategoria_idx` (`idCategoria`),
+  KEY `fkUPJornada_idx` (`idJornada`),
+  KEY `fkUPTipoNombramiento_idx` (`idTipoNombramiento`),
+  CONSTRAINT `fkUPCategoria` FOREIGN KEY (`idCategoria`) REFERENCES `catcategoriasplaza` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  CONSTRAINT `fkUPJornada` FOREIGN KEY (`idJornada`) REFERENCES `catjornada` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  CONSTRAINT `fkUPTipoNombramiento` FOREIGN KEY (`idTipoNombramiento`) REFERENCES `cattiposnombramiento` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  CONSTRAINT `fkUPUsuario` FOREIGN KEY (`idUsuario`) REFERENCES `usuario` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `usuarioplaza`
+--
+
+LOCK TABLES `usuarioplaza` WRITE;
+/*!40000 ALTER TABLE `usuarioplaza` DISABLE KEYS */;
+INSERT INTO `usuarioplaza` VALUES (1,5,4,NULL,'2020-11-01',5,'2702 E48290.00273157',57,'F'),(2,8,3,NULL,'2020-11-01',5,'2702 E48290.00273157',57,'F'),(3,1,1,1,'2020-11-01',1,'2702 E48290.00273157',57,'F');
+/*!40000 ALTER TABLE `usuarioplaza` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `vacancia`
 --
 
@@ -1573,6 +1612,7 @@ CREATE TABLE `vacancia` (
   `tipoVacancia` varchar(200) NOT NULL,
   `idPrograma` int NOT NULL,
   `idSubsistema` int NOT NULL DEFAULT '1',
+  `horas` int DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `fkVacanciaEntidad_idx` (`idEntidad`),
   KEY `fkVacanciaPlantel_idx` (`idPlantel`),
@@ -1586,7 +1626,7 @@ CREATE TABLE `vacancia` (
   CONSTRAINT `fkVacanciaPlantel` FOREIGN KEY (`idPlantel`) REFERENCES `catplanteles` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `fkVacanciaPrograma` FOREIGN KEY (`idPrograma`) REFERENCES `catprogramas` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `fkVacanciaSubsistema` FOREIGN KEY (`idSubsistema`) REFERENCES `catsubsistema` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE=InnoDB AUTO_INCREMENT=131 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=143 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1595,7 +1635,7 @@ CREATE TABLE `vacancia` (
 
 LOCK TABLES `vacancia` WRITE;
 /*!40000 ALTER TABLE `vacancia` DISABLE KEYS */;
-INSERT INTO `vacancia` VALUES (123,17,252,'D',2,4,4,'Corrimiento natural',1,1),(124,17,252,'D',1,5,4,'Corrimiento natural',1,1),(125,17,252,'D',1,6,2,'Corrimiento natural',1,1),(126,17,252,'D',1,6,3,'Corrimiento natural',1,1),(127,17,252,'D',1,6,4,'Real',1,1),(128,17,252,'D',1,5,2,'Corrimiento natural',1,1),(129,17,252,'D',1,5,3,'Corrimiento natural',1,1),(130,17,252,'D',1,5,4,'Real',1,1);
+INSERT INTO `vacancia` VALUES (131,9,89,'D',1,4,2,'Corrimiento natural',1,1,NULL),(132,9,89,'D',1,4,3,'Corrimiento natural',1,1,NULL),(133,9,89,'D',1,4,4,'Corrimiento natural',1,1,NULL),(134,9,89,'D',1,5,2,'Corrimiento natural',1,1,NULL),(135,9,89,'D',1,5,3,'Corrimiento natural',1,1,NULL),(136,9,89,'D',1,5,4,'Corrimiento natural',1,1,NULL),(137,9,89,'D',1,6,2,'Corrimiento natural',1,1,NULL),(138,9,89,'D',1,6,3,'Corrimiento natural',1,1,NULL),(139,9,89,'D',1,6,4,'Real',1,1,NULL),(140,9,89,'D',1,1,1,'Corrimiento natural',1,1,15),(141,9,89,'D',1,2,1,'Corrimiento natural',1,1,15),(142,9,89,'D',1,3,1,'Real',1,1,15);
 /*!40000 ALTER TABLE `vacancia` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -2418,6 +2458,30 @@ DELIMITER ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;
 /*!50003 SET character_set_results = @saved_cs_results */ ;
 /*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `sp_consultaUsuarioPlaza` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`admin`@`localhost` PROCEDURE `sp_consultaUsuarioPlaza`(in _idUsuario int)
+BEGIN
+	select up.id,up.idUsuario,up.idCategoria,cp.categoria, up.idJornada,j.jornada,up.horas,up.fecha,up.idTipoNombramiento,ctn.codigo, ctn.descripcion,up.clave,up.actual
+    from usuarioplaza up
+    join catcategoriasplaza cp on up.idCategoria=cp.id
+    join catjornada j on up.idJornada=j.id
+    join cattiposnombramiento ctn on up.idTipoNombramiento=ctn.id 
+    where up.idUsuario=_idUsuario;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `sp_consultaUsuarios` */;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
@@ -2493,7 +2557,7 @@ DELIMITER ;
 DELIMITER ;;
 CREATE DEFINER=`admin`@`localhost` PROCEDURE `sp_consultaVacancias`(in _idPrograma int,in _idSubsistema int,in _idEntidad int,in _idPlantel int,in _tipoCategoria varchar(3))
 BEGIN
-	set @consulta="select v.id,v.idPrograma,cpr.programa,v.idSubsistema,cs.subsistema,v.idEntidad,ce.entidad,v.idPlantel,cp.plantel,v.idCategoria,ccp.categoria,v.idJornada,cj.jornada,v.tipoVacancia,v.plazas,v.tipoCategoria
+	set @consulta="select v.id,v.idPrograma,cpr.programa,v.idSubsistema,cs.subsistema,v.idEntidad,ce.entidad,v.idPlantel,cp.plantel,v.idCategoria,ccp.categoria,v.idJornada,cj.jornada,v.tipoVacancia,v.plazas,v.tipoCategoria,v.horas
 		from vacancia v
 		join catprogramas cpr on v.idPrograma=cpr.id
 		join catplanteles cp on v.idPlantel=cp.id
@@ -3374,6 +3438,27 @@ DELIMITER ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;
 /*!50003 SET character_set_results = @saved_cs_results */ ;
 /*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `sp_insertUsuarioPlaza` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`admin`@`localhost` PROCEDURE `sp_insertUsuarioPlaza`(in _idUsuario int, in _idCategoria int, in _idJornada int,in _horas int,in _fecha date,in _idTipoNombramiento int,in _clave varchar(25))
+BEGIN
+	insert into usuarioplaza (idUsuario,idCategoria,idJornada,horas,fecha,idTipoNombramiento,clave,actual)
+    values(_idUsuario,_idCategoria,_idJornada,_horas,_fecha,_idTipoNombramiento,_clave,'F');
+    select 'ok' as respuesta;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `sp_insertVacancia` */;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
@@ -3384,7 +3469,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`admin`@`localhost` PROCEDURE `sp_insertVacancia`(in _idEntidad int,in _idPlantel int,in _tipoCategoria varchar(3),in _plazas int,in _idCategoria int,in _idJornada int,in _tipoVacancia varchar(200),in _idPrograma int,in _idSubsistema int)
+CREATE DEFINER=`admin`@`localhost` PROCEDURE `sp_insertVacancia`(in _idEntidad int,in _idPlantel int,in _tipoCategoria varchar(3),in _plazas int,in _idCategoria int,in _idJornada int,in _tipoVacancia varchar(200),in _idPrograma int,in _idSubsistema int,in _horas int)
 BEGIN
 	declare _idAux int default null;
     
@@ -3397,23 +3482,15 @@ BEGIN
 		and idJornada=_idJornada
 		and tipoVacancia=_tipoVacancia
 		and idPrograma =_idPrograma
-        and idSubsistema=_idSubsistema;
-    
+        and idSubsistema=_idSubsistema
+        and horas=_horas;    
     if(_idAux is null) then
-		INSERT INTO vacancia(idEntidad,idPlantel,tipoCategoria,plazas,idCategoria,idJornada,tipoVacancia,idPrograma,idSubsistema) 
-		VALUES(_idEntidad,_idPlantel,_tipoCategoria,_plazas,_idCategoria,_idJornada,_tipoVacancia,_idPrograma,_idSubsistema);
+		INSERT INTO vacancia(idEntidad,idPlantel,tipoCategoria,plazas,idCategoria,idJornada,tipoVacancia,idPrograma,idSubsistema,horas) 
+		VALUES(_idEntidad,_idPlantel,_tipoCategoria,_plazas,_idCategoria,_idJornada,_tipoVacancia,_idPrograma,_idSubsistema,_horas);
     else
 		update vacancia 
-        set idEntidad=_idEntidad,
-			idPlantel=_idPlantel,
-            tipoCategoria=_tipoCategoria,
-            plazas=plazas+_plazas,
-            idCategoria=_idCategoria,
-            idJornada=_idJornada,
-            tipoVacancia=_tipoVacancia,
-            idPrograma=_idPrograma,
-            idSubsistema=_idSubsistema
-         where id=_idAux;
+        set plazas=plazas+_plazas
+		where id=_idAux;
     end if;       
 END ;;
 DELIMITER ;
@@ -3454,7 +3531,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`admin`@`localhost` PROCEDURE `sp_registraVacancia`(in _idEntidad int,in _idPlantel int,in _tipoCategoria varchar(3),in _plazas int,in _idCategoria int,in _idJornada int,in _idPrograma int,in _idSubsistema int)
+CREATE DEFINER=`admin`@`localhost` PROCEDURE `sp_registraVacancia`(in _idEntidad int,in _idPlantel int,in _tipoCategoria varchar(3),in _plazas int,in _idCategoria int,in _idJornada int,in _idPrograma int,in _idSubsistema int,in _horas int)
 BEGIN
 	declare _idConvocatoria int default null;
 	declare _idCategoriaAux int;
@@ -3464,7 +3541,7 @@ BEGIN
 		select cj.idCategoria,cj.idJornada
 		from catcategoriajornada cj
 		join catcategoriasplaza cp on cj.idCategoria=cp.id
-		where cp.tipo=_tipoCategoria and (idCategoria<_idCategoria and idJornada=_idJornada) or (idCategoria=_idCategoria and idJornada<_idJornada);
+		where cp.tipo=_tipoCategoria and (idCategoria<_idCategoria) or (idCategoria=_idCategoria and idJornada<_idJornada);
 	declare continue handler for not found set fin=1;
     
     select id into _idConvocatoria
@@ -3478,11 +3555,12 @@ BEGIN
 			if fin = 1 then 
 				leave ciclo;
 			end if;
-			call sp_insertVacancia(_idEntidad,_idPlantel,_tipoCategoria,_plazas,_idCategoriaAux,_idJornadaAux,'Corrimiento natural',_idPrograma,_idSubsistema);
-			
+            if((_idJornada!=1 and _idJornadaAux!=1) or (_idJornada=1 and _idJornadaAux=1)) then
+				call sp_insertVacancia(_idEntidad,_idPlantel,_tipoCategoria,_plazas,_idCategoriaAux,_idJornadaAux,'Corrimiento natural',_idPrograma,_idSubsistema,_horas);                 
+			end if;            
 		end loop ciclo;
 		close cursorCategoriaJornada;
-		call sp_insertVacancia(_idEntidad,_idPlantel,_tipoCategoria,_plazas,_idCategoria,_idJornada,'Real',_idPrograma,_idSubsistema);
+		call sp_insertVacancia(_idEntidad,_idPlantel,_tipoCategoria,_plazas,_idCategoria,_idJornada,'Real',_idPrograma,_idSubsistema,_horas);
 		select 'ok' as respuesta;
 	else
 		select 'No existe una convocatoria para el plantel y programa seleccionado' as respuesta;
@@ -4448,4 +4526,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-11-06  4:40:47
+-- Dump completed on 2020-11-10 18:48:38
