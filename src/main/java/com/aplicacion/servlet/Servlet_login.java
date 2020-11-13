@@ -91,7 +91,7 @@ public class Servlet_login extends HttpServlet {
                 String clave_ = datos.get(0)[5];
                 String cadenaDencriptada = utilerias.desencriptarCodigo(clave_, ConstantsWS.LLAVE_CIFRADO);
                 
-                if(datos.get(0)[5].equals(clave)){
+                if(cadenaDencriptada.equals(clave)){
                     
                     InetAddress address = InetAddress.getLocalHost();
                     String ipUser = address.getHostAddress();
