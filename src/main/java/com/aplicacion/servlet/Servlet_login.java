@@ -5,8 +5,11 @@
  */
 package com.aplicacion.servlet;
 
+import constants.ConstantsWS;
+import herramientas.UtileriasHelper;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.net.InetAddress;
 import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.RequestDispatcher;
@@ -79,11 +82,27 @@ public class Servlet_login extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
             String rfc = request.getParameter("rfc");
             String clave = request.getParameter("clave");
+            UtileriasHelper utilerias = new UtileriasHelper();
             Metodos_sql metodos=new Metodos_sql();
             String[] parametros={rfc};
             List<String[]> datos=metodos.ejecutaSP("sp_consultaInfoLogin",parametros);
             if(!datos.isEmpty()){
+                
+                String clave_ = datos.get(0)[5];
+                String cadenaDencriptada = utilerias.desencriptarCodigo(clave_, ConstantsWS.LLAVE_CIFRADO);
+                
                 if(datos.get(0)[5].equals(clave)){
+                    
+                    InetAddress address = InetAddress.getLocalHost();
+                    String ipUser = address.getHostAddress();
+                    String idUser = datos.get(0)[0];
+                    String[] params={idUser, ipUser};
+                    
+                    List<String[]> datosConexion = metodos.ejecutaSP(ConstantsWS.BITACORA_LOGIN, params);
+                    if(!datosConexion.isEmpty()){
+                        System.out.println("Se guardo correctamente los datos de la conexion");
+                    }
+                    
                     HttpSession session = (HttpSession) request.getSession(true);
                     session.setAttribute("idUsuario", datos.get(0)[0]);
                     session.setAttribute("subsistema", datos.get(0)[1]);
