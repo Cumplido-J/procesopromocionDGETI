@@ -86,6 +86,7 @@ public class Servlet_login extends HttpServlet {
             Metodos_sql metodos=new Metodos_sql();
             String[] parametros={rfc};
             List<String[]> datos=metodos.ejecutaSP("sp_consultaInfoLogin",parametros);
+            
             if(!datos.isEmpty()){
                 
                 String clave_ = datos.get(0)[5];
