@@ -5,6 +5,9 @@
  */
 package herramientas;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
 /**
  *
  * @author jtrinidadl
@@ -49,5 +52,18 @@ public class UtileriasHelper {
 			return null;
 		}
 		return cadenaDesencriptada;
+	}
+        
+        public synchronized Object convertJsonToObject(String json, Class clazz) {
+		Object objeto = null;
+		GsonBuilder builder = new GsonBuilder().serializeNulls();
+		builder.registerTypeAdapter(String.class, new StringTypeAdapter());
+		Gson gson = builder.create();
+		try {
+			objeto = gson.fromJson(json, clazz);
+		} catch (Exception e) {
+                        System.out.println(e.toString());
+		}
+		return objeto;
 	}
 }

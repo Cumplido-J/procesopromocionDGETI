@@ -11,6 +11,7 @@ E:\Users\jtrinidadl\Desktop\cecytesNoviembre\procesopromocion\src\main\java\com\
 E:\Users\jtrinidadl\Desktop\cecytesNoviembre\procesopromocion\src\main\java\herramientas\WebService.java
 E:\Users\jtrinidadl\Desktop\cecytesNoviembre\procesopromocion\src\main\java\com\aplicacion\servlet\Servlet_guardar_convocatoria2.java
 E:\Users\jtrinidadl\Desktop\cecytesNoviembre\procesopromocion\src\main\java\com\convocatoria\servlet\ServletControladorProgramasPlantel.java
+E:\Users\jtrinidadl\Desktop\cecytesNoviembre\procesopromocion\src\main\java\com\aplicacion\beans\ModelRecaptcha.java
 E:\Users\jtrinidadl\Desktop\cecytesNoviembre\procesopromocion\src\main\java\com\aplicacion\servlet\Servlet_registrarUsuario.java
 E:\Users\jtrinidadl\Desktop\cecytesNoviembre\procesopromocion\src\main\java\com\aplicacion\servlet\Servlet_registroComite.java
 E:\Users\jtrinidadl\Desktop\cecytesNoviembre\procesopromocion\src\main\java\com\aplicacion\servlet\Servlet_cancelarPin.java
@@ -98,6 +99,7 @@ E:\Users\jtrinidadl\Desktop\cecytesNoviembre\procesopromocion\src\main\java\com\
 E:\Users\jtrinidadl\Desktop\cecytesNoviembre\procesopromocion\src\main\java\com\aplicacion\servlet\Servlet_consultaWSPersonal.java
 E:\Users\jtrinidadl\Desktop\cecytesNoviembre\procesopromocion\src\main\java\herramientas\Fecha.java
 E:\Users\jtrinidadl\Desktop\cecytesNoviembre\procesopromocion\src\main\java\com\aplicacion\servlet\Servlet_registroInfoAcademica.java
+E:\Users\jtrinidadl\Desktop\cecytesNoviembre\procesopromocion\src\main\java\herramientas\StringTypeAdapter.java
 E:\Users\jtrinidadl\Desktop\cecytesNoviembre\procesopromocion\src\main\java\com\aplicacion\servlet\Servlet_borrarHoraGrupo.java
 E:\Users\jtrinidadl\Desktop\cecytesNoviembre\procesopromocion\src\main\java\herramientas\Pin.java
 E:\Users\jtrinidadl\Desktop\cecytesNoviembre\procesopromocion\src\main\java\com\aplicacion\servlet\Servlet_registroEncuestado.java
@@ -106,6 +108,7 @@ E:\Users\jtrinidadl\Desktop\cecytesNoviembre\procesopromocion\src\main\java\com\
 E:\Users\jtrinidadl\Desktop\cecytesNoviembre\procesopromocion\src\main\java\com\aplicacion\servlet\Servlet_regresar3.java
 E:\Users\jtrinidadl\Desktop\cecytesNoviembre\procesopromocion\src\main\java\com\aplicacion\servlet\Servlet_registroHorasGrupo.java
 E:\Users\jtrinidadl\Desktop\cecytesNoviembre\procesopromocion\src\main\java\com\aplicacion\servlet\Servlet_muestraArchivo.java
+E:\Users\jtrinidadl\Desktop\cecytesNoviembre\procesopromocion\src\main\java\seguridad\VerificarRecaptcha.java
 E:\Users\jtrinidadl\Desktop\cecytesNoviembre\procesopromocion\src\main\java\com\aplicacion\servlet\Servlet_recuperacionContrasena.java
 E:\Users\jtrinidadl\Desktop\cecytesNoviembre\procesopromocion\src\main\java\com\convocatoria\datos\EntidadJDBC.java
 E:\Users\jtrinidadl\Desktop\cecytesNoviembre\procesopromocion\src\main\java\com\aplicacion\servlet\Servlet_guardar_vacancia.java

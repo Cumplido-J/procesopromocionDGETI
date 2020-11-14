@@ -19,6 +19,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import metodos_sql.Metodos_sql;
+import seguridad.VerificarRecaptcha;
 
 /**
  *
@@ -82,7 +83,12 @@ public class Servlet_login extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
             String rfc = request.getParameter("rfc");
             String clave = request.getParameter("clave");
-            UtileriasHelper utilerias = new UtileriasHelper();
+            
+            String gRecaptchaResponse = request.getParameter("g-recaptcha-response");
+            boolean verificado = VerificarRecaptcha.verificar(gRecaptchaResponse);
+            
+            if(verificado == true){
+                UtileriasHelper utilerias = new UtileriasHelper();
             Metodos_sql metodos=new Metodos_sql();
             String[] parametros={rfc};
             List<String[]> datos=metodos.ejecutaSP("sp_consultaInfoLogin",parametros);
@@ -138,6 +144,11 @@ public class Servlet_login extends HttpServlet {
             }
             else {
                 request.setAttribute("error", "El usuario no existe");
+                RequestDispatcher rd = request.getRequestDispatcher("login.jsp");
+                rd.forward(request, response);
+            }
+            }else{
+                request.setAttribute("error", "Seleccionar casilla para validar identidad");
                 RequestDispatcher rd = request.getRequestDispatcher("login.jsp");
                 rd.forward(request, response);
             }

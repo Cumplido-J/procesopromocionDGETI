@@ -17,6 +17,8 @@ com\aplicacion\servlet\Servlet_recuperacionContrasena.class
 herramientas\CipherDecode.class
 com\convocatoria\servlet\ServletControladorPlantel.class
 com\aplicacion\servlet\Servlet_registrarAportacion.class
+herramientas\StringTypeAdapter.class
+com\aplicacion\beans\ModelRecaptcha.class
 com\aplicacion\beans\Docente.class
 com\aplicacion\servlet\Servlet_recuperarclave_administrador.class
 com\aplicacion\beans\Docente$1.class
@@ -125,6 +127,7 @@ metodos_sql\Metodos_sql.class
 com\aplicacion\servlet\Servlet_registroBitacora.class
 herramientas\Pin.class
 herramientas\RutaConfig.class
+seguridad\VerificarRecaptcha.class
 com\aplicacion\servlet\Servlet_regresar2.class
 com\convocatoria\servlet\ServletReporte.class
 seguridad\Encriptar_Desencriptar.class
