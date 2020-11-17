@@ -5,8 +5,11 @@
  */
 package com.aplicacion.servlet;
 
+import constants.ConstantsWS;
+import herramientas.UtileriasHelper;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.net.InetAddress;
 import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.RequestDispatcher;
@@ -16,6 +19,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import metodos_sql.Metodos_sql;
+import seguridad.VerificarRecaptcha;
 
 /**
  *
@@ -79,11 +83,33 @@ public class Servlet_login extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
             String rfc = request.getParameter("rfc");
             String clave = request.getParameter("clave");
+            
+            String gRecaptchaResponse = request.getParameter("g-recaptcha-response");
+            boolean verificado = VerificarRecaptcha.verificar(gRecaptchaResponse);
+            
+            if(verificado == true){
+                UtileriasHelper utilerias = new UtileriasHelper();
             Metodos_sql metodos=new Metodos_sql();
             String[] parametros={rfc};
             List<String[]> datos=metodos.ejecutaSP("sp_consultaInfoLogin",parametros);
+            
             if(!datos.isEmpty()){
-                if(datos.get(0)[5].equals(clave)){
+                
+                String clave_ = datos.get(0)[5];
+                String cadenaDencriptada = utilerias.desencriptarCodigo(clave_, ConstantsWS.LLAVE_CIFRADO);
+                
+                if(cadenaDencriptada.equals(clave)){
+                    
+                    InetAddress address = InetAddress.getLocalHost();
+                    String ipUser = address.getHostAddress();
+                    String idUser = datos.get(0)[0];
+                    String[] params={idUser, ipUser};
+                    
+                    List<String[]> datosConexion = metodos.ejecutaSP(ConstantsWS.BITACORA_LOGIN, params);
+                    if(!datosConexion.isEmpty()){
+                        System.out.println("Se guardo correctamente los datos de la conexion");
+                    }
+                    
                     HttpSession session = (HttpSession) request.getSession(true);
                     session.setAttribute("idUsuario", datos.get(0)[0]);
                     session.setAttribute("subsistema", datos.get(0)[1]);
@@ -118,6 +144,11 @@ public class Servlet_login extends HttpServlet {
             }
             else {
                 request.setAttribute("error", "El usuario no existe");
+                RequestDispatcher rd = request.getRequestDispatcher("login.jsp");
+                rd.forward(request, response);
+            }
+            }else{
+                request.setAttribute("error", "Seleccionar casilla para validar identidad");
                 RequestDispatcher rd = request.getRequestDispatcher("login.jsp");
                 rd.forward(request, response);
             }

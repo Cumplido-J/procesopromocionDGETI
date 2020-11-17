@@ -5,7 +5,9 @@
  */
 package com.aplicacion.servlet;
 
+import constants.ConstantsWS;
 import herramientas.Correo;
+import herramientas.UtileriasHelper;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -85,9 +87,12 @@ public class Servlet_recuperacionContrasena extends HttpServlet {
             String respuesta;
             if(!datos.isEmpty()){
                 String contrasena=datos.get(0)[5];
+                UtileriasHelper utilerias = new UtileriasHelper();
+                String pass = utilerias.desencriptarCodigo(contrasena, ConstantsWS.LLAVE_CIFRADO);
+                
                 String correo=datos.get(0)[13];
                 Correo c=new Correo();
-                c.enviarCorreo("Envío de contraseña","Usted ha solicitado el envío de datos de acceso al Sistema de Promoción Docente. <br/>Los datos son: <br/> Usuario: <b>"+rfc+"</b><br/>Contrase&ntilde;a:<b>"+contrasena+"</b>", correo);
+                c.enviarCorreo("Envío de contraseña","Usted ha solicitado el envío de datos de acceso al Sistema de Promoción Docente. <br/>Los datos son: <br/> Usuario: <b>"+rfc+"</b><br/>Contrase&ntilde;a:<b>"+pass+"</b>", correo);
                 respuesta="Datos de acceso enviados al correo: "+correo;  
             }
             else{ 

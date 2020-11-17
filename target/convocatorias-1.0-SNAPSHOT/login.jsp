@@ -19,7 +19,7 @@
         <!-- CSS -->
         <link href="/favicon.ico" rel="shortcut icon">
         <link href="https://framework-gb.cdn.gob.mx/assets/styles/main.css" rel="stylesheet">
-
+        <script src="https://www.google.com/recaptcha/api.js"></script>
         <!-- Respond.js soporte de media queries para Internet Explorer 8 -->
         <!-- ie8.js EventTarget para cada nodo en Internet Explorer 8 -->
         <!--[if lt IE 9]>
@@ -40,7 +40,7 @@
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </button>
-                        <a class="navbar-brand" href="/">DGETI</a>
+                        <a class="navbar-brand" href="/">DGETI - CECyTEs</a>
                     </div>
                     <div class="collapse navbar-collapse" id="subenlaces">
                         <ul class="nav navbar-nav navbar-right">
@@ -103,7 +103,13 @@
                                 </divlog>
                             </div>
                         </div>
-
+                                
+                  <div class="form-group">
+                      <div class="col-sm-offset-3 col-sm-9">
+                     <div class="g-recaptcha" data-sitekey="6LdPoeIZAAAAAD_gQVvoatx_720HkBM_ijv8VQv2"></div>
+                     </div>
+                  </div>
+                                
                         <div class="form-group">
                             <div class="col-sm-offset-3 col-sm-9">
                                 <button class="btn btn-primary" type="submit" name="iniciarsesionadmin">Enviar</button>                            

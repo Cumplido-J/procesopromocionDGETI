@@ -5,6 +5,8 @@
  */
 package com.aplicacion.servlet;
 
+import constants.ConstantsWS;
+import herramientas.UtileriasHelper;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -77,6 +79,7 @@ public class Servlet_preregistro extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
+        UtileriasHelper utilerias = new UtileriasHelper();
         try {    
             String programa=request.getParameter("programa");
             String subsistema=request.getParameter("subsistema");
@@ -90,7 +93,11 @@ public class Servlet_preregistro extends HttpServlet {
             String movil=request.getParameter("movil"); 
             String correo=request.getParameter("correo");
             String consideraciones=request.getParameter("consideraciones"); 
-            String pass1=request.getParameter("pass1"); 
+            
+            String pass_=request.getParameter("pass1");
+            String encriptarPass = utilerias.encriptarCodigo(pass_, ConstantsWS.LLAVE_CIFRADO);
+            String pass1=encriptarPass;
+            
             String perfil="D";
             String respuesta="Error en almacenamiento de datos, intente nuevamente";
             Metodos_sql metodo = new Metodos_sql();
