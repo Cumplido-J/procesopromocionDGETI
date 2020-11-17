@@ -87,14 +87,20 @@
                         <a data-parent="#accordion" data-toggle="collapse" href="#infoAcademica" aria-expanded="true" aria-controls="infoAcademica">
                           Información Académica                        
                         <c:set var="bandera" value="${Docente.verificaSeccion('1')}"></c:set>
-                        <c:if test = "${bandera==true}">
-                            <span class="glyphicon glyphicon-ok-sign completo" title="Sección completa" id="estatusInfoAcademica" completo="true"></span>  
-                            <c:set var="in" value=""></c:set>
+                        <c:if test="${!vistaAdmin}">
+                            <c:if test = "${bandera==true}">
+                                <span class="glyphicon glyphicon-ok-sign completo" title="Sección completa" id="estatusInfoAcademica" completo="true"></span>  
+                                <c:set var="in" value=""></c:set>
+                            </c:if>
+                            <c:if test = "${bandera==false}">
+                                <span class="glyphicon glyphicon-exclamation-sign incompleto" title="Sección incompleta" id="estatusInfoAcademica" completo="false"></span>
+                                <c:set var="in" value="in"></c:set>
+                            </c:if>
                         </c:if>
-                        <c:if test = "${bandera==false}">
+                        <c:if test="${vistaAdmin}">
                             <span class="glyphicon glyphicon-exclamation-sign incompleto" title="Sección incompleta" id="estatusInfoAcademica" completo="false"></span>
                             <c:set var="in" value="in"></c:set>
-                        </c:if>
+                        </c:if>    
                         </a>
                     </h4>
                     
@@ -220,13 +226,18 @@
                                 </div> 
                             </div>
                         </div>     
-                        <c:if test="${!vistaAdmin}">
+                        
                             <div class="col-xs-12 text-right">
-                              <input  class="btn btn-sm btn-primary" type="reset" value="Limpiar"/>
-                              <input class="btn btn-sm btn-primary" id="btnEnviar1" type="submit" value='Guardar y continuar'/>
+                              <c:if test="${!vistaAdmin}">
+                                <input  class="btn btn-sm btn-primary" type="reset" value="Limpiar"/>
+                                <input class="btn btn-sm btn-primary" id="btnEnviar1" type="submit" value='Guardar y continuar'/>
+                              </c:if>
+                              <c:if test="${vistaAdmin}">
+                                <input class="btn btn-sm btn-primary" id="btnEnviar1" type="submit" value='Validar información'/>
+                              </c:if>
                               <!--<input type="button" class="btn btn-sm btn-primary" value="Guardar y continuar" onclick="mostrarSiguiente(1)"/>-->
                             </div>
-                        </c:if>
+                        
                       </form>
                     </div>
                   </div>
@@ -250,13 +261,19 @@
                         <a data-parent="#accordion" data-toggle="collapse" href="#infoLaboral" aria-expanded="true" aria-controls="infoLaboral">
                         Información Laboral                        
                         <c:set var="bandera" value="${Docente.verificaSeccion('2')}"></c:set>
-                        <c:if test = "${bandera==true}">
-                            <span class="glyphicon glyphicon-ok-sign completo" title="Sección completa" id="estatusInfoLaboral" completo="true"></span>  
-                            <c:set var="in" value=""></c:set>
+                        <c:if test="${!vistaAdmin}">
+                            <c:if test = "${bandera==true}">
+                                <span class="glyphicon glyphicon-ok-sign completo" title="Sección completa" id="estatusInfoLaboral" completo="true"></span>  
+                                <c:set var="in" value=""></c:set>
+                            </c:if>
+                            <c:if test = "${bandera==false}">
+                                <span class="glyphicon glyphicon-exclamation-sign incompleto" title="Sección incompleta" id="estatusInfoLaboral" completo="false"></span>
+                                <c:set var="in" value="in"></c:set>
+                            </c:if>                        
                         </c:if>
-                        <c:if test = "${bandera==false}">
+                        <c:if test="${vistaAdmin}">
                             <span class="glyphicon glyphicon-exclamation-sign incompleto" title="Sección incompleta" id="estatusInfoLaboral" completo="false"></span>
-                            <c:set var="in" value="in"></c:set>
+                            <c:set var="in" value=""></c:set>
                         </c:if>
                         </a>
                     </h4>
@@ -391,13 +408,16 @@
                                 </div> 
                             </div>
                         </div>
-                        <c:if test="${!vistaAdmin}">
                         <div class="col-xs-12 text-right">
-                          <button class="btn btn-sm btn-primary" type="reset">Limpiar</button>
-                          <input class="btn btn-sm btn-primary" id="btnEnviar2" type="submit" value='Guardar y continuar'/>
-                          
-                        </div>
-                        </c:if>
+                              <c:if test="${!vistaAdmin}">
+                                <input  class="btn btn-sm btn-primary" type="reset" value="Limpiar"/>
+                                <input class="btn btn-sm btn-primary" id="btnEnviar2" type="submit" value='Guardar y continuar'/>
+                              </c:if>
+                              <c:if test="${vistaAdmin}">
+                                <input class="btn btn-sm btn-primary" id="btnEnviar2" type="submit" value='Validar información'/>
+                              </c:if>
+                              <!--<input type="button" class="btn btn-sm btn-primary" value="Guardar y continuar" onclick="mostrarSiguiente(1)"/>-->
+                            </div>
                       </form>
                     
                   </div>
@@ -418,6 +438,7 @@
                       <a data-parent="#accordion" data-toggle="collapse" href="#infoHoras" aria-expanded="true" aria-controls="infoHoras">
                       Horas frente a grupo
                         <c:set var="bandera" value="${Docente.verificaSeccion('3')}"></c:set>
+                        <c:if test="${!vistaAdmin}">
                         <c:if test = "${bandera==true}">
                             <span class="glyphicon glyphicon-ok-sign completo" title="Sección completa" id="estatusInfoHoras" completo="true"></span>  
                             <c:set var="in" value=""></c:set>
@@ -425,6 +446,11 @@
                         <c:if test = "${bandera==false}">
                             <span class="glyphicon glyphicon-exclamation-sign incompleto" title="Sección incompleta" id="estatusInfoHoras" completo="false"></span>
                             <c:set var="in" value="in"></c:set>
+                        </c:if>
+                        </c:if>
+                        <c:if test="${vistaAdmin}">
+                            <span class="glyphicon glyphicon-exclamation-sign incompleto" title="Sección incompleta" id="estatusInfoHoras" completo="false"></span>
+                            <c:set var="in" value=""></c:set>
                         </c:if>
                       </a>
                     </h4>
@@ -516,12 +542,16 @@
                                 </c:if>                                
                             </div>
                         </div>
-                        <c:if test="${!vistaAdmin}">
                         <div class="col-xs-12 text-right">
-                          <button class="btn btn-sm btn-primary" type="reset">Limpiar</button>                          
-                          <input class="btn btn-sm btn-primary" id="btnEnviar3" type="submit" value='Guardar y continuar'/>
-                        </div>
-                        </c:if>
+                              <c:if test="${!vistaAdmin}">
+                                <input  class="btn btn-sm btn-primary" type="reset" value="Limpiar"/>
+                                <input class="btn btn-sm btn-primary" id="btnEnviar3" type="submit" value='Guardar y continuar'/>
+                              </c:if>
+                              <c:if test="${vistaAdmin}">
+                                <input class="btn btn-sm btn-primary" id="btnEnviar3" type="submit" value='Validar información'/>
+                              </c:if>
+                              <!--<input type="button" class="btn btn-sm btn-primary" value="Guardar y continuar" onclick="mostrarSiguiente(1)"/>-->
+                            </div>
                       </form>
                     </div>
                   </div>
@@ -540,6 +570,7 @@
                       <a data-parent="#accordion" data-toggle="collapse" href="#infoCompatibilidad" aria-expanded="true" aria-controls="infoCompatibilidad">
                       Compatibilidad
                         <c:set var="bandera" value="${Docente.verificaSeccion('4')}"></c:set>
+                        <c:if test="${!vistaAdmin}">
                         <c:if test = "${bandera==true}">
                             <span class="glyphicon glyphicon-ok-sign completo" title="Sección completa" id="estatusInfoCompatibilidad" completo="true"></span>  
                             <c:set var="in" value=""></c:set>
@@ -547,6 +578,11 @@
                         <c:if test = "${bandera==false}">
                             <span class="glyphicon glyphicon-exclamation-sign incompleto" title="Sección incompleta" id="estatusInfoCompatibilidad" completo="false"></span>
                             <c:set var="in" value="in"></c:set>
+                        </c:if>
+                        </c:if>
+                        <c:if test="${vistaAdmin}">
+                            <span class="glyphicon glyphicon-exclamation-sign incompleto" title="Sección incompleta" id="estatusInfoCompatibilidad" completo="false"></span>
+                            <c:set var="in" value=""></c:set>
                         </c:if>
                       </a>
                     </h4>
@@ -598,12 +634,16 @@
                                 </div> 
                             </div>
                         </div>
-                        <c:if test="${!vistaAdmin}">
                         <div class="col-xs-12 text-right">
-                          <button class="btn btn-sm btn-primary" type="reset">Limpiar</button>
-                          <input class="btn btn-sm btn-primary" id="btnEnviar4" type="submit" value='Guardar y continuar'/>                          
-                        </div>
-                        </c:if>
+                              <c:if test="${!vistaAdmin}">
+                                <input  class="btn btn-sm btn-primary" type="reset" value="Limpiar"/>
+                                <input class="btn btn-sm btn-primary" id="btnEnviar4" type="submit" value='Guardar y continuar'/>
+                              </c:if>
+                              <c:if test="${vistaAdmin}">
+                                <input class="btn btn-sm btn-primary" id="btnEnviar4" type="submit" value='Validar información'/>
+                              </c:if>
+                              <!--<input type="button" class="btn btn-sm btn-primary" value="Guardar y continuar" onclick="mostrarSiguiente(1)"/>-->
+                            </div>
                       </form>
                     </div>
                   </div>
@@ -630,11 +670,13 @@
                   <c:set var="banderaCompleto" value="false"></c:set>
                   <c:set var="hidden" value="hidden"></c:set>
               </c:if>
-              <c:if test="${!vistaAdmin}">
+              
               <div class="container text-center" style="margin-bottom:15px;">
                   <form action="FinalizaRegistro" method="POST">
                       <input type="hidden" id="banderaCompleto" name="k" value="${banderaCompleto}">
-                      <div id="seccionNotas" class="text-left" ${hidden}>
+                        
+                        <div id="seccionNotas" class="text-left" ${hidden}>
+                          <c:if test="${!vistaAdmin}">
                           <table>
                               <tr>
                                 <td valign="top"><input type="checkbox" name="cbProtestaVerdad" id="cbProtestaVerdad" onClick="cambioProtesta()"><td>
@@ -645,15 +687,20 @@
                                   <td>Acepta hacer públicos los resultados y recomendaciones individuales que se deriven de su valoración para el proceso de promoción en el servicio docente por cambio de categoría en Educación Media Superior ingreso a la Educación Media Superior, Ciclo Escolar 2020-2021.<td>
                               </tr>
                           </table>
-                          
-                        
+                          </c:if>
+                          <c:if test="${vistaAdmin}">
+                            <label class="control-label">Observaciones:</label>
+                            <textarea class="form-control text-uppercase" id="observaciones" name="observaciones" maxlength="200" onChange="cambioObservaciones(this)" required>${Docente.infoRegistro[67]}</textarea>
+                          </c:if>
+                          <br/>
+                          <input type="submit" disabled="true" class="btn btn-primary" value="Continuar" id="btnFinalizar">                      
                       </div>
-                      <br/>
-                      <input type="submit" disabled="true" class="btn btn-primary" value="Continuar" id="btnFinalizar">
+                      
+                       
+                      
                   </form>
               </div>
-          </div>
-              </c:if>                
+          </div>               
                             
          <!--MODAL-->                 
          <div id="modalArchivo" class="modal fade" role="dialog">
@@ -907,6 +954,23 @@
 
             </div>
           </div>
+        <div id="modalConfirmacion2" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  <h4 class="modal-title" >Confirmación</h4>
+                </div>
+                <div class="modal-body">
+                    <p id="mensajeConfirmacion">La información seleccionada será borrada<br/>¿Desea continuar?</p>                  
+                </div>
+                <div class="modal-footer">
+                  <button type="button" id="btnConfirmar" class="btn btn-sm btn-default">Sí</button>
+                  <button type="button" class="btn btn-sm btn-default" data-dismiss="modal">No</button>
+                </div>
+              </div>
+            </div>
+        </div>
          
          <!--FIN MODAL-->                   
                 

@@ -12,6 +12,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -20,6 +21,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import metodos_sql.Metodos_sql;
 
 /**
  *
@@ -88,7 +90,10 @@ public class Servlet_cbFichaRegistro extends HttpServlet {
             docente.actualizaBanderaIngles();
             String[][] puntajes=cv.consultaPuntajes(idUsuario); 
             String[] puntajeEncuestas=cv.consultaPuntajeEncuestas(rfc);
-            request.setAttribute("Docente", docente);
+            String[] parametros={idUsuario};            
+            List<String[]> infoPlazas=new Metodos_sql().ejecutaSP("sp_consultaUsuarioPlaza",parametros);
+            request.setAttribute("infoPlazas", infoPlazas);
+            request.setAttribute("Docente", docente);            
             request.setAttribute("puntajes", puntajes);
             request.setAttribute("puntajeEncuestas", puntajeEncuestas);            
             request.setAttribute("cursos", cv.getFilasCursosFicha(idUsuario));

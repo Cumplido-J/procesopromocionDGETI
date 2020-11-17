@@ -8,6 +8,7 @@ package com.aplicacion.servlet;
 import com.aplicacion.beans.Docente;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -16,6 +17,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import metodos_sql.Metodos_sql;
 
 /**
  *
@@ -80,6 +82,9 @@ public class Servlet_cbFichaRegistroIncompleto extends HttpServlet {
             docente.consultaInfoAspirante();
             docente.consultaHoras();            
             docente.actualizaBanderaIngles();
+            String[] parametros={idUsuario};            
+            List<String[]> infoPlazas=new Metodos_sql().ejecutaSP("sp_consultaUsuarioPlaza",parametros);
+            request.setAttribute("infoPlazas", infoPlazas);
             request.setAttribute("Docente", docente);
             ServletContext sc = getServletContext();
             RequestDispatcher rd = sc.getRequestDispatcher("/FichaRegistroIncompleto.jsp");

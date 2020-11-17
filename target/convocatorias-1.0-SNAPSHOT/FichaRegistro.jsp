@@ -114,19 +114,27 @@
                 <tr>
                     <td>FECHA DE INGRESO AL PLANTEL</td>
                     <td>:${fecha.formatoImprimir(Docente.infoRegistro[27])}</td>
-                </tr>
+                </tr> 
                 <tr>
-                    <td>CATEGORÍA/NIVEL QUE OSTENTA</td>
-                    <td>:${Docente.infoRegistro[29]}-${Docente.infoRegistro[31]}-${Docente.infoRegistro[33]}</td>
+                    <td COLSPAN="2">
+                        PLAZAS QUE OSTENTA:
+                        <table>
+                            <tr><th class="borde">CLAVE PRESUPUESTAL</th><th class="borde">FECHA DESDE QUE OSTENTA LA PLAZA</th><th class="borde">TIPO DE NOMBRAMIENTO</th><th class="borde">CATEGORIA</th><th class="borde">JORNADA</th></tr>
+                            
+                                <c:forEach items="${infoPlazas}" var="plaza">
+                                    <tr><td class="borde">${plaza[11]}</td><td class="borde">${fecha.formatoImprimir(plaza[7])}</td><td class="borde">${plaza[9]}:${plaza[10]}</td><td class="borde">${plaza[3]}</td>
+                                        <td class="borde">
+                                            ${plaza[5]}
+                                            <c:if test="${plaza[4]=='1'}">
+                                                (${plaza[6]})
+                                            </c:if>
+                                        </td>
+                                    </tr>
+                                </c:forEach>
+                            
+                        </table>
+                    </td>                    
                 </tr>
-                <tr>
-                    <td>FECHA DE INGRESO A LA PLAZA QUE OSTENTA</td>
-                    <td>:${fecha.formatoImprimir(Docente.infoRegistro[34])}</td>
-                </tr>
-                <tr>
-                    <td>TIPO DE NOMBRAMIENTO QUE OSTENTA </td>
-                    <td>:${Docente.infoRegistro[36]}-${Docente.infoRegistro[37]}</td>
-                </tr>                
                 <tr>
                     <td>FECHA DE SU ÚLTIMA_PROMOCIÓN</td>
                     <td>:${fecha.formatoImprimir(Docente.infoRegistro[39])}</td>

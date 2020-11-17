@@ -80,29 +80,30 @@ public class Servlet_finalizaRegistro extends HttpServlet {
             throws ServletException, IOException {
          HttpSession session= (HttpSession) request.getSession();     
         if(session.getAttribute("rol")!=null){
-            String idUsuario,rfc;
+            String idUsuario,rfc,retorno,observacion="",publico="";
+            String completo=request.getParameter("k");
             if(session.getAttribute("rol").toString().equals("D")){
                 idUsuario=session.getAttribute("idUsuario").toString();
                 rfc=session.getAttribute("rfc").toString();
+                retorno="SesionDocente";                
+                if(completo.equals("true")){
+                    if(request.getParameter("cbPublico")!=null){
+                        publico="S";
+                    }
+                    else{
+                        publico="N";
+                    }
+                }
             }else{
                 idUsuario=session.getAttribute("idDocente").toString();                
                 rfc=session.getAttribute("rfcDocente").toString();
-            }
-            
-            String completo=request.getParameter("k");
-            String publico="";
-            if(completo.equals("true")){
-                if(request.getParameter("cbPublico")!=null){
-                    publico="S";
-                }
-                else{
-                    publico="N";
-                }
+                retorno="VistaDocente";
+                observacion=request.getParameter("observaciones");
             }
             Metodos_sql metodo=new Metodos_sql();
-            String[] parametros={idUsuario,publico};
+            String[] parametros={idUsuario,publico,observacion};
             metodo.ejecutaSP("sp_finRegistro",parametros);
-            response.sendRedirect("SesionDocente");
+            response.sendRedirect(retorno);
             /*if(completo.equals("true")){
                 response.sendRedirect("evidenciaRegistroDocentes.html");
             }else{

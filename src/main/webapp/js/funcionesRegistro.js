@@ -60,6 +60,7 @@ $(document).ready(function () {
             }
         },
         submitHandler:function(){
+            var aux=$("#btnEnviar1").val(); 
             $.ajax({
                 type:$('#formInfoAcademica').attr("method"),
                 url:$('#formInfoAcademica').attr("action"),
@@ -69,7 +70,7 @@ $(document).ready(function () {
                     $("#btnEnviar1").attr("disabled","disabled");
                 },
                 complete:function(){
-                   $("#btnEnviar1").val("Guardar y continuar"); 
+                   $("#btnEnviar1").val(aux); 
                    $("#btnEnviar1").removeAttr("disabled");
                 },success:function(data){
                     if(data=="ok"){                                               
@@ -110,7 +111,7 @@ $(document).ready(function () {
             }
         },
         submitHandler:function(){
-           
+           var aux=$("#btnEnviar2").val(); 
             $.ajax({
                 type:$('#formInfoLaboral').attr("method"),
                 url:$('#formInfoLaboral').attr("action"),
@@ -120,7 +121,7 @@ $(document).ready(function () {
                     $("#btnEnviar2").attr("disabled","disabled");
                 },
                 complete:function(){
-                   $("#btnEnviar2").val("Guardar y continuar"); 
+                   $("#btnEnviar2").val(aux); 
                    $("#btnEnviar2").removeAttr("disabled");
                 },success:function(data){
                     if(data=="ok"){
@@ -210,6 +211,7 @@ $(document).ready(function () {
             }
         },
         submitHandler:function(){
+            var aux=$("#btnEnviar3").val(); 
             $.ajax({
                 type:$('#formInfoHorasGrupo').attr("method"),
                 url:$('#formInfoHorasGrupo').attr("action"),
@@ -219,7 +221,7 @@ $(document).ready(function () {
                     $("#btnEnviar3").attr("disabled","disabled");
                 },
                 complete:function(){
-                   $("#btnEnviar3").val("Guardar y continuar"); 
+                   $("#btnEnviar3").val(aux); 
                    $("#btnEnviar3").removeAttr("disabled");
                 },success:function(data){
                     if(data=="ok"){
@@ -252,6 +254,7 @@ $(document).ready(function () {
             }
         },
         submitHandler:function(){
+            var aux=$("#btnEnviar4").val(); 
             $.ajax({
                 type:$('#formInfoCompatibilidad').attr("method"),
                 url:$('#formInfoCompatibilidad').attr("action"),
@@ -261,7 +264,7 @@ $(document).ready(function () {
                     $("#btnEnviar4").attr("disabled","disabled");
                 },
                 complete:function(){
-                   $("#btnEnviar4").val("Guardar y continuar"); 
+                   $("#btnEnviar4").val(aux); 
                    $("#btnEnviar4").removeAttr("disabled");
                 },success:function(data){
                     if(data=="ok"){
@@ -991,24 +994,8 @@ function cambioCategoria() {
     $.get("ConsultaCatalogos", {k: "9",i:id}, function(respuesta){
         $("#jornada").html(respuesta);
     });
-    $("#categoriaAspira").val("");
-    /*if($("#categoriaAspira").val()!=""){
-        var categoria=parseInt($("#categoria").val());
-        var categoriaAspira=parseInt($("#categoriaAspira").val());
-        //var aux=categoria+1;
-
-        if(categoriaAspira==categoria+1){
-            $("#alertaCategoria").attr("hidden",true);
-            $("#btnEnviar2").removeClass("disabled");
-        }else{
-            $("#alertaCategoria").removeAttr("hidden");
-            $("#btnEnviar2").addClass("disabled");
-        }
-    }*/
 }
-function cambioCategoriaAspira() {
-    var categoria=parseInt($("#categoria").val());
-    var categoriaAspira=parseInt($("#categoriaAspira").val());
+function cambioCategoriaAspira() {   
     var tipo=$("#categoriaAspira option:selected").attr("aux");
     if(!tipo.includes("Real")){
         $("#avisoCategoria").removeClass("hidden");
@@ -1018,51 +1005,51 @@ function cambioCategoriaAspira() {
         $("#avisoCategoria").removeAttr("title");
         $("#avisoCategoria").addClass("hidden");
         $("#categoriaAspira").removeAttr("title");
-    }
-    //var aux=categoria+1;
-    
-    if(categoriaAspira==categoria|| categoriaAspira==categoria+1){
-        $("#alertaCategoria").attr("hidden",true);
-        $("#btnEnviar2").removeClass("disabled");
-        id=$("#categoriaAspira").val(); 
-        idPrograma=$("#programa").val(); 
-        idPlantel=$("#plantel").val(); 
-        $.get("ConsultaCatalogos", {k: "17",i:id,pr:idPrograma,pl:idPlantel}, function(){        
-        }).done(function(respuesta){
-            var aux=respuesta.split("|");
-            if(aux.length==2){
-                $("#jornadaAspira").html(aux[0]);
-                $("#rbRequisitos").html(aux[1]);
-            }
-        });
-         
-    }else{
-        $("#alertaCategoria").removeAttr("hidden");
-        $("#btnEnviar2").addClass("disabled");
-    }
+    } 
+    id=$("#categoriaAspira").val(); 
+    idPrograma=$("#programa").val(); 
+    idPlantel=$("#plantel").val(); 
+    $.get("ConsultaCatalogos", {k: "17",i:id,pr:idPrograma,pl:idPlantel}, function(){        
+    }).done(function(respuesta){
+        var aux=respuesta.split("|");
+        if(aux.length==2){
+            $("#jornadaAspira").html(aux[0]);
+            $("#rbRequisitos").html(aux[1]);
+        }
+    });
+}
+function validaAplicacion(){
+    var bandera=false;
+    var categoriaActual;
+    var jornadaActual;
+    var categoriaAspira=parseInt($("#categoriaAspira").val());
+    var jornadaAspira=parseInt($("#jornadaAspira").val());
+    $('#tablaPlazas tr').each(function () {
+        categoriaActual = parseInt($(this).find("td").eq(3).html());
+        jornadaActual = parseInt($(this).find("td").eq(5).html());
+        if(categoriaAspira===categoriaActual && jornadaAspira===jornadaActual+1){
+            bandera=true;
+        }else if(categoriaAspira===categoriaActual+1 && jornadaAspira===jornadaActual){
+            bandera=true;
+        }else if(categoriaAspira===categoriaActual+1 && jornadaAspira===jornadaActual+1){
+            bandera=true;
+        }
+    });    
+    return bandera;
 }
 function cambioJornadaAspira() {
     var categoria=parseInt($("#categoria").val());
     var categoriaAspira=parseInt($("#categoriaAspira").val());
     var jornada=parseInt($("#jornada").val());
     var jornadaAspira=parseInt($("#jornadaAspira").val());
-     
-    if(categoria==categoriaAspira){
-        if(jornadaAspira==jornada+1){
-            $("#alertaJornada").attr("hidden",true);
-            $("#btnEnviar2").removeClass("disabled");         
-        }else{
-            $("#alertaJornada").removeAttr("hidden");
-            $("#btnEnviar2").addClass("disabled");
-        }
-    }else if(categoria==categoriaAspira-1){
-        if(jornadaAspira==jornada){
-            $("#alertaJornada").attr("hidden",true);
-            $("#btnEnviar2").removeClass("disabled");         
-        }else{
-            $("#alertaJornada").removeAttr("hidden");
-            $("#btnEnviar2").addClass("disabled");
-        }        
+    
+    if(validaAplicacion()){
+        $("#btnEnviar2").removeClass("disabled"); 
+    }else{
+        $("#btnEnviar2").addClass("disabled");
+        $("#mensaje").html("No puede aplicar a esa combinación de categoria y jornada");
+        $("#modalMensaje").modal("show");
+        $("#jornadaAspira").val("");
     }
 }
 
@@ -1224,5 +1211,31 @@ function cambioJornada(objeto){
     }else{
         $("#seccionHoras2").addClass("hidden");
         $("#horas2").removeAttr("required");
+    }
+}
+function confirmarPlaza(id){
+    $("#btnConfirmar").attr("onClick","borrarPlaza("+id+")");
+    $("#modalConfirmacion2").modal("show");
+}
+function borrarPlaza(id){
+    $("#modalConfirmacion2").modal("hide");
+    $.post("AdministracionPlaza", {id: id}, function(data){
+        if(data.includes("<tr>")){            
+            $("#tablaPlazas").html(data); 
+            $("#categoriaAspira").val("");
+            $("#jornadaAspira").val("");
+        }
+        else{
+            $("#mensaje").html(data);            
+            $("#modalMensaje").modal("show");
+        } 
+    });
+}
+
+function cambioObservaciones(objeto){
+    if(objeto.value!=""){
+        $("#btnFinalizar").removeAttr("disabled");    
+    }else{
+        $("#btnFinalizar").attr("disabled",true); 
     }
 }

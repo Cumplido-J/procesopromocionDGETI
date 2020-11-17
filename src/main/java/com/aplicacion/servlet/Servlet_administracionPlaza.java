@@ -80,7 +80,7 @@ public class Servlet_administracionPlaza extends HttpServlet {
         try {
             Fecha fecha=new Fecha();
             HttpSession session= (HttpSession) request.getSession();
-            String idUsuario,rfc;
+            String idUsuario="",rfc="";
             if(session.getAttribute("rol").toString().equals("D")){
                 idUsuario=session.getAttribute("idUsuario").toString();
                 rfc=session.getAttribute("rfc").toString();
@@ -108,10 +108,10 @@ public class Servlet_administracionPlaza extends HttpServlet {
                     out.print("Error en almacenamiento de datos, intente nuevamente");
                 }
             }else{
-                String idCurso=request.getParameter("id");
-                String[] parametros={idCurso};
+                String id=request.getParameter("id");
+                String[] parametros={id};
                 List<String[]> datos;                           
-                datos=metodo.ejecutaSP("sp_deletePlaza",parametros);            
+                datos=metodo.ejecutaSP("sp_deleteUsuarioPlaza",parametros);            
                 if(!datos.isEmpty()){
                     if(datos.get(0)[0].equals("ok")){
                         String informacion=new Datos().desplegarPlazas(idUsuario);

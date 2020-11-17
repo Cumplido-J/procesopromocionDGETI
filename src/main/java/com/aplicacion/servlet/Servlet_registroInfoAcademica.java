@@ -83,8 +83,21 @@ public class Servlet_registroInfoAcademica extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         try {
-            HttpSession session= (HttpSession) request.getSession();
-            String idUsuario=session.getAttribute("idUsuario").toString();
+           HttpSession session= (HttpSession) request.getSession();
+        String id="",rfc="";
+        boolean vistaAdmin=false;  
+        if(session.getAttribute("rol")!=null){
+        if(session.getAttribute("rol").toString().equals("D")){
+            id=session.getAttribute("idUsuario").toString();
+            rfc=session.getAttribute("rfc").toString();
+            vistaAdmin=false; 
+            
+        }else{
+            id=session.getAttribute("idDocente").toString();
+            rfc=session.getAttribute("rfcDocente").toString();
+            vistaAdmin=true;                       
+        }
+        if(!id.equals("")&&!rfc.equals("")){
             /*String idEntidad=request.getParameter("entidad");
             String idTipoInstitucion=request.getParameter("tipoInstitucion");
             String idInstitucion=request.getParameter("institucion");*/
@@ -101,7 +114,7 @@ public class Servlet_registroInfoAcademica extends HttpServlet {
 
             Metodos_sql metodo = new Metodos_sql();
             //in _idUsuario int,in _idEscuelaEstudio int, in _carrera varchar(300),in _anioEgreso int,in _idGradoAcademico int, in _idModalidadTitulacion int,in _anioTitulacion int,in _cedula varchar(20),idcct
-            String[] parametros={idUsuario,idEscuela,carrera,anioEgreso,idGrado,idModalidadTitulacion,anioTitulacion,cedula,idCCT};
+            String[] parametros={id,idEscuela,carrera,anioEgreso,idGrado,idModalidadTitulacion,anioTitulacion,cedula,idCCT};
             List<String[]> datos;                           
             datos=metodo.ejecutaSP("sp_registroInfoAcademica",parametros);            
             if(!datos.isEmpty()){
@@ -109,6 +122,8 @@ public class Servlet_registroInfoAcademica extends HttpServlet {
             }else{
                 out.print("Error en almacenamiento de datos, intente nuevamente");
             }
+        }
+        }
             
         } finally {
             out.close();

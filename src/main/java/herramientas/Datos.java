@@ -109,6 +109,7 @@ public class Datos {
             return respuesta;        
         }
     }
+    
     public  String desplegarPlazas(String idUsuario){        
         String respuesta="<tr><td colspan='6' class='text-center'>Sin información</td></tr>";        
         try{
@@ -118,12 +119,12 @@ public class Datos {
                 respuesta="";
                 for(String[] dato:datos)
                 {
-                    respuesta+="<tr><td>"+dato[11]+"</td><td>"+new Fecha().formatoImprimir(dato[7])+"</td><td>"+dato[9]+":"+dato[10]+"</td><td>"+dato[3]+"</td><td>"+dato[5];
+                    respuesta+="<tr><td>"+dato[11]+"</td><td>"+new Fecha().formatoImprimir(dato[7])+"</td><td>"+dato[9]+":"+dato[10]+"</td><td class='hidden'>"+dato[2]+"</td><td>"+dato[3]+"</td><td class='hidden'>"+dato[4]+"</td><td>"+dato[5];
                     if(dato[4].equals("1")){
                         respuesta+="("+dato[6]+")";
                     }                    
                     respuesta+="</td><td>"; 
-                    respuesta+="<form method='POST' action='AdministracionPlaza'><input type='hidden' name='idUsuario' value='"+dato[0]+"'><button type='button' class='btn btn-sm' title='Borrar'><span class='glyphicon glyphicon-trash'></span></button></form>";  
+                    respuesta+="<button type='button' class='btn btn-sm' title='Borrar' onclick='confirmarPlaza("+dato[0]+")'><span class='glyphicon glyphicon-trash'></span></button>";  
                     respuesta+="</td></tr>";
                 }
             }
