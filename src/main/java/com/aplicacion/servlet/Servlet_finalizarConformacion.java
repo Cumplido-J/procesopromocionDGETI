@@ -5,8 +5,10 @@
  */
 package com.aplicacion.servlet;
 
+import constants.ConstantsWS;
 import herramientas.Comite;
 import herramientas.Pin;
+import herramientas.UtileriasHelper;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -83,7 +85,9 @@ public class Servlet_finalizarConformacion extends HttpServlet {
             String idRol=request.getParameter("idRol"); 
             String pass=Pin.generaPin();
             Comite c=new Comite();
-            out.print(c.finalizarComite(idComite,idRol,pass));
+            UtileriasHelper utilerias = new UtileriasHelper();
+            String encriptarPass = utilerias.encriptarCodigo(pass, ConstantsWS.LLAVE_CIFRADO);
+            out.print(c.finalizarComite(idComite,idRol,encriptarPass));
         }catch(Exception e){
             System.out.println(e.toString());
         }
