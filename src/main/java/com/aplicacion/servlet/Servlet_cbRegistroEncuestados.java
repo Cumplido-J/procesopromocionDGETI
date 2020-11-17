@@ -70,14 +70,14 @@ public class Servlet_cbRegistroEncuestados extends HttpServlet {
         HttpSession session= (HttpSession) request.getSession();  
         String id="",rfc="";
         boolean vistaAdmin=false;
-        if(session.getAttribute("rol").toString().equals("A")){            
-            id=session.getAttribute("idDocente").toString();
-            rfc=session.getAttribute("rfcDocente").toString();
-            vistaAdmin=true;
-        }else{   
+        if(session.getAttribute("rol").toString().equals("D")){  
             id=session.getAttribute("idUsuario").toString();
             rfc=session.getAttribute("rfc").toString();
             vistaAdmin=false;            
+        }else{
+            id=session.getAttribute("idDocente").toString();
+            rfc=session.getAttribute("rfcDocente").toString();
+            vistaAdmin=true;
         }
         
         if(!id.equals("")&&!rfc.equals("")){           

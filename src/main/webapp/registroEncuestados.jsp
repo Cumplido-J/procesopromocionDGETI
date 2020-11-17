@@ -178,6 +178,16 @@
                   <div class="text-right"><span id="c3"><c:out value="${filas[2][1]}"></c:out></span> de 10 registrados</div>
                 </div>
               </div>
+              <c:if test="${vistaAdmin}">
+                <div class="container text-center">
+                    <form action="FinalizaEncuestados" method="POST">
+                        <label class="control-label">Observaciones:</label>
+                        <textarea class="form-control text-uppercase" id="observaciones" name="observaciones" maxlength="200" onChange="cambioObservaciones(this)" required>${docente.infoRegistro[68]}</textarea>                      
+                        <br/>
+                        <input type="submit" disabled="true" class="btn btn-primary" value="Continuar" id="btnFinalizar">                      
+                    </form>
+                </div>
+              </c:if>
               <c:if test="${!vistaAdmin}">
               <div class="text-center">
                   <a href="RegistroCriterios" class="btn btn-primary disabled" id="btnFinalizar">Continuar</a>

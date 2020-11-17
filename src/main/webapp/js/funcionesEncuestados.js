@@ -163,3 +163,10 @@ function cancelaPin(idEncuestado,idTipo){
     });
 }
 
+function cambioObservaciones(objeto){
+    if(objeto.value!=""){
+        $("#btnFinalizar").removeAttr("disabled");    
+    }else{
+        $("#btnFinalizar").attr("disabled",true); 
+    }
+}

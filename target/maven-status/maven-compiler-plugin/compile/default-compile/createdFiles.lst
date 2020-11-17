@@ -105,6 +105,7 @@ com\convocatoria\datos\ConsultarComitesJDBC.class
 com\aplicacion\servlet\Servlet_buscarComite.class
 com\aplicacion\beans\ConvoctoriaBean.class
 herramientas\Comite.class
+com\aplicacion\servlet\Servlet_finalizaEncuestados.class
 com\aplicacion\servlet\Servlet_modificar_convocatoria.class
 herramientas\Catalogos.class
 com\aplicacion\servlet\Servlet_cbAltaUsuario.class
