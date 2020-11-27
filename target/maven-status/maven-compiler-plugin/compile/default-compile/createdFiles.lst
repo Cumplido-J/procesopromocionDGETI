@@ -12,6 +12,7 @@ com\aplicacion\servlet\Servlet_registrarCriterio.class
 herramientas\WebService.class
 com\convocatoria\domain\Comites.class
 com\convocatoria\reportes\ReporteConvocatoria.class
+com\aplicacion\servlet\Servlet_guardarArchivoFirmado.class
 com\aplicacion\servlet\Servlet_buscar_usuario.class
 com\aplicacion\servlet\Servlet_recuperacionContrasena.class
 herramientas\CipherDecode.class

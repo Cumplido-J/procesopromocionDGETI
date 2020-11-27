@@ -73,6 +73,8 @@
                 <c:set var="disabled3" value="disabled"></c:set>
                 <c:set var="hidden3" value="hidden"></c:set>
                 <c:set var="disabled4" value="disabled"></c:set>
+                <c:set var="hidden4" value="hidden"></c:set>
+                <c:set var="disabled5" value="disabled"></c:set>
                 
             </c:if>
             
@@ -101,7 +103,16 @@
                 <c:if test = "${Integer.parseInt(Docente.infoRegistro[66])>=6}"><!--Si el registro finalizó como incompleto-->
                     <c:set var="disabled3" value="disabled"></c:set>
                     <c:set var="hidden3" value=""></c:set>
-                    <c:set var="disabled4" value=""></c:set>                    
+                    <c:set var="disabled4" value=""></c:set>
+                    <c:set var="hidden4" value=""></c:set>
+                </c:if>
+                <c:if test = "${Docente.documentoCargado2('1')==false}"><!--Si el registro finalizó como incompleto-->
+                    <c:set var="disabled4" value="disabled"></c:set>
+                    <c:set var="hidden4" value=""></c:set>
+                    <c:set var="disabled5" value=""></c:set>
+                </c:if>
+                <c:if test = "${Docente.documentoCargado2('1')==true}"><!--Si el registro finalizó como completo-->
+                    <c:set var="finCompleto" value="true"></c:set>
                 </c:if>
             </c:if>
             
@@ -137,6 +148,19 @@
                         <h3>Paso 4:</h3>
                         <a href="FichaRegistro" target="_blank" ><img src="<%=Imagen.muestraImagen(RutaConfig.getRutaCarpeta()+"imagenes/EvidVal.jpg")%>" alt=""></a>
                         <a href="FichaRegistro"  target="_blank" ><h3>Ficha de <br/> registro </h3></a>
+                    </article>
+                        <c:if test = "${finIncompleto}">
+                    <c:set var="finIncompleto" value="true"></c:set>
+                    <article class="articleses ">
+                        <h3>Paso 5:</h3>
+                        <a href="FichaRegistro" target="_blank" ><img src="<%=Imagen.muestraImagen(RutaConfig.getRutaCarpeta()+"imagenes/EvidVal.jpg")%>" alt=""></a>
+                        <a href="FichaRegistro"  target="_blank" ><h3>Documento <br/> firmado </h3></a>
+                    </article>
+                    </c:if>
+                    <article class="articleses ${disabled5}">
+                        <h3>Paso 5:</h3>
+                        <a href="FichaRegistro" target="_blank" ><img src="<%=Imagen.muestraImagen(RutaConfig.getRutaCarpeta()+"imagenes/EvidVal.jpg")%>" alt=""></a>
+                        <a href="FichaRegistro"  target="_blank" ><h3>Documento <br/> firmado </h3></a>
                     </article>
                 </c:if>
                 <!--
