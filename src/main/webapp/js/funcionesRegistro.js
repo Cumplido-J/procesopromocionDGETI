@@ -859,6 +859,9 @@ function abrirModalArchivo(id){
     $("#archivo").val("");
     if($("#btnEvidencia"+id).attr("value")=="Subir archivo"){        
         $("#ifArchivo").attr("hidden","true");
+    }else if($("#btnEvidencia"+id).attr("value")=="Ver documento"){
+        $("#ifArchivo").attr("src","Archivo?i="+id); 
+        $("#ifArchivo").removeAttr("hidden");
     }else{
         $("#ifArchivo").attr("src","Archivo?k="+id); 
         $("#ifArchivo").removeAttr("hidden");

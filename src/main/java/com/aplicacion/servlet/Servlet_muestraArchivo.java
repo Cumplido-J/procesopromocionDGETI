@@ -72,7 +72,14 @@ public class Servlet_muestraArchivo extends HttpServlet {
         try {
             Properties p = new Properties();
             p.load(new FileReader(request.getServletContext().getInitParameter("rutaConfig")));
-            String ruta=p.getProperty("rutaEvidenciasRegistro");
+            String ruta="";
+            
+            if(request.getParameter("i")!=null){
+                ruta=p.getProperty("rutaCartaAceptacion");   
+            }else{
+                ruta=p.getProperty("rutaEvidenciasRegistro");   
+            }
+            
             HttpSession session= (HttpSession) request.getSession();
             
             String idUsuario,rfc;
@@ -91,6 +98,9 @@ public class Servlet_muestraArchivo extends HttpServlet {
             }else if(request.getParameter("e")!=null){
                 idDocumento=request.getParameter("e").toString();
                 ruta+="/ejemplos/"+idDocumento+".pdf";
+            }else if(request.getParameter("i")!=null){
+                idDocumento=request.getParameter("i").toString();
+                ruta+="/"+idUsuario+"_"+idDocumento+".pdf";
             }
             documento=new File(ruta);
             if(documento.exists()){

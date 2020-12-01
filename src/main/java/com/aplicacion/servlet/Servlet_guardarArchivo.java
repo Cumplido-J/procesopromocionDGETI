@@ -106,37 +106,61 @@ public class Servlet_guardarArchivo extends HttpServlet {
             
             
             String idRequisito=request.getParameter("idArchivo");
+
+            Part archivoCarta = request.getPart("archivoCarta");
             
-            Part archivo=request.getPart("archivo");
-            InputStream is=archivo.getInputStream();
-            
-            File carpeta = new File(ruta);
-            if (!carpeta.exists()) {
-                carpeta.mkdirs();                    
-            }
-            ruta+="/"+idUsuario+"_"+idRequisito+".pdf";
-            System.out.println(ruta);
-            File f=new File(ruta);
-            FileOutputStream ous=new FileOutputStream(f);
-            int dato=is.read();
-            while(dato!=-1){
-                ous.write(dato);
-                dato=is.read();
-            }
-            ous.close();
-            is.close();
-            if(Integer.parseInt(idRequisito)<9){
-                Metodos_sql metodo = new Metodos_sql();
-                String[] parametros={idUsuario,idRequisito};
-                List<String[]> datos;                           
-                datos=metodo.ejecutaSP("sp_registroConstancia",parametros);            
-                if(!datos.isEmpty()){
-                    out.print("ok");
-                }else{
-                    out.print("Error en almacenamiento de datos, intente nuevamente");
+            if(archivoCarta!=null){
+                String rutaCarta=p.getProperty("rutaCartaAceptacion");
+                
+                InputStream is=archivoCarta.getInputStream();
+
+                File carpeta = new File(rutaCarta);
+                if (!carpeta.exists()) {
+                    carpeta.mkdirs();                    
                 }
+                rutaCarta+="/"+idUsuario+"_"+idRequisito+".pdf";
+                System.out.println(rutaCarta);
+                File f=new File(rutaCarta);
+                FileOutputStream ous=new FileOutputStream(f);
+                int dato=is.read();
+                while(dato!=-1){
+                    ous.write(dato);
+                    dato=is.read();
+                }
+                ous.close();
+                is.close();
             }else{
-                out.print("ok");
+                Part archivo=request.getPart("archivo");
+                InputStream is=archivo.getInputStream();
+
+                File carpeta = new File(ruta);
+                if (!carpeta.exists()) {
+                    carpeta.mkdirs();                    
+                }
+                ruta+="/"+idUsuario+"_"+idRequisito+".pdf";
+                System.out.println(ruta);
+                File f=new File(ruta);
+                FileOutputStream ous=new FileOutputStream(f);
+                int dato=is.read();
+                while(dato!=-1){
+                    ous.write(dato);
+                    dato=is.read();
+                }
+                ous.close();
+                is.close();
+                if(Integer.parseInt(idRequisito)<9){
+                    Metodos_sql metodo = new Metodos_sql();
+                    String[] parametros={idUsuario,idRequisito};
+                    List<String[]> datos;                           
+                    datos=metodo.ejecutaSP("sp_registroConstancia",parametros);            
+                    if(!datos.isEmpty()){
+                        out.print("ok");
+                    }else{
+                        out.print("Error en almacenamiento de datos, intente nuevamente");
+                    }
+                }else{
+                    out.print("ok");
+                }
             }
             
         }finally{

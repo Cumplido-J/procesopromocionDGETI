@@ -127,19 +127,17 @@
                     </article>
                     <article class="articleses ">
                         <h3>Paso 4: </h3>
-                        <div class="form-group col-md-3">
-                                <a title="Ver ejemplo" onclick="abrirModalEjemplo(1)"></a>
-                                  <a><img src="<%=Imagen.muestraImagen(RutaConfig.getRutaCarpeta()+"imagenes/EvidReg.jpg")%>" alt=""></a>
-                                </a><br/> 
-                                <c:if test = "${Docente.documentoCargado2('1')==true}">
-                                    <input id="btnEvidencia1" type="button" class="btn btn-sm btn-link" value="Ver archivo" onclick="abrirModalArchivo(1)"/>                                    
-                                    <span class="glyphicon glyphicon-exclamation-sign incompleto" title="Sección incompleta" id="alertaBtnEvidencia1" style="display:none;"></span>
+<!--                                <a title="Ver ejemplo" onclick="abrirModalEjemplo(1)"></a>
+                                  <a><img src="<%=Imagen.muestraImagen(RutaConfig.getRutaCarpeta()+"imagenes/EvidReg.jpg")%>" alt=""></a><br> -->
+                                <c:if test = "${Docente.documentoCargado3('1')==true}">
+                                    <a href="#" onclick="abrirModalArchivo(1)"><img src="<%=Imagen.muestraImagen(RutaConfig.getRutaCarpeta()+"imagenes/EvidVal.jpg")%>" alt=""></a>
+                                    <input id="btnEvidencia1" type="button" class="btn btn-sm btn-link" value="Ver documento" onclick="abrirModalArchivo(1)"/>
                                 </c:if>
-                                <c:if test = "${Docente.documentoCargado2('1')==false}">
+                                <c:if test = "${Docente.documentoCargado3('1')==false}">
+                                    <a onclick="abrirModalArchivo(1)" ><img src="<%=Imagen.muestraImagen(RutaConfig.getRutaCarpeta()+"imagenes/EvidReg.jpg")%>" alt=""></a>
                                     <input id="btnEvidencia1" type="button" class="btn btn-sm btn-link incompleto" value="Subir archivo" onclick="abrirModalArchivo(1)"/>
-                                    <span class="glyphicon glyphicon-exclamation-sign incompleto" title="Sección incompleta" id="alertaBtnEvidencia1"></span>
-                                </c:if>
-                            </div> 
+                                    <a onclick="abrirModalArchivo(1)" ><h3>Carta de aceptación</h3></a>
+                                </c:if> 
 <!--                        <input id="btnEvidencia2" type="button" class="btn btn-sm btn-link incompleto" value="Subir archivo" onclick="abrirModalArchivo(2)"/>
                         <span class="glyphicon glyphicon-exclamation-sign incompleto" id="alertaBtnEvidencia2" title="Sección incompleta"></span>-->
                     </article>
@@ -238,10 +236,9 @@
                     <div id="seccionCarga">
                         <form id="formArchivo" name="formArchivo" method="POST" enctype="multipart/form-data" >
                                 <label class="text-warning" id="alertaCarga"><span class="glyphicon glyphicon-warning-sign"></span>&nbsp;Cárgue su archivo de evidencia ya firmado.</label>
-                                <label class="control-label" for="archivo1">Seleccione el archivo a cargar:</label>
+                                <label class="control-label" for="archivo">Seleccione el archivo a cargar:</label>
                                 <input type="hidden" id="idArchivo" name="idArchivo" value="" />
-                                <input type="file" class="form-control input-sm" id="archivo1" name="archivo1" onchange="subirArchivo1();" accept=".pdf" />
-
+                                <input type="file" class="form-control input-sm" id="archivoCarta" name="archivoCarta" onchange="subirArchivo_();" accept=".pdf" />
                         </form>  
                     </div>
                 </div>
@@ -295,27 +292,27 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
         <script src="https://framework-gb.cdn.gob.mx/assets/scripts/jquery-ui-datepicker.js"></script>
         <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.1/jquery.validate.min.js"></script>
-        <script src="js/funcionesRegistro.js"></script>
-        <script src="js/funcionesEvidencias.js?v=1"></script>
+        <!--<script src="js/funcionesEvidencias.js?v=1"></script>-->
+        <script src="js/funcionesRegistro.js"></script> 
         <script>
-            function subirArchivo1(){
+            function subirArchivo_(){
     $("#modalArchivo").modal("hide");
     
-    if(validaArchivo1()){
+    if(validaArchivo_()){
         document.formArchivo.target="ifRespuesta";
-        document.formArchivo.action="GuardarArchivoFirmado";
+        document.formArchivo.action="GuardarArchivo";
         document.formArchivo.submit();
         var id=$("#idArchivo").val(); 
-        $("#btnEvidencia"+id).attr("value","Ver archivo");
+        $("#btnEvidencia"+id).attr("value","Ver documento");
         $("#alertaBtnEvidencia"+id).attr("style","display:none;");
         $("#mensaje").html("El archivo fue cargado correctamente");
     }
     $("#modalMensaje").modal("show");
 }
 
-function validaArchivo1(){
+function validaArchivo_(){
     var retorno=true;
-    var elemento=document.getElementById("archivo1");
+    var elemento=document.getElementById("archivoCarta");
     var fileName = elemento.files[0].name;
     var fileSize = elemento.files[0].size;
 

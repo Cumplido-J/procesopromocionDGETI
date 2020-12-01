@@ -431,7 +431,7 @@ public class Docente {
             Properties p = new Properties();
             p.load(new FileReader(rutaConfig));
             String ruta=p.getProperty("rutaCartaAceptacion");
-            ruta+="/"+idUsuario+"_"+idDocumento+".pdf";    
+            ruta+="/"+idUsuario+"_"+idDocumento+".pdf";  
             File documento;            
             documento=new File(ruta);
             retorno= documento.exists();
