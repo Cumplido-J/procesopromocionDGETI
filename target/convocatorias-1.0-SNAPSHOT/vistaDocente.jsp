@@ -125,8 +125,24 @@
                         <a href="RegistroCriterios" ><img src="<%=Imagen.muestraImagen(RutaConfig.getRutaCarpeta()+"imagenes/EvidReg.jpg")%>" alt=""></a>
                         <a href="RegistroCriterios" ><h3>Evidencias de los criterios de valoración</h3></a>
                     </article>
+                    <article class="articleses ">
+                        <h3>Paso 4: </h3>
+<!--                                <a title="Ver ejemplo" onclick="abrirModalEjemplo(1)"></a>
+                                  <a><img src="<%=Imagen.muestraImagen(RutaConfig.getRutaCarpeta()+"imagenes/EvidReg.jpg")%>" alt=""></a><br> -->
+                                <c:if test = "${Docente.documentoCargado3('1')==true}">
+                                    <a href="#" onclick="abrirModalArchivo(1)"><img src="<%=Imagen.muestraImagen(RutaConfig.getRutaCarpeta()+"imagenes/EvidVal.jpg")%>" alt=""></a>
+                                    <input id="btnEvidencia1" type="button" class="btn btn-sm btn-link" value="Ver documento" onclick="abrirModalArchivo(1)"/>
+                                </c:if>
+                                <c:if test = "${Docente.documentoCargado3('1')==false}">
+                                    <a onclick="abrirModalArchivo(1)" ><img src="<%=Imagen.muestraImagen(RutaConfig.getRutaCarpeta()+"imagenes/EvidReg.jpg")%>" alt=""></a>
+                                    <input id="btnEvidencia1" type="button" class="btn btn-sm btn-link incompleto" value="Subir archivo" onclick="abrirModalArchivo(1)"/>
+                                    <a onclick="abrirModalArchivo(1)" ><h3>Carta de aceptación</h3></a>
+                                </c:if> 
+<!--                        <input id="btnEvidencia2" type="button" class="btn btn-sm btn-link incompleto" value="Subir archivo" onclick="abrirModalArchivo(2)"/>
+                        <span class="glyphicon glyphicon-exclamation-sign incompleto" id="alertaBtnEvidencia2" title="Sección incompleta"></span>-->
+                    </article>
                     <article class="articleses">
-                        <h3>Paso 4:</h3>
+                        <h3>Paso 5:</h3>
                         <a href="FichaRegistro" target="_blank" ><img src="<%=Imagen.muestraImagen(RutaConfig.getRutaCarpeta()+"imagenes/EvidVal.jpg")%>" alt=""></a>
                         <a href="FichaRegistro"  target="_blank" ><h3>Ficha de <br/> registro </h3></a>
                     </article>
@@ -206,11 +222,115 @@
               </div>
 
             </div>
-          </div> 
+          </div>
+                    <div id="modalArchivo" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  <h4 class="modal-title" id="tituloModal">Carga de evidencia documental</h4>
+                </div>
+                <div class="modal-body">
+                    <iframe name="ifRespuesta" hidden></iframe>
+                    <iframe style="width:100%;" id="ifArchivo" name="ifArchivo" src="" hidden></iframe>
+                    <div id="seccionCarga">
+                        <form id="formArchivo" name="formArchivo" method="POST" enctype="multipart/form-data" >
+                                <label class="text-warning" id="alertaCarga"><span class="glyphicon glyphicon-warning-sign"></span>&nbsp;Cárgue su archivo de evidencia ya firmado.</label>
+                                <label class="control-label" for="archivo">Seleccione el archivo a cargar:</label>
+                                <input type="hidden" id="idArchivo" name="idArchivo" value="" />
+                                <input type="file" class="form-control input-sm" id="archivoCarta" name="archivoCarta" onchange="subirArchivo_();" accept=".pdf" />
+                        </form>  
+                    </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-sm btn-default" data-dismiss="modal">Cerrar</button>
+                </div>
+              </div>
+            </div>
+        </div>
+                    
+                    <div id="modalEjemplo" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  <h4 class="modal-title" id="tituloModalEjemplo">Carga de archivos</h4>
+                </div>
+                <div class="modal-body">
+                    <iframe style="width:100%;" id="ifArchivoEjemplo" name="ifArchivoEjemplo" src=""></iframe>
+                                       
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-sm btn-default" data-dismiss="modal">Cerrar</button>
+                </div>
+              </div>
+            </div>
+          </div>
+                    
+                    <div class="modal fade" id="modalMensaje" role="dialog">
+            <div class="modal-dialog">
+
+              <!-- Modal content-->
+              <div class="modal-content panel">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  <h4 class="modal-title">Aviso</h4>
+                </div>
+                <div class="modal-body">
+                  <p id="mensaje">Registro exitoso.</p>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-sm btn-default" data-dismiss="modal">Cerrar</button>
+                </div>
+              </div>
+
+            </div>
+          </div>
         <!-- JS  para el framework del gobierno-->
         <script src="https://framework-gb.cdn.gob.mx/gobmx.js"></script>        
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-        
+        <script src="https://framework-gb.cdn.gob.mx/assets/scripts/jquery-ui-datepicker.js"></script>
+        <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.1/jquery.validate.min.js"></script>
+        <!--<script src="js/funcionesEvidencias.js?v=1"></script>-->
+        <script src="js/funcionesRegistro.js"></script> 
+        <script>
+            function subirArchivo_(){
+    $("#modalArchivo").modal("hide");
+    
+    if(validaArchivo_()){
+        document.formArchivo.target="ifRespuesta";
+        document.formArchivo.action="GuardarArchivo";
+        document.formArchivo.submit();
+        var id=$("#idArchivo").val(); 
+        $("#btnEvidencia"+id).attr("value","Ver documento");
+        $("#alertaBtnEvidencia"+id).attr("style","display:none;");
+        $("#mensaje").html("El archivo fue cargado correctamente");
+    }
+    $("#modalMensaje").modal("show");
+}
+
+function validaArchivo_(){
+    var retorno=true;
+    var elemento=document.getElementById("archivoCarta");
+    var fileName = elemento.files[0].name;
+    var fileSize = elemento.files[0].size;
+
+    if(fileSize > 1000000){
+            $("#mensaje").html("El archivo no debe superar 1MB");    
+            elemento.value = '';
+            retorno=false;
+    }else{
+            var ext = fileName.split('.').pop();
+            ext = ext.toLowerCase();            
+            if(ext!="pdf"){
+               $("#mensaje").html("Solo se aceptan archivos PDF"); 
+               elemento.value = ''; // reset del valor               
+               retorno=false;
+            }            
+    }
+    return retorno;
+}
+        </script>
     </body>
 </html>
