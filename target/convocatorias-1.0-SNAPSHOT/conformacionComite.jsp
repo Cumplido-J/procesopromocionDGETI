@@ -32,6 +32,14 @@
                 </div>
                 <div class="row">
                     <div class="form-group col-md-3">                               
+                        <label class="control-label" for="tipo">Tipo:</label>
+                        <select class="form-control input-sm disabled" id="tipo" name="tipo" required>                                  
+                            <option value=''>-Seleccione-</option>
+                            <option value='R'>Comité revisor</option>
+                            <option value='D'>Consejo dictaminador</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-3">                               
                         <label class="control-label" for="subsistema">Subsistema:</label>
                         <select class="form-control input-sm disabled" id="subsistema" name="subsistema" onchange="actualizarPlanteles()" required>                                  
                             <option value=''>-Seleccione-</option>
@@ -51,14 +59,7 @@
                             ${catalogo.desplegarOpcionesPlanteles2(datos[2],datos[3])};
                         </select>
                     </div>   
-                    <div class="form-group col-md-3">                               
-                        <label class="control-label" for="tipo">Tipo:</label>
-                        <select class="form-control input-sm disabled" id="tipo" name="tipo" required>                                  
-                            <option value=''>-Seleccione-</option>
-                            <option value='R'>Comité revisor</option>
-                            <option value='D'>Consejo dictaminador</option>
-                        </select>
-                    </div>
+                    
                 </div>
                 <div class="row text-center">                    
                     <!--<input  class="btn btn-sm btn-link" id="btnEditar" type="button" value='Modificar información comité'/>-->
@@ -116,7 +117,8 @@
                       <p id="mensaje">Registro exitoso.</p>
                     </div>
                     <div class="modal-footer">
-                      <button type="button" class="btn btn-sm btn-default" data-dismiss="modal">Cerrar</button>
+                      <button type="button" id="btnCerrar" class="btn btn-sm btn-default" data-dismiss="modal">Cerrar</button>
+                      <a href="busquedaComite.jsp" class="btn btn-sm btn-default hidden" id="btnContinuar">Continuar</a>
                     </div>
                   </div>
 
@@ -245,7 +247,7 @@
                             <input type="hidden" name="idRol" id="idRol">
                         </div>
                         <div class="modal-footer">
-                            <input class="btn btn-sm btn-primary" type="submit" value='Sí'/>
+                            <input class="btn btn-sm btn-primary" id="btnEnviar" type="submit" value='Sí'/>
                             <input type="button" class="btn btn-primary btn-sm" value="No" data-dismiss="modal"/>
                         </div>
                     </form>
@@ -256,7 +258,7 @@
         </main>
         <script src="https://framework-gb.cdn.gob.mx/gobmx.js"></script>
         <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-        <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.1/jquery.validate.min.js"></script>
+        <script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.1/jquery.validate.min.js"></script>
         <script src="js/funcionesConformacionComite.js"></script>
         
         <c:if test="${datos[0]!=null}">

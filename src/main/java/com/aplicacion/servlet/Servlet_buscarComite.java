@@ -82,9 +82,11 @@ public class Servlet_buscarComite extends HttpServlet {
             if(session.getAttribute("idUsuario")!=null&&session.getAttribute("rfc")!=null){*/
                 String programa=request.getParameter("programa");
                 String plantel=request.getParameter("plantel");
-                String tipo=request.getParameter("tipo");                
+                String tipo=request.getParameter("tipo");
+                String entidad=request.getParameter("entidad");
+                String subsistema=request.getParameter("subsistema");                
                 Comite c=new Comite();
-                out.print(c.desplegarComite(programa,plantel,tipo));
+                out.print(c.desplegarComite(programa,tipo,subsistema,entidad,plantel));
                                 
         }catch(Exception e){
             System.out.println(e.toString());

@@ -302,7 +302,7 @@
 
         <script src="https://framework-gb.cdn.gob.mx/gobmx.js"></script>
         <script src="https://code.jquery.com/jquery-1.12.4.js"></script>   
-        <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.1/jquery.validate.min.js"></script>
+        <script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.1/jquery.validate.min.js"></script>
         <script src="js/funcionesEncuestados.js"></script> 
     </body>
 </html>

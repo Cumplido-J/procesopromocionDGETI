@@ -5,6 +5,7 @@
  */
 package herramientas;
 
+import constants.ConstantsWS;
 import java.util.List;
 import metodos_sql.Metodos_sql;
 
@@ -18,10 +19,10 @@ public class Comite {
     public Comite() {
         metodos = new Metodos_sql();
     }
-    public  String registraComite(String idPlantel, String idPrograma, String tipo){        
+    public  String registraComite(String idPrograma, String tipo,String idSubsistema,String idEntidad,String idPlantel ){        
         String respuesta="-1";        
         try{
-            String[] parametros={idPlantel,idPrograma,tipo};
+            String[] parametros={idPrograma,tipo,idSubsistema,idEntidad,idPlantel};
             List<String[]> datos=metodos.ejecutaSP("sp_insertComite",parametros);
             if(!datos.isEmpty()){
                 respuesta=datos.get(0)[0];
@@ -52,12 +53,12 @@ public class Comite {
         }
     }
     public  String desplegarComite(){ 
-        return desplegarComite("","","");
+        return desplegarComite("","","","","");
     }
-    public  String desplegarComite(String idPrograma,String idPlantel,String tipo){        
+    public  String desplegarComite(String idPrograma, String tipo,String idSubsistema,String idEntidad,String idPlantel){        
         String respuesta="<tr><td colspan='8' class='text-center'>Sin información</td></tr>";        
         try{
-            String[] parametros={idPrograma,idPlantel,tipo};
+            String[] parametros={idPrograma,tipo,idSubsistema,idEntidad,idPlantel};
             List<String[]> datos=metodos.ejecutaSP("sp_consultaComite",parametros);
             if(!datos.isEmpty()){
                 respuesta="";
@@ -123,12 +124,46 @@ public class Comite {
         }
     }
     public  String finalizarComite(String idComite,String idRol,String pass){        
-        String respuesta="";        
+        String respuesta="";  
+        String permiso="";
+        String nivel="";
+        String tipoComite="";
         try{
-            String[] parametros={idComite,idRol,pass};
+            UtileriasHelper utilerias = new UtileriasHelper();
+            String encriptarPass = utilerias.encriptarCodigo(pass, ConstantsWS.LLAVE_CIFRADO);
+            String[] parametros={idComite,idRol};
             List<String[]> datos=metodos.ejecutaSP("sp_finalizarComite",parametros);
-            if(!datos.isEmpty()){
-                respuesta=datos.get(0)[0];                
+            if(!datos.isEmpty()){ 
+                
+                if(datos.get(0)[1]!=""){
+                    nivel="P";
+                }else if(datos.get(0)[0]!=""){
+                    nivel="E";
+                }else{
+                    nivel="N";
+                }
+                tipoComite=datos.get(0)[9];
+                if(tipoComite.equals("R")){
+                    permiso="5";
+                }else if(tipoComite.equals("D")){
+                    permiso="6";                
+                }
+                String usuario=datos.get(0)[6];
+                String correo=datos.get(0)[5];
+                String[] parametros2={datos.get(0)[0],datos.get(0)[1],datos.get(0)[2],datos.get(0)[3],datos.get(0)[4],correo,encriptarPass,usuario,"","","A","",nivel,datos.get(0)[7],datos.get(0)[8],""};                                      
+                datos=metodos.ejecutaSP("sp_insertUsuario",parametros2);            
+                if(!datos.isEmpty()){
+                    respuesta=datos.get(0)[0]; 
+                    parametros=new String[3];
+                    parametros[0]="";
+                    parametros[1]=usuario;  
+                    parametros[2]=permiso;
+                    if(respuesta.equals("ok")){                       
+                        Correo c=new Correo();
+                        c.enviarCorreo("Envío de contraseña","Usted ha sido registrado en el Sistema de Promoción Docente (disponible en https://www.promociondocente.sep.gob.mx) <br/> Sus datos de acceso son: <br/> Usuario: <b>"+usuario+"</b><br/>Contrase&ntilde;a:<b>"+pass+"</b>", correo);
+                        datos=metodos.ejecutaSP("sp_insertUsuarioPermiso",parametros); 
+                    }
+                }
             }           
         }catch(Exception e){
             respuesta=e.toString();

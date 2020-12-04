@@ -5,6 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%
     session = (HttpSession) request.getSession(true);    
     if (session.getAttribute("idUsuario") == null) {
@@ -55,8 +56,24 @@
                 </div>
                 <div class="row">
                     <div class="form-group col-md-3">                               
+                        <label class="control-label" for="tipo">Tipo:</label>
+                        <select class="form-control input-sm ${disabled4}" id="tipo" name="tipo" onChange="cambioComite()" required>                                                              
+                            
+                            <c:if test='${sessionScope["plantel"]!=null}'>                                
+                                <option value='R'>Comité revisor</option>
+                            </c:if>
+                            <c:if test='${sessionScope["plantel"]==null}'>
+                                <option value=''>-Seleccione-</option>
+                                <option value='R'>Comité revisor</option>
+                                <option value='D'>Consejo dictaminador</option>
+                            </c:if>
+                            
+                                                      
+                        </select>
+                    </div>
+                    <div class="form-group col-md-3">                               
                         <label class="control-label" for="subsistema">Subsistema:</label>
-                        <select class="form-control input-sm ${disabled2}" id="subsistema" name="subsistema" onchange="actualizarPlanteles()" required>                                  
+                        <select class="form-control input-sm ${disabled2}" id="subsistema" name="subsistema" onchange="actualizarPlanteles();cambioComite();" required>                                  
                             ${catalogo.desplegarOpcionesSubsistema(sessionScope["subsistema"])}
                         </select>
                     </div>
@@ -71,14 +88,6 @@
                         <label class="control-label" for="plantel">Plantel:</label>
                         <select class="form-control input-sm ${disabled4}" id="plantel" name="plantel" required>                                  
                             ${catalogo.desplegarOpcionesPlanteles2(sessionScope["subsistema"],sessionScope["entidad"],sessionScope["plantel"])}
-                        </select>
-                    </div>
-                    <div class="form-group col-md-3">                               
-                        <label class="control-label" for="tipo">Tipo:</label>
-                        <select class="form-control input-sm" id="tipo" name="tipo" required>                                  
-                            <option value=''>-Seleccione-</option>
-                            <option value='R'>Comité revisor</option>
-                            <!--<option value='D'>Consejo dictaminador</option>-->
                         </select>
                     </div>
                 </div>
@@ -102,7 +111,7 @@
                                 <th>Opciones</th>
                             </tr>
                         </thead>
-                        <tbody id="seccionEditable">${comite.desplegarComite(sessionScope["programa"],sessionScope["plantel"],"")}</tbody>
+                        <tbody id="seccionEditable">${comite.desplegarComite(sessionScope["programa"],"",sessionScope["subsistema"],sessionScope["entidad"],sessionScope["plantel"])}</tbody>
                     </table>
                 </div>
             </div>
@@ -179,7 +188,7 @@
         </main>
         <script src="https://framework-gb.cdn.gob.mx/gobmx.js"></script>
         <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-        <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.1/jquery.validate.min.js"></script>
+        <script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.1/jquery.validate.min.js"></script>
         <script src="js/funcionesBusquedaComite.js"></script>
     </body>
 </html>

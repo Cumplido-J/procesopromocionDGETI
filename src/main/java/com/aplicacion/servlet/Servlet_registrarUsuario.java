@@ -5,8 +5,10 @@
  */
 package com.aplicacion.servlet;
 
+import constants.ConstantsWS;
 import herramientas.Correo;
 import herramientas.Pin;
+import herramientas.UtileriasHelper;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -104,6 +106,9 @@ public class Servlet_registrarUsuario extends HttpServlet {
             }else{
                 contrasena="";
             }
+            UtileriasHelper utilerias = new UtileriasHelper();
+            String encriptarPass = utilerias.encriptarCodigo(contrasena, ConstantsWS.LLAVE_CIFRADO);
+            String pass=encriptarPass;
             String permisos=request.getParameter("permisos");
             String[] aux=permisos.split(";");
             
@@ -111,7 +116,7 @@ public class Servlet_registrarUsuario extends HttpServlet {
             String respuesta="Error en almacenamiento de datos, intente nuevamente";
             Metodos_sql metodo = new Metodos_sql();
             List<String[]> datos;            
-            String[] parametros={entidad,plantel,nombre,apellido1,apellido2,correo,contrasena,usuario,fijo,movil,perfil,consideraciones,nivel,subsistema,programa,id};                                      
+            String[] parametros={entidad,plantel,nombre,apellido1,apellido2,correo,pass,usuario,fijo,movil,perfil,consideraciones,nivel,subsistema,programa,id};                                      
             datos=metodo.ejecutaSP("sp_insertUsuario",parametros);            
             if(!datos.isEmpty()){
                 respuesta=datos.get(0)[0]; 
@@ -121,7 +126,7 @@ public class Servlet_registrarUsuario extends HttpServlet {
                 if(respuesta.equals("ok")){
                     if(id.equals("")){
                         Correo c=new Correo();
-                        c.enviarCorreo("Envío de contraseña","Usted ha sido registrado en el Sistema de Promoción Docente. <br/> Sus datos de acceso son: <br/> Usuario: <b>"+usuario+"</b><br/>Contrase&ntilde;a:<b>"+contrasena+"</b>", correo);
+                        c.enviarCorreo("Envío de contraseña","Usted ha sido registrado en el Sistema de Promoción Docente disponible en https://www.promociondocente.sep.gob.mx <br/> Sus datos de acceso son: <br/> Usuario: <b>"+usuario+"</b><br/>Contrase&ntilde;a:<b>"+contrasena+"</b>", correo);
                     }
                     for (String i : aux) {
                         parametros[2]=i;

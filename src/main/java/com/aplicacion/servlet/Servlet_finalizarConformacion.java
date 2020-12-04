@@ -78,16 +78,16 @@ public class Servlet_finalizarConformacion extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try{
+            response.setContentType("text/html;charset=UTF-8");
             PrintWriter out = response.getWriter();
             HttpSession session= (HttpSession) request.getSession();     
             //if(session.getAttribute("idUsuario")!=null&&session.getAttribute("rfc")!=null){
             String idComite=session.getAttribute("idComite").toString();
             String idRol=request.getParameter("idRol"); 
             String pass=Pin.generaPin();
-            Comite c=new Comite();
-            UtileriasHelper utilerias = new UtileriasHelper();
-            String encriptarPass = utilerias.encriptarCodigo(pass, ConstantsWS.LLAVE_CIFRADO);
-            out.print(c.finalizarComite(idComite,idRol,encriptarPass));
+            Comite c=new Comite();            
+            //finalizarComite(String idComite,String idRol,String pass,String nivel,String subsistema,String programa,String tipoComite){        
+            out.print(c.finalizarComite(idComite,idRol,pass));
         }catch(Exception e){
             System.out.println(e.toString());
         }

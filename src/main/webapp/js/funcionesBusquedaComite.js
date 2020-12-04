@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 $(document).ready(function () {
+    
     $('#formBusqueda').submit(function(e) {
         e.preventDefault();
     }).validate({                
@@ -97,5 +98,28 @@ function actualizarPlanteles(idPlantel) {
 function confirmacion(idComite) {
     $("#idComiteBorrar").val(idComite);
     $("#modalConfirmacion2").modal("show");
+}
+function cambioComite(){
+    var tipo=$("#tipo").val();
+    var subsistema=$("#subsistema").val();
+    if(tipo==="D"){
+        if(subsistema==="1"){
+            $("#entidad").val("");
+            $("#entidad").removeAttr("required");
+            $("#entidad").addClass("disabled");  
+            
+        }else{
+           $("#entidad").removeClass("disabled");
+           $("#entidad").attr("required",true);
+        }
+        $("#plantel").val("");
+        $("#plantel").removeAttr("required");
+        $("#plantel").addClass("disabled");        
+    }else{
+        $("#entidad").attr("required",true);
+        $("#entidad").removeClass("disabled");
+        $("#plantel").attr("required",true);
+        $("#plantel").removeClass("disabled");
+    }
 }
 

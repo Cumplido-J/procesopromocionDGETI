@@ -1233,7 +1233,7 @@ function borrarPlaza(id){
 }
 
 function cambioObservaciones(objeto){
-    if(objeto.value!=""){
+    if($("#observaciones").val()!=""){
         $("#btnFinalizar").removeAttr("disabled");    
     }else{
         $("#btnFinalizar").attr("disabled",true); 

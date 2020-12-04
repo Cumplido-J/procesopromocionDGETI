@@ -98,8 +98,13 @@
                             </c:if>
                         </c:if>
                         <c:if test="${vistaAdmin}">
-                            <span class="glyphicon glyphicon-exclamation-sign incompleto" title="Sección incompleta" id="estatusInfoAcademica" completo="false"></span>
-                            <c:set var="in" value="in"></c:set>
+                            <c:set var="in" value=""></c:set>
+                            <c:if test="${Docente.infoRegistro[67]!=null}">
+                                <span class="glyphicon glyphicon-ok-sign completo" title="Sección completa" id="estatusInfoAcademica" completo="true"></span>                                  
+                            </c:if>
+                            <c:if test="${Docente.infoRegistro[67]==null}">
+                                <span class="glyphicon glyphicon-exclamation-sign incompleto" title="Sección incompleta" id="estatusInfoAcademica" completo="false"></span>                                
+                            </c:if>  
                         </c:if>    
                         </a>
                     </h4>
@@ -272,9 +277,14 @@
                             </c:if>                        
                         </c:if>
                         <c:if test="${vistaAdmin}">
-                            <span class="glyphicon glyphicon-exclamation-sign incompleto" title="Sección incompleta" id="estatusInfoLaboral" completo="false"></span>
                             <c:set var="in" value=""></c:set>
-                        </c:if>
+                            <c:if test="${Docente.infoRegistro[67]!=null}">
+                                <span class="glyphicon glyphicon-ok-sign completo" title="Sección completa" id="estatusInfoLaboral" completo="true"></span>                                  
+                            </c:if>
+                            <c:if test="${Docente.infoRegistro[67]==null}">
+                                <span class="glyphicon glyphicon-exclamation-sign incompleto" title="Sección incompleta" id="estatusInfoLaboral" completo="false"></span>                                
+                            </c:if>  
+                        </c:if>   
                         </a>
                     </h4>
                     <button type="button" class="collpase-button collapsed" data-parent="#accordion" data-toggle="collapse" href="#infoLaboral"></button>
@@ -449,9 +459,14 @@
                         </c:if>
                         </c:if>
                         <c:if test="${vistaAdmin}">
-                            <span class="glyphicon glyphicon-exclamation-sign incompleto" title="Sección incompleta" id="estatusInfoHoras" completo="false"></span>
                             <c:set var="in" value=""></c:set>
-                        </c:if>
+                            <c:if test="${Docente.infoRegistro[67]!=null}">
+                                <span class="glyphicon glyphicon-ok-sign completo" title="Sección completa" id="estatusInfoHoras" completo="true"></span>                                  
+                            </c:if>
+                            <c:if test="${Docente.infoRegistro[67]==null}">
+                                <span class="glyphicon glyphicon-exclamation-sign incompleto" title="Sección incompleta" id="estatusInfoHoras" completo="false"></span>                                
+                            </c:if>  
+                        </c:if>   
                       </a>
                     </h4>
                     <button type="button" class="collpase-button collapsed" data-parent="#accordion" data-toggle="collapse" href="#infoHoras"></button>
@@ -581,9 +596,14 @@
                         </c:if>
                         </c:if>
                         <c:if test="${vistaAdmin}">
-                            <span class="glyphicon glyphicon-exclamation-sign incompleto" title="Sección incompleta" id="estatusInfoCompatibilidad" completo="false"></span>
                             <c:set var="in" value=""></c:set>
-                        </c:if>
+                            <c:if test="${Docente.infoRegistro[67]!=null}">
+                                <span class="glyphicon glyphicon-ok-sign completo" title="Sección completa" id="estatusInfoCompatibilidad" completo="true"></span>                                  
+                            </c:if>
+                            <c:if test="${Docente.infoRegistro[67]==null}">
+                                <span class="glyphicon glyphicon-exclamation-sign incompleto" title="Sección incompleta" id="estatusInfoCompatibilidad" completo="false"></span>                                
+                            </c:if>  
+                        </c:if>   
                       </a>
                     </h4>
                     <button type="button" class="collpase-button collapsed" data-parent="#accordion" data-toggle="collapse" href="#infoCompatibilidad"></button>
@@ -690,9 +710,9 @@
                           </c:if>
                           <c:if test="${vistaAdmin}">
                             <label class="control-label">Observaciones:</label>
-                            <textarea class="form-control text-uppercase" id="observaciones" name="observaciones" maxlength="200" onChange="cambioObservaciones(this)" required>${Docente.infoRegistro[67]}</textarea>
+                            <textarea class="form-control text-uppercase" id="observaciones" name="observaciones" maxlength="200" onKeyUp="cambioObservaciones()" required>${Docente.infoRegistro[67]}</textarea>
                           </c:if>
-                          <br/>
+                          <br/>                          
                           <input type="submit" disabled="true" class="btn btn-primary" value="Continuar" id="btnFinalizar">                      
                       </div>
                       
@@ -979,7 +999,7 @@
         <script src="https://code.jquery.com/jquery-1.12.4.js"></script>      
         <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>  
         <script src="https://framework-gb.cdn.gob.mx/assets/scripts/jquery-ui-datepicker.js"></script>
-        <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.1/jquery.validate.min.js"></script>
+        <script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.1/jquery.validate.min.js"></script>
         <script src="js/funcionesRegistro.js"></script> 
         <script>
             $( function() {
@@ -989,8 +1009,12 @@
                 $( "#carrera" ).autocomplete({
                   source: availableTags
                 });
+                <c:if test="${vistaAdmin}">
+                cambioObservaciones();
+                </c:if>
             });
         </script>
+        
     </body>
 </html>
 

@@ -96,6 +96,8 @@ $(document).ready(function () {
                     }
                 }else{
                     $("#mensaje").html(response);
+                    $("#btnContinuar").addClass("hidden");
+                    $("#btnCerrar").removeClass("hidden");
                     $("#modalMensaje").modal("show");
                 }
 	});
@@ -105,17 +107,22 @@ $(document).ready(function () {
 	var post_url = $(this).attr("action"); //get form action url
 	var request_method = $(this).attr("method"); //get form GET/POST method
 	var form_data = $(this).serialize(); //Encode form elements for submission
-	
+	$("#btnEnviar").attr("disabled",true);
 	$.ajax({
 		url : post_url,
 		type: request_method,
 		data : form_data
 	}).done(function(response){ //
+            $("#btnEnviar").removeAttr("disabled");
                 $("#modalConfirmacion2").modal("hide");
                 if(response=="ok"){
                     $("#mensaje").html("Información registrada correctamente");
+                    $("#btnContinuar").removeClass("hidden");
+                    $("#btnCerrar").addClass("hidden");
                 }else{
                    $("#mensaje").html(response); 
+                   $("#btnContinuar").addClass("hidden");
+                   $("#btnCerrar").removeClass("hidden");
                 }
                 $("#modalMensaje").modal("show");
 	});
@@ -160,6 +167,8 @@ function subirArchivo(){
         $("#btnEvidencia"+id).attr("value","Ver archivo");
         //$("#alertaBtnEvidencia"+id).attr("style","display:none;");
         $("#mensaje").html("El archivo fue cargado correctamente");
+        $("#btnContinuar").addClass("hidden");
+        $("#btnCerrar").removeClass("hidden");
     }
     $("#modalMensaje").modal("show");
 }
@@ -205,6 +214,8 @@ function finalizaRegistro(){
     }
     if(mensaje.length>0){
         $("#mensaje").html(mensaje);
+        $("#btnContinuar").addClass("hidden");
+        $("#btnCerrar").removeClass("hidden");
         $("#modalMensaje").modal("show");
     }
     

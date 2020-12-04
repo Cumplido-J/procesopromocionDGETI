@@ -1,8 +1,8 @@
-<header class="headerart">
+ï»¿<header class="headerart">
     <div class="titulo">
-        <p>Dirección General de Educación Tecnológica Industrial y de Servicios</p>
+        <p>DirecciÃ³n General de EducaciÃ³n TecnolÃ³gica Industrial y de Servicios</p>
     </div>
 <div class="texto-principalart margen-interno">
-    <p>Programa de Promoción en el Servicio Docente en Educación Media Superior</p>
+    <p>Programa de PromociÃ³n en el Servicio Docente en EducaciÃ³n Media Superior</p>
  </div>
 </header>

@@ -680,7 +680,7 @@
                                     </div>
                                 </div>
                                 <div class="col-xs-12">
-                                    <label class="control-label">Evidencias de resultados educativos</label>
+                                    <label class="control-label">Evidencia de participación en actividades para mejorar los resultados educativos</label>
                                     <div class='text-center'>
                                         <input type="hidden" id="pEvidencias" value="${resultados[1]}"/>
                                         <input type='button' class='btn btn-sm btn-link' value='(+) Agregar información' onClick="abrirModalResultado()"/>
@@ -1118,7 +1118,7 @@
         <script src="https://code.jquery.com/jquery-1.12.4.js"></script>      
         <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>  
         <script src="https://framework-gb.cdn.gob.mx/assets/scripts/jquery-ui-datepicker.js"></script>
-        <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.1/jquery.validate.min.js"></script>
+        <script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.1/jquery.validate.min.js"></script>
         <script type="text/javascript" src="js/jquery.ui.datepicker.validation.js"></script>
         <script src="js/funcionesEvidencias.js?v=1"></script> 
     </body>

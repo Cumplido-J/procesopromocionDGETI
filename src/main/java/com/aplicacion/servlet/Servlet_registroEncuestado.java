@@ -117,7 +117,7 @@ public class Servlet_registroEncuestado extends HttpServlet {
                         pw = new PrintWriter(fichero);                        
                         pw.println("RFC:"+rfc+" PIN:" + parametros[0]);
                         fichero.close();
-                        c.enviarCorreo("Envío de PIN","El PIN de acceso asignado es:<b>"+parametros[0]+"</b>. <br/>Acceda a la página http://encuestadocente.sems.gob.mx:8080/Encuesta/ para contestar el formulario.", correo);
+                        c.enviarCorreo("Envío de PIN","El PIN de acceso asignado es:<b>"+parametros[0]+"</b>. <br/>Acceda a la página https://www.encuestadocente.sep.gob.mx para contestar el formulario.", correo);
                     }
                     Docente d=new Docente();
                     d.setIdUsuario(idUsuario);
