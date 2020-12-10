@@ -100,8 +100,8 @@ public class Servlet_login extends HttpServlet {
                 
                 if(cadenaDencriptada.equals(clave)){
                     
-                    InetAddress address = InetAddress.getLocalHost();
-                    String ipUser = address.getHostAddress();
+                    String ipUser = request.getRemoteAddr();
+                    
                     String idUser = datos.get(0)[0];
                     String[] params={idUser, ipUser};
                     
