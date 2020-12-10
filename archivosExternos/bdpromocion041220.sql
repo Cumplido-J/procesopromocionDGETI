@@ -1689,7 +1689,7 @@ UNLOCK TABLES;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`admin`@`localhost` PROCEDURE `sp_borraAdmin`(in idUsuario int)
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_borraAdmin`(in idUsuario int)
 BEGIN
 	delete from bitacora where idUsuario=_idUsuario;
 	delete from bitacoralogin where idUsuario=_idUsuario;
@@ -1711,7 +1711,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`admin`@`localhost` PROCEDURE `sp_borraAspirante`(in _idUsuario int)
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_borraAspirante`(in _idUsuario int)
 BEGIN
 	delete from aportaciones where idUsuario=_idUsuario;
     delete from bitacora where idUsuario=_idUsuario;
@@ -1742,7 +1742,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`admin`@`localhost` PROCEDURE `sp_consultaAportaciones`(in _idUsuario int)
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_consultaAportaciones`(in _idUsuario int)
 BEGIN
 	select a.id,a.idUsuario,a.idAportacion,b.aportacion,a.fechaInicio,a.fechaFin,a.institucion,a.documento
     from aportaciones a
@@ -1765,7 +1765,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`admin`@`localhost` PROCEDURE `sp_consultaAsignaturaCBP`(in _idVersion int,in _semestre char(2))
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_consultaAsignaturaCBP`(in _idVersion int,in _semestre char(2))
 BEGIN
 	SELECT c.id,c.nombre,c.clave,c.semestre,c.horas,c.tipo,c.optativa
 	FROM catcomponentebasprop a 
@@ -1788,7 +1788,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`admin`@`localhost` PROCEDURE `sp_consultaCarreraCP`(in _idVersion int,in _semestre char(2))
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_consultaCarreraCP`(in _idVersion int,in _semestre char(2))
 BEGIN
 	SELECT a.idCarreraCP,b.carrera,b.clave
 	FROM catcomponenteprofesional a 
@@ -1813,7 +1813,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`admin`@`localhost` PROCEDURE `sp_consultaCategoriasVacantes`(in _idPlantel int,in _idPrograma int)
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_consultaCategoriasVacantes`(in _idPlantel int,in _idPrograma int)
 BEGIN
 	SELECT c.id,c.categoria,c.tipo,a.tipoVacancia
 	FROM vacancia a
@@ -1838,7 +1838,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`admin`@`localhost` PROCEDURE `sp_consultaComite`(in _idPrograma int, in _tipo char(2),in _idSubsistema int,in _idEntidad int, in _idPlantel int)
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_consultaComite`(in _idPrograma int, in _tipo char(2),in _idSubsistema int,in _idEntidad int, in _idPlantel int)
 BEGIN
 	set @consulta="select a.id,a.idEntidad,
     case 
@@ -1907,7 +1907,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`admin`@`localhost` PROCEDURE `sp_consultaComitePorId`(in _id int)
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_consultaComitePorId`(in _id int)
 BEGIN
 	select a.id,a.idEntidad,a.idSubsistema,a.idPlantel,a.idPrograma,a.tipo,a.finalizado
     from comite a
@@ -1930,7 +1930,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`admin`@`localhost` PROCEDURE `sp_consultaComitesRegistrados`(in _idEntidad int, in _idPlantel int, in _idEstatus int)
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_consultaComitesRegistrados`(in _idEntidad int, in _idPlantel int, in _idEstatus int)
 BEGIN
 	select u.id,u.entidad as idEntidad,e.entidad,u.plantel as idPlantel,p.plantel,u.nombre,u.primerApellido,u.segundoApellido,u.curp,a.idEstatus,ce.estatus,co.tipo
 	from usuario u
@@ -1956,7 +1956,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`admin`@`localhost` PROCEDURE `sp_consultaConstanciasProceso`(in _idUsuario int)
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_consultaConstanciasProceso`(in _idUsuario int)
 BEGIN
 	select a.id,a.idUsuario,c.id as idCriterio,a.idCatPuntaje1,
 		CASE
@@ -1985,7 +1985,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`admin`@`localhost` PROCEDURE `sp_consultaConvocatoria`(in _id int)
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_consultaConvocatoria`(in _id int)
 BEGIN
 	select c.id,idPrograma,cp.idSubsistema,cp.idEntidad,c.idPlantel,publicacion,inicioRegistro,finRegistro,inicioValoracion,finValoracion,inicioDictaminacion,finDictaminacion,resultados,estatus
     from convocatoria c
@@ -2008,7 +2008,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`admin`@`localhost` PROCEDURE `sp_consultaConvocatorias`(in _idPrograma int,in _idSubsistema int,in _idEntidad int,in _idPlantel int,in _estatus varchar(15))
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_consultaConvocatorias`(in _idPrograma int,in _idSubsistema int,in _idEntidad int,in _idPlantel int,in _estatus varchar(15))
 BEGIN
 	set @consulta="select c.id,c.idPrograma,cpr.programa,cp.idSubsistema,cs.subsistema,cp.idEntidad,ce.entidad,c.idPlantel,cp.plantel,c.estatus
 		from convocatoria c
@@ -2050,7 +2050,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`admin`@`localhost` PROCEDURE `sp_consultaConvocatoriasVigentes`(in _idPlantel int)
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_consultaConvocatoriasVigentes`(in _idPlantel int)
 BEGIN
 select c.id,p.programa
 from convocatoria c
@@ -2073,7 +2073,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`admin`@`localhost` PROCEDURE `sp_consultaDocentes`(in _idPrograma int, in _idSubsistema int, in _idEntidad int, in _idPlantel int,in _nombre varchar(200), in _idEstatus int)
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_consultaDocentes`(in _idPrograma int, in _idSubsistema int, in _idEntidad int, in _idPlantel int,in _nombre varchar(200), in _idEstatus int)
 BEGIN
 	set @consulta="select u.id,u.idEntidad,e.entidad,u.idPlantel,p.plantel,concat(u.nombre,' ',u.primerApellido,' ',u.segundoApellido) as nombre,u.curp,a.idEstatus, case when ce.estatus is null then 'Pre-registro' else ce.estatus end as estatus,u.idSubsistema ,s.subsistema,u.idPrograma,pr.programa,
     CASE
@@ -2125,7 +2125,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`admin`@`localhost` PROCEDURE `sp_consultaInfoLogin`(in _rfc varchar(18))
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_consultaInfoLogin`(in _rfc varchar(18))
 BEGIN
 	select u.id,u.idSubsistema,u.idEntidad,u.idPlantel,concat(u.nombre," ",u.primerApellido," ",u.segundoApellido) as nombre,u.clave as clave,u.curp,u.perfil,up.idPermiso,cp.permiso,cp.url,u.idPrograma,u.nivel,u.correo,up.permisoEdicion
 	from usuario u
@@ -2148,7 +2148,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`admin`@`localhost` PROCEDURE `sp_consultaJornadas`(in _idCategoria int)
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_consultaJornadas`(in _idCategoria int)
 BEGIN
 	SELECT a.idJornada,a.clave,b.jornada FROM catcategoriajornada a 
         inner join catjornada b on a.idJornada=b.id 
@@ -2169,7 +2169,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`admin`@`localhost` PROCEDURE `sp_consultaJornadaVacante`(in _idCategoria int, in _idPlantel int, in _idPrograma int)
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_consultaJornadaVacante`(in _idCategoria int, in _idPlantel int, in _idPrograma int)
 BEGIN
 	SELECT c.id,d.clave,c.jornada
 	FROM vacancia a
@@ -2194,7 +2194,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`admin`@`localhost` PROCEDURE `sp_consultaMiembrosComite`(in _idComite int)
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_consultaMiembrosComite`(in _idComite int)
 BEGIN
 	select a.id,a.rfc,a.nombre,a.primerApellido,
     CASE 
@@ -2222,7 +2222,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`admin`@`localhost` PROCEDURE `sp_consultaModuloCP`(in _idVersion int,in _semestre char(2),in _idCarrera int)
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_consultaModuloCP`(in _idVersion int,in _semestre char(2),in _idCarrera int)
 BEGIN
     SELECT d.id,d.modulo,d.clave	
 	FROM catcomponenteprofesional a 
@@ -2248,7 +2248,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`admin`@`localhost` PROCEDURE `sp_consultaParticipaciones`(in _idUsuario int)
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_consultaParticipaciones`(in _idUsuario int)
 BEGIN
 	select a.id,a.idUsuario,a.idParticipacion,b.participacion,a.fechaInicio,a.fechaFin,a.institucion,a.documento
     from participaciones a
@@ -2271,7 +2271,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`admin`@`localhost` PROCEDURE `sp_consultaProgramasPlantel`(in _idPlantel int)
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_consultaProgramasPlantel`(in _idPlantel int)
 BEGIN
 	SELECT c.id,p.programa
 	FROM convocatoria c
@@ -2318,7 +2318,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`admin`@`localhost` PROCEDURE `sp_consultaRegistro`(in _idUsuario int)
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_consultaRegistro`(in _idUsuario int)
 BEGIN
 	SELECT 
 		u.id,
@@ -2428,7 +2428,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`admin`@`localhost` PROCEDURE `sp_consultaRequisitosCategoria`(in _idCategoria int)
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_consultaRequisitosCategoria`(in _idCategoria int)
 BEGIN
 	SELECT b.id,b.requisito FROM catcategoriarequisitoplaza a
     inner join catrequisitosplaza b on a.idRequisitoPlaza=b.id
@@ -2449,7 +2449,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`admin`@`localhost` PROCEDURE `sp_consultaResultados`(in _idUsuario int)
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_consultaResultados`(in _idUsuario int)
 BEGIN
 	select r.id,r.idUsuario,r.idResultado,cr.resultado,r.fechaInicio,r.fechaFin,r.documento
     from resultados r
@@ -2472,7 +2472,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`admin`@`localhost` PROCEDURE `sp_consultaSubModuloCP`(in _idVersion int,in _semestre char(2),in _idCarrera int,in _idModulo int)
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_consultaSubModuloCP`(in _idVersion int,in _semestre char(2),in _idCarrera int,in _idModulo int)
 BEGIN    
     SELECT e.id,e.nombre,e.clave,e.semestre,e.horas,e.tipo	
 	FROM catcomponenteprofesional a 
@@ -2496,7 +2496,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`admin`@`localhost` PROCEDURE `sp_consultaTiposInstitucion`(in _idEntidad int)
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_consultaTiposInstitucion`(in _idEntidad int)
 BEGIN
 	SELECT b.id,b.tipo
 	FROM catinstituciones a
@@ -2520,7 +2520,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`admin`@`localhost` PROCEDURE `sp_consultaUsuarioPermiso`(in _idUsuario int)
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_consultaUsuarioPermiso`(in _idUsuario int)
 BEGIN
 	select cp.id,cp.permiso,
 	CASE
@@ -2545,7 +2545,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`admin`@`localhost` PROCEDURE `sp_consultaUsuarioPlaza`(in _idUsuario int)
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_consultaUsuarioPlaza`(in _idUsuario int)
 BEGIN
 	select up.id,up.idUsuario,up.idCategoria,cp.categoria, up.idJornada,j.jornada,up.horas,up.fecha,up.idTipoNombramiento,ctn.codigo, ctn.descripcion,up.clave,up.actual
     from usuarioplaza up
@@ -2569,7 +2569,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`admin`@`localhost` PROCEDURE `sp_consultaUsuarios`(in _idPrograma int, in _idSubsistema int, in _idEntidad int, in _idPlantel int,in _usuario varchar(18))
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_consultaUsuarios`(in _idPrograma int, in _idSubsistema int, in _idEntidad int, in _idPlantel int,in _usuario varchar(18))
 BEGIN
 	set @consulta="select u.id,u.idPrograma,
     CASE
@@ -2636,7 +2636,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`admin`@`localhost` PROCEDURE `sp_consultaVacancias`(in _idPrograma int,in _idSubsistema int,in _idEntidad int,in _idPlantel int,in _tipoCategoria varchar(3))
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_consultaVacancias`(in _idPrograma int,in _idSubsistema int,in _idEntidad int,in _idPlantel int,in _tipoCategoria varchar(3))
 BEGIN
 	set @consulta="select v.id,v.idPrograma,cpr.programa,v.idSubsistema,cs.subsistema,v.idEntidad,ce.entidad,v.idPlantel,cp.plantel,v.idCategoria,ccp.categoria,v.idJornada,cj.jornada,v.tipoVacancia,v.plazas,v.tipoCategoria,v.horas
 		from vacancia v
@@ -2681,7 +2681,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`admin`@`localhost` PROCEDURE `sp_consultaVersionCBP`()
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_consultaVersionCBP`()
 BEGIN
     SELECT b.id,b.version
 	FROM catcomponentebasprop a 
@@ -2704,7 +2704,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`admin`@`localhost` PROCEDURE `sp_consultaVersionCP`()
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_consultaVersionCP`()
 BEGIN
 	SELECT c.id,c.version	
 	FROM catcomponenteprofesional a 	
@@ -2727,7 +2727,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`admin`@`localhost` PROCEDURE `sp_countRegistrosVacancia`(in _idPlantel int, in _idPrograma int)
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_countRegistrosVacancia`(in _idPlantel int, in _idPrograma int)
 BEGIN
 	SELECT count(*)
 	FROM convocatoria c
@@ -2749,7 +2749,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`admin`@`localhost` PROCEDURE `sp_deleteAportaciones`(in _id int)
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_deleteAportaciones`(in _id int)
 BEGIN
 	delete from aportaciones where id=_id;
     select "ok" as respuesta;
@@ -2792,7 +2792,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`admin`@`localhost` PROCEDURE `sp_deleteConstanciasProceso`(in _idUsuario int, in _idCriterio int)
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_deleteConstanciasProceso`(in _idUsuario int, in _idCriterio int)
 BEGIN
 	delete from constanciasproceso where idUsuario=_idUsuario and idCriterio=_idCriterio;
     select "ok" as respuesta;
@@ -2812,7 +2812,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`admin`@`localhost` PROCEDURE `sp_deleteCursos`(in _id int)
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_deleteCursos`(in _id int)
 BEGIN
 	delete from cursos where id=_id;
     select "ok" as respuesta;
@@ -2832,7 +2832,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`admin`@`localhost` PROCEDURE `sp_deleteHorasGrupo`(in _id int)
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_deleteHorasGrupo`(in _id int)
 BEGIN
 	delete from horasgrupo 
     where id=_id;
@@ -2874,7 +2874,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`admin`@`localhost` PROCEDURE `sp_deleteParticipaciones`(in _id int)
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_deleteParticipaciones`(in _id int)
 BEGIN
 	delete from participaciones where id=_id;
     select "ok" as respuesta;
@@ -2894,7 +2894,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`admin`@`localhost` PROCEDURE `sp_deletePublicaciones`(in _id int)
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_deletePublicaciones`(in _id int)
 BEGIN
 	delete from publicaciones where id=_id;
     select "ok" as respuesta;
@@ -2914,7 +2914,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`admin`@`localhost` PROCEDURE `sp_deleteResultados`(in _id int)
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_deleteResultados`(in _id int)
 BEGIN
 	delete from resultados where id=_id;
     select "ok" as respuesta;
@@ -2934,7 +2934,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`admin`@`localhost` PROCEDURE `sp_deleteTutorias`(in _id int)
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_deleteTutorias`(in _id int)
 BEGIN
 	delete from tutorias where id=_id;
     select "ok" as respuesta;
@@ -2954,7 +2954,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`admin`@`localhost` PROCEDURE `sp_deleteUsuarioPermiso`(in _idUsuario int)
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_deleteUsuarioPermiso`(in _idUsuario int)
 BEGIN
 	delete from usuariopermiso where idUsuario=_idUsuario;
     select 'ok' as respuesta;
@@ -2974,7 +2974,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`admin`@`localhost` PROCEDURE `sp_deleteUsuarioPlaza`(in _id int)
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_deleteUsuarioPlaza`(in _id int)
 BEGIN
 	delete from usuarioplaza where id=_id;
     select 'ok' as respuesta;
@@ -2994,7 +2994,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`admin`@`localhost` PROCEDURE `sp_finalizarComite`(in _idComite int, in _idRol int)
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_finalizarComite`(in _idComite int, in _idRol int)
 BEGIN
 	update comite set finalizado='V' where id=_idComite;    
 	select 
@@ -3027,7 +3027,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`admin`@`localhost` PROCEDURE `sp_finEncuestados`(in _idUsuario int,in _observacion varchar(200) )
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_finEncuestados`(in _idUsuario int,in _observacion varchar(200) )
 BEGIN
 	update aspirantes
     set idEstatus=9,observacionEncuestados=_observacion 
@@ -3048,7 +3048,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`admin`@`localhost` PROCEDURE `sp_finProceso`(in _idUsuario int, in _totalEncuestados int, in _observacion varchar(200),in _evaluacion DECIMAL(10,5))
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_finProceso`(in _idUsuario int, in _totalEncuestados int, in _observacion varchar(200),in _evaluacion DECIMAL(10,5))
 BEGIN	
 	declare _idEstatus int default null;
     if _totalEncuestados<30 then
@@ -3081,7 +3081,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`admin`@`localhost` PROCEDURE `sp_finRegistro`(in _idUsuario int,in _publico char(1),in _observacion varchar(200))
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_finRegistro`(in _idUsuario int,in _publico char(1),in _observacion varchar(200))
 BEGIN
 	declare _idEstatus int default null;
     if _publico is not null then
@@ -3119,7 +3119,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`admin`@`localhost` PROCEDURE `sp_insertAportaciones`(in _idUsuario int,in _idAportacion int,in _fechaInicio date,in _fechaFin date,in _institucion varchar(200),in _aportacion varchar(500),in _documento varchar(100))
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_insertAportaciones`(in _idUsuario int,in _idAportacion int,in _fechaInicio date,in _fechaFin date,in _institucion varchar(200),in _aportacion varchar(500),in _documento varchar(100))
 BEGIN
 	declare _idAux int default null;
 	if _idAportacion <1  then
@@ -3158,7 +3158,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`admin`@`localhost` PROCEDURE `sp_insertBitacora`(in _idUsuario int,in _tipo char(1),in _descripcion varchar(200))
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_insertBitacora`(in _idUsuario int,in _tipo char(1),in _descripcion varchar(200))
 BEGIN
 	insert into bitacora (idUsuario,tipo,descripcion,fechaHora)
     values(_idUsuario,_tipo,_descripcion,now());
@@ -3180,7 +3180,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`admin`@`localhost` PROCEDURE `sp_insertBitacoraLogin`(in _idUsuario int,in _ipUsuario varchar(20))
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_insertBitacoraLogin`(in _idUsuario int,in _ipUsuario varchar(20))
 BEGIN
 	insert into bitacoraLogin (idUsuario, ipUsuario, fechaHoraLogin)
     values(_idUsuario, _ipUsuario, now());
@@ -3240,7 +3240,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`admin`@`localhost` PROCEDURE `sp_insertConstanciasProceso`(in _idUsuario int, in _idCriterio int, in _idCatPuntaje int,in _estatus char(1))
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_insertConstanciasProceso`(in _idUsuario int, in _idCriterio int, in _idCatPuntaje int,in _estatus char(1))
 BEGIN
 	declare _aux int default null;
     select id into _aux
@@ -3274,7 +3274,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`admin`@`localhost` PROCEDURE `sp_insertConvocatoria`(in _id int, in _publicacion date,in _inicioRegistro date,in _finRegistro date,in _inicioValoracion date,in _finValoracion date,in _inicioDictaminacion date,in _finDictaminacion date, in _resultados date,in _idPlantel int,in _idPrograma int,in _estatus varchar(15))
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_insertConvocatoria`(in _id int, in _publicacion date,in _inicioRegistro date,in _finRegistro date,in _inicioValoracion date,in _finValoracion date,in _inicioDictaminacion date,in _finDictaminacion date, in _resultados date,in _idPlantel int,in _idPrograma int,in _estatus varchar(15))
 BEGIN
 	declare _aux int default null;
     if _id is null then    
@@ -3321,7 +3321,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`admin`@`localhost` PROCEDURE `sp_insertCursos`(in _idUsuario int,in _tipo char(2),in _nombreCurso varchar(200), in _fechaInicio date,in _fechaFin date,in _institucion varchar(200), in _totalHoras int,in _documento varchar(100))
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_insertCursos`(in _idUsuario int,in _tipo char(2),in _nombreCurso varchar(200), in _fechaInicio date,in _fechaFin date,in _institucion varchar(200), in _totalHoras int,in _documento varchar(100))
 BEGIN
 	insert into cursos (idUsuario,tipo,nombreCurso,fechaInicio,fechaFin,institucion,totalHoras,documento)
     values (_idUsuario,_tipo,_nombreCurso,_fechaInicio,_fechaFin,_institucion,_totalHoras,_documento);
@@ -3343,7 +3343,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`admin`@`localhost` PROCEDURE `sp_insertMiembroComite`(in _idComite int,in _rfc varchar(20),in _nombre varchar(50),in _primerApellido varchar(50),in _segundoApellido varchar(50),in _correo varchar(50),in _idRolComite int)
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_insertMiembroComite`(in _idComite int,in _rfc varchar(20),in _nombre varchar(50),in _primerApellido varchar(50),in _segundoApellido varchar(50),in _correo varchar(50),in _idRolComite int)
 BEGIN
 	declare _idAux int default null;
     select id into _idAux 
@@ -3393,7 +3393,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`admin`@`localhost` PROCEDURE `sp_insertParticipaciones`(in _idUsuario int,in _idParticipacion int,in _fechaInicio date,in _fechaFin date,in _institucion varchar(200),in _participacion varchar(300),in _documento varchar(100))
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_insertParticipaciones`(in _idUsuario int,in _idParticipacion int,in _fechaInicio date,in _fechaFin date,in _institucion varchar(200),in _participacion varchar(300),in _documento varchar(100))
 BEGIN
 	declare _idAux int default null;
 	if _idParticipacion <1  then
@@ -3432,7 +3432,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`admin`@`localhost` PROCEDURE `sp_insertPublicaciones`( in _idUsuario int,in _nombre varchar(200),in _medio char(1),in _fecha date,in _ISSN varchar(50))
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_insertPublicaciones`( in _idUsuario int,in _nombre varchar(200),in _medio char(1),in _fecha date,in _ISSN varchar(50))
 BEGIN
 	declare _idAux int default null;
     select id into _idAux
@@ -3462,7 +3462,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`admin`@`localhost` PROCEDURE `sp_insertResultados`(in _idUsuario int,in _idResultado int, in _fechaInicio date, in _fechaFin date,in _resultado varchar(200),in _documento varchar(100))
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_insertResultados`(in _idUsuario int,in _idResultado int, in _fechaInicio date, in _fechaFin date,in _resultado varchar(200),in _documento varchar(100))
 BEGIN
 	declare _idAux int default null;
 	if _idResultado <1  then
@@ -3501,7 +3501,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`admin`@`localhost` PROCEDURE `sp_insertTutorias`(in _idUsuario int, in _fechaInicio date, in _fechaFin date,in _documento varchar(200))
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_insertTutorias`(in _idUsuario int, in _fechaInicio date, in _fechaFin date,in _documento varchar(200))
 BEGIN
 	insert into tutorias (idUsuario,fechaInicio,fechaFin,documento)
     values(_idUsuario,_fechaInicio,_fechaFin,_documento);
@@ -3522,7 +3522,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`admin`@`localhost` PROCEDURE `sp_insertUsuario`(in _idEntidad int,in _idPlantel int,in _nombre varchar(50),in _primerApellido varchar(50),in _segundoApellido varchar(50),in _correo varchar(50),in _pass varchar(200),in _curp varchar(18),in _telfijo varchar(10),in _telcel varchar(10),in _perfil varchar(1),in _consideraciones varchar(200),in _nivel char(1),in _idSubsistema int,in _idPrograma int,in _idUsuario int)
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_insertUsuario`(in _idEntidad int,in _idPlantel int,in _nombre varchar(50),in _primerApellido varchar(50),in _segundoApellido varchar(50),in _correo varchar(50),in _pass varchar(200),in _curp varchar(18),in _telfijo varchar(10),in _telcel varchar(10),in _perfil varchar(1),in _consideraciones varchar(200),in _nivel char(1),in _idSubsistema int,in _idPrograma int,in _idUsuario int)
 BEGIN
 	declare _idAux int default null;
     if(_idUsuario is null) then
@@ -3571,7 +3571,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`admin`@`localhost` PROCEDURE `sp_insertUsuarioPermiso`(in _idUsuario int,in _curp varchar(18), in _idPermiso int)
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_insertUsuarioPermiso`(in _idUsuario int,in _curp varchar(18), in _idPermiso int)
 BEGIN
 	declare _idAux int default null;
     
@@ -3606,7 +3606,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`admin`@`localhost` PROCEDURE `sp_insertUsuarioPlaza`(in _idUsuario int, in _idCategoria int, in _idJornada int,in _horas int,in _fecha date,in _idTipoNombramiento int,in _clave varchar(25))
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_insertUsuarioPlaza`(in _idUsuario int, in _idCategoria int, in _idJornada int,in _horas int,in _fecha date,in _idTipoNombramiento int,in _clave varchar(25))
 BEGIN
 	insert into usuarioplaza (idUsuario,idCategoria,idJornada,horas,fecha,idTipoNombramiento,clave,actual)
     values(_idUsuario,_idCategoria,_idJornada,_horas,_fecha,_idTipoNombramiento,_clave,'F');
@@ -3627,7 +3627,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`admin`@`localhost` PROCEDURE `sp_insertVacancia`(in _idEntidad int,in _idPlantel int,in _tipoCategoria varchar(3),in _plazas int,in _idCategoria int,in _idJornada int,in _tipoVacancia varchar(200),in _idPrograma int,in _idSubsistema int,in _horas int)
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_insertVacancia`(in _idEntidad int,in _idPlantel int,in _tipoCategoria varchar(3),in _plazas int,in _idCategoria int,in _idJornada int,in _tipoVacancia varchar(200),in _idPrograma int,in _idSubsistema int,in _horas int)
 BEGIN
 	declare _idAux int default null;
     
@@ -3666,7 +3666,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`admin`@`localhost` PROCEDURE `sp_registraConfirmacionHora`(in _id int,in _confirmada char(1))
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_registraConfirmacionHora`(in _id int,in _confirmada char(1))
 BEGIN
 	update horasgrupo
     set confirmada=_confirmada
@@ -3689,7 +3689,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`admin`@`localhost` PROCEDURE `sp_registraVacancia`(in _idEntidad int,in _idPlantel int,in _tipoCategoria varchar(3),in _plazas int,in _idCategoria int,in _idJornada int,in _idPrograma int,in _idSubsistema int,in _horas int)
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_registraVacancia`(in _idEntidad int,in _idPlantel int,in _tipoCategoria varchar(3),in _plazas int,in _idCategoria int,in _idJornada int,in _idPrograma int,in _idSubsistema int,in _horas int)
 BEGIN
 	declare _idConvocatoria int default null;
 	declare _idCategoriaAux int;
@@ -3739,7 +3739,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`admin`@`localhost` PROCEDURE `sp_registroConstancia`(in _idUsuario int, in _idRequisito int)
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_registroConstancia`(in _idUsuario int, in _idRequisito int)
 BEGIN
 	declare _idAux int default null;
     
@@ -3777,7 +3777,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`admin`@`localhost` PROCEDURE `sp_registroHorasGrupo`(in _idUsuario int, in _idPeriodo int, in _idAsignatura int,in _horas int,in _grupo varchar(5),in _semestre int)
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_registroHorasGrupo`(in _idUsuario int, in _idPeriodo int, in _idAsignatura int,in _horas int,in _grupo varchar(5),in _semestre int)
 BEGIN
 	declare _idAux int default null;
     
@@ -3820,7 +3820,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`admin`@`localhost` PROCEDURE `sp_registroHorasGrupoWS`(in _idUsuario int, in _idPeriodo int, in _claveAsignatura varchar(20),in _horas int,in _grupo varchar(5),in _semestre int)
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_registroHorasGrupoWS`(in _idUsuario int, in _idPeriodo int, in _claveAsignatura varchar(20),in _horas int,in _grupo varchar(5),in _semestre int)
 BEGIN
 	declare _idAux int default null;
 	declare _idAsignatura int default null;
@@ -3869,7 +3869,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`admin`@`localhost` PROCEDURE `sp_registroInfoAcademica`(in _idUsuario int,in _idEscuelaEstudio int, in _carrera varchar(300),in _anioEgreso int,in _idGradoAcademico int, in _idModalidadTitulacion int,in _anioTitulacion int,in _cedula varchar(20),in _idCCT int)
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_registroInfoAcademica`(in _idUsuario int,in _idEscuelaEstudio int, in _carrera varchar(300),in _anioEgreso int,in _idGradoAcademico int, in _idModalidadTitulacion int,in _anioTitulacion int,in _cedula varchar(20),in _idCCT int)
 BEGIN
 	declare _idCarrera int default NULL;
     declare _idUsuarioAux int default NULL;
@@ -3915,7 +3915,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`admin`@`localhost` PROCEDURE `sp_registroInfoCompatibilidad`(in _idUsuario int,in _funcionesOtro char(1), in _compatibilidad char(1),in _horasOtroSubsistema int)
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_registroInfoCompatibilidad`(in _idUsuario int,in _funcionesOtro char(1), in _compatibilidad char(1),in _horasOtroSubsistema int)
 BEGIN
 	declare _idUsuarioAux int default null;
     
@@ -3950,7 +3950,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`admin`@`localhost` PROCEDURE `sp_registroInfoHoras`(in _idUsuario int,in _frenteGrupo char(1),in _nivelCENNI int, in _folioCENNI varchar(15))
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_registroInfoHoras`(in _idUsuario int,in _frenteGrupo char(1),in _nivelCENNI int, in _folioCENNI varchar(15))
 BEGIN
 	declare _idUsuarioAux int default null;
     
@@ -3985,7 +3985,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`admin`@`localhost` PROCEDURE `sp_registroInfoLaboral`(in _idUsuario int,in _activo char(1),in _ingresoSubsistema date,in _ingresoPlantel date,in _idCategoria int,in _idJornada int,in _fechaPlaza date,in _idTipoNombramiento int,in _fechaUltimaPromocion date,in _idCategoriaAspira int ,in _idJornadaAspira int ,in _idPerfilRequerido int,in _notaSancion char(1))
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_registroInfoLaboral`(in _idUsuario int,in _activo char(1),in _ingresoSubsistema date,in _ingresoPlantel date,in _idCategoria int,in _idJornada int,in _fechaPlaza date,in _idTipoNombramiento int,in _fechaUltimaPromocion date,in _idCategoriaAspira int ,in _idJornadaAspira int ,in _idPerfilRequerido int,in _notaSancion char(1))
 BEGIN
 	declare _idUsuarioAux int default null;
    
@@ -4034,7 +4034,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`admin`@`localhost` PROCEDURE `sp_selectCatAportacion`()
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_selectCatAportacion`()
 BEGIN
 	select id,aportacion from cataportacion;
 END ;;
@@ -4053,7 +4053,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`admin`@`localhost` PROCEDURE `sp_selectCatCarreras`()
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_selectCatCarreras`()
 BEGIN
 	SELECT id,carrera FROM catcarreras;
 END ;;
@@ -4072,7 +4072,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`admin`@`localhost` PROCEDURE `sp_selectCatCategoriasPlaza`()
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_selectCatCategoriasPlaza`()
 BEGIN
 	SELECT id,categoria,tipo FROM catcategoriasplaza;
 END ;;
@@ -4091,7 +4091,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`admin`@`localhost` PROCEDURE `sp_selectCatCriteriosValoracion`(in _id int)
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_selectCatCriteriosValoracion`(in _id int)
 BEGIN
 	if _id is null then
 		SELECT id,criterio,puntajeMaximo,tablaAuxiliar  FROM catcriteriosvaloracion;
@@ -4114,7 +4114,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`admin`@`localhost` PROCEDURE `sp_selectCatEntidades`()
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_selectCatEntidades`()
 BEGIN
 	SELECT id,entidad FROM catentidades;
 END ;;
@@ -4133,7 +4133,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`admin`@`localhost` PROCEDURE `sp_selectCatEscuelas`(in _idInstitucion int)
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_selectCatEscuelas`(in _idInstitucion int)
 BEGIN
 	SELECT id,clave,escuela,tipo FROM catescuelas where idInstitucion=_idInstitucion;
 END ;;
@@ -4152,7 +4152,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`admin`@`localhost` PROCEDURE `sp_selectCatEstatus`()
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_selectCatEstatus`()
 BEGIN
 	select id,estatus from catestatus;
 END ;;
@@ -4171,7 +4171,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`admin`@`localhost` PROCEDURE `sp_selectCatGradosAcademicos`()
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_selectCatGradosAcademicos`()
 BEGIN
 	SELECT id,grado FROM catgradosacademicos;
 END ;;
@@ -4190,7 +4190,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`admin`@`localhost` PROCEDURE `sp_selectCatInstitucionCCT`(in _idInstitucion int)
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_selectCatInstitucionCCT`(in _idInstitucion int)
 BEGIN
 	SELECT id,cct
 	FROM catinstitucioncct 
@@ -4211,7 +4211,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`admin`@`localhost` PROCEDURE `sp_selectCatInstituciones`(in _idEntidad int,in _idTipoInstitucion int)
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_selectCatInstituciones`(in _idEntidad int,in _idTipoInstitucion int)
 BEGIN
 	SELECT id,institucion
     FROM catinstituciones 
@@ -4232,7 +4232,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`admin`@`localhost` PROCEDURE `sp_selectCatModalidadesTitulacion`()
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_selectCatModalidadesTitulacion`()
 BEGIN
 	SELECT id,modalidad FROM catmodalidadestitulacion;
 END ;;
@@ -4251,7 +4251,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`admin`@`localhost` PROCEDURE `sp_selectCatParticipacion`()
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_selectCatParticipacion`()
 BEGIN
 	select id,participacion from catparticipacion;
 END ;;
@@ -4270,7 +4270,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`admin`@`localhost` PROCEDURE `sp_selectCatPeriodos`()
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_selectCatPeriodos`()
 BEGIN
 	select id, periodo 
 	from catperiodos
@@ -4292,7 +4292,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`admin`@`localhost` PROCEDURE `sp_selectCatPermisos`()
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_selectCatPermisos`()
 BEGIN
 	select id,permiso from catpermisos;
 END ;;
@@ -4311,7 +4311,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`admin`@`localhost` PROCEDURE `sp_selectCatPlantelCCTs`(in _cct1 varchar(20),in _cct2 varchar(20))
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_selectCatPlantelCCTs`(in _cct1 varchar(20),in _cct2 varchar(20))
 BEGIN
 	select id,idEntidad,cct,plantel,nombre,domicilio,gradoMarginacion
     from catplanteles 
@@ -4333,7 +4333,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`admin`@`localhost` PROCEDURE `sp_selectCatPlanteles`(in _idSubsistema int,in _idEntidad int)
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_selectCatPlanteles`(in _idSubsistema int,in _idEntidad int)
 BEGIN
 	if (_idEntidad is null and _idSubsistema is null) then    
 		SELECT id,cct,plantel,gradoMarginacion 
@@ -4361,7 +4361,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`admin`@`localhost` PROCEDURE `sp_selectCatProgramas`()
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_selectCatProgramas`()
 BEGIN
 	select id,programa
     from catprogramas;
@@ -4381,7 +4381,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`admin`@`localhost` PROCEDURE `sp_selectCatPuntaje`(in _idCriterio int)
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_selectCatPuntaje`(in _idCriterio int)
 BEGIN
 	select id,descripcion,puntaje,multiple,puntajeFijo
     from catpuntaje 
@@ -4402,7 +4402,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`admin`@`localhost` PROCEDURE `sp_selectCatResultado`()
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_selectCatResultado`()
 BEGIN
 	select id,resultado from catresultado;
 END ;;
@@ -4421,7 +4421,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`admin`@`localhost` PROCEDURE `sp_selectCatRolComite`()
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_selectCatRolComite`()
 BEGIN
 	select id,rol from catrolcomite;
 END ;;
@@ -4440,7 +4440,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`admin`@`localhost` PROCEDURE `sp_selectCatSubsistema`()
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_selectCatSubsistema`()
 BEGIN
 	select id,subsistema from catsubsistema;
 END ;;
@@ -4459,7 +4459,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`admin`@`localhost` PROCEDURE `sp_selectCatTalleresLaboratorios`()
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_selectCatTalleresLaboratorios`()
 BEGIN
 	SELECT id,nombre FROM catasignatura
     where tipo="T";
@@ -4479,7 +4479,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`admin`@`localhost` PROCEDURE `sp_selectCatTiposNombramiento`()
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_selectCatTiposNombramiento`()
 BEGIN
 	SELECT id,codigo,descripcion,tipo FROM cattiposnombramiento;
 END ;;
@@ -4519,7 +4519,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`admin`@`localhost` PROCEDURE `sp_selectConstanciasRegistro`(in _idUsuario int,in _idRequisito int)
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_selectConstanciasRegistro`(in _idUsuario int,in _idRequisito int)
 BEGIN
 	if _idRequisito is null then
 		SELECT id,idUsuario,idRequisito,aceptado,observacion
@@ -4546,7 +4546,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`admin`@`localhost` PROCEDURE `sp_selectCursos`(in _idUsuario int)
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_selectCursos`(in _idUsuario int)
 BEGIN
 	select id,idUsuario,tipo,nombreCurso,fechaInicio,fechaFin,institucion,totalHoras,documento
     from cursos where idUsuario=_idUsuario
@@ -4567,7 +4567,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`admin`@`localhost` PROCEDURE `sp_selectHorasGrupo`(in _idUsuario int)
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_selectHorasGrupo`(in _idUsuario int)
 BEGIN
 	select a.id,a.idPeriodo,b.periodo,a.idAsignatura,c.nombre,c.clave,a.semestre,c.tipo,c.optativa,a.horas,a.grupo,a.ws,a.confirmada
     from horasgrupo a
@@ -4592,7 +4592,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`admin`@`localhost` PROCEDURE `sp_selectPublicaciones`(in _idUsuario int)
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_selectPublicaciones`(in _idUsuario int)
 BEGIN
 	select id,idUsuario,nombre,
     CASE
@@ -4619,7 +4619,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`admin`@`localhost` PROCEDURE `sp_selectTutorias`(in _idUsuario int)
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_selectTutorias`(in _idUsuario int)
 BEGIN
 	select id,idUsuario,fechaInicio,fechaFin,documento
     from tutorias 
@@ -4641,7 +4641,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`admin`@`localhost` PROCEDURE `sp_selectUsuario`(in _id int)
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_selectUsuario`(in _id int)
 BEGIN
 	select id,idEntidad,idPlantel,nombre,primerApellido,segundoApellido,correo,curp,telfijo,telcel,perfil,consideraciones,nivel,idSubsistema,idPrograma
     from usuario    
@@ -4662,7 +4662,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`admin`@`localhost` PROCEDURE `sp_selectVacanciaPlantelConvocatoriaVigente`(in _idConvocatoria int, in _plantel int)
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_selectVacanciaPlantelConvocatoriaVigente`(in _idConvocatoria int, in _plantel int)
 BEGIN
 	select count(*) as total
 	from vacancia v

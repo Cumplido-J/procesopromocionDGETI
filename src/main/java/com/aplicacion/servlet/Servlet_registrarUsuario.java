@@ -17,6 +17,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import metodos_sql.Metodos_sql;
 
 /**
@@ -81,60 +82,68 @@ public class Servlet_registrarUsuario extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         try {  
+            HttpSession session = (HttpSession) request.getSession(true);
             String id;
             if(request.getParameter("idUsuario")!=null){
                 id=request.getParameter("idUsuario");
             }else{
                 id="";
             }            
-            String programa=request.getParameter("programa");
-            String subsistema=request.getParameter("subsistema");
-            String nivel=request.getParameter("nivel");            
-            String usuario=request.getParameter("usuario");
-            String nombre=request.getParameter("nombre");
-            String apellido1=request.getParameter("apellido1");
-            String apellido2=request.getParameter("apellido2");
-            String entidad=request.getParameter("entidad");
-            String plantel=request.getParameter("plantel");
-            String fijo=request.getParameter("fijo"); 
-            String movil=request.getParameter("movil"); 
-            String correo=request.getParameter("correo");
-            String consideraciones=""; 
-            String contrasena;
-            if(id.equals("")){
-                contrasena=Pin.generaPin();
-            }else{
-                contrasena="";
-            }
-            UtileriasHelper utilerias = new UtileriasHelper();
-            String encriptarPass = utilerias.encriptarCodigo(contrasena, ConstantsWS.LLAVE_CIFRADO);
-            String pass=encriptarPass;
-            String permisos=request.getParameter("permisos");
-            String[] aux=permisos.split(";");
             
-            String perfil="A";
-            String respuesta="Error en almacenamiento de datos, intente nuevamente";
-            Metodos_sql metodo = new Metodos_sql();
-            List<String[]> datos;            
-            String[] parametros={entidad,plantel,nombre,apellido1,apellido2,correo,pass,usuario,fijo,movil,perfil,consideraciones,nivel,subsistema,programa,id};                                      
-            datos=metodo.ejecutaSP("sp_insertUsuario",parametros);            
-            if(!datos.isEmpty()){
-                respuesta=datos.get(0)[0]; 
-                parametros=new String[3];
-                parametros[0]="";
-                parametros[1]=usuario;                
-                if(respuesta.equals("ok")){
-                    if(id.equals("")){
-                        Correo c=new Correo();
-                        c.enviarCorreo("Envío de contraseña","Usted ha sido registrado en el Sistema de Promoción Docente disponible en https://www.promociondocente.sep.gob.mx <br/> Sus datos de acceso son: <br/> Usuario: <b>"+usuario+"</b><br/>Contrase&ntilde;a:<b>"+contrasena+"</b>", correo);
-                    }
-                    for (String i : aux) {
-                        parametros[2]=i;
-                        datos=metodo.ejecutaSP("sp_insertUsuarioPermiso",parametros);                        
+            String permisoEdicion_ = session.getAttribute("permisoEdicion").toString();
+            
+            if(permisoEdicion_.equals("V")){
+                String programa=request.getParameter("programa");
+                String subsistema=request.getParameter("subsistema");
+                String nivel=request.getParameter("nivel");            
+                String usuario=request.getParameter("usuario");
+                String nombre=request.getParameter("nombre");
+                String apellido1=request.getParameter("apellido1");
+                String apellido2=request.getParameter("apellido2");
+                String entidad=request.getParameter("entidad");
+                String plantel=request.getParameter("plantel");
+                String fijo=request.getParameter("fijo"); 
+                String movil=request.getParameter("movil"); 
+                String correo=request.getParameter("correo");
+                String consideraciones=""; 
+                String contrasena;
+                if(id.equals("")){
+                    contrasena=Pin.generaPin();
+                }else{
+                    contrasena="";
+                }
+                UtileriasHelper utilerias = new UtileriasHelper();
+                String encriptarPass = utilerias.encriptarCodigo(contrasena, ConstantsWS.LLAVE_CIFRADO);
+                String pass=encriptarPass;
+                String permisos=request.getParameter("permisos");
+                String[] aux=permisos.split(";");
+
+                String perfil="A";
+                String respuesta="Error en almacenamiento de datos, intente nuevamente";
+                Metodos_sql metodo = new Metodos_sql();
+                List<String[]> datos;            
+                String[] parametros={entidad,plantel,nombre,apellido1,apellido2,correo,pass,usuario,fijo,movil,perfil,consideraciones,nivel,subsistema,programa,id};                                      
+                datos=metodo.ejecutaSP("sp_insertUsuario",parametros);            
+                if(!datos.isEmpty()){
+                    respuesta=datos.get(0)[0]; 
+                    parametros=new String[3];
+                    parametros[0]="";
+                    parametros[1]=usuario;                
+                    if(respuesta.equals("ok")){
+                        if(id.equals("")){
+                            Correo c=new Correo();
+                            c.enviarCorreo("Envío de contraseña","Usted ha sido registrado en el Sistema de Promoción Docente disponible en https://www.promociondocente.sep.gob.mx <br/> Sus datos de acceso son: <br/> Usuario: <b>"+usuario+"</b><br/>Contrase&ntilde;a:<b>"+contrasena+"</b>", correo);
+                        }
+                        for (String i : aux) {
+                            parametros[2]=i;
+                            datos=metodo.ejecutaSP("sp_insertUsuarioPermiso",parametros);                        
+                        }
                     }
                 }
+                out.print(respuesta);
+            }else{
+                out.print("El usuario no tiene permisos para guardar");
             }
-            out.print(respuesta);
         } finally {
             out.close();
         }
