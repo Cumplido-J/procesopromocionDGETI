@@ -168,7 +168,7 @@ CREATE TABLE `bitacoralogin` (
   PRIMARY KEY (`id`),
   KEY `fk_idUsuarioBitacoraLogin_idx` (`idUsuario`),
   CONSTRAINT `fk_idUsuarioBitacoraLogin_idx` FOREIGN KEY (`idUsuario`) REFERENCES `usuario` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -177,7 +177,7 @@ CREATE TABLE `bitacoralogin` (
 
 LOCK TABLES `bitacoralogin` WRITE;
 /*!40000 ALTER TABLE `bitacoralogin` DISABLE KEYS */;
-INSERT INTO `bitacoralogin` VALUES (1,1,'192.168.56.1','2020-11-17 09:46:12'),(2,1,'192.168.56.1','2020-11-17 10:17:59'),(3,1,'192.168.56.1','2020-11-17 11:11:35'),(4,1,'192.168.56.1','2020-11-17 17:08:04'),(5,1,'192.168.56.1','2020-11-24 12:44:20'),(6,1,'192.168.56.1','2020-11-24 12:50:14'),(7,55,'10.212.134.60','2020-11-24 14:30:56'),(8,1,'10.212.134.60','2020-11-24 14:31:35'),(9,54,'10.212.134.60','2020-11-24 14:32:02'),(10,1,'192.168.56.1','2020-11-24 16:36:27'),(11,1,'10.212.134.60','2020-12-02 17:09:40'),(12,1,'10.212.134.60','2020-12-02 17:23:32'),(13,1,'10.212.134.60','2020-12-02 20:43:45'),(14,1,'10.212.134.60','2020-12-02 20:52:25'),(15,1,'192.168.56.1','2020-12-03 14:48:15'),(16,1,'10.212.134.60','2020-12-03 15:50:02');
+INSERT INTO `bitacoralogin` VALUES (1,1,'192.168.56.1','2020-11-17 09:46:12'),(2,1,'192.168.56.1','2020-11-17 10:17:59'),(3,1,'192.168.56.1','2020-11-17 11:11:35'),(4,1,'192.168.56.1','2020-11-17 17:08:04'),(5,1,'192.168.56.1','2020-11-24 12:44:20'),(6,1,'192.168.56.1','2020-11-24 12:50:14'),(7,55,'10.212.134.60','2020-11-24 14:30:56'),(8,1,'10.212.134.60','2020-11-24 14:31:35'),(9,54,'10.212.134.60','2020-11-24 14:32:02'),(10,1,'192.168.56.1','2020-11-24 16:36:27'),(11,1,'10.212.134.60','2020-12-02 17:09:40'),(12,1,'10.212.134.60','2020-12-02 17:23:32'),(13,1,'10.212.134.60','2020-12-02 20:43:45'),(14,1,'10.212.134.60','2020-12-02 20:52:25'),(15,1,'192.168.56.1','2020-12-03 14:48:15'),(16,1,'10.212.134.60','2020-12-03 15:50:02'),(17,1,'192.168.56.1','2020-12-04 12:42:12'),(18,44,'192.168.56.1','2020-12-04 12:44:07'),(19,29,'192.168.56.1','2020-12-04 12:44:58'),(20,29,'192.168.56.1','2020-12-04 12:59:06'),(21,1,'192.168.56.1','2020-12-04 13:00:18'),(22,1,'192.168.56.1','2020-12-04 13:07:10'),(23,1,'192.168.56.1','2020-12-09 12:44:34'),(24,1,'192.168.56.1','2020-12-09 12:48:32'),(25,1,'192.168.56.1','2020-12-09 13:41:36'),(26,1,'192.168.56.1','2020-12-09 14:29:33');
 /*!40000 ALTER TABLE `bitacoralogin` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -773,6 +773,7 @@ CREATE TABLE `catpermisos` (
   `id` int NOT NULL AUTO_INCREMENT,
   `permiso` varchar(45) NOT NULL,
   `url` varchar(45) NOT NULL,
+  `descripcion` varchar(500) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -783,7 +784,7 @@ CREATE TABLE `catpermisos` (
 
 LOCK TABLES `catpermisos` WRITE;
 /*!40000 ALTER TABLE `catpermisos` DISABLE KEYS */;
-INSERT INTO `catpermisos` VALUES (1,'Administradores','busquedaUsuarios.jsp'),(2,'Convocatoria','busquedaConvocatoria.jsp'),(3,'Vacancia','busquedaVacancia.jsp'),(4,'Comite','busquedaComite.jsp'),(5,'Comite revisor','busquedaDocente.jsp'),(6,'Consejo dictaminador','busquedaDocente.jsp');
+INSERT INTO `catpermisos` VALUES (1,'Administradores','busquedaUsuarios.jsp','Permite al usuario registrar nuevos usuarios administradores'),(2,'Convocatoria','busquedaConvocatoria.jsp','Permite al usuario registrar convocatorias'),(3,'Vacancia','busquedaVacancia.jsp','Permite al usuario registrar la vacancia de una convocatoria determinada'),(4,'Comite','busquedaComite.jsp','Permiite al usuario registrar la información de comités revisores y/o consejos dictaminadores'),(5,'Comité revisor','busquedaDocente.jsp','Permite al usuario acceder a la información de los aspirantes (como comité revisor)'),(6,'Consejo dictaminador','busquedaDocente.jsp','Permite al usuario acceder a la información de los aspirantes (como consejo dictaminador)');
 /*!40000 ALTER TABLE `catpermisos` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1579,7 +1580,7 @@ CREATE TABLE `usuariopermiso` (
   KEY `idPermisoUP_idx` (`idPermiso`),
   CONSTRAINT `idPermisoUP` FOREIGN KEY (`idPermiso`) REFERENCES `catpermisos` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `idUsuarioUP` FOREIGN KEY (`idUsuario`) REFERENCES `usuario` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE=InnoDB AUTO_INCREMENT=144 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=162 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1588,7 +1589,7 @@ CREATE TABLE `usuariopermiso` (
 
 LOCK TABLES `usuariopermiso` WRITE;
 /*!40000 ALTER TABLE `usuariopermiso` DISABLE KEYS */;
-INSERT INTO `usuariopermiso` VALUES (126,52,2,'F'),(127,53,3,'F'),(128,54,4,'F'),(130,55,5,'F'),(131,57,5,'F'),(132,57,5,'F'),(133,58,5,'F'),(134,1,1,'F'),(135,1,2,'F'),(136,1,3,'F'),(137,1,4,'F'),(138,1,5,'F'),(139,1,6,'F'),(140,59,6,'F'),(141,60,5,'F'),(142,61,6,'F'),(143,62,5,'F');
+INSERT INTO `usuariopermiso` VALUES (126,52,2,'F'),(127,53,3,'F'),(128,54,4,'F'),(130,55,5,'F'),(131,57,5,'F'),(132,57,5,'F'),(133,58,5,'F'),(140,59,6,'F'),(141,60,5,'F'),(142,61,6,'F'),(143,62,5,'F'),(156,1,1,'F'),(157,1,2,'F'),(158,1,3,'F'),(159,1,4,'F'),(160,1,5,'F'),(161,1,6,'F');
 /*!40000 ALTER TABLE `usuariopermiso` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -2526,7 +2527,11 @@ BEGIN
 	CASE
 		WHEN up.idUsuario is null then ''		
 		ELSE 'checked'
-	END as estatus
+	END as estatus,
+    CASE
+		WHEN up.permisoEdicion = 'V' then 'checked'		
+		ELSE ''
+	END as permisoEdicion
 	from catpermisos cp
     left join (select * from usuariopermiso where idUsuario=_idUsuario) up on cp.id=up.idPermiso;
 END ;;
@@ -4294,7 +4299,7 @@ DELIMITER ;
 DELIMITER ;;
 CREATE DEFINER=`admin`@`localhost` PROCEDURE `sp_selectCatPermisos`()
 BEGIN
-	select id,permiso from catpermisos;
+	select id,permiso,descripcion from catpermisos;
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -4684,4 +4689,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-12-04 12:29:14
+-- Dump completed on 2020-12-16  8:40:30

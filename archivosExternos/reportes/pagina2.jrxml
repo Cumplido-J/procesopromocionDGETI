@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Created with Jaspersoft Studio version 6.13.0.final using JasperReports Library version 6.13.0-46ada4d1be8f3c5985fd0b6146f3ed44caed6f05  -->
+<!-- Created with Jaspersoft Studio version 6.16.0.final using JasperReports Library version 6.16.0-48579d909b7943b64690c65c71e07e0b80981928  -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="pagina2" pageWidth="572" pageHeight="792" whenNoDataType="AllSectionsNoDetail" columnWidth="572" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="614cbd9c-39c2-4105-a294-67211c37b585">
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="bdpromocion"/>
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
@@ -33,34 +33,13 @@ order by catcategoriasplaza.categoria]]>
 		<band height="648" splitType="Stretch">
 			<property name="com.jaspersoft.studio.unit.height" value="px"/>
 			<staticText>
-				<reportElement positionType="Float" mode="Opaque" x="0" y="465" width="570" height="13" forecolor="#FFFFFF" backcolor="#730907" uuid="a9af564c-1d94-49ec-b0a2-0e9fee8846a0">
-					<property name="com.jaspersoft.studio.unit.x" value="px"/>
-					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
-					<property name="com.jaspersoft.studio.unit.width" value="px"/>
-				</reportElement>
-				<textElement textAlignment="Left" verticalAlignment="Middle">
-					<font fontName="Montserrat" size="9" isBold="true"/>
-				</textElement>
-				<text><![CDATA[CUARTA. CATEGORÍAS DISPONIBLES.]]></text>
-			</staticText>
-			<textField>
-				<reportElement positionType="Float" x="0" y="491" width="571" height="25" uuid="9d36f6d3-4a30-401c-86e8-8ed31e93495b">
-					<property name="com.jaspersoft.studio.unit.x" value="px"/>
-					<property name="com.jaspersoft.studio.unit.height" value="px"/>
-				</reportElement>
-				<textElement textAlignment="Justified">
-					<font fontName="Montserrat" size="9"/>
-				</textElement>
-				<textFieldExpression><![CDATA["A la fecha de publicación de la presente Convocatoria se cuenta con "+$F{totalCategorias}+" categorías vacantes para el proceso de selección para la promoción por cambio de categoría, mismas que se listan en el Anexo 1 de esta convocatoria."]]></textFieldExpression>
-			</textField>
-			<staticText>
-				<reportElement positionType="Float" x="0" y="22" width="570" height="38" uuid="ea87d694-b6b5-487c-9af1-295e215274ea">
+				<reportElement positionType="Float" x="0" y="17" width="570" height="47" uuid="ea87d694-b6b5-487c-9af1-295e215274ea">
 					<property name="com.jaspersoft.studio.unit.x" value="px"/>
 				</reportElement>
 				<textElement textAlignment="Justified">
 					<font fontName="Montserrat" size="9"/>
 				</textElement>
-				<text><![CDATA[El personal que desee participar en este proceso de promoción deberá presentar la siguiente documentación en original y copia para su cotejo, misma que utilizará para ingresar la información en el módulo de registro y le será requerida en la mesa de registro presencial, en la sede correspondiente.]]></text>
+				<text><![CDATA[El personal que desee participar en este proceso de promoción deberá subir los archivos con las evidencias a la plataforma de administración del Proceso Extraordinario de Promoción en el Servicio Docente por Cambio de categoría en la Dirección General de Educación Tecnológica Industrial y de Servicios, exclusivamente para el ciclo escolar 2020-2021, al momento de realizar el registro correspondiente.]]></text>
 			</staticText>
 			<staticText>
 				<reportElement positionType="Float" mode="Opaque" x="0" y="1" width="570" height="13" forecolor="#FFFFFF" backcolor="#730907" uuid="86238fb2-cac4-4a9c-a67f-68249f285d38">
@@ -79,7 +58,7 @@ order by catcategoriasplaza.categoria]]>
 				<textElement textAlignment="Justified">
 					<font fontName="Montserrat" size="9"/>
 				</textElement>
-				<text><![CDATA[Identificación oficial vigente: credencial de elector, cédula profesional o pasaporte.]]></text>
+				<text><![CDATA[Registro Federal de Contribuyentes (RFC).]]></text>
 			</staticText>
 			<staticText>
 				<reportElement positionType="Float" x="30" y="89" width="537" height="22" uuid="01cfc78b-79d5-497f-99a2-bb0ba1118a08">
@@ -101,7 +80,7 @@ order by catcategoriasplaza.categoria]]>
 				<textElement textAlignment="Justified">
 					<font fontName="Montserrat" size="9"/>
 				</textElement>
-				<text><![CDATA[Título Profesional o Cédula Profesional que acredite el grado de estudios requerido para la categoría a la que aspira, de acuerdo con el perfil profesional.]]></text>
+				<text><![CDATA[Contar con nombramiento definitivo en la plaza docente o técnico docente que ostenta el participante. Constancia de nombramiento expedida por la DGETI (Enlace de Gestión Administrativa);]]></text>
 			</staticText>
 			<staticText>
 				<reportElement positionType="Float" x="30" y="145" width="537" height="30" uuid="c8c8a0ee-e66a-406d-9917-ccb3344b63c7">
@@ -113,10 +92,10 @@ order by catcategoriasplaza.categoria]]>
 				<textElement textAlignment="Justified">
 					<font fontName="Montserrat" size="9"/>
 				</textElement>
-				<text><![CDATA[Constancia de servicio expedida por la autoridad educativa competente que acredite la antigüedad del aspirante, y el tiempo en el desempeño de la función docente.]]></text>
+				<text><![CDATA[Estar activo y frente a grupo en el servicio público educativo, en la DGETI. Constancia expedida por el Subdirector académico y el Jefe de departamento de servicios docentes de plantel.]]></text>
 			</staticText>
 			<staticText>
-				<reportElement positionType="Float" x="30" y="177" width="537" height="22" uuid="2895e1f9-0497-416f-bc46-ba375f28a33d">
+				<reportElement positionType="Float" x="30" y="177" width="537" height="33" uuid="2895e1f9-0497-416f-bc46-ba375f28a33d">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 					<property name="com.jaspersoft.studio.unit.x" value="px"/>
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
@@ -124,77 +103,77 @@ order by catcategoriasplaza.categoria]]>
 				<textElement textAlignment="Justified">
 					<font fontName="Montserrat" size="9"/>
 				</textElement>
-				<text><![CDATA[Formato Único de Personal o equivalente del nombramiento definitivo en plaza docente de jornada o por horas-semana-mes.]]></text>
+				<text><![CDATA[Acreditar haber ejercido la función docente o técnico docente en la DGETI, por un periodo mínimo de tres años al momento del registro de su participación en el proceso de selección. Constancia expedida por la DGETI (Dirección de Planeación y Evaluación), acreditando al menos tres años de servicio.]]></text>
 			</staticText>
 			<staticText>
-				<reportElement positionType="Float" x="30" y="201" width="537" height="12" uuid="732adddd-9188-41ab-9c00-192f7aca4ca7">
+				<reportElement positionType="Float" x="30" y="218" width="537" height="43" uuid="732adddd-9188-41ab-9c00-192f7aca4ca7">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 				</reportElement>
 				<textElement textAlignment="Justified">
 					<font fontName="Montserrat" size="9"/>
 				</textElement>
-				<text><![CDATA[Constancia de las horas frente al grupo expedida por el área administrativa o de personal, definida por la DGETI.]]></text>
+				<text><![CDATA[Acreditar que ha ocupado la categoría que ostenta al momento de emitirse la convocatoria, por un periodo de al menos dos años. Constancia de nombramiento expedida por la DGETI (Enlace de Gestión Administrativa). Acreditando al menos dos años en la plaza que ostenta.]]></text>
 			</staticText>
 			<staticText>
-				<reportElement positionType="Float" x="30" y="220" width="537" height="28" uuid="5095b02c-89bb-4656-8730-7b729af4bc2c">
+				<reportElement positionType="Float" x="30" y="262" width="537" height="33" uuid="5095b02c-89bb-4656-8730-7b729af4bc2c">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 				</reportElement>
 				<textElement textAlignment="Justified">
 					<font fontName="Montserrat" size="9"/>
 				</textElement>
-				<text><![CDATA[Constancia emitida por el Director del plantel, de que el participante no cuenta con nota desfavorable en los dos últimos ciclos escolares inmediatos a la publicación de la convocatoria.]]></text>
+				<text><![CDATA[Haber transcurrido al menos dos años a partir de su última promoción en el servicio docente por asignación de horas adicionales definitivas, para los docentes y técnicos docentes de asignatura. Constancia expedida por la DGETI (Enlace de Gestión Administrativa).]]></text>
 			</staticText>
 			<staticText>
-				<reportElement positionType="Float" x="30" y="250" width="537" height="29" uuid="b6bb58b6-206a-4a9e-8a77-b1e76d43067f">
+				<reportElement positionType="Float" x="30" y="306" width="537" height="49" uuid="b6bb58b6-206a-4a9e-8a77-b1e76d43067f">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 				</reportElement>
 				<textElement textAlignment="Justified">
 					<font fontName="Montserrat" size="9"/>
 				</textElement>
-				<text><![CDATA[Carta bajo protesta de decir verdad, donde manifieste que no cuenta con sanciones penales o administrativas que puedan limitar el desempeño de la función.]]></text>
+				<text><![CDATA[Contar con el perfil profesional afín al campo disciplinar, actividad paraescolar o módulo profesional, para la plaza vacante que se establezca en la convocatoria, según las necesidades del servicio. Documento acreditado por una instancia oficial que confirma el grado de estudios requerido para participar en el Proceso, de acuerdo con el perfil profesional.]]></text>
 			</staticText>
 			<staticText>
-				<reportElement positionType="Float" x="30" y="281" width="537" height="22" uuid="005ef9ea-f7ab-4717-b132-4e99851087f9">
+				<reportElement positionType="Float" x="30" y="357" width="537" height="38" uuid="005ef9ea-f7ab-4717-b132-4e99851087f9">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 				</reportElement>
 				<textElement textAlignment="Justified">
 					<font fontName="Montserrat" size="9"/>
 				</textElement>
-				<text><![CDATA[Constancia de compatibilidad de empleos emitida por la autoridad competente, en apego a las reglas de compatibilidad.]]></text>
+				<text><![CDATA[Acreditar el grado académico establecido por la DGETI para la categoría inmediata superior, respecto a la que actualmente ostenta. Documento acreditado por una instancia oficial que confirma el grado de estudios requerido para participar en el Proceso, de acuerdo con el perfil profesional.]]></text>
 			</staticText>
 			<staticText>
-				<reportElement positionType="Float" x="30" y="305" width="537" height="34" uuid="12c850eb-3dd0-497c-bdfc-cee95174b008">
+				<reportElement positionType="Float" x="30" y="398" width="537" height="34" uuid="12c850eb-3dd0-497c-bdfc-cee95174b008">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 				</reportElement>
 				<textElement textAlignment="Justified">
 					<font fontName="Montserrat" size="9"/>
 				</textElement>
-				<text><![CDATA[En su caso, certificado CENNI vigente mínimo Nivel 14, o constancia que acredite el trámite de expedición en proceso, emitido por la Secretaría de Educación Pública, para los participantes de inglés que tengan una licenciatura distinta a la de enseñanza del inglés.]]></text>
+				<text><![CDATA[Los docentes que imparten la asignatura de inglés deberán contar con título y cédula profesional de la licenciatura en la enseñanza del inglés o equivalente. Quienes tengan una licenciatura distinta, deberán presentar además la Certificación Nacional de Nivel de Idioma (CENNI) vigente, al menos en el nivel 14.]]></text>
 			</staticText>
 			<staticText>
-				<reportElement positionType="Float" x="30" y="338" width="537" height="32" uuid="0bea7b6d-28d7-4a69-b3ea-04b314f462c0">
+				<reportElement positionType="Float" x="30" y="438" width="537" height="24" uuid="0bea7b6d-28d7-4a69-b3ea-04b314f462c0">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 				</reportElement>
 				<textElement textAlignment="Justified">
 					<font fontName="Montserrat" size="9"/>
 				</textElement>
-				<text><![CDATA[Carta de aceptación de las bases de esta Convocatoria, en donde, con su firma al calce, cada participante protesta de decir verdad que conoce y se compromete a respetar estrictamente los términos de participación establecidos.]]></text>
+				<text><![CDATA[No contar en su expediente con nota desfavorable expedida durante los dos ciclos escolares inmediatos anteriores a la emisión de la convocatoria: ]]></text>
 			</staticText>
 			<staticText>
-				<reportElement positionType="Float" x="30" y="375" width="537" height="22" uuid="718cbd55-2f4b-4922-ae22-6b570408cc0e">
+				<reportElement positionType="Float" x="30" y="522" width="537" height="22" uuid="718cbd55-2f4b-4922-ae22-6b570408cc0e">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 				</reportElement>
 				<textElement textAlignment="Justified">
 					<font fontName="Montserrat" size="9"/>
 				</textElement>
-				<text><![CDATA[Evidencia documental del cumplimiento de los criterios de valoración, establecidos en la Base sexta de esta convocatoria.]]></text>
+				<text><![CDATA[Cumplir con las reglas de compatibilidad. Constancia vigente emitida por la autoridad competente en apego a las reglas de compatibilidad. (en su caso) ]]></text>
 			</staticText>
 			<staticText>
 				<reportElement positionType="Float" x="0" y="69" width="30" height="11" uuid="52678d83-0b55-4f18-ac14-fdf6f4d617ac">
@@ -207,7 +186,7 @@ order by catcategoriasplaza.categoria]]>
 				<text><![CDATA[1.]]></text>
 			</staticText>
 			<staticText>
-				<reportElement positionType="Float" x="0" y="87" width="30" height="11" uuid="ca385e9f-7587-4923-af5c-c80d7f035b83">
+				<reportElement positionType="Float" x="0" y="89" width="30" height="11" uuid="ca385e9f-7587-4923-af5c-c80d7f035b83">
 					<property name="com.jaspersoft.studio.unit.y" value="px"/>
 					<property name="com.jaspersoft.studio.unit.x" value="px"/>
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
@@ -218,7 +197,7 @@ order by catcategoriasplaza.categoria]]>
 				<text><![CDATA[2.]]></text>
 			</staticText>
 			<staticText>
-				<reportElement positionType="Float" x="0" y="117" width="30" height="11" uuid="e48d474e-ecb9-4803-8afc-c3be333f2fb5">
+				<reportElement positionType="Float" x="0" y="115" width="30" height="11" uuid="e48d474e-ecb9-4803-8afc-c3be333f2fb5">
 					<property name="com.jaspersoft.studio.unit.y" value="px"/>
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
@@ -248,7 +227,7 @@ order by catcategoriasplaza.categoria]]>
 				<text><![CDATA[5.]]></text>
 			</staticText>
 			<staticText>
-				<reportElement positionType="Float" x="0" y="204" width="30" height="11" uuid="381d5997-0b08-4502-b3ac-7c0a56865585">
+				<reportElement positionType="Float" x="0" y="221" width="30" height="11" uuid="381d5997-0b08-4502-b3ac-7c0a56865585">
 					<property name="com.jaspersoft.studio.unit.y" value="px"/>
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
@@ -258,7 +237,7 @@ order by catcategoriasplaza.categoria]]>
 				<text><![CDATA[6.]]></text>
 			</staticText>
 			<staticText>
-				<reportElement positionType="Float" x="0" y="220" width="30" height="11" uuid="6b40d770-0973-413f-a02a-94f08ebeea99">
+				<reportElement positionType="Float" x="0" y="262" width="30" height="11" uuid="6b40d770-0973-413f-a02a-94f08ebeea99">
 					<property name="com.jaspersoft.studio.unit.y" value="px"/>
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
@@ -268,7 +247,7 @@ order by catcategoriasplaza.categoria]]>
 				<text><![CDATA[7.]]></text>
 			</staticText>
 			<staticText>
-				<reportElement positionType="Float" x="0" y="248" width="30" height="11" uuid="c7639565-c171-4e4b-8304-bf1de71de387">
+				<reportElement positionType="Float" x="0" y="305" width="30" height="11" uuid="c7639565-c171-4e4b-8304-bf1de71de387">
 					<property name="com.jaspersoft.studio.unit.y" value="px"/>
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
@@ -278,7 +257,7 @@ order by catcategoriasplaza.categoria]]>
 				<text><![CDATA[8.]]></text>
 			</staticText>
 			<staticText>
-				<reportElement positionType="Float" x="0" y="277" width="30" height="11" uuid="e79b5e1a-fd78-4299-85b0-6d1625087491">
+				<reportElement positionType="Float" x="0" y="357" width="30" height="11" uuid="e79b5e1a-fd78-4299-85b0-6d1625087491">
 					<property name="com.jaspersoft.studio.unit.y" value="px"/>
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
@@ -288,7 +267,7 @@ order by catcategoriasplaza.categoria]]>
 				<text><![CDATA[9.]]></text>
 			</staticText>
 			<staticText>
-				<reportElement positionType="Float" x="0" y="305" width="30" height="11" uuid="ee269acc-c6ba-4902-b6a7-76a35ae3670f">
+				<reportElement positionType="Float" x="0" y="398" width="30" height="11" uuid="ee269acc-c6ba-4902-b6a7-76a35ae3670f">
 					<property name="com.jaspersoft.studio.unit.y" value="px"/>
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
@@ -298,7 +277,7 @@ order by catcategoriasplaza.categoria]]>
 				<text><![CDATA[10.]]></text>
 			</staticText>
 			<staticText>
-				<reportElement positionType="Float" x="0" y="345" width="30" height="11" uuid="71a08b9d-2c21-4b04-b9e4-4e76593a4fcf">
+				<reportElement positionType="Float" x="0" y="438" width="30" height="11" uuid="71a08b9d-2c21-4b04-b9e4-4e76593a4fcf">
 					<property name="com.jaspersoft.studio.unit.y" value="px"/>
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
@@ -308,7 +287,7 @@ order by catcategoriasplaza.categoria]]>
 				<text><![CDATA[11.]]></text>
 			</staticText>
 			<staticText>
-				<reportElement positionType="Float" x="0" y="375" width="30" height="11" uuid="95b233ef-5dd5-4497-9106-87f483afb2f3">
+				<reportElement positionType="Float" x="0" y="524" width="30" height="11" uuid="95b233ef-5dd5-4497-9106-87f483afb2f3">
 					<property name="com.jaspersoft.studio.unit.y" value="px"/>
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
@@ -318,7 +297,7 @@ order by catcategoriasplaza.categoria]]>
 				<text><![CDATA[12.]]></text>
 			</staticText>
 			<staticText>
-				<reportElement positionType="Float" x="0" y="404" width="30" height="11" uuid="f0c7eacf-432c-4f21-b8ba-37285cef3f1b">
+				<reportElement positionType="Float" x="0" y="551" width="30" height="11" uuid="f0c7eacf-432c-4f21-b8ba-37285cef3f1b">
 					<property name="com.jaspersoft.studio.unit.y" value="px"/>
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
@@ -328,17 +307,17 @@ order by catcategoriasplaza.categoria]]>
 				<text><![CDATA[13.]]></text>
 			</staticText>
 			<staticText>
-				<reportElement positionType="Float" x="30" y="404" width="537" height="12" uuid="947639f6-355f-47f2-8c92-27f0083b75dd">
+				<reportElement positionType="Float" x="30" y="552" width="537" height="30" uuid="947639f6-355f-47f2-8c92-27f0083b75dd">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 				</reportElement>
 				<textElement textAlignment="Justified">
 					<font fontName="Montserrat" size="9"/>
 				</textElement>
-				<text><![CDATA[Acta de nacimiento, carta de naturalización o permiso de trabajo para los extranjeros con residencia legal.]]></text>
+				<text><![CDATA[Carta de aceptación de las bases de esta Convocatoria, en donde, con su firma al calce, cada participante protesta de decir verdad que conoce y se compromete a respetar estrictamente los términos de participación establecidos.]]></text>
 			</staticText>
 			<staticText>
-				<reportElement positionType="Float" x="0" y="423" width="30" height="11" uuid="8f58498f-d4eb-4c7b-8fa2-3bca275453f7">
+				<reportElement positionType="Float" x="0" y="582" width="30" height="11" uuid="8f58498f-d4eb-4c7b-8fa2-3bca275453f7">
 					<property name="com.jaspersoft.studio.unit.y" value="px"/>
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
@@ -348,137 +327,54 @@ order by catcategoriasplaza.categoria]]>
 				<text><![CDATA[14.]]></text>
 			</staticText>
 			<staticText>
-				<reportElement positionType="Float" x="30" y="423" width="537" height="12" uuid="3a400d2c-b292-42b4-a8d9-09f8e44a2da0">
+				<reportElement positionType="Float" x="30" y="582" width="537" height="26" uuid="3a400d2c-b292-42b4-a8d9-09f8e44a2da0">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 				</reportElement>
 				<textElement textAlignment="Justified">
 					<font fontName="Montserrat" size="9"/>
 				</textElement>
-				<text><![CDATA[Comprobante de domicilio con fecha de expedición no mayor a tres meses.]]></text>
+				<text><![CDATA[Evidencia documental del cumplimiento de los criterios de valoración, establecidos en la Base sexta de esta convocatoria.]]></text>
 			</staticText>
 			<staticText>
-				<reportElement positionType="Float" x="0" y="442" width="30" height="11" uuid="5ac128ef-a9f2-4e2b-a0c4-7ee24624e051">
+				<reportElement positionType="Float" x="30" y="465" width="10" height="11" uuid="82f347fb-db81-4d4a-865e-49fee52fb8a8">
 					<property name="com.jaspersoft.studio.unit.y" value="px"/>
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<textElement textAlignment="Justified">
 					<font fontName="Montserrat" size="9"/>
 				</textElement>
-				<text><![CDATA[15.]]></text>
+				<text><![CDATA[a.]]></text>
 			</staticText>
 			<staticText>
-				<reportElement positionType="Float" x="30" y="442" width="537" height="12" uuid="06b9aac7-b39d-49cc-831c-4ed92e126842">
+				<reportElement positionType="Float" x="50" y="465" width="517" height="30" uuid="7be0649f-16ad-4d7f-8f33-7a12d5e5b437">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 				</reportElement>
 				<textElement textAlignment="Justified">
 					<font fontName="Montserrat" size="9"/>
 				</textElement>
-				<text><![CDATA[Dos fotografías recientes tamaño infantil, de frente, en blanco y negro.]]></text>
+				<text><![CDATA[Constancia emitida por la DGETI (Área de Servicios Institucionales), de que el participante no cuenta con nota desfavorable en los dos últimos ciclos escolares inmediatos a la publicación de la convocatoria, y ]]></text>
 			</staticText>
 			<staticText>
-				<reportElement positionType="Float" x="0" y="553" width="570" height="17" uuid="00ed05b1-2ada-43a2-8c3e-a45f95db5fd3">
-					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				<reportElement positionType="Float" x="30" y="490" width="10" height="11" uuid="4b1118df-6f9b-43d9-9ad9-d3b9550525fc">
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<textElement textAlignment="Justified">
 					<font fontName="Montserrat" size="9"/>
 				</textElement>
-				<text><![CDATA[De acuerdo con las categorías de las plazas vacantes, los aspirantes deberán reunir los siguientes requisitos de preparación:]]></text>
+				<text><![CDATA[b.]]></text>
 			</staticText>
 			<staticText>
-				<reportElement positionType="Float" mode="Opaque" x="0" y="529" width="570" height="13" forecolor="#FFFFFF" backcolor="#730907" uuid="ffa09c04-6afa-40d7-9f65-39179f4c6070">
-					<property name="com.jaspersoft.studio.unit.x" value="px"/>
-				</reportElement>
-				<textElement textAlignment="Left" verticalAlignment="Middle">
-					<font fontName="Montserrat" size="9" isBold="true"/>
-				</textElement>
-				<text><![CDATA[QUINTA. PERFILES PROFESIONALES (PARTICIPANTES)]]></text>
-			</staticText>
-			<staticText>
-				<reportElement positionType="Float" x="0" y="621" width="200" height="27" uuid="8d766d3c-275d-4168-b678-86c3f7609cab">
-					<property name="com.jaspersoft.studio.unit.x" value="px"/>
-					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				<reportElement positionType="Float" x="51" y="491" width="517" height="24" uuid="64df03d7-3af8-4922-9108-a402b189b23a">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 				</reportElement>
-				<box padding="7">
-					<topPen lineWidth="1.0"/>
-					<leftPen lineWidth="1.0"/>
-					<bottomPen lineWidth="1.0"/>
-				</box>
-				<textElement textAlignment="Justified" verticalAlignment="Middle">
+				<textElement textAlignment="Justified">
 					<font fontName="Montserrat" size="9"/>
 				</textElement>
-				<text><![CDATA[Profesor Asignatura A]]></text>
-			</staticText>
-			<staticText>
-				<reportElement positionType="Float" x="200" y="621" width="370" height="27" uuid="ed21e239-882b-4c87-a56d-825f87ff36f2">
-					<property name="com.jaspersoft.studio.unit.y" value="px"/>
-					<property name="com.jaspersoft.studio.unit.x" value="px"/>
-					<property name="com.jaspersoft.studio.unit.height" value="px"/>
-				</reportElement>
-				<box padding="7">
-					<topPen lineWidth="1.0"/>
-					<leftPen lineWidth="1.0"/>
-					<bottomPen lineWidth="1.0"/>
-					<rightPen lineWidth="1.0"/>
-				</box>
-				<textElement textAlignment="Justified" verticalAlignment="Middle">
-					<font fontName="Montserrat" size="9"/>
-				</textElement>
-				<text><![CDATA[2 años de haber obtenido el título de licenciatura.]]></text>
-			</staticText>
-			<staticText>
-				<reportElement positionType="Float" mode="Opaque" x="0" y="594" width="200" height="27" forecolor="#FFFFFF" backcolor="#CF6848" uuid="e71f42b9-f089-48cb-9c22-23336b1a21aa">
-					<property name="com.jaspersoft.studio.unit.x" value="px"/>
-					<property name="com.jaspersoft.studio.unit.y" value="px"/>
-					<property name="com.jaspersoft.studio.unit.height" value="px"/>
-				</reportElement>
-				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
-					<pen lineColor="#000000"/>
-					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
-					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
-					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
-					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
-				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Montserrat" size="10" isBold="true"/>
-				</textElement>
-				<text><![CDATA[Tipo de categoría]]></text>
-			</staticText>
-			<staticText>
-				<reportElement positionType="Float" mode="Opaque" x="200" y="594" width="370" height="27" forecolor="#FFFFFF" backcolor="#CF6848" uuid="198ccfce-7ba4-4150-b698-1416a618b8ab">
-					<property name="com.jaspersoft.studio.unit.y" value="px"/>
-					<property name="com.jaspersoft.studio.unit.x" value="px"/>
-					<property name="com.jaspersoft.studio.unit.height" value="px"/>
-				</reportElement>
-				<box padding="7">
-					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
-					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
-					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
-					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
-				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Montserrat" size="10" isBold="true"/>
-				</textElement>
-				<text><![CDATA[GRADO ACADÉMICO/Nivel de preparación]]></text>
-			</staticText>
-			<staticText>
-				<reportElement positionType="Float" mode="Opaque" x="0" y="574" width="570" height="20" forecolor="#FFFFFF" backcolor="#CF6848" uuid="d7970075-020c-491a-8090-165e53d5390b">
-					<property name="com.jaspersoft.studio.unit.x" value="px"/>
-					<property name="com.jaspersoft.studio.unit.y" value="px"/>
-					<property name="com.jaspersoft.studio.unit.height" value="px"/>
-				</reportElement>
-				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
-					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
-					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
-					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
-					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
-				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Montserrat" size="10" isBold="true"/>
-				</textElement>
-				<text><![CDATA[Categorías de plazas docentes]]></text>
+				<text><![CDATA[Carta del participante, bajo protesta de decir verdad, de que no cuenta con sanción administrativa que pueda limitar su desempeño en la función. ]]></text>
 			</staticText>
 		</band>
 	</summary>

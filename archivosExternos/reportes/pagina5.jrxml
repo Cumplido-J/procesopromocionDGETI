@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Created with Jaspersoft Studio version 6.13.0.final using JasperReports Library version 6.13.0-46ada4d1be8f3c5985fd0b6146f3ed44caed6f05  -->
+<!-- Created with Jaspersoft Studio version 6.16.0.final using JasperReports Library version 6.16.0-48579d909b7943b64690c65c71e07e0b80981928  -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="pagina5" pageWidth="572" pageHeight="792" whenNoDataType="AllSectionsNoDetail" columnWidth="572" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="2ab4038d-9d78-459e-927f-4f5c4dc4ad48">
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="bdpromocion"/>
@@ -12,16 +12,33 @@
 	<property name="com.jaspersoft.studio.unit.leftMargin" value="pixel"/>
 	<property name="com.jaspersoft.studio.unit.rightMargin" value="pixel"/>
 	<property name="com.jaspersoft.studio.unit.columnWidth" value="pixel"/>
-	<property name="com.jaspersoft.studio.unit.columnSpacing" value="pixel"/>
-	<subDataset name="Dataset1" uuid="a41bdb46-5d5e-41ef-ad00-4c46191ba2a6">
-		<queryString>
-			<![CDATA[]]>
-		</queryString>
-	</subDataset>
+	<property name="com.jaspersoft.studio.unit.columnSpacing" value="pixel"/>	
 	<parameter name="p5" class="java.lang.Integer"/>
 	<parameter name="c5" class="java.lang.Integer"/>
+	<parameter name="p6" class="java.lang.Integer"/>
+	<parameter name="c6" class="java.lang.Integer"/>
 	<queryString>
-		<![CDATA[]]>
+		<![CDATA[SELECT  
+vacancia.idPlantel, convocatoria.id as idConvocatoria,convocatoria.idPrograma, catplanteles.nombre as plantelnombre,
+DATE_FORMAT(convocatoria.inicioRegistro, '%d de %M de %Y') as inicioRegistro,
+DATE_FORMAT(convocatoria.finRegistro, '%d de %M de %Y') as finRegistro,
+DATE_FORMAT(convocatoria.publicacion, '%d de %M de %Y') as publicacion,
+DATE_FORMAT(convocatoria.inicioValoracion, '%d de %M de %Y') as inicioValoracion,
+DATE_FORMAT(convocatoria.finValoracion, '%d de %M de %Y') as finValoracion,
+DATE_FORMAT(convocatoria.inicioDictaminacion, '%d de %M de %Y') as inicioDictaminacion,
+DATE_FORMAT(convocatoria.finDictaminacion, '%d de %M de %Y') as finDictaminacion,
+DATE_FORMAT(convocatoria.resultados, '%d de %M de %Y') as resultados
+from vacancia
+INNER JOIN 
+    convocatoria
+on convocatoria.idPlantel=vacancia.idPlantel and convocatoria.idPrograma=vacancia.idPrograma
+INNER JOIN 
+    catplanteles
+ON
+	vacancia.idPlantel= catplanteles.id
+WHERE vacancia.idPlantel=  $P{p6}  and convocatoria.id= $P{c6} 
+
+GROUP BY convocatoria.id]]>
 	</queryString>
 	<field name="idPlantel" class="java.lang.Integer">
 		<property name="com.jaspersoft.studio.field.label" value="idPlantel"/>
@@ -54,16 +71,16 @@
 		<band height="677" splitType="Stretch">
 			<property name="com.jaspersoft.studio.unit.height" value="px"/>
 			<staticText>
-				<reportElement positionType="Float" x="22" y="337" width="547" height="59" uuid="3efb0ef2-a078-4ee4-9d71-8422c030d7d7">
+				<reportElement positionType="Float" x="23" y="185" width="547" height="59" uuid="3efb0ef2-a078-4ee4-9d71-8422c030d7d7">
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 				</reportElement>
 				<textElement textAlignment="Justified" verticalAlignment="Middle" markup="html">
 					<font fontName="Montserrat" size="9"/>
 				</textElement>
-				<text><![CDATA[<b>Participación en eventos y actividades de fortalecimiento académico y formación integral del educando:</b> al acompañamiento que se brinda a los estudiantes de manera individual o grupal, para favorecer su trayectoria escolar y coadyuvar en su formación integral, a través de eventos académicos, asesorías, tutorías académicas, círculos de lectura, entre otros, que estarán definidos en las orientaciones asociadas al Programa que emitan las AEMS y los OD; desarrolladas a partir de su última promoción en el servicio docente.]]></text>
+				<text><![CDATA[<b>Participación en eventos y actividades de fortalecimiento académico y formación integral del educando:</b> al acompañamiento que se brinda a los estudiantes de manera individual o grupal, para favorecer su trayectoria escolar y coadyuvar en su formación integral, a través de eventos académicos, asesorías, tutorías académicas, círculos de lectura, entre otros, que estarán definidos en las orientaciones asociadas al Proceso que emitan la DGETI; desarrolladas a partir de su última promoción en el servicio docente. ]]></text>
 			</staticText>
 			<staticText>
-				<reportElement positionType="Float" x="3" y="338" width="30" height="19" uuid="525fc3b7-5385-4a16-81c4-d40cd3924c74">
+				<reportElement positionType="Float" x="4" y="186" width="30" height="19" uuid="525fc3b7-5385-4a16-81c4-d40cd3924c74">
 					<property name="com.jaspersoft.studio.unit.y" value="px"/>
 					<property name="com.jaspersoft.studio.unit.x" value="px"/>
 				</reportElement>
@@ -73,16 +90,16 @@
 				<text><![CDATA[7.]]></text>
 			</staticText>
 			<staticText>
-				<reportElement positionType="Float" x="22" y="402" width="547" height="30" uuid="80184f0f-4b13-4f64-b46e-718b9e7774d7">
+				<reportElement positionType="Float" x="23" y="250" width="547" height="30" uuid="80184f0f-4b13-4f64-b46e-718b9e7774d7">
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 				</reportElement>
 				<textElement textAlignment="Justified">
 					<font fontName="Montserrat" size="9" isBold="false" isItalic="true"/>
 				</textElement>
-				<text><![CDATA[Valoración a partir de: constancia o documento que acredite la participación en los eventos y actividades de fortalecimiento académico y formación integral del educando, expedida por la DGETI. ]]></text>
+				<text><![CDATA[Valoración a partir de: constancia o documento que acredite la participación en los eventos y actividades de fortalecimiento académico y formación integral del educando, expedida por DGETI. ]]></text>
 			</staticText>
 			<staticText>
-				<reportElement positionType="Float" x="22" y="431" width="547" height="48" uuid="8fe53c96-a530-437f-b247-a0b1ee0e937e">
+				<reportElement positionType="Float" x="23" y="278" width="547" height="48" uuid="8fe53c96-a530-437f-b247-a0b1ee0e937e">
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 				</reportElement>
 				<textElement textAlignment="Justified" markup="html">
@@ -91,7 +108,7 @@
 				<text><![CDATA[<b>Actividades de tutoría o acompañamiento docente:</b> a las acciones de acompañamiento, apoyo y seguimiento entre pares, derivadas de las orientaciones generales que para tal efecto emitió la USICAMM, para fortalecer las competencias de docentes y técnicos docentes noveles o en servicio, las cuales contribuyan a la mejora educativa; desarrolladas a partir de su última promoción en el servicio docente.]]></text>
 			</staticText>
 			<staticText>
-				<reportElement positionType="Float" x="3" y="430" width="30" height="19" uuid="38d5aaad-5218-4ab3-b680-3524c5b3becc">
+				<reportElement positionType="Float" x="4" y="278" width="30" height="19" uuid="38d5aaad-5218-4ab3-b680-3524c5b3becc">
 					<property name="com.jaspersoft.studio.unit.y" value="px"/>
 				</reportElement>
 				<textElement textAlignment="Left">
@@ -100,17 +117,17 @@
 				<text><![CDATA[8.]]></text>
 			</staticText>
 			<staticText>
-				<reportElement positionType="Float" x="22" y="481" width="547" height="22" uuid="94140860-733e-4bbf-8e07-d6f1e3558c23">
+				<reportElement positionType="Float" x="22" y="328" width="547" height="22" uuid="94140860-733e-4bbf-8e07-d6f1e3558c23">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 				</reportElement>
 				<textElement textAlignment="Justified">
 					<font fontName="Montserrat" size="9" isBold="false" isItalic="true"/>
 				</textElement>
-				<text><![CDATA[Valoración a partir de: constancia de participación que emita el Director del plantel en donde labora el docente o técnico docente. ]]></text>
+				<text><![CDATA[Valoración a partir de: Constancia de participación que emita la DGETI (Dirección Académica e Innovación Educativa).]]></text>
 			</staticText>
 			<staticText>
-				<reportElement positionType="Float" x="22" y="512" width="547" height="44" uuid="143b4ac8-b77b-4efd-909c-124d0efb3770">
+				<reportElement positionType="Float" x="22" y="348" width="547" height="44" uuid="143b4ac8-b77b-4efd-909c-124d0efb3770">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 				</reportElement>
@@ -120,7 +137,7 @@
 				<text><![CDATA[<b>Publicaciones académicas o de investigación:</b> a los proyectos de investigación en los que participó o coordinó y artículos originales sobre temas académicos que hayan sido publicados por el personal docente o técnico docente en medios de comunicación especializados, arbitrados o indexados; desarrollados a partir de su última promoción en el servicio docente. ]]></text>
 			</staticText>
 			<staticText>
-				<reportElement positionType="Float" x="3" y="511" width="30" height="19" uuid="4160960a-e57f-493f-a35f-d002787bf5c5">
+				<reportElement positionType="Float" x="3" y="347" width="30" height="19" uuid="4160960a-e57f-493f-a35f-d002787bf5c5">
 					<property name="com.jaspersoft.studio.unit.y" value="px"/>
 				</reportElement>
 				<textElement textAlignment="Left">
@@ -129,16 +146,16 @@
 				<text><![CDATA[9.]]></text>
 			</staticText>
 			<staticText>
-				<reportElement positionType="Float" x="22" y="562" width="547" height="28" uuid="e00e7352-ac2e-48e1-ba72-7b6430fe7fa8">
+				<reportElement positionType="Float" x="22" y="398" width="547" height="42" uuid="e00e7352-ac2e-48e1-ba72-7b6430fe7fa8">
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 				</reportElement>
 				<textElement textAlignment="Justified">
 					<font fontName="Montserrat" size="9" isBold="false" isItalic="true"/>
 				</textElement>
-				<text><![CDATA[Valoración a partir de: el Número Internacional Normalizado de Publicaciones Seriadas (ISSN por sus siglas en inglés) asignado por la revista especializada o equivalente, según corresponda para el artículo publicado.]]></text>
+				<text><![CDATA[Valoración a partir de: el Número Internacional Normalizado de Publicaciones Seriadas (ISSN por sus siglas en inglés) asignado por la revista especializada o equivalente y/o del Número Internacional Normalizado del Libro (ISBN por sus siglas en inglés), según corresponda para el artículo o publicación realizada.]]></text>
 			</staticText>
 			<staticText>
-				<reportElement positionType="Float" x="22" y="591" width="547" height="38" uuid="da64ad38-4b96-44f3-8fde-adfb1b2a6953">
+				<reportElement positionType="Float" x="22" y="448" width="547" height="38" uuid="da64ad38-4b96-44f3-8fde-adfb1b2a6953">
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 				</reportElement>
 				<textElement textAlignment="Justified" markup="html">
@@ -147,7 +164,7 @@
 				<text><![CDATA[<b>Desempeño en el plantel o subsistema en el que realice su labor:</b> al conjunto de actividades que el docente o técnico docente realiza en su clase, orientado a incidir de manera favorable en el proceso de enseñanza aprendizaje y en el logro académico de sus estudiantes.]]></text>
 			</staticText>
 			<staticText>
-				<reportElement positionType="Float" x="3" y="590" width="30" height="19" uuid="9d970dd6-9f52-41b4-b113-63591ea52fac">
+				<reportElement positionType="Float" x="3" y="447" width="30" height="19" uuid="9d970dd6-9f52-41b4-b113-63591ea52fac">
 					<property name="com.jaspersoft.studio.unit.y" value="px"/>
 				</reportElement>
 				<textElement textAlignment="Left">
@@ -156,7 +173,7 @@
 				<text><![CDATA[10.]]></text>
 			</staticText>
 			<staticText>
-				<reportElement positionType="Float" x="22" y="630" width="547" height="30" uuid="ae4536d1-c5ab-41de-b2a2-6dc739d53dd5">
+				<reportElement positionType="Float" x="22" y="487" width="547" height="30" uuid="ae4536d1-c5ab-41de-b2a2-6dc739d53dd5">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 				</reportElement>
@@ -166,7 +183,7 @@
 				<text><![CDATA[Valoración a partir de los siguientes elementos: planeación didáctica, práctica docente, evaluación del aprendizaje y resultados educativos.]]></text>
 			</staticText>
 			<staticText>
-				<reportElement positionType="Float" x="22" y="245" width="547" height="58" uuid="a17c8ba5-4e91-42ce-bafb-eddf85efb214">
+				<reportElement positionType="Float" x="23" y="93" width="547" height="58" uuid="a17c8ba5-4e91-42ce-bafb-eddf85efb214">
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 				</reportElement>
 				<textElement textAlignment="Justified" markup="html">
@@ -175,7 +192,7 @@
 				<text><![CDATA[<b>Las aportaciones en materia de mejora continua en la educación, la docencia o la investigación:</b> a las producciones académicas con fundamento técnico y metodológico, elaboradas de manera individual o en colegiado; que contribuyen a mejorar los resultados educativos y el logro de los objetivos institucionales. Se consideran propuestas didácticas, elaboración de materiales educativos y/o de instrumentos de evaluación educativa; desarrolladas a partir de su última promoción en el servicio docente. ]]></text>
 			</staticText>
 			<staticText>
-				<reportElement positionType="Float" x="2" y="245" width="30" height="19" uuid="99fa4424-e9bb-4695-a456-de93723496ff">
+				<reportElement positionType="Float" x="3" y="93" width="30" height="19" uuid="99fa4424-e9bb-4695-a456-de93723496ff">
 					<property name="com.jaspersoft.studio.unit.x" value="px"/>
 				</reportElement>
 				<textElement textAlignment="Left">
@@ -184,7 +201,7 @@
 				<text><![CDATA[6.]]></text>
 			</staticText>
 			<staticText>
-				<reportElement positionType="Float" x="22" y="307" width="547" height="27" uuid="84043fe4-bf0d-46e7-82b6-c3b46c97dbf9">
+				<reportElement positionType="Float" x="23" y="155" width="547" height="27" uuid="84043fe4-bf0d-46e7-82b6-c3b46c97dbf9">
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 				</reportElement>
 				<textElement textAlignment="Justified">
@@ -193,7 +210,7 @@
 				<text><![CDATA[Valoración a partir de: constancia o documento probatorio de las aportaciones desarrolladas, emitido por autoridades e instituciones públicas y particulares, con reconocimiento oficial. ]]></text>
 			</staticText>
 			<staticText>
-				<reportElement positionType="Float" x="22" y="212" width="547" height="28" uuid="3d6d2b5c-6e82-4b79-9217-161f060bf2bf">
+				<reportElement positionType="Float" x="23" y="60" width="547" height="28" uuid="3d6d2b5c-6e82-4b79-9217-161f060bf2bf">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 				</reportElement>
@@ -203,16 +220,7 @@
 				<text><![CDATA[Valoración a partir de: constancia de curso, taller o diplomado que consigne la acreditación y el número de horas, emitida por autoridades e instituciones públicas y particulares, con reconocimiento oficial. ]]></text>
 			</staticText>
 			<staticText>
-				<reportElement positionType="Float" x="21" y="127" width="547" height="30" uuid="49433498-4c99-4812-a758-213cf3f44ff3">
-					<property name="com.jaspersoft.studio.unit.width" value="px"/>
-				</reportElement>
-				<textElement textAlignment="Justified">
-					<font fontName="Montserrat" size="9" isBold="false" isItalic="true"/>
-				</textElement>
-				<text><![CDATA[Valoración a partir de: documento acreditado por una instancia oficial que confirma el grado de estudios, de acuerdo con el perfil profesional y su función.]]></text>
-			</staticText>
-			<staticText>
-				<reportElement positionType="Float" x="21" y="157" width="547" height="55" uuid="04d4ddca-e1c7-4c1d-ada9-9fb7571bfd59">
+				<reportElement positionType="Float" x="22" y="5" width="547" height="55" uuid="04d4ddca-e1c7-4c1d-ada9-9fb7571bfd59">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 				</reportElement>
@@ -222,7 +230,7 @@
 				<text><![CDATA[<b>Capacitación y actualización docente:</b> a los procesos de capacitación y actualización con valor curricular, con un mínimo de 20 horas acumuladas, en los que haya participado el docente o técnico docente, a partir de su última promoción en el servicio docente, relacionados con el servicio educativo y la práctica pedagógica, vinculados al campo disciplinar, actividad paraescolar o módulo profesional, actividades pedagógicas, habilidades digitales o dominio de una lengua.]]></text>
 			</staticText>
 			<staticText>
-				<reportElement positionType="Float" x="2" y="156" width="30" height="19" uuid="21a5ea56-6a6b-4e3a-bd9b-23b3b256c507">
+				<reportElement positionType="Float" x="3" y="4" width="30" height="19" uuid="21a5ea56-6a6b-4e3a-bd9b-23b3b256c507">
 					<property name="com.jaspersoft.studio.unit.y" value="px"/>
 				</reportElement>
 				<textElement textAlignment="Left">
@@ -231,51 +239,42 @@
 				<text><![CDATA[5.]]></text>
 			</staticText>
 			<staticText>
-				<reportElement positionType="Float" x="22" y="12" width="547" height="49" uuid="76b9b312-9402-4c7a-9a3e-ba728de2c077">
+				<reportElement positionType="Float" mode="Opaque" x="0" y="529" width="572" height="13" forecolor="#FFFFFF" backcolor="#730907" uuid="29d8b652-59df-4182-a2e8-272ae0022817">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 				</reportElement>
-				<textElement textAlignment="Justified" markup="html">
-					<font fontName="Montserrat" size="9"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Montserrat" size="9" isBold="true"/>
 				</textElement>
-				<text><![CDATA[<b>El reconocimiento al buen desempeño por la comunidad educativa, con la participación de madres y padres de familia o tutores, alumnos y compañeros de trabajo:</b> a la opinión que los integrantes de la comunidad educativa tienen respecto a la forma en la que el participante se desenvuelve en el plantel educativo, y cómo su trabajo impacta en los aprendizajes de los alumnos. ]]></text>
+				<text><![CDATA[SÉPTIMA. PROCESO DE VALORACIÓN]]></text>
 			</staticText>
 			<staticText>
-				<reportElement positionType="Float" x="3" y="11" width="30" height="19" uuid="13492c86-669f-4aba-94bc-3b97d376b5a7">
-					<property name="com.jaspersoft.studio.unit.y" value="px"/>
-				</reportElement>
-				<textElement textAlignment="Left">
-					<font fontName="Montserrat" size="9"/>
-				</textElement>
-				<text><![CDATA[3.]]></text>
-			</staticText>
-			<staticText>
-				<reportElement positionType="Float" x="22" y="61" width="547" height="30" uuid="d6d374aa-9468-4248-ac22-ab8e696b5acc">
-					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				<reportElement positionType="Float" x="0" y="544" width="571" height="26" uuid="15e86893-eed5-49c1-84a2-ac1f083bc459">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
 				</reportElement>
 				<textElement textAlignment="Justified">
-					<font fontName="Montserrat" size="9" isBold="false" isItalic="true"/>
-				</textElement>
-				<text><![CDATA[Valoración a partir de: encuestas dirigidas a alumnos, madres y padres de familia o tutores y compañeros docentes y técnicos docentes. ]]></text>
-			</staticText>
-			<staticText>
-				<reportElement positionType="Float" x="22" y="94" width="547" height="35" uuid="54a1802f-3630-4176-9974-73f2fcf2c169">
-					<property name="com.jaspersoft.studio.unit.height" value="px"/>
-					<property name="com.jaspersoft.studio.unit.width" value="px"/>
-				</reportElement>
-				<textElement textAlignment="Justified" markup="html">
 					<font fontName="Montserrat" size="9"/>
 				</textElement>
-				<text><![CDATA[<b>Formación académica y de posgrado:</b> al nivel de preparación concluido y, en su caso, el grado académico que ostenta el aspirante, el cual debe ser afín al campo disciplinar, actividad paraescolar o módulo profesional en el que se desempeña. ]]></text>
+				<text><![CDATA[Este proceso de selección se basará en la ponderación de las evidencias para cada uno de los elementos de valoración y el proceso será el siguiente:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement positionType="Float" x="3" y="93" width="30" height="19" uuid="eedbe948-10b3-40a0-8891-4e57c9cec0f5">
-					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				<reportElement positionType="Float" x="1" y="575" width="571" height="41" uuid="333c3636-6c68-4ac2-be82-8ce9edcaedec">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
 				</reportElement>
-				<textElement textAlignment="Left">
+				<textElement textAlignment="Justified">
 					<font fontName="Montserrat" size="9"/>
 				</textElement>
-				<text><![CDATA[4.]]></text>
+				<text><![CDATA[1. El participante conocerá las bases de participación y se registrará en el Proceso de selección para el Proceso Extraordinario de Promoción en el Servicio Docente por Cambio de Categoría en la Dirección General de Educación Tecnológica Industrial y de Servicios, exclusivamente para el ciclo escolar 2020-2021, de acuerdo a lo establecido en la presente convocatoria. ]]></text>
 			</staticText>
+			<textField>
+				<reportElement positionType="Float" x="0" y="618" width="571" height="50" uuid="0c50c496-059b-4fc3-8919-8105b77152ee">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Justified">
+					<font fontName="Montserrat" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA["2. La valoración del nivel de cumplimiento de los 10 criterios establecidos en la Base sexta de la presente convocatoria tendrá dos etapas, la primera la realizará un Comité de revisión, que será un órgano colegiado constituido en el "+$F{plantelnombre} + " con la finalidad de verificar el cumplimiento de los requisitos, asignar una puntuación sobre los criterios de valoración y emitir el predictamen correspondiente. "]]></textFieldExpression>
+			</textField>
 		</band>
 	</summary>
 </jasperReport>

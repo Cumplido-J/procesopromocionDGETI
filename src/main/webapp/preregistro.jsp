@@ -125,8 +125,13 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="form-group col-md-12">                               
+                        <div class="form-group col-md-12">    
+                            <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="p.e. Debilidad visual, debilidad auditiva, silla de ruedas, etc">
                             <label class="control-label" for="consideraciones">Consideraciones particulares:</label>
+                            </span>
+                            <label class="text-warning">    
+                            <span class="glyphicon glyphicon-alert" aria-hidden="true" class="d-inline-block" tabindex="0" data-toggle="tooltip" title="p.e. Debilidad visual, debilidad auditiva, silla de ruedas, etc"></span>
+                            </label>
                             <textarea class="form-control text-uppercase" id="consideraciones" name="consideraciones" maxlength="200"></textarea>
                         </div>
                     </div>

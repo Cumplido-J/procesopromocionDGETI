@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Created with Jaspersoft Studio version 6.13.0.final using JasperReports Library version 6.13.0-46ada4d1be8f3c5985fd0b6146f3ed44caed6f05  -->
+<!-- Created with Jaspersoft Studio version 6.16.0.final using JasperReports Library version 6.16.0-48579d909b7943b64690c65c71e07e0b80981928  -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="pagina8" pageWidth="572" pageHeight="792" whenNoDataType="AllSectionsNoDetail" columnWidth="572" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="2ab4038d-9d78-459e-927f-4f5c4dc4ad48">
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="bdpromocion"/>
@@ -65,7 +65,7 @@ GROUP BY conv.id]]>
 		<band height="677" splitType="Stretch">
 			<property name="com.jaspersoft.studio.unit.height" value="px"/>
 			<staticText>
-				<reportElement positionType="Float" x="0" y="110" width="571" height="17" uuid="ba4a051b-8638-4029-8b3f-1d729402fcf1">
+				<reportElement positionType="Float" x="0" y="0" width="571" height="17" uuid="ba4a051b-8638-4029-8b3f-1d729402fcf1">
 					<property name="com.jaspersoft.studio.unit.x" value="px"/>
 				</reportElement>
 				<textElement textAlignment="Justified">
@@ -74,7 +74,7 @@ GROUP BY conv.id]]>
 				<text><![CDATA[Lo no previsto en la presente será resuelto por la DGETI, de acuerdo con su ámbito de competencia.]]></text>
 			</staticText>
 			<staticText>
-				<reportElement positionType="Float" x="0" y="224" width="571" height="20" uuid="0a9039e4-1a53-49ed-b551-09ccbfbdc79e">
+				<reportElement positionType="Float" x="0" y="114" width="571" height="20" uuid="0a9039e4-1a53-49ed-b551-09ccbfbdc79e">
 					<property name="com.jaspersoft.studio.unit.x" value="px"/>
 				</reportElement>
 				<textElement textAlignment="Center">
@@ -83,7 +83,7 @@ GROUP BY conv.id]]>
 				<text><![CDATA[RAFAEL SÁNCHEZ ANDRADE]]></text>
 			</staticText>
 			<staticText>
-				<reportElement positionType="Float" x="0" y="238" width="571" height="13" uuid="f0d1c652-3b3a-4d12-99f6-13deba46d0ff">
+				<reportElement positionType="Float" x="0" y="128" width="571" height="13" uuid="f0d1c652-3b3a-4d12-99f6-13deba46d0ff">
 					<property name="com.jaspersoft.studio.unit.x" value="px"/>
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
@@ -93,7 +93,7 @@ GROUP BY conv.id]]>
 				<text><![CDATA[DIRECTOR GENERAL]]></text>
 			</staticText>
 			<staticText>
-				<reportElement positionType="Float" x="0" y="227" width="571" height="20" uuid="4b5d0902-e554-42ae-857d-322f560ef585">
+				<reportElement positionType="Float" x="0" y="117" width="571" height="20" uuid="4b5d0902-e554-42ae-857d-322f560ef585">
 					<property name="com.jaspersoft.studio.unit.x" value="px"/>
 				</reportElement>
 				<textElement textAlignment="Center">
@@ -102,7 +102,7 @@ GROUP BY conv.id]]>
 				<text><![CDATA[___________________________________]]></text>
 			</staticText>
 			<textField>
-				<reportElement positionType="Float" x="0" y="154" width="571" height="18" uuid="61375f57-715e-4394-9b27-32682657744c">
+				<reportElement positionType="Float" x="0" y="44" width="571" height="18" uuid="61375f57-715e-4394-9b27-32682657744c">
 					<property name="com.jaspersoft.studio.unit.x" value="px"/>
 				</reportElement>
 				<textElement textAlignment="Center">
@@ -110,37 +110,8 @@ GROUP BY conv.id]]>
 				</textElement>
 				<textFieldExpression><![CDATA["Ciudad de México, a "+$F{publicacion} + "."]]></textFieldExpression>
 			</textField>
-			<staticText>
-				<reportElement positionType="Float" mode="Opaque" x="0" y="0" width="572" height="13" forecolor="#FFFFFF" backcolor="#730907" uuid="6e763f17-11e8-47af-8e67-c66e666a3165">
-					<property name="com.jaspersoft.studio.unit.x" value="px"/>
-					<property name="com.jaspersoft.studio.unit.width" value="px"/>
-				</reportElement>
-				<textElement textAlignment="Left" verticalAlignment="Middle">
-					<font fontName="Montserrat" size="9" isBold="true"/>
-				</textElement>
-				<text><![CDATA[DÉCIMA CUARTA. CONSIDERACIONES GENERALES]]></text>
-			</staticText>
-			<staticText>
-				<reportElement positionType="Float" x="0" y="24" width="571" height="40" uuid="19e82a17-c388-4e7c-8668-d35f2a55026a">
-					<property name="com.jaspersoft.studio.unit.x" value="px"/>
-				</reportElement>
-				<textElement textAlignment="Justified">
-					<font fontName="Montserrat" size="9"/>
-				</textElement>
-				<text><![CDATA[Las vías de comunicación entre la DGETI y quienes participen en el proceso de selección para la promoción en el servicio docente por cambio de categoría en el Ciclo Escolar 2020-2021, serán el correo electrónico y los números telefónicos (celular o fijo) que aporte cada aspirante, desde el momento de su registro. ]]></text>
-			</staticText>
-			<staticText>
-				<reportElement positionType="Float" x="0" y="67" width="571" height="35" uuid="8899f39f-fbd7-4bab-8ceb-3b4b7addeea0">
-					<property name="com.jaspersoft.studio.unit.x" value="px"/>
-					<property name="com.jaspersoft.studio.unit.height" value="px"/>
-				</reportElement>
-				<textElement textAlignment="Justified">
-					<font fontName="Montserrat" size="9"/>
-				</textElement>
-				<text><![CDATA[Para la aclaración de dudas o información adicional relacionada con este proceso de selección, el aspirante podrá dirigirse a la DGETI en la dirección de correo electrónico promociondocente@dgeti.sems.gob.mx o a los números telefónicos 5536017599 y 8002886688.]]></text>
-			</staticText>
 			<image>
-				<reportElement x="213" y="177" width="145" height="84" uuid="2f87f997-ab9a-410c-ba50-48a06a5dd05b">
+				<reportElement x="213" y="67" width="145" height="84" uuid="2f87f997-ab9a-410c-ba50-48a06a5dd05b">
 					<printWhenExpression><![CDATA[!$F{estatus}.equals( "TEMPORAL" )]]></printWhenExpression>
 				</reportElement>
 				<imageExpression><![CDATA["firma.png"]]></imageExpression>

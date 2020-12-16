@@ -16,6 +16,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import metodos_sql.Metodos_sql;
 
 /**
@@ -80,36 +81,44 @@ public class Servlet_registrarConvocatoria extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         try {  
+            HttpSession session = (HttpSession) request.getSession(true);
             String id;
             if(request.getParameter("idConvocatoria")!=null){
                 id=request.getParameter("idConvocatoria");
             }else{
                 id="";
-            }            
-            String programa=request.getParameter("programa");
-            String subsistema=request.getParameter("subsistema");            
-            String entidad=request.getParameter("entidad");
-            String plantel=request.getParameter("plantel");
-            Fecha fecha=new Fecha();
-            String publicacion=fecha.formatoAlmacenar(request.getParameter("publicacion"));
-            String inicioRegistro=fecha.formatoAlmacenar(request.getParameter("inicioRegistro"));
-            String finRegistro=fecha.formatoAlmacenar(request.getParameter("finRegistro"));            
-            String inicioValoracion=fecha.formatoAlmacenar(request.getParameter("inicioValoracion"));
-            String finValoracion=fecha.formatoAlmacenar(request.getParameter("finValoracion"));          
-            String inicioDictaminacion=fecha.formatoAlmacenar(request.getParameter("inicioDictaminacion"));
-            String finDictaminacion=fecha.formatoAlmacenar(request.getParameter("finDictaminacion"));
-            String resultados=fecha.formatoAlmacenar(request.getParameter("resultados"));             
-            String estatus=request.getParameter("estatus");
-            String respuesta="Error en almacenamiento de datos, intente nuevamente";
-            Metodos_sql metodo = new Metodos_sql();
-            List<String[]> datos;       
-            //in _publicacion date,in _inicioRegistro date,in _finRegistro date,in _inicioValoracion date,in _finValoracion date,in _inicioDictaminacion date,in _finDictaminacion date, in _resultados date,in _idPlantel int,in _idPrograma int,in _estatus varchar(15)
-            String[] parametros={id,publicacion,inicioRegistro,finRegistro,inicioValoracion,finValoracion,inicioDictaminacion,finDictaminacion,resultados,plantel,programa,estatus};                                      
-            datos=metodo.ejecutaSP("sp_insertConvocatoria",parametros);            
-            if(!datos.isEmpty()){
-                respuesta=datos.get(0)[0]; 
             }
-            out.print(respuesta);
+            
+            String permisoEdicion_ = session.getAttribute("permisoEdicion").toString();
+            
+            if(permisoEdicion_.equals("V")){
+                String programa=request.getParameter("programa");
+                String subsistema=request.getParameter("subsistema");            
+                String entidad=request.getParameter("entidad");
+                String plantel=request.getParameter("plantel");
+                Fecha fecha=new Fecha();
+                String publicacion=fecha.formatoAlmacenar(request.getParameter("publicacion"));
+                String inicioRegistro=fecha.formatoAlmacenar(request.getParameter("inicioRegistro"));
+                String finRegistro=fecha.formatoAlmacenar(request.getParameter("finRegistro"));            
+                String inicioValoracion=fecha.formatoAlmacenar(request.getParameter("inicioValoracion"));
+                String finValoracion=fecha.formatoAlmacenar(request.getParameter("finValoracion"));          
+                String inicioDictaminacion=fecha.formatoAlmacenar(request.getParameter("inicioDictaminacion"));
+                String finDictaminacion=fecha.formatoAlmacenar(request.getParameter("finDictaminacion"));
+                String resultados=fecha.formatoAlmacenar(request.getParameter("resultados"));             
+                String estatus=request.getParameter("estatus");
+                String respuesta="Error en almacenamiento de datos, intente nuevamente";
+                Metodos_sql metodo = new Metodos_sql();
+                List<String[]> datos;       
+                //in _publicacion date,in _inicioRegistro date,in _finRegistro date,in _inicioValoracion date,in _finValoracion date,in _inicioDictaminacion date,in _finDictaminacion date, in _resultados date,in _idPlantel int,in _idPrograma int,in _estatus varchar(15)
+                String[] parametros={id,publicacion,inicioRegistro,finRegistro,inicioValoracion,finValoracion,inicioDictaminacion,finDictaminacion,resultados,plantel,programa,estatus};                                      
+                datos=metodo.ejecutaSP("sp_insertConvocatoria",parametros);            
+                if(!datos.isEmpty()){
+                    respuesta=datos.get(0)[0]; 
+                }
+                out.print(respuesta);   
+                }else{
+                    out.print("El usuario no tienen permisos para guardar");
+                }
         } finally {
             out.close();
         }

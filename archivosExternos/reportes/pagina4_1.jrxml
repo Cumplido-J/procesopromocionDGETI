@@ -41,7 +41,7 @@
 		<band splitType="Stretch"/>
 	</background>
 	<summary>
-		<band height="655" splitType="Stretch">
+		<band height="677" splitType="Stretch">
 			<property name="com.jaspersoft.studio.unit.height" value="px"/>
 			<staticText>
 				<reportElement positionType="Float" x="1" y="193" width="25" height="25" uuid="c005ebf9-9089-4119-ad56-54b2428198c8">
@@ -431,14 +431,14 @@
 				<text><![CDATA[El desempeño en el plantel o subsistema en el que realice su labor. ]]></text>
 			</staticText>
 			<staticText>
-				<reportElement positionType="Float" x="23" y="414" width="547" height="18" uuid="2273ce88-1495-4cfd-abe6-6c116485f4af"/>
+				<reportElement positionType="Float" x="23" y="422" width="547" height="18" uuid="2273ce88-1495-4cfd-abe6-6c116485f4af"/>
 				<textElement textAlignment="Justified" markup="html">
 					<font fontName="Montserrat" size="9"/>
 				</textElement>
 				<text><![CDATA[<b>Antigüedad en el servicio:</b> al tiempo de servicio acumulado por el docente o técnico docente en la DGETI.]]></text>
 			</staticText>
 			<staticText>
-				<reportElement positionType="Float" x="23" y="443" width="547" height="48" uuid="71b715e6-e9b8-4efe-8c39-33ba84ce771f">
+				<reportElement positionType="Float" x="23" y="464" width="547" height="48" uuid="71b715e6-e9b8-4efe-8c39-33ba84ce771f">
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 				</reportElement>
 				<textElement textAlignment="Justified" verticalAlignment="Middle" markup="html">
@@ -447,7 +447,7 @@
 				<text><![CDATA[<b>Experiencia y tiempo de trabajo en zonas de marginación, pobreza y descomposición social:</b> al personal docente o técnico docente adscrito a planteles en zonas de alta marginación, pobreza y descomposición social conforme a los indicadores del Consejo Nacional de Evaluación de la Política de Desarrollo Social (CONEVAL), por lo menos desde el ciclo escolar inmediato anterior. ]]></text>
 			</staticText>
 			<staticText>
-				<reportElement positionType="Float" x="4" y="414" width="30" height="19" uuid="759819f0-d3fe-4a5f-87b1-43033c96a9d2">
+				<reportElement positionType="Float" x="4" y="422" width="30" height="19" uuid="759819f0-d3fe-4a5f-87b1-43033c96a9d2">
 					<property name="com.jaspersoft.studio.unit.x" value="px"/>
 				</reportElement>
 				<textElement textAlignment="Left">
@@ -456,7 +456,7 @@
 				<text><![CDATA[1.]]></text>
 			</staticText>
 			<staticText>
-				<reportElement positionType="Float" x="4" y="446" width="30" height="19" uuid="c199e79d-2eb8-4e36-946c-230a393fbeee">
+				<reportElement positionType="Float" x="4" y="467" width="30" height="19" uuid="c199e79d-2eb8-4e36-946c-230a393fbeee">
 					<property name="com.jaspersoft.studio.unit.y" value="px"/>
 					<property name="com.jaspersoft.studio.unit.x" value="px"/>
 				</reportElement>
@@ -466,14 +466,14 @@
 				<text><![CDATA[2.]]></text>
 			</staticText>
 			<staticText>
-				<reportElement positionType="Float" x="4" y="397" width="566" height="19" uuid="51e5b883-564f-4603-935b-d2474851b92e"/>
+				<reportElement positionType="Float" x="4" y="401" width="566" height="19" uuid="51e5b883-564f-4603-935b-d2474851b92e"/>
 				<textElement textAlignment="Left">
 					<font fontName="Montserrat" size="9"/>
 				</textElement>
 				<text><![CDATA[Las evidencias que se utilizarán para la valoración de cada criterio, se describen a continuación:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement positionType="Float" x="23" y="427" width="547" height="11" uuid="ff5cf98c-b335-44a9-956e-2c09abbf9552">
+				<reportElement positionType="Float" x="23" y="437" width="547" height="11" uuid="ff5cf98c-b335-44a9-956e-2c09abbf9552">
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 				</reportElement>
 				<textElement textAlignment="Left">
@@ -482,7 +482,7 @@
 				<text><![CDATA[Constancia de nombramiento expedida por la DGETI (Enlace de Gestión Administrativa). ]]></text>
 			</staticText>
 			<staticText>
-				<reportElement positionType="Float" x="0" y="16" width="571" height="45" uuid="0d6401c0-4818-42fa-b8fe-6c6af32beaa8">
+				<reportElement positionType="Float" x="0" y="24" width="571" height="37" uuid="0d6401c0-4818-42fa-b8fe-6c6af32beaa8">
 					<property name="com.jaspersoft.studio.unit.x" value="px"/>
 				</reportElement>
 				<textElement textAlignment="Justified">
@@ -707,7 +707,7 @@
 				<text><![CDATA[El reconocimiento al buen desempeño por la comunidad educativa, con la participación de madres y padres de familia o tutores, alumnos y compañeros de trabajo. ]]></text>
 			</staticText>
 			<staticText>
-				<reportElement positionType="Float" x="23" y="485" width="547" height="30" uuid="987eed17-47c0-42dc-a59e-f0089249c62f">
+				<reportElement positionType="Float" x="23" y="516" width="547" height="30" uuid="987eed17-47c0-42dc-a59e-f0089249c62f">
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 				</reportElement>
 				<textElement textAlignment="Justified">
@@ -716,7 +716,7 @@
 				<text><![CDATA[Valoración a partir de: En su caso, constancia emitida por el Director del Plantel, consignando el tiempo de adscripción y la ubicación del planten en donde labora. ]]></text>
 			</staticText>
 			<staticText>
-				<reportElement positionType="Float" x="4" y="514" width="30" height="19" uuid="af6d1dff-cc71-4d65-a03a-90d25eaac638">
+				<reportElement positionType="Float" x="4" y="545" width="30" height="19" uuid="af6d1dff-cc71-4d65-a03a-90d25eaac638">
 					<property name="com.jaspersoft.studio.unit.y" value="px"/>
 				</reportElement>
 				<textElement textAlignment="Left">
@@ -725,7 +725,7 @@
 				<text><![CDATA[3.]]></text>
 			</staticText>
 			<staticText>
-				<reportElement positionType="Float" x="23" y="515" width="547" height="49" uuid="b48c4481-6c97-4b43-98e0-af0fcea20cd9">
+				<reportElement positionType="Float" x="23" y="546" width="547" height="49" uuid="b48c4481-6c97-4b43-98e0-af0fcea20cd9">
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 				</reportElement>
 				<textElement textAlignment="Justified" markup="html">
@@ -734,7 +734,7 @@
 				<text><![CDATA[<b>El reconocimiento al buen desempeño por la comunidad educativa, con la participación de madres y padres de familia o tutores, alumnos y compañeros de trabajo:</b> a la opinión que los integrantes de la comunidad educativa tienen respecto a la forma en la que el participante se desenvuelve en el plantel educativo, y cómo su trabajo impacta en los aprendizajes de los alumnos. ]]></text>
 			</staticText>
 			<staticText>
-				<reportElement positionType="Float" x="23" y="562" width="547" height="30" uuid="c2ea010a-8767-4194-abb2-f2d191b182b3">
+				<reportElement positionType="Float" x="23" y="595" width="547" height="30" uuid="c2ea010a-8767-4194-abb2-f2d191b182b3">
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 				</reportElement>
 				<textElement textAlignment="Justified">
@@ -743,7 +743,7 @@
 				<text><![CDATA[Valoración a partir de: encuestas dirigidas a alumnos, madres y padres de familia o tutores y compañeros docentes y técnicos docentes. ]]></text>
 			</staticText>
 			<staticText>
-				<reportElement positionType="Float" x="4" y="589" width="30" height="19" uuid="2a300696-abee-427d-9758-14cd851eb060">
+				<reportElement positionType="Float" x="4" y="619" width="30" height="19" uuid="2a300696-abee-427d-9758-14cd851eb060">
 					<property name="com.jaspersoft.studio.unit.y" value="px"/>
 				</reportElement>
 				<textElement textAlignment="Left">
@@ -752,7 +752,7 @@
 				<text><![CDATA[4.]]></text>
 			</staticText>
 			<staticText>
-				<reportElement positionType="Float" x="23" y="590" width="547" height="35" uuid="48b98cff-6a20-4a9a-a89d-8c0baa09d635">
+				<reportElement positionType="Float" x="23" y="620" width="547" height="35" uuid="48b98cff-6a20-4a9a-a89d-8c0baa09d635">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 				</reportElement>
@@ -760,15 +760,6 @@
 					<font fontName="Montserrat" size="9"/>
 				</textElement>
 				<text><![CDATA[<b>Formación académica y de posgrado:</b> al nivel de preparación concluido y, en su caso, el grado académico que ostenta el aspirante, el cual debe ser afín al campo disciplinar, actividad paraescolar o módulo profesional en el que se desempeña. ]]></text>
-			</staticText>
-			<staticText>
-				<reportElement positionType="Float" x="22" y="625" width="547" height="26" uuid="2bf68b70-2fd1-4cfd-90c8-7d090f74dd9b">
-					<property name="com.jaspersoft.studio.unit.width" value="px"/>
-				</reportElement>
-				<textElement textAlignment="Justified">
-					<font fontName="Montserrat" size="9" isBold="false" isItalic="true"/>
-				</textElement>
-				<text><![CDATA[Valoración a partir de: documento acreditado por una instancia oficial que confirma el grado de estudios, de acuerdo con el perfil profesional y su función.]]></text>
 			</staticText>
 		</band>
 	</summary>

@@ -13,6 +13,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import metodos_sql.Metodos_sql;
 
 /**
@@ -75,27 +76,34 @@ public class Servlet_registrarVacancia extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
-        try {         
-            String programa=request.getParameter("programa");
-            String subsistema=request.getParameter("subsistema");            
-            String entidad=request.getParameter("entidad");
-            String plantel=request.getParameter("plantel");
-            String categoria=request.getParameter("categoria");
-            String tipoCategoria=request.getParameter("tipoCategoria");
-            String jornada=request.getParameter("jornada");
-            String vacancia=request.getParameter("vacancia");
-            String horas=request.getParameter("horas");
+        try {
+            HttpSession session = (HttpSession) request.getSession(true);
+            String permisoEdicion_ = session.getAttribute("permisoEdicion").toString();
             
-            String respuesta="Error en almacenamiento de datos, intente nuevamente";
-            Metodos_sql metodo = new Metodos_sql();
-            List<String[]> datos;       
-            //_idEntidad,_idPlantel,_tipoCategoria,_plazas,_idCategoriaAux,_idJornadaAux,'Real',_idPrograma,_idSubsistema
-            String[] parametros={entidad,plantel,tipoCategoria,vacancia,categoria,jornada,programa,subsistema,horas};                                      
-            datos=metodo.ejecutaSP("sp_registraVacancia",parametros);            
-            if(!datos.isEmpty()){
-                respuesta=datos.get(0)[0]; 
+            if(permisoEdicion_.equals("V")){
+                String programa=request.getParameter("programa");
+                String subsistema=request.getParameter("subsistema");            
+                String entidad=request.getParameter("entidad");
+                String plantel=request.getParameter("plantel");
+                String categoria=request.getParameter("categoria");
+                String tipoCategoria=request.getParameter("tipoCategoria");
+                String jornada=request.getParameter("jornada");
+                String vacancia=request.getParameter("vacancia");
+                String horas=request.getParameter("horas");
+
+                String respuesta="Error en almacenamiento de datos, intente nuevamente";
+                Metodos_sql metodo = new Metodos_sql();
+                List<String[]> datos;       
+                //_idEntidad,_idPlantel,_tipoCategoria,_plazas,_idCategoriaAux,_idJornadaAux,'Real',_idPrograma,_idSubsistema
+                String[] parametros={entidad,plantel,tipoCategoria,vacancia,categoria,jornada,programa,subsistema,horas};                                      
+                datos=metodo.ejecutaSP("sp_registraVacancia",parametros);            
+                if(!datos.isEmpty()){
+                    respuesta=datos.get(0)[0]; 
+                }
+                out.print(respuesta);
+            }else{
+                out.print("El usuario no tiene permisos para guardar");
             }
-            out.print(respuesta);
         } finally {
             out.close();
         }
