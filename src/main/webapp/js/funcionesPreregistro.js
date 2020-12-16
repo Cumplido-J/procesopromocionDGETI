@@ -5,14 +5,8 @@
  */
 var consultarWS=true;
 $(document).ready(function () {
-<<<<<<< HEAD
     var $regex=/^([a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?)$/;
     $('#correo').on('keypress keydown keyup change',function(){    
-=======
-//    var $regex=/^([a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?)$/;
-    var $regex=/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    $('#correo').keypress(function(){
->>>>>>> bada2ac10430fce6deac75c18cb882a79616ed2b
         if (!$(this).val().match($regex)) {         
             $('#alertaCorreo').removeAttr('hidden');    
             $("#cbAviso").attr("disabled",true);

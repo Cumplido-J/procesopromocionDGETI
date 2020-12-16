@@ -41,18 +41,9 @@ $(document).ready(function () {
               $("#plantel").removeClass("disabled");
         }
     });
-<<<<<<< HEAD
     $('#correo').on('keypress keydown keyup change',function(){
         if (!$("#correo").val().toLowerCase().match($regex)) {         
             $('#alertaCorreo').removeAttr('hidden'); 
-=======
-    $('#correo').keypress(function(){
-        if (!$(this).val().match($regex)) {         
-            $('#alertaCorreo').removeAttr('hidden');    
-            $("#cbAviso").attr("disabled",true);
-            $("#cbAviso").removeAttr("checked");
-            $("#btnEnviar").attr("disabled",true);
->>>>>>> bada2ac10430fce6deac75c18cb882a79616ed2b
             $('#correo').addClass('error'); 
         }
         else{
