@@ -141,9 +141,10 @@
                             </div>
                             <div class="form-group col-md-3">
                               <label class="control-label" for="cct">CCT:</label>
-                              <select class="form-control input-sm" id="cct" name="cct">
+                              <select class="form-control input-sm" id="cct" name="cct" onChange="cambioCCT()">
                                 ${catalogo.desplegarOpcionesCCT(Docente.infoRegistro[56],Docente.infoRegistro[53])}
                               </select>
+                              <input type="text" class="form-control input-sm" id="cctOtro" name="cctOtro" hidden>
                             </div>
                         </div>
                         <div class="row">

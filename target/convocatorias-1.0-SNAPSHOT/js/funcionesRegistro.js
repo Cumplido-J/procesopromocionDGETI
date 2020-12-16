@@ -1242,3 +1242,11 @@ function cambioObservaciones(objeto){
         $("#btnFinalizar").attr("disabled",true); 
     }
 }
+
+function cambioCCT(){
+    if($("#cct").val()=="-1"){
+        $("#cctOtro").removeClass("hidden");    
+    }else{
+        $("#cctOtro").addClass("hidden"); 
+    }
+}

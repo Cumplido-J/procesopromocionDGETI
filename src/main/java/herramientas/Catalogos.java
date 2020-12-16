@@ -152,6 +152,7 @@ public class Catalogos {
             for(String[] dato:datos){
                 respuesta+="<option  value='"+dato[0]+"'>"+dato[1]+"</option>";
             }
+            respuesta="<option value='-1'>Otro</option>";
         }catch(Exception e){
             respuesta=e.toString();
         }finally{
@@ -722,12 +723,13 @@ public class Catalogos {
         return respuesta;
     }
     public String desplegarOpcionesPermisos(){        
-        String respuesta="";
+        String respuesta="<table>";
         try{            
             List<String[]> datos=metodos.ejecutaSP("sp_selectCatPermisos");
             for(String[] dato:datos){
-                respuesta+="<label class='checkbox-inline'><input type='checkbox' value='"+dato[0]+"'>"+dato[1]+"</label>";
+                respuesta+="<tr><td><label><input type='checkbox' class='permiso' id='permiso"+dato[0]+"' value='"+dato[0]+"' title='"+dato[2]+"'>"+dato[1]+"</label></td><td><label><input type='checkbox' class='escritura' id='escritura"+dato[0]+"' value='"+dato[0]+"' title='Permitir al usuario modificar la información'>Permiso guardar</label></td></tr>";
             }
+            respuesta+="</table>";
         }catch(Exception e){
             respuesta=e.toString();
         }finally{
@@ -735,13 +737,14 @@ public class Catalogos {
         }
     }
     public String desplegarOpcionesPermisos(String idUsuario){        
-        String respuesta="";
+        String respuesta="<table>";
         try{      
             String[] parametros={idUsuario};
             List<String[]> datos=metodos.ejecutaSP("sp_consultaUsuarioPermiso",parametros);
             for(String[] dato:datos){
-                respuesta+="<label class='checkbox-inline'><input type='checkbox' value='"+dato[0]+"' "+dato[2]+">"+dato[1]+"</label>";
+                respuesta+="<tr><td><label><input type='checkbox' class='permiso' value='"+dato[0]+"' "+dato[2]+">"+dato[1]+"</label></td><td><label><input type='checkbox' class='escritura' value='"+dato[0]+"' "+dato[3]+">Permiso escritura</label></td></tr>";
             }
+            respuesta+="</table>";
         }catch(Exception e){
             respuesta=e.toString();
         }finally{

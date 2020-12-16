@@ -40,7 +40,7 @@ $(document).ready(function () {
               $("#plantel").removeClass("disabled");
         }
     });
-    $('#correo').on('change',function(){
+    $('#correo').on('keypress keydown keyup change',function(){
         if (!$("#correo").val().toLowerCase().match($regex)) {         
             $('#alertaCorreo').removeAttr('hidden'); 
             $('#correo').addClass('error'); 
@@ -50,7 +50,7 @@ $(document).ready(function () {
            $('#correo').removeClass('error'); 
         }
     });    
-    $('#usuario').on('change',function(){        
+    $('#usuario').on('keypress keydown keyup change',function(){        
         if (!$('#usuario').val().toUpperCase().match($regexRFC)) {         
             $('#alertaUsuario').removeAttr('hidden');
             $('#usuario').addClass('error'); 
@@ -122,11 +122,12 @@ $(document).ready(function () {
         submitHandler:function(){
             var aux=$("#btnEnviar").val();
             var permisos="";
-            $('#formRegistro input[type=checkbox]').each(function(){
+            $('.permiso').each(function(){
                 if (this.checked) {
                     permisos += $(this).val()+';';
                 }
             }); 
+            alert(permisos);
             $("#permisos").val(permisos);
             if (permisos!="") { 
                 if ($("#correo").val().toLowerCase().match($regex) && $("#usuario").val().toUpperCase().match($regexRFC)) {                            
