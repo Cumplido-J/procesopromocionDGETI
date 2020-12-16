@@ -883,7 +883,7 @@ function abrirModalArchivo(id){
             $("#tituloModal").html("Constancia de horas frente a grupo");        
             break;  
         case 5: 
-            $("#tituloModal").html("Constancia CENNI");                         
+            $("#tituloModal").html("Constancia CENNI");                        
             break;      
         case 6: 
             $("#tituloModal").html("Nota favorable y sin sanción administrativa");        
