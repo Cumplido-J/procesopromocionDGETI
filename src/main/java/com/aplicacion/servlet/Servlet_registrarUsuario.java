@@ -117,6 +117,7 @@ public class Servlet_registrarUsuario extends HttpServlet {
                 String pass=encriptarPass;
                 String permisos=request.getParameter("permisos");
                 String[] aux=permisos.split(";");
+                
 
                 String perfil="A";
                 String respuesta="Error en almacenamiento de datos, intente nuevamente";
@@ -126,7 +127,7 @@ public class Servlet_registrarUsuario extends HttpServlet {
                 datos=metodo.ejecutaSP("sp_insertUsuario",parametros);            
                 if(!datos.isEmpty()){
                     respuesta=datos.get(0)[0]; 
-                    parametros=new String[3];
+                    parametros=new String[4];
                     parametros[0]="";
                     parametros[1]=usuario;                
                     if(respuesta.equals("ok")){
@@ -135,7 +136,14 @@ public class Servlet_registrarUsuario extends HttpServlet {
                             c.enviarCorreo("Envío de contraseña","Usted ha sido registrado en el Sistema de Promoción Docente disponible en https://www.promociondocente.sep.gob.mx <br/> Sus datos de acceso son: <br/> Usuario: <b>"+usuario+"</b><br/>Contrase&ntilde;a:<b>"+contrasena+"</b>", correo);
                         }
                         for (String i : aux) {
-                            parametros[2]=i;
+                            String[] aux2=i.split(",");
+                            parametros[2]=aux2[0];
+                            if(aux2[1].equals("true")){
+                                parametros[3]="V";
+                            }else{
+                                parametros[3]="F";
+                            }
+                            
                             datos=metodo.ejecutaSP("sp_insertUsuarioPermiso",parametros);                        
                         }
                     }

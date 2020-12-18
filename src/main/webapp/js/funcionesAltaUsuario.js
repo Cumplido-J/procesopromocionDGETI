@@ -163,16 +163,20 @@ $(document).ready(function () {
                 required: "Campo requerido"
             }
         },
-        submitHandler:function(){
+        submitHandler:function(){            
             var aux=$("#btnEnviar").val();
             var permisos="";
+            var id=0;
             $('.permiso').each(function(){
+                id=$(this).val();
                 if (this.checked) {
-                    permisos += $(this).val()+';';
+                    permisos += id+",";                
+                    permisos+=document.getElementById('cbEscritura'+id).checked;                
+                    permisos+=";";
                 }
             }); 
-            alert(permisos);
-            $("#permisos").val(permisos);
+            //alert(permisos);
+            $("#permisos").val(permisos);            
             if (permisos!="") { 
                 if ($("#correo").val().toLowerCase().match($regex) && $("#usuario").val().toUpperCase().match($regexRFC)) {                            
                     $.ajax({
@@ -215,6 +219,17 @@ $(document).ready(function () {
         }
     });
 });
+
+function cambioPermiso(objeto){
+    var id=objeto.value;
+    id=id.replace("permiso","");
+    if(objeto.checked){
+        $("#escritura"+id).removeClass("hidden");
+    }else{
+        $("#escritura"+id).addClass("hidden");
+        $("#cbEscritura"+id).removeAttr("checked");
+    }
+}
 
 
 

@@ -390,10 +390,18 @@ function actualizarInstitucion() {
 }
 function cambioInstitucion() {
     id=$("#institucion").val(); 
+    
     $.get("ConsultaCatalogos", {k: "12",i:id}, function(){        
     }).done(function(respuesta){$("#cct").html(respuesta);});
     $.get("ConsultaCatalogos", {k: "2",i:id}, function(){        
     }).done(function(respuesta){$("#escuela").html(respuesta);});
+    if($("#institucion").val()=="-1"){
+        $("#institucionOtro").removeClass("hidden");  
+        $("#institucionOtro").attr("required",true); 
+    }else{
+        $("#institucionOtro").addClass("hidden"); 
+        $("#institucionOtro").removeAttr("required");
+    }
 }
 function cambioPlantel() {
     id=$("#plantel").val();
@@ -1248,5 +1256,12 @@ function cambioCCT(){
         $("#cctOtro").removeClass("hidden");    
     }else{
         $("#cctOtro").addClass("hidden"); 
+    }
+}
+function cambioEscuela(){
+    if($("#escuela").val()=="-1"){
+        $("#escuelaOtro").removeClass("hidden");    
+    }else{
+        $("#escuelaOtro").addClass("hidden"); 
     }
 }

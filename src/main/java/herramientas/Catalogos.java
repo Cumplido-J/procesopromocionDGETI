@@ -132,6 +132,7 @@ public class Catalogos {
             for(String[] dato:datos){
                 respuesta+="<option value='"+dato[0]+"'>"+dato[1]+"</option>";
             }
+            respuesta+="<option value='-1'>Otra</option>";
         }catch(Exception e){
             respuesta=e.toString();
         }finally{
@@ -152,7 +153,7 @@ public class Catalogos {
             for(String[] dato:datos){
                 respuesta+="<option  value='"+dato[0]+"'>"+dato[1]+"</option>";
             }
-            respuesta="<option value='-1'>Otro</option>";
+            respuesta+="<option value='-1'>Otro</option>";
         }catch(Exception e){
             respuesta=e.toString();
         }finally{
@@ -173,6 +174,7 @@ public class Catalogos {
             for(String[] dato:datos){
                 respuesta+="<option clave='"+dato[1]+"' value='"+dato[0]+"'>"+dato[2]+"</option>";
             }
+            respuesta+="<option clave='-1' value='-1'>Otra</option>";
         }catch(Exception e){
             respuesta=e.toString();
         }finally{
@@ -727,7 +729,7 @@ public class Catalogos {
         try{            
             List<String[]> datos=metodos.ejecutaSP("sp_selectCatPermisos");
             for(String[] dato:datos){
-                respuesta+="<tr><td><label><input type='checkbox' class='permiso' id='permiso"+dato[0]+"' value='"+dato[0]+"' title='"+dato[2]+"'>"+dato[1]+"</label></td><td><label><input type='checkbox' class='escritura' id='escritura"+dato[0]+"' value='"+dato[0]+"' title='Permitir al usuario modificar la información'>Permiso guardar</label></td></tr>";
+                respuesta+="<tr><td><label><input onChange='cambioPermiso(this)' type='checkbox' class='permiso' id='permiso"+dato[0]+"' value='"+dato[0]+"' title='"+dato[2]+"'>"+dato[1]+"</label></td><td><label class='hidden' id='escritura"+dato[0]+"'><input type='checkbox' id='cbEscritura"+dato[0]+"' class='escritura'  value='"+dato[0]+"' title='Permitir al usuario modificar la información'>Permiso guardar</label></td></tr>";
             }
             respuesta+="</table>";
         }catch(Exception e){
@@ -740,9 +742,15 @@ public class Catalogos {
         String respuesta="<table>";
         try{      
             String[] parametros={idUsuario};
+            String hidden="";
             List<String[]> datos=metodos.ejecutaSP("sp_consultaUsuarioPermiso",parametros);
             for(String[] dato:datos){
-                respuesta+="<tr><td><label><input type='checkbox' class='permiso' value='"+dato[0]+"' "+dato[2]+">"+dato[1]+"</label></td><td><label><input type='checkbox' class='escritura' value='"+dato[0]+"' "+dato[3]+">Permiso escritura</label></td></tr>";
+                if(dato[2].equals("checked")){
+                    hidden="";
+                }else{
+                    hidden="hidden";
+                }
+                respuesta+="<tr><td><label><input type='checkbox' onChange='cambioPermiso(this)' class='permiso' id='permiso"+dato[0]+"' value='"+dato[0]+"' "+dato[2]+">"+dato[1]+"</label></td><td><label id='escritura"+dato[0]+"' class='"+hidden+"'><input type='checkbox' id='cbEscritura"+dato[0]+"' class='escritura' value='"+dato[0]+"' "+dato[3]+">Permiso escritura</label></td></tr>";
             }
             respuesta+="</table>";
         }catch(Exception e){

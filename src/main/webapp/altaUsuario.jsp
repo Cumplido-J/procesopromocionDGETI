@@ -135,6 +135,7 @@
                     <label class="control-label">Permisos asignados:<span class="text-danger" title="Campo obligatorio">*</span></label><br/>  
                     ${catalogo.desplegarOpcionesPermisos()}    
                     <input type="hidden" id="permisos" name="permisos"/>
+                    <input type="hidden" id="permisosEscritura" name="permisosEscritura"/>
                 </div>
                 <div class="row" >
                     <div class="form-group col-xs-12 text-center" style="padding-top: 20px;">                         

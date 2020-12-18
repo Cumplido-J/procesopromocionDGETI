@@ -138,21 +138,23 @@
                               <select class="form-control input-sm" id="institucion" name="institucion" onchange="cambioInstitucion()" required>
                                 ${catalogo.desplegarOpcionesInstituciones(Docente.infoRegistro[55],Docente.infoRegistro[57],Docente.infoRegistro[56])}
                               </select>
+                              <input type="text" class="form-control input-sm hidden" id="institucionOtro" placeholder="Indique" name="institucionOtro" >
                             </div>
                             <div class="form-group col-md-3">
                               <label class="control-label" for="cct">CCT:</label>
                               <select class="form-control input-sm" id="cct" name="cct" onChange="cambioCCT()">
                                 ${catalogo.desplegarOpcionesCCT(Docente.infoRegistro[56],Docente.infoRegistro[53])}
                               </select>
-                              <input type="text" class="form-control input-sm" id="cctOtro" name="cctOtro" hidden>
+                              <input type="text" class="form-control input-sm hidden" id="cctOtro" placeholder="Indique" name="cctOtro">
                             </div>
                         </div>
                         <div class="row">
                             <div class="form-group col-md-3">
                               <label class="control-label" for="escuela">Escuela o Facultad:</label>
-                              <select class="form-control input-sm" id="escuela" name="escuela" required>
+                              <select class="form-control input-sm" id="escuela" name="escuela" onChange="cambioEscuela()" required>
                                 ${catalogo.desplegarOpcionesEscuelas(Docente.infoRegistro[56],Docente.infoRegistro[14])}
                               </select>
+                              <input type="text" class="form-control input-sm hidden" id="escuelaOtro" placeholder="Indique" name="escuelaOtro">
                             </div>
                             <div class="form-group col-md-3">
                               <label class="control-label" for="grado">Grado Académico:</label>
@@ -162,7 +164,7 @@
                             </div>
                             <div class="form-group col-md-3">
                               <label class="control-label" for="carrera">Carrera:</label>                              
-                              <input type="text" class="form-control input-sm" id="carrera" name="carrera" value="${Docente.infoRegistro[17]}" required onchange="cambioCarrera()">
+                              <input type="text" class="form-control input-sm" id="carrera" name="carrera" value="${Docente.infoRegistro[17]}" required >
                               <textarea id="catCarreras" hidden>${catalogo.consultarCarreras()}</textarea>
                             </div>
                             <div class="form-group col-md-3">

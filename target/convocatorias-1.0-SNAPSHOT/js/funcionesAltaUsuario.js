@@ -41,18 +41,9 @@ $(document).ready(function () {
               $("#plantel").removeClass("disabled");
         }
     });
-<<<<<<< HEAD
     $('#correo').on('keypress keydown keyup change',function(){
         if (!$("#correo").val().toLowerCase().match($regex)) {         
             $('#alertaCorreo').removeAttr('hidden'); 
-=======
-    $('#correo').keypress(function(){
-        if (!$(this).val().match($regex)) {         
-            $('#alertaCorreo').removeAttr('hidden');    
-            $("#cbAviso").attr("disabled",true);
-            $("#cbAviso").removeAttr("checked");
-            $("#btnEnviar").attr("disabled",true);
->>>>>>> bada2ac10430fce6deac75c18cb882a79616ed2b
             $('#correo').addClass('error'); 
         }
         else{
@@ -172,16 +163,20 @@ $(document).ready(function () {
                 required: "Campo requerido"
             }
         },
-        submitHandler:function(){
+        submitHandler:function(){            
             var aux=$("#btnEnviar").val();
             var permisos="";
+            var id=0;
             $('.permiso').each(function(){
+                id=$(this).val();
                 if (this.checked) {
-                    permisos += $(this).val()+';';
+                    permisos += id+",";                
+                    permisos+=document.getElementById('cbEscritura'+id).checked;                
+                    permisos+=";";
                 }
             }); 
-            alert(permisos);
-            $("#permisos").val(permisos);
+            //alert(permisos);
+            $("#permisos").val(permisos);            
             if (permisos!="") { 
                 if ($("#correo").val().toLowerCase().match($regex) && $("#usuario").val().toUpperCase().match($regexRFC)) {                            
                     $.ajax({
@@ -224,6 +219,17 @@ $(document).ready(function () {
         }
     });
 });
+
+function cambioPermiso(objeto){
+    var id=objeto.value;
+    id=id.replace("permiso","");
+    if(objeto.checked){
+        $("#escritura"+id).removeClass("hidden");
+    }else{
+        $("#escritura"+id).addClass("hidden");
+        $("#cbEscritura"+id).removeAttr("checked");
+    }
+}
 
 
 

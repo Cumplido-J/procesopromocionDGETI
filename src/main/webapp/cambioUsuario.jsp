@@ -157,6 +157,6 @@
         </div>
         <jsp:include page="seccionesPlantilla/scripts.jsp"/>
         <!--Agregar scripts aquí-->
-        <script src="js/funcionesAltaUsuario.js"></script>
+        <script src="js/funcionesAltaUsuario.js?v=1"></script>
     </body>
 </html>
