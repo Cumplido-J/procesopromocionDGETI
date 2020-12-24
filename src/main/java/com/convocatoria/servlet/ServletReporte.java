@@ -16,8 +16,8 @@ import javax.servlet.http.HttpServletResponse;
 import com.convocatoria.reportes.ReporteConvocatoria;
 
 /**
- *
- * @author ja1000
+ * 
+* @author ja1000
  */
 @WebServlet("/ServletReporte")
 public class ServletReporte extends HttpServlet {

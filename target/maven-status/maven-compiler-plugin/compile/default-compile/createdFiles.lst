@@ -95,6 +95,7 @@ com\aplicacion\servlet\Servlet_recuperarclave.class
 com\aplicacion\servlet\Servlet_registroInfoLaboral.class
 herramientas\UtileriasHelper.class
 com\aplicacion\servlet\Servlet_buscar_vacancia.class
+com\aplicacion\servlet\Servlet_registrarConvocatoriaBase.class
 com\aplicacion\servlet\Servlet_registrarTutoria.class
 com\aplicacion\servlet\Servlet_recuperarclave_vacancia.class
 com\convocatoria\domain\Convocatoria.class
@@ -118,6 +119,7 @@ constants\ConstantsWS.class
 com\aplicacion\servlet\Servlet_preregistro.class
 com\convocatoria\reportes\Reporteador.class
 com\convocatoria\servlet\ServletControlador.class
+com\aplicacion\servlet\Servlet_cbAltaConvocatoriaBase.class
 com\aplicacion\servlet\Servlet_registroIntegranteComite.class
 correos\Enviar_clave.class
 herramientas\Archivo.class
@@ -128,6 +130,7 @@ metodos_sql\Metodos_sql.class
 com\aplicacion\servlet\Servlet_registroBitacora.class
 herramientas\Pin.class
 herramientas\RutaConfig.class
+com\aplicacion\servlet\Servlet_buscar_convocatoriaBase.class
 seguridad\VerificarRecaptcha.class
 com\aplicacion\servlet\Servlet_regresar2.class
 com\convocatoria\servlet\ServletReporte.class
