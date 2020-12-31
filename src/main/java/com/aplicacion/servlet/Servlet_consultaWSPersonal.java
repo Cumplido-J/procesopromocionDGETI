@@ -99,7 +99,7 @@ public class Servlet_consultaWSPersonal extends HttpServlet {
             int periodos=personal.size();
             if(periodos>0){
                 String[] aux;
-                aux=personal.get(periodos-1).getNombre().split(" ");
+                /*aux=personal.get(periodos-1).getNombre().split(" ");
                 int a=aux.length;
                 if(a>=3){
                     primerApellido=aux[0].toUpperCase();
@@ -107,7 +107,8 @@ public class Servlet_consultaWSPersonal extends HttpServlet {
                     for(int c=2;c<a;c++){
                         nombre+=aux[c].toUpperCase()+" ";
                     }
-                }
+                }*/
+                nombre=personal.get(periodos-1).getNombre();
                 cct1=personal.get(periodos-1).getCct1();
                 cct2=personal.get(periodos-1).getCct2();
                 Metodos_sql metodo=new Metodos_sql();
@@ -123,7 +124,7 @@ public class Servlet_consultaWSPersonal extends HttpServlet {
                 }
             }
             
-            out.print(nombre+"|"+primerApellido+"|"+segundoApellido+"|"+idEstado+"|"+idPlantel);
+            out.print(nombre+"|"+idEstado+"|"+idPlantel);
         }catch(Exception e){
             out.println(e);
         } 

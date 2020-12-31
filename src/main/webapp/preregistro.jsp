@@ -69,7 +69,7 @@
                         </div>
                         <div class="form-group col-md-6">                               
                             <label class="control-label" for="programa">Subsistema:</label>
-                            <select class="form-control input-sm" id="subsistema" name="subsistema" onChange="$('#rfc').val('')" required>                                  
+                            <select class="form-control input-sm" id="subsistema" name="subsistema" onChange="cambioSubsistema(this)" required>                                  
                                 <option value=''>-Seleccione-</option>
                                 <option value='1'>DGETI</option>
                                 <option value='2'>CECyTE</option>
@@ -83,16 +83,16 @@
                             <label class="error" id="alertaRFC" hidden >Ingrese un RFC válido</label>
                         </div>
                         <div class="form-group col-md-4">                               
-                            <label class="control-label" for="nombre">Nombre(s):</label>
-                            <input required class="form-control input-sm text-uppercase" type="text" id="nombre" name="nombre" maxlength="50"/>
+                            <label class="control-label" for="nombre" id="lblNombre">Nombre(s):</label>
+                            <input required class="form-control input-sm text-uppercase" type="text" id="nombre" name="nombre" maxlength="200"/>
                         </div>
-                        <div class="form-group col-md-4">                               
+                        <div class="form-group col-md-4" id="seccionPaterno">                               
                             <label class="control-label" for="apellido1">Primer apellido:</label>
                             <input required class="form-control input-sm text-uppercase" type="text" id="apellido1" name="apellido1" maxlength="50"/>
                         </div>
                     </div>
                     <div class="row">
-                        <div class="form-group col-md-4">                               
+                        <div class="form-group col-md-4" id="seccionMaterno">                               
                             <label class="control-label" for="apellido2">Segundo apellido:</label>
                             <input required class="form-control input-sm text-uppercase" type="text" id="apellido2" name="apellido2" maxlength="50"/>
                         </div>

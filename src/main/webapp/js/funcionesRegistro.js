@@ -57,6 +57,15 @@ $(document).ready(function () {
             },
             'cedula':{
                 required: "Campo requerido"
+            },
+            'institucionOtro':{
+                required: "Campo requerido"
+            },
+            'cctOtro':{
+                required: "Campo requerido"
+            },
+            'escuelaOtro':{
+                required: "Campo requerido"
             }
         },
         submitHandler:function(){
@@ -1254,14 +1263,18 @@ function cambioObservaciones(objeto){
 function cambioCCT(){
     if($("#cct").val()=="-1"){
         $("#cctOtro").removeClass("hidden");    
+        $("#cctOtro").attr("required",true);
     }else{
         $("#cctOtro").addClass("hidden"); 
+        $("#cctOtro").removeAttr("required");
     }
 }
 function cambioEscuela(){
     if($("#escuela").val()=="-1"){
-        $("#escuelaOtro").removeClass("hidden");    
+        $("#escuelaOtro").removeClass("hidden");  
+        $("#escuelaOtro").attr("required",true);  
     }else{
         $("#escuelaOtro").addClass("hidden"); 
+        $("#escuelaOtro").removeAttr("required"); 
     }
 }

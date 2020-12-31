@@ -98,9 +98,9 @@ public class Servlet_registroInfoAcademica extends HttpServlet {
             vistaAdmin=true;                       
         }
         if(!id.equals("")&&!rfc.equals("")){
-            /*String idEntidad=request.getParameter("entidad");
+            String idEntidad=request.getParameter("entidad");
             String idTipoInstitucion=request.getParameter("tipoInstitucion");
-            String idInstitucion=request.getParameter("institucion");*/
+            String idInstitucion=request.getParameter("institucion");
             String idCCT=request.getParameter("cct");
             String idEscuela=request.getParameter("escuela");
             String idGrado=request.getParameter("grado");
@@ -109,12 +109,17 @@ public class Servlet_registroInfoAcademica extends HttpServlet {
             String idModalidadTitulacion=request.getParameter("modalidad");
             String anioTitulacion=request.getParameter("titulacion");
             //String idComprobante=request.getParameter("documento");
-            String cedula=request.getParameter("cedula");  
+            String cedula=request.getParameter("cedula"); 
+            
+            String institucionOtro=request.getParameter("institucionOtro"); 
+            String cctOtro=request.getParameter("cctOtro"); 
+            String escuelaOtro=request.getParameter("escuelaOtro"); 
 
+            
 
             Metodos_sql metodo = new Metodos_sql();
             //in _idUsuario int,in _idEscuelaEstudio int, in _carrera varchar(300),in _anioEgreso int,in _idGradoAcademico int, in _idModalidadTitulacion int,in _anioTitulacion int,in _cedula varchar(20),idcct
-            String[] parametros={id,idEscuela,carrera,anioEgreso,idGrado,idModalidadTitulacion,anioTitulacion,cedula,idCCT};
+            String[] parametros={id,idEscuela,carrera,anioEgreso,idGrado,idModalidadTitulacion,anioTitulacion,cedula,idCCT,idEntidad,idTipoInstitucion,idInstitucion,institucionOtro,cctOtro,escuelaOtro};
             List<String[]> datos;                           
             datos=metodo.ejecutaSP("sp_registroInfoAcademica",parametros);            
             if(!datos.isEmpty()){

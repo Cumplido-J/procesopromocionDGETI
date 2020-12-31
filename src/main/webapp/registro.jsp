@@ -114,7 +114,7 @@
                   <div class="panel-collapse collapse ${in}" id="infoAcademica">
                     <div class="panel-body">
                       <form id="formInfoAcademica" role="form" action="RegistroInfoAcademica" method="POST">
-                        <div class="row">
+                        <div class="row hidden">
                             <div class="col-xs-12">
                             <label class="text-warning"><span class="glyphicon glyphicon-warning-sign"></span>&nbsp;Si la información de Institucion, Escuela o Facultad y/o Carrera no está disponible para seleccionar, comuníquese con Mesa de Ayuda.</label>
                             </div>
@@ -138,14 +138,30 @@
                               <select class="form-control input-sm" id="institucion" name="institucion" onchange="cambioInstitucion()" required>
                                 ${catalogo.desplegarOpcionesInstituciones(Docente.infoRegistro[55],Docente.infoRegistro[57],Docente.infoRegistro[56])}
                               </select>
-                              <input type="text" class="form-control input-sm hidden" id="institucionOtro" placeholder="Indique" name="institucionOtro" >
+                              <c:if test = "${Docente.infoRegistro[56]=='-1'}">
+                                    <c:set var="hidden" value=""></c:set>
+                                    <c:set var="required" value="required"></c:set>
+                              </c:if>
+                              <c:if test = "${Docente.infoRegistro[56]!='-1'}">
+                                    <c:set var="hidden" value="hidden"></c:set>
+                                    <c:set var="required" value=""></c:set>
+                              </c:if>
+                              <input type="text" class="form-control input-sm ${hidden}" id="institucionOtro" placeholder="Indique" name="institucionOtro" value="${Docente.infoRegistro[70]}" ${required}>
                             </div>
                             <div class="form-group col-md-3">
                               <label class="control-label" for="cct">CCT:</label>
-                              <select class="form-control input-sm" id="cct" name="cct" onChange="cambioCCT()">
+                              <select class="form-control input-sm" id="cct" name="cct" onChange="cambioCCT()" required>
                                 ${catalogo.desplegarOpcionesCCT(Docente.infoRegistro[56],Docente.infoRegistro[53])}
                               </select>
-                              <input type="text" class="form-control input-sm hidden" id="cctOtro" placeholder="Indique" name="cctOtro">
+                              <c:if test = "${Docente.infoRegistro[53]=='-1'}">
+                                    <c:set var="hidden" value=""></c:set>
+                                    <c:set var="required" value="required"></c:set>
+                              </c:if>
+                              <c:if test = "${Docente.infoRegistro[53]!='-1'}">
+                                    <c:set var="hidden" value="hidden"></c:set>
+                                    <c:set var="required" value=""></c:set>
+                              </c:if>
+                              <input type="text" class="form-control input-sm ${hidden}" id="cctOtro" placeholder="Indique" name="cctOtro" value="${Docente.infoRegistro[71]}" ${required}>
                             </div>
                         </div>
                         <div class="row">
@@ -154,7 +170,15 @@
                               <select class="form-control input-sm" id="escuela" name="escuela" onChange="cambioEscuela()" required>
                                 ${catalogo.desplegarOpcionesEscuelas(Docente.infoRegistro[56],Docente.infoRegistro[14])}
                               </select>
-                              <input type="text" class="form-control input-sm hidden" id="escuelaOtro" placeholder="Indique" name="escuelaOtro">
+                              <c:if test = "${Docente.infoRegistro[14]=='-1'}">
+                                    <c:set var="hidden" value=""></c:set>
+                                    <c:set var="required" value="required"></c:set>
+                              </c:if>
+                              <c:if test = "${Docente.infoRegistro[14]!='-1'}">
+                                    <c:set var="hidden" value="hidden"></c:set>
+                                    <c:set var="required" value=""></c:set>
+                              </c:if>
+                              <input type="text" class="form-control input-sm ${hidden}" id="escuelaOtro" placeholder="Indique" name="escuelaOtro" value="${Docente.infoRegistro[72]}" ${required}>
                             </div>
                             <div class="form-group col-md-3">
                               <label class="control-label" for="grado">Grado Académico:</label>
@@ -163,8 +187,14 @@
                               </select>
                             </div>
                             <div class="form-group col-md-3">
-                              <label class="control-label" for="carrera">Carrera:</label>                              
-                              <input type="text" class="form-control input-sm" id="carrera" name="carrera" value="${Docente.infoRegistro[17]}" required >
+                              <label class="control-label" for="carrera">Carrera:</label>  
+                              <c:if test = "${Docente.infoRegistro[16]=='-1'}">
+                                    <c:set var="carrera" value="${Docente.infoRegistro[73]}"></c:set>
+                              </c:if>
+                              <c:if test = "${Docente.infoRegistro[16]!='-1'}">
+                                    <c:set var="carrera" value="${Docente.infoRegistro[17]}"></c:set>
+                              </c:if>
+                              <input type="text" class="form-control input-sm" id="carrera" name="carrera" value="${carrera}" required >
                               <textarea id="catCarreras" hidden>${catalogo.consultarCarreras()}</textarea>
                             </div>
                             <div class="form-group col-md-3">
@@ -346,10 +376,13 @@
                                     </table>
                                 </div>                              
                             </div>
-                            <div class="row"> 
-                                <div class="form-group col-md-3 datepicker-group">
-                                  <label class="control-label" for="fechaPromocion">Fecha de su última promoción:</label>
-                                  <input class="form-control input-sm" id="fechaPromocion" name="fechaPromocion" type="text" value="${fecha.formatoImprimir(Docente.infoRegistro[39])}" required>
+                            <div class="row">                                 
+                                <div class="form-group col-md-3 datepicker-group ">
+                                  <label><input type="checkbox" id="cbUP" name="cbUP" data-toggle="collapse" data-target="#seccionFUP" checked>He tenido promociones previas</label>
+                                  <div id="seccionFUP" class="collapse in">
+                                    <label class="control-label" for="fechaPromocion">Fecha de su última promoción:</label>
+                                    <input class="form-control input-sm" id="fechaPromocion" name="fechaPromocion" type="text" value="${fecha.formatoImprimir(Docente.infoRegistro[39])}" required>
+                                  </div>
                                 </div>
                                 <div class="form-group col-md-3">                                    
                                     <label class="control-label" for="btnEvidencia2">Constancia de antiguedad:</label>
@@ -740,6 +773,7 @@
                     <form id="formArchivo" name="formArchivo" method="POST" enctype="multipart/form-data" >
                         <div class="form-group">
                             <label class="control-label" for="archivo">Seleccione el archivo a cargar:</label>
+                            <label class="text-warning" id="alertaCarga"><span class="glyphicon glyphicon-warning-sign"></span>&nbsp;Al seleccionar un nuevo archivo, este se actualizará</label>
                             <input type="hidden" id="idArchivo" name="idArchivo" value="" />
                             <input type="file" class="form-control input-sm" id="archivo" name="archivo" onchange="subirArchivo()" accept=".pdf" />
                         </div>

@@ -20,48 +20,7 @@ $(document).ready(function () {
            $('#correo').removeClass('error'); 
         }
     });
-    $('#correo').keydown(function(){
-        if (!$(this).val().match($regex)) {         
-            $('#alertaCorreo').removeAttr('hidden');    
-            $("#cbAviso").attr("disabled",true);
-            $("#cbAviso").removeAttr("checked");
-            $("#btnEnviar").attr("disabled",true);
-            $('#correo').addClass('error'); 
-        }
-        else{
-           $('#alertaCorreo').attr('hidden',true);
-           $("#cbAviso").removeAttr("disabled");
-           $('#correo').removeClass('error'); 
-        }
-    });
-    $('#correo').keyup(function(){
-        if (!$(this).val().match($regex)) {         
-            $('#alertaCorreo').removeAttr('hidden');    
-            $("#cbAviso").attr("disabled",true);
-            $("#cbAviso").removeAttr("checked");
-            $("#btnEnviar").attr("disabled",true);
-            $('#correo').addClass('error'); 
-        }
-        else{
-           $('#alertaCorreo').attr('hidden',true);
-           $("#cbAviso").removeAttr("disabled");
-           $('#correo').removeClass('error'); 
-        }
-    });
-    $('#correo').change(function(){
-        if (!$(this).val().match($regex)) {         
-            $('#alertaCorreo').removeAttr('hidden');    
-            $("#cbAviso").attr("disabled",true);
-            $("#cbAviso").removeAttr("checked");
-            $("#btnEnviar").attr("disabled",true);
-            $('#correo').addClass('error'); 
-        }
-        else{
-           $('#alertaCorreo').attr('hidden',true);
-           $("#cbAviso").removeAttr("disabled");
-           $('#correo').removeClass('error'); 
-        }
-    });
+    
     
     $('#formPreregistro').submit(function(e) {
         e.preventDefault();
@@ -187,33 +146,19 @@ function consultaWS(){
              if($('#subsistema').val()=='1' && consultarWS){
                 $.post("ConsultaWSPersonal", {rfc: rfc}, function(respuesta){
                    var aux=respuesta.split("|");
-                   if(aux.length==5){
+                   if(aux.length==3){
                        if(aux[0]!=""){
                            $("#nombre").val(aux[0]);
                            $("#nombre").attr("readOnly","readOnly");
                        }else{
                           $("#nombre").val("");
                           $("#nombre").removeAttr("readOnly"); 
-                       }
+                       }                       
                        if(aux[1]!=""){
-                           $("#apellido1").val(aux[1]);
-                           $("#apellido1").attr("readOnly","readOnly");
-                       }else{
-                           $("#apellido1").val("");
-                           $("#apellido1").removeAttr("readOnly");
-                       }
-                       if(aux[2]!=""){
-                           $("#apellido2").val(aux[2]);
-                           $("#apellido2").attr("readOnly","readOnly");
-                       }else{
-                           $("#apellido2").val("");
-                           $("#apellido2").removeAttr("readOnly");
-                       }
-                       if(aux[3]!=""){
-                           $("#entidad").val(aux[3]);
+                           $("#entidad").val(aux[1]);
                            $("#entidad").attr("style", "pointer-events: none;");
                            $("#entidad").attr("readOnly","readOnly");
-                           actualizarPlanteles(aux[4]);
+                           actualizarPlanteles(aux[2]);
                            $("#plantel").attr("style", "pointer-events: none;");
                            $("#plantel").attr("readOnly","readOnly");
                        }else{
@@ -265,5 +210,19 @@ function cambioAviso(){
         $("#btnEnviar").removeAttr("disabled");        
     }else{
         $("#btnEnviar").attr("disabled","true");
+    }
+}
+function cambioSubsistema(objeto){
+    $('#rfc').val('');
+    if(objeto.value=="1"){
+        $("#lblNombre").html("Nombre completo:");
+        $("#seccionPaterno").addClass("hidden");
+        $("#seccionMaterno").addClass("hidden");
+        $("#apellido1").removeAttr("required");
+    }else{
+        $("#lblNombre").html("Nombre(s):");
+        $("#seccionPaterno").removeClass("hidden");
+        $("#seccionMaterno").removeClass("hidden");
+        $("#apellido1").attr("required",true);
     }
 }
