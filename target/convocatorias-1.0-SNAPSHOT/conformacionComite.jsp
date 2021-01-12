@@ -95,14 +95,16 @@
                 <div class="form-group col-md-4">                               
                     <label class="control-label">Rol al que se le asignará usuario:</label>
                     <select class="form-control input-sm" id="rolUsuario">                                  
-                        ${catalogo.desplegarOpcionesRolComite()}
+                        ${catalogo.desplegarOpcionesRolComite(datos[7])}
                     </select>
                     
                 </div>
+                <c:if test = "${datos[6]=='F'}">
                 <div class="col-md-4 text-center">
                     <br/>
                     <input type="button" class="btn btn-sm btn-primary" value='Finalizar registro de comité' onclick="finalizaRegistro()"/>                          
                 </div>
+                </c:if>
             </div>
             <div class="modal fade" id="modalMensaje" role="dialog">
                 <div class="modal-dialog">

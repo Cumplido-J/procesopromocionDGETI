@@ -369,7 +369,7 @@
                                 </div>
                                 <div class='table-responsive'>
                                     <table class='table table-bordered table-condensed'>
-                                        <tr><th>Clave presupuestal</th><th>Fecha desde que ostenta la plaza</th><th>Tipo de nombramiento</th><th>Categoria</th><th>Jornada</th><th>Borrar</th></tr>
+                                        <tr><th>Plaza con la que participa</th><th>Clave presupuestal</th><th>Fecha desde que ostenta la plaza</th><th>Tipo de nombramiento</th><th>Categoria</th><th>Jornada</th><th>Borrar</th></tr>
                                         <tbody id="tablaPlazas">
                                             ${dato.desplegarPlazas(Docente.infoRegistro[0])}
                                         </tbody>
@@ -378,8 +378,8 @@
                             </div>
                             <div class="row">                                 
                                 <div class="form-group col-md-3 datepicker-group ">
-                                  <label><input type="checkbox" id="cbUP" name="cbUP" data-toggle="collapse" data-target="#seccionFUP" checked>He tenido promociones previas</label>
-                                  <div id="seccionFUP" class="collapse in">
+                                  <label><input type="checkbox" id="cbUP" name="cbUP" data-toggle="collapse" data-target="#seccionFUP" checked>No he tenido promociones previas</label>
+                                  <div id="seccionFUP" class="collapse">
                                     <label class="control-label" for="fechaPromocion">Fecha de su última promoción:</label>
                                     <input class="form-control input-sm" id="fechaPromocion" name="fechaPromocion" type="text" value="${fecha.formatoImprimir(Docente.infoRegistro[39])}" required>
                                   </div>

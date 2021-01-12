@@ -704,6 +704,12 @@ public class Catalogos {
             return respuesta;        
         }
     }
+    public String desplegarOpcionesRolComite(String id){        
+        String respuesta= desplegarOpcionesRolComite();
+        String aux="value='"+id+"'";
+        respuesta=respuesta.replaceFirst(aux, aux+" selected");
+        return respuesta;
+    }
     
     public String desplegarOpcionesSubsistema(){        
         String respuesta="<option value=''>-Seleccione-</option>";

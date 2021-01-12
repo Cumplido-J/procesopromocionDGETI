@@ -139,7 +139,7 @@ public class Datos {
                 respuesta="";
                 for(String[] dato:datos)
                 {
-                    respuesta+="<tr><td>"+dato[11]+"</td><td>"+new Fecha().formatoImprimir(dato[7])+"</td><td>"+dato[9]+":"+dato[10]+"</td><td class='hidden'>"+dato[2]+"</td><td>"+dato[3]+"</td><td class='hidden'>"+dato[4]+"</td><td>"+dato[5];
+                    respuesta+="<tr><td><center><input type='checkbox' value='"+dato[0]+"'/></center><td>"+dato[11]+"</td><td>"+new Fecha().formatoImprimir(dato[7])+"</td><td>"+dato[9]+":"+dato[10]+"</td><td class='hidden'>"+dato[2]+"</td><td>"+dato[3]+"</td><td class='hidden'>"+dato[4]+"</td><td>"+dato[5];
                     if(dato[4].equals("1")){
                         respuesta+="("+dato[6]+")";
                     }                    

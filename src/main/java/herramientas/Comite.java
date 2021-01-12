@@ -34,7 +34,7 @@ public class Comite {
         }
     }
     public  String[] consultaComite(String id){        
-        String[] respuesta={"","","","","",""};        
+        String[] respuesta={"","","","","","","",""};        
         try{
             String[] parametros={id};
             List<String[]> datos=metodos.ejecutaSP("sp_consultaComitePorId",parametros);
@@ -45,6 +45,8 @@ public class Comite {
                 respuesta[3]=datos.get(0)[1];
                 respuesta[4]=datos.get(0)[3];
                 respuesta[5]=datos.get(0)[5];
+                respuesta[6]=datos.get(0)[6];
+                respuesta[7]=datos.get(0)[7];
             }
         }catch(Exception e){
             System.out.println(e.toString());
@@ -67,6 +69,9 @@ public class Comite {
                     respuesta+="<tr id='comite"+dato[0]+"'><td>"+dato[8]+"</td><td>"+dato[4]+"</td><td>"+dato[2]+"</td><td>"+dato[6]+"</td><td>"+dato[9]+"</td><td>"+dato[11]+"</td><td>"+dato[10]+"</td><td>";
                     if(dato[12].equals("F")){
                         respuesta+="<form method='POST' action='RegistroComite'><input type='hidden' name='idComite' value='"+dato[0]+"'><input class='btn btn-sm btn-link' id='btnEditar' type='submit' value='Editar'/><input class='btn btn-sm btn-link' id='btnBorrar' type='button' value='Borrar' onClick='confirmacion("+dato[0]+")'/></form>";                   
+                    }
+                    if(dato[12].equals("V")){
+                        respuesta+="<form method='POST' action='RegistroComite'><input type='hidden' name='idComite' value='"+dato[0]+"'><input class='btn btn-sm btn-link' id='btnVisualizar' type='submit' value='Ver integrantes'/></form>";                   
                     }
                     respuesta+="</td></tr>";
                 }

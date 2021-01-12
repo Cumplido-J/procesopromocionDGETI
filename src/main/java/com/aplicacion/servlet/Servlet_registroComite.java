@@ -81,7 +81,7 @@ public class Servlet_registroComite extends HttpServlet {
             PrintWriter out = response.getWriter();
             HttpSession session= (HttpSession) request.getSession();     
             /*if(session.getAttribute("idUsuario")!=null&&session.getAttribute("rfc")!=null){*/
-                String[] datos=new String[6];
+                String[] datos=new String[8];
                 Comite c=new Comite();
                 if(request.getParameter("idComite")!=null){
                     String id=request.getParameter("idComite"); 
@@ -95,7 +95,8 @@ public class Servlet_registroComite extends HttpServlet {
                     datos[3]=request.getParameter("idEntidad");
                     datos[4]=request.getParameter("idPlantel");
                     datos[5]=request.getParameter("idTipo");
-                    
+                    datos[6]="F";
+                    datos[7]="";
                 }
                 session.setAttribute("idComite", datos[0]);
                 session.setAttribute("idDocente", "comite"+datos[0]);
