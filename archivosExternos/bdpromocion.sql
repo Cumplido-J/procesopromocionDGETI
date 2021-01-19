@@ -92,26 +92,24 @@ CREATE TABLE `aspirantes` (
   `idJornadaAspira` int DEFAULT NULL,
   `observacionEncuestados` varchar(200) DEFAULT NULL,
   `observacionCriterios` varchar(200) DEFAULT NULL,
+  `idEntidadEstudio` int NOT NULL,
+  `idTipoInstitucion` int NOT NULL,
+  `idInstitucion` int NOT NULL,
+  `folio` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `fkUsuario2_idx` (`idUsuario`),
-  KEY `fkEscuelaEstudio_idx` (`idEscuelaEstudio`),
-  KEY `fkCarrera_idx` (`idCarrera`),
   KEY `fkGrado2_idx` (`idGradoAcademico`),
   KEY `fkModalidad_idx` (`idModalidadTitulacion`),
   KEY `fkTipoNombramiento_idx` (`idTipoNombramiento`),
   KEY `fkPerfil_idx` (`idPerfilRequerido`),
-  KEY `fkCCT_idx` (`idCCT`),
   KEY `fkAspiranteEstatus_idx` (`idEstatus`),
   CONSTRAINT `fkAspiranteEstatus` FOREIGN KEY (`idEstatus`) REFERENCES `catestatus` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
-  CONSTRAINT `fkCarrera` FOREIGN KEY (`idCarrera`) REFERENCES `catcarreras` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
-  CONSTRAINT `fkCCT` FOREIGN KEY (`idCCT`) REFERENCES `catinstitucioncct` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
-  CONSTRAINT `fkEscuelaEstudio` FOREIGN KEY (`idEscuelaEstudio`) REFERENCES `catescuelas` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `fkGrado2` FOREIGN KEY (`idGradoAcademico`) REFERENCES `catgradosacademicos` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `fkModalidad` FOREIGN KEY (`idModalidadTitulacion`) REFERENCES `catmodalidadestitulacion` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `fkPerfil` FOREIGN KEY (`idPerfilRequerido`) REFERENCES `catrequisitosplaza` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `fkTipoNombramiento` FOREIGN KEY (`idTipoNombramiento`) REFERENCES `cattiposnombramiento` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `fkUsuario2` FOREIGN KEY (`idUsuario`) REFERENCES `usuario` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE=InnoDB AUTO_INCREMENT=41 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=42 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -120,8 +118,38 @@ CREATE TABLE `aspirantes` (
 
 LOCK TABLES `aspirantes` WRITE;
 /*!40000 ALTER TABLE `aspirantes` DISABLE KEYS */;
-INSERT INTO `aspirantes` VALUES (36,29,3534,44,2000,12,1,2001,'1111111','S','2019-09-01','2020-01-01',26,'2020-10-01',1,'S','2020-01-01',35,6,'N','N','N',0,NULL,NULL,995,'2020-10-29 21:29:03','N',8,'Ninguna',170.50000,NULL,NULL,NULL,NULL),(37,44,5801,14,2020,12,1,2020,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,NULL,NULL,NULL,NULL,NULL,NULL),(38,45,5801,3,2000,11,1,2001,NULL,'S','2020-10-01','2020-10-01',30,'2020-10-01',1,'S','2020-10-01',33,6,'N','N','N',0,NULL,NULL,NULL,'2020-10-22 11:52:37','S',2,NULL,180.00000,NULL,NULL,NULL,NULL),(39,57,1423,526,2000,12,1,2001,NULL,'S','2020-11-01','2020-11-01',NULL,NULL,NULL,'S','2020-11-01',6,7,'N','N','N',0,NULL,NULL,NULL,'2020-11-17 11:51:37','S',10,'InformaciÃ³n correcta',230.00000,NULL,3,'sasasasas','Criterios correctos');
+INSERT INTO `aspirantes` VALUES (36,29,3534,44,2000,12,1,2001,'1111111','S','2019-09-01','2020-01-01',26,'2020-10-01',1,'S','2020-01-01',35,6,'N','N','N',0,NULL,NULL,995,'2020-10-29 21:29:03','N',8,'Ninguna',150.00000,NULL,NULL,NULL,NULL,0,0,0,'12PCC001000292021'),(37,44,5801,14,2020,12,1,2020,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,8,NULL,170.00000,NULL,NULL,NULL,NULL,0,0,0,'20PCC001000442021'),(38,45,5801,3,2000,11,1,2001,NULL,'S','2020-10-01','2020-10-01',30,'2020-10-01',1,'S','2020-10-01',33,6,'N','N','N',0,NULL,NULL,NULL,'2020-10-22 11:52:37','S',8,NULL,200.00000,NULL,NULL,NULL,NULL,0,0,0,'20PCC001000452021'),(39,57,1423,526,2000,12,1,2001,NULL,'S','2020-11-01','2020-11-01',NULL,NULL,NULL,'S','2020-11-01',6,7,'N','N','N',0,NULL,NULL,NULL,'2020-11-17 11:51:37','S',8,'InformaciÃ³n correcta',175.50000,NULL,3,'sasasasas','Criterios correctos',0,0,0,'17PCC001000572021'),(41,65,-1,-1,2020,12,1,2018,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,-1,NULL,NULL,8,NULL,150.50000,NULL,NULL,NULL,NULL,1,6,-1,'12PCC001000652021');
 /*!40000 ALTER TABLE `aspirantes` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `auxinfoacademica`
+--
+
+DROP TABLE IF EXISTS `auxinfoacademica`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `auxinfoacademica` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `idUsuario` int NOT NULL,
+  `institucion` varchar(50) DEFAULT NULL,
+  `cct` varchar(50) DEFAULT NULL,
+  `escuela` varchar(50) DEFAULT NULL,
+  `carrera` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fkUsuarioAuxiliarIA_idx` (`idUsuario`),
+  CONSTRAINT `fkUsuarioAuxiliarIA` FOREIGN KEY (`idUsuario`) REFERENCES `usuario` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `auxinfoacademica`
+--
+
+LOCK TABLES `auxinfoacademica` WRITE;
+/*!40000 ALTER TABLE `auxinfoacademica` DISABLE KEYS */;
+INSERT INTO `auxinfoacademica` VALUES (3,65,'IPN','1111111111','UPIICSA','sistemas comp');
+/*!40000 ALTER TABLE `auxinfoacademica` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -168,7 +196,7 @@ CREATE TABLE `bitacoralogin` (
   PRIMARY KEY (`id`),
   KEY `fk_idUsuarioBitacoraLogin_idx` (`idUsuario`),
   CONSTRAINT `fk_idUsuarioBitacoraLogin_idx` FOREIGN KEY (`idUsuario`) REFERENCES `usuario` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=51 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -177,7 +205,7 @@ CREATE TABLE `bitacoralogin` (
 
 LOCK TABLES `bitacoralogin` WRITE;
 /*!40000 ALTER TABLE `bitacoralogin` DISABLE KEYS */;
-INSERT INTO `bitacoralogin` VALUES (1,1,'192.168.56.1','2020-11-17 09:46:12'),(2,1,'192.168.56.1','2020-11-17 10:17:59'),(3,1,'192.168.56.1','2020-11-17 11:11:35'),(4,1,'192.168.56.1','2020-11-17 17:08:04'),(5,1,'192.168.56.1','2020-11-24 12:44:20'),(6,1,'192.168.56.1','2020-11-24 12:50:14'),(7,55,'10.212.134.60','2020-11-24 14:30:56'),(8,1,'10.212.134.60','2020-11-24 14:31:35'),(9,54,'10.212.134.60','2020-11-24 14:32:02'),(10,1,'192.168.56.1','2020-11-24 16:36:27'),(11,1,'10.212.134.60','2020-12-02 17:09:40'),(12,1,'10.212.134.60','2020-12-02 17:23:32'),(13,1,'10.212.134.60','2020-12-02 20:43:45'),(14,1,'10.212.134.60','2020-12-02 20:52:25'),(15,1,'192.168.56.1','2020-12-03 14:48:15'),(16,1,'10.212.134.60','2020-12-03 15:50:02'),(17,1,'192.168.56.1','2020-12-04 12:42:12'),(18,44,'192.168.56.1','2020-12-04 12:44:07'),(19,29,'192.168.56.1','2020-12-04 12:44:58'),(20,29,'192.168.56.1','2020-12-04 12:59:06'),(21,1,'192.168.56.1','2020-12-04 13:00:18'),(22,1,'192.168.56.1','2020-12-04 13:07:10'),(23,1,'192.168.56.1','2020-12-09 12:44:34'),(24,1,'192.168.56.1','2020-12-09 12:48:32'),(25,1,'192.168.56.1','2020-12-09 13:41:36'),(26,1,'192.168.56.1','2020-12-09 14:29:33');
+INSERT INTO `bitacoralogin` VALUES (1,1,'192.168.56.1','2020-11-17 09:46:12'),(2,1,'192.168.56.1','2020-11-17 10:17:59'),(3,1,'192.168.56.1','2020-11-17 11:11:35'),(4,1,'192.168.56.1','2020-11-17 17:08:04'),(5,1,'192.168.56.1','2020-11-24 12:44:20'),(6,1,'192.168.56.1','2020-11-24 12:50:14'),(7,55,'10.212.134.60','2020-11-24 14:30:56'),(8,1,'10.212.134.60','2020-11-24 14:31:35'),(9,54,'10.212.134.60','2020-11-24 14:32:02'),(10,1,'192.168.56.1','2020-11-24 16:36:27'),(11,1,'10.212.134.60','2020-12-02 17:09:40'),(12,1,'10.212.134.60','2020-12-02 17:23:32'),(13,1,'10.212.134.60','2020-12-02 20:43:45'),(14,1,'10.212.134.60','2020-12-02 20:52:25'),(15,1,'192.168.56.1','2020-12-03 14:48:15'),(16,1,'10.212.134.60','2020-12-03 15:50:02'),(17,1,'192.168.56.1','2020-12-04 12:42:12'),(18,44,'192.168.56.1','2020-12-04 12:44:07'),(19,29,'192.168.56.1','2020-12-04 12:44:58'),(20,29,'192.168.56.1','2020-12-04 12:59:06'),(21,1,'192.168.56.1','2020-12-04 13:00:18'),(22,1,'192.168.56.1','2020-12-04 13:07:10'),(23,1,'192.168.56.1','2020-12-09 12:44:34'),(24,1,'192.168.56.1','2020-12-09 12:48:32'),(25,1,'192.168.56.1','2020-12-09 13:41:36'),(26,1,'192.168.56.1','2020-12-09 14:29:33'),(27,1,'127.0.0.1','2020-12-18 11:10:59'),(28,1,'127.0.0.1','2020-12-18 12:16:16'),(29,1,'127.0.0.1','2020-12-18 12:31:51'),(30,1,'127.0.0.1','2020-12-18 12:44:02'),(31,44,'127.0.0.1','2020-12-18 12:45:28'),(32,65,'127.0.0.1','2020-12-30 14:40:11'),(33,65,'127.0.0.1','2020-12-30 18:26:43'),(34,1,'127.0.0.1','2021-01-11 15:21:50'),(35,1,'127.0.0.1','2021-01-11 15:22:39'),(36,1,'127.0.0.1','2021-01-11 15:30:30'),(37,65,'127.0.0.1','2021-01-11 17:57:01'),(38,1,'127.0.0.1','2021-01-11 18:35:53'),(39,1,'127.0.0.1','2021-01-11 18:41:15'),(40,53,'127.0.0.1','2021-01-11 18:41:44'),(41,65,'127.0.0.1','2021-01-11 18:43:30'),(42,1,'127.0.0.1','2021-01-11 18:44:04'),(43,65,'127.0.0.1','2021-01-11 18:50:10'),(44,1,'127.0.0.1','2021-01-11 18:53:24'),(45,65,'127.0.0.1','2021-01-12 18:40:40'),(46,1,'127.0.0.1','2021-01-12 18:49:53'),(47,53,'127.0.0.1','2021-01-12 18:55:48'),(48,1,'127.0.0.1','2021-01-12 18:58:37'),(49,1,'127.0.0.1','2021-01-18 18:50:54'),(50,1,'127.0.0.1','2021-01-18 19:17:49');
 /*!40000 ALTER TABLE `bitacoralogin` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -784,7 +812,7 @@ CREATE TABLE `catpermisos` (
 
 LOCK TABLES `catpermisos` WRITE;
 /*!40000 ALTER TABLE `catpermisos` DISABLE KEYS */;
-INSERT INTO `catpermisos` VALUES (1,'Administradores','busquedaUsuarios.jsp','Permite al usuario registrar nuevos usuarios administradores'),(2,'Convocatoria','busquedaConvocatoria.jsp','Permite al usuario registrar convocatorias'),(3,'Vacancia','busquedaVacancia.jsp','Permite al usuario registrar la vacancia de una convocatoria determinada'),(4,'Comite','busquedaComite.jsp','Permiite al usuario registrar la información de comités revisores y/o consejos dictaminadores'),(5,'Comité revisor','busquedaDocente.jsp','Permite al usuario acceder a la información de los aspirantes (como comité revisor)'),(6,'Consejo dictaminador','busquedaDocente.jsp','Permite al usuario acceder a la información de los aspirantes (como consejo dictaminador)');
+INSERT INTO `catpermisos` VALUES (1,'Administradores','busquedaUsuarios.jsp','Permite al usuario registrar nuevos usuarios administradores'),(2,'Convocatoria','busquedaConvocatoria.jsp','Permite al usuario registrar convocatorias'),(3,'Vacancia','busquedaVacancia.jsp','Permite al usuario registrar la vacancia de una convocatoria determinada'),(4,'Comite','busquedaComite.jsp','Permiite al usuario registrar la información de comités revisores y/o consejos dictaminadores'),(5,'Comité revisor','busquedaDocente.jsp','Permite al usuario acceder a la información de los aspirantes (como comité revisor)'),(6,'Consejo dictaminador','busquedaDocente.jsp','Permite al usuario acceder a la información de los aspirantes (como consejo dictaminador)'),(7,'Convocatoria Base','busquedaConvocatoriaBase.jsp','Permite al usuario registrar convocatoria base');
 /*!40000 ALTER TABLE `catpermisos` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -832,6 +860,7 @@ DROP TABLE IF EXISTS `catprogramas`;
 CREATE TABLE `catprogramas` (
   `id` int NOT NULL AUTO_INCREMENT,
   `programa` varchar(200) NOT NULL,
+  `claveFolio` varchar(10) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -842,7 +871,7 @@ CREATE TABLE `catprogramas` (
 
 LOCK TABLES `catprogramas` WRITE;
 /*!40000 ALTER TABLE `catprogramas` DISABLE KEYS */;
-INSERT INTO `catprogramas` VALUES (1,'Programa de Promoción en el Servicio Docente por Cambio de Categoría en Educación Media Superior'),(2,'Programa de Promoción en el Servicio Docente por Asignación de Horas Adicionales en Educación Media Superior'),(3,'Programa de Promoción en la Función por Incentivos en Educación Media Superior');
+INSERT INTO `catprogramas` VALUES (1,'Programa de Promoción en el Servicio Docente por Cambio de Categoría en Educación Media Superior','PCC001'),(2,'Programa de Promoción en el Servicio Docente por Asignación de Horas Adicionales en Educación Media Superior','PHA001'),(3,'Programa de Promoción en la Función por Incentivos en Educación Media Superior','PFI001');
 /*!40000 ALTER TABLE `catprogramas` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1134,16 +1163,19 @@ CREATE TABLE `comite` (
   `idPrograma` int NOT NULL,
   `tipo` char(2) NOT NULL,
   `finalizado` char(1) NOT NULL DEFAULT 'F',
+  `idRol` int DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `fkPlantelComite_idx` (`idPlantel`),
   KEY `fkProgramaComite_idx` (`idPrograma`),
   KEY `fkEntidadComite_idx` (`idEntidad`),
   KEY `fkSubsistemaComite_idx` (`idSubsistema`),
+  KEY `fkRolComite_idx` (`idRol`),
   CONSTRAINT `fkEntidadComite` FOREIGN KEY (`idEntidad`) REFERENCES `catentidades` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `fkPlantelComite` FOREIGN KEY (`idPlantel`) REFERENCES `catplanteles` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `fkProgramaComite` FOREIGN KEY (`idPrograma`) REFERENCES `catprogramas` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  CONSTRAINT `fkRolComite` FOREIGN KEY (`idRol`) REFERENCES `catrolcomite` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `fkSubsistemaComite` FOREIGN KEY (`idSubsistema`) REFERENCES `catsubsistema` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE=InnoDB AUTO_INCREMENT=36 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=41 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1152,7 +1184,7 @@ CREATE TABLE `comite` (
 
 LOCK TABLES `comite` WRITE;
 /*!40000 ALTER TABLE `comite` DISABLE KEYS */;
-INSERT INTO `comite` VALUES (27,1,17,252,1,'R','V'),(34,1,NULL,NULL,1,'D','V'),(35,1,1,7,1,'R','V');
+INSERT INTO `comite` VALUES (27,1,17,252,1,'R','V',1),(34,1,NULL,NULL,1,'D','V',2),(35,1,1,7,1,'R','V',3),(40,1,1,9,1,'R','F',NULL);
 /*!40000 ALTER TABLE `comite` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1183,7 +1215,7 @@ CREATE TABLE `constanciasproceso` (
   CONSTRAINT `fkCatPuntaje3` FOREIGN KEY (`idCatPuntaje3`) REFERENCES `catpuntaje` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `fkCriterioConstancia` FOREIGN KEY (`idCriterio`) REFERENCES `catcriteriosvaloracion` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `fkUsuario` FOREIGN KEY (`idUsuario`) REFERENCES `usuario` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE=InnoDB AUTO_INCREMENT=66 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=67 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1192,7 +1224,7 @@ CREATE TABLE `constanciasproceso` (
 
 LOCK TABLES `constanciasproceso` WRITE;
 /*!40000 ALTER TABLE `constanciasproceso` DISABLE KEYS */;
-INSERT INTO `constanciasproceso` VALUES (23,29,4,12,NULL,NULL,'R',NULL),(32,29,1,1,NULL,NULL,'R',NULL),(34,29,2,0,NULL,NULL,'R',NULL),(36,29,10,34,NULL,NULL,'R',NULL),(37,29,11,36,NULL,NULL,'R',NULL),(38,29,12,38,NULL,NULL,'R',NULL),(39,29,13,41,NULL,NULL,'R',NULL),(40,29,14,0,NULL,NULL,'R',NULL),(45,29,5,0,NULL,NULL,'R',NULL),(46,29,9,0,NULL,NULL,'R',NULL),(47,29,6,0,NULL,NULL,'R',NULL),(48,45,4,11,NULL,NULL,'P',NULL),(51,29,7,0,NULL,NULL,'R',NULL),(52,29,8,0,NULL,NULL,'R',NULL),(53,57,4,12,NULL,NULL,'R',NULL),(54,57,1,1,NULL,NULL,'R',NULL),(55,57,2,6,NULL,NULL,'R',NULL),(56,57,5,0,NULL,NULL,'R',NULL),(57,57,6,0,NULL,NULL,'R',NULL),(58,57,7,0,NULL,NULL,'R',NULL),(59,57,8,0,NULL,NULL,'R',NULL),(60,57,10,34,NULL,NULL,'R',NULL),(61,57,11,36,NULL,NULL,'R',NULL),(62,57,12,38,NULL,NULL,'R',NULL),(63,57,13,41,NULL,NULL,'R',NULL),(64,57,14,46,NULL,NULL,'R',NULL),(65,1,4,12,NULL,NULL,'P',NULL);
+INSERT INTO `constanciasproceso` VALUES (23,29,4,12,NULL,NULL,'R',NULL),(32,29,1,1,NULL,NULL,'R',NULL),(34,29,2,0,NULL,NULL,'R',NULL),(36,29,10,34,NULL,NULL,'R',NULL),(37,29,11,36,NULL,NULL,'R',NULL),(38,29,12,38,NULL,NULL,'R',NULL),(39,29,13,41,NULL,NULL,'R',NULL),(40,29,14,0,NULL,NULL,'R',NULL),(45,29,5,0,NULL,NULL,'R',NULL),(46,29,9,0,NULL,NULL,'R',NULL),(47,29,6,0,NULL,NULL,'R',NULL),(48,45,4,11,NULL,NULL,'P',NULL),(51,29,7,0,NULL,NULL,'R',NULL),(52,29,8,0,NULL,NULL,'R',NULL),(53,57,4,12,NULL,NULL,'R',NULL),(54,57,1,1,NULL,NULL,'R',NULL),(55,57,2,6,NULL,NULL,'R',NULL),(56,57,5,0,NULL,NULL,'R',NULL),(57,57,6,0,NULL,NULL,'R',NULL),(58,57,7,0,NULL,NULL,'R',NULL),(59,57,8,0,NULL,NULL,'R',NULL),(60,57,10,34,NULL,NULL,'R',NULL),(61,57,11,36,NULL,NULL,'R',NULL),(62,57,12,38,NULL,NULL,'R',NULL),(63,57,13,41,NULL,NULL,'R',NULL),(64,57,14,46,NULL,NULL,'R',NULL),(65,1,4,12,NULL,NULL,'P',NULL),(66,65,4,12,NULL,NULL,'P',NULL);
 /*!40000 ALTER TABLE `constanciasproceso` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1214,7 +1246,7 @@ CREATE TABLE `constanciasregistro` (
   KEY `fkRequisito_idx` (`idRequisito`),
   CONSTRAINT `fkRequisito` FOREIGN KEY (`idRequisito`) REFERENCES `catrequisitosregistro` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `fkUsuario3` FOREIGN KEY (`idUsuario`) REFERENCES `usuario` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE=InnoDB AUTO_INCREMENT=113 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=114 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1223,7 +1255,7 @@ CREATE TABLE `constanciasregistro` (
 
 LOCK TABLES `constanciasregistro` WRITE;
 /*!40000 ALTER TABLE `constanciasregistro` DISABLE KEYS */;
-INSERT INTO `constanciasregistro` VALUES (96,29,1,'F',NULL),(97,29,8,'F',NULL),(98,29,2,'F',NULL),(99,29,3,'F',NULL),(100,29,6,'F',NULL),(101,29,4,'F',NULL),(103,45,1,'F',NULL),(104,45,2,'F',NULL),(105,45,3,'F',NULL),(106,45,6,'F',NULL),(107,45,4,'F',NULL),(108,57,1,'F',NULL),(109,57,2,'F',NULL),(110,57,3,'F',NULL),(111,57,6,'F',NULL),(112,57,4,'F',NULL);
+INSERT INTO `constanciasregistro` VALUES (96,29,1,'F',NULL),(97,29,8,'F',NULL),(98,29,2,'F',NULL),(99,29,3,'F',NULL),(100,29,6,'F',NULL),(101,29,4,'F',NULL),(103,45,1,'F',NULL),(104,45,2,'F',NULL),(105,45,3,'F',NULL),(106,45,6,'F',NULL),(107,45,4,'F',NULL),(108,57,1,'F',NULL),(109,57,2,'F',NULL),(110,57,3,'F',NULL),(111,57,6,'F',NULL),(112,57,4,'F',NULL),(113,65,1,'F',NULL);
 /*!40000 ALTER TABLE `constanciasregistro` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1263,6 +1295,44 @@ LOCK TABLES `convocatoria` WRITE;
 /*!40000 ALTER TABLE `convocatoria` DISABLE KEYS */;
 INSERT INTO `convocatoria` VALUES (15,'2020-08-01','2020-08-03','2020-08-07','2020-08-10','2020-08-14','2020-08-17','2020-08-21','2020-12-31',193,1,'DEFINITIVA'),(16,'2020-08-14','2020-08-15','2020-08-15','2020-08-17','2020-08-18','2020-08-19','2020-08-20','2020-12-21',193,2,'DEFINITIVA'),(17,'2020-08-01','2020-08-03','2020-08-07','2020-08-10','2020-08-14','2020-08-17','2020-08-21','2020-12-24',193,3,'DEFINITIVA'),(18,'2020-11-01','2020-11-03','2020-11-07','2020-11-10','2020-11-14','2020-11-17','2020-11-21','2020-11-30',1,1,'DEFINITIVA'),(19,'2020-08-01','2020-08-03','2020-08-04','2020-08-05','2020-08-06','2020-08-07','2020-08-10','2020-12-30',89,1,'DEFINITIVA'),(20,'2020-08-01','2020-08-03','2020-08-07','2020-08-10','2020-08-14','2020-08-17','2020-08-21','2020-08-31',1,3,'DEFINITIVA'),(22,'2020-10-08','2020-10-08','2020-10-15','2020-10-16','2020-10-22','2020-10-23','2020-10-29','2020-10-30',291,1,'TEMPORAL'),(24,'2020-10-01','2020-10-05','2020-10-09','2020-10-12','2020-10-16','2020-10-19','2020-10-23','2020-10-30',90,1,'TEMPORAL'),(25,'2020-10-01','2020-10-05','2020-10-09','2020-10-12','2020-10-16','2020-10-19','2020-10-23','2020-10-30',91,1,'TEMPORAL'),(26,'2020-11-01','2020-11-02','2020-11-06','2020-11-09','2020-11-13','2020-11-16','2020-11-20','2020-11-30',252,1,'DEFINITIVA');
 /*!40000 ALTER TABLE `convocatoria` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `convocatoriabase`
+--
+
+DROP TABLE IF EXISTS `convocatoriabase`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `convocatoriabase` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `publicacion` date NOT NULL,
+  `inicioRegistro` date NOT NULL,
+  `finRegistro` date NOT NULL,
+  `inicioValoracion` date NOT NULL,
+  `finValoracion` date NOT NULL,
+  `inicioDictaminacion` date NOT NULL,
+  `finDictaminacion` date NOT NULL,
+  `resultados` date NOT NULL,
+  `idPlantel` int NOT NULL,
+  `idPrograma` int NOT NULL,
+  `estatus` varchar(15) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fkConvPlantelBase_idx` (`idPlantel`),
+  KEY `fkConvProgramaBase_idx` (`idPrograma`),
+  CONSTRAINT `fkConvPlantel_` FOREIGN KEY (`idPlantel`) REFERENCES `catplanteles` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  CONSTRAINT `fkConvPrograma_` FOREIGN KEY (`idPrograma`) REFERENCES `catprogramas` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `convocatoriabase`
+--
+
+LOCK TABLES `convocatoriabase` WRITE;
+/*!40000 ALTER TABLE `convocatoriabase` DISABLE KEYS */;
+INSERT INTO `convocatoriabase` VALUES (1,'2021-01-11','2021-01-12','2021-01-15','2021-01-18','2021-01-22','2021-01-25','2021-01-29','2021-01-31',8,1,'TEMPORAL'),(2,'2021-01-11','2021-01-12','2021-01-15','2021-01-18','2021-01-22','2021-01-18','2021-01-29','2021-01-30',118,1,'TEMPORAL');
+/*!40000 ALTER TABLE `convocatoriabase` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -1321,7 +1391,7 @@ CREATE TABLE `horasgrupo` (
   CONSTRAINT `fkIdAsignaturaHoras` FOREIGN KEY (`idAsignatura`) REFERENCES `catasignatura` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `fkIdPeriodoHoras` FOREIGN KEY (`idPeriodo`) REFERENCES `catperiodos` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `fkIdUsuarioHoras` FOREIGN KEY (`idUsuario`) REFERENCES `usuario` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE=InnoDB AUTO_INCREMENT=312 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=318 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1330,7 +1400,7 @@ CREATE TABLE `horasgrupo` (
 
 LOCK TABLES `horasgrupo` WRITE;
 /*!40000 ALTER TABLE `horasgrupo` DISABLE KEYS */;
-INSERT INTO `horasgrupo` VALUES (284,605,591,8,'4a',29,'V',4,'V'),(285,605,585,6,'2a',29,'V',2,'V'),(286,583,12,3,'1g',29,'V',1,'V'),(287,583,12,3,'1d',29,'V',1,'V'),(288,583,12,3,'1f',29,'V',1,'V'),(289,583,12,3,'1e',29,'V',1,'V'),(296,605,60,5,'6a',44,'V',6,NULL),(297,605,51,5,'6b',44,'V',6,NULL),(298,583,23,4,'3a',44,'V',3,NULL),(299,605,1,4,'A',45,'F',1,'V'),(300,605,13,4,'2a',57,'V',2,'V'),(301,605,13,4,'2e',57,'V',2,'V'),(302,605,29,4,'4b',57,'V',4,'V'),(303,605,29,4,'4d',57,'V',4,'V'),(304,605,13,4,'2c',57,'V',2,'V'),(305,605,13,4,'2d',57,'V',2,'V'),(306,583,2,4,'1i',57,'V',1,'V'),(307,583,25,4,'3a',57,'V',3,'V'),(308,583,25,4,'3c',57,'V',3,'V'),(309,583,2,4,'1c',57,'V',1,'V'),(310,583,2,4,'1a',57,'V',1,'V'),(311,583,2,4,'1f',57,'V',1,'V');
+INSERT INTO `horasgrupo` VALUES (284,605,591,8,'4a',29,'V',4,'V'),(285,605,585,6,'2a',29,'V',2,'V'),(286,583,12,3,'1g',29,'V',1,'V'),(287,583,12,3,'1d',29,'V',1,'V'),(288,583,12,3,'1f',29,'V',1,'V'),(289,583,12,3,'1e',29,'V',1,'V'),(296,605,60,5,'6a',44,'V',6,NULL),(297,605,51,5,'6b',44,'V',6,NULL),(298,583,23,4,'3a',44,'V',3,NULL),(299,605,1,4,'A',45,'F',1,'V'),(300,605,13,4,'2a',57,'V',2,'V'),(301,605,13,4,'2e',57,'V',2,'V'),(302,605,29,4,'4b',57,'V',4,'V'),(303,605,29,4,'4d',57,'V',4,'V'),(304,605,13,4,'2c',57,'V',2,'V'),(305,605,13,4,'2d',57,'V',2,'V'),(306,583,2,4,'1i',57,'V',1,'V'),(307,583,25,4,'3a',57,'V',3,'V'),(308,583,25,4,'3c',57,'V',3,'V'),(309,583,2,4,'1c',57,'V',1,'V'),(310,583,2,4,'1a',57,'V',1,'V'),(311,583,2,4,'1f',57,'V',1,'V'),(312,605,591,8,'4a',65,'V',4,NULL),(313,605,585,6,'2a',65,'V',2,NULL),(314,583,12,3,'1g',65,'V',1,NULL),(315,583,12,3,'1d',65,'V',1,NULL),(316,583,12,3,'1f',65,'V',1,NULL),(317,583,12,3,'1e',65,'V',1,NULL);
 /*!40000 ALTER TABLE `horasgrupo` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1504,7 +1574,7 @@ CREATE TABLE `tutorias` (
   PRIMARY KEY (`id`),
   KEY `fkUsuarioTutoria_idx` (`idUsuario`),
   CONSTRAINT `fkUsuarioTutoria` FOREIGN KEY (`idUsuario`) REFERENCES `usuario` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1513,7 +1583,7 @@ CREATE TABLE `tutorias` (
 
 LOCK TABLES `tutorias` WRITE;
 /*!40000 ALTER TABLE `tutorias` DISABLE KEYS */;
-INSERT INTO `tutorias` VALUES (5,29,'2020-09-01','2020-09-30','Reconocimiento');
+INSERT INTO `tutorias` VALUES (5,29,'2020-09-01','2020-09-30','Reconocimiento'),(6,65,'2020-08-01','2021-01-12','Diploma');
 /*!40000 ALTER TABLE `tutorias` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1528,8 +1598,8 @@ CREATE TABLE `usuario` (
   `id` int NOT NULL AUTO_INCREMENT,
   `idEntidad` int DEFAULT NULL,
   `idPlantel` int DEFAULT NULL,
-  `nombre` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
-  `primerApellido` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
+  `nombre` varchar(200) COLLATE utf8_spanish_ci NOT NULL,
+  `primerApellido` varchar(50) COLLATE utf8_spanish_ci DEFAULT NULL,
   `segundoApellido` varchar(50) COLLATE utf8_spanish_ci DEFAULT NULL,
   `correo` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
   `clave` varchar(200) COLLATE utf8_spanish_ci NOT NULL,
@@ -1550,7 +1620,7 @@ CREATE TABLE `usuario` (
   CONSTRAINT `fkUsuarioPlantel` FOREIGN KEY (`idPlantel`) REFERENCES `catplanteles` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `fkUsuarioPrograma` FOREIGN KEY (`idPrograma`) REFERENCES `catprogramas` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `fkUsuarioSubsistema` FOREIGN KEY (`idSubsistema`) REFERENCES `catsubsistema` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE=InnoDB AUTO_INCREMENT=63 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=66 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1559,7 +1629,7 @@ CREATE TABLE `usuario` (
 
 LOCK TABLES `usuario` WRITE;
 /*!40000 ALTER TABLE `usuario` DISABLE KEYS */;
-INSERT INTO `usuario` VALUES (1,NULL,NULL,'ANTONIO DAVID','REYNA','MARTINEZ','tony310894@hotmail.com','MIe1Fcfx8fzX6ClgQIQZ0Q==','REMA940831BA1','1111111111','1111111111','A',NULL,'N',1,1),(29,12,193,'SAMUEL ','ALVARADO','AGAMA','david.reyna31@gmail.com','MIe1Fcfx8fzX6ClgQIQZ0Q==','AAAS860114A5A','1111111111','1111111111','D',NULL,'P',1,1),(44,20,291,'KARLA MONSERRAT ','ARAGON','ALARCON','correo@mail.com','MIe1Fcfx8fzX6ClgQIQZ0Q==','AAAK800917ME1','1111111111','1111111111','D',NULL,'P',1,1),(45,20,291,'ANTONIO DAVID','REYNA','MARTINEZ','correo@mail.com','MIe1Fcfx8fzX6ClgQIQZ0Q==','rema940831ba9','1111111111','1111111111','D',NULL,'P',1,1),(52,17,252,'ANTONIO DAVID2','reyna2','martinez2','david.reyna31@gmail.com','MIe1Fcfx8fzX6ClgQIQZ0Q==','rema940831ba2','2222222222','2222222222','A',NULL,'P',1,1),(53,NULL,NULL,'ANTONIO DAVID3','reyna3','martinez3','david.reyna31@gmail.com','MIe1Fcfx8fzX6ClgQIQZ0Q==','rema940831ba3','3333333333','3333333333','A',NULL,'N',1,1),(54,NULL,NULL,'ANTONIO DAVID4','reyna4','martinez4','david.reyna31@gmail.com','MIe1Fcfx8fzX6ClgQIQZ0Q==','rema940831ba4','4444444444','4444444444','A',NULL,'N',1,1),(55,17,252,'ANTONIO DAVID','REYNA','MARTINEZ','david.reyna31@gmail.com','MIe1Fcfx8fzX6ClgQIQZ0Q==','REMA940831BA7',NULL,NULL,'A',NULL,'P',1,1),(57,17,252,'CIPRIANO ','ALVAREZ','ZULOAGA','david.reyna31@gmail.com','MIe1Fcfx8fzX6ClgQIQZ0Q==','AAZC520916JG2','1111111111','1111111111','D',NULL,'P',1,1),(58,NULL,NULL,'ANTONIO DAVID','REYNA','MATERNO','dvid@mail.com','AqScfRKExcdoIOAcmh6Z8g==','REMA940831BA8',NULL,NULL,'A',NULL,'P',1,1),(59,NULL,NULL,'ANTONIO DAVID','REYNA','MARTINEZ','david_rema@hotmail.com','4A5k0jW2gx6Asojo4KKgGA==','REMA940831VA1_',NULL,NULL,'A',NULL,'P',1,1),(60,1,7,'DAVID','REYNA','MARTINEZ','david.reyna31@gmail.com','07th8hWyBtOAclGjTqJh8Q==','REMA940831001_',NULL,NULL,'A',NULL,'P',1,1),(61,NULL,NULL,'ANTONIO DAVID','REYNA','MARTINEZ','david_rema@hotmail.com','Svo2j0IKyuhjmoBw5eQkcQ==','REMA940831VA1',NULL,NULL,'A',NULL,'P',1,1),(62,1,7,'DAVID','REYNA','MARTINEZ','david.reyna31@gmail.com','KEjlU7kCC1TfRmgrg6TpyA==','REMA940831001',NULL,NULL,'A',NULL,'P',1,1);
+INSERT INTO `usuario` VALUES (1,NULL,NULL,'ANTONIO DAVID','REYNA','MARTINEZ','tony310894@hotmail.com','MIe1Fcfx8fzX6ClgQIQZ0Q==','REMA940831BA1','1111111111','1111111111','A',NULL,'N',1,1),(29,12,193,'SAMUEL ','ALVARADO','AGAMA','david.reyna31@gmail.com','MIe1Fcfx8fzX6ClgQIQZ0Q==','AAAS860114A5B','1111111111','1111111111','D',NULL,'P',1,1),(44,20,291,'KARLA MONSERRAT ','ARAGON','ALARCON','correo@mail.com','MIe1Fcfx8fzX6ClgQIQZ0Q==','AAAK800917ME1','1111111111','1111111111','D',NULL,'P',1,1),(45,20,291,'ANTONIO DAVID','REYNA','MARTINEZ','correo@mail.com','MIe1Fcfx8fzX6ClgQIQZ0Q==','rema940831ba9','1111111111','1111111111','D',NULL,'P',1,1),(52,17,252,'ANTONIO DAVID2','reyna2','martinez2','david.reyna31@gmail.com','MIe1Fcfx8fzX6ClgQIQZ0Q==','rema940831ba2','2222222222','2222222222','A',NULL,'P',1,1),(53,NULL,NULL,'ANTONIO DAVID3','reyna3','martinez3','david.reyna31@gmail.com','MIe1Fcfx8fzX6ClgQIQZ0Q==','rema940831ba3','3333333333','3333333333','A',NULL,'N',1,1),(54,NULL,NULL,'ANTONIO DAVID4','reyna4','martinez4','david.reyna31@gmail.com','MIe1Fcfx8fzX6ClgQIQZ0Q==','rema940831ba4','4444444444','4444444444','A',NULL,'N',1,1),(55,17,252,'ANTONIO DAVID','REYNA','MARTINEZ','david.reyna31@gmail.com','MIe1Fcfx8fzX6ClgQIQZ0Q==','REMA940831BA7',NULL,NULL,'A',NULL,'P',1,1),(57,17,252,'CIPRIANO ','ALVAREZ','ZULOAGA','david.reyna31@gmail.com','MIe1Fcfx8fzX6ClgQIQZ0Q==','AAZC520916JG2','1111111111','1111111111','D',NULL,'P',1,1),(58,NULL,NULL,'ANTONIO DAVID','REYNA','MATERNO','dvid@mail.com','AqScfRKExcdoIOAcmh6Z8g==','REMA940831BA8',NULL,NULL,'A',NULL,'P',1,1),(59,NULL,NULL,'ANTONIO DAVID','REYNA','MARTINEZ','david_rema@hotmail.com','4A5k0jW2gx6Asojo4KKgGA==','REMA940831VA1_',NULL,NULL,'A',NULL,'P',1,1),(60,1,7,'DAVID','REYNA','MARTINEZ','david.reyna31@gmail.com','07th8hWyBtOAclGjTqJh8Q==','REMA940831001_',NULL,NULL,'A',NULL,'P',1,1),(61,NULL,NULL,'ANTONIO DAVID','REYNA','MARTINEZ','david_rema@hotmail.com','Svo2j0IKyuhjmoBw5eQkcQ==','REMA940831VA1',NULL,NULL,'A',NULL,'P',1,1),(62,1,7,'DAVID','REYNA','MARTINEZ','david.reyna31@gmail.com','KEjlU7kCC1TfRmgrg6TpyA==','REMA940831001',NULL,NULL,'A',NULL,'P',1,1),(64,1,NULL,'CIPRIANO','a','ALARCON','david.reyna35@gmail.com','Hs8P9DYk6ofugwOE2M2zAQ==','rema940831ca9','1111111111','1111111111','A',NULL,'E',1,1),(65,12,193,'alvarado agama samuel ',NULL,NULL,'david.reyna31@gmail.com','MIe1Fcfx8fzX6ClgQIQZ0Q==','AAAS860114A5A','1111111111','3333333333','D',NULL,'P',1,1);
 /*!40000 ALTER TABLE `usuario` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1580,7 +1650,7 @@ CREATE TABLE `usuariopermiso` (
   KEY `idPermisoUP_idx` (`idPermiso`),
   CONSTRAINT `idPermisoUP` FOREIGN KEY (`idPermiso`) REFERENCES `catpermisos` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `idUsuarioUP` FOREIGN KEY (`idUsuario`) REFERENCES `usuario` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE=InnoDB AUTO_INCREMENT=162 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=186 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1589,7 +1659,7 @@ CREATE TABLE `usuariopermiso` (
 
 LOCK TABLES `usuariopermiso` WRITE;
 /*!40000 ALTER TABLE `usuariopermiso` DISABLE KEYS */;
-INSERT INTO `usuariopermiso` VALUES (126,52,2,'F'),(127,53,3,'F'),(128,54,4,'F'),(130,55,5,'F'),(131,57,5,'F'),(132,57,5,'F'),(133,58,5,'F'),(140,59,6,'F'),(141,60,5,'F'),(142,61,6,'F'),(143,62,5,'F'),(156,1,1,'F'),(157,1,2,'F'),(158,1,3,'F'),(159,1,4,'F'),(160,1,5,'F'),(161,1,6,'F');
+INSERT INTO `usuariopermiso` VALUES (126,52,2,'F'),(127,53,3,'F'),(128,54,4,'F'),(130,55,5,'F'),(131,57,5,'F'),(132,57,5,'F'),(133,58,5,'F'),(140,59,6,'F'),(141,60,5,'F'),(142,61,6,'F'),(143,62,5,'F'),(178,64,1,'V'),(179,1,1,'V'),(180,1,2,'V'),(181,1,3,'V'),(182,1,4,'V'),(183,1,5,'V'),(184,1,6,'V'),(185,1,7,'V');
 /*!40000 ALTER TABLE `usuariopermiso` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1619,7 +1689,7 @@ CREATE TABLE `usuarioplaza` (
   CONSTRAINT `fkUPJornada` FOREIGN KEY (`idJornada`) REFERENCES `catjornada` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `fkUPTipoNombramiento` FOREIGN KEY (`idTipoNombramiento`) REFERENCES `cattiposnombramiento` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `fkUPUsuario` FOREIGN KEY (`idUsuario`) REFERENCES `usuario` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1628,7 +1698,7 @@ CREATE TABLE `usuarioplaza` (
 
 LOCK TABLES `usuarioplaza` WRITE;
 /*!40000 ALTER TABLE `usuarioplaza` DISABLE KEYS */;
-INSERT INTO `usuarioplaza` VALUES (5,5,3,NULL,'2020-11-01',1,'2702 E48290.00273157',57,'F');
+INSERT INTO `usuarioplaza` VALUES (5,5,3,NULL,'2020-11-01',1,'2702 E48290.00273157',57,'F'),(6,1,1,10,'2021-01-11',1,'2702 E48290.00273157',65,'F');
 /*!40000 ALTER TABLE `usuarioplaza` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1673,7 +1743,7 @@ CREATE TABLE `vacancia` (
 
 LOCK TABLES `vacancia` WRITE;
 /*!40000 ALTER TABLE `vacancia` DISABLE KEYS */;
-INSERT INTO `vacancia` VALUES (131,9,89,'D',1,4,2,'Corrimiento natural',1,1,NULL),(132,9,89,'D',1,4,3,'Corrimiento natural',1,1,NULL),(133,9,89,'D',1,4,4,'Corrimiento natural',1,1,NULL),(134,9,89,'D',1,5,2,'Corrimiento natural',1,1,NULL),(135,9,89,'D',1,5,3,'Corrimiento natural',1,1,NULL),(136,9,89,'D',1,5,4,'Corrimiento natural',1,1,NULL),(137,9,89,'D',1,6,2,'Corrimiento natural',1,1,NULL),(138,9,89,'D',1,6,3,'Corrimiento natural',1,1,NULL),(139,9,89,'D',1,6,4,'Real',1,1,NULL),(140,9,89,'D',1,1,1,'Corrimiento natural',1,1,15),(141,9,89,'D',1,2,1,'Corrimiento natural',1,1,15),(142,9,89,'D',1,3,1,'Real',1,1,15),(143,17,252,'D',1,4,2,'Corrimiento natural',1,1,NULL),(144,17,252,'D',1,4,3,'Corrimiento natural',1,1,NULL),(145,17,252,'D',1,4,4,'Corrimiento natural',1,1,NULL),(146,17,252,'D',1,5,2,'Corrimiento natural',1,1,NULL),(147,17,252,'D',1,5,3,'Corrimiento natural',1,1,NULL),(148,17,252,'D',1,5,4,'Corrimiento natural',1,1,NULL),(149,17,252,'D',1,6,2,'Corrimiento natural',1,1,NULL),(150,17,252,'D',1,6,3,'Corrimiento natural',1,1,NULL),(151,17,252,'D',1,6,4,'Corrimiento natural',1,1,NULL),(152,17,252,'D',1,7,2,'Corrimiento natural',1,1,NULL),(153,17,252,'D',1,7,3,'Corrimiento natural',1,1,NULL),(154,17,252,'D',1,7,4,'Corrimiento natural',1,1,NULL),(155,17,252,'D',1,8,2,'Corrimiento natural',1,1,NULL),(156,17,252,'D',1,8,3,'Corrimiento natural',1,1,NULL),(157,17,252,'D',1,8,4,'Corrimiento natural',1,1,NULL),(158,17,252,'D',1,9,2,'Corrimiento natural',1,1,NULL),(159,17,252,'D',1,9,3,'Real',1,1,NULL);
+INSERT INTO `vacancia` VALUES (131,9,193,'D',1,4,2,'Corrimiento natural',1,1,NULL),(132,9,89,'D',1,4,3,'Corrimiento natural',1,1,NULL),(133,9,89,'D',1,4,4,'Corrimiento natural',1,1,NULL),(134,9,89,'D',1,5,2,'Corrimiento natural',1,1,NULL),(135,9,89,'D',1,5,3,'Corrimiento natural',1,1,NULL),(136,9,89,'D',1,5,4,'Corrimiento natural',1,1,NULL),(137,9,89,'D',1,6,2,'Corrimiento natural',1,1,NULL),(138,9,89,'D',1,6,3,'Corrimiento natural',1,1,NULL),(139,9,89,'D',1,6,4,'Real',1,1,NULL),(140,9,89,'D',1,1,1,'Corrimiento natural',1,1,15),(141,9,89,'D',1,2,1,'Corrimiento natural',1,1,15),(142,9,89,'D',1,3,1,'Real',1,1,15),(143,17,252,'D',1,4,2,'Corrimiento natural',1,1,NULL),(144,17,252,'D',1,4,3,'Corrimiento natural',1,1,NULL),(145,17,252,'D',1,4,4,'Corrimiento natural',1,1,NULL),(146,17,252,'D',1,5,2,'Corrimiento natural',1,1,NULL),(147,17,252,'D',1,5,3,'Corrimiento natural',1,1,NULL),(148,17,252,'D',1,5,4,'Corrimiento natural',1,1,NULL),(149,17,252,'D',1,6,2,'Corrimiento natural',1,1,NULL),(150,17,252,'D',1,6,3,'Corrimiento natural',1,1,NULL),(151,17,252,'D',1,6,4,'Corrimiento natural',1,1,NULL),(152,17,252,'D',1,7,2,'Corrimiento natural',1,1,NULL),(153,17,252,'D',1,7,3,'Corrimiento natural',1,1,NULL),(154,17,252,'D',1,7,4,'Corrimiento natural',1,1,NULL),(155,17,252,'D',1,8,2,'Corrimiento natural',1,1,NULL),(156,17,252,'D',1,8,3,'Corrimiento natural',1,1,NULL),(157,17,252,'D',1,8,4,'Corrimiento natural',1,1,NULL),(158,17,252,'D',1,9,2,'Corrimiento natural',1,1,NULL),(159,17,252,'D',1,9,3,'Real',1,1,NULL);
 /*!40000 ALTER TABLE `vacancia` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1910,7 +1980,7 @@ DELIMITER ;
 DELIMITER ;;
 CREATE DEFINER=`admin`@`localhost` PROCEDURE `sp_consultaComitePorId`(in _id int)
 BEGIN
-	select a.id,a.idEntidad,a.idSubsistema,a.idPlantel,a.idPrograma,a.tipo,a.finalizado
+	select a.id,a.idEntidad,a.idSubsistema,a.idPlantel,a.idPrograma,a.tipo,a.finalizado,a.idRol
     from comite a
     left join catplanteles b on a.idPlantel=b.id
     left join (select idComite,nombre,primerApellido,segundoApellido from miembrocomite where idRolComite=1 ) f on a.id=f.idComite
@@ -1999,6 +2069,29 @@ DELIMITER ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;
 /*!50003 SET character_set_results = @saved_cs_results */ ;
 /*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `sp_consultaConvocatoriaBase` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_consultaConvocatoriaBase`(in _id int)
+BEGIN
+	select c.id,idPrograma,cp.idSubsistema,cp.idEntidad,c.idPlantel,publicacion,inicioRegistro,finRegistro,inicioValoracion,finValoracion,inicioDictaminacion,finDictaminacion,resultados,estatus
+    from convocatoriabase c
+    join catplanteles cp on c.idPlantel=cp.id
+    where c.id=_id;
+
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `sp_consultaConvocatorias` */;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
@@ -2013,6 +2106,48 @@ CREATE DEFINER=`admin`@`localhost` PROCEDURE `sp_consultaConvocatorias`(in _idPr
 BEGIN
 	set @consulta="select c.id,c.idPrograma,cpr.programa,cp.idSubsistema,cs.subsistema,cp.idEntidad,ce.entidad,c.idPlantel,cp.plantel,c.estatus
 		from convocatoria c
+		join catprogramas cpr on c.idPrograma=cpr.id
+		join catplanteles cp on c.idPlantel=cp.id
+		join catentidades ce on cp.idEntidad=ce.id
+		join catsubsistema cs on cp.idSubsistema=cs.id where c.id>0 ";
+	if(_idPrograma is not null) then
+		set @consulta=concat(@consulta," and c.idPrograma = ",_idPrograma);
+    end if;
+    if(_idSubsistema is not null) then
+		set @consulta=concat(@consulta," and cp.idSubsistema = ",_idSubsistema);
+    end if;    
+    if(_idEntidad is not null) then
+		set @consulta=concat(@consulta," and cp.idEntidad = ",_idEntidad);
+    end if;
+    if(_idPlantel is not null) then
+		set @consulta=concat(@consulta," and c.idPlantel = ",_idPlantel);
+    end if;
+    if(_estatus is not null) then
+		set @consulta=concat(@consulta," and c.estatus = '",_estatus,"' ");
+    end if;    
+    set @consulta=concat(@consulta,' order by cp.idEntidad asc,c.idPlantel asc;');
+    PREPARE instruccion FROM @consulta;
+	EXECUTE instruccion;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `sp_consultaConvocatoriasBase` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`admin`@`localhost` PROCEDURE `sp_consultaConvocatoriasBase`(in _idPrograma int,in _idSubsistema int,in _idEntidad int,in _idPlantel int,in _estatus varchar(15))
+BEGIN
+	set @consulta="select c.id,c.idPrograma,cpr.programa,cp.idSubsistema,cs.subsistema,cp.idEntidad,ce.entidad,c.idPlantel,cp.plantel,c.estatus
+		from convocatoriabase c
 		join catprogramas cpr on c.idPrograma=cpr.id
 		join catplanteles cp on c.idPlantel=cp.id
 		join catentidades ce on cp.idEntidad=ce.id
@@ -2377,9 +2512,9 @@ BEGIN
 		a.folioCENNI,
 		a.idCCT,
         o.cct as cctEstudio,
-        r.idEntidad as idEntidadEstudio,
-        c.idInstitucion,
-        r.idTipoInstitucion,
+		a.idEntidadEstudio,
+        a.idInstitucion,
+        a.idTipoInstitucion,
         b.gradoMarginacion,
         a.frenteGrupo,
         a.funcionesOtro,
@@ -2391,13 +2526,17 @@ BEGIN
         a.idEstatus,
         a.observacionInfo,
         a.observacionEncuestados,
-        a.observacionCriterios
+        a.observacionCriterios,
+        aia.institucion as institucionOtra,
+        aia.cct as cctOtro,
+        aia.escuela as escuelaOtra,
+        aia.carrera as carreraOtra
+        
 	FROM usuario u
     left join aspirantes a on u.id=a.idUsuario
     left join catplanteles b on u.idPlantel=b.id
     left join catentidades q on u.idEntidad=q.id
     left join catescuelas c on a.idEscuelaEstudio=c.id
-    left join catinstituciones r on c.idInstitucion=r.id
     left join catcarreras d on a.idCarrera=d.id
     left join catgradosacademicos e on a.idGradoAcademico=e.id
     left join catmodalidadestitulacion f on a.idModalidadTitulacion=f.id    
@@ -2411,6 +2550,7 @@ BEGIN
     left join convocatoria p on (u.idPrograma=p.idPrograma and u.idPlantel=p.idPlantel)
     left join catcategoriajornada g on (a.idJornada=g.idJornada and a.idCategoria=g.idCategoria)
     left join catcategoriajornada k on (a.idJornadaAspira=k.idJornada and a.idCategoriaAspira=k.idCategoria)
+    left join auxinfoacademica aia on a.idUsuario=aia.idUsuario
 	where u.id=_idUsuario;
 
 END ;;
@@ -3001,7 +3141,7 @@ DELIMITER ;
 DELIMITER ;;
 CREATE DEFINER=`admin`@`localhost` PROCEDURE `sp_finalizarComite`(in _idComite int, in _idRol int)
 BEGIN
-	update comite set finalizado='V' where id=_idComite;    
+	update comite set finalizado='V',idRol=_idRol where id=_idComite;    
 	select 
     case 
 		when c.idEntidad is null then ''
@@ -3316,6 +3456,53 @@ DELIMITER ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;
 /*!50003 SET character_set_results = @saved_cs_results */ ;
 /*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `sp_insertConvocatoriaBase` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`admin`@`localhost` PROCEDURE `sp_insertConvocatoriaBase`(in _id int, in _publicacion date,in _inicioRegistro date,in _finRegistro date,in _inicioValoracion date,in _finValoracion date,in _inicioDictaminacion date,in _finDictaminacion date, in _resultados date,in _idPlantel int,in _idPrograma int,in _estatus varchar(15))
+BEGIN
+	declare _aux int default null;
+    if _id is null then    
+		select id into _aux
+		from convocatoria 
+		where idPlantel=_idPlantel and idPrograma=_idPrograma;
+		
+		if(_aux is null) then
+			INSERT INTO convocatoriaBase(publicacion,inicioRegistro,finRegistro,inicioValoracion,finValoracion,inicioDictaminacion,finDictaminacion,resultados,idPlantel,idPrograma,estatus) 
+			VALUES(_publicacion,_inicioRegistro,_finRegistro,_inicioValoracion,_finValoracion,_inicioDictaminacion,_finDictaminacion,_resultados,_idPlantel,_idPrograma,_estatus);
+			select 'ok' as respuesta;
+		else
+			select 'Convocatoria previamente registrada' as respuesta;
+		end if;		
+	else
+		update convocatoria 
+        set publicacion=_publicacion,
+			inicioRegistro=_inicioRegistro,
+            finRegistro=_finRegistro,
+            inicioValoracion=_inicioValoracion,
+            finValoracion=_finValoracion,
+            inicioDictaminacion=_inicioDictaminacion,
+            finDictaminacion=_finDictaminacion,
+            resultados=_resultados,
+            idPlantel=_idPlantel,
+            idPrograma=_idPrograma,
+            estatus=_estatus
+		where id=_id;
+        select 'ok' as respuesta;
+    end if;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `sp_insertCursos` */;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
@@ -3527,7 +3714,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`admin`@`localhost` PROCEDURE `sp_insertUsuario`(in _idEntidad int,in _idPlantel int,in _nombre varchar(50),in _primerApellido varchar(50),in _segundoApellido varchar(50),in _correo varchar(50),in _pass varchar(200),in _curp varchar(18),in _telfijo varchar(10),in _telcel varchar(10),in _perfil varchar(1),in _consideraciones varchar(200),in _nivel char(1),in _idSubsistema int,in _idPrograma int,in _idUsuario int)
+CREATE DEFINER=`admin`@`localhost` PROCEDURE `sp_insertUsuario`(in _idEntidad int,in _idPlantel int,in _nombre varchar(200),in _primerApellido varchar(50),in _segundoApellido varchar(50),in _correo varchar(50),in _pass varchar(200),in _curp varchar(18),in _telfijo varchar(10),in _telcel varchar(10),in _perfil varchar(1),in _consideraciones varchar(200),in _nivel char(1),in _idSubsistema int,in _idPrograma int,in _idUsuario int)
 BEGIN
 	declare _idAux int default null;
     if(_idUsuario is null) then
@@ -3576,7 +3763,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`admin`@`localhost` PROCEDURE `sp_insertUsuarioPermiso`(in _idUsuario int,in _curp varchar(18), in _idPermiso int)
+CREATE DEFINER=`admin`@`localhost` PROCEDURE `sp_insertUsuarioPermiso`(in _idUsuario int,in _curp varchar(18), in _idPermiso int, in _escritura char(1))
 BEGIN
 	declare _idAux int default null;
     
@@ -3588,8 +3775,8 @@ BEGIN
 		set _idAux=_idUsuario;
     end if;
     if(_idAux is not null) then
-		insert into usuariopermiso (idUsuario,idPermiso)
-		values (_idAux,_idPermiso);
+		insert into usuariopermiso (idUsuario,idPermiso,permisoEdicion)
+		values (_idAux,_idPermiso,_escritura);
         select "ok" as respuesta;
 	else
 		select "curp no registrado" as respuesta;
@@ -3874,22 +4061,49 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`admin`@`localhost` PROCEDURE `sp_registroInfoAcademica`(in _idUsuario int,in _idEscuelaEstudio int, in _carrera varchar(300),in _anioEgreso int,in _idGradoAcademico int, in _idModalidadTitulacion int,in _anioTitulacion int,in _cedula varchar(20),in _idCCT int)
+CREATE DEFINER=`admin`@`localhost` PROCEDURE `sp_registroInfoAcademica`(in _idUsuario int,in _idEscuelaEstudio int, in _carrera varchar(300),in _anioEgreso int,in _idGradoAcademico int, in _idModalidadTitulacion int,in _anioTitulacion int,in _cedula varchar(20),in _idCCT int, in _idEntidad int, in _idTipo int, in _idInstitucion int,in _institucionOtro varchar(50),in _cctOtro varchar(50),in _escuelaOtro varchar(50))
 BEGIN
 	declare _idCarrera int default NULL;
     declare _idUsuarioAux int default NULL;
+    declare _auxCarrera varchar(50) default null;
     
     select id into _idCarrera 
     from catcarreras 
     where carrera=_carrera;
+    
+    if(_idCarrera is null) then
+		set _idCarrera=-1;
+        set _auxCarrera=_carrera;
+	end if;
+    
+    if(_idEscuelaEstudio ='-1' or _idCarrera ='-1' or _idCCT ='-1' or _idInstitucion ='-1') then
+		select idUsuario into _idUsuarioAux
+		from auxinfoacademica
+		where idUsuario=_idUsuario;
+		
+		if _idUsuarioAux is null then   
+			insert into auxinfoacademica (idUsuario,institucion,cct,escuela,carrera)
+			values(_idUsuario,_institucionOtro,_cctOtro,_escuelaOtro,_auxCarrera);
+		else
+			update auxinfoacademica 
+			set institucion=_institucionOtro,
+				cct=_cctOtro,
+				escuela=_escuelaOtro,
+				carrera=_auxCarrera
+			where idUsuario=_idUsuario;
+		end if;
+	else
+		delete from auxinfoacademica
+		where idUsuario=_idUsuario;
+	end if;
     
     select idUsuario into _idUsuarioAux
     from aspirantes
     where idUsuario=_idUsuario;
     
     if _idUsuarioAux is null then    
-		insert into aspirantes (idUsuario,idEscuelaEstudio,idCarrera,anioEgreso,idGradoAcademico,idModalidadTitulacion,anioTitulacion,cedula,idCCT) 
-		values(_idUsuario,_idEscuelaEstudio,_idCarrera,_anioEgreso,_idGradoAcademico,_idModalidadTitulacion,_anioTitulacion,_cedula,_idCCT);	   
+		insert into aspirantes (idUsuario,idEscuelaEstudio,idCarrera,anioEgreso,idGradoAcademico,idModalidadTitulacion,anioTitulacion,cedula,idCCT,idEntidadEstudio,idTipoInstitucion,idInstitucion) 
+		values(_idUsuario,_idEscuelaEstudio,_idCarrera,_anioEgreso,_idGradoAcademico,_idModalidadTitulacion,_anioTitulacion,_cedula,_idCCT,_idEntidad,_idTipo,_idInstitucion);	   
 	else
 		update aspirantes 
         set idEscuelaEstudio=_idEscuelaEstudio,
@@ -3899,7 +4113,10 @@ BEGIN
             idModalidadTitulacion=_idModalidadTitulacion,
             anioTitulacion=_anioTitulacion,
             cedula=_cedula,
-            idCCT=_idCCT
+            idCCT=_idCCT,
+            idEntidadEstudio=_idEntidad,
+            idTipoInstitucion=_idTipo,
+            idInstitucion=_idInstitucion
 		where idUsuario=_idUsuario;    
     end if;
     call sp_insertConstanciasProceso(_idUsuario,'4',_idGradoAcademico,'P');
@@ -4689,4 +4906,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-12-16  8:40:30
+-- Dump completed on 2021-01-18 19:31:14
