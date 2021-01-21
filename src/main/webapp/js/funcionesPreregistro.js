@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-var consultarWS=true;
+var consultarWS=false;
 $(document).ready(function () {
     var $regex=/^([a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?)$/;
     $('#correo').on('keypress keydown keyup change',function(){    
@@ -214,15 +214,17 @@ function cambioAviso(){
 }
 function cambioSubsistema(objeto){
     $('#rfc').val('');
-    if(objeto.value=="1"){
-        $("#lblNombre").html("Nombre completo:");
-        $("#seccionPaterno").addClass("hidden");
-        $("#seccionMaterno").addClass("hidden");
-        $("#apellido1").removeAttr("required");
-    }else{
-        $("#lblNombre").html("Nombre(s):");
-        $("#seccionPaterno").removeClass("hidden");
-        $("#seccionMaterno").removeClass("hidden");
-        $("#apellido1").attr("required",true);
+    if(consultarWS){
+        if(objeto.value=="1"){
+            $("#lblNombre").html("Nombre completo:");
+            $("#seccionPaterno").addClass("hidden");
+            $("#seccionMaterno").addClass("hidden");
+            $("#apellido1").removeAttr("required");
+        }else{
+            $("#lblNombre").html("Nombre(s):");
+            $("#seccionPaterno").removeClass("hidden");
+            $("#seccionMaterno").removeClass("hidden");
+            $("#apellido1").attr("required",true);
     }
+}
 }

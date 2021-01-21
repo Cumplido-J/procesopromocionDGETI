@@ -6,12 +6,15 @@
 package com.aplicacion.servlet;
 
 import constants.ConstantsWS;
+import herramientas.RutaConfig;
 import herramientas.UtileriasHelper;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.InetAddress;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -85,8 +88,18 @@ public class Servlet_login extends HttpServlet {
             String clave = request.getParameter("clave");
             
             String gRecaptchaResponse = request.getParameter("g-recaptcha-response");
-            boolean verificado = VerificarRecaptcha.verificar(gRecaptchaResponse);
-            
+            System.out.println("info captcha"+gRecaptchaResponse);
+            String rutaConfig = RutaConfig.getRutaConfig();
+            Properties p = new Properties(); 
+            p.load(new FileReader(rutaConfig));            
+            Boolean consultaCaptcha= Boolean.parseBoolean(p.getProperty("consultaCaptcha"));
+            boolean verificado;
+            if(consultaCaptcha){
+                verificado = VerificarRecaptcha.verificar(gRecaptchaResponse);
+                System.out.println("captcha verificado"+verificado);
+            }else{
+                verificado=true;
+            }            
             if(verificado == true){
                 UtileriasHelper utilerias = new UtileriasHelper();
             Metodos_sql metodos=new Metodos_sql();
@@ -101,7 +114,7 @@ public class Servlet_login extends HttpServlet {
                 if(cadenaDencriptada.equals(clave)){
                     
                     String ipUser = request.getRemoteAddr();
-                    
+                    System.out.println("IP"+ipUser);
                     String idUser = datos.get(0)[0];
                     String[] params={idUser, ipUser};
                     

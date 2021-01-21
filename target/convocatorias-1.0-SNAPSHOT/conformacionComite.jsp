@@ -272,6 +272,14 @@
                 $("#tipo").val('${datos[5]}');
             </script>
         </c:if>
+        <c:if test = "${datos[6]=='V'}">
+            <script>
+                function confirmacion(){
+                    $("#mensaje").html("Acción no permitida");                    
+                    $("#modalMensaje").modal("show");
+                }
+            </script>
+        </c:if>
         
     </body>
 </html>
