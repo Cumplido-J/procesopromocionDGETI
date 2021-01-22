@@ -18,7 +18,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author jtrinidadl
  */
-@WebServlet(name = "BuscarConvocatoria", urlPatterns = {"/BuscarConvocatoria"})
+@WebServlet(name = "BuscarConvocatoriaBase", urlPatterns = {"/BuscarConvocatoriaBase"})
 public class Servlet_buscar_convocatoriaBase extends HttpServlet {
 
     /**
