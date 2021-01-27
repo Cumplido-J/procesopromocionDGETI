@@ -58,20 +58,34 @@ public class Datos {
             return respuesta;        
         }
     }
-    public  String desplegarConvocatoriasBase(String idPrograma,String idSubsistema,String idEntidad,String idPlantel,String estatus){        
+    public  String desplegarConvocatoriasBase(String idPrograma,String idSubsistema,String idEntidad,String idPlantel,String estatus,String tipoConvocatoria){        
         String respuesta="<tr><td colspan='6' class='text-center'>Sin información</td></tr>";        
         try{
-            String[] parametros={idPrograma,idSubsistema,idEntidad,idPlantel,estatus};
-            List<String[]> datos=metodos.ejecutaSP("sp_consultaConvocatoriasBase",parametros);
-            if(!datos.isEmpty()){
+            
+            if(estatus.isEmpty()){
+                estatus = "0";
+            }
+            
+            if(tipoConvocatoria.equals("NACIONAL")){
+                idEntidad="";
+                idPlantel="";
+            }else if(tipoConvocatoria.equals("ESTATAL")){
+                idPlantel="";
+            }
+            
+            String[] parametros={idPrograma,idSubsistema,idEntidad,idPlantel,estatus,tipoConvocatoria};
+            
+                List<String[]> datos=metodos.ejecutaSP("sp_consultaConvocatoriasBase",parametros);
+                if(!datos.isEmpty()){
                 respuesta="";
                 for(String[] dato:datos)
                 {
-                    respuesta+="<tr><td>"+dato[2]+"</td><td>"+dato[4]+"</td><td>"+dato[6]+"</td><td>"+dato[8]+"</td><td>"+dato[9]+"</td><td>"; 
+                    respuesta+="<tr><td>"+dato[2]+"</td><td>"+dato[9]+"</td><td>"+dato[4]+"</td><td>"+dato[6]+"</td><td>"+dato[8]+"</td><td>"; 
                     respuesta+="<form method='POST' action='AltaConvocatoriaBase'><input type='hidden' name='idConvocatoria' value='"+dato[0]+"'><input class='btn btn-sm btn-link' type='submit' value='Editar'/></form>";                                                                                  
                     respuesta+="</td></tr>";
                 }
-            }
+                }
+            
         }catch(Exception e){
             respuesta=e.toString();
         }finally{

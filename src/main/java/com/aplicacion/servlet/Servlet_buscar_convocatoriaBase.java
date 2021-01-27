@@ -81,9 +81,9 @@ public class Servlet_buscar_convocatoriaBase extends HttpServlet {
                 String entidad=request.getParameter("entidad");
                 String plantel=request.getParameter("plantel");
                 String estatus=request.getParameter("estatus");
+                String tipoConvocatoria=request.getParameter("tipoConvocatoria");
                 Datos d=new Datos();
-                out.print(d.desplegarConvocatorias(programa, subsistema, entidad, plantel, estatus));
-                
+                out.print(d.desplegarConvocatoriasBase(programa, subsistema, entidad, plantel, "0",tipoConvocatoria));               
         }catch(Exception e){
             System.out.println(e.toString());
         }

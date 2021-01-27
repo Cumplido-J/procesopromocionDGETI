@@ -72,7 +72,6 @@
                           ${catalogo.desplegarOpcionesEstado(informacion[3])}
                       </select>
                     </div>
-                      
                     <div class="form-group col-md-3">                               
                         <label class="control-label" for="plantel">Plantel:<span class="text-danger" title="Campo obligatorio">*</span></label>
                         <select class="form-control input-sm ${disabled4}" id="plantel" name="plantel" required>                                  

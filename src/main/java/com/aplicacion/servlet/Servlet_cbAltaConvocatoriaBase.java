@@ -95,7 +95,7 @@ public class Servlet_cbAltaConvocatoriaBase extends HttpServlet {
                 String[] parametros={id};                                      
                 datos=metodo.ejecutaSP("sp_consultaConvocatoriaBase",parametros);
                 request.setAttribute("informacion", datos.get(0));
-                rd = sc.getRequestDispatcher("/cambioConvocatoria.jsp");
+                rd = sc.getRequestDispatcher("/cambioConvocatoriaBase.jsp");
             }else{
                 rd = sc.getRequestDispatcher("/altaConvocatoriaBase.jsp");
             }

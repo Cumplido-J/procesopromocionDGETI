@@ -110,7 +110,16 @@ public class Servlet_registrarConvocatoria extends HttpServlet {
                 Metodos_sql metodo = new Metodos_sql();
                 List<String[]> datos;       
                 //in _publicacion date,in _inicioRegistro date,in _finRegistro date,in _inicioValoracion date,in _finValoracion date,in _inicioDictaminacion date,in _finDictaminacion date, in _resultados date,in _idPlantel int,in _idPrograma int,in _estatus varchar(15)
-                String[] parametros={id,publicacion,inicioRegistro,finRegistro,inicioValoracion,finValoracion,inicioDictaminacion,finDictaminacion,resultados,plantel,programa,estatus};                                      
+                String tipoConvocatoria = "";
+                if(entidad.equals("") && plantel.equals("")){
+                    tipoConvocatoria = "NACIONAL";
+                }else if(!entidad.equals("") && plantel.equals("")){
+                    tipoConvocatoria = "ESTATAL";
+                }else{
+                    tipoConvocatoria = "PLANTEL";
+                }
+                
+                String[] parametros={id,publicacion,inicioRegistro,finRegistro,inicioValoracion,finValoracion,inicioDictaminacion,finDictaminacion,resultados,plantel,programa,estatus,entidad,tipoConvocatoria,subsistema};                                      
                 datos=metodo.ejecutaSP("sp_insertConvocatoria",parametros);            
                 if(!datos.isEmpty()){
                     respuesta=datos.get(0)[0]; 

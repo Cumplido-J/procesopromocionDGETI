@@ -84,6 +84,8 @@ public class Servlet_cbAltaConvocatoria extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
+        PrintWriter out = response.getWriter();
         HttpSession session= (HttpSession) request.getSession();     
         if(session.getAttribute("idUsuario")!=null){            
             ServletContext sc = getServletContext();
@@ -96,10 +98,26 @@ public class Servlet_cbAltaConvocatoria extends HttpServlet {
                 datos=metodo.ejecutaSP("sp_consultaConvocatoria",parametros);
                 request.setAttribute("informacion", datos.get(0));
                 rd = sc.getRequestDispatcher("/cambioConvocatoria.jsp");
+                rd.forward(request,response);
             }else{
-                rd = sc.getRequestDispatcher("/altaConvocatoria.jsp");
+                String idEntidad=session.getAttribute("entidad").toString();
+                String idPlantel=session.getAttribute("plantel").toString();
+                String idSubsistema=session.getAttribute("subsistema").toString();
+                Metodos_sql metodo = new Metodos_sql();
+                List<String[]> datos;            
+                String[] parametros={idEntidad,idPlantel,idSubsistema};                                      
+                datos=metodo.ejecutaSP("sp_consultaCBase",parametros);
+                
+                if(datos.isEmpty()){
+                    request.setAttribute("error", "Vacante No Registrado");
+                    RequestDispatcher rd1 = request.getRequestDispatcher("busquedaConvocatoria.jsp");
+                    rd1.forward(request, response);
+                }else{
+                   request.setAttribute("informacion", datos.get(0));
+                    rd = sc.getRequestDispatcher("/altaConvocatoria.jsp");
+                    rd.forward(request,response); 
+                }
             }
-            rd.forward(request,response);
         }else{
             response.sendRedirect("login.jsp");
         }

@@ -36,10 +36,18 @@ public class Catalogos {
         }
     }
     public String desplegarOpcionesEstado(String id){
-        String respuesta=desplegarOpcionesEstado();
-        String aux="value='"+id+"'";
-        respuesta=respuesta.replaceFirst(aux, aux+" selected");
-        return respuesta;  
+        String respuesta="";
+        String _id="0";
+        if(id.equals(_id)){
+            _id="";
+            respuesta+="<option value='"+_id+"'>"+_id+"</option>";
+        }else{
+            respuesta=desplegarOpcionesEstado();
+            String aux="value='"+id+"'";
+            respuesta=respuesta.replaceFirst(aux, aux+" selected");
+            
+        }
+        return respuesta;
     }    
     public String desplegarOpcionesGrado(){        
         String respuesta="<option value=''>-Seleccione-</option>";
@@ -684,10 +692,18 @@ public class Catalogos {
             return respuesta;        
         }
     }
-    public String desplegarOpcionesPlanteles2(String idSubsistema,String idEstado,String id){ 
-        String respuesta= desplegarOpcionesPlanteles2(idSubsistema,idEstado);
+    public String desplegarOpcionesPlanteles2(String idSubsistema,String idEstado,String id){
+        String respuesta="";
+        String _id="0";
+        if(id.equals(_id)){
+            _id="";
+            respuesta+="<option value='"+_id+"'>"+_id+"</option>";
+        }else{
+            respuesta= desplegarOpcionesPlanteles2(idSubsistema,idEstado);
         String aux="value='"+id+"'";
         respuesta=respuesta.replaceFirst(aux, aux+" selected");
+        }
+        
         return respuesta;  
     }
     
@@ -801,5 +817,34 @@ public class Catalogos {
         String aux="value='"+id+"'";
         respuesta=respuesta.replaceFirst(aux, aux+" selected");
         return respuesta;
+    }
+    
+    public String desplegarOpcionesTipoConvocatoria(){ 
+        String respuesta="<option value=''>-Seleccione-</option>" +
+            "<option value='ESTATAL'>Estatal</option>" +
+            "<option value='NACIONAL'>Nacional</option>" +
+            "<option value='PLANTEL'>Plantel</option>"; 
+        return respuesta;
+    }
+    
+    public String desplegarOpcionesTipoConvocatoria1(String id){
+        String respuestaOption="<option value=''>-Seleccione-</option>" +
+            "<option value='ESTATAL'>Estatal</option>" +
+            "<option value='NACIONAL'>Nacional</option>" +
+            "<option value='PLANTEL'>Plantel</option>";
+        
+        String aux="value='"+id+"'";
+        respuestaOption=respuestaOption.replaceFirst(aux, aux+" selected");
+        return respuestaOption;
+    }
+    
+    public String desplegarOpcionesEstatusConvocatoria(String id){
+        String respuestaOption="<option value=''>-Seleccione-</option>" +
+            "<option value='1'>Terminada</option>" +
+            "<option value='0'>Vigente</option>";
+        
+        String aux="value='"+id+"'";
+        respuestaOption=respuestaOption.replaceFirst(aux, aux+" selected");
+        return respuestaOption;
     }
 }

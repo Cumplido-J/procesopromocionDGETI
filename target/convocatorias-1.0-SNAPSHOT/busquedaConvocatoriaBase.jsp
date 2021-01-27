@@ -44,9 +44,9 @@
             <jsp:include page="seccionesPlantilla/barraSuperior.jsp"/>
             <div class="container">
                 <div class="text-center">
-                    <h4>Consulta de convocatorias</h4>                       
+                    <h4>Consulta de convocatorias base</h4>                       
                 </div>
-                <form id="formBusqueda" role="form" method="POST" action="BuscarConvocatoria">
+                <form id="formBusqueda" role="form" method="POST" action="BuscarConvocatoriaBase">
                 <div class="row">
                     <div class="form-group col-xs-12">                               
                         <label class="control-label" for="programa">Programa:</label>
@@ -56,6 +56,14 @@
                     </div>
                 </div>
                 <div class="row">
+                    
+                    <div class="form-group col-md-3">                               
+                        <label class="control-label" for="tipoConvocatoria">Tipo Convocatoria:</label>
+                        <select class="form-control input-sm" id="tipoConvocatoria" name="tipoConvocatoria" >                                  
+                            ${catalogo.desplegarOpcionesTipoConvocatoria()}
+                        </select>
+                    </div>
+                    
                     <div class="form-group col-md-3">                               
                         <label class="control-label" for="subsistema">Subsistema:</label>
                         <select class="form-control input-sm ${disabled2}" id="subsistema" name="subsistema" onchange="actualizarPlanteles()" >                                  
@@ -74,12 +82,6 @@
                         <select class="form-control input-sm ${disabled4}" id="plantel" name="plantel" >                                  
                              ${catalogo.desplegarOpcionesPlanteles2(sessionScope["subsistema"],sessionScope["entidad"],sessionScope["plantel"])}
                         </select>
-                    </div>                        
-                    <div class="form-group col-md-3">                               
-                        <label class="control-label" for="estatus">Estatus:</label>
-                        <select class="form-control input-sm" id="estatus" name="estatus" >                                  
-                            ${catalogo.desplegarOpcionesEstatus()}
-                        </select>
                     </div>
                     
                 </div>
@@ -95,14 +97,14 @@
                         <thead>
                             <tr>
                                 <th>Programa</th>
+                                <th>Tipo convocatoria</th>
                                 <th>Subsistema</th>
                                 <th>Entidad</th>
                                 <th>Plantel</th>
-                                <th>Estatus</th>
                                 <th>Opciones</th>
                             </tr>
                         </thead>
-                        <tbody id="seccionEditable">${dato.desplegarConvocatoriasBase(sessionScope["programa"],sessionScope["subsistema"],sessionScope["entidad"],sessionScope["plantel"],'')}</tbody>
+                        <tbody id="seccionEditable">${dato.desplegarConvocatoriasBase(sessionScope["programa"],sessionScope["subsistema"],sessionScope["entidad"],sessionScope["plantel"],'','')}</tbody>
                     </table>
                 </div>
             </div>
@@ -130,5 +132,28 @@
         <jsp:include page="seccionesPlantilla/scripts.jsp"/>
         <!--Agregar scripts aquí-->
         <script src="js/funcionesBusqueda.js"></script>
+        <script type="text/javascript">
+	(function(){
+		var tConvocatoria = document.querySelector("#tipoConvocatoria");
+		var tentidad = document.querySelector("#entidad");
+                var tplantel = document.querySelector("#plantel");
+
+		tConvocatoria.addEventListener('change', function(){
+			debugger;
+			if( tConvocatoria.value === 'NACIONAL' ) {
+        			tentidad.disabled = true;
+                                tentidad.required=false;
+                                tplantel.disabled = true;
+                                tplantel.required=false;
+			}else  if(tConvocatoria.value === 'ESTATAL'){
+                                tentidad.disabled = false;
+        			tplantel.disabled = true;
+			}else{
+                            tentidad.disabled = false;
+                            tplantel.disabled = false;
+                        }
+		})
+	})();
+	</script>
     </body>
 </html>

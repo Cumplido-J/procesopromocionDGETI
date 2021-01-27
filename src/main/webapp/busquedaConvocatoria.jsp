@@ -81,15 +81,22 @@
                             ${catalogo.desplegarOpcionesEstatus()}
                         </select>
                     </div>
-                    
-                </div>
+                </div>    
                 <div class="row">
                     <div class="form-group col-xs-12 text-center">                         
-                        <input class="btn btn-sm btn-primary" id="btnBuscar" type="submit" value='Buscar'/> 
-                        <a href="AltaConvocatoria" class="btn btn-sm btn-primary">Agregar</a>                        
+                        <input class="btn btn-sm btn-primary" id="btnBuscar" type="submit" value='Buscar'class="btn btn-sm btn-primary" id="btnBuscar" type="submit" value="Buscar" style="margin-left: -110px;"/> 
                     </div>
                 </div>
                 </form>
+                
+                <div class="row">
+                <form form method='POST' action='AltaConvocatoria'>
+                    <div class="form-group col-xs-12 text-center">    
+                        <input class="btn btn-sm btn-primary" id="btnBuscar" type="submit" value="Agregar" style="margin-top: -92px;margin-right: -54px;">
+                    </div>
+                </form>
+                </div>
+                        
                 <div class="table-responsive">
                     <table class="table table-condensed table-striped">
                         <thead>

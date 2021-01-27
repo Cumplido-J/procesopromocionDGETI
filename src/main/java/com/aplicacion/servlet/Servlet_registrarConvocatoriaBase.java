@@ -104,11 +104,39 @@ public class Servlet_registrarConvocatoriaBase extends HttpServlet {
                 String finDictaminacion=fecha.formatoAlmacenar(request.getParameter("finDictaminacion"));
                 String resultados=fecha.formatoAlmacenar(request.getParameter("resultados"));             
                 String estatus=request.getParameter("estatus");
+                String tipoConvocatoria=request.getParameter("tipoConvocatoria");
+                
+                if(tipoConvocatoria == null){
+                    if(entidad.equals("") && plantel.equals("")){
+                    tipoConvocatoria = "NACIONAL";
+                    entidad = "0";
+                    plantel = "0";
+                    }else if(!entidad.equals("") && plantel.equals("")){
+                        tipoConvocatoria = "ESTATAL";
+                        plantel = "0";
+                    }else{
+                        tipoConvocatoria = "PLANTEL";
+                    }
+                }else{
+                    if(entidad.equals("") && plantel.equals("")){
+                    entidad = "0";
+                    plantel = "0";
+                    }else if(!entidad.equals("") && plantel.equals("")){tipoConvocatoria = "ESTATAL";
+                        plantel = "0";
+                    }
+                }
+                
+                
                 String respuesta="Error en almacenamiento de datos, intente nuevamente";
                 Metodos_sql metodo = new Metodos_sql();
                 List<String[]> datos;       
-                //in _publicacion date,in _inicioRegistro date,in _finRegistro date,in _inicioValoracion date,in _finValoracion date,in _inicioDictaminacion date,in _finDictaminacion date, in _resultados date,in _idPlantel int,in _idPrograma int,in _estatus varchar(15)
-                String[] parametros={id,publicacion,inicioRegistro,finRegistro,inicioValoracion,finValoracion,inicioDictaminacion,finDictaminacion,resultados,plantel,programa,estatus};                                      
+                
+                //Validacion cuando una convocatoria es nueva
+                if(id.equals("")){
+                    estatus="0";
+                }
+                
+                String[] parametros={id,publicacion,inicioRegistro,finRegistro,inicioValoracion,finValoracion,inicioDictaminacion,finDictaminacion,resultados,plantel,programa,tipoConvocatoria,estatus,entidad,subsistema};                                      
                 datos=metodo.ejecutaSP("sp_insertConvocatoriaBase",parametros);            
                 if(!datos.isEmpty()){
                     respuesta=datos.get(0)[0]; 

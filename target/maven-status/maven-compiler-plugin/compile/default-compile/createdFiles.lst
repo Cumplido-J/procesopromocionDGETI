@@ -141,5 +141,4 @@ com\aplicacion\servlet\Servlet_finalizarConformacion.class
 com\convocatoria\servlet\ServletControladorEntidad.class
 com\aplicacion\servlet\Servlet_guardar_datos2.class
 com\aplicacion\servlet\Servlet_cbSesionAdministrador.class
-com\aplicacion\servlet\Servlet_convocatoria.class
 com\aplicacion\servlet\Servlet_guardar.class

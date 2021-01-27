@@ -6,11 +6,15 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%
+    session = (HttpSession) request.getSession(true);       
+%>
 <!DOCTYPE html>
 <html>
     <head>
         <jsp:include page="seccionesPlantilla/head.jsp"/>
         <jsp:useBean id="catalogo" class="herramientas.Catalogos" />
+        <jsp:useBean id="fecha" class="herramientas.Fecha" />
         <!--Agregar estilos aquí-->
     </head>
     <body>
@@ -60,59 +64,59 @@
                     </div>
                     <div class="form-group col-md-3">                                               
                       <label class="control-label" for="entidad">Entidad:<span class="text-danger" title="Campo obligatorio">*</span></label>
-                      <select class="form-control input-sm ${disabled3}" id="entidad" name="entidad" onchange="actualizarPlanteles()" required>                                  
-                          ${catalogo.desplegarOpcionesEstado(sessionScope["entidad"])}
+                      <select class="form-control input-sm ${disabled3}" id="entidad" name="entidad" onchange="actualizarPlanteles()">                                  
+                          ${catalogo.desplegarOpcionesEstado(informacion[13])}
                       </select>
                     </div>
                       
                     <div class="form-group col-md-3">                               
                         <label class="control-label" for="plantel">Plantel:<span class="text-danger" title="Campo obligatorio">*</span></label>
-                        <select class="form-control input-sm ${disabled4}" id="plantel" name="plantel" required>                                  
-                             ${catalogo.desplegarOpcionesPlanteles2(sessionScope["subsistema"],sessionScope["entidad"],sessionScope["plantel"])}
+                        <select class="form-control input-sm ${disabled4}" id="plantel" name="plantel">                                  
+                             ${catalogo.desplegarOpcionesPlanteles2(sessionScope["subsistema"],sessionScope["entidad"],informacion[9])}
                         </select>
                     </div> 
                     <div class="form-group col-md-3 datepicker-group">
                         <label class="control-label">Publicación de convocatoria:<span class="text-danger" title="Campo obligatorio">*</span></label>
-                        <input type="text" class="form-control input-sm calendario" id="publicacion" name="publicacion" onChange="validaFecha('publicacion','alertaPublicacion')" required>
+                        <input type="text" class="form-control input-sm disabled" id="publicacion" name="publicacion" onChange="validaFecha('publicacion','alertaPublicacion')" value="${fecha.formatoImprimir(informacion[1])}">
                         <label class="error hidden" id="alertaPublicacion">Ingrese una fecha válida</label>
-                    </div>
+                    </div>  
                 </div>
                 <div class="row">
                     <div class="form-group col-md-3 datepicker-group">                        
                         <label class="control-label">Inicio registro:<span class="text-danger" title="Campo obligatorio">*</span></label>
-                        <input type="text" class="form-control input-sm calendario" id="inicioRegistro" name="inicioRegistro" onChange="validaFecha('inicioRegistro','alertaInicioR')" required>
+                        <input type="text" class="form-control input-sm disabled" id="inicioRegistro" name="inicioRegistro" onChange="validaFecha('inicioRegistro','alertaInicioR')" value="${fecha.formatoImprimir(informacion[2])}">
                         <label class="error hidden" id="alertaInicioR">Ingrese una fecha válida</label>
                     </div>
                     <div class="form-group col-md-3 datepicker-group">
                         <label class="control-label">Término registro:<span class="text-danger" title="Campo obligatorio">*</span></label>
-                        <input type="text" class="form-control input-sm calendario" id="finRegistro" name="finRegistro" onChange="validaFecha('finRegistro','alertaFinR')" required>
+                        <input type="text" class="form-control input-sm disabled" id="finRegistro" name="finRegistro" onChange="validaFecha('finRegistro','alertaFinR')" value="${fecha.formatoImprimir(informacion[3])}">
                         <label class="error hidden" id="alertaFinR">Ingrese una fecha válida</label>
                     </div>
                     <div class="form-group col-md-3 datepicker-group">                        
                         <label class="control-label">Inicio valoración:<span class="text-danger" title="Campo obligatorio">*</span></label>
-                        <input type="text" class="form-control input-sm calendario" id="inicioValoracion" name="inicioValoracion" onChange="validaFecha('inicioValoracion','alertaInicioV')" required>
+                        <input type="text" class="form-control input-sm disabled" id="inicioValoracion" name="inicioValoracion" onChange="validaFecha('inicioValoracion','alertaInicioV')" value="${fecha.formatoImprimir(informacion[4])}">
                         <label class="error hidden" id="alertaInicioV">Ingrese una fecha válida</label>
                     </div>
                     <div class="form-group col-md-3 datepicker-group">
                         <label class="control-label">Término valoración:<span class="text-danger" title="Campo obligatorio">*</span></label>
-                        <input type="text" class="form-control input-sm calendario" id="finValoracion" name="finValoracion" onChange="validaFecha('finValoracion','alertaFinV')" required>
+                        <input type="text" class="form-control input-sm disabled" id="finValoracion" name="finValoracion" onChange="validaFecha('finValoracion','alertaFinV')" value="${fecha.formatoImprimir(informacion[5])}">
                         <label class="error hidden" id="alertaFinV">Ingrese una fecha válida</label>
                     </div>
                 </div>                
                 <div class="row">
                     <div class="form-group col-md-3 datepicker-group">                        
                         <label class="control-label">Inicio dictaminación:<span class="text-danger" title="Campo obligatorio">*</span></label>
-                        <input type="text" class="form-control input-sm calendario" id="inicioDictaminacion" name="inicioDictaminacion" onChange="validaFecha('inicioDictaminacion','alertaInicioD')" required>
+                        <input type="text" class="form-control input-sm disabled" id="inicioDictaminacion" name="inicioDictaminacion" onChange="validaFecha('inicioDictaminacion','alertaInicioD')" value="${fecha.formatoImprimir(informacion[6])}">
                         <label class="error hidden" id="alertaInicioD">Ingrese una fecha válida</label>
                     </div>
                     <div class="form-group col-md-3 datepicker-group">
                         <label class="control-label">Término dictaminación:<span class="text-danger" title="Campo obligatorio">*</span></label>
-                        <input type="text" class="form-control input-sm calendario" id="finDictaminacion" name="finDictaminacion" onChange="validaFecha('finDictaminacion','alertaFinD')" required>
+                        <input type="text" class="form-control input-sm disabled" id="finDictaminacion" name="finDictaminacion" onChange="validaFecha('finDictaminacion','alertaFinD')" value="${fecha.formatoImprimir(informacion[7])}">
                         <label class="error hidden" id="alertaFinD">Ingrese una fecha válida</label>
                     </div>     
                     <div class="form-group col-md-3 datepicker-group">
                         <label class="control-label">Publicación de resultados:<span class="text-danger" title="Campo obligatorio">*</span></label>
-                        <input type="text" class="form-control input-sm calendario" id="resultados" name="resultados" onChange="validaFecha('resultados','alertaResultados')" required>
+                        <input type="text" class="form-control input-sm disabled" id="resultados" name="resultados" onChange="validaFecha('resultados','alertaResultados')" value="${fecha.formatoImprimir(informacion[8])}">
                         <label class="error hidden" id="alertaResultados">Ingrese una fecha válida</label>
                     </div>
                     <div class="form-group col-md-3 datepicker-group">

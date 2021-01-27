@@ -14,30 +14,30 @@
         <!--Agregar estilos aquí-->
     </head>
     <body>
-        <c:set var="disabled1" value=""></c:set>
-        <c:set var="disabled2" value=""></c:set>
-        <c:set var="disabled3" value=""></c:set>
-        <c:set var="disabled4" value=""></c:set> 
+        <c:set var="disabled5" value=""></c:set>
+        <c:set var="disabled6" value=""></c:set>
+        <c:set var="disabled7" value=""></c:set>
+        <c:set var="disabled8" value=""></c:set> 
         
         <c:if test='${sessionScope["rol"]!="S"}'>
             <c:if test='${sessionScope["programa"]!=""}'>
-                <c:set var="disabled1" value="disabled"></c:set>
+                <c:set var="disabled5" value="disabled"></c:set>
             </c:if>
             <c:if test='${sessionScope["subsistema"]!=""}'>
-                <c:set var="disabled2" value="disabled"></c:set>
+                <c:set var="disabled6" value="disabled"></c:set>
             </c:if>
             <c:if test='${sessionScope["entidad"]!=null}'>
-                <c:set var="disabled3" value="disabled"></c:set>
+                <c:set var="disabled7" value="disabled"></c:set>
             </c:if>
             <c:if test='${sessionScope["plantel"]!=null}'>
-                <c:set var="disabled4" value="disabled"></c:set>
+                <c:set var="disabled8" value="disabled"></c:set>
             </c:if>
         </c:if>
         <main class="page">
             <jsp:include page="seccionesPlantilla/barraSuperior.jsp"/>
             <div class="container">
                 <div class="text-center">
-                    <h4>Alta convocatoria</h4>                       
+                    <h4>Alta convocatoria base</h4>                       
                 </div>
                 <div class="row col-xs-12">
                     <p>Los campos marcados con <span class="text-danger" title="Campo obligatorio">*</span> son obligatorios.</p>
@@ -46,38 +46,45 @@
                 <div class="row">
                     <div class="form-group col-xs-12">                               
                         <label class="control-label" for="programa">Programa:<span class="text-danger" title="Campo obligatorio">*</span></label>
-                        <select class="form-control input-sm ${disabled1}" id="programa" name="programa" required>                                  
+                        <select class="form-control input-sm ${disabled5}" id="programa" name="programa" required>                                  
                             ${catalogo.desplegarOpcionesProgramas(sessionScope["programa"])}
                         </select>
                     </div>
                 </div>
+                    
                 <div class="row">
                     <div class="form-group col-md-3">                               
+                        <label class="control-label" for="tipoConvocatoria">Tipo Convocatoria:</label>
+                        <select class="form-control input-sm" id="tipoConvocatoria" name="tipoConvocatoria" >                                  
+                                ${catalogo.desplegarOpcionesTipoConvocatoria()}
+                        </select>
+                    </div>
+                    <div class="form-group col-md-3">                               
                         <label class="control-label" for="subsistema">Subsistema:<span class="text-danger" title="Campo obligatorio">*</span></label>
-                        <select class="form-control input-sm ${disabled2}" id="subsistema" name="subsistema" onchange="actualizarPlanteles()" required>                                  
+                        <select class="form-control input-sm ${disabled6}" id="subsistema" name="subsistema" onchange="actualizarPlanteles()" required>                                  
                             ${catalogo.desplegarOpcionesSubsistema(sessionScope["subsistema"])}
                         </select>
                     </div>
                     <div class="form-group col-md-3">                                               
                       <label class="control-label" for="entidad">Entidad:<span class="text-danger" title="Campo obligatorio">*</span></label>
-                      <select class="form-control input-sm ${disabled3}" id="entidad" name="entidad" onchange="actualizarPlanteles()" required>                                  
+                      <select class="form-control input-sm ${disabled7}" id="entidad" name="entidad" onchange="actualizarPlanteles()" required>                                  
                           ${catalogo.desplegarOpcionesEstado(sessionScope["entidad"])}
                       </select>
                     </div>
                       
                     <div class="form-group col-md-3">                               
                         <label class="control-label" for="plantel">Plantel:<span class="text-danger" title="Campo obligatorio">*</span></label>
-                        <select class="form-control input-sm ${disabled4}" id="plantel" name="plantel" required>                                  
+                        <select class="form-control input-sm ${disabled8}" id="plantel" name="plantel" required>                                  
                              ${catalogo.desplegarOpcionesPlanteles2(sessionScope["subsistema"],sessionScope["entidad"],sessionScope["plantel"])}
                         </select>
                     </div> 
+                </div>
+                <div class="row">
                     <div class="form-group col-md-3 datepicker-group">
                         <label class="control-label">Publicación de convocatoria:<span class="text-danger" title="Campo obligatorio">*</span></label>
                         <input type="text" class="form-control input-sm calendario" id="publicacion" name="publicacion" onChange="validaFecha('publicacion','alertaPublicacion')" required>
                         <label class="error hidden" id="alertaPublicacion">Ingrese una fecha válida</label>
                     </div>
-                </div>
-                <div class="row">
                     <div class="form-group col-md-3 datepicker-group">                        
                         <label class="control-label">Inicio registro:<span class="text-danger" title="Campo obligatorio">*</span></label>
                         <input type="text" class="form-control input-sm calendario" id="inicioRegistro" name="inicioRegistro" onChange="validaFecha('inicioRegistro','alertaInicioR')" required>
@@ -93,13 +100,13 @@
                         <input type="text" class="form-control input-sm calendario" id="inicioValoracion" name="inicioValoracion" onChange="validaFecha('inicioValoracion','alertaInicioV')" required>
                         <label class="error hidden" id="alertaInicioV">Ingrese una fecha válida</label>
                     </div>
+                </div>                
+                <div class="row">
                     <div class="form-group col-md-3 datepicker-group">
                         <label class="control-label">Término valoración:<span class="text-danger" title="Campo obligatorio">*</span></label>
                         <input type="text" class="form-control input-sm calendario" id="finValoracion" name="finValoracion" onChange="validaFecha('finValoracion','alertaFinV')" required>
                         <label class="error hidden" id="alertaFinV">Ingrese una fecha válida</label>
                     </div>
-                </div>                
-                <div class="row">
                     <div class="form-group col-md-3 datepicker-group">                        
                         <label class="control-label">Inicio dictaminación:<span class="text-danger" title="Campo obligatorio">*</span></label>
                         <input type="text" class="form-control input-sm calendario" id="inicioDictaminacion" name="inicioDictaminacion" onChange="validaFecha('inicioDictaminacion','alertaInicioD')" required>
@@ -114,12 +121,6 @@
                         <label class="control-label">Publicación de resultados:<span class="text-danger" title="Campo obligatorio">*</span></label>
                         <input type="text" class="form-control input-sm calendario" id="resultados" name="resultados" onChange="validaFecha('resultados','alertaResultados')" required>
                         <label class="error hidden" id="alertaResultados">Ingrese una fecha válida</label>
-                    </div>
-                    <div class="form-group col-md-3 datepicker-group">
-                        <label class="control-label" for="estatus">Estatus:<span class="text-danger" title="Campo obligatorio">*</span></label>
-                        <select class="form-control input-sm" id="estatus" name="estatus" >
-                            <option value="TEMPORAL">Temporal</option>                            
-                        </select>
                     </div>
                 </div>
                 
@@ -154,6 +155,29 @@
         </div>
         <jsp:include page="seccionesPlantilla/scripts.jsp"/>
         <!--Agregar scripts aquí-->
-        <script src="js/funcionesAltaConvocatoria.js"></script> 
+        <script src="js/funcionesAltaConvocatoria.js"></script>
+        <script type="text/javascript">
+	(function(){
+		var tConvocatoria = document.querySelector("#tipoConvocatoria");
+		var tentidad = document.querySelector("#entidad");
+                var tplantel = document.querySelector("#plantel");
+
+		tConvocatoria.addEventListener('change', function(){
+			debugger;
+			if( tConvocatoria.value === 'NACIONAL' ) {
+        			tentidad.disabled = true;
+                                tentidad.required=false;
+                                tplantel.disabled = true;
+                                tplantel.required=false;
+			}else  if(tConvocatoria.value === 'ESTATAL'){
+                                tentidad.disabled = false;
+        			tplantel.disabled = true;
+			}else{
+                            tentidad.disabled = false;
+                            tplantel.disabled = false;
+                        }
+		})
+	})();
+	</script>
     </body>
 </html>
