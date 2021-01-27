@@ -118,14 +118,14 @@ public class Servlet_registrarConvocatoriaBase extends HttpServlet {
                         tipoConvocatoria = "PLANTEL";
                     }
                 }else{
-                    if(entidad.equals("") && plantel.equals("")){
+                    if(entidad==null && plantel==null){
                     entidad = "0";
                     plantel = "0";
-                    }else if(!entidad.equals("") && plantel.equals("")){tipoConvocatoria = "ESTATAL";
+                    }else if(!entidad.equals("") && plantel.equals("")){
+                        tipoConvocatoria = "ESTATAL";
                         plantel = "0";
                     }
                 }
-                
                 
                 String respuesta="Error en almacenamiento de datos, intente nuevamente";
                 Metodos_sql metodo = new Metodos_sql();
