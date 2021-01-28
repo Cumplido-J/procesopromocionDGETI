@@ -50,7 +50,7 @@
                 <div class="row">
                     <div class="form-group col-xs-12">                               
                         <label class="control-label" for="programa">Programa:</label>
-                        <select class="form-control input-sm ${disabled1}" id="programa" name="programa" >                                  
+                        <select class="form-control input-sm " id="programa" name="programa" >                                  
                             ${catalogo.desplegarOpcionesProgramas(sessionScope["programa"])}
                         </select>
                     </div>
@@ -84,19 +84,17 @@
                 </div>    
                 <div class="row">
                     <div class="form-group col-xs-12 text-center">                         
-                        <input class="btn btn-sm btn-primary" id="btnBuscar" type="submit" value='Buscar'class="btn btn-sm btn-primary" id="btnBuscar" type="submit" value="Buscar" style="margin-left: -110px;"/> 
+                        <input class="btn btn-sm btn-primary" id="btnBuscar" type="submit" value='Buscar'class="btn btn-sm btn-primary" id="btnBuscar" type="submit" value="Buscar" style="margin-left: -110px;"/>
                     </div>
                 </div>
                 </form>
-                
                 <div class="row">
-                <form form method='POST' action='AltaConvocatoria'>
-                    <div class="form-group col-xs-12 text-center">    
+                <form form method='POST' action='AltaConvocatoria' >
+                    <div class="form-group col-xs-12 text-center">
                         <input class="btn btn-sm btn-primary" id="btnBuscar" type="submit" value="Agregar" style="margin-top: -92px;margin-right: -54px;">
                     </div>
                 </form>
-                </div>
-                        
+                </div>        
                 <div class="table-responsive">
                     <table class="table table-condensed table-striped">
                         <thead>

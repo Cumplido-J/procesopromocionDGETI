@@ -100,8 +100,16 @@ public class Servlet_cbAltaConvocatoria extends HttpServlet {
                 rd = sc.getRequestDispatcher("/cambioConvocatoria.jsp");
                 rd.forward(request,response);
             }else{
-                String idEntidad=session.getAttribute("entidad").toString();
-                String idPlantel=session.getAttribute("plantel").toString();
+                String idEntidad="";
+                String idPlantel="";
+                if(session.getAttribute("entidad")!=null && session.getAttribute("plantel")!=null){
+                    idEntidad=session.getAttribute("entidad").toString();
+                    idPlantel=session.getAttribute("plantel").toString();
+                }else{
+                    idEntidad="";
+                    idPlantel="";
+                }
+                
                 String idSubsistema=session.getAttribute("subsistema").toString();
                 Metodos_sql metodo = new Metodos_sql();
                 List<String[]> datos;            

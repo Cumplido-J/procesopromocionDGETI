@@ -113,8 +113,11 @@ public class Servlet_registrarConvocatoria extends HttpServlet {
                 String tipoConvocatoria = "";
                 if(entidad.equals("") && plantel.equals("")){
                     tipoConvocatoria = "NACIONAL";
+                    entidad="0";
+                    plantel="0";
                 }else if(!entidad.equals("") && plantel.equals("")){
                     tipoConvocatoria = "ESTATAL";
+                    plantel="0";
                 }else{
                     tipoConvocatoria = "PLANTEL";
                 }

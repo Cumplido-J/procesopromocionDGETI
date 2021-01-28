@@ -36,17 +36,11 @@ public class Catalogos {
         }
     }
     public String desplegarOpcionesEstado(String id){
-        String respuesta="";
-        String _id="0";
-        if(id.equals(_id)){
-            _id="";
-            respuesta+="<option value='"+_id+"'>"+_id+"</option>";
-        }else{
-            respuesta=desplegarOpcionesEstado();
-            String aux="value='"+id+"'";
-            respuesta=respuesta.replaceFirst(aux, aux+" selected");
+        
+        String respuesta=desplegarOpcionesEstado();
+        String aux="value='"+id+"'";
+        respuesta=respuesta.replaceFirst(aux, aux+" selected");
             
-        }
         return respuesta;
     }    
     public String desplegarOpcionesGrado(){        
@@ -693,16 +687,9 @@ public class Catalogos {
         }
     }
     public String desplegarOpcionesPlanteles2(String idSubsistema,String idEstado,String id){
-        String respuesta="";
-        String _id="0";
-        if(id.equals(_id)){
-            _id="";
-            respuesta+="<option value='"+_id+"'>"+_id+"</option>";
-        }else{
-            respuesta= desplegarOpcionesPlanteles2(idSubsistema,idEstado);
+        String respuesta=desplegarOpcionesPlanteles2(idSubsistema,idEstado);
         String aux="value='"+id+"'";
         respuesta=respuesta.replaceFirst(aux, aux+" selected");
-        }
         
         return respuesta;  
     }

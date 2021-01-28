@@ -41,6 +41,14 @@ public class Datos {
     public  String desplegarConvocatorias(String idPrograma,String idSubsistema,String idEntidad,String idPlantel,String estatus){        
         String respuesta="<tr><td colspan='6' class='text-center'>Sin información</td></tr>";        
         try{
+            if(idEntidad==null && idPlantel==null){
+                idEntidad="";
+                idPlantel="";
+            }else if(idEntidad==null){
+                idEntidad="";
+            }else if(idPlantel==null){
+                idPlantel="";
+            }
             String[] parametros={idPrograma,idSubsistema,idEntidad,idPlantel,estatus};
             List<String[]> datos=metodos.ejecutaSP("sp_consultaConvocatorias",parametros);
             if(!datos.isEmpty()){

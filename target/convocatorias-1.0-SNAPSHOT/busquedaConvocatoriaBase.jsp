@@ -50,7 +50,7 @@
                 <div class="row">
                     <div class="form-group col-xs-12">                               
                         <label class="control-label" for="programa">Programa:</label>
-                        <select class="form-control input-sm ${disabled1}" id="programa" name="programa" >                                  
+                        <select class="form-control input-sm " id="programa" name="programa" >                                  
                             ${catalogo.desplegarOpcionesProgramas(sessionScope["programa"])}
                         </select>
                     </div>
@@ -143,11 +143,14 @@
 			if( tConvocatoria.value === 'NACIONAL' ) {
         			tentidad.disabled = true;
                                 tentidad.required=false;
+                                tentidad.value = "true"
                                 tplantel.disabled = true;
                                 tplantel.required=false;
+                                tplantel.value="";
 			}else  if(tConvocatoria.value === 'ESTATAL'){
                                 tentidad.disabled = false;
         			tplantel.disabled = true;
+                                tplantel.value = "";
 			}else{
                             tentidad.disabled = false;
                             tplantel.disabled = false;
