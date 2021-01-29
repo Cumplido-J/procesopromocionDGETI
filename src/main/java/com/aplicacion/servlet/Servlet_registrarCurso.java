@@ -104,7 +104,7 @@ public class Servlet_registrarCurso extends HttpServlet {
                 datos=metodo.ejecutaSP("sp_insertCursos",parametros);            
                 if(!datos.isEmpty()){
                     if(datos.get(0)[0].equals("ok")){
-                        String[] infoCursos=new CriteriosValoracion().getFilasCursos(idUsuario);
+                        String[] infoCursos=new CriteriosValoracion().getFilasCursos(idUsuario,false);
                         out.print(infoCursos[0]+"||"+infoCursos[1]);                     
                     }
                 }else{
@@ -117,7 +117,7 @@ public class Servlet_registrarCurso extends HttpServlet {
                 datos=metodo.ejecutaSP("sp_deleteCursos",parametros);            
                 if(!datos.isEmpty()){
                     if(datos.get(0)[0].equals("ok")){
-                        String[] infoCursos=new CriteriosValoracion().getFilasCursos(idUsuario);
+                        String[] infoCursos=new CriteriosValoracion().getFilasCursos(idUsuario,false);
                         out.print(infoCursos[0]+"||"+infoCursos[1]);                    
                     }
                 }else{

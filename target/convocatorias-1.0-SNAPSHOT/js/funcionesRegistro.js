@@ -1239,11 +1239,9 @@ function confirmarPlaza(id){
 }
 function borrarPlaza(id){
     $("#modalConfirmacion2").modal("hide");
-    $.post("AdministracionPlaza", {id: id}, function(data){
+    $.post("AdministracionPlaza", {id: id,k:"B"}, function(data){
         if(data.includes("<tr>")){            
-            $("#tablaPlazas").html(data); 
-            $("#categoriaAspira").val("");
-            $("#jornadaAspira").val("");
+            $("#tablaPlazas").html(data);
         }
         else{
             $("#mensaje").html(data);            
@@ -1277,4 +1275,21 @@ function cambioEscuela(){
         $("#escuelaOtro").addClass("hidden"); 
         $("#escuelaOtro").removeAttr("required"); 
     }
+}
+
+function seleccionarPlaza(objeto){
+    var id=objeto.value;
+    var seleccionada;
+    if(objeto.checked){
+        seleccionada="V";
+    }else{
+        seleccionada="F";
+    }    
+    $.post("AdministracionPlaza", {id: id,k:"S",s:seleccionada}, function(data){
+        if(!data.includes("ok")){ 
+            $("#mensaje").html(data);            
+            $("#modalMensaje").modal("show");
+            objeto.checked=false;
+        } 
+    });
 }

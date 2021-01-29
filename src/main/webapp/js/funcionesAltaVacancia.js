@@ -82,6 +82,7 @@ $(document).ready(function () {
 });
 
 function cambioCategoria() {
+    var idPrograma=$("#programa").val();
     var tipoCategoria=$("#categoria option:selected").attr("tipo");
     var id=$("#categoria").val();
     if(id!=""){
@@ -94,12 +95,22 @@ function cambioCategoria() {
 }
 
 function cambioJornada(objeto){
+    var programa=$("#programa").val();
     var jornada=objeto.value;
+    
     if(jornada=="1"){
-        $("#seccionHoras").removeClass("hidden");
-        $("#horas").attr("required",true);
+        if(programa=="1"){
+            $("#mensaje").html("Opción no permitida para este programa");
+            $("#modalMensaje").modal("show");
+            $("#btnEnviar").addClass("disabled");
+        }else{
+            $("#seccionHoras").removeClass("hidden");
+            $("#horas").attr("required",true);
+            $("#btnEnviar").removeClass("disabled");
+        }
     }else{
         $("#seccionHoras").addClass("hidden");
         $("#horas").removeAttr("required");
+        $("#btnEnviar").removeClass("disabled");
     }
 }

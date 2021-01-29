@@ -101,7 +101,7 @@ public class Servlet_registrarPublicacion extends HttpServlet {
                 datos=metodo.ejecutaSP("sp_insertPublicaciones",parametros);            
                 if(!datos.isEmpty()){
                     if(datos.get(0)[0].equals("ok")){
-                        String[] info=new CriteriosValoracion().getFilasPublicaciones(idUsuario);
+                        String[] info=new CriteriosValoracion().getFilasPublicaciones(idUsuario,false);
                         out.print(info[0]+"||"+info[1]);                    
                     }else{
                         out.print(datos.get(0)[0]);
@@ -116,7 +116,7 @@ public class Servlet_registrarPublicacion extends HttpServlet {
                 datos=metodo.ejecutaSP("sp_deletePublicaciones",parametros);            
                 if(!datos.isEmpty()){
                     if(datos.get(0)[0].equals("ok")){
-                        String[] info=new CriteriosValoracion().getFilasPublicaciones(idUsuario);
+                        String[] info=new CriteriosValoracion().getFilasPublicaciones(idUsuario,false);
                         out.print(info[0]+"||"+info[1]);                    
                     }
                 }else{

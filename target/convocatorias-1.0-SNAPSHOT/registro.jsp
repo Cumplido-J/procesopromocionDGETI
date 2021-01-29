@@ -378,8 +378,16 @@
                             </div>
                             <div class="row">                                 
                                 <div class="form-group col-md-3 datepicker-group ">
-                                  <label><input type="checkbox" id="cbUP" name="cbUP" data-toggle="collapse" data-target="#seccionFUP" checked>No he tenido promociones previas</label>
-                                  <div id="seccionFUP" class="collapse">
+                                    <c:if test="${Docente.infoRegistro[39]==null}">
+                                        <c:set var="checked" value="checked='true'"></c:set>
+                                        <c:set var="in" value=""></c:set>
+                                    </c:if>
+                                    <c:if test="${Docente.infoRegistro[39]!=null}">
+                                        <c:set var="checked" value=""></c:set>
+                                        <c:set var="in" value="in"></c:set>
+                                    </c:if>
+                                  <label><input type="checkbox" id="cbUP" name="cbUP" data-toggle="collapse" data-target="#seccionFUP" ${checked}>No he tenido promociones previas</label>
+                                  <div id="seccionFUP" class="collapse ${in}">
                                     <label class="control-label" for="fechaPromocion">Fecha de su última promoción:</label>
                                     <input class="form-control input-sm" id="fechaPromocion" name="fechaPromocion" type="text" value="${fecha.formatoImprimir(Docente.infoRegistro[39])}" required>
                                   </div>
@@ -413,14 +421,14 @@
                                   <select class="form-control input-sm" id="categoriaAspira" name="categoriaAspira" onchange="cambioCategoriaAspira()" required>                                     
                                      ${catalogo.desplegarOpcionesCategoriasVacantes(Docente.infoRegistro[6],Docente.infoRegistro[64],Docente.infoRegistro[42])}
                                   </select>  
-                                  <label class="error" id="alertaCategoria" hidden >No puede participar a esta categoría</label>
+                                  
                                 </div>
                                 <div class="form-group col-md-3">
                                   <label class="control-label" for="jornadaAspira">Tipo de jornada:</label>
-                                  <select class="form-control input-sm" id="jornadaAspira" name="jornadaAspira" onchange="cambioJornadaAspira()" required>
+                                  <select class="form-control input-sm" id="jornadaAspira" name="jornadaAspira" required>
                                       ${catalogo.desplegarOpcionesJornadaVacante(Docente.infoRegistro[42],Docente.infoRegistro[6],Docente.infoRegistro[64],Docente.infoRegistro[44])}
                                   </select>  
-                                  <label class="error" id="alertaJornada" hidden >No puede participar para esta jornada</label>
+                                  
                                 </div>
                                 <div class="form-group col-md-3">
                                     <label class="control-label">Seleccione el requisito cumplido de acuerdo a su situación:</label><br>
@@ -1051,6 +1059,14 @@
                 </c:if>
             });
         </script>
+        <c:if test="${vistaAdmin}">
+            <script>
+                function confirmarPlaza(){
+                    $("#mensaje").html("Acción no permitida");                    
+                    $("#modalMensaje").modal("show");
+                }
+            </script>
+        </c:if>
         
     </body>
 </html>

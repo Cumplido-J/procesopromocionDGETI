@@ -109,16 +109,38 @@ public class Servlet_administracionPlaza extends HttpServlet {
                 }
             }else{
                 String id=request.getParameter("id");
-                String[] parametros={id};
-                List<String[]> datos;                           
-                datos=metodo.ejecutaSP("sp_deleteUsuarioPlaza",parametros);            
-                if(!datos.isEmpty()){
-                    if(datos.get(0)[0].equals("ok")){
-                        String informacion=new Datos().desplegarPlazas(idUsuario);
-                        out.print(informacion);                     
+                if(request.getParameter("k").equals("B")){
+                    String[] parametros={id};
+                    List<String[]> datos;                           
+                    datos=metodo.ejecutaSP("sp_deleteUsuarioPlaza",parametros);            
+                    if(!datos.isEmpty()){
+                        if(datos.get(0)[0].equals("ok")){
+                            String informacion=new Datos().desplegarPlazas(idUsuario);
+                            out.print(informacion);                     
+                        }
+                    }else{
+                        out.print("Error al eliminar la información, intente nuevamente");
                     }
-                }else{
-                    out.print("Error al eliminar la información, intente nuevamente");
+                }else if(request.getParameter("k").equals("S")){
+                    String seleccionada=request.getParameter("s");
+                    String[] parametros={id,seleccionada};
+                    List<String[]> datos;                           
+                    datos=metodo.ejecutaSP("sp_actualizarPlazaActual",parametros);            
+                    if(!datos.isEmpty()){
+                        if(datos.get(0)[0].equals("ok")){
+                            String respuesta=new Datos().validarSeleccionadas(idUsuario);
+                            System.out.println(respuesta);
+                            if(!respuesta.contains(",")){
+                                parametros[1]="F";
+                                datos=metodo.ejecutaSP("sp_actualizarPlazaActual",parametros);
+                            }else{
+                                respuesta="ok";
+                            }
+                            out.print(respuesta);                     
+                        }
+                    }else{
+                        out.print("Error al eliminar la información, intente nuevamente");
+                    }
                 }
             }
         } finally {

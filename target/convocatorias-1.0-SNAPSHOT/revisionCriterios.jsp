@@ -107,7 +107,7 @@
                                 </div>
                                 <div class="col-xs-12 text-right">
                                     
-                                    <input class="btn btn-sm btn-primary" id="btnEnviar1" type="submit" value='Aprobar criterio'/>                                    
+                                    <input class="btn btn-sm btn-primary" id="btnEnviar1" type="submit" value='Guardar y continuar'/>                                    
                                 </div>
                             </form>
                         </div>
@@ -163,7 +163,7 @@
                                 </div>
                                 <div class="col-xs-12 text-right">
                                     
-                                    <input class="btn btn-sm btn-primary" id="btnEnviar2" type="submit" value='Aprobar criterio'/>                                    
+                                    <input class="btn btn-sm btn-primary" id="btnEnviar2" type="submit" value='Guardar y continuar'/>                                    
                                 </div>
                             </form>
                         </div>
@@ -237,7 +237,7 @@
                                 </div>
                                 <div class="col-xs-12 text-right">
                                     
-                                    <input class="btn btn-sm btn-primary" id="btnEnviar4" type="submit" value='Aprobar criterio'/>                                    
+                                    <input class="btn btn-sm btn-primary" id="btnEnviar4" type="submit" value='Guardar y continuar'/>                                    
                                 </div>
                             </form>
                         </div>
@@ -290,7 +290,7 @@
                             </div>
                             <div class='table-responsive'>
                                 <table class='table table-bordered table-condensed'>
-                                    <tr><th>Tipo</th><th>Nombre del curso</th><th>Periodo o Fecha de realización</th><th>Institución educativa con reconocimiento oficial que emite constancia</th><th>Total de horas que acredita el curso</th><th>Constancia o documento probatorio</th><th>Borrar</th></tr>
+                                    <tr><th>Tipo</th><th>Nombre del curso</th><th>Periodo o Fecha de realización</th><th>Institución educativa con reconocimiento oficial que emite constancia</th><th>Total de horas que acredita el curso</th><th>Constancia o documento probatorio</th><th>Opciones</th></tr>
                                     <tbody id="tablaCursos">
                                         ${cursos[0]}
                                     </tbody>
@@ -314,7 +314,7 @@
                             </div>
                             <div class="col-xs-12 text-right">
                                 
-                                <input class="btn btn-sm btn-primary" id="btnEnviar5" type="submit" value='Aprobar criterio'/>                                    
+                                <input class="btn btn-sm btn-primary" id="btnEnviar5" type="submit" value='Guardar y continuar'/>                                    
                             </div>
                             </form>
                         </div>
@@ -365,7 +365,7 @@
                             </div>
                             <div class='table-responsive'>
                                 <table class='table table-bordered table-condensed'>
-                                    <tr><th>Nombre de la aportación en materia de mejora continua</th><th>Periodo o Fecha de realización</th><th>Institución educativa con reconocimiento oficial que emite constancia</th><th>Constancia o documento probatorio</th><th>Borrar</th></tr>
+                                    <tr><th>Nombre de la aportación en materia de mejora continua</th><th>Periodo o Fecha de realización</th><th>Institución educativa con reconocimiento oficial que emite constancia</th><th>Constancia o documento probatorio</th><th>Opciones</th></tr>
                                     <tbody id="tablaAportaciones">
                                         ${aportaciones[0]}
                                     </tbody>
@@ -389,7 +389,7 @@
                         </div>
                             <div class="col-xs-12 text-right">
                                 
-                                <input class="btn btn-sm btn-primary" id="btnEnviar6" type="submit" value='Aprobar criterio'/>                                    
+                                <input class="btn btn-sm btn-primary" id="btnEnviar6" type="submit" value='Guardar y continuar'/>                                    
                             </div>
                             </form>
                         </div>        
@@ -439,7 +439,7 @@
                             </div>
                             <div class='table-responsive'>
                                 <table class='table table-bordered table-condensed'>
-                                    <tr><th>Nombre de la participación en eventos y actividades de fortalecimiento académico y formación integral del educando</th><th>Periodo o Fecha de realización</th><th>Institución educativa con reconocimiento oficial que emite constancia</th><th>Constancia o documento probatorio</th><th>Borrar</th></tr>
+                                    <tr><th>Nombre de la participación en eventos y actividades de fortalecimiento académico y formación integral del educando</th><th>Periodo o Fecha de realización</th><th>Institución educativa con reconocimiento oficial que emite constancia</th><th>Constancia o documento probatorio</th><th>Opciones</th></tr>
                                     <tbody id="tablaParticipaciones">
                                         ${participaciones[0]}
                                     </tbody>
@@ -462,7 +462,7 @@
                             </div>
                             <div class="col-xs-12 text-right">
                                     
-                                    <input class="btn btn-sm btn-primary" id="btnEnviar7" type="submit" value='Aprobar criterio'/>                                    
+                                    <input class="btn btn-sm btn-primary" id="btnEnviar7" type="submit" value='Guardar y continuar'/>                                    
                                 </div>
                             </form>
                         </div>
@@ -513,7 +513,7 @@
                             </div>
                             <div class='table-responsive'>
                                 <table class='table table-bordered table-condensed'>
-                                    <tr><th>Periodo o Fecha de realización</th><th>Constancia o documento probatorio</th><th>Borrar</th></tr>
+                                    <tr><th>Periodo o Fecha de realización</th><th>Constancia o documento probatorio</th><th>Opciones</th></tr>
                                     <tbody id="tablaTutorias">
                                         ${tutorias[0]}
                                     </tbody>
@@ -537,7 +537,7 @@
                         </div>
                                 <div class="col-xs-12 text-right">
                                     
-                                    <input class="btn btn-sm btn-primary" id="btnEnviar8" type="submit" value='Aprobar criterio'/>                                    
+                                    <input class="btn btn-sm btn-primary" id="btnEnviar8" type="submit" value='Guardar y continuar'/>                                    
                                 </div>
                             </form>
                         </div>
@@ -588,7 +588,7 @@
                             </div>
                             <div class='table-responsive'>
                                 <table class='table table-bordered table-condensed'>
-                                    <tr><th>Nombre de  la publicación</th><th>Medio en el que se publicó</th><th>Fecha de publicación</th><th>ISSN/ISBN</th><th>Borrar</th></tr>
+                                    <tr><th>Nombre de  la publicación</th><th>Medio en el que se publicó</th><th>Fecha de publicación</th><th>ISSN/ISBN</th><th>Opciones</th></tr>
                                     <tbody id="tablaPublicaciones">
                                         ${publicaciones[0]}
                                     </tbody>
@@ -612,7 +612,7 @@
                         </div>
                         <div class="col-xs-12 text-right">
                                     
-                                    <input class="btn btn-sm btn-primary" id="btnEnviar9" type="submit" value='Aprobar criterio'/>                                    
+                                    <input class="btn btn-sm btn-primary" id="btnEnviar9" type="submit" value='Guardar y continuar'/>                                    
                                 </div>
                             </form>
                         </div>
@@ -687,7 +687,7 @@
                                     </div>
                                     <div class='table-responsive'>
                                         <table class='table table-bordered table-condensed'>
-                                            <tr><th>Tipo de evidencia</th><th>Periodo o Fecha de realización</th><th>Constancia o documento probatorio</th><th>Borrar</th></tr>
+                                            <tr><th>Tipo de evidencia</th><th>Periodo o Fecha de realización</th><th>Constancia o documento probatorio</th><th>Opciones</th></tr>
                                             <tbody id="tablaResultados">
                                                 ${resultados[0]}
                                             </tbody>
@@ -707,7 +707,7 @@
                                 </div>
                                 <div class="col-xs-12 text-right">
                                     
-                                    <input class="btn btn-sm btn-primary" id="btnEnviar10" type="submit" value='Aprobar criterio'/>                                    
+                                    <input class="btn btn-sm btn-primary" id="btnEnviar10" type="submit" value='Guardar y continuar'/>                                    
                                 </div>
                             </form>
                         </div>

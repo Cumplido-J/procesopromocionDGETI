@@ -152,6 +152,7 @@ public class Datos {
         }
     }
     
+    
     public  String desplegarPlazas(String idUsuario){        
         String respuesta="<tr><td colspan='6' class='text-center'>Sin información</td></tr>";        
         try{
@@ -159,15 +160,65 @@ public class Datos {
             List<String[]> datos=metodos.ejecutaSP("sp_consultaUsuarioPlaza",parametros);
             if(!datos.isEmpty()){
                 respuesta="";
+                String seleccionado="";
                 for(String[] dato:datos)
                 {
-                    respuesta+="<tr><td><center><input type='checkbox' value='"+dato[0]+"'/></center><td>"+dato[11]+"</td><td>"+new Fecha().formatoImprimir(dato[7])+"</td><td>"+dato[9]+":"+dato[10]+"</td><td class='hidden'>"+dato[2]+"</td><td>"+dato[3]+"</td><td class='hidden'>"+dato[4]+"</td><td>"+dato[5];
+                    if(dato[12].equals("V")){
+                        seleccionado="checked";
+                    }else{
+                        seleccionado="";
+                    }
+                    respuesta+="<tr><td><center><input type='checkbox' onChange='seleccionarPlaza(this)' value='"+dato[0]+"' "+seleccionado+"/></center><td>"+dato[11]+"</td><td>"+new Fecha().formatoImprimir(dato[7])+"</td><td>"+dato[9]+":"+dato[10]+"</td><td class='hidden'>"+dato[2]+"</td><td>"+dato[3]+"</td><td class='hidden'>"+dato[4]+"</td><td>"+dato[5];
                     if(dato[4].equals("1")){
                         respuesta+="("+dato[6]+")";
                     }                    
                     respuesta+="</td><td>"; 
                     respuesta+="<button type='button' class='btn btn-sm' title='Borrar' onclick='confirmarPlaza("+dato[0]+")'><span class='glyphicon glyphicon-trash'></span></button>";  
                     respuesta+="</td></tr>";
+                }
+            }
+        }catch(Exception e){
+            respuesta=e.toString();
+        }finally{
+            return respuesta;        
+        }
+    }
+    public  String validarSeleccionadas(String idUsuario){        
+        String respuesta="";   
+        int horas=0,numPlazas=0;
+        String idCategoria="-1",idJornada="-1",idCategoriaAux="",idJornadaAux="";
+        try{
+            String[] parametros={idUsuario};
+            List<String[]> datos=metodos.ejecutaSP("sp_consultaUsuarioPlaza",parametros);
+            if(!datos.isEmpty()){
+                respuesta="";                
+                for(String[] dato:datos)
+                {
+                    if(dato[12].equals("V")){
+                        idCategoria=dato[2];
+                        idJornada=dato[4];
+                        if(dato[4].equals("1")){
+                            horas+=Integer.parseInt(dato[6]);
+                        }        
+                        System.out.println(idCategoria+"-"+idCategoriaAux+"-"+idJornada+"-"+idJornadaAux);
+                        if(!idCategoriaAux.isEmpty()){
+                            
+                            if(!idCategoriaAux.equals(idCategoria)||!idJornadaAux.equals(idJornada)){
+                                respuesta="Solo puede seleccionar plazas de la misma categoria y jornada";
+                            }
+                        }
+                        idCategoriaAux=idCategoria;
+                        idJornadaAux=idJornada;
+                        numPlazas++;
+                    }
+                    
+                }
+                if(!idJornada.equals("1")&&numPlazas>1){
+                    respuesta="Solo puede seleccionar una plaza con la que participará";
+                }else{
+                    if(respuesta.isEmpty()){
+                        respuesta=idCategoria+","+idJornada+","+horas;
+                    }
                 }
             }
         }catch(Exception e){

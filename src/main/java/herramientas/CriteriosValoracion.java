@@ -20,7 +20,7 @@ public class CriteriosValoracion {
         metodo=new Metodos_sql();
         fecha=new Fecha();
     }    
-    public String[] getFilasCursos(String idUsuario){   
+    public String[] getFilasCursos(String idUsuario,boolean vistaAdmin){   
         String[] respuesta={"",""};        
         int puntaje=0;
         int horas=0;
@@ -50,9 +50,19 @@ public class CriteriosValoracion {
                 respuesta[0]+="<td>"+dato[7]+"</td>";
                 respuesta[0]+="<td>"+dato[8]+"</td>";
                 respuesta[0]+="<td>";
-                respuesta[0]+="<button type='button' class='btn btn-sm' title='Borrar' onclick='confirmarCurso("+dato[0]+")'>";
-                respuesta[0]+="<span class='glyphicon glyphicon-trash'></span>";
-                respuesta[0]+="</button>";
+                if(vistaAdmin){
+                    respuesta[0]+="<button type='button' class='btn btn-sm' title='Aprobar'>";
+                    respuesta[0]+="<span class='glyphicon glyphicon-ok completo'></span>";
+                    respuesta[0]+="</button>";
+                    respuesta[0]+="<button type='button' class='btn btn-sm' title='No aprobado'>";
+                    respuesta[0]+="<span class='glyphicon glyphicon-remove incompleto'></span>";                    
+                    respuesta[0]+="</button>";
+                    respuesta[0]+="<span class='glyphicon glyphicon-exclamation-sign incompleto' title='Sección incompleta'></span>";
+                }else{
+                    respuesta[0]+="<button type='button' class='btn btn-sm' title='Borrar' onclick='confirmarCurso("+dato[0]+")'>";
+                    respuesta[0]+="<span class='glyphicon glyphicon-trash'></span>";
+                    respuesta[0]+="</button>";
+                }                
                 respuesta[0]+="</td>";
                 respuesta[0]+="</tr>";
             }            
@@ -67,7 +77,7 @@ public class CriteriosValoracion {
         respuesta[1]=""+puntaje;
         return respuesta;
     }
-    public String[] getFilasAportaciones(String idUsuario){   
+    public String[] getFilasAportaciones(String idUsuario,boolean vistaAdmin){   
         String respuesta;
         String puntaje;
         String[] retorno={"","0"};
@@ -89,9 +99,19 @@ public class CriteriosValoracion {
                 respuesta+="<td>"+dato[6]+"</td>";
                 respuesta+="<td>"+dato[7]+"</td>";
                 respuesta+="<td>";
+                if(vistaAdmin){
+                    respuesta+="<button type='button' class='btn btn-sm' title='Aprobar'>";
+                    respuesta+="<span class='glyphicon glyphicon-ok completo'></span>";
+                    respuesta+="</button>";
+                    respuesta+="<button type='button' class='btn btn-sm' title='No aprobado'>";
+                    respuesta+="<span class='glyphicon glyphicon-remove incompleto'></span>";                    
+                    respuesta+="</button>";
+                    respuesta+="<span class='glyphicon glyphicon-exclamation-sign incompleto' title='Sección incompleta'></span>";
+                }else{
                 respuesta+="<button type='button' class='btn btn-sm' title='Borrar' onclick='confirmarAportacion("+dato[0]+")'>";
                 respuesta+="<span class='glyphicon glyphicon-trash'></span>";
                 respuesta+="</button>";
+                }
                 respuesta+="</td>";
                 respuesta+="</tr>";
             }          
@@ -117,7 +137,7 @@ public class CriteriosValoracion {
         retorno[1]=puntaje;
         return retorno;
     }
-    public String[] getFilasParticipaciones(String idUsuario){   
+    public String[] getFilasParticipaciones(String idUsuario,boolean vistaAdmin){   
         String[] retorno={"","0"};
         String respuesta;
         String puntaje;
@@ -139,9 +159,19 @@ public class CriteriosValoracion {
                 respuesta+="<td>"+dato[6]+"</td>";
                 respuesta+="<td>"+dato[7]+"</td>";
                 respuesta+="<td>";
+                if(vistaAdmin){
+                    respuesta+="<button type='button' class='btn btn-sm' title='Aprobar'>";
+                    respuesta+="<span class='glyphicon glyphicon-ok completo'></span>";
+                    respuesta+="</button>";
+                    respuesta+="<button type='button' class='btn btn-sm' title='No aprobado'>";
+                    respuesta+="<span class='glyphicon glyphicon-remove incompleto'></span>";                    
+                    respuesta+="</button>";
+                    respuesta+="<span class='glyphicon glyphicon-exclamation-sign incompleto' title='Sección incompleta'></span>";
+                }else{
                 respuesta+="<button type='button' class='btn btn-sm' title='Borrar' onclick='confirmarParticipacion("+dato[0]+")'>";
                 respuesta+="<span class='glyphicon glyphicon-trash'></span>";
                 respuesta+="</button>";
+                }
                 respuesta+="</td>";
                 respuesta+="</tr>";
             }           
@@ -167,7 +197,7 @@ public class CriteriosValoracion {
         retorno[1]=puntaje;
         return retorno;
     }
-    public String[] getFilasTutorias(String idUsuario){   
+    public String[] getFilasTutorias(String idUsuario,boolean vistaAdmin){   
         String respuesta;
         String[] retorno={"","0"};
         String puntaje;
@@ -187,9 +217,19 @@ public class CriteriosValoracion {
                 }
                 respuesta+="<td>"+dato[4]+"</td>";
                 respuesta+="<td>";
+                if(vistaAdmin){
+                    respuesta+="<button type='button' class='btn btn-sm' title='Aprobar'>";
+                    respuesta+="<span class='glyphicon glyphicon-ok completo'></span>";
+                    respuesta+="</button>";
+                    respuesta+="<button type='button' class='btn btn-sm' title='No aprobado'>";
+                    respuesta+="<span class='glyphicon glyphicon-remove incompleto'></span>";                    
+                    respuesta+="</button>";
+                    respuesta+="<span class='glyphicon glyphicon-exclamation-sign incompleto' title='Sección incompleta'></span>";
+                }else{
                 respuesta+="<button type='button' class='btn btn-sm' title='Borrar' onclick='confirmarTutoria("+dato[0]+")'>";
                 respuesta+="<span class='glyphicon glyphicon-trash'></span>";
                 respuesta+="</button>";
+                }
                 respuesta+="</td>";
                 respuesta+="</tr>";
             } 
@@ -203,7 +243,7 @@ public class CriteriosValoracion {
         retorno[1]=puntaje;
         return retorno;
     }
-    public String[] getFilasPublicaciones(String idUsuario){   
+    public String[] getFilasPublicaciones(String idUsuario,boolean vistaAdmin){   
         String respuesta;
         String puntaje="0";
         String[] retorno={"","0"};
@@ -221,9 +261,19 @@ public class CriteriosValoracion {
                 respuesta+="<td>"+fecha.formatoImprimir(dato[4])+"</td>"; 
                 respuesta+="<td>"+dato[5]+"</td>";
                 respuesta+="<td>";
+                if(vistaAdmin){
+                    respuesta+="<button type='button' class='btn btn-sm' title='Aprobar'>";
+                    respuesta+="<span class='glyphicon glyphicon-ok completo'></span>";
+                    respuesta+="</button>";
+                    respuesta+="<button type='button' class='btn btn-sm' title='No aprobado'>";
+                    respuesta+="<span class='glyphicon glyphicon-remove incompleto'></span>";                    
+                    respuesta+="</button>";
+                    respuesta+="<span class='glyphicon glyphicon-exclamation-sign incompleto' title='Sección incompleta'></span>";
+                }else{
                 respuesta+="<button type='button' class='btn btn-sm' title='Borrar' onclick='confirmarPublicacion("+dato[0]+")'>";
                 respuesta+="<span class='glyphicon glyphicon-trash'></span>";
                 respuesta+="</button>";
+                }
                 respuesta+="</td>";
                 respuesta+="</tr>";
             }           
@@ -237,7 +287,7 @@ public class CriteriosValoracion {
         retorno[1]=puntaje;
         return retorno;
     }
-    public String[] getFilasResultados(String idUsuario){   
+    public String[] getFilasResultados(String idUsuario,boolean vistaAdmin){   
         String respuesta;
         String puntaje="0";
         String[] retorno=new String[2];
@@ -258,9 +308,19 @@ public class CriteriosValoracion {
                 }
                 respuesta+="<td>"+dato[6]+"</td>";
                 respuesta+="<td>";
+                if(vistaAdmin){
+                    respuesta+="<button type='button' class='btn btn-sm' title='Aprobar'>";
+                    respuesta+="<span class='glyphicon glyphicon-ok completo'></span>";
+                    respuesta+="</button>";
+                    respuesta+="<button type='button' class='btn btn-sm' title='No aprobado'>";
+                    respuesta+="<span class='glyphicon glyphicon-remove incompleto'></span>";                    
+                    respuesta+="</button>";
+                    respuesta+="<span class='glyphicon glyphicon-exclamation-sign incompleto' title='Sección incompleta'></span>";
+                }else{
                 respuesta+="<button type='button' class='btn btn-sm' title='Borrar' onclick='confirmarResultado("+dato[0]+")'>";
                 respuesta+="<span class='glyphicon glyphicon-trash'></span>";
                 respuesta+="</button>";
+                }
                 respuesta+="</td>";
                 respuesta+="</tr>";
             }  

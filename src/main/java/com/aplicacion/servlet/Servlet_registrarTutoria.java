@@ -100,7 +100,7 @@ public class Servlet_registrarTutoria extends HttpServlet {
                 datos=metodo.ejecutaSP("sp_insertTutorias",parametros);            
                 if(!datos.isEmpty()){
                     if(datos.get(0)[0].equals("ok")){
-                        String[] info=new CriteriosValoracion().getFilasTutorias(idUsuario);
+                        String[] info=new CriteriosValoracion().getFilasTutorias(idUsuario,false);
                         out.print(info[0]+"||"+info[1]);                    
                     }else{
                         out.print(datos.get(0)[0]);
@@ -115,7 +115,7 @@ public class Servlet_registrarTutoria extends HttpServlet {
                 datos=metodo.ejecutaSP("sp_deleteTutorias",parametros);            
                 if(!datos.isEmpty()){
                     if(datos.get(0)[0].equals("ok")){
-                        String[] info=new CriteriosValoracion().getFilasTutorias(idUsuario);
+                        String[] info=new CriteriosValoracion().getFilasTutorias(idUsuario,false);
                         out.print(info[0]+"||"+info[1]);                    
                     }
                 }else{

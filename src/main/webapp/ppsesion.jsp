@@ -147,15 +147,15 @@
                     <article class="articleses ${disabled5}">
                         <h3>Paso 5:</h3>
                         <c:if test = "${Docente.documentoCargado3('1')==true}">
-                                    <a href="#" onclick="abrirModalArchivo(1)"><img src="<%=Imagen.muestraImagen(RutaConfig.getRutaCarpeta()+"imagenes/EvidVal.jpg")%>" alt=""></a>
-                                    <input id="btnEvidencia1" type="button" class="btn btn-sm btn-link" value="" onclick="abrirModalArchivo(1)"/>
-                                    <a onclick="abrirModalArchivo(1)" ><h3>Carta de aceptación</h3></a>
-                                </c:if>
-                                <c:if test = "${Docente.documentoCargado3('1')==false}">
-                                    <a onclick="abrirModalArchivo(1)" ><img src="<%=Imagen.muestraImagen(RutaConfig.getRutaCarpeta()+"imagenes/EvidReg.jpg")%>" alt=""></a>
-                                    <input id="btnEvidencia1" type="button" class="btn btn-sm btn-link incompleto" value="" onclick="abrirModalArchivo(1)"/>
-                                    <a onclick="abrirModalArchivo(1)" ><h3>Carta de aceptación</h3></a>
-                                </c:if> 
+                            <a href="#" onclick="abrirModalArchivo(1)"><img src="<%=Imagen.muestraImagen(RutaConfig.getRutaCarpeta()+"imagenes/EvidVal.jpg")%>" alt=""></a>
+                            <input id="btnEvidencia1" type="button" class="btn btn-sm btn-link" value="" onclick="abrirModalArchivo(1)"/>
+                            <a onclick="abrirModalArchivo(1)" ><h3>Carta de aceptación</h3></a>
+                        </c:if>
+                        <c:if test = "${Docente.documentoCargado3('1')==false}">
+                            <a onclick="abrirModalArchivo(1)" ><img src="<%=Imagen.muestraImagen(RutaConfig.getRutaCarpeta()+"imagenes/EvidReg.jpg")%>" alt=""></a>
+                            <input id="btnEvidencia1" type="button" class="btn btn-sm btn-link incompleto" value="" onclick="abrirModalArchivo(1)"/>
+                            <a onclick="abrirModalArchivo(1)" ><h3>Carta de aceptación</h3></a>
+                        </c:if> 
                     </article>
                 </c:if>
                 <!--
@@ -297,7 +297,7 @@
         document.formArchivo.action="GuardarArchivo";
         document.formArchivo.submit();
         var id=$("#idArchivo").val(); 
-        $("#btnEvidencia"+id).attr("value","Ver documento");
+        //$("#btnEvidencia"+id).attr("value","Ver documento");
         $("#alertaBtnEvidencia"+id).attr("style","display:none;");
         $("#mensaje").html("El archivo fue cargado correctamente");
     }

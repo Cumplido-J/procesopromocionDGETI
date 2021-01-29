@@ -95,12 +95,12 @@ public class Servlet_cbRegistroCriterios extends HttpServlet {
             request.setAttribute("criterios", criterios);
             request.setAttribute("puntajes", puntajes);
             request.setAttribute("puntajeEncuestas", puntajeEncuestas);            
-            request.setAttribute("cursos", cv.getFilasCursos(idUsuario));
-            request.setAttribute("aportaciones", cv.getFilasAportaciones(idUsuario));
-            request.setAttribute("participaciones", cv.getFilasParticipaciones(idUsuario));
-            request.setAttribute("tutorias", cv.getFilasTutorias(idUsuario));
-            request.setAttribute("publicaciones", cv.getFilasPublicaciones(idUsuario));
-            request.setAttribute("resultados", cv.getFilasResultados(idUsuario));
+            request.setAttribute("cursos", cv.getFilasCursos(idUsuario,vistaAdmin));
+            request.setAttribute("aportaciones", cv.getFilasAportaciones(idUsuario,vistaAdmin));
+            request.setAttribute("participaciones", cv.getFilasParticipaciones(idUsuario,vistaAdmin));
+            request.setAttribute("tutorias", cv.getFilasTutorias(idUsuario,vistaAdmin));
+            request.setAttribute("publicaciones", cv.getFilasPublicaciones(idUsuario,vistaAdmin));
+            request.setAttribute("resultados", cv.getFilasResultados(idUsuario,vistaAdmin));
             request.setAttribute("vistaAdmin", vistaAdmin);
             ServletContext sc = getServletContext();
             RequestDispatcher rd;
