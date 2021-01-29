@@ -65,6 +65,11 @@ END$$
 
 DELIMITER ;
 
+ALTER TABLE `bdpromocion`.`convocatoria` 
+ADD COLUMN `idEntidad` INT NULL AFTER `estatus`, 
+ADD COLUMN `tipoConvocatoria` VARCHAR(20) NULL AFTER `idEntidad`,
+ADD COLUMN `idSubsistema` INT NULL AFTER `tipoConvocatoria`;
+
 
 ALTER TABLE `bdpromocion`.`convocatoriabase` 
 ADD COLUMN `tipoConvocatoria` VARCHAR(20) NULL AFTER `idPrograma`,
