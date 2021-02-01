@@ -84,17 +84,11 @@
                 </div>    
                 <div class="row">
                     <div class="form-group col-xs-12 text-center">                         
-                        <input class="btn btn-sm btn-primary" id="btnBuscar" type="submit" value='Buscar'class="btn btn-sm btn-primary" id="btnBuscar" type="submit" value="Buscar" style="margin-left: -110px;"/>
+                        <input class="btn btn-sm btn-primary" id="btnBuscar" type="submit" value='Buscar'class="btn btn-sm btn-primary" id="btnBuscar" type="submit" value="Buscar"/>
+                        <a onclick="location.href='AltaConvocatoria?entidadAdm='+document.getElementById('entidad').value+'&plantelAdm='+document.getElementById('plantel').value+'&programaAdm='+document.getElementById('programa').value;" class="btn btn-sm btn-primary">Agregar</a>
                     </div>
                 </div>
-                </form>
-                <div class="row">
-                <form form method='POST' action='AltaConvocatoria' >
-                    <div class="form-group col-xs-12 text-center">
-                        <input class="btn btn-sm btn-primary" id="btnBuscar" type="submit" value="Agregar" style="margin-top: -92px;margin-right: -54px;">
-                    </div>
-                </form>
-                </div>        
+                </form>        
                 <div class="table-responsive">
                     <table class="table table-condensed table-striped">
                         <thead>

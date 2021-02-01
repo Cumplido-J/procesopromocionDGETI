@@ -72,7 +72,7 @@
                     <div class="form-group col-md-3">                               
                         <label class="control-label" for="plantel">Plantel:<span class="text-danger" title="Campo obligatorio">*</span></label>
                         <select class="form-control input-sm ${disabled4}" id="plantel" name="plantel">                                  
-                             ${catalogo.desplegarOpcionesPlanteles2(sessionScope["subsistema"],sessionScope["entidad"],informacion[9])}
+                             ${catalogo.desplegarOpcionesPlanteles2(sessionScope["subsistema"],informacion[13],informacion[9])}
                         </select>
                     </div> 
                     <div class="form-group col-md-3 datepicker-group">

@@ -63,11 +63,62 @@ public class Servlet_cbAltaConvocatoria extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        HttpSession session= (HttpSession) request.getSession();     
-        if(session.getAttribute("idUsuario")!=null){            
+        HttpSession session= (HttpSession) request.getSession();
+        response.setContentType("text/html;charset=UTF-8");
+        PrintWriter out = response.getWriter();
+        
+        String entidadAdm = request.getParameter("entidadAdm");
+        String plantelAdm = request.getParameter("plantelAdm");
+        String programaAdm = request.getParameter("programaAdm");
+        
+        if(session.getAttribute("idUsuario")!=null){
             ServletContext sc = getServletContext();
-            RequestDispatcher rd= sc.getRequestDispatcher("/altaConvocatoria.jsp");            
-            rd.forward(request,response);
+            RequestDispatcher rd;
+            
+            String idEntidad="";
+            String idPlantel="";
+            String idPrograma="";
+            
+                if(session.getAttribute("entidad")!=null && session.getAttribute("plantel")!=null){
+                    idEntidad=session.getAttribute("entidad").toString();
+                    idPlantel=session.getAttribute("plantel").toString();
+                    idPrograma=session.getAttribute("programa").toString();
+                }else if(request.getParameter("entidadAdm")!=null && request.getParameter("plantelAdm") != null){
+                            idEntidad = entidadAdm;
+                            idPlantel = plantelAdm;
+                            idPrograma= request.getParameter("programaAdm");
+                }else if(request.getParameter("entidadAdm")!=null && request.getParameter("plantelAdm") == null){
+                            idEntidad = request.getParameter("entidadAdm");
+                            idPlantel = "";
+                            idPrograma= programaAdm;
+                }else{
+                    idEntidad="";
+                    idPlantel="";
+                    idPrograma= programaAdm;
+                }
+                
+                String idSubsistema=session.getAttribute("subsistema").toString();
+                Metodos_sql metodo = new Metodos_sql();
+                List<String[]> datos;            
+                String[] parametros={idEntidad,idPlantel,idSubsistema,idPrograma};                                      
+                datos=metodo.ejecutaSP("sp_consultaCBase",parametros);
+                
+                if(datos.isEmpty()){
+                    request.setAttribute("error", "Vacante No Registrado");
+                    RequestDispatcher rd1 = request.getRequestDispatcher("busquedaConvocatoria.jsp");
+                    rd1.forward(request, response);
+                    //out.print("No hay convocatorias disponibles");
+                }else{
+                    request.setAttribute("informacion", datos.get(0));
+                    rd = sc.getRequestDispatcher("/altaConvocatoria.jsp");
+                    rd.forward(request,response);
+                    //session.setAttribute("informacion",datos.get(0));
+                    //response.sendRedirect("/altaConvocatoria.jsp");
+                }
+            
+            //ServletContext sc = getServletContext();
+            //RequestDispatcher rd= sc.getRequestDispatcher("/altaConvocatoria.jsp");            
+            //rd.forward(request,response);
         }else{
             response.sendRedirect("login.jsp");
         }
@@ -102,28 +153,42 @@ public class Servlet_cbAltaConvocatoria extends HttpServlet {
             }else{
                 String idEntidad="";
                 String idPlantel="";
+                String idPrograma="";
                 if(session.getAttribute("entidad")!=null && session.getAttribute("plantel")!=null){
                     idEntidad=session.getAttribute("entidad").toString();
                     idPlantel=session.getAttribute("plantel").toString();
+                    idPrograma=session.getAttribute("programa").toString();
+                }else if(request.getParameter("entidadA")!=null && request.getParameter("plantelA") != null){
+                            idEntidad = request.getParameter("entidadA");
+                            idPlantel = request.getParameter("plantelA");
+                            idPrograma= request.getParameter("programaA");
+                }else if(request.getParameter("entidadA")!=null && request.getParameter("plantelA") == null){
+                            idEntidad = request.getParameter("entidadA");
+                            idPlantel = "";
+                            idPrograma= request.getParameter("programaA");
                 }else{
                     idEntidad="";
                     idPlantel="";
+                    idPrograma= request.getParameter("programaA");
                 }
                 
                 String idSubsistema=session.getAttribute("subsistema").toString();
                 Metodos_sql metodo = new Metodos_sql();
                 List<String[]> datos;            
-                String[] parametros={idEntidad,idPlantel,idSubsistema};                                      
+                String[] parametros={idEntidad,idPlantel,idSubsistema,idPrograma};                                      
                 datos=metodo.ejecutaSP("sp_consultaCBase",parametros);
                 
                 if(datos.isEmpty()){
                     request.setAttribute("error", "Vacante No Registrado");
                     RequestDispatcher rd1 = request.getRequestDispatcher("busquedaConvocatoria.jsp");
                     rd1.forward(request, response);
+                    //out.print("No hay convocatorias disponibles");
                 }else{
-                   request.setAttribute("informacion", datos.get(0));
+                    request.setAttribute("informacion", datos.get(0));
                     rd = sc.getRequestDispatcher("/altaConvocatoria.jsp");
-                    rd.forward(request,response); 
+                    rd.forward(request,response);
+                    //session.setAttribute("informacion",datos.get(0));
+                    //response.sendRedirect("/altaConvocatoria.jsp");
                 }
             }
         }else{
