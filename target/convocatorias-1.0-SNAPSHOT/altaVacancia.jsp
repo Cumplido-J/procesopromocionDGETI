@@ -53,7 +53,7 @@
                 <div class="row">
                     <div class="form-group col-xs-12">                               
                         <label class="control-label" for="programa">Programa:<span class="text-danger" title="Campo obligatorio">*</span></label>
-                        <select class="form-control input-sm ${disabled1}" id="programa" name="programa" required>                                  
+                        <select class="form-control input-sm " id="programa" name="programa" required>                                  
                             ${catalogo.desplegarOpcionesProgramas(sessionScope["programa"])}
                         </select>
                     </div>
