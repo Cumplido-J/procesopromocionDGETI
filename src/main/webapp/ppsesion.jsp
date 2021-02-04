@@ -74,7 +74,7 @@
                 <c:set var="hidden3" value="hidden"></c:set>
                 <c:set var="disabled4" value="disabled"></c:set>
                 <c:set var="hidden4" value="disabled"></c:set>
-                <c:set var="disabled5" value=""></c:set>
+                <c:set var="disabled5" value="disabled"></c:set>
             </c:if>
             
             <c:if test = "${Docente.infoRegistro[61]!=null&&Docente.infoRegistro[66]!='1'}">  <!--Si ya finalizó el registro-->
@@ -139,13 +139,9 @@
                         <a href="RegistroCriterios" ><img src="<%=Imagen.muestraImagen(RutaConfig.getRutaCarpeta()+"imagenes/EvidReg.jpg")%>" alt=""></a>
                         <a href="RegistroCriterios" ><h3>Evidencias de los criterios de valoración</h3></a>
                     </article>
+                        
                     <article class="articleses ${disabled4}">
                         <h3>Paso 4:</h3>
-                        <a href="FichaRegistro" target="_blank" ><img src="<%=Imagen.muestraImagen(RutaConfig.getRutaCarpeta()+"imagenes/EvidVal.jpg")%>" alt=""></a>
-                        <a href="FichaRegistro"  target="_blank" ><h3>Ficha de <br/> registro </h3></a>
-                    </article>
-                    <article class="articleses ${disabled5}">
-                        <h3>Paso 5:</h3>
                         <c:if test = "${Docente.documentoCargado3('1')==true}">
                             <a href="#" onclick="abrirModalArchivo(1)"><img src="<%=Imagen.muestraImagen(RutaConfig.getRutaCarpeta()+"imagenes/EvidVal.jpg")%>" alt=""></a>
                             <input id="btnEvidencia1" type="button" class="btn btn-sm btn-link" value="" onclick="abrirModalArchivo(1)"/>
@@ -156,6 +152,12 @@
                             <input id="btnEvidencia1" type="button" class="btn btn-sm btn-link incompleto" value="" onclick="abrirModalArchivo(1)"/>
                             <a onclick="abrirModalArchivo(1)" ><h3>Carta de aceptación</h3></a>
                         </c:if> 
+                    </article>
+                        
+                    <article class="articleses ${disabled5}">
+                        <h3>Paso 5:</h3>
+                        <a href="FichaRegistro" target="_blank" ><img src="<%=Imagen.muestraImagen(RutaConfig.getRutaCarpeta()+"imagenes/EvidVal.jpg")%>" alt=""></a>
+                        <a href="FichaRegistro"  target="_blank" ><h3>Ficha de <br/> registro </h3></a>
                     </article>
                 </c:if>
                 <!--
@@ -251,7 +253,7 @@
                                 <label class="control-label" for="archivo">Seleccione el archivo a cargar:</label>
                                 <input type="hidden" id="idArchivo" name="idArchivo" value="" />
                                 <input type="file" class="form-control input-sm" id="archivoCarta" name="archivoCarta" onchange="subirArchivo_();" accept=".pdf" />
-                                <a href="descargas/cartaaceptaciónbasesconvocatoriaPPSDCC 03022021.docx" download>
+                                <a href="descargas/cartaaceptaciónbasesconvocatoriaPPSDCC03022021.pdf" download>
                                     Descargar carta aceptación
                                 </a>
                         </form>  
