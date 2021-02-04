@@ -251,6 +251,9 @@
                                 <label class="control-label" for="archivo">Seleccione el archivo a cargar:</label>
                                 <input type="hidden" id="idArchivo" name="idArchivo" value="" />
                                 <input type="file" class="form-control input-sm" id="archivoCarta" name="archivoCarta" onchange="subirArchivo_();" accept=".pdf" />
+                                <a href="descargas/cartaaceptaciónbasesconvocatoriaPPSDCC 03022021.docx" download>
+                                    Descargar carta aceptación
+                                </a>
                         </form>  
                     </div>
                 </div>

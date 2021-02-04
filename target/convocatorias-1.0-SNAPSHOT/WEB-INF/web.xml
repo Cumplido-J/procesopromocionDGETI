@@ -5,8 +5,12 @@
         <param-value>C:/ArchivosPromocion/config.properties</param-value>
     </context-param>-->
     <context-param>
-        <param-name>rutaConfig</param-name>
+        <param-name>rutaConfig1</param-name>
         <param-value>/home/pdadmin/configDocente/ArchivosPromocion/configLinux.properties</param-value>
+    </context-param>
+    <context-param>
+        <param-name>rutaConfig</param-name>
+        <param-value>C:/ArchivosPromocion/config.properties</param-value>
     </context-param>
     <servlet>
         <servlet-name>Servlet_cancelarPin</servlet-name>
