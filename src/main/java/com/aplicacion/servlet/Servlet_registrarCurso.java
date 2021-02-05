@@ -83,12 +83,15 @@ public class Servlet_registrarCurso extends HttpServlet {
             Fecha fecha=new Fecha();
             HttpSession session= (HttpSession) request.getSession();
             String idUsuario,rfc;
+            boolean vistaAdmin;
             if(session.getAttribute("rol").toString().equals("D")){
                 idUsuario=session.getAttribute("idUsuario").toString();
                 rfc=session.getAttribute("rfc").toString();
+                vistaAdmin=false;
             }else{
                 idUsuario=session.getAttribute("idDocente").toString();                
                 rfc=session.getAttribute("rfcDocente").toString();
+                vistaAdmin=true;
             }           
             Metodos_sql metodo = new Metodos_sql(); 
             if(request.getParameter("id")==null){
@@ -104,7 +107,7 @@ public class Servlet_registrarCurso extends HttpServlet {
                 datos=metodo.ejecutaSP("sp_insertCursos",parametros);            
                 if(!datos.isEmpty()){
                     if(datos.get(0)[0].equals("ok")){
-                        String[] infoCursos=new CriteriosValoracion().getFilasCursos(idUsuario,false);
+                        String[] infoCursos=new CriteriosValoracion().getFilasCursos(idUsuario,vistaAdmin);
                         out.print(infoCursos[0]+"||"+infoCursos[1]);                     
                     }
                 }else{
@@ -112,12 +115,19 @@ public class Servlet_registrarCurso extends HttpServlet {
                 }
             }else{
                 String idCurso=request.getParameter("id");
+                String idAccion=request.getParameter("k");
                 String[] parametros={idCurso};
-                List<String[]> datos;                           
-                datos=metodo.ejecutaSP("sp_deleteCursos",parametros);            
+                List<String[]> datos=null;   
+                if(idAccion.equals("B")){
+                    datos=metodo.ejecutaSP("sp_deleteCursos",parametros); 
+                }else if(idAccion.equals("A")){
+                    datos=metodo.ejecutaSP("sp_aprobarCurso",parametros); 
+                }else if(idAccion.equals("R")){
+                    datos=metodo.ejecutaSP("sp_rechazarCurso",parametros); 
+                }
                 if(!datos.isEmpty()){
                     if(datos.get(0)[0].equals("ok")){
-                        String[] infoCursos=new CriteriosValoracion().getFilasCursos(idUsuario,false);
+                        String[] infoCursos=new CriteriosValoracion().getFilasCursos(idUsuario,vistaAdmin);
                         out.print(infoCursos[0]+"||"+infoCursos[1]);                    
                     }
                 }else{

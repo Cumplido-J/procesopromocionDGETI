@@ -33,11 +33,19 @@ public class CriteriosValoracion {
             for(String[] dato:datos){
                 respuesta[0]+="<tr>";
                 if(dato[2].equals("CU")){
-                    horas+=Integer.parseInt(dato[7]);
-                    System.out.println(horas);
+                    if(dato[9]!=null){
+                        if(dato[9].equals("V")){
+                            horas+=Integer.parseInt(dato[7]);
+                        }
+                    }
+                    //System.out.println(horas);
                     respuesta[0]+="<td>Curso de actualización</td>"; 
                 }else if(dato[2].equals("CE")){
-                    puntaje=10;
+                    if(dato[9]!=null){
+                        if(dato[9].equals("V")){
+                        puntaje=10;
+                        }
+                    }
                     respuesta[0]+="<td>Certificación</td>"; 
                 }
                 respuesta[0]+="<td>"+dato[3]+"</td>";  
@@ -51,13 +59,21 @@ public class CriteriosValoracion {
                 respuesta[0]+="<td>"+dato[8]+"</td>";
                 respuesta[0]+="<td>";
                 if(vistaAdmin){
-                    respuesta[0]+="<button type='button' class='btn btn-sm' title='Aprobar'>";
-                    respuesta[0]+="<span class='glyphicon glyphicon-ok completo'></span>";
-                    respuesta[0]+="</button>";
-                    respuesta[0]+="<button type='button' class='btn btn-sm' title='No aprobado'>";
-                    respuesta[0]+="<span class='glyphicon glyphicon-remove incompleto'></span>";                    
-                    respuesta[0]+="</button>";
-                    respuesta[0]+="<span class='glyphicon glyphicon-exclamation-sign incompleto' title='Sección incompleta'></span>";
+                    if(dato[9]==null){
+                        respuesta[0]+="<button type='button' class='btn btn-sm' title='Aprobar' onclick='aprobarCurso("+dato[0]+")'>";
+                        respuesta[0]+="<span class='glyphicon glyphicon-ok completo'></span>";
+                        respuesta[0]+="</button>";
+                        respuesta[0]+="<button type='button' class='btn btn-sm' title='No cumple con la evidencia' onclick='rechazarCurso("+dato[0]+")'>";
+                        respuesta[0]+="<span class='glyphicon glyphicon-remove incompleto'></span>";                    
+                        respuesta[0]+="</button>";
+                        respuesta[0]+="<span class='glyphicon glyphicon-exclamation-sign incompleto' title='Sección incompleta'></span>";
+                    }else{
+                        if(dato[9].equals("V")){
+                            respuesta[0]+="<span class='glyphicon glyphicon-ok completo' title='Aprobado'></span>";
+                        }else{
+                            respuesta[0]+="<span class='glyphicon glyphicon-remove incompleto' title='No cumple con la evidencia'></span>";
+                        }
+                    }
                 }else{
                     respuesta[0]+="<button type='button' class='btn btn-sm' title='Borrar' onclick='confirmarCurso("+dato[0]+")'>";
                     respuesta[0]+="<span class='glyphicon glyphicon-trash'></span>";
@@ -82,6 +98,7 @@ public class CriteriosValoracion {
         String puntaje;
         String[] retorno={"","0"};
         String[] parametros={idUsuario};
+        int validos=0;
         List<String[]> datos=metodo.ejecutaSP("sp_consultaAportaciones",parametros);
         if(datos.isEmpty()){
             respuesta="<tr><td colspan='5'>Sin información</td></tr>";
@@ -100,13 +117,22 @@ public class CriteriosValoracion {
                 respuesta+="<td>"+dato[7]+"</td>";
                 respuesta+="<td>";
                 if(vistaAdmin){
-                    respuesta+="<button type='button' class='btn btn-sm' title='Aprobar'>";
-                    respuesta+="<span class='glyphicon glyphicon-ok completo'></span>";
-                    respuesta+="</button>";
-                    respuesta+="<button type='button' class='btn btn-sm' title='No aprobado'>";
-                    respuesta+="<span class='glyphicon glyphicon-remove incompleto'></span>";                    
-                    respuesta+="</button>";
-                    respuesta+="<span class='glyphicon glyphicon-exclamation-sign incompleto' title='Sección incompleta'></span>";
+                    if(dato[8]==null){
+                        respuesta+="<button type='button' class='btn btn-sm' title='Aprobar' onclick='aprobarAportacion("+dato[0]+")'>";
+                        respuesta+="<span class='glyphicon glyphicon-ok completo'></span>";
+                        respuesta+="</button>";
+                        respuesta+="<button type='button' class='btn btn-sm' title='No cumple con la evidencia' onclick='rechazarAportacion("+dato[0]+")'>";
+                        respuesta+="<span class='glyphicon glyphicon-remove incompleto'></span>";                    
+                        respuesta+="</button>";
+                        respuesta+="<span class='glyphicon glyphicon-exclamation-sign incompleto' title='Sección incompleta'></span>";
+                    }else{
+                        if(dato[8].equals("V")){
+                            respuesta+="<span class='glyphicon glyphicon-ok completo' title='Aprobado'></span>";
+                            validos++;
+                        }else{
+                            respuesta+="<span class='glyphicon glyphicon-remove incompleto' title='No cumple con la evidencia'></span>";
+                        }
+                    }
                 }else{
                 respuesta+="<button type='button' class='btn btn-sm' title='Borrar' onclick='confirmarAportacion("+dato[0]+")'>";
                 respuesta+="<span class='glyphicon glyphicon-trash'></span>";
@@ -115,7 +141,10 @@ public class CriteriosValoracion {
                 respuesta+="</td>";
                 respuesta+="</tr>";
             }          
-            switch(datos.size()){
+            switch(validos){
+                case 0:
+                    puntaje="0";
+                    break;
                 case 1:
                     puntaje="30";
                     break;
@@ -143,6 +172,7 @@ public class CriteriosValoracion {
         String puntaje;
         String[] parametros={idUsuario};
         List<String[]> datos=metodo.ejecutaSP("sp_consultaParticipaciones",parametros);
+        int validos=0;
         if(datos.isEmpty()){
             respuesta="<tr><td colspan='5'>Sin información</td></tr>";
             puntaje="0";
@@ -160,13 +190,22 @@ public class CriteriosValoracion {
                 respuesta+="<td>"+dato[7]+"</td>";
                 respuesta+="<td>";
                 if(vistaAdmin){
-                    respuesta+="<button type='button' class='btn btn-sm' title='Aprobar'>";
-                    respuesta+="<span class='glyphicon glyphicon-ok completo'></span>";
-                    respuesta+="</button>";
-                    respuesta+="<button type='button' class='btn btn-sm' title='No aprobado'>";
-                    respuesta+="<span class='glyphicon glyphicon-remove incompleto'></span>";                    
-                    respuesta+="</button>";
-                    respuesta+="<span class='glyphicon glyphicon-exclamation-sign incompleto' title='Sección incompleta'></span>";
+                    if(dato[8]==null){
+                        respuesta+="<button type='button' class='btn btn-sm' title='Aprobar' onclick='aprobarParticipacion("+dato[0]+")'>";
+                        respuesta+="<span class='glyphicon glyphicon-ok completo'></span>";
+                        respuesta+="</button>";
+                        respuesta+="<button type='button' class='btn btn-sm' title='No cumple con la evidencia' onclick='rechazarParticipacion("+dato[0]+")'>";
+                        respuesta+="<span class='glyphicon glyphicon-remove incompleto'></span>";                    
+                        respuesta+="</button>";
+                        respuesta+="<span class='glyphicon glyphicon-exclamation-sign incompleto' title='Sección incompleta'></span>";
+                    }else{
+                        if(dato[8].equals("V")){
+                            respuesta+="<span class='glyphicon glyphicon-ok completo' title='Aprobado'></span>";
+                            validos++;
+                        }else{
+                            respuesta+="<span class='glyphicon glyphicon-remove incompleto' title='No cumple con la evidencia'></span>";
+                        }
+                    }
                 }else{
                 respuesta+="<button type='button' class='btn btn-sm' title='Borrar' onclick='confirmarParticipacion("+dato[0]+")'>";
                 respuesta+="<span class='glyphicon glyphicon-trash'></span>";
@@ -175,7 +214,10 @@ public class CriteriosValoracion {
                 respuesta+="</td>";
                 respuesta+="</tr>";
             }           
-            switch(datos.size()){
+            switch(validos){
+                case 0:
+                    puntaje="0";
+                    break;
                 case 1:
                     puntaje="30";
                     break;
@@ -200,9 +242,10 @@ public class CriteriosValoracion {
     public String[] getFilasTutorias(String idUsuario,boolean vistaAdmin){   
         String respuesta;
         String[] retorno={"","0"};
-        String puntaje;
+        String puntaje="0";
         String[] parametros={idUsuario};
         List<String[]> datos=metodo.ejecutaSP("sp_selectTutorias",parametros);
+        int validos=0;
         if(datos.isEmpty()){
             respuesta="<tr><td colspan='3'>Sin información</td></tr>";
             puntaje="0";
@@ -218,13 +261,22 @@ public class CriteriosValoracion {
                 respuesta+="<td>"+dato[4]+"</td>";
                 respuesta+="<td>";
                 if(vistaAdmin){
-                    respuesta+="<button type='button' class='btn btn-sm' title='Aprobar'>";
-                    respuesta+="<span class='glyphicon glyphicon-ok completo'></span>";
-                    respuesta+="</button>";
-                    respuesta+="<button type='button' class='btn btn-sm' title='No aprobado'>";
-                    respuesta+="<span class='glyphicon glyphicon-remove incompleto'></span>";                    
-                    respuesta+="</button>";
-                    respuesta+="<span class='glyphicon glyphicon-exclamation-sign incompleto' title='Sección incompleta'></span>";
+                    if(dato[5]==null){
+                        respuesta+="<button type='button' class='btn btn-sm' title='Aprobar' onclick='aprobarTutoria("+dato[0]+")'>";
+                        respuesta+="<span class='glyphicon glyphicon-ok completo'></span>";
+                        respuesta+="</button>";
+                        respuesta+="<button type='button' class='btn btn-sm' title='No cumple con la evidencia' onclick='rechazarTutoria("+dato[0]+")'>";
+                        respuesta+="<span class='glyphicon glyphicon-remove incompleto'></span>";                    
+                        respuesta+="</button>";
+                        respuesta+="<span class='glyphicon glyphicon-exclamation-sign incompleto' title='Sección incompleta'></span>";
+                    }else{
+                        if(dato[5].equals("V")){
+                            respuesta+="<span class='glyphicon glyphicon-ok completo' title='Aprobado'></span>";
+                            validos++;
+                        }else{
+                            respuesta+="<span class='glyphicon glyphicon-remove incompleto' title='No cumple con la evidencia'></span>";
+                        }
+                    }
                 }else{
                 respuesta+="<button type='button' class='btn btn-sm' title='Borrar' onclick='confirmarTutoria("+dato[0]+")'>";
                 respuesta+="<span class='glyphicon glyphicon-trash'></span>";
@@ -233,9 +285,11 @@ public class CriteriosValoracion {
                 respuesta+="</td>";
                 respuesta+="</tr>";
             } 
-            if(datos.size()==1){
+            if(validos==0){
+                puntaje="0";
+            }if(validos==1){
                 puntaje="35";
-            }else{
+            }else if(validos>1){
                 puntaje="70";
             }
         }
@@ -248,6 +302,7 @@ public class CriteriosValoracion {
         String puntaje="0";
         String[] retorno={"","0"};
         String[] parametros={idUsuario};
+        int validos=0;
         List<String[]> datos=metodo.ejecutaSP("sp_selectPublicaciones",parametros);
         if(datos.isEmpty()){
             respuesta="<tr><td colspan='5'>Sin información</td></tr>";
@@ -262,13 +317,22 @@ public class CriteriosValoracion {
                 respuesta+="<td>"+dato[5]+"</td>";
                 respuesta+="<td>";
                 if(vistaAdmin){
-                    respuesta+="<button type='button' class='btn btn-sm' title='Aprobar'>";
-                    respuesta+="<span class='glyphicon glyphicon-ok completo'></span>";
-                    respuesta+="</button>";
-                    respuesta+="<button type='button' class='btn btn-sm' title='No aprobado'>";
-                    respuesta+="<span class='glyphicon glyphicon-remove incompleto'></span>";                    
-                    respuesta+="</button>";
-                    respuesta+="<span class='glyphicon glyphicon-exclamation-sign incompleto' title='Sección incompleta'></span>";
+                    if(dato[6]==null){
+                        respuesta+="<button type='button' class='btn btn-sm' title='Aprobar' onclick='aprobarPublicacion("+dato[0]+")'>";
+                        respuesta+="<span class='glyphicon glyphicon-ok completo'></span>";
+                        respuesta+="</button>";
+                        respuesta+="<button type='button' class='btn btn-sm' title='No cumple con la evidencia' onclick='rechazarPublicacion("+dato[0]+")'>";
+                        respuesta+="<span class='glyphicon glyphicon-remove incompleto'></span>";                    
+                        respuesta+="</button>";
+                        respuesta+="<span class='glyphicon glyphicon-exclamation-sign incompleto' title='Sección incompleta'></span>";
+                    }else{
+                        if(dato[6].equals("V")){
+                            respuesta+="<span class='glyphicon glyphicon-ok completo' title='Aprobado'></span>";
+                            validos++;
+                        }else{
+                            respuesta+="<span class='glyphicon glyphicon-remove incompleto' title='No cumple con la evidencia'></span>";
+                        }
+                    }
                 }else{
                 respuesta+="<button type='button' class='btn btn-sm' title='Borrar' onclick='confirmarPublicacion("+dato[0]+")'>";
                 respuesta+="<span class='glyphicon glyphicon-trash'></span>";
@@ -277,9 +341,11 @@ public class CriteriosValoracion {
                 respuesta+="</td>";
                 respuesta+="</tr>";
             }           
-            if(datos.size()==1){
+            if(validos==0){
+                puntaje="0";
+            }else if(validos==1){
                 puntaje="25";
-            }else{
+            }else if(validos>1){
                 puntaje="50";
             }
         }
@@ -292,6 +358,7 @@ public class CriteriosValoracion {
         String puntaje="0";
         String[] retorno=new String[2];
         String[] parametros={idUsuario};
+        int validos=0;
         List<String[]> datos=metodo.ejecutaSP("sp_consultaResultados",parametros);
         if(datos.isEmpty()){
             respuesta="<tr><td colspan='4'>Sin información</td></tr>";
@@ -309,13 +376,22 @@ public class CriteriosValoracion {
                 respuesta+="<td>"+dato[6]+"</td>";
                 respuesta+="<td>";
                 if(vistaAdmin){
-                    respuesta+="<button type='button' class='btn btn-sm' title='Aprobar'>";
-                    respuesta+="<span class='glyphicon glyphicon-ok completo'></span>";
-                    respuesta+="</button>";
-                    respuesta+="<button type='button' class='btn btn-sm' title='No aprobado'>";
-                    respuesta+="<span class='glyphicon glyphicon-remove incompleto'></span>";                    
-                    respuesta+="</button>";
-                    respuesta+="<span class='glyphicon glyphicon-exclamation-sign incompleto' title='Sección incompleta'></span>";
+                    if(dato[7]==null){
+                        respuesta+="<button type='button' class='btn btn-sm' title='Aprobar' onclick='aprobarResultado("+dato[0]+")'>";
+                        respuesta+="<span class='glyphicon glyphicon-ok completo'></span>";
+                        respuesta+="</button>";
+                        respuesta+="<button type='button' class='btn btn-sm' title='No cumple con la evidencia' onclick='rechazarResultado("+dato[0]+")'>";
+                        respuesta+="<span class='glyphicon glyphicon-remove incompleto'></span>";                    
+                        respuesta+="</button>";
+                        respuesta+="<span class='glyphicon glyphicon-exclamation-sign incompleto' title='Sección incompleta'></span>";
+                    }else{
+                        if(dato[7].equals("V")){
+                            respuesta+="<span class='glyphicon glyphicon-ok completo' title='Aprobado'></span>";
+                            validos++;
+                        }else{
+                            respuesta+="<span class='glyphicon glyphicon-remove incompleto' title='No cumple con la evidencia'></span>";
+                        }
+                    }
                 }else{
                 respuesta+="<button type='button' class='btn btn-sm' title='Borrar' onclick='confirmarResultado("+dato[0]+")'>";
                 respuesta+="<span class='glyphicon glyphicon-trash'></span>";
@@ -324,7 +400,7 @@ public class CriteriosValoracion {
                 respuesta+="</td>";
                 respuesta+="</tr>";
             }  
-            int aux=datos.size();
+            int aux=validos;
             if(aux==1 || aux==2){
                 puntaje="30";
             }else if(aux==3 || aux==4){

@@ -285,10 +285,9 @@
                             <div class="text-left">
                                 <label class="control-label">Cursos de actualización relacionados con la asignatura y/o módulo que imparte, o mejora pedagógica en los 2 años anteriores</label>
                             </div>
-                            <div class='text-center'>
-                                <input type='button' class='btn btn-sm btn-link' value='(+) Agregar información' onclick="abrirModalCursos();" />
-                            </div>
+                            
                             <div class='table-responsive'>
+                                <label class="text-warning" id="alertaCarga"><span class="glyphicon glyphicon-warning-sign"></span>&nbsp;Utilice la barra de desplazamiento para recorrer la tabla y visualizar todos los elementos</label>
                                 <table class='table table-bordered table-condensed'>
                                     <tr><th>Tipo</th><th>Nombre del curso</th><th>Periodo o Fecha de realización</th><th>Institución educativa con reconocimiento oficial que emite constancia</th><th>Total de horas que acredita el curso</th><th>Constancia o documento probatorio</th><th>Opciones</th></tr>
                                     <tbody id="tablaCursos">
@@ -360,10 +359,9 @@
                                 </div>
                             </div>
                             <div id="seccionAportaciones" class="collapse ${in}">
-                            <div class='text-center'>
-                                <input type='button' class='btn btn-sm btn-link' value='(+) Agregar información' onClick="abrirModalAportaciones()"/>
-                            </div>
+                            
                             <div class='table-responsive'>
+                                <label class="text-warning" id="alertaCarga"><span class="glyphicon glyphicon-warning-sign"></span>&nbsp;Utilice la barra de desplazamiento para recorrer la tabla y visualizar todos los elementos</label>
                                 <table class='table table-bordered table-condensed'>
                                     <tr><th>Nombre de la aportación en materia de mejora continua</th><th>Periodo o Fecha de realización</th><th>Institución educativa con reconocimiento oficial que emite constancia</th><th>Constancia o documento probatorio</th><th>Opciones</th></tr>
                                     <tbody id="tablaAportaciones">
@@ -434,10 +432,9 @@
                                 </div>
                             </div>
                             <div id="seccionParticipaciones" class="collapse ${in}">
-                            <div class='text-center'>
-                                <input type='button' class='btn btn-sm btn-link' value='(+) Agregar información' onclick="abrirModalParticipaciones()"/>
-                            </div>
+                            
                             <div class='table-responsive'>
+                                <label class="text-warning" id="alertaCarga"><span class="glyphicon glyphicon-warning-sign"></span>&nbsp;Utilice la barra de desplazamiento para recorrer la tabla y visualizar todos los elementos</label>
                                 <table class='table table-bordered table-condensed'>
                                     <tr><th>Nombre de la participación en eventos y actividades de fortalecimiento académico y formación integral del educando</th><th>Periodo o Fecha de realización</th><th>Institución educativa con reconocimiento oficial que emite constancia</th><th>Constancia o documento probatorio</th><th>Opciones</th></tr>
                                     <tbody id="tablaParticipaciones">
@@ -508,10 +505,9 @@
                                     </div>
                             </div>
                             <div id="seccionTutorias" class="collapse ${in}">
-                            <div class='text-center'>
-                                <input type='button' class='btn btn-sm btn-link' value='(+) Agregar información' onClick="abrirModalTutorias()" />
-                            </div>
+                            
                             <div class='table-responsive'>
+                                <label class="text-warning" id="alertaCarga"><span class="glyphicon glyphicon-warning-sign"></span>&nbsp;Utilice la barra de desplazamiento para recorrer la tabla y visualizar todos los elementos</label>
                                 <table class='table table-bordered table-condensed'>
                                     <tr><th>Periodo o Fecha de realización</th><th>Constancia o documento probatorio</th><th>Opciones</th></tr>
                                     <tbody id="tablaTutorias">
@@ -583,10 +579,9 @@
                                     </div>
                             </div>
                             <div id="seccionPublicaciones" class="collapse ${in}">
-                            <div class='text-center'>
-                                <input type='button' class='btn btn-sm btn-link' value='(+) Agregar información' onClick="abrirModalPublicacion()"/>
-                            </div>
+                            
                             <div class='table-responsive'>
+                                <label class="text-warning" id="alertaCarga"><span class="glyphicon glyphicon-warning-sign"></span>&nbsp;Utilice la barra de desplazamiento para recorrer la tabla y visualizar todos los elementos</label>
                                 <table class='table table-bordered table-condensed'>
                                     <tr><th>Nombre de  la publicación</th><th>Medio en el que se publicó</th><th>Fecha de publicación</th><th>ISSN/ISBN</th><th>Opciones</th></tr>
                                     <tbody id="tablaPublicaciones">
@@ -683,9 +678,10 @@
                                     <label class="control-label">Evidencia de participación en actividades para mejorar los resultados educativos</label>
                                     <div class='text-center'>
                                         <input type="hidden" id="pEvidencias" value="${resultados[1]}"/>
-                                        <input type='button' class='btn btn-sm btn-link' value='(+) Agregar información' onClick="abrirModalResultado()"/>
+                                        
                                     </div>
                                     <div class='table-responsive'>
+                                        <label class="text-warning" id="alertaCarga"><span class="glyphicon glyphicon-warning-sign"></span>&nbsp;Utilice la barra de desplazamiento para recorrer la tabla y visualizar todos los elementos</label>
                                         <table class='table table-bordered table-condensed'>
                                             <tr><th>Tipo de evidencia</th><th>Periodo o Fecha de realización</th><th>Constancia o documento probatorio</th><th>Opciones</th></tr>
                                             <tbody id="tablaResultados">
@@ -1063,6 +1059,7 @@
                         <form id="formArchivo" name="formArchivo" method="POST" enctype="multipart/form-data" >
                                 <label class="text-warning" id="alertaCarga"><span class="glyphicon glyphicon-warning-sign"></span>&nbsp;Cárgue todas las evidencias documentales del criterio en un solo archivo PDF</label>
                                 <label class="control-label" for="archivo">Seleccione el archivo a cargar:</label>
+                                <label class="text-warning" id="alertaCarga"><span class="glyphicon glyphicon-warning-sign"></span>&nbsp;Al seleccionar un nuevo archivo, este se actualizará</label>
                                 <input type="hidden" id="idArchivo" name="idArchivo" value="" />
                                 <input type="file" class="form-control input-sm" id="archivo" name="archivo" onchange="subirArchivo()" accept=".pdf" />
 

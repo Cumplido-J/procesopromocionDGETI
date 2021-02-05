@@ -187,7 +187,7 @@ $(document).ready(function () {
                             }                                        
                             $("#modalMensaje").modal("show");
                             if(!$("#cb5").is(':checked')){
-                                if($("#btnEvidencia13").val().includes("Ver")){
+                                if($("#btnEvidencia13").val().includes("Ver")&&!$("#tablaCursos").html().includes("glyphicon-exclamation-sign")){
                                     $("#estatus5").attr("class","glyphicon glyphicon-ok-sign completo");
                                     $("#estatus5").attr("title","Sección completa");
                                     $("#estatus5").attr("completo",true);
@@ -240,7 +240,7 @@ $(document).ready(function () {
                                   
                         $("#modalMensaje").modal("show");
                         if(!$("#cb6").is(':checked')){
-                            if($("#btnEvidencia14").val().includes("Ver")){
+                            if($("#btnEvidencia14").val().includes("Ver")&&!$("#tablaAportaciones").html().includes("glyphicon-exclamation-sign")){
                                 $("#estatus6").attr("class","glyphicon glyphicon-ok-sign completo");
                                 $("#estatus6").attr("title","Sección completa");
                                 $("#estatus6").attr("completo",true);
@@ -294,7 +294,7 @@ $(document).ready(function () {
                                   
                         $("#modalMensaje").modal("show");
                         if(!$("#cb7").is(':checked')){
-                            if($("#btnEvidencia15").val().includes("Ver")){
+                            if($("#btnEvidencia15").val().includes("Ver")&&!$("#tablaParticipaciones").html().includes("glyphicon-exclamation-sign")){
                                 $("#estatus7").attr("class","glyphicon glyphicon-ok-sign completo");
                                 $("#estatus7").attr("title","Sección completa");
                                 $("#estatus7").attr("completo",true);
@@ -346,7 +346,7 @@ $(document).ready(function () {
                     }         
                         $("#modalMensaje").modal("show");
                         if(!$("#cb8").is(':checked')){
-                            if($("#btnEvidencia16").val().includes("Ver")){
+                            if($("#btnEvidencia16").val().includes("Ver")&&!$("#tablaTutorias").html().includes("glyphicon-exclamation-sign")){
                                 $("#estatus8").attr("class","glyphicon glyphicon-ok-sign completo");
                                 $("#estatus8").attr("title","Sección completa");
                                 $("#estatus8").attr("completo",true);
@@ -397,7 +397,7 @@ $(document).ready(function () {
                     }             
                         $("#modalMensaje").modal("show");
                         if(!$("#cb9").is(':checked')){
-                            if($("#btnEvidencia17").val().includes("Ver")){
+                            if($("#btnEvidencia17").val().includes("Ver")&&!$("#tablaPublicaciones").html().includes("glyphicon-exclamation-sign")){
                                 $("#estatus9").attr("class","glyphicon glyphicon-ok-sign completo");
                                 $("#estatus9").attr("title","Sección completa");
                                 $("#estatus9").attr("completo",true);
@@ -466,7 +466,7 @@ $(document).ready(function () {
                         calculaTotal();
                         $("#mensaje").html("Información guardada correctamente");            
                         $("#modalMensaje").modal("show");                        
-                        if($("#btnEvidencia18").val().includes("Ver")){
+                        if($("#btnEvidencia18").val().includes("Ver")&&!$("#tablaResultados").html().includes("glyphicon-exclamation-sign")){
                             $("#estatus10").attr("class","glyphicon glyphicon-ok-sign completo");
                             $("#estatus10").attr("title","Sección completa");
                             $("#estatus10").attr("completo",true);
@@ -884,7 +884,39 @@ function confirmarCurso(id){
 }
 function borrarCurso(id){
     $("#modalConfirmacion").modal("hide");
-    $.post("RegistrarCurso", {id: id}, function(data){
+    $.post("RegistrarCurso", {id: id,k:"B"}, function(data){
+        if(data.includes("<tr>")){
+            var aux=data.split("||");
+            $("#tablaCursos").html(aux[0]);
+            $("#p5").html(aux[1]); 
+            calculaTotal();
+        }
+        else{
+            $("#mensaje").html(data);            
+            $("#modalMensaje").modal("show");
+        } 
+    });
+}
+
+function aprobarCurso(id){
+    $("#modalConfirmacion").modal("hide");
+    $.post("RegistrarCurso", {id: id,k:"A"}, function(data){
+        if(data.includes("<tr>")){
+            var aux=data.split("||");
+            $("#tablaCursos").html(aux[0]);
+            $("#p5").html(aux[1]); 
+            calculaTotal();
+        }
+        else{
+            $("#mensaje").html(data);            
+            $("#modalMensaje").modal("show");
+        } 
+    });
+}
+
+function rechazarCurso(id){
+    $("#modalConfirmacion").modal("hide");
+    $.post("RegistrarCurso", {id: id,k:"R"}, function(data){
         if(data.includes("<tr>")){
             var aux=data.split("||");
             $("#tablaCursos").html(aux[0]);
@@ -916,7 +948,37 @@ function confirmarAportacion(id){
 }
 function borrarAportacion(id){
     $("#modalConfirmacion").modal("hide");
-    $.post("RegistrarAportacion", {id: id}, function(data){
+    $.post("RegistrarAportacion", {id: id,k:"B"}, function(data){
+        if(data.includes("<tr>")){
+            var aux=data.split("||");
+            $("#tablaAportaciones").html(aux[0]);
+            $("#p6").html(aux[1]);
+            calculaTotal();
+        }
+        else{
+            $("#mensaje").html(data);            
+            $("#modalMensaje").modal("show");
+        } 
+    });
+}
+function aprobarAportacion(id){
+    $("#modalConfirmacion").modal("hide");
+    $.post("RegistrarAportacion", {id: id,k:"A"}, function(data){
+        if(data.includes("<tr>")){
+            var aux=data.split("||");
+            $("#tablaAportaciones").html(aux[0]);
+            $("#p6").html(aux[1]);
+            calculaTotal();
+        }
+        else{
+            $("#mensaje").html(data);            
+            $("#modalMensaje").modal("show");
+        } 
+    });
+}
+function rechazarAportacion(id){
+    $("#modalConfirmacion").modal("hide");
+    $.post("RegistrarAportacion", {id: id,k:"R"}, function(data){
         if(data.includes("<tr>")){
             var aux=data.split("||");
             $("#tablaAportaciones").html(aux[0]);
@@ -947,7 +1009,37 @@ function confirmarParticipacion(id){
 }
 function borrarParticipacion(id){
     $("#modalConfirmacion").modal("hide");
-    $.post("RegistrarParticipacion", {id: id}, function(data){
+    $.post("RegistrarParticipacion", {id: id,k:"B"}, function(data){
+        if(data.includes("<tr>")){
+            var aux=data.split("||");
+            $("#tablaParticipaciones").html(aux[0]);
+            $("#p7").html(aux[1]);
+            calculaTotal();
+        }
+        else{
+            $("#mensaje").html(data);            
+            $("#modalMensaje").modal("show");
+        } 
+    });
+}
+function aprobarParticipacion(id){
+    $("#modalConfirmacion").modal("hide");
+    $.post("RegistrarParticipacion", {id: id,k:"A"}, function(data){
+        if(data.includes("<tr>")){
+            var aux=data.split("||");
+            $("#tablaParticipaciones").html(aux[0]);
+            $("#p7").html(aux[1]);
+            calculaTotal();
+        }
+        else{
+            $("#mensaje").html(data);            
+            $("#modalMensaje").modal("show");
+        } 
+    });
+}
+function rechazarParticipacion(id){
+    $("#modalConfirmacion").modal("hide");
+    $.post("RegistrarParticipacion", {id: id,k:"R"}, function(data){
         if(data.includes("<tr>")){
             var aux=data.split("||");
             $("#tablaParticipaciones").html(aux[0]);
@@ -966,7 +1058,37 @@ function confirmarTutoria(id){
 }
 function borrarTutoria(id){
     $("#modalConfirmacion").modal("hide");
-    $.post("RegistrarTutoria", {id: id}, function(data){
+    $.post("RegistrarTutoria", {id: id,k:"B"}, function(data){
+        if(data.includes("<tr>")){
+            var aux=data.split("||");
+            $("#tablaTutorias").html(aux[0]);
+            $("#p8").html(aux[1]);
+            calculaTotal();
+        }
+        else{
+            $("#mensaje").html(data);            
+            $("#modalMensaje").modal("show");
+        } 
+    });
+}
+function aprobarTutoria(id){
+    $("#modalConfirmacion").modal("hide");
+    $.post("RegistrarTutoria", {id: id,k:"A"}, function(data){
+        if(data.includes("<tr>")){
+            var aux=data.split("||");
+            $("#tablaTutorias").html(aux[0]);
+            $("#p8").html(aux[1]);
+            calculaTotal();
+        }
+        else{
+            $("#mensaje").html(data);            
+            $("#modalMensaje").modal("show");
+        } 
+    });
+}
+function rechazarTutoria(id){
+    $("#modalConfirmacion").modal("hide");
+    $.post("RegistrarTutoria", {id: id,k:"R"}, function(data){
         if(data.includes("<tr>")){
             var aux=data.split("||");
             $("#tablaTutorias").html(aux[0]);
@@ -985,7 +1107,37 @@ function confirmarPublicacion(id){
 }
 function borrarPublicacion(id){
     $("#modalConfirmacion").modal("hide");
-    $.post("RegistrarPublicacion", {id: id}, function(data){
+    $.post("RegistrarPublicacion", {id: id,k:"B"}, function(data){
+        if(data.includes("<tr>")){
+            var aux=data.split("||");
+            $("#tablaPublicaciones").html(aux[0]);
+            $("#p9").html(aux[1]);   
+            calculaTotal();
+        }
+        else{
+            $("#mensaje").html(data);            
+            $("#modalMensaje").modal("show");
+        } 
+    });
+}
+function aprobarPublicacion(id){
+    $("#modalConfirmacion").modal("hide");
+    $.post("RegistrarPublicacion", {id: id,k:"A"}, function(data){
+        if(data.includes("<tr>")){
+            var aux=data.split("||");
+            $("#tablaPublicaciones").html(aux[0]);
+            $("#p9").html(aux[1]);   
+            calculaTotal();
+        }
+        else{
+            $("#mensaje").html(data);            
+            $("#modalMensaje").modal("show");
+        } 
+    });
+}
+function rechazarPublicacion(id){
+    $("#modalConfirmacion").modal("hide");
+    $.post("RegistrarPublicacion", {id: id,k:"R"}, function(data){
         if(data.includes("<tr>")){
             var aux=data.split("||");
             $("#tablaPublicaciones").html(aux[0]);
@@ -1004,7 +1156,35 @@ function confirmarResultado(id){
 }
 function borrarResultado(id){
     $("#modalConfirmacion").modal("hide");
-    $.post("RegistrarResultado", {id: id}, function(data){
+    $.post("RegistrarResultado", {id: id,k:"B"}, function(data){
+        if(data.includes("<tr>")){
+            var aux=data.split("||");
+            $("#tablaResultados").html(aux[0]);
+            $("#pEvidencias").val(aux[1]);
+        }
+        else{
+            $("#mensaje").html(data);            
+            $("#modalMensaje").modal("show");
+        } 
+    });
+}
+function aprobarResultado(id){
+    $("#modalConfirmacion").modal("hide");
+    $.post("RegistrarResultado", {id: id,k:"A"}, function(data){
+        if(data.includes("<tr>")){
+            var aux=data.split("||");
+            $("#tablaResultados").html(aux[0]);
+            $("#pEvidencias").val(aux[1]);
+        }
+        else{
+            $("#mensaje").html(data);            
+            $("#modalMensaje").modal("show");
+        } 
+    });
+}
+function rechazarResultado(id){
+    $("#modalConfirmacion").modal("hide");
+    $.post("RegistrarResultado", {id: id,k:"R"}, function(data){
         if(data.includes("<tr>")){
             var aux=data.split("||");
             $("#tablaResultados").html(aux[0]);

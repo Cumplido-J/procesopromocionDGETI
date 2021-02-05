@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 var consultarWS=true;
+var banderaContinuar=false;
 $(document).ready(function () {
     var $regex=/^([a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?)$/;
     $('#correo').on('keypress keydown keyup change',function(){    
@@ -95,34 +96,39 @@ $(document).ready(function () {
             }
         },
         submitHandler:function(){
-            $.ajax({
-                type:$('#formPreregistro').attr("method"),
-                url:$('#formPreregistro').attr("action"),
-                data:$('#formPreregistro').serialize(),
-                beforeSend:function(){
-                    $("#btnEnviar").val("Guardando...");
-                    $("#btnEnviar").attr("disabled","disabled");
-                },
-                complete:function(){
-                   $("#btnEnviar").val("Guardar"); 
-                   $("#btnEnviar").removeAttr("disabled");
-                },success:function(data){
-                    if(data=="ok"){           
-                        $("#btnContinuar").removeAttr("style");
-                        $("#btnCerrar").attr("style","display:none;");
-                        $("#mensaje").html("Los datos fueron almacenados correctamente");            
-                        $("#modalMensaje").modal("show");
-                        
-                    }else{
-                        $("#btnCerrar").removeAttr("style");
-                        $("#btnContinuar").attr("style","display:none;");
-                        $("#mensaje").html(data);            
-                        $("#modalMensaje").modal("show");                        
+            if(banderaContinuar){
+                $.ajax({
+                    type:$('#formPreregistro').attr("method"),
+                    url:$('#formPreregistro').attr("action"),
+                    data:$('#formPreregistro').serialize(),
+                    beforeSend:function(){
+                        $("#btnEnviar").val("Guardando...");
+                        $("#btnEnviar").attr("disabled","disabled");
+                    },
+                    complete:function(){
+                       $("#btnEnviar").val("Guardar"); 
+                       $("#btnEnviar").removeAttr("disabled");
+                    },success:function(data){
+                        if(data=="ok"){           
+                            $("#btnContinuar").removeAttr("style");
+                            $("#btnCerrar").attr("style","display:none;");
+                            $("#mensaje").html("Los datos fueron almacenados correctamente");            
+                            $("#modalMensaje").modal("show");
+
+                        }else{
+                            $("#btnCerrar").removeAttr("style");
+                            $("#btnContinuar").attr("style","display:none;");
+                            $("#mensaje").html(data);            
+                            $("#modalMensaje").modal("show");                        
+                        }
+                    },error:function(){
+
                     }
-                },error:function(){
-                    
-                }
-            });
+                });
+            }else{
+                $("#mensaje").html("El usuario no puede ser registrado");            
+                $("#modalMensaje").modal("show");
+            }
             return false;
         }
     });
@@ -149,37 +155,48 @@ function consultaWS(){
                    if(aux.length==3){
                        if(aux[0]!=""){
                            $("#nombre").val(aux[0]);
-                           $("#nombre").attr("readOnly","readOnly");
+                           
                        }else{
                           $("#nombre").val("");
-                          $("#nombre").removeAttr("readOnly"); 
+                          
                        }                       
                        if(aux[1]!=""){
                            $("#entidad").val(aux[1]);
-                           $("#entidad").attr("style", "pointer-events: none;");
-                           $("#entidad").attr("readOnly","readOnly");
+                           
                            actualizarPlanteles(aux[2]);
-                           $("#plantel").attr("style", "pointer-events: none;");
-                           $("#plantel").attr("readOnly","readOnly");
+                           
+                           banderaContinuar=true;
                        }else{
+                           $("#entidad").val("");
+                           $("#plantel").val("");
                            $("#mensaje").html("El RFC ingresado no se encuentra asignado a plantel, contacte al personal de recursos humanos");            
                            $("#modalMensaje").modal("show");
                            $("#cbAviso").attr("disabled",true);
                            $("#cbAviso").removeAttr("checked");
                            $("#btnEnviar").attr("disabled",true);
                            $("#btnContinuar").attr("style","display:none;");
+                           banderaContinuar=false;
                        }
 
                    }else{
+                       $("#entidad").val("");
+                       $("#plantel").val("");
                        $("#mensaje").html("El RFC ingresado no se encuentra registrado en la institución, contacte al personal de recursos humanos de su plantel");            
                        $("#modalMensaje").modal("show");
                        $("#cbAviso").attr("disabled",true);
                        $("#cbAviso").removeAttr("checked");
                        $("#btnEnviar").attr("disabled",true);
                        $("#btnContinuar").attr("style","display:none;");
+                       banderaContinuar=false;
                    }
+                   $("#nombre").attr("readOnly","readOnly");
+                   $("#entidad").attr("style", "pointer-events: none;");
+                   $("#entidad").attr("readOnly","readOnly");
+                   $("#plantel").attr("style", "pointer-events: none;");
+                   $("#plantel").attr("readOnly","readOnly");
                });
             }else{
+                banderaContinuar=true;
                 $("#nombre").removeAttr("readOnly"); 
                 $("#apellido1").removeAttr("readOnly"); 
                 $("#apellido2").removeAttr("readOnly"); 

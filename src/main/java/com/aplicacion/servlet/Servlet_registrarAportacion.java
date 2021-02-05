@@ -83,12 +83,15 @@ public class Servlet_registrarAportacion extends HttpServlet {
             Fecha fecha=new Fecha();
             HttpSession session= (HttpSession) request.getSession();
             String idUsuario,rfc;
+            boolean vistaAdmin;
             if(session.getAttribute("rol").toString().equals("D")){
                 idUsuario=session.getAttribute("idUsuario").toString();
                 rfc=session.getAttribute("rfc").toString();
+                vistaAdmin=false;
             }else{
                 idUsuario=session.getAttribute("idDocente").toString();                
                 rfc=session.getAttribute("rfcDocente").toString();
+                vistaAdmin=true;
             }            
             Metodos_sql metodo = new Metodos_sql(); 
             if(request.getParameter("id")==null){
@@ -103,7 +106,7 @@ public class Servlet_registrarAportacion extends HttpServlet {
                 datos=metodo.ejecutaSP("sp_insertAportaciones",parametros);            
                 if(!datos.isEmpty()){
                     if(datos.get(0)[0].equals("ok")){
-                        String[] infoAportaciones=new CriteriosValoracion().getFilasAportaciones(idUsuario,false);
+                        String[] infoAportaciones=new CriteriosValoracion().getFilasAportaciones(idUsuario,vistaAdmin);
                         out.print(infoAportaciones[0]+"||"+infoAportaciones[1]);                    
                     }else{
                         out.print(datos.get(0)[0]);
@@ -114,11 +117,19 @@ public class Servlet_registrarAportacion extends HttpServlet {
             }else{
                 String id=request.getParameter("id");
                 String[] parametros={id};
-                List<String[]> datos;                           
-                datos=metodo.ejecutaSP("sp_deleteAportaciones",parametros);            
+                List<String[]> datos=null;   
+                String idAccion=request.getParameter("k");
+                if(idAccion.equals("B")){
+                    datos=metodo.ejecutaSP("sp_deleteAportaciones",parametros);
+                }else if(idAccion.equals("A")){
+                    datos=metodo.ejecutaSP("sp_aprobarAportacion",parametros); 
+                }else if(idAccion.equals("R")){
+                    datos=metodo.ejecutaSP("sp_rechazarAportacion",parametros); 
+                }
+                            
                 if(!datos.isEmpty()){
                     if(datos.get(0)[0].equals("ok")){
-                        String[] infoAportaciones=new CriteriosValoracion().getFilasAportaciones(idUsuario,false);
+                        String[] infoAportaciones=new CriteriosValoracion().getFilasAportaciones(idUsuario,vistaAdmin);
                         out.print(infoAportaciones[0]+"||"+infoAportaciones[1]);                   
                     }
                 }else{
