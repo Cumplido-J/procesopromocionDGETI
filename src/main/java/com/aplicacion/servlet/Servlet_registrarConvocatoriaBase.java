@@ -121,8 +121,7 @@ public class Servlet_registrarConvocatoriaBase extends HttpServlet {
                     if(entidad==null && plantel==null){
                     entidad = "0";
                     plantel = "0";
-                    }else if(!entidad.equals("") && plantel.equals("")){
-                        tipoConvocatoria = "ESTATAL";
+                    }else if(entidad!=null && plantel==null){
                         plantel = "0";
                     }
                 }

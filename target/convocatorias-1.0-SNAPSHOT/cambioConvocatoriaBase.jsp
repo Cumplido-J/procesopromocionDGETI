@@ -152,7 +152,7 @@
                   <p id="mensaje"></p>
                 </div>
                 <div class="modal-footer">
-                  <a id="btnContinuar" href="busquedaConvocatoria.jsp" class="btn btn-sm btn-default">Continuar</a>
+                  <a id="btnContinuar" href="busquedaConvocatoriaBase.jsp" class="btn btn-sm btn-default">Continuar</a>
                   <button type="button" id="btnCerrar" class="btn btn-sm btn-default" data-dismiss="modal">Cerrar</button>
                 </div>
               </div>

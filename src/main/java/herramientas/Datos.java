@@ -75,10 +75,10 @@ public class Datos {
             }
             
             if(tipoConvocatoria.equals("NACIONAL")){
-                idEntidad="";
-                idPlantel="";
+                idEntidad="0";
+                idPlantel="0";
             }else if(tipoConvocatoria.equals("ESTATAL")){
-                idPlantel="";
+                idPlantel="0";
             }
             
             String[] parametros={idPrograma,idSubsistema,idEntidad,idPlantel,estatus,tipoConvocatoria};
