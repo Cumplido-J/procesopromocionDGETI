@@ -7,7 +7,7 @@
     <context-param>
         <param-name>rutaConfig</param-name>
         <param-value>/home/pdadmin/configDocente/ArchivosPromocion/configLinux.properties</param-value>
-    </context-param>  
+    </context-param>
     <servlet>
         <servlet-name>Servlet_cancelarPin</servlet-name>
         <servlet-class>com.aplicacion.servlet.Servlet_cancelarPin</servlet-class>
