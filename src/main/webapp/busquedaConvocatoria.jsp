@@ -64,14 +64,14 @@
                     </div>
                     <div class="form-group col-md-3">                                               
                       <label class="control-label" for="entidad">Entidad</label>
-                      <select class="form-control input-sm ${disabled3}" id="entidad" name="entidad" onchange="actualizarPlanteles()" >                                  
+                      <select class="form-control input-sm ${disabled3}" id="entidad" name="entidad" onchange="actualizarPlanteles()" required>                                  
                           ${catalogo.desplegarOpcionesEstado(sessionScope["entidad"])}
                       </select>
                     </div>
                       
                     <div class="form-group col-md-3">                               
                         <label class="control-label" for="plantel">Plantel:</label>
-                        <select class="form-control input-sm ${disabled4}" id="plantel" name="plantel" >                                  
+                        <select class="form-control input-sm ${disabled4}" id="plantel" name="plantel" required>                                  
                              ${catalogo.desplegarOpcionesPlanteles2(sessionScope["subsistema"],sessionScope["entidad"],sessionScope["plantel"])}
                         </select>
                     </div>                        

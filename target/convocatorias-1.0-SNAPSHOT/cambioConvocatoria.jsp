@@ -68,13 +68,13 @@
                     </div>
                     <div class="form-group col-md-3">                                               
                       <label class="control-label" for="entidad">Entidad:<span class="text-danger" title="Campo obligatorio">*</span></label>
-                      <select class="form-control input-sm ${disabled3}" id="entidad" name="entidad" onchange="actualizarPlanteles()" required>                                  
+                      <select class="form-control input-sm ${disabled3}" id="entidad" name="entidad" onchange="actualizarPlanteles()">                                  
                           ${catalogo.desplegarOpcionesEstado(informacion[3])}
                       </select>
                     </div>
                     <div class="form-group col-md-3">                               
                         <label class="control-label" for="plantel">Plantel:<span class="text-danger" title="Campo obligatorio">*</span></label>
-                        <select class="form-control input-sm ${disabled4}" id="plantel" name="plantel" required>                                  
+                        <select class="form-control input-sm ${disabled4}" id="plantel" name="plantel">                                  
                              ${catalogo.desplegarOpcionesPlanteles2(informacion[2],informacion[3],informacion[4])}
                         </select>
                     </div> 
