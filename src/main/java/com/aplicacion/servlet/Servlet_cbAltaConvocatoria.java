@@ -102,7 +102,6 @@ public class Servlet_cbAltaConvocatoria extends HttpServlet {
                 List<String[]> datos;            
                 String[] parametros={idEntidad,idPlantel,idSubsistema,idPrograma};                                      
                 datos=metodo.ejecutaSP("sp_consultaCBase",parametros);
-                
                 if(datos.isEmpty()){
                     request.setAttribute("error", "Vacante No Registrado");
                     RequestDispatcher rd1 = request.getRequestDispatcher("busquedaConvocatoria.jsp");

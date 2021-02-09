@@ -143,7 +143,7 @@
 			if( tConvocatoria.value === 'NACIONAL' ) {
         			tentidad.disabled = true;
                                 tentidad.required=false;
-                                tentidad.value = "true"
+                                tentidad.value = ""
                                 tplantel.disabled = true;
                                 tplantel.required=false;
                                 tplantel.value="";
