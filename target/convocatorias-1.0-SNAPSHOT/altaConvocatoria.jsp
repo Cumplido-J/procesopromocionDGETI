@@ -51,7 +51,7 @@
                     <div class="form-group col-xs-12">                               
                         <label class="control-label" for="programa">Programa:<span class="text-danger" title="Campo obligatorio">*</span></label>
                         <select class="form-control input-sm ${disabled1}" id="programa" name="programa" required>                                  
-                            ${catalogo.desplegarOpcionesProgramas(informacion[10])}
+                            ${catalogo.desplegarOpcionesProgramas(sessionScope["programa"])}
                         </select>
                     </div>
                 </div>
@@ -65,14 +65,14 @@
                     <div class="form-group col-md-3">                                               
                       <label class="control-label" for="entidad">Entidad:<span class="text-danger" title="Campo obligatorio">*</span></label>
                       <select class="form-control input-sm ${disabled3}" id="entidad" name="entidad" onchange="actualizarPlanteles()" required>                                  
-                          ${catalogo.desplegarOpcionesEstado(informacion[13])}
+                          ${catalogo.desplegarOpcionesEstado(sessionScope["entidad"])}
                       </select>
                     </div>
                       
                     <div class="form-group col-md-3">                               
-                        <label class="control-label" for="plantel">Plantel:<span class="text-danger" title="Campo obligatorio" required>*</span></label>
-                        <select class="form-control input-sm ${disabled4}" id="plantel" name="plantel">                                  
-                             ${catalogo.desplegarOpcionesPlanteles2(sessionScope["subsistema"],informacion[13],informacion[9])}
+                        <label class="control-label" for="plantel">Plantel:<span class="text-danger" title="Campo obligatorio">*</span></label>
+                        <select class="form-control input-sm ${disabled4}" id="plantel" name="plantel" onchange="datosConvocatoria()" required>                                  
+                             ${catalogo.desplegarOpcionesPlanteles2(sessionScope["subsistema"],sessionScope["entidad"],sessionScope["plantel"])}
                         </select>
                     </div> 
                     <div class="form-group col-md-3 datepicker-group">
@@ -159,5 +159,40 @@
         <jsp:include page="seccionesPlantilla/scripts.jsp"/>
         <!--Agregar scripts aquí-->
         <script src="js/funcionesAltaConvocatoria.js"></script> 
+        <script>
+            function datosConvocatoria(idPlantel) {
+                var idPrograma=$('#programa').val();
+                var idSubsistema=$('#subsistema').val(); 
+                var idEntidad=$("#entidad").val();
+                var idPlantel=$('#plantel').val();
+                if(idPrograma!="" &&  idSubsistema!="" &&  idEntidad!="" &&  idPlantel!="")
+                $.get("Servlet_consultaConBase", {p:idPrograma, s:idSubsistema, e:idEntidad, k:idPlantel}, function(respuesta){
+                    respuesta = JSON.parse(respuesta);
+                    var fecha1=formatearFecha(respuesta.key1);
+                    var fecha2=formatearFecha(respuesta.key2);
+                    var fecha3=formatearFecha(respuesta.key3);
+                    var fecha4=formatearFecha(respuesta.key4);
+                    var fecha5=formatearFecha(respuesta.key5);
+                    var fecha6=formatearFecha(respuesta.key6);
+                    var fecha7=formatearFecha(respuesta.key7);
+                    var fecha8=formatearFecha(respuesta.key8);
+                    $("#publicacion").val(fecha1);
+                    $("#inicioRegistro").val(fecha2);
+                    $("#finRegistro").val(fecha3);
+                    $("#inicioValoracion").val(fecha4);
+                    $("#finValoracion").val(fecha5);
+                    $("#inicioDictaminacion").val(fecha6);
+                    $("#finDictaminacion").val(fecha7);
+                    $("#resultados").val(fecha8);
+                });
+            }
+            
+            function formatearFecha(fecha){
+                var aux = fecha.split('-');
+                var respuesta = aux[2]+"/"+aux[1]+"/"+aux[0];
+                
+                return respuesta;
+            }
+        </script>
     </body>
 </html>

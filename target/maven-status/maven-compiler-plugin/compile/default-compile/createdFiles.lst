@@ -116,6 +116,7 @@ com\aplicacion\servlet\Servlet_finalizaProceso.class
 com\aplicacion\servlet\Servlet_registrarParticipacion.class
 com\convocatoria\domain\Plantel.class
 constants\ConstantsWS.class
+com\aplicacion\servlet\Servlet_consultaConBase.class
 com\aplicacion\servlet\Servlet_preregistro.class
 com\convocatoria\reportes\Reporteador.class
 com\convocatoria\servlet\ServletControlador.class

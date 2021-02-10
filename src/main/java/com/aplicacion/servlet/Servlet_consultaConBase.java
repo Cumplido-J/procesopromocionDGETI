@@ -8,6 +8,7 @@ package com.aplicacion.servlet;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
+import javax.json.Json;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -73,7 +74,16 @@ public class Servlet_consultaConBase extends HttpServlet {
             String entidad=request.getParameter("e");
             String plantel=request.getParameter("k");
             
-            String respuesta="Hola";        
+            String respuesta="";
+            String json = "";
+            String fecha1="";
+            String fecha2="";
+            String fecha3="";
+            String fecha4="";
+            String fecha5="";
+            String fecha6="";
+            String fecha7="";
+            String fecha8="";
             
             Metodos_sql metodo = new Metodos_sql();
                 List<String[]> datos;            
@@ -82,10 +92,31 @@ public class Servlet_consultaConBase extends HttpServlet {
                 if(datos.isEmpty()){
                     respuesta="No existe convocatoria base para esta convinacion";
                 }else{
-                    request.setAttribute("informacion", datos.get(0));
+                    //request.setAttribute("informacion", datos.get(0));
+                    fecha1 = datos.get(0)[1];
+                    fecha2 = datos.get(0)[2];
+                    fecha3 = datos.get(0)[3];
+                    fecha4 = datos.get(0)[4];
+                    fecha5 = datos.get(0)[5];
+                    fecha6 = datos.get(0)[6];
+                    fecha7 = datos.get(0)[7];
+                    fecha8 = datos.get(0)[8];
+                    
+                    json = Json.createObjectBuilder()
+                    .add("key1", fecha1)
+                    .add("key2", fecha2)
+                    .add("key3", fecha3)
+                    .add("key4", fecha4)
+                    .add("key5", fecha5)
+                    .add("key6", fecha6)
+                    .add("key7", fecha7)
+                    .add("key8", fecha8)
+                    .build()
+                    .toString();
+                    
                 }
             
-            out.println(request);
+            out.println(json);
                       
         }catch(Exception e){
             out.println(e);
