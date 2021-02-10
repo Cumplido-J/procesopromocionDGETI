@@ -84,8 +84,8 @@
                 </div>    
                 <div class="row">
                     <div class="form-group col-xs-12 text-center">                         
-                        <input class="btn btn-sm btn-primary" id="btnBuscar" type="submit" value='Buscar'class="btn btn-sm btn-primary" id="btnBuscar" type="submit" value="Buscar"/>
-                        <a onclick="location.href='AltaConvocatoria?entidadAdm='+document.getElementById('entidad').value+'&plantelAdm='+document.getElementById('plantel').value+'&programaAdm='+document.getElementById('programa').value;" class="btn btn-sm btn-primary">Agregar</a>
+                        <input class="btn btn-sm btn-primary" id="btnBuscar" type="submit" value='Buscar'/> 
+                        <a href="AltaConvocatoria" class="btn btn-sm btn-primary">Agregar</a>                        
                     </div>
                 </div>
                 </form>        

@@ -15,15 +15,14 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import metodos_sql.Metodos_sql;
 
 /**
  *
- * @author David Reyna
+ * @author Fernando
  */
-@WebServlet(name = "AltaConvocatoria", urlPatterns = {"/AltaConvocatoria"})
-public class Servlet_cbAltaConvocatoria extends HttpServlet {
+@WebServlet(name = "Servlet_consultaConBase", urlPatterns = {"/Servlet_consultaConBase"})
+public class Servlet_consultaConBase extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -42,10 +41,10 @@ public class Servlet_cbAltaConvocatoria extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet Servlet_cbAltaConvocatoria</title>");            
+            out.println("<title>Servlet Servlet_consultaConBase</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet Servlet_cbAltaConvocatoria at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet Servlet_consultaConBase at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -63,40 +62,36 @@ public class Servlet_cbAltaConvocatoria extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        HttpSession session= (HttpSession) request.getSession();     
-        if(session.getAttribute("idUsuario")!=null){
+        response.setContentType("text/html;charset=UTF-8");
+        PrintWriter out = response.getWriter();
+        try {
             ServletContext sc = getServletContext();
             RequestDispatcher rd;
             
-            String idEntidad="";
-            String idPlantel="";
-            String idPrograma="";
+            String programa=request.getParameter("p");
+            String subsistema=request.getParameter("s");
+            String entidad=request.getParameter("e");
+            String plantel=request.getParameter("k");
             
-                if(session.getAttribute("entidad")!=null && session.getAttribute("plantel")!=null){
-                    idEntidad=session.getAttribute("entidad").toString();
-                    idPlantel=session.getAttribute("plantel").toString();
-                    idPrograma=session.getAttribute("programa").toString();
-                }
-                
-                String idSubsistema=session.getAttribute("subsistema").toString();
-                Metodos_sql metodo = new Metodos_sql();
+            String respuesta="Hola";        
+            
+            Metodos_sql metodo = new Metodos_sql();
                 List<String[]> datos;            
-                String[] parametros={idEntidad,idPlantel,idSubsistema,idPrograma};                                      
+                String[] parametros={entidad,plantel,subsistema,programa};                                      
                 datos=metodo.ejecutaSP("sp_consultaCBase",parametros);
                 if(datos.isEmpty()){
-                    RequestDispatcher rd1 = request.getRequestDispatcher("altaConvocatoria.jsp");
-                    rd1.forward(request, response);
+                    respuesta="No existe convocatoria base para esta convinacion";
                 }else{
                     request.setAttribute("informacion", datos.get(0));
-                    rd = sc.getRequestDispatcher("/altaConvocatoria.jsp");
-                    rd.forward(request,response);
                 }
             
-            //ServletContext sc = getServletContext();
-            //RequestDispatcher rd= sc.getRequestDispatcher("/altaConvocatoria.jsp");            
-            //rd.forward(request,response);
-        }else{
-            response.sendRedirect("login.jsp");
+            out.println(request);
+                      
+        }catch(Exception e){
+            out.println(e);
+        } 
+        finally {
+            out.close();
         }
     }
 
@@ -111,30 +106,7 @@ public class Servlet_cbAltaConvocatoria extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        PrintWriter out = response.getWriter();
-        HttpSession session= (HttpSession) request.getSession();     
-        if(session.getAttribute("idUsuario")!=null){            
-            ServletContext sc = getServletContext();
-            RequestDispatcher rd;
-            System.out.println("post alta convocatoria");
-            if(request.getParameter("idConvocatoria")!=null){
-                String id=request.getParameter("idConvocatoria").toString();
-                Metodos_sql metodo = new Metodos_sql();
-                List<String[]> datos;            
-                String[] parametros={id};                                      
-                datos=metodo.ejecutaSP("sp_consultaConvocatoria",parametros);
-                request.setAttribute("informacion", datos.get(0));
-                rd = sc.getRequestDispatcher("/cambioConvocatoria.jsp");
-                System.out.println("post cambio convocatoria");
-            }else{
-                System.out.println("post cambio altaConvocatoria");
-                rd = sc.getRequestDispatcher("/altaConvocatoria.jsp");
-            }
-            rd.forward(request,response);
-        }else{
-            response.sendRedirect("login.jsp");
-        }
+        processRequest(request, response);
     }
 
     /**

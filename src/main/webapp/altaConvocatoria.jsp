@@ -51,7 +51,7 @@
                     <div class="form-group col-xs-12">                               
                         <label class="control-label" for="programa">Programa:<span class="text-danger" title="Campo obligatorio">*</span></label>
                         <select class="form-control input-sm ${disabled1}" id="programa" name="programa" required>                                  
-                            ${catalogo.desplegarOpcionesProgramas(informacion[10])}
+                            ${catalogo.desplegarOpcionesProgramas(sessionScope["programa"])}
                         </select>
                     </div>
                 </div>
@@ -65,14 +65,14 @@
                     <div class="form-group col-md-3">                                               
                       <label class="control-label" for="entidad">Entidad:<span class="text-danger" title="Campo obligatorio">*</span></label>
                       <select class="form-control input-sm ${disabled3}" id="entidad" name="entidad" onchange="actualizarPlanteles()" required>                                  
-                          ${catalogo.desplegarOpcionesEstado(informacion[13])}
+                          ${catalogo.desplegarOpcionesEstado(sessionScope["entidad"])}
                       </select>
                     </div>
                       
                     <div class="form-group col-md-3">                               
-                        <label class="control-label" for="plantel">Plantel:<span class="text-danger" title="Campo obligatorio" required>*</span></label>
-                        <select class="form-control input-sm ${disabled4}" id="plantel" name="plantel">                                  
-                             ${catalogo.desplegarOpcionesPlanteles2(sessionScope["subsistema"],informacion[13],informacion[9])}
+                        <label class="control-label" for="plantel">Plantel:<span class="text-danger" title="Campo obligatorio">*</span></label>
+                        <select class="form-control input-sm ${disabled4}" id="plantel" name="plantel" onchange="datosConvocatoria()" required>                                  
+                             ${catalogo.desplegarOpcionesPlanteles2(sessionScope["subsistema"],sessionScope["entidad"],sessionScope["plantel"])}
                         </select>
                     </div> 
                     <div class="form-group col-md-3 datepicker-group">
@@ -159,5 +159,17 @@
         <jsp:include page="seccionesPlantilla/scripts.jsp"/>
         <!--Agregar scripts aquí-->
         <script src="js/funcionesAltaConvocatoria.js"></script> 
+        <script>
+            function datosConvocatoria(idPlantel) {
+                var idPrograma=$('#programa').val();
+                var idSubsistema=$('#subsistema').val(); 
+                var idEntidad=$("#entidad").val();
+                var idPlantel=$('#plantel').val();
+                if(idPrograma!="" &&  idSubsistema!="" &&  idEntidad!="" &&  idPlantel!="")
+                $.get("Servlet_consultaConBase", {p:idPrograma, s:idSubsistema, e:idEntidad, k:idPlantel}, function(respuesta){
+                    alert(respuesta);
+                });
+            }
+        </script>
     </body>
 </html>
