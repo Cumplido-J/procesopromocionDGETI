@@ -66,6 +66,8 @@ public class Servlet_cbAltaConvocatoria extends HttpServlet {
         HttpSession session= (HttpSession) request.getSession();     
         if(session.getAttribute("idUsuario")!=null){
             ServletContext sc = getServletContext();
+            response.setContentType("text/html;charset=UTF-8");
+            PrintWriter out = response.getWriter();
             RequestDispatcher rd;
             
             String idEntidad="";
@@ -76,25 +78,24 @@ public class Servlet_cbAltaConvocatoria extends HttpServlet {
                     idEntidad=session.getAttribute("entidad").toString();
                     idPlantel=session.getAttribute("plantel").toString();
                     idPrograma=session.getAttribute("programa").toString();
-                }
-                
-                String idSubsistema=session.getAttribute("subsistema").toString();
-                Metodos_sql metodo = new Metodos_sql();
-                List<String[]> datos;            
-                String[] parametros={idEntidad,idPlantel,idSubsistema,idPrograma};                                      
-                datos=metodo.ejecutaSP("sp_consultaCBase",parametros);
-                if(datos.isEmpty()){
-                    RequestDispatcher rd1 = request.getRequestDispatcher("altaConvocatoria.jsp");
-                    rd1.forward(request, response);
+                    
+                    String idSubsistema=session.getAttribute("subsistema").toString();
+                    Metodos_sql metodo = new Metodos_sql();
+                    List<String[]> datos;            
+                    String[] parametros={idEntidad,idPlantel,idSubsistema,idPrograma};                                      
+                    datos=metodo.ejecutaSP("sp_consultaCBase",parametros);
+                    if(datos.isEmpty()){
+                        rd = sc.getRequestDispatcher("/altaConvocatoria.jsp");
+                        rd.forward(request,response);
+                    }else{
+                        request.setAttribute("informacion", datos.get(0));
+                        rd = sc.getRequestDispatcher("/altaConvocatoria.jsp");
+                        rd.forward(request,response);
+                    }
                 }else{
-                    request.setAttribute("informacion", datos.get(0));
                     rd = sc.getRequestDispatcher("/altaConvocatoria.jsp");
                     rd.forward(request,response);
                 }
-            
-            //ServletContext sc = getServletContext();
-            //RequestDispatcher rd= sc.getRequestDispatcher("/altaConvocatoria.jsp");            
-            //rd.forward(request,response);
         }else{
             response.sendRedirect("login.jsp");
         }

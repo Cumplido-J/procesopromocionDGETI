@@ -88,7 +88,7 @@
                 <div class="row">
                     <div class="form-group col-xs-12 text-center">                         
                         <input class="btn btn-sm btn-primary" id="btnBuscar" type="submit" value='Buscar'/> 
-                        <a href="altaConvocatoriaBase.jsp" class="btn btn-sm btn-primary">Agregar</a>                        
+                        <a href="altaConvocatoriaBase.jsp" class="btn btn-sm btn-primary">Agregar</a>                       
                     </div>
                 </div>
                 </form>

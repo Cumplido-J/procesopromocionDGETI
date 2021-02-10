@@ -122,12 +122,16 @@ public class Servlet_registrarConvocatoria extends HttpServlet {
                     tipoConvocatoria = "PLANTEL";
                 }
                 
-                String[] parametros={id,publicacion,inicioRegistro,finRegistro,inicioValoracion,finValoracion,inicioDictaminacion,finDictaminacion,resultados,plantel,programa,estatus,entidad,tipoConvocatoria,subsistema};                                      
+                if(publicacion.equals("") || publicacion.isEmpty() ){
+                    out.print("No existe convocatoria base");
+                }else{
+                    String[] parametros={id,publicacion,inicioRegistro,finRegistro,inicioValoracion,finValoracion,inicioDictaminacion,finDictaminacion,resultados,plantel,programa,estatus,entidad,tipoConvocatoria,subsistema};                                      
                 datos=metodo.ejecutaSP("sp_insertConvocatoria",parametros);            
                 if(!datos.isEmpty()){
                     respuesta=datos.get(0)[0]; 
                 }
-                out.print(respuesta);   
+                out.print(respuesta);
+                }
                 }else{
                     out.print("El usuario no tienen permisos para guardar");
                 }
