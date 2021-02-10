@@ -167,23 +167,29 @@
                 var idPlantel=$('#plantel').val();
                 if(idPrograma!="" &&  idSubsistema!="" &&  idEntidad!="" &&  idPlantel!="")
                 $.get("Servlet_consultaConBase", {p:idPrograma, s:idSubsistema, e:idEntidad, k:idPlantel}, function(respuesta){
-                    respuesta = JSON.parse(respuesta);
-                    var fecha1=formatearFecha(respuesta.key1);
-                    var fecha2=formatearFecha(respuesta.key2);
-                    var fecha3=formatearFecha(respuesta.key3);
-                    var fecha4=formatearFecha(respuesta.key4);
-                    var fecha5=formatearFecha(respuesta.key5);
-                    var fecha6=formatearFecha(respuesta.key6);
-                    var fecha7=formatearFecha(respuesta.key7);
-                    var fecha8=formatearFecha(respuesta.key8);
-                    $("#publicacion").val(fecha1);
-                    $("#inicioRegistro").val(fecha2);
-                    $("#finRegistro").val(fecha3);
-                    $("#inicioValoracion").val(fecha4);
-                    $("#finValoracion").val(fecha5);
-                    $("#inicioDictaminacion").val(fecha6);
-                    $("#finDictaminacion").val(fecha7);
-                    $("#resultados").val(fecha8);
+                    
+                    if(respuesta.includes("No")){
+                        $("#mensaje").html(respuesta);
+                        $("#modalMensaje").modal();   
+                    }else{
+                        respuesta = JSON.parse(respuesta);
+                        var fecha1=formatearFecha(respuesta.key1);
+                        var fecha2=formatearFecha(respuesta.key2);
+                        var fecha3=formatearFecha(respuesta.key3);
+                        var fecha4=formatearFecha(respuesta.key4);
+                        var fecha5=formatearFecha(respuesta.key5);
+                        var fecha6=formatearFecha(respuesta.key6);
+                        var fecha7=formatearFecha(respuesta.key7);
+                        var fecha8=formatearFecha(respuesta.key8);
+                        $("#publicacion").val(fecha1);
+                        $("#inicioRegistro").val(fecha2);
+                        $("#finRegistro").val(fecha3);
+                        $("#inicioValoracion").val(fecha4);
+                        $("#finValoracion").val(fecha5);
+                        $("#inicioDictaminacion").val(fecha6);
+                        $("#finDictaminacion").val(fecha7);
+                        $("#resultados").val(fecha8);   
+                    }
                 });
             }
             
