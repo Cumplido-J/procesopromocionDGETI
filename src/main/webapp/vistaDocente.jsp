@@ -130,14 +130,14 @@
 <!--                                <a title="Ver ejemplo" onclick="abrirModalEjemplo(1)"></a>
                                   <a><img src="<%=Imagen.muestraImagen(RutaConfig.getRutaCarpeta()+"imagenes/EvidReg.jpg")%>" alt=""></a><br> -->
                                 <c:if test = "${Docente.documentoCargado3('1')==true}">
-                                    <a href="#" onclick="abrirModalArchivo(1)"><img src="<%=Imagen.muestraImagen(RutaConfig.getRutaCarpeta()+"imagenes/EvidVal.jpg")%>" alt=""></a>
-                                    <input id="btnEvidencia1" type="button" class="btn btn-sm btn-link" value="Ver documento" onclick="abrirModalArchivo(1)"/>
-                                    <a onclick="abrirModalArchivo(1)" ><h3>Carta de aceptación</h3></a>
+                                    <a href="#" onclick="abrirModalArchivoCarta(1)"><img src="<%=Imagen.muestraImagen(RutaConfig.getRutaCarpeta()+"imagenes/EvidVal.jpg")%>" alt=""></a>
+                                    <input id="btnEvidencia1" type="button" class="btn btn-sm btn-link" value="Ver documento" onclick="abrirModalArchivoCarta(1)"/>
+                                    <a onclick="abrirModalArchivoCarta(1)" ><h3>Carta de aceptación</h3></a>
                                 </c:if>
                                 <c:if test = "${Docente.documentoCargado3('1')==false}">
-                                    <a onclick="abrirModalArchivo(1)" ><img src="<%=Imagen.muestraImagen(RutaConfig.getRutaCarpeta()+"imagenes/EvidReg.jpg")%>" alt=""></a>
-                                    <input id="btnEvidencia1" type="button" class="btn btn-sm btn-link incompleto" value="" onclick="abrirModalArchivo(1)"/>
-                                    <a onclick="abrirModalArchivo(1)" ><h3>Carta de aceptación</h3></a>
+                                    <a onclick="abrirModalArchivoCarta(1)" ><img src="<%=Imagen.muestraImagen(RutaConfig.getRutaCarpeta()+"imagenes/EvidReg.jpg")%>" alt=""></a>
+                                    <input id="btnEvidencia1" type="button" class="btn btn-sm btn-link incompleto" value="" onclick="abrirModalArchivoCarta(1)"/>
+                                    <a onclick="abrirModalArchivoCarta(1)" ><h3>Carta de aceptación</h3></a>
                                 </c:if> 
 <!--                        <input id="btnEvidencia2" type="button" class="btn btn-sm btn-link incompleto" value="Subir archivo" onclick="abrirModalArchivo(2)"/>
                         <span class="glyphicon glyphicon-exclamation-sign incompleto" id="alertaBtnEvidencia2" title="Sección incompleta"></span>-->
@@ -331,6 +331,21 @@ function validaArchivo_(){
     }
     return retorno;
 }
+        </script>
+        <script>
+            function abrirModalArchivoCarta(id){    
+                if($("#btnEvidencia"+id).attr("value")=="Ver documento"){
+                    $("#ifArchivo").attr("src","Archivo?i="+id); 
+                    $("#ifArchivo").removeAttr("hidden");
+                }else{
+                    $("#ifArchivo").attr("src","Archivo?i="+id); 
+                    $("#ifArchivo").removeAttr("hidden");
+                }
+
+                $("#idArchivo").val(id);
+                
+                $("#modalArchivo").modal("show");
+            }
         </script>
     </body>
 </html>
