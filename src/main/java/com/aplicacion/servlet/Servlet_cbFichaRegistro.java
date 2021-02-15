@@ -73,7 +73,7 @@ public class Servlet_cbFichaRegistro extends HttpServlet {
             throws ServletException, IOException {
         HttpSession session= (HttpSession) request.getSession();     
         if(session.getAttribute("rol")!=null){
-            String idUsuario,rfc;
+            String idUsuario,rfc,idPermiso;
             if(session.getAttribute("rol").toString().equals("D")){
                 idUsuario=session.getAttribute("idUsuario").toString();
                 rfc=session.getAttribute("rfc").toString();
@@ -82,13 +82,15 @@ public class Servlet_cbFichaRegistro extends HttpServlet {
                 rfc=session.getAttribute("rfcDocente").toString();
             }
             
+            idPermiso = session.getAttribute("permisoActual").toString();
+            
             CriteriosValoracion cv=new CriteriosValoracion();
             docente=new Docente();
             docente.setIdUsuario(idUsuario);
             docente.consultaInfoAspirante();
             docente.consultaHoras();            
             docente.actualizaBanderaIngles();
-            String[][] puntajes=cv.consultaPuntajes(idUsuario); 
+            String[][] puntajes=cv.consultaPuntajes(idUsuario, idPermiso); 
             String[] puntajeEncuestas=cv.consultaPuntajeEncuestas(rfc);
             String[] parametros={idUsuario};            
             List<String[]> infoPlazas=new Metodos_sql().ejecutaSP("sp_consultaUsuarioPlaza",parametros);

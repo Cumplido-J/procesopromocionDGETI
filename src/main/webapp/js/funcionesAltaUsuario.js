@@ -63,7 +63,8 @@ $(document).ready(function () {
         else{
            $('#alertaCorreo').attr('hidden',true);
            $("#cbAviso").removeAttr("disabled");
-           $('#correo').removeClass('error'); 
+           $('#correo').removeClass('error');
+//           $("#btnEnviar").attr("disabled",false);
         }
     });
     $('#correo').keyup(function(){
@@ -77,7 +78,8 @@ $(document).ready(function () {
         else{
            $('#alertaCorreo').attr('hidden',true);
            $("#cbAviso").removeAttr("disabled");
-           $('#correo').removeClass('error'); 
+           $('#correo').removeClass('error');
+           $("#btnEnviar").attr("disabled",false);
         }
     });
     $('#correo').change(function(){
@@ -91,7 +93,8 @@ $(document).ready(function () {
         else{
            $('#alertaCorreo').attr('hidden',true);
            $("#cbAviso").removeAttr("disabled");
-           $('#correo').removeClass('error'); 
+           $('#correo').removeClass('error');
+           $("#btnEnviar").attr("disabled",false);
         }
     });    
     $('#usuario').on('keypress keydown keyup change',function(){        

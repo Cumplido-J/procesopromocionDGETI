@@ -419,7 +419,7 @@ public class CriteriosValoracion {
         retorno[1]=puntaje;
         return retorno;
     }
-    public String[][] consultaPuntajes(String idUsuario){
+    public String[][] consultaPuntajes(String idUsuario, String idPermiso){
         String[][] respuesta=new String[15][8];
         int c,d;
         /*for(c=0;c<15;c++){
@@ -428,7 +428,7 @@ public class CriteriosValoracion {
             }
             respuesta[c][4]="0";
         }*/
-        String[] parametros={idUsuario};
+        String[] parametros={idUsuario,idPermiso};
         List<String[]> datos=metodo.ejecutaSP("sp_consultaConstanciasProceso",parametros);
         if(!datos.isEmpty()){             
             for(String[] dato:datos){

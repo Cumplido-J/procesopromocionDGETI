@@ -67,7 +67,7 @@ public class Servlet_cbRegistroCriterios extends HttpServlet {
             throws ServletException, IOException {
         HttpSession session= (HttpSession) request.getSession();     
         if(session.getAttribute("rol")!=null){
-            String idUsuario,rfc;
+            String idUsuario,rfc, idPermiso;
             boolean vistaAdmin;
             if(session.getAttribute("rol").toString().equals("D")){
                 idUsuario=session.getAttribute("idUsuario").toString();
@@ -79,6 +79,7 @@ public class Servlet_cbRegistroCriterios extends HttpServlet {
                 vistaAdmin=true;
             }           
             Docente docente;  
+            idPermiso = session.getAttribute("permisoActual").toString();
             Metodos_sql metodos=new Metodos_sql();
             CriteriosValoracion cv=new CriteriosValoracion();
             String[] parametros={""};            
@@ -89,7 +90,7 @@ public class Servlet_cbRegistroCriterios extends HttpServlet {
             docente.setRfc(rfc);
             docente.consultaInfoAspirante();             
             docente.consultaDocumentos();
-            String[][] puntajes=cv.consultaPuntajes(idUsuario); 
+            String[][] puntajes=cv.consultaPuntajes(idUsuario, idPermiso); 
             String[] puntajeEncuestas=cv.consultaPuntajeEncuestas(rfc);
             request.setAttribute("docente", docente);
             request.setAttribute("criterios", criterios);

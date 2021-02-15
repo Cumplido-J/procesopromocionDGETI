@@ -8,18 +8,19 @@ package com.aplicacion.servlet;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import metodos_sql.Metodos_sql;
 
 /**
  *
- * @author David Reyna
+ * @author pelle
  */
-public class Servlet_finalizaProceso extends HttpServlet {
-
+@WebServlet(name = "ConsultaSesionPermiso", urlPatterns = {"/ConsultaSesionPermiso"})
+public class Servlet_consultaSesionPermiso extends HttpServlet {
+    
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -32,17 +33,20 @@ public class Servlet_finalizaProceso extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
+        PrintWriter out = response.getWriter();
+        try {
             /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet Servlet_finalizaProceso</title>");            
+            out.println("<title>Servlet Servlet_consultaSesionPermiso</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet Servlet_finalizaProceso at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet Servlet_consultaSesionPermiso at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
+        } finally {
+            out.close();
         }
     }
 
@@ -55,10 +59,27 @@ public class Servlet_finalizaProceso extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    @Override
+    
+        @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        
+        PrintWriter out = response.getWriter();
+        try {
+            /* TODO output your page here. You may use following sample code. */
+            String respuesta = null;
+            
+            HttpSession session= (HttpSession) request.getSession(true); 
+            respuesta = session.getAttribute("permisoActual").toString();
+            
+            out.println(respuesta);
+                      
+        }catch(Exception e){
+            out.println(e);
+        } 
+        finally {
+            out.close();
+        }
     }
 
     /**
@@ -69,35 +90,10 @@ public class Servlet_finalizaProceso extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    @Override
+        @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        HttpSession session= (HttpSession) request.getSession();     
-        if(session.getAttribute("rol")!=null){
-            String idUsuario,rfc,totalEncuestados,retorno,observacion="",total="",idPermiso="";
-            idPermiso = session.getAttribute("permisoActual").toString();
-            if(session.getAttribute("rol").toString().equals("D")){
-                idUsuario=session.getAttribute("idUsuario").toString();
-                rfc=session.getAttribute("rfc").toString();
-                retorno="SesionDocente";
-            }else{
-                idUsuario=session.getAttribute("idDocente").toString();                
-                rfc=session.getAttribute("rfcDocente").toString();
-                retorno="VistaDocente";
-                observacion=request.getParameter("observaciones");
-                total=request.getParameter("evaluacion");
-            }           
-            totalEncuestados=session.getAttribute("totalEncuestados").toString();
-            Metodos_sql metodo=new Metodos_sql();
-            String[] parametros={idUsuario,totalEncuestados,observacion,total,idPermiso};
-            metodo.ejecutaSP("sp_finProceso",parametros);
-            response.sendRedirect(retorno);
-            /*if(completo.equals("true")){
-                response.sendRedirect("evidenciaRegistroDocentes.html");
-            }else{
-                response.sendRedirect("FichaRegistroIncompleto");
-            }*/
-        }
+        processRequest(request, response);
     }
 
     /**
@@ -105,9 +101,8 @@ public class Servlet_finalizaProceso extends HttpServlet {
      *
      * @return a String containing servlet description
      */
-    @Override
+        @Override
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-
 }
