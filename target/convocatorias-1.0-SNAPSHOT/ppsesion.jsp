@@ -80,7 +80,7 @@
             <c:if test = "${Docente.infoRegistro[61]!=null&&Docente.infoRegistro[66]!='1'}">  <!--Si ya finalizó el registro-->
                 <c:set var="disabled1" value="disabled"></c:set>
                 <c:set var="hidden1" value=""></c:set>
-                <c:set var="disabled4" value="disabled"></c:set>                
+                <c:set var="disabled5" value="disabled"></c:set>                
                 <c:if test = "${Docente.infoRegistro[66]=='3'}"><!--Si el registro finalizó como incompleto-->
                     <c:set var="finIncompleto" value="true"></c:set>
                 </c:if>
@@ -154,7 +154,7 @@
                         </c:if> 
                     </article>
                         
-                    <article class="articleses ${disabled5}">
+                    <article id="pasoFicha" for="pasoFicha" name="pasoFicha" class="articleses ${disabled5}" >
                         <h3>Paso 5:</h3>
                         <a href="FichaRegistro" target="_blank" ><img src="<%=Imagen.muestraImagen(RutaConfig.getRutaCarpeta()+"imagenes/EvidVal.jpg")%>" alt=""></a>
                         <a href="FichaRegistro"  target="_blank" ><h3>Ficha de <br/> registro </h3></a>
@@ -284,6 +284,26 @@
             </div>
           </div>
                     
+          <div class="modal fade" id="modalMensaje" role="dialog">
+            <div class="modal-dialog">
+
+              <!-- Modal content-->
+              <div class="modal-content panel">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  <h4 class="modal-title">Aviso</h4>
+                </div>
+                <div class="modal-body">
+                  <p id="mensaje">Registro exitoso.</p>
+                </div>
+                <div class="modal-footer">
+                    <button onclick="myFicha()" type="button" class="btn btn-sm btn-default" data-dismiss="modal">Cerrar</button>
+                </div>
+              </div>
+
+            </div>
+          </div>         
+                    
         <!-- JS  para el framework del gobierno-->
         <script src="https://framework-gb.cdn.gob.mx/gobmx.js"></script>        
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -306,7 +326,7 @@
         $("#alertaBtnEvidencia"+id).attr("style","display:none;");
         $("#mensaje").html("El archivo fue cargado correctamente");
     }
-    $("#modalMensaje").modal("show");
+        $("#modalMensaje").modal("show");
 }
 
 function validaArchivo_(){
@@ -345,6 +365,13 @@ function validaArchivo_(){
                 $("#idArchivo").val(id);
                 
                 $("#modalArchivo").modal("show");
+            }
+        </script>
+        <script>
+            function myFicha() {
+              document.getElementById("pasoFicha").removeAttribute("class");
+              var element = document.getElementById("pasoFicha");
+              element.classList.add("articleses");
             }
         </script>
     </body>

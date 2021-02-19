@@ -104,11 +104,14 @@
                                 <th>RFC</th>
                                 <th>Nombre</th>
                                 <th>Estatus</th>
-                                <th>Puntaje</th>
+                                <th>Puntaje Consejo</th>
+                                <c:if test='${sessionScope["permisoActual"]=="6"}'>
+                                <th>Puntaje Dictaminador</th>
+                                </c:if>
                                 <th>Opciones</th>
                             </tr>
                         </thead>
-                        <tbody id="seccionEditable">${dato.desplegarDocentes(sessionScope["programa"],sessionScope["subsistema"],sessionScope["entidad"],sessionScope["plantel"],'','')}</tbody>
+                        <tbody id="seccionEditable">${dato.desplegarDocentes(sessionScope["programa"],sessionScope["subsistema"],sessionScope["entidad"],sessionScope["plantel"],'','',sessionScope["permisoActual"])}</tbody>
                     </table>
                 </div>
             </div>

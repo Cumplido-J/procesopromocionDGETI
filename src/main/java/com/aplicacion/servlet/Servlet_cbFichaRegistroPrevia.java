@@ -76,6 +76,17 @@ public class Servlet_cbFichaRegistroPrevia extends HttpServlet {
                 rfc=session.getAttribute("rfcDocente").toString();
             }
             
+            //Seobtienen datos para validar que imagen se va a mostrar en la ficha de registro.
+            String rutaImagenP="";
+            String entidadUsuario=session.getAttribute("entidad").toString();
+            String subsistemaUsuario=session.getAttribute("subsistema").toString();
+            
+            if(subsistemaUsuario.equals("2")){
+                rutaImagenP="logos/cecyte/logo_cecyte+"+entidadUsuario+"+.jpg";
+            }else{
+                rutaImagenP="logos/logo_dgeti.jpg";
+            }
+            
             idPermiso = session.getAttribute("permisoActual").toString();
             
             CriteriosValoracion cv=new CriteriosValoracion();
@@ -98,6 +109,7 @@ public class Servlet_cbFichaRegistroPrevia extends HttpServlet {
             request.setAttribute("tutorias", cv.getFilasTutoriasFicha(idUsuario));
             request.setAttribute("publicaciones", cv.getFilasPublicacionesFicha(idUsuario));
             request.setAttribute("resultados", cv.getFilasResultadosFicha(idUsuario));
+            request.setAttribute("rutaimagenP", rutaImagenP);
             ServletContext sc = getServletContext();
             RequestDispatcher rd = sc.getRequestDispatcher("/FichaRegistroPrevia.jsp");
             rd.forward(request,response);

@@ -12,6 +12,7 @@ com\aplicacion\servlet\Servlet_registrarCriterio.class
 herramientas\WebService.class
 com\convocatoria\domain\Comites.class
 com\convocatoria\reportes\ReporteConvocatoria.class
+com\aplicacion\servlet\Servlet_estableceSesionPermiso.class
 com\aplicacion\servlet\Servlet_buscar_usuario.class
 com\aplicacion\servlet\Servlet_recuperacionContrasena.class
 herramientas\CipherDecode.class
@@ -133,6 +134,7 @@ herramientas\Pin.class
 herramientas\RutaConfig.class
 com\aplicacion\servlet\Servlet_buscar_convocatoriaBase.class
 seguridad\VerificarRecaptcha.class
+com\aplicacion\servlet\Servlet_consultaSesionPermiso.class
 com\aplicacion\servlet\Servlet_regresar2.class
 com\convocatoria\servlet\ServletReporte.class
 seguridad\Encriptar_Desencriptar.class
