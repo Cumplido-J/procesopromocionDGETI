@@ -82,7 +82,7 @@ public class Servlet_cbFichaRegistroPrevia extends HttpServlet {
             String subsistemaUsuario=session.getAttribute("subsistema").toString();
             
             if(subsistemaUsuario.equals("2")){
-                rutaImagenP="logos/cecyte/logo_cecyte+"+entidadUsuario+"+.jpg";
+                rutaImagenP="logos/cecyte/logo_cecyte"+entidadUsuario+".jpg";
             }else{
                 rutaImagenP="logos/logo_dgeti.jpg";
             }
