@@ -254,9 +254,16 @@
                                 <label class="control-label" for="archivo">Seleccione el archivo a cargar:</label>
                                 <input type="hidden" id="idArchivo" name="idArchivo" value="" />
                                 <input type="file" class="form-control input-sm" id="archivoCarta" name="archivoCarta" onchange="subirArchivo_();" accept=".pdf" />
-                                <a href="descargas/cartaaceptaciónbasesconvocatoriaPPSDCC03022021.pdf" download>
+                                <c:if test = "${Docente.infoRegistro[74]=='1'}">
+                                    <a href="descargas/cartaaceptaciónbasesconvocatoriaPPSDCC03022021.pdf" download>
                                     Descargar carta aceptación
-                                </a>
+                                    </a>
+                                </c:if>
+                                <c:if test = "${Docente.infoRegistro[74]=='2'}">
+                                    <a href="descargas/cartaaceptaciónbasesconvocatoriacecyte03022021.pdf" download>
+                                    Descargar carta aceptación
+                                    </a>
+                                </c:if>
                         </form>  
                     </div>
                 </div>
