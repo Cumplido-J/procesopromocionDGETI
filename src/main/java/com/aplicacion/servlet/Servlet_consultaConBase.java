@@ -90,7 +90,7 @@ public class Servlet_consultaConBase extends HttpServlet {
                 String[] parametros={entidad,plantel,subsistema,programa};                                      
                 datos=metodo.ejecutaSP("sp_consultaCBase",parametros);
                 if(datos.isEmpty()){
-                    json="No existe convocatoria base para esta convinacion";
+                    json="No existe convocatoria base para esta conbinación";
                 }else{
                     //request.setAttribute("informacion", datos.get(0));
                     fecha1 = datos.get(0)[1];

@@ -43,8 +43,7 @@
             <table >
                 <tr>
                     <td>FOLIO</td>
-                    <fmt:formatDate var="anio" value="${now}" pattern="yyyy" />
-                    <td>:<fmt:formatNumber pattern="00" value="${Docente.infoRegistro[7]}" />PCC001<fmt:formatNumber pattern="00000" value="${Docente.infoRegistro[0]}"/>${anio}</td>
+                    <td>:${Docente.infoRegistro[75]}</td>
                 </tr>
                 <!--<tr>
                     <td>CURP</td>
@@ -136,14 +135,28 @@
                     <td COLSPAN="2">
                         PLAZAS QUE OSTENTA:
                         <table>
-                            <tr><th class="borde">CLAVE PRESUPUESTAL</th><th class="borde">FECHA DESDE QUE OSTENTA LA PLAZA</th><th class="borde">TIPO DE NOMBRAMIENTO</th><th class="borde">CATEGORIA</th><th class="borde">JORNADA</th></tr>
+                            <tr><th class="borde">CLAVE PRESUPUESTAL</th><th class="borde">FECHA DESDE QUE OSTENTA LA PLAZA</th><th class="borde">TIPO DE NOMBRAMIENTO</th><th class="borde">CATEGORIA</th><th class="borde">JORNADA</th><th class="borde">FUNCIÓN DIRECTIVA</th></tr>
                             
                                 <c:forEach items="${infoPlazas}" var="plaza">
-                                    <tr><td class="borde">${plaza[11]}</td><td class="borde">${fecha.formatoImprimir(plaza[7])}</td><td class="borde">${plaza[9]}:${plaza[10]}</td><td class="borde">${plaza[3]}</td>
+                                    <tr><td class="borde">${plaza[11]}</td><td class="borde">${plaza[7]}</td><td class="borde">${plaza[9]}:${plaza[10]}</td><td class="borde">${plaza[3]}</td>
                                         <td class="borde">
                                             ${plaza[5]}
                                             <c:if test="${plaza[4]=='1'}">
                                                 (${plaza[6]})
+                                            </c:if>
+                                        </td>
+                                        <td class="borde">
+                                            <c:if test="${plaza[13]=='D'}">
+                                                Director<br/>Fecha de renuncia:${plaza[14]}
+                                            </c:if>
+                                                <c:if test="${plaza[13]=='S'}">
+                                                Subdirector<br/>Fecha de renuncia:${plaza[14]}
+                                            </c:if>
+                                            <c:if test="${plaza[13]=='J'}">
+                                                Jefe de Departamento<br/>Fecha de renuncia:${plaza[14]}
+                                            </c:if>
+                                            <c:if test="${plaza[13]=='-'}">
+                                                No aplica
                                             </c:if>
                                         </td>
                                     </tr>

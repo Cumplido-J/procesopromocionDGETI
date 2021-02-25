@@ -1,8 +1,9 @@
 $(document).ready(function () {
-    $( "#ingresoSubsistema" ).datepicker({changeMonth:true, changeYear: true,firstDay: 0});  
-    $( "#ingresoPlantel" ).datepicker({changeMonth:true, changeYear: true,firstDay: 0});     
-    $( "#fechaPlaza" ).datepicker({changeMonth:true, changeYear: true,firstDay: 0});         
-    $( "#fechaPromocion" ).datepicker({changeMonth:true, changeYear: true,firstDay: 0});  
+    $( ".fecha" ).datepicker({changeMonth:true, changeYear: true,firstDay: 0});  
+//    $( "#ingresoSubsistema" ).datepicker({changeMonth:true, changeYear: true,firstDay: 0});  
+//    $( "#ingresoPlantel" ).datepicker({changeMonth:true, changeYear: true,firstDay: 0});     
+//    $( "#fechaPlaza" ).datepicker({changeMonth:true, changeYear: true,firstDay: 0});         
+//    $( "#fechaPromocion" ).datepicker({changeMonth:true, changeYear: true,firstDay: 0});  
         
     $('#formInfoAcademica').submit(function(e) {
         e.preventDefault();
@@ -174,6 +175,12 @@ $(document).ready(function () {
                 number:"Ingrese sólo números",
                 min:"Ingrese un valor mayor a 0",
                 max:"Ingrese un valor menor a 20"
+            },
+            'cargo':{
+                required: "Campo requerido"
+            },
+            'fechaRenuncia':{
+                required: "Campo requerido"
             }
         },
         submitHandler:function(){
@@ -1222,6 +1229,7 @@ function cambioCarrera(){
 function abrirModalPlazas(){
     $("#formPlaza")[0].reset();
     $("#modalPlazas").modal("show");
+    $("#seccionDirectivo").removeClass("in");
 }
 function cambioJornada(objeto){
     var jornada=objeto.value;

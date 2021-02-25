@@ -134,6 +134,7 @@ public class Servlet_login extends HttpServlet {
                     session.setAttribute("programa", datos.get(0)[11]);
                     session.setAttribute("nivel", datos.get(0)[12]);
                     session.setAttribute("permisoEdicion", datos.get(0)[14]);
+                    session.setAttribute("permisoActual","");
                     if(datos.get(0)[7].equals("D")){
                         response.sendRedirect("SesionDocente"); 
                     }else{                        
@@ -147,6 +148,10 @@ public class Servlet_login extends HttpServlet {
                             vinculo[2]=dato[10];
                             vinculos.add(vinculo);
                         }
+                        
+                        if (vinculos.size()== 1)
+                        { session.setAttribute("permisoActual",(vinculos.get(0))[0]); }                        
+                        
                         session.setAttribute("vinculos",vinculos);
                         response.sendRedirect("SesionAdministrador");
                     }

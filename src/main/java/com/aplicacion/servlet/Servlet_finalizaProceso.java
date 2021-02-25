@@ -74,7 +74,8 @@ public class Servlet_finalizaProceso extends HttpServlet {
             throws ServletException, IOException {
         HttpSession session= (HttpSession) request.getSession();     
         if(session.getAttribute("rol")!=null){
-            String idUsuario,rfc,totalEncuestados,retorno,observacion="",total="";
+            String idUsuario,rfc,totalEncuestados,retorno,observacion="",total="",idPermiso="";
+            idPermiso = session.getAttribute("permisoActual").toString();
             if(session.getAttribute("rol").toString().equals("D")){
                 idUsuario=session.getAttribute("idUsuario").toString();
                 rfc=session.getAttribute("rfc").toString();
@@ -88,7 +89,7 @@ public class Servlet_finalizaProceso extends HttpServlet {
             }           
             totalEncuestados=session.getAttribute("totalEncuestados").toString();
             Metodos_sql metodo=new Metodos_sql();
-            String[] parametros={idUsuario,totalEncuestados,observacion,total};
+            String[] parametros={idUsuario,totalEncuestados,observacion,total,idPermiso};
             metodo.ejecutaSP("sp_finProceso",parametros);
             response.sendRedirect(retorno);
             /*if(completo.equals("true")){

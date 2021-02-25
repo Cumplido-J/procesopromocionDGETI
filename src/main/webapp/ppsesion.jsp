@@ -80,7 +80,8 @@
             <c:if test = "${Docente.infoRegistro[61]!=null&&Docente.infoRegistro[66]!='1'}">  <!--Si ya finalizó el registro-->
                 <c:set var="disabled1" value="disabled"></c:set>
                 <c:set var="hidden1" value=""></c:set>
-                <c:set var="disabled4" value="disabled"></c:set>                
+                <c:set var="disabled4" value="disabled"></c:set>
+                <c:set var="disabled5" value="disabled"></c:set>                
                 <c:if test = "${Docente.infoRegistro[66]=='3'}"><!--Si el registro finalizó como incompleto-->
                     <c:set var="finIncompleto" value="true"></c:set>
                 </c:if>
@@ -91,7 +92,7 @@
                     <c:set var="disabled2" value=""></c:set>
                     <c:set var="hidden2" value="hidden"></c:set>
                     <c:set var="disabled3" value=""></c:set>
-                    <c:set var="hidden3" value="hidden"></c:set>                    
+                    <c:set var="hidden3" value="hidden"></c:set>
                 </c:if>
                 <c:if test = "${Docente.totalEncuestados==30}"> <!--Si ya registró a 30 encuestados-->
                     <c:set var="disabled2" value="disabled"></c:set>
@@ -104,7 +105,7 @@
                     <c:set var="hidden3" value=""></c:set>
                     <c:set var="disabled4" value=""></c:set>                    
                 </c:if>
-                <c:if test = "${Docente.documentoCargado3('1')==true}"><!--Si el registro finalizó como incompleto-->
+                <c:if test = "${Docente.documentoCargado3('1')==true}"><!--Si la carta aceptacion fue cargada correctamente-->
                     <c:set var="disabled4" value=""></c:set>
                     <c:set var="hidden4" value=""></c:set>
                     <c:set var="disabled5" value=""></c:set>                    
@@ -154,7 +155,7 @@
                         </c:if> 
                     </article>
                         
-                    <article class="articleses ${disabled5}">
+                    <article id="pasoFicha" for="pasoFicha" name="pasoFicha" class="articleses ${disabled5}" >
                         <h3>Paso 5:</h3>
                         <a href="FichaRegistro" target="_blank" ><img src="<%=Imagen.muestraImagen(RutaConfig.getRutaCarpeta()+"imagenes/EvidVal.jpg")%>" alt=""></a>
                         <a href="FichaRegistro"  target="_blank" ><h3>Ficha de <br/> registro </h3></a>
@@ -253,9 +254,16 @@
                                 <label class="control-label" for="archivo">Seleccione el archivo a cargar:</label>
                                 <input type="hidden" id="idArchivo" name="idArchivo" value="" />
                                 <input type="file" class="form-control input-sm" id="archivoCarta" name="archivoCarta" onchange="subirArchivo_();" accept=".pdf" />
-                                <a href="descargas/cartaaceptaciónbasesconvocatoriaPPSDCC03022021.pdf" download>
+                                <c:if test = "${Docente.infoRegistro[74]=='1'}">
+                                    <a href="descargas/cartaaceptaciónbasesconvocatoriaPPSDCC03022021.pdf" download>
                                     Descargar carta aceptación
-                                </a>
+                                    </a>
+                                </c:if>
+                                <c:if test = "${Docente.infoRegistro[74]=='2'}">
+                                    <a href="descargas/cartaaceptaciónbasesconvocatoriacecyte03022021.pdf" download>
+                                    Descargar carta aceptación
+                                    </a>
+                                </c:if>
                         </form>  
                     </div>
                 </div>
@@ -284,6 +292,26 @@
             </div>
           </div>
                     
+          <div class="modal fade" id="modalMensaje" role="dialog">
+            <div class="modal-dialog">
+
+              <!-- Modal content-->
+              <div class="modal-content panel">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  <h4 class="modal-title">Aviso</h4>
+                </div>
+                <div class="modal-body">
+                  <p id="mensaje">Registro exitoso.</p>
+                </div>
+                <div class="modal-footer">
+                    <button onclick="myFicha()" type="button" class="btn btn-sm btn-default" data-dismiss="modal">Cerrar</button>
+                </div>
+              </div>
+
+            </div>
+          </div>         
+                    
         <!-- JS  para el framework del gobierno-->
         <script src="https://framework-gb.cdn.gob.mx/gobmx.js"></script>        
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -306,7 +334,7 @@
         $("#alertaBtnEvidencia"+id).attr("style","display:none;");
         $("#mensaje").html("El archivo fue cargado correctamente");
     }
-    $("#modalMensaje").modal("show");
+        $("#modalMensaje").modal("show");
 }
 
 function validaArchivo_(){
@@ -345,6 +373,13 @@ function validaArchivo_(){
                 $("#idArchivo").val(id);
                 
                 $("#modalArchivo").modal("show");
+            }
+        </script>
+        <script>
+            function myFicha() {
+              document.getElementById("pasoFicha").removeAttribute("class");
+              var element = document.getElementById("pasoFicha");
+              element.classList.add("articleses");
             }
         </script>
     </body>

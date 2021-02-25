@@ -35,6 +35,7 @@ C:\Users\David Reyna\Desktop\promocion\procesopromocion\src\main\java\herramient
 C:\Users\David Reyna\Desktop\promocion\procesopromocion\src\main\java\com\aplicacion\servlet\Servlet_descargaConvocatoria.java
 C:\Users\David Reyna\Desktop\promocion\procesopromocion\src\main\java\com\aplicacion\servlet\Servlet_registroHorasGrupo.java
 C:\Users\David Reyna\Desktop\promocion\procesopromocion\src\main\java\com\convocatoria\domain\ProgramasPlantel.java
+C:\Users\David Reyna\Desktop\promocion\procesopromocion\src\main\java\com\aplicacion\servlet\Servlet_estableceSesionPermiso.java
 C:\Users\David Reyna\Desktop\promocion\procesopromocion\src\main\java\constants\ConstantsWS.java
 C:\Users\David Reyna\Desktop\promocion\procesopromocion\src\main\java\com\aplicacion\servlet\Servlet_registrarConvocatoria.java
 C:\Users\David Reyna\Desktop\promocion\procesopromocion\src\main\java\com\aplicacion\servlet\Servlet_registroInfoCompatibilidad.java
@@ -122,6 +123,7 @@ C:\Users\David Reyna\Desktop\promocion\procesopromocion\src\main\java\com\aplica
 C:\Users\David Reyna\Desktop\promocion\procesopromocion\src\main\java\com\aplicacion\servlet\Servlet_recuperarclave.java
 C:\Users\David Reyna\Desktop\promocion\procesopromocion\src\main\java\com\aplicacion\servlet\Servlet_regresar3.java
 C:\Users\David Reyna\Desktop\promocion\procesopromocion\src\main\java\metodos_sql\Metodos_sql.java
+C:\Users\David Reyna\Desktop\promocion\procesopromocion\src\main\java\com\aplicacion\servlet\Servlet_consultaSesionPermiso.java
 C:\Users\David Reyna\Desktop\promocion\procesopromocion\src\main\java\com\aplicacion\servlet\Servlet_cbVistaDocente.java
 C:\Users\David Reyna\Desktop\promocion\procesopromocion\src\main\java\com\convocatoria\domain\Vacancia.java
 C:\Users\David Reyna\Desktop\promocion\procesopromocion\src\main\java\com\aplicacion\servlet\Servlet_iniciosesion_administrador.java

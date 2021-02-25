@@ -84,7 +84,7 @@ public class Servlet_registroInfoLaboral extends HttpServlet {
         PrintWriter out = response.getWriter();
         try {
             HttpSession session= (HttpSession) request.getSession();
-            String idUsuario="",rfc="";
+            String idUsuario="",rfc="",programa="";
             if(session.getAttribute("rol").toString().equals("D")){
                 idUsuario=session.getAttribute("idUsuario").toString();
                 rfc=session.getAttribute("rfc").toString();
@@ -92,6 +92,7 @@ public class Servlet_registroInfoLaboral extends HttpServlet {
                 idUsuario=session.getAttribute("idDocente").toString();                
                 rfc=session.getAttribute("rfcDocente").toString();
             }
+            programa=session.getAttribute("programa").toString();
             //out.println(idUsuario);
             Fecha fecha=new Fecha();
             String activo,ingresoSubsistema="",ingresoPlantel="",idJornada="",fechaPlaza="",idTipoNombramiento="",fechaUltimaPromocion="",idJornadaAspira="",idPerfilRequerido="",notaSancion="N",idCategoria="",idCategoriaAspira="";
@@ -132,22 +133,35 @@ public class Servlet_registroInfoLaboral extends HttpServlet {
             if(idCategoria.equals("-1")||idJornada.equals("-1")){
                 out.print("Debe seleccionar la plaza con la que participará");
             }else{
+                
                 int categoriaActual=Integer.parseInt(idCategoria);
                 int categoriaAspira=Integer.parseInt(idCategoriaAspira);
                 int jornadaActual=Integer.parseInt(idJornada);
                 int jornadaAspira=Integer.parseInt(idJornadaAspira);
                 boolean bandera=false;
-                if((categoriaActual==3 && categoriaAspira==4)||((categoriaActual==11 && categoriaAspira==12))){
-                    if(Integer.parseInt(horas)>=18){
-                        bandera=true;
+                if(programa.equals("1")){
+                    if((categoriaActual==3 && categoriaAspira==4)||((categoriaActual==11 && categoriaAspira==12))){
+                        if(Integer.parseInt(horas)>=18){
+                            bandera=true;
+                        }
+                    }else{
+                        if(categoriaAspira==categoriaActual && jornadaAspira==jornadaActual+1){
+                            bandera=true;
+                        }else if(categoriaAspira==categoriaActual+1 && jornadaAspira==jornadaActual){
+                            bandera=true;
+                        }else if(categoriaAspira==categoriaActual+1 && jornadaAspira==jornadaActual+1){
+                            bandera=true;
+                        }
                     }
-                }else{
-                    if(categoriaAspira==categoriaActual && jornadaAspira==jornadaActual+1){
-                        bandera=true;
-                    }else if(categoriaAspira==categoriaActual+1 && jornadaAspira==jornadaActual){
-                        bandera=true;
-                    }else if(categoriaAspira==categoriaActual+1 && jornadaAspira==jornadaActual+1){
-                        bandera=true;
+                }else if(programa.equals("2")){
+                    if(jornadaAspira==jornadaActual && jornadaAspira==1){
+                        if(Integer.parseInt(horas)<=19){
+                            bandera=true;
+                        }else{
+                            bandera=false;
+                        }
+                    }else{
+                        bandera=false;
                     }
                 }
                 
@@ -164,6 +178,9 @@ public class Servlet_registroInfoLaboral extends HttpServlet {
                     }
                 }else{
                     out.print("No puede aplicar a esa combinación de categoria y jornada");
+                    if(programa.equals("2")){
+                        out.println("Excede el número de horas permitidas");
+                    }
                 }
             }            
         } finally {

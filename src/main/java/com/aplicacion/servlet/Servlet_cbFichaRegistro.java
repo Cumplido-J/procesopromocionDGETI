@@ -73,7 +73,7 @@ public class Servlet_cbFichaRegistro extends HttpServlet {
             throws ServletException, IOException {
         HttpSession session= (HttpSession) request.getSession();     
         if(session.getAttribute("rol")!=null){
-            String idUsuario,rfc;
+            String idUsuario,rfc,idPermiso;
             if(session.getAttribute("rol").toString().equals("D")){
                 idUsuario=session.getAttribute("idUsuario").toString();
                 rfc=session.getAttribute("rfc").toString();
@@ -82,13 +82,27 @@ public class Servlet_cbFichaRegistro extends HttpServlet {
                 rfc=session.getAttribute("rfcDocente").toString();
             }
             
+            //Seobtienen datos para validar que imagen se va a mostrar en la ficha de registro.
+            String rutaImagen="";
+            String entidadUsuario=session.getAttribute("entidad").toString();
+            String subsistemaUsuario=session.getAttribute("subsistema").toString();
+            
+            if(subsistemaUsuario.equals("2")){
+                rutaImagen="logos/cecyte/logo_cecyte"+entidadUsuario+".jpg";
+                System.out.println(rutaImagen);
+            }else{
+                rutaImagen="logos/logo_dgeti.jpg";
+            }
+            
+            idPermiso = session.getAttribute("permisoActual").toString();
+            
             CriteriosValoracion cv=new CriteriosValoracion();
             docente=new Docente();
             docente.setIdUsuario(idUsuario);
             docente.consultaInfoAspirante();
             docente.consultaHoras();            
             docente.actualizaBanderaIngles();
-            String[][] puntajes=cv.consultaPuntajes(idUsuario); 
+            String[][] puntajes=cv.consultaPuntajes(idUsuario, idPermiso); 
             String[] puntajeEncuestas=cv.consultaPuntajeEncuestas(rfc);
             String[] parametros={idUsuario};            
             List<String[]> infoPlazas=new Metodos_sql().ejecutaSP("sp_consultaUsuarioPlaza",parametros);
@@ -102,6 +116,7 @@ public class Servlet_cbFichaRegistro extends HttpServlet {
             request.setAttribute("tutorias", cv.getFilasTutoriasFicha(idUsuario));
             request.setAttribute("publicaciones", cv.getFilasPublicacionesFicha(idUsuario));
             request.setAttribute("resultados", cv.getFilasResultadosFicha(idUsuario));
+            request.setAttribute("rutaimagen", rutaImagen);
             ServletContext sc = getServletContext();
             RequestDispatcher rd = sc.getRequestDispatcher("/FichaRegistro.jsp");
             rd.forward(request,response);

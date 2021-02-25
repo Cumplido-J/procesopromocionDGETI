@@ -159,10 +159,11 @@ public class Comite {
                 datos=metodos.ejecutaSP("sp_insertUsuario",parametros2);            
                 if(!datos.isEmpty()){
                     respuesta=datos.get(0)[0]; 
-                    parametros=new String[3];
+                    parametros=new String[4];
                     parametros[0]="";
                     parametros[1]=usuario;  
                     parametros[2]=permiso;
+                    parametros[3]="V";
                     if(respuesta.equals("ok")){                       
                         Correo c=new Correo();
                         c.enviarCorreo("Envío de contraseña","Usted ha sido registrado en el Sistema de Promoción Docente (disponible en https://www.promociondocente.sep.gob.mx) <br/> Sus datos de acceso son: <br/> Usuario: <b>"+usuario+"</b><br/>Contrase&ntilde;a:<b>"+pass+"</b>", correo);

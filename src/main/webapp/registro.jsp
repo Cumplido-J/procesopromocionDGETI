@@ -342,12 +342,12 @@
                             <div class="row">
                                 <div class="form-group col-md-3 datepicker-group">
                                   <label class="control-label" for="ingresoSubsistema">Fecha de ingreso al subsistema:</label>
-                                  <input type="text" class="form-control input-sm" id="ingresoSubsistema" name="ingresoSubsistema" value="${fecha.formatoImprimir(Docente.infoRegistro[26])}" required>
+                                  <input type="text" class="form-control input-sm fecha" id="ingresoSubsistema" name="ingresoSubsistema" value="${fecha.formatoImprimir(Docente.infoRegistro[26])}" required>
 
                                 </div>
                                 <div class="form-group col-md-3 datepicker-group">
                                   <label class="control-label" for="ingresoPlantel">Fecha de ingreso al plantel:</label>
-                                  <input class="form-control input-sm" id="ingresoPlantel" name="ingresoPlantel" type="text" value="${fecha.formatoImprimir(Docente.infoRegistro[27])}" required>
+                                  <input class="form-control input-sm fecha" id="ingresoPlantel" name="ingresoPlantel" type="text" value="${fecha.formatoImprimir(Docente.infoRegistro[27])}" required>
 
                                 </div>
                                 <div class="form-group col-md-3">
@@ -369,7 +369,7 @@
                                 </div>
                                 <div class='table-responsive'>
                                     <table class='table table-bordered table-condensed'>
-                                        <tr><th>Plaza con la que participa</th><th>Clave presupuestal</th><th>Fecha desde que ostenta la plaza</th><th>Tipo de nombramiento</th><th>Categoria</th><th>Jornada</th><th>Borrar</th></tr>
+                                        <tr><th>Plaza con la que participa</th><th>Clave presupuestal</th><th>Fecha desde que ostenta la plaza</th><th>Tipo de nombramiento</th><th>Categoria</th><th>Jornada</th><th>Cargo directivo</th><th>Borrar</th></tr>
                                         <tbody id="tablaPlazas">
                                             ${dato.desplegarPlazas(Docente.infoRegistro[0])}
                                         </tbody>
@@ -389,7 +389,7 @@
                                   <label><input type="checkbox" id="cbUP" name="cbUP" data-toggle="collapse" data-target="#seccionFUP" ${checked}>No he tenido promociones previas</label>
                                   <div id="seccionFUP" class="collapse ${in}">
                                     <label class="control-label" for="fechaPromocion">Fecha de su última promoción:</label>
-                                    <input class="form-control input-sm" id="fechaPromocion" name="fechaPromocion" type="text" value="${fecha.formatoImprimir(Docente.infoRegistro[39])}" required>
+                                    <input class="form-control input-sm fecha" id="fechaPromocion" name="fechaPromocion" type="text" value="${fecha.formatoImprimir(Docente.infoRegistro[39])}" required>
                                   </div>
                                 </div>
                                 <div class="form-group col-md-3">                                    
@@ -980,7 +980,7 @@
                         </div>    
                         <div class="form-group col-md-6 datepicker-group">
                           <label class="control-label" for="fechaPlaza" style="font-size: 12px;">Fecha desde que ostenta la plaza:</label>
-                          <input class="form-control input-sm" id="fechaPlaza" name="fechaPlaza" type="text"  required>
+                          <input class="form-control input-sm fecha" id="fechaPlaza" name="fechaPlaza" type="text"  required>
                         </div>
                       </div>
                       <div class="row">  
@@ -1007,6 +1007,26 @@
                         <div class="form-group col-md-6 hidden" id="seccionHoras2">
                             <label class="control-label" for="horas">Horas:</label>
                             <input type="text" class="form-control input-sm" id="horas2" name="horas" maxlength="2" /> 
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="form-group col-md-12">
+                            <label><input type="checkbox" id="cbDirectivo" name="cbDirectivo" data-toggle="collapse" data-target="#seccionDirectivo">Marque la casilla si desempeña una función como Director, Subdirector o Jefe de Departamento</label>
+                        </div>    
+                        <div id="seccionDirectivo" class="collapse">
+                          <div class="form-group col-md-6">
+                            <label class="control-label" for="cargo">Cargo:</label>
+                            <select class="form-control input-sm" id="cargo" name="cargo" required>
+                                <option value="">-Seleccione-</option>
+                                <option value="D">Director</option>
+                                <option value="S">Subdirector</option>
+                                <option value="J">Jefe de Departamento</option>
+                            </select>                          
+                          </div>
+                          <div class="form-group col-md-6">
+                            <label class="control-label" for="fechaRenuncia">Fecha de renuncia al cargo:</label>
+                            <input class="form-control input-sm fecha" id="fechaRenuncia" name="fechaRenuncia" type="text" required>
+                          </div>
                         </div>
                       </div>
                     </div>
