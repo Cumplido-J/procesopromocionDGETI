@@ -96,13 +96,20 @@ public class Servlet_administracionPlaza extends HttpServlet {
                 String idJornada=request.getParameter("jornada");
                 String fechaPlaza=fecha.formatoAlmacenar(request.getParameter("fechaPlaza"));
                 String idTipoNombramiento=request.getParameter("tipoNombramiento");
-                String[] parametros={idUsuario,idCategoria,idJornada,horas,fechaPlaza,idTipoNombramiento,clave};
+                String cargo="",fechaRenuncia="";
+                if(request.getParameter("cbDirectivo")!=null){
+                    cargo=request.getParameter("cargo");
+                    fechaRenuncia=fecha.formatoAlmacenar(request.getParameter("fechaRenuncia"));
+                }
+                String[] parametros={idUsuario,idCategoria,idJornada,horas,fechaPlaza,idTipoNombramiento,clave,cargo,fechaRenuncia};
                 List<String[]> datos;                           
                 datos=metodo.ejecutaSP("sp_insertUsuarioPlaza",parametros);            
                 if(!datos.isEmpty()){
                     if(datos.get(0)[0].equals("ok")){
                         String informacion=new Datos().desplegarPlazas(idUsuario);
                         out.print(informacion);                     
+                    }else{
+                        out.print(datos.get(0)[0]);
                     }
                 }else{
                     out.print("Error en almacenamiento de datos, intente nuevamente");

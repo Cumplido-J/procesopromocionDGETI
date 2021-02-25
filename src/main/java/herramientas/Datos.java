@@ -164,13 +164,14 @@ public class Datos {
     
     
     public  String desplegarPlazas(String idUsuario){        
-        String respuesta="<tr><td colspan='6' class='text-center'>Sin información</td></tr>";        
+        String respuesta="<tr><td colspan='7' class='text-center'>Sin información</td></tr>";        
         try{
             String[] parametros={idUsuario};
             List<String[]> datos=metodos.ejecutaSP("sp_consultaUsuarioPlaza",parametros);
             if(!datos.isEmpty()){
                 respuesta="";
                 String seleccionado="";
+                String cargo="";
                 for(String[] dato:datos)
                 {
                     if(dato[12].equals("V")){
@@ -178,12 +179,26 @@ public class Datos {
                     }else{
                         seleccionado="";
                     }
-                    respuesta+="<tr><td><center><input type='checkbox' onChange='seleccionarPlaza(this)' value='"+dato[0]+"' "+seleccionado+"/></center><td>"+dato[11]+"</td><td>"+new Fecha().formatoImprimir(dato[7])+"</td><td>"+dato[9]+":"+dato[10]+"</td><td class='hidden'>"+dato[2]+"</td><td>"+dato[3]+"</td><td class='hidden'>"+dato[4]+"</td><td>"+dato[5];
+                    respuesta+="<tr><td><center><input type='checkbox' onChange='seleccionarPlaza(this)' value='"+dato[0]+"' "+seleccionado+"/></center><td>"+dato[11]+"</td><td>"+dato[7]+"</td><td>"+dato[9]+":"+dato[10]+"</td><td class='hidden'>"+dato[2]+"</td><td>"+dato[3]+"</td><td class='hidden'>"+dato[4]+"</td><td>"+dato[5];
                     if(dato[4].equals("1")){
                         respuesta+="("+dato[6]+")";
                     }                    
-                    respuesta+="</td><td>"; 
-                    respuesta+="<button type='button' class='btn btn-sm' title='Borrar' onclick='confirmarPlaza("+dato[0]+")'><span class='glyphicon glyphicon-trash'></span></button>";  
+                    respuesta+="</td>";
+                    switch(dato[13]){
+                        case "D":
+                            respuesta+="<td>Director<br/>Fecha renuncia:"+dato[14]+"</td>";
+                            break;
+                        case "S":
+                            respuesta+="<td>Subdirector<br/>Fecha renuncia:"+dato[14]+"</td>";
+                            break;
+                        case "J":
+                            respuesta+="<td>Jefe de Departamento<br/>Fecha renuncia:"+dato[14]+"</td>";
+                            break;
+                        default:
+                            respuesta+="<td>No aplica</td>";                        
+                    }
+                     
+                    respuesta+="<td><button type='button' class='btn btn-sm' title='Borrar' onclick='confirmarPlaza("+dato[0]+")'><span class='glyphicon glyphicon-trash'></span></button>";  
                     respuesta+="</td></tr>";
                 }
             }
@@ -211,12 +226,22 @@ public class Datos {
                             horas+=Integer.parseInt(dato[6]);
                         }        
                         System.out.println(idCategoria+"-"+idCategoriaAux+"-"+idJornada+"-"+idJornadaAux);
-                        if(!idCategoriaAux.isEmpty()){
-                            
-                            if(!idCategoriaAux.equals(idCategoria)||!idJornadaAux.equals(idJornada)){
-                                respuesta="Solo puede seleccionar plazas de la misma categoria y jornada";
+                        
+                        if(dato[15].equals("1")){//Para el programa 1:Cambio categoria solo puede sumar plazas con la misma categoria y jornada
+                            if(!idCategoriaAux.isEmpty()){
+                                if(!idCategoriaAux.equals(idCategoria)||!idJornadaAux.equals(idJornada)){
+                                    respuesta="Solo puede seleccionar plazas de la misma categoria y jornada";
+                                }
+                            }
+                        }else if(dato[15].equals("2")){//Para el programa 2:Horas adicionales solo puede sumar plazas con jornada de horas
+                            if(!idJornada.equals("1")){
+                                respuesta="Solo puede seleccionar plazas con jornada de horas";
+                            }
+                            if(horas>17){
+                                respuesta="Solo puede acumular 17 horas como máximo";
                             }
                         }
+                        
                         idCategoriaAux=idCategoria;
                         idJornadaAux=idJornada;
                         numPlazas++;
@@ -227,6 +252,7 @@ public class Datos {
                     respuesta="Solo puede seleccionar una plaza con la que participará";
                 }else{
                     if(respuesta.isEmpty()){
+                        
                         respuesta=idCategoria+","+idJornada+","+horas;
                     }
                 }
