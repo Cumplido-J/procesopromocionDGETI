@@ -77,6 +77,18 @@ public class Servlet_cbFichaRegistroIncompleto extends HttpServlet {
                 idUsuario=session.getAttribute("idDocente").toString();                
                 rfc=session.getAttribute("rfcDocente").toString();
             }
+            
+            String rutaImagenInc="";
+            String entidadUsuario=session.getAttribute("entidad").toString();
+            String subsistemaUsuario=session.getAttribute("subsistema").toString();
+            
+            if(subsistemaUsuario.equals("2")){
+                rutaImagenInc="logos/cecyte/logo_cecyte"+entidadUsuario+".jpg";
+                System.out.println(rutaImagenInc);
+            }else{
+                rutaImagenInc="logos/logo_dgeti.jpg";
+            }
+            
             docente=new Docente();
             docente.setIdUsuario(idUsuario);
             docente.consultaInfoAspirante();
@@ -86,6 +98,7 @@ public class Servlet_cbFichaRegistroIncompleto extends HttpServlet {
             List<String[]> infoPlazas=new Metodos_sql().ejecutaSP("sp_consultaUsuarioPlaza",parametros);
             request.setAttribute("infoPlazas", infoPlazas);
             request.setAttribute("Docente", docente);
+            request.setAttribute("rutaImagenInc", rutaImagenInc);
             ServletContext sc = getServletContext();
             RequestDispatcher rd = sc.getRequestDispatcher("/FichaRegistroIncompleto.jsp");
             rd.forward(request,response);
