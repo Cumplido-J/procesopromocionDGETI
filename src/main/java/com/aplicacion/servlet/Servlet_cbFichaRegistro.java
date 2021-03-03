@@ -74,17 +74,19 @@ public class Servlet_cbFichaRegistro extends HttpServlet {
         HttpSession session= (HttpSession) request.getSession();     
         if(session.getAttribute("rol")!=null){
             String idUsuario,rfc,idPermiso;
+            String entidadUsuario="";
             if(session.getAttribute("rol").toString().equals("D")){
                 idUsuario=session.getAttribute("idUsuario").toString();
                 rfc=session.getAttribute("rfc").toString();
+                entidadUsuario=session.getAttribute("entidad").toString();
             }else{
                 idUsuario=session.getAttribute("idDocente").toString();                
                 rfc=session.getAttribute("rfcDocente").toString();
+                entidadUsuario=session.getAttribute("entidadDocente").toString();
             }
             
             //Seobtienen datos para validar que imagen se va a mostrar en la ficha de registro.
             String rutaImagen="";
-            String entidadUsuario=session.getAttribute("entidad").toString();
             String subsistemaUsuario=session.getAttribute("subsistema").toString();
             
             if(subsistemaUsuario.equals("2")){

@@ -102,10 +102,11 @@ public class Servlet_cbVistaDocente extends HttpServlet {
             session.setAttribute("idConvocatoria",docente.getIdConvocatoria());
             docente.consultaEncuestados(); 
             session.setAttribute("totalEncuestados",docente.getTotalEncuestados());
+            session.setAttribute("entidadDocente", docente.getInfoRegistro()[7]);
             request.setAttribute("Docente", docente);
             request.setAttribute("vinculos", session.getAttribute("vinculos"));
             ServletContext sc = getServletContext();
-            RequestDispatcher rd = sc.getRequestDispatcher("/vistaDocente.jsp");
+            RequestDispatcher rd = sc.getRequestDispatcher("/vistaDocente.jsp");    
             rd.forward(request,response);
         
     }

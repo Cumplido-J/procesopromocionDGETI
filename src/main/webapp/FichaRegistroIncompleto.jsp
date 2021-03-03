@@ -32,7 +32,10 @@
                         <br/>(Promoción horizontal)
                         <br/>Ciclo Escolar 2020-2021                                            
                 </td>
-                <td valign="top"><img width="200" src="<%=Imagen.muestraImagen(RutaConfig.getRutaCarpeta()+"logos/logo_dgeti.jpg")%>"></td>
+                <%
+                    String rutaLogo = (String) request.getAttribute("rutaImagenInc");
+                %>
+                <td valign="top"><img width="200" src="<%=Imagen.muestraImagen(RutaConfig.getRutaCarpeta()+rutaLogo)%>"></td>
             </tr>
         </table> 
         <center><p>FICHA DE REGISTRO INCOMPLETO</p></center>
