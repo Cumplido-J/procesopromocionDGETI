@@ -109,6 +109,11 @@ public class Servlet_administracionPlaza extends HttpServlet {
                         String informacion=new Datos().desplegarPlazas(idUsuario);
                         out.print(informacion);                     
                     }else{
+                        if(datos.get(0)[0].contains("anterior") && Integer.parseInt(idTipoNombramiento)!=10){
+                           String[] parametrosFinalizar={idUsuario,"N","Se finaliza registro por fecha de renuncia"};
+                           metodo.ejecutaSP("sp_finRegistro",parametrosFinalizar);
+                           response.sendRedirect("FichaRegistroIncompleto");
+                        }
                         out.print(datos.get(0)[0]);
                     }
                 }else{

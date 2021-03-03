@@ -929,7 +929,7 @@
                   <p id="mensaje">Registro exitoso.</p>
                 </div>
                 <div class="modal-footer">
-                  <button type="button" class="btn btn-sm btn-default" data-dismiss="modal">Cerrar</button>
+                  <button type="button" onclick="finalizarReg()" class="btn btn-sm btn-default" data-dismiss="modal">Cerrar</button>
                 </div>
               </div>
 
@@ -1066,6 +1066,15 @@
         <script src="https://framework-gb.cdn.gob.mx/assets/scripts/jquery-ui-datepicker.js"></script>
         <script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.1/jquery.validate.min.js"></script>
         <script src="js/funcionesRegistro.js"></script> 
+        <script>
+            function finalizarReg(){
+                    var text =  document.getElementById("mensaje").value;
+                    var idNombramiento = document.getElementById("tipoNombramiento").value;
+                    if(text.includes("anterior") && idNombramiento!==10){
+                        location.href = "SesionDocente";
+                    }
+            }
+        </script>
         <script>
             $( function() {
                 var availableTags = [
