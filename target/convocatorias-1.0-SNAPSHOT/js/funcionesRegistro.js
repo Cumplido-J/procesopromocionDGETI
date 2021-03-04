@@ -200,7 +200,10 @@ $(document).ready(function () {
                     if(data.includes("<tr>")){                        
                         $("#tablaPlazas").html(data);
                     }
-                    else{
+                    else if(data.includes("anterior")){
+                        $("#mensajeFin").html(data);            
+                        $("#modalMensajeFin").modal("show");
+                    }else{
                         $("#mensaje").html(data);            
                         $("#modalMensaje").modal("show");
                     }                    
