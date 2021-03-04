@@ -1092,6 +1092,18 @@
         <script>
             function myFunction(){                    
                 $("#modalMensajeFin").modal("hide");
+                $.post("FinalizaRegistro", {z:"F"}, function(data){
+                    if(data.includes("<tr>")){
+                        var aux=data.split("||");
+                        $("#tablaCursos").html(aux[0]);
+                        $("#p5").html(aux[1]); 
+                        calculaTotal();
+                    }
+                    else{
+                        $("#mensaje").html(data);            
+                        $("#modalMensaje").modal("show");
+                    } 
+                });
             }
         </script>
         <script>

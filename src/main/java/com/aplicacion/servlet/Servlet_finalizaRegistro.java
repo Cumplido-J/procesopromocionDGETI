@@ -82,29 +82,38 @@ public class Servlet_finalizaRegistro extends HttpServlet {
         if(session.getAttribute("rol")!=null){
             String idUsuario,rfc,retorno,observacion="",publico="";
             String completo=request.getParameter("k");
-            if(session.getAttribute("rol").toString().equals("D")){
+            String inCompleto=request.getParameter("z");
+            
+            if(session.getAttribute("rol").toString().equals("D") && inCompleto!=null && inCompleto.equals("F")){
                 idUsuario=session.getAttribute("idUsuario").toString();
-                rfc=session.getAttribute("rfc").toString();
-                retorno="SesionDocente";                
-                if(completo.equals("true")){
-                    if(request.getParameter("cbPublico")!=null){
-                        publico="S";
-                    }
-                    else{
-                        publico="N";
-                    }
-                }
+                publico="";
+                observacion="";
+                retorno="SesionDocente";
             }else{
-                idUsuario=session.getAttribute("idDocente").toString();                
-                rfc=session.getAttribute("rfcDocente").toString();
-                retorno="VistaDocente";
-                observacion=request.getParameter("observaciones");
+                    if(session.getAttribute("rol").toString().equals("D")){
+                    idUsuario=session.getAttribute("idUsuario").toString();
+                    rfc=session.getAttribute("rfc").toString();
+                    retorno="SesionDocente";                
+                    if(completo.equals("true")){
+                        if(request.getParameter("cbPublico")!=null){
+                            publico="S";
+                        }
+                        else{
+                            publico="N";
+                        }
+                    }
+                }else{
+                    idUsuario=session.getAttribute("idDocente").toString();                
+                    rfc=session.getAttribute("rfcDocente").toString();
+                    retorno="VistaDocente";
+                    observacion=request.getParameter("observaciones");
+                }
             }
             Metodos_sql metodo=new Metodos_sql();
             String[] parametros={idUsuario,publico,observacion};
             
             metodo.ejecutaSP("sp_finRegistro",parametros);
-            response.sendRedirect(retorno);
+               response.sendRedirect(retorno);
             /*if(completo.equals("true")){
                 response.sendRedirect("evidenciaRegistroDocentes.html");
             }else{
