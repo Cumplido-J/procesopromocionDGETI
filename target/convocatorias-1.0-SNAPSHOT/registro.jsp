@@ -1090,8 +1090,34 @@
         <script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.1/jquery.validate.min.js"></script>
         <script src="js/funcionesRegistro.js"></script>
         <script>
-            function myFunction(){                    
+            function myFunction(){
+                var idCategoria=$('#categoria').val();
+                var idJornada=$('#jornada').val();
+                var horas=$('#horas2').val();
+                var fechaPlaza=$('#fechaPlaza').val();
+                var idTipoNombramiento=$('#tipoNombramiento').val();
+                var clave=$('#clave').val();
+                var cargo=$('#cargo').val();
+                var fechaRenuncia=$('#fechaRenuncia').val();
+                
                 $("#modalMensajeFin").modal("hide");
+                $.post("FinalizaRegistro", {z:"F"}, function(data){
+                    if(data.includes("<tr>")){
+                        //$("#tablaPlazas").html(data);
+                    }
+                    else{
+                        $("#mensaje").html(data);            
+                        $("#modalMensaje").modal("show");
+                    } 
+                });
+                
+                $.post("AdministracionPlaza", {z:"F",categoria:idCategoria,jornada:idJornada,
+                    horas:horas,fechaPlaza:fechaPlaza,tipoNombramiento:idTipoNombramiento,clave:clave,
+                    cargo:cargo,fechaRenuncia:fechaRenuncia}, function(data){
+                    if(data.includes("<tr>")){
+                        $("#tablaPlazas").html(data);
+                    }
+                });
             }
         </script>
         <script>

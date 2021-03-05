@@ -85,6 +85,9 @@ public class Servlet_finalizaRegistro extends HttpServlet {
             String inCompleto=request.getParameter("z");
             
             if(session.getAttribute("rol").toString().equals("D") && inCompleto!=null && inCompleto.equals("F")){
+                
+                
+                
                 idUsuario=session.getAttribute("idUsuario").toString();
                 publico="";
                 observacion="";
@@ -114,6 +117,8 @@ public class Servlet_finalizaRegistro extends HttpServlet {
             
             metodo.ejecutaSP("sp_finRegistro",parametros);
                response.sendRedirect(retorno);
+               
+            
             /*if(completo.equals("true")){
                 response.sendRedirect("evidenciaRegistroDocentes.html");
             }else{
