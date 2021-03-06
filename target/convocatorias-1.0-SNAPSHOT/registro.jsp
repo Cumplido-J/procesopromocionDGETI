@@ -949,7 +949,7 @@
                   <p id="mensajeFin">Registro exitoso.</p>
                 </div>
                 <div class="modal-footer">
-                  <a href="FichaRegistroIncompleto" target="_blank">
+                  <a href="SesionDocente">
                     <button type="button" onclick="myFunction()" class="btn btn-sm btn-default">Continuar</button>
                  </a>
                  <button type="button" class="btn btn-sm btn-default" data-dismiss="modal">Cancelar</button>

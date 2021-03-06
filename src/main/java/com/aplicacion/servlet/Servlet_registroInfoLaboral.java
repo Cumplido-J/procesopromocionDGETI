@@ -184,7 +184,7 @@ public class Servlet_registroInfoLaboral extends HttpServlet {
                     }
                 }
                 }else{
-                    out.print("-El tipo de tipo de nombramiento no es valido para esta convocatoria-");
+                    out.print("-El tipo de nombramiento no es valido para esta convocatoria-");
                 }
             }            
         } finally {
