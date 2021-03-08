@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Created with Jaspersoft Studio version 6.16.0.final using JasperReports Library version 6.16.0-48579d909b7943b64690c65c71e07e0b80981928  -->
+<!-- Created with Jaspersoft Studio version 6.13.0.final using JasperReports Library version 6.13.0-46ada4d1be8f3c5985fd0b6146f3ed44caed6f05  -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="mainreport" pageWidth="612" pageHeight="792" whenNoDataType="AllSectionsNoDetail" columnWidth="572" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isSummaryWithPageHeaderAndFooter="true" uuid="b5f84621-db99-4d60-b6d5-62bd705d015a">
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="bdpromocion"/>
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
@@ -152,10 +152,10 @@ GROUP BY conv.id]]>
 		</band>
 	</pageHeader>
 	<summary>
-		<band height="238">
+		<band height="283">
 			<property name="com.jaspersoft.studio.unit.height" value="px"/>
 			<subreport>
-				<reportElement positionType="Float" x="0" y="0" width="568" height="22" uuid="485c1412-6194-4e2c-bb9c-49212e4da727">
+				<reportElement positionType="Float" isPrintRepeatedValues="false" x="0" y="0" width="568" height="22" uuid="485c1412-6194-4e2c-bb9c-49212e4da727">
 					<property name="com.jaspersoft.studio.unit.x" value="px"/>
 				</reportElement>
 				<subreportParameter name="c1">
@@ -168,7 +168,7 @@ GROUP BY conv.id]]>
 				<subreportExpression><![CDATA["pagina1.jasper"]]></subreportExpression>
 			</subreport>
 			<subreport>
-				<reportElement positionType="Float" x="0" y="25" width="568" height="22" uuid="dd02cf31-fd2a-4b8f-b737-355961f05de5"/>
+				<reportElement positionType="Float" isPrintRepeatedValues="false" x="0" y="27" width="568" height="22" uuid="dd02cf31-fd2a-4b8f-b737-355961f05de5"/>
 				<subreportParameter name="cc">
 					<subreportParameterExpression><![CDATA[$P{convocatoria}]]></subreportParameterExpression>
 				</subreportParameter>
@@ -179,34 +179,40 @@ GROUP BY conv.id]]>
 				<subreportExpression><![CDATA["pagina2.jasper"]]></subreportExpression>
 			</subreport>
 			<subreport>
-				<reportElement positionType="Float" x="0" y="50" width="568" height="22" uuid="e4284703-a3ab-49b9-b328-b9e9a162aa0a">
+				<reportElement positionType="Float" isPrintRepeatedValues="false" x="0" y="52" width="568" height="22" uuid="e4284703-a3ab-49b9-b328-b9e9a162aa0a">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
+				<subreportParameter name="cc">
+					<subreportParameterExpression><![CDATA[$P{convocatoria}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="cp">
+					<subreportParameterExpression><![CDATA[$P{plantel}]]></subreportParameterExpression>
+				</subreportParameter>
 				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
 				<subreportExpression><![CDATA["pagina3.jasper"]]></subreportExpression>
 			</subreport>
 			<subreport>
-				<reportElement positionType="Float" x="0" y="76" width="568" height="22" uuid="92ce5086-0454-4d3f-93e5-5f3e8f6812d8">
+				<reportElement positionType="Float" isPrintRepeatedValues="false" x="0" y="78" width="568" height="22" uuid="92ce5086-0454-4d3f-93e5-5f3e8f6812d8">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
 				<subreportExpression><![CDATA["pagina4.jasper"]]></subreportExpression>
 			</subreport>
 			<subreport>
-				<reportElement positionType="Float" x="0" y="102" width="568" height="22" uuid="137d2318-1f2d-4526-8b9b-a9b28635bb3a">
+				<reportElement positionType="Float" isPrintRepeatedValues="false" x="0" y="104" width="568" height="22" uuid="137d2318-1f2d-4526-8b9b-a9b28635bb3a">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
-				<subreportParameter name="c5">
+				<subreportParameter name="c6">
 					<subreportParameterExpression><![CDATA[$P{convocatoria}]]></subreportParameterExpression>
 				</subreportParameter>
-				<subreportParameter name="p5">
+				<subreportParameter name="p6">
 					<subreportParameterExpression><![CDATA[$P{plantel}]]></subreportParameterExpression>
 				</subreportParameter>
 				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
 				<subreportExpression><![CDATA["pagina5.jasper"]]></subreportExpression>
 			</subreport>
 			<subreport>
-				<reportElement positionType="Float" x="0" y="128" width="568" height="22" uuid="3b028d39-a518-4ef9-a2b4-31d4489fa619">
+				<reportElement positionType="Float" x="0" y="130" width="568" height="22" uuid="3b028d39-a518-4ef9-a2b4-31d4489fa619">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<subreportParameter name="c6">
@@ -219,7 +225,7 @@ GROUP BY conv.id]]>
 				<subreportExpression><![CDATA["pagina6.jasper"]]></subreportExpression>
 			</subreport>
 			<subreport>
-				<reportElement positionType="Float" x="0" y="154" width="568" height="22" uuid="f3f38366-0078-4a94-a0c9-e18079b77697">
+				<reportElement positionType="Float" isPrintRepeatedValues="false" x="0" y="156" width="568" height="22" uuid="f3f38366-0078-4a94-a0c9-e18079b77697">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<subreportParameter name="c7">
@@ -232,7 +238,7 @@ GROUP BY conv.id]]>
 				<subreportExpression><![CDATA["pagina7.jasper"]]></subreportExpression>
 			</subreport>
 			<subreport>
-				<reportElement positionType="Float" x="0" y="209" width="568" height="22" uuid="e25ad204-e77f-446e-b850-76d17f9ec1d8">
+				<reportElement positionType="Float" x="0" y="212" width="568" height="22" uuid="e25ad204-e77f-446e-b850-76d17f9ec1d8">
 					<property name="com.jaspersoft.studio.unit.x" value="px"/>
 					<property name="com.jaspersoft.studio.unit.y" value="px"/>
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
@@ -247,7 +253,7 @@ GROUP BY conv.id]]>
 				<subreportExpression><![CDATA["pagina9.jasper"]]></subreportExpression>
 			</subreport>
 			<subreport>
-				<reportElement positionType="Float" x="0" y="182" width="568" height="22" uuid="d326d391-f62b-4635-b020-c5e4404d059b">
+				<reportElement positionType="Float" x="0" y="184" width="568" height="22" uuid="d326d391-f62b-4635-b020-c5e4404d059b">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<subreportParameter name="c7">

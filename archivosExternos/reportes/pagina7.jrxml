@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Created with Jaspersoft Studio version 6.16.0.final using JasperReports Library version 6.16.0-48579d909b7943b64690c65c71e07e0b80981928  -->
+<!-- Created with Jaspersoft Studio version 6.13.0.final using JasperReports Library version 6.13.0-46ada4d1be8f3c5985fd0b6146f3ed44caed6f05  -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="pagina7" pageWidth="572" pageHeight="792" whenNoDataType="AllSectionsNoDetail" columnWidth="572" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="2ab4038d-9d78-459e-927f-4f5c4dc4ad48">
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="bdpromocion"/>
@@ -65,17 +65,17 @@ GROUP BY conv.id]]>
 		<band height="676" splitType="Stretch">
 			<property name="com.jaspersoft.studio.unit.height" value="px"/>
 			<staticText>
-				<reportElement positionType="Float" x="0" y="391" width="571" height="45" uuid="55fa9fa8-0449-46c0-bb24-de6ca558a86c">
+				<reportElement positionType="Float" x="0" y="411" width="571" height="25" uuid="55fa9fa8-0449-46c0-bb24-de6ca558a86c">
 					<property name="com.jaspersoft.studio.unit.x" value="px"/>
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<textElement textAlignment="Justified">
 					<font fontName="Montserrat" size="9"/>
 				</textElement>
-				<text><![CDATA[Los aspirantes que cuenten con plazas adicionales a aquellas con las que participen en este proceso y resulten beneficiarios de una promoción en el servicio docente por cambio de categoría, deberán obtener la autorización de compatibilidad de plazas correspondiente, para lo cual deberán apegarse a lo establecido en las Reglas en materia de compatibilidad de plazas emitidas por la USICAMM. ]]></text>
+				<text><![CDATA[Los cambios de categoría se otorgarán de acuerdo con el campo disciplinar, actividad paraescolar o módulo profesional en que se desempeña el personal docente o técnico docente.]]></text>
 			</staticText>
 			<staticText>
-				<reportElement positionType="Float" mode="Opaque" x="0" y="290" width="572" height="13" forecolor="#FFFFFF" backcolor="#730907" uuid="f5a539d9-cea6-4f20-97ca-3d4676735469">
+				<reportElement positionType="Float" mode="Opaque" x="0" y="284" width="572" height="13" forecolor="#FFFFFF" backcolor="#730907" uuid="f5a539d9-cea6-4f20-97ca-3d4676735469">
 					<property name="com.jaspersoft.studio.unit.x" value="px"/>
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 				</reportElement>
@@ -85,33 +85,33 @@ GROUP BY conv.id]]>
 				<text><![CDATA[DÉCIMA SEGUNDA. ASIGNACIÓN DE CATEGORÍAS]]></text>
 			</staticText>
 			<staticText>
-				<reportElement positionType="Float" x="0" y="311" width="571" height="61" uuid="bb764e2c-3466-4689-8af0-4b5af8a63e85">
+				<reportElement positionType="Float" x="0" y="300" width="571" height="79" uuid="bb764e2c-3466-4689-8af0-4b5af8a63e85">
 					<property name="com.jaspersoft.studio.unit.x" value="px"/>
 				</reportElement>
 				<textElement textAlignment="Justified">
 					<font fontName="Montserrat" size="9"/>
 				</textElement>
-				<text><![CDATA[El Consejo dictaminador del Proceso Extraordinario de Promoción en el Servicio Docente por Cambio de Categoría en la Dirección General de Educación Tecnológica Industrial y de Servicios, exclusivamente para el ciclo escolar 2020-2021, emitirá las listas de resultados obtenidos por los participantes, ordenados en forma descendente, de acuerdo con los elementos de valoración establecidos para este proceso de selección. Se conformarán listas de ordenamiento por plantel las cuales incluirán a todos los aspirantes.]]></text>
+				<text><![CDATA[El Consejo Dictaminador del Proceso de Promoción en el Servicio Docente por Cambio de Categoría en la Dirección General de Educación Tecnológica Industrial y de Servicios, para el ciclo escolar 2020-2021, emitirá las listas de resultados obtenidos por los participantes, ordenados en forma descendente, de acuerdo con los elementos de valoración establecidos para este proceso de selección. Se conformarán listas de ordenamiento por plantel, las cuales incluirán a todos los aspirantes. A partir de la vacancia real y la de corrimiento natural, señalada en la disposición cuarta de esta convocatoria y de las necesidades del servicio educativo, las plazas deberán ser asignadas para atender actividades frente a grupo exclusivamente, con pleno respeto a la descarga académica que corresponde a cada plaza/categoría conforme a la normatividad aplicable.]]></text>
 			</staticText>
 			<staticText>
-				<reportElement positionType="Float" x="0" y="372" width="571" height="12" uuid="4b459b6b-a9bb-4ced-beb8-0caab4c2a412">
+				<reportElement positionType="Float" x="0" y="383" width="571" height="31" uuid="4b459b6b-a9bb-4ced-beb8-0caab4c2a412">
 					<property name="com.jaspersoft.studio.unit.x" value="px"/>
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<textElement textAlignment="Justified">
 					<font fontName="Montserrat" size="9"/>
 				</textElement>
-				<text><![CDATA[La promoción por cambio de categoría dará lugar a un nombramiento por tiempo fijo. ]]></text>
+				<text><![CDATA[La promoción por cambio de categoría dará lugar a un nombramiento definitivo, previa renuncia de la(s) plaza(s) que ostenta el participante al momento del registro al proceso objeto de la presente convocatoria. ]]></text>
 			</staticText>
 			<staticText>
-				<reportElement positionType="Float" x="0" y="443" width="571" height="35" uuid="bdad606a-547d-4dc2-882d-728dabf07b67">
+				<reportElement positionType="Float" x="0" y="440" width="571" height="35" uuid="bdad606a-547d-4dc2-882d-728dabf07b67">
 					<property name="com.jaspersoft.studio.unit.x" value="px"/>
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<textElement textAlignment="Justified">
 					<font fontName="Montserrat" size="9"/>
 				</textElement>
-				<text><![CDATA[Las personas que sean objeto de una promoción vertical, derivada de un proceso de selección distinto a lo previsto en la Ley General del Sistema para la Carrera de las Maestras y los Maestros y en esta Convocatoria, no recibirán remuneración alguna, ni serán sujetas de ningún tipo de regularización.]]></text>
+				<text><![CDATA[Las personas que sean objeto de una promoción en el servicio docente, derivada de un proceso de selección distinto a lo previsto en la Ley General del Sistema para la Carrera de las Maestras y los Maestros y en esta Convocatoria, no recibirán remuneración alguna, ni serán sujetas de ningún tipo de regularización.]]></text>
 			</staticText>
 			<staticText>
 				<reportElement positionType="Float" mode="Opaque" x="1" y="488" width="572" height="13" forecolor="#FFFFFF" backcolor="#730907" uuid="1d3dc95d-95f4-41c7-b005-6e8a6f83c836">
@@ -131,20 +131,20 @@ GROUP BY conv.id]]>
 				<textElement textAlignment="Justified">
 					<font fontName="Montserrat" size="9"/>
 				</textElement>
-				<text><![CDATA[Podrán participar como observadores en este proceso de selección, madres y padres de familia o tutores, sistemas anticorrupción y representantes de la comunidad, conforme a los criterios y mecanismos de participación que emita la USICAMM.]]></text>
+				<text><![CDATA[Podrán participar como observadores en este proceso de selección, madres y padres de familia o tutores, sistemas anticorrupción y representantes de la comunidad, conforme a los criterios y mecanismos de participación emitidos por la USICAMM.]]></text>
 			</staticText>
 			<staticText>
-				<reportElement positionType="Float" x="0" y="247" width="571" height="43" uuid="06bff82a-c776-45db-b7d8-d49dc70b95b2">
+				<reportElement positionType="Float" x="0" y="183" width="571" height="39" uuid="06bff82a-c776-45db-b7d8-d49dc70b95b2">
 					<property name="com.jaspersoft.studio.unit.x" value="px"/>
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<textElement textAlignment="Justified">
 					<font fontName="Montserrat" size="9"/>
 				</textElement>
-				<text><![CDATA[La publicación de la lista ordenada de resultados, de ninguna manera implica una obligación de asignación de una categoría a todos los aspirantes por parte de la DGETI. La asignación de categorías está sujeta a las necesidades del servicio público educativo, las estructuras ocupaciona¬les autorizadas y la disponibilidad de categorías vacantes.]]></text>
+				<text><![CDATA[Los resultados obtenidos para el proceso de Promoción en el Servicio Docente por Cambio de Categoría en la Dirección General de Educación Tecnológica Industrial y de Servicios, ciclo escolar 2020-2021 estarán vigentes desde la emisión del dictamen y su publicación y hasta la emisión de la siguiente convocatoria.]]></text>
 			</staticText>
 			<staticText>
-				<reportElement positionType="Float" x="0" y="229" width="571" height="12" uuid="5d9565e7-e3ca-4f04-b05b-1e1b87af1b53">
+				<reportElement positionType="Float" x="0" y="169" width="571" height="12" uuid="5d9565e7-e3ca-4f04-b05b-1e1b87af1b53">
 					<property name="com.jaspersoft.studio.unit.x" value="px"/>
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
@@ -154,7 +154,7 @@ GROUP BY conv.id]]>
 				<text><![CDATA[Se notificará por escrito a cada participante el resultado obtenido en el proceso de selección. ]]></text>
 			</staticText>
 			<staticText>
-				<reportElement positionType="Float" x="0" y="200" width="571" height="28" uuid="8e73b9f2-2392-4da3-8580-226e4fdbb1f8">
+				<reportElement positionType="Float" x="0" y="144" width="571" height="28" uuid="8e73b9f2-2392-4da3-8580-226e4fdbb1f8">
 					<property name="com.jaspersoft.studio.unit.x" value="px"/>
 				</reportElement>
 				<textElement textAlignment="Justified">
@@ -173,14 +173,14 @@ GROUP BY conv.id]]>
 				<text><![CDATA[DÉCIMA PRIMERA. PUBLICACIÓN DE RESULTADOS]]></text>
 			</staticText>
 			<textField>
-				<reportElement positionType="Float" x="0" y="80" width="571" height="80" uuid="1b7c2e4c-2270-4077-b5d0-f72e77bae3e4">
+				<reportElement positionType="Float" x="0" y="77" width="571" height="40" uuid="1b7c2e4c-2270-4077-b5d0-f72e77bae3e4">
 					<property name="com.jaspersoft.studio.unit.x" value="px"/>
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<textElement textAlignment="Justified">
 					<font fontName="Montserrat" size="9"/>
 				</textElement>
-				<textFieldExpression><![CDATA["Los resultados del Proceso Extraordinario de Promoción en el Servicio Docente por Cambio de Categoría en la Dirección General de Educación Tecnológica Industrial y de Servicios, exclusivamente para el ciclo escolar 2020-2021, se publicarán en la plataforma DGETI en la siguiente dirección electrónica:  https://www.promociondocente.sep.gob.mx/promocion/ el "+$F{resultados} + ".Los resultados obtenidos para el Proceso Extraordinario de Promoción en el Servicio Docente por Cambio de Categoría en la Dirección General de Educación Tecnológica Industrial y de Servicios, exclusivamente para el ciclo escolar 2020-2021, estarán vigentes desde su publicación y hasta la emisión del Programa Promoción en el Servicio Docente por Cambio de Categoría."]]></textFieldExpression>
+				<textFieldExpression><![CDATA["Los resultados del Proceso de Promoción en el Servicio Docente por Cambio de Categoría en la Dirección General de Educación Tecnológica Industrial y de Servicios, para el ciclo escolar 2020-2021, se publicarán en la plataforma DGETI en la siguiente dirección electrónica https://www.promociondocente.sep.gob.mx/promocion/, el "+$F{resultados} + "."]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement positionType="Float" x="0" y="0" width="571" height="60" uuid="03d7b857-fbde-4b1f-a114-fa48dcd0b746">
@@ -190,16 +190,16 @@ GROUP BY conv.id]]>
 				<textElement textAlignment="Justified">
 					<font fontName="Montserrat" size="9"/>
 				</textElement>
-				<text><![CDATA[Ante cualquier inconformidad respecto de la aplicación del Proceso Extraordinario de Promoción en el Servicio Docente por Cambio de Categoría en la Dirección General de Educación Tecnológica Industrial y de Servicios, exclusivamente para el ciclo escolar 2020-2021, el aspirante podrá interponer por escrito el recurso de reconsideración ante la autoridad que emitió la resolución, o en su caso, podrá concurrir ante las instancias jurisdiccionales que se consideren convenientes, tal y como lo establece el artículo 103 de la Ley General del Sistema para la Carrera de las Maestras y los Maestros.]]></text>
+				<text><![CDATA[Ante cualquier inconformidad respecto de la aplicación del Proceso de Promoción en el Servicio Docente por Cambio de Categoría en la Dirección General de Educación Tecnológica Industrial y de Servicios, para el ciclo escolar 2020-2021, el aspirante podrá interponer por escrito el recurso de reconsideración ante la autoridad que emitió la resolución, o en su caso, podrá concurrir ante las instancias jurisdiccionales que se consideren convenientes, tal y como lo establece el artículo 103 de la Ley General del Sistema para la Carrera de las Maestras y los Maestros.]]></text>
 			</staticText>
 			<staticText>
-				<reportElement positionType="Float" x="0" y="165" width="571" height="28" uuid="5a1d88d9-d9f2-4d2f-97cb-40378a850327">
+				<reportElement positionType="Float" x="0" y="119" width="571" height="29" uuid="5a1d88d9-d9f2-4d2f-97cb-40378a850327">
 					<property name="com.jaspersoft.studio.unit.x" value="px"/>
 				</reportElement>
 				<textElement textAlignment="Justified">
 					<font fontName="Montserrat" size="9"/>
 				</textElement>
-				<text><![CDATA[A partir del dictamen que haya emitido el Consejo dictaminador para cada uno de los participantes del proceso de selección, se elaborarán las listas de resultados que serán públicas.]]></text>
+				<text><![CDATA[A partir del dictamen que haya emitido el Consejo Dictaminador para cada uno de los participantes del proceso de selección, se elaborarán las listas de resultados que serán públicas.]]></text>
 			</staticText>
 			<staticText>
 				<reportElement positionType="Float" mode="Opaque" x="0" y="550" width="572" height="13" forecolor="#FFFFFF" backcolor="#730907" uuid="ccb728ae-2d4d-45a9-95f8-9e4cfe8c8c51">
@@ -218,7 +218,7 @@ GROUP BY conv.id]]>
 				<textElement textAlignment="Justified">
 					<font fontName="Montserrat" size="9"/>
 				</textElement>
-				<text><![CDATA[Las vías de comunicación entre la DGETI y quienes participen en el proceso extraordinario de Promoción en el Servicio Docente por Cambio de Categoría en la Dirección General de Educación Tecnológica Industrial y de Servicios, exclusivamente para el ciclo escolar 2020-2021, serán el correo electrónico y los números telefónicos (celular o fijo) que aporte cada aspirante, desde el momento de su registro. ]]></text>
+				<text><![CDATA[Las vías de comunicación entre la DGETI y quienes participen en el Proceso de Promoción en el Servicio Docente por Cambio de Categoría en la Dirección General de Educación Tecnológica Industrial y de Servicios, para el ciclo escolar 2020-2021, serán el correo electrónico y los números telefónicos (celular o fijo) que aporte cada aspirante, desde el momento de su registro. ]]></text>
 			</staticText>
 			<staticText>
 				<reportElement positionType="Float" x="0" y="570" width="571" height="19" uuid="2eaed1ef-e52e-4400-aa0c-cfddc3f0859d">
@@ -237,7 +237,27 @@ GROUP BY conv.id]]>
 				<textElement textAlignment="Justified">
 					<font fontName="Montserrat" size="9"/>
 				</textElement>
-				<text><![CDATA[Para la aclaración de dudas o información adicional relacionada con este proceso de selección, el aspirante podrá dirigirse a la DGETI en la dirección de correo electrónico:  promoción.cambiodecategoria@uemstis.sems.gob.mx]]></text>
+				<text><![CDATA[Para la aclaración de dudas o información adicional relacionada con este proceso de selección, el aspirante podrá dirigirse a la DGETI en la dirección de correo electrónico:  promoción.cambiodecategoria@dgeti.sems.gob.mx]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="0" y="221" width="571" height="22" uuid="11492142-c21a-41a5-a1b9-97ef72eeb6e9">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Justified">
+					<font fontName="Montserrat" size="9"/>
+				</textElement>
+				<text><![CDATA[Los participantes, por así convenir a sus intereses previo a la aplicación del dictamen de promoción, podrán renunciar a sus resultados en el proceso, sin afectación alguna en procesos posteriores y para ello, deberán expresarlo por escrito.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="1" y="248" width="571" height="42" uuid="09215d54-7566-474e-aca0-aed8e97a925a">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Justified">
+					<font fontName="Montserrat" size="9"/>
+				</textElement>
+				<text><![CDATA[La publicación de la lista ordenada de resultados, de ninguna manera implica una obligación de asignación de una categoría a todos los aspirantes por parte de la DGETI. La asignación de categorías está sujeta a las necesidades del servicio público educativo, las estructuras ocupaciona¬les autorizadas y la disponibilidad de categorías vacantes.]]></text>
 			</staticText>
 		</band>
 	</summary>

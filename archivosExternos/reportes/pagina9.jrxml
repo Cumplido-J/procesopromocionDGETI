@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Created with Jaspersoft Studio version 6.16.0.final using JasperReports Library version 6.16.0-48579d909b7943b64690c65c71e07e0b80981928  -->
+<!-- Created with Jaspersoft Studio version 6.13.0.final using JasperReports Library version 6.13.0-46ada4d1be8f3c5985fd0b6146f3ed44caed6f05  -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="pagina9" pageWidth="571" pageHeight="792" whenNoDataType="AllSectionsNoDetail" columnWidth="571" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="614cbd9c-39c2-4105-a294-67211c37b585">
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="bdpromocion"/>
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
@@ -37,35 +37,48 @@
 		<parameter name="plantel" class="java.lang.Integer"/>
 		<parameter name="convocatoria" class="java.lang.String"/>
 		<queryString language="SQL">
-			<![CDATA[SELECT vacancia.idCategoria as tipocategoria,
-	vacancia.plazas as cantidadplazas,
-	CASE
-		WHEN vacancia.horas is not null then concat(catcategoriasplaza.categoria,"-",catjornada.jornada,"(",vacancia.horas,")","-",vacancia.tipoVacancia)
-		ELSE concat(catcategoriasplaza.categoria,"-",catjornada.jornada,"-",vacancia.tipoVacancia)
-	END as categoria
-FROM vacancia
-	inner join catcategoriasplaza ON 
-	 vacancia.idCategoria = catcategoriasplaza.id 
-    inner join catjornada on
-     vacancia.idJornada=catjornada.id
-	INNER JOIN convocatoria conv
-	ON conv.idPlantel=vacancia.idPlantel and conv.idPrograma=vacancia.idPrograma
-WHERE 
-	 conv.id =  $P{convocatoria}
-	 AND vacancia.idPlantel =  $P{plantel} 
-ORDER BY catcategoriasplaza.categoria DESC, catjornada.id desc,vacancia.tipoVacancia DESC]]>
+			<![CDATA[select vacancia.idCategoria,vacancia.idJornada,
+vacancia.tipoVacancia, vacancia.plazas, count(vacancia.plazas) as cantidadplazas,
+(select catcategoriasplaza.categoria from catcategoriasplaza where
+vacancia.idCategoria=catcategoriasplaza.id
+) as categoria,
+(select catjornada.jornada from catjornada where
+vacancia.idJornada=catjornada.id) as jornada
+ from vacancia 
+ 	INNER JOIN convocatoria
+	ON convocatoria.idPlantel=vacancia.idPlantel and convocatoria.idPrograma=vacancia.idPrograma
+ where 
+  convocatoria.id = $P{convocatoria} and
+vacancia.idPlantel=$P{plantel} and vacancia.idPrograma group by vacancia.idCategoria,vacancia.idJornada,
+vacancia.tipoVacancia, vacancia.plazas 
+order by vacancia.idCategoria,vacancia.idJornada, vacancia.tipoVacancia asc ;]]>
 		</queryString>
-		<field name="tipocategoria" class="java.lang.Integer">
-			<property name="com.jaspersoft.studio.field.label" value="tipocategoria"/>
+		<field name="idCategoria" class="java.lang.Integer">
+			<property name="com.jaspersoft.studio.field.label" value="idCategoria"/>
 			<property name="com.jaspersoft.studio.field.tree.path" value="vacancia"/>
 		</field>
-		<field name="cantidadplazas" class="java.lang.Integer">
+		<field name="idJornada" class="java.lang.Integer">
+			<property name="com.jaspersoft.studio.field.label" value="idJornada"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="vacancia"/>
+		</field>
+		<field name="tipoVacancia" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.label" value="tipoVacancia"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="vacancia"/>
+		</field>
+		<field name="plazas" class="java.lang.Integer">
+			<property name="com.jaspersoft.studio.field.label" value="plazas"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="vacancia"/>
+		</field>
+		<field name="cantidadplazas" class="java.lang.Long">
 			<property name="com.jaspersoft.studio.field.label" value="cantidadplazas"/>
 			<property name="com.jaspersoft.studio.field.tree.path" value="vacancia"/>
 		</field>
 		<field name="categoria" class="java.lang.String">
 			<property name="com.jaspersoft.studio.field.label" value="categoria"/>
 			<property name="com.jaspersoft.studio.field.tree.path" value="catcategoriasplaza"/>
+		</field>
+		<field name="jornada" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.label" value="jornada"/>
 		</field>
 		<variable name="total" class="java.lang.Integer" calculation="Sum">
 			<variableExpression><![CDATA[$F{cantidadplazas}]]></variableExpression>
@@ -74,27 +87,48 @@ ORDER BY catcategoriasplaza.categoria DESC, catjornada.id desc,vacancia.tipoVaca
 	<parameter name="cc" class="java.lang.Integer"/>
 	<parameter name="cp" class="java.lang.Integer"/>
 	<queryString>
-		<![CDATA[SELECT vacancia.idCategoria as tipocategoria, vacancia.plazas as cantidadplazas, catcategoriasplaza.categoria from vacancia
-
-inner join catcategoriasplaza 
-on vacancia.idCategoria =catcategoriasplaza.id
-INNER JOIN 
-    convocatoria conv
-ON conv.idPlantel=vacancia.idPlantel and conv.idPrograma=vacancia.idPrograma
-where conv.id= $P{cc}  and vacancia.idPlantel= $P{cp} 
-order by catcategoriasplaza.categoria]]>
+		<![CDATA[select vacancia.idCategoria,vacancia.idJornada,
+vacancia.tipoVacancia, vacancia.plazas, count(vacancia.plazas) as cantidadplazas,
+(select catcategoriasplaza.categoria from catcategoriasplaza where
+vacancia.idCategoria=catcategoriasplaza.id
+) as categoria,
+(select catjornada.jornada from catjornada where
+vacancia.idJornada=catjornada.id) as jornada
+ from vacancia 
+ 	INNER JOIN convocatoria
+	ON convocatoria.idPlantel=vacancia.idPlantel and convocatoria.idPrograma=vacancia.idPrograma
+ where 
+  convocatoria.id = $P{cc} and
+vacancia.idPlantel=$P{cp} and vacancia.idPrograma group by vacancia.idCategoria,vacancia.idJornada,
+vacancia.tipoVacancia, vacancia.plazas 
+order by vacancia.idCategoria,vacancia.idJornada, vacancia.tipoVacancia asc ;]]>
 	</queryString>
-	<field name="tipocategoria" class="java.lang.Integer">
-		<property name="com.jaspersoft.studio.field.label" value="tipocategoria"/>
+	<field name="idCategoria" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="idCategoria"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="vacancia"/>
 	</field>
-	<field name="cantidadplazas" class="java.lang.Integer">
+	<field name="idJornada" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="idJornada"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="vacancia"/>
+	</field>
+	<field name="tipoVacancia" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="tipoVacancia"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="vacancia"/>
+	</field>
+	<field name="plazas" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="plazas"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="vacancia"/>
+	</field>
+	<field name="cantidadplazas" class="java.lang.Long">
 		<property name="com.jaspersoft.studio.field.label" value="cantidadplazas"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="vacancia"/>
 	</field>
 	<field name="categoria" class="java.lang.String">
 		<property name="com.jaspersoft.studio.field.label" value="categoria"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="catcategoriasplaza"/>
+	</field>
+	<field name="jornada" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="jornada"/>
 	</field>
 	<variable name="total" class="java.lang.Integer" calculation="Sum">
 		<variableExpression><![CDATA[$F{cantidadplazas}]]></variableExpression>
@@ -109,7 +143,7 @@ order by catcategoriasplaza.categoria]]>
 		<band height="159">
 			<property name="com.jaspersoft.studio.unit.height" value="px"/>
 			<componentElement>
-				<reportElement positionType="Float" x="0" y="61" width="569" height="95" uuid="c2d1c2f2-2aae-4606-9c4b-8ff514856397">
+				<reportElement positionType="Float" x="0" y="61" width="569" height="90" uuid="c2d1c2f2-2aae-4606-9c4b-8ff514856397">
 					<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.VerticalRowLayout"/>
 					<property name="com.jaspersoft.studio.table.style.table_header" value="Table_TH"/>
 					<property name="com.jaspersoft.studio.table.style.column_header" value="Table_CH"/>
@@ -129,11 +163,11 @@ order by catcategoriasplaza.categoria]]>
 						</datasetParameter>
 						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
 					</datasetRun>
-					<jr:column width="344" uuid="e2d8645b-f46b-4f8e-8d18-332a5b5d3e64">
+					<jr:column width="170" uuid="e2d8645b-f46b-4f8e-8d18-332a5b5d3e64">
 						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column1"/>
 						<jr:columnHeader style="Table_CH" height="30" rowSpan="1">
 							<staticText>
-								<reportElement x="0" y="0" width="344" height="30" forecolor="#FFFFFF" uuid="c922c3f5-020b-45f4-9161-41665237a042"/>
+								<reportElement x="0" y="0" width="170" height="30" forecolor="#FFFFFF" uuid="c922c3f5-020b-45f4-9161-41665237a042"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
 									<font fontName="Montserrat" size="9" isBold="true"/>
 								</textElement>
@@ -143,7 +177,7 @@ order by catcategoriasplaza.categoria]]>
 						<jr:columnFooter style="Table_CH" height="30" rowSpan="1"/>
 						<jr:detailCell style="Table_TD" height="30">
 							<textField>
-								<reportElement positionType="Float" x="0" y="0" width="344" height="30" uuid="1f8baaaf-8358-4c41-9a26-10bc32a38295"/>
+								<reportElement positionType="Float" x="0" y="0" width="170" height="30" uuid="1f8baaaf-8358-4c41-9a26-10bc32a38295"/>
 								<box topPadding="0" leftPadding="5" bottomPadding="0" rightPadding="0"/>
 								<textElement verticalAlignment="Middle">
 									<font fontName="Montserrat" size="9"/>
@@ -152,11 +186,57 @@ order by catcategoriasplaza.categoria]]>
 							</textField>
 						</jr:detailCell>
 					</jr:column>
-					<jr:column width="225" uuid="23c6bbc9-c4ae-4e3e-bd03-b716ce923a56">
+					<jr:column width="130" uuid="20ba2cfa-8f1c-4d32-81a2-a4a1ae7c48eb">
 						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column2"/>
 						<jr:columnHeader style="Table_CH" height="30" rowSpan="1">
 							<staticText>
-								<reportElement x="0" y="0" width="225" height="30" forecolor="#FFFFFF" uuid="65bf14e5-c1ae-48a1-b04f-2d46930f5904"/>
+								<reportElement x="0" y="0" width="130" height="30" forecolor="#FFFFFF" uuid="0af0c391-b3eb-4151-a155-dc99c55a7c59"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="Montserrat" size="9" isBold="true"/>
+								</textElement>
+								<text><![CDATA[Jornada]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:columnFooter style="Table_CH" height="30" rowSpan="1"/>
+						<jr:detailCell style="Table_TD" height="30">
+							<textField>
+								<reportElement mode="Transparent" x="0" y="0" width="130" height="30" uuid="940d5a02-e50e-4118-87a1-980712136519"/>
+								<box padding="5"/>
+								<textElement verticalAlignment="Middle">
+									<font fontName="Montserrat" size="9"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{jornada}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="142" uuid="78244437-d1d9-455e-8fd4-eac8f7a49bfe">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column3"/>
+						<jr:columnHeader style="Table_CH" height="30" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="142" height="30" forecolor="#FFFFFF" uuid="1d5851b8-687c-4909-99de-582bad6d7e1e"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="Montserrat" size="9" isBold="true"/>
+								</textElement>
+								<text><![CDATA[Tipo de Vacancia]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:columnFooter style="Table_CH" height="30" rowSpan="1"/>
+						<jr:detailCell style="Table_TD" height="30">
+							<textField>
+								<reportElement mode="Transparent" x="0" y="0" width="142" height="30" uuid="7e2368a6-6b46-4569-876e-59dfc085b5cb"/>
+								<box padding="5"/>
+								<textElement verticalAlignment="Middle">
+									<font fontName="Montserrat" size="9"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{tipoVacancia}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="127" uuid="23c6bbc9-c4ae-4e3e-bd03-b716ce923a56">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column4"/>
+						<jr:columnHeader style="Table_CH" height="30" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="127" height="30" forecolor="#FFFFFF" uuid="65bf14e5-c1ae-48a1-b04f-2d46930f5904"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
 									<font fontName="Montserrat" size="9" isBold="true"/>
 								</textElement>
@@ -165,7 +245,7 @@ order by catcategoriasplaza.categoria]]>
 						</jr:columnHeader>
 						<jr:columnFooter style="Table_CH" height="30" rowSpan="1">
 							<textField>
-								<reportElement x="0" y="0" width="225" height="30" forecolor="#FFFFFF" uuid="027e11da-07b1-487c-99c8-926e6a7a6a3b"/>
+								<reportElement x="0" y="0" width="127" height="30" forecolor="#FFFFFF" uuid="027e11da-07b1-487c-99c8-926e6a7a6a3b"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
 									<font fontName="Montserrat" size="9" isBold="true"/>
 								</textElement>
@@ -174,7 +254,7 @@ order by catcategoriasplaza.categoria]]>
 						</jr:columnFooter>
 						<jr:detailCell style="Table_TD" height="30">
 							<textField>
-								<reportElement x="0" y="0" width="225" height="30" uuid="f29f67c2-4164-4e1a-835b-e1dc9680d364"/>
+								<reportElement x="0" y="0" width="127" height="30" uuid="f29f67c2-4164-4e1a-835b-e1dc9680d364"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
 									<font fontName="Montserrat" size="9"/>
 								</textElement>
