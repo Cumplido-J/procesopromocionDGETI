@@ -124,18 +124,21 @@ GROUP BY conv.id]]>
 				<text><![CDATA[(Promoción horizontal)]]></text>
 			</staticText>
 			<staticText>
-				<reportElement positionType="Float" x="111" y="4" width="349" height="51" uuid="a2c518d6-34fe-4ce0-91d5-7f909dc34057"/>
+				<reportElement positionType="Float" x="120" y="3" width="320" height="51" uuid="a2c518d6-34fe-4ce0-91d5-7f909dc34057"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Montserrat" size="9" isBold="true"/>
+					<font fontName="Montserrat" size="11" isBold="true"/>
 				</textElement>
-				<text><![CDATA[Convocatoria para proceso extraordinario de Promoción en el Servicio Docente por Cambio de Categoría en la Dirección General de Educación Tecnológica Industrial y de Servicios, exclusivamente para el ciclo escolar 2020-2021]]></text>
+				<text><![CDATA[Convocatoria para el proceso de Promoción en el Servicio Docente por Cambio de Categoría
+Dirección General de Educación Tecnológica Industrial y de Servicios
+Ciclo Escolar 2020-2021
+]]></text>
 			</staticText>
 			<staticText>
 				<reportElement positionType="Float" x="120" y="58" width="330" height="14" uuid="fae73163-5d0b-4481-b2df-47ff04efbc96">
 					<property name="com.jaspersoft.studio.unit.x" value="px"/>
 				</reportElement>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="10" isBold="true"/>
+					<font fontName="Monserrat&#xD;&#xA;" size="11" isBold="true"/>
 				</textElement>
 				<text><![CDATA[ ]]></text>
 			</staticText>

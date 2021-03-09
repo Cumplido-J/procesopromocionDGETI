@@ -284,7 +284,7 @@ order by vacancia.idCategoria,vacancia.idJornada, vacancia.tipoVacancia asc ;]]>
 				<textElement textAlignment="Justified">
 					<font fontName="Montserrat" size="9"/>
 				</textElement>
-				<textFieldExpression><![CDATA["A la fecha de publicación de la presente Convocatoria se cuenta con " +$V{TotalCategorias}+" categorías vacantes para el Proceso Extraordinario de Promoción en el Servicio Docente por Cambio de Categoría en la Dirección General de Educación Tecnológica Industrial y de Servicios, exclusivamente para el ciclo escolar 2020-2021."]]></textFieldExpression>
+				<textFieldExpression><![CDATA["A la fecha de publicación de la presente Convocatoria se cuenta con " +$V{total}+"  vacantes para el Proceso Extraordinario de Promoción en el Servicio Docente por Cambio de Categoría en la Dirección General de Educación Tecnológica Industrial y de Servicios, exclusivamente para el ciclo escolar 2020-2021."]]></textFieldExpression>
 			</textField>
 		</band>
 	</summary>

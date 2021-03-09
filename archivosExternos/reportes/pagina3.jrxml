@@ -60,6 +60,9 @@ order by vacancia.idCategoria,vacancia.idJornada, vacancia.tipoVacancia asc ;]]>
 	<variable name="totalCategorias" class="java.lang.Integer" calculation="Count">
 		<variableExpression><![CDATA[$F{categoria}]]></variableExpression>
 	</variable>
+	<variable name="total" class="java.lang.Integer" calculation="Sum">
+		<variableExpression><![CDATA[$F{cantidadplazas}]]></variableExpression>
+	</variable>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -85,7 +88,7 @@ order by vacancia.idCategoria,vacancia.idJornada, vacancia.tipoVacancia asc ;]]>
 				<textElement textAlignment="Justified">
 					<font fontName="Montserrat" size="9"/>
 				</textElement>
-				<textFieldExpression><![CDATA["A la fecha de publicación de la presente Convocatoria se cuenta con "+$V{totalCategorias}+" categorías vacantes para el Proceso de Promoción en el Servicio Docente por Cambio de Categoría en la Dirección General de Educación Tecnológica Industrial y de Servicios, para el ciclo escolar 2020-2021."]]></textFieldExpression>
+				<textFieldExpression><![CDATA["A la fecha de publicación de la presente Convocatoria se cuenta con "+$V{total}+"  vacantes para el Proceso de Promoción en el Servicio Docente por Cambio de Categoría en la Dirección General de Educación Tecnológica Industrial y de Servicios, para el ciclo escolar 2020-2021. Ver Anexo 1."]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement positionType="Float" x="0" y="76" width="570" height="17" uuid="00ed05b1-2ada-43a2-8c3e-a45f95db5fd3">
