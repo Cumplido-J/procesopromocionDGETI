@@ -127,14 +127,15 @@ public class Servlet_registroInfoLaboral extends HttpServlet {
                 idCategoria=aux[0];
                 idJornada=aux[1];
                 horas=aux[2];
+                idTipoNombramiento=aux[3];
             }
             System.out.println("cat"+idCategoria);
             System.out.println("jor"+idJornada);
             if(idCategoria.equals("-1")||idJornada.equals("-1")){
                 out.print("Debe seleccionar la plaza con la que participará");
             }else{
-                
-                int categoriaActual=Integer.parseInt(idCategoria);
+                if(idTipoNombramiento.equals("5")){
+                    int categoriaActual=Integer.parseInt(idCategoria);
                 int categoriaAspira=Integer.parseInt(idCategoriaAspira);
                 int jornadaActual=Integer.parseInt(idJornada);
                 int jornadaAspira=Integer.parseInt(idJornadaAspira);
@@ -170,7 +171,7 @@ public class Servlet_registroInfoLaboral extends HttpServlet {
                     Metodos_sql metodo = new Metodos_sql();
                     String[] parametros={idUsuario,activo,ingresoSubsistema,ingresoPlantel,idCategoria,idJornada,fechaPlaza,idTipoNombramiento,fechaUltimaPromocion,idCategoriaAspira,idJornadaAspira,idPerfilRequerido,notaSancion};
                     List<String[]> datos;                           
-                    datos=metodo.ejecutaSP("sp_registroInfoLaboral",parametros);            
+                    datos=metodo.ejecutaSP("sp_registroInfoLaboral",parametros);           
                     if(!datos.isEmpty()){
                         out.print("ok");
                     }else{
@@ -181,6 +182,9 @@ public class Servlet_registroInfoLaboral extends HttpServlet {
                     if(programa.equals("2")){
                         out.println("Excede el número de horas permitidas");
                     }
+                }
+                }else{
+                    out.print("-El tipo de nombramiento no es valido para esta convocatoria-");
                 }
             }            
         } finally {

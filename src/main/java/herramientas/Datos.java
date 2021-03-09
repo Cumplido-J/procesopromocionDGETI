@@ -179,7 +179,7 @@ public class Datos {
                     }else{
                         seleccionado="";
                     }
-                    respuesta+="<tr><td><center><input type='checkbox' onChange='seleccionarPlaza(this)' value='"+dato[0]+"' "+seleccionado+"/></center><td>"+dato[11]+"</td><td>"+dato[7]+"</td><td>"+dato[9]+":"+dato[10]+"</td><td class='hidden'>"+dato[2]+"</td><td>"+dato[3]+"</td><td class='hidden'>"+dato[4]+"</td><td>"+dato[5];
+                    respuesta+="<tr><td><center><input type='checkbox' onChange='seleccionarPlaza(this)' value='"+dato[0]+"' "+seleccionado+"/></center><td>"+dato[11]+"</td><td>"+dato[7]+"</td><td id="+"tipoNom"+">"+dato[9]+":"+dato[10]+"</td><td class='hidden'>"+dato[2]+"</td><td>"+dato[3]+"</td><td class='hidden'>"+dato[4]+"</td><td>"+dato[5];
                     if(dato[4].equals("1")){
                         respuesta+="("+dato[6]+")";
                     }                    
@@ -212,6 +212,7 @@ public class Datos {
         String respuesta="";   
         int horas=0,numPlazas=0;
         String idCategoria="-1",idJornada="-1",idCategoriaAux="",idJornadaAux="";
+        String idNombramiento="",idNombramientoAux="";
         try{
             String[] parametros={idUsuario};
             List<String[]> datos=metodos.ejecutaSP("sp_consultaUsuarioPlaza",parametros);
@@ -222,6 +223,7 @@ public class Datos {
                     if(dato[12].equals("V")){
                         idCategoria=dato[2];
                         idJornada=dato[4];
+                        idNombramiento=dato[8];
                         if(dato[4].equals("1")){
                             horas+=Integer.parseInt(dato[6]);
                         }        
@@ -244,6 +246,7 @@ public class Datos {
                         
                         idCategoriaAux=idCategoria;
                         idJornadaAux=idJornada;
+                        idNombramientoAux=idNombramiento;
                         numPlazas++;
                     }
                     
@@ -252,8 +255,7 @@ public class Datos {
                     respuesta="Solo puede seleccionar una plaza con la que participará";
                 }else{
                     if(respuesta.isEmpty()){
-                        
-                        respuesta=idCategoria+","+idJornada+","+horas;
+                        respuesta=idCategoria+","+idJornada+","+horas+","+idNombramiento;
                     }
                 }
             }

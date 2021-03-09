@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Created with Jaspersoft Studio version 6.16.0.final using JasperReports Library version 6.16.0-48579d909b7943b64690c65c71e07e0b80981928  -->
+<!-- Created with Jaspersoft Studio version 6.13.0.final using JasperReports Library version 6.13.0-46ada4d1be8f3c5985fd0b6146f3ed44caed6f05  -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="pagina2" pageWidth="572" pageHeight="792" whenNoDataType="AllSectionsNoDetail" columnWidth="572" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="614cbd9c-39c2-4105-a294-67211c37b585">
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="bdpromocion"/>
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
@@ -16,16 +16,53 @@
 	<parameter name="cc" class="java.lang.Integer"/>
 	<parameter name="cp" class="java.lang.Integer"/>
 	<queryString>
-		<![CDATA[SELECT count(catcategoriasplaza.categoria) as totalCategorias 
-from vacancia
-inner join catcategoriasplaza on vacancia.idCategoria =catcategoriasplaza.id
-INNER JOIN convocatoria conv on conv.idPlantel=vacancia.idPlantel and conv.idPrograma=vacancia.idPrograma
-where conv.id= $P{cc}  and vacancia.idPlantel= $P{cp}
-order by catcategoriasplaza.categoria]]>
+		<![CDATA[select vacancia.idCategoria,vacancia.idJornada,
+vacancia.tipoVacancia, vacancia.plazas, count(vacancia.plazas) as cantidadplazas,
+(select catcategoriasplaza.categoria from catcategoriasplaza where
+vacancia.idCategoria=catcategoriasplaza.id
+) as categoria,
+(select catjornada.jornada from catjornada where
+vacancia.idJornada=catjornada.id) as jornada
+ from vacancia 
+ 	INNER JOIN convocatoria
+	ON convocatoria.idPlantel=vacancia.idPlantel and convocatoria.idPrograma=vacancia.idPrograma
+ where 
+  convocatoria.id = $P{cc} and
+vacancia.idPlantel=$P{cp} and vacancia.idPrograma group by vacancia.idCategoria,vacancia.idJornada,
+vacancia.tipoVacancia, vacancia.plazas 
+order by vacancia.idCategoria,vacancia.idJornada, vacancia.tipoVacancia asc ;]]>
 	</queryString>
-	<field name="totalCategorias" class="java.lang.Long">
-		<property name="com.jaspersoft.studio.field.label" value="totalCategorias"/>
+	<field name="idCategoria" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="idCategoria"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="vacancia"/>
 	</field>
+	<field name="idJornada" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="idJornada"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="vacancia"/>
+	</field>
+	<field name="tipoVacancia" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="tipoVacancia"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="vacancia"/>
+	</field>
+	<field name="plazas" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="plazas"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="vacancia"/>
+	</field>
+	<field name="cantidadplazas" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.label" value="cantidadplazas"/>
+	</field>
+	<field name="categoria" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="categoria"/>
+	</field>
+	<field name="jornada" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="jornada"/>
+	</field>
+	<variable name="totalCategorias" class="java.lang.Integer" calculation="Count">
+		<variableExpression><![CDATA[$F{categoria}]]></variableExpression>
+	</variable>
+	<variable name="total" class="java.lang.Integer" calculation="Sum">
+		<variableExpression><![CDATA[$F{cantidadplazas}]]></variableExpression>
+	</variable>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -51,7 +88,7 @@ order by catcategoriasplaza.categoria]]>
 				<textElement textAlignment="Justified">
 					<font fontName="Montserrat" size="9"/>
 				</textElement>
-				<textFieldExpression><![CDATA["A la fecha de publicación de la presente Convocatoria se cuenta con "+$F{totalCategorias}+" categorías vacantes para el Proceso Extraordinario de Promoción en el Servicio Docente por Cambio de Categoría en la Dirección General de Educación Tecnológica Industrial y de Servicios, exclusivamente para el ciclo escolar 2020-2021. Mismas que se listan en el Anexo 1 de esta convocatoria."]]></textFieldExpression>
+				<textFieldExpression><![CDATA["A la fecha de publicación de la presente Convocatoria se cuenta con "+$V{total}+"  vacantes para el Proceso de Promoción en el Servicio Docente por Cambio de Categoría en la Dirección General de Educación Tecnológica Industrial y de Servicios, para el ciclo escolar 2020-2021. Ver Anexo 1."]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement positionType="Float" x="0" y="76" width="570" height="17" uuid="00ed05b1-2ada-43a2-8c3e-a45f95db5fd3">

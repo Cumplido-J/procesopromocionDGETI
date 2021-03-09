@@ -935,7 +935,30 @@
 
             </div>
           </div>
-                                  
+        
+        <div class="modal fade" id="modalMensajeFin" role="dialog">
+            <div class="modal-dialog">
+
+              <!-- Modal content-->
+              <div class="modal-content panel">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  <h4 class="modal-title">Aviso</h4>
+                </div>
+                <div class="modal-body">
+                  <p id="mensajeFin">Registro exitoso.</p>
+                </div>
+                <div class="modal-footer">
+                  <a href="SesionDocente">
+                    <button type="button" onclick="myFunction()" class="btn btn-sm btn-default">Continuar</button>
+                 </a>
+                 <button type="button" class="btn btn-sm btn-default" data-dismiss="modal">Cancelar</button>
+                </div>
+              </div>
+
+            </div>
+        </div>                            
+                                    
         <div class="modal fade" id="modalConfirmacion" role="dialog">
             <div class="modal-dialog">
 
@@ -954,7 +977,7 @@
                       <input type="hidden" value="" id="descripcionBitacora" name="descripcionBitacora">
                     </div>
                     <div class="modal-footer">
-                      <button type="button" id="btnConfirmacion" class="btn btn-sm btn-default">Confirmar</button>
+                      <button type="button" class="btn btn-sm btn-default" id="btnConfirmacion">Confirmar</button>
                       <button type="button" class="btn btn-sm btn-default" data-dismiss="modal">Cancelar</button>
                     </div>
                   </form>
@@ -1065,7 +1088,38 @@
         <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>  
         <script src="https://framework-gb.cdn.gob.mx/assets/scripts/jquery-ui-datepicker.js"></script>
         <script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.1/jquery.validate.min.js"></script>
-        <script src="js/funcionesRegistro.js"></script> 
+        <script src="js/funcionesRegistro.js"></script>
+        <script>
+            function myFunction(){
+                var idCategoria=$('#categoria').val();
+                var idJornada=$('#jornada').val();
+                var horas=$('#horas2').val();
+                var fechaPlaza=$('#fechaPlaza').val();
+                var idTipoNombramiento=$('#tipoNombramiento').val();
+                var clave=$('#clave').val();
+                var cargo=$('#cargo').val();
+                var fechaRenuncia=$('#fechaRenuncia').val();
+                
+                $("#modalMensajeFin").modal("hide");
+                $.post("FinalizaRegistro", {z:"F"}, function(data){
+                    if(data.includes("<tr>")){
+                        //$("#tablaPlazas").html(data);
+                    }
+                    else{
+                        $("#mensaje").html(data);            
+                        $("#modalMensaje").modal("show");
+                    } 
+                });
+                
+                $.post("AdministracionPlaza", {z:"F",categoria:idCategoria,jornada:idJornada,
+                    horas:horas,fechaPlaza:fechaPlaza,tipoNombramiento:idTipoNombramiento,clave:clave,
+                    cargo:cargo,fechaRenuncia:fechaRenuncia}, function(data){
+                    if(data.includes("<tr>")){
+                        $("#tablaPlazas").html(data);
+                    }
+                });
+            }
+        </script>
         <script>
             $( function() {
                 var availableTags = [

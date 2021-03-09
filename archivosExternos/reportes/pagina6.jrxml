@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Created with Jaspersoft Studio version 6.16.0.final using JasperReports Library version 6.16.0-48579d909b7943b64690c65c71e07e0b80981928  -->
+<!-- Created with Jaspersoft Studio version 6.13.0.final using JasperReports Library version 6.13.0-46ada4d1be8f3c5985fd0b6146f3ed44caed6f05  -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="pagina6" pageWidth="572" pageHeight="792" whenNoDataType="AllSectionsNoDetail" columnWidth="572" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="2ab4038d-9d78-459e-927f-4f5c4dc4ad48">
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="bdpromocion"/>
@@ -44,7 +44,7 @@ GROUP BY convocatoria.id]]>
 	</field>
 	<field name="idConvocatoria" class="java.lang.Integer">
 		<property name="com.jaspersoft.studio.field.label" value="idConvocatoria"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="vacancia"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="convocatoria"/>
 	</field>
 	<field name="idPrograma" class="java.lang.Integer">
 		<property name="com.jaspersoft.studio.field.label" value="idPrograma"/>
@@ -101,7 +101,7 @@ GROUP BY convocatoria.id]]>
 				<textElement textAlignment="Justified">
 					<font fontName="Montserrat" size="9"/>
 				</textElement>
-				<text><![CDATA[Todo aspirante deberá registrarse para participar en el proceso extraordinario de Promoción en el Servicio Docente por Cambio de Categoría en la Dirección General de Educación Tecnológica Industrial y de Servicios, exclusivamente para el ciclo escolar 2020-2021, a través de la plataforma electrónica que la DGETI ha definido para este proceso en la siguiente dirección electrónica: https://www.promociondocente.sep.gob.mx/promocion/]]></text>
+				<text><![CDATA[Todo aspirante deberá registrarse para participar en el Proceso de Promoción en el Servicio Docente por Cambio de Categoría en la Dirección General de Educación Tecnológica Industrial y de Servicios, para el ciclo escolar 2020-2021, a través de la plataforma electrónica que la DGETI ha definido para este proceso: https://www.promociondocente.sep.gob.mx/promocion/ ]]></text>
 			</staticText>
 			<staticText>
 				<reportElement positionType="Float" x="0" y="311" width="571" height="40" uuid="f3ae0615-bb93-4786-9372-94bd29facf7f">
@@ -120,7 +120,7 @@ GROUP BY convocatoria.id]]>
 				<textElement textAlignment="Justified">
 					<font fontName="Montserrat" size="9"/>
 				</textElement>
-				<text><![CDATA[El aspirante deberá proporcionar sus datos personales y elegir la entidad federativa y plantel en el que labora, categoría a la que aspira, así como la información que corresponda a los requisitos y evidencias de los criterios de valoración establecidos en el proceso extraordinario de Promoción en el Servicio Docente por Cambio de Categoría en la Dirección General de Educación Tecnológica Industrial y de Servicios, exclusivamente para el ciclo escolar 2020-2021: ]]></text>
+				<text><![CDATA[El aspirante deberá proporcionar sus datos personales y elegir la entidad federativa y plantel en el que labora, categoría a la que aspira, así como la información que corresponda a los requisitos y evidencias de los criterios de valoración establecidos en el Proceso de Promoción en el Servicio Docente por Cambio de Categoría en la Dirección General de Educación Tecnológica Industrial y de Servicios, para el ciclo escolar 2020-2021. ]]></text>
 			</staticText>
 			<staticText>
 				<reportElement positionType="Float" x="0" y="408" width="571" height="19" uuid="cac837ae-862e-4065-ac64-e10a498cbf75">
@@ -149,7 +149,7 @@ GROUP BY convocatoria.id]]>
 				<textElement textAlignment="Justified">
 					<font fontName="Montserrat" size="9"/>
 				</textElement>
-				<text><![CDATA[El Comité de revisión deberá cotejar los documentos proporcionados de los archivos electrónicos por cada aspirante y verificar que correspondan con la información registrada por el aspirante en la plataforma digital.]]></text>
+				<text><![CDATA[El Comité de Revisión deberá cotejar los documentos proporcionados de los archivos electrónicos por cada aspirante y verificar que correspondan con la información registrada por el aspirante en la plataforma digital]]></text>
 			</staticText>
 			<staticText>
 				<reportElement positionType="Float" x="0" y="490" width="571" height="50" uuid="05bb925b-3e01-48f2-b2c4-0b0200ac3ef5">
@@ -158,7 +158,7 @@ GROUP BY convocatoria.id]]>
 				<textElement textAlignment="Justified">
 					<font fontName="Montserrat" size="9"/>
 				</textElement>
-				<text><![CDATA[La documentación se recibirá con la reserva de verificar su autenticidad; cuando se compruebe que un aspirante haya proporcionado información o documentación apócrifa o falsa quedará eliminado del proceso de selección en cualquiera de las fases, incluso si ya se le hubiese asignado un nombramiento con la categoría, el cual quedará sin efectos, sin perjuicio de las sanciones de tipo administrativo o penal en las que pudiera incurrir]]></text>
+				<text><![CDATA[La documentación se recibirá con la reserva de verificar su autenticidad; cuando se compruebe que un aspirante haya proporcionado información o documentación apócrifa o falsa quedará eliminado del proceso de selección en cualquiera de las fases, incluso si ya se le hubiese asignado un nombramiento con la categoría, el cual quedará sin efectos, sin perjuicio de las sanciones de tipo administrativo o penal en las que pudiera incurrir. ]]></text>
 			</staticText>
 			<staticText>
 				<reportElement positionType="Float" x="1" y="167" width="571" height="19" uuid="28c433dc-0281-43b7-a22d-74152985f072">
@@ -177,7 +177,7 @@ GROUP BY convocatoria.id]]>
 				<textElement textAlignment="Justified">
 					<font fontName="Montserrat" size="9"/>
 				</textElement>
-				<textFieldExpression><![CDATA["Del "+$F{inicioValoracion} + " al "+$F{finValoracion} + ", el Comité de revisión realizará el análisis de las evidencias de los elementos de valoración señalados en la Base sexta de la presente convocatoria y a partir de ello emitirá el predictamen correspondiente; y del "+$F{inicioDictaminacion} + " al "+$F{finDictaminacion} + " el Consejo dictaminador analizará, rectificará o ratificará la información emitida por el Comité de revisión y emitirá los dictámenes correspondientes y las listas ordenadas de resultados."]]></textFieldExpression>
+				<textFieldExpression><![CDATA["Del "+$F{inicioValoracion} + " al "+$F{finValoracion} + " el Comité de Revisión realizará el análisis de las evidencias de los elementos de valoración señalados en la Base sexta de la presente convocatoria y a partir de ello emitirá el pre dictamen correspondiente; y del 28 de abril al 7 de mayo del 2021 el Consejo Dictaminador analizará, rectificará o ratificará la información emitida por el Comité de revisión y emitirá los dictámenes correspondientes y las listas ordenadas de resultados."]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement positionType="Float" x="1" y="10" width="571" height="33" uuid="2bdc256d-62c6-43ce-9324-35f2e7ef4d80">
@@ -187,7 +187,7 @@ GROUP BY convocatoria.id]]>
 				<textElement textAlignment="Justified">
 					<font fontName="Montserrat" size="9"/>
 				</textElement>
-				<text><![CDATA[3. La segunda etapa estará a cargo de un Consejo dictaminador, que será el órgano colegiado constituido por las áreas centrales de la DGETI para ratificar o rectificar los resultados de las puntuaciones de los criterios de valoración y los predictámenes emitidos por el comité revisor.]]></text>
+				<text><![CDATA[3. La segunda etapa estará a cargo de un Consejo Dictaminador, que será el órgano colegiado constituido por las áreas centrales de la DGETI para ratificar o rectificar los resultados de las puntuaciones de los criterios de valoración y los predictámenes emitidos por el comité revisor.]]></text>
 			</staticText>
 			<staticText>
 				<reportElement positionType="Float" x="1" y="74" width="571" height="17" uuid="201e8913-5aa4-4ff1-ad18-41ec4b3fbe54">
@@ -225,7 +225,9 @@ GROUP BY convocatoria.id]]>
 				<textElement textAlignment="Justified">
 					<font fontName="Montserrat" size="9"/>
 				</textElement>
-				<textFieldExpression><![CDATA["Del "+$F{inicioRegistro} + " al "+$F{finRegistro} + ", el aspirante deberá subir los archivos a la plataforma de administración del Proceso, con la documentación especificada en la Base tercera de esta Convocatoria, así como las evidencias documentales de cada uno los elementos de valoración asentados en la Base sexta, de conformidad con lo establecido en el proceso extraordinario de Promoción en el Servicio Docente por Cambio de Categoría en la Dirección General de Educación Tecnológica Industrial y de Servicios, exclusivamente para el ciclo escolar 2020-2021."]]></textFieldExpression>
+				<textFieldExpression><![CDATA["Del "+$F{inicioRegistro} + " al "+$F{finRegistro} + ", el aspirante deberá subir los archivos a la plataforma de administración del Proceso, con la documentación especificada en la Base tercera de esta Convocatoria, así como las evidencias documentales de cada uno los elementos de valoración asentados en la Base sexta, de conformidad con lo establecido en el Proceso de Promoción en el Servicio Docente por Cambio de Categoría en la Dirección General de Educación Tecnológica Industrial y de Servicios, para el ciclo escolar 2020-2021."
+
+]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement positionType="Float" mode="Opaque" x="1" y="540" width="572" height="13" forecolor="#FFFFFF" backcolor="#730907" uuid="c2bf11cd-f7f6-46e8-a04a-51444b64e53d">
@@ -244,7 +246,8 @@ GROUP BY convocatoria.id]]>
 				<textElement textAlignment="Justified">
 					<font fontName="Montserrat" size="9"/>
 				</textElement>
-				<textFieldExpression><![CDATA["Los resultados del proceso de selección para el proceso de promoción en el servicio docente por cambio de categoría en Educación Media Superior, Ciclo Escolar 2020-2021, se publicarán a través de la plataforma electrónica de la DGETI el "+$F{resultados} + "."]]></textFieldExpression>
+				<textFieldExpression><![CDATA["Los resultados del proceso de selección para el Proceso de Promoción en el Servicio Docente por Cambio de Categoría en la Dirección General de Educación Tecnológica Industrial y de Servicios, para el ciclo escolar 2020-2021, se publicarán a través de la plataforma electrónica de la DGETI el "+$F{resultados} + "."
+]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement positionType="Float" x="0" y="600" width="571" height="38" uuid="fd53fbac-0850-432c-a3b6-fad1612bfd62">
@@ -262,7 +265,7 @@ GROUP BY convocatoria.id]]>
 				<textElement textAlignment="Justified">
 					<font fontName="Montserrat" size="9"/>
 				</textElement>
-				<text><![CDATA[Los resultados obtenidos serán definitivos e inapelables de conformidad con los criterios para la emisión de resultados, descritos en las Orientaciones del Proceso Extraordinario de Promoción en el Servicio Docente por Cambio de Categoría en la Dirección General de Educación Tecnológica Industrial y de Servicios, exclusivamente para el ciclo escolar 2020-2021.]]></text>
+				<text><![CDATA[Los resultados obtenidos serán definitivos e inapelables de conformidad con los criterios para la emisión de resultados, descritos en las Orientaciones.]]></text>
 			</staticText>
 		</band>
 	</summary>

@@ -101,9 +101,23 @@ public class Servlet_administracionPlaza extends HttpServlet {
                     cargo=request.getParameter("cargo");
                     fechaRenuncia=fecha.formatoAlmacenar(request.getParameter("fechaRenuncia"));
                 }
+                String inCompleto=request.getParameter("z");
+                if(inCompleto==null){
+                    inCompleto="";
+                }
+                
+                if(request.getParameter("cbDirectivo")==null && inCompleto.equals("F")){
+                    cargo=request.getParameter("cargo");
+                    fechaRenuncia=fecha.formatoAlmacenar(request.getParameter("fechaRenuncia"));
+                }
+                
                 String[] parametros={idUsuario,idCategoria,idJornada,horas,fechaPlaza,idTipoNombramiento,clave,cargo,fechaRenuncia};
-                List<String[]> datos;                           
-                datos=metodo.ejecutaSP("sp_insertUsuarioPlaza",parametros);            
+                List<String[]> datos;
+                if(inCompleto.equals("F")){
+                    datos=metodo.ejecutaSP("sp_insertUsuarioPlazaFin",parametros);
+                }else{
+                    datos=metodo.ejecutaSP("sp_insertUsuarioPlaza",parametros);
+                }            
                 if(!datos.isEmpty()){
                     if(datos.get(0)[0].equals("ok")){
                         String informacion=new Datos().desplegarPlazas(idUsuario);

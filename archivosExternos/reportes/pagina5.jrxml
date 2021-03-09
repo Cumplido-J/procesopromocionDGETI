@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Created with Jaspersoft Studio version 6.16.0.final using JasperReports Library version 6.16.0-48579d909b7943b64690c65c71e07e0b80981928  -->
+<!-- Created with Jaspersoft Studio version 6.13.0.final using JasperReports Library version 6.13.0-46ada4d1be8f3c5985fd0b6146f3ed44caed6f05  -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="pagina5" pageWidth="572" pageHeight="792" whenNoDataType="AllSectionsNoDetail" columnWidth="572" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="2ab4038d-9d78-459e-927f-4f5c4dc4ad48">
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="bdpromocion"/>
@@ -12,9 +12,7 @@
 	<property name="com.jaspersoft.studio.unit.leftMargin" value="pixel"/>
 	<property name="com.jaspersoft.studio.unit.rightMargin" value="pixel"/>
 	<property name="com.jaspersoft.studio.unit.columnWidth" value="pixel"/>
-	<property name="com.jaspersoft.studio.unit.columnSpacing" value="pixel"/>	
-	<parameter name="p5" class="java.lang.Integer"/>
-	<parameter name="c5" class="java.lang.Integer"/>
+	<property name="com.jaspersoft.studio.unit.columnSpacing" value="pixel"/>
 	<parameter name="p6" class="java.lang.Integer"/>
 	<parameter name="c6" class="java.lang.Integer"/>
 	<queryString>
@@ -105,7 +103,7 @@ GROUP BY convocatoria.id]]>
 				<textElement textAlignment="Justified" markup="html">
 					<font fontName="Montserrat" size="9"/>
 				</textElement>
-				<text><![CDATA[<b>Actividades de tutoría o acompañamiento docente:</b> a las acciones de acompañamiento, apoyo y seguimiento entre pares, derivadas de las orientaciones generales que para tal efecto emitió la USICAMM, para fortalecer las competencias de docentes y técnicos docentes noveles o en servicio, las cuales contribuyan a la mejora educativa; desarrolladas a partir de su última promoción en el servicio docente.]]></text>
+				<text><![CDATA[<b>Actividades de tutoría o acompañamiento docente:</b> a las acciones de acompañamiento, apoyo y seguimiento entre pares, derivadas de las orientaciones generales que para tal efecto emitió la USICAMM, para fortalecer las competencias de docentes y técnicos docentes noveles o en servicio, las cuales contribuyan a la mejora educativa; desarrolladas a partir de su última promoción en el servicio docente. ]]></text>
 			</staticText>
 			<staticText>
 				<reportElement positionType="Float" x="4" y="278" width="30" height="19" uuid="38d5aaad-5218-4ab3-b680-3524c5b3becc">
@@ -155,16 +153,16 @@ GROUP BY convocatoria.id]]>
 				<text><![CDATA[Valoración a partir de: el Número Internacional Normalizado de Publicaciones Seriadas (ISSN por sus siglas en inglés) asignado por la revista especializada o equivalente y/o del Número Internacional Normalizado del Libro (ISBN por sus siglas en inglés), según corresponda para el artículo o publicación realizada.]]></text>
 			</staticText>
 			<staticText>
-				<reportElement positionType="Float" x="22" y="448" width="547" height="38" uuid="da64ad38-4b96-44f3-8fde-adfb1b2a6953">
+				<reportElement positionType="Float" x="22" y="438" width="547" height="38" uuid="da64ad38-4b96-44f3-8fde-adfb1b2a6953">
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 				</reportElement>
 				<textElement textAlignment="Justified" markup="html">
 					<font fontName="Montserrat" size="9"/>
 				</textElement>
-				<text><![CDATA[<b>Desempeño en el plantel o subsistema en el que realice su labor:</b> al conjunto de actividades que el docente o técnico docente realiza en su clase, orientado a incidir de manera favorable en el proceso de enseñanza aprendizaje y en el logro académico de sus estudiantes.]]></text>
+				<text><![CDATA[<b>Desempeño en el plantel o subsistema en el que realice su labor:</b> al conjunto de actividades que el docente o técnico docente realiza en su clase, orientado a incidir de manera favorable en el proceso de enseñanza aprendizaje y en el logro académico de sus estudiantes. ]]></text>
 			</staticText>
 			<staticText>
-				<reportElement positionType="Float" x="3" y="447" width="30" height="19" uuid="9d970dd6-9f52-41b4-b113-63591ea52fac">
+				<reportElement positionType="Float" x="3" y="437" width="30" height="19" uuid="9d970dd6-9f52-41b4-b113-63591ea52fac">
 					<property name="com.jaspersoft.studio.unit.y" value="px"/>
 				</reportElement>
 				<textElement textAlignment="Left">
@@ -173,14 +171,14 @@ GROUP BY convocatoria.id]]>
 				<text><![CDATA[10.]]></text>
 			</staticText>
 			<staticText>
-				<reportElement positionType="Float" x="22" y="487" width="547" height="30" uuid="ae4536d1-c5ab-41de-b2a2-6dc739d53dd5">
+				<reportElement positionType="Float" x="22" y="472" width="547" height="30" uuid="ae4536d1-c5ab-41de-b2a2-6dc739d53dd5">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 				</reportElement>
 				<textElement textAlignment="Justified">
 					<font fontName="Montserrat" size="9" isBold="false" isItalic="true"/>
 				</textElement>
-				<text><![CDATA[Valoración a partir de los siguientes elementos: planeación didáctica, práctica docente, evaluación del aprendizaje y resultados educativos.]]></text>
+				<text><![CDATA[Valoración a partir de los siguientes elementos: planeación didáctica, práctica docente, evaluación del aprendizaje y resultados educativos. ]]></text>
 			</staticText>
 			<staticText>
 				<reportElement positionType="Float" x="23" y="93" width="547" height="58" uuid="a17c8ba5-4e91-42ce-bafb-eddf85efb214">
@@ -207,7 +205,7 @@ GROUP BY convocatoria.id]]>
 				<textElement textAlignment="Justified">
 					<font fontName="Montserrat" size="9" isItalic="true"/>
 				</textElement>
-				<text><![CDATA[Valoración a partir de: constancia o documento probatorio de las aportaciones desarrolladas, emitido por autoridades e instituciones públicas y particulares, con reconocimiento oficial. ]]></text>
+				<text><![CDATA[Valoración a partir de: constancia o documento probatorio de las aportaciones desarrolladas, emitido por autoridades e instituciones públicas y particulares, con reconocimiento oficial]]></text>
 			</staticText>
 			<staticText>
 				<reportElement positionType="Float" x="23" y="60" width="547" height="28" uuid="3d6d2b5c-6e82-4b79-9217-161f060bf2bf">
@@ -239,7 +237,7 @@ GROUP BY convocatoria.id]]>
 				<text><![CDATA[5.]]></text>
 			</staticText>
 			<staticText>
-				<reportElement positionType="Float" mode="Opaque" x="0" y="529" width="572" height="13" forecolor="#FFFFFF" backcolor="#730907" uuid="29d8b652-59df-4182-a2e8-272ae0022817">
+				<reportElement positionType="Float" mode="Opaque" x="0" y="545" width="572" height="13" forecolor="#FFFFFF" backcolor="#730907" uuid="29d8b652-59df-4182-a2e8-272ae0022817">
 					<property name="com.jaspersoft.studio.unit.x" value="px"/>
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 				</reportElement>
@@ -249,7 +247,7 @@ GROUP BY convocatoria.id]]>
 				<text><![CDATA[SÉPTIMA. PROCESO DE VALORACIÓN]]></text>
 			</staticText>
 			<staticText>
-				<reportElement positionType="Float" x="0" y="544" width="571" height="26" uuid="15e86893-eed5-49c1-84a2-ac1f083bc459">
+				<reportElement positionType="Float" x="0" y="560" width="571" height="26" uuid="15e86893-eed5-49c1-84a2-ac1f083bc459">
 					<property name="com.jaspersoft.studio.unit.x" value="px"/>
 				</reportElement>
 				<textElement textAlignment="Justified">
@@ -258,23 +256,32 @@ GROUP BY convocatoria.id]]>
 				<text><![CDATA[Este proceso de selección se basará en la ponderación de las evidencias para cada uno de los elementos de valoración y el proceso será el siguiente:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement positionType="Float" x="1" y="575" width="571" height="41" uuid="333c3636-6c68-4ac2-be82-8ce9edcaedec">
+				<reportElement positionType="Float" x="1" y="583" width="571" height="41" uuid="333c3636-6c68-4ac2-be82-8ce9edcaedec">
 					<property name="com.jaspersoft.studio.unit.x" value="px"/>
 				</reportElement>
 				<textElement textAlignment="Justified">
 					<font fontName="Montserrat" size="9"/>
 				</textElement>
-				<text><![CDATA[1. El participante conocerá las bases de participación y se registrará en el Proceso de selección para el Proceso Extraordinario de Promoción en el Servicio Docente por Cambio de Categoría en la Dirección General de Educación Tecnológica Industrial y de Servicios, exclusivamente para el ciclo escolar 2020-2021, de acuerdo a lo establecido en la presente convocatoria. ]]></text>
+				<text><![CDATA[1. El participante conocerá las bases de participación y se registrará en el Proceso de Promoción en el Servicio Docente por Cambio de Categoría en la Dirección General de Educación Tecnológica Industrial y de Servicios, para el ciclo escolar 2020-2021, de acuerdo a lo establecido en la presente convocatoria. ]]></text>
 			</staticText>
 			<textField>
-				<reportElement positionType="Float" x="0" y="618" width="571" height="50" uuid="0c50c496-059b-4fc3-8919-8105b77152ee">
+				<reportElement positionType="Float" x="0" y="620" width="571" height="54" uuid="0c50c496-059b-4fc3-8919-8105b77152ee">
 					<property name="com.jaspersoft.studio.unit.x" value="px"/>
 				</reportElement>
 				<textElement textAlignment="Justified">
 					<font fontName="Montserrat" size="9"/>
 				</textElement>
-				<textFieldExpression><![CDATA["2. La valoración del nivel de cumplimiento de los 10 criterios establecidos en la Base sexta de la presente convocatoria tendrá dos etapas, la primera la realizará un Comité de revisión, que será un órgano colegiado constituido en el "+$F{plantelnombre} + " con la finalidad de verificar el cumplimiento de los requisitos, asignar una puntuación sobre los criterios de valoración y emitir el predictamen correspondiente. "]]></textFieldExpression>
+				<textFieldExpression><![CDATA["2. La valoración del nivel de cumplimiento de los 10 criterios establecidos en la Base sexta de la presente convocatoria tendrá dos etapas, la primera la realizará un Comité de Revisión, que será un órgano colegiado constituido en el "+$F{plantelnombre}+ " con la finalidad de verificar el cumplimiento de los requisitos, asignar una puntuación sobre los criterios de valoración y emitir el predictamen correspondiente."]]></textFieldExpression>
 			</textField>
+			<staticText>
+				<reportElement positionType="Float" x="1" y="496" width="569" height="53" uuid="1ab69b69-45c9-44ac-9000-acd4f1100762">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Justified" markup="html">
+					<font fontName="Montserrat" size="9"/>
+				</textElement>
+				<text><![CDATA[Todos los formatos establecidos para dar cuenta de las evidencias documentales que se derivan del cumplimiento de los 10 criterios de valoración, se encuentran descritos en las Orientaciones del Programa de Promoción en el Servicio Docente por Cambio de Categoría en la Dirección General de Educación Tecnológica Industrial y de Servicios, publicadas el 19 de febrero del 2021.]]></text>
+			</staticText>
 		</band>
 	</summary>
 </jasperReport>
