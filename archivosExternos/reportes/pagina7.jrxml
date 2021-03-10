@@ -180,7 +180,7 @@ GROUP BY conv.id]]>
 				<textElement textAlignment="Justified">
 					<font fontName="Montserrat" size="9"/>
 				</textElement>
-				<textFieldExpression><![CDATA["Los resultados del Proceso de Promoción en el Servicio Docente por Cambio de Categoría en la Dirección General de Educación Tecnológica Industrial y de Servicios, para el ciclo escolar 2020-2021, se publicarán en la plataforma DGETI en la siguiente dirección electrónica https://www.promociondocente.sep.gob.mx/promocion/, el "+$F{resultados} + "."]]></textFieldExpression>
+				<textFieldExpression><![CDATA["Los resultados del Proceso de Promoción en el Servicio Docente por Cambio de Categoría en la Dirección General de Educación Tecnológica Industrial y de Servicios, para el ciclo escolar 2020-2021, se publicarán en la plataforma       de     la      DGETI     en      la siguiente dirección electrónica: https://www.promociondocente.sep.gob.mx/promocion/, el "+$F{resultados} + "."]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement positionType="Float" x="0" y="0" width="571" height="60" uuid="03d7b857-fbde-4b1f-a114-fa48dcd0b746">
@@ -257,7 +257,7 @@ GROUP BY conv.id]]>
 				<textElement textAlignment="Justified">
 					<font fontName="Montserrat" size="9"/>
 				</textElement>
-				<text><![CDATA[La publicación de la lista ordenada de resultados, de ninguna manera implica una obligación de asignación de una categoría a todos los aspirantes por parte de la DGETI. La asignación de categorías está sujeta a las necesidades del servicio público educativo, las estructuras ocupaciona¬les autorizadas y la disponibilidad de categorías vacantes.]]></text>
+				<text><![CDATA[La publicación de la lista ordenada de resultados, de ninguna manera implica una obligación de asignación de una categoría a todos los aspirantes por parte de la DGETI. La asignación de categorías está sujeta a las necesidades del servicio público educativo, las estructuras ocupacionales autorizadas y la disponibilidad de categorías vacantes.]]></text>
 			</staticText>
 		</band>
 	</summary>

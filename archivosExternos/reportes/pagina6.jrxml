@@ -225,9 +225,7 @@ GROUP BY convocatoria.id]]>
 				<textElement textAlignment="Justified">
 					<font fontName="Montserrat" size="9"/>
 				</textElement>
-				<textFieldExpression><![CDATA["Del "+$F{inicioRegistro} + " al "+$F{finRegistro} + ", el aspirante deberá subir los archivos a la plataforma de administración del Proceso, con la documentación especificada en la Base tercera de esta Convocatoria, así como las evidencias documentales de cada uno los elementos de valoración asentados en la Base sexta, de conformidad con lo establecido en el Proceso de Promoción en el Servicio Docente por Cambio de Categoría en la Dirección General de Educación Tecnológica Industrial y de Servicios, para el ciclo escolar 2020-2021."
-
-]]></textFieldExpression>
+				<textFieldExpression><![CDATA["Del "+$F{inicioRegistro} + " al "+$F{finRegistro} + ", el aspirante deberá subir los archivos a la plataforma de administración del Proceso, con la documentación especificada en la Base tercera de esta Convocatoria, así como las evidencias documentales de cada uno los elementos de valoración asentados en la Base sexta, de conformidad con lo establecido en el Proceso de Promoción en el Servicio Docente por Cambio de Categoría en la Dirección General de Educación Tecnológica Industrial y de Servicios, para el ciclo escolar 2020-2021."]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement positionType="Float" mode="Opaque" x="1" y="540" width="572" height="13" forecolor="#FFFFFF" backcolor="#730907" uuid="c2bf11cd-f7f6-46e8-a04a-51444b64e53d">
@@ -246,8 +244,7 @@ GROUP BY convocatoria.id]]>
 				<textElement textAlignment="Justified">
 					<font fontName="Montserrat" size="9"/>
 				</textElement>
-				<textFieldExpression><![CDATA["Los resultados del proceso de selección para el Proceso de Promoción en el Servicio Docente por Cambio de Categoría en la Dirección General de Educación Tecnológica Industrial y de Servicios, para el ciclo escolar 2020-2021, se publicarán a través de la plataforma electrónica de la DGETI el "+$F{resultados} + "."
-]]></textFieldExpression>
+				<textFieldExpression><![CDATA["Los resultados del proceso de selección para el Proceso de Promoción en el Servicio Docente por Cambio de Categoría en la Dirección General de Educación Tecnológica Industrial y de Servicios, para el ciclo escolar 2020-2021, se publicarán a través de la plataforma electrónica de la DGETI el "+$F{resultados} + "."]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement positionType="Float" x="0" y="600" width="571" height="38" uuid="fd53fbac-0850-432c-a3b6-fad1612bfd62">
@@ -256,7 +253,7 @@ GROUP BY convocatoria.id]]>
 				<textElement textAlignment="Justified">
 					<font fontName="Montserrat" size="9"/>
 				</textElement>
-				<textFieldExpression><![CDATA["La ponderación de los elementos de valoración se realizará conforme a lo criterios técnicos señalados en las orientaciones del Programa de Promoción en el servicio docente por cambio de categoría en Educación Media Superior, publicadas el  "+$F{publicacion} + "."]]></textFieldExpression>
+				<textFieldExpression><![CDATA["La ponderación de los elementos de valoración se realizará conforme a lo criterios técnicos señalados en las Orientaciones del Programa de Promoción en el Servicio Docente por Cambio de Categoría  en la Dirección General de Educación Tecnológica Industrial y de Servicios, publicadas el  19 de febrero del 2021."]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement positionType="Float" x="0" y="638" width="571" height="39" uuid="1d8b4924-b51d-4734-a2f8-20cd1e98d0fb">

@@ -713,7 +713,7 @@
 				<textElement textAlignment="Justified">
 					<font fontName="Montserrat" size="9" isBold="false" isItalic="true"/>
 				</textElement>
-				<text><![CDATA[Valoración a partir de: En su caso, constancia emitida por el Director del Plantel, consignando el tiempo de adscripción y la ubicación del planten en donde labora. ]]></text>
+				<text><![CDATA[Valoración a partir de: En su caso, constancia emitida por el Director del Plantel, consignando el tiempo de adscripción y la ubicación del plantel en donde labora. ]]></text>
 			</staticText>
 			<staticText>
 				<reportElement positionType="Float" x="4" y="514" width="30" height="19" uuid="af6d1dff-cc71-4d65-a03a-90d25eaac638">

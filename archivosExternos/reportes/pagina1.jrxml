@@ -204,7 +204,7 @@ GROUP BY conv.id]]>
 				<textElement textAlignment="Justified">
 					<font fontName="Montserrat" size="9"/>
 				</textElement>
-				<text><![CDATA[Cumplir con las reglas de compatibilidad que emitió la USICAMM, y ]]></text>
+				<text><![CDATA[En su caso, cumplir con las reglas de compatibilidad que emitió la USICAMM, y ]]></text>
 			</staticText>
 			<staticText>
 				<reportElement positionType="Float" x="47" y="608" width="520" height="19" uuid="341a8314-d5bb-4cf7-bde1-e4c776a1697f">
