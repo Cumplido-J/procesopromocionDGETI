@@ -17,6 +17,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import metodos_sql.Metodos_sql;
+import constants.ConstantsWS;
 
 /**
  *
@@ -134,7 +135,7 @@ public class Servlet_registroInfoLaboral extends HttpServlet {
             if(idCategoria.equals("-1")||idJornada.equals("-1")){
                 out.print("Debe seleccionar la plaza con la que participará");
             }else{
-                if(idTipoNombramiento.equals("5")){
+                if(idTipoNombramiento.equals(ConstantsWS.ALTA_DEFINITIVA) || idTipoNombramiento.equals(ConstantsWS.ALTA_PROVICIONAL)){
                     int categoriaActual=Integer.parseInt(idCategoria);
                 int categoriaAspira=Integer.parseInt(idCategoriaAspira);
                 int jornadaActual=Integer.parseInt(idJornada);
