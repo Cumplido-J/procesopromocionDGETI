@@ -33,26 +33,16 @@ order by catcategoriasplaza.categoria]]>
 		<band height="648" splitType="Stretch">
 			<property name="com.jaspersoft.studio.unit.height" value="px"/>
 			<staticText>
-				<reportElement positionType="Float" x="0" y="17" width="570" height="47" uuid="ea87d694-b6b5-487c-9af1-295e215274ea">
+				<reportElement positionType="Float" x="0" y="2" width="570" height="28" uuid="ea87d694-b6b5-487c-9af1-295e215274ea">
 					<property name="com.jaspersoft.studio.unit.x" value="px"/>
 				</reportElement>
 				<textElement textAlignment="Justified">
 					<font fontName="Montserrat" size="9"/>
 				</textElement>
-				<text><![CDATA[El personal que desee participar deberá subir los archivos con las evidencias documentales a la plataforma de administración del Proceso de Promoción en el Servicio Docente por Cambio de Categoría en la Dirección General de Educación Tecnológica Industrial y de Servicios, para el ciclo escolar 2020-2021, al momento de realizar el registro correspondiente, a través de la liga: https://www.promociondocente.sep.gob.mx/promocion/]]></text>
+				<text><![CDATA[Industrial y de Servicios, para el ciclo escolar 2020-2021, al momento de realizar el registro correspondiente, a través de la liga: https://www.promociondocente.sep.gob.mx/promocion/]]></text>
 			</staticText>
 			<staticText>
-				<reportElement positionType="Float" mode="Opaque" x="0" y="1" width="570" height="13" forecolor="#FFFFFF" backcolor="#730907" uuid="86238fb2-cac4-4a9c-a67f-68249f285d38">
-					<property name="com.jaspersoft.studio.unit.x" value="px"/>
-					<property name="com.jaspersoft.studio.unit.width" value="px"/>
-				</reportElement>
-				<textElement textAlignment="Left" verticalAlignment="Middle">
-					<font fontName="Montserrat" size="9" isBold="true"/>
-				</textElement>
-				<text><![CDATA[TERCERA. REQUISITOS DOCUMENTALES]]></text>
-			</staticText>
-			<staticText>
-				<reportElement positionType="Float" x="30" y="69" width="537" height="12" uuid="5f137d89-717d-4c2f-bc4e-b2b967e0263c">
+				<reportElement positionType="Float" x="30" y="32" width="537" height="12" uuid="5f137d89-717d-4c2f-bc4e-b2b967e0263c">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<textElement textAlignment="Justified">
@@ -61,7 +51,7 @@ order by catcategoriasplaza.categoria]]>
 				<text><![CDATA[Registro Federal de Contribuyentes (RFC).]]></text>
 			</staticText>
 			<staticText>
-				<reportElement positionType="Float" x="30" y="83" width="537" height="22" uuid="01cfc78b-79d5-497f-99a2-bb0ba1118a08">
+				<reportElement positionType="Float" x="30" y="45" width="537" height="41" uuid="01cfc78b-79d5-497f-99a2-bb0ba1118a08">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 					<property name="com.jaspersoft.studio.unit.x" value="px"/>
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
@@ -69,10 +59,10 @@ order by catcategoriasplaza.categoria]]>
 				<textElement textAlignment="Justified">
 					<font fontName="Montserrat" size="9"/>
 				</textElement>
-				<text><![CDATA[Contar con nombramiento definitivo en la plaza docente o técnico docente que ostenta el participante. Constancia de nombramiento definitivo que fue expedida por la DGETI (Enlace de Gestión Administrativa);]]></text>
+				<text><![CDATA[Contar con nombramiento definitivo (o código 95, exclusivamente con las características señaladas en la base Primera. Participantes) en la plaza docente o técnico docente que ostenta el participante. Constancia de nombramiento definitivo que fue expedida por la DGETI (Enlace de Gestión Administrativa);]]></text>
 			</staticText>
 			<staticText>
-				<reportElement positionType="Float" x="30" y="107" width="537" height="36" uuid="da423b96-d641-45da-9565-fc2f2604c57f">
+				<reportElement positionType="Float" x="30" y="93" width="537" height="36" uuid="da423b96-d641-45da-9565-fc2f2604c57f">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 					<property name="com.jaspersoft.studio.unit.x" value="px"/>
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
@@ -83,7 +73,7 @@ order by catcategoriasplaza.categoria]]>
 				<text><![CDATA[Estar activo y frente a grupo en la DGETI y en el plantel en el que participa. Constancia expedida por el Subdirector académico y el Jefe de departamento de servicios docentes de plantel, alineada a la estructura organizacional autorizada por la Dirección de Planeación y Evaluación.]]></text>
 			</staticText>
 			<staticText>
-				<reportElement positionType="Float" x="33" y="144" width="537" height="33" uuid="c8c8a0ee-e66a-406d-9917-ccb3344b63c7">
+				<reportElement positionType="Float" x="33" y="130" width="537" height="33" uuid="c8c8a0ee-e66a-406d-9917-ccb3344b63c7">
 					<property name="com.jaspersoft.studio.unit.y" value="px"/>
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 					<property name="com.jaspersoft.studio.unit.x" value="px"/>
@@ -95,7 +85,7 @@ order by catcategoriasplaza.categoria]]>
 				<text><![CDATA[Acreditar haber ejercido la función docente o técnico docente en la DGETI y en el plantel en el que participa, por un periodo mínimo de tres años al momento del registro de su participación en el proceso de selección. Constancia expedida por la Dirección de Planeación y Evaluación, acreditando al menos tres años de servicio. ]]></text>
 			</staticText>
 			<staticText>
-				<reportElement positionType="Float" x="30" y="181" width="537" height="33" uuid="2895e1f9-0497-416f-bc46-ba375f28a33d">
+				<reportElement positionType="Float" x="30" y="167" width="537" height="33" uuid="2895e1f9-0497-416f-bc46-ba375f28a33d">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 					<property name="com.jaspersoft.studio.unit.x" value="px"/>
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
@@ -106,7 +96,7 @@ order by catcategoriasplaza.categoria]]>
 				<text><![CDATA[Acreditar que ha ocupado la categoría que ostenta al momento de emitirse la presente convocatoria, por un periodo de al menos dos años. Constancia de nombramiento que fue expedida por la DGETI (Enlace de Gestión Administrativa). Acreditando al menos dos años en la plaza que ostenta.]]></text>
 			</staticText>
 			<staticText>
-				<reportElement positionType="Float" x="30" y="218" width="537" height="43" uuid="732adddd-9188-41ab-9c00-192f7aca4ca7">
+				<reportElement positionType="Float" x="30" y="204" width="537" height="43" uuid="732adddd-9188-41ab-9c00-192f7aca4ca7">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 				</reportElement>
@@ -116,7 +106,7 @@ order by catcategoriasplaza.categoria]]>
 				<text><![CDATA[Haber transcurrido al menos dos años a partir de su última promoción en el servicio docente por asignación de horas adicionales definitivas, para los docentes y técnicos docentes de asignatura. Constancia expedida por la DGETI (Enlace de Gestión Administrativa). ]]></text>
 			</staticText>
 			<staticText>
-				<reportElement positionType="Float" x="30" y="253" width="537" height="63" uuid="5095b02c-89bb-4656-8730-7b729af4bc2c">
+				<reportElement positionType="Float" x="30" y="239" width="537" height="63" uuid="5095b02c-89bb-4656-8730-7b729af4bc2c">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 				</reportElement>
@@ -126,7 +116,7 @@ order by catcategoriasplaza.categoria]]>
 				<text><![CDATA[Contar con el perfil profesional afín al campo disciplinar, actividad paraescolar o módulo profesional, para la plaza vacante que se establezca en la presente convocatoria, según las necesidades del servicio. Documento acreditado por una instancia oficial que confirma el grado de estudios requerido para participar en el Proceso de Promoción en el Servicio Docente por Cambio de Categoría en la Dirección General de Educación Tecnológica Industrial y de Servicios, para el ciclo escolar 2020-2021.]]></text>
 			</staticText>
 			<staticText>
-				<reportElement positionType="Float" x="30" y="310" width="537" height="49" uuid="b6bb58b6-206a-4a9e-8a77-b1e76d43067f">
+				<reportElement positionType="Float" x="30" y="296" width="537" height="49" uuid="b6bb58b6-206a-4a9e-8a77-b1e76d43067f">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 				</reportElement>
@@ -136,7 +126,7 @@ order by catcategoriasplaza.categoria]]>
 				<text><![CDATA[Acreditar el grado académico establecido por la DGETI para la categoría inmediata superior, respecto a la que actualmente ostenta. Documento acreditado por una instancia oficial que confirma el grado de estudios requerido para participar en el Proceso de Promoción en el Servicio Docente por Cambio de Categoría en la Dirección General de Educación Tecnológica Industrial y de Servicios, para el ciclo escolar 2020-2021.  ]]></text>
 			</staticText>
 			<staticText>
-				<reportElement positionType="Float" x="30" y="357" width="537" height="38" uuid="005ef9ea-f7ab-4717-b132-4e99851087f9">
+				<reportElement positionType="Float" x="30" y="343" width="537" height="38" uuid="005ef9ea-f7ab-4717-b132-4e99851087f9">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 				</reportElement>
@@ -146,7 +136,7 @@ order by catcategoriasplaza.categoria]]>
 				<text><![CDATA[Los docentes que imparten la asignatura de inglés deberán contar con título y cédula profesional de la licenciatura en la enseñanza del inglés o equivalente. Quienes tengan una licenciatura distinta, deberán presentar además la Certificación Nacional de Nivel de Idioma (CENNI) vigente, al menos en el nivel 14.]]></text>
 			</staticText>
 			<staticText>
-				<reportElement positionType="Float" x="30" y="397" width="537" height="24" uuid="0bea7b6d-28d7-4a69-b3ea-04b314f462c0">
+				<reportElement positionType="Float" x="30" y="383" width="537" height="24" uuid="0bea7b6d-28d7-4a69-b3ea-04b314f462c0">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 				</reportElement>
@@ -156,7 +146,7 @@ order by catcategoriasplaza.categoria]]>
 				<text><![CDATA[No contar en su expediente con nota desfavorable expedida durante los dos ciclos escolares inmediatos anteriores a la emisión de la convocatoria: ]]></text>
 			</staticText>
 			<staticText>
-				<reportElement positionType="Float" x="30" y="484" width="537" height="12" uuid="718cbd55-2f4b-4922-ae22-6b570408cc0e">
+				<reportElement positionType="Float" x="30" y="470" width="537" height="12" uuid="718cbd55-2f4b-4922-ae22-6b570408cc0e">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 				</reportElement>
@@ -166,7 +156,7 @@ order by catcategoriasplaza.categoria]]>
 				<text><![CDATA[Cumplir con las reglas de compatibilidad.]]></text>
 			</staticText>
 			<staticText>
-				<reportElement positionType="Float" x="0" y="69" width="30" height="11" uuid="52678d83-0b55-4f18-ac14-fdf6f4d617ac">
+				<reportElement positionType="Float" x="0" y="32" width="30" height="11" uuid="52678d83-0b55-4f18-ac14-fdf6f4d617ac">
 					<property name="com.jaspersoft.studio.unit.x" value="px"/>
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
@@ -176,7 +166,7 @@ order by catcategoriasplaza.categoria]]>
 				<text><![CDATA[1.]]></text>
 			</staticText>
 			<staticText>
-				<reportElement positionType="Float" x="0" y="83" width="30" height="11" uuid="ca385e9f-7587-4923-af5c-c80d7f035b83">
+				<reportElement positionType="Float" x="0" y="49" width="30" height="11" uuid="ca385e9f-7587-4923-af5c-c80d7f035b83">
 					<property name="com.jaspersoft.studio.unit.y" value="px"/>
 					<property name="com.jaspersoft.studio.unit.x" value="px"/>
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
@@ -187,7 +177,7 @@ order by catcategoriasplaza.categoria]]>
 				<text><![CDATA[2.]]></text>
 			</staticText>
 			<staticText>
-				<reportElement positionType="Float" x="0" y="108" width="30" height="11" uuid="e48d474e-ecb9-4803-8afc-c3be333f2fb5">
+				<reportElement positionType="Float" x="0" y="94" width="30" height="11" uuid="e48d474e-ecb9-4803-8afc-c3be333f2fb5">
 					<property name="com.jaspersoft.studio.unit.y" value="px"/>
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
@@ -197,7 +187,7 @@ order by catcategoriasplaza.categoria]]>
 				<text><![CDATA[3.]]></text>
 			</staticText>
 			<staticText>
-				<reportElement positionType="Float" x="0" y="140" width="30" height="11" uuid="f7fd2471-9947-4527-b5cc-fe92aac2ee4e">
+				<reportElement positionType="Float" x="0" y="126" width="30" height="11" uuid="f7fd2471-9947-4527-b5cc-fe92aac2ee4e">
 					<property name="com.jaspersoft.studio.unit.y" value="px"/>
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
@@ -207,7 +197,7 @@ order by catcategoriasplaza.categoria]]>
 				<text><![CDATA[4.]]></text>
 			</staticText>
 			<staticText>
-				<reportElement positionType="Float" x="0" y="180" width="30" height="11" uuid="df4e9997-ac74-4492-a89d-fae3d993a6f9">
+				<reportElement positionType="Float" x="0" y="166" width="30" height="11" uuid="df4e9997-ac74-4492-a89d-fae3d993a6f9">
 					<property name="com.jaspersoft.studio.unit.y" value="px"/>
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
@@ -217,7 +207,7 @@ order by catcategoriasplaza.categoria]]>
 				<text><![CDATA[5.]]></text>
 			</staticText>
 			<staticText>
-				<reportElement positionType="Float" x="0" y="221" width="30" height="11" uuid="381d5997-0b08-4502-b3ac-7c0a56865585">
+				<reportElement positionType="Float" x="0" y="207" width="30" height="11" uuid="381d5997-0b08-4502-b3ac-7c0a56865585">
 					<property name="com.jaspersoft.studio.unit.y" value="px"/>
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
@@ -227,7 +217,7 @@ order by catcategoriasplaza.categoria]]>
 				<text><![CDATA[6.]]></text>
 			</staticText>
 			<staticText>
-				<reportElement positionType="Float" x="0" y="253" width="30" height="11" uuid="6b40d770-0973-413f-a02a-94f08ebeea99">
+				<reportElement positionType="Float" x="0" y="239" width="30" height="11" uuid="6b40d770-0973-413f-a02a-94f08ebeea99">
 					<property name="com.jaspersoft.studio.unit.y" value="px"/>
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
@@ -237,7 +227,7 @@ order by catcategoriasplaza.categoria]]>
 				<text><![CDATA[7.]]></text>
 			</staticText>
 			<staticText>
-				<reportElement positionType="Float" x="0" y="309" width="30" height="11" uuid="c7639565-c171-4e4b-8304-bf1de71de387">
+				<reportElement positionType="Float" x="0" y="295" width="30" height="11" uuid="c7639565-c171-4e4b-8304-bf1de71de387">
 					<property name="com.jaspersoft.studio.unit.y" value="px"/>
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
@@ -247,7 +237,7 @@ order by catcategoriasplaza.categoria]]>
 				<text><![CDATA[8.]]></text>
 			</staticText>
 			<staticText>
-				<reportElement positionType="Float" x="0" y="357" width="30" height="11" uuid="e79b5e1a-fd78-4299-85b0-6d1625087491">
+				<reportElement positionType="Float" x="0" y="343" width="30" height="11" uuid="e79b5e1a-fd78-4299-85b0-6d1625087491">
 					<property name="com.jaspersoft.studio.unit.y" value="px"/>
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
@@ -257,7 +247,7 @@ order by catcategoriasplaza.categoria]]>
 				<text><![CDATA[9.]]></text>
 			</staticText>
 			<staticText>
-				<reportElement positionType="Float" x="0" y="398" width="30" height="11" uuid="ee269acc-c6ba-4902-b6a7-76a35ae3670f">
+				<reportElement positionType="Float" x="0" y="384" width="30" height="11" uuid="ee269acc-c6ba-4902-b6a7-76a35ae3670f">
 					<property name="com.jaspersoft.studio.unit.y" value="px"/>
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
@@ -267,7 +257,7 @@ order by catcategoriasplaza.categoria]]>
 				<text><![CDATA[10.]]></text>
 			</staticText>
 			<staticText>
-				<reportElement positionType="Float" x="0" y="483" width="30" height="11" uuid="71a08b9d-2c21-4b04-b9e4-4e76593a4fcf">
+				<reportElement positionType="Float" x="0" y="469" width="30" height="11" uuid="71a08b9d-2c21-4b04-b9e4-4e76593a4fcf">
 					<property name="com.jaspersoft.studio.unit.y" value="px"/>
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
@@ -277,7 +267,7 @@ order by catcategoriasplaza.categoria]]>
 				<text><![CDATA[11.]]></text>
 			</staticText>
 			<staticText>
-				<reportElement positionType="Float" x="0" y="545" width="30" height="11" uuid="95b233ef-5dd5-4497-9106-87f483afb2f3">
+				<reportElement positionType="Float" x="0" y="531" width="30" height="11" uuid="95b233ef-5dd5-4497-9106-87f483afb2f3">
 					<property name="com.jaspersoft.studio.unit.y" value="px"/>
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
@@ -287,7 +277,7 @@ order by catcategoriasplaza.categoria]]>
 				<text><![CDATA[12.]]></text>
 			</staticText>
 			<staticText>
-				<reportElement positionType="Float" x="0" y="574" width="30" height="11" uuid="f0c7eacf-432c-4f21-b8ba-37285cef3f1b">
+				<reportElement positionType="Float" x="0" y="560" width="30" height="11" uuid="f0c7eacf-432c-4f21-b8ba-37285cef3f1b">
 					<property name="com.jaspersoft.studio.unit.y" value="px"/>
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
@@ -297,7 +287,7 @@ order by catcategoriasplaza.categoria]]>
 				<text><![CDATA[13.]]></text>
 			</staticText>
 			<staticText>
-				<reportElement positionType="Float" x="30" y="500" width="537" height="20" uuid="947639f6-355f-47f2-8c92-27f0083b75dd">
+				<reportElement positionType="Float" x="30" y="486" width="537" height="20" uuid="947639f6-355f-47f2-8c92-27f0083b75dd">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 				</reportElement>
@@ -307,7 +297,7 @@ order by catcategoriasplaza.categoria]]>
 				<text><![CDATA[Constancia vigente emitida por la autoridad competente en apego a las reglas de compatibilidad (en su caso). ]]></text>
 			</staticText>
 			<staticText>
-				<reportElement positionType="Float" x="0" y="596" width="568" height="44" uuid="8f58498f-d4eb-4c7b-8fa2-3bca275453f7">
+				<reportElement positionType="Float" x="0" y="582" width="568" height="44" uuid="8f58498f-d4eb-4c7b-8fa2-3bca275453f7">
 					<property name="com.jaspersoft.studio.unit.y" value="px"/>
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
@@ -317,7 +307,7 @@ order by catcategoriasplaza.categoria]]>
 				<text><![CDATA[Todos los formatos establecidos para dar cuenta de las evidencias documentales que se derivan del cumplimiento de los requisitos antes señalados, se encuentran descritos en las Orientaciones del Programa de Promoción en el Servicio Docente por Cambio de Categoría en la Dirección General de Educación Tecnológica Industrial y de Servicios, publicadas el 19 de febrero del 2021.]]></text>
 			</staticText>
 			<staticText>
-				<reportElement positionType="Float" x="30" y="515" width="537" height="26" uuid="3a400d2c-b292-42b4-a8d9-09f8e44a2da0">
+				<reportElement positionType="Float" x="30" y="501" width="537" height="26" uuid="3a400d2c-b292-42b4-a8d9-09f8e44a2da0">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 				</reportElement>
@@ -327,7 +317,7 @@ order by catcategoriasplaza.categoria]]>
 				<text><![CDATA[Carta del participante, bajo protesta de decir verdad, en la que manifieste no contar con otro nombramiento en el Sistema Educativo Nacional o en alguna otra dependencia de gobierno federal, estatal o municipal (en su caso).]]></text>
 			</staticText>
 			<staticText>
-				<reportElement positionType="Float" x="30" y="424" width="10" height="11" uuid="82f347fb-db81-4d4a-865e-49fee52fb8a8">
+				<reportElement positionType="Float" x="30" y="410" width="10" height="11" uuid="82f347fb-db81-4d4a-865e-49fee52fb8a8">
 					<property name="com.jaspersoft.studio.unit.y" value="px"/>
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
@@ -337,7 +327,7 @@ order by catcategoriasplaza.categoria]]>
 				<text><![CDATA[a.]]></text>
 			</staticText>
 			<staticText>
-				<reportElement positionType="Float" x="50" y="424" width="517" height="30" uuid="7be0649f-16ad-4d7f-8f33-7a12d5e5b437">
+				<reportElement positionType="Float" x="50" y="410" width="517" height="30" uuid="7be0649f-16ad-4d7f-8f33-7a12d5e5b437">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 				</reportElement>
@@ -347,7 +337,7 @@ order by catcategoriasplaza.categoria]]>
 				<text><![CDATA[Constancia emitida por la DGETI (Área de Servicios Institucionales), de que el participante no cuenta con nota desfavorable en los dos últimos ciclos escolares inmediatos a la publicación de la convocatoria, y ]]></text>
 			</staticText>
 			<staticText>
-				<reportElement positionType="Float" x="30" y="456" width="10" height="11" uuid="4b1118df-6f9b-43d9-9ad9-d3b9550525fc">
+				<reportElement positionType="Float" x="30" y="442" width="10" height="11" uuid="4b1118df-6f9b-43d9-9ad9-d3b9550525fc">
 					<property name="com.jaspersoft.studio.unit.y" value="px"/>
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
@@ -357,7 +347,7 @@ order by catcategoriasplaza.categoria]]>
 				<text><![CDATA[b.]]></text>
 			</staticText>
 			<staticText>
-				<reportElement positionType="Float" x="51" y="456" width="517" height="24" uuid="64df03d7-3af8-4922-9108-a402b189b23a">
+				<reportElement positionType="Float" x="51" y="442" width="517" height="24" uuid="64df03d7-3af8-4922-9108-a402b189b23a">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 				</reportElement>
@@ -367,7 +357,7 @@ order by catcategoriasplaza.categoria]]>
 				<text><![CDATA[Carta del participante, bajo protesta de decir verdad, de que no cuenta con sanción administrativa que pueda limitar su desempeño en la función. ]]></text>
 			</staticText>
 			<staticText>
-				<reportElement positionType="Float" x="30" y="543" width="537" height="26" uuid="c75b0a1c-9965-4e16-8533-f491e828bcdb">
+				<reportElement positionType="Float" x="30" y="529" width="537" height="26" uuid="c75b0a1c-9965-4e16-8533-f491e828bcdb">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 				</reportElement>
@@ -377,7 +367,7 @@ order by catcategoriasplaza.categoria]]>
 				<text><![CDATA[Carta de aceptación de las bases de esta Convocatoria, en donde, con su firma al calce, cada participante protesta de decir verdad que conoce y se compromete a respetar estrictamente los términos de participación establecidos.]]></text>
 			</staticText>
 			<staticText>
-				<reportElement positionType="Float" x="30" y="571" width="537" height="26" uuid="5cbf5527-b7f8-4158-b5da-f7c90bfe12da">
+				<reportElement positionType="Float" x="30" y="557" width="537" height="26" uuid="5cbf5527-b7f8-4158-b5da-f7c90bfe12da">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 				</reportElement>
