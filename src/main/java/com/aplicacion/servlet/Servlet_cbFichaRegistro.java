@@ -104,7 +104,7 @@ public class Servlet_cbFichaRegistro extends HttpServlet {
             docente.consultaInfoAspirante();
             docente.consultaHoras();            
             docente.actualizaBanderaIngles();
-            String[][] puntajes=cv.consultaPuntajes(idUsuario, idPermiso); 
+            String[][] puntajes=cv.consultaPuntajes(idUsuario); 
             String[] puntajeEncuestas=cv.consultaPuntajeEncuestas(rfc);
             String[] parametros={idUsuario};            
             List<String[]> infoPlazas=new Metodos_sql().ejecutaSP("sp_consultaUsuarioPlaza",parametros);

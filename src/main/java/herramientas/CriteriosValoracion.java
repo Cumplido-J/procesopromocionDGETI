@@ -20,10 +20,13 @@ public class CriteriosValoracion {
         metodo=new Metodos_sql();
         fecha=new Fecha();
     }    
-    public String[] getFilasCursos(String idUsuario,boolean vistaAdmin){   
-        String[] respuesta={"",""};        
+    public String[] getFilasCursos(String idUsuario,boolean vistaAdmin, String idPermiso){   
+        String[] respuesta={"","",""}; 
+        String valido;
         int puntaje=0;
         int horas=0;
+        int puntajeD=0;
+        int horasD=0;
         String[] parametros={idUsuario};
         List<String[]> datos=metodo.ejecutaSP("sp_selectCursos",parametros);
         if(datos.isEmpty()){
@@ -33,18 +36,28 @@ public class CriteriosValoracion {
             for(String[] dato:datos){
                 respuesta[0]+="<tr>";
                 if(dato[2].equals("CU")){
-                    if(dato[9]!=null){
-                        if(dato[9].equals("V")){
-                            horas+=Integer.parseInt(dato[7]);
-                        }
+                    if(dato[10]!=null)
+                    {
+                        if(dato[10].equals("V"))
+                        {horasD+=Integer.parseInt(dato[7]);}
+                    }
+                    if(dato[9]!=null)
+                    {
+                        if(dato[9].equals("V"))
+                        {horas+=Integer.parseInt(dato[7]);}
                     }
                     //System.out.println(horas);
                     respuesta[0]+="<td>Curso de actualización</td>"; 
                 }else if(dato[2].equals("CE")){
-                    if(dato[9]!=null){
-                        if(dato[9].equals("V")){
-                        puntaje=10;
-                        }
+                    if(dato[10]!=null)
+                    {
+                        if(dato[10].equals("V"))
+                        {puntajeD=10;}
+                    }
+                    if(dato[9]!=null)
+                    {
+                        if(dato[9].equals("V"))
+                        {puntaje=10;}
                     }
                     respuesta[0]+="<td>Certificación</td>"; 
                 }
@@ -58,8 +71,12 @@ public class CriteriosValoracion {
                 respuesta[0]+="<td>"+dato[7]+"</td>";
                 respuesta[0]+="<td>"+dato[8]+"</td>";
                 respuesta[0]+="<td>";
+                if (idPermiso.equals("6"))
+                {valido = dato[10];}
+                else
+                {valido = dato[9];}
                 if(vistaAdmin){
-                    if(dato[9]==null){
+                    if(valido==null){
                         respuesta[0]+="<button type='button' class='btn btn-sm' title='Aprobar' onclick='aprobarCurso("+dato[0]+")'>";
                         respuesta[0]+="<span class='glyphicon glyphicon-ok completo'></span>";
                         respuesta[0]+="</button>";
@@ -68,7 +85,7 @@ public class CriteriosValoracion {
                         respuesta[0]+="</button>";
                         respuesta[0]+="<span class='glyphicon glyphicon-exclamation-sign incompleto' title='Sección incompleta'></span>";
                     }else{
-                        if(dato[9].equals("V")){
+                        if(valido.equals("V")){
                             respuesta[0]+="<span class='glyphicon glyphicon-ok completo' title='Aprobado'></span>";
                         }else{
                             respuesta[0]+="<span class='glyphicon glyphicon-remove incompleto' title='No cumple con la evidencia'></span>";
@@ -90,19 +107,32 @@ public class CriteriosValoracion {
         }else if(horas>=200){
             puntaje+=60;
         }
+        
+        if(horasD>=120 && horasD<=160){
+            puntajeD+=40;
+        }else if(horasD>=161 && horasD<=199){
+            puntajeD+=50;
+        }else if(horasD>=200){
+            puntajeD+=60;
+        }
+       
         respuesta[1]=""+puntaje;
+        respuesta[2]=""+puntajeD;
         return respuesta;
     }
-    public String[] getFilasAportaciones(String idUsuario,boolean vistaAdmin){   
+    public String[] getFilasAportaciones(String idUsuario,boolean vistaAdmin, String idPermiso){   
         String respuesta;
-        String puntaje;
-        String[] retorno={"","0"};
+        String puntaje, puntajeD;
+        String valido;
+        String[] retorno={"","0","0"};
         String[] parametros={idUsuario};
         int validos=0;
+        int validosD=0;
         List<String[]> datos=metodo.ejecutaSP("sp_consultaAportaciones",parametros);
         if(datos.isEmpty()){
             respuesta="<tr><td colspan='5'>Sin información</td></tr>";
-            puntaje=null;
+            puntaje="0";
+            puntajeD="0";
         }else{
             respuesta="";
             for(String[] dato:datos){
@@ -116,8 +146,23 @@ public class CriteriosValoracion {
                 respuesta+="<td>"+dato[6]+"</td>";
                 respuesta+="<td>"+dato[7]+"</td>";
                 respuesta+="<td>";
+                if(dato[9]!=null)
+                {    
+                    if(dato[9].equals("V"))
+                    {validosD++;}
+                }
+                if(dato[8]!=null)
+                {    
+                    if(dato[8].equals("V"))
+                    {validos++;}
+                }
+               
+                if (idPermiso.equals("6"))
+                {valido = dato[9];}
+                else
+                {valido = dato[8];}
                 if(vistaAdmin){
-                    if(dato[8]==null){
+                    if(valido==null){
                         respuesta+="<button type='button' class='btn btn-sm' title='Aprobar' onclick='aprobarAportacion("+dato[0]+")'>";
                         respuesta+="<span class='glyphicon glyphicon-ok completo'></span>";
                         respuesta+="</button>";
@@ -126,9 +171,8 @@ public class CriteriosValoracion {
                         respuesta+="</button>";
                         respuesta+="<span class='glyphicon glyphicon-exclamation-sign incompleto' title='Sección incompleta'></span>";
                     }else{
-                        if(dato[8].equals("V")){
+                        if(valido.equals("V")){
                             respuesta+="<span class='glyphicon glyphicon-ok completo' title='Aprobado'></span>";
-                            validos++;
                         }else{
                             respuesta+="<span class='glyphicon glyphicon-remove incompleto' title='No cumple con la evidencia'></span>";
                         }
@@ -161,21 +205,45 @@ public class CriteriosValoracion {
                     puntaje="130";
                     break;                
             }
+ 
+            switch(validosD){
+                case 0:
+                    puntajeD="0";
+                    break;
+                case 1:
+                    puntajeD="30";
+                    break;
+                case 2:
+                    puntajeD="55";
+                    break;
+                case 3:
+                    puntajeD="80";
+                    break;
+                case 4:
+                    puntajeD="105";
+                    break;
+                default:
+                    puntajeD="130";
+                    break;                
+            }
         }
         retorno[0]=respuesta;
         retorno[1]=puntaje;
+        retorno[2]=puntajeD;
         return retorno;
     }
-    public String[] getFilasParticipaciones(String idUsuario,boolean vistaAdmin){   
-        String[] retorno={"","0"};
+    public String[] getFilasParticipaciones(String idUsuario,boolean vistaAdmin, String idPermiso){   
+        String[] retorno={"","0","0"};
         String respuesta;
-        String puntaje;
+        String puntaje, valido, puntajeD;
         String[] parametros={idUsuario};
         List<String[]> datos=metodo.ejecutaSP("sp_consultaParticipaciones",parametros);
         int validos=0;
+        int validosD=0;
         if(datos.isEmpty()){
             respuesta="<tr><td colspan='5'>Sin información</td></tr>";
             puntaje="0";
+            puntajeD="0";
         }else{
             respuesta="";
             for(String[] dato:datos){
@@ -189,8 +257,23 @@ public class CriteriosValoracion {
                 respuesta+="<td>"+dato[6]+"</td>";
                 respuesta+="<td>"+dato[7]+"</td>";
                 respuesta+="<td>";
+                if(dato[9]!=null)
+                {    
+                    if(dato[9].equals("V"))
+                    {validosD++;}
+                }
+                if(dato[8]!=null)
+                {    
+                    if(dato[8].equals("V"))
+                    {validos++;}
+                }
+                 
+                if (idPermiso.equals("6"))
+                {valido = dato[9];}
+                else
+                {valido = dato[8];}                
                 if(vistaAdmin){
-                    if(dato[8]==null){
+                    if(valido==null){
                         respuesta+="<button type='button' class='btn btn-sm' title='Aprobar' onclick='aprobarParticipacion("+dato[0]+")'>";
                         respuesta+="<span class='glyphicon glyphicon-ok completo'></span>";
                         respuesta+="</button>";
@@ -199,9 +282,8 @@ public class CriteriosValoracion {
                         respuesta+="</button>";
                         respuesta+="<span class='glyphicon glyphicon-exclamation-sign incompleto' title='Sección incompleta'></span>";
                     }else{
-                        if(dato[8].equals("V")){
+                        if(valido.equals("V")){
                             respuesta+="<span class='glyphicon glyphicon-ok completo' title='Aprobado'></span>";
-                            validos++;
                         }else{
                             respuesta+="<span class='glyphicon glyphicon-remove incompleto' title='No cumple con la evidencia'></span>";
                         }
@@ -234,21 +316,45 @@ public class CriteriosValoracion {
                     puntaje="130";
                     break;                
             }
+            
+            switch(validosD){
+                case 0:
+                    puntajeD="0";
+                    break;
+                case 1:
+                    puntajeD="30";
+                    break;
+                case 2:
+                    puntajeD="55";
+                    break;
+                case 3:
+                    puntajeD="80";
+                    break;
+                case 4:
+                    puntajeD="105";
+                    break;
+                default:
+                    puntajeD="130";
+                    break;                
+            }            
         }
         retorno[0]=respuesta;
         retorno[1]=puntaje;
+        retorno[2]=puntajeD;
         return retorno;
     }
-    public String[] getFilasTutorias(String idUsuario,boolean vistaAdmin){   
-        String respuesta;
-        String[] retorno={"","0"};
-        String puntaje="0";
+    public String[] getFilasTutorias(String idUsuario,boolean vistaAdmin, String idPermiso){   
+        String respuesta, valido;
+        String[] retorno={"","0","0"};
+        String puntaje="0", puntajeD="0";
         String[] parametros={idUsuario};
         List<String[]> datos=metodo.ejecutaSP("sp_selectTutorias",parametros);
         int validos=0;
+        int validosD=0;
         if(datos.isEmpty()){
             respuesta="<tr><td colspan='3'>Sin información</td></tr>";
             puntaje="0";
+            puntajeD="0";
         }else{
             respuesta="";
             for(String[] dato:datos){
@@ -260,8 +366,23 @@ public class CriteriosValoracion {
                 }
                 respuesta+="<td>"+dato[4]+"</td>";
                 respuesta+="<td>";
+                if(dato[6]!=null)
+                {    
+                    if(dato[6].equals("V"))
+                    {validosD++;}
+                }
+                if(dato[5]!=null)
+                {    
+                    if(dato[5].equals("V"))                
+                    {validos++;}
+                }
+                
+                if (idPermiso.equals("6"))
+                {valido = dato[6];}
+                else
+                {valido = dato[5];}                 
                 if(vistaAdmin){
-                    if(dato[5]==null){
+                    if(valido==null){
                         respuesta+="<button type='button' class='btn btn-sm' title='Aprobar' onclick='aprobarTutoria("+dato[0]+")'>";
                         respuesta+="<span class='glyphicon glyphicon-ok completo'></span>";
                         respuesta+="</button>";
@@ -270,9 +391,8 @@ public class CriteriosValoracion {
                         respuesta+="</button>";
                         respuesta+="<span class='glyphicon glyphicon-exclamation-sign incompleto' title='Sección incompleta'></span>";
                     }else{
-                        if(dato[5].equals("V")){
+                        if(valido.equals("V")){
                             respuesta+="<span class='glyphicon glyphicon-ok completo' title='Aprobado'></span>";
-                            validos++;
                         }else{
                             respuesta+="<span class='glyphicon glyphicon-remove incompleto' title='No cumple con la evidencia'></span>";
                         }
@@ -292,21 +412,32 @@ public class CriteriosValoracion {
             }else if(validos>1){
                 puntaje="70";
             }
+            
+            if(validosD==0){
+                puntajeD="0";
+            }if(validosD==1){
+                puntajeD="35";
+            }else if(validosD>1){
+                puntajeD="70";
+            }
         }
         retorno[0]=respuesta;
         retorno[1]=puntaje;
+        retorno[2]=puntajeD;
         return retorno;
     }
-    public String[] getFilasPublicaciones(String idUsuario,boolean vistaAdmin){   
-        String respuesta;
-        String puntaje="0";
-        String[] retorno={"","0"};
+    public String[] getFilasPublicaciones(String idUsuario,boolean vistaAdmin, String idPermiso){   
+        String respuesta, valido;
+        String puntaje="0", puntajeD="0";
+        String[] retorno={"","0","0"};
         String[] parametros={idUsuario};
         int validos=0;
+        int validosD=0;
         List<String[]> datos=metodo.ejecutaSP("sp_selectPublicaciones",parametros);
         if(datos.isEmpty()){
             respuesta="<tr><td colspan='5'>Sin información</td></tr>";
             puntaje="0";
+            puntajeD="0";
         }else{
             respuesta="";
             for(String[] dato:datos){
@@ -316,8 +447,23 @@ public class CriteriosValoracion {
                 respuesta+="<td>"+fecha.formatoImprimir(dato[4])+"</td>"; 
                 respuesta+="<td>"+dato[5]+"</td>";
                 respuesta+="<td>";
+                if(dato[7]!=null)
+                {    
+                    if(dato[7].equals("V"))
+                    {validosD++;}
+                }
+                if(dato[6]!=null)
+                {    
+                    if(dato[6].equals("V"))
+                    {validos++;} 
+                }
+                
+                if (idPermiso.equals("6"))
+                {valido = dato[7];}
+                else
+                {valido = dato[6];}                  
                 if(vistaAdmin){
-                    if(dato[6]==null){
+                    if(valido==null){
                         respuesta+="<button type='button' class='btn btn-sm' title='Aprobar' onclick='aprobarPublicacion("+dato[0]+")'>";
                         respuesta+="<span class='glyphicon glyphicon-ok completo'></span>";
                         respuesta+="</button>";
@@ -326,9 +472,8 @@ public class CriteriosValoracion {
                         respuesta+="</button>";
                         respuesta+="<span class='glyphicon glyphicon-exclamation-sign incompleto' title='Sección incompleta'></span>";
                     }else{
-                        if(dato[6].equals("V")){
+                        if(valido.equals("V")){
                             respuesta+="<span class='glyphicon glyphicon-ok completo' title='Aprobado'></span>";
-                            validos++;
                         }else{
                             respuesta+="<span class='glyphicon glyphicon-remove incompleto' title='No cumple con la evidencia'></span>";
                         }
@@ -348,21 +493,32 @@ public class CriteriosValoracion {
             }else if(validos>1){
                 puntaje="50";
             }
+            
+            if(validosD==0){
+                puntajeD="0";
+            }else if(validosD==1){
+                puntajeD="25";
+            }else if(validosD>1){
+                puntajeD="50";
+            }
         }
         retorno[0]=respuesta;
         retorno[1]=puntaje;
+        retorno[2]=puntajeD;
         return retorno;
     }
-    public String[] getFilasResultados(String idUsuario,boolean vistaAdmin){   
-        String respuesta;
-        String puntaje="0";
-        String[] retorno=new String[2];
+    public String[] getFilasResultados(String idUsuario,boolean vistaAdmin, String idPermiso){   
+        String respuesta, valido;
+        String puntaje="0", puntajeD="0";
+        String[] retorno=new String[3];
         String[] parametros={idUsuario};
         int validos=0;
+        int validosD=0;
         List<String[]> datos=metodo.ejecutaSP("sp_consultaResultados",parametros);
         if(datos.isEmpty()){
             respuesta="<tr><td colspan='4'>Sin información</td></tr>";
             puntaje="0";
+            puntajeD="0";
         }else{
             respuesta="";
             for(String[] dato:datos){                
@@ -375,8 +531,23 @@ public class CriteriosValoracion {
                 }
                 respuesta+="<td>"+dato[6]+"</td>";
                 respuesta+="<td>";
+                if(dato[8]!=null)
+                {    
+                    if(dato[8].equals("V"))
+                    {validosD++;}
+                }
+                if(dato[7]!=null)
+                {    
+                    if(dato[7].equals("V"))
+                    {validos++;}
+                }
+                
+                if (idPermiso.equals("6"))
+                {valido = dato[8];}
+                else
+                {valido = dato[7];}                 
                 if(vistaAdmin){
-                    if(dato[7]==null){
+                    if(valido==null){
                         respuesta+="<button type='button' class='btn btn-sm' title='Aprobar' onclick='aprobarResultado("+dato[0]+")'>";
                         respuesta+="<span class='glyphicon glyphicon-ok completo'></span>";
                         respuesta+="</button>";
@@ -385,9 +556,8 @@ public class CriteriosValoracion {
                         respuesta+="</button>";
                         respuesta+="<span class='glyphicon glyphicon-exclamation-sign incompleto' title='Sección incompleta'></span>";
                     }else{
-                        if(dato[7].equals("V")){
+                        if(valido.equals("V")){
                             respuesta+="<span class='glyphicon glyphicon-ok completo' title='Aprobado'></span>";
-                            validos++;
                         }else{
                             respuesta+="<span class='glyphicon glyphicon-remove incompleto' title='No cumple con la evidencia'></span>";
                         }
@@ -414,12 +584,28 @@ public class CriteriosValoracion {
             }else if(aux>10){
                 puntaje="150";
             }
+            
+            aux=validosD;
+            if(aux==1 || aux==2){
+                puntajeD="30";
+            }else if(aux==3 || aux==4){
+                puntajeD="55";
+            }else if(aux==5 || aux==6){
+                puntajeD="80";
+            }else if(aux==7 || aux==8){
+                puntajeD="105";
+            }else if(aux==9 || aux==10){
+                puntajeD="130";
+            }else if(aux>10){
+                puntajeD="150";
+            }
         }
         retorno[0]=respuesta;
         retorno[1]=puntaje;
+        retorno[2]=puntajeD;
         return retorno;
     }
-    public String[][] consultaPuntajes(String idUsuario, String idPermiso){
+    public String[][] consultaPuntajes(String idUsuario){
         String[][] respuesta=new String[15][8];
         int c,d;
         /*for(c=0;c<15;c++){
@@ -428,8 +614,22 @@ public class CriteriosValoracion {
             }
             respuesta[c][4]="0";
         }*/
-        String[] parametros={idUsuario,idPermiso};
+        String[] parametros={idUsuario};
         List<String[]> datos=metodo.ejecutaSP("sp_consultaConstanciasProceso",parametros);
+        if(!datos.isEmpty()){             
+            for(String[] dato:datos){
+                c=Integer.parseInt(dato[2]);
+                respuesta[c-1]=dato;
+            }            
+        }        
+        return respuesta;
+    }
+    public String[][] consultaPuntajesDictaminador(String idUsuario){
+        String[][] respuesta=new String[15][8];
+        int c;
+
+        String[] parametros={idUsuario};
+        List<String[]> datos=metodo.ejecutaSP("sp_consultaConstanciasProcesoDictaminador",parametros);
         if(!datos.isEmpty()){             
             for(String[] dato:datos){
                 c=Integer.parseInt(dato[2]);

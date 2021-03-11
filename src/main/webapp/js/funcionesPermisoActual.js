@@ -11,3 +11,13 @@ function establecerPermisoActual(idPermiso){
         respuestaIdPermiso = respuesta;
     });
 }
+
+function consultarPermisoActual(){
+    
+    var idPermiso = null;
+    
+    $.get("ConsultaSesionPermiso", function(respuesta){
+        idPermiso = respuesta;
+    });
+    return idPermiso;
+}

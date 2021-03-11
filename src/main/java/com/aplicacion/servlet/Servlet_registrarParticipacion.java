@@ -82,8 +82,9 @@ public class Servlet_registrarParticipacion extends HttpServlet {
         try {
             Fecha fecha=new Fecha();
             HttpSession session= (HttpSession) request.getSession();
-            String idUsuario,rfc;
+            String idUsuario,rfc, idPermiso;
             boolean vistaAdmin;
+            idPermiso = session.getAttribute("permisoActual").toString();
             if(session.getAttribute("rol").toString().equals("D")){
                 idUsuario=session.getAttribute("idUsuario").toString();
                 rfc=session.getAttribute("rfc").toString();
@@ -106,8 +107,8 @@ public class Servlet_registrarParticipacion extends HttpServlet {
                 datos=metodo.ejecutaSP("sp_insertParticipaciones",parametros);            
                 if(!datos.isEmpty()){
                     if(datos.get(0)[0].equals("ok")){
-                        String[] info=new CriteriosValoracion().getFilasParticipaciones(idUsuario,vistaAdmin);
-                        out.print(info[0]+"||"+info[1]);                    
+                        String[] info=new CriteriosValoracion().getFilasParticipaciones(idUsuario,vistaAdmin,idPermiso);
+                        out.print(info[0]+"||"+info[1]+"||"+info[2]);                    
                     }else{
                         out.print(datos.get(0)[0]);
                     }
@@ -116,11 +117,12 @@ public class Servlet_registrarParticipacion extends HttpServlet {
                 }
             }else{
                 String id=request.getParameter("id");
-                String[] parametros={id};
+                String[] parametrosDelete={id};
+                String[] parametros={id,idPermiso};                
                 List<String[]> datos=null;    
                 String idAccion=request.getParameter("k");
                 if(idAccion.equals("B")){
-                        datos=metodo.ejecutaSP("sp_deleteParticipaciones",parametros);
+                        datos=metodo.ejecutaSP("sp_deleteParticipaciones",parametrosDelete);
                 }else if(idAccion.equals("A")){
                         datos=metodo.ejecutaSP("sp_aprobarParticipacion",parametros); 
                 }else if(idAccion.equals("R")){
@@ -129,8 +131,8 @@ public class Servlet_registrarParticipacion extends HttpServlet {
                           
                 if(!datos.isEmpty()){
                     if(datos.get(0)[0].equals("ok")){
-                        String[] info=new CriteriosValoracion().getFilasParticipaciones(idUsuario,vistaAdmin);
-                        out.print(info[0]+"||"+info[1]);                     
+                        String[] info=new CriteriosValoracion().getFilasParticipaciones(idUsuario,vistaAdmin,idPermiso);
+                        out.print(info[0]+"||"+info[1]+"||"+info[2]);                     
                     }
                 }else{
                     out.print("Error al eliminar la información, intente nuevamente");

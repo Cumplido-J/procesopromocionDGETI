@@ -106,7 +106,7 @@ public class Servlet_registrarCriterio extends HttpServlet {
                     if(request.getParameter("cbConstancia")!=null){
                         idPuntaje="0";
                     }else{
-                        idPuntaje="-1";
+                        idPuntaje="55";
                     }
                 }  
                 System.out.println("puntaje="+idPuntaje);
