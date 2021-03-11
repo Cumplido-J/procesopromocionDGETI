@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.13.0.final using JasperReports Library version 6.13.0-46ada4d1be8f3c5985fd0b6146f3ed44caed6f05  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="listado_estatus_convocatoria" pageWidth="792" pageHeight="612" orientation="Landscape" whenNoDataType="NoDataSection" columnWidth="752" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isSummaryNewPage="true" isSummaryWithPageHeaderAndFooter="true" uuid="486a6239-166b-4fe7-88fe-718d95200644">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="bdpromocion"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="net.sf.jasperreports.export.xls.remove.empty.space.between.rows" value="true"/>
+	<property name="net.sf.jasperreports.export.xls.remove.empty.space.between.columns" value="true"/>
+	<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+	<property name="net.sf.jasperreports.export.xls.detect.cell.type" value="true"/>
+	<property name="net.sf.jasperreports.export.xls.ignore.graphics" value="false"/>
+	<property name="net.sf.jasperreports.page.break.no.pagination" value="apply"/>
+	<property name="net.sf.jasperreports.export.xls.freeze.row" value="3"/>
+	<property name="net.sf.jasperreports.print.keep.full.text" value="true"/>
+	<property name="net.sf.jasperreports.exports.xls.font.size.fix.enabled" value="false"/>
+	<queryString>
+		<![CDATA[select catentidades.entidad, catplanteles.cct,
+ catplanteles.plantel,  IF(convocatoria.estatus 	is not null,convocatoria.estatus,"SIN INFORMACION") as estatus from catplanteles 
+left  join convocatoria on convocatoria.idPlantel = catplanteles.id and convocatoria.idPrograma=1
+inner join catentidades on catentidades.id=catplanteles.idEntidad
+ where catplanteles.idsubsistema=1  order by catentidades.entidad,catplanteles.id asc]]>
+	</queryString>
+	<field name="entidad" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="entidad"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="catentidades"/>
+	</field>
+	<field name="cct" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="cct"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="catplanteles"/>
+	</field>
+	<field name="plantel" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="plantel"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="catplanteles"/>
+	</field>
+	<field name="estatus" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="estatus"/>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="55" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="-17" width="180" height="14" uuid="412dc681-f516-4b72-b817-d9158570e974"/>
+				<text><![CDATA[ENTIDAD]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="180" y="-17" width="200" height="14" uuid="f4a5a2aa-1d98-460a-99b4-bc3c0e4d33e7"/>
+				<text><![CDATA[CCT]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="380" y="-17" width="200" height="14" uuid="189f3e66-279c-4b6a-9a2e-47600002c0c4"/>
+				<text><![CDATA[PLANTEL]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="580" y="-17" width="170" height="14" uuid="9f4831e4-0568-492c-8756-28db960c66c2"/>
+				<text><![CDATA[ESTATUS]]></text>
+			</staticText>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="16" splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="26" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="2" width="180" height="20" uuid="76448272-0b60-4f0f-b905-1640dd031501"/>
+				<textFieldExpression><![CDATA[$F{entidad}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="180" y="2" width="200" height="20" uuid="3857b2f6-2dca-4389-a114-e55086efd3a8"/>
+				<textFieldExpression><![CDATA[$F{cct}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="380" y="2" width="200" height="20" uuid="d8d3b291-51b9-4f98-a45a-9903619af9be"/>
+				<textFieldExpression><![CDATA[$F{plantel}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="580" y="2" width="170" height="20" uuid="ad027753-541d-4d9f-a632-65928fbb3b5c"/>
+				<textFieldExpression><![CDATA[$F{estatus}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

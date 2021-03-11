@@ -90,19 +90,26 @@ public class Servlet_cbRegistroCriterios extends HttpServlet {
             docente.setRfc(rfc);
             docente.consultaInfoAspirante();             
             docente.consultaDocumentos();
-            String[][] puntajes=cv.consultaPuntajes(idUsuario, idPermiso); 
+            String[][] puntajes=cv.consultaPuntajes(idUsuario); 
             String[] puntajeEncuestas=cv.consultaPuntajeEncuestas(rfc);
             request.setAttribute("docente", docente);
             request.setAttribute("criterios", criterios);
             request.setAttribute("puntajes", puntajes);
             request.setAttribute("puntajeEncuestas", puntajeEncuestas);            
-            request.setAttribute("cursos", cv.getFilasCursos(idUsuario,vistaAdmin));
-            request.setAttribute("aportaciones", cv.getFilasAportaciones(idUsuario,vistaAdmin));
-            request.setAttribute("participaciones", cv.getFilasParticipaciones(idUsuario,vistaAdmin));
-            request.setAttribute("tutorias", cv.getFilasTutorias(idUsuario,vistaAdmin));
-            request.setAttribute("publicaciones", cv.getFilasPublicaciones(idUsuario,vistaAdmin));
-            request.setAttribute("resultados", cv.getFilasResultados(idUsuario,vistaAdmin));
+            request.setAttribute("cursos", cv.getFilasCursos(idUsuario,vistaAdmin, idPermiso));
+            request.setAttribute("aportaciones", cv.getFilasAportaciones(idUsuario,vistaAdmin, idPermiso));
+            request.setAttribute("participaciones", cv.getFilasParticipaciones(idUsuario,vistaAdmin, idPermiso));
+            request.setAttribute("tutorias", cv.getFilasTutorias(idUsuario,vistaAdmin, idPermiso));
+            request.setAttribute("publicaciones", cv.getFilasPublicaciones(idUsuario,vistaAdmin, idPermiso));
+            request.setAttribute("resultados", cv.getFilasResultados(idUsuario,vistaAdmin, idPermiso));
             request.setAttribute("vistaAdmin", vistaAdmin);
+            
+            if (idPermiso.equals("6"))
+            {
+                String[][] puntajesDictaminador=cv.consultaPuntajesDictaminador(idUsuario);
+                request.setAttribute("puntajesDictaminador", puntajesDictaminador);
+            }
+            
             ServletContext sc = getServletContext();
             RequestDispatcher rd;
             if(vistaAdmin){

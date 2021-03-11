@@ -6,6 +6,7 @@
 package com.convocatoria.reportes;
 
 import herramientas.RutaConfig;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -26,6 +27,12 @@ import net.sf.jasperreports.engine.JasperExportManager;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.*;
+import net.sf.jasperreports.engine.export.JRXlsExporter;
+import net.sf.jasperreports.engine.util.JRLoader;
+import net.sf.jasperreports.engine.util.JRSaver;
+import net.sf.jasperreports.export.SimpleExporterInput;
+import net.sf.jasperreports.export.SimpleOutputStreamExporterOutput;
+import net.sf.jasperreports.export.SimpleXlsReportConfiguration;
 
 /*
 import net.sf.jasperreports.engine.JRException;
@@ -100,6 +107,38 @@ public class ReporteConvocatoria {
         }
         //return path_pdfs + "404.pdf";
         return "404.pdf";
+    }
+    
+    
+       public File xls() throws JRException {
+        System.out.println("Iniciando reporte");
+        conn = conector();
+        String jasperFileJrxml = pathr + "listado_estatus_convocatoria.jrxml";
+        String jasperFile = pathr + "listado_estatus_convocatoria.jrprint";
+        JasperReport report = JasperCompileManager.compileReport(jasperFileJrxml);
+        HashMap<String, Object> params = new HashMap<String, Object>();
+        JasperPrint myJRprintReportObject = JasperFillManager.fillReport(report, params, conn);
+        JRSaver.saveObject(myJRprintReportObject, jasperFile);
+        long start = System.currentTimeMillis();
+        File sourceFile = new File(jasperFile);
+
+        JasperPrint jasperPrint = (JasperPrint) JRLoader.loadObject(sourceFile);
+
+        File destFile = new File(sourceFile.getParent(), jasperPrint.getName() + ".xls");
+
+        JRXlsExporter exporter = new JRXlsExporter();
+
+        exporter.setExporterInput(new SimpleExporterInput(jasperPrint));
+        exporter.setExporterOutput(new SimpleOutputStreamExporterOutput(destFile));
+        SimpleXlsReportConfiguration configuration = new SimpleXlsReportConfiguration();
+        configuration.setOnePagePerSheet(false);
+        exporter.setConfiguration(configuration);
+
+        exporter.exportReport();
+
+        System.err.println("XLS creation time : " + (System.currentTimeMillis() - start));
+        return destFile;
+
     }
 
 }

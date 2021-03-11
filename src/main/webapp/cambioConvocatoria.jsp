@@ -80,46 +80,46 @@
                     </div> 
                     <div class="form-group col-md-3 datepicker-group">
                         <label class="control-label">Publicación de convocatoria:<span class="text-danger" title="Campo obligatorio">*</span></label>
-                        <input type="text" class="form-control input-sm calendario" id="publicacion" name="publicacion" onChange="validaFecha('publicacion','alertaPublicacion')" value="${fecha.formatoImprimir(informacion[5])}" required>
+                        <input type="text" class="form-control input-sm disabled" id="publicacion" name="publicacion" onChange="validaFecha('publicacion','alertaPublicacion')" value="${fecha.formatoImprimir(informacion[5])}" required>
                         <label class="error hidden" id="alertaPublicacion">Ingrese una fecha válida</label>
                     </div>
                 </div>
                 <div class="row">
                     <div class="form-group col-md-3 datepicker-group">                        
                         <label class="control-label">Inicio registro:<span class="text-danger" title="Campo obligatorio">*</span></label>
-                        <input type="text" class="form-control input-sm calendario" id="inicioRegistro" name="inicioRegistro" onChange="validaFecha('inicioRegistro','alertaInicioR')" value="${fecha.formatoImprimir(informacion[6])}" required>
+                        <input type="text" class="form-control input-sm disabled" id="inicioRegistro" name="inicioRegistro" onChange="validaFecha('inicioRegistro','alertaInicioR')" value="${fecha.formatoImprimir(informacion[6])}" required>
                         <label class="error hidden" id="alertaInicioR">Ingrese una fecha válida</label>
                     </div>
                     <div class="form-group col-md-3 datepicker-group">
                         <label class="control-label">Término registro:<span class="text-danger" title="Campo obligatorio">*</span></label>
-                        <input type="text" class="form-control input-sm calendario" id="finRegistro" name="finRegistro" onChange="validaFecha('finRegistro','alertaFinR')" value="${fecha.formatoImprimir(informacion[7])}" required>
+                        <input type="text" class="form-control input-sm disabled" id="finRegistro" name="finRegistro" onChange="validaFecha('finRegistro','alertaFinR')" value="${fecha.formatoImprimir(informacion[7])}" required>
                         <label class="error hidden" id="alertaFinR">Ingrese una fecha válida</label>
                     </div>
                     <div class="form-group col-md-3 datepicker-group">                        
                         <label class="control-label">Inicio valoración:<span class="text-danger" title="Campo obligatorio">*</span></label>
-                        <input type="text" class="form-control input-sm calendario" id="inicioValoracion" name="inicioValoracion" onChange="validaFecha('inicioValoracion','alertaInicioV')" value="${fecha.formatoImprimir(informacion[8])}" required>
+                        <input type="text" class="form-control input-sm disabled" id="inicioValoracion" name="inicioValoracion" onChange="validaFecha('inicioValoracion','alertaInicioV')" value="${fecha.formatoImprimir(informacion[8])}" required>
                         <label class="error hidden" id="alertaInicioV">Ingrese una fecha válida</label>
                     </div>
                     <div class="form-group col-md-3 datepicker-group">
                         <label class="control-label">Término valoración:<span class="text-danger" title="Campo obligatorio">*</span></label>
-                        <input type="text" class="form-control input-sm calendario" id="finValoracion" name="finValoracion" onChange="validaFecha('finValoracion','alertaFinV')"  value="${fecha.formatoImprimir(informacion[9])}" required>
+                        <input type="text" class="form-control input-sm disabled" id="finValoracion" name="finValoracion" onChange="validaFecha('finValoracion','alertaFinV')"  value="${fecha.formatoImprimir(informacion[9])}" required>
                         <label class="error hidden" id="alertaFinV">Ingrese una fecha válida</label>
                     </div>
                 </div>                
                 <div class="row">
                     <div class="form-group col-md-3 datepicker-group">                        
                         <label class="control-label">Inicio dictaminación:<span class="text-danger" title="Campo obligatorio">*</span></label>
-                        <input type="text" class="form-control input-sm calendario" id="inicioDictaminacion" name="inicioDictaminacion" onChange="validaFecha('inicioDictaminacion','alertaInicioD')"  value="${fecha.formatoImprimir(informacion[10])}" required>
+                        <input type="text" class="form-control input-sm disabled" id="inicioDictaminacion" name="inicioDictaminacion" onChange="validaFecha('inicioDictaminacion','alertaInicioD')"  value="${fecha.formatoImprimir(informacion[10])}" required>
                         <label class="error hidden" id="alertaInicioD">Ingrese una fecha válida</label>
                     </div>
                     <div class="form-group col-md-3 datepicker-group">
                         <label class="control-label">Término dictaminación:<span class="text-danger" title="Campo obligatorio">*</span></label>
-                        <input type="text" class="form-control input-sm calendario" id="finDictaminacion" name="finDictaminacion" onChange="validaFecha('finDictaminacion','alertaFinD')" value="${fecha.formatoImprimir(informacion[11])}"  required>
+                        <input type="text" class="form-control input-sm disabled" id="finDictaminacion" name="finDictaminacion" onChange="validaFecha('finDictaminacion','alertaFinD')" value="${fecha.formatoImprimir(informacion[11])}"  required>
                         <label class="error hidden" id="alertaFinD">Ingrese una fecha válida</label>
                     </div>     
                     <div class="form-group col-md-3 datepicker-group">
                         <label class="control-label">Publicación de resultados:<span class="text-danger" title="Campo obligatorio">*</span></label>
-                        <input type="text" class="form-control input-sm calendario" id="resultados" name="resultados" onChange="validaFecha('resultados','alertaResultados')"  value="${fecha.formatoImprimir(informacion[12])}"  required>
+                        <input type="text" class="form-control input-sm disabled" id="resultados" name="resultados" onChange="validaFecha('resultados','alertaResultados')"  value="${fecha.formatoImprimir(informacion[12])}"  required>
                         <label class="error hidden" id="alertaResultados">Ingrese una fecha válida</label>
                     </div>
                     <div class="form-group col-md-3 datepicker-group">
