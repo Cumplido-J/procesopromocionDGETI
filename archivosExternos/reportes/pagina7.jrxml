@@ -237,7 +237,7 @@ GROUP BY conv.id]]>
 				<textElement textAlignment="Justified">
 					<font fontName="Montserrat" size="9"/>
 				</textElement>
-				<text><![CDATA[Para la aclaración de dudas o información adicional relacionada con este proceso de selección, el aspirante podrá dirigirse a la DGETI en la dirección de correo electrónico:  promoción.cambiodecategoria@dgeti.sems.gob.mx]]></text>
+				<text><![CDATA[Para la aclaración de dudas o información adicional relacionada con este proceso de selección, el aspirante podrá dirigirse a la DGETI en la dirección de correo electrónico:  promocion.cambiodecategoria@dgeti.sems.gob.mx]]></text>
 			</staticText>
 			<staticText>
 				<reportElement positionType="Float" x="0" y="221" width="571" height="22" uuid="11492142-c21a-41a5-a1b9-97ef72eeb6e9">
