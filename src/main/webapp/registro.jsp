@@ -998,33 +998,52 @@
                     <div class="modal-body">
                       <div class="row">
                         <div class="form-group col-md-6">
-                            <label class="control-label" for="tipoNombramiento">Clave presupuestal:</label>
-                            <input type="text" class="form-control input-sm" id="clave" name="clave" required /> 
-                        </div>    
-                        <div class="form-group col-md-6 datepicker-group">
+                          <label class="control-label" for="tipoNombramiento">Tipo de nombramiento:</label>
+                          <select class="form-control input-sm" id="tipoNombramiento" name="tipoNombramiento" required>                                    
+                            ${catalogo.desplegarOpcionesTipoNombramiento()}
+                          </select>                          
+                        </div>
+                          <div class="form-group col-md-6 datepicker-group">
                           <label class="control-label" for="fechaPlaza" style="font-size: 12px;">Fecha desde que ostenta la plaza:</label>
                           <input class="form-control input-sm fecha" id="fechaPlaza" name="fechaPlaza" type="text"  required>
                         </div>
                       </div>
                       <div class="row">  
                         <div class="form-group col-md-6">
-                          <label class="control-label" for="tipoNombramiento">Tipo de nombramiento:</label>
-                          <select class="form-control input-sm" id="tipoNombramiento" name="tipoNombramiento" required>                                    
-                            ${catalogo.desplegarOpcionesTipoNombramiento()}
+                            <label class="control-label" for="clvPresupUnidad">Clave Presupuestal (9 Dígitos):</label>
+                            <input type='hidden' id="valorClavePresupuestal" name="valorClavePresupuestal" value=''>
+                            <input type="text" class="form-control input-sm" id="clavePresupUnidad" name="clavePresupUnidad" required /> 
+                        </div>
+                        <div class="form-group col-md-6">
+                          <label class="control-label" for="clvPresupCategoria">Clave Presupuestal (Categoría):</label>
+                          <select class="form-control input-sm" id="categoriaPresupuestal" name="categoriaPresupuestal" onchange="cambioCategoriaPresupuestal()" required>
+                            ${catalogo.desplegarCategoriasPresupuestales()}
                           </select>                          
-                        </div> 
-                      <div class="form-group col-md-6">
-                        <label class="control-label" for="categoria">Categoría:</label>
-                        <select class="form-control input-sm" id="categoria" name="categoria" onchange="cambioCategoria()" required>
-                          ${catalogo.desplegarOpcionesCategorias()}
-                        </select>                          
+                        </div>
                       </div>
+                      <div class="row">  
+                        <div class="form-group col-md-6">
+                            <label class="control-label" for="clvPresupHoras">Clave Presupuestal (2 Dígitos Seguidos Por: .0):</label>
+                            <input type="text" class="form-control input-sm" id="clavePresupHoras" name="clavePresupHoras" required /> 
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label class="control-label" for="clvPresupPlaza">Clave Presupuestal (6 Dígitos):</label>
+                            <input type="text" class="form-control input-sm" id="clavePresupPlaza" name="clavePresupPlaza" required /> 
+                        </div>
+                      </div>
+                      <div class="row"> 
+                        <div class="form-group col-md-6">
+                          <label class="control-label" for="categoria">Categoría:</label>
+                          <select class="form-control input-sm" id="categoria" name="categoria" onchange="cambioCategoria()" required>
+                            ${catalogo.desplegarOpcionesCategorias()}
+                          </select>                          
+                        </div>
                       </div>
                       <div class="row"> 
                         <div class="form-group col-md-6">
                           <label class="control-label" for="jornada">Tipo de jornada:</label>
                           <select class="form-control input-sm" id="jornada" name="jornada" onChange="cambioJornada(this)" required>
-                              <option value="">-Seleccione-</option>
+                              ${catalogo.desplegarOpcionesJornada()}
                           </select>                          
                         </div>
                         <div class="form-group col-md-6 hidden" id="seccionHoras2">
