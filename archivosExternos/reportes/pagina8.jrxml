@@ -74,7 +74,7 @@ GROUP BY conv.id]]>
 				<text><![CDATA[Lo no previsto en la presente será resuelto por la DGETI, de acuerdo con su ámbito de competencia.]]></text>
 			</staticText>
 			<staticText>
-				<reportElement positionType="Float" x="1" y="112" width="571" height="29" uuid="0a9039e4-1a53-49ed-b551-09ccbfbdc79e">
+				<reportElement positionType="Float" x="1" y="122" width="571" height="29" uuid="0a9039e4-1a53-49ed-b551-09ccbfbdc79e">
 					<property name="com.jaspersoft.studio.unit.x" value="px"/>
 				</reportElement>
 				<textElement textAlignment="Center">
@@ -83,7 +83,7 @@ GROUP BY conv.id]]>
 				<text><![CDATA[RAFAEL SÁNCHEZ ANDRADE]]></text>
 			</staticText>
 			<staticText>
-				<reportElement positionType="Float" x="1" y="133" width="571" height="13" uuid="f0d1c652-3b3a-4d12-99f6-13deba46d0ff">
+				<reportElement positionType="Float" x="1" y="138" width="571" height="13" uuid="f0d1c652-3b3a-4d12-99f6-13deba46d0ff">
 					<property name="com.jaspersoft.studio.unit.x" value="px"/>
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
@@ -93,7 +93,7 @@ GROUP BY conv.id]]>
 				<text><![CDATA[DIRECTOR GENERAL]]></text>
 			</staticText>
 			<staticText>
-				<reportElement positionType="Float" x="0" y="121" width="571" height="29" uuid="4b5d0902-e554-42ae-857d-322f560ef585">
+				<reportElement positionType="Float" x="0" y="126" width="571" height="29" uuid="4b5d0902-e554-42ae-857d-322f560ef585">
 					<property name="com.jaspersoft.studio.unit.x" value="px"/>
 				</reportElement>
 				<textElement textAlignment="Center">
@@ -111,7 +111,7 @@ GROUP BY conv.id]]>
 				<textFieldExpression><![CDATA["Ciudad de México, a "+$F{publicacion} + "."]]></textFieldExpression>
 			</textField>
 			<image>
-				<reportElement x="224" y="49" width="145" height="84" uuid="2f87f997-ab9a-410c-ba50-48a06a5dd05b">
+				<reportElement x="215" y="49" width="145" height="84" uuid="2f87f997-ab9a-410c-ba50-48a06a5dd05b">
 					<printWhenExpression><![CDATA[!$F{estatus}.equals( "TEMPORAL" )]]></printWhenExpression>
 				</reportElement>
 				<imageExpression><![CDATA["firma.png"]]></imageExpression>
