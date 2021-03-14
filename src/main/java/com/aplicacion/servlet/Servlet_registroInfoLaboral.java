@@ -128,7 +128,9 @@ public class Servlet_registroInfoLaboral extends HttpServlet {
                 idCategoria=aux[0];
                 idJornada=aux[1];
                 horas=aux[2];
-                idTipoNombramiento=aux[3];
+                if(aux.length==4){
+                 idTipoNombramiento=aux[3];   
+                }
             }
             System.out.println("cat"+idCategoria);
             System.out.println("jor"+idJornada);

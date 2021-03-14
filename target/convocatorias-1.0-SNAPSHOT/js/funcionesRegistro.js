@@ -181,16 +181,36 @@ $(document).ready(function () {
             },
             'fechaRenuncia':{
                 required: "Campo requerido"
-            }
+            },
+            'clavePresupUnidad':{
+                required: "Campo requerido",
+                number:"Ingrese sólo números"
+            },
+            'categoriaPresupuestal':{
+                required: "Seleccione una opción"
+            },
+            'clavePresupHoras':{
+                required: "Campo requerido"                
+            },
+            'clavePresupPlaza':{
+                required: "Campo requerido",
+                number:"Ingrese sólo números"
+            }           
         },
         submitHandler:function(){
+            $("#categoria").removeAttr("disabled");
+            $("#jornada").removeAttr("disabled");                        
+            $("#valorClavePresupuestal").val($("#categoriaPresupuestal option:selected").attr("ClavePresupuestal"));
             $.ajax({
                 type:$('#formPlaza').attr("method"),
                 url:$('#formPlaza').attr("action"),
                 data:$('#formPlaza').serialize(),
                 beforeSend:function(){
+                    $("#categoria").removeAttr("disabled");
+                    $("#jornada").removeAttr("disabled");
                     $("#btnGuardarPlaza").val("Guardando...");
                     $("#btnGuardarPlaza").attr("disabled","disabled");
+                    $("#valorClavePresupuestal").val($("#categoriaPresupuestal option:selected").attr("ClavePresupuestal"));
                 },
                 complete:function(){
                    $("#btnGuardarPlaza").val("Guardar"); 
@@ -1020,10 +1040,21 @@ function cambioDocumento(elemento){
     }
 }
 function cambioCategoria() {
-    id=$("#categoria").val(); 
-    $.get("ConsultaCatalogos", {k: "9",i:id}, function(respuesta){
-        $("#jornada").html(respuesta);
-    });
+    //id=$("#categoria").val(); 
+    //$.get("ConsultaCatalogos", {k: "9",i:id}, function(respuesta){
+    //    $("#jornada").html(respuesta);
+    //});
+}
+function cambioCategoriaPresupuestal() {
+    var idCategoria=$("#categoriaPresupuestal option:selected").attr("idCategoriaPlazaCP");
+    var idJornada=$("#categoriaPresupuestal option:selected").attr("idJornadaCP");
+    $("#categoria").val(idCategoria);    
+    $("#categoria").val(idCategoria).select();
+    $("#jornada").val(idJornada);
+    $("#jornada").val(idJornada).select();    
+    cambioJornada(idJornada);
+    $("#categoria").attr("disabled","disabled");
+    $("#jornada").attr("disabled","disabled");
 }
 function cambioCategoriaAspira() {   
     var tipo=$("#categoriaAspira option:selected").attr("aux");
@@ -1237,6 +1268,15 @@ function abrirModalPlazas(){
 function cambioJornada(objeto){
     var jornada=objeto.value;
     if(jornada=="1"){
+        $("#seccionHoras2").removeClass("hidden");
+        $("#horas2").attr("required",true);
+    }else{
+        $("#seccionHoras2").addClass("hidden");
+        $("#horas2").removeAttr("required");
+    }
+}
+function cambioJornada(idJornada){
+    if(idJornada==="1"){
         $("#seccionHoras2").removeClass("hidden");
         $("#horas2").attr("required",true);
     }else{
