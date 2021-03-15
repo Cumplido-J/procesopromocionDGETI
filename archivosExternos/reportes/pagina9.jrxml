@@ -83,6 +83,9 @@ order by vacancia.idCategoria,vacancia.idJornada, vacancia.tipoVacancia asc ;]]>
 		<variable name="total" class="java.lang.Integer" calculation="Sum">
 			<variableExpression><![CDATA[$F{cantidadplazas}]]></variableExpression>
 		</variable>
+		<variable name="totaalVacanteReal" class="java.lang.Integer" calculation="Sum">
+			<variableExpression><![CDATA[new Integer(LEN($F{tipoVacancia})<=4 ? 1 :0)]]></variableExpression>
+		</variable>
 	</subDataset>
 	<parameter name="cc" class="java.lang.Integer"/>
 	<parameter name="cp" class="java.lang.Integer"/>
@@ -136,14 +139,20 @@ order by vacancia.idCategoria,vacancia.idJornada, vacancia.tipoVacancia asc ;]]>
 	<variable name="TotalCategorias" class="java.lang.Integer" calculation="Count">
 		<variableExpression><![CDATA[$F{categoria}]]></variableExpression>
 	</variable>
+	<variable name="totalReal" class="java.lang.Integer" calculation="Sum">
+		<variableExpression><![CDATA[new Integer(LEN($F{tipoVacancia})==4 ? 1 :0)]]></variableExpression>
+	</variable>
+	<variable name="totalCorrimiento" class="java.lang.Integer" calculation="Sum">
+		<variableExpression><![CDATA[new Integer(LEN($F{tipoVacancia})==19 ? 1 :0)]]></variableExpression>
+	</variable>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
 	<summary>
-		<band height="159">
+		<band height="241">
 			<property name="com.jaspersoft.studio.unit.height" value="px"/>
 			<componentElement>
-				<reportElement positionType="Float" x="0" y="61" width="569" height="90" uuid="c2d1c2f2-2aae-4606-9c4b-8ff514856397">
+				<reportElement positionType="Float" x="0" y="136" width="569" height="90" uuid="c2d1c2f2-2aae-4606-9c4b-8ff514856397">
 					<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.VerticalRowLayout"/>
 					<property name="com.jaspersoft.studio.table.style.table_header" value="Table_TH"/>
 					<property name="com.jaspersoft.studio.table.style.column_header" value="Table_CH"/>
@@ -177,10 +186,9 @@ order by vacancia.idCategoria,vacancia.idJornada, vacancia.tipoVacancia asc ;]]>
 						<jr:columnFooter style="Table_CH" height="30" rowSpan="1"/>
 						<jr:detailCell style="Table_TD" height="30">
 							<textField>
-								<reportElement positionType="Float" x="0" y="0" width="170" height="30" uuid="1f8baaaf-8358-4c41-9a26-10bc32a38295"/>
-								<box topPadding="0" leftPadding="5" bottomPadding="0" rightPadding="0"/>
+								<reportElement x="0" y="0" width="170" height="30" uuid="b33bf7ee-81ca-43b1-8bef-bed4acca3d7e"/>
 								<textElement verticalAlignment="Middle">
-									<font fontName="Montserrat" size="9"/>
+									<font fontName="Montserrat" size="9" isBold="false"/>
 								</textElement>
 								<textFieldExpression><![CDATA[$F{categoria}]]></textFieldExpression>
 							</textField>
@@ -284,7 +292,18 @@ order by vacancia.idCategoria,vacancia.idJornada, vacancia.tipoVacancia asc ;]]>
 				<textElement textAlignment="Justified">
 					<font fontName="Montserrat" size="9"/>
 				</textElement>
-				<textFieldExpression><![CDATA["A la fecha de publicación de la presente Convocatoria se cuenta con " +$V{total}+"  vacantes para el Proceso Extraordinario de Promoción en el Servicio Docente por Cambio de Categoría en la Dirección General de Educación Tecnológica Industrial y de Servicios, exclusivamente para el ciclo escolar 2020-2021."]]></textFieldExpression>
+				<textFieldExpression><![CDATA["A la fecha de publicación de la presente Convocatoria se cuenta con " +$V{totalReal}+"  vacantes reales para el Proceso de Promoción en el Servicio Docente por Cambio de Categoría en la Dirección General de Educación Tecnológica Industrial y de Servicios, exclusivamente para el ciclo escolar 2020-2021."]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement positionType="Float" x="1" y="59" width="569" height="71" uuid="2ef6a060-f327-46fa-9b1e-1701c74e5d20">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Justified">
+					<font fontName="Montserrat" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Una vez asignada la vacancia real, se estima que se genere un escenario de " +$V{totalCorrimiento}+" vacantes por corrimiento natural, es decir, al momento de publicar la convocatoria no hay categoría disponible, se presenta a partir de que se concrete la primera promoción, con la ocupación de la vacancia real, debido a que el participante libera la que ocupaba antes de ser promovido. Así se realiza consecutivamente, hasta concluir la ocupación de la vacancia que se va generando. Es importante señalar que los docentes pueden registrarse en esta convocatoria, debido a que las plazas podrán serán liberadas para su asignación."]]></textFieldExpression>
 			</textField>
 		</band>
 	</summary>
