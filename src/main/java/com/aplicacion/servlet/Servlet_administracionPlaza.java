@@ -90,7 +90,12 @@ public class Servlet_administracionPlaza extends HttpServlet {
             }           
             Metodos_sql metodo = new Metodos_sql(); 
             if(request.getParameter("id")==null){
-                String clave=request.getParameter("clave");
+                String clavePresupUnidad=request.getParameter("clavePresupUnidad");
+                //String categoriaPresupuestal=request.getParameter("categoriaPresupuestal");
+                String valorClavePresupuestal=request.getParameter("valorClavePresupuestal");
+                String clavePresupHoras=request.getParameter("clavePresupHoras");
+                String clavePresupPlaza=request.getParameter("clavePresupPlaza");
+                String clave = clavePresupUnidad + valorClavePresupuestal + clavePresupHoras + clavePresupPlaza;
                 String horas=request.getParameter("horas");
                 String idCategoria=request.getParameter("categoria");
                 String idJornada=request.getParameter("jornada");
