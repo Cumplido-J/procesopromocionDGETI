@@ -106,10 +106,16 @@ public class Servlet_preregistro extends HttpServlet {
             datos=metodo.ejecutaSP("sp_countRegistrosVacancia",parametros1);
             if(!datos.isEmpty()){
                 if(!datos.get(0)[0].equals("0")){
-                    String[] parametros2={entidad,plantel,nombre,apellido1,apellido2,correo,pass1,rfc,fijo,movil,perfil,consideraciones,"P",subsistema,programa,""};                                      
-                    datos=metodo.ejecutaSP("sp_insertUsuario",parametros2);            
-                    if(!datos.isEmpty()){
-                        respuesta=datos.get(0)[0];                    
+                    String[] parametros3={plantel,programa,subsistema,"D"};
+                    List<String[]> datos1=metodo.ejecutaSP(ConstantsWS.SP_FECHAS_CONVOCATORIA,parametros3);
+                    if(datos1.get(0)[0].equals("1")){
+                        String[] parametros2={entidad,plantel,nombre,apellido1,apellido2,correo,pass1,rfc,fijo,movil,perfil,consideraciones,"P",subsistema,programa,""};                                      
+                        datos=metodo.ejecutaSP("sp_insertUsuario",parametros2);            
+                        if(!datos.isEmpty()){
+                            respuesta=datos.get(0)[0];                    
+                        }   
+                    }else{
+                       respuesta="De acuerdo a las fechas de la convocatoria ya no es posible registrarse"; 
                     }
                 }else{
                     respuesta="No existe convocatoria abierta para esta solicitud";

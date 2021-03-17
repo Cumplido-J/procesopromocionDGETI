@@ -113,7 +113,7 @@
                         <div class="form-group">
                             <div class="col-sm-offset-3 col-sm-9">
                                 <button class="btn btn-primary" type="submit" name="iniciarsesionadmin">Enviar</button>                            
-                                <!--<a href="preregistro.jsp"><button class="btn btn-primary" type="button">Regístrate aquí</button></a>-->
+                                <a href="preregistro.jsp"><button class="btn btn-primary" type="button">Regístrate aquí</button></a>
                             </div>
                         </div>
                     </form>

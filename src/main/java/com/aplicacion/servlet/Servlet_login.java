@@ -136,24 +136,60 @@ public class Servlet_login extends HttpServlet {
                     session.setAttribute("permisoEdicion", datos.get(0)[14]);
                     session.setAttribute("permisoActual","");
                     if(datos.get(0)[7].equals("D")){
-                        response.sendRedirect("SesionDocente"); 
-                    }else{                        
-                        List<String[]> vinculos = new ArrayList<String[]>();
-                        String[] vinculo = null;
-                        for(String[] dato:datos){
-                            //System.out.println(dato[8]+"-"+dato[9]+"-"+dato[10]);
-                            vinculo=new String[3];
-                            vinculo[0]=dato[8];
-                            vinculo[1]=dato[9];
-                            vinculo[2]=dato[10];
-                            vinculos.add(vinculo);
+                        String[] parametros1={datos.get(0)[3],datos.get(0)[11],datos.get(0)[1],"D"};
+                        List<String[]> datos1=metodos.ejecutaSP(ConstantsWS.SP_FECHAS_CONVOCATORIA,parametros1);
+                        if(datos1.get(0)[0].equals("1")){
+                            response.sendRedirect("SesionDocente"); 
+                        }else{
+                            request.setAttribute("error", "De acuerdo a las fechas de la convocatoria ya no es posible inciar sesión");
+                            RequestDispatcher rd = request.getRequestDispatcher("login.jsp");
+                            rd.forward(request, response);
                         }
-                        
-                        if (vinculos.size()== 1)
-                        { session.setAttribute("permisoActual",(vinculos.get(0))[0]); }                        
-                        
-                        session.setAttribute("vinculos",vinculos);
-                        response.sendRedirect("SesionAdministrador");
+                    }else{
+                        if(datos.get(0)[7].equals("A") && datos.size()==1 && datos.get(0)[8].equals("5") && datos.get(0)[14].equals("V")){
+                            String[] parametros2={datos.get(0)[3],datos.get(0)[11],datos.get(0)[1],"A"};
+                            List<String[]> datos1=metodos.ejecutaSP(ConstantsWS.SP_FECHAS_CONVOCATORIA,parametros2);
+                            
+                            if(datos1.get(0)[0].equals("1")){
+                                List<String[]> vinculos = new ArrayList<String[]>();
+                                String[] vinculo = null;
+                                for(String[] dato:datos){
+                                    //System.out.println(dato[8]+"-"+dato[9]+"-"+dato[10]);
+                                    vinculo=new String[3];
+                                    vinculo[0]=dato[8];
+                                    vinculo[1]=dato[9];
+                                    vinculo[2]=dato[10];
+                                    vinculos.add(vinculo);
+                                }
+
+                                if (vinculos.size()== 1)
+                                { session.setAttribute("permisoActual",(vinculos.get(0))[0]); }                        
+
+                                session.setAttribute("vinculos",vinculos);
+                                response.sendRedirect("SesionAdministrador"); 
+                            }else{
+                                request.setAttribute("error", "De acuerdo a las fechas de la convocatoria ya no es posible inciar sesión");
+                                RequestDispatcher rd = request.getRequestDispatcher("login.jsp");
+                                rd.forward(request, response);
+                            }  
+                        }else{
+                            List<String[]> vinculos = new ArrayList<String[]>();
+                            String[] vinculo = null;
+                            for(String[] dato:datos){
+                                //System.out.println(dato[8]+"-"+dato[9]+"-"+dato[10]);
+                                vinculo=new String[3];
+                                vinculo[0]=dato[8];
+                                vinculo[1]=dato[9];
+                                vinculo[2]=dato[10];
+                                vinculos.add(vinculo);
+                            }
+
+                            if (vinculos.size()== 1)
+                            { session.setAttribute("permisoActual",(vinculos.get(0))[0]); }                        
+
+                            session.setAttribute("vinculos",vinculos);
+                            response.sendRedirect("SesionAdministrador");   
+                        }
                     }
                 }else{
                     request.setAttribute("error", "Contraseña incorrecta");
