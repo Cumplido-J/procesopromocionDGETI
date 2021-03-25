@@ -318,49 +318,49 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
         <script src="js/funcionesRegistro.js"></script>
-        <c:if test = "${Docente.totalEncuestados<30 && Docente.infoRegistro[66]!='1'}">
+        <c:if test = "${Docente.totalEncuestados<31 && Docente.infoRegistro[66]!='1'}">
         <script>
             $("#modalCriterios").modal();
         </script>
+        </c:if>
         <script>
             function subirArchivo_(){
-    $("#modalArchivo").modal("hide");
-    
-    if(validaArchivo_()){
-        document.formArchivo.target="ifRespuesta";
-        document.formArchivo.action="GuardarArchivo";
-        document.formArchivo.submit();
-        var id=$("#idArchivo").val(); 
-        //$("#btnEvidencia"+id).attr("value","Ver documento");
-        $("#alertaBtnEvidencia"+id).attr("style","display:none;");
-        $("#mensaje").html("El archivo fue cargado correctamente");
-    }
-        $("#modalMensaje").modal("show");
-}
+                $("#modalArchivo").modal("hide");
 
-function validaArchivo_(){
-    var retorno=true;
-    var elemento=document.getElementById("archivoCarta");
-    var fileName = elemento.files[0].name;
-    var fileSize = elemento.files[0].size;
+                if(validaArchivo_()){
+                    document.formArchivo.target="ifRespuesta";
+                    document.formArchivo.action="GuardarArchivo";
+                    document.formArchivo.submit();
+                    var id=$("#idArchivo").val(); 
+                    //$("#btnEvidencia"+id).attr("value","Ver documento");
+                    $("#alertaBtnEvidencia"+id).attr("style","display:none;");
+                    $("#mensaje").html("El archivo fue cargado correctamente");
+                }
+                    $("#modalMensaje").modal("show");
+            }
 
-    if(fileSize > 1000000){
-            $("#mensaje").html("El archivo no debe superar 1MB");    
-            elemento.value = '';
-            retorno=false;
-    }else{
-            var ext = fileName.split('.').pop();
-            ext = ext.toLowerCase();            
-            if(ext!="pdf"){
-               $("#mensaje").html("Solo se aceptan archivos PDF"); 
-               elemento.value = ''; // reset del valor               
-               retorno=false;
-            }            
-    }
-    return retorno;
-}
+            function validaArchivo_(){
+                var retorno=true;
+                var elemento=document.getElementById("archivoCarta");
+                var fileName = elemento.files[0].name;
+                var fileSize = elemento.files[0].size;
+
+                if(fileSize > 1000000){
+                        $("#mensaje").html("El archivo no debe superar 1MB");    
+                        elemento.value = '';
+                        retorno=false;
+                }else{
+                        var ext = fileName.split('.').pop();
+                        ext = ext.toLowerCase();            
+                        if(ext!="pdf"){
+                           $("#mensaje").html("Solo se aceptan archivos PDF"); 
+                           elemento.value = ''; // reset del valor               
+                           retorno=false;
+                        }            
+                }
+                return retorno;
+            }
         </script>
-        </c:if>
         <script>
             function abrirModalArchivoCarta(id){    
                 if($("#btnEvidencia"+id).attr("value")=="Ver documento"){
