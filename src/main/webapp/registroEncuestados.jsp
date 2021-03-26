@@ -114,6 +114,7 @@
                           <th>CURP</th>
                           <th>Correo</th>
                           <th>Opciones</th>
+                          <th>PIN</th>
                         </tr>                        
                       </thead>
                       <tbody id="tabla1">
@@ -138,6 +139,7 @@
                           <th>CURP</th>
                           <th>Correo</th>
                           <th>Opciones</th>
+                          <th>PIN</th>
                         </tr>                        
                       </thead>
                       <tbody id="tabla2">
@@ -162,6 +164,7 @@
                           <th>CURP</th>
                           <th>Correo</th>
                           <th>Opciones</th>
+                          <th>PIN</th>
                         </tr>                        
                       </thead>
                       <tbody id="tabla3">
