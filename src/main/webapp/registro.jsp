@@ -246,7 +246,7 @@
                             <c:if test = "${Docente.infoRegistro[24]==null}">
                                 <c:set var="hidden" value="hidden"></c:set>
                             </c:if>
-                            <div id="seccionCedula" ${hidden}>
+                            <div id="seccionCedula">
                                 <div class="form-group col-md-3">
                                   <label class="control-label" for="cedula">Número de Cédula:</label>
                                   <input type="text" class="form-control input-sm" id="cedula" name="cedula" value="${Docente.infoRegistro[24]}">

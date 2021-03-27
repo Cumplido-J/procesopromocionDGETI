@@ -256,12 +256,12 @@
                           </a>
                           <p class="text-danger ${hidden}">Puntaje: 
                               <span id="p5">
-                                  <c:if test="${puntajes[4][3]!=null}">
+                                  <c:if test="${puntajes[4][3]=='0'}">
                                       ${puntajes[4][4]}
                                       <c:set var="checked" value="checked"></c:set>
                                       <c:set var="in" value=""></c:set>
                                   </c:if>
-                                  <c:if test="${puntajes[4][3]==null}">
+                                  <c:if test="${puntajes[4][3]!='0'}">
                                       ${cursos[1]}
                                       <c:set var="checked" value=""></c:set>
                                       <c:set var="in" value="in"></c:set>
@@ -337,12 +337,12 @@
                           </a>
                           <p class="text-danger ${hidden}">Puntaje: 
                               <span id="p6">
-                                  <c:if test="${puntajes[5][3]!=null}">
+                                  <c:if test="${puntajes[5][3]=='0'}">
                                       ${puntajes[5][4]}
                                       <c:set var="checked" value="checked"></c:set>
                                       <c:set var="in" value=""></c:set>
                                   </c:if>
-                                  <c:if test="${puntajes[5][3]==null}">
+                                  <c:if test="${puntajes[5][3]!='0'}">
                                       ${aportaciones[1]}
                                       <c:set var="checked" value=""></c:set>
                                       <c:set var="in" value="in"></c:set>
@@ -416,12 +416,12 @@
                           </a>
                           <p class="text-danger ${hidden}">Puntaje: 
                               <span id="p7">
-                                  <c:if test="${puntajes[6][3]!=null}">
+                                  <c:if test="${puntajes[6][3]=='0'}">
                                       ${puntajes[6][4]}
                                       <c:set var="checked" value="checked"></c:set>
                                       <c:set var="in" value=""></c:set>
                                   </c:if>
-                                  <c:if test="${puntajes[6][3]==null}">
+                                  <c:if test="${puntajes[6][3]!='0'}">
                                       ${participaciones[1]}
                                       <c:set var="checked" value=""></c:set>
                                       <c:set var="in" value="in"></c:set>
@@ -493,12 +493,12 @@
                           </a>
                           <p class="text-danger ${hidden}">Puntaje: 
                               <span id="p8">
-                                  <c:if test="${puntajes[7][3]!=null}">
+                                  <c:if test="${puntajes[7][3]=='0'}">
                                       ${puntajes[7][4]}
                                       <c:set var="checked" value="checked"></c:set>
                                       <c:set var="in" value=""></c:set>
                                   </c:if>
-                                  <c:if test="${puntajes[7][3]==null}">
+                                  <c:if test="${puntajes[7][3]!='0'}">
                                       ${tutorias[1]}
                                       <c:set var="checked" value=""></c:set>
                                       <c:set var="in" value="in"></c:set>
@@ -572,12 +572,12 @@
                           </a>
                           <p class="text-danger ${hidden}">Puntaje: 
                               <span id="p9">
-                                  <c:if test="${puntajes[8][3]!=null}">
+                                  <c:if test="${puntajes[8][3]=='0'}">
                                       ${puntajes[8][4]}
                                       <c:set var="checked" value="checked"></c:set>
                                       <c:set var="in" value=""></c:set>
                                   </c:if>
-                                  <c:if test="${puntajes[8][3]==null}">
+                                  <c:if test="${puntajes[8][3]!='0'}">
                                       ${publicaciones[1]}
                                       <c:set var="checked" value=""></c:set>
                                       <c:set var="in" value="in"></c:set>
