@@ -835,7 +835,7 @@
                             </div>
                             <div class="form-group col-md-6">
                                 <label class="control-label" for="grupo">Grupo:</label>
-                                <input type="text" class="form-control input-sm" id="grupo" name="grupo" required>                                                                 
+                                <input type="text" class="form-control input-sm" id="grupo" name="grupo" maxlength="5" required>                                                                 
                             </div>
                             <div class="form-group col-md-6" id="divSemestre">
                                 <label class="control-label" for="semestre">Semestre:</label>
