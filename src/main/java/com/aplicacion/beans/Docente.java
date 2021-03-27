@@ -350,7 +350,7 @@ public class Docente {
                     fila+="<span class='glyphicon glyphicon-trash'></span>";
                     fila+="</button>";
                 }
-                
+                fila+="<td>"+encuestado[6]+"</td><td>";
                 fila+="<td></tr>";
                 switch(encuestado[3]){
                     case "1":
@@ -392,7 +392,8 @@ public class Docente {
                         fila+="<button type='button' class='btn btn-sm' disabled title='Esta información no puede borrarse'>";
                         fila+="<span class='glyphicon glyphicon-trash'></span>";
                         fila+="</button>";
-                    }                
+                    }
+                    fila+="<td>"+encuestado[6]+"</td><td>";
                     fila+="<td></tr>";
                     c++;
                 }                

@@ -96,7 +96,7 @@
                     <c:set var="hidden3" value="hidden"></c:set>
                 </c:if>
                 <c:if test = "${Docente.totalEncuestados==30}"> <!--Si ya registró a 30 encuestados-->
-                    <c:set var="disabled2" value="disabled"></c:set>
+                    <c:set var="disabled2" value=""></c:set>
                     <c:set var="hidden2" value=""></c:set>
                     <c:set var="disabled3" value=""></c:set>
                     <c:set var="hidden3" value="hidden"></c:set>

@@ -46,7 +46,7 @@
             <table >
                 <tr>
                     <td>FOLIO</td>
-                    <td>:${Docente.infoRegistro[75]}</td>
+                    <td>:${Docente.infoRegistro[76]}</td>
                 </tr>
                 <!--<tr>
                     <td>CURP</td>
