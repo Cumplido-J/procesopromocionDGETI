@@ -60,12 +60,12 @@
                         <select class="form-control input-sm ${disabled4}" id="tipo" name="tipo" onChange="cambioComite()" required>                                                              
                             
                             <c:if test='${sessionScope["plantel"]!=null}'>                                
-                                <option value='R'>Comité revisor</option>
-                            </c:if>
-                            <c:if test='${sessionScope["plantel"]==null}'>
                                 <option value=''>-Seleccione-</option>
                                 <option value='R'>Comité revisor</option>
                                 <option value='D'>Consejo dictaminador</option>
+                            </c:if>
+                            <c:if test='${sessionScope["plantel"]==null}'>
+                                <option value='R'>Comité revisor</option>                                
                             </c:if>
                             
                                                       
