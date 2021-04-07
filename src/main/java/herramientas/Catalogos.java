@@ -601,6 +601,20 @@ public class Catalogos {
         }
     }
     
+    public String desplegarCatalogosEstatus(String idUsuario){        
+        String respuesta="<option value=''>-Seleccione-</option>";
+        String[] parametros={idUsuario};
+        try{
+            List<String[]> datos=metodos.ejecutaSP("sp_selectCatEstatusidUsuario",parametros);
+            for(String[] dato:datos){
+                respuesta+="<option value='"+dato[0]+"'>"+dato[1]+"</option>";
+            }
+        }catch(Exception e){
+            respuesta=e.toString();
+        }finally{
+            return respuesta;        
+        }
+    }
      public String desplegarConvocatorio(String nombreUsuario, String _idEntidad, String _idPlantel, String _idEstatus){        
         String respuesta="";
         String[] parametros={nombreUsuario, _idEntidad, _idPlantel, _idEstatus};

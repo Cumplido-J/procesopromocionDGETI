@@ -83,7 +83,7 @@
                         <div class="form-group col-md-8">                               
                             <label class="control-label" for="estatus">Estatus:</label>
                             <select class="form-control input-sm" id="estatus" name="estatus" >                                  
-                                ${catalogo.desplegarCatalogosEstatus()}
+                                ${catalogo.desplegarCatalogosEstatus(sessionScope["idUsuario"])}
                             </select>
                         </div>
                     </div>
@@ -111,7 +111,7 @@
                                 <th>Opciones</th>
                             </tr>
                         </thead>
-                        <tbody id="seccionEditable">${dato.desplegarDocentes(sessionScope["programa"],sessionScope["subsistema"],sessionScope["entidad"],sessionScope["plantel"],'','',sessionScope["permisoActual"])}</tbody>
+                        <tbody id="seccionEditable">${dato.desplegarDocentes(sessionScope["programa"],sessionScope["subsistema"],sessionScope["entidad"],sessionScope["plantel"],'','',sessionScope["permisoActual"],sessionScope["idUsuario"])}</tbody>
                     </table>
                 </div>
             </div>
