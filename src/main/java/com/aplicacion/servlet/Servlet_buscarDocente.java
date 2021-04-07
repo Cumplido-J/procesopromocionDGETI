@@ -14,6 +14,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -77,6 +78,7 @@ public class Servlet_buscarDocente extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try{
             PrintWriter out = response.getWriter();
+            HttpSession session= (HttpSession) request.getSession();
             /*HttpSession session= (HttpSession) request.getSession();     
             if(session.getAttribute("idUsuario")!=null&&session.getAttribute("rfc")!=null){*/
                 String programa=request.getParameter("programa");
@@ -86,7 +88,7 @@ public class Servlet_buscarDocente extends HttpServlet {
                 String nombre=request.getParameter("rfcNombre");
                 String estatus=request.getParameter("estatus");
                 Datos d=new Datos();
-                out.print(d.desplegarDocentes(programa, subsistema, entidad, plantel, nombre, estatus, ""));
+                out.print(d.desplegarDocentes(programa, subsistema, entidad, plantel, nombre, estatus, "", session.getAttribute("idUsuario").toString()));
                 //out.print("-"+programa+"-"+ subsistema+"-"+ entidad+"-"+ plantel+"-"+ nombre+"-"+ estatus);                
         }catch(Exception e){
             System.out.println(e.toString());
