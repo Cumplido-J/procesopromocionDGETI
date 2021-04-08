@@ -83,7 +83,7 @@
                         <div class="form-group col-md-8">                               
                             <label class="control-label" for="estatus">Estatus:</label>
                             <select class="form-control input-sm" id="estatus" name="estatus" >                                  
-                                ${catalogo.desplegarCatalogosEstatus(sessionScope["idUsuario"])}
+                                ${catalogo.desplegarCatalogosEstatus(sessionScope["idUsuario"],sessionScope["permisoActual"],sessionScope["vinculos"])}
                             </select>
                         </div>
                     </div>

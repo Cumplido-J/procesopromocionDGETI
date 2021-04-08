@@ -5,20 +5,24 @@
  */
 package com.aplicacion.servlet;
 
-import herramientas.Catalogos;
 import herramientas.Datos;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import metodos_sql.Metodos_sql;
 
 /**
  *
- * @author David Reyna
+ * @author jtrinidadl
  */
-public class Servlet_buscarUsuario extends HttpServlet {
+@WebServlet(name = "borrarUsuario", urlPatterns = {"/borrarUsuario"})
+public class Servlet_borrarUsuario extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,10 +41,10 @@ public class Servlet_buscarUsuario extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet Servlet_buscarUsuarios</title>");            
+            out.println("<title>Servlet Servlet_borrarUsuario</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet Servlet_buscarUsuarios at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet Servlet_borrarUsuario at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -73,20 +77,36 @@ public class Servlet_buscarUsuario extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        PrintWriter out = response.getWriter();
         try{
-            PrintWriter out = response.getWriter();            
+            HttpSession session= (HttpSession) request.getSession();
+            Metodos_sql metodo = new Metodos_sql();
+            String rfc="";
+            rfc = session.getAttribute("rfc").toString();
+            if(request.getParameter("id")!= null){
+                String id=request.getParameter("id");
                 String programa=request.getParameter("programa");
                 String subsistema=request.getParameter("subsistema");
                 String entidad=request.getParameter("entidad");
                 String plantel=request.getParameter("plantel");
-                String usuario=request.getParameter("usuario");
+                String usuario=request.getParameter("usuario")==null?"":request.getParameter("usuario");
                 String tusuario=request.getParameter("tusuario");
-                System.out.println("tipo de usuario: " + tusuario);
-                Datos d=new Datos();
-                out.print(d.desplegarUsuarios(programa, subsistema, entidad, plantel, usuario,tusuario));
                 
-        }catch(Exception e){
-            System.out.println(e.toString());
+                String[] parametros={id};
+                String[] parametrosEliminado={id,rfc,tusuario};
+                    List<String[]> datos;
+                    datos=metodo.ejecutaSP("sp_insertbitacorausuarioeliminado",parametrosEliminado);
+                    if(tusuario.equals("D")){
+                        datos=metodo.ejecutaSP("sp_borraAspirante",parametros);
+                    }else{
+                        datos=metodo.ejecutaSP("sp_borraAdmin",parametros);
+                    }
+                    
+                    String informacion=new Datos().desplegarUsuarios(programa, subsistema, entidad, plantel, usuario, tusuario);
+                    out.print(informacion);
+            }
+        } finally {
+            out.close();
         }
     }
 

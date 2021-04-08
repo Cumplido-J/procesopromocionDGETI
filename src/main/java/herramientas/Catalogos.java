@@ -601,11 +601,16 @@ public class Catalogos {
         }
     }
     
-    public String desplegarCatalogosEstatus(String idUsuario){        
+    public String desplegarCatalogosEstatus(String idUsuario, String idPermisoActual, Object vinculos){        
         String respuesta="<option value=''>-Seleccione-</option>";
         String[] parametros={idUsuario};
         try{
             List<String[]> datos=metodos.ejecutaSP("sp_selectCatEstatusidUsuario",parametros);
+            if(!datos.isEmpty())
+            {   
+                if(idPermisoActual.equals("5") && ((List<String[]>)vinculos).size()==1)
+                {respuesta+="<option value='-1'>-Todos-</option>";}
+            }
             for(String[] dato:datos){
                 respuesta+="<option value='"+dato[0]+"'>"+dato[1]+"</option>";
             }
