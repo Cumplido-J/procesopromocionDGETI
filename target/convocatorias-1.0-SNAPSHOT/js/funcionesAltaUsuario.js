@@ -168,6 +168,7 @@ $(document).ready(function () {
         },
         submitHandler:function(){            
             var aux=$("#btnEnviar").val();
+            var perfilD=$("#perfilD").val();
             var permisos="";
             var id=0;
             $('.permiso').each(function(){
@@ -180,7 +181,7 @@ $(document).ready(function () {
             }); 
             //alert(permisos);
             $("#permisos").val(permisos);            
-            if (permisos!="") { 
+            if (permisos!="" || perfilD=="D") { 
                 if ($("#correo").val().toLowerCase().match($regex) && $("#usuario").val().toUpperCase().match($regexRFC)) {                            
                     $.ajax({
                         type:$('#formRegistro').attr("method"),

@@ -44,7 +44,7 @@
             <div class="container">
                 <!--Agregar contenido de página aquí-->
                 <div class="text-center">
-                    <h4>Consulta de administradores</h4>                    
+                    <h4>Consulta de usuarios</h4>                    
                 </div>
                 <form id="formBusqueda" role="form" method="POST" action="BuscarUsuario">
                 <div class="row">
@@ -79,6 +79,13 @@
                         <label class="control-label" for="usuario">Usuario:</label>
                         <input type="text" class="form-control input-sm" name="usuario" />
                     </div>
+                    <div class="form-group col-md-3">                               
+                        <label class="control-label" for="tusuario">Tipo Usuario</label>
+                        <select class="form-control input-sm ${disabled4}" id="tusuario" name="tusuario" required>
+                            <option value="D">DOCENTE</option>
+                            <option value="A">ADMINISTRADOR</option>
+                        </select>
+                    </div>
                 </div>
                 <div class="row">
                     <div class="form-group col-xs-12 text-center">                         
@@ -100,7 +107,7 @@
                                 <th>Opciones</th>
                             </tr>
                         </thead>
-                        <tbody id="seccionEditable">${dato.desplegarUsuarios(sessionScope["programa"],sessionScope["subsistema"],sessionScope["entidad"],sessionScope["plantel"],'')}</tbody>
+                        <tbody id="seccionEditable">${dato.desplegarUsuarios(sessionScope["programa"],sessionScope["subsistema"],sessionScope["entidad"],sessionScope["plantel"],'','')}</tbody>
                     </table>
                 </div>
             </div>
@@ -125,8 +132,48 @@
 
             </div>
         </div>
+        <div id="modalConfirmacion2" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  <h4 class="modal-title" >Confirmación</h4>
+                </div>
+                <div class="modal-body">
+                    <p id="mensajeConfirmacion">La información seleccionada será borrada de manera definitiva del sistema<br/>¿Desea continuar?</p>                  
+                </div>
+                <div class="modal-footer">
+                  <button type="button" id="btnConfirmar" class="btn btn-sm btn-default">Sí</button>
+                  <button type="button" class="btn btn-sm btn-default" data-dismiss="modal">No</button>
+                </div>
+              </div>
+            </div>
+        </div>
         <jsp:include page="seccionesPlantilla/scripts.jsp"/>
         <!--Agregar scripts aquí-->
         <script src="js/funcionesBusqueda.js"></script>
+        <script>
+            function confirmarUsuario(id){
+                $("#btnConfirmar").attr("onClick","borrarUsuario("+id+")");
+                $("#modalConfirmacion2").modal("show");
+            }
+            function borrarUsuario(id){
+                $("#modalConfirmacion2").modal("hide");
+                var programa=$("#programa").val();
+                var subsistema=$("#subsistema").val();
+                var entidad=$("#entidad").val();
+                var plantel=$("#plantel").val();
+                var usuario=$("#usuario").val();
+                var tusuario=$("#tusuario").val();
+                $.post("borrarUsuario", {id:id,programa:programa,subsistema:subsistema,entidad:entidad,plantel:plantel,usuario:usuario,tusuario:tusuario}, function(data){
+                    if(data.includes("<tr>")){            
+                        $("#seccionEditable").html(data);
+                    }
+                    else{
+                        $("#seccionEditable").html(data);
+                    } 
+                });
+            }
+        </script>
     </body>
 </html>

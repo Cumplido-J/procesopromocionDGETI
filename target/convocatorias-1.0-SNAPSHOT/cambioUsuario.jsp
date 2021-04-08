@@ -43,7 +43,7 @@
             <div class="container">
                 <!--Agregar contenido de página aquí-->
                 <div class="text-center">
-                    <h4>Actualización de información de administrador</h4>                       
+                    <h4>Actualización de información de usuario</h4>                       
                 </div>
                 <div class="row col-xs-12">
                     <p>Los campos marcados con <span class="text-danger" title="Campo obligatorio">*</span> son requeridos.</p>
@@ -95,10 +95,18 @@
                         <label class="control-label" for="nombre">Nombre:<span class="text-danger" title="Campo obligatorio">*</span></label>
                         <input type="text" class="form-control input-sm" name="nombre" value="${informacion[3]}" required/>
                     </div>
-                    <div class="form-group col-md-4">                               
-                        <label class="control-label" for="apellido1">Primer apellido:<span class="text-danger" title="Campo obligatorio">*</span></label>
-                        <input type="text" class="form-control input-sm" name="apellido1" value="${informacion[4]}" required/>
-                    </div>
+                    <c:if test='${informacion[10]!="D"}'>
+                        <div class="form-group col-md-4">                               
+                            <label class="control-label" for="apellido1">Primer apellido:<span class="text-danger" title="Campo obligatorio">*</span></label>
+                            <input type="text" class="form-control input-sm" name="apellido1" value="${informacion[4]}" required/>
+                        </div>
+                    </c:if>
+                    <c:if test='${informacion[10]=="D"}'>
+                        <div class="form-group col-md-4">                               
+                            <label class="control-label" for="apellido1">Primer apellido:</label>
+                            <input type="text" class="form-control input-sm" name="apellido1" value="${informacion[4]}"/>
+                        </div>
+                    </c:if>
                 </div>
                 <div class="row">
                     <div class="form-group col-md-4">                               
@@ -119,13 +127,22 @@
                         <label class="control-label">Correo electrónico:<span class="text-danger" title="Campo obligatorio">*</span></label>
                         <input type="text" class="form-control input-sm" name="correo" id="correo" value="${informacion[6]}" required/>
                         <label class="error" id="alertaCorreo" hidden >Ingrese una dirección de correo válida</label>
-                    </div>                    
+                    </div>
+                    <div class="form-group col-md-4">                               
+                        <label class="control-label">Actualizar Contraseña:<span class="text-danger" title="Campo obligatorio">*</span></label>
+                        <input type="password" class="form-control input-sm" name="pass" id="pass" />
+                    </div>
                 </div>
-                <div class="row col-xs-12">
-                    <label class="control-label">Permisos asignados:<span class="text-danger" title="Campo obligatorio">*</span></label><br/>  
-                    ${catalogo.desplegarOpcionesPermisos(informacion[0])}    
-                    <input type="hidden" id="permisos" name="permisos"/>
-                </div>
+                <c:if test='${informacion[10]!="D"}'>
+                   <div class="row col-xs-12">
+                        <label class="control-label">Permisos asignados:<span class="text-danger" title="Campo obligatorio">*</span></label><br/>  
+                            ${catalogo.desplegarOpcionesPermisos(informacion[0])}    
+                        <input type="hidden" id="permisos" name="permisos"/>
+                    </div> 
+                </c:if>
+                <c:if test='${informacion[10]=="D"}'>
+                    <input type="hidden" id="perfilD" name="perfilD" value="D" readonly/>
+                </c:if>
                 <div class="row" >
                     <div class="form-group col-xs-12 text-center" style="padding-top: 20px;">                         
                         <input class="btn btn-primary" id="btnEnviar" type="submit" value='Guardar'/>                                                

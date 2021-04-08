@@ -18,18 +18,25 @@ public class Datos {
     public Datos() {
         metodos = new Metodos_sql();
     }
-    public  String desplegarUsuarios(String idPrograma,String idSubsistema,String idEntidad,String idPlantel,String usuario){        
+    public  String desplegarUsuarios(String idPrograma,String idSubsistema,String idEntidad,String idPlantel,String usuario,String tusuario){        
         String respuesta="<tr><td colspan='7' class='text-center'>Sin información</td></tr>";        
         try{
-            String[] parametros={idPrograma,idSubsistema,idEntidad,idPlantel,usuario};
-            List<String[]> datos=metodos.ejecutaSP("sp_consultaUsuarios",parametros);
-            if(!datos.isEmpty()){
-                respuesta="";
-                for(String[] dato:datos)
-                {
-                    respuesta+="<tr><td>"+dato[2]+"</td><td>"+dato[4]+"</td><td>"+dato[6]+"</td><td>"+dato[8]+"</td><td>"+dato[9]+"</td><td>"+dato[10]+"</td><td>"; 
-                    respuesta+="<form method='POST' action='AltaUsuario'><input type='hidden' name='idUsuario' value='"+dato[0]+"'><input class='btn btn-sm btn-link' type='submit' value='Editar'/></form>";                                                                                  
-                    respuesta+="</td></tr>";
+            String[] parametros={idPrograma,idSubsistema,idEntidad,idPlantel,usuario,tusuario};
+            if(idEntidad.isEmpty() && idPlantel.isEmpty() && tusuario.isEmpty()){
+                return respuesta;
+            }else{
+                List<String[]> datos=metodos.ejecutaSP("sp_consultaUsuarios",parametros);
+                if(!datos.isEmpty()){
+                    respuesta="";
+                    for(String[] dato:datos)
+                    {   
+                        String nombreUsuario=dato[10]==null?"":dato[10];
+                        
+                        respuesta+="<tr><td>"+dato[2]+"</td><td>"+dato[4]+"</td><td>"+dato[6]+"</td><td>"+dato[8]+"</td><td>"+dato[9]+"</td><td>"+nombreUsuario+"</td><td>"; 
+                        respuesta+="<form method='POST' action='AltaUsuario'><input type='hidden' name='idUsuario' value='"+dato[0]+"'><input class='btn btn-sm btn-link' type='submit' value='Editar'/></form>";
+                        respuesta+="<td><button type='button' class='btn btn-sm' title='Borrar' onclick='confirmarUsuario("+dato[0]+")'><span class='glyphicon glyphicon-trash'></span></button></td>";                                                                                  
+                        respuesta+="</td></tr>";
+                    }
                 }
             }
         }catch(Exception e){
@@ -38,6 +45,7 @@ public class Datos {
             return respuesta;        
         }
     }
+    
     public  String desplegarConvocatorias(String idPrograma,String idSubsistema,String idEntidad,String idPlantel,String estatus){        
         String respuesta="<tr><td colspan='6' class='text-center'>Sin información</td></tr>";        
         try{
