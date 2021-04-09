@@ -226,14 +226,14 @@
           </div>
         <div id="modalArchivo" class="modal fade" role="dialog">
             <div class="modal-dialog">
-              <div class="modal-content">
+              <div class="modal-content" style="width: 700px;height: 672px;">
                 <div class="modal-header">
                   <button type="button" class="close" data-dismiss="modal">&times;</button>
                   <h4 class="modal-title" >Carta de aceptación</h4>
                 </div>
                 <div class="modal-body">
                     <iframe name="ifRespuesta" hidden></iframe>
-                    <iframe style="width:100%;" id="ifArchivo" name="ifArchivo" src="" hidden></iframe>
+                    <iframe style="width:100%;height: 338px;" id="ifArchivo" name="ifArchivo" src="" hidden></iframe>
                     <div id="seccionCarga">
                         <form id="formArchivo" name="formArchivo" method="POST" enctype="multipart/form-data" >
 <!--                                <label class="text-warning" id="alertaCarga"><span class="glyphicon glyphicon-warning-sign"></span>&nbsp;Cárgue su archivo de evidencia ya firmado.</label>

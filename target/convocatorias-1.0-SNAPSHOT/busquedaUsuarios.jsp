@@ -170,7 +170,8 @@
                         $("#seccionEditable").html(data);
                     }
                     else{
-                        $("#seccionEditable").html(data);
+                        $("#mensaje").html("No tienes permisos para eliminar.");
+                        $("#modalMensaje").modal("show");
                     } 
                 });
             }

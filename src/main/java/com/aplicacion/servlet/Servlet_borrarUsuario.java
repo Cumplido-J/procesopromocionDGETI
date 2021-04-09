@@ -83,27 +83,32 @@ public class Servlet_borrarUsuario extends HttpServlet {
             Metodos_sql metodo = new Metodos_sql();
             String rfc="";
             rfc = session.getAttribute("rfc").toString();
-            if(request.getParameter("id")!= null){
-                String id=request.getParameter("id");
-                String programa=request.getParameter("programa");
-                String subsistema=request.getParameter("subsistema");
-                String entidad=request.getParameter("entidad");
-                String plantel=request.getParameter("plantel");
-                String usuario=request.getParameter("usuario")==null?"":request.getParameter("usuario");
-                String tusuario=request.getParameter("tusuario");
-                
-                String[] parametros={id};
-                String[] parametrosEliminado={id,rfc,tusuario};
-                    List<String[]> datos;
-                    datos=metodo.ejecutaSP("sp_insertbitacorausuarioeliminado",parametrosEliminado);
-                    if(tusuario.equals("D")){
-                        datos=metodo.ejecutaSP("sp_borraAspirante",parametros);
-                    }else{
-                        datos=metodo.ejecutaSP("sp_borraAdmin",parametros);
-                    }
-                    
-                    String informacion=new Datos().desplegarUsuarios(programa, subsistema, entidad, plantel, usuario, tusuario);
-                    out.print(informacion);
+            String permisoEdicion_ = session.getAttribute("permisoEdicion").toString();
+            if(permisoEdicion_.equals("V")){
+                if(request.getParameter("id")!= null){
+                   String id=request.getParameter("id");
+                   String programa=request.getParameter("programa");
+                   String subsistema=request.getParameter("subsistema");
+                   String entidad=request.getParameter("entidad");
+                   String plantel=request.getParameter("plantel");
+                   String usuario=request.getParameter("usuario")==null?"":request.getParameter("usuario");
+                   String tusuario=request.getParameter("tusuario");
+
+                   String[] parametros={id};
+                   String[] parametrosEliminado={id,rfc,tusuario};
+                       List<String[]> datos;
+                       datos=metodo.ejecutaSP("sp_insertbitacorausuarioeliminado",parametrosEliminado);
+                       if(tusuario.equals("D")){
+                           datos=metodo.ejecutaSP("sp_borraAspirante",parametros);
+                       }else{
+                           datos=metodo.ejecutaSP("sp_borraAdmin",parametros);
+                       }
+
+                       String informacion=new Datos().desplegarUsuarios(programa, subsistema, entidad, plantel, usuario, tusuario);
+                       out.print(informacion);
+               }   
+            }else{
+                out.print("El usuario no tienen permisos para eliminar");
             }
         } finally {
             out.close();
