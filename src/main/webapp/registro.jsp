@@ -754,7 +754,7 @@
                           </c:if>
                           <c:if test="${vistaAdmin}">
                             <label class="control-label">Observaciones:</label>
-                            <textarea class="form-control text-uppercase" id="observaciones" name="observaciones" maxlength="200" onKeyUp="cambioObservaciones()" required>${Docente.infoRegistro[67]}</textarea>
+                            <textarea class="form-control text-uppercase" id="observaciones" name="observaciones" maxlength="2000" onKeyUp="cambioObservaciones()" required>${Docente.infoRegistro[67]}</textarea>
                           </c:if>
                           <br/>                          
                           <input type="submit" disabled="true" class="btn btn-primary" value="Continuar" id="btnFinalizar">                      
