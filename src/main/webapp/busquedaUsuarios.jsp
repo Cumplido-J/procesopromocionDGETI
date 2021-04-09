@@ -81,7 +81,8 @@
                     </div>
                     <div class="form-group col-md-3">                               
                         <label class="control-label" for="tusuario">Tipo Usuario</label>
-                        <select class="form-control input-sm ${disabled4}" id="tusuario" name="tusuario" required>
+                        <select class="form-control input-sm" id="tusuario" name="tusuario" required>
+                            <option value="">---Seleccionar una opción---</option>
                             <option value="D">DOCENTE</option>
                             <option value="A">ADMINISTRADOR</option>
                         </select>
