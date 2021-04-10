@@ -24,6 +24,8 @@ public class Datos {
             String[] parametros={idPrograma,idSubsistema,idEntidad,idPlantel,usuario,tusuario};
             if(idEntidad.isEmpty() && idPlantel.isEmpty() && tusuario.isEmpty()){
                 return respuesta;
+            }else if(!idEntidad.isEmpty() && !idPlantel.isEmpty() && tusuario.isEmpty()){
+                return respuesta;
             }else{
                 List<String[]> datos=metodos.ejecutaSP("sp_consultaUsuarios",parametros);
                 if(!datos.isEmpty()){

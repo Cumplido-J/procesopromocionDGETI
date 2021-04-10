@@ -185,7 +185,7 @@
                 <div class="container text-center">
                     <form action="FinalizaEncuestados" method="POST">
                         <label class="control-label">Observaciones:</label>
-                        <textarea class="form-control text-uppercase" id="observaciones" name="observaciones" maxlength="200" onChange="cambioObservaciones(this)" required>${docente.infoRegistro[68]}</textarea>                      
+                        <textarea class="form-control text-uppercase" id="observaciones" name="observaciones" maxlength="2000" onChange="cambioObservaciones(this)" required>${docente.infoRegistro[68]}</textarea>                      
                         <br/>
                         <input type="submit" disabled="true" class="btn btn-primary" value="Continuar" id="btnFinalizar">                      
                     </form>
