@@ -116,7 +116,12 @@ public class Datos {
         try{
             String[] parametros={idPrograma,idSubsistema,idEntidad,idPlantel,tipoCategoria};
             List<String[]> datos=metodos.ejecutaSP("sp_consultaVacancias",parametros);
-            if(!datos.isEmpty()){
+           
+            if(idEntidad.isEmpty() && idPlantel.isEmpty() &&tipoCategoria.isEmpty()){
+                return respuesta;
+            }
+            else{
+                if(!datos.isEmpty()){
                 respuesta="";
                 for(String[] dato:datos)
                 {
@@ -129,6 +134,8 @@ public class Datos {
                     //respuesta+="<form method='POST' action='AltaVacancia'><input type='hidden' name='idConvocatoria' value='"+dato[0]+"'><input class='btn btn-sm btn-link' type='submit' value='Editar'/></form>";                                                                                  
                     respuesta+="</tr>";
                 }
+            }
+            
             }
         }catch(Exception e){
             respuesta=e.toString();
