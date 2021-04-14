@@ -8,6 +8,9 @@
 <%@page import='herramientas.Catalogos'%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<%
+    session = (HttpSession) request.getSession(true);       
+%>
 <!DOCTYPE html>
 <html lang="es">
     <head>
@@ -419,9 +422,8 @@
                                 <div class="form-group col-md-6">
                                   <label class="control-label" for="categoriaAspira">Categoría a la que aspira: <span id="avisoCategoria" class="glyphicon glyphicon-warning-sign text-warning hidden"></span></label>
                                   <select class="form-control input-sm" id="categoriaAspira" name="categoriaAspira" onchange="cambioCategoriaAspira()" required>                                     
-                                     ${catalogo.desplegarOpcionesCategoriasVacantes(Docente.infoRegistro[6],Docente.infoRegistro[64],Docente.infoRegistro[42])}
-                                  </select>  
-                                  
+                                     ${catalogo.desplegarOpcionesCategoriasVacantes(Docente.infoRegistro[6],Docente.infoRegistro[64],Docente.infoRegistro[42],Docente.infoRegistro[78])}
+                                  </select>
                                 </div>
                                 <div class="form-group col-md-3">
                                   <label class="control-label" for="jornadaAspira">Tipo de jornada:</label>
@@ -471,7 +473,7 @@
                                 <input class="btn btn-sm btn-primary" id="btnEnviar2" type="submit" value='Validar información'/>
                               </c:if>
                               <!--<input type="button" class="btn btn-sm btn-primary" value="Guardar y continuar" onclick="mostrarSiguiente(1)"/>-->
-                            </div>
+                        </div>
                       </form>
                     
                   </div>
@@ -754,7 +756,7 @@
                           </c:if>
                           <c:if test="${vistaAdmin}">
                             <label class="control-label">Observaciones:</label>
-                            <textarea class="form-control text-uppercase" id="observaciones" name="observaciones" maxlength="200" onKeyUp="cambioObservaciones()" required>${Docente.infoRegistro[67]}</textarea>
+                            <textarea class="form-control text-uppercase" id="observaciones" name="observaciones" maxlength="2000" onKeyUp="cambioObservaciones()" required>${Docente.infoRegistro[67]}</textarea>
                           </c:if>
                           <br/>                          
                           <input type="submit" disabled="true" class="btn btn-primary" value="Continuar" id="btnFinalizar">                      

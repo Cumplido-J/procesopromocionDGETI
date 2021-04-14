@@ -127,7 +127,7 @@
                 <div class="row">
                     <div class="form-group col-md-4">                               
                         <label class="control-label">Correo electrónico:<span class="text-danger" title="Campo obligatorio">*</span></label>
-                        <input type="text" class="form-control input-sm" name="correo" id="correo" required/>
+                        <input type="text" class="form-control input-sm" name="correo" id="correo" maxlength="50" required/>
                         <label class="error" id="alertaCorreo" hidden >Ingrese una dirección de correo válida</label>
                     </div>                    
                 </div>

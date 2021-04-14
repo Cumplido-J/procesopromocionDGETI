@@ -120,6 +120,10 @@ $(document).ready(function () {
                 number:true,
                 minlength:10,
                 maxlength:10
+            },
+            'correo':{
+                number:false,
+                maxlength:50
             }
         },
         messages: {
@@ -163,7 +167,8 @@ $(document).ready(function () {
                 maxlength:"Ingrese el número a diez dígitos"
             },
             'correo':{
-                required: "Campo requerido"
+                required: "Campo requerido",
+                 maxlength:"Longitud de correo de 50 caracteres"
             }
         },
         submitHandler:function(){            

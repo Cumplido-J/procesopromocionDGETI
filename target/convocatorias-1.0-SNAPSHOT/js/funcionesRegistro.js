@@ -118,6 +118,9 @@ $(document).ready(function () {
             },
             'jornadaAspira':{
                 required: "Seleccione una opción"
+            },
+            'opReqCat':{
+                required: "Campo requerido"
             }
         },
         submitHandler:function(){

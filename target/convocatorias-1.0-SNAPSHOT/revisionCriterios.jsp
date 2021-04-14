@@ -918,10 +918,10 @@
                         <p><label class="control-label text-danger ${hiddenDictaminador}">Puntaje total Dictaminador:&nbsp<span id="totalD">${totalDictaminador}</span></label></p>
                         <br/>
                         <label class="control-label">Observaciones Consejo:</label>
-                        <textarea class="form-control text-uppercase ${disabled1}" id="aux" name="observaciones" maxlength="200">${docente.infoRegistro[69]}</textarea>
+                        <textarea class="form-control text-uppercase ${disabled1}" id="aux" name="observaciones" maxlength="2000">${docente.infoRegistro[69]}</textarea>
                         <br/>
                         <label class="control-label ${hiddenDictaminador}">Observaciones Dictaminador:</label>
-                         <textarea class="form-control text-uppercase ${hiddenDictaminador}" id="aux2" name="observacionesD" maxlength="200">${docente.infoRegistro[74]}</textarea>
+                         <textarea class="form-control text-uppercase ${hiddenDictaminador}" id="aux2" name="observacionesD" maxlength="2000">${docente.infoRegistro[74]}</textarea>
                     </div>
                     <br/>                      
                     <!--<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalConfirmacion2">Finalizar registro</button>-->
@@ -1253,14 +1253,14 @@
                       
         <div id="modalArchivo" class="modal fade" role="dialog">
             <div class="modal-dialog">
-              <div class="modal-content">
+              <div class="modal-content" style="width: 700px;height: 672px;">
                 <div class="modal-header">
                   <button type="button" class="close" data-dismiss="modal">&times;</button>
                   <h4 class="modal-title" id="tituloModal">Carga de evidencia documental</h4>
                 </div>
                 <div class="modal-body">
                     <iframe name="ifRespuesta" hidden></iframe>
-                    <iframe style="width:100%;" id="ifArchivo" name="ifArchivo" src="" hidden></iframe>
+                    <iframe style="width:100%;height: 338px;" id="ifArchivo" name="ifArchivo" src="" hidden></iframe>
                     <div id="seccionCarga">
                         <form id="formArchivo" name="formArchivo" method="POST" enctype="multipart/form-data" >
                                 <label class="text-warning" id="alertaCarga"><span class="glyphicon glyphicon-warning-sign"></span>&nbsp;Cárgue todas las evidencias documentales del criterio en un solo archivo PDF</label>
@@ -1307,7 +1307,7 @@
                 </div>
                 <div class="modal-footer">
                   <form action="FinalizaProceso" method="POST">
-                    <textarea class="form-control text-uppercase hidden" id="observaciones" name="observaciones" maxlength="200"></textarea>
+                    <textarea class="form-control text-uppercase hidden" id="observaciones" name="observaciones" maxlength="2000"></textarea>
                     <input type="hidden" id="evaluacion" name="evaluacion" />
                     <input class="btn btn-sm btn-default" type="submit" value='Sí'/>
                     <button type="button" class="btn btn-sm btn-default" data-dismiss="modal">No</button>
