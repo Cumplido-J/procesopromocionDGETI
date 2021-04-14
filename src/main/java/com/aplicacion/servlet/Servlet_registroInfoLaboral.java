@@ -85,7 +85,7 @@ public class Servlet_registroInfoLaboral extends HttpServlet {
         PrintWriter out = response.getWriter();
         try {
             HttpSession session= (HttpSession) request.getSession();
-            String idUsuario="",rfc="",programa="";
+            String idUsuario="",rfc="",programa="",idEntidad="",idPlantel="";
             if(session.getAttribute("rol").toString().equals("D")){
                 idUsuario=session.getAttribute("idUsuario").toString();
                 rfc=session.getAttribute("rfc").toString();
@@ -93,10 +93,11 @@ public class Servlet_registroInfoLaboral extends HttpServlet {
                 idUsuario=session.getAttribute("idDocente").toString();                
                 rfc=session.getAttribute("rfcDocente").toString();
             }
+            
             programa=session.getAttribute("programa").toString();
             //out.println(idUsuario);
             Fecha fecha=new Fecha();
-            String activo,ingresoSubsistema="",ingresoPlantel="",idJornada="",fechaPlaza="",idTipoNombramiento="",fechaUltimaPromocion="",idJornadaAspira="",idPerfilRequerido="",notaSancion="N",idCategoria="",idCategoriaAspira="";
+            String activo,ingresoSubsistema="",ingresoPlantel="",idJornada="",fechaPlaza="",idTipoNombramiento="",fechaUltimaPromocion="",idJornadaAspira="",idPerfilRequerido="",notaSancion="N",idCategoria="",idCategoriaAspira="",nombreVacancia="";
             if(request.getParameter("activoServicio")!=null){
                 activo="S";
                 ingresoSubsistema=fecha.formatoAlmacenar(request.getParameter("ingresoSubsistema"));
@@ -110,7 +111,12 @@ public class Servlet_registroInfoLaboral extends HttpServlet {
                 }else{
                     fechaUltimaPromocion="";
                 }
-                idCategoriaAspira=request.getParameter("categoriaAspira");
+                String categoriaNombre=request.getParameter("categoriaAspira");
+                
+                String[] categoria;
+		categoria = categoriaNombre.split("-");
+                idCategoriaAspira=categoria[0];
+                nombreVacancia=categoria[1];
                 idJornadaAspira=request.getParameter("jornadaAspira");
                 idPerfilRequerido=request.getParameter("opReqCat");                
                 if(request.getParameter("notaDesfavorable")!=null){
@@ -149,6 +155,7 @@ public class Servlet_registroInfoLaboral extends HttpServlet {
                             bandera=true;
                         }
                     }else{
+                        
                         if(categoriaAspira==categoriaActual && jornadaAspira==jornadaActual+1){
                             bandera=true;
                         }else if(categoriaAspira==categoriaActual+1 && jornadaAspira==jornadaActual){
@@ -172,11 +179,15 @@ public class Servlet_registroInfoLaboral extends HttpServlet {
                 if(bandera){
                 //out.println(notaSancion);
                     Metodos_sql metodo = new Metodos_sql();
-                    String[] parametros={idUsuario,activo,ingresoSubsistema,ingresoPlantel,idCategoria,idJornada,fechaPlaza,idTipoNombramiento,fechaUltimaPromocion,idCategoriaAspira,idJornadaAspira,idPerfilRequerido,notaSancion};
+                    String[] parametros={idUsuario,activo,ingresoSubsistema,ingresoPlantel,idCategoria,idJornada,fechaPlaza,idTipoNombramiento,fechaUltimaPromocion,idCategoriaAspira,idJornadaAspira,idPerfilRequerido,notaSancion,nombreVacancia};
                     List<String[]> datos;                           
                     datos=metodo.ejecutaSP("sp_registroInfoLaboral",parametros);           
                     if(!datos.isEmpty()){
-                        out.print("ok");
+                        if(datos.get(0)[0].contains("-")){
+                            out.print("No puede aplicar a esa combinación de categoria y jornada-");
+                        }else{
+                            out.print("ok");
+                        }
                     }else{
                         out.print("Error en almacenamiento de datos, intente nuevamente");
                     }
