@@ -728,8 +728,6 @@ $(document).ready(function () {
         submitHandler:function(){
             var idPermiso=$("#idPermisoD10").val();            
             var aux=$("#btnEnviar10E").val();
-            var aux1=$("#cb10").val();
-            if(!$("#tablaResultados").html().includes("colspan")){
             $.ajax({
                 type:$('#form10E').attr("method"),
                 url:$('#form10E').attr("action"),
@@ -800,10 +798,6 @@ $(document).ready(function () {
                     }
                 }
             });
-        }else{
-                $("#mensaje").html("Debe registrar la información de al menos un resultado educativo");            
-                $("#modalMensaje").modal("show");
-            }
             return false;
         }
     });
