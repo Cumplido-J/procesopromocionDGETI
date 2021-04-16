@@ -705,6 +705,108 @@ $(document).ready(function () {
             return false;
         }
     });
+    $('#form10E').submit(function(e) {
+        e.preventDefault();
+    }).validate({
+        messages: {
+            'puntaje10': {
+                required: "Seleccione una opción"
+            },
+            'puntaje11': {
+                required: "Seleccione una opción"
+            },
+            'puntaje12': {
+                required: "Seleccione una opción"
+            },
+            'puntaje13': {
+                required: "Seleccione una opción"
+            },
+            'puntaje14': {
+                required: "Seleccione una opción"
+            }
+        },
+        submitHandler:function(){
+            var idPermiso=$("#idPermisoD10").val();            
+            var aux=$("#btnEnviar10E").val();
+            var aux1=$("#cb10").val();
+            if(!$("#tablaResultados").html().includes("colspan")){
+            $.ajax({
+                type:$('#form10E').attr("method"),
+                url:$('#form10E').attr("action"),
+                data:$('#form10E').serialize(),
+                beforeSend:function(){
+                    $("#btnEnviar10E").val("Guardando...");
+                    $("#btnEnviar10E").attr("disabled","disabled");
+                },
+                complete:function(){
+                   $("#btnEnviar10E").val(aux); 
+                   $("#btnEnviar10E").removeAttr("disabled");
+                },success:function(data){
+                    if(isNaN(data)){
+                        $("#mensaje").html(data);            
+                        $("#modalMensaje").modal("show");
+                    }
+                    else{
+                        if (idPermiso === "6")
+                        {$("#pEvidenciasD").val(data);}
+                        else
+                        {$("#pEvidencias").val(data);}
+                        
+                        var puntaje=parseFloat($("#pResultado").val())+parseFloat($("#pEvidencias").val());                        
+                        $("#p10").html(puntaje);
+                        
+                        var puntajeD=parseFloat($("#pResultadoD").val())+parseFloat($("#pEvidenciasD").val());                        
+                        $("#p10D").html(puntajeD);
+                        calculaTotal();
+                        
+                        //$("#mensaje").html("Información guardada correctamente");            
+                        //$("#modalMensaje").modal("show");
+                        if (idPermiso === "6")
+                        {
+                            if($("#cb10").is(':checked') && !$("#tablaResultados").html().includes("glyphicon-exclamation-sign")){
+                                $("#estatus10D").attr("class","glyphicon glyphicon-ok-sign completo");
+                                $("#estatus10D").attr("title","Sección completa");
+                                $("#estatus10D").attr("completo",true);
+                                
+                                $("#mensaje").html("Información guardada correctamente");            
+                                $("#modalMensaje").modal("show");
+                            }else{
+                                $("#estatus10D").attr("class","glyphicon glyphicon-exclamation-sign incompleto");
+                                $("#estatus10D").attr("title","Sección incompleta");
+                                $("#estatus10D").attr("completo",false);
+                                
+                                $("#mensaje").html("Marcar la casilla si no cuenta con evidencia.");            
+                                $("#modalMensaje").modal("show");
+                            }
+                        }
+                        else
+                        {
+                            if($("#cb10").is(':checked') && !$("#tablaResultados").html().includes("glyphicon-exclamation-sign")){
+                                $("#estatus10").attr("class","glyphicon glyphicon-ok-sign completo");
+                                $("#estatus10").attr("title","Sección completa");
+                                $("#estatus10").attr("completo",true);
+                                
+                                $("#mensaje").html("Información guardada correctamente");            
+                                $("#modalMensaje").modal("show");
+                            }else{
+                                $("#estatus10").attr("class","glyphicon glyphicon-exclamation-sign incompleto");
+                                $("#estatus10").attr("title","Sección incompleta");
+                                $("#estatus10").attr("completo",false);
+                                
+                                $("#mensaje").html("Marcar la casilla si no cuenta con evidencia.");            
+                                $("#modalMensaje").modal("show");
+                            }
+                        }
+                    }
+                }
+            });
+        }else{
+                $("#mensaje").html("Debe registrar la información de al menos un resultado educativo");            
+                $("#modalMensaje").modal("show");
+            }
+            return false;
+        }
+    });
     $('#formCursos').submit(function(e) {
         e.preventDefault();
     }).validate({

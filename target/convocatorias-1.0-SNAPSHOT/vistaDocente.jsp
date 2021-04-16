@@ -7,6 +7,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<%@page import='herramientas.Catalogos'%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -18,6 +19,7 @@
         <link href="https://framework-gb.cdn.gob.mx/assets/styles/main.css" rel="stylesheet">
         <%@page import='herramientas.Imagen'%>
         <%@page import='herramientas.RutaConfig'%>
+        <jsp:useBean id="catalogo" class="herramientas.Catalogos" />
         
     </head>
     <body>
@@ -148,6 +150,22 @@
                         <a href="FichaRegistro"  target="_blank" ><h3>Ficha de <br/> registro </h3></a>
                     </article>
                 </c:if>
+                    <c:choose>
+                        <c:when test='${sessionScope["permisoActual"]=="6"}'>                                            
+                            <article class="articleses">
+                                <form id="formFinal" role="form" action="RevisionFinal" method="POST">
+                                    <h3></h3>
+                                    <a href=""  target="_blank" ><h3>Revision final:</h3></a>
+                                    <select class="form-control input-sm" id="revisionfinal" name="revisionfinal" required>
+                                            ${catalogo.desplegarCatalogosEstatusFinal(sessionScope["idDocente"])}                                
+                                    </select>
+                                    <div style="margin-top: 10px;">
+                                        <input class="btn btn-sm btn-primary" id="btnEnviarCurso" type="submit" value='Guardar' style="margin-right: 105px;"/>
+                                    </div>
+                                </form>
+                            </article>
+                        </c:when>
+                    </c:choose>        
                 <!--
                 <article class="articleses">
                     <h3>Paso 5:<span class="glyphicon glyphicon-ok-sign completo hidden" title="Sección completa"></span></h3>
