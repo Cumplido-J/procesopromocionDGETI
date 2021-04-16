@@ -795,7 +795,7 @@
                       </div>
                       <div class="panel-collapse collapse" id="panel10">
                         <div class="panel-body">
-                            <form id="form10" role="form" action="RegistrarCriterio" method="POST">
+                            <form id="form10E" role="form" action="RegistrarCriterio" method="POST">
                                 <input type='hidden' name='idCriterio' value='${criterios[9][0]}'>
                                 <input type='hidden' name='idPermisoD10' id="idPermisoD10" value='${sessionScope["permisoActual"]}'>    
                                 <div class="row">
@@ -903,8 +903,13 @@
                                     </c:if>
                                 </div>
                                 <div class="col-xs-12 text-right">
+                                <div class="row">
+                                    <div class="checkbox col-xs-12 text-left">                                  
+                                      <label><input type="checkbox" id="cb10" name="cbConstancia">Marque la casilla si no cuenta con evidencias de este criterio</label>
+                                    </div>
+                                </div>
                                     
-                                    <input class="btn btn-sm btn-primary" id="btnEnviar10" type="submit" value='Guardar y continuar'/>                                    
+                                    <input class="btn btn-sm btn-primary" id="btnEnviar10E" type="submit" value='Guardar y continuar'/>                                    
                                 </div>
                             </form>
                         </div>

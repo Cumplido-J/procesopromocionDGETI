@@ -637,6 +637,34 @@ public class Catalogos {
             return respuesta;        
         }
     }
+    public String desplegarCatalogosEstatusFinal(String idUsuario){        
+        String respuesta="<option value=''>-Seleccione-</option>";
+        String idPermisoActual="";
+        
+        String[] parametros1={idUsuario};
+                List<String[]> datos1=metodos.ejecutaSP("sp_consultaRegistro",parametros1);
+                if(!datos1.isEmpty()){
+                    idPermisoActual=datos1.get(0)[66];
+                }
+                
+                String[] parametros={idUsuario};
+        try{
+            List<String[]> datos=metodos.ejecutaSP("sp_selectCatEstatusFinalidUsuario",parametros);
+            for(String[] dato:datos){
+                respuesta+="<option value='"+dato[0]+"'>"+dato[1]+"</option>";
+            }
+            if(idPermisoActual.equals("14") || idPermisoActual.equals("15") || idPermisoActual.equals("16")){
+             String aux="value='"+idPermisoActual+"'";
+            respuesta=respuesta.replaceFirst(aux, aux+" selected");   
+            }
+            
+        }catch(Exception e){
+            respuesta=e.toString();
+        }finally{
+            return respuesta;        
+        }
+    }
+    
      public String desplegarConvocatorio(String nombreUsuario, String _idEntidad, String _idPlantel, String _idEstatus){        
         String respuesta="";
         String[] parametros={nombreUsuario, _idEntidad, _idPlantel, _idEstatus};
