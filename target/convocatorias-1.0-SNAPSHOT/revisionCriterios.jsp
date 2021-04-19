@@ -905,7 +905,7 @@
                                 <div class="col-xs-12 text-right">
                                 <div class="row">
                                     <div class="checkbox col-xs-12 text-left">                                  
-                                      <label><input type="checkbox" id="cb10" name="cbConstancia">Marque la casilla si no cuenta con evidencias de este criterio</label>
+                                      <label><input type="checkbox" id="cb10" name="cbConstancia">Marque la casilla si no cuenta con evidencias o no presenta las suficientes para acreditar el cumplimiento de este criterio de valoración.</label>
                                     </div>
                                 </div>
                                     
