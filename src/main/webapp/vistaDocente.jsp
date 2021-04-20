@@ -365,5 +365,41 @@ function validaArchivo_(){
                 $("#modalArchivo").modal("show");
             }
         </script>
+        <script>
+            $('#formFinal').submit(function(e) {
+                e.preventDefault();
+            }).validate({ 
+                    messages: {
+                    'revisionfinal': {
+                        required: "Seleccione una opción"
+                    }
+                },
+                submitHandler:function(){
+                    $.ajax({
+                        type:$('#formFinal').attr("method"),
+                        url:$('#formFinal').attr("action"),
+                        data:$('#formFinal').serialize(),
+                        beforeSend:function(){
+                            $("#btnEnviarCurso").val("Guardando...");
+                            $("#btnEnviarCurso").attr("disabled","disabled");
+                        },
+                        complete:function(){
+                           $("#btnEnviarCurso").val("Guardar"); 
+                           $("#btnEnviarCurso").removeAttr("disabled");
+                        },success:function(data){
+                            if(data.includes("ok")){
+                                $("#mensaje").html(data);            
+                                $("#modalMensaje").modal("show");
+                            }
+                            else{
+                                $("#mensaje").html(data);            
+                                $("#modalMensaje").modal("show");
+                            }                    
+                        }
+                    });
+                    return false;
+                }
+            });
+        </script>
     </body>
 </html>
