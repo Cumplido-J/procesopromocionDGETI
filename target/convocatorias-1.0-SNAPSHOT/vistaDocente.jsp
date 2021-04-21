@@ -310,7 +310,7 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
         <script src="https://framework-gb.cdn.gob.mx/assets/scripts/jquery-ui-datepicker.js"></script>
-        <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.1/jquery.validate.min.js"></script>
+        <script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.1/jquery.validate.min.js"></script>
         <script src="js/funcionesRegistro.js"></script> 
         <script>
             function subirArchivo_(){
@@ -364,42 +364,6 @@ function validaArchivo_(){
                 
                 $("#modalArchivo").modal("show");
             }
-        </script>
-        <script>
-            $('#formFinal').submit(function(e) {
-                e.preventDefault();
-            }).validate({ 
-                    messages: {
-                    'revisionfinal': {
-                        required: "Seleccione una opción"
-                    }
-                },
-                submitHandler:function(){
-                    $.ajax({
-                        type:$('#formFinal').attr("method"),
-                        url:$('#formFinal').attr("action"),
-                        data:$('#formFinal').serialize(),
-                        beforeSend:function(){
-                            $("#btnEnviarCurso").val("Guardando...");
-                            $("#btnEnviarCurso").attr("disabled","disabled");
-                        },
-                        complete:function(){
-                           $("#btnEnviarCurso").val("Guardar"); 
-                           $("#btnEnviarCurso").removeAttr("disabled");
-                        },success:function(data){
-                            if(data.includes("ok")){
-                                $("#mensaje").html(data);            
-                                $("#modalMensaje").modal("show");
-                            }
-                            else{
-                                $("#mensaje").html(data);            
-                                $("#modalMensaje").modal("show");
-                            }                    
-                        }
-                    });
-                    return false;
-                }
-            });
         </script>
     </body>
 </html>
