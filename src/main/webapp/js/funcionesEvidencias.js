@@ -728,8 +728,6 @@ $(document).ready(function () {
         submitHandler:function(){
             var idPermiso=$("#idPermisoD10").val();            
             var aux=$("#btnEnviar10E").val();
-            var aux1=$("#cb10").val();
-            if(!$("#tablaResultados").html().includes("colspan")){
             $.ajax({
                 type:$('#form10E').attr("method"),
                 url:$('#form10E').attr("action"),
@@ -763,7 +761,7 @@ $(document).ready(function () {
                         //$("#modalMensaje").modal("show");
                         if (idPermiso === "6")
                         {
-                            if($("#cb10").is(':checked') && !$("#tablaResultados").html().includes("glyphicon-exclamation-sign")){
+                            if(($("#cb10").is(':checked') && !$("#tablaResultados").html().includes("glyphicon-exclamation-sign"))||$("#btnEvidencia18").val().includes("Ver")){
                                 $("#estatus10D").attr("class","glyphicon glyphicon-ok-sign completo");
                                 $("#estatus10D").attr("title","Sección completa");
                                 $("#estatus10D").attr("completo",true);
@@ -781,7 +779,7 @@ $(document).ready(function () {
                         }
                         else
                         {
-                            if($("#cb10").is(':checked') && !$("#tablaResultados").html().includes("glyphicon-exclamation-sign")){
+                            if(($("#cb10").is(':checked') && !$("#tablaResultados").html().includes("glyphicon-exclamation-sign"))||$("#btnEvidencia18").val().includes("Ver")){
                                 $("#estatus10").attr("class","glyphicon glyphicon-ok-sign completo");
                                 $("#estatus10").attr("title","Sección completa");
                                 $("#estatus10").attr("completo",true);
@@ -800,10 +798,6 @@ $(document).ready(function () {
                     }
                 }
             });
-        }else{
-                $("#mensaje").html("Debe registrar la información de al menos un resultado educativo");            
-                $("#modalMensaje").modal("show");
-            }
             return false;
         }
     });

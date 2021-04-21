@@ -91,7 +91,7 @@ public class Servlet_Revision_Final extends HttpServlet {
                     datos=metodo.ejecutaSP("sp_actualizaEstatusAspirante",parametros); 
             if(!datos.isEmpty()){
                         if(datos.get(0)[0].contains("ok")){
-                            out.print("Se guardo correctamente.");
+                            out.print("Se guardó correctamente.");
                         }
             }else{
                         out.print("Error en almacenamiento de datos, intente nuevamente");
