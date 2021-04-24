@@ -20,7 +20,7 @@ public class CriteriosValoracion {
         metodo=new Metodos_sql();
         fecha=new Fecha();
     }    
-    public String[] getFilasCursos(String idUsuario,boolean vistaAdmin, String idPermiso){   
+    public String[] getFilasCursos(String idUsuario,boolean vistaAdmin, String idPermiso,String permisoActualEdicion){   
         String[] respuesta={"","",""}; 
         String valido;
         int puntaje=0;
@@ -28,6 +28,7 @@ public class CriteriosValoracion {
         int puntajeD=0;
         int horasD=0;
         String[] parametros={idUsuario};
+        String permisoEdicion = permisoActualEdicion.equals("F") ? "disabled" : "";
         List<String[]> datos=metodo.ejecutaSP("sp_selectCursos",parametros);
         if(datos.isEmpty()){
             respuesta[0]="<tr><td colspan='7'>Sin información</td></tr>";
@@ -77,10 +78,10 @@ public class CriteriosValoracion {
                 {valido = dato[9];}
                 if(vistaAdmin){
                     if(valido==null){
-                        respuesta[0]+="<button type='button' class='btn btn-sm' title='Aprobar' onclick='aprobarCurso("+dato[0]+")'>";
+                        respuesta[0]+="<button type='button' class='btn btn-sm  " + permisoEdicion + "' title='Aprobar' onclick='aprobarCurso("+dato[0]+")'>";
                         respuesta[0]+="<span class='glyphicon glyphicon-ok completo'></span>";
                         respuesta[0]+="</button>";
-                        respuesta[0]+="<button type='button' class='btn btn-sm' title='No cumple con la evidencia' onclick='rechazarCurso("+dato[0]+")'>";
+                        respuesta[0]+="<button type='button' class='btn btn-sm  " + permisoEdicion + "' title='No cumple con la evidencia' onclick='rechazarCurso("+dato[0]+")'>";
                         respuesta[0]+="<span class='glyphicon glyphicon-remove incompleto'></span>";                    
                         respuesta[0]+="</button>";
                         respuesta[0]+="<span class='glyphicon glyphicon-exclamation-sign incompleto' title='Sección incompleta'></span>";
@@ -120,12 +121,13 @@ public class CriteriosValoracion {
         respuesta[2]=""+puntajeD;
         return respuesta;
     }
-    public String[] getFilasAportaciones(String idUsuario,boolean vistaAdmin, String idPermiso){   
+    public String[] getFilasAportaciones(String idUsuario,boolean vistaAdmin, String idPermiso,String permisoActualEdicion){   
         String respuesta;
         String puntaje, puntajeD;
         String valido;
         String[] retorno={"","0","0"};
         String[] parametros={idUsuario};
+        String permisoEdicion = permisoActualEdicion.equals("F") ? "disabled" : "";
         int validos=0;
         int validosD=0;
         List<String[]> datos=metodo.ejecutaSP("sp_consultaAportaciones",parametros);
@@ -163,10 +165,10 @@ public class CriteriosValoracion {
                 {valido = dato[8];}
                 if(vistaAdmin){
                     if(valido==null){
-                        respuesta+="<button type='button' class='btn btn-sm' title='Aprobar' onclick='aprobarAportacion("+dato[0]+")'>";
+                        respuesta+="<button type='button' class='btn btn-sm " + permisoEdicion + "' title='Aprobar' onclick='aprobarAportacion("+dato[0]+")'>";
                         respuesta+="<span class='glyphicon glyphicon-ok completo'></span>";
                         respuesta+="</button>";
-                        respuesta+="<button type='button' class='btn btn-sm' title='No cumple con la evidencia' onclick='rechazarAportacion("+dato[0]+")'>";
+                        respuesta+="<button type='button' class='btn btn-sm " + permisoEdicion + "' title='No cumple con la evidencia' onclick='rechazarAportacion("+dato[0]+")'>";
                         respuesta+="<span class='glyphicon glyphicon-remove incompleto'></span>";                    
                         respuesta+="</button>";
                         respuesta+="<span class='glyphicon glyphicon-exclamation-sign incompleto' title='Sección incompleta'></span>";
@@ -232,11 +234,12 @@ public class CriteriosValoracion {
         retorno[2]=puntajeD;
         return retorno;
     }
-    public String[] getFilasParticipaciones(String idUsuario,boolean vistaAdmin, String idPermiso){   
+    public String[] getFilasParticipaciones(String idUsuario,boolean vistaAdmin, String idPermiso,String permisoActualEdicion){   
         String[] retorno={"","0","0"};
         String respuesta;
         String puntaje, valido, puntajeD;
         String[] parametros={idUsuario};
+        String permisoEdicion = permisoActualEdicion.equals("F") ? "disabled" : "";
         List<String[]> datos=metodo.ejecutaSP("sp_consultaParticipaciones",parametros);
         int validos=0;
         int validosD=0;
@@ -274,10 +277,10 @@ public class CriteriosValoracion {
                 {valido = dato[8];}                
                 if(vistaAdmin){
                     if(valido==null){
-                        respuesta+="<button type='button' class='btn btn-sm' title='Aprobar' onclick='aprobarParticipacion("+dato[0]+")'>";
+                        respuesta+="<button type='button' class='btn btn-sm " + permisoEdicion + "' title='Aprobar' onclick='aprobarParticipacion("+dato[0]+")'>";
                         respuesta+="<span class='glyphicon glyphicon-ok completo'></span>";
                         respuesta+="</button>";
-                        respuesta+="<button type='button' class='btn btn-sm' title='No cumple con la evidencia' onclick='rechazarParticipacion("+dato[0]+")'>";
+                        respuesta+="<button type='button' class='btn btn-sm " + permisoEdicion + "' title='No cumple con la evidencia' onclick='rechazarParticipacion("+dato[0]+")'>";
                         respuesta+="<span class='glyphicon glyphicon-remove incompleto'></span>";                    
                         respuesta+="</button>";
                         respuesta+="<span class='glyphicon glyphicon-exclamation-sign incompleto' title='Sección incompleta'></span>";
@@ -343,11 +346,12 @@ public class CriteriosValoracion {
         retorno[2]=puntajeD;
         return retorno;
     }
-    public String[] getFilasTutorias(String idUsuario,boolean vistaAdmin, String idPermiso){   
+    public String[] getFilasTutorias(String idUsuario,boolean vistaAdmin, String idPermiso,String permisoActualEdicion){   
         String respuesta, valido;
         String[] retorno={"","0","0"};
         String puntaje="0", puntajeD="0";
         String[] parametros={idUsuario};
+        String permisoEdicion = permisoActualEdicion.equals("F") ? "disabled" : "";
         List<String[]> datos=metodo.ejecutaSP("sp_selectTutorias",parametros);
         int validos=0;
         int validosD=0;
@@ -383,10 +387,10 @@ public class CriteriosValoracion {
                 {valido = dato[5];}                 
                 if(vistaAdmin){
                     if(valido==null){
-                        respuesta+="<button type='button' class='btn btn-sm' title='Aprobar' onclick='aprobarTutoria("+dato[0]+")'>";
+                        respuesta+="<button type='button' class='btn btn-sm " + permisoEdicion + "' title='Aprobar' onclick='aprobarTutoria("+dato[0]+")'>";
                         respuesta+="<span class='glyphicon glyphicon-ok completo'></span>";
                         respuesta+="</button>";
-                        respuesta+="<button type='button' class='btn btn-sm' title='No cumple con la evidencia' onclick='rechazarTutoria("+dato[0]+")'>";
+                        respuesta+="<button type='button' class='btn btn-sm " + permisoEdicion + "' title='No cumple con la evidencia' onclick='rechazarTutoria("+dato[0]+")'>";
                         respuesta+="<span class='glyphicon glyphicon-remove incompleto'></span>";                    
                         respuesta+="</button>";
                         respuesta+="<span class='glyphicon glyphicon-exclamation-sign incompleto' title='Sección incompleta'></span>";
@@ -426,13 +430,14 @@ public class CriteriosValoracion {
         retorno[2]=puntajeD;
         return retorno;
     }
-    public String[] getFilasPublicaciones(String idUsuario,boolean vistaAdmin, String idPermiso){   
+    public String[] getFilasPublicaciones(String idUsuario,boolean vistaAdmin, String idPermiso,String permisoActualEdicion){   
         String respuesta, valido;
         String puntaje="0", puntajeD="0";
         String[] retorno={"","0","0"};
         String[] parametros={idUsuario};
         int validos=0;
         int validosD=0;
+        String permisoEdicion = permisoActualEdicion.equals("F") ? "disabled" : "";
         List<String[]> datos=metodo.ejecutaSP("sp_selectPublicaciones",parametros);
         if(datos.isEmpty()){
             respuesta="<tr><td colspan='5'>Sin información</td></tr>";
@@ -464,10 +469,10 @@ public class CriteriosValoracion {
                 {valido = dato[6];}                  
                 if(vistaAdmin){
                     if(valido==null){
-                        respuesta+="<button type='button' class='btn btn-sm' title='Aprobar' onclick='aprobarPublicacion("+dato[0]+")'>";
+                        respuesta+="<button type='button' class='btn btn-sm " + permisoEdicion + "' title='Aprobar' onclick='aprobarPublicacion("+dato[0]+")'>";
                         respuesta+="<span class='glyphicon glyphicon-ok completo'></span>";
                         respuesta+="</button>";
-                        respuesta+="<button type='button' class='btn btn-sm' title='No cumple con la evidencia' onclick='rechazarPublicacion("+dato[0]+")'>";
+                        respuesta+="<button type='button' class='btn btn-sm " + permisoEdicion + "' title='No cumple con la evidencia' onclick='rechazarPublicacion("+dato[0]+")'>";
                         respuesta+="<span class='glyphicon glyphicon-remove incompleto'></span>";                    
                         respuesta+="</button>";
                         respuesta+="<span class='glyphicon glyphicon-exclamation-sign incompleto' title='Sección incompleta'></span>";
@@ -507,11 +512,12 @@ public class CriteriosValoracion {
         retorno[2]=puntajeD;
         return retorno;
     }
-    public String[] getFilasResultados(String idUsuario,boolean vistaAdmin, String idPermiso){   
+    public String[] getFilasResultados(String idUsuario,boolean vistaAdmin, String idPermiso,String permisoActualEdicion){   
         String respuesta, valido;
         String puntaje="0", puntajeD="0";
         String[] retorno=new String[3];
         String[] parametros={idUsuario};
+        String permisoEdicion = permisoActualEdicion.equals("F") ? "disabled" : "";
         int validos=0;
         int validosD=0;
         List<String[]> datos=metodo.ejecutaSP("sp_consultaResultados",parametros);
@@ -548,10 +554,10 @@ public class CriteriosValoracion {
                 {valido = dato[7];}                 
                 if(vistaAdmin){
                     if(valido==null){
-                        respuesta+="<button type='button' class='btn btn-sm' title='Aprobar' onclick='aprobarResultado("+dato[0]+")'>";
+                        respuesta+="<button type='button' class='btn btn-sm " + permisoEdicion + "' title='Aprobar' onclick='aprobarResultado("+dato[0]+")'>";
                         respuesta+="<span class='glyphicon glyphicon-ok completo'></span>";
                         respuesta+="</button>";
-                        respuesta+="<button type='button' class='btn btn-sm' title='No cumple con la evidencia' onclick='rechazarResultado("+dato[0]+")'>";
+                        respuesta+="<button type='button' class='btn btn-sm " + permisoEdicion + "' title='No cumple con la evidencia' onclick='rechazarResultado("+dato[0]+")'>";
                         respuesta+="<span class='glyphicon glyphicon-remove incompleto'></span>";                    
                         respuesta+="</button>";
                         respuesta+="<span class='glyphicon glyphicon-exclamation-sign incompleto' title='Sección incompleta'></span>";

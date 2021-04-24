@@ -104,7 +104,7 @@ public class Servlet_registrarTutoria extends HttpServlet {
                 datos=metodo.ejecutaSP("sp_insertTutorias",parametros);            
                 if(!datos.isEmpty()){
                     if(datos.get(0)[0].equals("ok")){
-                        String[] info=new CriteriosValoracion().getFilasTutorias(idUsuario,vistaAdmin, idPermiso);
+                        String[] info=new CriteriosValoracion().getFilasTutorias(idUsuario,vistaAdmin, idPermiso,session.getAttribute("permisoActualEdicion").toString());
                         out.print(info[0]+"||"+info[1]+"||"+info[2]);                    
                     }else{
                         out.print(datos.get(0)[0]);
@@ -127,7 +127,7 @@ public class Servlet_registrarTutoria extends HttpServlet {
                 }                            
                 if(!datos.isEmpty()){
                     if(datos.get(0)[0].equals("ok")){
-                        String[] info=new CriteriosValoracion().getFilasTutorias(idUsuario,vistaAdmin, idPermiso);
+                        String[] info=new CriteriosValoracion().getFilasTutorias(idUsuario,vistaAdmin, idPermiso,session.getAttribute("permisoActualEdicion").toString());
                         out.print(info[0]+"||"+info[1]+"||"+info[2]);                    
                     }
                 }else{

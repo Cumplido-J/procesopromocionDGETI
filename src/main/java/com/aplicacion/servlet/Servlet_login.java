@@ -135,6 +135,7 @@ public class Servlet_login extends HttpServlet {
                     session.setAttribute("nivel", datos.get(0)[12]);
                     session.setAttribute("permisoEdicion", datos.get(0)[14]);
                     session.setAttribute("permisoActual","");
+                    session.setAttribute("permisoActualEdicion","");
                     if(datos.get(0)[7].equals("D")){
                         String[] parametros1={datos.get(0)[3],datos.get(0)[11],datos.get(0)[1],"D"};
                         List<String[]> datos1=metodos.ejecutaSP(ConstantsWS.SP_FECHAS_CONVOCATORIA,parametros1);
@@ -155,15 +156,18 @@ public class Servlet_login extends HttpServlet {
                                 String[] vinculo = null;
                                 for(String[] dato:datos){
                                     //System.out.println(dato[8]+"-"+dato[9]+"-"+dato[10]);
-                                    vinculo=new String[3];
+                                    vinculo=new String[4];
                                     vinculo[0]=dato[8];
                                     vinculo[1]=dato[9];
                                     vinculo[2]=dato[10];
+                                    vinculo[3]=dato[14];
                                     vinculos.add(vinculo);
                                 }
 
                                 if (vinculos.size()== 1)
-                                { session.setAttribute("permisoActual",(vinculos.get(0))[0]); }                        
+                                { session.setAttribute("permisoActual",(vinculos.get(0))[0]); 
+                                  session.setAttribute("permisoActualEdicion",(vinculos.get(0))[3]);
+                                }                        
 
                                 session.setAttribute("vinculos",vinculos);
                                 response.sendRedirect("SesionAdministrador"); 
@@ -177,15 +181,18 @@ public class Servlet_login extends HttpServlet {
                             String[] vinculo = null;
                             for(String[] dato:datos){
                                 //System.out.println(dato[8]+"-"+dato[9]+"-"+dato[10]);
-                                vinculo=new String[3];
+                                vinculo=new String[4];
                                 vinculo[0]=dato[8];
                                 vinculo[1]=dato[9];
                                 vinculo[2]=dato[10];
+                                vinculo[3]=dato[14];
                                 vinculos.add(vinculo);
                             }
 
                             if (vinculos.size()== 1)
-                            { session.setAttribute("permisoActual",(vinculos.get(0))[0]); }                        
+                            { session.setAttribute("permisoActual",(vinculos.get(0))[0]); 
+                              session.setAttribute("permisoActualEdicion",(vinculos.get(0))[3]);
+                            }                        
 
                             session.setAttribute("vinculos",vinculos);
                             response.sendRedirect("SesionAdministrador");   
