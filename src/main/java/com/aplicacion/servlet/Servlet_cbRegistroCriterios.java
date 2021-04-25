@@ -67,7 +67,7 @@ public class Servlet_cbRegistroCriterios extends HttpServlet {
             throws ServletException, IOException {
         HttpSession session= (HttpSession) request.getSession();     
         if(session.getAttribute("rol")!=null){
-            String idUsuario,rfc, idPermiso;
+            String idUsuario,rfc, idPermiso, permisoEdicion;
             boolean vistaAdmin;
             if(session.getAttribute("rol").toString().equals("D")){
                 idUsuario=session.getAttribute("idUsuario").toString();
@@ -80,6 +80,7 @@ public class Servlet_cbRegistroCriterios extends HttpServlet {
             }           
             Docente docente;  
             idPermiso = session.getAttribute("permisoActual").toString();
+            permisoEdicion = session.getAttribute("permisoActualEdicion").toString();
             Metodos_sql metodos=new Metodos_sql();
             CriteriosValoracion cv=new CriteriosValoracion();
             String[] parametros={""};            
@@ -96,12 +97,12 @@ public class Servlet_cbRegistroCriterios extends HttpServlet {
             request.setAttribute("criterios", criterios);
             request.setAttribute("puntajes", puntajes);
             request.setAttribute("puntajeEncuestas", puntajeEncuestas);            
-            request.setAttribute("cursos", cv.getFilasCursos(idUsuario,vistaAdmin, idPermiso));
-            request.setAttribute("aportaciones", cv.getFilasAportaciones(idUsuario,vistaAdmin, idPermiso));
-            request.setAttribute("participaciones", cv.getFilasParticipaciones(idUsuario,vistaAdmin, idPermiso));
-            request.setAttribute("tutorias", cv.getFilasTutorias(idUsuario,vistaAdmin, idPermiso));
-            request.setAttribute("publicaciones", cv.getFilasPublicaciones(idUsuario,vistaAdmin, idPermiso));
-            request.setAttribute("resultados", cv.getFilasResultados(idUsuario,vistaAdmin, idPermiso));
+            request.setAttribute("cursos", cv.getFilasCursos(idUsuario,vistaAdmin, idPermiso, permisoEdicion));
+            request.setAttribute("aportaciones", cv.getFilasAportaciones(idUsuario,vistaAdmin, idPermiso, permisoEdicion));
+            request.setAttribute("participaciones", cv.getFilasParticipaciones(idUsuario,vistaAdmin, idPermiso, permisoEdicion));
+            request.setAttribute("tutorias", cv.getFilasTutorias(idUsuario,vistaAdmin, idPermiso, permisoEdicion));
+            request.setAttribute("publicaciones", cv.getFilasPublicaciones(idUsuario,vistaAdmin, idPermiso, permisoEdicion));
+            request.setAttribute("resultados", cv.getFilasResultados(idUsuario,vistaAdmin, idPermiso, permisoEdicion));
             request.setAttribute("vistaAdmin", vistaAdmin);
             
             if (idPermiso.equals("6"))

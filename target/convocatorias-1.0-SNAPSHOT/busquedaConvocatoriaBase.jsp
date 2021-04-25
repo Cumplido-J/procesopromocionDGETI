@@ -40,9 +40,8 @@
                 <c:set var="disabled4" value="disabled"></c:set>
             </c:if>
             <c:if test='${sessionScope["rol"]=="A"}'>
+                <c:set var="disabled2" value=""></c:set>
                 <c:set var="disabled3" value=""></c:set>
-            </c:if>
-            <c:if test='${sessionScope["rol"]=="A"}'>
                 <c:set var="disabled4" value=""></c:set>
             </c:if>
         </c:if>

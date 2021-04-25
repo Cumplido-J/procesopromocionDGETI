@@ -38,11 +38,17 @@
             <c:if test='${sessionScope["plantel"]!=null}'>
                 <c:set var="disabled4" value="disabled"></c:set>
             </c:if>
-            <c:if test='${sessionScope["rol"]=="A"}'>
+            <c:if test='${sessionScope["rol"]=="A" && sessionScope["entidad"]=="" && sessionScope["plantel"]==""}'>
                 <c:set var="disabled3" value=""></c:set>
-            </c:if>
-            <c:if test='${sessionScope["rol"]=="A"}'>
                 <c:set var="disabled4" value=""></c:set>
+            </c:if>
+            <c:if test='${sessionScope["rol"]=="A" && sessionScope["entidad"]!="" && sessionScope["plantel"]==""}'>
+                <c:set var="disabled3" value="disabled"></c:set>
+                <c:set var="disabled4" value=""></c:set>
+            </c:if>
+            <c:if test='${sessionScope["rol"]=="A" && sessionScope["entidad"]!="" && sessionScope["plantel"]!=""}'>
+                <c:set var="disabled3" value="disabled"></c:set>
+                <c:set var="disabled4" value="disabled"></c:set>
             </c:if>
         </c:if>
         <main class="page">

@@ -68,8 +68,11 @@ public class Servlet_estableceSesionPermiso extends HttpServlet {
             /* TODO output your page here. You may use following sample code. */
             String respuesta = null;
             String key=request.getParameter("e");
+            String edicion=request.getParameter("p");
             
-            HttpSession session= (HttpSession) request.getSession(true); 
+            HttpSession session= (HttpSession) request.getSession(true);
+            session.setAttribute("permisoActualEdicion",edicion);
+            respuesta = session.getAttribute("permisoActualEdicion").toString();
             session.setAttribute("permisoActual",key);
             respuesta = session.getAttribute("permisoActual").toString();            
             

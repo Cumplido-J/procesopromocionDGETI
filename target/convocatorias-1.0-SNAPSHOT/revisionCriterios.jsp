@@ -38,6 +38,7 @@
                     <ul class="nav navbar-nav navbar-right">      
                         <c:set var="hiddenDictaminador" value="hidden"></c:set>
                         <c:set var="disabled1" value=""></c:set>
+                        <c:set var="disabledEdicion" value=""></c:set>
                         <c:if test="${!vistaAdmin}">
                             <li><a href="SesionDocente">Regresar </a></li>
                             <c:set var="hidden" value="hidden"></c:set>
@@ -48,7 +49,11 @@
                             <c:if test='${sessionScope["permisoActual"]=="6"}'>
                                 <c:set var="hiddenDictaminador" value=""></c:set>
                                 <c:set var="disabled1" value="disabled"></c:set>
+                            </c:if>
+                            <c:if test='${sessionScope["permisoActualEdicion"]=="F"}'>
+                                <c:set var="disabledEdicion" value="disabled"></c:set>
                             </c:if>                            
+                            
                         </c:if>
                         <li><a href="Servlet_cerrarsesion">Cerrar sesión</a></li> 
                     </ul>
@@ -123,13 +128,13 @@
                                         <input id="btnEvidencia2" type="button" class="btn btn-sm btn-link" value="Ver archivo" onclick="abrirModalArchivo(2)"/>                                    
                                     </c:if>
                                     <c:if test = "${docente.documentoCargado2('2')==false}">
-                                        <input id="btnEvidencia2" type="button" class="btn btn-sm btn-link incompleto" value="Subir archivo" onclick="abrirModalArchivo(2)"/>
+                                        <input id="btnEvidencia2" type="button" class="btn btn-sm btn-link incompleto ${disabledEdicion}" value="Subir archivo" onclick="abrirModalArchivo(2)"/>
                                         <span class="glyphicon glyphicon-exclamation-sign incompleto" id="alertaBtnEvidencia2" title="Sección incompleta"></span>  
                                     </c:if> 
                                 </div>
                                 <div class="col-xs-12 text-right">
                                     
-                                    <input class="btn btn-sm btn-primary" id="btnEnviar1" type="submit" value='Guardar y continuar'/>                                    
+                                    <input class="btn btn-sm btn-primary ${disabledEdicion}" id="btnEnviar1" type="submit" value='Guardar y continuar'/>                                    
                                 </div>
                             </form>
                         </div>
@@ -195,14 +200,14 @@
                                         <input id="btnEvidencia10" type="button" class="btn btn-sm btn-link" value="Ver archivo" onclick="abrirModalArchivo(10)"/>                                                                            
                                     </c:if>
                                     <c:if test = "${docente.documentoCargado2('10')==false}">
-                                        <input id="btnEvidencia10" type="button" class="btn btn-sm btn-link incompleto" value="Subir archivo" onclick="abrirModalArchivo(10)"/>
+                                        <input id="btnEvidencia10" type="button" class="btn btn-sm btn-link incompleto ${disabledEdicion}" value="Subir archivo" onclick="abrirModalArchivo(10)"/>
                                         <span class="glyphicon glyphicon-exclamation-sign incompleto" id="alertaBtnEvidencia10" title="Sección incompleta"></span>  
                                     </c:if>
                                     
                                 </div>
                                 <div class="col-xs-12 text-right">
                                     
-                                    <input class="btn btn-sm btn-primary" id="btnEnviar2" type="submit" value='Guardar y continuar'/>                                    
+                                    <input class="btn btn-sm btn-primary ${disabledEdicion}" id="btnEnviar2" type="submit" value='Guardar y continuar'/>                                    
                                 </div>
                             </form>
                         </div>
@@ -280,14 +285,14 @@
                                         <input id="btnEvidencia1" type="button" class="btn btn-sm btn-link" value="Ver archivo" onclick="abrirModalArchivo(1)"/>                                                                            
                                     </c:if>
                                     <c:if test = "${docente.documentoCargado2('1')==false}">
-                                        <input id="btnEvidencia1" type="button" class="btn btn-sm btn-link incompleto" value="Subir archivo" onclick="abrirModalArchivo(1)"/>  
+                                        <input id="btnEvidencia1" type="button" class="btn btn-sm btn-link incompleto ${disabledEdicion}" value="Subir archivo" onclick="abrirModalArchivo(1)"/>  
                                         <span class="glyphicon glyphicon-exclamation-sign incompleto" id="alertaBtnEvidencia1" title="Sección incompleta"></span>  
                                     </c:if>
                                     
                                 </div>
                                 <div class="col-xs-12 text-right">
                                     
-                                    <input class="btn btn-sm btn-primary" id="btnEnviar4" type="submit" value='Guardar y continuar'/>                                    
+                                    <input class="btn btn-sm btn-primary ${disabledEdicion}" id="btnEnviar4" type="submit" value='Guardar y continuar'/>                                    
                                 </div>
                             </form>
                         </div>
@@ -375,14 +380,14 @@
                                         <input id="btnEvidencia13" type="button" class="btn btn-sm btn-link" value="Ver archivo" onclick="abrirModalArchivo(13)"/>                                                                            
                                     </c:if>
                                     <c:if test = "${docente.documentoCargado2('13')==false}">
-                                        <input id="btnEvidencia13" type="button" class="btn btn-sm btn-link incompleto" value="Subir archivo" onclick="abrirModalArchivo(13)"/>  
+                                        <input id="btnEvidencia13" type="button" class="btn btn-sm btn-link incompleto ${disabledEdicion}" value="Subir archivo" onclick="abrirModalArchivo(13)"/>  
                                         <span class="glyphicon glyphicon-exclamation-sign incompleto" id="alertaBtnEvidencia13" title="Sección incompleta"></span>  
                                     </c:if>
                             </div>                              
                             </div>
                             <div class="col-xs-12 text-right">
                                 
-                                <input class="btn btn-sm btn-primary" id="btnEnviar5" type="submit" value='Guardar y continuar'/>                                    
+                                <input class="btn btn-sm btn-primary ${disabledEdicion}" id="btnEnviar5" type="submit" value='Guardar y continuar'/>                                    
                             </div>
                             </form>
                         </div>
@@ -468,7 +473,7 @@
                                         <input id="btnEvidencia14" type="button" class="btn btn-sm btn-link" value="Ver archivo" onclick="abrirModalArchivo(14)"/>                                                                            
                                     </c:if>
                                     <c:if test = "${docente.documentoCargado2('14')==false}">
-                                        <input id="btnEvidencia14" type="button" class="btn btn-sm btn-link incompleto" value="Subir archivo" onclick="abrirModalArchivo(14)"/>  
+                                        <input id="btnEvidencia14" type="button" class="btn btn-sm btn-link incompleto ${disabledEdicion}" value="Subir archivo" onclick="abrirModalArchivo(14)"/>  
                                         <span class="glyphicon glyphicon-exclamation-sign incompleto" id="alertaBtnEvidencia14" title="Sección incompleta"></span>  
                                     </c:if>
                             </div>
@@ -477,7 +482,7 @@
                         </div>
                             <div class="col-xs-12 text-right">
                                 
-                                <input class="btn btn-sm btn-primary" id="btnEnviar6" type="submit" value='Guardar y continuar'/>                                    
+                                <input class="btn btn-sm btn-primary ${disabledEdicion}" id="btnEnviar6" type="submit" value='Guardar y continuar'/>                                    
                             </div>
                             </form>
                         </div>        
@@ -563,7 +568,7 @@
                                         <input id="btnEvidencia15" type="button" class="btn btn-sm btn-link" value="Ver archivo" onclick="abrirModalArchivo(15)"/>                                                                            
                                     </c:if>
                                     <c:if test = "${docente.documentoCargado2('15')==false}">
-                                        <input id="btnEvidencia15" type="button" class="btn btn-sm btn-link incompleto" value="Subir archivo" onclick="abrirModalArchivo(15)"/>  
+                                        <input id="btnEvidencia15" type="button" class="btn btn-sm btn-link incompleto ${disabledEdicion}" value="Subir archivo" onclick="abrirModalArchivo(15)"/>  
                                         <span class="glyphicon glyphicon-exclamation-sign incompleto" id="alertaBtnEvidencia15" title="Sección incompleta"></span>  
                                     </c:if>                                        
                                 </div>
@@ -571,7 +576,7 @@
                             </div>
                             <div class="col-xs-12 text-right">
                                     
-                                    <input class="btn btn-sm btn-primary" id="btnEnviar7" type="submit" value='Guardar y continuar'/>                                    
+                                    <input class="btn btn-sm btn-primary ${disabledEdicion}" id="btnEnviar7" type="submit" value='Guardar y continuar'/>                                    
                                 </div>
                             </form>
                         </div>
@@ -657,7 +662,7 @@
                                         <input id="btnEvidencia16" type="button" class="btn btn-sm btn-link" value="Ver archivo" onclick="abrirModalArchivo(16)"/>                                                                            
                                     </c:if>
                                     <c:if test = "${docente.documentoCargado2('16')==false}">
-                                        <input id="btnEvidencia16" type="button" class="btn btn-sm btn-link incompleto" value="Subir archivo" onclick="abrirModalArchivo(16)"/>  
+                                        <input id="btnEvidencia16" type="button" class="btn btn-sm btn-link incompleto ${disabledEdicion}" value="Subir archivo" onclick="abrirModalArchivo(16)"/>  
                                         <span class="glyphicon glyphicon-exclamation-sign incompleto" id="alertaBtnEvidencia16" title="Sección incompleta"></span>  
                                     </c:if>
                                 </div>
@@ -666,7 +671,7 @@
                         </div>
                                 <div class="col-xs-12 text-right">
                                     
-                                    <input class="btn btn-sm btn-primary" id="btnEnviar8" type="submit" value='Guardar y continuar'/>                                    
+                                    <input class="btn btn-sm btn-primary ${disabledEdicion}" id="btnEnviar8" type="submit" value='Guardar y continuar'/>                                    
                                 </div>
                             </form>
                         </div>
@@ -753,7 +758,7 @@
                                         <input id="btnEvidencia17" type="button" class="btn btn-sm btn-link" value="Ver archivo" onclick="abrirModalArchivo(17)"/>                                                                            
                                     </c:if>
                                     <c:if test = "${docente.documentoCargado2('17')==false}">
-                                        <input id="btnEvidencia17" type="button" class="btn btn-sm btn-link incompleto" value="Subir archivo" onclick="abrirModalArchivo(17)"/>  
+                                        <input id="btnEvidencia17" type="button" class="btn btn-sm btn-link incompleto ${disabledEdicion}" value="Subir archivo" onclick="abrirModalArchivo(17)"/>  
                                         <span class="glyphicon glyphicon-exclamation-sign incompleto" id="alertaBtnEvidencia17" title="Sección incompleta"></span>  
                                     </c:if>
                                 </div>
@@ -762,7 +767,7 @@
                         </div>
                         <div class="col-xs-12 text-right">
                                     
-                                    <input class="btn btn-sm btn-primary" id="btnEnviar9" type="submit" value='Guardar y continuar'/>                                    
+                                    <input class="btn btn-sm btn-primary ${disabledEdicion}" id="btnEnviar9" type="submit" value='Guardar y continuar'/>                                    
                                 </div>
                             </form>
                         </div>
@@ -898,7 +903,7 @@
                                         <input id="btnEvidencia18" type="button" class="btn btn-sm btn-link" value="Ver archivo" onclick="abrirModalArchivo(18)"/>                                                                            
                                     </c:if>
                                     <c:if test = "${docente.documentoCargado2('18')==false}">
-                                        <input id="btnEvidencia18" type="button" class="btn btn-sm btn-link incompleto" value="Subir archivo" onclick="abrirModalArchivo(18)"/>  
+                                        <input id="btnEvidencia18" type="button" class="btn btn-sm btn-link incompleto ${disabledEdicion}" value="Subir archivo" onclick="abrirModalArchivo(18)"/>  
                                         <span class="glyphicon glyphicon-exclamation-sign incompleto" id="alertaBtnEvidencia18" title="Sección incompleta"></span>  
                                     </c:if>
                                 </div>
@@ -909,7 +914,7 @@
                                     </div>
                                 </div>
                                     
-                                    <input class="btn btn-sm btn-primary" id="btnEnviar10E" type="submit" value='Guardar y continuar'/>                                    
+                                    <input class="btn btn-sm btn-primary ${disabledEdicion}" id="btnEnviar10E" type="submit" value='Guardar y continuar'/>                                    
                                 </div>
                             </form>
                         </div>
@@ -930,7 +935,7 @@
                     </div>
                     <br/>                      
                     <!--<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalConfirmacion2">Finalizar registro</button>-->
-                    <button type="button" class="btn btn-primary" onClick="finalizarRevision()">Evaluación finalizada</button>
+                    <button type="button" class="btn btn-primary ${disabledEdicion}" onClick="finalizarRevision()">Evaluación finalizada</button>
                   
               </div>
               
