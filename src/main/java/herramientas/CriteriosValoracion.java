@@ -31,7 +31,7 @@ public class CriteriosValoracion {
         String permisoEdicion = permisoActualEdicion.equals("F") ? "disabled" : "";
         List<String[]> datos=metodo.ejecutaSP("sp_selectCursos",parametros);
         if(datos.isEmpty()){
-            respuesta[0]="<tr><td colspan='7'>Sin información</td></tr>";
+            respuesta[0]="<tr><td colspan='8'>Sin información</td></tr>";
         }else{
             respuesta[0]="";
             for(String[] dato:datos){
@@ -73,7 +73,17 @@ public class CriteriosValoracion {
                 respuesta[0]+="<td>"+dato[8]+"</td>";
                 respuesta[0]+="<td>";
                 if (idPermiso.equals("6"))
-                {valido = dato[10];}
+                {
+                    if(dato[9]==null){
+                        respuesta[0]+="<span class='glyphicon glyphicon-exclamation-sign incompleto' title='Sección incompleta'></span>";
+                    }else if (dato[9].equals("V")){
+                        respuesta[0]+="<span class='glyphicon glyphicon-ok completo' title='Aprobado'></span>";
+                    }else{
+                        respuesta[0]+="<span class='glyphicon glyphicon-remove incompleto' title='No cumple con la evidencia'></span>";
+                    }
+                    valido = dato[10];
+                    respuesta[0]+="</td><td>";
+                }
                 else
                 {valido = dato[9];}
                 if(vistaAdmin){
@@ -132,7 +142,7 @@ public class CriteriosValoracion {
         int validosD=0;
         List<String[]> datos=metodo.ejecutaSP("sp_consultaAportaciones",parametros);
         if(datos.isEmpty()){
-            respuesta="<tr><td colspan='5'>Sin información</td></tr>";
+            respuesta="<tr><td colspan='6'>Sin información</td></tr>";
             puntaje="0";
             puntajeD="0";
         }else{
@@ -160,7 +170,17 @@ public class CriteriosValoracion {
                 }
                
                 if (idPermiso.equals("6"))
-                {valido = dato[9];}
+                {
+                    if(dato[8]==null){
+                        respuesta+="<span class='glyphicon glyphicon-exclamation-sign incompleto' title='Sección incompleta'></span>";
+                    }else if (dato[8].equals("V")){
+                        respuesta+="<span class='glyphicon glyphicon-ok completo' title='Aprobado'></span>";
+                    }else{
+                        respuesta+="<span class='glyphicon glyphicon-remove incompleto' title='No cumple con la evidencia'></span>";
+                    }
+                    valido = dato[9];
+                    respuesta+="</td><td>";
+                }
                 else
                 {valido = dato[8];}
                 if(vistaAdmin){
@@ -244,7 +264,7 @@ public class CriteriosValoracion {
         int validos=0;
         int validosD=0;
         if(datos.isEmpty()){
-            respuesta="<tr><td colspan='5'>Sin información</td></tr>";
+            respuesta="<tr><td colspan='6'>Sin información</td></tr>";
             puntaje="0";
             puntajeD="0";
         }else{
@@ -272,7 +292,17 @@ public class CriteriosValoracion {
                 }
                  
                 if (idPermiso.equals("6"))
-                {valido = dato[9];}
+                {
+                    if(dato[8]==null){
+                        respuesta+="<span class='glyphicon glyphicon-exclamation-sign incompleto' title='Sección incompleta'></span>";
+                    }else if (dato[8].equals("V")){
+                        respuesta+="<span class='glyphicon glyphicon-ok completo' title='Aprobado'></span>";
+                    }else{
+                        respuesta+="<span class='glyphicon glyphicon-remove incompleto' title='No cumple con la evidencia'></span>";
+                    }                
+                    valido = dato[9];
+                    respuesta+="</td><td>";
+                }
                 else
                 {valido = dato[8];}                
                 if(vistaAdmin){
@@ -356,7 +386,7 @@ public class CriteriosValoracion {
         int validos=0;
         int validosD=0;
         if(datos.isEmpty()){
-            respuesta="<tr><td colspan='3'>Sin información</td></tr>";
+            respuesta="<tr><td colspan='4'>Sin información</td></tr>";
             puntaje="0";
             puntajeD="0";
         }else{
@@ -382,7 +412,17 @@ public class CriteriosValoracion {
                 }
                 
                 if (idPermiso.equals("6"))
-                {valido = dato[6];}
+                {
+                    if(dato[5]==null){
+                        respuesta+="<span class='glyphicon glyphicon-exclamation-sign incompleto' title='Sección incompleta'></span>";
+                    }else if (dato[5].equals("V")){
+                        respuesta+="<span class='glyphicon glyphicon-ok completo' title='Aprobado'></span>";
+                    }else{
+                        respuesta+="<span class='glyphicon glyphicon-remove incompleto' title='No cumple con la evidencia'></span>";
+                    }                
+                    valido = dato[6];
+                    respuesta+="</td><td>";
+                }
                 else
                 {valido = dato[5];}                 
                 if(vistaAdmin){
@@ -440,7 +480,7 @@ public class CriteriosValoracion {
         String permisoEdicion = permisoActualEdicion.equals("F") ? "disabled" : "";
         List<String[]> datos=metodo.ejecutaSP("sp_selectPublicaciones",parametros);
         if(datos.isEmpty()){
-            respuesta="<tr><td colspan='5'>Sin información</td></tr>";
+            respuesta="<tr><td colspan='6'>Sin información</td></tr>";
             puntaje="0";
             puntajeD="0";
         }else{
@@ -464,7 +504,17 @@ public class CriteriosValoracion {
                 }
                 
                 if (idPermiso.equals("6"))
-                {valido = dato[7];}
+                {
+                    if(dato[6]==null){
+                        respuesta+="<span class='glyphicon glyphicon-exclamation-sign incompleto' title='Sección incompleta'></span>";
+                    }else if (dato[6].equals("V")){
+                        respuesta+="<span class='glyphicon glyphicon-ok completo' title='Aprobado'></span>";
+                    }else{
+                        respuesta+="<span class='glyphicon glyphicon-remove incompleto' title='No cumple con la evidencia'></span>";
+                    }                
+                    valido = dato[7];
+                    respuesta+="</td><td>";                
+                }
                 else
                 {valido = dato[6];}                  
                 if(vistaAdmin){
@@ -522,7 +572,7 @@ public class CriteriosValoracion {
         int validosD=0;
         List<String[]> datos=metodo.ejecutaSP("sp_consultaResultados",parametros);
         if(datos.isEmpty()){
-            respuesta="<tr><td colspan='4'>Sin información</td></tr>";
+            respuesta="<tr><td colspan='5'>Sin información</td></tr>";
             puntaje="0";
             puntajeD="0";
         }else{
@@ -549,7 +599,17 @@ public class CriteriosValoracion {
                 }
                 
                 if (idPermiso.equals("6"))
-                {valido = dato[8];}
+                {
+                    if(dato[7]==null){
+                        respuesta+="<span class='glyphicon glyphicon-exclamation-sign incompleto' title='Sección incompleta'></span>";
+                    }else if (dato[7].equals("V")){
+                        respuesta+="<span class='glyphicon glyphicon-ok completo' title='Aprobado'></span>";
+                    }else{
+                        respuesta+="<span class='glyphicon glyphicon-remove incompleto' title='No cumple con la evidencia'></span>";
+                    }                
+                    valido = dato[8];
+                    respuesta+="</td><td>";                    
+                }
                 else
                 {valido = dato[7];}                 
                 if(vistaAdmin){

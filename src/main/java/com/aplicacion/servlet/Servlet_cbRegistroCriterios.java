@@ -93,6 +93,8 @@ public class Servlet_cbRegistroCriterios extends HttpServlet {
             docente.consultaDocumentos();
             String[][] puntajes=cv.consultaPuntajes(idUsuario); 
             String[] puntajeEncuestas=cv.consultaPuntajeEncuestas(rfc);
+            puntajeEncuestas[5] =  Double.toString(Math.round(Double.parseDouble(puntajeEncuestas[5])*100.0)/100.0);
+            
             request.setAttribute("docente", docente);
             request.setAttribute("criterios", criterios);
             request.setAttribute("puntajes", puntajes);

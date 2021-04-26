@@ -120,6 +120,12 @@
                                           </c:otherwise>
                                       </c:choose>
                                    </select>
+                                  <c:if test='${sessionScope["permisoActual"]=="6"}'>
+                                        <label class="control-label">Evaluación Comité Revisor:</label>
+                                        <select class="form-control input-sm disabled" id="puntaje1Referencia" name="puntaje1Referencia">
+                                              ${catalogo.desplegarOpcionesPuntajeAdmin(criterios[0][0],puntajes[0][3])}                                              
+                                        </select>
+                                  </c:if>
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label class="control-label">Carga de evidencia documental:</label>
@@ -193,6 +199,12 @@
                                           </c:otherwise>
                                        </c:choose>                                      
                                   </select>
+                                  <c:if test='${sessionScope["permisoActual"]=="6"}'>
+                                        <label class="control-label">Evaluación Comité Revisor:</label>
+                                        <select class="form-control input-sm disabled" id="puntaje2Referencia" name="puntaje2Referencia">
+                                              ${catalogo.desplegarOpcionesPuntajeAdmin(criterios[1][0],puntajes[1][3])}                                              
+                                        </select>
+                                  </c:if>
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label class="control-label">Carga de evidencia documental:</label><br/>
@@ -366,7 +378,7 @@
                             <div class='table-responsive'>
                                 <label class="text-warning" id="alertaCarga"><span class="glyphicon glyphicon-warning-sign"></span>&nbsp;Utilice la barra de desplazamiento para recorrer la tabla y visualizar todos los elementos</label>
                                 <table class='table table-bordered table-condensed'>
-                                    <tr><th>Tipo</th><th>Nombre del curso</th><th>Periodo o Fecha de realización</th><th>Institución educativa con reconocimiento oficial que emite constancia</th><th>Total de horas que acredita el curso</th><th>Constancia o documento probatorio</th><th>Opciones</th></tr>
+                                    <tr><th>Tipo</th><th>Nombre del curso</th><th>Periodo o Fecha de realización</th><th>Institución educativa con reconocimiento oficial que emite constancia</th><th>Total de horas que acredita el curso</th><th>Constancia o documento probatorio</th><c:if test='${sessionScope["permisoActual"]=="6"}'><th>Evaluación Comité Revisor</th></c:if><th>Opciones</th></tr>
                                     <tbody id="tablaCursos">
                                         ${cursos[0]}
                                     </tbody>
@@ -458,7 +470,7 @@
                             <div class='table-responsive'>
                                 <label class="text-warning" id="alertaCarga"><span class="glyphicon glyphicon-warning-sign"></span>&nbsp;Utilice la barra de desplazamiento para recorrer la tabla y visualizar todos los elementos</label>
                                 <table class='table table-bordered table-condensed'>
-                                    <tr><th>Nombre de la aportación en materia de mejora continua</th><th>Periodo o Fecha de realización</th><th>Institución educativa con reconocimiento oficial que emite constancia</th><th>Constancia o documento probatorio</th><th>Opciones</th></tr>
+                                    <tr><th>Nombre de la aportación en materia de mejora continua</th><th>Periodo o Fecha de realización</th><th>Institución educativa con reconocimiento oficial que emite constancia</th><th>Constancia o documento probatorio</th><c:if test='${sessionScope["permisoActual"]=="6"}'><th>Evaluación Comité Revisor</th></c:if><th>Opciones</th></tr>
                                     <tbody id="tablaAportaciones">
                                         ${aportaciones[0]}
                                     </tbody>
@@ -553,7 +565,7 @@
                             <div class='table-responsive'>
                                 <label class="text-warning" id="alertaCarga"><span class="glyphicon glyphicon-warning-sign"></span>&nbsp;Utilice la barra de desplazamiento para recorrer la tabla y visualizar todos los elementos</label>
                                 <table class='table table-bordered table-condensed'>
-                                    <tr><th>Nombre de la participación en eventos y actividades de fortalecimiento académico y formación integral del educando</th><th>Periodo o Fecha de realización</th><th>Institución educativa con reconocimiento oficial que emite constancia</th><th>Constancia o documento probatorio</th><th>Opciones</th></tr>
+                                    <tr><th>Nombre de la participación en eventos y actividades de fortalecimiento académico y formación integral del educando</th><th>Periodo o Fecha de realización</th><th>Institución educativa con reconocimiento oficial que emite constancia</th><th>Constancia o documento probatorio</th><c:if test='${sessionScope["permisoActual"]=="6"}'><th>Evaluación Comité Revisor</th></c:if><th>Opciones</th></tr>
                                     <tbody id="tablaParticipaciones">
                                         ${participaciones[0]}
                                     </tbody>
@@ -647,7 +659,7 @@
                             <div class='table-responsive'>
                                 <label class="text-warning" id="alertaCarga"><span class="glyphicon glyphicon-warning-sign"></span>&nbsp;Utilice la barra de desplazamiento para recorrer la tabla y visualizar todos los elementos</label>
                                 <table class='table table-bordered table-condensed'>
-                                    <tr><th>Periodo o Fecha de realización</th><th>Constancia o documento probatorio</th><th>Opciones</th></tr>
+                                    <tr><th>Periodo o Fecha de realización</th><th>Constancia o documento probatorio</th><c:if test='${sessionScope["permisoActual"]=="6"}'><th>Evaluación Comité Revisor</th></c:if><th>Opciones</th></tr>
                                     <tbody id="tablaTutorias">
                                         ${tutorias[0]}
                                     </tbody>
@@ -743,7 +755,7 @@
                             <div class='table-responsive'>
                                 <label class="text-warning" id="alertaCarga"><span class="glyphicon glyphicon-warning-sign"></span>&nbsp;Utilice la barra de desplazamiento para recorrer la tabla y visualizar todos los elementos</label>
                                 <table class='table table-bordered table-condensed'>
-                                    <tr><th>Nombre de  la publicación</th><th>Medio en el que se publicó</th><th>Fecha de publicación</th><th>ISSN/ISBN</th><th>Opciones</th></tr>
+                                    <tr><th>Nombre de  la publicación</th><th>Medio en el que se publicó</th><th>Fecha de publicación</th><th>ISSN/ISBN</th><c:if test='${sessionScope["permisoActual"]=="6"}'><th>Evaluación Comité Revisor</th></c:if><th>Opciones</th></tr>
                                     <tbody id="tablaPublicaciones">
                                         ${publicaciones[0]}
                                     </tbody>
@@ -816,6 +828,12 @@
                                               </c:otherwise>
                                             </c:choose>
                                       </select>
+                                      <c:if test='${sessionScope["permisoActual"]=="6"}'>
+                                            <label class="control-label">Evaluación Comité Revisor:</label>
+                                            <select class="form-control input-sm disabled" id="puntaje3Referencia" name="puntaje3Referencia">
+                                                  ${catalogo.desplegarOpcionesPuntajeAdmin("10",puntajes[9][3])}                                              
+                                            </select>
+                                      </c:if>
                                     </div>
                                     <div class="form-group col-md-6">
                                         <label class="control-label">10.B Portafolio de evidencias de Evaluación del aprendizaje</label>
@@ -829,6 +847,12 @@
                                               </c:otherwise>
                                             </c:choose>
                                         </select>
+                                        <c:if test='${sessionScope["permisoActual"]=="6"}'>
+                                            <label class="control-label">Evaluación Comité Revisor:</label>
+                                            <select class="form-control input-sm disabled" id="puntaje4Referencia" name="puntaje4Referencia">
+                                                  ${catalogo.desplegarOpcionesPuntajeAdmin("11",puntajes[10][3])}                                              
+                                            </select>
+                                        </c:if>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -846,6 +870,12 @@
                                               </c:otherwise>
                                            </c:choose>
                                       </select>
+                                      <c:if test='${sessionScope["permisoActual"]=="6"}'>
+                                        <label class="control-label">Evaluación Comité Revisor:</label>
+                                        <select class="form-control input-sm disabled" id="puntaje5Referencia" name="puntaje5Referencia">
+                                              ${catalogo.desplegarOpcionesPuntajeAdmin("12",puntajes[11][3])}                                              
+                                        </select>
+                                      </c:if>
                                     </div>
                                     <div class="form-group col-md-6">                                                             
                                       <label class="control-label">10.C Porcentaje de aprobación escolar (Resultados educativos) por las asignatura, actividades paraescolar o módulos profesionales impartidos:<br/><br/></label>
@@ -859,6 +889,12 @@
                                               </c:otherwise>
                                            </c:choose>                                          
                                       </select>
+                                      <c:if test='${sessionScope["permisoActual"]=="6"}'>
+                                        <label class="control-label">Evaluación Comité Revisor:</label>
+                                        <select class="form-control input-sm disabled" id="puntaje6Referencia" name="puntaje6Referencia">
+                                              ${catalogo.desplegarOpcionesPuntajeAdmin("13",puntajes[12][3])}                                              
+                                        </select>
+                                      </c:if>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -876,6 +912,12 @@
                                               </c:otherwise>
                                            </c:choose>  
                                       </select>
+                                      <c:if test='${sessionScope["permisoActual"]=="6"}'>
+                                        <label class="control-label">Evaluación Comité Revisor:</label>
+                                        <select class="form-control input-sm disabled" id="puntaje7Referencia" name="puntaje7Referencia">
+                                              ${catalogo.desplegarOpcionesPuntajeAdmin("14",puntajes[13][3])}                                              
+                                        </select>
+                                      </c:if>
                                     </div>
                                 </div>
                                 <div class="col-xs-12">
@@ -889,7 +931,7 @@
                                     <div class='table-responsive'>
                                         <label class="text-warning" id="alertaCarga"><span class="glyphicon glyphicon-warning-sign"></span>&nbsp;Utilice la barra de desplazamiento para recorrer la tabla y visualizar todos los elementos</label>
                                         <table class='table table-bordered table-condensed'>
-                                            <tr><th>Tipo de evidencia</th><th>Periodo o Fecha de realización</th><th>Constancia o documento probatorio</th><th>Opciones</th></tr>
+                                            <tr><th>Tipo de evidencia</th><th>Periodo o Fecha de realización</th><th>Constancia o documento probatorio</th><c:if test='${sessionScope["permisoActual"]=="6"}'><th>Evaluación Comité Revisor</th></c:if><th>Opciones</th></tr>
                                             <tbody id="tablaResultados">
                                                 ${resultados[0]}
                                             </tbody>
