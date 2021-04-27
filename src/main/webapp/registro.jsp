@@ -274,7 +274,12 @@
                                 <input class="btn btn-sm btn-primary" id="btnEnviar1" type="submit" value='Guardar y continuar'/>
                               </c:if>
                               <c:if test="${vistaAdmin}">
-                                <input class="btn btn-sm btn-primary" id="btnEnviar1" type="submit" value='Validar información'/>
+                                  <c:if test='${sessionScope["permisoActualEdicion"]=="F"}'>
+                                      <input class="btn btn-sm btn-primary" id="btnEnviar1" type="submit" value='Validar información' disabled/>
+                                  </c:if>
+                                  <c:if test='${sessionScope["permisoActualEdicion"]=="V"}'>
+                                      <input class="btn btn-sm btn-primary" id="btnEnviar1" type="submit" value='Validar información'/>
+                                  </c:if>
                               </c:if>
                               <!--<input type="button" class="btn btn-sm btn-primary" value="Guardar y continuar" onclick="mostrarSiguiente(1)"/>-->
                             </div>
@@ -367,9 +372,23 @@
                                 </div>  
                             </div>
                             <div class="row">
-                                <div class='text-center'>
-                                    <input type='button' class='btn btn-sm btn-link' value='(+) Agregar información de plazas' onclick="abrirModalPlazas();" />
-                                </div>
+                                <c:if test="${vistaAdmin}">
+                                    <c:if test='${sessionScope["permisoActualEdicion"]=="F"}'>
+                                        <div class='text-center'>
+                                            <input type='button' class='btn btn-sm btn-link' value='(+) Agregar información de plazas' onclick="abrirModalPlazas();" disabled/>
+                                        </div>
+                                    </c:if>
+                                    <c:if test='${sessionScope["permisoActualEdicion"]=="V"}'>
+                                        <div class='text-center'>
+                                            <input type='button' class='btn btn-sm btn-link' value='(+) Agregar información de plazas' onclick="abrirModalPlazas();" />
+                                        </div>
+                                    </c:if>
+                                </c:if>
+                                <c:if test="${!vistaAdmin}">
+                                    <div class='text-center'>
+                                        <input type='button' class='btn btn-sm btn-link' value='(+) Agregar información de plazas' onclick="abrirModalPlazas();"/>
+                                    </div>
+                                </c:if>
                                 <div class='table-responsive'>
                                     <table class='table table-bordered table-condensed'>
                                         <tr><th>Plaza con la que participa</th><th>Clave presupuestal</th><th>Fecha desde que ostenta la plaza</th><th>Tipo de nombramiento</th><th>Categoria</th><th>Jornada</th><th>Cargo directivo</th><th>Borrar</th></tr>
@@ -470,7 +489,12 @@
                                 <input class="btn btn-sm btn-primary" id="btnEnviar2" type="submit" value='Guardar y continuar'/>
                               </c:if>
                               <c:if test="${vistaAdmin}">
-                                <input class="btn btn-sm btn-primary" id="btnEnviar2" type="submit" value='Validar información'/>
+                                  <c:if test='${sessionScope["permisoActualEdicion"]=="F"}'>
+                                      <input class="btn btn-sm btn-primary" id="btnEnviar2" type="submit" value='Validar información' disabled/>
+                                  </c:if>
+                                  <c:if test='${sessionScope["permisoActualEdicion"]=="V"}'>
+                                      <input class="btn btn-sm btn-primary" id="btnEnviar2" type="submit" value='Validar información'/>
+                                  </c:if>
                               </c:if>
                               <!--<input type="button" class="btn btn-sm btn-primary" value="Guardar y continuar" onclick="mostrarSiguiente(1)"/>-->
                         </div>
@@ -541,9 +565,23 @@
                               <label class="control-label" for="numGrupos">Número de grupos:</label>
                               <input type="text" class="form-control input-sm" id="numGrupos" name="numGrupos" value="${Docente.getNumGrupos()}" readOnly required>
                             </div>
-                            <div class="text-center">
-                              <input type="button" class="btn btn-link btn-sm" value="(+) Agregar información" data-toggle="modal" data-target="#modalInformacion"/>
-                            </div>
+                            <c:if test="${vistaAdmin}">
+                                <c:if test='${sessionScope["permisoActualEdicion"]=="F"}'>
+                                    <div class="text-center">
+                                      <input type="button" class="btn btn-link btn-sm" value="(+) Agregar información" data-toggle="modal" data-target="#modalInformacion" disabled/>
+                                    </div>
+                                </c:if>
+                                <c:if test='${sessionScope["permisoActualEdicion"]=="V"}'>
+                                    <div class="text-center">
+                                      <input type="button" class="btn btn-link btn-sm" value="(+) Agregar información" data-toggle="modal" data-target="#modalInformacion"/>
+                                    </div>
+                                </c:if>
+                            </c:if>
+                            <c:if test="${!vistaAdmin}">
+                                <div class="text-center">
+                                    <input type="button" class="btn btn-link btn-sm" value="(+) Agregar información" data-toggle="modal" data-target="#modalInformacion"/>
+                                </div>
+                            </c:if>
                             <div>
                               <span>Los datos mostrados a continuación provienen de información institucional.<br/>En cada uno de los renglones con la opción habilitada, presione el botón <span class='glyphicon glyphicon-ok completo'></span> para válidarlos como correctos, de lo contrario presione <span class='glyphicon glyphicon-remove incompleto'></span>.</span>
                               <br/><br/>
@@ -609,7 +647,12 @@
                                 <input class="btn btn-sm btn-primary" id="btnEnviar3" type="submit" value='Guardar y continuar'/>
                               </c:if>
                               <c:if test="${vistaAdmin}">
-                                <input class="btn btn-sm btn-primary" id="btnEnviar3" type="submit" value='Validar información'/>
+                                  <c:if test='${sessionScope["permisoActualEdicion"]=="F"}'>
+                                      <input class="btn btn-sm btn-primary" id="btnEnviar3" type="submit" value='Validar información' disabled/>
+                                  </c:if>
+                                  <c:if test='${sessionScope["permisoActualEdicion"]=="V"}'>
+                                      <input class="btn btn-sm btn-primary" id="btnEnviar3" type="submit" value='Validar información'/>
+                                  </c:if>
                               </c:if>
                               <!--<input type="button" class="btn btn-sm btn-primary" value="Guardar y continuar" onclick="mostrarSiguiente(1)"/>-->
                             </div>
@@ -706,7 +749,12 @@
                                 <input class="btn btn-sm btn-primary" id="btnEnviar4" type="submit" value='Guardar y continuar'/>
                               </c:if>
                               <c:if test="${vistaAdmin}">
-                                <input class="btn btn-sm btn-primary" id="btnEnviar4" type="submit" value='Validar información'/>
+                                  <c:if test='${sessionScope["permisoActualEdicion"]=="F"}'>
+                                      <input class="btn btn-sm btn-primary" id="btnEnviar4" type="submit" value='Validar información' disabled/>
+                                  </c:if>
+                                  <c:if test='${sessionScope["permisoActualEdicion"]=="V"}'>
+                                      <input class="btn btn-sm btn-primary" id="btnEnviar4" type="submit" value='Validar información'/>
+                                  </c:if>
                               </c:if>
                               <!--<input type="button" class="btn btn-sm btn-primary" value="Guardar y continuar" onclick="mostrarSiguiente(1)"/>-->
                             </div>
@@ -756,10 +804,15 @@
                           </c:if>
                           <c:if test="${vistaAdmin}">
                             <label class="control-label">Observaciones:</label>
-                            <textarea class="form-control text-uppercase" id="observaciones" name="observaciones" maxlength="2000" onKeyUp="cambioObservaciones()" required>${Docente.infoRegistro[67]}</textarea>
+                            <c:if test='${sessionScope["permisoActualEdicion"]=="F"}'>
+                                <textarea class="form-control text-uppercase" id="observaciones" name="observaciones" maxlength="2000" onKeyUp="cambioObservaciones()" required disabled>${Docente.infoRegistro[67]}</textarea>
+                            </c:if>
+                            <c:if test='${sessionScope["permisoActualEdicion"]=="V"}'>
+                                <textarea class="form-control text-uppercase" id="observaciones" name="observaciones" maxlength="2000" onKeyUp="cambioObservaciones()" required>${Docente.infoRegistro[67]}</textarea>
+                            </c:if>
                           </c:if>
-                          <br/>                          
-                          <input type="submit" disabled="true" class="btn btn-primary" value="Continuar" id="btnFinalizar">                      
+                          <br/>
+                              <input type="submit" disabled="true" class="btn btn-primary" value="Continuar" id="btnFinalizar">
                       </div>
                       
                        
