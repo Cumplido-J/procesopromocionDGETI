@@ -1313,6 +1313,7 @@
                 <div class="modal-body">
                     <iframe name="ifRespuesta" hidden></iframe>
                     <iframe style="width:100%;height: 338px;" id="ifArchivo" name="ifArchivo" src="" hidden></iframe>
+                    <c:if test="${!vistaAdmin}">
                     <div id="seccionCarga">
                         <form id="formArchivo" name="formArchivo" method="POST" enctype="multipart/form-data" >
                                 <label class="text-warning" id="alertaCarga"><span class="glyphicon glyphicon-warning-sign"></span>&nbsp;Cárgue todas las evidencias documentales del criterio en un solo archivo PDF</label>
@@ -1323,6 +1324,8 @@
 
                         </form>  
                     </div>
+                    </c:if>
+                    <c:if test="${vistaAdmin}"><p>El documento no puede ser modificado</p></c:if>
                 </div>
                 <div class="modal-footer">
                   <button type="button" class="btn btn-sm btn-default" data-dismiss="modal">Cerrar</button>
