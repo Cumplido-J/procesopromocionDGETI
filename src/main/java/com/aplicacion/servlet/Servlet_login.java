@@ -136,12 +136,18 @@ public class Servlet_login extends HttpServlet {
                     session.setAttribute("permisoEdicion", datos.get(0)[14]);
                     session.setAttribute("permisoActual","");
                     session.setAttribute("permisoActualEdicion","");
+                    session.setAttribute("fechaDictaminacion",0);
                     if(datos.get(0)[7].equals("D")){
                         String[] parametros1={datos.get(0)[3],datos.get(0)[11],datos.get(0)[1],"D"};
                         List<String[]> datos1=metodos.ejecutaSP(ConstantsWS.SP_FECHAS_CONVOCATORIA,parametros1);
                         if(datos1.get(0)[0].equals("1")){
                             response.sendRedirect("SesionDocente"); 
                         }else{
+                        	List<String[]> datos2=metodos.ejecutaSP(ConstantsWS.SP_FECHAS_DICTAMINACION,parametros1);
+                            if(datos2.get(0)[0].equals("1")){
+                                session.setAttribute("fechaDictaminacion",1);
+                                response.sendRedirect("SesionDocente"); 
+                            }
                             request.setAttribute("error", "De acuerdo a las fechas de la convocatoria ya no es posible inciar sesión");
                             RequestDispatcher rd = request.getRequestDispatcher("login.jsp");
                             rd.forward(request, response);

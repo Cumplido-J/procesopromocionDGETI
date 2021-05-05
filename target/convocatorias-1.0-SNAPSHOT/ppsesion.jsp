@@ -113,6 +113,19 @@
                 </c:if>
             </c:if>
             
+            <c:if test='${sessionScope["fechaDictaminacion"]=="1"}'>
+                <c:set var="disabled1" value="disabled"></c:set>
+                <c:set var="hidden1" value="hidden"></c:set>
+                <c:set var="disabled2" value="disabled"></c:set>
+                <c:set var="hidden2" value="hidden"></c:set>
+                <c:set var="disabled3" value="disabled"></c:set>
+                <c:set var="hidden3" value="hidden"></c:set>
+                <c:set var="disabled4" value="disabled"></c:set>
+                <c:set var="hidden4" value="disabled"></c:set>
+                <c:set var="disabled5" value="disabled"></c:set>
+                <c:set var="disabled6" value=""></c:set>
+            </c:if>            
+
             <div class="articulosses">
                 <article class="articleses ${disabled1}">
                     <h3>Paso 1 <span class="glyphicon glyphicon-ok-sign completo ${hidden1}" title="Sección completa"></span></h3>
@@ -162,6 +175,14 @@
                         <a href="FichaRegistro"  target="_blank" ><h3>Ficha de <br/> registro </h3></a>
                     </article>
                 </c:if>
+                <c:if test='${sessionScope["fechaDictaminacion"]=="1"}'>
+                        <article id="pasoFicha" for="pasoFicha" name="pasoFicha" class="articleses ${disabled6}" >
+                            <h3>Paso 6:</h3>
+                            <a href="FichaDictamen" target="_blank" ><img src="<%=Imagen.muestraImagen(RutaConfig.getRutaCarpeta()+"imagenes/EvidVal.jpg")%>" alt=""></a>
+                            <a href="FichaDictamen"  target="_blank" ><h3>Ficha de <br/> dictamen </h3></a>
+                        </article>
+                  </c:if>
+              </c:if>
                 <!--
                 <article class="articleses">
                     <h3>Paso 5:<span class="glyphicon glyphicon-ok-sign completo hidden" title="Sección completa"></span></h3>

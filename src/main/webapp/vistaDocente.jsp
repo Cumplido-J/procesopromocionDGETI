@@ -150,6 +150,11 @@
                         <a href="FichaRegistro"  target="_blank" ><h3>Ficha de <br/> registro </h3></a>
                     </article>
                 </c:if>
+                    <article id="pasoFicha" for="pasoFicha" name="pasoFicha" class="articleses" >
+                            <h3>Paso 6:</h3>
+                            <a href="FichaDictamen" target="_blank" ><img src="<%=Imagen.muestraImagen(RutaConfig.getRutaCarpeta()+"imagenes/EvidVal.jpg")%>" alt=""></a>
+                            <a href="FichaDictamen"  target="_blank" ><h3>Ficha de <br/> dictamen </h3></a>
+                    </article>
                     <c:choose>
                         <c:when test='${sessionScope["permisoActual"]=="6"}'>                                            
                             <article class="articleses">
