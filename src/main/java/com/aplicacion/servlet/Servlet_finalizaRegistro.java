@@ -113,7 +113,9 @@ public class Servlet_finalizaRegistro extends HttpServlet {
                 }
             }
             Metodos_sql metodo=new Metodos_sql();
-            String[] parametros={idUsuario,publico,observacion};
+            byte ptext[] = observacion.getBytes("ISO-8859-1"); 
+            String value = new String(ptext, "UTF-8");
+            String[] parametros={idUsuario,publico,value};
             
             metodo.ejecutaSP("sp_finRegistro",parametros);
                response.sendRedirect(retorno);

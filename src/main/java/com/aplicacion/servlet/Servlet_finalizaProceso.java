@@ -89,7 +89,9 @@ public class Servlet_finalizaProceso extends HttpServlet {
             }           
             totalEncuestados=session.getAttribute("totalEncuestados").toString();
             Metodos_sql metodo=new Metodos_sql();
-            String[] parametros={idUsuario,totalEncuestados,observacion,total,idPermiso};
+            byte ptext[] = observacion.getBytes("ISO-8859-1"); 
+            String value = new String(ptext, "UTF-8");
+            String[] parametros={idUsuario,totalEncuestados,value,total,idPermiso};
             metodo.ejecutaSP("sp_finProceso",parametros);
             response.sendRedirect(retorno);
             /*if(completo.equals("true")){

@@ -88,7 +88,9 @@ public class Servlet_finalizaEncuestados extends HttpServlet {
                 observacion=request.getParameter("observaciones");
             }
             Metodos_sql metodo=new Metodos_sql();
-            String[] parametros={idUsuario,observacion};
+            byte ptext[] = observacion.getBytes("ISO-8859-1");
+            String value = new String(ptext, "UTF-8");
+            String[] parametros={idUsuario,value};
             metodo.ejecutaSP("sp_finEncuestados",parametros);
             response.sendRedirect(retorno);
         }
