@@ -671,6 +671,66 @@ public class CriteriosValoracion {
         retorno[2]=puntajeD;
         return retorno;
     }
+    public String[] getFilasResultados2(String idUsuario,boolean vistaAdmin, String idPermiso){   
+        String respuesta, valido;
+        String puntaje="0", puntajeD="0";
+        String[] retorno=new String[3];
+        String[] parametros={idUsuario};
+        int validos=0;
+        int validosD=0;
+        List<String[]> datos=metodo.ejecutaSP("sp_consultaResultados",parametros);
+        if(datos.isEmpty()){
+            puntaje="0";
+            puntajeD="0";
+        }else{
+            respuesta="";
+            for(String[] dato:datos){
+                if(dato[8]!=null)
+                {    
+                    if(dato[8].equals("V"))
+                    {validosD++;}
+                }
+                if(dato[7]!=null)
+                {    
+                    if(dato[7].equals("V"))
+                    {validos++;}
+                }
+            }
+            int aux=validos;
+            if(aux==1 || aux==2){
+                puntaje="30";
+            }else if(aux==3 || aux==4){
+                puntaje="55";
+            }else if(aux==5 || aux==6){
+                puntaje="80";
+            }else if(aux==7 || aux==8){
+                puntaje="105";
+            }else if(aux==9 || aux==10){
+                puntaje="130";
+            }else if(aux>10){
+                puntaje="150";
+            }
+            
+            aux=validosD;
+            if(aux==1 || aux==2){
+                puntajeD="30";
+            }else if(aux==3 || aux==4){
+                puntajeD="55";
+            }else if(aux==5 || aux==6){
+                puntajeD="80";
+            }else if(aux==7 || aux==8){
+                puntajeD="105";
+            }else if(aux==9 || aux==10){
+                puntajeD="130";
+            }else if(aux>10){
+                puntajeD="150";
+            }
+        }
+        retorno[0]="";
+        retorno[1]=puntaje;
+        retorno[2]=puntajeD;
+        return retorno;
+    }
     public String[][] consultaPuntajes(String idUsuario){
         String[][] respuesta=new String[15][8];
         int c,d;

@@ -150,17 +150,34 @@
                         <a href="FichaRegistro"  target="_blank" ><h3>Ficha de <br/> registro </h3></a>
                     </article>
                 </c:if>
+                    <article id="pasoFicha" for="pasoFicha" name="pasoFicha" class="articleses" >
+                            <h3>Paso 6:</h3>
+                            <a href="FichaDictamen" target="_blank" ><img src="<%=Imagen.muestraImagen(RutaConfig.getRutaCarpeta()+"imagenes/EvidVal.jpg")%>" alt=""></a>
+                            <a href="FichaDictamen"  target="_blank" ><h3>Ficha de <br/> dictamen </h3></a>
+                    </article>
                     <c:choose>
                         <c:when test='${sessionScope["permisoActual"]=="6"}'>                                            
                             <article class="articleses">
                                 <form id="formFinal" role="form" action="RevisionFinal" method="POST">
                                     <h3></h3>
                                     <a href=""  target="_blank" ><h3>Revision final:</h3></a>
-                                    <select class="form-control input-sm" id="revisionfinal" name="revisionfinal" required>
+                                    <c:if test='${sessionScope["permisoActualEdicion"]=="F"}'>
+                                        <select class="form-control input-sm" id="revisionfinal" name="revisionfinal" required disabled>
                                             ${catalogo.desplegarCatalogosEstatusFinal(sessionScope["idDocente"])}                                
-                                    </select>
+                                        </select>
+                                    </c:if>
+                                    <c:if test='${sessionScope["permisoActualEdicion"]=="V"}'>
+                                        <select class="form-control input-sm" id="revisionfinal" name="revisionfinal" required>
+                                            ${catalogo.desplegarCatalogosEstatusFinal(sessionScope["idDocente"])}                                
+                                        </select>
+                                    </c:if>
                                     <div style="margin-top: 10px;">
-                                        <input class="btn btn-sm btn-primary" id="btnEnviarCurso" type="submit" value='Guardar' style="margin-right: 105px;"/>
+                                        <c:if test='${sessionScope["permisoActualEdicion"]=="F"}'>
+                                            <input class="btn btn-sm btn-primary" id="btnEnviarCurso" type="submit" value='Guardar' style="margin-right: 105px;" disabled=""/>
+                                        </c:if>
+                                        <c:if test='${sessionScope["permisoActualEdicion"]=="V"}'>
+                                            <input class="btn btn-sm btn-primary" id="btnEnviarCurso" type="submit" value='Guardar' style="margin-right: 105px;"/>
+                                        </c:if>
                                     </div>
                                 </form>
                             </article>
