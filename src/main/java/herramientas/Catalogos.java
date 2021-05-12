@@ -517,9 +517,9 @@ public class Catalogos {
             return respuesta;        
         }
     }
-    public String desplegarOpcionesCategoriasVacantes(String idPlantel,String idPrograma,String id,String idTipoVacancia){
+    public String desplegarOpcionesCategoriasVacantes(String idPlantel,String idPrograma,String id,String idTipoVacancia,String tipoVacancia){
         String respuesta=desplegarOpcionesCategoriasVacantes(idPlantel,idPrograma);
-        String aux="value='"+id+"-"+idTipoVacancia+"'";
+        String aux="value='"+id+"-"+tipoVacancia+"'";
         respuesta=respuesta.replaceFirst(aux, aux+" selected");
         return respuesta;  
     }
