@@ -653,7 +653,7 @@ public class Catalogos {
             for(String[] dato:datos){
                 respuesta+="<option value='"+dato[0]+"'>"+dato[1]+"</option>";
             }
-            if(idPermisoActual.equals("14") || idPermisoActual.equals("15") || idPermisoActual.equals("16")){
+            if(idPermisoActual.equals("14") || idPermisoActual.equals("15") || idPermisoActual.equals("16") || idPermisoActual.equals("17")){
              String aux="value='"+idPermisoActual+"'";
             respuesta=respuesta.replaceFirst(aux, aux+" selected");   
             }
