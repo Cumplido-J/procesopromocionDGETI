@@ -36,6 +36,42 @@ function actualizarPlanteles(idPlantel) {
         }
     });
 }
+function actualizarVacancias() {
+    var idPrograma=$('#programa').val();
+    var idSubsistema=$('#subsistema').val();    
+    var idEntidad=$("#entidad").val();
+    var idPlantel=$("#plantel").val();
+    var id="18";
+    if(idSubsistema!="" &&  idEntidad!="")
+    $.get("ConsultaCatalogos", {k:id,e:idPrograma,s:idSubsistema,i:idEntidad,m:idPlantel}, function(respuesta){
+        $("#categoria").html(respuesta);
+    });
+}
+function actualizarJornada() {
+    var idPrograma=$('#programa').val();
+    var idSubsistema=$('#subsistema').val();    
+    var idEntidad=$("#entidad").val();
+    var idPlantel=$("#plantel").val();
+    var idCategoria=$("#categoria").val();
+    var id="19";
+    if(idSubsistema!="" &&  idEntidad!="")
+    $.get("ConsultaCatalogos", {k:id,e:idPrograma,s:idSubsistema,i:idEntidad,m:idPlantel,n:idCategoria}, function(respuesta){
+        $("#jornada").html(respuesta);
+    });
+}
+function numeroPlazas() {
+    var idPrograma=$('#programa').val();
+    var idSubsistema=$('#subsistema').val();    
+    var idEntidad=$("#entidad").val();
+    var idPlantel=$("#plantel").val();
+    var idCategoria=$("#categoria").val();
+    var idJornada=$("#jornada").val();
+    var id="20";
+    if(idSubsistema!="" &&  idEntidad!="")
+    $.get("ConsultaCatalogos", {k:id,e:idPrograma,s:idSubsistema,i:idEntidad,m:idPlantel,n:idCategoria,p:idJornada}, function(respuesta){
+        $("#plazas").html(respuesta);
+    });
+}
 function confirmacion(idComite) {
     $("#idComiteBorrar").val(idComite);
     $("#modalConfirmacion2").modal("show");

@@ -287,4 +287,116 @@ public class Datos {
             return respuesta;        
         }
     }
+    public String desplegarAspirantesVacancia(String id,String idPrograma,String idSubsistema,String idEntidad,String idPlantel,String categoria,String jornada){        
+        String respuesta="<tr><td colspan='9' class='text-center'>Sin información</td></tr>";        
+        try{
+            String[] parametros={idPrograma,idSubsistema,idEntidad,idPlantel,categoria,jornada};
+            if(idEntidad.isEmpty() && idPlantel.isEmpty()){
+                return respuesta;
+            }else{
+                if(id.contains("b")){
+                    List<String[]> datos=metodos.ejecutaSP("sp_consultaGanadorAspirante",parametros);
+                
+                if(!datos.isEmpty()){
+                    respuesta="";
+                    for(String[] dato:datos)
+                    {
+                        respuesta+="<tr><td>"+dato[2]+"</td><td>"+dato[4]+"</td><td>"+dato[6]+"</td><td>"+dato[8]+"</td><td>"+dato[12]+"</td><td>"+dato[16]+"</td><td>"+dato[11]+"</td><td>"+dato[13]+"</td><td>"+(dato[10]==null?"0":dato[10])+"</td>";
+                        if(dato[10]==null){
+                            respuesta+="<td>"+"***"+"</td>"+"</tr>";
+                        }else{
+                            //respuesta+="<td>"+(datos.indexOf(dato)+1)+"</td>"+"</tr>";
+                            respuesta+="<td>"+dato[15]+"</td>"+"</tr>";
+                        }
+                    }
+                    return respuesta; 
+                }
+                }else{
+                    if(id.contains("r")){
+                            String[] parametrosPlazas={idPrograma, idSubsistema, idEntidad, idPlantel, "D", categoria, jornada};
+                            List<String[]> datosPlazas=metodos.ejecutaSP("sp_consultaNumeroPlazas",parametrosPlazas);
+                            int numeroPlazas=Integer.parseInt(datosPlazas.get(0)[8]);
+                            String[] parametrosGanador={idPrograma, idSubsistema, idEntidad, idPlantel, categoria, jornada};
+                            List<String[]> datosGanador=metodos.ejecutaSP("sp_consultaGanadorAspirante",parametrosGanador);
+                            if(!datosGanador.isEmpty()){
+                                int contador = 1;
+                                for(String[] datoGanador:datosGanador){
+                                    int posicionGanador=1;
+                                    if(numeroPlazas>(datosGanador.indexOf(datoGanador))){
+                                        String[] parametrosGanador1={datoGanador[0],Integer.toString(posicionGanador)};
+                                        metodos.ejecutaSP("sp_insertPosicion",parametrosGanador1);
+                                    }else{
+                                        contador++;
+                                        String[] parametrosGanador1={datoGanador[0],Integer.toString(contador)};
+                                        metodos.ejecutaSP("sp_insertPosicion",parametrosGanador1);
+                                    }
+                                }
+                            }
+                        }
+                    
+                    List<String[]> datos=metodos.ejecutaSP("sp_consultaGanadorAspirante",parametros);
+                    if(!datos.isEmpty()){
+                        respuesta="";
+                        for(String[] dato:datos)
+                        {
+                            respuesta+="<tr><td>"+dato[2]+"</td><td>"+dato[4]+"</td><td>"+dato[6]+"</td><td>"+dato[8]+"</td><td>"+dato[12]+"</td><td>"+dato[16]+"</td><td>"+dato[11]+"</td><td>"+dato[13]+"</td><td>"+(dato[10]==null?"0":dato[10])+"</td>";
+                            if(dato[10]==null){
+                                respuesta+="<td>"+"***"+"</td>"+"</tr>";
+                            }else{
+                                respuesta+="<td>"+dato[15]+"</td>"+"</tr>";
+                            }
+                        }
+                        return respuesta;
+                    }
+                }
+            }
+        }catch(Exception e){
+            respuesta=e.toString();
+        }finally{
+            return respuesta;        
+        }
+    }
+    public String generarResultadosCentrales(String programa, String idSubsistema, String entidad, String plantel){        
+        String respuesta="<tr><td colspan='9' class='text-center'>Sin información</td></tr>";        
+        try{
+            List<String[]> datosEntidades=metodos.ejecutaSP("sp_selectCatEntidades");
+            for(String[] dato:datosEntidades){
+                String[] parametros={idSubsistema,dato[0]};
+                List<String[]> datos=metodos.ejecutaSP("sp_selectCatPlanteles",parametros);
+                for(String[] datoPlanteles:datos){
+                    String idEntidad=dato[0];
+                    String idPlantel=datoPlanteles[0];
+                    String[] parametros1={programa, idSubsistema, idEntidad, idPlantel};
+                    List<String[]> datosProgramas=metodos.ejecutaSP("sp_consultaVacanciasResultados",parametros1);
+                    for(String[] datoPrograma:datosProgramas){
+                        
+                        String[] parametrosPlazas={programa, idSubsistema, idEntidad, idPlantel, "D", datoPrograma[0], datoPrograma[2]};
+                        List<String[]> datosPlazas=metodos.ejecutaSP("sp_consultaNumeroPlazas",parametrosPlazas);
+                        int numeroPlazas=Integer.parseInt(datosPlazas.get(0)[8]);
+                        String[] parametrosGanador={programa, idSubsistema, idEntidad, idPlantel, datoPrograma[0], datoPrograma[2]};
+                        List<String[]> datosGanador=metodos.ejecutaSP("sp_consultaGanadorAspirante",parametrosGanador);
+                        if(!datosGanador.isEmpty()){
+                            int contador = 1;
+                            for(String[] datoGanador:datosGanador){
+                                int posicionGanador=1;
+                                if(numeroPlazas>(datosGanador.indexOf(datoGanador))){
+                                    String[] parametrosGanador1={datoGanador[0],Integer.toString(posicionGanador)};
+                                    metodos.ejecutaSP("sp_insertPosicion",parametrosGanador1);
+                                }else{
+                                    contador++;
+                                    String[] parametrosGanador1={datoGanador[0],Integer.toString(contador)};
+                                    metodos.ejecutaSP("sp_insertPosicion",parametrosGanador1);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            return respuesta;
+        }catch(Exception e){
+            respuesta=e.toString();
+        }finally{
+            return respuesta;  
+        }
+    }
 }

@@ -930,4 +930,82 @@ public class Catalogos {
         respuestaOption=respuestaOption.replaceFirst(aux, aux+" selected");
         return respuestaOption;
     }
+
+    public  String desplegarAspirantesVacancia(String idPrograma,String idSubsistema,String idEntidad,String idPlantel){        
+        String respuesta="<tr><td colspan='9' class='text-center'>Sin información</td></tr>";        
+        try{
+            String[] parametros={idPrograma,idSubsistema,idEntidad,idPlantel};
+            if(idEntidad.isEmpty() && idPlantel.isEmpty()){
+                return respuesta;
+            }else{
+                List<String[]> datos=metodos.ejecutaSP("sp_consultaGanadorAspirante",parametros);
+                
+                if(!datos.isEmpty()){
+                    respuesta="";
+                    for(String[] dato:datos)
+                    {
+                        respuesta+="<tr><td>"+dato[2]+"</td><td>"+dato[4]+"</td><td>"+dato[6]+"</td><td>"+dato[8]+"</td><td>"+dato[10]+"</td><td>"+dato[19]+"</td><td>"+dato[17]+"</td><td>"+dato[18]+"</td><td>";
+                            respuesta+=dato[14]+"</td><td>";
+                            if(!dato[14].equals("")){
+                                respuesta+="<span class='glyphicon glyphicon-ok-sign completo' title='Aspirante evaluado'></span>";
+                            }
+                            if(!dato[13].equals("")){
+                                respuesta+="<span class='glyphicon glyphicon-ok-sign completo' title='Aspirante evaluado'></span>";
+                            }
+                        respuesta+="<form method='POST' action='VistaDocente'><input type='hidden' name='idUsuario' value='"+dato[0]+"'><input type='hidden' name='rfc' value='"+dato[6]+"'><input class='btn btn-sm btn-link' type='submit' value='Ver información'/></form>";                                                               
+
+
+                        respuesta+="</td></tr>";
+                    }
+                }
+            }
+        }catch(Exception e){
+            respuesta=e.toString();
+        }finally{
+            return respuesta;        
+        }
+    }
+    
+    public String desplegarOpcionesVacancia(String idPrograma,String idSubsistema,String idEntidad,String idPlantel){        
+        String respuesta="<option value=''>-Seleccione-</option>";
+        try{
+            String[] parametros={idSubsistema, idSubsistema, idEntidad, idPlantel};
+            List<String[]> datos=metodos.ejecutaSP("sp_consultaVacanciasResultados",parametros);
+            for(String[] dato:datos){
+                respuesta+="<option value='"+dato[0]+"'>"+dato[1]+"</option>";
+            }
+        }catch(Exception e){
+            respuesta=e.toString();
+        }finally{
+            return respuesta;        
+        }
+    }
+    
+    public String desplegarOpcionesJornada(String idPrograma,String idSubsistema,String idEntidad,String idPlantel, String idCategoria){        
+        String respuesta="<option value=''>-Seleccione-</option>";
+        try{
+            String[] parametros={idSubsistema, idSubsistema, idEntidad, idPlantel, idCategoria};
+            List<String[]> datos=metodos.ejecutaSP("sp_consultaJornadasActuales",parametros);
+            for(String[] dato:datos){
+                respuesta+="<option value='"+dato[2]+"'>"+dato[3]+"</option>";
+            }
+        }catch(Exception e){
+            respuesta=e.toString();
+        }finally{
+            return respuesta;        
+        }
+    }
+    
+    public String desplegarNumeroPlazas(String idPrograma,String idSubsistema,String idEntidad,String idPlantel, String idCategoria, String idJornada){        
+        String respuesta="";
+        try{
+            String[] parametros={idSubsistema, idSubsistema, idEntidad, idPlantel, "D", idCategoria, idJornada};
+            List<String[]> datos=metodos.ejecutaSP("sp_consultaNumeroPlazas",parametros);
+            respuesta+=datos.get(0)[8];
+        }catch(Exception e){
+            respuesta=e.toString();
+        }finally{
+            return respuesta;
+        }
+    }
 }
