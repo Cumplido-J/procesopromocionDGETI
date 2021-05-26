@@ -112,7 +112,12 @@
                 </tr>
                 <tr>
                     <td>NÚMERO EN LAS LISTA DE RESULTADOS:</td>
-                    <td></td>
+                        <c:if test="${Docente.infoRegistro[81]==null}">
+                            <td>:No aplica</td>
+                        </c:if>
+                        <c:if test="${Docente.infoRegistro[81]!=null}">
+                            <td>:${Docente.infoRegistro[81]}</td>
+                        </c:if>
                 </tr>
                 <tr>
                     <td COLSPAN="2">
