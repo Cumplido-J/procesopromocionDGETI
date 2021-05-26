@@ -302,7 +302,7 @@ public class Datos {
                     for(String[] dato:datos)
                     {
                         respuesta+="<tr><td>"+dato[2]+"</td><td>"+dato[4]+"</td><td>"+dato[6]+"</td><td>"+dato[8]+"</td><td>"+dato[12]+"</td><td>"+dato[16]+"</td><td>"+dato[11]+"</td><td>"+dato[13]+"</td><td>"+(dato[10]==null?"0":dato[10])+"</td>";
-                        if(dato[10]==null){
+                        if(dato[10]==null || dato[15]==null){
                             respuesta+="<td>"+"***"+"</td>"+"</tr>";
                         }else{
                             //respuesta+="<td>"+(datos.indexOf(dato)+1)+"</td>"+"</tr>";
