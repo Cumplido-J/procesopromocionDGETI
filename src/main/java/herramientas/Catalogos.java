@@ -517,8 +517,14 @@ public class Catalogos {
             return respuesta;        
         }
     }
-    public String desplegarOpcionesCategoriasVacantes(String idPlantel,String idPrograma,String id,String idTipoVacancia,String tipoVacancia){
+    public String desplegarOpcionesCategoriasVacantes(String idPlantel,String idPrograma,String id,String idTipoVacancia,String idJornada){
         String respuesta=desplegarOpcionesCategoriasVacantes(idPlantel,idPrograma);
+        String[] parametros={idPlantel,id,idJornada};
+        List<String[]> datos=metodos.ejecutaSP("sp_consultaCategoriaTipoVacante",parametros);
+        String tipoVacancia="";
+        if(!datos.isEmpty()){
+            tipoVacancia=datos.get(0)[0];
+        }
         String aux="value='"+id+"-"+tipoVacancia+"'";
         respuesta=respuesta.replaceFirst(aux, aux+" selected");
         return respuesta;  
@@ -969,7 +975,7 @@ public class Catalogos {
     public String desplegarOpcionesVacancia(String idPrograma,String idSubsistema,String idEntidad,String idPlantel){        
         String respuesta="<option value=''>-Seleccione-</option>";
         try{
-            String[] parametros={idSubsistema, idSubsistema, idEntidad, idPlantel};
+            String[] parametros={idPrograma, idSubsistema, idEntidad, idPlantel};
             List<String[]> datos=metodos.ejecutaSP("sp_consultaVacanciasResultados",parametros);
             for(String[] dato:datos){
                 respuesta+="<option value='"+dato[0]+"'>"+dato[1]+"</option>";
@@ -984,7 +990,7 @@ public class Catalogos {
     public String desplegarOpcionesJornada(String idPrograma,String idSubsistema,String idEntidad,String idPlantel, String idCategoria){        
         String respuesta="<option value=''>-Seleccione-</option>";
         try{
-            String[] parametros={idSubsistema, idSubsistema, idEntidad, idPlantel, idCategoria};
+            String[] parametros={idPrograma, idSubsistema, idEntidad, idPlantel, idCategoria};
             List<String[]> datos=metodos.ejecutaSP("sp_consultaJornadasActuales",parametros);
             for(String[] dato:datos){
                 respuesta+="<option value='"+dato[2]+"'>"+dato[3]+"</option>";
@@ -999,7 +1005,7 @@ public class Catalogos {
     public String desplegarNumeroPlazas(String idPrograma,String idSubsistema,String idEntidad,String idPlantel, String idCategoria, String idJornada){        
         String respuesta="";
         try{
-            String[] parametros={idSubsistema, idSubsistema, idEntidad, idPlantel, "D", idCategoria, idJornada};
+            String[] parametros={idPrograma, idSubsistema, idEntidad, idPlantel, "D", idCategoria, idJornada};
             List<String[]> datos=metodos.ejecutaSP("sp_consultaNumeroPlazas",parametros);
             respuesta+=datos.get(0)[8];
         }catch(Exception e){
