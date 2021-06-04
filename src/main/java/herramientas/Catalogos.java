@@ -514,7 +514,7 @@ public class Catalogos {
         }catch(Exception e){
             respuesta=e.toString();
         }finally{
-            return respuesta;        
+            return respuesta;       
         }
     }
     public String desplegarOpcionesCategoriasVacantes(String idPlantel,String idPrograma,String id,String idTipoVacancia,String idJornada){

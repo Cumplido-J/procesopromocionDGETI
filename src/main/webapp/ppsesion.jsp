@@ -182,7 +182,6 @@
                             <a href="FichaDictamen"  target="_blank" ><h3>Ficha de <br/> dictamen </h3></a>
                         </article>
                   </c:if>
-              </c:if>
                 <!--
                 <article class="articleses">
                     <h3>Paso 5:<span class="glyphicon glyphicon-ok-sign completo hidden" title="Sección completa"></span></h3>
