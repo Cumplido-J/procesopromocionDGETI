@@ -241,20 +241,25 @@ public class Docente {
         boolean retorno=false;
         switch(idSeccion){
             case "1":
-                if(infoRegistro[14]!=null){
-                    if(documentoCargado("1")){//Si ya se registró la información academica y se cargo el titulo                        
-                        if(infoRegistro[24]==null){//Si no se registró información de Cédula
-                            retorno=true;                            
-                        }else{
-                            if(documentoCargado("8")){//Si sí se registró la información de Cédula y se cargo el documento
-                                retorno=true;
-                            }
-                        }  
+                try{
+                    if(infoRegistro[14]!=null){
+                        if(documentoCargado("1")){//Si ya se registró la información academica y se cargo el titulo                        
+                            if(infoRegistro[24]==null){//Si no se registró información de Cédula
+                                retorno=true;                            
+                            }else{
+                                if(documentoCargado("8")){//Si sí se registró la información de Cédula y se cargo el documento
+                                    retorno=true;
+                                }
+                            }  
+                        }
                     }
+                }catch(Exception e){
+                    System.out.println(e.toString());
                 }
                 break;
             case "2":
-                if(infoRegistro[26]!=null){
+                try{
+                    if(infoRegistro[26]!=null){
                     if(documentoCargado("2")&&documentoCargado("3")){//Si ya se registró la información laboral  y se cargo la constancia de antiguedad y nombramiento                       
                         if(infoRegistro[48].equals("S")){//Si cuenta con nota desfavorable
                             retorno=true;                            
@@ -265,9 +270,13 @@ public class Docente {
                         }  
                     }
                 }
+                }catch(Exception e){
+                    System.out.println(e.toString());
+                }
                 break;
             case "3":
-                if(listaHoras.size()>0){                    
+                try{
+                    if(listaHoras.size()>0){                    
                     if(documentoCargado("4")){//Si ya se registró la información de horas frente a grupo  y se cargo la constancia                       
                         if(infoRegistro[52]==null){//Si no requiere registrar CENNI
                             retorno=true;                            
@@ -284,9 +293,13 @@ public class Docente {
                         }
                     }
                 }
+                }catch(Exception e){
+                    System.out.println(e.toString());
+                }
                 break;
-            case "4": 
-                if(infoRegistro[60]!=null){
+            case "4":
+                try{
+                   if(infoRegistro[60]!=null){
                     if(infoRegistro[60].equals("S")){//Si marco la casilla de funciones en otro subsistema
                         if(infoRegistro[49].equals("S")){//Si marcó la casilla de compatibilidad 
                             if(documentoCargado("7")){//Si cargó la constancia de compatibilidad                              
@@ -296,6 +309,9 @@ public class Docente {
                     }else{
                         retorno=true; 
                     }
+                } 
+                }catch(Exception e){
+                    System.out.println(e.toString());
                 }
                 break;
             default:
