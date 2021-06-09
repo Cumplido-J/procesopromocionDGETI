@@ -83,7 +83,6 @@
                 <c:set var="disabled4" value="disabled"></c:set>
                 <c:set var="disabled5" value="disabled"></c:set>                
                 <c:if test = "${Docente.infoRegistro[66]=='3'}"><!--Si el registro finalizó como incompleto-->
-                    <c:set var="disabled1" value="disabled"></c:set>
                     <c:set var="finIncompleto" value="true"></c:set>
                 </c:if>
                 <c:if test = "${Docente.infoRegistro[66]=='2'}"><!--Si el registro finalizó como completo-->
