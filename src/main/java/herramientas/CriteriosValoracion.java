@@ -29,14 +29,17 @@ public class CriteriosValoracion {
         int horasD=0;
         String[] parametros={idUsuario};
         String permisoEdicion = permisoActualEdicion.equals("F") ? "disabled" : "";
-        List<String[]> datos=metodo.ejecutaSP("sp_selectCursos",parametros);
+        List<String[]> datos=metodo.ejecutaSP("sp_selectCursos_v2",parametros);
         if(datos.isEmpty()){
             respuesta[0]="<tr><td colspan='8'>Sin información</td></tr>";
         }else{
             respuesta[0]="";
             for(String[] dato:datos){
+                puntaje = Integer.parseInt(dato[11]);
+                puntajeD = Integer.parseInt(dato[12]);
                 respuesta[0]+="<tr>";
                 if(dato[2].equals("CU")){
+                    /*
                     if(dato[10]!=null)
                     {
                         if(dato[10].equals("V"))
@@ -48,8 +51,10 @@ public class CriteriosValoracion {
                         {horas+=Integer.parseInt(dato[7]);}
                     }
                     //System.out.println(horas);
+                    */
                     respuesta[0]+="<td>Curso de actualización</td>"; 
                 }else if(dato[2].equals("CE")){
+                    /*
                     if(dato[10]!=null)
                     {
                         if(dato[10].equals("V"))
@@ -60,6 +65,7 @@ public class CriteriosValoracion {
                         if(dato[9].equals("V"))
                         {puntaje=10;}
                     }
+                    */
                     respuesta[0]+="<td>Certificación</td>"; 
                 }
                 respuesta[0]+="<td>"+dato[3]+"</td>";  
@@ -111,6 +117,7 @@ public class CriteriosValoracion {
                 respuesta[0]+="</tr>";
             }            
         }
+        /*
         if(horas>=120 && horas<=160){
             puntaje+=40;
         }else if(horas>=161 && horas<=199){
@@ -126,7 +133,8 @@ public class CriteriosValoracion {
         }else if(horasD>=200){
             puntajeD+=60;
         }
-       
+        */
+        
         respuesta[1]=""+puntaje;
         respuesta[2]=""+puntajeD;
         return respuesta;
@@ -140,7 +148,9 @@ public class CriteriosValoracion {
         String permisoEdicion = permisoActualEdicion.equals("F") ? "disabled" : "";
         int validos=0;
         int validosD=0;
-        List<String[]> datos=metodo.ejecutaSP("sp_consultaAportaciones",parametros);
+        puntaje="0";
+        puntajeD="0";        
+        List<String[]> datos=metodo.ejecutaSP("sp_consultaAportaciones_v2",parametros);
         if(datos.isEmpty()){
             respuesta="<tr><td colspan='6'>Sin información</td></tr>";
             puntaje="0";
@@ -148,6 +158,8 @@ public class CriteriosValoracion {
         }else{
             respuesta="";
             for(String[] dato:datos){
+                puntaje = dato[10];
+                puntajeD = dato[11];                
                 respuesta+="<tr>"; 
                 respuesta+="<td>"+dato[3]+"</td>";  
                 if(dato[4].equals(dato[5])){
@@ -158,6 +170,7 @@ public class CriteriosValoracion {
                 respuesta+="<td>"+dato[6]+"</td>";
                 respuesta+="<td>"+dato[7]+"</td>";
                 respuesta+="<td>";
+                /*
                 if(dato[9]!=null)
                 {    
                     if(dato[9].equals("V"))
@@ -168,7 +181,7 @@ public class CriteriosValoracion {
                     if(dato[8].equals("V"))
                     {validos++;}
                 }
-               
+               */
                 if (idPermiso.equals("6"))
                 {
                     if(dato[8]==null){
@@ -207,6 +220,7 @@ public class CriteriosValoracion {
                 respuesta+="</td>";
                 respuesta+="</tr>";
             }          
+            /*
             switch(validos){
                 case 0:
                     puntaje="0";
@@ -248,6 +262,7 @@ public class CriteriosValoracion {
                     puntajeD="130";
                     break;                
             }
+            */
         }
         retorno[0]=respuesta;
         retorno[1]=puntaje;
@@ -260,9 +275,11 @@ public class CriteriosValoracion {
         String puntaje, valido, puntajeD;
         String[] parametros={idUsuario};
         String permisoEdicion = permisoActualEdicion.equals("F") ? "disabled" : "";
-        List<String[]> datos=metodo.ejecutaSP("sp_consultaParticipaciones",parametros);
+        List<String[]> datos=metodo.ejecutaSP("sp_consultaParticipaciones_v2",parametros);
         int validos=0;
         int validosD=0;
+        puntaje="0";
+        puntajeD="0"; 
         if(datos.isEmpty()){
             respuesta="<tr><td colspan='6'>Sin información</td></tr>";
             puntaje="0";
@@ -270,6 +287,8 @@ public class CriteriosValoracion {
         }else{
             respuesta="";
             for(String[] dato:datos){
+                puntaje = dato[10];
+                puntajeD = dato[11];                 
                 respuesta+="<tr>"; 
                 respuesta+="<td>"+dato[3]+"</td>";  
                 if(dato[4].equals(dato[5])){
@@ -280,6 +299,7 @@ public class CriteriosValoracion {
                 respuesta+="<td>"+dato[6]+"</td>";
                 respuesta+="<td>"+dato[7]+"</td>";
                 respuesta+="<td>";
+                /*
                 if(dato[9]!=null)
                 {    
                     if(dato[9].equals("V"))
@@ -290,7 +310,7 @@ public class CriteriosValoracion {
                     if(dato[8].equals("V"))
                     {validos++;}
                 }
-                 
+                */                 
                 if (idPermiso.equals("6"))
                 {
                     if(dato[8]==null){
@@ -328,7 +348,8 @@ public class CriteriosValoracion {
                 }
                 respuesta+="</td>";
                 respuesta+="</tr>";
-            }           
+            }
+            /*
             switch(validos){
                 case 0:
                     puntaje="0";
@@ -369,7 +390,8 @@ public class CriteriosValoracion {
                 default:
                     puntajeD="130";
                     break;                
-            }            
+            } 
+            */
         }
         retorno[0]=respuesta;
         retorno[1]=puntaje;
@@ -382,7 +404,7 @@ public class CriteriosValoracion {
         String puntaje="0", puntajeD="0";
         String[] parametros={idUsuario};
         String permisoEdicion = permisoActualEdicion.equals("F") ? "disabled" : "";
-        List<String[]> datos=metodo.ejecutaSP("sp_selectTutorias",parametros);
+        List<String[]> datos=metodo.ejecutaSP("sp_selectTutorias_v2",parametros);
         int validos=0;
         int validosD=0;
         if(datos.isEmpty()){
@@ -392,6 +414,8 @@ public class CriteriosValoracion {
         }else{
             respuesta="";
             for(String[] dato:datos){
+                puntaje = dato[7];
+                puntajeD = dato[8];                
                 respuesta+="<tr>";                  
                 if(dato[2].equals(dato[3])){
                     respuesta+="<td>"+fecha.formatoImprimir(dato[2])+"</td>";                                
@@ -400,6 +424,7 @@ public class CriteriosValoracion {
                 }
                 respuesta+="<td>"+dato[4]+"</td>";
                 respuesta+="<td>";
+                /*
                 if(dato[6]!=null)
                 {    
                     if(dato[6].equals("V"))
@@ -410,7 +435,7 @@ public class CriteriosValoracion {
                     if(dato[5].equals("V"))                
                     {validos++;}
                 }
-                
+                */                
                 if (idPermiso.equals("6"))
                 {
                     if(dato[5]==null){
@@ -448,7 +473,8 @@ public class CriteriosValoracion {
                 }
                 respuesta+="</td>";
                 respuesta+="</tr>";
-            } 
+            }
+            /*
             if(validos==0){
                 puntaje="0";
             }if(validos==1){
@@ -464,6 +490,7 @@ public class CriteriosValoracion {
             }else if(validosD>1){
                 puntajeD="70";
             }
+            */
         }
         retorno[0]=respuesta;
         retorno[1]=puntaje;
@@ -478,7 +505,7 @@ public class CriteriosValoracion {
         int validos=0;
         int validosD=0;
         String permisoEdicion = permisoActualEdicion.equals("F") ? "disabled" : "";
-        List<String[]> datos=metodo.ejecutaSP("sp_selectPublicaciones",parametros);
+        List<String[]> datos=metodo.ejecutaSP("sp_selectPublicaciones_v2",parametros);
         if(datos.isEmpty()){
             respuesta="<tr><td colspan='6'>Sin información</td></tr>";
             puntaje="0";
@@ -486,12 +513,15 @@ public class CriteriosValoracion {
         }else{
             respuesta="";
             for(String[] dato:datos){
+                puntaje = dato[8];
+                puntajeD = dato[9];                
                 respuesta+="<tr>"; 
                 respuesta+="<td>"+dato[2]+"</td>";
                 respuesta+="<td>"+dato[3]+"</td>";
                 respuesta+="<td>"+fecha.formatoImprimir(dato[4])+"</td>"; 
                 respuesta+="<td>"+dato[5]+"</td>";
                 respuesta+="<td>";
+                /*
                 if(dato[7]!=null)
                 {    
                     if(dato[7].equals("V"))
@@ -502,7 +532,7 @@ public class CriteriosValoracion {
                     if(dato[6].equals("V"))
                     {validos++;} 
                 }
-                
+                */                
                 if (idPermiso.equals("6"))
                 {
                     if(dato[6]==null){
@@ -540,7 +570,8 @@ public class CriteriosValoracion {
                 }
                 respuesta+="</td>";
                 respuesta+="</tr>";
-            }           
+            }      
+            /*
             if(validos==0){
                 puntaje="0";
             }else if(validos==1){
@@ -556,6 +587,7 @@ public class CriteriosValoracion {
             }else if(validosD>1){
                 puntajeD="50";
             }
+            */
         }
         retorno[0]=respuesta;
         retorno[1]=puntaje;
@@ -570,14 +602,16 @@ public class CriteriosValoracion {
         String permisoEdicion = permisoActualEdicion.equals("F") ? "disabled" : "";
         int validos=0;
         int validosD=0;
-        List<String[]> datos=metodo.ejecutaSP("sp_consultaResultados",parametros);
+        List<String[]> datos=metodo.ejecutaSP("sp_consultaResultados_v2",parametros);
         if(datos.isEmpty()){
             respuesta="<tr><td colspan='5'>Sin información</td></tr>";
             puntaje="0";
             puntajeD="0";
         }else{
             respuesta="";
-            for(String[] dato:datos){                
+            for(String[] dato:datos){
+                puntaje = dato[9];
+                puntajeD = dato[10];                
                 respuesta+="<tr>"; 
                 respuesta+="<td>"+dato[3]+"</td>";
                 if(dato[4].equals(dato[5])){
@@ -587,6 +621,7 @@ public class CriteriosValoracion {
                 }
                 respuesta+="<td>"+dato[6]+"</td>";
                 respuesta+="<td>";
+                /*
                 if(dato[8]!=null)
                 {    
                     if(dato[8].equals("V"))
@@ -597,7 +632,7 @@ public class CriteriosValoracion {
                     if(dato[7].equals("V"))
                     {validos++;}
                 }
-                
+                */
                 if (idPermiso.equals("6"))
                 {
                     if(dato[7]==null){
@@ -636,6 +671,7 @@ public class CriteriosValoracion {
                 respuesta+="</td>";
                 respuesta+="</tr>";
             }  
+            /*
             int aux=validos;
             if(aux==1 || aux==2){
                 puntaje="30";
@@ -665,6 +701,7 @@ public class CriteriosValoracion {
             }else if(aux>10){
                 puntajeD="150";
             }
+            */
         }
         retorno[0]=respuesta;
         retorno[1]=puntaje;
@@ -678,13 +715,16 @@ public class CriteriosValoracion {
         String[] parametros={idUsuario};
         int validos=0;
         int validosD=0;
-        List<String[]> datos=metodo.ejecutaSP("sp_consultaResultados",parametros);
+        List<String[]> datos=metodo.ejecutaSP("sp_consultaResultados_v2",parametros);
         if(datos.isEmpty()){
             puntaje="0";
             puntajeD="0";
         }else{
             respuesta="";
             for(String[] dato:datos){
+                puntaje = dato[9];
+                puntajeD = dato[10];   
+                /*
                 if(dato[8]!=null)
                 {    
                     if(dato[8].equals("V"))
@@ -695,7 +735,9 @@ public class CriteriosValoracion {
                     if(dato[7].equals("V"))
                     {validos++;}
                 }
+                */
             }
+            /*
             int aux=validos;
             if(aux==1 || aux==2){
                 puntaje="30";
@@ -725,6 +767,7 @@ public class CriteriosValoracion {
             }else if(aux>10){
                 puntajeD="150";
             }
+            */
         }
         retorno[0]="";
         retorno[1]=puntaje;
@@ -741,7 +784,7 @@ public class CriteriosValoracion {
             respuesta[c][4]="0";
         }*/
         String[] parametros={idUsuario};
-        List<String[]> datos=metodo.ejecutaSP("sp_consultaConstanciasProceso",parametros);
+        List<String[]> datos=metodo.ejecutaSP("sp_consultaConstanciasProceso_v2",parametros);
         if(!datos.isEmpty()){             
             for(String[] dato:datos){
                 c=Integer.parseInt(dato[2]);
@@ -755,7 +798,7 @@ public class CriteriosValoracion {
         int c;
 
         String[] parametros={idUsuario};
-        List<String[]> datos=metodo.ejecutaSP("sp_consultaConstanciasProcesoDictaminador",parametros);
+        List<String[]> datos=metodo.ejecutaSP("sp_consultaConstanciasProcesoDictaminador_v2",parametros);
         if(!datos.isEmpty()){             
             for(String[] dato:datos){
                 c=Integer.parseInt(dato[2]);

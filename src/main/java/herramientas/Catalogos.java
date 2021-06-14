@@ -462,11 +462,11 @@ public class Catalogos {
         respuesta=respuesta.replaceFirst(aux, aux+" selected");
         return respuesta; 
     }
-    public String desplegarOpcionesPuntaje(String idCriterio){        
+    public String desplegarOpcionesPuntaje(String idCriterio, String idUsuario){        
         String respuesta="<option value='' puntaje='0'>-Seleccione-</option>";
         try{
-            String[] parametros={idCriterio};
-            List<String[]> datos=metodos.ejecutaSP("sp_selectCatPuntaje",parametros);
+            String[] parametros={idCriterio, idUsuario};
+            List<String[]> datos=metodos.ejecutaSP("sp_selectCatPuntaje_v2",parametros);
             for(String[] dato:datos){
                 respuesta+="<option value='"+dato[0]+"' puntaje='"+dato[2]+"'>"+dato[1]+"</option>";
             }
@@ -476,18 +476,18 @@ public class Catalogos {
             return respuesta;        
         }
     }
-    public String desplegarOpcionesPuntaje(String idCriterio,String id){        
-        String respuesta=desplegarOpcionesPuntaje(idCriterio);
+    public String desplegarOpcionesPuntaje(String idCriterio,String id,String idUsuario){        
+        String respuesta=desplegarOpcionesPuntaje(idCriterio, idUsuario);
         String aux="value='"+id+"'";
         respuesta=respuesta.replaceFirst(aux, aux+" selected");
         return respuesta;  
     }
-    public String desplegarOpcionesPuntajeAdmin(String idCriterio){        
+    public String desplegarOpcionesPuntajeAdmin(String idCriterio,String idUsuario){        
         String respuesta="<option value='' puntaje='0'>-Seleccione-</option>";
         respuesta+="<option value='0' puntaje='0'>No cumple el criterio</option>";
         try{
-            String[] parametros={idCriterio};
-            List<String[]> datos=metodos.ejecutaSP("sp_selectCatPuntaje",parametros);
+            String[] parametros={idCriterio, idUsuario};
+            List<String[]> datos=metodos.ejecutaSP("sp_selectCatPuntaje_v2",parametros);
             for(String[] dato:datos){
                 respuesta+="<option value='"+dato[0]+"' puntaje='"+dato[2]+"'>"+dato[1]+"</option>";
             }
@@ -497,8 +497,8 @@ public class Catalogos {
             return respuesta;        
         }
     }
-    public String desplegarOpcionesPuntajeAdmin(String idCriterio,String id){        
-        String respuesta=desplegarOpcionesPuntajeAdmin(idCriterio);
+    public String desplegarOpcionesPuntajeAdmin(String idCriterio,String id,String idUsuario){        
+        String respuesta=desplegarOpcionesPuntajeAdmin(idCriterio, idUsuario);
         String aux="value='"+id+"'";
         respuesta=respuesta.replaceFirst(aux, aux+" selected");
         return respuesta;  
