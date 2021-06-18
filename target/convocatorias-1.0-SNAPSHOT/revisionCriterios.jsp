@@ -96,7 +96,7 @@
                                     <span class="glyphicon glyphicon-exclamation-sign ${hiddenDictaminador} incompleto" title="Criterio pendiente de revisar" id="estatus1D" completo="false"></span>                                    
                                 </c:if>                                
                           </a>
-                          <p class="text-danger ${hidden}">Puntaje Consejo: <span id="p1">${puntajes[0][4]}</span></p>
+                          <p class="text-danger ${hidden}">Puntaje Comité: <span id="p1">${puntajes[0][4]}</span></p>
                           <p class="text-danger ${hiddenDictaminador}">Puntaje Dictaminador: <span id="p1D">${puntajesDictaminador[0][4]}</span></p>
                           <c:set var="total" value="${puntajes[0][4]}"></c:set>
                           <c:set var="totalDictaminador" value="${puntajesDictaminador[0][4]}"></c:set>
@@ -113,17 +113,17 @@
                                   <select class="form-control input-sm" id="puntaje1" name="puntaje" required>
                                       <c:choose>
                                           <c:when test='${sessionScope["permisoActual"]=="6"}'>
-                                              ${catalogo.desplegarOpcionesPuntajeAdmin(criterios[0][0],puntajesDictaminador[0][3])}
+                                              ${catalogo.desplegarOpcionesPuntajeAdmin(criterios[0][0],puntajesDictaminador[0][3],sessionScope["idDocente"])}
                                           </c:when>
                                           <c:otherwise>
-                                              ${catalogo.desplegarOpcionesPuntajeAdmin(criterios[0][0],puntajes[0][3])}                                              
+                                              ${catalogo.desplegarOpcionesPuntajeAdmin(criterios[0][0],puntajes[0][3],sessionScope["idDocente"])}                                              
                                           </c:otherwise>
                                       </c:choose>
                                    </select>
                                   <c:if test='${sessionScope["permisoActual"]=="6"}'>
                                         <label class="control-label">Evaluación Comité Revisor:</label>
                                         <select class="form-control input-sm disabled" id="puntaje1Referencia" name="puntaje1Referencia">
-                                              ${catalogo.desplegarOpcionesPuntajeAdmin(criterios[0][0],puntajes[0][3])}                                              
+                                              ${catalogo.desplegarOpcionesPuntajeAdmin(criterios[0][0],puntajes[0][3],sessionScope["idDocente"])}                                              
                                         </select>
                                   </c:if>
                                 </div>
@@ -175,7 +175,7 @@
                             
                             </c:if>                                
                           </a>
-                          <p class="text-danger ${hidden}">Puntaje Consejo: <span id="p2">${puntajes[1][4]}</span></p>
+                          <p class="text-danger ${hidden}">Puntaje Comité: <span id="p2">${puntajes[1][4]}</span></p>
                           <p class="text-danger ${hiddenDictaminador}">Puntaje Dictaminador: <span id="p2D">${puntajesDictaminador[1][4]}</span></p>
                           <c:set var="total" value="${total+puntajes[1][4]}"></c:set>
                           <c:set var="totalDictaminador" value="${totalDictaminador+puntajesDictaminador[1][4]}"></c:set>
@@ -192,17 +192,17 @@
                                   <select class="form-control input-sm" id="puntaje2" name="puntaje" required>
                                       <c:choose>
                                           <c:when test='${sessionScope["permisoActual"]=="6"}'>                                              
-                                              ${catalogo.desplegarOpcionesPuntajeAdmin(criterios[1][0],puntajesDictaminador[1][3])}
+                                              ${catalogo.desplegarOpcionesPuntajeAdmin(criterios[1][0],puntajesDictaminador[1][3],sessionScope["idDocente"])}
                                           </c:when>
                                           <c:otherwise>
-                                              ${catalogo.desplegarOpcionesPuntajeAdmin(criterios[1][0],puntajes[1][3])}                                              
+                                              ${catalogo.desplegarOpcionesPuntajeAdmin(criterios[1][0],puntajes[1][3],sessionScope["idDocente"])}                                              
                                           </c:otherwise>
                                        </c:choose>                                      
                                   </select>
                                   <c:if test='${sessionScope["permisoActual"]=="6"}'>
                                         <label class="control-label">Evaluación Comité Revisor:</label>
                                         <select class="form-control input-sm disabled" id="puntaje2Referencia" name="puntaje2Referencia">
-                                              ${catalogo.desplegarOpcionesPuntajeAdmin(criterios[1][0],puntajes[1][3])}                                              
+                                              ${catalogo.desplegarOpcionesPuntajeAdmin(criterios[1][0],puntajes[1][3],sessionScope["idDocente"])}                                              
                                         </select>
                                   </c:if>
                                 </div>
@@ -233,7 +233,7 @@
                             <span class="glyphicon glyphicon-ok-sign completo" title="Criterio revisado" id="estatus3" completo="true"></span>
                             <span class="glyphicon glyphicon-ok-sign ${hiddenDictaminador} completo" title="Criterio revisado" id="estatus3D" completo="true"></span>
                           </a>
-                          <p class="text-danger ${hidden}">Puntaje Consejo: <span id="p3">${puntajeEncuestas[5]}</span></p>
+                          <p class="text-danger ${hidden}">Puntaje Comité: <span id="p3">${puntajeEncuestas[5]}</span></p>
                           <c:set var="total" value="${total+puntajeEncuestas[5]}"></c:set>
                           <p class="text-danger ${hiddenDictaminador}">Puntaje Dictaminador: <span id="p3D">${puntajeEncuestas[5]}</span></p>
                           <c:set var="totalDictaminador" value="${totalDictaminador+puntajeEncuestas[5]}"></c:set>
@@ -271,7 +271,7 @@
                                     <span class="glyphicon glyphicon-exclamation-sign ${hiddenDictaminador} incompleto" title="Criterio pendiente de revisar" id="estatus4D" completo="false"></span>                                    
                                 </c:if>           
                           </a>
-                          <p class="text-danger ${hidden}">Puntaje Consejo: <span id="p4">${puntajes[3][4]}</span></p>
+                          <p class="text-danger ${hidden}">Puntaje Comité: <span id="p4">${puntajes[3][4]}</span></p>
                           <p class="text-danger ${hiddenDictaminador}">Puntaje Dictaminador: <span id="p4D">${puntajesDictaminador[3][4]}</span></p>
                           <c:set var="total" value="${total+puntajes[3][4]}"></c:set>
                           <c:set var="totalDictaminador" value="${totalDictaminador+puntajesDictaminador[3][4]}"></c:set>
@@ -286,7 +286,7 @@
                                 <div class="form-group col-md-6">                                                             
                                   <label class="control-label">Máximo grado académico:</label>
                                   <select class="form-control input-sm disabled" id="puntaje4" name="puntaje" required>                                  
-                                      ${catalogo.desplegarOpcionesPuntajeAdmin(criterios[3][0],docente.infoRegistro[19])}                                                                            
+                                      ${catalogo.desplegarOpcionesPuntajeAdmin(criterios[3][0],docente.infoRegistro[19],sessionScope["idDocente"])}                                                                            
                                   </select>
                                   
                                 </div>
@@ -328,7 +328,7 @@
                                 <span class="glyphicon glyphicon-exclamation-sign ${hiddenDictaminador} incompleto" title="Criterio pendiente de revisar" id="estatus5D" completo="false"></span>                                    
                             </c:if>    
                           </a>
-                          <p class="text-danger ${hidden}">Puntaje Consejo: 
+                          <p class="text-danger ${hidden}">Puntaje Comité: 
                               <span id="p5">
                                   <c:if test="${puntajes[4][3]=='0'}">
                                       ${puntajes[4][4]}
@@ -423,7 +423,7 @@
                                 <span class="glyphicon glyphicon-exclamation-sign ${hiddenDictaminador} incompleto" title="Criterio pendiente de revisar" id="estatus6D" completo="false"></span>                                    
                             </c:if>    
                           </a>
-                          <p class="text-danger ${hidden}">Puntaje Consejo: 
+                          <p class="text-danger ${hidden}">Puntaje Comité: 
                               <span id="p6">
                                   <c:if test="${puntajes[5][3]=='0'}">
                                       ${puntajes[5][4]}
@@ -518,7 +518,7 @@
                                 <span class="glyphicon glyphicon-exclamation-sign ${hiddenDictaminador} incompleto" title="Criterio pendiente de revisar" id="estatus7D" completo="false"></span>                                    
                             </c:if>    
                           </a>
-                          <p class="text-danger ${hidden}">Puntaje Consejo: 
+                          <p class="text-danger ${hidden}">Puntaje Comité: 
                               <span id="p7">
                                   <c:if test="${puntajes[6][3]=='0'}">
                                       ${puntajes[6][4]}
@@ -612,7 +612,7 @@
                                 <span class="glyphicon glyphicon-exclamation-sign ${hiddenDictaminador} incompleto" title="Criterio pendiente de revisar" id="estatus8D" completo="false"></span>                                    
                             </c:if>    
                           </a>
-                          <p class="text-danger ${hidden}">Puntaje Consejo: 
+                          <p class="text-danger ${hidden}">Puntaje Comité: 
                               <span id="p8">
                                   <c:if test="${puntajes[7][3]=='0'}">
                                       ${puntajes[7][4]}
@@ -708,7 +708,7 @@
                             </c:if>
 
                           </a>
-                          <p class="text-danger ${hidden}">Puntaje Consejo: 
+                          <p class="text-danger ${hidden}">Puntaje Comité: 
                               <span id="p9">
                                   <c:if test="${puntajes[8][3]=='0'}">
                                       ${puntajes[8][4]}
@@ -803,7 +803,7 @@
                                 <span class="glyphicon glyphicon-exclamation-sign ${hiddenDictaminador} incompleto" title="Criterio pendiente de revisar" id="estatus10D" completo="false"></span>                                    
                             </c:if>    
                           </a>
-                          <p class="text-danger ${hidden}">Puntaje Consejo: <span id="p10">${puntajes[9][4]+puntajes[10][4]+puntajes[11][4]+puntajes[12][4]+puntajes[13][4]+resultados[1]}</span></p>
+                          <p class="text-danger ${hidden}">Puntaje Comité: <span id="p10">${puntajes[9][4]+puntajes[10][4]+puntajes[11][4]+puntajes[12][4]+puntajes[13][4]+resultados[1]}</span></p>
                           <c:set var="total" value="${total+puntajes[9][4]+puntajes[10][4]+puntajes[11][4]+puntajes[12][4]+puntajes[13][4]+resultados[1]}"></c:set>
                           <p class="text-danger ${hiddenDictaminador}">Puntaje Dictaminador: <span id="p10D">${puntajesDictaminador[9][4]+puntajesDictaminador[10][4]+puntajesDictaminador[11][4]+puntajesDictaminador[12][4]+puntajesDictaminador[13][4]+resultados[2]}</span></p>
                           <c:set var="totalDictaminador" value="${totalDictaminador+puntajesDictaminador[9][4]+puntajesDictaminador[10][4]+puntajesDictaminador[11][4]+puntajesDictaminador[12][4]+puntajesDictaminador[13][4]+resultados[2]}"></c:set>
@@ -821,17 +821,17 @@
                                         <select class="form-control input-sm" id="puntaje10" name="puntaje10" required>                                  
                                             <c:choose>
                                               <c:when test='${sessionScope["permisoActual"]=="6"}'>                                              
-                                                  ${catalogo.desplegarOpcionesPuntajeAdmin("10",puntajesDictaminador[9][3])}
+                                                  ${catalogo.desplegarOpcionesPuntajeAdmin("10",puntajesDictaminador[9][3],sessionScope["idDocente"])}
                                               </c:when>
                                               <c:otherwise>
-                                                  ${catalogo.desplegarOpcionesPuntajeAdmin("10",puntajes[9][3])}                                                  
+                                                  ${catalogo.desplegarOpcionesPuntajeAdmin("10",puntajes[9][3],sessionScope["idDocente"])}                                                  
                                               </c:otherwise>
                                             </c:choose>
                                       </select>
                                       <c:if test='${sessionScope["permisoActual"]=="6"}'>
                                             <label class="control-label">Evaluación Comité Revisor:</label>
                                             <select class="form-control input-sm disabled" id="puntaje3Referencia" name="puntaje3Referencia">
-                                                  ${catalogo.desplegarOpcionesPuntajeAdmin("10",puntajes[9][3])}                                              
+                                                  ${catalogo.desplegarOpcionesPuntajeAdmin("10",puntajes[9][3],sessionScope["idDocente"])}                                              
                                             </select>
                                       </c:if>
                                     </div>
@@ -840,17 +840,17 @@
                                         <select class="form-control input-sm" id="puntaje11" name="puntaje11" required>                                  
                                             <c:choose>
                                               <c:when test='${sessionScope["permisoActual"]=="6"}'>                                              
-                                                  ${catalogo.desplegarOpcionesPuntajeAdmin("11",puntajesDictaminador[10][3])}
+                                                  ${catalogo.desplegarOpcionesPuntajeAdmin("11",puntajesDictaminador[10][3],sessionScope["idDocente"])}
                                               </c:when>
                                               <c:otherwise>
-                                                  ${catalogo.desplegarOpcionesPuntajeAdmin("11",puntajes[10][3])}                                                  
+                                                  ${catalogo.desplegarOpcionesPuntajeAdmin("11",puntajes[10][3],sessionScope["idDocente"])}                                                  
                                               </c:otherwise>
                                             </c:choose>
                                         </select>
                                         <c:if test='${sessionScope["permisoActual"]=="6"}'>
                                             <label class="control-label">Evaluación Comité Revisor:</label>
                                             <select class="form-control input-sm disabled" id="puntaje4Referencia" name="puntaje4Referencia">
-                                                  ${catalogo.desplegarOpcionesPuntajeAdmin("11",puntajes[10][3])}                                              
+                                                  ${catalogo.desplegarOpcionesPuntajeAdmin("11",puntajes[10][3],sessionScope["idDocente"])}                                              
                                             </select>
                                         </c:if>
                                     </div>
@@ -863,17 +863,17 @@
                                       <select class="form-control input-sm" id="puntaje12" name="puntaje12" required>                                  
                                            <c:choose>
                                               <c:when test='${sessionScope["permisoActual"]=="6"}'>
-                                                  ${catalogo.desplegarOpcionesPuntajeAdmin("12",puntajesDictaminador[11][3])}
+                                                  ${catalogo.desplegarOpcionesPuntajeAdmin("12",puntajesDictaminador[11][3],sessionScope["idDocente"])}
                                               </c:when>
                                               <c:otherwise>
-                                                  ${catalogo.desplegarOpcionesPuntajeAdmin("12",puntajes[11][3])}                                                                                               
+                                                  ${catalogo.desplegarOpcionesPuntajeAdmin("12",puntajes[11][3],sessionScope["idDocente"])}                                                                                               
                                               </c:otherwise>
                                            </c:choose>
                                       </select>
                                       <c:if test='${sessionScope["permisoActual"]=="6"}'>
                                         <label class="control-label">Evaluación Comité Revisor:</label>
                                         <select class="form-control input-sm disabled" id="puntaje5Referencia" name="puntaje5Referencia">
-                                              ${catalogo.desplegarOpcionesPuntajeAdmin("12",puntajes[11][3])}                                              
+                                              ${catalogo.desplegarOpcionesPuntajeAdmin("12",puntajes[11][3],sessionScope["idDocente"])}                                              
                                         </select>
                                       </c:if>
                                     </div>
@@ -882,17 +882,17 @@
                                       <select class="form-control input-sm" id="puntaje13" name="puntaje13" required>                                  
                                           <c:choose>
                                               <c:when test='${sessionScope["permisoActual"]=="6"}'>
-                                                  ${catalogo.desplegarOpcionesPuntajeAdmin("13",puntajesDictaminador[12][3])}
+                                                  ${catalogo.desplegarOpcionesPuntajeAdmin("13",puntajesDictaminador[12][3],sessionScope["idDocente"])}
                                               </c:when>
                                               <c:otherwise>
-                                                  ${catalogo.desplegarOpcionesPuntajeAdmin("13",puntajes[12][3])}                                                                                               
+                                                  ${catalogo.desplegarOpcionesPuntajeAdmin("13",puntajes[12][3],sessionScope["idDocente"])}                                                                                               
                                               </c:otherwise>
                                            </c:choose>                                          
                                       </select>
                                       <c:if test='${sessionScope["permisoActual"]=="6"}'>
                                         <label class="control-label">Evaluación Comité Revisor:</label>
                                         <select class="form-control input-sm disabled" id="puntaje6Referencia" name="puntaje6Referencia">
-                                              ${catalogo.desplegarOpcionesPuntajeAdmin("13",puntajes[12][3])}                                              
+                                              ${catalogo.desplegarOpcionesPuntajeAdmin("13",puntajes[12][3],sessionScope["idDocente"])}                                              
                                         </select>
                                       </c:if>
                                     </div>
@@ -905,17 +905,17 @@
                                       <select class="form-control input-sm" id="puntaje13" name="puntaje14" required>                                  
                                           <c:choose>
                                               <c:when test='${sessionScope["permisoActual"]=="6"}'>
-                                                  ${catalogo.desplegarOpcionesPuntajeAdmin("14",puntajesDictaminador[13][3])}
+                                                  ${catalogo.desplegarOpcionesPuntajeAdmin("14",puntajesDictaminador[13][3],sessionScope["idDocente"])}
                                               </c:when>
                                               <c:otherwise>
-                                                  ${catalogo.desplegarOpcionesPuntajeAdmin("14",puntajes[13][3])}                                                                                               
+                                                  ${catalogo.desplegarOpcionesPuntajeAdmin("14",puntajes[13][3],sessionScope["idDocente"])}                                                                                               
                                               </c:otherwise>
                                            </c:choose>  
                                       </select>
                                       <c:if test='${sessionScope["permisoActual"]=="6"}'>
                                         <label class="control-label">Evaluación Comité Revisor:</label>
                                         <select class="form-control input-sm disabled" id="puntaje7Referencia" name="puntaje7Referencia">
-                                              ${catalogo.desplegarOpcionesPuntajeAdmin("14",puntajes[13][3])}                                              
+                                              ${catalogo.desplegarOpcionesPuntajeAdmin("14",puntajes[13][3],sessionScope["idDocente"])}                                              
                                         </select>
                                       </c:if>
                                     </div>
@@ -964,12 +964,12 @@
                     </div>
                       
                   </div>
-              <div class="container text-center" style="margin-bottom:15px;"> 
+              <div class="container text-center" style="margin-bottom:15px;">
                     <div class="form-group col-md-12 text-left">              
-                        <p><label class="control-label text-danger" id="puntajeCR1" >Puntaje total Consejo:&nbsp<span id="totalCR">${total}</span></label></p>
+                        <p><label class="control-label text-danger" id="puntajeCR1" >Puntaje total Comité:&nbsp<span id="totalCR">${total}</span></label></p>
                         <p><label class="control-label text-danger ${hiddenDictaminador}">Puntaje total Dictaminador:&nbsp<span id="totalD">${totalDictaminador}</span></label></p>
                         <br/>
-                        <label class="control-label">Observaciones Consejo:</label>
+                        <label class="control-label">Observaciones Comité:</label>
                         <textarea class="form-control text-uppercase ${disabled1}" id="aux" name="observaciones" maxlength="2000">${docente.infoRegistro[69]}</textarea>
                         <br/>
                         <label class="control-label ${hiddenDictaminador}">Observaciones Dictaminador:</label>

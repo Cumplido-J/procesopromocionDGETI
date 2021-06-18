@@ -85,7 +85,7 @@
                 </tr>
                 <tr>
                     <td>CATEGORÍA A LA QUE ASPIRA</td>
-                    <td>:${Docente.infoRegistro[41]}-${Docente.infoRegistro[43]} ${Docente.infoRegistro[77]}-${Docente.infoRegistro[45]}</td>
+                    <td>:${Docente.infoRegistro[41]}-${Docente.infoRegistro[43]}-${Docente.infoRegistro[45]}</td>
                 </tr>
                 <tr>
                     <td>GRADO ACADÉMICO REQUERIDO</td>

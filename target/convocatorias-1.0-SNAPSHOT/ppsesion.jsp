@@ -83,7 +83,6 @@
                 <c:set var="disabled4" value="disabled"></c:set>
                 <c:set var="disabled5" value="disabled"></c:set>                
                 <c:if test = "${Docente.infoRegistro[66]=='3'}"><!--Si el registro finalizó como incompleto-->
-                    <c:set var="disabled1" value="disabled"></c:set>
                     <c:set var="finIncompleto" value="true"></c:set>
                 </c:if>
                 <c:if test = "${Docente.infoRegistro[66]=='2'}"><!--Si el registro finalizó como completo-->
@@ -182,7 +181,6 @@
                             <a href="FichaDictamen"  target="_blank" ><h3>Ficha de <br/> dictamen </h3></a>
                         </article>
                   </c:if>
-              </c:if>
                 <!--
                 <article class="articleses">
                     <h3>Paso 5:<span class="glyphicon glyphicon-ok-sign completo hidden" title="Sección completa"></span></h3>

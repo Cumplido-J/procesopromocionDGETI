@@ -90,7 +90,7 @@
                                 <div class="form-group col-md-6">                                                             
                                   <label class="control-label">Antigüedad:</label>
                                   <select class="form-control input-sm" id="puntaje1" name="puntaje" required>                                  
-                                      ${catalogo.desplegarOpcionesPuntaje(criterios[0][0],puntajes[0][3])}
+                                      ${catalogo.desplegarOpcionesPuntaje(criterios[0][0],puntajes[0][3],sessionScope["idUsuario"])}
                                   </select>
                                 </div>
                                 <div class="form-group col-md-6">
@@ -143,7 +143,7 @@
                                 <div class="form-group col-md-6">                                                             
                                   <label class="control-label">Experiencia:</label>
                                   <select class="form-control input-sm" id="puntaje2" name="puntaje" required>                                  
-                                      ${catalogo.desplegarOpcionesPuntaje(criterios[1][0],puntajes[1][3])}
+                                      ${catalogo.desplegarOpcionesPuntaje(criterios[1][0],puntajes[1][3],sessionScope["idUsuario"])}
                                   </select>
                                 </div>
                                 <div class="form-group col-md-6">
@@ -213,7 +213,7 @@
                                 <div class="form-group col-md-6">                                                             
                                   <label class="control-label">Máximo grado académico:</label>
                                   <select class="form-control input-sm " id="puntaje4" name="puntaje" required>                                  
-                                      ${catalogo.desplegarOpcionesPuntaje(criterios[3][0],docente.infoRegistro[19])}
+                                      ${catalogo.desplegarOpcionesPuntaje(criterios[3][0],docente.infoRegistro[19],sessionScope["idUsuario"])}
                                   </select>
                                   
                                 </div>
@@ -656,13 +656,13 @@
                                     <div class="form-group col-md-6">
                                         <label class="control-label">10.1A Planeación didáctica: Docente</label>
                                         <select class="form-control input-sm" id="puntaje10" name="puntaje10" required>                                  
-                                          ${catalogo.desplegarOpcionesPuntaje(10,puntajes[9][3])}
+                                          ${catalogo.desplegarOpcionesPuntaje(10,puntajes[9][3],sessionScope["idUsuario"])}
                                       </select>
                                     </div>
                                     <div class="form-group col-md-6">
                                         <label class="control-label">10.1AB Portafolio de evidencias de Evaluación del aprendizaje</label>
                                         <select class="form-control input-sm" id="puntaje11" name="puntaje11" required>                                  
-                                          ${catalogo.desplegarOpcionesPuntaje(11,puntajes[10][3])}
+                                          ${catalogo.desplegarOpcionesPuntaje(11,puntajes[10][3],sessionScope["idUsuario"])}
                                         </select>
                                     </div>
                                 </div>
@@ -672,13 +672,13 @@
                                           <br/>Nivel de desempeño en la observación de clase en aula (práctica docente)
                                       </label>
                                       <select class="form-control input-sm" id="puntaje12" name="puntaje12" required>                                  
-                                          ${catalogo.desplegarOpcionesPuntaje(12,puntajes[11][3])}
+                                          ${catalogo.desplegarOpcionesPuntaje(12,puntajes[11][3],sessionScope["idUsuario"])}
                                       </select>
                                     </div>
                                     <div class="form-group col-md-6">                                                             
                                       <label class="control-label">10.3A Porcentaje de aprobación escolar (Resultados educativos) por asignatura, actividad paraescolar o módulo profesional:<br/><br/></label>
                                       <select class="form-control input-sm" id="puntaje13" name="puntaje13" required>                                  
-                                          ${catalogo.desplegarOpcionesPuntaje(13,puntajes[12][3])}
+                                          ${catalogo.desplegarOpcionesPuntaje(13,puntajes[12][3],sessionScope["idUsuario"])}
                                       </select>
                                     </div>
                                 </div>
@@ -688,7 +688,7 @@
                                       <br/>Nivel de Desempeño(resultados educativos): 
                                       </label>
                                       <select class="form-control input-sm" id="puntaje13" name="puntaje14" required>                                  
-                                          ${catalogo.desplegarOpcionesPuntaje(14,puntajes[13][3])}
+                                          ${catalogo.desplegarOpcionesPuntaje(14,puntajes[13][3],sessionScope["idUsuario"])}
                                       </select>
                                     </div>
                                 </div>

@@ -113,17 +113,17 @@
                                   <select class="form-control input-sm" id="puntaje1" name="puntaje" required>
                                       <c:choose>
                                           <c:when test='${sessionScope["permisoActual"]=="6"}'>
-                                              ${catalogo.desplegarOpcionesPuntajeAdmin(criterios[0][0],puntajesDictaminador[0][3])}
+                                              ${catalogo.desplegarOpcionesPuntajeAdmin(criterios[0][0],puntajesDictaminador[0][3],sessionScope["idDocente"])}
                                           </c:when>
                                           <c:otherwise>
-                                              ${catalogo.desplegarOpcionesPuntajeAdmin(criterios[0][0],puntajes[0][3])}                                              
+                                              ${catalogo.desplegarOpcionesPuntajeAdmin(criterios[0][0],puntajes[0][3],sessionScope["idDocente"])}                                              
                                           </c:otherwise>
                                       </c:choose>
                                    </select>
                                   <c:if test='${sessionScope["permisoActual"]=="6"}'>
                                         <label class="control-label">Evaluación Comité Revisor:</label>
                                         <select class="form-control input-sm disabled" id="puntaje1Referencia" name="puntaje1Referencia">
-                                              ${catalogo.desplegarOpcionesPuntajeAdmin(criterios[0][0],puntajes[0][3])}                                              
+                                              ${catalogo.desplegarOpcionesPuntajeAdmin(criterios[0][0],puntajes[0][3],sessionScope["idDocente"])}                                              
                                         </select>
                                   </c:if>
                                 </div>
@@ -192,17 +192,17 @@
                                   <select class="form-control input-sm" id="puntaje2" name="puntaje" required>
                                       <c:choose>
                                           <c:when test='${sessionScope["permisoActual"]=="6"}'>                                              
-                                              ${catalogo.desplegarOpcionesPuntajeAdmin(criterios[1][0],puntajesDictaminador[1][3])}
+                                              ${catalogo.desplegarOpcionesPuntajeAdmin(criterios[1][0],puntajesDictaminador[1][3],sessionScope["idDocente"])}
                                           </c:when>
                                           <c:otherwise>
-                                              ${catalogo.desplegarOpcionesPuntajeAdmin(criterios[1][0],puntajes[1][3])}                                              
+                                              ${catalogo.desplegarOpcionesPuntajeAdmin(criterios[1][0],puntajes[1][3],sessionScope["idDocente"])}                                              
                                           </c:otherwise>
                                        </c:choose>                                      
                                   </select>
                                   <c:if test='${sessionScope["permisoActual"]=="6"}'>
                                         <label class="control-label">Evaluación Comité Revisor:</label>
                                         <select class="form-control input-sm disabled" id="puntaje2Referencia" name="puntaje2Referencia">
-                                              ${catalogo.desplegarOpcionesPuntajeAdmin(criterios[1][0],puntajes[1][3])}                                              
+                                              ${catalogo.desplegarOpcionesPuntajeAdmin(criterios[1][0],puntajes[1][3],sessionScope["idDocente"])}                                              
                                         </select>
                                   </c:if>
                                 </div>
@@ -286,7 +286,7 @@
                                 <div class="form-group col-md-6">                                                             
                                   <label class="control-label">Máximo grado académico:</label>
                                   <select class="form-control input-sm disabled" id="puntaje4" name="puntaje" required>                                  
-                                      ${catalogo.desplegarOpcionesPuntajeAdmin(criterios[3][0],docente.infoRegistro[19])}                                                                            
+                                      ${catalogo.desplegarOpcionesPuntajeAdmin(criterios[3][0],docente.infoRegistro[19],sessionScope["idDocente"])}                                                                            
                                   </select>
                                   
                                 </div>
@@ -821,17 +821,17 @@
                                         <select class="form-control input-sm" id="puntaje10" name="puntaje10" required>                                  
                                             <c:choose>
                                               <c:when test='${sessionScope["permisoActual"]=="6"}'>                                              
-                                                  ${catalogo.desplegarOpcionesPuntajeAdmin("10",puntajesDictaminador[9][3])}
+                                                  ${catalogo.desplegarOpcionesPuntajeAdmin("10",puntajesDictaminador[9][3],sessionScope["idDocente"])}
                                               </c:when>
                                               <c:otherwise>
-                                                  ${catalogo.desplegarOpcionesPuntajeAdmin("10",puntajes[9][3])}                                                  
+                                                  ${catalogo.desplegarOpcionesPuntajeAdmin("10",puntajes[9][3],sessionScope["idDocente"])}                                                  
                                               </c:otherwise>
                                             </c:choose>
                                       </select>
                                       <c:if test='${sessionScope["permisoActual"]=="6"}'>
                                             <label class="control-label">Evaluación Comité Revisor:</label>
                                             <select class="form-control input-sm disabled" id="puntaje3Referencia" name="puntaje3Referencia">
-                                                  ${catalogo.desplegarOpcionesPuntajeAdmin("10",puntajes[9][3])}                                              
+                                                  ${catalogo.desplegarOpcionesPuntajeAdmin("10",puntajes[9][3],sessionScope["idDocente"])}                                              
                                             </select>
                                       </c:if>
                                     </div>
@@ -840,17 +840,17 @@
                                         <select class="form-control input-sm" id="puntaje11" name="puntaje11" required>                                  
                                             <c:choose>
                                               <c:when test='${sessionScope["permisoActual"]=="6"}'>                                              
-                                                  ${catalogo.desplegarOpcionesPuntajeAdmin("11",puntajesDictaminador[10][3])}
+                                                  ${catalogo.desplegarOpcionesPuntajeAdmin("11",puntajesDictaminador[10][3],sessionScope["idDocente"])}
                                               </c:when>
                                               <c:otherwise>
-                                                  ${catalogo.desplegarOpcionesPuntajeAdmin("11",puntajes[10][3])}                                                  
+                                                  ${catalogo.desplegarOpcionesPuntajeAdmin("11",puntajes[10][3],sessionScope["idDocente"])}                                                  
                                               </c:otherwise>
                                             </c:choose>
                                         </select>
                                         <c:if test='${sessionScope["permisoActual"]=="6"}'>
                                             <label class="control-label">Evaluación Comité Revisor:</label>
                                             <select class="form-control input-sm disabled" id="puntaje4Referencia" name="puntaje4Referencia">
-                                                  ${catalogo.desplegarOpcionesPuntajeAdmin("11",puntajes[10][3])}                                              
+                                                  ${catalogo.desplegarOpcionesPuntajeAdmin("11",puntajes[10][3],sessionScope["idDocente"])}                                              
                                             </select>
                                         </c:if>
                                     </div>
@@ -863,17 +863,17 @@
                                       <select class="form-control input-sm" id="puntaje12" name="puntaje12" required>                                  
                                            <c:choose>
                                               <c:when test='${sessionScope["permisoActual"]=="6"}'>
-                                                  ${catalogo.desplegarOpcionesPuntajeAdmin("12",puntajesDictaminador[11][3])}
+                                                  ${catalogo.desplegarOpcionesPuntajeAdmin("12",puntajesDictaminador[11][3],sessionScope["idDocente"])}
                                               </c:when>
                                               <c:otherwise>
-                                                  ${catalogo.desplegarOpcionesPuntajeAdmin("12",puntajes[11][3])}                                                                                               
+                                                  ${catalogo.desplegarOpcionesPuntajeAdmin("12",puntajes[11][3],sessionScope["idDocente"])}                                                                                               
                                               </c:otherwise>
                                            </c:choose>
                                       </select>
                                       <c:if test='${sessionScope["permisoActual"]=="6"}'>
                                         <label class="control-label">Evaluación Comité Revisor:</label>
                                         <select class="form-control input-sm disabled" id="puntaje5Referencia" name="puntaje5Referencia">
-                                              ${catalogo.desplegarOpcionesPuntajeAdmin("12",puntajes[11][3])}                                              
+                                              ${catalogo.desplegarOpcionesPuntajeAdmin("12",puntajes[11][3],sessionScope["idDocente"])}                                              
                                         </select>
                                       </c:if>
                                     </div>
@@ -882,17 +882,17 @@
                                       <select class="form-control input-sm" id="puntaje13" name="puntaje13" required>                                  
                                           <c:choose>
                                               <c:when test='${sessionScope["permisoActual"]=="6"}'>
-                                                  ${catalogo.desplegarOpcionesPuntajeAdmin("13",puntajesDictaminador[12][3])}
+                                                  ${catalogo.desplegarOpcionesPuntajeAdmin("13",puntajesDictaminador[12][3],sessionScope["idDocente"])}
                                               </c:when>
                                               <c:otherwise>
-                                                  ${catalogo.desplegarOpcionesPuntajeAdmin("13",puntajes[12][3])}                                                                                               
+                                                  ${catalogo.desplegarOpcionesPuntajeAdmin("13",puntajes[12][3],sessionScope["idDocente"])}                                                                                               
                                               </c:otherwise>
                                            </c:choose>                                          
                                       </select>
                                       <c:if test='${sessionScope["permisoActual"]=="6"}'>
                                         <label class="control-label">Evaluación Comité Revisor:</label>
                                         <select class="form-control input-sm disabled" id="puntaje6Referencia" name="puntaje6Referencia">
-                                              ${catalogo.desplegarOpcionesPuntajeAdmin("13",puntajes[12][3])}                                              
+                                              ${catalogo.desplegarOpcionesPuntajeAdmin("13",puntajes[12][3],sessionScope["idDocente"])}                                              
                                         </select>
                                       </c:if>
                                     </div>
@@ -905,17 +905,17 @@
                                       <select class="form-control input-sm" id="puntaje13" name="puntaje14" required>                                  
                                           <c:choose>
                                               <c:when test='${sessionScope["permisoActual"]=="6"}'>
-                                                  ${catalogo.desplegarOpcionesPuntajeAdmin("14",puntajesDictaminador[13][3])}
+                                                  ${catalogo.desplegarOpcionesPuntajeAdmin("14",puntajesDictaminador[13][3],sessionScope["idDocente"])}
                                               </c:when>
                                               <c:otherwise>
-                                                  ${catalogo.desplegarOpcionesPuntajeAdmin("14",puntajes[13][3])}                                                                                               
+                                                  ${catalogo.desplegarOpcionesPuntajeAdmin("14",puntajes[13][3],sessionScope["idDocente"])}                                                                                               
                                               </c:otherwise>
                                            </c:choose>  
                                       </select>
                                       <c:if test='${sessionScope["permisoActual"]=="6"}'>
                                         <label class="control-label">Evaluación Comité Revisor:</label>
                                         <select class="form-control input-sm disabled" id="puntaje7Referencia" name="puntaje7Referencia">
-                                              ${catalogo.desplegarOpcionesPuntajeAdmin("14",puntajes[13][3])}                                              
+                                              ${catalogo.desplegarOpcionesPuntajeAdmin("14",puntajes[13][3],sessionScope["idDocente"])}                                              
                                         </select>
                                       </c:if>
                                     </div>
