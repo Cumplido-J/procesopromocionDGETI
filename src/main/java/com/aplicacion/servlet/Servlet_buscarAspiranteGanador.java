@@ -85,11 +85,12 @@ public class Servlet_buscarAspiranteGanador extends HttpServlet {
                 String plantel=request.getParameter("plantel");
                 String categoria=request.getParameter("categoria");
                 String jornada=request.getParameter("jornada");
+                String vacancia=request.getParameter("vacancia");
                 Datos d=new Datos();
                 if(entidad.isEmpty() && plantel.isEmpty()){
-                    out.print(d.generarResultadosCentrales(programa,subsistema,entidad,plantel));
+                    out.print(d.generarResultadosCentrales(programa,subsistema,entidad,plantel,vacancia));
                 }else{
-                    out.print(d.desplegarAspirantesVacancia(id, programa, subsistema, entidad, plantel, categoria, jornada));
+                    out.print(d.desplegarAspirantesVacancia(id, programa, subsistema, entidad, plantel, categoria, jornada, vacancia));
                 }
         }catch(Exception e){
             System.out.println(e.toString());

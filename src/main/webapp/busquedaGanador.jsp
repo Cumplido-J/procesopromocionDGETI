@@ -34,6 +34,14 @@
                         </div>
                     </div>
                     <div class="row">
+                        <div class="form-group col-md-4">  
+                            <label class="control-label" for="tvacancia">Tipo Vacancia</label>
+                            <select class="form-control input-sm" id="tvacancia" name="tvacancia" required>
+                                <option value="">---Seleccionar una opción---</option>
+                                <option value="1">Real</option>
+                                <option value="2">Corrimiento Natural</option>
+                            </select>
+                        </div>
                         <div class="form-group col-md-4">                               
                             <label class="control-label" for="subsistema">Subsistema:</label>
                             <select class="form-control input-sm ${disabled2}" id="subsistema" name="subsistema" onchange="actualizarPlanteles()" >                                  
@@ -46,15 +54,14 @@
                               ${catalogo.desplegarOpcionesEstado(sessionScope["entidad"])}
                           </select>
                         </div>
-
+                    </div>
+                    <div class="row">
                         <div class="form-group col-md-4">                               
                             <label class="control-label" for="plantel">Plantel:</label>
                             <select class="form-control input-sm ${disabled4}" id="plantel" name="plantel" onchange="actualizarVacancias()">                            
                                 ${catalogo.desplegarAspirantesVacancia(sessionScope["programa"],sessionScope["subsistema"],sessionScope["entidad"],sessionScope["plantel"])}
                             </select>
                         </div>
-                    </div>
-                    <div class="row">
                         <div class="form-group col-md-4">                               
                             <label class="control-label" for="categoria">Categoria:</label>
                             <select class="form-control input-sm" id="categoria" name="categoria" onchange="actualizarJornada()">                                  
@@ -67,9 +74,15 @@
                                 <option value=''>-Seleccione-</option>
                             </select>
                         </div>
+                    </div>
+                     <div class="row">
                         <div class="form-group col-md-4">                               
                             <label class="control-label" for="plazas">Plazas Disponibles</label>
                             <p id="plazas"></p>
+                        </div>
+                        <div class="form-group col-md-4"> 
+                        </div>
+                        <div class="form-group col-md-4">
                         </div>
                     </div>
                     <div class="row">
@@ -97,7 +110,7 @@
                                 <th>Posición</th>
                             </tr>
                         </thead>
-                        <tbody id="seccionEditable">${dato.desplegarAspirantesVacancia("",sessionScope["programa"],sessionScope["subsistema"],sessionScope["entidad"],sessionScope["plantel"],"","")}</tbody>
+                        <tbody id="seccionEditable">${dato.desplegarAspirantesVacancia("",sessionScope["programa"],sessionScope["subsistema"],sessionScope["entidad"],sessionScope["plantel"],"","","")}</tbody>
                     </table>
                 </div>
             </div>
@@ -156,10 +169,11 @@
                 var plantel=$("#plantel").val();
                 var categoria=$("#categoria").val();
                 var jornada=$("#jornada").val();
+                var vacancia=$("#tvacancia").val();
                 $("#modalConfirmacion2").modal("hide");
                 $("#btnBuscar").val("Generando resultados...");
                 $("#btnBuscar").attr("disabled","disabled");
-                $.post("aspiranteGanador", {id:"r",programa:programa,subsistema:subsistema,entidad:entidad,plantel:plantel,categoria:categoria,jornada:jornada}, function(data){
+                $.post("aspiranteGanador", {id:"r",programa:programa,subsistema:subsistema,entidad:entidad,plantel:plantel,categoria:categoria,jornada:jornada,vacancia:vacancia}, function(data){
                     $("#btnBuscar").val("Buscar resultados");
                     $("#btnBuscar").removeAttr("disabled");}
                 );
@@ -171,7 +185,8 @@
                 var plantel=$("#plantel").val();
                 var categoria=$("#categoria").val();
                 var jornada=$("#jornada").val();
-                $.post("aspiranteGanador", {id:"b",programa:programa,subsistema:subsistema,entidad:entidad,plantel:plantel,categoria:categoria,jornada:jornada}, function(data){
+                var vacancia=$("#tvacancia").val();
+                $.post("aspiranteGanador", {id:"b",programa:programa,subsistema:subsistema,entidad:entidad,plantel:plantel,categoria:categoria,jornada:jornada,vacancia:vacancia}, function(data){
                     $("#seccionEditable").html(data);}
                 );
             }

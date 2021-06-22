@@ -289,10 +289,10 @@ public class Datos {
             return respuesta;        
         }
     }
-    public String desplegarAspirantesVacancia(String id,String idPrograma,String idSubsistema,String idEntidad,String idPlantel,String categoria,String jornada){        
+    public String desplegarAspirantesVacancia(String id,String idPrograma,String idSubsistema,String idEntidad,String idPlantel,String categoria,String jornada,String vacancia){        
         String respuesta="<tr><td colspan='9' class='text-center'>Sin información</td></tr>";        
         try{
-            String[] parametros={idPrograma,idSubsistema,idEntidad,idPlantel,categoria,jornada};
+            String[] parametros={idPrograma,idSubsistema,idEntidad,idPlantel,categoria,jornada,vacancia};
             if(idEntidad.isEmpty() && idPlantel.isEmpty()){
                 return respuesta;
             }else{
@@ -318,7 +318,7 @@ public class Datos {
                             String[] parametrosPlazas={idPrograma, idSubsistema, idEntidad, idPlantel, "D", categoria, jornada};
                             List<String[]> datosPlazas=metodos.ejecutaSP(constants.SP_CONSULTA_NUMERO_PLAZAS,parametrosPlazas);
                             int numeroPlazas=Integer.parseInt(datosPlazas.get(0)[8]);
-                            String[] parametrosGanador={idPrograma, idSubsistema, idEntidad, idPlantel, categoria, jornada};
+                            String[] parametrosGanador={idPrograma, idSubsistema, idEntidad, idPlantel, categoria, jornada, vacancia};
                             List<String[]> datosGanador=metodos.ejecutaSP(constants.SP_CONSULTA_GANADOR_ASPIRANTE,parametrosGanador);
                             if(!datosGanador.isEmpty()){
                                 int contador = 0;
@@ -361,7 +361,7 @@ public class Datos {
             return respuesta;        
         }
     }
-    public String generarResultadosCentrales(String programa, String idSubsistema, String entidad, String plantel){        
+    public String generarResultadosCentrales(String programa, String idSubsistema, String entidad, String plantel, String vacancia){        
         String respuesta="<tr><td colspan='9' class='text-center'>Sin información</td></tr>";        
         try{
             List<String[]> datosEntidades=metodos.ejecutaSP("sp_selectCatEntidades");
@@ -371,7 +371,7 @@ public class Datos {
                 for(String[] datoPlanteles:datos){
                     String idEntidad=dato[0];
                     String idPlantel=datoPlanteles[0];
-                    String[] parametros1={programa, idSubsistema, idEntidad, idPlantel};
+                    String[] parametros1={programa, idSubsistema, idEntidad, idPlantel,vacancia};
                     List<String[]> datosProgramas=metodos.ejecutaSP("sp_consultaVacanciasResultados",parametros1);
                     if(datosProgramas.size()>0){
                         for(String[] datoPrograma:datosProgramas){
@@ -380,7 +380,7 @@ public class Datos {
                             List<String[]> datosPlazas=metodos.ejecutaSP("sp_consultaNumeroPlazas",parametrosPlazas);
                             if(datosPlazas.size()>0){
                                 int numeroPlazas=Integer.parseInt(datosPlazas.get(0)[8]);
-                                String[] parametrosGanador={programa, idSubsistema, idEntidad, idPlantel, datoPrograma[0], datoPrograma[2]};
+                                String[] parametrosGanador={programa, idSubsistema, idEntidad, idPlantel, datoPrograma[0], datoPrograma[2],vacancia};
                                 List<String[]> datosGanador=metodos.ejecutaSP("sp_consultaGanadorAspirante",parametrosGanador);
                                     if(!datosGanador.isEmpty()){
                                         int contador = 0;

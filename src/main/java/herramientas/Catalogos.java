@@ -972,10 +972,10 @@ public class Catalogos {
         }
     }
     
-    public String desplegarOpcionesVacancia(String idPrograma,String idSubsistema,String idEntidad,String idPlantel){        
+    public String desplegarOpcionesVacancia(String idPrograma,String idSubsistema,String idEntidad,String idPlantel,String vacancia){        
         String respuesta="<option value=''>-Seleccione-</option>";
         try{
-            String[] parametros={idPrograma, idSubsistema, idEntidad, idPlantel};
+            String[] parametros={idPrograma, idSubsistema, idEntidad, idPlantel, vacancia};
             List<String[]> datos=metodos.ejecutaSP("sp_consultaVacanciasResultados",parametros);
             for(String[] dato:datos){
                 respuesta+="<option value='"+dato[0]+"'>"+dato[1]+"</option>";
