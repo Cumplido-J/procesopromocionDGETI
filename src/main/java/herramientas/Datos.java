@@ -321,17 +321,20 @@ public class Datos {
                             String[] parametrosGanador={idPrograma, idSubsistema, idEntidad, idPlantel, categoria, jornada};
                             List<String[]> datosGanador=metodos.ejecutaSP(constants.SP_CONSULTA_GANADOR_ASPIRANTE,parametrosGanador);
                             if(!datosGanador.isEmpty()){
-                                int contador = 1;
+                                int contador = 0;
                                 for(String[] datoGanador:datosGanador){
                                     int posicionGanador=1;
-                                    if(numeroPlazas>(datosGanador.indexOf(datoGanador))){
-                                        String[] parametrosGanador1={datoGanador[0],Integer.toString(posicionGanador)};
-                                        metodos.ejecutaSP(constants.SP_INSERT_POSICION,parametrosGanador1);
-                                    }else{
-                                        contador++;
-                                        String[] parametrosGanador1={datoGanador[0],Integer.toString(contador)};
-                                        metodos.ejecutaSP(constants.SP_INSERT_POSICION,parametrosGanador1);
-                                    }
+//                                    if(numeroPlazas>(datosGanador.indexOf(datoGanador))){
+//                                        String[] parametrosGanador1={datoGanador[0],Integer.toString(posicionGanador)};
+//                                        metodos.ejecutaSP(constants.SP_INSERT_POSICION,parametrosGanador1);
+//                                    }else{
+//                                        contador++;
+//                                        String[] parametrosGanador1={datoGanador[0],Integer.toString(contador)};
+//                                        metodos.ejecutaSP(constants.SP_INSERT_POSICION,parametrosGanador1);
+//                                    }
+                                    contador++;
+                                    String[] parametrosGanador1={datoGanador[0],Integer.toString(contador)};
+                                    metodos.ejecutaSP("sp_insertPosicion",parametrosGanador1);
                                 }
                             }
                         }
@@ -361,34 +364,37 @@ public class Datos {
     public String generarResultadosCentrales(String programa, String idSubsistema, String entidad, String plantel){        
         String respuesta="<tr><td colspan='9' class='text-center'>Sin información</td></tr>";        
         try{
-            List<String[]> datosEntidades=metodos.ejecutaSP(constants.SP_SELECT_ENTIDADES);
+            List<String[]> datosEntidades=metodos.ejecutaSP("sp_selectCatEntidades");
             for(String[] dato:datosEntidades){
                 String[] parametros={idSubsistema,dato[0]};
-                List<String[]> datos=metodos.ejecutaSP(constants.SP_SELECT_PLANTELES,parametros);
+                List<String[]> datos=metodos.ejecutaSP("sp_selectCatPlanteles",parametros);
                 for(String[] datoPlanteles:datos){
                     String idEntidad=dato[0];
                     String idPlantel=datoPlanteles[0];
                     String[] parametros1={programa, idSubsistema, idEntidad, idPlantel};
-                    List<String[]> datosProgramas=metodos.ejecutaSP(constants.SP_CONSULTA_VACANCIAS_RESULTADOS,parametros1);
+                    List<String[]> datosProgramas=metodos.ejecutaSP("sp_consultaVacanciasResultados",parametros1);
                     for(String[] datoPrograma:datosProgramas){
                         
                         String[] parametrosPlazas={programa, idSubsistema, idEntidad, idPlantel, "D", datoPrograma[0], datoPrograma[2]};
-                        List<String[]> datosPlazas=metodos.ejecutaSP(constants.SP_CONSULTA_NUMERO_PLAZAS,parametrosPlazas);
+                        List<String[]> datosPlazas=metodos.ejecutaSP("sp_consultaNumeroPlazas",parametrosPlazas);
                         int numeroPlazas=Integer.parseInt(datosPlazas.get(0)[8]);
                         String[] parametrosGanador={programa, idSubsistema, idEntidad, idPlantel, datoPrograma[0], datoPrograma[2]};
-                        List<String[]> datosGanador=metodos.ejecutaSP(constants.SP_CONSULTA_GANADOR_ASPIRANTE,parametrosGanador);
+                        List<String[]> datosGanador=metodos.ejecutaSP("sp_consultaGanadorAspirante",parametrosGanador);
                         if(!datosGanador.isEmpty()){
-                            int contador = 1;
+                            int contador = 0;
                             for(String[] datoGanador:datosGanador){
                                 int posicionGanador=1;
-                                if(numeroPlazas>(datosGanador.indexOf(datoGanador))){
-                                    String[] parametrosGanador1={datoGanador[0],Integer.toString(posicionGanador)};
-                                    metodos.ejecutaSP(constants.SP_INSERT_POSICION,parametrosGanador1);
-                                }else{
+//                                if(numeroPlazas>(datosGanador.indexOf(datoGanador))){
+//                                    String[] parametrosGanador1={datoGanador[0],Integer.toString(posicionGanador)};
+//                                    metodos.ejecutaSP("sp_insertPosicion",parametrosGanador1);
+//                                }else{
+//                                    contador++;
+//                                    String[] parametrosGanador1={datoGanador[0],Integer.toString(contador)};
+//                                    metodos.ejecutaSP("sp_insertPosicion",parametrosGanador1);
+//                                }
                                     contador++;
                                     String[] parametrosGanador1={datoGanador[0],Integer.toString(contador)};
-                                    metodos.ejecutaSP(constants.SP_INSERT_POSICION,parametrosGanador1);
-                                }
+                                    metodos.ejecutaSP("sp_insertPosicion",parametrosGanador1);
                             }
                         }
                     }
