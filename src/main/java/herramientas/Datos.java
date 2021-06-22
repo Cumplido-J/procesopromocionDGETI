@@ -373,28 +373,32 @@ public class Datos {
                     String idPlantel=datoPlanteles[0];
                     String[] parametros1={programa, idSubsistema, idEntidad, idPlantel};
                     List<String[]> datosProgramas=metodos.ejecutaSP("sp_consultaVacanciasResultados",parametros1);
-                    for(String[] datoPrograma:datosProgramas){
-                        
-                        String[] parametrosPlazas={programa, idSubsistema, idEntidad, idPlantel, "D", datoPrograma[0], datoPrograma[2]};
-                        List<String[]> datosPlazas=metodos.ejecutaSP("sp_consultaNumeroPlazas",parametrosPlazas);
-                        int numeroPlazas=Integer.parseInt(datosPlazas.get(0)[8]);
-                        String[] parametrosGanador={programa, idSubsistema, idEntidad, idPlantel, datoPrograma[0], datoPrograma[2]};
-                        List<String[]> datosGanador=metodos.ejecutaSP("sp_consultaGanadorAspirante",parametrosGanador);
-                        if(!datosGanador.isEmpty()){
-                            int contador = 0;
-                            for(String[] datoGanador:datosGanador){
-                                int posicionGanador=1;
-//                                if(numeroPlazas>(datosGanador.indexOf(datoGanador))){
-//                                    String[] parametrosGanador1={datoGanador[0],Integer.toString(posicionGanador)};
-//                                    metodos.ejecutaSP("sp_insertPosicion",parametrosGanador1);
-//                                }else{
-//                                    contador++;
-//                                    String[] parametrosGanador1={datoGanador[0],Integer.toString(contador)};
-//                                    metodos.ejecutaSP("sp_insertPosicion",parametrosGanador1);
-//                                }
-                                    contador++;
-                                    String[] parametrosGanador1={datoGanador[0],Integer.toString(contador)};
-                                    metodos.ejecutaSP("sp_insertPosicion",parametrosGanador1);
+                    if(datosProgramas.size()>0){
+                        for(String[] datoPrograma:datosProgramas){
+
+                            String[] parametrosPlazas={programa, idSubsistema, idEntidad, idPlantel, "D", datoPrograma[0], datoPrograma[2]};
+                            List<String[]> datosPlazas=metodos.ejecutaSP("sp_consultaNumeroPlazas",parametrosPlazas);
+                            if(datosPlazas.size()>0){
+                                int numeroPlazas=Integer.parseInt(datosPlazas.get(0)[8]);
+                                String[] parametrosGanador={programa, idSubsistema, idEntidad, idPlantel, datoPrograma[0], datoPrograma[2]};
+                                List<String[]> datosGanador=metodos.ejecutaSP("sp_consultaGanadorAspirante",parametrosGanador);
+                                    if(!datosGanador.isEmpty()){
+                                        int contador = 0;
+                                        for(String[] datoGanador:datosGanador){
+                                            int posicionGanador=1;
+            //                                if(numeroPlazas>(datosGanador.indexOf(datoGanador))){
+            //                                    String[] parametrosGanador1={datoGanador[0],Integer.toString(posicionGanador)};
+            //                                    metodos.ejecutaSP("sp_insertPosicion",parametrosGanador1);
+            //                                }else{
+            //                                    contador++;
+            //                                    String[] parametrosGanador1={datoGanador[0],Integer.toString(contador)};
+            //                                    metodos.ejecutaSP("sp_insertPosicion",parametrosGanador1);
+            //                                }
+                                                contador++;
+                                                String[] parametrosGanador1={datoGanador[0],Integer.toString(contador)};
+                                                metodos.ejecutaSP("sp_insertPosicion",parametrosGanador1);
+                                        }
+                                    }
                             }
                         }
                     }
