@@ -375,8 +375,12 @@ public class Datos {
                     List<String[]> datosProgramas=metodos.ejecutaSP("sp_consultaVacanciasResultados",parametros1);
                     if(datosProgramas.size()>0){
                         for(String[] datoPrograma:datosProgramas){
-
-                            String[] parametrosPlazas={programa, idSubsistema, idEntidad, idPlantel, "D", datoPrograma[0], datoPrograma[2]};
+                            
+                            if(datoPrograma[4].contains("TD")){
+                                System.out.println("Hola");
+                            }
+                            
+                            String[] parametrosPlazas={programa, idSubsistema, idEntidad, idPlantel, datoPrograma[4], datoPrograma[0], datoPrograma[2]};
                             List<String[]> datosPlazas=metodos.ejecutaSP("sp_consultaNumeroPlazas",parametrosPlazas);
                             if(datosPlazas.size()>0){
                                 int numeroPlazas=Integer.parseInt(datosPlazas.get(0)[8]);
