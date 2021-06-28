@@ -85,7 +85,7 @@ public class Servlet_registroInfoLaboral extends HttpServlet {
         PrintWriter out = response.getWriter();
         try {
             HttpSession session= (HttpSession) request.getSession();
-            String idUsuario="",rfc="",programa="",idEntidad="",idPlantel="";
+            String idUsuario="",rfc="",programa="",idEntidad="",idPlantel="",numhoras="";
             if(session.getAttribute("rol").toString().equals("D")){
                 idUsuario=session.getAttribute("idUsuario").toString();
                 rfc=session.getAttribute("rfc").toString();
@@ -95,6 +95,11 @@ public class Servlet_registroInfoLaboral extends HttpServlet {
             }
             
             programa=session.getAttribute("programa").toString();
+            
+            if(programa.equals("2")){
+                numhoras=request.getParameter("numhoras");
+            }
+            
             //out.println(idUsuario);
             Fecha fecha=new Fecha();
             String activo,ingresoSubsistema="",ingresoPlantel="",idJornada="",fechaPlaza="",idTipoNombramiento="",fechaUltimaPromocion="",idJornadaAspira="",idPerfilRequerido="",notaSancion="N",idCategoria="",idCategoriaAspira="",nombreVacancia="";
@@ -114,7 +119,7 @@ public class Servlet_registroInfoLaboral extends HttpServlet {
                 String categoriaNombre=request.getParameter("categoriaAspira");
                 
                 String[] categoria;
-		categoria = categoriaNombre.split("-");
+        categoria = categoriaNombre.split("-");
                 idCategoriaAspira=categoria[0];
                 nombreVacancia=categoria[1];
                 idJornadaAspira=request.getParameter("jornadaAspira");
@@ -164,9 +169,16 @@ public class Servlet_registroInfoLaboral extends HttpServlet {
                             bandera=true;
                         }
                     }
+                    
+                    int totalHoras=Integer.parseInt(numhoras)+Integer.parseInt(horas);
+                    if(totalHoras>18 && (jornadaAspira==3 || jornadaAspira==4)){
+                        bandera=false;
+                    }
+                    
                 }else if(programa.equals("2")){
                     if(jornadaAspira==jornadaActual && jornadaAspira==1){
-                        if(Integer.parseInt(horas)<=19){
+                        int totalHoras=Integer.parseInt(numhoras)+Integer.parseInt(horas);
+                        if(totalHoras<=19){
                             bandera=true;
                         }else{
                             bandera=false;

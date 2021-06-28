@@ -263,8 +263,8 @@ public class Datos {
                             if(!idJornada.equals("1")){
                                 respuesta="Solo puede seleccionar plazas con jornada de horas";
                             }
-                            if(horas>17){
-                                respuesta="Solo puede acumular 17 horas como máximo";
+                            if(horas>19){
+                                respuesta="Solo puede acumular 19 horas como máximo";
                             }
                         }
                         
