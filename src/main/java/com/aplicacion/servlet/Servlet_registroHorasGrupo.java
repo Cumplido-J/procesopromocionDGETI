@@ -90,26 +90,51 @@ public class Servlet_registroHorasGrupo extends HttpServlet {
                 rfc=session.getAttribute("rfcDocente").toString();
             }
             
+            String tipoInfo="";
             String idPeriodo=request.getParameter("periodo");
-            String tipoInfo=request.getParameter("tipoInfo");
+            tipoInfo=request.getParameter("tipoInfo");
+            
+            if(tipoInfo==null){
+                tipoInfo=request.getParameter("tipoInfoCecyte");
+            }
+            
             String idAsignatura="0";
             switch (tipoInfo){
                 case "cbp":
                     idAsignatura=request.getParameter("asignatura");
+                    if(idAsignatura==null){
+                        idAsignatura=request.getParameter("asignatura1");
+                    }
                     break;
                 case "cp":
                     idAsignatura=request.getParameter("submodulo");
+                    if(idAsignatura==null){
+                        idAsignatura=request.getParameter("submodulo1");
+                    }
                     break;
                 case "tl":
                     idAsignatura=request.getParameter("taller");
+                    if(idAsignatura==null){
+                        idAsignatura=request.getParameter("taller1");
+                    }
                     break;
                 default:
                     break;                
             }
             
+            String semestre="";
             String horas=request.getParameter("horas");
-            String semestre=request.getParameter("semestre");
+            semestre=request.getParameter("semestre");
             String grupo=request.getParameter("grupo").toUpperCase();
+            if(horas==null){
+                horas="";
+            }
+            if(semestre==null){
+                semestre=request.getParameter("semestre1");
+            }
+            if(grupo==null){
+                grupo="";
+            }
             Docente d=new Docente();
             d.setIdUsuario(idUsuario);
             d.registraHoras(idPeriodo, idAsignatura, horas, grupo,semestre);

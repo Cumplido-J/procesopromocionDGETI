@@ -529,8 +529,95 @@ $(document).ready(function () {
             return false;
         }
     });    
+    $('#formHorasGrupo1').submit(function(e) {
+        e.preventDefault();
+    }).validate({
+        rules: {
+            horas: {
+              number: true
+            }
+        },
+        messages: {
+            'periodo': {
+                required: "Seleccione una opción"
+            },
+            'grupo': {
+                required: "Campo requerido"
+            },
+            'semestre': {
+                required: "Seleccione una opción"
+            },
+            'tipoInfo': {
+                required: "Seleccione una opción"
+            },
+            'version1': {
+                required: "Seleccione una opción"
+            },
+            'asignatura1': {
+                required: "Seleccione una opción"
+            },
+            'carrera_cp1': {
+                required: "Seleccione una opción"
+            },
+            'modulo1': {
+                required: "Seleccione una opción"
+            },
+            'submodulo1': {
+                required: "Seleccione una opción"
+            },
+            'taller1': {
+                required: "Seleccione una opción"
+            },
+            'horas': {
+                required: "Campo requerido",
+                number:"Ingrese un valor numérico"
+            }
+        },
+        submitHandler:function(){
+            $.ajax({
+                type:$('#formHorasGrupo1').attr("method"),
+                url:$('#formHorasGrupo1').attr("action"),
+                data:$('#formHorasGrupo1').serialize(),
+                beforeSend:function(){
+                    $("#btnEnviarHG").val("Guardando...");
+                    $("#btnEnviarHG").attr("disabled","disabled");
+                },
+                complete:function(){
+                   $("#btnEnviarHG").val("Registrar"); 
+                   $("#btnEnviarHG").removeAttr("disabled");
+                },success:function(data){
+                    var datos=data.split("|");
+                    if(datos.length==3){
+                        $("#tablaInfo").html(datos[0]);                        
+                        if(datos[0].includes("INGLES")||datos[0].includes("CENNI")||datos[0].includes("INGLÉS")){
+                            $("#seccionCENNI").removeAttr("hidden");
+                            $("#nivelCENNI").attr("required","true");
+                            $("#folio").attr("required","true");
+                        }else{
+                            $("#seccionCENNI").attr("hidden","true");
+                            $("#nivelCENNI").removeAttr("required");
+                            $("#nivelCENNI").val("");
+                            $("#folio").removeAttr("required");
+                            $("#folio").val("");
+                        }                        
+                        $("#numHoras").val(datos[1]);
+                        $("#numGrupos").val(datos[2]);
+                        $("#modalInformacionHoras").modal("hide");
+                        $("#tipoInfo").val("");
+                        $("#periodo").val("");
+                        $("#semestre").val("");
+                        $("#grupo").val("");
+                        $("#horas").val("");
+                        cambioTipoInfoCecyte();
+                    }
+                },error:function(){
+                    
+                }
+            });
+            return false;
+        }
+    });    
 });
-
 function actualizarTipoInstitucion() {
     id=$("#entidad").val();
     $.get("ConsultaCatalogos", {k: "11",i:id}, function(respuesta){

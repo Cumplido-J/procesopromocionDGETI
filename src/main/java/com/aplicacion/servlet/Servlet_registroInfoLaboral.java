@@ -153,6 +153,7 @@ public class Servlet_registroInfoLaboral extends HttpServlet {
                 int categoriaAspira=Integer.parseInt(idCategoriaAspira);
                 int jornadaActual=Integer.parseInt(idJornada);
                 int jornadaAspira=Integer.parseInt(idJornadaAspira);
+                int totalHoras=0;
                 boolean bandera=false;
                 if(programa.equals("1")){
                     if((categoriaActual==3 && categoriaAspira==4)||((categoriaActual==11 && categoriaAspira==12))){
@@ -170,14 +171,14 @@ public class Servlet_registroInfoLaboral extends HttpServlet {
                         }
                     }
                     
-                    int totalHoras=Integer.parseInt(numhoras)+Integer.parseInt(horas);
+                    totalHoras=Integer.parseInt(numhoras)+Integer.parseInt(horas);
                     if(totalHoras>18 && (jornadaAspira==3 || jornadaAspira==4)){
                         bandera=false;
                     }
                     
                 }else if(programa.equals("2")){
                     if(jornadaAspira==jornadaActual && jornadaAspira==1){
-                        int totalHoras=Integer.parseInt(numhoras)+Integer.parseInt(horas);
+                        totalHoras=Integer.parseInt(numhoras)+Integer.parseInt(horas);
                         if(totalHoras<=19){
                             bandera=true;
                         }else{
@@ -188,10 +189,14 @@ public class Servlet_registroInfoLaboral extends HttpServlet {
                     }
                 }
                 
+                if(programa.equals("1")){
+                    totalHoras=0;
+                }  
+                
                 if(bandera){
                 //out.println(notaSancion);
                     Metodos_sql metodo = new Metodos_sql();
-                    String[] parametros={idUsuario,activo,ingresoSubsistema,ingresoPlantel,idCategoria,idJornada,fechaPlaza,idTipoNombramiento,fechaUltimaPromocion,idCategoriaAspira,idJornadaAspira,idPerfilRequerido,notaSancion,nombreVacancia};
+                    String[] parametros={idUsuario,activo,ingresoSubsistema,ingresoPlantel,idCategoria,idJornada,fechaPlaza,idTipoNombramiento,fechaUltimaPromocion,idCategoriaAspira,idJornadaAspira,idPerfilRequerido,notaSancion,nombreVacancia,String.valueOf(totalHoras)};
                     List<String[]> datos;                           
                     datos=metodo.ejecutaSP("sp_registroInfoLaboral",parametros);           
                     if(!datos.isEmpty()){

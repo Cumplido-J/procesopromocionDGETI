@@ -90,7 +90,7 @@ public class Servlet_cbRegistro extends HttpServlet {
             docente.setRfc(rfc);
             docente.consultaInfoAspirante();
             String datos[]=docente.getInfoRegistro();            
-            //if(datos[61]==null){
+            if(!datos[66].equalsIgnoreCase("1") || session.getAttribute("rol").toString().equals("A") || session.getAttribute("rol").toString().equals("S")){
                 docente.consultaDocumentos();
                 docente.consultaHoras();
                 String rutaConfig = RutaConfig.getRutaConfig();
@@ -109,9 +109,9 @@ public class Servlet_cbRegistro extends HttpServlet {
                 ServletContext sc = getServletContext();
                 RequestDispatcher rd = sc.getRequestDispatcher("/registro.jsp");
                 rd.forward(request,response);
-            /*}else{
-                response.sendRedirect("evidenciaRegistroDocentes.html");
-            }*/
+            }else{
+                response.sendRedirect("SesionDocente");
+            }
 
         }else{
             response.sendRedirect("login.jsp");

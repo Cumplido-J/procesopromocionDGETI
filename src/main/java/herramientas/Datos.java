@@ -415,4 +415,43 @@ public class Datos {
             return respuesta;  
         }
     }
+    public String desplegarAspirantesAsignacion(String id,String idPrograma,String idSubsistema,String idEntidad,String idPlantel,String categoria,String jornada,String vacancia){        
+        String respuesta="<tr><td colspan='9' class='text-center'>Sin información</td></tr>";        
+        try{
+            String[] parametros={idPrograma,idSubsistema,idEntidad,idPlantel,categoria,jornada,vacancia};
+            if(idEntidad.isEmpty() && idPlantel.isEmpty()){
+                return respuesta;
+            }else{
+                if(id.contains("b")){
+                    List<String[]> datos=metodos.ejecutaSP(constants.SP_CONSULTA_GANADOR_ASPIRANTE,parametros);
+                
+                if(!datos.isEmpty()){
+                    respuesta="";
+                    for(String[] dato:datos)
+                    {
+                        respuesta+="<tr><td>"+dato[6]+"</td><td>"+dato[8]+"</td><td>"+dato[12]+"</td><td>"+dato[16]+"</td><td>"+dato[11]+"</td><td>"+dato[13]+"</td><td>"+(dato[10]==null?"0":dato[10])+"</td>";
+                        if(dato[10]==null || dato[15]==null){
+                            respuesta+="<td>"+"***"+"</td>"+"</tr>";
+                        }else{
+                            //respuesta+="<td>"+(datos.indexOf(dato)+1)+"</td>"+"</tr>";
+                            respuesta+="<td>"+dato[15]+"</td>";
+                        }
+                        respuesta+="<td><div class=\"form-group col-md-24\">  \n" +
+"                            <select class=\"form-control input-sm\" id=\"tvacancia\" name=\"tvacancia\" required>\n" +
+"                                <option value=\"\">Seleccionar una opción</option>\n" +
+"                                <option value=\"1\">Acepto</option>\n" +
+"                                <option value=\"2\">Rechazo</option>\n" +
+"                            </select>\n" +
+"                        </div></td>"+"</tr>";
+                    }
+                    return respuesta; 
+                }
+                }
+            }
+        }catch(Exception e){
+            respuesta=e.toString();
+        }finally{
+            return respuesta;        
+        }
+    }
 }

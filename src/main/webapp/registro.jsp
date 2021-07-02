@@ -467,7 +467,7 @@
                                 </div>
                                 <div class="form-group col-md-3">
                                   <label class="control-label" for="jornadaAspira">Tipo de jornada:</label>
-                                  <select class="form-control input-sm" id="jornadaAspira" name="jornadaAspira" required>
+                                  <select class="form-control input-sm" id="jornadaAspira" name="jornadaAspira" onchange="cambioCategoriaAspiraHoras2()" required>
                                       ${catalogo.desplegarOpcionesJornadaVacante(Docente.infoRegistro[42],Docente.infoRegistro[6],Docente.infoRegistro[64],Docente.infoRegistro[44])}
                                   </select>  
                                   
@@ -482,6 +482,7 @@
                            <c:if test='${sessionScope["programa"]=="2"}'>
                                 <div class="row">
                                     <div class="form-group col-md-3">
+                                      <label class="control-label" for="numhoras">Numero de horas:</label>
                                       <select class="form-control input-sm" id="numhoras" name="numhoras" required>
                                         ${catalogo.desplegarOpcionesHorasVacante(Docente.infoRegistro[42],Docente.infoRegistro[6],Docente.infoRegistro[64],Docente.infoRegistro[44])}
                                       </select>
@@ -1030,7 +1031,7 @@
                 <div class="modal-body">
                     <div class="container-fluid">
                         
-                        <form id="formHorasGrupo" role="form" method="POST" action="RegistroHorasGrupo">
+                        <form id="formHorasGrupo1" role="form" method="POST" action="RegistroHorasGrupo">
                             <div class="form-group col-md-6" >
                                 <label class="control-label" for="periodo">Periodo:</label>
                                 <select class="form-control input-sm" id="periodo" name="periodo" required>
@@ -1108,7 +1109,6 @@
                             </div>
                             <div class="form-group col-md-6">
                                 <label class="control-label" for="horas">Horas:</label>
-                                <label class="control-label" for="horas">Aqui estoy...</label>
                                 <input type="text" class="form-control input-sm" id="horas" name="horas" required>                                                                 
                             </div>
                             <div class="col-xs-12 text-center">
@@ -1317,7 +1317,7 @@
                         <div class="form-group col-md-6">
                             <label class="control-label" for="clvPresupUnidad">Clave Presupuestal (9 Dígitos):</label>
                             <input type='hidden' id="valorClavePresupuestal" name="valorClavePresupuestal" value=''>
-                            <input type="text" class="form-control input-sm" id="clavePresupUnidad" name="clavePresupUnidad" required />
+                            <input type="text" class="form-control input-sm" id="clavePresupUnidad" name="clavePresupUnidad" size="9" required />
                         </div>
                         <div class="form-group col-md-6">
                           <label class="control-label" for="categoria">Categoría:</label>
