@@ -93,24 +93,26 @@
                     <c:set var="disabled3" value=""></c:set>
                     <c:set var="hidden3" value="hidden"></c:set>
                 </c:if>
-                <c:if test = "${Docente.totalEncuestados==30}"> <!--Si ya registró a 30 encuestados-->
+            </c:if>
+            
+            <c:if test = "${Docente.totalEncuestados==30}"> <!--Si ya registró a 30 encuestados-->
                     <c:set var="disabled2" value=""></c:set>
                     <c:set var="hidden2" value=""></c:set>
-                    <c:set var="disabled3" value=""></c:set>
-                    <c:set var="hidden3" value="hidden"></c:set>
-                </c:if>
-                <c:if test = "${Integer.parseInt(Docente.infoRegistro[66])>=6}"><!--Si el registro finalizó como incompleto-->
-                    <c:set var="disabled3" value="disabled"></c:set>
-                    <c:set var="hidden3" value=""></c:set>
-                    <c:set var="disabled4" value=""></c:set>                    
-                </c:if>
-                <c:if test = "${Docente.documentoCargado3('1')==true}"><!--Si la carta aceptacion fue cargada correctamente-->
+            </c:if>
+            
+            <c:if test = "${Docente.infoRegistro[66]>6}">
+                        <c:set var="disabled3" value="disabled"></c:set>
+                        <c:set var="hidden3" value=""></c:set>
+                        <c:set var="disabled4" value=""></c:set>
+                        <c:set var="hidden4" value=""></c:set>    
+            </c:if>
+            
+            <c:if test = "${Docente.documentoCargado3('1')==true}"><!--Si la carta aceptacion fue cargada correctamente-->
                     <c:set var="disabled4" value=""></c:set>
                     <c:set var="hidden4" value=""></c:set>
                     <c:set var="disabled5" value=""></c:set>                    
-                </c:if>
             </c:if>
-            
+                
             <c:if test='${sessionScope["fechaDictaminacion"]=="1"}'>
                 <c:set var="disabled1" value="disabled"></c:set>
                 <c:set var="hidden1" value="hidden"></c:set>
