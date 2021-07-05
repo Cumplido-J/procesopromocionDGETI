@@ -558,7 +558,7 @@ public class Catalogos {
         try{
             List<String[]> datos=metodos.ejecutaSP("sp_consultaJornadaVacante",parametros);
             for(String[] dato:datos){
-                respuesta+="<option value='"+dato[0]+"' clave='"+dato[1]+"'>"+dato[2]+"</option>";
+                respuesta+="<option value='"+dato[0]+"' clave='"+dato[1]+"'>"+dato[3]+"</option>";
             }
         }catch(Exception e){
             respuesta=e.toString();
@@ -602,7 +602,8 @@ public class Catalogos {
         try{
             List<String[]> datos=metodos.ejecutaSP("sp_consultaJornadaVacante",parametros);
             for(String[] dato:datos){
-                respuesta+="<option value='"+dato[4]+"' clave='"+dato[2]+"'>"+dato[4]+"</option>";
+                respuesta+="<option value='"+dato[4]+"' clave='"+dato[2]+"'>"+dato[4]+"jjj"+"</option>";
+                System.out.println("11111");
             }
         }catch(Exception e){
             respuesta=e.toString();

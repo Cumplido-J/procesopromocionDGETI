@@ -484,6 +484,7 @@
                                     <div class="form-group col-md-3">
                                       <label class="control-label" for="numhoras">Numero de horas:</label>
                                       <select class="form-control input-sm" id="numhoras" name="numhoras" required>
+                                          
                                         ${catalogo.desplegarOpcionesHorasVacante(Docente.infoRegistro[42],Docente.infoRegistro[6],Docente.infoRegistro[64],Docente.infoRegistro[44])}
                                       </select>
                                     </div>
