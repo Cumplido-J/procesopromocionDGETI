@@ -1383,6 +1383,29 @@ function cambioCategoriaAspira() {
         }
     });
 }
+function cambioCategoriaAspiraHoras() {
+    var id=$("#categoriaAspira option:selected").attr("aux");
+    idPrograma=$("#programa").val(); 
+    idPlantel=$("#plantel").val(); 
+    $.get("ConsultaCatalogos", {k: "17",i:id,pr:idPrograma,pl:idPlantel}, function(){        
+    }).done(function(respuesta){
+        var aux=respuesta.split("|");
+        if(aux.length==2){
+            $("#jornadaAspira").html(aux[0]);
+            $("#rbRequisitos").html(aux[1]);
+        }
+    });
+}
+function cambioCategoriaAspiraHoras2() {
+    var id=$("#categoriaAspira option:selected").attr("aux");
+    idPrograma=$("#programa").val(); 
+    idPlantel=$("#plantel").val(); 
+    $.get("ConsultaCatalogos", {k: "21",i:id,pr:idPrograma,pl:idPlantel}, function(){        
+    }).done(function(respuesta){
+        var aux=respuesta;
+        $("#numhoras").html(aux);
+    });
+}
 function validaAplicacion(){
     var bandera=false;
     var categoriaActual;

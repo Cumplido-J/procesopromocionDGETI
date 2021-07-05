@@ -462,7 +462,7 @@
                                 <div class="form-group col-md-6">
                                   <label class="control-label" for="categoriaAspira">Categoría a la que aspira: <span id="avisoCategoria" class="glyphicon glyphicon-warning-sign text-warning hidden"></span></label>
                                   <select class="form-control input-sm" id="categoriaAspira" name="categoriaAspira" onchange="cambioCategoriaAspira()" required>                                     
-                                     ${catalogo.desplegarOpcionesCategoriasVacantes(Docente.infoRegistro[6],Docente.infoRegistro[64],Docente.infoRegistro[42],Docente.infoRegistro[78],Docente.infoRegistro[44])}
+                                     ${catalogo.desplegarOpcionesCategoriasVacantes(Docente.infoRegistro[6],Docente.infoRegistro[64],Docente.infoRegistro[42],Docente.infoRegistro[78],Docente.infoRegistro[44],Docente.infoRegistro[75])}
                                   </select>
                                 </div>
                                 <div class="form-group col-md-3">
