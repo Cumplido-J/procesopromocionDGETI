@@ -119,7 +119,7 @@ public class Servlet_registroInfoLaboral extends HttpServlet {
                 String categoriaNombre=request.getParameter("categoriaAspira");
                 
                 String[] categoria;
-        categoria = categoriaNombre.split("-");
+                categoria = categoriaNombre.split("-");
                 idCategoriaAspira=categoria[0];
                 nombreVacancia=categoria[1];
                 idJornadaAspira=request.getParameter("jornadaAspira");
