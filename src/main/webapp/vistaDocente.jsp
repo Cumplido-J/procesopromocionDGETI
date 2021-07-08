@@ -103,7 +103,7 @@
                     <c:set var="hidden2" value=""></c:set>
             </c:if>
             
-            <c:if test = "${Docente.infoRegistro[66]>6}">
+            <c:if test = "${Docente.infoRegistro[66]>=6}">
                         <c:set var="disabled3" value="disabled"></c:set>
                         <c:set var="hidden3" value=""></c:set>
                         <c:set var="disabled4" value=""></c:set>
