@@ -177,7 +177,7 @@ public class Servlet_registroInfoLaboral extends HttpServlet {
                     }
                     
                 }else if(programa.equals("2")){
-                    if(jornadaAspira==jornadaActual && jornadaAspira==1){
+                    if(jornadaAspira==jornadaActual && jornadaAspira==1 && categoriaAspira==categoriaActual){
                         totalHoras=Integer.parseInt(numhoras)+Integer.parseInt(horas);
                         if(totalHoras<=19){
                             bandera=true;
@@ -211,7 +211,9 @@ public class Servlet_registroInfoLaboral extends HttpServlet {
                 }else{
                     out.print("No puede aplicar a esa combinación de categoria y jornada");
                     if(programa.equals("2")){
-                        out.println("Excede el número de horas permitidas");
+                        if(totalHoras>19){
+                            out.println("Excede el número de horas permitidas");
+                        }
                     }
                 }
                 }else{
