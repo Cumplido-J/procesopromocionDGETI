@@ -745,6 +745,7 @@ public class Metodos_sql {
         conexion = null;
 
         String buscar = "call " + sp + "();";
+        System.out.println(buscar);
         conexion = conector();
         try {
             sentencia_preparada = conexion.prepareStatement(buscar);

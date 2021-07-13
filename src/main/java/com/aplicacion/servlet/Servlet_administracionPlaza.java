@@ -80,7 +80,7 @@ public class Servlet_administracionPlaza extends HttpServlet {
         try {
             Fecha fecha=new Fecha();
             HttpSession session= (HttpSession) request.getSession();
-            String idUsuario="",rfc="";
+            String idUsuario="",rfc="",programa="",clave;
             if(session.getAttribute("rol").toString().equals("D")){
                 idUsuario=session.getAttribute("idUsuario").toString();
                 rfc=session.getAttribute("rfc").toString();
@@ -90,13 +90,24 @@ public class Servlet_administracionPlaza extends HttpServlet {
             }           
             Metodos_sql metodo = new Metodos_sql(); 
             if(request.getParameter("id")==null){
-                String clavePresupUnidad=request.getParameter("clavePresupUnidad");
-                //String categoriaPresupuestal=request.getParameter("categoriaPresupuestal");
-                String valorClavePresupuestal=request.getParameter("valorClavePresupuestal");
-                String clavePresupHoras=request.getParameter("clavePresupHoras");
-                String clavePresupPlaza=request.getParameter("clavePresupPlaza");
-                String clave = clavePresupUnidad + valorClavePresupuestal + clavePresupHoras + clavePresupPlaza;
-                String horas=request.getParameter("horas");
+                programa=session.getAttribute("programa").toString();
+                if(Integer.parseInt(programa)!=2){
+                    String clavePresupUnidad=request.getParameter("clavePresupUnidad");
+                    //String categoriaPresupuestal=request.getParameter("categoriaPresupuestal");
+                    String valorClavePresupuestal=request.getParameter("valorClavePresupuestal");
+                    String clavePresupHoras=request.getParameter("clavePresupHoras");
+                    String clavePresupPlaza=request.getParameter("clavePresupPlaza");
+                    clave = clavePresupUnidad + valorClavePresupuestal + clavePresupHoras + clavePresupPlaza;
+                }else{
+                    String clavePresupUnidad=request.getParameter("clavePresupUnidad");
+                    clave = clavePresupUnidad;
+                }
+                String horas="";
+                if(Integer.parseInt(programa)!=2){
+                    horas=request.getParameter("horas");
+                }else{
+                   horas=request.getParameter("horas3"); 
+                }
                 String idCategoria=request.getParameter("categoria");
                 String idJornada=request.getParameter("jornada");
                 String fechaPlaza=fecha.formatoAlmacenar(request.getParameter("fechaPlaza"));

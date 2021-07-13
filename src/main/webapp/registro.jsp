@@ -373,21 +373,42 @@
                             </div>
                             <div class="row">
                                 <c:if test="${vistaAdmin}">
-                                    <c:if test='${sessionScope["permisoActualEdicion"]=="F"}'>
+                                    <c:if test='${sessionScope["permisoActualEdicion"]=="F" && sessionScope["programa"]!=2}'>
                                         <div class='text-center'>
                                             <input type='button' class='btn btn-sm btn-link' value='(+) Agregar información de plazas' onclick="abrirModalPlazas();" disabled/>
                                         </div>
                                     </c:if>
-                                    <c:if test='${sessionScope["permisoActualEdicion"]=="V"}'>
+                                    <c:if test='${sessionScope["permisoActualEdicion"]=="V" && sessionScope["programa"]!=2}'>
                                         <div class='text-center'>
                                             <input type='button' class='btn btn-sm btn-link' value='(+) Agregar información de plazas' onclick="abrirModalPlazas();" />
                                         </div>
                                     </c:if>
                                 </c:if>
                                 <c:if test="${!vistaAdmin}">
+                                    <c:if test='${sessionScope["programa"]!=2}'>
                                     <div class='text-center'>
                                         <input type='button' class='btn btn-sm btn-link' value='(+) Agregar información de plazas' onclick="abrirModalPlazas();"/>
                                     </div>
+                                    </c:if>
+                                </c:if>
+                                <c:if test="${vistaAdmin}">
+                                    <c:if test='${sessionScope["permisoActualEdicion"]=="F" && sessionScope["programa"]==2}'>
+                                        <div class='text-center'>
+                                            <input type='button' class='btn btn-sm btn-link' value='(+) Agregar información de plazas' onclick="abrirModalPlazasHoras();" disabled/>
+                                        </div>
+                                    </c:if>
+                                    <c:if test='${sessionScope["permisoActualEdicion"]=="V" && sessionScope["programa"]==2}'>
+                                        <div class='text-center'>
+                                            <input type='button' class='btn btn-sm btn-link' value='(+) Agregar información de plazas' onclick="abrirModalPlazasHoras();" />
+                                        </div>
+                                    </c:if>
+                                </c:if>
+                                <c:if test="${!vistaAdmin}">
+                                    <c:if test='${sessionScope["programa"]==2}'>
+                                    <div class='text-center'>
+                                        <input type='button' class='btn btn-sm btn-link' value='(+) Agregar información de plazas' onclick="abrirModalPlazasHoras();"/>
+                                    </div>
+                                    </c:if>
                                 </c:if>
                                 <div class='table-responsive'>
                                     <table class='table table-bordered table-condensed'>
@@ -441,12 +462,12 @@
                                 <div class="form-group col-md-6">
                                   <label class="control-label" for="categoriaAspira">Categoría a la que aspira: <span id="avisoCategoria" class="glyphicon glyphicon-warning-sign text-warning hidden"></span></label>
                                   <select class="form-control input-sm" id="categoriaAspira" name="categoriaAspira" onchange="cambioCategoriaAspira()" required>                                     
-                                     ${catalogo.desplegarOpcionesCategoriasVacantes(Docente.infoRegistro[6],Docente.infoRegistro[64],Docente.infoRegistro[42],Docente.infoRegistro[78],Docente.infoRegistro[44])}
+                                     ${catalogo.desplegarOpcionesCategoriasVacantes(Docente.infoRegistro[6],Docente.infoRegistro[64],Docente.infoRegistro[42],Docente.infoRegistro[78],Docente.infoRegistro[44],Docente.infoRegistro[75])}
                                   </select>
                                 </div>
                                 <div class="form-group col-md-3">
                                   <label class="control-label" for="jornadaAspira">Tipo de jornada:</label>
-                                  <select class="form-control input-sm" id="jornadaAspira" name="jornadaAspira" required>
+                                  <select class="form-control input-sm" id="jornadaAspira" name="jornadaAspira" onchange="cambioCategoriaAspiraHoras2()" required>
                                       ${catalogo.desplegarOpcionesJornadaVacante(Docente.infoRegistro[42],Docente.infoRegistro[6],Docente.infoRegistro[64],Docente.infoRegistro[44])}
                                   </select>  
                                   
@@ -458,6 +479,23 @@
                                     </span>                                    
                                 </div>
                             </div>
+                           <c:if test='${sessionScope["programa"]=="2"}'>
+                                <div class="row">
+                                    <div class="form-group col-md-3">
+                                      <label class="control-label" for="numhoras">Numero de horas:</label>
+                                      <select class="form-control input-sm" id="numhoras" name="numhoras" required>
+                                          
+                                        ${catalogo.desplegarOpcionesHorasVacante(Docente.infoRegistro[42],Docente.infoRegistro[6],Docente.infoRegistro[64],Docente.infoRegistro[44])}
+                                      </select>
+                                    </div>
+                                    <div class="form-group col-md-3">
+                                    </div>
+                                    <div class="form-group col-md-3">
+                                    </div>
+                                    <div class="form-group col-md-3">                                   
+                                    </div>
+                                </div>
+                            </c:if>
                             <div class="row">
                                 <div class="checkbox col-md-6">
                                     <c:if test = "${Docente.infoRegistro[48]=='S'}">
@@ -566,20 +604,33 @@
                               <input type="text" class="form-control input-sm" id="numGrupos" name="numGrupos" value="${Docente.getNumGrupos()}" readOnly required>
                             </div>
                             <c:if test="${vistaAdmin}">
-                                <c:if test='${sessionScope["permisoActualEdicion"]=="F"}'>
+                                <c:if test='${sessionScope["permisoActualEdicion"]=="F" && sessionScope["programa"]!=2}'>
                                     <div class="text-center">
                                       <input type="button" class="btn btn-link btn-sm" value="(+) Agregar información" data-toggle="modal" data-target="#modalInformacion" disabled/>
                                     </div>
                                 </c:if>
-                                <c:if test='${sessionScope["permisoActualEdicion"]=="V"}'>
+                                <c:if test='${sessionScope["permisoActualEdicion"]=="V" && sessionScope["programa"]!=2}'>
                                     <div class="text-center">
                                       <input type="button" class="btn btn-link btn-sm" value="(+) Agregar información" data-toggle="modal" data-target="#modalInformacion"/>
+                                    </div>
+                                </c:if>
+                                    <div class="text-center">
+                                      <input type="button" class="btn btn-link btn-sm" value="(+) Agregar información" data-toggle="modal" data-target="#modalInformacionHoras" disabled/>
+                                    </div>
+                                <c:if test='${sessionScope["permisoActualEdicion"]=="V" && sessionScope["programa"]==2}'>
+                                    <div class="text-center">
+                                      <input type="button" class="btn btn-link btn-sm" value="(+) Agregar información" data-toggle="modal" data-target="#modalInformacionHoras"/>
                                     </div>
                                 </c:if>
                             </c:if>
                             <c:if test="${!vistaAdmin}">
                                 <div class="text-center">
-                                    <input type="button" class="btn btn-link btn-sm" value="(+) Agregar información" data-toggle="modal" data-target="#modalInformacion"/>
+                                    <c:if test='${sessionScope["programa"]!=2}'>
+                                        <input type="button" class="btn btn-link btn-sm" value="(+) Agregar información" data-toggle="modal" data-target="#modalInformacion"/>
+                                    </c:if>
+                                    <c:if test='${sessionScope["programa"]==2}'>
+                                        <input type="button" class="btn btn-link btn-sm" value="(+) Agregar información" data-toggle="modal" data-target="#modalInformacionHoras"/>
+                                    </c:if>
                                 </div>
                             </c:if>
                             <div>
@@ -906,7 +957,7 @@
                             </div>
                             <div class="form-group col-md-6">
                                 <label class="control-label" for="tipoInfo">Tipo de información:</label>
-                                <select class="form-control input-sm" id="tipoInfo" name="tipoInfo" onchange="cambioTipoInfo()" required>
+                                <select class="form-control input-sm" id="tipoInfo" name="tipoInfo" onchange="cambioTipoInfo(1)" required>
                                     <option value="">-Seleccione-</option>
                                     <option value="cbp">Componente básico y/o propedeútico</option>
                                     <option value="cp">Componente profesional</option>
@@ -970,7 +1021,112 @@
               </div>
             </div>
           </div>
-         
+                                    
+          <div id="modalInformacionHoras" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  <h4 class="modal-title">Registro información Horas</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="container-fluid">
+                        
+                        <form id="formHorasGrupo1" role="form" method="POST" action="RegistroHorasGrupo">
+                            <div class="form-group col-md-6" >
+                                <label class="control-label" for="periodo">Periodo:</label>
+                                <select class="form-control input-sm" id="periodo" name="periodo" required>
+                                    <%=new Catalogos().desplegarOpcionesPeriodos()%>  
+                                    
+                                </select>                          
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label class="control-label" for="grupo">Grupo:</label>
+                                <input type="text" class="form-control input-sm" id="grupo" name="grupo" maxlength="5" required>                                                                 
+                            </div>
+                            <div class="form-group col-md-6" id="divSemestre1">
+                                <label class="control-label" for="semestre1">Semestre:</label>
+                                <select class="form-control input-sm" id="semestre1" name="semestre1" required>
+                                    <option value="">-Seleccione-</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                    <option value="6">6</option>
+                                </select>                          
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label class="control-label" for="tipoInfo">Tipo de información:</label>
+                                <select class="form-control input-sm" id="tipoInfoCecyte" name="tipoInfoCecyte" onchange="cambioTipoInfoCecyte(2)" required>
+                                    <option value="">-Seleccione-</option>
+                                    <option value="cbp">Componente básico y/o propedeútico</option>
+                                    <option value="cp">Componente profesional</option>
+                                    <option value="tl">Taller / laboratorio</option>
+                                </select>                          
+                            </div>
+                            <div class="form-group col-md-6" id="divVersion1" hidden>
+                                <label class="control-label" for="version1">Versión:</label>
+                                <select class="form-control input-sm" id="version1" name="version1" onChange="cambioVersion()">
+                                    <option value="">-Seleccione-</option>                                        
+                                </select>
+                                <input type="text" class="form-control input-sm ${hidden}" id="versionOtro" placeholder="Indique" name="versionOtro" value="" ${required}>
+                            </div>                            
+                            <div class="form-group col-md-6" id="divAsignatura1" hidden>
+                                <label class="control-label" for="asignatura1" >Asignatura:</label>
+                                <select class="form-control input-sm" id="asignatura1" name="asignatura1" onchange="cambioAsignatura()">
+                                    <option value="">-Seleccione-</option>                                        
+                                </select>                          
+                            </div>
+                            <div class="form-group col-md-6" id="divCarrera1" hidden>
+                                <label class="control-label" for="carrera_cp1">Carrera:</label>
+                                <select class="form-control input-sm" id="carrera_cp1" name="carrera_cp1" onchange="cambioCarreraCP1()">
+                                    <option value="">-Seleccione-</option>                                        
+                                </select>
+                                <input type="text" class="form-control input-sm ${hidden}" id="carreraOtro" placeholder="Indique" name="carreraOtro" value="" ${required}>
+                            </div>
+                            <div class="form-group col-md-6" id="divModulo1" hidden>
+                                <label class="control-label" for="modulo1">Modulo:</label>
+                                <select class="form-control input-sm" id="modulo1" name="modulo1" onchange="cambioModulo()">
+                                    <option value="">-Seleccione-</option>                                        
+                                </select>
+                                <input type="text" class="form-control input-sm ${hidden}" id="moduloOtro" placeholder="Indique" name="moduloOtro" value="" ${required}>
+                            </div>
+                            <div class="form-group col-md-6" id="divSubmodulo1" hidden>
+                                <label class="control-label" for="submodulo1">Submodulo:</label>
+                                <select class="form-control input-sm" id="submodulo1" name="submodulo1" onchange="cambioSubmodulo()">
+                                    <option value="">-Seleccione-</option>                                        
+                                </select>
+                                <input type="text" class="form-control input-sm ${hidden}" id="submoduloOtro" placeholder="Indique" name="submoduloOtro" value="" ${required}>
+                            </div>
+                            <div id="divTaller1" hidden>
+                                <div class="form-group col-md-6">
+                                    <label class="control-label" for="taller1">Taller / laboratorio:</label>
+                                    <select class="form-control input-sm" id="taller1" name="taller1">
+                                        <%=new Catalogos().desplegarTalleres()%>                                        
+                                    </select>                          
+                                </div>
+                                
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label class="control-label" for="horas">Horas:</label>
+                                <input type="text" class="form-control input-sm" id="horas" name="horas" required>                                                                 
+                            </div>
+                            <div class="col-xs-12 text-center">
+                                <input type="button" class="btn btn-primary btn-sm" value="Cancelar" data-dismiss="modal"/>
+                                <input class="btn btn-sm btn-primary" id="btnEnviarHG" type="submit" value='Registrar'/>
+                                                                   
+                            </div>
+                        </form>
+                    </div>                                       
+                </div>
+                <!--<div class="modal-footer">
+                  <button type="button" class="btn btn-sm btn-default" data-dismiss="modal">Cerrar</button>
+                </div>-->
+              </div>
+            </div>
+          </div>
+                                    
          <div class="modal fade" id="modalMensaje" role="dialog">
             <div class="modal-dialog">
 
@@ -1067,7 +1223,7 @@
                         <div class="form-group col-md-6">
                             <label class="control-label" for="clvPresupUnidad">Clave Presupuestal (9 Dígitos):</label>
                             <input type='hidden' id="valorClavePresupuestal" name="valorClavePresupuestal" value=''>
-                            <input type="text" class="form-control input-sm" id="clavePresupUnidad" name="clavePresupUnidad" required /> 
+                            <input type="text" class="form-control input-sm" id="clavePresupUnidad" name="clavePresupUnidad" required />
                         </div>
                         <div class="form-group col-md-6">
                           <label class="control-label" for="clvPresupCategoria">Clave Presupuestal (Categoría):</label>
@@ -1079,11 +1235,11 @@
                       <div class="row">  
                         <div class="form-group col-md-6">
                             <label class="control-label" for="clvPresupHoras">Clave Presupuestal (2 Dígitos Seguidos Por: .0):</label>
-                            <input type="text" class="form-control input-sm" id="clavePresupHoras" name="clavePresupHoras" required /> 
+                            <input type="text" class="form-control input-sm" id="clavePresupHoras" name="clavePresupHoras" required />
                         </div>
                         <div class="form-group col-md-6">
                             <label class="control-label" for="clvPresupPlaza">Clave Presupuestal (6 Dígitos):</label>
-                            <input type="text" class="form-control input-sm" id="clavePresupPlaza" name="clavePresupPlaza" required /> 
+                            <input type="text" class="form-control input-sm" id="clavePresupPlaza" name="clavePresupPlaza" required />
                         </div>
                       </div>
                       <div class="row"> 
@@ -1136,6 +1292,82 @@
 
             </div>
           </div>
+          <div class="modal fade" id="modalPlazasHoras" role="dialog">
+            <div class="modal-dialog">
+              <!-- Modal content-->
+              <div class="modal-content panel">
+                  <form id="formPlaza1" action="AdministracionPlaza" method="POST">
+                    <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal">&times;</button>
+                      <h4 class="modal-title">Registro de plaza horas</h4>
+                    </div>
+                    <div class="modal-body">
+                      <div class="row">
+                        <div class="form-group col-md-6">
+                          <label class="control-label" for="tipoNombramiento">Tipo de nombramiento:</label>
+                          <select class="form-control input-sm" id="tipoNombramiento" name="tipoNombramiento" required>                                    
+                            ${catalogo.desplegarOpcionesTipoNombramiento()}
+                          </select>                          
+                        </div>
+                          <div class="form-group col-md-6 datepicker-group">
+                          <label class="control-label" for="fechaPlaza" style="font-size: 12px;">Fecha desde que ostenta la plaza:</label>
+                          <input class="form-control input-sm fecha" id="fechaPlaza" name="fechaPlaza" type="text"  required>
+                        </div>
+                      </div>
+                      <div class="row">  
+                        <div class="form-group col-md-6">
+                            <label class="control-label" for="clvPresupUnidad">Clave Presupuestal (9 Dígitos):</label>
+                            <input type='hidden' id="valorClavePresupuestal" name="valorClavePresupuestal" value=''>
+                            <input type="text" class="form-control input-sm" id="clavePresupUnidad" name="clavePresupUnidad" size="9" required />
+                        </div>
+                        <div class="form-group col-md-6">
+                          <label class="control-label" for="categoria">Categoría:</label>
+                          <select class="form-control input-sm" id="categoria" name="categoria" onchange="cambioCategoria()" required>
+                            ${catalogo.desplegarOpcionesCategorias()}
+                          </select>                          
+                        </div>
+                      </div>
+                      <div class="row"> 
+                        <div class="form-group col-md-6">
+                          <label class="control-label" for="jornada">Tipo de jornada:</label>
+                          <select class="form-control input-sm" id="jornada" name="jornada" onChange="cambioJornada2(this)" required>
+                              ${catalogo.desplegarOpcionesJornada()}
+                          </select>                          
+                        </div>
+                        <div class="form-group col-md-6 hidden" id="seccionHoras3">
+                            <label class="control-label" for="horas3">Horas:</label>
+                            <input type="text" class="form-control input-sm" id="horas3" name="horas3" maxlength="2" />
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="form-group col-md-12">
+                            <label><input type="checkbox" id="cbDirectivoHoras" name="cbDirectivoHoras" data-toggle="collapse" data-target="#seccionDirectivoHoras">Marque la casilla si desempeña una función como Director, Subdirector o Jefe de Departamento</label>
+                        </div>    
+                        <div id="seccionDirectivoHoras" class="collapse">
+                          <div class="form-group col-md-6">
+                            <label class="control-label" for="cargo">Cargo:</label>
+                            <select class="form-control input-sm" id="cargo" name="cargo" required>
+                                <option value="">-Seleccione-</option>
+                                <option value="D">Director</option>
+                                <option value="S">Subdirector</option>
+                                <option value="J">Jefe de Departamento</option>
+                            </select>                          
+                          </div>
+                          <div class="form-group col-md-6">
+                            <label class="control-label" for="fechaRenuncia">Fecha de renuncia al cargo:</label>
+                            <input class="form-control input-sm fecha" id="fechaRenuncia" name="fechaRenuncia" type="text" required>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="submit" id="btnGuardarPlaza" class="btn btn-sm btn-default">Guardar</button>
+                      <button type="button" class="btn btn-sm btn-default" data-dismiss="modal">Cancelar</button>
+                    </div>
+                  </form>
+              </div>
+            </div>
+          </div>  
         <div id="modalConfirmacion2" class="modal fade" role="dialog">
             <div class="modal-dialog">
               <div class="modal-content">
@@ -1218,4 +1450,3 @@
         
     </body>
 </html>
-

@@ -122,7 +122,7 @@
                                    </select>
                                   <c:if test='${sessionScope["permisoActual"]=="6"}'>
                                         <label class="control-label">Evaluación Comité Revisor:</label>
-                                        <select class="form-control input-sm disabled" id="puntaje1Referencia" name="puntaje1Referencia">
+                                        <select class="form-control input-sm" id="puntaje1Referencia" name="puntaje1Referencia">
                                               ${catalogo.desplegarOpcionesPuntajeAdmin(criterios[0][0],puntajes[0][3],sessionScope["idDocente"])}                                              
                                         </select>
                                   </c:if>
@@ -285,7 +285,7 @@
                                 <input type='hidden' name='idPermisoD4' id='idPermisoD4' value='${sessionScope["permisoActual"]}'>
                                 <div class="form-group col-md-6">                                                             
                                   <label class="control-label">Máximo grado académico:</label>
-                                  <select class="form-control input-sm disabled" id="puntaje4" name="puntaje" required>                                  
+                                  <select class="form-control input-sm" id="puntaje4" name="puntaje" required>                                  
                                       ${catalogo.desplegarOpcionesPuntajeAdmin(criterios[3][0],docente.infoRegistro[19],sessionScope["idDocente"])}                                                                            
                                   </select>
                                   

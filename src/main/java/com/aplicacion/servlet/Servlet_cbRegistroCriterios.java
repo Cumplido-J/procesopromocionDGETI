@@ -93,6 +93,9 @@ public class Servlet_cbRegistroCriterios extends HttpServlet {
             docente.consultaDocumentos();
             String[][] puntajes=cv.consultaPuntajes(idUsuario); 
             String[] puntajeEncuestas=cv.consultaPuntajeEncuestas(rfc);
+            if(puntajeEncuestas[5]==null || puntajeEncuestas[5].isEmpty()){
+                puntajeEncuestas[5]="0.0";
+            }
             puntajeEncuestas[5] =  Double.toString(Math.round(Double.parseDouble(puntajeEncuestas[5])*100.0)/100.0);
             
             request.setAttribute("docente", docente);
@@ -107,11 +110,11 @@ public class Servlet_cbRegistroCriterios extends HttpServlet {
             request.setAttribute("resultados", cv.getFilasResultados(idUsuario,vistaAdmin, idPermiso, permisoEdicion));
             request.setAttribute("vistaAdmin", vistaAdmin);
             
-            if (idPermiso.equals("6"))
-            {
+//            if (idPermiso.equals("6"))
+//            {
                 String[][] puntajesDictaminador=cv.consultaPuntajesDictaminador(idUsuario);
                 request.setAttribute("puntajesDictaminador", puntajesDictaminador);
-            }
+//            }
             
             ServletContext sc = getServletContext();
             RequestDispatcher rd;

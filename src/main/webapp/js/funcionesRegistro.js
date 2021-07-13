@@ -235,6 +235,91 @@ $(document).ready(function () {
             return false;
         }
     });
+    $('#formPlaza1').submit(function(e) {
+        e.preventDefault();
+    }).validate({
+        rules:{            
+            'horas': {
+                number: true,
+                min:1,
+                max:19
+            }
+        },
+        messages: {
+            'categoria':{
+                required: "Seleccione una opción"
+            },
+            'jornada':{
+                required: "Seleccione una opción"
+            },
+            'fechaPlaza':{
+                required: "Campo requerido"
+            },
+            'tipoNombramiento':{
+                required: "Seleccione una opción"
+            },
+            'horas': {
+                required: "Campo requerido",
+                number:"Ingrese sólo números",
+                min:"Ingrese un valor mayor a 0",
+                max:"Ingrese un valor menor a 20"
+            },
+            'cargo':{
+                required: "Campo requerido"
+            },
+            'fechaRenuncia':{
+                required: "Campo requerido"
+            },
+            'clavePresupUnidad':{
+                required: "Campo requerido",
+                number:"Ingrese sólo números"
+            },
+            'categoriaPresupuestal':{
+                required: "Seleccione una opción"
+            },
+            'clavePresupHoras':{
+                required: "Campo requerido"                
+            },
+            'clavePresupPlaza':{
+                required: "Campo requerido",
+                number:"Ingrese sólo números"
+            }           
+        },
+        submitHandler:function(){
+            $("#categoria").removeAttr("disabled");
+            $("#jornada").removeAttr("disabled");                        
+            $("#valorClavePresupuestal").val($("#categoriaPresupuestal option:selected").attr("ClavePresupuestal"));
+            $.ajax({
+                type:$('#formPlaza1').attr("method"),
+                url:$('#formPlaza1').attr("action"),
+                data:$('#formPlaza1').serialize(),
+                beforeSend:function(){
+                    $("#categoria").removeAttr("disabled");
+                    $("#jornada").removeAttr("disabled");
+                    $("#btnGuardarPlaza").val("Guardando...");
+                    $("#btnGuardarPlaza").attr("disabled","disabled");
+                    $("#valorClavePresupuestal").val($("#categoriaPresupuestal option:selected").attr("ClavePresupuestal"));
+                },
+                complete:function(){
+                   $("#btnGuardarPlaza").val("Guardar"); 
+                   $("#btnGuardarPlaza").removeAttr("disabled");
+                   $("#modalPlazasHoras").modal("hide");
+                },success:function(data){
+                    if(data.includes("<tr>")){                        
+                        $("#tablaPlazas").html(data);
+                    }
+                    else if(data.includes("anterior")){
+                        $("#mensajeFin").html(data);            
+                        $("#modalMensajeFin").modal("show");
+                    }else{
+                        $("#mensaje").html(data);            
+                        $("#modalMensaje").modal("show");
+                    }                    
+                }
+            });
+            return false;
+        }
+    });
     $('#formInfoHorasGrupo').submit(function(e) {
         e.preventDefault();
     }).validate({    
@@ -444,8 +529,95 @@ $(document).ready(function () {
             return false;
         }
     });    
+    $('#formHorasGrupo1').submit(function(e) {
+        e.preventDefault();
+    }).validate({
+        rules: {
+            horas: {
+              number: true
+            }
+        },
+        messages: {
+            'periodo': {
+                required: "Seleccione una opción"
+            },
+            'grupo': {
+                required: "Campo requerido"
+            },
+            'semestre': {
+                required: "Seleccione una opción"
+            },
+            'tipoInfo': {
+                required: "Seleccione una opción"
+            },
+            'version1': {
+                required: "Seleccione una opción"
+            },
+            'asignatura1': {
+                required: "Seleccione una opción"
+            },
+            'carrera_cp1': {
+                required: "Seleccione una opción"
+            },
+            'modulo1': {
+                required: "Seleccione una opción"
+            },
+            'submodulo1': {
+                required: "Seleccione una opción"
+            },
+            'taller1': {
+                required: "Seleccione una opción"
+            },
+            'horas': {
+                required: "Campo requerido",
+                number:"Ingrese un valor numérico"
+            }
+        },
+        submitHandler:function(){
+            $.ajax({
+                type:$('#formHorasGrupo1').attr("method"),
+                url:$('#formHorasGrupo1').attr("action"),
+                data:$('#formHorasGrupo1').serialize(),
+                beforeSend:function(){
+                    $("#btnEnviarHG").val("Guardando...");
+                    $("#btnEnviarHG").attr("disabled","disabled");
+                },
+                complete:function(){
+                   $("#btnEnviarHG").val("Registrar"); 
+                   $("#btnEnviarHG").removeAttr("disabled");
+                },success:function(data){
+                    var datos=data.split("|");
+                    if(datos.length==3){
+                        $("#tablaInfo").html(datos[0]);                        
+                        if(datos[0].includes("INGLES")||datos[0].includes("CENNI")||datos[0].includes("INGLÉS")){
+                            $("#seccionCENNI").removeAttr("hidden");
+                            $("#nivelCENNI").attr("required","true");
+                            $("#folio").attr("required","true");
+                        }else{
+                            $("#seccionCENNI").attr("hidden","true");
+                            $("#nivelCENNI").removeAttr("required");
+                            $("#nivelCENNI").val("");
+                            $("#folio").removeAttr("required");
+                            $("#folio").val("");
+                        }                        
+                        $("#numHoras").val(datos[1]);
+                        $("#numGrupos").val(datos[2]);
+                        $("#modalInformacionHoras").modal("hide");
+                        $("#tipoInfo").val("");
+                        $("#periodo").val("");
+                        $("#semestre").val("");
+                        $("#grupo").val("");
+                        $("#horas").val("");
+                        cambioTipoInfoCecyte();
+                    }
+                },error:function(){
+                    
+                }
+            });
+            return false;
+        }
+    });    
 });
-
 function actualizarTipoInstitucion() {
     id=$("#entidad").val();
     $.get("ConsultaCatalogos", {k: "11",i:id}, function(respuesta){
@@ -504,7 +676,7 @@ function cambioTipoInfo(){
     switch(id){
         case "cbp":
             $.get("ConsultaCatalogos", {k: "3"}, function(respuesta){
-                $("#version").html(respuesta);
+                $("#version1").html(respuesta);
             }); 
             $("#version").attr("onchange","cargaAsignaturas()");
             $("#version").attr("required","true");
@@ -518,7 +690,7 @@ function cambioTipoInfo(){
             mostrarElemento("divAsignatura");
             $("#carrera_cp").removeAttr("required");
             ocultarElemento("divCarrera");
-            $("#modulo").removeAttr("required");
+            $("#modulo1").removeAttr("required");
             ocultarElemento("divModulo");
             $("#submodulo").removeAttr("required");
             ocultarElemento("divSubmodulo");
@@ -578,11 +750,97 @@ function cambioTipoInfo(){
             ocultarElemento("divTaller");
     }
 }
+function cambioTipoInfoCecyte(idSubsistema){
+    id=$("#tipoInfoCecyte").val();
+    switch(id){
+        case "cbp":
+            $.get("ConsultaCatalogos", {k: "3",m:idSubsistema}, function(respuesta){
+                $("#version1").html(respuesta);
+            }); 
+            $("#version1").attr("onchange","cargaAsignaturas1()");
+            $("#version1").attr("required","true");
+            $("#version1").val("");
+            $("#semestre1").attr("onchange","cargaAsignaturas1()");
+            //$("#semestre").val("");
+            $("#asignatura1").val("");
+            mostrarElemento("divVersion1");
+            //mostrarElemento("divSemestre");
+            $("#asignatura1").attr("required","true");
+            mostrarElemento("divAsignatura1");
+            $("#carrera_cp1").removeAttr("required");
+            ocultarElemento("divCarrera1");
+            $("#modulo1").removeAttr("required");
+            ocultarElemento("divModulo1");
+            $("#submodulo1").removeAttr("required");
+            ocultarElemento("divSubmodulo1");
+            $("#taller1").removeAttr("required");
+            ocultarElemento("divTaller1");
+            break;
+        case "cp":
+            $.get("ConsultaCatalogos", {k: "4"}, function(respuesta){
+                $("#version").html(respuesta);
+            }); 
+            $("#version1").attr("onchange","cargaCarreras()");
+            $("#version1").val("");
+            $("#version1").attr("required","true");
+            $("#semestre1").attr("onchange","cargaCarreras()");
+            //$("#semestre").val("");
+            $("#carrera_cp1").val("");
+            $("#carrera_cp1").attr("required","true");
+            $("#modulo1").val("");
+            $("#modulo1").attr("required","true");
+            $("#submodulo1").val("");
+            $("#submodulo1").attr("required","true");
+            mostrarElemento("divVersion1");
+            //mostrarElemento("divSemestre");
+            $("#asignatura1").removeAttr("required");
+            ocultarElemento("divAsignatura1");
+            mostrarElemento("divCarrera1");
+            mostrarElemento("divModulo1");
+            mostrarElemento("divSubmodulo1");
+            $("#taller1").removeAttr("required");
+            ocultarElemento("divTaller1");
+            break;
+        case "tl":
+            $("#taller1").val("");
+            $("#version1").removeAttr("required");
+            ocultarElemento("divVersion1");
+            //ocultarElemento("divSemestre");
+            $("#version1").removeAttr("required");
+            ocultarElemento("divAsignatura1");
+            $("#asignatura1").removeAttr("required");
+            $("#carrera_cp1").removeAttr("required");
+            ocultarElemento("divCarrera1");
+            $("#modulo").removeAttr("required");
+            ocultarElemento("divModulo1");
+            $("#submodulo1").removeAttr("required");            
+            ocultarElemento("divSubmodulo1");
+            mostrarElemento("divTaller1");
+            $("#taller1").attr("required","true"); 
+            $("#horas").removeAttr("readOnly");
+            break;
+        default:
+            ocultarElemento("divVersion1");
+            //ocultarElemento("divSemestre");
+            ocultarElemento("divAsignatura1");
+            ocultarElemento("divCarrera1");
+            ocultarElemento("divModulo1");
+            ocultarElemento("divSubmodulo1");
+            ocultarElemento("divTaller1");
+    }
+}
 function cargaAsignaturas() {
     version=$("#version").val();
     semestre=$("#semestre").val();
-    $.get("ConsultaCatalogos", {k: "5",v:version,s:semestre}, function(respuesta){
+    $.get("ConsultaCatalogos", {k: "5",v:version,s:semestre,m:"2"}, function(respuesta){
         $("#asignatura").html(respuesta);
+    }); 
+}
+function cargaAsignaturas1() {
+    version=$("#version1").val();
+    semestre=$("#semestre1").val();
+    $.get("ConsultaCatalogos", {k: "5",v:version,s:semestre,m:"2"}, function(respuesta){
+        $("#asignatura1").html(respuesta);
     }); 
 }
 function cargaCarreras() {
@@ -601,6 +859,15 @@ function cambioCarreraCP() {
     $.get("ConsultaCatalogos", {k: "7",v:version,s:semestre,c:carrera}, function(respuesta){
         $("#modulo").html(respuesta);
         $("#submodulo").val("");
+    }); 
+}
+function cambioCarreraCP1() {
+    version=$("#version1").val();
+    semestre=$("#semestre").val();
+    carrera=$("#carrera_cp1").val();
+    $.get("ConsultaCatalogos", {k: "7",v:version,s:semestre,c:carrera}, function(respuesta){
+        $("#modulo1").html(respuesta);
+        $("#submodulo1").val("");
     }); 
 }
 function cambioModulo() {
@@ -1116,6 +1383,29 @@ function cambioCategoriaAspira() {
         }
     });
 }
+function cambioCategoriaAspiraHoras() {
+    var id=$("#categoriaAspira option:selected").attr("aux");
+    idPrograma=$("#programa").val(); 
+    idPlantel=$("#plantel").val(); 
+    $.get("ConsultaCatalogos", {k: "17",i:id,pr:idPrograma,pl:idPlantel}, function(){        
+    }).done(function(respuesta){
+        var aux=respuesta.split("|");
+        if(aux.length==2){
+            $("#jornadaAspira").html(aux[0]);
+            $("#rbRequisitos").html(aux[1]);
+        }
+    });
+}
+function cambioCategoriaAspiraHoras2() {
+    var id=$("#categoriaAspira option:selected").attr("aux");
+    idPrograma=$("#programa").val(); 
+    idPlantel=$("#plantel").val(); 
+    $.get("ConsultaCatalogos", {k: "21",i:id,pr:idPrograma,pl:idPlantel}, function(){        
+    }).done(function(respuesta){
+        var aux=respuesta;
+        $("#numhoras").html(aux);
+    });
+}
 function validaAplicacion(){
     var bandera=false;
     var categoriaActual;
@@ -1302,23 +1592,28 @@ function abrirModalPlazas(){
     $("#modalPlazas").modal("show");
     $("#seccionDirectivo").removeClass("in");
 }
+function abrirModalPlazasHoras(){
+    $("#formPlaza")[0].reset();
+    $("#modalPlazasHoras").modal("show");
+    $("#seccionDirectivoHoras").removeClass("in");
+}
 function cambioJornada(objeto){
     var jornada=objeto.value;
     if(jornada=="1"){
-        $("#seccionHoras2").removeClass("hidden");
-        $("#horas2").attr("required",true);
+        $("#seccionHoras").removeClass("hidden");
+        $("#horas").attr("required",true);
     }else{
-        $("#seccionHoras2").addClass("hidden");
-        $("#horas2").removeAttr("required");
+        $("#seccionHoras").addClass("hidden");
+        $("#horas").removeAttr("required");
     }
 }
 function cambioJornada(idJornada){
     if(idJornada==="1"){
-        $("#seccionHoras2").removeClass("hidden");
-        $("#horas2").attr("required",true);
+        $("#seccionHoras").removeClass("hidden");
+        $("#horas").attr("required",true);
     }else{
-        $("#seccionHoras2").addClass("hidden");
-        $("#horas2").removeAttr("required");
+        $("#seccionHoras").addClass("hidden");
+        $("#horas").removeAttr("required");
     }
 }
 function confirmarPlaza(id){
@@ -1364,7 +1659,42 @@ function cambioEscuela(){
         $("#escuelaOtro").removeAttr("required"); 
     }
 }
-
+function cambioVersion(){
+    if($("#version1").val()=="-1"){
+        $("#versionOtro").removeClass("hidden");    
+        $("#versionOtro").attr("required",true);
+    }else{
+        $("#versionOtro").addClass("hidden"); 
+        $("#versionOtro").removeAttr("required");
+    }
+}
+function cambioCarrera(){
+    if($("#version1").val()=="-1"){
+        $("#versionOtro").removeClass("hidden");    
+        $("#versionOtro").attr("required",true);
+    }else{
+        $("#versionOtro").addClass("hidden"); 
+        $("#versionOtro").removeAttr("required");
+    }
+}
+function cambioModulo(){
+    if($("#modulo1").val()=="-1"){
+        $("#carreraOtro").removeClass("hidden");    
+        $("#carreraOtro").attr("required",true);
+    }else{
+        $("#carreraOtro").addClass("hidden"); 
+        $("#carreraOtro").removeAttr("required");
+    }
+}
+function cambioSubmodulo(){
+    if($("#version1").val()=="-1"){
+        $("#versionOtro").removeClass("hidden");    
+        $("#versionOtro").attr("required",true);
+    }else{
+        $("#versionOtro").addClass("hidden"); 
+        $("#versionOtro").removeAttr("required");
+    }
+}
 function seleccionarPlaza(objeto){
     var id=objeto.value;
     var seleccionada;
@@ -1380,4 +1710,24 @@ function seleccionarPlaza(objeto){
             objeto.checked=false;
         } 
     });
+}
+function cambioJornada2(objeto){
+    var programa=$("#programa").val();
+    var jornada=objeto.value;
+    
+    if(jornada=="1"){
+        if(programa=="1"){
+            $("#mensaje").html("Opción no permitida para este programa");
+            $("#modalMensaje").modal("show");
+            $("#btnEnviar").addClass("disabled");
+        }else{
+            $("#seccionHoras3").removeClass("hidden");
+            $("#horas3").attr("required",true);
+            $("#btnEnviar").removeClass("disabled");
+        }
+    }else{
+        $("#seccionHoras3").addClass("hidden");
+        $("#horas3").removeAttr("required");
+        $("#btnEnviar").removeClass("disabled");
+    }
 }

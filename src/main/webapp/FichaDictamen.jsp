@@ -120,6 +120,15 @@
                         </c:if>
                 </tr>
                 <tr>
+                    <td>DICTAMEN:</td>
+                        <c:if test="${Docente.infoRegistro[66]==14}">
+                            <td>: ACEPTADO</td>
+                        </c:if>
+                        <c:if test="${Docente.infoRegistro[66]!=14}">
+                            <td>: RECHAZADO</td>
+                        </c:if>
+                </tr>
+                <tr>
                     <td COLSPAN="2">
                         <h3>REQUISITOS:</h3>
                         <table>

@@ -202,6 +202,19 @@ public class Catalogos {
             return respuesta;        
         }
     }
+    public String desplegarOpcionesCategoriasHoras(){        
+        String respuesta="<option value=''>-Seleccione-</option>";
+        try{
+            List<String[]> datos=metodos.ejecutaSP("sp_selectCatCategoriasPlazaHoras");
+            for(String[] dato:datos){
+                respuesta+="<option tipo='"+dato[2]+"' value='"+dato[0]+"'>"+dato[1]+"</option>";
+            }
+        }catch(Exception e){
+            respuesta=e.toString();
+        }finally{
+            return respuesta;
+        }
+    }
     public String desplegarOpcionesCategorias(String id){
         String respuesta=desplegarOpcionesCategorias();
         String aux="value='"+id+"'";
@@ -246,12 +259,15 @@ public class Catalogos {
         respuesta=respuesta.replaceFirst(aux, aux+" selected");
         return respuesta;  
     }
-    public String desplegarVersionesCompBP(){        
+     public String desplegarVersionesCompBP(String idSubsistema){        
         String respuesta="<option value=''>-Seleccione-</option>";
         try{
             List<String[]> datos=metodos.ejecutaSP("sp_consultaVersionCBP");
             for(String[] dato:datos){
                 respuesta+="<option value='"+dato[0]+"'>"+dato[1]+"</option>";
+            }
+            if(idSubsistema.contains("2")){
+                respuesta+="<option value='-1'>Otro</option>";
             }
         }catch(Exception e){
             respuesta=e.toString();
@@ -272,7 +288,7 @@ public class Catalogos {
             return respuesta;        
         }
     }
-    public String desplegarAsignaturasCompBP(String idVersion,String semestre ){        
+    public String desplegarAsignaturasCompBP(String idVersion,String semestre,String idSubsistema){        
         String respuesta="<option value=''>-Seleccione-</option>";
         String[] parametros={idVersion,semestre};
         try{
@@ -509,7 +525,7 @@ public class Catalogos {
             String[] parametros={idPlantel,idPrograma};
             List<String[]> datos=metodos.ejecutaSP("sp_consultaCategoriasVacantes",parametros);
             for(String[] dato:datos){
-                respuesta+="<option tipo='"+dato[2]+"' aux='"+dato[3]+"' value='"+dato[0]+"-"+dato[3]+"'>"+dato[1]+"-"+dato[3]+"</option>";
+                respuesta+="<option tipo='"+dato[3]+"' aux='"+dato[1]+"' value='"+dato[1]+"-"+dato[4]+"'>"+dato[2]+"-"+dato[4]+"</option>";
             }
         }catch(Exception e){
             respuesta=e.toString();
@@ -517,9 +533,11 @@ public class Catalogos {
             return respuesta;       
         }
     }
-    public String desplegarOpcionesCategoriasVacantes(String idPlantel,String idPrograma,String id,String idTipoVacancia,String idJornada){
+        public String desplegarOpcionesCategoriasVacantes(String idPlantel,String idPrograma,String id,String idTipoVacancia,String idJornada,String idSubsistema){
         String respuesta=desplegarOpcionesCategoriasVacantes(idPlantel,idPrograma);
-        String[] parametros={idPlantel,id,idJornada};
+//        String[] parametros={idPlantel,id,idJornada};
+        String[] parametros={idPlantel,idPrograma,idSubsistema};
+        //
         List<String[]> datos=metodos.ejecutaSP("sp_consultaCategoriaTipoVacante",parametros);
         String tipoVacancia="";
         if(!datos.isEmpty()){
@@ -540,7 +558,26 @@ public class Catalogos {
         try{
             List<String[]> datos=metodos.ejecutaSP("sp_consultaJornadaVacante",parametros);
             for(String[] dato:datos){
-                respuesta+="<option value='"+dato[0]+"' clave='"+dato[1]+"'>"+dato[2]+"</option>";
+                respuesta+="<option value='"+dato[1]+"' clave='"+dato[2]+"'>"+dato[3]+"</option>";
+            }
+        }catch(Exception e){
+            respuesta=e.toString();
+        }finally{
+            return respuesta;        
+        }
+    }
+    public String desplegarOpcionesJornadaVacanteHoras(String idCategoria,String idPlantel,String idPrograma){        
+        String respuesta="<option value=''>-Seleccione-</option>";
+        if(idCategoria.contains("R") || idCategoria.contains("C")){
+            String[] categoria;
+		categoria = idCategoria.split("-");
+                idCategoria=categoria[0];
+        }
+        String[] parametros={idCategoria,idPlantel,idPrograma};
+        try{
+            List<String[]> datos=metodos.ejecutaSP("sp_consultaJornadaVacante",parametros);
+            for(String[] dato:datos){
+                respuesta+="<option value='"+dato[4]+"' clave='"+dato[2]+"'>"+dato[4]+"</option>";
             }
         }catch(Exception e){
             respuesta=e.toString();
@@ -550,6 +587,32 @@ public class Catalogos {
     }
     public String desplegarOpcionesJornadaVacante(String idCategoria,String idPlantel,String idPrograma,String id){
         String respuesta=desplegarOpcionesJornadaVacante(idCategoria,idPlantel,idPrograma);
+        String aux="value='"+id+"'";
+        respuesta=respuesta.replaceFirst(aux, aux+" selected");        
+        return respuesta;  
+    }
+    public String desplegarOpcionesHorasVacante(String idCategoria,String idPlantel,String idPrograma){        
+        String respuesta="<option value=''>-Seleccione-</option>";
+        if(idCategoria.contains("R") || idCategoria.contains("C")){
+            String[] categoria;
+        categoria = idCategoria.split("-");
+                idCategoria=categoria[0];
+        }
+        String[] parametros={idCategoria,idPlantel,idPrograma};
+        try{
+            List<String[]> datos=metodos.ejecutaSP("sp_consultaJornadaVacante",parametros);
+            for(String[] dato:datos){
+                respuesta+="<option value='"+dato[4]+"' clave='"+dato[2]+"'>"+dato[4]+"</option>";
+                System.out.println("11111");
+            }
+        }catch(Exception e){
+            respuesta=e.toString();
+        }finally{
+            return respuesta;        
+        }
+    }
+    public String desplegarOpcionesHorasVacante(String idCategoria,String idPlantel,String idPrograma,String id){
+        String respuesta=desplegarOpcionesHorasVacante(idCategoria,idPlantel,idPrograma);
         String aux="value='"+id+"'";
         respuesta=respuesta.replaceFirst(aux, aux+" selected");        
         return respuesta;  
@@ -972,10 +1035,10 @@ public class Catalogos {
         }
     }
     
-    public String desplegarOpcionesVacancia(String idPrograma,String idSubsistema,String idEntidad,String idPlantel){        
+    public String desplegarOpcionesVacancia(String idPrograma,String idSubsistema,String idEntidad,String idPlantel,String vacancia){        
         String respuesta="<option value=''>-Seleccione-</option>";
         try{
-            String[] parametros={idPrograma, idSubsistema, idEntidad, idPlantel};
+            String[] parametros={idPrograma, idSubsistema, idEntidad, idPlantel, vacancia};
             List<String[]> datos=metodos.ejecutaSP("sp_consultaVacanciasResultados",parametros);
             for(String[] dato:datos){
                 respuesta+="<option value='"+dato[0]+"'>"+dato[1]+"</option>";

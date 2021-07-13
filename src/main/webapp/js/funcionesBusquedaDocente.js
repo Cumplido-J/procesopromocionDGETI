@@ -41,9 +41,10 @@ function actualizarVacancias() {
     var idSubsistema=$('#subsistema').val();    
     var idEntidad=$("#entidad").val();
     var idPlantel=$("#plantel").val();
+    var vacancia=$("#tvacancia").val();
     var id="18";
     if(idSubsistema!="" &&  idEntidad!="")
-    $.get("ConsultaCatalogos", {k:id,e:idPrograma,s:idSubsistema,i:idEntidad,m:idPlantel}, function(respuesta){
+    $.get("ConsultaCatalogos", {k:id,e:idPrograma,s:idSubsistema,i:idEntidad,m:idPlantel,z:vacancia}, function(respuesta){
         $("#categoria").html(respuesta);
     });
 }

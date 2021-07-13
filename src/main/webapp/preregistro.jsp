@@ -156,7 +156,7 @@
                     <div class="row">                        
                         <div class="col-xs-12 text-right">
                             <input   class="btn btn-sm btn-primary" type="reset" value="Limpiar"/>
-                            <!--<input  class="btn btn-sm btn-primary" id="btnEnviar" type="submit" value='Guardar' disabled/>-->
+                            <input  class="btn btn-sm btn-primary" id="btnEnviar" type="submit" value='Guardar' disabled/>
                             <!--<input required type="button" class="btn btn-sm btn-primary" value="Guardar y continuar" onclick="mostrarSiguiente(1)"/>-->
                         </div>
                     </div>

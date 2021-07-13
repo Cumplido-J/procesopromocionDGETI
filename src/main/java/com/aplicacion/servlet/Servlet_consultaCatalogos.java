@@ -68,6 +68,7 @@ public class Servlet_consultaCatalogos extends HttpServlet {
         try {
             /* TODO output your page here. You may use following sample code. */
             String key=request.getParameter("k");
+            String idSubsistema=request.getParameter("m");
             String respuesta;
             switch(key)
             {    
@@ -78,13 +79,13 @@ public class Servlet_consultaCatalogos extends HttpServlet {
                   respuesta=catalogo.desplegarOpcionesEscuelas(request.getParameter("i"));
                break; 
                case "3":
-                  respuesta=catalogo.desplegarVersionesCompBP();
+                  respuesta=catalogo.desplegarVersionesCompBP(idSubsistema);
                break; 
                case "4":
                   respuesta=catalogo.desplegarVersionesCompP();
                break;
                case "5":
-                  respuesta=catalogo.desplegarAsignaturasCompBP(request.getParameter("v"),request.getParameter("s"));
+                  respuesta=catalogo.desplegarAsignaturasCompBP(request.getParameter("v"),request.getParameter("s"),idSubsistema);
                break; 
                case "6":
                   respuesta=catalogo.desplegarCarrerasCompP(request.getParameter("v"),request.getParameter("s"));
@@ -124,13 +125,16 @@ public class Servlet_consultaCatalogos extends HttpServlet {
                    respuesta+="|"+catalogo.desplegarRequisitosCategoria(request.getParameter("i"));
                break;
                case "18":
-                   respuesta=catalogo.desplegarOpcionesVacancia(request.getParameter("e"),request.getParameter("s"),request.getParameter("i"),request.getParameter("m"));                   
+                   respuesta=catalogo.desplegarOpcionesVacancia(request.getParameter("e"),request.getParameter("s"),request.getParameter("i"),request.getParameter("m"),request.getParameter("z"));                   
                break;
                case "19":
                    respuesta=catalogo.desplegarOpcionesJornada(request.getParameter("e"),request.getParameter("s"),request.getParameter("i"),request.getParameter("m"),request.getParameter("n"));                   
                break;
                case "20":
                    respuesta=catalogo.desplegarNumeroPlazas(request.getParameter("e"),request.getParameter("s"),request.getParameter("i"),request.getParameter("m"),request.getParameter("n"),request.getParameter("p"));                   
+               break;
+               case "21":
+                   respuesta=catalogo.desplegarOpcionesJornadaVacanteHoras(request.getParameter("i"),request.getParameter("pl"),request.getParameter("pr"));
                break;
                default : 
                    respuesta="<option value=''>-Seleccione-</option>";
