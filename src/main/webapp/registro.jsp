@@ -33,8 +33,14 @@
         <input type="hidden" id="mensajeNoCompatibilidad" value="${mensaje.noCompatibilidad}" />
         <input type="hidden" id="mensajeConfirmacionHora" value="${mensaje.confirmacionHora}" />
         <input type="hidden" id="mensajeRechazoHora" value="${mensaje.rechazoHora}" />
-        <input type="hidden" id="programa" value="${Docente.infoRegistro[64]}" />
-        <input type="hidden" id="plantel" value="${Docente.infoRegistro[6]}" />
+        <c:if test = "${Docente.infoRegistro[6]==null&& Docente.infoRegistro[64]==null}">
+            <input type="hidden" id="programa" value="${sessionScope["programa"]}" />
+            <input type="hidden" id="plantel" value="${sessionScope["plantel"]}" />
+        </c:if>
+        <c:if test = "${Docente.infoRegistro[6]!= null&& Docente.infoRegistro[64] != null}">
+            <input type="hidden" id="programa" value="${Docente.infoRegistro[64]}" />
+            <input type="hidden" id="plantel" value="${Docente.infoRegistro[6]}" />
+        </c:if>
         <main class="page">            
             <!--Barra navegación UEMSTIS-->
             <nav class="navbar navbar-inverse sub-navbar navbar-fixed-top">
@@ -462,7 +468,12 @@
                                 <div class="form-group col-md-6">
                                   <label class="control-label" for="categoriaAspira">Categoría a la que aspira: <span id="avisoCategoria" class="glyphicon glyphicon-warning-sign text-warning hidden"></span></label>
                                   <select class="form-control input-sm" id="categoriaAspira" name="categoriaAspira" onchange="cambioCategoriaAspira()" required>                                     
-                                     ${catalogo.desplegarOpcionesCategoriasVacantes(Docente.infoRegistro[6],Docente.infoRegistro[64],Docente.infoRegistro[42],Docente.infoRegistro[78],Docente.infoRegistro[44],Docente.infoRegistro[75])}
+                                      <c:if test = "${Docente.infoRegistro[6]==null&& Docente.infoRegistro[64]==null}">
+                                      ${catalogo.desplegarOpcionesCategoriasVacantes(sessionScope["plantel"],sessionScope["programa"],Docente.infoRegistro[42],Docente.infoRegistro[78],Docente.infoRegistro[44],sessionScope["subsistema"])}
+                                      </c:if>
+                                      <c:if test = "${Docente.infoRegistro[6]!=null&& Docente.infoRegistro[64]!=null}">
+                                      ${catalogo.desplegarOpcionesCategoriasVacantes(Docente.infoRegistro[6],Docente.infoRegistro[64],Docente.infoRegistro[42],Docente.infoRegistro[78],Docente.infoRegistro[44],Docente.infoRegistro[75])}
+                                      </c:if>
                                   </select>
                                 </div>
                                 <div class="form-group col-md-3">
@@ -472,14 +483,8 @@
                                   </select>  
                                   
                                 </div>
-                                <div class="form-group col-md-3">
-                                    <label class="control-label">Seleccione el requisito cumplido de acuerdo a su situación:</label><br>
-                                    <span id="rbRequisitos">
-                                        ${catalogo.desplegarRequisitosCategoria(Docente.infoRegistro[42],Docente.infoRegistro[46])}
-                                    </span>                                    
-                                </div>
-                            </div>
-                           <c:if test='${sessionScope["programa"]=="2"}'>
+                                  
+                                <c:if test='${sessionScope["programa"]=="2"}'>
                                 <div class="row">
                                     <div class="form-group col-md-3">
                                       <label class="control-label" for="numhoras">Numero de horas:</label>
@@ -495,7 +500,17 @@
                                     <div class="form-group col-md-3">                                   
                                     </div>
                                 </div>
-                            </c:if>
+                            </c:if>  
+                               
+                            </div>
+                                  <div class="row">    
+                                     <div class="form-group col-md-3">
+                                    <label class="control-label">Seleccione el requisito cumplido de acuerdo a su situación:</label><br>
+                                    <span id="rbRequisitos">
+                                        ${catalogo.desplegarRequisitosCategoria(Docente.infoRegistro[42],Docente.infoRegistro[46])}
+                                    </span>                                    
+                                    </div>
+                                  </div>
                             <div class="row">
                                 <div class="checkbox col-md-6">
                                     <c:if test = "${Docente.infoRegistro[48]=='S'}">
@@ -1341,9 +1356,9 @@
                       </div>
                       <div class="row">
                         <div class="form-group col-md-12">
-                            <label><input type="checkbox" id="cbDirectivoHoras" name="cbDirectivoHoras" data-toggle="collapse" data-target="#seccionDirectivoHoras">Marque la casilla si desempeña una función como Director, Subdirector o Jefe de Departamento</label>
+                            <label><input type="checkbox" id="cbDirectivoHoras" name="cbDirectivoHoras" onchange="mostrarCamposDirector(this);">Marque la casilla si desempeña una función como Director, Subdirector o Jefe de Departamento</label>
                         </div>    
-                        <div id="seccionDirectivoHoras" class="collapse">
+                        <div style="display:none" id="seccionDirectivoHoras" >
                           <div class="form-group col-md-6">
                             <label class="control-label" for="cargo">Cargo:</label>
                             <select class="form-control input-sm" id="cargo" name="cargo" required>

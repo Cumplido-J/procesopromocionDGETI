@@ -1731,3 +1731,13 @@ function cambioJornada2(objeto){
         $("#btnEnviar").removeClass("disabled");
     }
 }
+
+function mostrarCamposDirector() {
+   var acep=document.getElementById('cbDirectivoHoras').checked;
+   if(acep){
+        document.getElementById('seccionDirectivoHoras').style.display = 'block';
+   }
+   else{
+        document.getElementById('seccionDirectivoHoras').style.display = 'none';
+   }
+}
