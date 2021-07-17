@@ -19,6 +19,7 @@
         <meta charset="UTF-8">        
         <jsp:useBean id="fecha" class="herramientas.Fecha" />      
         <jsp:useBean id="now" class="java.util.Date" />
+        <fmt:formatDate var="fechaYear" value="${now}" type="both" dateStyle="long" pattern="yyyy" />
         <style>
             .borde{
                 border: 1px solid black;                
@@ -30,7 +31,17 @@
             <tr>
                 <td valign="top"><img width="200" src="<%=Imagen.muestraImagen(RutaConfig.getRutaCarpeta()+"logos/sems.png")%>"></td>
                 <td style="text-align:center;">
-                    Convocatoria para el proceso de promoción en el servicio docente por cambio de categoría en Educación Media Superior 
+                    Convocatoria para el proceso de promoción en el servicio docente por 
+                      <c:if test='${sessionScope["programa"]=="1"}'>
+                      cambio de categoría  
+                      </c:if>
+                      <c:if test='${sessionScope["programa"]=="2"}'>
+                      horas adicionales 
+                      </c:if>
+                       <c:if test='${sessionScope["programa"]=="3"}'>
+                      incentivos
+                      </c:if>
+                    en Educación Media Superior 
                     <br/>(Promoción horizontal)
                     <br/>Ciclo Escolar 2020-2021
                         
@@ -65,11 +76,25 @@
                 </tr>
                 <tr>
                     <td>PRIMER APELLIDO</td>
-                    <td>:${Docente.infoRegistro[2]}</td>
+                    <td>:
+                        <c:if test='${Docente.infoRegistro[2]!=null}'>
+                      ${Docente.infoRegistro[2]}
+                      </c:if>
+                      <c:if test='${Docente.infoRegistro[2] == null}'>
+                      ----------------------------
+                      </c:if>  
+                    </td>
                 </tr>
                 <tr>
                     <td>SEGUNDO APELLIDO</td>
-                    <td>:${Docente.infoRegistro[3]}</td>
+                    <td>:
+                        <c:if test='${Docente.infoRegistro[3]!=null}'>
+                      ${Docente.infoRegistro[3]}
+                      </c:if>
+                      <c:if test='${Docente.infoRegistro[3] == null}'>
+                      ----------------------------
+                      </c:if> 
+                    </td>
                 </tr>
                 <tr>
                     <td>CORREO ELECTRÓNICO</td>
@@ -94,7 +119,7 @@
                 <tr>
                     <td>GRADO ACADÉMICO QUE OSTENTA</td>
                     <fmt:parseNumber var = "anioTitulacion" type = "number" value = "${Docente.infoRegistro[23]}" />                    
-                    <td>:${anio-anioTitulacion} años de haber obtenido el título de ${Docente.infoRegistro[20]}</td>
+                     <td>:${fechaYear-anioTitulacion} años de haber obtenido el título de ${Docente.infoRegistro[20]}</td>
                 </tr>
                 <tr>
                     <td>PERFIL PROFESIONAL (CARRERA)</td>
@@ -153,7 +178,14 @@
                 </tr>
                 <tr>
                     <td>FECHA DE SU ÚLTIMA_PROMOCIÓN</td>
-                    <td>:${fecha.formatoImprimir(Docente.infoRegistro[39])}</td>
+                    <td>:
+                      <c:if test='${Docente.infoRegistro[39]!=null}'>
+                      ${fecha.formatoImprimir(Docente.infoRegistro[39])}
+                      </c:if>
+                      <c:if test='${Docente.infoRegistro[39] == null}'>
+                      ----------------------------
+                      </c:if> 
+                    </td>
                 </tr>
                 <tr>
                     <td>NOTA DESF. o SANCIÓN_ADMINISTRATIVA</td>

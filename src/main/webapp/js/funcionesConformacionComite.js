@@ -264,7 +264,8 @@ function finalizaRegistro(){
         $("#modalMensaje").modal("show");
     }
     
-    else{        
+    else{  
+        $("#btnEnviar").removeAttr("disabled");
         $("#modalConfirmacion2").modal("show");
     }
 }

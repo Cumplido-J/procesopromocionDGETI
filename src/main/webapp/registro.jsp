@@ -41,6 +41,13 @@
             <input type="hidden" id="programa" value="${Docente.infoRegistro[64]}" />
             <input type="hidden" id="plantel" value="${Docente.infoRegistro[6]}" />
         </c:if>
+        <c:if test='${sessionScope["rol"]=="D"}'>
+            <c:if test = "${Docente.infoRegistro[61]!=null&&Docente.infoRegistro[66]!='1'}">
+            <%
+                response.sendRedirect("/procesopromocion/SesionDocente");
+            %>
+            </c:if>       
+        </c:if>    
         <main class="page">            
             <!--Barra navegación UEMSTIS-->
             <nav class="navbar navbar-inverse sub-navbar navbar-fixed-top">

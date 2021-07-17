@@ -30,7 +30,17 @@
             <tr>
                 <td valign="top"><img width="200" src="<%=Imagen.muestraImagen(RutaConfig.getRutaCarpeta()+"logos/sems.png")%>"></td>
                 <td style="text-align:center;">
-                    Convocatoria para el proceso de promoción en el servicio docente por cambio de categoría en Educación Media Superior 
+                    Convocatoria para el proceso de promoción en el servicio docente por
+                      <c:if test='${sessionScope["programa"]=="1"}'>
+                      cambio de categoría  
+                      </c:if>
+                      <c:if test='${sessionScope["programa"]=="2"}'>
+                      horas adicionales 
+                      </c:if>
+                       <c:if test='${sessionScope["programa"]=="3"}'>
+                      incentivos
+                      </c:if>
+                    en Educación Media Superior 
                     <br/>(Promoción horizontal)
                     <br/>Ciclo Escolar 2020-2021
                         

@@ -26,7 +26,7 @@
                     <div class="form-group col-xs-12">                               
                         <label class="control-label" for="programa">Programa:</label>
                         <select class="form-control input-sm disabled" id="programa" name="programa">                                  
-                            ${catalogo.desplegarOpcionesProgramas()}
+                            ${catalogo.desplegarOpcionesProgramas2(datos[1])}
                         </select>
                     </div>
                 </div>
@@ -35,6 +35,12 @@
                         <label class="control-label" for="tipo">Tipo:</label>
                         <select class="form-control input-sm disabled" id="tipo" name="tipo" required>                                  
                             <option value=''>-Seleccione-</option>
+                             <c:if test='${datos[5]=="R"}'>
+                                 <option value='R' selected>Comité revisor</option>
+                             </c:if>
+                             <c:if test='${datos[5]=="D"}'>
+                                 <option value='D' selected>Consejo dictaminador</option>
+                             </c:if>  
                             <option value='R'>Comité revisor</option>
                             <option value='D'>Consejo dictaminador</option>
                         </select>
@@ -43,20 +49,24 @@
                         <label class="control-label" for="subsistema">Subsistema:</label>
                         <select class="form-control input-sm disabled" id="subsistema" name="subsistema" onchange="actualizarPlanteles()" required>                                  
                             <option value=''>-Seleccione-</option>
-                            <option value='1'>DGETI</option>
-                            <option value='2'>CECyTE</option>
+                            <c:if test='${datos[2]=="1"}'>
+                                 <option value='1' selected>DGETI</option>
+                             </c:if>
+                             <c:if test='${datos[2]=="2"}'>
+                                 <option value='2' selected>CECyTE</option>
+                             </c:if>
                         </select>
                     </div>
                     <div class="form-group col-md-3">                                               
                       <label class="control-label" for="entidad">Entidad</label>
                       <select class="form-control input-sm disabled" id="entidad" name="entidad" onchange="actualizarPlanteles()" required>                                  
-                          ${catalogo.desplegarOpcionesEstado()}
+                           ${catalogo.desplegarOpcionesEstado2(datos[3])}
                       </select>
                     </div>
                     <div class="form-group col-md-3">                               
                         <label class="control-label" for="plantel">Plantel:</label>
                         <select class="form-control input-sm disabled" id="plantel" name="plantel" required>                                  
-                            ${catalogo.desplegarOpcionesPlanteles2(datos[2],datos[3])};
+                             ${catalogo.desplegarOpcionesPlanteles3(datos[2],datos[3],datos[4])};
                         </select>
                     </div>   
                     

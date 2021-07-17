@@ -82,6 +82,25 @@ public class Comite {
             return respuesta;        
         }
     }
+    public  String desplegarComite2(String idPrograma, String tipo,String idSubsistema,String idEntidad,String idPlantel){        
+        String respuesta="";        
+        try{
+            String[] parametros={idPrograma,tipo,idSubsistema,idEntidad,idPlantel};
+            List<String[]> datos=metodos.ejecutaSP("sp_consultaComite",parametros);
+            if(!datos.isEmpty()){
+                respuesta="";
+                for(String[] dato:datos)
+                {
+                    respuesta=""+dato[0];
+
+                }
+            }
+        }catch(Exception e){
+            respuesta=e.toString();
+        }finally{
+            return respuesta;        
+        }
+    }
     public  String desplegarIntegrantesComite(String id){        
         String respuesta="<td colspan='6' class='text-center'>Sin información</td>";        
         try{

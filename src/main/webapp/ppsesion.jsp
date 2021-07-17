@@ -172,7 +172,7 @@
                     <article id="pasoFicha" for="pasoFicha" name="pasoFicha" class="articleses ${disabled5}" >
                         <h3>Paso 5:</h3>
                         <a href="FichaRegistro" target="_blank" ><img src="<%=Imagen.muestraImagen(RutaConfig.getRutaCarpeta()+"imagenes/EvidVal.jpg")%>" alt=""></a>
-                        <a href="FichaRegistro"  target="_blank" ><h3>Ficha de <br/> registro </h3></a>
+                        <a href="FichaRegistro"  target="_blank" ><h3>Comprobante de ficha <br/>de registro</h3></a>
                     </article>
                 </c:if>
                 <c:if test='${sessionScope["fechaDictaminacion"]=="1"}'>
@@ -201,7 +201,17 @@
                   <h4 class="modal-title">Criterios de valoración</h4>
                 </div>
                 <div class="modal-body" style="font-size:10px;text-align:justify">
-                  <p >La Promoción en el servicio docente por cambio de categoría se llevará a cabo mediante un proceso de selección respecto al cumplimiento de los criterios de valoración establecidos por la Ley General del Sistema para la Carrera de las Maestras y los Maestros listados a continuación:</p>
+                  <p >La Promoción en el servicio docente por
+                      <c:if test='${sessionScope["programa"]=="1"}'>
+                      cambio de categoría  
+                      </c:if>
+                      <c:if test='${sessionScope["programa"]=="2"}'>
+                      horas adicionales 
+                      </c:if>
+                       <c:if test='${sessionScope["programa"]=="3"}'>
+                      incentivos
+                      </c:if> 
+                      se llevará a cabo mediante un proceso de selección respecto al cumplimiento de los criterios de valoración establecidos por la Ley General del Sistema para la Carrera de las Maestras y los Maestros listados a continuación:</p>
                   <table class="table table-responsive">
                       <tr>
                           <th>No.</th>
@@ -269,7 +279,17 @@
                   <h4 class="modal-title">Criterios de valoración</h4>
                 </div>
                 <div class="modal-body" style="font-size:10px;text-align:justify">
-                  <p >La Promoción en el servicio docente por horas adicionales se llevará a cabo mediante un proceso de selección respecto al cumplimiento de los criterios de valoración establecidos por la Ley General del Sistema para la Carrera de las Maestras y los Maestros listados a continuación:</p>
+                  <p >La Promoción en el servicio docente por
+                       <c:if test='${sessionScope["programa"]=="1"}'>
+                      cambio de categoría  
+                      </c:if>
+                      <c:if test='${sessionScope["programa"]=="2"}'>
+                      horas adicionales 
+                      </c:if>
+                       <c:if test='${sessionScope["programa"]=="3"}'>
+                      incentivos
+                      </c:if> 
+                      se llevará a cabo mediante un proceso de selección respecto al cumplimiento de los criterios de valoración establecidos por la Ley General del Sistema para la Carrera de las Maestras y los Maestros listados a continuación:</p>
                   <table class="table table-responsive">
                       <tr>
                           <th>No.</th>

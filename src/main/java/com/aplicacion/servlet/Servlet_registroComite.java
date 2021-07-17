@@ -90,6 +90,9 @@ public class Servlet_registroComite extends HttpServlet {
                 }
                 else{                    
                     datos[0]=c.registraComite(request.getParameter("idPrograma"),request.getParameter("idTipo"),request.getParameter("idSubsistema"),  request.getParameter("idEntidad"),request.getParameter("idPlantel"));
+                    
+                    datos[0]=c.desplegarComite2(request.getParameter("idPrograma"),request.getParameter("idTipo"),request.getParameter("idSubsistema"),request.getParameter("idEntidad"),request.getParameter("idPlantel"));
+                   
                     datos[1]=request.getParameter("idPrograma");
                     datos[2]=request.getParameter("idSubsistema");
                     datos[3]=request.getParameter("idEntidad");
