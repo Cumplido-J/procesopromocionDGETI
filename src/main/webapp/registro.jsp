@@ -386,38 +386,38 @@
                             </div>
                             <div class="row">
                                 <c:if test="${vistaAdmin}">
-                                    <c:if test='${sessionScope["permisoActualEdicion"]=="F" && sessionScope["programa"]!=2}'>
+                                    <c:if test='${sessionScope["permisoActualEdicion"]=="F" && sessionScope["subsistema"]!=2}'>
                                         <div class='text-center'>
                                             <input type='button' class='btn btn-sm btn-link' value='(+) Agregar información de plazas' onclick="abrirModalPlazas();" disabled/>
                                         </div>
                                     </c:if>
-                                    <c:if test='${sessionScope["permisoActualEdicion"]=="V" && sessionScope["programa"]!=2}'>
+                                    <c:if test='${sessionScope["permisoActualEdicion"]=="V" && sessionScope["subsistema"]!=2}'>
                                         <div class='text-center'>
                                             <input type='button' class='btn btn-sm btn-link' value='(+) Agregar información de plazas' onclick="abrirModalPlazas();" />
                                         </div>
                                     </c:if>
                                 </c:if>
                                 <c:if test="${!vistaAdmin}">
-                                    <c:if test='${sessionScope["programa"]!=2}'>
+                                    <c:if test='${sessionScope["subsistema"]!=2}'>
                                     <div class='text-center'>
                                         <input type='button' class='btn btn-sm btn-link' value='(+) Agregar información de plazas' onclick="abrirModalPlazas();"/>
                                     </div>
                                     </c:if>
                                 </c:if>
                                 <c:if test="${vistaAdmin}">
-                                    <c:if test='${sessionScope["permisoActualEdicion"]=="F" && sessionScope["programa"]==2}'>
+                                    <c:if test='${sessionScope["permisoActualEdicion"]=="F" && sessionScope["subsistema"]==2}'>
                                         <div class='text-center'>
                                             <input type='button' class='btn btn-sm btn-link' value='(+) Agregar información de plazas' onclick="abrirModalPlazasHoras();" disabled/>
                                         </div>
                                     </c:if>
-                                    <c:if test='${sessionScope["permisoActualEdicion"]=="V" && sessionScope["programa"]==2}'>
+                                    <c:if test='${sessionScope["permisoActualEdicion"]=="V" && sessionScope["subsistema"]==2}'>
                                         <div class='text-center'>
                                             <input type='button' class='btn btn-sm btn-link' value='(+) Agregar información de plazas' onclick="abrirModalPlazasHoras();" />
                                         </div>
                                     </c:if>
                                 </c:if>
                                 <c:if test="${!vistaAdmin}">
-                                    <c:if test='${sessionScope["programa"]==2}'>
+                                    <c:if test='${sessionScope["subsistema"]==2}'>
                                     <div class='text-center'>
                                         <input type='button' class='btn btn-sm btn-link' value='(+) Agregar información de plazas' onclick="abrirModalPlazasHoras();"/>
                                     </div>
