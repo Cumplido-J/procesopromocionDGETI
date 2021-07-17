@@ -85,7 +85,7 @@ public class Servlet_registroInfoLaboral extends HttpServlet {
         PrintWriter out = response.getWriter();
         try {
             HttpSession session= (HttpSession) request.getSession();
-            String idUsuario="",rfc="",programa="",idEntidad="",idPlantel="",numhoras="";
+            String idUsuario="",rfc="",programa="",idEntidad="",idPlantel="",numhoras="0";
             if(session.getAttribute("rol").toString().equals("D")){
                 idUsuario=session.getAttribute("idUsuario").toString();
                 rfc=session.getAttribute("rfc").toString();
