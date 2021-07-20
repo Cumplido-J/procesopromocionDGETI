@@ -1279,9 +1279,9 @@
                               ${catalogo.desplegarOpcionesJornada()}
                           </select>                          
                         </div>
-                        <div class="form-group col-md-6 hidden" id="seccionHoras2">
+                        <div class="form-group col-md-6 hidden" id="seccionHoras4">
                             <label class="control-label" for="horas">Horas:</label>
-                            <input type="text" class="form-control input-sm" id="horas2" name="horas" maxlength="2" /> 
+                            <input type="text" class="form-control input-sm" id="horas" name="horas" maxlength="2" /> 
                         </div>
                       </div>
                       <div class="row">

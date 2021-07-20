@@ -1609,10 +1609,10 @@ function cambioJornada(objeto){
 }
 function cambioJornada(idJornada){
     if(idJornada==="1"){
-        $("#seccionHoras").removeClass("hidden");
+        $("#seccionHoras4").removeClass("hidden");
         $("#horas").attr("required",true);
     }else{
-        $("#seccionHoras").addClass("hidden");
+        $("#seccionHoras4").addClass("hidden");
         $("#horas").removeAttr("required");
     }
 }
