@@ -23,7 +23,7 @@
         <c:set var="disabled3" value=""></c:set>
         <c:set var="disabled4" value=""></c:set> 
         
-        <c:if test='${sessionScope["rol"]!="S"}'>
+        <c:if test='${sessionScope["rol"]=="S"}'>
             <c:if test='${sessionScope["programa"]!=""}'>
                 <c:set var="disabled1" value="disabled"></c:set>
             </c:if>
