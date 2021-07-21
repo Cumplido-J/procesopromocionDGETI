@@ -27,6 +27,11 @@
                 response.sendRedirect("/procesopromocion/SesionDocente");
             %>
             </c:if>  
+            <c:if test = "${docente.infoRegistro[66]==1||docente.infoRegistro[66]==null}">
+             <%
+                response.sendRedirect("/procesopromocion/SesionDocente");
+             %>   
+            </c:if>
         </c:if>
         <main class="page">
             <!--Barra navegación UEMSTIS-->

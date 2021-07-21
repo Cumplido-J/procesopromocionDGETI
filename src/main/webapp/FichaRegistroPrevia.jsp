@@ -75,11 +75,25 @@
                 </tr>
                 <tr>
                     <td>PRIMER APELLIDO</td>
-                    <td>:${Docente.infoRegistro[2]}</td>
+                    <td>:
+                        <c:if test="${Docente.infoRegistro[2]!=null}">
+                        ${Docente.infoRegistro[2]}
+                        </c:if>
+                        <c:if test="${Docente.infoRegistro[2]==null}">
+                            -------------------------------------
+                        </c:if>
+                    </td>
                 </tr>
                 <tr>
                     <td>SEGUNDO APELLIDO</td>
-                    <td>:${Docente.infoRegistro[3]}</td>
+                    <td>:
+                        <c:if test="${Docente.infoRegistro[3]!=null}">
+                        ${Docente.infoRegistro[3]}
+                        </c:if>
+                        <c:if test="${Docente.infoRegistro[3]==null}">
+                            -------------------------------------
+                        </c:if>
+                    </td>
                 </tr>
                 <tr>
                     <td>CORREO ELECTRÓNICO</td>
@@ -163,7 +177,13 @@
                 </tr>               
                 <tr>
                     <td>FECHA DE SU ÚLTIMA_PROMOCIÓN</td>
-                    <td>:${fecha.formatoImprimir(Docente.infoRegistro[39])}</td>
+                    <td>:<c:if test='${Docente.infoRegistro[39]!=null}'>
+                        ${fecha.formatoImprimir(Docente.infoRegistro[39])}
+                        </c:if>
+                        <c:if test='${Docente.infoRegistro[39] == null}'>
+                            -------------------------------------
+                        </c:if> 
+                    </td>
                 </tr>
                 <tr>
                     <td>NOTA DESF. o SANCIÓN_ADMINISTRATIVA</td>

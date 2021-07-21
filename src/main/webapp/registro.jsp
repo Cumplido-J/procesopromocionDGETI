@@ -1247,23 +1247,27 @@
                             <input type='hidden' id="valorClavePresupuestal" name="valorClavePresupuestal" value=''>
                             <input type="text" class="form-control input-sm" id="clavePresupUnidad" name="clavePresupUnidad" required />
                         </div>
-                        <div class="form-group col-md-6">
-                          <label class="control-label" for="clvPresupCategoria">Clave Presupuestal (Categoría):</label>
-                          <select class="form-control input-sm" id="categoriaPresupuestal" name="categoriaPresupuestal" onchange="cambioCategoriaPresupuestal()" required>
-                            ${catalogo.desplegarCategoriasPresupuestales()}
-                          </select>                          
-                        </div>
+                        <c:if test='${sessionScope["subsistema"]=="1"}'> 
+                            <div class="form-group col-md-6">
+                              <label class="control-label" for="clvPresupCategoria">Clave Presupuestal (Categoría):</label>
+                              <select class="form-control input-sm" id="categoriaPresupuestal" name="categoriaPresupuestal" onchange="cambioCategoriaPresupuestal()" required>
+                                ${catalogo.desplegarCategoriasPresupuestales()}
+                              </select>                          
+                            </div>
+                        </c:if>  
                       </div>
-                      <div class="row">  
-                        <div class="form-group col-md-6">
-                            <label class="control-label" for="clvPresupHoras">Clave Presupuestal (2 Dígitos Seguidos Por: .0):</label>
-                            <input type="text" class="form-control input-sm" id="clavePresupHoras" name="clavePresupHoras" required />
-                        </div>
-                        <div class="form-group col-md-6">
-                            <label class="control-label" for="clvPresupPlaza">Clave Presupuestal (6 Dígitos):</label>
-                            <input type="text" class="form-control input-sm" id="clavePresupPlaza" name="clavePresupPlaza" required />
-                        </div>
-                      </div>
+                      <c:if test='${sessionScope["subsistema"]=="1"}'> 
+                            <div class="row">  
+                                <div class="form-group col-md-6">
+                                      <label class="control-label" for="clvPresupHoras">Clave Presupuestal (2 Dígitos Seguidos Por: .0):</label>
+                                      <input type="text" class="form-control input-sm" id="clavePresupHoras" name="clavePresupHoras" required />
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label class="control-label" for="clvPresupPlaza">Clave Presupuestal (6 Dígitos):</label>
+                                    <input type="text" class="form-control input-sm" id="clavePresupPlaza" name="clavePresupPlaza" required />
+                                </div>
+                              </div>
+                      </c:if>
                       <div class="row"> 
                         <div class="form-group col-md-6">
                           <label class="control-label" for="categoria">Categoría:</label>

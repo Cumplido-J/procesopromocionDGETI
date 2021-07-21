@@ -25,6 +25,13 @@
                 border: 1px solid black;                
             }
         </style>
+        <c:if test='${sessionScope["rol"]=="D"}'>
+            <c:if test = "${Docente.documentoCargado3('1')==false}">
+            <%
+                response.sendRedirect("/procesopromocion/SesionDocente");
+            %>
+            </c:if>       
+        </c:if> 
     </head>
     <body style="width:800px; font-family:Verdana;">
         <table >

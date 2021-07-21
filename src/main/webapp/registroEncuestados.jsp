@@ -19,6 +19,13 @@
         <jsp:useBean id="catalogo" class="herramientas.Catalogos" />        
     </head>
     <body>
+         <c:if test='${sessionScope["rol"]=="D"}'> 
+            <c:if test = "${docente.infoRegistro[61]==null||Docente.infoRegistro[66]=='1'}">
+             <%
+                response.sendRedirect("/procesopromocion/SesionDocente");
+             %>   
+            </c:if>
+        </c:if>
         <main class="page">
             <!--Barra navegación UEMSTIS-->
             <nav class="navbar navbar-inverse sub-navbar navbar-fixed-top">
