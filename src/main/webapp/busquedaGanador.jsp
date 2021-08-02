@@ -86,14 +86,24 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="form-group col-xs-12 text-center">                         
+                        <div class="form-group col-xs-8 text-right" style="margin-left: 28px;">                         
                             <input class="btn btn-sm btn-primary" id="btnBuscar" value='Buscar resultados' onclick="busquedaResultados()"/>
                             <c:if test='${sessionScope["permisoActualEdicion"]=="V"}'>
                                 <input class="btn btn-sm btn-primary" id="btnBuscar" value='Calcular resultado' onclick="confirmacionResultados()"/>
                             </c:if>
                         </div>
+                        <div class="form-group col-xs-4 text-right" style="margin-left: -95px;">                         
+                            <img src="imagenes/excel.svg" style="width: 30px; border-radius: 50%; border: 2px solid #46b12e; margin-left: -190px;" onclick="confirmacionReporte()">
+                            <span class="tooltiptext" style="margin-left: -190px;">Generar Reporte</span>
+                        </div>
                     </div>
                 </form>
+<!--                <div style="margin: -6px 1050px 0px;">
+                    <div class="tooltip2" style="margin-right: 10px;">
+                    <img src="imagenes/excel.svg" style="width: 30px; border-radius: 50%; border: 2px solid #46b12e;" onclick="confirmacionReporte()">
+                    <span class="tooltiptext" style="margin-left: -190px;">Generar Reporte</span>
+                    </div>
+                </div>-->
                 <div class="table-responsive">
                     <table class="table table-condensed table-striped">
                         <thead>                                
@@ -152,6 +162,27 @@
                   </div>
                 </div>
             </div>
+            <div class="modal fade" id="modalMensajeReporte" role="dialog">
+                <div class="modal-dialog">
+
+                  <!-- Modal content-->
+                  <div class="modal-content panel">
+                    <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal">&times;</button>
+                      <h4 class="modal-title">Reporte asignación de categoria</h4>
+                    </div>
+                    <div class="modal-body">
+                      <p id="mensaje">Desea generar el reporte de asignación de categoria?</p>
+                    </div>
+                    <div class="modal-footer">
+                      <input class="btn btn-sm btn-primary" id="btnConfirmarReporte" value='Si'/>
+                      <!--<button type="button" id="btnConfirmarReporte" class="btn btn-sm btn-default">Sí</button>-->
+                      <!--<button type="button" class="btn btn-sm btn-default" data-dismiss="modal">No</button>-->
+                      <input class="btn btn-sm btn-primary" id="btnConfirmarReporteNo" data-dismiss="modal" value='No'/>
+                    </div>  
+                  </div>
+                </div>
+            </div>     
         </main>
         <script src="https://framework-gb.cdn.gob.mx/gobmx.js"></script>
         <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
@@ -189,6 +220,107 @@
                 $.post("aspiranteGanador", {id:"b",programa:programa,subsistema:subsistema,entidad:entidad,plantel:plantel,categoria:categoria,jornada:jornada,vacancia:vacancia}, function(data){
                     $("#seccionEditable").html(data);}
                 );
+            }
+            function confirmacionReporte(){
+                $("#btnConfirmarReporte").attr("onClick","crearExcel()");
+                $("#modalMensajeReporte").modal("show");
+            }
+            function crearExcel(){
+                var programa=$("#programa").val();
+                var subsistema=$("#subsistema").val();
+                var entidad=$("#entidad").val();
+//                $("#modalMensajeReporte").modal("show");
+                $("#btnConfirmarReporte").val("Generando reporte...");
+                $("#btnConfirmarReporte").attr("disabled","disabled");
+                $("#btnConfirmarReporteNo").attr("disabled","disabled");
+                $.post("reporteAsignacion", {programa:programa,subsistema:subsistema,entidad:entidad}, function(data){
+                    GenerarDocumento("excel",data);
+                    $("#btnConfirmarReporte").val("Si");
+                    $("#btnConfirmarReporte").removeAttr("disabled");
+                    $("#btnConfirmarReporteNo").removeAttr("disabled");
+                    $("#modalMensajeReporte").modal("hide");
+                });
+            }
+            function GenerarDocumento(option,tabla) {
+                switch (option) {
+                    case 'pdf':
+                    tableExport({ type: 'pdf', escape: false },tabla);
+                        break;
+                    case 'excel':
+                    tableExport({ type: 'excel', escape: false },tabla);
+                        break;
+                    default: console.log('No se pudo cargar archivo');
+                }
+            }
+            function tableExport(options,tabla){
+                var defaults = {
+                    separator: ',',
+                    ignoreColumn: [],
+                    tableName:'yourTableName',
+                    type:'excel',
+                    pdfFontSize:14,
+                    pdfLeftMargin:20,
+                    escape:'true',
+                    htmlContent:'false',
+                    consoleLog:'false'
+                };
+                var options = $.extend(defaults, options);
+                if(defaults.type == 'excel'  ){
+                    var excelFile = "<html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:x='urn:schemas-microsoft-com:office:"+defaults.type+"' xmlns='http://www.w3.org/TR/REC-html40'><meta http-equiv='content-type' content='application/vnd.ms-excel; charset=UTF-8'>";
+                    excelFile += "<head>";
+                    excelFile += "<!--[if gte mso 9]>";
+                    excelFile += "<xml>";
+                    excelFile += "<x:ExcelWorkbook>";
+                    excelFile += "<x:ExcelWorksheets>";
+                    excelFile += "<x:ExcelWorksheet>";
+                    excelFile += "<x:Name>";
+                    excelFile += "{worksheet}";
+                    excelFile += "</x:Name>";
+                    excelFile += "<x:WorksheetOptions>";
+                    excelFile += "<x:DisplayGridlines/>";
+                    excelFile += "</x:WorksheetOptions>";
+                    excelFile += "</x:ExcelWorksheet>";
+                    excelFile += "</x:ExcelWorksheets>";
+                    excelFile += "</x:ExcelWorkbook>";
+                    excelFile += "</xml>";
+                    excelFile += "<![endif]-->";
+                    excelFile += "</head>";
+                    excelFile += "<body>";
+                    excelFile += tabla;
+                    excelFile += "</body>";
+                    excelFile += "</html>";
+
+                    var fileType='';
+                    if (defaults.type == 'excel') {
+                       fileType = 'xls';
+                    }
+
+                    var blob = new Blob([excelFile], { type: 'text/' + fileType });
+                    if (window.navigator.msSaveBlob) {
+                       window.navigator.msSaveOrOpenBlob(blob, 'Reporte de asignación de categoria ' + new Date().toDateString() + '.' + fileType);
+                    }
+                    else {
+                       var a = window.document.createElement("a");
+                       a.href = window.URL.createObjectURL(blob, { type: "text/plain" });
+                       a.download = "Reporte de asignación de categoria " + new Date().toDateString() + "." + fileType;
+                       document.body.appendChild(a);
+                       a.click();
+                       document.body.removeChild(a);
+                    }
+                    }else if(defaults.type == 'pdf'){
+                    var doc = new jsPDF('p','pt', 'a4', true);
+                    doc.setFontSize(defaults.pdfFontSize);
+                    defaults.ignoreColumn = '<table > '+
+                    '<tr> <th >Número<br>económico</th> <th >CU</th><th >Fecha<br>pedido</th><th >Empleado<br>entrega</th>'+
+                    '<th >Pedido<br>surtido</th><th >Monto</th><th >Fecha<br>redención</th> <th >Premio</th><th >Estatus</th></tr><tr>'+
+                    '<td>112233</td> <td>01098462985632</td> <td>20/07/2019</td><td>T73076</td><td>69878</td>'+
+                    '<td>$10,000</td><td>20/07/2019</td><td>Lonchera</td> <td>Pendiente</td> </tr></table>';
+                    // Header
+                    var startColPosition=defaults.pdfLeftMargin;
+                    doc.text(20,20, defaults.ignoreColumn);
+
+                    doc.output('datauriNew');
+                }
             }
         </script>
 </html>
