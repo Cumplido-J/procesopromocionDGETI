@@ -233,13 +233,33 @@
                 $("#btnConfirmarReporte").val("Generando reporte...");
                 $("#btnConfirmarReporte").attr("disabled","disabled");
                 $("#btnConfirmarReporteNo").attr("disabled","disabled");
-                $.post("reporteAsignacion", {programa:programa,subsistema:subsistema,entidad:entidad}, function(data){
+//                $.post("reporteAsignacion", {programa:programa,subsistema:subsistema,entidad:entidad}, function(data){
+//                    GenerarDocumento("excel",data);
+//                    $("#btnConfirmarReporte").val("Si");
+//                    $("#btnConfirmarReporte").removeAttr("disabled");
+//                    $("#btnConfirmarReporteNo").removeAttr("disabled");
+//                    $("#modalMensajeReporte").modal("hide");
+//                });
+                $.ajax({
+                type: "POST",
+                url: '/procesopromocion/reporteAsignacion',
+                data: {programa:programa,subsistema:subsistema,entidad:entidad},    
+                timeout: 360000,
+                success: function (data) {
                     GenerarDocumento("excel",data);
                     $("#btnConfirmarReporte").val("Si");
                     $("#btnConfirmarReporte").removeAttr("disabled");
                     $("#btnConfirmarReporteNo").removeAttr("disabled");
                     $("#modalMensajeReporte").modal("hide");
-                });
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    if(textStatus==="timeout") {
+                       $("#btnConfirmarReporte").val("Si");
+                       $("#btnConfirmarReporte").removeAttr("disabled");
+                       $("#btnConfirmarReporteNo").removeAttr("disabled");
+                       $("#modalMensajeReporte").modal("hide");
+                    } 
+                }});
             }
             function GenerarDocumento(option,tabla) {
                 switch (option) {
