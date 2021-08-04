@@ -81,7 +81,12 @@
                     <div class="form-group col-md-3">                               
                         <label class="control-label" for="categoria">Categoria:<span class="text-danger" title="Campo obligatorio">*</span></label>
                         <select class="form-control input-sm" id="categoria" name="categoria" onChange="cambioCategoria(this,'tipoCategoria','jornada')" required>                                  
-                            ${catalogo.desplegarOpcionesCategorias()}
+                            <c:if test='${sessionScope["programa"]=="2"}'>
+                                ${catalogo.desplegarOpcionesCategoriasHoras()}
+                            </c:if>
+                            <c:if test='${sessionScope["programa"]!="2"}'>
+                                ${catalogo.desplegarOpcionesCategorias()}
+                            </c:if>
                         </select>
                         <input type="hidden" id="tipoCategoria" name="tipoCategoria"/>
                     </div>

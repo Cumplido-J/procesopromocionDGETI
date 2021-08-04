@@ -21,6 +21,18 @@
         <jsp:useBean id="criteriosValoracion" class="herramientas.CriteriosValoracion" />
     </head>
     <body>
+        <c:if test='${sessionScope["rol"]=="D"}'>
+            <c:if test = "${docente.infoRegistro[66]>=6}">
+            <%
+                response.sendRedirect("/procesopromocion/SesionDocente");
+            %>
+            </c:if>  
+            <c:if test = "${docente.infoRegistro[66]==1||docente.infoRegistro[66]==null}">
+             <%
+                response.sendRedirect("/procesopromocion/SesionDocente");
+             %>   
+            </c:if>
+        </c:if>
         <main class="page">
             <!--Barra navegación UEMSTIS-->
             <nav class="navbar navbar-inverse sub-navbar navbar-fixed-top">
