@@ -557,8 +557,8 @@ public class Catalogos {
             String[] parametros={idPlantel,idPrograma};
             List<String[]> datos=metodos.ejecutaSP("sp_consultaCategoriasVacantes",parametros);
             for(String[] dato:datos){
-                respuesta+="<option tipo='"+dato[3]+"' aux='"+dato[1]+"' value='"+dato[1]+"-"+dato[4]+"'>"+dato[2]+"-"+dato[4]+"</option>";
-                //respuesta+="<option tipo='"+dato[2]+"' aux='"+dato[0]+"' value='"+dato[0]+"-"+dato[2]+"'>"+dato[1]+"-"+dato[2]+"</option>";
+                //respuesta+="<option tipo='"+dato[3]+"' aux='"+dato[1]+"' value='"+dato[1]+"-"+dato[4]+"'>"+dato[2]+"-"+dato[4]+"</option>";
+                respuesta+="<option tipo='"+dato[2]+"' aux='"+dato[0]+"' value='"+dato[0]+"-"+dato[2]+"'>"+dato[1]+"-"+dato[2]+"</option>";
             }
         }catch(Exception e){
             respuesta=e.toString();
