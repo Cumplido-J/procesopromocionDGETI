@@ -905,7 +905,7 @@
                 <div class="modal-body">
                     <iframe name="ifRespuesta" hidden></iframe>
                     <iframe style="width:100%;height: 338px;" id="ifArchivo" name="ifArchivo" src="" hidden></iframe>
-                    <c:if test="${!vistaAdmin}">
+                    <%--<c:if test="${!vistaAdmin}">--%>
                     <form id="formArchivo" name="formArchivo" method="POST" enctype="multipart/form-data" >
                         <div class="form-group">
                             <label class="control-label" for="archivo">Seleccione el archivo a cargar:</label>
@@ -914,8 +914,8 @@
                             <input type="file" class="form-control input-sm" id="archivo" name="archivo" onchange="subirArchivo()" accept=".pdf" />
                         </div>
                     </form>  
-                    </c:if>
-                    <c:if test="${vistaAdmin}"><p>El documento no puede ser modificado</p></c:if>
+                    <%--</c:if>--%>
+                    <%--<c:if test="${vistaAdmin}"><p>El documento no puede ser modificado</p></c:if>--%>
                 </div>
                 <div class="modal-footer">
                   <button type="button" class="btn btn-sm btn-default" data-dismiss="modal">Cerrar</button>
