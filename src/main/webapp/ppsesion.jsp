@@ -171,8 +171,8 @@
                         
                     <article id="pasoFicha" for="pasoFicha" name="pasoFicha" class="articleses ${disabled5}" >
                         <h3>Paso 5:</h3>
-                        <a href="FichaRegistro" target="_blank" ><img src="<%=Imagen.muestraImagen(RutaConfig.getRutaCarpeta()+"imagenes/EvidVal.jpg")%>" alt=""></a>
-                        <a href="FichaRegistro"  target="_blank" ><h3>Comprobante de ficha <br/>de registro</h3></a>
+                        <a href="FichaRegistroClon" target="_blank" ><img src="<%=Imagen.muestraImagen(RutaConfig.getRutaCarpeta()+"imagenes/EvidVal.jpg")%>" alt=""></a>
+                        <a href="FichaRegistroClon"  target="_blank" ><h3>Comprobante de ficha <br/>de registro</h3></a>
                     </article>
                 </c:if>
                 <c:if test='${sessionScope["fechaDictaminacion"]=="1"}'>

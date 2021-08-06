@@ -93,6 +93,8 @@ public class Servlet_finalizaProceso extends HttpServlet {
             String value = new String(ptext, "UTF-8");
             String[] parametros={idUsuario,totalEncuestados,value,total,idPermiso};
             metodo.ejecutaSP("sp_finProceso",parametros);
+			String[] parametros1={idUsuario};
+            metodo.ejecutaSP("sp_insertAspiranteClon",parametros);
             response.sendRedirect(retorno);
             /*if(completo.equals("true")){
                 response.sendRedirect("evidenciaRegistroDocentes.html");

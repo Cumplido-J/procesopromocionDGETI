@@ -222,6 +222,15 @@ public class Docente {
             idConvocatoria=infoRegistro[65];
         }
     }
+    public void consultaInfoAspirante2(){
+        Metodos_sql metodo = new Metodos_sql();
+        String[] parametros={idUsuario};
+        List<String[]> datos=metodo.ejecutaSP("sp_consultaRegistro2",parametros);
+        if(!datos.isEmpty()){
+            infoRegistro=datos.get(0);
+            idConvocatoria=infoRegistro[65];
+        }
+    }
     public void consultaDocumentos(){
         Metodos_sql metodo = new Metodos_sql();
         String[] parametros={idUsuario,""};

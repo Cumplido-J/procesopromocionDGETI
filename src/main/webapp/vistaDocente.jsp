@@ -176,6 +176,11 @@
                     </article>
                     <article class="articleses">
                         <h3>Paso 5:</h3>
+                        <a href="FichaRegistroClon" target="_blank" ><img src="<%=Imagen.muestraImagen(RutaConfig.getRutaCarpeta()+"imagenes/EvidVal.jpg")%>" alt=""></a>
+                        <a href="FichaRegistroClon"  target="_blank" ><h3>Ficha de <br/> registro Docente</h3></a>
+                    </article>
+                    <article class="articleses">
+                        <h3>Paso 5:</h3>
                         <a href="FichaRegistro" target="_blank" ><img src="<%=Imagen.muestraImagen(RutaConfig.getRutaCarpeta()+"imagenes/EvidVal.jpg")%>" alt=""></a>
                         <a href="FichaRegistro"  target="_blank" ><h3>Ficha de <br/> registro </h3></a>
                     </article>
