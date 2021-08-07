@@ -6,6 +6,7 @@
 package herramientas;
 
 import java.sql.ResultSet;
+import java.util.ArrayList;
 import java.util.List;
 import metodos_sql.Metodos_sql;
 
@@ -1124,6 +1125,29 @@ public class Catalogos {
             respuesta=e.toString();
         }finally{
             return respuesta;
+        }
+    }
+    
+       public ArrayList<String> getSelectObservacionPaso1(String idUsuario){ 
+            ArrayList<String> lista=new ArrayList<>();
+        List<String[]> datos=null;
+        try{
+            String[] parametros={idUsuario};
+           datos=metodos.ejecutaSP("sp_selectObservacionPaso1", parametros);
+            for(String[] dato:datos){
+                lista.add(dato[0]);
+                lista.add(dato[1]);
+                lista.add(dato[2]);
+                lista.add(dato[3]);
+                lista.add(dato[4]);
+                lista.add(dato[5]);
+                lista.add(dato[6]);
+                lista.add(dato[7]);
+            }
+        }catch(Exception e){
+
+        }finally{
+            return lista;        
         }
     }
 }

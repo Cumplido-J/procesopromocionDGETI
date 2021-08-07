@@ -616,7 +616,139 @@ $(document).ready(function () {
             });
             return false;
         }
-    });    
+    });
+    
+    $('#formInfoAcademicaOb1').submit(function(e) {
+        e.preventDefault();
+    }).validate({        
+        
+        submitHandler:function(){
+            var aux=$("#btnFinalizarOb1").val(); 
+            $.ajax({
+                type:$('#formInfoAcademica').attr("method"),
+                url:$('#formInfoAcademica').attr("action"),
+                data:$('#formInfoAcademicaOb1').serialize(),
+                beforeSend:function(){
+                    $("#btnFinalizarOb1").val("Guardando...");
+                    $("#btnFinalizarOb1").attr("disabled","disabled");
+                },
+                complete:function(){
+                   $("#btnFinalizarOb1").val(aux); 
+                   $("#btnFinalizarOb1").removeAttr("disabled");
+                },success:function(data){
+                    if(data=="ok"){                                               
+                        //cerrar(1);
+                    }else{
+                        $("#mensaje").html(data);            
+                        $("#modalMensaje").modal("show");
+                    }
+                },error:function(){
+                    
+                }
+            });
+            return false;
+        }
+    }); 
+    
+    
+    $('#formInfoAcademicaOb2').submit(function(e) {
+        e.preventDefault();
+    }).validate({        
+        
+        submitHandler:function(){
+            var aux=$("#btnFinalizarOb2").val(); 
+            $.ajax({
+                type:$('#formInfoAcademica').attr("method"),
+                url:$('#formInfoAcademica').attr("action"),
+                data:$('#formInfoAcademicaOb2').serialize(),
+                beforeSend:function(){
+                    $("#btnFinalizarOb2").val("Guardando...");
+                    $("#btnFinalizarOb2").attr("disabled","disabled");
+                },
+                complete:function(){
+                   $("#btnFinalizarOb2").val(aux); 
+                   $("#btnFinalizarOb2").removeAttr("disabled");
+                },success:function(data){
+                    if(data=="ok"){                                               
+                       //cerrar(2);
+                    }else{
+                        $("#mensaje").html(data);            
+                        $("#modalMensaje").modal("show");
+                    }
+                },error:function(){
+                    
+                }
+            });
+            return false;
+        }
+    });
+    
+
+    $('#formInfoAcademicaOb3').submit(function(e) {
+        e.preventDefault();
+    }).validate({        
+        
+        submitHandler:function(){
+            var aux=$("#btnFinalizarOb3").val(); 
+            $.ajax({
+                type:$('#formInfoAcademica').attr("method"),
+                url:$('#formInfoAcademica').attr("action"),
+                data:$('#formInfoAcademicaOb3').serialize(),
+                beforeSend:function(){
+                    $("#btnFinalizarOb3").val("Guardando...");
+                    $("#btnFinalizarOb3").attr("disabled","disabled");
+                },
+                complete:function(){
+                   $("#btnFinalizarOb3").val(aux); 
+                   $("#btnFinalizarOb3").removeAttr("disabled");
+                },success:function(data){
+                    if(data=="ok"){                                               
+                        //cerrar(3);
+                    }else{
+                        $("#mensaje").html(data);            
+                        $("#modalMensaje").modal("show");
+                    }
+                },error:function(){
+                    
+                }
+            });
+            return false;
+        }
+    });
+    
+    
+    $('#formInfoAcademicaOb4').submit(function(e) {
+        e.preventDefault();
+    }).validate({        
+        
+        submitHandler:function(){
+            var aux=$("#btnFinalizarOb4").val(); 
+            $.ajax({
+                type:$('#formInfoAcademica').attr("method"),
+                url:$('#formInfoAcademica').attr("action"),
+                data:$('#formInfoAcademicaOb4').serialize(),
+                beforeSend:function(){
+                    $("#btnFinalizarOb4").val("Guardando...");
+                    $("#btnFinalizarOb4").attr("disabled","disabled");
+                },
+                complete:function(){
+                   $("#btnFinalizarOb4").val(aux); 
+                   $("#btnFinalizarOb4").removeAttr("disabled");
+                },success:function(data){
+                    if(data=="ok"){                                               
+                        //cerrar(4);
+                    }else{
+                        $("#mensaje").html(data);            
+                        $("#modalMensaje").modal("show");
+                    }
+                },error:function(){
+                    
+                }
+            });
+            return false;
+        }
+    });
+    
 });
 function actualizarTipoInstitucion() {
     id=$("#entidad").val();

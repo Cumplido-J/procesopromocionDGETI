@@ -42,7 +42,7 @@
                       </c:if>
                     en Educación Media Superior 
                     <br/>(Promoción horizontal)
-                    <br/>Ciclo Escolar 2020-2021
+                    <br/><jsp:include page="seccionesPlantilla/cicloEscolar.jsp" flush="true"/>
                         
                 </td>
                 <%
@@ -155,7 +155,33 @@
                             <c:if test="${Docente.infoRegistro[78]=='16'}">
                                 <tr><td class="borde">Aceptado</td><td class="borde">----------</td></tr>
                             </c:if>
-                            <tr><td class="borde" COLSPAN="2">${Docente.infoRegistro[67].toUpperCase()}</td></tr>
+                                <%--<tr><td class="borde" COLSPAN="2">${Docente.infoRegistro[67].toUpperCase()}</td></tr>--%>
+                            
+                            <c:if test="${observacionesR[0].length()>0}">
+                                <tr><td class="borde" COLSPAN="2">${observacionesR[0].toUpperCase()}</td></tr> 
+                            </c:if>
+                            <c:if test="${observacionesR[4].length()>0}">
+                                <tr><td class="borde" COLSPAN="2">${observacionesR[4].toUpperCase()}</td></tr> 
+                            </c:if>
+                            <c:if test="${observacionesR[1].length()>0}">
+                                <tr><td class="borde" COLSPAN="2">${observacionesR[1].toUpperCase()}</td></tr> 
+                            </c:if> 
+                            <c:if test="${observacionesR[5].length()>0}">
+                                <tr><td class="borde" COLSPAN="2">${observacionesR[5].toUpperCase()}</td></tr> 
+                            </c:if>    
+                            <c:if test="${observacionesR[2].length()>0}">
+                                <tr><td class="borde" COLSPAN="2">${observacionesR[2].toUpperCase()}</td></tr> 
+                            </c:if>
+                            <c:if test="${observacionesR[6].length()>0}">
+                                <tr><td class="borde" COLSPAN="2">${observacionesR[6].toUpperCase()}</td></tr> 
+                            </c:if>
+                            <c:if test="${observacionesR[3].length()>0}">
+                                <tr><td class="borde" COLSPAN="2">${observacionesR[3].toUpperCase()}</td></tr> 
+                            </c:if>
+                            <c:if test="${observacionesR[7].length()>0}">
+                                <tr><td class="borde" COLSPAN="2">${observacionesR[7].toUpperCase()}</td></tr> 
+                            </c:if>
+                            
                         </table>
                     </td>                    
                 </tr>

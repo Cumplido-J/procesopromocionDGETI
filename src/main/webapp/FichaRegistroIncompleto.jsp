@@ -40,7 +40,7 @@
                       </c:if>
                         en Educación Media Superior 
                         <br/>(Promoción horizontal)
-                        <br/>Ciclo Escolar 2020-2021                                            
+                    <br/><jsp:include page="seccionesPlantilla/cicloEscolar.jsp" flush="true"/>                                            
                 </td>
                 <%
                     String rutaLogo = (String) request.getAttribute("rutaImagenInc");
@@ -311,7 +311,7 @@
                 <br/>f. <b>No contar con nota desfavorable:</b> constancia emitida por el Director del plantel, de que el participante no cuenta con nota desfavorable en los dos últimos ciclos escolares inmediatos a la publicación de la convocatoria, y carta del participante, bajo protesta de decir verdad, de que no cuenta con sanción administrativa que pueda limitar su desempeño en la función.
                 <br/>g. <b>Compatibilidad de empleos:</b> constancia vigente emitida por la autoridad competente en apego a las reglas de compatibilidad.
             </p>-->
-            <p>Usted tiene su registro incompleto por lo que no es posible su participación en el proceso de promoción en el servicio docente por cambio de categoría en Educación Media Superior, Ciclo Escolar 2020-2021.</p>
+            <p>Usted tiene su registro incompleto por lo que no es posible su participación en el proceso de promoción en el servicio docente por cambio de categoría en Educación Media Superior, <jsp:include page="seccionesPlantilla/cicloEscolar.jsp" flush="true"/>.</p>
             
             <br/><br/><br/><center>${Docente.infoRegistro[1]} ${Docente.infoRegistro[2]} ${Docente.infoRegistro[3]}</center>
         </div>

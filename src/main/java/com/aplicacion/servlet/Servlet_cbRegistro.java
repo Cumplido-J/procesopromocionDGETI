@@ -7,6 +7,7 @@ package com.aplicacion.servlet;
 
 import com.aplicacion.beans.Docente;
 import com.aplicacion.beans.HoraGrupo;
+import herramientas.Catalogos;
 import herramientas.RutaConfig;
 import java.io.FileReader;
 import java.io.IOException;
@@ -72,7 +73,9 @@ public class Servlet_cbRegistro extends HttpServlet {
             throws ServletException, IOException {
         HttpSession session= (HttpSession) request.getSession();
         String id="",rfc="";
-        boolean vistaAdmin=false;  
+        boolean vistaAdmin=false;
+        Catalogos catalgo=new Catalogos();
+        
         if(session.getAttribute("rol")!=null){
         if(session.getAttribute("rol").toString().equals("D")){
             id=session.getAttribute("idUsuario").toString();
@@ -82,7 +85,8 @@ public class Servlet_cbRegistro extends HttpServlet {
         }else{
             id=session.getAttribute("idDocente").toString();
             rfc=session.getAttribute("rfcDocente").toString();
-            vistaAdmin=true;                       
+            vistaAdmin=true;
+            request.setAttribute("observacionesR", catalgo.getSelectObservacionPaso1(id));
         }
         if(!id.equals("")&&!rfc.equals("")){
             docente=new Docente();

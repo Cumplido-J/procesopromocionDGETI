@@ -6,6 +6,7 @@
 package com.aplicacion.servlet;
 
 import com.aplicacion.beans.Docente;
+import herramientas.Catalogos;
 import herramientas.CriteriosValoracion;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -69,7 +70,8 @@ public class Servlet_cbFichaDictamen extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        HttpSession session= (HttpSession) request.getSession();     
+        HttpSession session= (HttpSession) request.getSession();
+         Catalogos catalgo=new Catalogos();
         if(session.getAttribute("rol")!=null){
             String idUsuario,rfc,idPermiso,permisoEdicion;
             boolean vistaAdmin;
@@ -118,6 +120,7 @@ public class Servlet_cbFichaDictamen extends HttpServlet {
             request.setAttribute("infoPlazas", infoPlazas);
             request.setAttribute("Docente", docente);
             request.setAttribute("rutaImagenInc", rutaImagenInc);
+             request.setAttribute("observacionesR", catalgo.getSelectObservacionPaso1(idUsuario));
             ServletContext sc = getServletContext();
             RequestDispatcher rd = sc.getRequestDispatcher("/FichaDictamen.jsp");
             rd.forward(request,response);
