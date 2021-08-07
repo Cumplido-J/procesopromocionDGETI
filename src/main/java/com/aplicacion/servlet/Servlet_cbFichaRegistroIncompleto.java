@@ -92,8 +92,12 @@ public class Servlet_cbFichaRegistroIncompleto extends HttpServlet {
             docente=new Docente();
             docente.setIdUsuario(idUsuario);
             docente.consultaInfoAspirante();
-            docente.consultaHoras();            
-            docente.actualizaBanderaIngles();
+            if(subsistemaUsuario.equals("2")){
+                docente.consultaHorasCecyte();
+            }else{
+                docente.consultaHoras();
+                docente.actualizaBanderaIngles();
+            }
             String[] parametros={idUsuario};            
             List<String[]> infoPlazas=new Metodos_sql().ejecutaSP("sp_consultaUsuarioPlaza",parametros);
             request.setAttribute("infoPlazas", infoPlazas);
