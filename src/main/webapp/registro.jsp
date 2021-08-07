@@ -694,20 +694,22 @@
                               <input type="text" class="form-control input-sm" id="numGrupos" name="numGrupos" value="${Docente.getNumGrupos()}" readOnly required>
                             </div>
                             <c:if test="${vistaAdmin}">
-                                <c:if test='${sessionScope["permisoActualEdicion"]=="F" && sessionScope["programa"]!=2}'>
+                                <c:if test='${sessionScope["permisoActualEdicion"]=="F" && sessionScope["programa"]!=2 && sessionScope["subsistema"]!=2}'>
                                     <div class="text-center">
                                       <input type="button" class="btn btn-link btn-sm" value="(+) Agregar información" data-toggle="modal" data-target="#modalInformacion" disabled/>
                                     </div>
                                 </c:if>
-                                <c:if test='${sessionScope["permisoActualEdicion"]=="V" && sessionScope["programa"]!=2}'>
+                                <c:if test='${sessionScope["permisoActualEdicion"]=="V" && sessionScope["programa"]!=2 && sessionScope["subsistema"]!=2}'>
                                     <div class="text-center">
                                       <input type="button" class="btn btn-link btn-sm" value="(+) Agregar información" data-toggle="modal" data-target="#modalInformacion"/>
                                     </div>
                                 </c:if>
+                                <c:if test='${sessionScope["permisoActualEdicion"]=="F" && sessionScope["programa"]==2 && sessionScope["subsistema"]!=2}'>
                                     <div class="text-center">
                                       <input type="button" class="btn btn-link btn-sm" value="(+) Agregar información" data-toggle="modal" data-target="#modalInformacionHoras" disabled/>
                                     </div>
-                                <c:if test='${sessionScope["permisoActualEdicion"]=="V" && sessionScope["programa"]==2}'>
+                                </c:if>
+                                <c:if test='${sessionScope["permisoActualEdicion"]=="V" && sessionScope["programa"]==2 && sessionScope["subsistema"]!=2}'>
                                     <div class="text-center">
                                       <input type="button" class="btn btn-link btn-sm" value="(+) Agregar información" data-toggle="modal" data-target="#modalInformacionHoras"/>
                                     </div>
@@ -715,14 +717,33 @@
                             </c:if>
                             <c:if test="${!vistaAdmin}">
                                 <div class="text-center">
-                                    <c:if test='${sessionScope["programa"]!=2}'>
+                                    <c:if test='${sessionScope["programa"]!=2 && sessionScope["subsistema"]!=2}'>
                                         <input type="button" class="btn btn-link btn-sm" value="(+) Agregar información" data-toggle="modal" data-target="#modalInformacion"/>
                                     </c:if>
-                                    <c:if test='${sessionScope["programa"]==2}'>
+                                    <c:if test='${sessionScope["programa"]==2 && sessionScope["subsistema"]!=2}'>
                                         <input type="button" class="btn btn-link btn-sm" value="(+) Agregar información" data-toggle="modal" data-target="#modalInformacionHoras"/>
                                     </c:if>
                                 </div>
                             </c:if>
+                            <c:if test="${vistaAdmin}">
+                                    <c:if test='${sessionScope["permisoActualEdicion"]=="F" && sessionScope["subsistema"]==2}'>
+                                        <div class='text-center'>
+                                            <input type='button' class='btn btn-sm btn-link' value='(+) Agregar información' data-toggle="modal" data-target="#modalInformacionCecyte" disabled/>
+                                        </div>
+                                    </c:if>
+                                    <c:if test='${sessionScope["permisoActualEdicion"]=="V" && sessionScope["subsistema"]==2}'>
+                                        <div class='text-center'>
+                                            <input type='button' class='btn btn-sm btn-link' value='(+) Agregar información' data-toggle="modal" data-target="#modalInformacionCecyte" />
+                                        </div>
+                                    </c:if>
+                                </c:if>
+                                <c:if test="${!vistaAdmin}">
+                                    <c:if test='${sessionScope["subsistema"]==2}'>
+                                    <div class='text-center'>
+                                        <input type='button' class='btn btn-sm btn-link' value='(+) Agregar información' data-toggle="modal" data-target="#modalInformacionCecyte"/>
+                                    </div>
+                                    </c:if>
+                                </c:if>
                             <div>
                               <span>Los datos mostrados a continuación provienen de información institucional.<br/>En cada uno de los renglones con la opción habilitada, presione el botón <span class='glyphicon glyphicon-ok completo'></span> para válidarlos como correctos, de lo contrario presione <span class='glyphicon glyphicon-remove incompleto'></span>.</span>
                               <br/><br/>
@@ -734,7 +755,12 @@
                                   <th>Opciones</th>                        
                                 </tr>
                                 <tbody id="tablaInfo">
-                                    ${Docente.mostrarHoras()}
+                                    <c:if test='${sessionScope["subsistema"]!=2}'>
+                                        ${Docente.mostrarHoras()}
+                                    </c:if>
+                                    <c:if test='${sessionScope["subsistema"]==2}'>
+                                        ${Docente.mostrarHorasCecyte()}
+                                    </c:if>
                                     <!--<td colspan="2" class="text-center"><p class="text-danger">Sin información</p></td>-->
                                     
                                 </tbody>                                
@@ -1261,7 +1287,69 @@
               </div>
             </div>
           </div>
-                                    
+         
+         <div id="modalInformacionCecyte" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  <h4 class="modal-title">Registro información Cecyte</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="container-fluid">
+                        
+                        <form id="formGrupoCecyte" role="form" method="POST" action="RegistroGrupoCecyte">
+                            <div class="form-group col-md-6" >
+                                <label class="control-label" for="periodo2">Periodo:</label>
+                                <input type="text" class="form-control input-sm" id="periodo2" name="periodo2" required>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label class="control-label" for="grupo2">Grupo:</label>
+                                <input type="text" class="form-control input-sm" id="grupo2" name="grupo2" maxlength="5" required>                                                                 
+                            </div>
+                            <div class="form-group col-md-6" id="divSemestre2">
+                                <label class="control-label" for="semestre2">Semestre:</label>
+                                <input type="text" class="form-control input-sm" id="semestre2" name="semestre2" required>     
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label class="control-label" for="tipoInfo2">Tipo de información:</label>
+                                <input type="text" class="form-control input-sm" id="tipoInfoCecyte" name="tipoInfoCecyte" required>
+                            </div>
+                            <div class="form-group col-md-6" id="divVersion2">
+                                <label class="control-label" for="version2">Versión:</label>
+                                <input type="text" class="form-control input-sm" id="version2" name="version2" required>
+                            </div>
+                            <div class="form-group col-md-6" id="divCarrera2">
+                                <label class="control-label" for="carrera_cp2">Carrera:</label>
+                                <input type="text" class="form-control input-sm" id="carrera_cp2" name="carrera_cp2" required>
+                            </div>
+                            <div class="form-group col-md-6" id="divModulo2">
+                                <label class="control-label" for="modulo2">Modulo:</label>
+                                <input type="text" class="form-control input-sm" id="modulo2" name="modulo2" required>
+                            </div>
+                            <div class="form-group col-md-6" id="divSubmodulo2">
+                                <label class="control-label" for="submodulo2">Submodulo:</label>
+                                <input type="text" class="form-control input-sm" id="submodulo2" name="submodulo2" required>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label class="control-label" for="horas2">Horas:</label>
+                                <input type="text" class="form-control input-sm" id="horas2" name="horas2" required>                                                                 
+                            </div>
+                            <div class="form-group col-md-6" id="divAsignatura2">
+                                <label class="control-label" for="asignatura2" >Asignatura:</label>    
+                                <input type="text" class="form-control input-sm" id="asignatura2" name="asignatura2" required>
+                            </div>
+                            <div class="col-xs-12 text-center">
+                                <input type="button" class="btn btn-primary btn-sm" value="Cancelar" data-dismiss="modal"/>
+                                <input class="btn btn-sm btn-primary" id="btnEnviarHG" type="submit" value='Registrar'/>                               
+                            </div>
+                        </form>
+                    </div>                                       
+                </div>
+              </div>
+            </div>
+          </div> 
+
          <div class="modal fade" id="modalMensaje" role="dialog">
             <div class="modal-dialog">
 

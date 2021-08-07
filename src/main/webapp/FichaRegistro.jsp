@@ -243,7 +243,8 @@
                                 <th class="borde">SEMESTRE</th>
                                 <th class="borde">HORAS</th>
                             </tr>
-                            <c:forEach items="${Docente.getListaHoras()}" var="hora">
+                            <c:if test='${Docente.infoRegistro[75] != "2"}'>
+                                 <c:forEach items="${Docente.getListaHoras()}" var="hora">
                                 <tr>
                                     <td class="borde"><c:out value="${hora[2]}"/></td>
                                     <td class="borde">
@@ -261,6 +262,28 @@
                                 <td colspan="4" class="borde">HORAS FRENTE A GRUPO</td>
                                 <td class="borde"><b>${Docente.getTotalHoras()}</b></td>
                             </tr>
+                            </c:if>
+                            
+                            <c:if test='${Docente.infoRegistro[75] == "2"}'>
+                                <c:forEach items="${Docente.getListaHorasCecyte()}" var="hora">
+                                <tr>
+                                    <td class="borde"><c:out value="${hora[2]}"/></td>
+                                    <td class="borde">
+                                        <c:if test = "${hora[11] != null}">
+                                            <c:out value="${hora[11]}"/> - 
+                                        </c:if>
+                                        <c:out value="${hora[5]}"/><br/>
+                                    </td>   
+                                    <td class="borde"><c:out value="${hora[3]}"/></td>
+                                    <td class="borde"><c:out value="${hora[4]}"/></td>
+                                    <td class="borde"><c:out value="${hora[10]}"/></td>
+                                </tr>
+                            </c:forEach>
+                            <tr>
+                                <td colspan="4" class="borde">HORAS FRENTE A GRUPO</td>
+                                <td class="borde"><b>${Docente.getTotalHorasCecyte()}</b></td>
+                            </tr>
+                            </c:if>
                         </table>
                     </td>
                 </tr>

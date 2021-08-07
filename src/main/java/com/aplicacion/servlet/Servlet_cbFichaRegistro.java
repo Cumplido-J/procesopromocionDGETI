@@ -102,8 +102,12 @@ public class Servlet_cbFichaRegistro extends HttpServlet {
             docente=new Docente();
             docente.setIdUsuario(idUsuario);
             docente.consultaInfoAspirante();
-            docente.consultaHoras();            
-            docente.actualizaBanderaIngles();
+            if(subsistemaUsuario.equals("2")){
+                docente.consultaHorasCecyte();
+            }else{
+                docente.consultaHoras();
+                docente.actualizaBanderaIngles();
+            }
             String[][] puntajes=cv.consultaPuntajes(idUsuario); 
             String[] puntajeEncuestas=cv.consultaPuntajeEncuestas(rfc);
             String[] parametros={idUsuario};            

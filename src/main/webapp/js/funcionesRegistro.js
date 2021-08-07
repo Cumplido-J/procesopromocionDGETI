@@ -617,7 +617,98 @@ $(document).ready(function () {
             return false;
         }
     });
-    
+    $('#formGrupoCecyte').submit(function(e) {
+        e.preventDefault();
+    }).validate({
+        rules: {
+            horas: {
+              number: true
+            }
+        },
+        messages: {
+            'periodo': {
+                required: "Seleccione una opción"
+            },
+            'grupo': {
+                required: "Campo requerido"
+            },
+            'semestre': {
+                required: "Seleccione una opción"
+            },
+            'tipoInfo': {
+                required: "Seleccione una opción"
+            },
+            'version1': {
+                required: "Seleccione una opción"
+            },
+            'asignatura1': {
+                required: "Seleccione una opción"
+            },
+            'carrera_cp1': {
+                required: "Seleccione una opción"
+            },
+            'modulo1': {
+                required: "Seleccione una opción"
+            },
+            'submodulo1': {
+                required: "Seleccione una opción"
+            },
+            'taller1': {
+                required: "Seleccione una opción"
+            },
+            'horas': {
+                required: "Campo requerido",
+                number:"Ingrese un valor numérico"
+            }
+        },
+        submitHandler:function(){
+            $.ajax({
+                type:$('#formGrupoCecyte').attr("method"),
+                url:$('#formGrupoCecyte').attr("action"),
+                data:$('#formGrupoCecyte').serialize(),
+                beforeSend:function(){
+                    $("#btnEnviarHG").val("Guardando...");
+                    $("#btnEnviarHG").attr("disabled","disabled");
+                },
+                complete:function(){
+                   $("#btnEnviarHG").val("Registrar"); 
+                   $("#btnEnviarHG").removeAttr("disabled");
+                },success:function(data){
+                    var datos=data.split("|");
+                    if(datos.length==3){
+                        $("#tablaInfo").html(datos[0]);                        
+                        if(datos[0].includes("INGLES")||datos[0].includes("CENNI")||datos[0].includes("INGLÉS")){
+                            $("#seccionCENNI").removeAttr("hidden");
+                            $("#nivelCENNI").attr("required","true");
+                            $("#folio").attr("required","true");
+                        }else{
+                            $("#seccionCENNI").attr("hidden","true");
+                            $("#nivelCENNI").removeAttr("required");
+                            $("#nivelCENNI").val("");
+                            $("#folio").removeAttr("required");
+                            $("#folio").val("");
+                        }                        
+                        $("#numHoras").val(datos[1]);
+                        $("#numGrupos").val(datos[2]);
+                        $("#modalInformacionCecyte").modal("hide");
+                        $("#periodo2").val("");
+                        $("#grupo2").val("");
+                        $("#semestre2").val("");
+                        $("#tipoInfoCecyte").val("");
+                        $("#version2").val("");
+                        $("#carrera_cp2").val("");
+                        $("#modulo2").val("");
+                        $("#submodulo2").val("");
+                        $("#horas2").val("");
+                        $("#asignatura2").val("");
+                    }
+                },error:function(){
+                    
+                }
+            });
+            return false;
+        }
+    });
     $('#formInfoAcademicaOb1').submit(function(e) {
         e.preventDefault();
     }).validate({        
@@ -1595,7 +1686,27 @@ function borrarHoraGrupo(id){
     });
 }
 
-
+function borrarHoraGrupoCecyte(id){
+    $.post("BorrarHoraGrupoCecyte", {i: id}, function(result){
+        var datos=result.split("|");
+        if(datos.length==3){
+            $("#tablaInfo").html(datos[0]);
+            if(datos[0].includes("INGLES")||datos[0].includes("CENNI")||datos[0].includes("INGLÉS")){
+                $("#seccionCENNI").removeAttr("hidden");
+                $("#nivelCENNI").attr("required","true");
+                $("#folio").attr("required","true");
+            }else{
+                $("#seccionCENNI").attr("hidden","true");
+                $("#nivelCENNI").removeAttr("required");
+                $("#nivelCENNI").val("");
+                $("#folio").removeAttr("required");
+                $("#folio").val("");
+            } 
+            $("#numHoras").val(datos[1]);
+            $("#numGrupos").val(datos[2]);
+        }
+    });
+}
 
 function cambioAsignatura(){
     var horas=$("#asignatura option:selected").attr("horas");

@@ -30,6 +30,7 @@ public class Docente {
     private String jsonHoras=null;
     private String jsonPersonal=null;
     private List<String[]> listaHoras=null;
+    private List<String[]> listaHorasCecyte=null;
     private List<String[]> listaDocumentos=null;
     private Boolean banderaIngles=false;
     private String[]infoRegistro=null;
@@ -48,6 +49,10 @@ public class Docente {
 
     public List<String[]> getListaHoras() {
         return listaHoras;
+    }
+
+    public List<String[]> getListaHorasCecyte() {
+        return listaHorasCecyte;
     }
 
     public List<String[]> getListaDocumentos() {
@@ -198,7 +203,58 @@ public class Docente {
         String[] parametros={idHoraGrupo};
         List<String[]> datos=metodo.ejecutaSP("sp_deleteHorasGrupo",parametros);          
     }
-
+    public void borraHorascCecyte(String idHoraGrupo){
+        Metodos_sql metodo = new Metodos_sql();
+        String[] parametros={idHoraGrupo};
+        List<String[]> datos=metodo.ejecutaSP("sp_deleteHorasGrupoCecyte",parametros);       
+    }
+    public void registraHorasCecyte(String idPeriodo,String grupo,String semestre,String tipoInfo,String version,String carrera,String modulo,String submodulo,String horas,String idAsignatura){
+        Metodos_sql metodo = new Metodos_sql();
+        String[] parametros={idUsuario,idPeriodo,grupo,semestre,tipoInfo,version,carrera,modulo,submodulo,horas,idAsignatura};
+        List<String[]> datos=metodo.ejecutaSP("sp_registroHorasGrupoCecyte",parametros);          
+    }
+    public int getTotalHorasCecyte(){
+        int totalHoras=0;
+        //HorasGrupo[] aux=getArrayHoras();
+        if(listaHorasCecyte.size()>0){
+            for(String[] hora:listaHorasCecyte){
+                totalHoras+=Integer.parseInt(hora[10]);
+            }
+        }
+        return totalHoras;
+    }
+    public int getNumGruposCecyte(){
+        return listaHorasCecyte.size();
+    }
+    public void consultaHorasCecyte(){
+        Metodos_sql metodo = new Metodos_sql();
+        String[] parametros={idUsuario};
+        listaHorasCecyte=metodo.ejecutaSP("sp_selectHorasGrupoCecyte",parametros);          
+    } 
+    public String mostrarHorasCecyte(){
+        consultaHorasCecyte();
+        String respuesta="";
+        for(String[] hora:listaHorasCecyte){
+                respuesta+="<tr><td>";
+                respuesta+="Periodo: "+hora[2]+"<br/>";                
+                //tipoInfo
+                respuesta+=hora[5];                
+                //clave
+                respuesta+=" - ";
+                //carrera
+                respuesta+=hora[7]+"-"+hora[11]+"<br/>";                                                              
+                respuesta+="Grupo: "+hora[3]+"<br/>"; 
+                respuesta+="Semestre: "+hora[4]+"<br/>"; 
+                respuesta+="Horas: "+hora[10]+"<br/>";
+                respuesta+="</td>";
+                respuesta+="<td class='text-center'>";
+                respuesta+="<button type='button' class='btn btn-sm' title='Borrar' onclick='borrarHoraGrupoCecyte("+hora[0]+")'>";
+                respuesta+="<span class='glyphicon glyphicon-trash'></span>";
+                respuesta+="</button>";                                             
+                respuesta+="</td></tr>";                
+            }
+        return respuesta;
+    }
     public Boolean getBanderaIngles() {
         return banderaIngles;
     }
