@@ -257,31 +257,31 @@
                                       <option value="acta" >Acta de grado</option>
                                       <option value="cedula">Cédula profesional</option>
                                       <option value="titulo">Título</option>
-                                      <option value="todos">Otros</option> 
+                                      <option value="Otros">Otros</option> 
                                     </c:if>
                                     <c:if test = "${Docente.infoRegistro[82]=='acta'}">
                                       <option value="acta" selected>Acta de grado</option>
                                       <option value="cedula">Cédula profesional</option>
                                       <option value="titulo">Título</option>
-                                      <option value="todos">Otros</option> 
+                                      <option value="Otros">Otros</option> 
                                     </c:if>
                                     <c:if test = "${Docente.infoRegistro[82]=='cedula'}">
                                       <option value="acta" >Acta de grado</option>
                                       <option value="cedula" selected>Cédula profesional</option>
                                       <option value="titulo">Título</option>
-                                      <option value="todos">Otros</option>  
+                                      <option value="Otros">Otros</option>  
                                     </c:if>
                                     <c:if test = "${Docente.infoRegistro[82]=='titulo'}">
                                       <option value="acta" >Acta de grado</option>
                                       <option value="cedula">Cédula profesional</option>
                                       <option value="titulo" selected>Título</option>
-                                      <option value="todos">Otros</option> 
+                                      <option value="Otros">Otros</option> 
                                     </c:if> 
-                                    <c:if test = "${Docente.infoRegistro[82]=='todos'}">
+                                    <c:if test = "${Docente.infoRegistro[82]=='Otros'}">
                                       <option value="acta" >Acta de grado</option>
                                       <option value="cedula">Cédula profesional</option>
                                       <option value="titulo">Título</option>
-                                      <option value="todos" selected>Otros</option>   
+                                      <option value="Otros" selected>Otros</option>   
                                     </c:if> 
                                       
                               </select>
@@ -347,7 +347,7 @@
                     <label class="control-label">Observaciones consejo dictaminador:</label>
                     <textarea  class="form-control text-uppercase" id="observacion1P1D" name="observacion1P1D" maxlength="2000" onKeyUp="cambioObservacionesPaso1(this)"  required>${observacionesR[0]}</textarea>
                     </c:if>
-                    <input style="margin-top:10px;" disabled="true" type="submit"  class="btn btn-primary" value="Continuar" id="btnFinalizarOb1" onclick="cerrar(1)">
+                    <input style="margin-top:10px;" disabled="true" type="submit"  class="btn btn-primary" value="Guardar" id="btnFinalizarOb1" onclick="cerrar(1)">
                     </form>
                 </c:if>      
                     </div>
@@ -624,7 +624,7 @@
                     <label class="control-label">Observaciones consejo dictaminador:</label>
                     <textarea  class="form-control text-uppercase" id="observacion2P1D" name="observacion2P1D" maxlength="2000" onKeyUp="cambioObservacionesPaso2(this)"  required>${observacionesR[1]}</textarea>
                     </c:if>
-                    <input style="margin-top:10px;" disabled="true" type="submit"  class="btn btn-primary" value="Continuar" id="btnFinalizarOb2" onclick="cerrar(2)" >
+                    <input style="margin-top:10px;" disabled="true" type="submit"  class="btn btn-primary" value="Guardar" id="btnFinalizarOb2" onclick="cerrar(2)" >
                     </form>
                 </c:if>
                                     
@@ -838,7 +838,7 @@
                     <label class="control-label">Observaciones consejo dictaminador:</label>
                     <textarea  class="form-control text-uppercase" id="observacion3P1D" name="observacion3P1D" maxlength="2000" onKeyUp="cambioObservacionesPaso3(this)"  required>${observacionesR[2]}</textarea>
                     </c:if>
-                    <input style="margin-top:10px;" disabled="true" type="submit"  class="btn btn-primary" value="Continuar" id="btnFinalizarOb3" onclick="cerrar(3)">
+                    <input style="margin-top:10px;" disabled="true" type="submit"  class="btn btn-primary" value="Guardar" id="btnFinalizarOb3" onclick="cerrar(3)">
                     </form>
                 </c:if> 
                                 
@@ -962,7 +962,7 @@
                                 <label class="control-label">Observaciones consejo dictaminador:</label>
                                 <textarea  class="form-control text-uppercase" id="observacion4P1D" name="observacion4P1D" maxlength="2000" onKeyUp="cambioObservacionesPaso4(this)"  required>${observacionesR[3]}</textarea>
                                 </c:if>
-                                <input style="margin-top:10px;" disabled="true" type="submit"  class="btn btn-primary" value="Continuar" id="btnFinalizarOb4" onclick="cerrar(4)">
+                                <input style="margin-top:10px;" disabled="true" type="submit"  class="btn btn-primary" value="Guardar" id="btnFinalizarOb4" onclick="cerrar(4)">
                                 </form>
                             </c:if> 
                             
@@ -1001,11 +1001,11 @@
                           <table>
                               <tr>
                                 <td valign="top"><input type="checkbox" name="cbProtestaVerdad" id="cbProtestaVerdad" onClick="cambioProtesta()"><td>
-                                <td>Declara bajo protesta de decir verdad que cumple con los requisitos establecidos en la Convocatoria para el proceso de promoción en el servicio docente por cambio de categoría en Educación Media Superior, Ciclo Escolar 2020-2021. Para confirmar su dicho, la DGETI podrá verificar la autenticidad de la documentación que proporciono, por lo que, en caso de alteración o falsificación de la misma, acepta la descalificación inmediata del proceso o, en su caso, la invalidación del nombramiento respectivo, sin perjuicio de las sanciones de tipo administrativo o penal en las que pudiera incurrir.</td>    
+                                <td>Declara bajo protesta de decir verdad que cumple con los requisitos establecidos en la Convocatoria para el proceso de promoción en el servicio docente por cambio de categoría en Educación Media Superior, <jsp:include page="seccionesPlantilla/cicloEscolar.jsp" flush="true"/>. Para confirmar su dicho, la DGETI podrá verificar la autenticidad de la documentación que proporciono, por lo que, en caso de alteración o falsificación de la misma, acepta la descalificación inmediata del proceso o, en su caso, la invalidación del nombramiento respectivo, sin perjuicio de las sanciones de tipo administrativo o penal en las que pudiera incurrir.</td>    
                               </tr>
                               <tr>
                                   <td valign="top"><input type="checkbox" name="cbPublico" id="cbPublico" ><td>
-                                  <td>Acepta hacer públicos los resultados y recomendaciones individuales que se deriven de su valoración para el proceso de promoción en el servicio docente por cambio de categoría en Educación Media Superior ingreso a la Educación Media Superior, Ciclo Escolar 2020-2021.<td>
+                                  <td>Acepta hacer públicos los resultados y recomendaciones individuales que se deriven de su valoración para el proceso de promoción en el servicio docente por cambio de categoría en Educación Media Superior ingreso a la Educación Media Superior, <jsp:include page="seccionesPlantilla/cicloEscolar.jsp" flush="true"/>.<td>
                               </tr>
                           </table>
                           </c:if>
