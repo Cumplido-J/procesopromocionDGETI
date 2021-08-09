@@ -1566,12 +1566,12 @@ function cambioResultado(){
     }
 }
 function finalizar(){
-    if($("#estatus1").attr("completo").includes("true")&&$("#estatus2").attr("completo").includes("true")&&$("#estatus3").attr("completo").includes("true")&&$("#estatus4").attr("completo").includes("true")&&$("#estatus5").attr("completo").includes("true")&&$("#estatus6").attr("completo").includes("true")&&$("#estatus7").attr("completo").includes("true")&&$("#estatus8").attr("completo").includes("true")&&$("#estatus9").attr("completo").includes("true")&&$("#estatus10").attr("completo").includes("true")){
+//    if($("#estatus1").attr("completo").includes("true")&&$("#estatus2").attr("completo").includes("true")&&$("#estatus3").attr("completo").includes("true")&&$("#estatus4").attr("completo").includes("true")&&$("#estatus5").attr("completo").includes("true")&&$("#estatus6").attr("completo").includes("true")&&$("#estatus7").attr("completo").includes("true")&&$("#estatus8").attr("completo").includes("true")&&$("#estatus9").attr("completo").includes("true")&&$("#estatus10").attr("completo").includes("true")){
         $("#modalConfirmacion2").modal("show");
-    }else{
-        $("#mensaje").html("Hay información pendiente de registrar");            
-        $("#modalMensaje").modal("show");
-    }
+//    }else{
+//        $("#mensaje").html("Hay información pendiente de registrar");            
+//        $("#modalMensaje").modal("show");
+//    }
 }
 function finalizarRevision(){
     var idPermiso=$("#idPermisoD5").val();

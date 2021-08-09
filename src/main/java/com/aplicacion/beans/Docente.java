@@ -214,6 +214,7 @@ public class Docente {
         List<String[]> datos=metodo.ejecutaSP("sp_registroHorasGrupoCecyte",parametros);          
     }
     public int getTotalHorasCecyte(){
+        consultaHorasCecyte();
         int totalHoras=0;
         //HorasGrupo[] aux=getArrayHoras();
         if(listaHorasCecyte.size()>0){
