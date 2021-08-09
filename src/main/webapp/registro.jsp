@@ -1333,7 +1333,7 @@
                             </div>
                             <div class="form-group col-md-6">
                                 <label class="control-label" for="horas2">Horas:</label>
-                                <input type="text" class="form-control input-sm" id="horas2" name="horas2" required>                                                                 
+                                <input type="number" class="form-control input-sm" id="horas2" name="horas2" required>                                                                 
                             </div>
                             <div class="form-group col-md-6" id="divAsignatura2">
                                 <label class="control-label" for="asignatura2" >Asignatura:</label>    
