@@ -976,5 +976,133 @@ public class CriteriosValoracion {
         }
         return respuesta;
     }
-    
+    public String getFilasResultadosConstancias(String idUsuario){   
+        String respuesta;
+        
+        String[] parametros={idUsuario};
+        List<String[]> datos=metodo.ejecutaSP("sp_consultaEvidenciasDocente",parametros);
+        if(datos.isEmpty()){
+            respuesta="<tr><td class='borde' colspan='3'>Sin información</td></tr>";
+            
+        }else{
+            respuesta="";
+            for(String[] dato:datos){
+                if(dato[0].equals("2")){
+                    respuesta+="<tr>"; 
+                    respuesta+="<td class='borde'>Criterio 1</td>";
+                    respuesta+="<td class='borde'>Constancia de antiguedad</td>";
+                    respuesta+="<td class='borde'>Si</td>";
+                    respuesta+="</tr>";
+                }else if(dato[0].equals("10")){
+                    respuesta+="<tr>"; 
+                    respuesta+="<td class='borde'>Criterio 2</td>";
+                    respuesta+="<td class='borde'>Constancia de experiencia</td>";
+                    respuesta+="<td class='borde'>Si</td>";
+                    respuesta+="</tr>";
+                    respuesta+="<tr>"; 
+                    respuesta+="<td class='borde'>Criterio 3</td>";
+                    respuesta+="<td class='borde'>No aplica</td>";
+                    respuesta+="<td class='borde'>No aplica</td>";
+                    respuesta+="</tr>";
+                }else if(dato[0].equals("1")){
+                    respuesta+="<tr>"; 
+                    respuesta+="<td class='borde'>Criterio 4</td>";
+                    respuesta+="<td class='borde'>Constancia de Máximo grado académico</td>";
+                    respuesta+="<td class='borde'>Si</td>";
+                    respuesta+="</tr>";
+                }else if(dato[0].equals("13")){
+                    respuesta+="<tr>"; 
+                    respuesta+="<td class='borde'>Criterio 5</td>";
+                    respuesta+="<td class='borde'>Carga de evidencia documental</td>";
+                    respuesta+="<td class='borde'>Si</td>";
+                    respuesta+="</tr>";
+                }else if(dato[0].equals("14")){
+                    respuesta+="<tr>"; 
+                    respuesta+="<td class='borde'>Criterio 6</td>";
+                    respuesta+="<td class='borde'>Carga de evidencia documental</td>";
+                    respuesta+="<td class='borde'>Si</td>";
+                    respuesta+="</tr>";
+                }else if(dato[0].equals("15")){
+                    respuesta+="<tr>"; 
+                    respuesta+="<td class='borde'>Criterio 7</td>";
+                    respuesta+="<td class='borde'>Carga de evidencia documental</td>";
+                    respuesta+="<td class='borde'>Si</td>";
+                    respuesta+="</tr>";
+                }else if(dato[0].equals("16")){
+                    respuesta+="<tr>"; 
+                    respuesta+="<td class='borde'>Criterio 8</td>";
+                    respuesta+="<td class='borde'>Carga de evidencia documental</td>";
+                    respuesta+="<td class='borde'>Si</td>";
+                    respuesta+="</tr>";
+                }else if(dato[0].equals("17")){
+                    respuesta+="<tr>"; 
+                    respuesta+="<td class='borde'>Criterio 9</td>";
+                    respuesta+="<td class='borde'>Carga de evidencia documental</td>";
+                    respuesta+="<td class='borde'>Si</td>";
+                    respuesta+="</tr>";
+                }else if(dato[0].equals("18")){
+                    respuesta+="<tr>"; 
+                    respuesta+="<td class='borde'>Criterio 10</td>";
+                    respuesta+="<td class='borde'>Carga de evidencia documental</td>";
+                    respuesta+="<td class='borde'>Si</td>";
+                    respuesta+="</tr>";
+                }
+            }
+        }
+        return respuesta;
+    }
+    public String getFilasResultadosRegistro(String idUsuario){   
+        String respuesta;
+        
+        String[] parametros={idUsuario};
+        List<String[]> datos=metodo.ejecutaSP("sp_consultaEvidenciasDocente",parametros);
+        if(datos.isEmpty()){
+            respuesta="<tr><td class='borde' colspan='3'>Sin información</td></tr>";
+            
+        }else{
+            respuesta="";
+            for(String[] dato:datos){
+                if(dato[0].equals("1")){
+                    respuesta+="<tr>"; 
+                    respuesta+="<td class='borde'>Informaciòn Acadèmica</td>";
+                    respuesta+="<td class='borde'>Documento comprobatorio</td>";
+                    respuesta+="<td class='borde'>Si</td>";
+                    respuesta+="</tr>";
+                }else if(dato[0].equals("2")){
+                    respuesta+="<tr>"; 
+                    respuesta+="<td class='borde'>Informaciòn Laboral</td>";
+                    respuesta+="<td class='borde'>Constancia de antiguedad</td>";
+                    respuesta+="<td class='borde'>Si</td>";
+                    respuesta+="</tr>";
+                    respuesta+="<tr>";
+                }else if(dato[0].equals("3")){
+                    respuesta+="<tr>"; 
+                    respuesta+="<td class='borde'>Informaciòn Laboral</td>";
+                    respuesta+="<td class='borde'>Constancia de nombramiento definitivo</td>";
+                    respuesta+="<td class='borde'>Si</td>";
+                    respuesta+="</tr>";
+                }else if(dato[0].equals("6")){
+                    respuesta+="<tr>"; 
+                    respuesta+="<td class='borde'>Informaciòn Laboral</td>";
+                    respuesta+="<td class='borde'>Constancia de nota favorable</td>";
+                    respuesta+="<td class='borde'>Si</td>";
+                    respuesta+="</tr>";
+                }else if(dato[0].equals("4")){
+                    respuesta+="<tr>"; 
+                    respuesta+="<td class='borde'>Horas frente a grupo</td>";
+                    respuesta+="<td class='borde'>Constancia de horas frente a grupo</td>";
+                    respuesta+="<td class='borde'>Si</td>";
+                    respuesta+="</tr>";
+                }else if(dato[0].equals("7")){
+                    respuesta+="<tr>"; 
+                    respuesta+="<td class='borde'>Compatibilidad - Carta protesta</td>";
+                    respuesta+="<td class='borde'>Archivo de evidencia</td>";
+                    respuesta+="<td class='borde'>Si</td>";
+                    respuesta+="</tr>";
+                }
+            }
+        }
+        return respuesta;
+    }
+	
 }

@@ -1567,11 +1567,96 @@ function cambioResultado(){
 }
 function finalizar(){
 //    if($("#estatus1").attr("completo").includes("true")&&$("#estatus2").attr("completo").includes("true")&&$("#estatus3").attr("completo").includes("true")&&$("#estatus4").attr("completo").includes("true")&&$("#estatus5").attr("completo").includes("true")&&$("#estatus6").attr("completo").includes("true")&&$("#estatus7").attr("completo").includes("true")&&$("#estatus8").attr("completo").includes("true")&&$("#estatus9").attr("completo").includes("true")&&$("#estatus10").attr("completo").includes("true")){
+		$("#modalValidarArchivosCriterios").modal("hide");
         $("#modalConfirmacion2").modal("show");
 //    }else{
 //        $("#mensaje").html("Hay información pendiente de registrar");            
 //        $("#modalMensaje").modal("show");
 //    }
+}
+function validarArchivosCriterios(){
+                if($("#btnEvidencia2").val().includes("Ver")){
+                    $("#estatusArchivo1").attr("class","glyphicon glyphicon-ok-sign completo");
+                    $("#estatusArchivo1").attr("title","Sección completa");
+                    $("#estatusArchivo").attr("completo",true);
+                }else{
+                    $("#estatusArchivo1").attr("class","glyphicon glyphicon-exclamation-sign incompleto");
+                    $("#estatusArchivo1").attr("title","Sección incompleta");
+                    $("#estatusArchivo1").attr("completo",false);                            
+                }
+                if($("#btnEvidencia10").val().includes("Ver")){
+                    $("#estatusArchivo2").attr("class","glyphicon glyphicon-ok-sign completo");
+                    $("#estatusArchivo2").attr("title","Sección completa");
+                    $("#estatusArchivo2").attr("completo",true);
+                }else{
+                    $("#estatusArchivo2").attr("class","glyphicon glyphicon-exclamation-sign incompleto");
+                    $("#estatusArchivo2").attr("title","Sección incompleta");
+                    $("#estatusArchivo2").attr("completo",false);                            
+                }
+                if($("#btnEvidencia1").val().includes("Ver")){
+                    $("#estatusArchivo3").attr("class","glyphicon glyphicon-ok-sign completo");
+                    $("#estatusArchivo3").attr("title","Sección completa");
+                    $("#estatusArchivo3").attr("completo",true);
+                }else{
+                    $("#estatusArchivo3").attr("class","glyphicon glyphicon-exclamation-sign incompleto");
+                    $("#estatusArchivo3").attr("title","Sección incompleta");
+                    $("#estatusArchivo3").attr("completo",false);                            
+                }
+                if($("#btnEvidencia13").val().includes("Ver")){
+                    $("#estatusArchivo4").attr("class","glyphicon glyphicon-ok-sign completo");
+                    $("#estatusArchivo4").attr("title","Sección completa");
+                    $("#estatusArchivo4").attr("completo",true);
+                }else{
+                    $("#estatusArchivo4").attr("class","glyphicon glyphicon-exclamation-sign incompleto");
+                    $("#estatusArchivo4").attr("title","Sección incompleta");
+                    $("#estatusArchivo4").attr("completo",false);                            
+                }
+                if($("#btnEvidencia14").val().includes("Ver")){
+                    $("#estatusArchivo5").attr("class","glyphicon glyphicon-ok-sign completo");
+                    $("#estatusArchivo5").attr("title","Sección completa");
+                    $("#estatusArchivo5").attr("completo",true);
+                }else{
+                    $("#estatusArchivo5").attr("class","glyphicon glyphicon-exclamation-sign incompleto");
+                    $("#estatusArchivo5").attr("title","Sección incompleta");
+                    $("#estatusArchivo5").attr("completo",false);                            
+                }
+                if($("#btnEvidencia15").val().includes("Ver")){
+                    $("#estatusArchivo6").attr("class","glyphicon glyphicon-ok-sign completo");
+                    $("#estatusArchivo6").attr("title","Sección completa");
+                    $("#estatusArchivo6").attr("completo",true);
+                }else{
+                    $("#estatusArchivo6").attr("class","glyphicon glyphicon-exclamation-sign incompleto");
+                    $("#estatusArchivo6").attr("title","Sección incompleta");
+                    $("#estatusArchivo6").attr("completo",false);                            
+                }
+                if($("#btnEvidencia16").val().includes("Ver")){
+                    $("#estatusArchivo7").attr("class","glyphicon glyphicon-ok-sign completo");
+                    $("#estatusArchivo7").attr("title","Sección completa");
+                    $("#estatusArchivo7").attr("completo",true);
+                }else{
+                    $("#estatusArchivo7").attr("class","glyphicon glyphicon-exclamation-sign incompleto");
+                    $("#estatusArchivo7").attr("title","Sección incompleta");
+                    $("#estatusArchivo7").attr("completo",false);                            
+                }
+                if($("#btnEvidencia17").val().includes("Ver")){
+                    $("#estatusArchivo8").attr("class","glyphicon glyphicon-ok-sign completo");
+                    $("#estatusArchivo8").attr("title","Sección completa");
+                    $("#estatusArchivo8").attr("completo",true);
+                }else{
+                    $("#estatusArchivo8").attr("class","glyphicon glyphicon-exclamation-sign incompleto");
+                    $("#estatusArchivo8").attr("title","Sección incompleta");
+                    $("#estatusArchivo8").attr("completo",false);                            
+                }
+                if($("#btnEvidencia18").val().includes("Ver")){
+                    $("#estatusArchivo9").attr("class","glyphicon glyphicon-ok-sign completo");
+                    $("#estatusArchivo9").attr("title","Sección completa");
+                    $("#estatusArchivo9").attr("completo",true);
+                }else{
+                    $("#estatusArchivo9").attr("class","glyphicon glyphicon-exclamation-sign incompleto");
+                    $("#estatusArchivo9").attr("title","Sección incompleta");
+                    $("#estatusArchivo9").attr("completo",false);                            
+                }
+                $("#modalValidarArchivosCriterios").modal("show");
 }
 function finalizarRevision(){
     var idPermiso=$("#idPermisoD5").val();

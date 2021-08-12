@@ -686,12 +686,22 @@
                         <div id="seccionHoras" class="collapse ${in}">
                             <div class="form-group col-md-3">
                               <label class="control-label" for="numHoras">Horas frente a grupo:</label>
-                              <c:set var="totalHoras" value="${Docente.getTotalHoras()}"></c:set>
+                              <c:if test='${sessionScope["subsistema"]!=2}'>
+                                  <c:set var="totalHoras" value="${Docente.getTotalHoras()}"></c:set>
+                              </c:if>
+                              <c:if test='${sessionScope["subsistema"]==2}'>
+                                  <c:set var="totalHoras" value="${Docente.getTotalHorasCecyte()}"></c:set>
+                              </c:if>
                               <input type="text" class="form-control input-sm" id="numHoras" name="numHoras" value="${totalHoras}" readOnly  required>
                             </div>
                             <div class="form-group col-md-3">
                               <label class="control-label" for="numGrupos">Número de grupos:</label>
-                              <input type="text" class="form-control input-sm" id="numGrupos" name="numGrupos" value="${Docente.getNumGrupos()}" readOnly required>
+                              <c:if test='${sessionScope["subsistema"]!=2}'>
+                                  <input type="text" class="form-control input-sm" id="numGrupos" name="numGrupos" value="${Docente.getNumGrupos()}" readOnly required>
+                              </c:if>
+                              <c:if test='${sessionScope["subsistema"]==2}'>
+                                  <input type="text" class="form-control input-sm" id="numGrupos" name="numGrupos" value="${Docente.getNumGruposCecyte()}" readOnly required>
+                              </c:if>
                             </div>
                             <c:if test="${vistaAdmin}">
                                 <c:if test='${sessionScope["permisoActualEdicion"]=="F" && sessionScope["programa"]!=2 && sessionScope["subsistema"]!=2}'>
@@ -1024,7 +1034,7 @@
                                 
                           </c:if>
                           <br/>
-                              <center><input type="submit" disabled="true" class="btn btn-primary" value="Continuar" id="btnFinalizar"></center>
+                              <center><input type="button" disabled="true" class="btn btn-primary" value="Continuar" id="btnFinalizar" onclick="validarArchivos()"></center>
                       </div>
                       
                        
@@ -1612,7 +1622,29 @@
               </div>
             </div>
         </div>
-         
+        <div id="modalValidarArchivos" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+              <div class="modal-content" style="width: 111%;">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  <h4 class="modal-title" >Archivos cargados</h4>
+                </div>
+                <div class="modal-body">
+                    <p class="control-label"><span class="glyphicon glyphicon-exclamation-sign incompleto" title="Sección incompleta" id="estatusArchivo" completo="false"></span> Información Académica - Documento comprobatorio</p>
+                    <p class="control-label"><span class="glyphicon glyphicon-exclamation-sign incompleto" title="Sección incompleta" id="estatusArchivo1" completo="false"></span> Información Laboral - Constancia de antiguedad</p>
+                    <p class="control-label"><span class="glyphicon glyphicon-exclamation-sign incompleto" title="Sección incompleta" id="estatusArchivo2" completo="false"></span> Información Laboral - Constancia de nombramiento definitivo</p>
+                    <p class="control-label"><span class="glyphicon glyphicon-exclamation-sign incompleto" title="Sección incompleta" id="estatusArchivo3" completo="false"></span> Información Laboral - Constancia de nota favorable</p>
+                    <p class="control-label"><span class="glyphicon glyphicon-exclamation-sign incompleto" title="Sección incompleta" id="estatusArchivo4" completo="false"></span> Horas frente a grupo - Constancia de horas frente a grupo</p>
+                    <p class="control-label"><span class="glyphicon glyphicon-exclamation-sign incompleto" title="Sección incompleta" id="estatusArchivo5" completo="false"></span> Compatibilidad - Carta protesta - Archivo de evidencia</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="btnConfirmar" class="btn btn-sm btn-default" onclick="myFinRegistro()">Aceptar</button>
+                  <button type="button" class="btn btn-sm btn-default" data-dismiss="modal">Cancelar</button>
+                </div>
+              </div>
+            </div>
+        </div>
+		
          <!--FIN MODAL-->                   
                 
         </main>
@@ -1731,6 +1763,73 @@
                }
             </script>
         </c:if>
+		<script>
+        function myFinRegistro(){
+                var k=$('#banderaCompleto').val();
+                var cbPublico=$('#cbPublico').val();
+                
+                $.post("FinalizaRegistro", {k:k,cbPublico:cbPublico}, function(data){
+                     window.location.href = "/procesopromocion/SesionDocente";
+                });
+            }
+            function validarArchivos(){
+                if($("#btnEvidencia1").val().includes("Ver")){
+                    $("#estatusArchivo").attr("class","glyphicon glyphicon-ok-sign completo");
+                    $("#estatusArchivo").attr("title","Sección completa");
+                    $("#estatusArchivo").attr("completo",true);
+                }else{
+                    $("#estatusArchivo").attr("class","glyphicon glyphicon-exclamation-sign incompleto");
+                    $("#estatusArchivo").attr("title","Sección incompleta");
+                    $("#estatusArchivo").attr("completo",false);                            
+                }
+                if($("#btnEvidencia2").val().includes("Ver")){
+                    $("#estatusArchivo1").attr("class","glyphicon glyphicon-ok-sign completo");
+                    $("#estatusArchivo1").attr("title","Sección completa");
+                    $("#estatusArchivo").attr("completo",true);
+                }else{
+                    $("#estatusArchivo1").attr("class","glyphicon glyphicon-exclamation-sign incompleto");
+                    $("#estatusArchivo1").attr("title","Sección incompleta");
+                    $("#estatusArchivo1").attr("completo",false);                            
+                }
+                if($("#btnEvidencia3").val().includes("Ver")){
+                    $("#estatusArchivo2").attr("class","glyphicon glyphicon-ok-sign completo");
+                    $("#estatusArchivo2").attr("title","Sección completa");
+                    $("#estatusArchivo2").attr("completo",true);
+                }else{
+                    $("#estatusArchivo2").attr("class","glyphicon glyphicon-exclamation-sign incompleto");
+                    $("#estatusArchivo2").attr("title","Sección incompleta");
+                    $("#estatusArchivo2").attr("completo",false);                            
+                }
+                if($("#btnEvidencia6").val().includes("Ver")){
+                    $("#estatusArchivo3").attr("class","glyphicon glyphicon-ok-sign completo");
+                    $("#estatusArchivo3").attr("title","Sección completa");
+                    $("#estatusArchivo3").attr("completo",true);
+                }else{
+                    $("#estatusArchivo3").attr("class","glyphicon glyphicon-exclamation-sign incompleto");
+                    $("#estatusArchivo3").attr("title","Sección incompleta");
+                    $("#estatusArchivo3").attr("completo",false);                            
+                }
+                if($("#btnEvidencia4").val().includes("Ver")){
+                    $("#estatusArchivo4").attr("class","glyphicon glyphicon-ok-sign completo");
+                    $("#estatusArchivo4").attr("title","Sección completa");
+                    $("#estatusArchivo4").attr("completo",true);
+                }else{
+                    $("#estatusArchivo4").attr("class","glyphicon glyphicon-exclamation-sign incompleto");
+                    $("#estatusArchivo4").attr("title","Sección incompleta");
+                    $("#estatusArchivo4").attr("completo",false);                            
+                }
+                if($("#btnEvidencia7").val().includes("Ver")){
+                    $("#estatusArchivo5").attr("class","glyphicon glyphicon-ok-sign completo");
+                    $("#estatusArchivo5").attr("title","Sección completa");
+                    $("#estatusArchivo5").attr("completo",true);
+                }else{
+                    $("#estatusArchivo5").attr("class","glyphicon glyphicon-exclamation-sign incompleto");
+                    $("#estatusArchivo5").attr("title","Sección incompleta");
+                    $("#estatusArchivo5").attr("completo",false);                            
+                }
+                $("#modalValidarArchivos").modal("show");
+            }
+        </script>
         
     </body>
 </html>

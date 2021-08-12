@@ -7,6 +7,8 @@ package com.aplicacion.servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -118,8 +120,14 @@ public class Servlet_finalizaRegistro extends HttpServlet {
             String[] parametros={idUsuario,publico,value};
             
             metodo.ejecutaSP("sp_finRegistro",parametros);
-               response.sendRedirect(retorno);
-               
+            //response.sendRedirect(retorno);
+            
+            ServletContext sc = getServletContext();
+            RequestDispatcher rd;
+            
+            rd= sc.getRequestDispatcher("/ppsesion.jsp");
+            
+            rd.forward(request,response);
             
             /*if(completo.equals("true")){
                 response.sendRedirect("evidenciaRegistroDocentes.html");
