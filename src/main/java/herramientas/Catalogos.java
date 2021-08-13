@@ -1150,4 +1150,39 @@ public class Catalogos {
             return lista;        
         }
     }
+       
+    public String getPeriodoActivo(){        
+        String respuesta="<option value='0'>-Seleccione-</option>";
+        try{
+            List<String[]> datos=metodos.ejecutaSP("sp_consultaPeriodoRegistro");
+            for(String[] dato:datos){
+                if(dato[2].equals("V")){
+                respuesta+="<option value='"+dato[0]+"' selected>"+dato[1]+"</option>";
+                }
+                else{
+                respuesta+="<option value='"+dato[0]+"'>"+dato[1]+"</option>";
+                }
+            }
+        }catch(Exception e){
+            respuesta=e.toString();
+        }finally{
+            return respuesta;        
+        }
+    }  
+        
+     public String getPeriodoActivoUnicamenteId(){        
+        String respuesta="";
+        try{
+            List<String[]> datos=metodos.ejecutaSP("sp_consultaPeriodoRegistro");
+            for(String[] dato:datos){
+                if(dato[2].equals("V")){
+                respuesta=dato[0];
+                }
+            }
+        }catch(Exception e){
+            respuesta=e.toString();
+        }finally{
+            return respuesta;        
+        }
+    }
 }

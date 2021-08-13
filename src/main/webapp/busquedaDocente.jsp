@@ -24,6 +24,7 @@
         <c:set var="disabled2" value=""></c:set>
         <c:set var="disabled3" value=""></c:set>
         <c:set var="disabled4" value=""></c:set> 
+        <c:set var="periodoIdActivo" value="${catalogo.getPeriodoActivoUnicamenteId()}"></c:set> 
         
         <c:if test='${sessionScope["rol"]!="S"}'>
             <c:if test='${sessionScope["programa"]!=""}'>
@@ -99,6 +100,17 @@
                             </select>
                         </div>
                     </div>
+                      
+                     <div class="row">                        
+                        <div class="form-group col-md-4">                               
+                            <label class="control-label" for="periodo">Periodo:</label>
+                            <select class="form-control input-sm" id="periodo" name="periodo" >  
+                                
+                                 ${catalogo.getPeriodoActivo()}
+                            </select>
+                        </div>
+                    </div>        
+                            
                     <div class="row">
                         <div class="form-group col-xs-12 text-center">                         
                             <input class="btn btn-sm btn-primary" id="btnBuscar" type="submit" value='Buscar'/>                          
@@ -123,7 +135,7 @@
                                 <th>Opciones</th>
                             </tr>
                         </thead>
-                        <tbody id="seccionEditable">${dato.desplegarDocentes(sessionScope["programa"],sessionScope["subsistema"],sessionScope["entidad"],sessionScope["plantel"],'','',sessionScope["permisoActual"],sessionScope["idUsuario"])}</tbody>
+                        <tbody id="seccionEditable">${dato.desplegarDocentes(sessionScope["programa"],sessionScope["subsistema"],sessionScope["entidad"],sessionScope["plantel"],'','',sessionScope["permisoActual"],sessionScope["idUsuario"],periodoIdActivo)}</tbody>
                     </table>
                 </div>
             </div>

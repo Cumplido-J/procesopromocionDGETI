@@ -145,10 +145,10 @@ public class Datos {
             return respuesta;        
         }
     }
-    public  String desplegarDocentes(String idPrograma,String idSubsistema,String idEntidad,String idPlantel,String nombreRFC,String estatus,String idPermiso,String idUsuario){        
+    public  String desplegarDocentes(String idPrograma,String idSubsistema,String idEntidad,String idPlantel,String nombreRFC,String estatus,String idPermiso,String idUsuario,String idPeriodo){        
         String respuesta="<tr><td colspan='9' class='text-center'>Sin información</td></tr>";        
         try{
-            String[] parametros={idPrograma,idSubsistema,idEntidad,idPlantel,nombreRFC,estatus,idUsuario};
+            String[] parametros={idPrograma,idSubsistema,idEntidad,idPlantel,nombreRFC,estatus,idUsuario,idPeriodo};
             if(idEntidad.isEmpty() && idPlantel.isEmpty() && nombreRFC.isEmpty() && estatus.isEmpty()){
                 return respuesta;
             }else{
