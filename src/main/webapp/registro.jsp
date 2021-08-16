@@ -1034,7 +1034,12 @@
                                 
                           </c:if>
                           <br/>
+                              <c:if test="${!vistaAdmin}">
                               <center><input type="button" disabled="true" class="btn btn-primary" value="Continuar" id="btnFinalizar" onclick="validarArchivos()"></center>
+                              </c:if>
+                              <c:if test="${vistaAdmin}">
+                              <center><input type="submit" disabled="true" class="btn btn-primary" value="Continuar" id="btnFinalizar"></center>
+                              </c:if>
                       </div>
                       
                        
