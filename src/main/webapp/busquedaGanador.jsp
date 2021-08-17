@@ -48,14 +48,20 @@
                                 ${catalogo.desplegarOpcionesSubsistema(sessionScope["subsistema"])}
                             </select>
                         </div>
+                        <div class="form-group col-md-4">                               
+                            <label class="control-label" for="periodo">Periodo:</label>
+                            <select class="form-control input-sm" id="periodo" name="periodo" required>
+                                 ${catalogo.getPeriodoActivo()}
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row">
                         <div class="form-group col-md-4">                                               
                           <label class="control-label" for="entidad">Entidad</label>
                           <select class="form-control input-sm ${disabled3}" id="entidad" name="entidad" onchange="actualizarPlanteles()" >                                  
                               ${catalogo.desplegarOpcionesEstado(sessionScope["entidad"])}
                           </select>
                         </div>
-                    </div>
-                    <div class="row">
                         <div class="form-group col-md-4">                               
                             <label class="control-label" for="plantel">Plantel:</label>
                             <select class="form-control input-sm ${disabled4}" id="plantel" name="plantel" onchange="actualizarVacancias()">                            
@@ -68,19 +74,17 @@
                                 <option value=''>-Seleccione-</option>
                             </select>
                         </div>
+                    </div>
+                     <div class="row">
                         <div class="form-group col-md-4">                               
                             <label class="control-label" for="jornada">Jornada</label>
                             <select class="form-control input-sm" id="jornada" name="jornada" onchange="numeroPlazas()">                                  
                                 <option value=''>-Seleccione-</option>
                             </select>
                         </div>
-                    </div>
-                     <div class="row">
                         <div class="form-group col-md-4">                               
                             <label class="control-label" for="plazas">Plazas Disponibles</label>
                             <p id="plazas"></p>
-                        </div>
-                        <div class="form-group col-md-4"> 
                         </div>
                         <div class="form-group col-md-4">
                         </div>
@@ -120,7 +124,7 @@
                                 <th>Posición</th>
                             </tr>
                         </thead>
-                        <tbody id="seccionEditable">${dato.desplegarAspirantesVacancia("",sessionScope["programa"],sessionScope["subsistema"],sessionScope["entidad"],sessionScope["plantel"],"","","")}</tbody>
+                        <tbody id="seccionEditable">${dato.desplegarAspirantesVacancia("",sessionScope["programa"],sessionScope["subsistema"],sessionScope["entidad"],sessionScope["plantel"],"","","","")}</tbody>
                     </table>
                 </div>
             </div>
@@ -201,10 +205,11 @@
                 var categoria=$("#categoria").val();
                 var jornada=$("#jornada").val();
                 var vacancia=$("#tvacancia").val();
+                var periodo=$("#periodo").val();
                 $("#modalConfirmacion2").modal("hide");
                 $("#btnBuscar").val("Generando resultados...");
                 $("#btnBuscar").attr("disabled","disabled");
-                $.post("aspiranteGanador", {id:"r",programa:programa,subsistema:subsistema,entidad:entidad,plantel:plantel,categoria:categoria,jornada:jornada,vacancia:vacancia}, function(data){
+                $.post("aspiranteGanador", {id:"r",programa:programa,subsistema:subsistema,entidad:entidad,plantel:plantel,categoria:categoria,jornada:jornada,vacancia:vacancia, periodo:periodo}, function(data){
                     $("#btnBuscar").val("Buscar resultados");
                     $("#btnBuscar").removeAttr("disabled");}
                 );
@@ -217,7 +222,8 @@
                 var categoria=$("#categoria").val();
                 var jornada=$("#jornada").val();
                 var vacancia=$("#tvacancia").val();
-                $.post("aspiranteGanador", {id:"b",programa:programa,subsistema:subsistema,entidad:entidad,plantel:plantel,categoria:categoria,jornada:jornada,vacancia:vacancia}, function(data){
+                var periodo=$("#periodo").val();
+                $.post("aspiranteGanador", {id:"b",programa:programa,subsistema:subsistema,entidad:entidad,plantel:plantel,categoria:categoria,jornada:jornada,vacancia:vacancia,periodo:periodo}, function(data){
                     $("#seccionEditable").html(data);}
                 );
             }
@@ -229,6 +235,7 @@
                 var programa=$("#programa").val();
                 var subsistema=$("#subsistema").val();
                 var entidad=$("#entidad").val();
+                var periodo=$("#periodo").val();
 //                $("#modalMensajeReporte").modal("show");
                 $("#btnConfirmarReporte").val("Generando reporte...");
                 $("#btnConfirmarReporte").attr("disabled","disabled");
@@ -243,7 +250,7 @@
                 $.ajax({
                 type: "POST",
                 url: '/procesopromocion/reporteAsignacion',
-                data: {programa:programa,subsistema:subsistema,entidad:entidad},    
+                data: {programa:programa,subsistema:subsistema,entidad:entidad,periodo:periodo},    
                 timeout: 360000,
                 success: function (data) {
                     GenerarDocumento("excel",data);

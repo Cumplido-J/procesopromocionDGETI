@@ -81,8 +81,9 @@ public class Servlet_reporteAsignacion extends HttpServlet {
                 String programa=request.getParameter("programa");
                 String subsistema=request.getParameter("subsistema");
                 String entidad=request.getParameter("entidad");
+                String periodo=request.getParameter("periodo");
                 Datos d=new Datos();
-                out.print(d.generarReporte(programa, subsistema, entidad));
+                out.print(d.generarReporte(programa, subsistema, entidad, periodo));
                 
         }catch(Exception e){
             System.out.println(e.toString());

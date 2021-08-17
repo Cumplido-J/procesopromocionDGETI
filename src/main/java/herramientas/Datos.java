@@ -289,10 +289,10 @@ public class Datos {
             return respuesta;        
         }
     }
-    public String desplegarAspirantesVacancia(String id,String idPrograma,String idSubsistema,String idEntidad,String idPlantel,String categoria,String jornada,String vacancia){        
+    public String desplegarAspirantesVacancia(String id,String idPrograma,String idSubsistema,String idEntidad,String idPlantel,String categoria,String jornada,String vacancia, String periodo){        
         String respuesta="<tr><td colspan='9' class='text-center'>Sin información</td></tr>";        
         try{
-            String[] parametros={idPrograma,idSubsistema,idEntidad,idPlantel,categoria,jornada,vacancia};
+            String[] parametros={idPrograma,idSubsistema,idEntidad,idPlantel,categoria,jornada,vacancia,periodo};
             if(idEntidad.isEmpty() && idPlantel.isEmpty()){
                 return respuesta;
             }else{
@@ -315,10 +315,10 @@ public class Datos {
                 }
                 }else{
                     if(id.contains("r")){
-                            String[] parametrosPlazas={idPrograma, idSubsistema, idEntidad, idPlantel, "D", categoria, jornada};
+                            String[] parametrosPlazas={idPrograma, idSubsistema, idEntidad, idPlantel, "D", categoria, jornada, periodo};
                             List<String[]> datosPlazas=metodos.ejecutaSP(constants.SP_CONSULTA_NUMERO_PLAZAS,parametrosPlazas);
                             int numeroPlazas=Integer.parseInt(datosPlazas.get(0)[8]);
-                            String[] parametrosGanador={idPrograma, idSubsistema, idEntidad, idPlantel, categoria, jornada, vacancia};
+                            String[] parametrosGanador={idPrograma, idSubsistema, idEntidad, idPlantel, categoria, jornada, vacancia, periodo};
                             List<String[]> datosGanador=metodos.ejecutaSP(constants.SP_CONSULTA_GANADOR_ASPIRANTE,parametrosGanador);
                             if(!datosGanador.isEmpty()){
                                 int contador = 0;
@@ -361,7 +361,7 @@ public class Datos {
             return respuesta;        
         }
     }
-    public String generarResultadosCentrales(String programa, String idSubsistema, String entidad, String plantel, String vacancia){        
+    public String generarResultadosCentrales(String programa, String idSubsistema, String entidad, String plantel, String vacancia , String periodo){        
         String respuesta="<tr><td colspan='9' class='text-center'>Sin información</td></tr>";        
         try{
             List<String[]> datosEntidades=metodos.ejecutaSP("sp_selectCatEntidades");
@@ -371,7 +371,7 @@ public class Datos {
                 for(String[] datoPlanteles:datos){
                     String idEntidad=dato[0];
                     String idPlantel=datoPlanteles[0];
-                    String[] parametros1={programa, idSubsistema, idEntidad, idPlantel,vacancia};
+                    String[] parametros1={programa, idSubsistema, idEntidad, idPlantel,vacancia,periodo};
                     List<String[]> datosProgramas=metodos.ejecutaSP("sp_consultaVacanciasResultados",parametros1);
                     if(datosProgramas.size()>0){
                         for(String[] datoPrograma:datosProgramas){
@@ -380,11 +380,11 @@ public class Datos {
                                 System.out.println("Hola");
                             }
                             
-                            String[] parametrosPlazas={programa, idSubsistema, idEntidad, idPlantel, datoPrograma[4], datoPrograma[0], datoPrograma[2]};
+                            String[] parametrosPlazas={programa, idSubsistema, idEntidad, idPlantel, datoPrograma[4], datoPrograma[0], datoPrograma[2], periodo};
                             List<String[]> datosPlazas=metodos.ejecutaSP("sp_consultaNumeroPlazas",parametrosPlazas);
                             if(datosPlazas.size()>0){
                                 int numeroPlazas=Integer.parseInt(datosPlazas.get(0)[8]);
-                                String[] parametrosGanador={programa, idSubsistema, idEntidad, idPlantel, datoPrograma[0], datoPrograma[2],vacancia};
+                                String[] parametrosGanador={programa, idSubsistema, idEntidad, idPlantel, datoPrograma[0], datoPrograma[2],vacancia, periodo};
                                 List<String[]> datosGanador=metodos.ejecutaSP("sp_consultaGanadorAspirante",parametrosGanador);
                                     if(!datosGanador.isEmpty()){
                                         int contador = 0;
@@ -454,15 +454,15 @@ public class Datos {
             return respuesta;        
         }
     }
-    public  String generarReporte(String idPrograma,String idSubsistema, String entidad){        
+    public  String generarReporte(String idPrograma,String idSubsistema, String entidad, String periodo){        
         String respuesta="<table><tr><th >id</th><th >nombre</th><th >primerApellido</th><th >segundoApellido</th><th >correo</th><th >curp</th><th >idPlantel</th><th >idEntidad</th><th >entidad</th><th >cct</th><th >plantel</th><th >telfijo</th><th >telcel</th><th >consideraciones</th><th >idEscuelaEstudio</th><th >escuela</th><th >idCarrera</th><th >carrera</th><th >anioEgreso</th><th >idGradoAcademico</th><th >grado</th><th >idModalidadTitulacion</th><th >modalidad</th><th >anioTitulacion</th><th >cedula</th><th >activo</th><th >ingresoSubsistema</th><th >ingresoPlantel</th><th >idCategoriaJornada</th><th >clave</th><th >idCategoria</th><th >categoria</th><th >idJornada</th><th >jornada</th><th >fechaPlaza</th><th >idTipoNombramiento</th><th >clave</th><th >codigo</th><th >descripcion</th><th >tipo</th><th >fechaUltimaPromocion</th><th >idCategoriaJornadaAspira</th><th >clave as claveAspira</th><th >idCategoriaAspira</th><th >categoriaAspira</th>        <th >idJornadaAspira</th><th >jornadaAspira</th><th >idPerfilRequerido</th><th >requisito</th><th >notaSancion</th><th >compatibilidad</th><th >horasOtroSubsistema</th><th >nivelCENNI</th><th >folioCENNI</th><th >idCCT</th><th >cct</th><th >idEntidadEstudio</th><th >idInstitucion</th><th >idTipoInstitucion</th><th >gradoMarginacion</th><th >frenteGrupo</th><th >funcionesOtro</th><th >finRegistro</th><th >consideraciones</th><th >publico</th><th >idPrograma</th><th >idConvocatoria</th><th >idEstatus</th><th >observacionInfo</th><th >observacionEncuestados</th><th >observacionCriterios</th><th >institucion</th><th >cct</th><th >escuela</th><th >carreraOtra</th><th >observacionCriterios2</th><th >idSubsistema</th><th >folio</th><th >tipoVacanciaAspira</th><th >idEstatus</th><th >estatus</th><th >puntaje1</th><th >puntaje2</th><th >observacionInfo</th><th >observacionEncuestados</th><th >observacionCriterios</th><th >posicion</th></tr>";        
         try{
-            String[] parametros={idPrograma,idSubsistema,entidad};
+            String[] parametros={idPrograma,idSubsistema,entidad,periodo};
                 List<String[]> datos=metodos.ejecutaSP("sp_reporteAsignacion",parametros);
                 if(!datos.isEmpty()){
                     for(String[] dato:datos)
                     {   
-                        respuesta+="<tr><th >"+dato[0]+"</th><th >"+dato[1]+"</th><th >"+dato[2]+"</th><th >"+dato[3]+"</th><th >"+dato[4]+"</th><th >"+dato[5]+"</th><th >"+dato[6]+"</th><th >"+dato[7]+"</th><th >"+dato[8]+"</th><th >"+dato[9]+"</th><th >"+dato[10]+"</th><th >"+dato[11]+"</th><th >"+dato[12]+"</th><th >"+dato[13]+"</th><th >"+dato[14]+"</th><th >"+dato[15]+"</th><th >"+dato[16]+"</th><th >"+dato[17]+"</th><th >"+dato[18]+"</th><th >"+dato[19]+"</th><th >"+dato[20]+"</th><th >"+dato[21]+"</th><th >"+dato[22]+"</th><th >"+dato[23]+"</th><th >"+dato[24]+"</th><th >"+dato[25]+"</th><th >"+dato[26]+"</th><th >"+dato[27]+"</th><th >"+dato[28]+"</th><th >"+dato[29]+"</th><th >"+dato[30]+"</th><th >"+dato[31]+"</th><th >"+dato[32]+"</th><th >"+dato[33]+"</th><th >"+dato[34]+"</th><th >"+dato[35]+"</th><th >"+dato[36]+"</th><th >"+dato[37]+"</th><th >"+dato[38]+"</th><th >"+dato[39]+"</th><th >"+dato[40]+"</th><th >"+dato[41]+"</th><th >"+dato[42]+"</th><th >"+dato[43]+"</th><th >"+dato[44]+"</th><th >"+dato[45]+"</th><th >"+dato[46]+"</th><th >"+dato[47]+"</th><th >"+dato[48]+"</th><th >"+dato[49]+"</th><th >"+dato[50]+"</th><th >"+dato[51]+"</th><th >"+dato[52]+"</th><th >"+dato[53]+"</th><th >"+dato[54]+"</th><th >"+dato[55]+"</th><th >"+dato[56]+"</th><th >"+dato[57]+"</th><th >"+dato[58]+"</th><th >"+dato[59]+"</th><th >"+dato[60]+"</th><th >"+dato[61]+"</th><th >"+dato[62]+"</th><th >"+dato[63]+"</th><th >"+dato[64]+"</th><th >"+dato[65]+"</th><th >"+dato[66]+"</th><th >"+dato[67]+"</th><th >"+dato[68]+"</th><th >"+dato[69]+"</th><th >"+dato[70]+"</th><th >"+dato[71]+"</th><th >"+dato[72]+"</th><th >"+dato[73]+"</th><th >"+dato[74]+"</th><th >"+dato[75]+"</th><th >"+dato[76]+"</th><th >"+dato[77]+"</th><th >"+dato[78]+"</th><th >"+dato[79]+"</th><th >"+dato[80]+"</th><th >"+dato[81]+"</th><th >"+dato[82]+"</th><th >"+dato[83]+"</th><th >"+dato[84]+"</th><th >"+dato[85]+"</th></tr>";
+                        respuesta+="<tr><th >"+dato[0]+"</th><th >"+dato[1]+"</th><th >"+dato[2]+"</th><th >"+dato[3]+"</th><th >"+dato[4]+"</th><th >"+dato[5]+"</th><th >"+dato[6]+"</th><th >"+dato[7]+"</th><th >"+dato[8]+"</th><th >"+dato[9]+"</th><th >"+dato[10]+"</th><th >"+dato[11]+"</th><th >"+dato[12]+"</th><th >"+dato[13]+"</th><th >"+dato[14]+"</th><th >"+dato[15]+"</th><th >"+dato[16]+"</th><th >"+dato[17]+"</th><th >"+dato[18]+"</th><th >"+dato[19]+"</th><th >"+dato[20]+"</th><th >"+dato[21]+"</th><th >"+dato[22]+"</th><th >"+dato[23]+"</th><th >"+dato[24]+"</th><th >"+dato[25]+"</th><th >"+dato[26]+"</th><th >"+dato[27]+"</th><th >"+dato[28]+"</th><th >"+dato[29]+"</th><th >"+dato[30]+"</th><th >"+dato[31]+"</th><th >"+dato[32]+"</th><th >"+dato[33]+"</th><th >"+dato[34]+"</th><th >"+dato[35]+"</th><th >"+dato[36]+"</th><th >"+dato[37]+"</th><th >"+dato[38]+"</th><th >"+dato[39]+"</th><th >"+dato[40]+"</th><th >"+dato[41]+"</th><th >"+dato[42]+"</th><th >"+dato[43]+"</th><th >"+dato[44]+"</th><th >"+dato[45]+"</th><th >"+dato[46]+"</th><th >"+dato[47]+"</th><th >"+dato[48]+"</th><th >"+dato[49]+"</th><th >"+dato[50]+"</th><th >"+dato[51]+"</th><th >"+dato[52]+"</th><th >"+dato[53]+"</th><th >"+dato[54]+"</th><th >"+dato[55]+"</th><th >"+dato[56]+"</th><th >"+dato[57]+"</th><th >"+dato[58]+"</th><th >"+dato[59]+"</th><th >"+dato[60]+"</th><th >"+dato[61]+"</th><th >"+dato[62]+"</th><th >"+dato[63]+"</th><th >"+dato[64]+"</th><th >"+dato[65]+"</th><th >"+dato[66]+"</th><th >"+dato[67]+"</th><th >"+dato[68]+"</th><th >"+dato[69]+"</th><th >"+dato[70]+"</th><th >"+dato[71]+"</th><th >"+dato[72]+"</th><th >"+dato[73]+"</th><th >"+dato[74]+"</th><th >"+dato[75]+"</th><th >"+dato[76]+"</th><th >"+dato[77]+"</th><th >"+dato[78]+"</th><th >"+dato[79]+"</th><th >"+dato[80]+"</th><th >"+dato[81]+"</th><th >"+dato[82]+"</th><th >"+dato[83]+"</th><th >"+dato[84]+"</th><th >"+dato[85]+"</th><th >"+dato[86]+"</th></tr>";
                     }
                 }
                 respuesta+="</table>";

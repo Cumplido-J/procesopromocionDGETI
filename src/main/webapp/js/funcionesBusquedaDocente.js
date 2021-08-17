@@ -42,9 +42,10 @@ function actualizarVacancias() {
     var idEntidad=$("#entidad").val();
     var idPlantel=$("#plantel").val();
     var vacancia=$("#tvacancia").val();
+    var periodo=$("#periodo").val();
     var id="18";
     if(idSubsistema!="" &&  idEntidad!="")
-    $.get("ConsultaCatalogos", {k:id,e:idPrograma,s:idSubsistema,i:idEntidad,m:idPlantel,z:vacancia}, function(respuesta){
+    $.get("ConsultaCatalogos", {k:id,e:idPrograma,s:idSubsistema,i:idEntidad,m:idPlantel,z:vacancia,periodo:periodo}, function(respuesta){
         $("#categoria").html(respuesta);
     });
 }
@@ -67,9 +68,10 @@ function numeroPlazas() {
     var idPlantel=$("#plantel").val();
     var idCategoria=$("#categoria").val();
     var idJornada=$("#jornada").val();
+    var periodo=$("#periodo").val();
     var id="20";
     if(idSubsistema!="" &&  idEntidad!="")
-    $.get("ConsultaCatalogos", {k:id,e:idPrograma,s:idSubsistema,i:idEntidad,m:idPlantel,n:idCategoria,p:idJornada}, function(respuesta){
+    $.get("ConsultaCatalogos", {k:id,e:idPrograma,s:idSubsistema,i:idEntidad,m:idPlantel,n:idCategoria,p:idJornada,periodo:periodo}, function(respuesta){
         $("#plazas").html(respuesta);
     });
 }
