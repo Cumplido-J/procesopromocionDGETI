@@ -100,17 +100,16 @@
                             </select>
                         </div>
                     </div>
-                      
-                     <div class="row">                        
-                        <div class="form-group col-md-4">                               
-                            <label class="control-label" for="periodo">Periodo:</label>
-                            <select class="form-control input-sm" id="periodo" name="periodo" >  
-                                
-                                 ${catalogo.getPeriodoActivo()}
-                            </select>
+                    <c:if test='${sessionScope["permisoActual"]!="5"}'>
+                        <div class="row">                        
+                            <div class="form-group col-md-4">                               
+                                <label class="control-label" for="periodo">Periodo:</label>
+                                <select class="form-control input-sm" id="periodo" name="periodo" >
+                                     ${catalogo.getPeriodoActivo()}
+                                </select>
+                            </div>
                         </div>
-                    </div>        
-                            
+                    </c:if>
                     <div class="row">
                         <div class="form-group col-xs-12 text-center">                         
                             <input class="btn btn-sm btn-primary" id="btnBuscar" type="submit" value='Buscar'/>                          

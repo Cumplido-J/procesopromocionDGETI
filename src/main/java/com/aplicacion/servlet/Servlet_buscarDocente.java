@@ -88,6 +88,9 @@ public class Servlet_buscarDocente extends HttpServlet {
                 String nombre=request.getParameter("rfcNombre");
                 String estatus=request.getParameter("estatus");
                 String periodo=request.getParameter("periodo");
+                if(periodo==null){
+                    periodo="0";
+                }
                 Datos d=new Datos();
                 out.print(d.desplegarDocentes(programa, subsistema, entidad, plantel, nombre, estatus, session.getAttribute("permisoActual").toString(), session.getAttribute("idUsuario").toString(),periodo));
                 //out.print("-"+programa+"-"+ subsistema+"-"+ entidad+"-"+ plantel+"-"+ nombre+"-"+ estatus);                
