@@ -141,7 +141,7 @@ public class Servlet_login extends HttpServlet {
                         String[] parametros1={datos.get(0)[3],datos.get(0)[11],datos.get(0)[1],"D"};
                         List<String[]> datos1=metodos.ejecutaSP(ConstantsWS.SP_FECHAS_CONVOCATORIA,parametros1);
                         if(datos1.get(0)[0].equals("1")){
-                            response.sendRedirect("SesionDocente"); 
+                                response.sendRedirect("SesionDocente");
                         }else{
                         	List<String[]> datos2=metodos.ejecutaSP(ConstantsWS.SP_FECHAS_DICTAMINACION,parametros1);
                             if(datos2.get(0)[0].equals("1")){

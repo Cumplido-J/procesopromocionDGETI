@@ -79,6 +79,88 @@ public class Servlet_consultaWSPersonal extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {        
         response.setContentType("text/html;charset=UTF-8");
+        
+        String parametro = request.getParameter("accion");
+        parametro= (parametro==null) ? "preregistro": parametro;
+        try{
+         switch(parametro){
+                case "preregistro": 
+                    ConsultaWSPersonal(request,response);    
+                    break;
+                case "preregistroRFC":
+                    registroPreRegistroRFC(request, response);
+                    break;   
+            }
+        }catch(IOException | ServletException e){
+            System.out.println("Error: ConsultaWSPersonal --> "+e);
+        }
+        /*PrintWriter out = response.getWriter();
+        try {
+
+            String rfc=request.getParameter("rfc");
+            String respuesta;
+            Docente docente=new Docente();
+            docente.setRfc(rfc);
+            docente.consumeWSCatalogoPersonal();
+            docente.procesaJsonPersonal();
+            List<Personal> personal=docente.getPersonal();
+            String nombre="";
+            String primerApellido="";
+            String segundoApellido="";
+            String idEstado="";
+            String idPlantel="";
+            String cct1="";
+            String cct2="";
+            int periodos=personal.size();
+            if(periodos>0){
+                String[] aux;
+                //aux=personal.get(periodos-1).getNombre().split(" ");
+                //int a=aux.length;
+                //if(a>=3){
+                   // primerApellido=aux[0].toUpperCase();
+                    //segundoApellido=aux[1].toUpperCase();
+                    //for(int c=2;c<a;c++){
+                    //    nombre+=aux[c].toUpperCase()+" ";
+                  //  }
+                //}
+                nombre=personal.get(periodos-1).getNombre();
+                cct1=personal.get(periodos-1).getCct1();
+                cct2=personal.get(periodos-1).getCct2();
+                Metodos_sql metodo=new Metodos_sql();
+                String[] parametros={cct1,cct2};
+                List<String[]> datos=metodo.ejecutaSP("sp_selectCatPlantelCCTs",parametros);
+                
+                if(!datos.isEmpty()){
+                    idPlantel=datos.get(0)[0];
+                    idEstado=datos.get(0)[1];
+                    //Catalogos catalogo=new Catalogos();
+                    //catEstado=catalogo.desplegarOpcionesEstado(idEstado);
+                    //catPlantel=catalogo.desplegarOpcionesPlanteles(idEstado, idPlantel);
+                }
+            }
+            
+            out.print(nombre+"|"+idEstado+"|"+idPlantel);
+        }catch(Exception e){
+            out.println(e);
+        } 
+        finally {
+            out.close();
+        }*/
+    }
+
+    /**
+     * Returns a short description of the servlet.
+     *
+     * @return a String containing servlet description
+     */
+    @Override
+    public String getServletInfo() {
+        return "Short description";
+    }// </editor-fold>
+
+    
+    private void ConsultaWSPersonal(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+        response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         try {
             /* TODO output your page here. You may use following sample code. */
@@ -132,15 +214,45 @@ public class Servlet_consultaWSPersonal extends HttpServlet {
             out.close();
         }
     }
+    
+    private void registroPreRegistroRFC (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+        response.setContentType("text/html;charset=UTF-8");
+        PrintWriter out = response.getWriter();
+        try {
+        
+            String rfc=request.getParameter("rfc");
+            Docente docente=new Docente();
+            docente.setRfc(rfc);
+            docente.consumeWSCatalogoPersonal();
+            docente.procesaJsonPersonal();
+            List<Personal> personal=docente.getPersonal();
+            int restDatos=personal.size();
+            String nombre="";
+            String cct1="";
+            String cct2="";
+            String respuesta="";
+            if(restDatos > 0){
+                nombre=personal.get(0).getNombre();
+                cct1=personal.get(0).getCct1();
+                cct2=personal.get(0).getCct2();
+                Metodos_sql metodo=new Metodos_sql();
+                String[] parametros={rfc.toUpperCase(),cct1,cct2};
+                List<String[]> datos=metodo.ejecutaSP("sp_insertPreAspirante2Validacion",parametros);
+                if(!datos.isEmpty()){
+                    respuesta=datos.get(0)[0];
+                }
+                out.print(nombre+"|"+respuesta);
+            }else if(restDatos < 1){
+                out.print(nombre+"|"+respuesta+"|"+"Noencontrado");
+            }
 
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
-    @Override
-    public String getServletInfo() {
-        return "Short description";
-    }// </editor-fold>
-
+        }catch(Exception e){
+            out.println(e);
+        } 
+        finally {
+            out.close();
+        }
+    }
+    
+    
 }
