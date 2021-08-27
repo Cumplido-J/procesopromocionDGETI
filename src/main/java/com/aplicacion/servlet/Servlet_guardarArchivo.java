@@ -95,13 +95,15 @@ public class Servlet_guardarArchivo extends HttpServlet {
             String ruta=p.getProperty("rutaEvidenciasRegistro");
             HttpSession session= (HttpSession) request.getSession();
             
-            String idUsuario,rfc;
+            String idUsuario,rfc,idDocente;
             if(session.getAttribute("rol").toString().equals("D")){
                 idUsuario=session.getAttribute("idUsuario").toString();
                 rfc=session.getAttribute("rfc").toString();
+                idDocente=session.getAttribute("idUsuario").toString();;
             }else{
                 idUsuario=session.getAttribute("idDocente").toString();                
                 rfc=session.getAttribute("rfcDocente").toString();
+                idDocente=session.getAttribute("idUsuario").toString();
             }
             
             
@@ -148,9 +150,9 @@ public class Servlet_guardarArchivo extends HttpServlet {
                 }
                 ous.close();
                 is.close();
-                if(Integer.parseInt(idRequisito)<9){
+                if(Integer.parseInt(idRequisito)<19){
                     Metodos_sql metodo = new Metodos_sql();
-                    String[] parametros={idUsuario,idRequisito};
+                    String[] parametros={idUsuario,idRequisito,idDocente};
                     List<String[]> datos;                           
                     datos=metodo.ejecutaSP("sp_registroConstancia",parametros);            
                     if(!datos.isEmpty()){

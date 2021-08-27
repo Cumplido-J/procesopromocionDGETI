@@ -1632,7 +1632,7 @@
               <div class="modal-content" style="width: 111%;">
                 <div class="modal-header">
                   <button type="button" class="close" data-dismiss="modal">&times;</button>
-                  <h4 class="modal-title" >Archivos cargados</h4>
+                  <h4 class="modal-title" >Archivos cargados en los requisitos</h4>
                 </div>
                 <div class="modal-body">
                     <p class="control-label"><span class="glyphicon glyphicon-exclamation-sign incompleto" title="Sección incompleta" id="estatusArchivo" completo="false"></span> Información Académica - Documento comprobatorio</p>
@@ -1641,6 +1641,11 @@
                     <p class="control-label"><span class="glyphicon glyphicon-exclamation-sign incompleto" title="Sección incompleta" id="estatusArchivo3" completo="false"></span> Información Laboral - Constancia de nota favorable</p>
                     <p class="control-label"><span class="glyphicon glyphicon-exclamation-sign incompleto" title="Sección incompleta" id="estatusArchivo4" completo="false"></span> Horas frente a grupo - Constancia de horas frente a grupo</p>
                     <p class="control-label"><span class="glyphicon glyphicon-exclamation-sign incompleto" title="Sección incompleta" id="estatusArchivo5" completo="false"></span> Compatibilidad - Carta protesta - Archivo de evidencia</p>
+                    <br>
+                    <br>
+                    <p class="control-label" style="font-weight: bold;">Nota:</p>
+                    <p class="control-label"><span class="glyphicon glyphicon-exclamation-sign incompleto"></span> Sin evidencia</p>
+                    <p class="control-label"><span class="glyphicon glyphicon-exclamation-sign completo"></span> Con evidencia</p>
                 </div>
                 <div class="modal-footer">
                     <button type="button" id="btnConfirmar" class="btn btn-sm btn-default" onclick="myFinRegistro()">Aceptar</button>

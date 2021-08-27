@@ -1144,7 +1144,7 @@
               <div class="modal-content" style="width: 111%;">
                 <div class="modal-header">
                   <button type="button" class="close" data-dismiss="modal">&times;</button>
-                  <h4 class="modal-title" >Archivos cargados en el registro de criterios</h4>
+                  <h4 class="modal-title" >Archivos cargados en los criterios de valoración</h4>
                 </div>
                 <div class="modal-body">
                     <p class="control-label"><span class="glyphicon glyphicon-exclamation-sign incompleto" title="Sección incompleta" id="estatusArchivo1" completo="false"></span> Criterio 1 - Constancia de antiguedad</p>
@@ -1156,6 +1156,11 @@
                     <p class="control-label"><span class="glyphicon glyphicon-exclamation-sign incompleto" title="Sección incompleta" id="estatusArchivo7" completo="false"></span> Criterio 8 - Carga de evidencia documental</p>
                     <p class="control-label"><span class="glyphicon glyphicon-exclamation-sign incompleto" title="Sección incompleta" id="estatusArchivo8" completo="false"></span> Criterio 9 - Carga de evidencia documental</p>
                     <p class="control-label"><span class="glyphicon glyphicon-exclamation-sign incompleto" title="Sección incompleta" id="estatusArchivo9" completo="false"></span> Criterio 10 - Carga de evidencia documental</p>
+                    <br>
+                    <br>
+                    <p class="control-label" style="font-weight: bold;">Nota:</p>
+                    <p class="control-label"><span class="glyphicon glyphicon-exclamation-sign incompleto"></span> Sin evidencia</p>
+                    <p class="control-label"><span class="glyphicon glyphicon-exclamation-sign completo"></span> Con evidencia</p>
                 </div>
                 <div class="modal-footer">
                     <button type="button" id="btnConfirmar" class="btn btn-sm btn-default" onclick="finalizar()">Aceptar</button>

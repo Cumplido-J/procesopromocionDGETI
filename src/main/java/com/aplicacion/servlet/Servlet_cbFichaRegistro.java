@@ -122,6 +122,8 @@ public class Servlet_cbFichaRegistro extends HttpServlet {
             request.setAttribute("tutorias", cv.getFilasTutoriasFicha(idUsuario));
             request.setAttribute("publicaciones", cv.getFilasPublicacionesFicha(idUsuario));
             request.setAttribute("resultados", cv.getFilasResultadosFicha(idUsuario));
+			request.setAttribute("evidencias", cv.getFilasResultadosConstancias(idUsuario));
+            request.setAttribute("registroEvidencias", cv.getFilasResultadosRegistro(idUsuario));
             request.setAttribute("rutaimagen", rutaImagen);
             ServletContext sc = getServletContext();
             RequestDispatcher rd = sc.getRequestDispatcher("/FichaRegistro.jsp");

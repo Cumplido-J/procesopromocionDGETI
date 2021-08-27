@@ -90,12 +90,17 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="form-group col-xs-8 text-right" style="margin-left: 28px;">                         
-                            <input class="btn btn-sm btn-primary" id="btnBuscar" value='Buscar resultados' onclick="busquedaResultados()"/>
-                            <c:if test='${sessionScope["permisoActualEdicion"]=="V"}'>
+                        <c:if test='${sessionScope["permisoActualEdicion"]=="V"}'>
+                            <div class="form-group col-xs-8 text-right" style="margin-left: 28px;">                         
+                                <input class="btn btn-sm btn-primary" id="btnBuscar" value='Buscar resultados' onclick="busquedaResultados()"/>
                                 <input class="btn btn-sm btn-primary" id="btnBuscar" value='Calcular resultado' onclick="confirmacionResultados()"/>
-                            </c:if>
-                        </div>
+                            </div>
+                        </c:if>
+                        <c:if test='${sessionScope["permisoActualEdicion"]=="F"}'>
+                            <div class="form-group col-xs-8 text-right" "="" style="margin-left: -75px;">                          
+                                <input class="btn btn-sm btn-primary" id="btnBuscar" value='Buscar resultados' onclick="busquedaResultados()"/>
+                            </div>
+                        </c:if>
                         <div class="form-group col-xs-4 text-right" style="margin-left: -95px;">                         
                             <img src="imagenes/excel.svg" style="width: 30px; border-radius: 50%; border: 2px solid #46b12e; margin-left: -190px;" onclick="confirmacionReporte()">
                             <span class="tooltiptext" style="margin-left: -190px;">Generar Reporte</span>

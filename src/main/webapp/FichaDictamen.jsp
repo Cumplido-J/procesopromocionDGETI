@@ -190,56 +190,71 @@
                         <h3>PUNTAJE CRITERIOS DE VALORACIÓN:</h3>
                         <table>
                             <tr><th class="borde">No.</th><th class="borde">Criterio de valoración</th><th class="borde">Puntaje</th></tr>
-                            <tr><td class="borde">1</td><td class="borde">Antigüedad en el servicio.</td><td class="borde">${puntajesDictaminador[0][4]}</td></tr>
-                            <c:set var="totalDictaminador" value="${totalDictaminador+puntajesDictaminador[0][4]}"></c:set>
-                            <tr><td class="borde">2</td><td class="borde">Experiencia y tiempo de trabajo en zonas de marginación, pobreza y descomposición social.</td><td class="borde">${puntajesDictaminador[1][4]}</td></tr>
-                            <c:set var="totalDictaminador" value="${totalDictaminador+puntajesDictaminador[1][4]}"></c:set>
-                            <tr><td class="borde">3</td><td class="borde">El reconocimiento al buen desempeño por la comunidad educativa, con la participación de madres y padres de familia o tutores, alumnos y compañeros de trabajo.</td><td class="borde">${puntajeEncuestas[5]}</td></tr>
-                            <c:set var="totalDictaminador" value="${totalDictaminador+puntajeEncuestas[5]}"></c:set>
-                            <tr><td class="borde">4</td><td class="borde">La formación académica y de posgrado.</td><td class="borde">${puntajesDictaminador[3][4]}</td></tr>
-                            <c:set var="totalDictaminador" value="${totalDictaminador+puntajesDictaminador[3][4]}"></c:set>
-                            <c:if test="${puntajesDictaminador[4][3]=='0'}">
-                                <tr><td class="borde">5</td><td class="borde">La capacitación y actualización. </td><td class="borde">${puntajesDictaminador[4][4]}</td></tr>
-                                <c:set var="totalDictaminador" value="${totalDictaminador+puntajesDictaminador[4][4]}"></c:set>
+                            <c:if test="${Docente.infoRegistro[66]==15}">
+                                <tr><td class="borde">1</td><td class="borde">Antigüedad en el servicio.</td><td class="borde">---</td></tr>
+                                <tr><td class="borde">2</td><td class="borde">Experiencia y tiempo de trabajo en zonas de marginación, pobreza y descomposición social.</td><td class="borde">---</td></tr>
+                                <tr><td class="borde">3</td><td class="borde">El reconocimiento al buen desempeño por la comunidad educativa, con la participación de madres y padres de familia o tutores, alumnos y compañeros de trabajo.</td><td class="borde">---</td></tr>
+                                <tr><td class="borde">4</td><td class="borde">La formación académica y de posgrado.</td><td class="borde">---</td></tr>
+                                <tr><td class="borde">5</td><td class="borde">La capacitación y actualización. </td><td class="borde">---</td></tr>
+                                <tr><td class="borde">6</td><td class="borde">Las aportaciones en materia de mejora continua en la educación, la docencia o la investigación.</td><td class="borde">---</td></tr>
+                                <tr><td class="borde">7</td><td class="borde">Participación en eventos y actividades de fortalecimiento académico y formación integral del educando.</td><td class="borde">---</td></tr>
+                                <tr><td class="borde">8</td><td class="borde">Actividades de tutoría o acompañamiento docente.</td><td class="borde">---</td></tr>
+                                <tr><td class="borde">9</td><td class="borde">Las publicaciones académicas o de investigación.</td><td class="borde">---</td></tr>    
+                                <tr><td class="borde">10</td><td class="borde">El desempeño en el plantel o subsistema en el que realice su labor.</td><td class="borde">---</td></tr>
+                                <tr><td class="borde" COLSPAN="2"><p class="text-center">Total</p></td><td class="borde">---</td></tr>
                             </c:if>
-                            <c:if test="${puntajesDictaminador[4][3]!='0'}">
-                                <tr><td class="borde">5</td><td class="borde">La capacitación y actualización. </td><td class="borde">${cursos[2]}</td></tr>
-                                <c:set var="totalDictaminador" value="${totalDictaminador+cursos[2]}"></c:set>
+                            <c:if test="${Docente.infoRegistro[66]!=15}">
+                                <tr><td class="borde">1</td><td class="borde">Antigüedad en el servicio.</td><td class="borde">${puntajesDictaminador[0][4]}</td></tr>
+                                <c:set var="totalDictaminador" value="${totalDictaminador+puntajesDictaminador[0][4]}"></c:set>
+                                <tr><td class="borde">2</td><td class="borde">Experiencia y tiempo de trabajo en zonas de marginación, pobreza y descomposición social.</td><td class="borde">${puntajesDictaminador[1][4]}</td></tr>
+                                <c:set var="totalDictaminador" value="${totalDictaminador+puntajesDictaminador[1][4]}"></c:set>
+                                <tr><td class="borde">3</td><td class="borde">El reconocimiento al buen desempeño por la comunidad educativa, con la participación de madres y padres de familia o tutores, alumnos y compañeros de trabajo.</td><td class="borde">${puntajeEncuestas[5]}</td></tr>
+                                <c:set var="totalDictaminador" value="${totalDictaminador+puntajeEncuestas[5]}"></c:set>
+                                <tr><td class="borde">4</td><td class="borde">La formación académica y de posgrado.</td><td class="borde">${puntajesDictaminador[3][4]}</td></tr>
+                                <c:set var="totalDictaminador" value="${totalDictaminador+puntajesDictaminador[3][4]}"></c:set>
+                                <c:if test="${puntajesDictaminador[4][3]=='0'}">
+                                    <tr><td class="borde">5</td><td class="borde">La capacitación y actualización. </td><td class="borde">${puntajesDictaminador[4][4]}</td></tr>
+                                    <c:set var="totalDictaminador" value="${totalDictaminador+puntajesDictaminador[4][4]}"></c:set>
+                                </c:if>
+                                <c:if test="${puntajesDictaminador[4][3]!='0'}">
+                                    <tr><td class="borde">5</td><td class="borde">La capacitación y actualización. </td><td class="borde">${cursos[2]}</td></tr>
+                                    <c:set var="totalDictaminador" value="${totalDictaminador+cursos[2]}"></c:set>
+                                </c:if>
+                                <c:if test="${puntajesDictaminador[5][3]=='0'}">
+                                    <tr><td class="borde">6</td><td class="borde">Las aportaciones en materia de mejora continua en la educación, la docencia o la investigación.</td><td class="borde">${puntajesDictaminador[5][4]}</td></tr>
+                                    <c:set var="totalDictaminador" value="${totalDictaminador+puntajesDictaminador[5][4]}"></c:set>
+                                </c:if>
+                                <c:if test="${puntajesDictaminador[5][3]!='0'}">
+                                    <tr><td class="borde">6</td><td class="borde">Las aportaciones en materia de mejora continua en la educación, la docencia o la investigación.</td><td class="borde">${aportaciones[2]}</td></tr>
+                                    <c:set var="totalDictaminador" value="${totalDictaminador+aportaciones[2]}"></c:set>
+                                </c:if>
+                                <c:if test="${puntajesDictaminador[6][3]=='0'}">
+                                    <tr><td class="borde">7</td><td class="borde">Participación en eventos y actividades de fortalecimiento académico y formación integral del educando.</td><td class="borde">${puntajesDictaminador[6][4]}</td></tr>
+                                    <c:set var="totalDictaminador" value="${totalDictaminador+puntajesDictaminador[6][4]}"></c:set>
+                                </c:if>
+                                <c:if test="${puntajesDictaminador[6][3]!='0'}">
+                                    <tr><td class="borde">7</td><td class="borde">Participación en eventos y actividades de fortalecimiento académico y formación integral del educando.</td><td class="borde">${participaciones[2]}</td></tr>
+                                    <c:set var="totalDictaminador" value="${totalDictaminador+participaciones[2]}"></c:set>
+                                </c:if>
+                                <c:if test="${puntajesDictaminador[7][3]=='0'}">
+                                    <tr><td class="borde">8</td><td class="borde">Actividades de tutoría o acompañamiento docente.</td><td class="borde">${puntajesDictaminador[7][4]}</td></tr>
+                                    <c:set var="totalDictaminador" value="${totalDictaminador+puntajesDictaminador[7][4]}"></c:set>
+                                </c:if>
+                                <c:if test="${puntajesDictaminador[7][3]!='0'}">
+                                    <tr><td class="borde">8</td><td class="borde">Actividades de tutoría o acompañamiento docente.</td><td class="borde">${tutorias[2]}</td></tr>
+                                    <c:set var="totalDictaminador" value="${totalDictaminador+tutorias[2]}"></c:set>
+                                </c:if>
+                                <c:if test="${puntajesDictaminador[8][3]=='0'}">
+                                    <tr><td class="borde">9</td><td class="borde">Las publicaciones académicas o de investigación.</td><td class="borde">${puntajesDictaminador[8][4]}</td></tr>
+                                    <c:set var="totalDictaminador" value="${totalDictaminador+puntajesDictaminador[8][4]}"></c:set>
+                                </c:if>
+                                <c:if test="${puntajesDictaminador[8][3]!='0'}">
+                                    <tr><td class="borde">9</td><td class="borde">Las publicaciones académicas o de investigación.</td><td class="borde">${publicaciones[2]}</td></tr>
+                                    <c:set var="totalDictaminador" value="${totalDictaminador+publicaciones[2]}"></c:set>
+                                </c:if> 
+                                <tr><td class="borde">10</td><td class="borde">El desempeño en el plantel o subsistema en el que realice su labor.</td><td class="borde">${puntajesDictaminador[9][4]+puntajesDictaminador[10][4]+puntajesDictaminador[11][4]+puntajesDictaminador[12][4]+puntajesDictaminador[13][4]+resultados[2]}</td></tr>
+                                <tr><td class="borde" COLSPAN="2"><p class="text-center">Total</p></td><td class="borde">${totalDictaminador+puntajesDictaminador[9][4]+puntajesDictaminador[10][4]+puntajesDictaminador[11][4]+puntajesDictaminador[12][4]+puntajesDictaminador[13][4]+resultados[2]}</td></tr>
                             </c:if>
-                            <c:if test="${puntajesDictaminador[5][3]=='0'}">
-                                <tr><td class="borde">6</td><td class="borde">Las aportaciones en materia de mejora continua en la educación, la docencia o la investigación.</td><td class="borde">${puntajesDictaminador[5][4]}</td></tr>
-                                <c:set var="totalDictaminador" value="${totalDictaminador+puntajesDictaminador[5][4]}"></c:set>
-                            </c:if>
-                            <c:if test="${puntajesDictaminador[5][3]!='0'}">
-                                <tr><td class="borde">6</td><td class="borde">Las aportaciones en materia de mejora continua en la educación, la docencia o la investigación.</td><td class="borde">${aportaciones[2]}</td></tr>
-                                <c:set var="totalDictaminador" value="${totalDictaminador+aportaciones[2]}"></c:set>
-                            </c:if>
-                            <c:if test="${puntajesDictaminador[6][3]=='0'}">
-                                <tr><td class="borde">7</td><td class="borde">Participación en eventos y actividades de fortalecimiento académico y formación integral del educando.</td><td class="borde">${puntajesDictaminador[6][4]}</td></tr>
-                                <c:set var="totalDictaminador" value="${totalDictaminador+puntajesDictaminador[6][4]}"></c:set>
-                            </c:if>
-                            <c:if test="${puntajesDictaminador[6][3]!='0'}">
-                                <tr><td class="borde">7</td><td class="borde">Participación en eventos y actividades de fortalecimiento académico y formación integral del educando.</td><td class="borde">${participaciones[2]}</td></tr>
-                                <c:set var="totalDictaminador" value="${totalDictaminador+participaciones[2]}"></c:set>
-                            </c:if>
-                            <c:if test="${puntajesDictaminador[7][3]=='0'}">
-                                <tr><td class="borde">8</td><td class="borde">Actividades de tutoría o acompañamiento docente.</td><td class="borde">${puntajesDictaminador[7][4]}</td></tr>
-                                <c:set var="totalDictaminador" value="${totalDictaminador+puntajesDictaminador[7][4]}"></c:set>
-                            </c:if>
-                            <c:if test="${puntajesDictaminador[7][3]!='0'}">
-                                <tr><td class="borde">8</td><td class="borde">Actividades de tutoría o acompañamiento docente.</td><td class="borde">${tutorias[2]}</td></tr>
-                                <c:set var="totalDictaminador" value="${totalDictaminador+tutorias[2]}"></c:set>
-                            </c:if>
-                            <c:if test="${puntajesDictaminador[8][3]=='0'}">
-                                <tr><td class="borde">9</td><td class="borde">Las publicaciones académicas o de investigación.</td><td class="borde">${puntajesDictaminador[8][4]}</td></tr>
-                                <c:set var="totalDictaminador" value="${totalDictaminador+puntajesDictaminador[8][4]}"></c:set>
-                            </c:if>
-                            <c:if test="${puntajesDictaminador[8][3]!='0'}">
-                                <tr><td class="borde">9</td><td class="borde">Las publicaciones académicas o de investigación.</td><td class="borde">${publicaciones[2]}</td></tr>
-                                <c:set var="totalDictaminador" value="${totalDictaminador+publicaciones[2]}"></c:set>
-                            </c:if>
-                            <tr><td class="borde">10</td><td class="borde">El desempeño en el plantel o subsistema en el que realice su labor.</td><td class="borde">${puntajesDictaminador[9][4]+puntajesDictaminador[10][4]+puntajesDictaminador[11][4]+puntajesDictaminador[12][4]+puntajesDictaminador[13][4]+resultados[2]}</td></tr>
-                            <tr><td class="borde" COLSPAN="2"><p class="text-center">Total</p></td><td class="borde">${totalDictaminador+puntajesDictaminador[9][4]+puntajesDictaminador[10][4]+puntajesDictaminador[11][4]+puntajesDictaminador[12][4]+puntajesDictaminador[13][4]+resultados[2]}</td></tr>
                         </table>
                     </td>                    
                 </tr>

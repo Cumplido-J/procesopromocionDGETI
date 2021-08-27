@@ -5,6 +5,7 @@
  */
 package herramientas;
 
+import java.util.ArrayList;
 import java.util.List;
 import metodos_sql.Metodos_sql;
 
@@ -986,14 +987,26 @@ public class CriteriosValoracion {
             
         }else{
             respuesta="";
+            List<String> arrC = new ArrayList<String>();
             for(String[] dato:datos){
-                if(dato[0].equals("2")){
+                arrC.add(dato[0]);
+            }
+            
+            if(arrC.contains("2")){
                     respuesta+="<tr>"; 
                     respuesta+="<td class='borde'>Criterio 1</td>";
                     respuesta+="<td class='borde'>Constancia de antiguedad</td>";
                     respuesta+="<td class='borde'>Si</td>";
                     respuesta+="</tr>";
-                }else if(dato[0].equals("10")){
+            }else{
+                    respuesta+="<tr>"; 
+                    respuesta+="<td class='borde'>Criterio 1</td>";
+                    respuesta+="<td class='borde'>Constancia de antiguedad</td>";
+                    respuesta+="<td class='borde'>No</td>";
+                    respuesta+="</tr>";
+            }
+            
+            if(arrC.contains("10")){
                     respuesta+="<tr>"; 
                     respuesta+="<td class='borde'>Criterio 2</td>";
                     respuesta+="<td class='borde'>Constancia de experiencia</td>";
@@ -1004,49 +1017,115 @@ public class CriteriosValoracion {
                     respuesta+="<td class='borde'>No aplica</td>";
                     respuesta+="<td class='borde'>No aplica</td>";
                     respuesta+="</tr>";
-                }else if(dato[0].equals("1")){
+            }else{
+                    respuesta+="<tr>"; 
+                    respuesta+="<td class='borde'>Criterio 2</td>";
+                    respuesta+="<td class='borde'>Constancia de experiencia</td>";
+                    respuesta+="<td class='borde'>No</td>";
+                    respuesta+="</tr>";
+                    respuesta+="<tr>"; 
+                    respuesta+="<td class='borde'>Criterio 3</td>";
+                    respuesta+="<td class='borde'>No aplica</td>";
+                    respuesta+="<td class='borde'>No aplica</td>";
+                    respuesta+="</tr>";
+            }
+            
+            if(arrC.contains("1")){
                     respuesta+="<tr>"; 
                     respuesta+="<td class='borde'>Criterio 4</td>";
                     respuesta+="<td class='borde'>Constancia de Máximo grado académico</td>";
                     respuesta+="<td class='borde'>Si</td>";
                     respuesta+="</tr>";
-                }else if(dato[0].equals("13")){
+            }else{
+                    respuesta+="<tr>"; 
+                    respuesta+="<td class='borde'>Criterio 4</td>";
+                    respuesta+="<td class='borde'>Constancia de Máximo grado académico</td>";
+                    respuesta+="<td class='borde'>No</td>";
+                    respuesta+="</tr>";
+            }
+            
+            if(arrC.contains("13")){
                     respuesta+="<tr>"; 
                     respuesta+="<td class='borde'>Criterio 5</td>";
                     respuesta+="<td class='borde'>Carga de evidencia documental</td>";
                     respuesta+="<td class='borde'>Si</td>";
                     respuesta+="</tr>";
-                }else if(dato[0].equals("14")){
+            }else{
+                    respuesta+="<tr>"; 
+                    respuesta+="<td class='borde'>Criterio 5</td>";
+                    respuesta+="<td class='borde'>Carga de evidencia documental</td>";
+                    respuesta+="<td class='borde'>No</td>";
+                    respuesta+="</tr>";
+            }
+            
+            if(arrC.contains("14")){
                     respuesta+="<tr>"; 
                     respuesta+="<td class='borde'>Criterio 6</td>";
                     respuesta+="<td class='borde'>Carga de evidencia documental</td>";
                     respuesta+="<td class='borde'>Si</td>";
                     respuesta+="</tr>";
-                }else if(dato[0].equals("15")){
+            }else{
+                    respuesta+="<tr>"; 
+                    respuesta+="<td class='borde'>Criterio 6</td>";
+                    respuesta+="<td class='borde'>Carga de evidencia documental</td>";
+                    respuesta+="<td class='borde'>No</td>";
+                    respuesta+="</tr>";
+            }
+            
+            if(arrC.contains("15")){
                     respuesta+="<tr>"; 
                     respuesta+="<td class='borde'>Criterio 7</td>";
                     respuesta+="<td class='borde'>Carga de evidencia documental</td>";
                     respuesta+="<td class='borde'>Si</td>";
                     respuesta+="</tr>";
-                }else if(dato[0].equals("16")){
+            }else{
+                    respuesta+="<tr>"; 
+                    respuesta+="<td class='borde'>Criterio 7</td>";
+                    respuesta+="<td class='borde'>Carga de evidencia documental</td>";
+                    respuesta+="<td class='borde'>No</td>";
+                    respuesta+="</tr>";
+            }
+            
+            if(arrC.contains("16")){
                     respuesta+="<tr>"; 
                     respuesta+="<td class='borde'>Criterio 8</td>";
                     respuesta+="<td class='borde'>Carga de evidencia documental</td>";
                     respuesta+="<td class='borde'>Si</td>";
                     respuesta+="</tr>";
-                }else if(dato[0].equals("17")){
+            }else{
+                    respuesta+="<tr>"; 
+                    respuesta+="<td class='borde'>Criterio 8</td>";
+                    respuesta+="<td class='borde'>Carga de evidencia documental</td>";
+                    respuesta+="<td class='borde'>No</td>";
+                    respuesta+="</tr>";
+            }
+            
+            if(arrC.contains("17")){
                     respuesta+="<tr>"; 
                     respuesta+="<td class='borde'>Criterio 9</td>";
                     respuesta+="<td class='borde'>Carga de evidencia documental</td>";
                     respuesta+="<td class='borde'>Si</td>";
                     respuesta+="</tr>";
-                }else if(dato[0].equals("18")){
+            }else{
+                    respuesta+="<tr>"; 
+                    respuesta+="<td class='borde'>Criterio 9</td>";
+                    respuesta+="<td class='borde'>Carga de evidencia documental</td>";
+                    respuesta+="<td class='borde'>No</td>";
+                    respuesta+="</tr>";
+            }
+            
+            if(arrC.contains("18")){
                     respuesta+="<tr>"; 
                     respuesta+="<td class='borde'>Criterio 10</td>";
                     respuesta+="<td class='borde'>Carga de evidencia documental</td>";
                     respuesta+="<td class='borde'>Si</td>";
                     respuesta+="</tr>";
-                }
+            }else{
+                    respuesta+="<tr>"; 
+                    respuesta+="<td class='borde'>Criterio 10</td>";
+                    respuesta+="<td class='borde'>Carga de evidencia documental</td>";
+                    respuesta+="<td class='borde'>No</td>";
+                    respuesta+="</tr>";
             }
         }
         return respuesta;
@@ -1061,45 +1140,95 @@ public class CriteriosValoracion {
             
         }else{
             respuesta="";
+            List<String> arr = new ArrayList<String>();
             for(String[] dato:datos){
-                if(dato[0].equals("1")){
+                arr.add(dato[0]);
+            }
+            
+            if(arr.contains("1")){
                     respuesta+="<tr>"; 
                     respuesta+="<td class='borde'>Informaciòn Acadèmica</td>";
                     respuesta+="<td class='borde'>Documento comprobatorio</td>";
                     respuesta+="<td class='borde'>Si</td>";
                     respuesta+="</tr>";
-                }else if(dato[0].equals("2")){
+            }else{
+                    respuesta+="<tr>"; 
+                    respuesta+="<td class='borde'>Informaciòn Acadèmica</td>";
+                    respuesta+="<td class='borde'>Documento comprobatorio</td>";
+                    respuesta+="<td class='borde'>No</td>";
+                    respuesta+="</tr>";
+            }
+            
+            if(arr.contains("2")){
                     respuesta+="<tr>"; 
                     respuesta+="<td class='borde'>Informaciòn Laboral</td>";
                     respuesta+="<td class='borde'>Constancia de antiguedad</td>";
                     respuesta+="<td class='borde'>Si</td>";
                     respuesta+="</tr>";
                     respuesta+="<tr>";
-                }else if(dato[0].equals("3")){
+            }else{
+                    respuesta+="<tr>"; 
+                    respuesta+="<td class='borde'>Informaciòn Laboral</td>";
+                    respuesta+="<td class='borde'>Constancia de antiguedad</td>";
+                    respuesta+="<td class='borde'>No</td>";
+                    respuesta+="</tr>";
+                    respuesta+="<tr>";
+            }
+            
+            if(arr.contains("3")){
                     respuesta+="<tr>"; 
                     respuesta+="<td class='borde'>Informaciòn Laboral</td>";
                     respuesta+="<td class='borde'>Constancia de nombramiento definitivo</td>";
                     respuesta+="<td class='borde'>Si</td>";
                     respuesta+="</tr>";
-                }else if(dato[0].equals("6")){
+            }else{
+                    respuesta+="<tr>"; 
+                    respuesta+="<td class='borde'>Informaciòn Laboral</td>";
+                    respuesta+="<td class='borde'>Constancia de nombramiento definitivo</td>";
+                    respuesta+="<td class='borde'>No</td>";
+                    respuesta+="</tr>";
+            }
+            
+            if(arr.contains("6")){
                     respuesta+="<tr>"; 
                     respuesta+="<td class='borde'>Informaciòn Laboral</td>";
                     respuesta+="<td class='borde'>Constancia de nota favorable</td>";
                     respuesta+="<td class='borde'>Si</td>";
                     respuesta+="</tr>";
-                }else if(dato[0].equals("4")){
+            }else{
+                    respuesta+="<tr>"; 
+                    respuesta+="<td class='borde'>Informaciòn Laboral</td>";
+                    respuesta+="<td class='borde'>Constancia de nota favorable</td>";
+                    respuesta+="<td class='borde'>No</td>";
+                    respuesta+="</tr>";
+            }
+            
+            if(arr.contains("4")){
                     respuesta+="<tr>"; 
                     respuesta+="<td class='borde'>Horas frente a grupo</td>";
                     respuesta+="<td class='borde'>Constancia de horas frente a grupo</td>";
                     respuesta+="<td class='borde'>Si</td>";
                     respuesta+="</tr>";
-                }else if(dato[0].equals("7")){
+            }else{
+                    respuesta+="<tr>"; 
+                    respuesta+="<td class='borde'>Horas frente a grupo</td>";
+                    respuesta+="<td class='borde'>Constancia de horas frente a grupo</td>";
+                    respuesta+="<td class='borde'>No</td>";
+                    respuesta+="</tr>";
+            }
+            
+            if(arr.contains("7")){
                     respuesta+="<tr>"; 
                     respuesta+="<td class='borde'>Compatibilidad - Carta protesta</td>";
                     respuesta+="<td class='borde'>Archivo de evidencia</td>";
                     respuesta+="<td class='borde'>Si</td>";
                     respuesta+="</tr>";
-                }
+            }else{
+                    respuesta+="<tr>"; 
+                    respuesta+="<td class='borde'>Compatibilidad - Carta protesta</td>";
+                    respuesta+="<td class='borde'>Archivo de evidencia</td>";
+                    respuesta+="<td class='borde'>No</td>";
+                    respuesta+="</tr>";
             }
         }
         return respuesta;
