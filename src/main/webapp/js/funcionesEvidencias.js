@@ -834,6 +834,9 @@ $(document).ready(function () {
             }
         },
         submitHandler:function(){
+            var tipoCurso=$("#tipoCurso").val();
+            if (tipoCurso==="CE")
+            {$("#horasCurso").attr("disabled",false);}    
             $.ajax({
                 type:$('#formCursos').attr("method"),
                 url:$('#formCursos').attr("action"),
@@ -841,6 +844,9 @@ $(document).ready(function () {
                 beforeSend:function(){
                     $("#btnEnviarCurso").val("Guardando...");
                     $("#btnEnviarCurso").attr("disabled","disabled");
+                    var tipoCurso=$("#tipoCurso").val();
+                    if (tipoCurso==="CE")
+                    {$("#horasCurso").attr("disabled",true);}    
                 },
                 complete:function(){
                    $("#btnEnviarCurso").val("Guardar"); 
@@ -1707,4 +1713,75 @@ function calculaTotal(){
         var totalCR=parseFloat($("#p1").html())+parseFloat($("#p2").html())+parseFloat($("#p3").html())+parseFloat($("#p4").html())+parseFloat($("#p5").html())+parseFloat($("#p6").html())+parseFloat($("#p7").html())+parseFloat($("#p8").html())+parseFloat($("#p9").html())+parseFloat($("#p10").html());
         $("#totalCR").html(totalCR);
     }
+}
+
+function certificacionHoraValorCero(){
+    
+    var tipoCurso=$("#tipoCurso").val();
+        
+    if (tipoCurso==="CE")
+    {
+        $("#horasCurso").val(0);
+        $("#horasCurso").attr("disabled",true);
+    }
+    else
+    {
+        $("#horasCurso").val("");
+        $("#horasCurso").attr("disabled",false);
+    }
+   
+}
+function activarEditarCurso(id){
+
+    $("#cursoAprobado"+id).addClass("hidden");
+    $("#cursoRechazado"+id).addClass("hidden");
+    $("#cursoAprueba"+id).removeClass("hidden");
+    $("#cursoRechaza"+id).removeClass("hidden");
+    //$("#cursoIncompleto"+id).removeClass("hidden");
+    //$("#cursoIncompleto"+id).removeClass("disabled");
+}
+
+function activarEditarAportacion(id){
+
+    $("#aportacionAprobado"+id).addClass("hidden");
+    $("#aportacionRechazado"+id).addClass("hidden");
+    $("#aportacionAprueba"+id).removeClass("hidden");
+    $("#aportacionRechaza"+id).removeClass("hidden");
+    //$("#aportacionIncompleto"+id).removeClass("hidden");
+}
+
+function activarEditarParticipacion(id){
+
+    $("#participacionAprobado"+id).addClass("hidden");
+    $("#participacionRechazado"+id).addClass("hidden");
+    $("#participacionAprueba"+id).removeClass("hidden");
+    $("#participacionRechaza"+id).removeClass("hidden");
+    //$("#participacionIncompleto"+id).removeClass("hidden");
+}
+
+function activarEditarTutoria(id){
+
+    $("#tutoriaAprobado"+id).addClass("hidden");
+    $("#tutoriaRechazado"+id).addClass("hidden");
+    $("#tutoriaAprueba"+id).removeClass("hidden");
+    $("#tutoriaRechaza"+id).removeClass("hidden");
+    //$("#tutoriaIncompleto"+id).removeClass("hidden");
+}
+
+function activarEditarPublicacion(id){
+
+    $("#publicacionAprobado"+id).addClass("hidden");
+    $("#publicacionRechazado"+id).addClass("hidden");
+    $("#publicacionAprueba"+id).removeClass("hidden");
+    $("#publicacionRechaza"+id).removeClass("hidden");
+    //$("#publicacionIncompleto"+id).removeClass("hidden");
+}
+
+function activarEditarResultado(id){
+
+    $("#resultadoAprobado"+id).addClass("hidden");
+    $("#resultadoRechazado"+id).addClass("hidden");
+    $("#resultadoAprueba"+id).removeClass("hidden");
+    $("#resultadoRechaza"+id).removeClass("hidden");
+    //$("#resultadoIncompleto"+id).removeClass("hidden");
 }

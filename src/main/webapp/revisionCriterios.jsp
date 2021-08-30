@@ -878,7 +878,7 @@
                                       </c:if>
                                     </div>
                                     <div class="form-group col-md-6">                                                             
-                                      <label class="control-label">10.C Porcentaje de aprobación escolar (Resultados educativos) por las asignatura, actividades paraescolar o módulos profesionales impartidos:<br/><br/></label>
+                                      <label class="control-label">10.D Porcentaje de aprobación escolar (Resultados educativos) por las asignatura, actividades paraescolar o módulos profesionales impartidos:<br/><br/></label>
                                       <select class="form-control input-sm" id="puntaje13" name="puntaje13" required>                                  
                                           <c:choose>
                                               <c:when test='${sessionScope["permisoActual"]=="6"}'>
@@ -899,7 +899,7 @@
                                 </div>
                                 <div class="row">
                                     <div class="form-group col-md-6">                                                             
-                                      <label class="control-label">10.D. Dictamen del área académica
+                                      <label class="control-label">10.E. Dictamen del área académica
                                       <br/>Nivel de Desempeño(resultados educativos): 
                                       </label>
                                       <select class="form-control input-sm" id="puntaje13" name="puntaje14" required>                                  
@@ -1017,7 +1017,7 @@
                         <div class="row">
                             <div class="form-group col-md-6">                                                             
                                 <label class="control-label">Tipo:</label>
-                                <select class="form-control input-sm" name="tipo" required>   
+                                <select class="form-control input-sm" name="tipo" id="tipoCurso" onChange="certificacionHoraValorCero()" required>   
                                     <option value="">-Seleccione-</option>
                                     <option value="CE">Certificación vigente laboral o de idiomas</option>
                                     <option value="CU">Curso de actualización</option>
@@ -1045,7 +1045,7 @@
                             </div>
                             <div class="form-group col-md-6">                                                             
                                 <label class="control-label">Total de horas:</label>
-                                <input type="text" class="form-control input-sm" name="horasCurso" required/>
+                                <input type="text" class="form-control input-sm" name="horasCurso" id="horasCurso" required/>
                             </div>
                         </div>  
                         <div class="row">

@@ -378,7 +378,7 @@
                             <div class='table-responsive'>
                                 <label class="text-warning" id="alertaCarga"><span class="glyphicon glyphicon-warning-sign"></span>&nbsp;Utilice la barra de desplazamiento para recorrer la tabla y visualizar todos los elementos</label>
                                 <table class='table table-bordered table-condensed'>
-                                    <tr><th>Tipo</th><th>Nombre del curso</th><th>Periodo o Fecha de realización</th><th>Institución educativa con reconocimiento oficial que emite constancia</th><th>Total de horas que acredita el curso</th><th>Constancia o documento probatorio</th><c:if test='${sessionScope["permisoActual"]=="6"}'><th>Evaluación Comité Revisor</th></c:if><th>Opciones</th></tr>
+                                    <tr><th>Tipo</th><th>Nombre del curso</th><th>Periodo o Fecha de realización</th><th>Institución educativa con reconocimiento oficial que emite constancia</th><th>Total de horas que acredita el curso</th><th>Constancia o documento probatorio</th><c:if test='${sessionScope["permisoActual"]=="6"}'><th>Evaluación Comité Revisor</th><th>Evaluación Consejo Dictaminador</th></c:if><c:if test='${sessionScope["permisoActual"]!="6"}'><th>Evaluación Comité Revisor</th></c:if></tr>
                                     <tbody id="tablaCursos">
                                         ${cursos[0]}
                                     </tbody>
@@ -470,7 +470,7 @@
                             <div class='table-responsive'>
                                 <label class="text-warning" id="alertaCarga"><span class="glyphicon glyphicon-warning-sign"></span>&nbsp;Utilice la barra de desplazamiento para recorrer la tabla y visualizar todos los elementos</label>
                                 <table class='table table-bordered table-condensed'>
-                                    <tr><th>Nombre de la aportación en materia de mejora continua</th><th>Periodo o Fecha de realización</th><th>Institución educativa con reconocimiento oficial que emite constancia</th><th>Constancia o documento probatorio</th><c:if test='${sessionScope["permisoActual"]=="6"}'><th>Evaluación Comité Revisor</th></c:if><th>Opciones</th></tr>
+                                    <tr><th>Nombre de la aportación en materia de mejora continua</th><th>Periodo o Fecha de realización</th><th>Institución educativa con reconocimiento oficial que emite constancia</th><th>Constancia o documento probatorio</th><c:if test='${sessionScope["permisoActual"]=="6"}'><th>Evaluación Comité Revisor</th><th>Evaluación Consejo Dictaminador</th></c:if><c:if test='${sessionScope["permisoActual"]!="6"}'><th>Evaluación Comité Revisor</th></c:if></tr>
                                     <tbody id="tablaAportaciones">
                                         ${aportaciones[0]}
                                     </tbody>
@@ -565,7 +565,7 @@
                             <div class='table-responsive'>
                                 <label class="text-warning" id="alertaCarga"><span class="glyphicon glyphicon-warning-sign"></span>&nbsp;Utilice la barra de desplazamiento para recorrer la tabla y visualizar todos los elementos</label>
                                 <table class='table table-bordered table-condensed'>
-                                    <tr><th>Nombre de la participación en eventos y actividades de fortalecimiento académico y formación integral del educando</th><th>Periodo o Fecha de realización</th><th>Institución educativa con reconocimiento oficial que emite constancia</th><th>Constancia o documento probatorio</th><c:if test='${sessionScope["permisoActual"]=="6"}'><th>Evaluación Comité Revisor</th></c:if><th>Opciones</th></tr>
+                                    <tr><th>Nombre de la participación en eventos y actividades de fortalecimiento académico y formación integral del educando</th><th>Periodo o Fecha de realización</th><th>Institución educativa con reconocimiento oficial que emite constancia</th><th>Constancia o documento probatorio</th><c:if test='${sessionScope["permisoActual"]=="6"}'><th>Evaluación Comité Revisor</th><th>Evaluación Consejo Dictaminador</th></c:if><c:if test='${sessionScope["permisoActual"]!="6"}'><th>Evaluación Comité Revisor</th></c:if></tr>
                                     <tbody id="tablaParticipaciones">
                                         ${participaciones[0]}
                                     </tbody>
@@ -659,7 +659,7 @@
                             <div class='table-responsive'>
                                 <label class="text-warning" id="alertaCarga"><span class="glyphicon glyphicon-warning-sign"></span>&nbsp;Utilice la barra de desplazamiento para recorrer la tabla y visualizar todos los elementos</label>
                                 <table class='table table-bordered table-condensed'>
-                                    <tr><th>Periodo o Fecha de realización</th><th>Constancia o documento probatorio</th><c:if test='${sessionScope["permisoActual"]=="6"}'><th>Evaluación Comité Revisor</th></c:if><th>Opciones</th></tr>
+                                    <tr><th>Periodo o Fecha de realización</th><th>Constancia o documento probatorio</th><c:if test='${sessionScope["permisoActual"]=="6"}'><th>Evaluación Comité Revisor</th><th>Evaluación Consejo Dictaminador</th></c:if><c:if test='${sessionScope["permisoActual"]!="6"}'><th>Evaluación Comité Revisor</th></c:if></tr>
                                     <tbody id="tablaTutorias">
                                         ${tutorias[0]}
                                     </tbody>
@@ -755,7 +755,7 @@
                             <div class='table-responsive'>
                                 <label class="text-warning" id="alertaCarga"><span class="glyphicon glyphicon-warning-sign"></span>&nbsp;Utilice la barra de desplazamiento para recorrer la tabla y visualizar todos los elementos</label>
                                 <table class='table table-bordered table-condensed'>
-                                    <tr><th>Nombre de  la publicación</th><th>Medio en el que se publicó</th><th>Fecha de publicación</th><th>ISSN/ISBN</th><c:if test='${sessionScope["permisoActual"]=="6"}'><th>Evaluación Comité Revisor</th></c:if><th>Opciones</th></tr>
+                                    <tr><th>Nombre de  la publicación</th><th>Medio en el que se publicó</th><th>Fecha de publicación</th><th>ISSN/ISBN</th><c:if test='${sessionScope["permisoActual"]=="6"}'><th>Evaluación Comité Revisor</th><th>Evaluación Consejo Dictaminador</th></c:if><c:if test='${sessionScope["permisoActual"]!="6"}'><th>Evaluación Comité Revisor</th></c:if></tr>
                                     <tbody id="tablaPublicaciones">
                                         ${publicaciones[0]}
                                     </tbody>
@@ -878,7 +878,7 @@
                                       </c:if>
                                     </div>
                                     <div class="form-group col-md-6">                                                             
-                                      <label class="control-label">10.C Porcentaje de aprobación escolar (Resultados educativos) por las asignatura, actividades paraescolar o módulos profesionales impartidos:<br/><br/></label>
+                                      <label class="control-label">10.D Porcentaje de aprobación escolar (Resultados educativos) por las asignatura, actividades paraescolar o módulos profesionales impartidos:<br/><br/></label>
                                       <select class="form-control input-sm" id="puntaje13" name="puntaje13" required>                                  
                                           <c:choose>
                                               <c:when test='${sessionScope["permisoActual"]=="6"}'>
@@ -899,7 +899,7 @@
                                 </div>
                                 <div class="row">
                                     <div class="form-group col-md-6">                                                             
-                                      <label class="control-label">10.D. Dictamen del área académica
+                                      <label class="control-label">10.E. Dictamen del área académica
                                       <br/>Nivel de Desempeño(resultados educativos): 
                                       </label>
                                       <select class="form-control input-sm" id="puntaje13" name="puntaje14" required>                                  
@@ -931,7 +931,7 @@
                                     <div class='table-responsive'>
                                         <label class="text-warning" id="alertaCarga"><span class="glyphicon glyphicon-warning-sign"></span>&nbsp;Utilice la barra de desplazamiento para recorrer la tabla y visualizar todos los elementos</label>
                                         <table class='table table-bordered table-condensed'>
-                                            <tr><th>Tipo de evidencia</th><th>Periodo o Fecha de realización</th><th>Constancia o documento probatorio</th><c:if test='${sessionScope["permisoActual"]=="6"}'><th>Evaluación Comité Revisor</th></c:if><th>Opciones</th></tr>
+                                            <tr><th>Tipo de evidencia</th><th>Periodo o Fecha de realización</th><th>Constancia o documento probatorio</th><c:if test='${sessionScope["permisoActual"]=="6"}'><th>Evaluación Comité Revisor</th><th>Evaluación Consejo Dictaminador</th></c:if><c:if test='${sessionScope["permisoActual"]!="6"}'><th>Evaluación Comité Revisor</th></c:if></tr>
                                             <tbody id="tablaResultados">
                                                 ${resultados[0]}
                                             </tbody>
@@ -1017,7 +1017,7 @@
                         <div class="row">
                             <div class="form-group col-md-6">                                                             
                                 <label class="control-label">Tipo:</label>
-                                <select class="form-control input-sm" name="tipo" required>   
+                                <select class="form-control input-sm" name="tipo" id="tipoCurso" onChange="certificacionHoraValorCero()" required>   
                                     <option value="">-Seleccione-</option>
                                     <option value="CE">Certificación vigente laboral o de idiomas</option>
                                     <option value="CU">Curso de actualización</option>
@@ -1045,7 +1045,7 @@
                             </div>
                             <div class="form-group col-md-6">                                                             
                                 <label class="control-label">Total de horas:</label>
-                                <input type="text" class="form-control input-sm" name="horasCurso" required/>
+                                <input type="text" class="form-control input-sm" name="horasCurso" id="horasCurso" required/>
                             </div>
                         </div>  
                         <div class="row">
@@ -1313,7 +1313,7 @@
                 <div class="modal-body">
                     <iframe name="ifRespuesta" hidden></iframe>
                     <iframe style="width:100%;height: 338px;" id="ifArchivo" name="ifArchivo" src="" hidden></iframe>
-                    <c:if test="${!vistaAdmin}">
+                    <%--<c:if test="${!vistaAdmin}">--%>
                     <div id="seccionCarga">
                         <form id="formArchivo" name="formArchivo" method="POST" enctype="multipart/form-data" >
                                 <label class="text-warning" id="alertaCarga"><span class="glyphicon glyphicon-warning-sign"></span>&nbsp;Cárgue todas las evidencias documentales del criterio en un solo archivo PDF</label>
@@ -1324,8 +1324,8 @@
 
                         </form>  
                     </div>
-                    </c:if>
-                    <c:if test="${vistaAdmin}"><p>El documento no puede ser modificado</p></c:if>
+                    <%--</c:if>--%>
+                    <%--<c:if test="${vistaAdmin}"><p>El documento no puede ser modificado</p></c:if>--%>
                 </div>
                 <div class="modal-footer">
                   <button type="button" class="btn btn-sm btn-default" data-dismiss="modal">Cerrar</button>

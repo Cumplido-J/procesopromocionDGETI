@@ -789,7 +789,7 @@
                         <div class="row">
                             <div class="form-group col-md-6">                                                             
                                 <label class="control-label">Tipo:</label>
-                                <select class="form-control input-sm" name="tipo" required>   
+                                <select class="form-control input-sm" name="tipo" id="tipoCurso" onChange="certificacionHoraValorCero()" required>   
                                     <option value="">-Seleccione-</option>
                                     <option value="CE">Certificación vigente laboral o de idiomas</option>
                                     <option value="CU">Curso de actualización</option>
@@ -817,7 +817,7 @@
                             </div>
                             <div class="form-group col-md-6">                                                             
                                 <label class="control-label">Total de horas:</label>
-                                <input type="text" class="form-control input-sm" name="horasCurso" required/>
+                                <input type="text" class="form-control input-sm" name="horasCurso" id="horasCurso" required/>
                             </div>
                         </div>  
                         <div class="row">

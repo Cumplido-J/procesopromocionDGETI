@@ -748,7 +748,8 @@
                       <a href="FichaRegistroPrevia"  target="_blank" class="btn btn-default" >Vista previa Ficha de registro</a>
                       </c:if>
                       <!--<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalConfirmacion2">Finalizar registro</button>-->
-                      <button type="button" class="btn btn-primary" onClick="finalizar()">Finalizar registro</button>
+                      <button type="button" class="btn btn-primary" onClick="validarArchivosCriterios()">Finalizar registro</button>
+                      <!--<button type="button" class="btn btn-primary" onClick="finalizar()">Finalizar registro</button>-->
                   
               </div>
               
@@ -788,7 +789,7 @@
                         <div class="row">
                             <div class="form-group col-md-6">                                                             
                                 <label class="control-label">Tipo:</label>
-                                <select class="form-control input-sm" name="tipo" required>   
+                                <select class="form-control input-sm" name="tipo" id="tipoCurso" onChange="certificacionHoraValorCero()" required>   
                                     <option value="">-Seleccione-</option>
                                     <option value="CE">Certificación vigente laboral o de idiomas</option>
                                     <option value="CU">Curso de actualización</option>
@@ -816,7 +817,7 @@
                             </div>
                             <div class="form-group col-md-6">                                                             
                                 <label class="control-label">Total de horas:</label>
-                                <input type="text" class="form-control input-sm" name="horasCurso" required/>
+                                <input type="text" class="form-control input-sm" name="horasCurso" id="horasCurso" required/>
                             </div>
                         </div>  
                         <div class="row">
@@ -1137,7 +1138,37 @@
                 </div>
               </div>
             </div>
-        </div>                       
+        </div>
+		<div id="modalValidarArchivosCriterios" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+              <div class="modal-content" style="width: 111%;">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  <h4 class="modal-title" >Archivos cargados en los criterios de valoración</h4>
+                </div>
+                <div class="modal-body">
+                    <p class="control-label"><span class="glyphicon glyphicon-exclamation-sign incompleto" title="Sección incompleta" id="estatusArchivo1" completo="false"></span> Criterio 1 - Constancia de antiguedad</p>
+                    <p class="control-label"><span class="glyphicon glyphicon-exclamation-sign incompleto" title="Sección incompleta" id="estatusArchivo2" completo="false"></span> Criterio 2 - Constancia de experiencia</p>
+                    <p class="control-label"><span class="glyphicon glyphicon-exclamation-sign incompleto" title="Sección incompleta" id="estatusArchivo3" completo="false"></span> Criterio 4 - Constancia de Máximo grado académico</p>
+                    <p class="control-label"><span class="glyphicon glyphicon-exclamation-sign incompleto" title="Sección incompleta" id="estatusArchivo4" completo="false"></span> Criterio 5 - Carga de evidencia documental</p>
+                    <p class="control-label"><span class="glyphicon glyphicon-exclamation-sign incompleto" title="Sección incompleta" id="estatusArchivo5" completo="false"></span> Criterio 6 - Carga de evidencia documental</p>
+                    <p class="control-label"><span class="glyphicon glyphicon-exclamation-sign incompleto" title="Sección incompleta" id="estatusArchivo6" completo="false"></span> Criterio 7 - Carga de evidencia documental</p>
+                    <p class="control-label"><span class="glyphicon glyphicon-exclamation-sign incompleto" title="Sección incompleta" id="estatusArchivo7" completo="false"></span> Criterio 8 - Carga de evidencia documental</p>
+                    <p class="control-label"><span class="glyphicon glyphicon-exclamation-sign incompleto" title="Sección incompleta" id="estatusArchivo8" completo="false"></span> Criterio 9 - Carga de evidencia documental</p>
+                    <p class="control-label"><span class="glyphicon glyphicon-exclamation-sign incompleto" title="Sección incompleta" id="estatusArchivo9" completo="false"></span> Criterio 10 - Carga de evidencia documental</p>
+                    <br>
+                    <br>
+                    <p class="control-label" style="font-weight: bold;">Nota:</p>
+                    <p class="control-label"><span class="glyphicon glyphicon-exclamation-sign incompleto"></span> Sin evidencia</p>
+                    <p class="control-label"><span class="glyphicon glyphicon-exclamation-sign completo"></span> Con evidencia</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="btnConfirmar" class="btn btn-sm btn-default" onclick="finalizar()">Aceptar</button>
+                  <button type="button" class="btn btn-sm btn-default" data-dismiss="modal">Cancelar</button>
+                </div>
+              </div>
+            </div>
+        </div>
         <script src="https://framework-gb.cdn.gob.mx/gobmx.js"></script>        
         <script src="https://code.jquery.com/jquery-1.12.4.js"></script>      
         <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>  

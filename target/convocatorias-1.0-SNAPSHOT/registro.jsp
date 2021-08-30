@@ -47,6 +47,12 @@
                 response.sendRedirect("/procesopromocion/SesionDocente");
             %>
             </c:if>       
+        </c:if>
+        <c:if test="${vistaAdmin}">    
+        <c:set var="disabled1" value=""></c:set>
+            <c:if test='${sessionScope["permisoActual"]=="6"}'>
+                  <c:set var="disabled1" value="disabled"></c:set>
+            </c:if>
         </c:if>    
         <main class="page">            
             <!--Barra navegación UEMSTIS-->
@@ -230,7 +236,7 @@
                               <input type="text" class="form-control input-sm" id="titulacion" name="titulacion" pattern="[0-9]{4}" value="${Docente.infoRegistro[23]}" maxlength="4" required>
                             </div>                            
                             <div class="form-group col-md-3">
-                                <label class="control-label" for="btnEvidencia1">Título:</label>
+                                <label class="control-label" for="btnEvidencia1">Documento comprobatorio:</label>
                                 <a title="Ver ejemplo" onclick="abrirModalEjemplo(1)">
                                   <span class="glyphicon glyphicon-picture"></span>
                                 </a><br/> 
@@ -244,17 +250,40 @@
                                 </c:if>
                             </div> 
                             <div class="form-group col-md-3">
-                              <label class="control-label" for="documento">Documento comprobatorio:</label>
+                              <label class="control-label" for="documento">Archivo de evidencia:</label>
                               <select class="form-control input-sm" id="documento" name="documento" onchange="cambioDocumento(this)" required>
-                                  <option value="">-Seleccionar-</option>                                  
-                                  <c:if test = "${Docente.infoRegistro[24]==null}">
+                                    <c:if test = "${Docente.infoRegistro[82]==null}">
+                                      <option value="" selected>-Seleccionar-</option>   
+                                      <option value="acta" >Acta de grado</option>
+                                      <option value="cedula">Cédula profesional</option>
+                                      <option value="titulo">Título</option>
+                                      <option value="Otros">Otros</option> 
+                                    </c:if>
+                                    <c:if test = "${Docente.infoRegistro[82]=='acta'}">
                                       <option value="acta" selected>Acta de grado</option>
                                       <option value="cedula">Cédula profesional</option>
-                                  </c:if>
-                                  <c:if test = "${Docente.infoRegistro[24]!=null}">
-                                      <option value="acta">Acta de grado</option>
+                                      <option value="titulo">Título</option>
+                                      <option value="Otros">Otros</option> 
+                                    </c:if>
+                                    <c:if test = "${Docente.infoRegistro[82]=='cedula'}">
+                                      <option value="acta" >Acta de grado</option>
                                       <option value="cedula" selected>Cédula profesional</option>
-                                  </c:if>
+                                      <option value="titulo">Título</option>
+                                      <option value="Otros">Otros</option>  
+                                    </c:if>
+                                    <c:if test = "${Docente.infoRegistro[82]=='titulo'}">
+                                      <option value="acta" >Acta de grado</option>
+                                      <option value="cedula">Cédula profesional</option>
+                                      <option value="titulo" selected>Título</option>
+                                      <option value="Otros">Otros</option> 
+                                    </c:if> 
+                                    <c:if test = "${Docente.infoRegistro[82]=='Otros'}">
+                                      <option value="acta" >Acta de grado</option>
+                                      <option value="cedula">Cédula profesional</option>
+                                      <option value="titulo">Título</option>
+                                      <option value="Otros" selected>Otros</option>   
+                                    </c:if> 
+                                      
                               </select>
                             </div>
                         </div>
@@ -262,11 +291,18 @@
                             <c:if test = "${Docente.infoRegistro[24]==null}">
                                 <c:set var="hidden" value="hidden"></c:set>
                             </c:if>
-                            <div id="seccionCedula">
+                            <c:set var="cedulahidden" value=""></c:set>
+                            <c:if test = "${Docente.infoRegistro[82]!='cedula'}">
+                                 <c:set var="cedulahidden" value="hidden"></c:set>
+                            </c:if>
+                            <div id="seccionCedula" ${cedulahidden}>
+                                
                                 <div class="form-group col-md-3">
                                   <label class="control-label" for="cedula">Número de Cédula:</label>
                                   <input type="text" class="form-control input-sm" id="cedula" name="cedula" value="${Docente.infoRegistro[24]}">
                                 </div>
+                                
+                                <%--
                                 <div class="form-group col-md-3">
                                     <label class="control-label" for="btnEvidencia8">Cédula profesional:</label>
                                     <a title="Ver ejemplo" onclick="abrirModalEjemplo(8)"><span class="glyphicon glyphicon-picture"></span></a><br/>  
@@ -277,7 +313,7 @@
                                         <input id="btnEvidencia8" type="button" class="btn btn-sm btn-link incompleto" value="Subir archivo" onclick="abrirModalArchivo(8)"/>
                                         <span class="glyphicon glyphicon-exclamation-sign incompleto" title="Sección incompleta" id="alertaBtnEvidencia8"></span>
                                     </c:if>                                  
-                                </div> 
+                                </div> --%>
                             </div>
                         </div>     
                         
@@ -298,6 +334,22 @@
                             </div>
                         
                       </form>
+                            
+                <c:if test="${vistaAdmin}">
+                    <form id="formInfoAcademicaOb1" role="form" action="RegistroInfoAcademica" method="POST">
+                      <input type="hidden" id="accion" name="accion" value="observacionesPaso1">
+                         <%-- <c:if test='${sessionScope["permisoActualEdicion"]=="F"}'>    --%>
+                    <label class="control-label">Observaciones comité revisor:</label>    
+                    <textarea ${disabled1}  class="form-control text-uppercase ${disabled1}" id="observacion1P1R" name="observacion1P1R" maxlength="2000" onKeyUp="cambioObservacionesPaso1(this)" >${observacionesR[4]}</textarea>
+                         <%-- </c:if>--%>
+                    <c:if test='${sessionScope["permisoActual"]=="6"}'>
+                    <input type="hidden" id="observacion1P1R" name="observacion1P1R" value="">
+                    <label class="control-label">Observaciones consejo dictaminador:</label>
+                    <textarea  class="form-control text-uppercase" id="observacion1P1D" name="observacion1P1D" maxlength="2000" onKeyUp="cambioObservacionesPaso1(this)"  required>${observacionesR[0]}</textarea>
+                    </c:if>
+                    <input style="margin-top:10px;" disabled="true" type="submit"  class="btn btn-primary" value="Guardar" id="btnFinalizarOb1" onclick="cerrar(1)">
+                    </form>
+                </c:if>      
                     </div>
                   </div>
                 </div>
@@ -560,6 +612,22 @@
                         </div>
                       </form>
                     
+                <c:if test="${vistaAdmin}">
+                    <form id="formInfoAcademicaOb2" role="form" action="RegistroInfoAcademica" method="POST">
+                      <input type="hidden" id="accion" name="accion" value="observacionesPaso2">
+                         <%-- <c:if test='${sessionScope["permisoActualEdicion"]=="F"}'>    --%>
+                    <label class="control-label">Observaciones comité revisor:</label>    
+                    <textarea ${disabled1}  class="form-control text-uppercase ${disabled1}" id="observacion2P1R" name="observacion2P1R" maxlength="2000" onKeyUp="cambioObservacionesPaso2(this)">${observacionesR[5]}</textarea>
+                         <%-- </c:if>--%>
+                    <c:if test='${sessionScope["permisoActual"]=="6"}'>
+                    <input type="hidden" id="observacion2P1R" name="observacion2P1R" value="">
+                    <label class="control-label">Observaciones consejo dictaminador:</label>
+                    <textarea  class="form-control text-uppercase" id="observacion2P1D" name="observacion2P1D" maxlength="2000" onKeyUp="cambioObservacionesPaso2(this)"  required>${observacionesR[1]}</textarea>
+                    </c:if>
+                    <input style="margin-top:10px;" disabled="true" type="submit"  class="btn btn-primary" value="Guardar" id="btnFinalizarOb2" onclick="cerrar(2)" >
+                    </form>
+                </c:if>
+                                    
                   </div>
                 </div>
                 </div>
@@ -618,28 +686,40 @@
                         <div id="seccionHoras" class="collapse ${in}">
                             <div class="form-group col-md-3">
                               <label class="control-label" for="numHoras">Horas frente a grupo:</label>
-                              <c:set var="totalHoras" value="${Docente.getTotalHoras()}"></c:set>
+                              <c:if test='${sessionScope["subsistema"]!=2}'>
+                                  <c:set var="totalHoras" value="${Docente.getTotalHoras()}"></c:set>
+                              </c:if>
+                              <c:if test='${sessionScope["subsistema"]==2}'>
+                                  <c:set var="totalHoras" value="${Docente.getTotalHorasCecyte()}"></c:set>
+                              </c:if>
                               <input type="text" class="form-control input-sm" id="numHoras" name="numHoras" value="${totalHoras}" readOnly  required>
                             </div>
                             <div class="form-group col-md-3">
                               <label class="control-label" for="numGrupos">Número de grupos:</label>
-                              <input type="text" class="form-control input-sm" id="numGrupos" name="numGrupos" value="${Docente.getNumGrupos()}" readOnly required>
+                              <c:if test='${sessionScope["subsistema"]!=2}'>
+                                  <input type="text" class="form-control input-sm" id="numGrupos" name="numGrupos" value="${Docente.getNumGrupos()}" readOnly required>
+                              </c:if>
+                              <c:if test='${sessionScope["subsistema"]==2}'>
+                                  <input type="text" class="form-control input-sm" id="numGrupos" name="numGrupos" value="${Docente.getNumGruposCecyte()}" readOnly required>
+                              </c:if>
                             </div>
                             <c:if test="${vistaAdmin}">
-                                <c:if test='${sessionScope["permisoActualEdicion"]=="F" && sessionScope["programa"]!=2}'>
+                                <c:if test='${sessionScope["permisoActualEdicion"]=="F" && sessionScope["programa"]!=2 && sessionScope["subsistema"]!=2}'>
                                     <div class="text-center">
                                       <input type="button" class="btn btn-link btn-sm" value="(+) Agregar información" data-toggle="modal" data-target="#modalInformacion" disabled/>
                                     </div>
                                 </c:if>
-                                <c:if test='${sessionScope["permisoActualEdicion"]=="V" && sessionScope["programa"]!=2}'>
+                                <c:if test='${sessionScope["permisoActualEdicion"]=="V" && sessionScope["programa"]!=2 && sessionScope["subsistema"]!=2}'>
                                     <div class="text-center">
                                       <input type="button" class="btn btn-link btn-sm" value="(+) Agregar información" data-toggle="modal" data-target="#modalInformacion"/>
                                     </div>
                                 </c:if>
+                                <c:if test='${sessionScope["permisoActualEdicion"]=="F" && sessionScope["programa"]==2 && sessionScope["subsistema"]!=2}'>
                                     <div class="text-center">
                                       <input type="button" class="btn btn-link btn-sm" value="(+) Agregar información" data-toggle="modal" data-target="#modalInformacionHoras" disabled/>
                                     </div>
-                                <c:if test='${sessionScope["permisoActualEdicion"]=="V" && sessionScope["programa"]==2}'>
+                                </c:if>
+                                <c:if test='${sessionScope["permisoActualEdicion"]=="V" && sessionScope["programa"]==2 && sessionScope["subsistema"]!=2}'>
                                     <div class="text-center">
                                       <input type="button" class="btn btn-link btn-sm" value="(+) Agregar información" data-toggle="modal" data-target="#modalInformacionHoras"/>
                                     </div>
@@ -647,14 +727,33 @@
                             </c:if>
                             <c:if test="${!vistaAdmin}">
                                 <div class="text-center">
-                                    <c:if test='${sessionScope["programa"]!=2}'>
+                                    <c:if test='${sessionScope["programa"]!=2 && sessionScope["subsistema"]!=2}'>
                                         <input type="button" class="btn btn-link btn-sm" value="(+) Agregar información" data-toggle="modal" data-target="#modalInformacion"/>
                                     </c:if>
-                                    <c:if test='${sessionScope["programa"]==2}'>
+                                    <c:if test='${sessionScope["programa"]==2 && sessionScope["subsistema"]!=2}'>
                                         <input type="button" class="btn btn-link btn-sm" value="(+) Agregar información" data-toggle="modal" data-target="#modalInformacionHoras"/>
                                     </c:if>
                                 </div>
                             </c:if>
+                            <c:if test="${vistaAdmin}">
+                                    <c:if test='${sessionScope["permisoActualEdicion"]=="F" && sessionScope["subsistema"]==2}'>
+                                        <div class='text-center'>
+                                            <input type='button' class='btn btn-sm btn-link' value='(+) Agregar información' data-toggle="modal" data-target="#modalInformacionCecyte" disabled/>
+                                        </div>
+                                    </c:if>
+                                    <c:if test='${sessionScope["permisoActualEdicion"]=="V" && sessionScope["subsistema"]==2}'>
+                                        <div class='text-center'>
+                                            <input type='button' class='btn btn-sm btn-link' value='(+) Agregar información' data-toggle="modal" data-target="#modalInformacionCecyte" />
+                                        </div>
+                                    </c:if>
+                                </c:if>
+                                <c:if test="${!vistaAdmin}">
+                                    <c:if test='${sessionScope["subsistema"]==2}'>
+                                    <div class='text-center'>
+                                        <input type='button' class='btn btn-sm btn-link' value='(+) Agregar información' data-toggle="modal" data-target="#modalInformacionCecyte"/>
+                                    </div>
+                                    </c:if>
+                                </c:if>
                             <div>
                               <span>Los datos mostrados a continuación provienen de información institucional.<br/>En cada uno de los renglones con la opción habilitada, presione el botón <span class='glyphicon glyphicon-ok completo'></span> para válidarlos como correctos, de lo contrario presione <span class='glyphicon glyphicon-remove incompleto'></span>.</span>
                               <br/><br/>
@@ -666,7 +765,12 @@
                                   <th>Opciones</th>                        
                                 </tr>
                                 <tbody id="tablaInfo">
-                                    ${Docente.mostrarHoras()}
+                                    <c:if test='${sessionScope["subsistema"]!=2}'>
+                                        ${Docente.mostrarHoras()}
+                                    </c:if>
+                                    <c:if test='${sessionScope["subsistema"]==2}'>
+                                        ${Docente.mostrarHorasCecyte()}
+                                    </c:if>
                                     <!--<td colspan="2" class="text-center"><p class="text-danger">Sin información</p></td>-->
                                     
                                 </tbody>                                
@@ -730,6 +834,25 @@
                               <!--<input type="button" class="btn btn-sm btn-primary" value="Guardar y continuar" onclick="mostrarSiguiente(1)"/>-->
                             </div>
                       </form>
+                    
+                                
+                <c:if test="${vistaAdmin}">
+                    <form id="formInfoAcademicaOb3" role="form" action="RegistroInfoAcademica" method="POST">
+                      <input type="hidden" id="accion3" name="accion" value="observacionesPaso3">
+                         <%-- <c:if test='${sessionScope["permisoActualEdicion"]=="F"}'>    --%>
+                    <label class="control-label">Observaciones comité revisor:</label>    
+                    <textarea ${disabled1} class="form-control text-uppercase ${disabled1}" id="observacion3P1R" name="observacion3P1R" maxlength="2000" onKeyUp="cambioObservacionesPaso3(this)" >${observacionesR[6]}</textarea>
+                         <%-- </c:if>--%>
+                    <c:if test='${sessionScope["permisoActual"]=="6"}'>
+                   <input type="hidden" id="observacion3P1R" name="observacion3P1R" value="">
+                    <label class="control-label">Observaciones consejo dictaminador:</label>
+                    <textarea  class="form-control text-uppercase" id="observacion3P1D" name="observacion3P1D" maxlength="2000" onKeyUp="cambioObservacionesPaso3(this)"  required>${observacionesR[2]}</textarea>
+                    </c:if>
+                    <input style="margin-top:10px;" disabled="true" type="submit"  class="btn btn-primary" value="Guardar" id="btnFinalizarOb3" onclick="cerrar(3)">
+                    </form>
+                </c:if> 
+                                
+                                
                     </div>
                   </div>
                 </div>                                
@@ -745,7 +868,7 @@
                   <div class="panel-heading" id="phInfoCompatibilidad">
                     <h4 class="panel-title">
                       <a data-parent="#accordion" data-toggle="collapse" href="#infoCompatibilidad" aria-expanded="true" aria-controls="infoCompatibilidad">
-                      Compatibilidad
+                      Compatibilidad - Carta protesta
                         <c:set var="bandera" value="${Docente.verificaSeccion('4')}"></c:set>
                         <c:if test="${!vistaAdmin}">
                         <c:if test = "${bandera==true}">
@@ -772,9 +895,23 @@
                   </div>
                   <div class="panel-collapse collapse ${in}" id="infoCompatibilidad" >
                     <div class="panel-body">
-                      <form role="form" id="formInfoCompatibilidad" method="POST" action="RegistroInfoCompatibilidad">                           
-                        <div class="checkbox col-xs-12">
+                      <form role="form" id="formInfoCompatibilidad" method="POST" action="RegistroInfoCompatibilidad" style="margin-bottom:  200px;">                           
+                        
                           
+                          <div id="seccionCompatibilidad"  >
+                                <div class="form-group col-md-4">
+                                    <label class="control-label" for="btnEvidencia7">Archivo de evidencia:</label>  
+                                    <a title="Ver ejemplo" onclick="abrirModalEjemplo(7)"><span class="glyphicon glyphicon-picture"></span></a><br/>
+                                    <c:if test = "${Docente.documentoCargado2('7')==true}">
+                                        <input id="btnEvidencia7" type="button" class="btn btn-sm btn-link" value="Ver archivo" onclick="abrirModalArchivo(7)"/>                                    
+                                    </c:if>
+                                    <c:if test = "${Docente.documentoCargado2('7')==false}">
+                                        <input id="btnEvidencia7" type="button" class="btn btn-sm btn-link incompleto" value="Subir archivo" onclick="abrirModalArchivo(7)"/>
+                                        <span class="glyphicon glyphicon-exclamation-sign incompleto" title="Sección incompleta" id="alertaBtnEvidencia7"></span>
+                                    </c:if>                                    
+                                </div> 
+                            </div>
+                        <div class="checkbox col-xs-12">   
                         <c:if test="${Docente.infoRegistro[60]=='S'}">
                             <c:set var="checked" value="checked"></c:set>
                             <c:set var="in" value="in"></c:set>
@@ -800,21 +937,9 @@
                                 <c:set var="checked" value=""></c:set>
                                 <c:set var="in" value=""></c:set>
                               </c:if>
-                              <label><input data-toggle="collapse" data-target="#seccionCompatibilidad" type="checkbox" ${checked} name="compatibilidad" id="compatibilidad">Marque la casilla si cuenta con la compatibilidad requerida</label>
+                              <label><input  type="checkbox" ${checked} name="compatibilidad" id="compatibilidad">Marque la casilla si cuenta con la compatibilidad requerida</label>
                             </div>
-                            <div id="seccionCompatibilidad" class="collapse ${in}" >
-                                <div class="form-group col-md-4">
-                                    <label class="control-label" for="btnEvidencia7">Constancia de compatibilidad:</label>  
-                                    <a title="Ver ejemplo" onclick="abrirModalEjemplo(7)"><span class="glyphicon glyphicon-picture"></span></a><br/>
-                                    <c:if test = "${Docente.documentoCargado2('7')==true}">
-                                        <input id="btnEvidencia7" type="button" class="btn btn-sm btn-link" value="Ver archivo" onclick="abrirModalArchivo(7)"/>                                    
-                                    </c:if>
-                                    <c:if test = "${Docente.documentoCargado2('7')==false}">
-                                        <input id="btnEvidencia7" type="button" class="btn btn-sm btn-link incompleto" value="Subir archivo" onclick="abrirModalArchivo(7)"/>
-                                        <span class="glyphicon glyphicon-exclamation-sign incompleto" title="Sección incompleta" id="alertaBtnEvidencia7"></span>
-                                    </c:if>                                    
-                                </div> 
-                            </div>
+                            
                         </div>
                         <div class="col-xs-12 text-right">
                               <c:if test="${!vistaAdmin}">
@@ -832,6 +957,25 @@
                               <!--<input type="button" class="btn btn-sm btn-primary" value="Guardar y continuar" onclick="mostrarSiguiente(1)"/>-->
                             </div>
                       </form>
+                            
+                            
+                            <c:if test="${vistaAdmin}">
+                                <form id="formInfoAcademicaOb4" role="form" action="RegistroInfoAcademica" method="POST" >
+                                   
+                                  <input type="hidden" id="accion4" name="accion" value="observacionesPaso4">
+                                     <%-- <c:if test='${sessionScope["permisoActualEdicion"]=="F"}'>    --%>
+                                <label class="control-label">Observaciones comité revisor:</label>    
+                                <textarea ${disabled1} class="form-control text-uppercase ${disabled1}" id="observacion4P1R" name="observacion4P1R" maxlength="2000" onKeyUp="cambioObservacionesPaso4(this)" >${observacionesR[7]}</textarea>
+                                     <%-- </c:if>--%>
+                                <c:if test='${sessionScope["permisoActual"]=="6"}'>
+                                    <input type="hidden" id="observacion4P1R" name="observacion4P1R" value="">
+                                <label class="control-label">Observaciones consejo dictaminador:</label>
+                                <textarea  class="form-control text-uppercase" id="observacion4P1D" name="observacion4P1D" maxlength="2000" onKeyUp="cambioObservacionesPaso4(this)"  required>${observacionesR[3]}</textarea>
+                                </c:if>
+                                <input style="margin-top:10px;" disabled="true" type="submit"  class="btn btn-primary" value="Guardar" id="btnFinalizarOb4" onclick="cerrar(4)">
+                                </form>
+                            </c:if> 
+                            
                     </div>
                   </div>
                 </div>
@@ -867,25 +1011,35 @@
                           <table>
                               <tr>
                                 <td valign="top"><input type="checkbox" name="cbProtestaVerdad" id="cbProtestaVerdad" onClick="cambioProtesta()"><td>
-                                <td>Declara bajo protesta de decir verdad que cumple con los requisitos establecidos en la Convocatoria para el proceso de promoción en el servicio docente por cambio de categoría en Educación Media Superior, Ciclo Escolar 2020-2021. Para confirmar su dicho, la DGETI podrá verificar la autenticidad de la documentación que proporciono, por lo que, en caso de alteración o falsificación de la misma, acepta la descalificación inmediata del proceso o, en su caso, la invalidación del nombramiento respectivo, sin perjuicio de las sanciones de tipo administrativo o penal en las que pudiera incurrir.</td>    
+                                <td>Declara bajo protesta de decir verdad que cumple con los requisitos establecidos en la Convocatoria para el proceso de promoción en el servicio docente por cambio de categoría en Educación Media Superior, <jsp:include page="seccionesPlantilla/cicloEscolar.jsp" flush="true"/>. Para confirmar su dicho, la DGETI podrá verificar la autenticidad de la documentación que proporciono, por lo que, en caso de alteración o falsificación de la misma, acepta la descalificación inmediata del proceso o, en su caso, la invalidación del nombramiento respectivo, sin perjuicio de las sanciones de tipo administrativo o penal en las que pudiera incurrir.</td>    
                               </tr>
                               <tr>
                                   <td valign="top"><input type="checkbox" name="cbPublico" id="cbPublico" ><td>
-                                  <td>Acepta hacer públicos los resultados y recomendaciones individuales que se deriven de su valoración para el proceso de promoción en el servicio docente por cambio de categoría en Educación Media Superior ingreso a la Educación Media Superior, Ciclo Escolar 2020-2021.<td>
+                                  <td>Acepta hacer públicos los resultados y recomendaciones individuales que se deriven de su valoración para el proceso de promoción en el servicio docente por cambio de categoría en Educación Media Superior ingreso a la Educación Media Superior, <jsp:include page="seccionesPlantilla/cicloEscolar.jsp" flush="true"/>.<td>
                               </tr>
                           </table>
                           </c:if>
                           <c:if test="${vistaAdmin}">
-                            <label class="control-label">Observaciones:</label>
+                              
+                              
+                            <!--<label class="control-label">Observaciones:</label>-->
                             <c:if test='${sessionScope["permisoActualEdicion"]=="F"}'>
-                                <textarea class="form-control text-uppercase" id="observaciones" name="observaciones" maxlength="2000" onKeyUp="cambioObservaciones()" required disabled>${Docente.infoRegistro[67]}</textarea>
+                                <input type="hidden" id="observaciones" name="observaciones" value="paso1" >
+                                <%-- <textarea class="form-control text-uppercase" id="observaciones" name="observaciones" maxlength="2000" onKeyUp="cambioObservaciones()" required disabled>${Docente.infoRegistro[67]}</textarea>--%>
                             </c:if>
                             <c:if test='${sessionScope["permisoActualEdicion"]=="V"}'>
-                                <textarea class="form-control text-uppercase" id="observaciones" name="observaciones" maxlength="2000" onKeyUp="cambioObservaciones()" required>${Docente.infoRegistro[67]}</textarea>
+                                <input type="hidden" id="observaciones" name="observaciones" value="paso1" >
+                                <%-- <textarea class="form-control text-uppercase" id="observaciones" name="observaciones" maxlength="2000" onKeyUp="cambioObservaciones()" required>${Docente.infoRegistro[67]}</textarea>--%>
                             </c:if>
+                                
                           </c:if>
                           <br/>
-                              <input type="submit" disabled="true" class="btn btn-primary" value="Continuar" id="btnFinalizar">
+                              <c:if test="${!vistaAdmin}">
+                              <center><input type="button" disabled="true" class="btn btn-primary" value="Continuar" id="btnFinalizar" onclick="validarArchivos()"></center>
+                              </c:if>
+                              <c:if test="${vistaAdmin}">
+                              <center><input type="submit" disabled="true" class="btn btn-primary" value="Continuar" id="btnFinalizar"></center>
+                              </c:if>
                       </div>
                       
                        
@@ -905,7 +1059,7 @@
                 <div class="modal-body">
                     <iframe name="ifRespuesta" hidden></iframe>
                     <iframe style="width:100%;height: 338px;" id="ifArchivo" name="ifArchivo" src="" hidden></iframe>
-                    <c:if test="${!vistaAdmin}">
+                    <%--<c:if test="${!vistaAdmin}">--%>
                     <form id="formArchivo" name="formArchivo" method="POST" enctype="multipart/form-data" >
                         <div class="form-group">
                             <label class="control-label" for="archivo">Seleccione el archivo a cargar:</label>
@@ -914,8 +1068,8 @@
                             <input type="file" class="form-control input-sm" id="archivo" name="archivo" onchange="subirArchivo()" accept=".pdf" />
                         </div>
                     </form>  
-                    </c:if>
-                    <c:if test="${vistaAdmin}"><p>El documento no puede ser modificado</p></c:if>
+                    <%--</c:if>--%>
+                    <%--<c:if test="${vistaAdmin}"><p>El documento no puede ser modificado</p></c:if>--%>
                 </div>
                 <div class="modal-footer">
                   <button type="button" class="btn btn-sm btn-default" data-dismiss="modal">Cerrar</button>
@@ -1148,7 +1302,69 @@
               </div>
             </div>
           </div>
-                                    
+         
+         <div id="modalInformacionCecyte" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  <h4 class="modal-title">Registro información Cecyte</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="container-fluid">
+                        
+                        <form id="formGrupoCecyte" role="form" method="POST" action="RegistroGrupoCecyte">
+                            <div class="form-group col-md-6" >
+                                <label class="control-label" for="periodo2">Periodo:</label>
+                                <input type="text" class="form-control input-sm" id="periodo2" name="periodo2" required>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label class="control-label" for="grupo2">Grupo:</label>
+                                <input type="text" class="form-control input-sm" id="grupo2" name="grupo2" maxlength="5" required>                                                                 
+                            </div>
+                            <div class="form-group col-md-6" id="divSemestre2">
+                                <label class="control-label" for="semestre2">Semestre:</label>
+                                <input type="text" class="form-control input-sm" id="semestre2" name="semestre2" required>     
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label class="control-label" for="tipoInfo2">Tipo de información:</label>
+                                <input type="text" class="form-control input-sm" id="tipoInfoCecyte" name="tipoInfoCecyte" required>
+                            </div>
+                            <div class="form-group col-md-6" id="divVersion2">
+                                <label class="control-label" for="version2">Versión:</label>
+                                <input type="text" class="form-control input-sm" id="version2" name="version2" required>
+                            </div>
+                            <div class="form-group col-md-6" id="divCarrera2">
+                                <label class="control-label" for="carrera_cp2">Carrera:</label>
+                                <input type="text" class="form-control input-sm" id="carrera_cp2" name="carrera_cp2" required>
+                            </div>
+                            <div class="form-group col-md-6" id="divModulo2">
+                                <label class="control-label" for="modulo2">Modulo:</label>
+                                <input type="text" class="form-control input-sm" id="modulo2" name="modulo2" required>
+                            </div>
+                            <div class="form-group col-md-6" id="divSubmodulo2">
+                                <label class="control-label" for="submodulo2">Submodulo:</label>
+                                <input type="text" class="form-control input-sm" id="submodulo2" name="submodulo2" required>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label class="control-label" for="horas2">Horas:</label>
+                                <input type="number" class="form-control input-sm" id="horas2" name="horas2" required>                                                                 
+                            </div>
+                            <div class="form-group col-md-6" id="divAsignatura2">
+                                <label class="control-label" for="asignatura2" >Asignatura:</label>    
+                                <input type="text" class="form-control input-sm" id="asignatura2" name="asignatura2" required>
+                            </div>
+                            <div class="col-xs-12 text-center">
+                                <input type="button" class="btn btn-primary btn-sm" value="Cancelar" data-dismiss="modal"/>
+                                <input class="btn btn-sm btn-primary" id="btnEnviarHG" type="submit" value='Registrar'/>                               
+                            </div>
+                        </form>
+                    </div>                                       
+                </div>
+              </div>
+            </div>
+          </div> 
+
          <div class="modal fade" id="modalMensaje" role="dialog">
             <div class="modal-dialog">
 
@@ -1411,7 +1627,34 @@
               </div>
             </div>
         </div>
-         
+        <div id="modalValidarArchivos" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+              <div class="modal-content" style="width: 111%;">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  <h4 class="modal-title" >Archivos cargados en los requisitos</h4>
+                </div>
+                <div class="modal-body">
+                    <p class="control-label"><span class="glyphicon glyphicon-exclamation-sign incompleto" title="Sección incompleta" id="estatusArchivo" completo="false"></span> Información Académica - Documento comprobatorio</p>
+                    <p class="control-label"><span class="glyphicon glyphicon-exclamation-sign incompleto" title="Sección incompleta" id="estatusArchivo1" completo="false"></span> Información Laboral - Constancia de antiguedad</p>
+                    <p class="control-label"><span class="glyphicon glyphicon-exclamation-sign incompleto" title="Sección incompleta" id="estatusArchivo2" completo="false"></span> Información Laboral - Constancia de nombramiento definitivo</p>
+                    <p class="control-label"><span class="glyphicon glyphicon-exclamation-sign incompleto" title="Sección incompleta" id="estatusArchivo3" completo="false"></span> Información Laboral - Constancia de nota favorable</p>
+                    <p class="control-label"><span class="glyphicon glyphicon-exclamation-sign incompleto" title="Sección incompleta" id="estatusArchivo4" completo="false"></span> Horas frente a grupo - Constancia de horas frente a grupo</p>
+                    <p class="control-label"><span class="glyphicon glyphicon-exclamation-sign incompleto" title="Sección incompleta" id="estatusArchivo5" completo="false"></span> Compatibilidad - Carta protesta - Archivo de evidencia</p>
+                    <br>
+                    <br>
+                    <p class="control-label" style="font-weight: bold;">Nota:</p>
+                    <p class="control-label"><span class="glyphicon glyphicon-exclamation-sign incompleto"></span> Sin evidencia</p>
+                    <p class="control-label"><span class="glyphicon glyphicon-exclamation-sign completo"></span> Con evidencia</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="btnConfirmar" class="btn btn-sm btn-default" onclick="myFinRegistro()">Aceptar</button>
+                  <button type="button" class="btn btn-sm btn-default" data-dismiss="modal">Cancelar</button>
+                </div>
+              </div>
+            </div>
+        </div>
+		
          <!--FIN MODAL-->                   
                 
         </main>
@@ -1472,7 +1715,131 @@
                     $("#modalMensaje").modal("show");
                 }
             </script>
+            <script>
+                
+              function cambioObservacionesPaso1(objeto){
+                   if(objeto.value!=""){
+                        $("#btnFinalizarOb1").removeAttr("disabled");    
+                    }else{
+                        $("#btnFinalizarOb1").attr("disabled",true); 
+                    }
+               }
+               
+               function cambioObservacionesPaso2(objeto){
+                   if(objeto.value!=""){
+                        $("#btnFinalizarOb2").removeAttr("disabled");    
+                    }else{
+                        $("#btnFinalizarOb2").attr("disabled",true); 
+                    }
+               }
+               
+                function cambioObservacionesPaso3(objeto){
+                   if(objeto.value!=""){
+                        $("#btnFinalizarOb3").removeAttr("disabled");    
+                    }else{
+                        $("#btnFinalizarOb3").attr("disabled",true); 
+                    }
+               }
+               
+               function cambioObservacionesPaso4(objeto){
+                   if(objeto.value!=""){
+                        $("#btnFinalizarOb4").removeAttr("disabled");    
+                    }else{
+                        $("#btnFinalizarOb4").attr("disabled",true); 
+                    }
+               }
+               
+               function cerrar(id){
+    console.log(id);
+    switch(id){
+        case 1:         
+            $("#infoLaboral").collapse("show");
+            $("#infoAcademica").collapse("hide");
+             break
+        case 2:         
+            $("#infoHoras").collapse("show");
+            $("#infoLaboral").collapse("hide");
+             break
+        case 3:         
+            $("#infoCompatibilidad").collapse("show");
+            $("#infoHoras").collapse("hide");
+             break
+        case 4:         
+            //$("#infoCompatibilidad").collapse("show");
+            $("#infoCompatibilidad").collapse("hide");
+             $("#btnFinalizar").removeAttr("disabled");
+             break 
+           }           
+               }
+            </script>
         </c:if>
+		<script>
+        function myFinRegistro(){
+                var k=$('#banderaCompleto').val();
+                var cbPublico=$('#cbPublico').val();
+                
+                $.post("FinalizaRegistro", {k:k,cbPublico:cbPublico}, function(data){
+                     window.location.href = "/procesopromocion/SesionDocente";
+                });
+            }
+            function validarArchivos(){
+                if($("#btnEvidencia1").val().includes("Ver")){
+                    $("#estatusArchivo").attr("class","glyphicon glyphicon-ok-sign completo");
+                    $("#estatusArchivo").attr("title","Sección completa");
+                    $("#estatusArchivo").attr("completo",true);
+                }else{
+                    $("#estatusArchivo").attr("class","glyphicon glyphicon-exclamation-sign incompleto");
+                    $("#estatusArchivo").attr("title","Sección incompleta");
+                    $("#estatusArchivo").attr("completo",false);                            
+                }
+                if($("#btnEvidencia2").val().includes("Ver")){
+                    $("#estatusArchivo1").attr("class","glyphicon glyphicon-ok-sign completo");
+                    $("#estatusArchivo1").attr("title","Sección completa");
+                    $("#estatusArchivo").attr("completo",true);
+                }else{
+                    $("#estatusArchivo1").attr("class","glyphicon glyphicon-exclamation-sign incompleto");
+                    $("#estatusArchivo1").attr("title","Sección incompleta");
+                    $("#estatusArchivo1").attr("completo",false);                            
+                }
+                if($("#btnEvidencia3").val().includes("Ver")){
+                    $("#estatusArchivo2").attr("class","glyphicon glyphicon-ok-sign completo");
+                    $("#estatusArchivo2").attr("title","Sección completa");
+                    $("#estatusArchivo2").attr("completo",true);
+                }else{
+                    $("#estatusArchivo2").attr("class","glyphicon glyphicon-exclamation-sign incompleto");
+                    $("#estatusArchivo2").attr("title","Sección incompleta");
+                    $("#estatusArchivo2").attr("completo",false);                            
+                }
+                if($("#btnEvidencia6").val().includes("Ver")){
+                    $("#estatusArchivo3").attr("class","glyphicon glyphicon-ok-sign completo");
+                    $("#estatusArchivo3").attr("title","Sección completa");
+                    $("#estatusArchivo3").attr("completo",true);
+                }else{
+                    $("#estatusArchivo3").attr("class","glyphicon glyphicon-exclamation-sign incompleto");
+                    $("#estatusArchivo3").attr("title","Sección incompleta");
+                    $("#estatusArchivo3").attr("completo",false);                            
+                }
+                if($("#btnEvidencia4").val().includes("Ver")){
+                    $("#estatusArchivo4").attr("class","glyphicon glyphicon-ok-sign completo");
+                    $("#estatusArchivo4").attr("title","Sección completa");
+                    $("#estatusArchivo4").attr("completo",true);
+                }else{
+                    $("#estatusArchivo4").attr("class","glyphicon glyphicon-exclamation-sign incompleto");
+                    $("#estatusArchivo4").attr("title","Sección incompleta");
+                    $("#estatusArchivo4").attr("completo",false);                            
+                }
+                if($("#btnEvidencia7").val().includes("Ver")){
+                    $("#estatusArchivo5").attr("class","glyphicon glyphicon-ok-sign completo");
+                    $("#estatusArchivo5").attr("title","Sección completa");
+                    $("#estatusArchivo5").attr("completo",true);
+                }else{
+                    $("#estatusArchivo5").attr("class","glyphicon glyphicon-exclamation-sign incompleto");
+                    $("#estatusArchivo5").attr("title","Sección incompleta");
+                    $("#estatusArchivo5").attr("completo",false);                            
+                }
+                $("#modalValidarArchivos").modal("show");
+            }
+        </script>
         
     </body>
 </html>

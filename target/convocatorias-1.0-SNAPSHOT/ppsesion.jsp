@@ -126,6 +126,7 @@
                 <c:set var="disabled6" value=""></c:set>
             </c:if>            
 
+    <c:if test = "${Docente.infoRegistro[83]==null}">
             <div class="articulosses">
                 <article class="articleses ${disabled1}">
                     <h3>Paso 1 <span class="glyphicon glyphicon-ok-sign completo ${hidden1}" title="Sección completa"></span></h3>
@@ -168,13 +169,21 @@
                             <a onclick="abrirModalArchivoCarta(1)" ><h3>Carta de aceptación</h3></a>
                         </c:if> 
                     </article>
-                        
+
                     <article id="pasoFicha" for="pasoFicha" name="pasoFicha" class="articleses ${disabled5}" >
                         <h3>Paso 5:</h3>
                         <a href="FichaRegistro" target="_blank" ><img src="<%=Imagen.muestraImagen(RutaConfig.getRutaCarpeta()+"imagenes/EvidVal.jpg")%>" alt=""></a>
                         <a href="FichaRegistro"  target="_blank" ><h3>Comprobante de ficha <br/>de registro</h3></a>
-                    </article>
+                    </article>  
                 </c:if>
+    </c:if>   
+                    
+                <c:if test = "${Docente.infoRegistro[83]!=null}">    
+                    <center><article id="pasoFicha" for="pasoFicha" name="pasoFicha" class="articleses ${disabled5}">
+                        <a href="FichaRegistroClon" target="_blank" ><img src="<%=Imagen.muestraImagen(RutaConfig.getRutaCarpeta()+"imagenes/EvidVal.jpg")%>" alt=""></a>
+                        <a href="FichaRegistroClon"  target="_blank" ><h3>Comprobante de ficha <br/>de registro</h3></a>
+                        </article>    </center>
+                </c:if>  
                 <c:if test='${sessionScope["fechaDictaminacion"]=="1"}'>
                         <article id="pasoFicha" for="pasoFicha" name="pasoFicha" class="articleses ${disabled6}" >
                             <h3>Paso 6:</h3>

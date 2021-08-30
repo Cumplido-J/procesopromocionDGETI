@@ -132,6 +132,49 @@ $(document).ready(function () {
             return false;
         }
     });
+    
+    $('#formPreregistroRFC').submit(function(e) {
+        e.preventDefault();
+    }).validate({
+        messages: {
+            'rfc':{
+                required: "Campo requerido"
+            }
+        },
+        submitHandler:function(){
+                $.ajax({
+                    type:$('#formPreregistro').attr("method"),
+                    url:$('#formPreregistro').attr("action"),
+                    data:$('#formPreregistroRFC').serialize(),
+                    beforeSend:function(){
+                        $("#btnEnviarRFC").val("Guardando...");
+                        $("#btnEnviarRFC").attr("disabled","disabled");
+                    },
+                    complete:function(){
+                       $("#btnEnviarRFC").val("Guardar"); 
+                       $("#btnEnviarRFC").removeAttr("disabled");
+                    },success:function(data){
+                        if(data=="ok"){           
+                            $("#btnContinuar").removeAttr("style");
+                            $("#btnCerrar").attr("style","display:none;");
+                            $("#mensaje").html("Los datos fueron almacenados correctamente");            
+                            $("#modalMensaje").modal("show");
+
+                        }else{
+                            $("#btnCerrar").removeAttr("style");
+                            $("#btnContinuar").attr("style","display:none;");
+                            $("#mensaje").html(data);            
+                            $("#modalMensaje").modal("show");                        
+                        }
+                    },error:function(){
+
+                    }
+                });
+            
+            return false;
+        }
+    });
+    
 });
 function consultaWS(){
     var rfc=$("#rfc").val().toUpperCase();
@@ -245,3 +288,122 @@ function cambioSubsistema(objeto){
     }
 }
 }
+
+
+function validacionRegistro(objeto){
+    if(objeto.value==="1"){
+        $("#validRegistro").removeClass("hidden");
+        $("#validRegistro").attr("required",true);
+        addHiddenDelForm();
+
+    }else{
+        $("#validRegistro").addClass("hidden"); 
+        $("#validRegistro").removeAttr("required");
+        removeHiddenDelForm();   
+    }
+}
+
+function validacionRegistroFormulario(objeto){
+    if(objeto.value === "opcion-01"){
+        removeHiddenDelForm();
+        $("#valid-form-07").addClass("hidden");
+    }else if(objeto.value === "opcion-02"){
+        addHiddenDelForm();
+        $("#valid-form-07").removeClass("hidden");
+    }
+}
+
+function removeHiddenDelForm(){
+    $("#valid-form-01").removeClass("hidden");
+    $("#valid-form-02").removeClass("hidden");
+    $("#valid-form-03").removeClass("hidden");
+    $("#valid-form-04").removeClass("hidden");
+    $("#valid-form-05").removeClass("hidden");
+    $("#valid-form-06").removeClass("hidden");
+    $("#valid-form-07").addClass("hidden");
+    $("#valid-form-09").addClass("hidden"); 
+        $("#valid-form-10").removeAttr("hidden");
+                        $("#valid-form-11").attr("hidden",true);
+}
+function addHiddenDelForm(){
+    $("#valid-form-01").addClass("hidden");
+    $("#valid-form-02").addClass("hidden");
+    $("#valid-form-03").addClass("hidden");
+    $("#valid-form-04").addClass("hidden");
+    $("#valid-form-05").addClass("hidden");
+    $("#valid-form-06").addClass("hidden");
+                $("#valid-form-10").attr("hidden",true);
+
+}
+
+function noConservaCambio(){
+    removeHiddenDelForm();
+    $("#validRegistro").addClass("hidden"); 
+    $("#validRegistro").removeAttr("required");
+}
+
+function siConservaCambio(){
+    $("#valid-form-08").addClass("hidden"); 
+    $("#valid-form-09").removeClass("hidden");
+    $("#validRegistro").addClass("hidden"); 
+    $("#validRegistro").removeAttr("required");
+            $("#valid-form-11").removeAttr("hidden");
+}
+
+function comprobacionRFC2(){
+    var accion=$("#accion").val();
+    
+    var rfc=$("#rfc-02").val().toUpperCase();
+    var $regexRFC=/^([A-Z&Ñ]{3,4}[0-9]{2}(0[1-9]|1[012])(0[1-9]|[12][0-9]|3[01])[A-Z0-9]{2}[0-9A])$/;  
+    if(rfc.length>0){
+        if (!rfc.match($regexRFC)) {
+            $('#alertaRFC-02').removeAttr('hidden'); 
+            $('#rfc-02').addClass('error'); 
+        }else{
+             $('#alertaRFC-02').attr('hidden',true);
+             $('#rfc-02').removeClass('error'); 
+             
+             $.post("ConsultaWSPersonal", {rfc: rfc,accion:accion}, function(respuesta){
+                 var aux=respuesta.split("|");
+                 if(aux.length===2){
+                     if(aux[1]==='ok'){
+                        $("#btnEnviarRFC").removeAttr("disabled");
+                        //$("#valid-form-12").removeClass("hidden");
+                        //$("#valid-form-13").removeClass("hidden");
+                     }
+                     else{
+                        $("#btnEnviarRFC").attr("disabled",true);
+                        //$("#valid-form-12").addClass("hidden");
+                        //$("#valid-form-13").addClass("hidden");
+                        $("#mensaje").html(aux[1]);            
+                        $("#modalMensaje").modal("show");
+                        $("#btnContinuar").attr("style","display:none;");
+                    }
+                 }else{
+                     $("#mensaje").html("El RFC ingresado no se encuentra registrado en la institución, contacte al personal de recursos humanos de su plantel");            
+                     $("#modalMensaje").modal("show");
+                     $("#btnContinuar").attr("style","display:none;");
+                 }
+                 console.log(aux);
+             });
+        }
+    }else{
+        $('#alertaRFC-02').attr('hidden',true);
+    }
+}
+
+/*function comprobacionPassword2(){
+    var pass1=$("#pass01-p").val();
+    var pass2=$("#pass02-p").val();
+    
+    if(pass1 !== "" && pass2 !== ""){
+        if(pass1 === pass2 ){
+            $("#btnEnviarRFC").removeAttr("disabled");
+        }else{
+            $("#btnEnviarRFC").attr("disabled",true);
+            $("#mensaje").html("Contraseñas incorrectas");            
+            $("#modalMensaje").modal("show");
+            $("#btnContinuar").attr("style","display:none;");
+        }
+    }
+}*/

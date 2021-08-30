@@ -61,13 +61,26 @@
             <div class="container" style="margin-bottom: 20px;">
                 <form id="formPreregistro" method="POST" action="Preregistro">
                     <div class="row">
-                        <div class="form-group col-md-6">                               
+                        <div class="form-group col-md-12">                               
                             <label class="control-label" for="programa">Programa por el que participa:</label>
-                            <select class="form-control input-sm" id="programa" name="programa" required>                                  
+                            <select class="form-control input-sm" id="programa" name="programa" required onChange="validacionRegistro(this)">                                  
                                 ${catalogo.desplegarOpcionesProgramas()}
                             </select>
                         </div>
-                        <div class="form-group col-md-6">                               
+                    </div>
+                    
+                    <div class="row">
+                        <div class="form-group col-md-6 hidden" id="validRegistro" name="validRegistro">                               
+                            <div class="radio">
+                                <label>
+                                    <input type="radio" name="radio-01" value="opcion-01" onChange="validacionRegistroFormulario(this)"> <Strong>Deseas registrarte como un participante nuevo.</strong>
+                                </label>
+                                <label>
+                                  <input type="radio" name="radio-01" value="opcion-02" onChange="validacionRegistroFormulario(this)"> <Strong>Deseas participar con tu resultado anterior.</Strong>
+                                </label>
+                            </div>
+                        </div>        
+                        <div class="form-group col-md-6 hidden" id="valid-form-01">                               
                             <label class="control-label" for="programa">Subsistema:</label>
                             <select class="form-control input-sm" id="subsistema" name="subsistema" onChange="cambioSubsistema(this)" required>                                  
                                 <option value=''>-Seleccione-</option>
@@ -75,8 +88,26 @@
                                 <option value='2'>CECyTE</option>
                             </select>
                         </div>
-                    </div>
+     
+                    </div>         
+                          
                     <div class="row">
+                        <div class="form-group col-md-12 hidden" id="valid-form-07" style="text-align: justify;">
+                            <p>
+                                "En caso de que hayas participado en el Proceso de Promoción en el Servicio Docente por Cambio de Categoría Ciclo Escolar 2020-2021, tienes la posibilidad de conservar tus resultados. Si decides hacerlo, registra tu RFC y 
+                                elige la opción <strong>SI DESEO CONSERVAR LOS RESULTADOS</strong> y el puntaje que obtuviste te permitirá formar parte de la lista ordenada de resultados del Proceso de Promoción en el Servicio 
+                                Docente por Cambio de Categoría Ciclo Escolar 2021-2022.
+                                También puede elegir la opción <strong>NO DESEO CONSERVAR LOS RESULTADOS</strong> y deberas realizar el procedimiento completo de registro, como participante nuevo."
+                            </p>
+                            <div align="center" id="valid-form-08">
+                                <button type="button" class="btn btn-sm  btn-primary" onclick="noConservaCambio()">NO DESEO CONSERVAR LOS RESULTADOS</button>
+                                <button type="button" class="btn btn-sm btn-primary" onclick="siConservaCambio()">SI DESEO CONSERVAR LOS RESULTADOS</button>
+                            </div>
+                        </div> 
+                        
+                    </div>          
+                            
+                    <div class="row hidden" id="valid-form-02">
                         <div class="form-group col-md-4">                               
                             <label class="control-label" for="rfc">RFC:</label>
                             <input required class="form-control input-sm" type="text" id="rfc" name="rfc" onchange="consultaWS()" maxlength="13" />
@@ -91,7 +122,7 @@
                             <input required class="form-control input-sm text-uppercase" type="text" id="apellido1" name="apellido1" maxlength="50"/>
                         </div>
                     </div>
-                    <div class="row">
+                    <div class="row hidden" id="valid-form-03">
                         <div class="form-group col-md-4" id="seccionMaterno">                               
                             <label class="control-label" for="apellido2">Segundo apellido:</label>
                             <input required class="form-control input-sm text-uppercase" type="text" id="apellido2" name="apellido2" maxlength="50"/>
@@ -109,7 +140,7 @@
                             </select>
                         </div>
                     </div>
-                    <div class="row">
+                    <div class="row hidden" id="valid-form-04">
                         <div class="form-group col-md-4">                               
                             <label class="control-label" for="fijo">Teléfono fijo:</label>
                             <input required class="form-control input-sm" type="text" id="fijo" name="fijo" maxlength="10" />
@@ -124,7 +155,7 @@
                             <label class="error" id="alertaCorreo" hidden >Ingrese una dirección de correo válida</label>
                         </div>
                     </div>
-                    <div class="row">
+                    <div class="row hidden" id="valid-form-05">
                         <div class="form-group col-md-12">    
                             <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="p.e. Debilidad visual, debilidad auditiva, silla de ruedas, etc">
                             <label class="control-label" for="consideraciones">Consideraciones particulares:</label>
@@ -135,7 +166,7 @@
                             <textarea class="form-control text-uppercase" id="consideraciones" name="consideraciones" maxlength="200"></textarea>
                         </div>
                     </div>
-                    <div class="row">
+                    <div class="row hidden" id="valid-form-06">
                         <div class="form-group col-md-4">                               
                             <label class="control-label" for="pass1">Crear contraseña:</label>
                             <input required class="form-control input-sm" type="password" id="pass1" name="pass1" />
@@ -154,13 +185,37 @@
                         </div>
                     </div>
                     <div class="row">                        
-                        <div class="col-xs-12 text-right">
+                        <div class="col-xs-12 text-right" id="valid-form-10" hidden>
                             <input   class="btn btn-sm btn-primary" type="reset" value="Limpiar"/>
                             <input  class="btn btn-sm btn-primary" id="btnEnviar" type="submit" value='Guardar' disabled/>
                             <!--<input required type="button" class="btn btn-sm btn-primary" value="Guardar y continuar" onclick="mostrarSiguiente(1)"/>-->
                         </div>
+                        
                     </div>
                 </form>
+                <form id="formPreregistroRFC" method="POST" action="Preregistro">
+                    <div class="row">
+                            <div class="form-group col-md-4  hidden" id="valid-form-09"> 
+                                <input type="hidden" id="accion" name="accion" value="preregistroRFC">
+                                <label class="control-label" for="rfc">Registrar RFC:</label>
+                                <input  class="form-control input-sm" type="text" id="rfc-02" onchange="comprobacionRFC2()" name="rfc-02"  maxlength="13" />
+                                <label class="error" id="alertaRFC-02" hidden >Ingrese un RFC válido</label>
+                            </div>
+                           <!-- <div class="form-group col-md-4 hidden" id="valid-form-12">                               
+                                <label class="control-label" for="pass1">Crear contraseña:</label>
+                                <input  class="form-control input-sm" type="password" id="pass01-p" name="pass01-p" onChange="comprobacionPassword2()"/>
+                            </div>
+                            <div class="form-group col-md-4 hidden" id="valid-form-13">                               
+                                <label class="control-label" for="pass2">Confirmar contraseña:</label>
+                                <input  class="form-control input-sm" type="password" id="pass02-p" name="pass02-p" onChange="comprobacionPassword2()"/>
+                            </div>-->
+                        <br>
+                        <div class="col-xs-6 " id="valid-form-11" hidden>
+                            <input  class="btn btn-sm btn-primary" id="btnEnviarRFC" type="submit" value='Guardar' disabled/>
+                            <!--<input required type="button" class="btn btn-sm btn-primary" value="Guardar y continuar" onclick="mostrarSiguiente(1)"/>-->
+                        </div>
+                    </div>
+                </form>            
             </div>
             <div class="modal fade" id="modalMensaje" role="dialog">
             <div class="modal-dialog">
