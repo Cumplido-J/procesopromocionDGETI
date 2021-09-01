@@ -362,6 +362,9 @@
                                 <label class="control-label" for="archivo">Seleccione el archivo a cargar:</label>
                                 <input type="hidden" id="idArchivoR" name="idArchivoR" value="1" />
                                 <input type="file" class="form-control input-sm" id="archivoCartaRevisor" name="archivoCartaRevisor" onchange="subirArchivoR_();" accept=".pdf" />
+                                <a href="descargas/cartaaceptaciónbasesconvocatoriacecytehoras03022021.pdf" download>
+                                    Descargar carta aceptación revisor
+                                </a>
                         </form>  
                     </div>
                 </div>
