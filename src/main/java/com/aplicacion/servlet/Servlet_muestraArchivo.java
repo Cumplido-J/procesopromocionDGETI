@@ -76,8 +76,10 @@ public class Servlet_muestraArchivo extends HttpServlet {
             
             if(request.getParameter("i")!=null){
                 ruta=p.getProperty("rutaCartaAceptacion");   
+            }else if(request.getParameter("z")!=null){
+                ruta=p.getProperty("rutaCartaAceptacionRevisor");
             }else{
-                ruta=p.getProperty("rutaEvidenciasRegistro");   
+                ruta=p.getProperty("rutaEvidenciasRegistro");
             }
             
             HttpSession session= (HttpSession) request.getSession();
@@ -100,6 +102,9 @@ public class Servlet_muestraArchivo extends HttpServlet {
                 ruta+="/ejemplos/"+idDocumento+".pdf";
             }else if(request.getParameter("i")!=null){
                 idDocumento=request.getParameter("i").toString();
+                ruta+="/"+idUsuario+"_"+idDocumento+".pdf";
+            }else if(request.getParameter("z")!=null){
+                idDocumento=request.getParameter("z").toString();
                 ruta+="/"+idUsuario+"_"+idDocumento+".pdf";
             }
             documento=new File(ruta);

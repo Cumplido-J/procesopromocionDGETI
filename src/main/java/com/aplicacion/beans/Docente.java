@@ -528,4 +528,24 @@ public class Docente {
         }
     }
     
+    public boolean documentoCargado4(String idDocumento){
+        boolean retorno=false;
+        try{        
+            String rutaConfig = RutaConfig.getRutaConfig();
+            Properties p = new Properties();
+            p.load(new FileReader(rutaConfig));
+            String ruta=p.getProperty("rutaCartaAceptacionRevisor");
+            System.out.println(ruta);
+            ruta+="/"+idUsuario+"_"+idDocumento+".pdf";
+            System.out.println(ruta);
+            File documento;            
+            documento=new File(ruta);
+            retorno= documento.exists();
+        }catch(Exception e){
+            System.out.println(e.toString());
+        }finally{
+            return retorno;
+        }
+    }
+    
 }

@@ -32,7 +32,7 @@
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </button>
-                        <a class="navbar-brand" href="/">DGETI</a>
+                        <a class="navbar-brand" href="/">DGETI-CECYTE</a>
                     </div>
 
                     <div class="collapse navbar-collapse" id="subenlaces">
@@ -372,13 +372,23 @@
                                 <label class="control-label" for="archivo">Seleccione el archivo a cargar:</label>
                                 <input type="hidden" id="idArchivo" name="idArchivo" value="" />
                                 <input type="file" class="form-control input-sm" id="archivoCarta" name="archivoCarta" onchange="subirArchivo_();" accept=".pdf" />
-                                <c:if test = "${Docente.infoRegistro[75]=='1'}">
+                                <c:if test = "${Docente.infoRegistro[75]=='1'&& Docente.infoRegistro[64]=='1'}">
                                     <a href="descargas/cartaaceptaciónbasesconvocatoriaPPSDCC03022021.pdf" download>
                                     Descargar carta aceptación
                                     </a>
                                 </c:if>
-                                <c:if test = "${Docente.infoRegistro[75]=='2'}">
+                                <c:if test = "${Docente.infoRegistro[75]=='2' && Docente.infoRegistro[64]=='1'}">
                                     <a href="descargas/cartaaceptaciónbasesconvocatoriacecyte03022021.pdf" download>
+                                    Descargar carta aceptación
+                                    </a>
+                                </c:if>
+                                <c:if test = "${Docente.infoRegistro[75]=='1'&& Docente.infoRegistro[64]=='2'}">
+                                    <a href="descargas/cartaaceptaciónbasesconvocatoriahorasPPSDCC03022021.pdf" download>
+                                    Descargar carta aceptación
+                                    </a>
+                                </c:if>
+                                <c:if test = "${Docente.infoRegistro[75]=='2' && Docente.infoRegistro[64]=='2'}">
+                                    <a href="descargas/cartaaceptaciónbasesconvocatoriacecytehoras03022021.pdf" download>
                                     Descargar carta aceptación
                                     </a>
                                 </c:if>

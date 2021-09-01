@@ -34,7 +34,7 @@
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </button>
-                        <a class="navbar-brand" href="/">DGETI</a>
+                        <a class="navbar-brand" href="/">DGETI-CECYTE</a>
                     </div>
 
                     <div class="collapse navbar-collapse" id="subenlaces">
@@ -180,16 +180,42 @@
                         <a href="FichaRegistroClon"  target="_blank" ><h3>Ficha de <br/> registro Docente</h3></a>
                     </article>
                     <article class="articleses">
-                        <h3>Paso 5:</h3>
+                        <h3>Paso 5.1:</h3>
                         <a href="FichaRegistro" target="_blank" ><img src="<%=Imagen.muestraImagen(RutaConfig.getRutaCarpeta()+"imagenes/EvidVal.jpg")%>" alt=""></a>
                         <a href="FichaRegistro"  target="_blank" ><h3>Ficha de <br/> registro </h3></a>
                     </article>
                 </c:if>
+                    <c:if test='${sessionScope["permisoActual"]=="5"}'>
+                        <article class="articleses ">
+                            <h3>Paso 6: </h3>
+                            <!--                                <a title="Ver ejemplo" onclick="abrirModalEjemplo(1)"></a>
+                                                              <a><img src="<%=Imagen.muestraImagen(RutaConfig.getRutaCarpeta() + "imagenes/EvidReg.jpg")%>" alt=""></a><br> -->
+                            <c:if test = "${Docente.documentoCargado4('1')==true}">
+                                <a href="#" onclick="abrirModalRevisorFile(1)"><img src="<%=Imagen.muestraImagen(RutaConfig.getRutaCarpeta() + "imagenes/EvidVal.jpg")%>" alt=""></a>
+                                <input id="btnEvidenciaR" type="button" class="btn btn-sm btn-link" value="Ver documento" onclick="abrirModalRevisorFile(1)"/>
+                                <a onclick="abrirModalRevisorFile(1)" ><h3>Carta revisor</h3></a>
+                            </c:if>
+                            <c:if test = "${Docente.documentoCargado4('1')==false}">
+                                <a onclick="abrirModalRevisorFile(1)" ><img src="<%=Imagen.muestraImagen(RutaConfig.getRutaCarpeta() + "imagenes/EvidReg.jpg")%>" alt=""></a>
+                                <input id="btnEvidenciaR" type="button" class="btn btn-sm btn-link incompleto" value="" onclick="abrirModalRevisorFile(1)"/>
+                                <a onclick="abrirModalRevisorFile(1)" ><h3>Carta revisor</h3></a>
+                            </c:if>
+                        </article>
+                    </c:if>
+                    <c:if test='${sessionScope["permisoActual"]=="5"}'>
+                    <article id="pasoFicha" for="pasoFicha" name="pasoFicha" class="articleses" >
+                            <h3>Paso 7:</h3>
+                            <a href="FichaDictamen" target="_blank" ><img src="<%=Imagen.muestraImagen(RutaConfig.getRutaCarpeta()+"imagenes/EvidVal.jpg")%>" alt=""></a>
+                            <a href="FichaDictamen"  target="_blank" ><h3>Ficha de <br/> dictamen </h3></a>
+                    </article>
+                    </c:if>
+                    <c:if test='${sessionScope["permisoActual"]=="6"}'>
                     <article id="pasoFicha" for="pasoFicha" name="pasoFicha" class="articleses" >
                             <h3>Paso 6:</h3>
                             <a href="FichaDictamen" target="_blank" ><img src="<%=Imagen.muestraImagen(RutaConfig.getRutaCarpeta()+"imagenes/EvidVal.jpg")%>" alt=""></a>
                             <a href="FichaDictamen"  target="_blank" ><h3>Ficha de <br/> dictamen </h3></a>
                     </article>
+                    </c:if>
                     <c:choose>
                         <c:when test='${sessionScope["permisoActual"]=="6"}'>                                            
                             <article class="articleses">
@@ -319,24 +345,50 @@
               </div>
             </div>
         </div>
-                    
-                    <div id="modalEjemplo" class="modal fade" role="dialog">
+        
+        <div id="modalArchivoR" class="modal fade" role="dialog">
             <div class="modal-dialog">
-              <div class="modal-content">
+              <div class="modal-content" style="width: 700px;height: 672px;">
                 <div class="modal-header">
                   <button type="button" class="close" data-dismiss="modal">&times;</button>
-                  <h4 class="modal-title" id="tituloModalEjemplo">Carga de archivos</h4>
+                  <h4 class="modal-title" >Carta de aceptación revisor</h4>
                 </div>
                 <div class="modal-body">
-                    <iframe style="width:100%;" id="ifArchivoEjemplo" name="ifArchivoEjemplo" src=""></iframe>
-                                       
+                    <iframe name="ifArchivoRevisor" hidden></iframe>
+                    <iframe style="width:100%;height: 338px;" id="ifArchivoRevisor" name="ifArchivoRevisor" src="" hidden></iframe>
+                    <div id="seccionCarga">
+                        <form id="formArchivo1" name="formArchivo1" method="POST" enctype="multipart/form-data" >
+                                <label class="text-warning" id="alertaCarga"><span class="glyphicon glyphicon-warning-sign"></span>&nbsp;Cárgue su archivo de evidencia ya firmado.</label>
+                                <label class="control-label" for="archivo">Seleccione el archivo a cargar:</label>
+                                <input type="hidden" id="idArchivoR" name="idArchivoR" value="1" />
+                                <input type="file" class="form-control input-sm" id="archivoCartaRevisor" name="archivoCartaRevisor" onchange="subirArchivoR_();" accept=".pdf" />
+                        </form>  
+                    </div>
                 </div>
                 <div class="modal-footer">
                   <button type="button" class="btn btn-sm btn-default" data-dismiss="modal">Cerrar</button>
                 </div>
               </div>
             </div>
-          </div>
+        </div>
+                    
+                    <div id="modalEjemplo" class="modal fade" role="dialog">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                    <h4 class="modal-title" id="tituloModalEjemplo">Carga de archivos</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <iframe style="width:100%;" id="ifArchivoEjemplo" name="ifArchivoEjemplo" src=""></iframe>
+
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-sm btn-default" data-dismiss="modal">Cerrar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     
                     <div class="modal fade" id="modalMensaje" role="dialog">
             <div class="modal-dialog">
@@ -366,23 +418,57 @@
         <script src="js/funcionesRegistro.js"></script> 
         <script>
             function subirArchivo_(){
-    $("#modalArchivo").modal("hide");
-    
-    if(validaArchivo_()){
-        document.formArchivo.target="ifRespuesta";
-        document.formArchivo.action="GuardarArchivo";
-        document.formArchivo.submit();
-        var id=$("#idArchivo").val(); 
-        $("#btnEvidencia"+id).attr("value","Ver documento");
-        $("#alertaBtnEvidencia"+id).attr("style","display:none;");
-        $("#mensaje").html("El archivo fue cargado correctamente");
-    }
-    $("#modalMensaje").modal("show");
-}
+                $("#modalArchivo").modal("hide");
 
+                if(validaArchivo_()){
+                    document.formArchivo.target="ifRespuesta";
+                    document.formArchivo.action="GuardarArchivo";
+                    document.formArchivo.submit();
+                    var id=$("#idArchivo").val(); 
+                    $("#btnEvidencia"+id).attr("value","Ver documento");
+                    $("#alertaBtnEvidencia"+id).attr("style","display:none;");
+                    $("#mensaje").html("El archivo fue cargado correctamente");
+                }
+                $("#modalMensaje").modal("show");
+            }
+            function subirArchivoR_(){
+                $("#modalArchivo").modal("hide");
+
+                if(validaArchivoR_()){
+                    document.formArchivo1.target="ifArchivoRevisor";
+                    document.formArchivo1.action="GuardarArchivo";
+                    document.formArchivo1.submit();
+                    var id=$("#idArchivoR").val(); 
+                    $("#btnEvidenciaR").attr("value","Ver documento");
+                    $("#alertaBtnEvidencia"+id).attr("style","display:none;");
+                    $("#mensaje").html("El archivo fue cargado correctamente");
+                }
+                $("#modalMensaje").modal("show");
+            }
 function validaArchivo_(){
     var retorno=true;
     var elemento=document.getElementById("archivoCarta");
+    var fileName = elemento.files[0].name;
+    var fileSize = elemento.files[0].size;
+
+    if(fileSize > 1000000){
+            $("#mensaje").html("El archivo no debe superar 1MB");    
+            elemento.value = '';
+            retorno=false;
+    }else{
+            var ext = fileName.split('.').pop();
+            ext = ext.toLowerCase();            
+            if(ext!="pdf"){
+               $("#mensaje").html("Solo se aceptan archivos PDF"); 
+               elemento.value = ''; // reset del valor               
+               retorno=false;
+            }            
+    }
+    return retorno;
+}
+function validaArchivoR_(){
+    var retorno=true;
+    var elemento=document.getElementById("archivoCartaRevisor");
     var fileName = elemento.files[0].name;
     var fileSize = elemento.files[0].size;
 
@@ -415,6 +501,19 @@ function validaArchivo_(){
                 $("#idArchivo").val(id);
                 
                 $("#modalArchivo").modal("show");
+            }
+            function abrirModalRevisorFile(id){    
+                if($("#btnEvidenciaR").attr("value")=="Ver documento"){
+                    $("#ifArchivoRevisor").attr("src","Archivo?z="+id); 
+                    $("#ifArchivoRevisor").removeAttr("hidden");
+                }else{
+                    $("#ifArchivoRevisor").attr("src","Archivo?i="+id); 
+                    $("#ifArchivoRevisor").removeAttr("hidden");
+                }
+
+                $("#idArchivoR").val(id);
+                
+                $("#modalArchivoR").modal("show");
             }
         </script>
     </body>

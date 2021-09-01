@@ -110,6 +110,7 @@ public class Servlet_guardarArchivo extends HttpServlet {
             String idRequisito=request.getParameter("idArchivo");
 
             Part archivoCarta = request.getPart("archivoCarta");
+            Part archivoCartaRevisor = request.getPart("archivoCartaRevisor");
             
             if(archivoCarta!=null){
                 String rutaCarta=p.getProperty("rutaCartaAceptacion");
@@ -123,6 +124,29 @@ public class Servlet_guardarArchivo extends HttpServlet {
                 rutaCarta+="/"+idUsuario+"_"+idRequisito+".pdf";
                 System.out.println(rutaCarta);
                 File f=new File(rutaCarta);
+                FileOutputStream ous=new FileOutputStream(f);
+                int dato=is.read();
+                while(dato!=-1){
+                    ous.write(dato);
+                    dato=is.read();
+                }
+                ous.close();
+                is.close();
+            }else if(archivoCartaRevisor!=null){
+                String rutaCartaRevisor=p.getProperty("rutaCartaAceptacionRevisor");
+                
+                InputStream is=archivoCartaRevisor.getInputStream();
+
+                File carpeta = new File(rutaCartaRevisor);
+                if (!carpeta.exists()) {
+                    carpeta.mkdirs();                    
+                }
+                
+                String idRequisitoR=request.getParameter("idArchivoR");
+                
+                rutaCartaRevisor+="/"+idUsuario+"_"+idRequisitoR+".pdf";
+                System.out.println(rutaCartaRevisor);
+                File f=new File(rutaCartaRevisor);
                 FileOutputStream ous=new FileOutputStream(f);
                 int dato=is.read();
                 while(dato!=-1){
