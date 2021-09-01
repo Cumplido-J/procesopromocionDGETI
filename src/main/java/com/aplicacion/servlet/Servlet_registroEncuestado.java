@@ -97,6 +97,7 @@ public class Servlet_registroEncuestado extends HttpServlet {
                 String curp=request.getParameter("curp");
                 String correo=request.getParameter("correo");
                 String tipoEncuesta=request.getParameter("tipoEncuesta");
+                String idPeriodoActivo=request.getParameter("idPeriodoActivo");
                 //String[] p2={idUsuario,curp,correo,tipoEncuesta};
                 Metodos_sql metodos=new Metodos_sql(); 
                 Correo c=new Correo();
@@ -104,10 +105,11 @@ public class Servlet_registroEncuestado extends HttpServlet {
                 List<String[]> retorno=null;
                 do{
                     parametros[0]=Pin.generaPin();
-                    retorno=metodos.ejecutaSPEncuestas("sp_selectLecturaUrl",parametros);
+                    String[] parametrosAux={parametros[0],idPeriodoActivo};
+                    retorno=metodos.ejecutaSPEncuestas("sp_selectLecturaUrl",parametrosAux);
                 }while(!retorno.isEmpty());
                 
-                String[] parametros2={rfc,curp,parametros[0],tipoEncuesta,correo};
+                String[] parametros2={rfc,curp,parametros[0],tipoEncuesta,correo,idPeriodoActivo};
                 retorno=metodos.ejecutaSPEncuestas("sp_insertLecturaUrl",parametros2);
                 if(!retorno.isEmpty()){                    
                     if(retorno.get(0)[0].equals("ok")){   
@@ -122,7 +124,7 @@ public class Servlet_registroEncuestado extends HttpServlet {
                     Docente d=new Docente();
                     d.setIdUsuario(idUsuario);
                     d.setRfc(rfc);
-                    d.consultaEncuestados();
+                    d.consultaEncuestados2(idPeriodoActivo);
                     String[] datos=d.generaFilasEncuestados(tipoEncuesta);
                     System.out.println(datos[0]+"|"+datos[1]);
                     out.print(datos[0]+"|"+datos[1]); 

@@ -235,8 +235,8 @@ public class Servlet_registroInfoAcademica extends HttpServlet {
             observacion1P1D = request.getParameter("observacion1P1D");
             String tipoOb = ( observacion1P1R.length() > 0 ) ? "5" : "1";
             String observacion =( observacion1P1R.length() > 0 ) ? observacion1P1R : observacion1P1D;
-            byte ptext[] = observacion.getBytes("ISO-8859-1"); 
-            String value = new String(ptext, "UTF-8");
+            //byte ptext[] = observacion.getBytes("ISO-8859-1"); 
+            String value = observacion;//new String(ptext, "UTF-8");
             String[] parametros={tipoOb,idDocente,value};
             datos=metodo.ejecutaSP("sp_insertObservacionesPaso1",parametros);
             
@@ -264,8 +264,8 @@ public class Servlet_registroInfoAcademica extends HttpServlet {
             String tipoOb = ( observacion2P1R.length() > 0 ) ? "6" : "2";
             String observacion =( observacion2P1R.length() > 0 ) ? observacion2P1R : observacion2P1D;
             
-            byte ptext[] = observacion.getBytes("ISO-8859-1"); 
-            String value = new String(ptext, "UTF-8");
+            //byte ptext[] = observacion.getBytes("ISO-8859-1"); 
+            String value = observacion;//new String(ptext, "UTF-8");
             String[] parametros={tipoOb,idDocente,value};
             datos=metodo.ejecutaSP("sp_insertObservacionesPaso1",parametros);
             if(!datos.isEmpty()){
@@ -292,8 +292,8 @@ public class Servlet_registroInfoAcademica extends HttpServlet {
             String tipoOb = ( observacion3P1R.length() > 0 ) ? "7" : "3";
             String observacion =( observacion3P1R.length() > 0 ) ? observacion3P1R : observacion3P1D;
             
-            byte ptext[] = observacion.getBytes("ISO-8859-1"); 
-            String value = new String(ptext, "UTF-8");
+            //byte ptext[] = observacion.getBytes("ISO-8859-1"); 
+            String value = observacion;//new String(ptext, "UTF-8");
             String[] parametros={tipoOb,idDocente,value};
             datos=metodo.ejecutaSP("sp_insertObservacionesPaso1",parametros);
             if(!datos.isEmpty()){
@@ -320,8 +320,8 @@ public class Servlet_registroInfoAcademica extends HttpServlet {
             String tipoOb = ( observacion4P1R.length() > 0 ) ? "8" : "4";
             observacion =( observacion4P1R.length() > 0 ) ? observacion4P1R : observacion4P1D;
             
-            byte ptext[] = observacion.getBytes("ISO-8859-1"); 
-            String value = new String(ptext, "UTF-8");
+            //byte ptext[] = observacion.getBytes("ISO-8859-1"); 
+            String value = observacion;//new String(ptext, "UTF-8");
             String[] parametros={tipoOb,idDocente,value};
             datos=metodo.ejecutaSP("sp_insertObservacionesPaso1",parametros);
                         //System.out.println("aqui--->>>>>observacion4P1D : "+value);

@@ -100,10 +100,10 @@ public class Servlet_cbFichaDictamen extends HttpServlet {
             
             CriteriosValoracion cv=new CriteriosValoracion();
             String[][] puntajesDictaminador=cv.consultaPuntajesDictaminador(idUsuario);
-            String[] puntajeEncuestas=cv.consultaPuntajeEncuestas(rfc);
+           
             request.setAttribute("puntajesDictaminador", puntajesDictaminador);
             request.setAttribute("resultados", cv.getFilasResultados2(idUsuario,vistaAdmin, idPermiso));
-            request.setAttribute("puntajeEncuestas", puntajeEncuestas);
+            
             request.setAttribute("cursos", cv.getFilasCursos(idUsuario,vistaAdmin,idPermiso,permisoEdicion));
             request.setAttribute("aportaciones", cv.getFilasAportaciones(idUsuario,vistaAdmin,idPermiso,permisoEdicion));
             request.setAttribute("tutorias", cv.getFilasTutorias(idUsuario,vistaAdmin,idPermiso,permisoEdicion));
@@ -115,6 +115,10 @@ public class Servlet_cbFichaDictamen extends HttpServlet {
             docente.consultaInfoAspirante();
             docente.consultaHoras();            
             docente.actualizaBanderaIngles();
+            
+            String[] puntajeEncuestas=cv.consultaPuntajeEncuestas(rfc,docente.getIdPeriodoRegistro());
+            request.setAttribute("puntajeEncuestas", puntajeEncuestas);
+            
             String[] parametros={idUsuario};            
             List<String[]> infoPlazas=new Metodos_sql().ejecutaSP("sp_consultaUsuarioPlaza",parametros);
             request.setAttribute("infoPlazas", infoPlazas);

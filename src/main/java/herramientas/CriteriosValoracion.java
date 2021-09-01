@@ -905,9 +905,9 @@ public class CriteriosValoracion {
         }        
         return respuesta;
     }
-    public String[] consultaPuntajeEncuestas(String rfc){
+    public String[] consultaPuntajeEncuestas(String rfc, String idPeriodo){
         String[] respuesta={"","","0","0","0","0"};
-        String[] parametros={rfc};
+        String[] parametros={rfc, idPeriodo};
         List<String[]> datos=metodo.ejecutaSPEncuestas("sp_selectConsultaResultado",parametros);
         if(!datos.isEmpty()){ 
             respuesta=datos.get(0);

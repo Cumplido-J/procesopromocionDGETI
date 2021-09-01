@@ -92,7 +92,7 @@ public class Servlet_cbRegistroCriterios extends HttpServlet {
             docente.consultaInfoAspirante();             
             docente.consultaDocumentos();
             String[][] puntajes=cv.consultaPuntajes(idUsuario); 
-            String[] puntajeEncuestas=cv.consultaPuntajeEncuestas(rfc);
+            String[] puntajeEncuestas=cv.consultaPuntajeEncuestas(rfc, docente.getIdPeriodoRegistro());
             if(puntajeEncuestas[5]==null || puntajeEncuestas[5].isEmpty()){
                 puntajeEncuestas[5]="0.0";
             }

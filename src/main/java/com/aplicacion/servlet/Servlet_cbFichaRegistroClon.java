@@ -108,7 +108,7 @@ public class Servlet_cbFichaRegistroClon extends HttpServlet {
                 docente.actualizaBanderaIngles();
             }
             String[][] puntajes=cv.consultaPuntajes(idUsuario); 
-            String[] puntajeEncuestas=cv.consultaPuntajeEncuestas(rfc);
+            String[] puntajeEncuestas=cv.consultaPuntajeEncuestas(rfc, docente.getIdPeriodoRegistro());
             String[] parametros={idUsuario};            
             List<String[]> infoPlazas=new Metodos_sql().ejecutaSP("sp_consultaUsuarioPlaza",parametros);
             request.setAttribute("infoPlazas", infoPlazas);

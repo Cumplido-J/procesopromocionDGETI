@@ -178,13 +178,13 @@ function cancelar(){
 function cambioEncuesta(){
     $("#respuesta").html("");
 }
-function borrarEncuestado(idEncuestado,idTipo){
-    $("#btnCancelaPin").attr("onClick","cancelaPin("+idEncuestado+","+idTipo+")");
+function borrarEncuestado(idEncuestado,idTipo,idPeriodo){
+    $("#btnCancelaPin").attr("onClick","cancelaPin("+idEncuestado+","+idTipo+","+idPeriodo+")");
     $("#modalConfirmacion").modal("show");
 }
-function cancelaPin(idEncuestado,idTipo){
+function cancelaPin(idEncuestado,idTipo,idPeriodo){
     $("#modalConfirmacion").modal("hide");
-    $.post("CancelaPin", {i: idEncuestado,t:idTipo}, function(data){
+    $.post("CancelaPin", {i: idEncuestado,t:idTipo, p:idPeriodo}, function(data){
         var aux=data.split("|");
         if(aux.length==2){  
             var id=idTipo;

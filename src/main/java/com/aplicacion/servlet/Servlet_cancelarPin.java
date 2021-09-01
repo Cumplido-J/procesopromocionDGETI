@@ -84,7 +84,8 @@ public class Servlet_cancelarPin extends HttpServlet {
                 String idUsuario=session.getAttribute("idUsuario").toString();
                 String rfc=session.getAttribute("rfc").toString();
                 String idEncuestado=request.getParameter("i").toString(); 
-                String idTipo=request.getParameter("t").toString(); 
+                String idTipo=request.getParameter("t").toString();
+                String idPeriodo=request.getParameter("p").toString();
                 Metodos_sql metodos=new Metodos_sql();
                 String[] parametros={idEncuestado};
                 List<String[]>retorno;
@@ -94,7 +95,7 @@ public class Servlet_cancelarPin extends HttpServlet {
                         Docente d=new Docente();
                         d.setIdUsuario(idUsuario);
                         d.setRfc(rfc);
-                        d.consultaEncuestados();
+                        d.consultaEncuestados2(idPeriodo);
                         String[] datos=d.generaFilasEncuestados(idTipo);
                         if(datos[0]==""){
                             datos[0]="<tr><td colspan='3'>Sin información</td></tr>";

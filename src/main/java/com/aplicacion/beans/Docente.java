@@ -39,6 +39,16 @@ public class Docente {
     private List<String[]> encuestados=null;
     private int totalEncuestados=0;
     private String idConvocatoria=null;
+    private String idPeriodoRegistro=null;
+     
+    public String getIdPeriodoRegistro() {
+        return idPeriodoRegistro;
+    }
+
+    public void setIdPeriodoRegistro(String idPeriodoRegistro) {
+        this.idPeriodoRegistro = idPeriodoRegistro;
+    } 
+    
     public Docente() {
     }
 
@@ -277,6 +287,7 @@ public class Docente {
         if(!datos.isEmpty()){
             infoRegistro=datos.get(0);
             idConvocatoria=infoRegistro[65];
+            idPeriodoRegistro=infoRegistro[84];
         }
     }
     public void consultaInfoAspirante2(){
@@ -286,6 +297,7 @@ public class Docente {
         if(!datos.isEmpty()){
             infoRegistro=datos.get(0);
             idConvocatoria=infoRegistro[65];
+            idPeriodoRegistro=infoRegistro[82];
         }
     }
     public void consultaDocumentos(){
@@ -405,7 +417,7 @@ public class Docente {
     
     public void consultaEncuestados(){
         Metodos_sql metodos=new Metodos_sql();
-        String[] parametros={rfc};
+        String[] parametros={rfc,idPeriodoRegistro};
         encuestados= metodos.ejecutaSPEncuestas("sp_selectLecturaUrlRFC",parametros);
         totalEncuestados=encuestados.size();
     }
@@ -424,7 +436,7 @@ public class Docente {
                 fila="<tr><td>"+encuestado[2]+"</td><td>"+encuestado[4]+"</td><td>";
                 System.out.println(encuestado[5]);
                 if(encuestado[5].equals("PENDIENTE")){
-                    fila+="<button type='button' class='btn btn-sm' title='Borrar' onclick='borrarEncuestado("+encuestado[0]+","+encuestado[3]+")'>";
+                    fila+="<button type='button' class='btn btn-sm' title='Borrar' onclick='borrarEncuestado("+encuestado[0]+","+encuestado[3]+","+encuestado[7]+")'>";
                     fila+="<span class='glyphicon glyphicon-trash'></span>";
                     fila+="</button>";
                 }else if(encuestado[5].equals("CONCLUIDO")){
@@ -467,7 +479,7 @@ public class Docente {
                 if(encuestado[3].equals(tipoEncuesta)){
                     fila+="<tr><td>"+encuestado[2]+"</td><td>"+encuestado[4]+"</td><td>";
                     if(encuestado[5].equals("PENDIENTE")){
-                        fila+="<button type='button' class='btn btn-sm' title='Borrar' onclick='borrarEncuestado("+encuestado[0]+","+encuestado[3]+")'>";
+                        fila+="<button type='button' class='btn btn-sm' title='Borrar' onclick='borrarEncuestado("+encuestado[0]+","+encuestado[3]+","+encuestado[7]+")'>";
                         fila+="<span class='glyphicon glyphicon-trash'></span>";
                         fila+="</button>";
                     }else if(encuestado[5].equals("CONCLUIDO")){
@@ -548,4 +560,10 @@ public class Docente {
         }
     }
     
+    public void consultaEncuestados2(String idPeriodoRegistro){
+        Metodos_sql metodos=new Metodos_sql();
+        String[] parametros={rfc,idPeriodoRegistro};
+        encuestados= metodos.ejecutaSPEncuestas("sp_selectLecturaUrlRFC",parametros);
+        totalEncuestados=encuestados.size();
+    }
 }
