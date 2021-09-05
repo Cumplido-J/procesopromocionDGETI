@@ -151,18 +151,45 @@ public class Docente {
         String respuesta="";
         for(String[] hora:listaHoras){
                 respuesta+="<tr><td>";
-                respuesta+="Periodo: "+hora[2]+"<br/>";                
-                if(hora[7].equals("A")){
-                    respuesta+="Componente básico y/o propedéutico: ";
-                }else if(hora[7].equals("S")){
-                    respuesta+="Componente profesional:  ";
-                }else if(hora[7].equals("T")){
-                    respuesta+="Taller: ";
-                }                
-                if(hora[5]!=null){
-                    respuesta+=hora[5]+" - ";
+                respuesta+="Periodo: "+hora[2]+"<br/>";    
+                
+                if(hora[3]!=null){
+                    if(hora[7].equals("A")){
+                        respuesta+="Componente básico y/o propedéutico: ";
+                    }else if(hora[7].equals("S")){
+                        respuesta+="Componente profesional:  ";
+                    }else if(hora[7].equals("T")){
+                        respuesta+="Taller: ";
+                    }                
+                    if(hora[5]!=null){
+                        respuesta+=hora[5]+" - ";
+                    }
+                    respuesta+=hora[4]+"<br/>";
                 }
-                respuesta+=hora[4]+"<br/>";                                                              
+                
+                String auxClave2=hora[15]+" - "+hora[16];
+                if(hora[13]!=null){
+                    if(hora[14].equals("A")){
+                        respuesta+="Componente básico y/o propedéutico: "+(hora[15]!=null ? auxClave2  : hora[16])+"<br/>";
+                    }else if(hora[14].equals("S")){
+                        respuesta+="Componente profesional:  "+(hora[15]!=null ? auxClave2  : hora[16])+"<br/>";
+                    }else if(hora[14].equals("T")){
+                        respuesta+="Taller: "+(hora[15]!=null ? auxClave2  : hora[16])+"<br/>";
+                    }
+                }
+                
+                String auxClave3=hora[19]+" - "+hora[20];
+                if(hora[17]!=null){
+
+                    if(hora[18].equals("A")){
+                        respuesta+="Componente básico y/o propedéutico: "+(hora[19]!=null ? auxClave3  : hora[20])+"<br/>";
+                    }else if(hora[18].equals("S")){
+                        respuesta+="Componente profesional:  "+(hora[19]!=null ? auxClave3  : hora[20])+"<br/>";
+                    }else if(hora[18].equals("T")){
+                        respuesta+="Taller: "+(hora[19]!=null ? auxClave3  : hora[20])+"<br/>";
+                    }
+                }
+                
                 respuesta+="Grupo: "+hora[10]+"<br/>"; 
                 respuesta+="Semestre: "+hora[6]+"<br/>"; 
                 respuesta+="Horas: "+hora[9]+"<br/>";
@@ -207,6 +234,11 @@ public class Docente {
         Metodos_sql metodo = new Metodos_sql();
         String[] parametros={idUsuario,idPeriodo,idAsignatura,horas,grupo,semestre};
         List<String[]> datos=metodo.ejecutaSP("sp_registroHorasGrupo",parametros);          
+    }
+    public void registraHorasDGETI(String idPeriodo,String idAsignatura,String horas,String grupo,String semestre,String idAsignatura2,String idAsignatura3){
+        Metodos_sql metodo = new Metodos_sql();
+        String[] parametros={idUsuario,idPeriodo,idAsignatura,horas,grupo,semestre,idAsignatura2,idAsignatura3};
+        List<String[]> datos=metodo.ejecutaSP("sp_registroHorasGrupoDGETI",parametros);          
     }
     public void borraHoras(String idHoraGrupo){
         Metodos_sql metodo = new Metodos_sql();
@@ -275,8 +307,10 @@ public class Docente {
     }
     public void actualizaBanderaIngles(){
         for(String[] dato:listaHoras){
-            if(dato[4].contains("INGLÉS")||dato[4].contains("INGLES")||dato[4].contains("CENNI")){
-                banderaIngles=true;
+            if(dato[4]!=null){
+                if(dato[4].contains("INGLÉS")||dato[4].contains("INGLES")||dato[4].contains("CENNI")){
+                    banderaIngles=true;
+                }
             }
         }
     }

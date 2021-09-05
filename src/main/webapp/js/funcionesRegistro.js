@@ -608,7 +608,8 @@ $(document).ready(function () {
                         $("#semestre").val("");
                         $("#grupo").val("");
                         $("#horas").val("");
-                        cambioTipoInfoCecyte();
+                        //cambioTipoInfoCecyte();
+                        limpiarFormHoras();
                     }
                 },error:function(){
                     
@@ -1062,7 +1063,7 @@ function cargaAsignaturas() {
 function cargaAsignaturas1() {
     version=$("#version1").val();
     semestre=$("#semestre1").val();
-    $.get("ConsultaCatalogos", {k: "5",v:version,s:semestre,m:"2"}, function(respuesta){
+    $.get("ConsultaCatalogos", {k: "22",v:version,s:semestre,m:"2"}, function(respuesta){
         $("#asignatura1").html(respuesta);
     }); 
 }
@@ -1983,4 +1984,66 @@ function mostrarCamposDirector() {
    else{
         document.getElementById('seccionDirectivoHoras').style.display = 'none';
    }
+}
+
+function cargaCarreras2() {
+    version=$("#version2").val();
+    semestre=$("#semestre1").val();
+    $.get("ConsultaCatalogos", {k: "24",v:version,s:semestre}, function(respuesta){
+        $("#carrera_cp1").html(respuesta);
+        $("#modulo1").val("");
+        $("#submodulo1").val("");
+    }); 
+}
+
+function cambioCarreraCP1_1() {
+    version=$("#version2").val();
+    semestre=$("#semestre1").val();
+    carrera=$("#carrera_cp1").val();
+    $.get("ConsultaCatalogos", {k: "26",v:version,s:semestre,c:carrera}, function(respuesta){
+        $("#modulo1").html(respuesta);
+        $("#submodulo1").val("");
+    }); 
+}
+
+function cambioModulo2() {
+    version=$("#version2").val();
+    semestre=$("#semestre1").val();
+    carrera=$("#carrera_cp1").val();
+    modulo=$("#modulo1").val();
+    $.get("ConsultaCatalogos", {k: "25",v:version,s:semestre,c:carrera,m:modulo}, function(respuesta){
+        $("#submodulo1").html(respuesta);
+    }); 
+}
+
+
+function cargaVersionCBP(idSubsistema){
+      $.get("ConsultaCatalogos", {k: "23",m:idSubsistema}, function(respuesta){
+        $("#version1").html(respuesta);
+      }); 
+}
+
+function cargaVersionCP(){
+    $.get("ConsultaCatalogos", {k: "4"}, function(respuesta){
+        $("#version2").html(respuesta);
+    }); 
+}
+
+function limpiarFormHoras(){
+    //$("#periodo").val("");
+    //$("#grupo").val("");
+    $("#semestre1").val("");
+    $("#version1").val("");
+    $("#version2").val("");
+    $("#asignatura1").val("");
+    $("#carrera_cp1").val("");
+    $("#modulo1").val("");
+    $("#submodulo1").val("");
+    $("#taller1").val("");
+    
+}
+
+function cargaSemestreGeneral(){
+    cargaCarreras2();
+    cargaAsignaturas1();
 }

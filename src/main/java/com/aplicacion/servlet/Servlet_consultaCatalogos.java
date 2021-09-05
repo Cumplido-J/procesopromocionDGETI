@@ -136,6 +136,21 @@ public class Servlet_consultaCatalogos extends HttpServlet {
                case "21":
                    respuesta=catalogo.desplegarOpcionesJornadaVacanteHoras(request.getParameter("i"),request.getParameter("pl"),request.getParameter("pr"));
                break;
+               case "22":
+                  respuesta=catalogo.desplegarAsignaturasCompBPDGETI(request.getParameter("v"),request.getParameter("s"),idSubsistema);
+               break;
+               case "23":
+                  respuesta=catalogo.desplegarVersionesCompBPDGETI(idSubsistema);
+               break;
+               case "24":
+                  respuesta=catalogo.desplegarCarrerasCompPDGETI(request.getParameter("v"),request.getParameter("s"));
+               break;
+               case "25":
+                  respuesta=catalogo.desplegarSubmodulosCompPDGETI(request.getParameter("v"),request.getParameter("s"),request.getParameter("c"),request.getParameter("m"));
+               break;
+               case "26":
+                  respuesta=catalogo.desplegarModulosCompPDGETI(request.getParameter("v"),request.getParameter("s"),request.getParameter("c"));
+               break;
                default : 
                    respuesta="<option value=''>-Seleccione-</option>";
                   break;

@@ -362,6 +362,7 @@ public class Catalogos {
     }
     public String desplegarTalleres(){        
         String respuesta="<option value=''>-Seleccione-</option>";
+        respuesta+="<option value='0'> NA </option>";
         try{
             List<String[]> datos=metodos.ejecutaSP("sp_selectCatTalleresLaboratorios");
             for(String[] dato:datos){
@@ -1178,6 +1179,103 @@ public class Catalogos {
                 if(dato[2].equals("V")){
                 respuesta=dato[0];
                 }
+            }
+        }catch(Exception e){
+            respuesta=e.toString();
+        }finally{
+            return respuesta;        
+        }
+    }
+     
+     public String desplegarAsignaturasCompBPDGETI(String idVersion,String semestre,String idSubsistema){        
+        String respuesta="<option value=''>-Seleccione-</option>";
+        respuesta+="<option value='0'> NA </option>";
+        String[] parametros={idVersion,semestre};
+        try{
+            List<String[]> datos=metodos.ejecutaSP("sp_consultaAsignaturaCBP", parametros);
+            for(String[] dato:datos){
+                respuesta+="<option value='"+dato[0]+"' clave='"+dato[2]+"' horas='"+dato[4]+"'>"+dato[1]+"</option>";
+            }
+        }catch(Exception e){
+            respuesta=e.toString();
+        }finally{
+            return respuesta;        
+        }
+    }
+    
+    public String desplegarVersionesCompBPDGETI(String idSubsistema){        
+        String respuesta="<option value=''>-Seleccione-</option>";
+        respuesta+="<option value='0'> NA </option>";
+        try{
+            List<String[]> datos=metodos.ejecutaSP("sp_consultaVersionCBP");
+            for(String[] dato:datos){
+                respuesta+="<option value='"+dato[0]+"'>"+dato[1]+"</option>";
+            }
+            if(idSubsistema.contains("2")){
+                respuesta+="<option value='-1'>Otro</option>";
+            }
+        }catch(Exception e){
+            respuesta=e.toString();
+        }finally{
+            return respuesta;        
+        }
+    }
+    
+    public String desplegarCarrerasCompPDGETI(String idVersion,String semestre ){        
+        String respuesta="<option value=''>-Seleccione-</option>"; 
+        respuesta+="<option value='0'> NA </option>";
+        String[] param={idVersion,semestre};
+        try{
+            List<String[]> datos=metodos.ejecutaSP("sp_consultaCarreraCP",param);
+            for(String[] dato:datos){
+                respuesta+="<option value='"+dato[0]+"' clave='"+dato[2]+"'>"+dato[1]+"</option>";
+            }
+        }catch(Exception e){
+            respuesta=e.toString();
+        }finally{
+            return respuesta;        
+        }
+    }
+        
+    public String desplegarSubmodulosCompPDGETI(String idVersion,String semestre,String idCarrera,String idModulo ){        
+        String respuesta="<option value=''>-Seleccione-</option>";
+        respuesta+="<option value='0'> NA </option>";
+        String[] parametros={idVersion,semestre,idCarrera,idModulo};
+        try{
+            List<String[]> datos=metodos.ejecutaSP("sp_consultaSubModuloCP",parametros);
+            for(String[] dato:datos){
+                respuesta+="<option clave='"+dato[2]+"' horas='"+dato[4]+"' value='"+dato[0]+"'>"+dato[1]+"</option>";
+            }
+        }catch(Exception e){
+            respuesta=e.toString();
+        }finally{
+            return respuesta;        
+        }
+    }
+
+    public String desplegarModulosCompPDGETI(String idVersion,String semestre,String idCarrera ){        
+        String respuesta="<option value=''>-Seleccione-</option>";
+        respuesta+="<option value='0'> NA </option>";
+        String[] parametros={idVersion,semestre,idCarrera};
+        try{
+            List<String[]> datos=metodos.ejecutaSP("sp_consultaModuloCP", parametros);
+            for(String[] dato:datos){
+                respuesta+="<option value='"+dato[0]+"' clave='"+dato[2]+"'>"+dato[1]+"</option>";
+            }
+        }catch(Exception e){
+            respuesta=e.toString();
+        }finally{
+            return respuesta;        
+        }
+    }
+
+     public String desplegarVersionesCompPDGETI(){        
+        String respuesta="<option value=''>-Seleccione-</option>";
+        respuesta+="<option value='0'> NA </option>";
+        try{
+            List<String[]> datos=metodos.ejecutaSP("sp_consultaVersionCP");
+            for(String[] dato:datos){
+                respuesta+="<option value='"+dato[0]+"'>"+dato[1]+"</option>";
             }
         }catch(Exception e){
             respuesta=e.toString();

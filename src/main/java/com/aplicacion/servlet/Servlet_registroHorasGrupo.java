@@ -78,6 +78,22 @@ public class Servlet_registroHorasGrupo extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        
+        String parametro = request.getParameter("accion");
+        parametro= (parametro==null) ? "cecyte": parametro;
+        
+        try{
+         switch(parametro){
+                case "cecyte": 
+                    registroInfoCECYTE(request,response);    
+                    break;
+                case "dgeti":
+                    registroInfoDGETI(request, response);
+                    break;
+            }
+        }catch(IOException | ServletException e){
+            System.out.println("Servlet_registroHorasGrupo :"+ e);}
+        /*response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         HttpSession session= (HttpSession) request.getSession();     
         if(session.getAttribute("rol")!=null){
@@ -146,7 +162,7 @@ public class Servlet_registroHorasGrupo extends HttpServlet {
             respuesta+="|"+totalHoras+"|"+grupos;
             out.println(respuesta);
         }        
-        out.close();
+        out.close();*/
     }
 
     /**
@@ -159,4 +175,134 @@ public class Servlet_registroHorasGrupo extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
+    private void registroInfoCECYTE(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+    
+        response.setContentType("text/html;charset=UTF-8");
+        PrintWriter out = response.getWriter();
+        HttpSession session= (HttpSession) request.getSession();     
+        if(session.getAttribute("rol")!=null){
+            String idUsuario,rfc;
+            if(session.getAttribute("rol").toString().equals("D")){
+                idUsuario=session.getAttribute("idUsuario").toString();
+                rfc=session.getAttribute("rfc").toString();
+            }else{
+                idUsuario=session.getAttribute("idDocente").toString();                
+                rfc=session.getAttribute("rfcDocente").toString();
+            }
+            
+            String tipoInfo="";
+            String idPeriodo=request.getParameter("periodo");
+            tipoInfo=request.getParameter("tipoInfo");
+            
+            if(tipoInfo==null){
+                tipoInfo=request.getParameter("tipoInfoCecyte");
+            }
+            
+            String idAsignatura="0";
+            
+            /*switch (tipoInfo){
+                case "cbp":
+                    idAsignatura=request.getParameter("asignatura");
+                    if(idAsignatura==null){
+                        idAsignatura=request.getParameter("asignatura1");
+                    }
+                    break;
+                case "cp":
+                    idAsignatura=request.getParameter("submodulo");
+                    if(idAsignatura==null){
+                        idAsignatura=request.getParameter("submodulo1");
+                    }
+                    break;
+                case "tl":
+                    idAsignatura=request.getParameter("taller");
+                    if(idAsignatura==null){
+                        idAsignatura=request.getParameter("taller1");
+                    }
+                    break;
+                default:
+                    break;                
+            }*/
+            
+            String semestre="";
+            String horas=request.getParameter("horas");
+            semestre=request.getParameter("semestre");
+            String grupo=request.getParameter("grupo").toUpperCase();
+            if(horas==null){
+                horas="";
+            }
+            if(semestre==null){
+                semestre=request.getParameter("semestre1");
+            }
+            if(grupo==null){
+                grupo="";
+            }
+            Docente d=new Docente();
+            d.setIdUsuario(idUsuario);
+            d.registraHoras(idPeriodo, idAsignatura, horas, grupo,semestre);
+            d.consultaHoras();
+            String respuesta="";
+            int totalHoras=d.getTotalHoras();
+            int grupos=d.getNumGrupos();
+            respuesta=d.mostrarHoras();
+            respuesta+="|"+totalHoras+"|"+grupos;
+            out.println(respuesta);
+        }
+                out.close();
+    }
+    
+    private void registroInfoDGETI(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+    
+        response.setContentType("text/html;charset=UTF-8");
+        PrintWriter out = response.getWriter();
+        HttpSession session= (HttpSession) request.getSession();     
+        if(session.getAttribute("rol")!=null){
+            String idUsuario,rfc;
+            if(session.getAttribute("rol").toString().equals("D")){
+                idUsuario=session.getAttribute("idUsuario").toString();
+                rfc=session.getAttribute("rfc").toString();
+            }else{
+                idUsuario=session.getAttribute("idDocente").toString();                
+                rfc=session.getAttribute("rfcDocente").toString();
+            }
+            
+            String tipoInfo="";
+            String idPeriodo=request.getParameter("periodo");
+            tipoInfo=request.getParameter("tipoInfo");
+            
+            
+            String idAsignatura="0",idAsignatura2="0",idAsignatura3="0";
+            idAsignatura=request.getParameter("asignatura1");
+            idAsignatura2=request.getParameter("submodulo1");
+            idAsignatura3=request.getParameter("taller1");
+            
+
+            
+            String semestre="";
+            String horas=request.getParameter("horas");
+            semestre=request.getParameter("semestre");
+            String grupo=request.getParameter("grupo").toUpperCase();
+            if(horas==null){
+                horas="";
+            }
+            if(semestre==null){
+                semestre=request.getParameter("semestre1");
+            }
+            if(grupo==null){
+                grupo="";
+            }
+            Docente d=new Docente();
+            d.setIdUsuario(idUsuario);
+            if((!idAsignatura.equals("0") || !idAsignatura2.equals("0")) || !idAsignatura3.equals("0")) {
+                d.registraHorasDGETI(idPeriodo, idAsignatura, horas, grupo,semestre,idAsignatura2,idAsignatura3);
+            } 
+            d.consultaHoras();
+            String respuesta="";
+            int totalHoras=d.getTotalHoras();
+            int grupos=d.getNumGrupos();
+            respuesta=d.mostrarHoras();
+            respuesta+="|"+totalHoras+"|"+grupos;
+            out.println(respuesta);
+        }
+                out.close();
+    }
 }

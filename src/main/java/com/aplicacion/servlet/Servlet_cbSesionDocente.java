@@ -70,7 +70,8 @@ public class Servlet_cbSesionDocente extends HttpServlet {
             docente.setRfc(session.getAttribute("rfc").toString());
             docente.consultaInfoAspirante(); 
             session.setAttribute("idConvocatoria",docente.getIdConvocatoria());
-            docente.consultaEncuestados();      
+            String idPeriodoRegistro=(String) session.getAttribute("idPeriodoActivo");
+            docente.consultaEncuestados2(idPeriodoRegistro);      
             session.setAttribute("totalEncuestados",docente.getTotalEncuestados());
             request.setAttribute("Docente", docente);
             ServletContext sc = getServletContext();

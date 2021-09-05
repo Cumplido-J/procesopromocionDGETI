@@ -1209,9 +1209,10 @@
                     <div class="container-fluid">
                         
                         <form id="formHorasGrupo1" role="form" method="POST" action="RegistroHorasGrupo">
+                            <input type="hidden" name="accion" id="accion" value="dgeti"/>
                             <div class="form-group col-md-6" >
                                 <label class="control-label" for="periodo">Periodo:</label>
-                                <select class="form-control input-sm" id="periodo" name="periodo" required>
+                                <select class="form-control input-sm" id="periodo" name="periodo"  required>
                                     <%=new Catalogos().desplegarOpcionesPeriodos()%>  
                                     
                                 </select>                          
@@ -1220,9 +1221,9 @@
                                 <label class="control-label" for="grupo">Grupo:</label>
                                 <input type="text" class="form-control input-sm" id="grupo" name="grupo" maxlength="5" required>                                                                 
                             </div>
-                            <div class="form-group col-md-6" id="divSemestre1">
+                            <div class="form-group col-md-12" id="divSemestre1">
                                 <label class="control-label" for="semestre1">Semestre:</label>
-                                <select class="form-control input-sm" id="semestre1" name="semestre1" required>
+                                <select class="form-control input-sm" id="semestre1" name="semestre1" onchange="cargaSemestreGeneral()" required>
                                     <option value="">-Seleccione-</option>
                                     <option value="1">1</option>
                                     <option value="2">2</option>
@@ -1232,53 +1233,64 @@
                                     <option value="6">6</option>
                                 </select>                          
                             </div>
-                            <div class="form-group col-md-6">
+                           <!-- <div class="form-group col-md-6">
+                               
                                 <label class="control-label" for="tipoInfo">Tipo de información:</label>
                                 <select class="form-control input-sm" id="tipoInfoCecyte" name="tipoInfoCecyte" onchange="cambioTipoInfoCecyte(2)" required>
                                     <option value="">-Seleccione-</option>
                                     <option value="cbp">Componente básico y/o propedeútico</option>
                                     <option value="cp">Componente profesional</option>
                                     <option value="tl">Taller / laboratorio</option>
-                                </select>                          
-                            </div>
-                            <div class="form-group col-md-6" id="divVersion1" hidden>
-                                <label class="control-label" for="version1">Versión:</label>
-                                <select class="form-control input-sm" id="version1" name="version1" onChange="cambioVersion()">
-                                    <option value="">-Seleccione-</option>                                        
+                                </select>                        
+                            </div> -->
+
+                            <div class="form-group col-md-6" id="divVersion1" >
+                                <label class="control-label" for="version1">Versión Asignatura:</label>
+                                <select class="form-control input-sm" id="version1" name="version1" onchange="cargaAsignaturas1()" required>
+                                       
+                                   
+                                    <%=new Catalogos().desplegarVersionesCompBPDGETI("1")%>   
                                 </select>
                                 <input type="text" class="form-control input-sm ${hidden}" id="versionOtro" placeholder="Indique" name="versionOtro" value="" ${required}>
                             </div>                            
-                            <div class="form-group col-md-6" id="divAsignatura1" hidden>
+                            <div class="form-group col-md-6" id="divAsignatura1" >
                                 <label class="control-label" for="asignatura1" >Asignatura:</label>
-                                <select class="form-control input-sm" id="asignatura1" name="asignatura1" onchange="cambioAsignatura()">
+                                <select class="form-control input-sm" id="asignatura1" name="asignatura1" onchange="cambioAsignatura()" required >
                                     <option value="">-Seleccione-</option>                                        
                                 </select>                          
                             </div>
-                            <div class="form-group col-md-6" id="divCarrera1" hidden>
+                            <div class="form-group col-md-6" id="divVersion2" >
+                                <label class="control-label" for="version1">Versión Carrera:</label>
+                                <select class="form-control input-sm" id="version2" name="version2" onchange="cargaCarreras2()" required> 
+                                    <%=new Catalogos().desplegarVersionesCompPDGETI()%>                                        
+                                </select>
+                                <input type="text" class="form-control input-sm ${hidden}" id="versionOtro" placeholder="Indique" name="versionOtro" value="" ${required}>
+                            </div>
+                            <div class="form-group col-md-6" id="divCarrera1" >
                                 <label class="control-label" for="carrera_cp1">Carrera:</label>
-                                <select class="form-control input-sm" id="carrera_cp1" name="carrera_cp1" onchange="cambioCarreraCP1()">
+                                <select class="form-control input-sm" id="carrera_cp1" name="carrera_cp1" onchange="cambioCarreraCP1_1()" required>
                                     <option value="">-Seleccione-</option>                                        
                                 </select>
                                 <input type="text" class="form-control input-sm ${hidden}" id="carreraOtro" placeholder="Indique" name="carreraOtro" value="" ${required}>
                             </div>
-                            <div class="form-group col-md-6" id="divModulo1" hidden>
+                            <div class="form-group col-md-6" id="divModulo1" >
                                 <label class="control-label" for="modulo1">Modulo:</label>
-                                <select class="form-control input-sm" id="modulo1" name="modulo1" onchange="cambioModulo()">
+                                <select class="form-control input-sm" id="modulo1" name="modulo1" onchange="cambioModulo2()" required>
                                     <option value="">-Seleccione-</option>                                        
                                 </select>
                                 <input type="text" class="form-control input-sm ${hidden}" id="moduloOtro" placeholder="Indique" name="moduloOtro" value="" ${required}>
                             </div>
-                            <div class="form-group col-md-6" id="divSubmodulo1" hidden>
+                            <div class="form-group col-md-6" id="divSubmodulo1" >
                                 <label class="control-label" for="submodulo1">Submodulo:</label>
-                                <select class="form-control input-sm" id="submodulo1" name="submodulo1" onchange="cambioSubmodulo()">
+                                <select class="form-control input-sm" id="submodulo1" name="submodulo1" onchange="cambioSubmodulo()" required>
                                     <option value="">-Seleccione-</option>                                        
                                 </select>
                                 <input type="text" class="form-control input-sm ${hidden}" id="submoduloOtro" placeholder="Indique" name="submoduloOtro" value="" ${required}>
                             </div>
-                            <div id="divTaller1" hidden>
+                            <div id="divTaller1" >
                                 <div class="form-group col-md-6">
                                     <label class="control-label" for="taller1">Taller / laboratorio:</label>
-                                    <select class="form-control input-sm" id="taller1" name="taller1">
+                                    <select class="form-control input-sm" id="taller1" name="taller1" required>
                                         <%=new Catalogos().desplegarTalleres()%>                                        
                                     </select>                          
                                 </div>

@@ -137,6 +137,7 @@ public class Servlet_login extends HttpServlet {
                     session.setAttribute("permisoActual","");
                     session.setAttribute("permisoActualEdicion","");
                     session.setAttribute("fechaDictaminacion",0);
+                    session.setAttribute("idPeriodoActivo", datos.get(0)[15]);
                     if(datos.get(0)[7].equals("D")){
                         String[] parametros1={datos.get(0)[3],datos.get(0)[11],datos.get(0)[1],"D"};
                         List<String[]> datos1=metodos.ejecutaSP(ConstantsWS.SP_FECHAS_CONVOCATORIA,parametros1);
