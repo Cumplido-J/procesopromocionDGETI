@@ -125,7 +125,8 @@ public class Servlet_finalizaRegistro extends HttpServlet {
             ServletContext sc = getServletContext();
             RequestDispatcher rd;
             
-            rd= sc.getRequestDispatcher("/ppsesion.jsp");
+            //rd= sc.getRequestDispatcher("/ppsesion.jsp");
+            rd= sc.getRequestDispatcher("/"+retorno);
             
             rd.forward(request,response);
             

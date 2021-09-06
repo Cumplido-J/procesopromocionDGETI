@@ -99,7 +99,18 @@
               <!--FIN Breadcrumbs-->
               <div class="text-center">
                 <h4>Registro de requisitos para participar en el:</h4>
-                <h4>Programa de Promoción en el Servicio Docente por Cambio de Categoría en Educación Media Superior</h4>
+                <h4>Programa de Promoción en el Servicio Docente por 
+                    
+                      <c:if test='${sessionScope["programa"]=="1"}'>
+                      cambio de categoría  
+                      </c:if>
+                      <c:if test='${sessionScope["programa"]=="2"}'>
+                      horas adicionales 
+                      </c:if>
+                       <c:if test='${sessionScope["programa"]=="3"}'>
+                      incentivos
+                      </c:if>
+                    en Educación Media Superior</h4>
               </div>
               <!--Paneles colapsables-->
               <div class="panel-group ficha-collapse" id="accordion">
@@ -1034,6 +1045,8 @@
                                 
                           </c:if>
                           <br/>
+                            <input type="hidden" id="rfc" name="rfc" value="${Docente.rfc}">
+                            <input type="hidden" id="idUsuario" name="idUsuario" value="${Docente.idUsuario}">
                               <c:if test="${!vistaAdmin}">
                               <center><input type="button" disabled="true" class="btn btn-primary" value="Continuar" id="btnFinalizar" onclick="validarArchivos()"></center>
                               </c:if>

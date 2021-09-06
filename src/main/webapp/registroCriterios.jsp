@@ -292,7 +292,7 @@
                             </div>
                             <div id="seccionCursos" class="collapse ${in}">
                             <div class="text-left">
-                                <label class="control-label">Cursos de actualización relacionados con la asignatura y/o módulo que imparte, o mejora pedagógica en los 2 años anteriores</label>
+                                <label class="control-label">Cursos de actualización relacionados con la asignatura y/o módulo que imparte, o mejora pedagógica solo desde su última promoción en adelante</label>
                             </div>
                             <div class='text-center'>
                                 <input type='button' class='btn btn-sm btn-link' value='(+) Agregar información' onclick="abrirModalCursos();" />
@@ -455,6 +455,7 @@
                                 <input type='button' class='btn btn-sm btn-link' value='(+) Agregar información' onclick="abrirModalParticipaciones()"/>
                             </div>
                             <div class='table-responsive'>
+                                <label class="control-label">Subir evidencias solo de su última promoción en adelante</label><br>
                                 <label class="text-warning" id="alertaCarga"><span class="glyphicon glyphicon-warning-sign"></span>&nbsp;Utilice la barra de desplazamiento para recorrer la tabla y visualizar todos los elementos</label>
                                 <table class='table table-bordered table-condensed'>
                                     <tr><th>Nombre de la participación en eventos y actividades de fortalecimiento académico y formación integral del educando</th><th>Periodo o Fecha de realización</th><th>Institución educativa con reconocimiento oficial que emite constancia</th><th>Constancia o documento probatorio</th><th>Borrar</th></tr>
@@ -533,6 +534,7 @@
                                 <input type='button' class='btn btn-sm btn-link' value='(+) Agregar información' onClick="abrirModalTutorias()" />
                             </div>
                             <div class='table-responsive'>
+                                <label class="control-label">Subir evidencias solo de su última promoción en adelante</label><br>
                                 <label class="text-warning" id="alertaCarga"><span class="glyphicon glyphicon-warning-sign"></span>&nbsp;Utilice la barra de desplazamiento para recorrer la tabla y visualizar todos los elementos</label>
                                 <table class='table table-bordered table-condensed'>
                                     <tr><th>Periodo o Fecha de realización</th><th>Constancia o documento probatorio</th><th>Borrar</th></tr>
@@ -612,6 +614,7 @@
                                 <input type='button' class='btn btn-sm btn-link' value='(+) Agregar información' onClick="abrirModalPublicacion()"/>
                             </div>
                             <div class='table-responsive'>
+                                <label class="control-label">Subir evidencias solo de su última promoción en adelante</label><br>
                                 <label class="text-warning" id="alertaCarga"><span class="glyphicon glyphicon-warning-sign"></span>&nbsp;Utilice la barra de desplazamiento para recorrer la tabla y visualizar todos los elementos</label>
                                 <table class='table table-bordered table-condensed'>
                                     <tr><th>Nombre de  la publicación</th><th>Medio en el que se publicó</th><th>Fecha de publicación</th><th>ISSN / ISBN</th><th>Borrar</th></tr>

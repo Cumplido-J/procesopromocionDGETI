@@ -182,7 +182,7 @@
                     <article class="articleses">
                         <h3>Paso 5.1:</h3>
                         <a href="FichaRegistro" target="_blank" ><img src="<%=Imagen.muestraImagen(RutaConfig.getRutaCarpeta()+"imagenes/EvidVal.jpg")%>" alt=""></a>
-                        <a href="FichaRegistro"  target="_blank" ><h3>Ficha de <br/> registro </h3></a>
+                        <a href="FichaRegistro"  target="_blank" ><h3>Ficha de <br/>revisor </h3></a>
                     </article>
                 </c:if>
                     <c:if test='${sessionScope["permisoActual"]=="5"}'>
@@ -193,12 +193,12 @@
                             <c:if test = "${Docente.documentoCargado4('1')==true}">
                                 <a href="#" onclick="abrirModalRevisorFile(1)"><img src="<%=Imagen.muestraImagen(RutaConfig.getRutaCarpeta() + "imagenes/EvidVal.jpg")%>" alt=""></a>
                                 <input id="btnEvidenciaR" type="button" class="btn btn-sm btn-link" value="Ver documento" onclick="abrirModalRevisorFile(1)"/>
-                                <a onclick="abrirModalRevisorFile(1)" ><h3>Carta revisor</h3></a>
+                                <a onclick="abrirModalRevisorFile(1)" ><h3>Lista de cotejo <br/>de revisor</h3></a>
                             </c:if>
                             <c:if test = "${Docente.documentoCargado4('1')==false}">
                                 <a onclick="abrirModalRevisorFile(1)" ><img src="<%=Imagen.muestraImagen(RutaConfig.getRutaCarpeta() + "imagenes/EvidReg.jpg")%>" alt=""></a>
                                 <input id="btnEvidenciaR" type="button" class="btn btn-sm btn-link incompleto" value="" onclick="abrirModalRevisorFile(1)"/>
-                                <a onclick="abrirModalRevisorFile(1)" ><h3>Carta revisor</h3></a>
+                                <a onclick="abrirModalRevisorFile(1)" ><h3>Lista de cotejo <br/>de revisor</h3></a>
                             </c:if>
                         </article>
                     </c:if>
@@ -351,7 +351,7 @@
               <div class="modal-content" style="width: 700px;height: 672px;">
                 <div class="modal-header">
                   <button type="button" class="close" data-dismiss="modal">&times;</button>
-                  <h4 class="modal-title" >Carta de aceptación revisor</h4>
+                  <h4 class="modal-title" >Lista de cotejo de revisor</h4>
                 </div>
                 <div class="modal-body">
                     <iframe name="ifArchivoRevisor" hidden></iframe>
