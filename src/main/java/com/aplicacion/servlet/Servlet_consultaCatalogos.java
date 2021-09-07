@@ -151,6 +151,12 @@ public class Servlet_consultaCatalogos extends HttpServlet {
                case "26":
                   respuesta=catalogo.desplegarModulosCompPDGETI(request.getParameter("v"),request.getParameter("s"),request.getParameter("c"));
                break;
+               case "27":
+                  respuesta=catalogo.desplegarOpcionesCategorias();
+               break;
+               case "28":
+                  respuesta=catalogo.desplegarOpcionesCategoriasHoras();
+               break;
                default : 
                    respuesta="<option value=''>-Seleccione-</option>";
                   break;

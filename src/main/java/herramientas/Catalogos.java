@@ -235,7 +235,7 @@ public class Catalogos {
         String respuesta=desplegarOpcionesCategorias();
         String aux="value='"+id+"'";
         respuesta=respuesta.replaceFirst(aux, aux+" selected");
-        return respuesta;  
+        return respuesta;
     }
     public String desplegarCategoriasPresupuestales(){        
         String respuesta="<option value=''>-Seleccione-</option>";
