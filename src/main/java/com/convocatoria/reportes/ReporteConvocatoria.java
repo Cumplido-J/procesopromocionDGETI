@@ -87,10 +87,10 @@ public class ReporteConvocatoria {
         }
     }
 
-    public String pdf(int plantel, int convocatoria, String nombre) {
-        compilarReporte();
+    public String pdf(int plantel, int convocatoria, String nombre, String tiporeporte) {
+        //compilarReporte();
                conn = conector();
-        String jasperFileName = "mainreport.jasper";
+        String jasperFileName = tiporeporte+".jasper";
         String jasperFile = pathr + jasperFileName;
         String pdfFileName = "convocatoria" + plantel + convocatoria + ".pdf";
         try {
