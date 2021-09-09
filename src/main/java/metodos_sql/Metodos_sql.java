@@ -983,5 +983,23 @@ public class Metodos_sql {
         }
         return resultado;
     }//fin metodo guardar 
+    
+        public int buscarIdProgramaPorConvocatoria(int idconvocatoria) {
+        int programa=0;
+        conexion = null;
+        conexion = conector();
+        if( idconvocatoria>0){
+            List<String[]> datos = new ArrayList<String[]>();
+            String value[] = {"0"};
+            String param1 = new String(new Integer(idconvocatoria).toString());
+            String param[] =  {param1};
+   
+            datos = ejecutaSP("sp_selectIdPrograma", param);
+            value = datos.get(0);
+            programa = Integer.parseInt(value[0]);
+        }
+
+        return programa;
+    }
 
 }//fin clase metodos_sql
