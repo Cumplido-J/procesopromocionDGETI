@@ -1283,4 +1283,35 @@ public class Catalogos {
             return respuesta;        
         }
     }
+     
+    public ArrayList<String> getSelectUsuarioByID(String idUsuario){ 
+            ArrayList<String> lista=new ArrayList<>();
+        List<String[]> datos=null;
+        try{
+            String[] parametros={idUsuario};
+           datos=metodos.ejecutaSP("sp_selectUsuario", parametros);
+            for(String[] dato:datos){
+                lista.add(dato[0]);
+                lista.add(dato[1]);
+                lista.add(dato[2]);
+                lista.add(dato[3]);
+                lista.add(dato[4]);
+                lista.add(dato[5]);
+                lista.add(dato[6]);
+                lista.add(dato[7]);
+                lista.add(dato[8]);
+                lista.add(dato[9]);
+                lista.add(dato[10]);
+                lista.add(dato[11]);
+                lista.add(dato[12]);
+                lista.add(dato[13]);
+                lista.add(dato[14]);
+                lista.add(dato[15]);
+            }
+        }catch(Exception e){
+
+        }finally{
+            return lista;        
+        }
+    }
 }

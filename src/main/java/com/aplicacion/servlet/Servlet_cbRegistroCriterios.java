@@ -6,9 +6,11 @@
 package com.aplicacion.servlet;
 
 import com.aplicacion.beans.Docente;
+import herramientas.Catalogos;
 import herramientas.CriteriosValoracion;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
@@ -92,7 +94,9 @@ public class Servlet_cbRegistroCriterios extends HttpServlet {
             docente.consultaInfoAspirante();             
             docente.consultaDocumentos();
             String[][] puntajes=cv.consultaPuntajes(idUsuario); 
-            String[] puntajeEncuestas=cv.consultaPuntajeEncuestas(rfc, docente.getIdPeriodoRegistro());
+            Catalogos catalogos=new Catalogos();
+            ArrayList<String> datosUser=catalogos.getSelectUsuarioByID(idUsuario);
+            String[] puntajeEncuestas=cv.consultaPuntajeEncuestas(rfc, datosUser.get(15));
             if(puntajeEncuestas[5]==null || puntajeEncuestas[5].isEmpty()){
                 puntajeEncuestas[5]="0.0";
             }

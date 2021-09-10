@@ -6,9 +6,11 @@
 package com.aplicacion.servlet;
 
 import com.aplicacion.beans.Docente;
+import herramientas.Catalogos;
 import herramientas.CriteriosValoracion;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
@@ -107,8 +109,10 @@ public class Servlet_cbFichaRegistroClon extends HttpServlet {
                 docente.consultaHoras();
                 docente.actualizaBanderaIngles();
             }
+            Catalogos catalogos=new Catalogos();
+            ArrayList<String> datosUser=catalogos.getSelectUsuarioByID(idUsuario);
             String[][] puntajes=cv.consultaPuntajes(idUsuario); 
-            String[] puntajeEncuestas=cv.consultaPuntajeEncuestas(rfc, docente.getIdPeriodoRegistro());
+            String[] puntajeEncuestas=cv.consultaPuntajeEncuestas(rfc, datosUser.get(15));
             String[] parametros={idUsuario};            
             List<String[]> infoPlazas=new Metodos_sql().ejecutaSP("sp_consultaUsuarioPlaza",parametros);
             request.setAttribute("infoPlazas", infoPlazas);
