@@ -739,7 +739,7 @@
                             <c:if test="${!vistaAdmin}">
                                 <div class="text-center">
                                     <c:if test='${sessionScope["programa"]!=2 && sessionScope["subsistema"]!=2}'>
-                                        <input type="button" class="btn btn-link btn-sm" value="(+) Agregar información" data-toggle="modal" data-target="#modalInformacion"/>
+                                        <input type="button" class="btn btn-link btn-sm" value="(+) Agregar información" data-toggle="modal" data-target="#modalInformacionHoras"/>
                                     </c:if>
                                     <c:if test='${sessionScope["programa"]==2 && sessionScope["subsistema"]!=2}'>
                                         <input type="button" class="btn btn-link btn-sm" value="(+) Agregar información" data-toggle="modal" data-target="#modalInformacionHoras"/>
@@ -932,7 +932,7 @@
                             <c:set var="in" value=""></c:set>
                         </c:if>
                           
-                          <label><input data-toggle="collapse" ${checked} data-target="#seccionOtro" type="checkbox" name="funcionesOtro" id="funcionesOtro">Marque la casilla si desempeña funciones en otro subsistema</label>
+                            <label><input data-toggle="collapse" ${checked} data-target="#seccionOtro" type="checkbox" name="funcionesOtro" id="funcionesOtro" onClick="limpiarCampatibilidad()">Marque la casilla si desempeña funciones en otro subsistema</label>
                         </div>
                         <div id="seccionOtro" class="collapse ${in}" >
                             <div class="form-group col-md-3">
@@ -1264,7 +1264,7 @@
                                    
                                     <%=new Catalogos().desplegarVersionesCompBPDGETI("1")%>   
                                 </select>
-                                <input type="text" class="form-control input-sm ${hidden}" id="versionOtro" placeholder="Indique" name="versionOtro" value="" ${required}>
+                                    <%--<!-- comment<input type="text" class="form-control input-sm ${hidden}" id="versionOtro" placeholder="Indique" name="versionOtro" value="" ${required}> --%>
                             </div>                            
                             <div class="form-group col-md-6" id="divAsignatura1" >
                                 <label class="control-label" for="asignatura1" >Asignatura:</label>
@@ -1277,28 +1277,28 @@
                                 <select class="form-control input-sm" id="version2" name="version2" onchange="cargaCarreras2()" required> 
                                     <%=new Catalogos().desplegarVersionesCompPDGETI()%>                                        
                                 </select>
-                                <input type="text" class="form-control input-sm ${hidden}" id="versionOtro" placeholder="Indique" name="versionOtro" value="" ${required}>
+                                    <%-- <input type="text" class="form-control input-sm ${hidden}" id="versionOtro" placeholder="Indique" name="versionOtro" value="" ${required}>--%>
                             </div>
                             <div class="form-group col-md-6" id="divCarrera1" >
                                 <label class="control-label" for="carrera_cp1">Carrera:</label>
                                 <select class="form-control input-sm" id="carrera_cp1" name="carrera_cp1" onchange="cambioCarreraCP1_1()" required>
                                     <option value="">-Seleccione-</option>                                        
                                 </select>
-                                <input type="text" class="form-control input-sm ${hidden}" id="carreraOtro" placeholder="Indique" name="carreraOtro" value="" ${required}>
+                               <%-- <input type="text" class="form-control input-sm ${hidden}" id="carreraOtro" placeholder="Indique" name="carreraOtro" value="" ${required}> --%>
                             </div>
                             <div class="form-group col-md-6" id="divModulo1" >
                                 <label class="control-label" for="modulo1">Modulo:</label>
                                 <select class="form-control input-sm" id="modulo1" name="modulo1" onchange="cambioModulo2()" required>
                                     <option value="">-Seleccione-</option>                                        
                                 </select>
-                                <input type="text" class="form-control input-sm ${hidden}" id="moduloOtro" placeholder="Indique" name="moduloOtro" value="" ${required}>
+                               <%-- <input type="text" class="form-control input-sm ${hidden}" id="moduloOtro" placeholder="Indique" name="moduloOtro" value="" ${required}> --%>
                             </div>
                             <div class="form-group col-md-6" id="divSubmodulo1" >
                                 <label class="control-label" for="submodulo1">Submodulo:</label>
                                 <select class="form-control input-sm" id="submodulo1" name="submodulo1" onchange="cambioSubmodulo()" required>
                                     <option value="">-Seleccione-</option>                                        
                                 </select>
-                                <input type="text" class="form-control input-sm ${hidden}" id="submoduloOtro" placeholder="Indique" name="submoduloOtro" value="" ${required}>
+                               <%-- <input type="text" class="form-control input-sm ${hidden}" id="submoduloOtro" placeholder="Indique" name="submoduloOtro" value="" ${required}> --%>
                             </div>
                             <div id="divTaller1" >
                                 <div class="form-group col-md-6">

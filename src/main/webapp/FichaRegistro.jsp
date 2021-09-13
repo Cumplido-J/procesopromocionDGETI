@@ -26,7 +26,7 @@
             }
         </style>
         <c:if test='${sessionScope["rol"]=="D"}'>
-            <c:if test = "${Docente.documentoCargado3('1')==false}">
+            <c:if test = "${Docente.documentoCargado3('1')==false && !banderaIdUsuarioPadre }">
             <%
                 response.sendRedirect("/procesopromocion/SesionDocente");
             %>
@@ -48,7 +48,7 @@
                        <c:if test='${sessionScope["programa"]=="3"}'>
                       incentivos
                       </c:if>
-                    en Educación Media Superior 
+                    en Educación Media Superior
                     <br/>(Promoción horizontal)
                     <br/><jsp:include page="seccionesPlantilla/cicloEscolar.jsp" flush="true"/>
                         

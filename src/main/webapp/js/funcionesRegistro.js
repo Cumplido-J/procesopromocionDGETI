@@ -2047,3 +2047,8 @@ function cargaSemestreGeneral(){
     cargaCarreras2();
     cargaAsignaturas1();
 }
+function limpiarCampatibilidad(){
+    $("#numHorasOtro").val("");
+    $("#compatibilidad").prop('checked', false);
+    
+}

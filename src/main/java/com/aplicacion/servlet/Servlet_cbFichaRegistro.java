@@ -100,19 +100,25 @@ public class Servlet_cbFichaRegistro extends HttpServlet {
             
             idPermiso = session.getAttribute("permisoActual").toString();
             
+            Catalogos catalogos=new Catalogos();
+            ArrayList<String> datosUser=catalogos.getSelectUsuarioByID(idUsuario);
+            String idUsuarioPadre=datosUser.get(16);
+            
             CriteriosValoracion cv=new CriteriosValoracion();
             docente=new Docente();
             docente.setIdUsuario(idUsuario);
             docente.consultaInfoAspirante();
+            docente.setIdUsuario( idUsuarioPadre !=null ? idUsuarioPadre: idUsuario);// se reinicia el id en caso de que exista un idUsuarioPadre
             if(subsistemaUsuario.equals("2")){
                 docente.consultaHorasCecyte();
             }else{
                 docente.consultaHoras();
                 docente.actualizaBanderaIngles();
             }
+            idUsuario = idUsuarioPadre != null ? idUsuarioPadre: idUsuario;
             String[][] puntajes=cv.consultaPuntajes(idUsuario); 
-            Catalogos catalogos=new Catalogos();
-            ArrayList<String> datosUser=catalogos.getSelectUsuarioByID(idUsuario);
+            //Catalogos catalogos=new Catalogos();
+            //ArrayList<String> datosUser=catalogos.getSelectUsuarioByID(idUsuario);
             String[] puntajeEncuestas=cv.consultaPuntajeEncuestas(rfc, datosUser.get(15));
             String[] parametros={idUsuario};            
             List<String[]> infoPlazas=new Metodos_sql().ejecutaSP("sp_consultaUsuarioPlaza",parametros);
@@ -129,6 +135,7 @@ public class Servlet_cbFichaRegistro extends HttpServlet {
 			request.setAttribute("evidencias", cv.getFilasResultadosConstancias(idUsuario));
             request.setAttribute("registroEvidencias", cv.getFilasResultadosRegistro(idUsuario));
             request.setAttribute("rutaimagen", rutaImagen);
+             request.setAttribute("banderaIdUsuarioPadre", (idUsuarioPadre != null));
             ServletContext sc = getServletContext();
             RequestDispatcher rd = sc.getRequestDispatcher("/FichaRegistro.jsp");
             rd.forward(request,response);
