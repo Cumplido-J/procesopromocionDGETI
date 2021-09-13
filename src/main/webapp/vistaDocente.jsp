@@ -362,9 +362,16 @@
                                 <label class="control-label" for="archivo">Seleccione el archivo a cargar:</label>
                                 <input type="hidden" id="idArchivoR" name="idArchivoR" value="1" />
                                 <input type="file" class="form-control input-sm" id="archivoCartaRevisor" name="archivoCartaRevisor" onchange="subirArchivoR_();" accept=".pdf" />
-                                <a href="descargas/cartaaceptaciónbasesconvocatoriacecytehoras03022021.pdf" download>
+                                <c:if test = '${sessionScope["programa"]=="1"}'>
+                                <a href="descargas/listadecotejoparaelcomitérevisorcambiodecategoría10092021.pdf" download>
                                     Descargar carta aceptación revisor
                                 </a>
+                                </c:if>
+                                <c:if test = '${sessionScope["programa"]=="2"}'>
+                                <a href="descargas/listadecotejoparaelcomitérevisorhorasadicionales10092021.pdf" download>
+                                    Descargar carta aceptación revisor
+                                </a>
+                                </c:if>
                         </form>  
                     </div>
                 </div>
