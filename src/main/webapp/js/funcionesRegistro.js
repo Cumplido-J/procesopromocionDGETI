@@ -1356,6 +1356,10 @@ function mostrarSiguiente(id){
                     completo=false;
                 } 
             }
+            if($("#btnEvidencia7").val()=="Subir archivo"){
+                        completo=false;
+                        console.log("sa");
+            }
             if(completo){
                 $("#estatusInfoCompatibilidad").attr("class","glyphicon glyphicon-ok-sign completo");
                 $("#estatusInfoCompatibilidad").attr("title","Sección completa");
