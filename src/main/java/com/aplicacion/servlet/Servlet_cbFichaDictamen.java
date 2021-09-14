@@ -99,6 +99,18 @@ public class Servlet_cbFichaDictamen extends HttpServlet {
                 rutaImagenInc="logos/logo_dgeti.jpg";
             }
             
+            ArrayList<String> datosUser=catalgo.getSelectUsuarioByID(idUsuario);
+            String idUsuarioPadre=datosUser.get(16);
+
+            docente=new Docente();
+            docente.setIdUsuario(idUsuario);
+            docente.consultaInfoAspirante();
+            docente.setIdUsuario( idUsuarioPadre !=null ? idUsuarioPadre: idUsuario);// se reinicia el id en caso de que exista un idUsuarioPadre
+            docente.consultaHoras();            
+            docente.actualizaBanderaIngles();
+
+            idUsuario = idUsuarioPadre != null ? idUsuarioPadre: idUsuario;
+            
             CriteriosValoracion cv=new CriteriosValoracion();
             String[][] puntajesDictaminador=cv.consultaPuntajesDictaminador(idUsuario);
            
@@ -111,14 +123,14 @@ public class Servlet_cbFichaDictamen extends HttpServlet {
             request.setAttribute("participaciones", cv.getFilasParticipaciones(idUsuario,vistaAdmin,idPermiso,permisoEdicion));
             request.setAttribute("publicaciones", cv.getFilasPublicaciones(idUsuario,vistaAdmin,idPermiso,permisoEdicion));
             
-            docente=new Docente();
-            docente.setIdUsuario(idUsuario);
-            docente.consultaInfoAspirante();
-            docente.consultaHoras();            
-            docente.actualizaBanderaIngles();
-            
-            Catalogos catalogos=new Catalogos();
-            ArrayList<String> datosUser=catalogos.getSelectUsuarioByID(idUsuario);
+            //docente=new Docente();
+            //docente.setIdUsuario(idUsuario);
+            //docente.consultaInfoAspirante();
+            //docente.consultaHoras();            
+            //docente.actualizaBanderaIngles();
+            //docente.setIdUsuario( idUsuarioPadre !=null ? idUsuarioPadre: idUsuario);// se reinicia el id en caso de que exista un idUsuarioPadre
+            //Catalogos catalogos=new Catalogos();
+            //ArrayList<String> datosUser=catalogos.getSelectUsuarioByID(idUsuario);
             String[] puntajeEncuestas=cv.consultaPuntajeEncuestas(rfc,datosUser.get(15));
             request.setAttribute("puntajeEncuestas", puntajeEncuestas);
             

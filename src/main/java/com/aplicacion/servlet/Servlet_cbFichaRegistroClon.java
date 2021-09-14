@@ -99,18 +99,25 @@ public class Servlet_cbFichaRegistroClon extends HttpServlet {
             
             idPermiso = session.getAttribute("permisoActual").toString();
             
+            
+            Catalogos catalogos=new Catalogos();
+            ArrayList<String> datosUser=catalogos.getSelectUsuarioByID(idUsuario);
+            String idUsuarioPadre=datosUser.get(16);
+            
             CriteriosValoracion cv=new CriteriosValoracion();
             docente=new Docente();
             docente.setIdUsuario(idUsuario);
             docente.consultaInfoAspirante2();
+            docente.setIdUsuario( idUsuarioPadre !=null ? idUsuarioPadre: idUsuario);// se reinicia el id en caso de que exista un idUsuarioPadre
             if(subsistemaUsuario.equals("2")){
                 docente.consultaHorasCecyte();
             }else{
                 docente.consultaHoras();
                 docente.actualizaBanderaIngles();
             }
-            Catalogos catalogos=new Catalogos();
-            ArrayList<String> datosUser=catalogos.getSelectUsuarioByID(idUsuario);
+
+            
+            idUsuario = idUsuarioPadre != null ? idUsuarioPadre: idUsuario;
             String[][] puntajes=cv.consultaPuntajes(idUsuario); 
             String[] puntajeEncuestas=cv.consultaPuntajeEncuestas(rfc, datosUser.get(15));
             String[] parametros={idUsuario};            
@@ -126,6 +133,7 @@ public class Servlet_cbFichaRegistroClon extends HttpServlet {
             request.setAttribute("publicaciones", cv.getFilasPublicacionesFicha(idUsuario));
             request.setAttribute("resultados", cv.getFilasResultadosFicha(idUsuario));
             request.setAttribute("rutaimagen", rutaImagen);
+            request.setAttribute("banderaIdUsuarioPadre", (idUsuarioPadre != null));
             ServletContext sc = getServletContext();
             RequestDispatcher rd = sc.getRequestDispatcher("/FichaRegistro.jsp");
             rd.forward(request,response);
