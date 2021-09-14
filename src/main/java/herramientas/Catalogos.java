@@ -1315,4 +1315,19 @@ public class Catalogos {
             return lista;        
         }
     }
+    
+        public String desplegarCategoriasPresupuestales2(){        
+        String respuesta="<option value=''>-Seleccione-</option>";
+        try{
+            List<String[]> datos=metodos.ejecutaSP("sp_selectCatCategoriasPresupuestales");
+            for(String[] dato:datos){
+                respuesta+="<option ClavePresupuestal='"+dato[1]+"' idCategoriaPlazaCP='"+dato[2]+"' idJornadaCP='"+dato[3]+"' value='"+dato[1]+"'>"+dato[1]+"</option>";
+               
+            }
+        }catch(Exception e){
+            respuesta=e.toString();
+        }finally{
+            return respuesta;        
+        }
+    }
 }

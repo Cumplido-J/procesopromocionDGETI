@@ -261,7 +261,7 @@ public class Datos {
                             }
                         }else if(dato[15].equals("2")){//Para el programa 2:Horas adicionales solo puede sumar plazas con jornada de horas
                             if(!idJornada.equals("1")){
-                                respuesta="Solo puede seleccionar plazas con jornada de horas";
+                                respuesta="Solo puede seleccionar plazas de horas";
                             }
                             if(horas>19){
                                 respuesta="Solo puede acumular 19 horas como máximo";

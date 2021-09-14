@@ -1492,7 +1492,7 @@
                             <div class="form-group col-md-6">
                               <label class="control-label" for="clvPresupCategoria">Clave Presupuestal (Categoría):</label>
                               <select class="form-control input-sm" id="categoriaPresupuestal" name="categoriaPresupuestal" onchange="cambioCategoriaPresupuestal()" required>
-                                ${catalogo.desplegarCategoriasPresupuestales()}
+                                ${catalogo.desplegarCategoriasPresupuestales2()}
                               </select>                          
                             </div>
                         </c:if>  
