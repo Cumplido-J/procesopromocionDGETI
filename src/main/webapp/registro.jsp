@@ -591,7 +591,7 @@
                                         <c:set var="checked" value=""></c:set>
                                         <c:set var="in" value="in"></c:set>
                                     </c:if>
-                                    <label><input type="checkbox" id="notaDesfavorable" ${checked} name="notaDesfavorable" data-toggle="collapse" data-target="#seccionNota" >Marque la casilla si cuenta con nota desfavorable y/o sanción administrativa</label>
+                                    <label><input type="checkbox" id="notaDesfavorable" ${checked} name="notaDesfavorable" data-toggle="collapse" data-target="#seccionNota" >Marque la casilla si cuenta con nota desfavorable</label>
                                 </div>
                                 <div id="seccionNota" class="form-group col-md-6 collapse ${in}">
                                     <label class="control-label" for="btnEvidencia6">Constancia de nota favorable:</label>
@@ -880,7 +880,7 @@
                     <h4 class="panel-title">
                       <a data-parent="#accordion" data-toggle="collapse" href="#infoCompatibilidad" aria-expanded="true" aria-controls="infoCompatibilidad">
                       Compatibilidad - Carta protesta
-                        <c:set var="bandera" value="${Docente.verificaSeccion('4')}"></c:set>
+                        <c:set var="bandera" value="${Docente.verificaSeccion('7')}"></c:set>
                         <c:if test="${!vistaAdmin}">
                         <c:if test = "${bandera==true}">
                             <span class="glyphicon glyphicon-ok-sign completo" title="Sección completa" id="estatusInfoCompatibilidad" completo="true"></span>  
