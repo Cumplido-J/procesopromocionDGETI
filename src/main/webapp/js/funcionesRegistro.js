@@ -139,6 +139,8 @@ $(document).ready(function () {
                 },success:function(data){
                     if(data=="ok"){
                         mostrarSiguiente(2);
+                    }else if(data=="fin"){
+                        window.location.href = "/procesopromocion/SesionDocente";
                     }else{
                         $("#mensaje").html(data);            
                         $("#modalMensaje").modal("show");
@@ -1365,7 +1367,8 @@ function mostrarSiguiente(id){
             } 
             if($("#funcionesOtro").is(':checked')){
                 if(!$("#compatibilidad").is(':checked')){ 
-                    $("#btnConfirmacion").attr("onClick","enviarConfirmacion(4)");
+//                    $("#btnConfirmacion").attr("onClick","enviarConfirmacion(4)");
+                    $("#btnConfirmacion").attr("onClick","myFunction1()");
                     $("#idHora").val("");
                     $("#descripcionBitacora").val("El usuario confirma que:"+$("#mensajeNoCompatibilidad").val());
                     $("#mensajeConfirmacion").html($("#mensajeNoCompatibilidad").val());

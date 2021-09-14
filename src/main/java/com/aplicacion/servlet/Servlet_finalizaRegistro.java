@@ -7,6 +7,7 @@ package com.aplicacion.servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -118,17 +119,21 @@ public class Servlet_finalizaRegistro extends HttpServlet {
             byte ptext[] = observacion.getBytes("ISO-8859-1"); 
             String value = new String(ptext, "UTF-8");
             String[] parametros={idUsuario,publico,value};
+            List<String[]> datos;
             
-            metodo.ejecutaSP("sp_finRegistro",parametros);
+            datos=metodo.ejecutaSP("sp_finRegistro",parametros);
             //response.sendRedirect(retorno);
             
             ServletContext sc = getServletContext();
             RequestDispatcher rd;
             
             //rd= sc.getRequestDispatcher("/ppsesion.jsp");
-            rd= sc.getRequestDispatcher("/"+retorno);
-            
-            rd.forward(request,response);
+            if(!datos.isEmpty()){
+                if(datos.get(0)[0].equals("ok")){
+                    rd= sc.getRequestDispatcher("/"+retorno);
+                    rd.forward(request,response);
+                }
+            }
             
             /*if(completo.equals("true")){
                 response.sendRedirect("evidenciaRegistroDocentes.html");

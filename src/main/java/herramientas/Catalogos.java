@@ -436,7 +436,7 @@ public class Catalogos {
             for(String[] dato:datos){
                 respuesta+="<label class='control-label'><input type='radio' name='opReqCat' value='"+dato[0]+"' required>&nbsp;"+dato[1]+"</label><br/>";
             }
-            respuesta+="<label><input type='radio' name='opReqCat' value='' required>&nbsp;Ninguno</label>";
+            respuesta+="<label><input type='radio' name='opReqCat' value='0' required>&nbsp;Ninguno</label>";
         }catch(Exception e){
             respuesta=e.toString();
         }finally{

@@ -922,7 +922,7 @@
                                     </c:if>                                    
                                 </div> 
                             </div>
-                        <div class="checkbox col-xs-12">   
+                        <div class="checkbox col-xs-12">
                         <c:if test="${Docente.infoRegistro[60]=='S'}">
                             <c:set var="checked" value="checked"></c:set>
                             <c:set var="in" value="in"></c:set>
@@ -1423,9 +1423,9 @@
                   <p id="mensajeFin">Registro exitoso.</p>
                 </div>
                 <div class="modal-footer">
-                  <a href="SesionDocente">
+                  <!--<a href="SesionDocente">-->
                     <button type="button" onclick="myFunction()" class="btn btn-sm btn-default">Continuar</button>
-                 </a>
+                 <!--</a>-->
                  <button type="button" class="btn btn-sm btn-default" data-dismiss="modal">Cancelar</button>
                 </div>
               </div>
@@ -1702,13 +1702,7 @@
                 
                 $("#modalMensajeFin").modal("hide");
                 $.post("FinalizaRegistro", {z:"F"}, function(data){
-                    if(data.includes("<tr>")){
-                        //$("#tablaPlazas").html(data);
-                    }
-                    else{
-                        $("#mensaje").html(data);            
-                        $("#modalMensaje").modal("show");
-                    } 
+                    window.location.href = "/procesopromocion/SesionDocente";
                 });
                 
                 $.post("AdministracionPlaza", {z:"F",categoria:idCategoria,jornada:idJornada,
@@ -1719,6 +1713,13 @@
                     }
                 });
             }
+            function myFunction1(){
+                $("#modalConfirmacion").modal("hide");
+                $.post("FinalizaRegistro", {z:"F"}, function(data){
+                    window.location.href = "/procesopromocion/SesionDocente";
+                });
+            }
+        </script>
         </script>
         <script>
             $( function() {

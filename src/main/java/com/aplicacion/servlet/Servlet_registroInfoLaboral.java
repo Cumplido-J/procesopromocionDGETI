@@ -18,6 +18,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import metodos_sql.Metodos_sql;
 import constants.ConstantsWS;
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
 
 /**
  *
@@ -145,7 +147,19 @@ public class Servlet_registroInfoLaboral extends HttpServlet {
             }
             System.out.println("cat"+idCategoria);
             System.out.println("jor"+idJornada);
-            if(idCategoria.equals("-1")||idJornada.equals("-1")){
+            if(idPerfilRequerido.equals("0") || notaSancion.equals("S") || activo.equals("N")){
+                Metodos_sql metodo=new Metodos_sql();
+                String[] parametros={idUsuario,"",""};
+                List<String[]> datos;
+                datos=metodo.ejecutaSP("sp_finRegistro",parametros);
+                                
+                if(!datos.isEmpty()){
+                if(datos.get(0)[0].equals("ok")){
+                    out.print("fin");
+                }
+                }
+            }else{
+                if(idCategoria.equals("-1")||idJornada.equals("-1")){
                 out.print("Debe seleccionar la plaza con la que participará");
             }else{
                 if(idTipoNombramiento.equals(ConstantsWS.ALTA_DEFINITIVA) || idTipoNombramiento.equals(ConstantsWS.ALTA_PROVICIONAL)){
@@ -219,6 +233,7 @@ public class Servlet_registroInfoLaboral extends HttpServlet {
                 }else{
                     out.print("-El tipo de nombramiento no es valido para esta convocatoria-");
                 }
+            }
             }            
         } finally {
             out.close();
