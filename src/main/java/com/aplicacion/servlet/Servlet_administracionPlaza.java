@@ -150,7 +150,17 @@ public class Servlet_administracionPlaza extends HttpServlet {
                 if(request.getParameter("k").equals("B")){
                     String[] parametros={id};
                     List<String[]> datos;                           
-                    datos=metodo.ejecutaSP("sp_deleteUsuarioPlaza",parametros);            
+                    datos=metodo.ejecutaSP("sp_deleteUsuarioPlaza",parametros);
+
+                    String respuestaHoras=new Datos().validarSeleccionadasAdd(idUsuario);
+                    if(respuestaHoras.contains(",")){
+                        String[] aux=respuestaHoras.split(",");
+                        respuestaHoras=aux[4];
+                        List<String[]> datosHoras;
+                        String[] parametrosHoras={idUsuario,respuestaHoras};
+                        datosHoras=metodo.ejecutaSP("sp_updateHoras",parametrosHoras);
+                    }
+
                     if(!datos.isEmpty()){
                         if(datos.get(0)[0].equals("ok")){
                             String informacion=new Datos().desplegarPlazas(idUsuario);

@@ -121,7 +121,7 @@ public class Servlet_consultaCatalogos extends HttpServlet {
                    respuesta=catalogo.desplegarOpcionesPlanteles2(request.getParameter("s"),request.getParameter("e"));                   
                break;
                case "17":
-                   respuesta=catalogo.desplegarOpcionesJornadaVacante(request.getParameter("i"),request.getParameter("pl"),request.getParameter("pr"));
+                   respuesta=catalogo.desplegarOpcionesJornadaVacante1(request.getParameter("i"),request.getParameter("pl"),request.getParameter("pr"),request.getParameter("p2"));
                    respuesta+="|"+catalogo.desplegarRequisitosCategoria(request.getParameter("i"));
                break;
                case "18":
@@ -134,7 +134,7 @@ public class Servlet_consultaCatalogos extends HttpServlet {
                    respuesta=catalogo.desplegarNumeroPlazas(request.getParameter("e"),request.getParameter("s"),request.getParameter("i"),request.getParameter("m"),request.getParameter("n"),request.getParameter("p"),request.getParameter("periodo"));                   
                break;
                case "21":
-                   respuesta=catalogo.desplegarOpcionesJornadaVacanteHoras(request.getParameter("i"),request.getParameter("pl"),request.getParameter("pr"));
+                   respuesta=catalogo.desplegarOpcionesJornadaVacanteHoras(request.getParameter("i"),request.getParameter("pl"),request.getParameter("pr"),request.getParameter("p2"));
                break;
                case "22":
                   respuesta=catalogo.desplegarAsignaturasCompBPDGETI(request.getParameter("v"),request.getParameter("s"),idSubsistema);

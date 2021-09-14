@@ -18,8 +18,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import metodos_sql.Metodos_sql;
 import constants.ConstantsWS;
-import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletContext;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  *
@@ -133,20 +133,34 @@ public class Servlet_registroInfoLaboral extends HttpServlet {
                 activo="N";
             }
             String horas="0";
-            String respuesta=new Datos().validarSeleccionadas(idUsuario);
-            System.out.println("respuesta"+respuesta);
-            if(respuesta.contains(",")){
-                String[] aux=respuesta.split(",");
-                System.out.println("longitud"+aux.length);
-                idCategoria=aux[0];
-                idJornada=aux[1];
-                horas=aux[2];
-                if(aux.length==4){
-                 idTipoNombramiento=aux[3];   
+            if(programa.equals("1")){
+                String respuesta=new Datos().validarSeleccionadas(idUsuario);
+                System.out.println("respuesta"+respuesta);
+                if(respuesta.contains(",")){
+                    String[] aux=respuesta.split(",");
+                    System.out.println("longitud"+aux.length);
+                    idCategoria=aux[0];
+                    idJornada=aux[1];
+                    horas=aux[2];
+                    if(aux.length==4){
+                        idTipoNombramiento=aux[3];   
+                    }
+                }  
+            }else if(programa.equals("2")){
+                String respuesta=new Datos().validarSeleccionadasAdd(idUsuario);
+                System.out.println("respuesta"+respuesta);
+                if(respuesta.contains(",")){
+                    String[] aux=respuesta.split(",");
+                    System.out.println("longitud"+aux.length);
+                    idCategoria=aux[0];
+                    idJornada=aux[1];
+                    idTipoNombramiento=aux[3];
+                    horas=aux[4];
                 }
             }
             System.out.println("cat"+idCategoria);
             System.out.println("jor"+idJornada);
+
             if(idPerfilRequerido.equals("0") || notaSancion.equals("S") || activo.equals("N")){
                 Metodos_sql metodo=new Metodos_sql();
                 String[] parametros={idUsuario,"",""};
@@ -175,14 +189,74 @@ public class Servlet_registroInfoLaboral extends HttpServlet {
                             bandera=true;
                         }
                     }else{
-                        
-                        if(categoriaAspira==categoriaActual && jornadaAspira==jornadaActual+1){
-                            bandera=true;
-                        }else if(categoriaAspira==categoriaActual+1 && jornadaAspira==jornadaActual){
-                            bandera=true;
-                        }else if(categoriaAspira==categoriaActual+1 && jornadaAspira==jornadaActual+1){
-                            bandera=true;
+                          
+                        String[] catAsignatura = {"1", "2", "3"};
+                        String[] catCarAsociado = {"4", "5", "6"};
+                        String[] catCarTitular = {"7", "8", "9"};
+                        String[] catDocAsignatura = {"10", "11"};
+                        String[] catDocAsociado = {"12", "13", "14"};
+                        String[] catDocTtitular = {"15", "16", "17"};
+
+                        List<String> list1 = new ArrayList<>(Arrays.asList(catAsignatura));
+                        List<String> list2 = new ArrayList<>(Arrays.asList(catCarAsociado));
+                        List<String> list3 = new ArrayList<>(Arrays.asList(catCarTitular));
+                        List<String> list4 = new ArrayList<>(Arrays.asList(catDocAsignatura));
+                        List<String> list5 = new ArrayList<>(Arrays.asList(catDocAsociado));
+                        List<String> list6 = new ArrayList<>(Arrays.asList(catDocTtitular));
+
+                        if(list1.contains(Integer.toString(categoriaAspira)) && list1.contains(Integer.toString(categoriaActual)) && jornadaAspira==jornadaActual && jornadaAspira==1){
+                            totalHoras=Integer.parseInt(numhoras)+Integer.parseInt(horas);
+                            if(totalHoras<=19){
+                                bandera=true;
+                            }else{
+                                bandera=false;
+                            }
+                        }else if(list2.contains(categoriaAspira) && list2.contains(categoriaActual) && jornadaAspira==jornadaActual && jornadaAspira==1){
+                            totalHoras=Integer.parseInt(numhoras)+Integer.parseInt(horas);
+                            if(totalHoras<=19){
+                                bandera=true;
+                            }else{
+                                bandera=false;
+                            }
+                        }else if(list3.contains(categoriaAspira) && list3.contains(categoriaActual) && jornadaAspira==jornadaActual && jornadaAspira==1){
+                            totalHoras=Integer.parseInt(numhoras)+Integer.parseInt(horas);
+                            if(totalHoras<=19){
+                                bandera=true;
+                            }else{
+                                bandera=false;
+                            }
+                        }else if(list4.contains(categoriaAspira) && list4.contains(categoriaActual) && jornadaAspira==jornadaActual && jornadaAspira==1){
+                            totalHoras=Integer.parseInt(numhoras)+Integer.parseInt(horas);
+                            if(totalHoras<=19){
+                                bandera=true;
+                            }else{
+                                bandera=false;
+                            }
+                        }else if(list5.contains(categoriaAspira) && list5.contains(categoriaActual) && jornadaAspira==jornadaActual && jornadaAspira==1){
+                            totalHoras=Integer.parseInt(numhoras)+Integer.parseInt(horas);
+                            if(totalHoras<=19){
+                                bandera=true;
+                            }else{
+                                bandera=false;
+                            }
+                        }else if(list6.contains(categoriaAspira) && list6.contains(categoriaActual) && jornadaAspira==jornadaActual && jornadaAspira==1){
+                            totalHoras=Integer.parseInt(numhoras)+Integer.parseInt(horas);
+                            if(totalHoras<=19){
+                                bandera=true;
+                            }else{
+                                bandera=false;
+                            }
+                        }else{
+                            bandera=false;
                         }
+                        
+//                        if(categoriaAspira==categoriaActual && jornadaAspira==jornadaActual+1){
+//                            bandera=true;
+//                        }else if(categoriaAspira==categoriaActual+1 && jornadaAspira==jornadaActual){
+//                            bandera=true;
+//                        }else if(categoriaAspira==categoriaActual+1 && jornadaAspira==jornadaActual+1){
+//                            bandera=true;
+//                        }
                     }
                     
                     totalHoras=Integer.parseInt(numhoras)+Integer.parseInt(horas);
@@ -191,13 +265,8 @@ public class Servlet_registroInfoLaboral extends HttpServlet {
                     }
                     
                 }else if(programa.equals("2")){
-                    if(jornadaAspira==jornadaActual && jornadaAspira==1 && categoriaAspira==categoriaActual){
-                        totalHoras=Integer.parseInt(numhoras)+Integer.parseInt(horas);
-                        if(totalHoras<=19){
-                            bandera=true;
-                        }else{
-                            bandera=false;
-                        }
+                    if(jornadaAspira==jornadaActual && jornadaAspira==1){
+                        bandera=true;
                     }else{
                         bandera=false;
                     }
@@ -231,7 +300,7 @@ public class Servlet_registroInfoLaboral extends HttpServlet {
                     }
                 }
                 }else{
-                    out.print("-El tipo de nombramiento no es valido para esta convocatoria-");
+                    out.print("-El tipo de nombramiento no es valido para esta convocatoria solo puedes partipar con Alta definitiva o Alta provisional-");
                 }
             }
             }            

@@ -560,7 +560,7 @@ public class Catalogos {
             List<String[]> datos=metodos.ejecutaSP("sp_consultaCategoriasVacantes",parametros);
             for(String[] dato:datos){
                 //respuesta+="<option tipo='"+dato[3]+"' aux='"+dato[1]+"' value='"+dato[1]+"-"+dato[4]+"'>"+dato[2]+"-"+dato[4]+"</option>";
-                respuesta+="<option tipo='"+dato[2]+"' aux='"+dato[0]+"' value='"+dato[0]+"-"+dato[2]+"'>"+dato[1]+"-"+dato[2]+"</option>";
+                respuesta+="<option tipo='"+dato[2]+"' idCategoria='"+dato[3]+"' aux='"+dato[0]+"' value='"+dato[0]+"-"+dato[2]+"'>"+dato[1]+"-"+dato[2]+"-"+dato[5]+"-"+dato[6]+"</option>";
             }
         }catch(Exception e){
             respuesta=e.toString();
@@ -601,14 +601,33 @@ public class Catalogos {
             return respuesta;        
         }
     }
-    public String desplegarOpcionesJornadaVacanteHoras(String idCategoria,String idPlantel,String idPrograma){        
+    public String desplegarOpcionesJornadaVacante1(String idCategoria,String idPlantel,String idPrograma,String idCategoria1){        
         String respuesta="<option value=''>-Seleccione-</option>";
         if(idCategoria.contains("R") || idCategoria.contains("C")){
             String[] categoria;
-		categoria = idCategoria.split("-");
+        categoria = idCategoria.split("-");
                 idCategoria=categoria[0];
         }
-        String[] parametros={idCategoria,idPlantel,idPrograma};
+        String[] parametros={idCategoria,idPlantel,idPrograma,idCategoria1};
+        try{
+            List<String[]> datos=metodos.ejecutaSP("sp_consultaJornadaVacante",parametros);
+            for(String[] dato:datos){
+                respuesta+="<option value='"+dato[1]+"' clave='"+dato[2]+"'>"+dato[3]+"</option>";
+            }
+        }catch(Exception e){
+            respuesta=e.toString();
+        }finally{
+            return respuesta;        
+        }
+    }
+    public String desplegarOpcionesJornadaVacanteHoras(String idCategoria,String idPlantel,String idPrograma,String idCategoria1){        
+        String respuesta="<option value=''>-Seleccione-</option>";
+        if(idCategoria.contains("R") || idCategoria.contains("C")){
+            String[] categoria;
+        categoria = idCategoria.split("-");
+                idCategoria=categoria[0];
+        }
+        String[] parametros={idCategoria,idPlantel,idPrograma,idCategoria1};
         try{
             List<String[]> datos=metodos.ejecutaSP("sp_consultaJornadaVacante",parametros);
             for(String[] dato:datos){

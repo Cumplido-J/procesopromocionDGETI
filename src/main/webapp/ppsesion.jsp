@@ -373,7 +373,7 @@
                                 <input type="hidden" id="idArchivo" name="idArchivo" value="" />
                                 <input type="file" class="form-control input-sm" id="archivoCarta" name="archivoCarta" onchange="subirArchivo_();" accept=".pdf" />
                                 <c:if test = "${Docente.infoRegistro[75]=='1'&& Docente.infoRegistro[64]=='1'}">
-                                    <a href="descargas/cartaaceptaciónbasesconvocatoriaPPSDCC03022021.pdf" download>
+                                    <a href="descargas/cartadeaceptacióncambiodecategoría_2021-2022_1.pdf" download>
                                     Descargar carta aceptación
                                     </a>
                                 </c:if>
@@ -383,7 +383,7 @@
                                     </a>
                                 </c:if>
                                 <c:if test = "${Docente.infoRegistro[75]=='1'&& Docente.infoRegistro[64]=='2'}">
-                                    <a href="descargas/cartaaceptaciónbasesconvocatoriahorasPPSDCC03022021.pdf" download>
+                                    <a href="descargas/cartadeaceptaciónhorasadicionales_2021_2022_1.pdf" download>
                                     Descargar carta aceptación
                                     </a>
                                 </c:if>

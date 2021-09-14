@@ -198,12 +198,21 @@ public class Datos {
                 String cargo="";
                 for(String[] dato:datos)
                 {
-                    if(dato[12].equals("V")){
+                    if(dato[12].equals("V") && dato[15].equals("1")){
+                        seleccionado="checked";
+                    }else if(dato[4].equals("1") && dato[15].equals("2")){
                         seleccionado="checked";
                     }else{
                         seleccionado="";
                     }
-                    respuesta+="<tr><td><center><input type='checkbox' onChange='seleccionarPlaza(this)' value='"+dato[0]+"' "+seleccionado+"/></center><td>"+dato[11]+"</td><td>"+dato[7]+"</td><td id="+"tipoNom"+">"+dato[9]+":"+dato[10]+"</td><td class='hidden'>"+dato[2]+"</td><td>"+dato[3]+"</td><td class='hidden'>"+dato[4]+"</td><td>"+dato[5];
+                    
+                    if(dato[15].equals("1")){
+                        respuesta+="<tr><td><center><input type='checkbox' onChange='seleccionarPlaza(this)' value='"+dato[0]+"' "+seleccionado+"/></center><td>"+dato[11]+"</td><td>"+dato[7]+"</td><td id="+"tipoNom"+">"+dato[9]+":"+dato[10]+"</td><td class='hidden'>"+dato[2]+"</td><td>"+dato[3]+"</td><td class='hidden'>"+dato[4]+"</td><td>"+dato[5];
+                    }else{                    
+                       respuesta+="<tr><td><center><input type='checkbox' onChange='seleccionarPlaza(this)' value='"+dato[0]+"' "+seleccionado+" disabled/></center><td>"+dato[11]+"</td><td>"+dato[7]+"</td><td id="+"tipoNom"+">"+dato[9]+":"+dato[10]+"</td><td class='hidden'>"+dato[2]+"</td><td>"+dato[3]+"</td><td class='hidden'>"+dato[4]+"</td><td>"+dato[5]; 
+                    }
+                    
+                    
                     if(dato[4].equals("1")){
                         respuesta+="("+dato[6]+")";
                     }                    
@@ -469,6 +478,84 @@ public class Datos {
                 }
                 respuesta+="</table>";
                 return respuesta;
+        }catch(Exception e){
+            respuesta=e.toString();
+        }finally{
+            return respuesta;        
+        }
+    }
+    public  String validarSeleccionadasAdd(String idUsuario){        
+        String respuesta="";   
+        int horas=0,totalHoras=0,numPlazas=0;
+        String idCategoria="-1",idJornada="-1",idCategoriaAux="",idJornadaAux="";
+        String idNombramiento="",idNombramientoAux="";
+        try{
+            String[] parametros={idUsuario};
+            List<String[]> datos=metodos.ejecutaSP("sp_consultaUsuarioPlaza",parametros);
+            if(!datos.isEmpty()){
+                respuesta="";                
+                for(String[] dato:datos)
+                {
+                    if(dato[4].equals("1")){
+                        idCategoria=dato[2];
+                        idJornada=dato[4];
+                        idNombramiento=dato[8];
+                        if(dato[4].equals("1")){
+                            horas+=Integer.parseInt(dato[6]);
+                        }        
+                        System.out.println(idCategoria+"-"+idCategoriaAux+"-"+idJornada+"-"+idJornadaAux);
+                        
+                        if(dato[15].equals("1")){//Para el programa 1:Cambio categoria solo puede sumar plazas con la misma categoria y jornada
+                            if(!idCategoriaAux.isEmpty()){
+                                if(!idCategoriaAux.equals(idCategoria)||!idJornadaAux.equals(idJornada)){
+                                    respuesta="Solo puede seleccionar plazas de la misma categoria y jornada";
+                                }
+                            }
+                        }else if(dato[15].equals("2")){//Para el programa 2:Horas adicionales solo puede sumar plazas con jornada de horas
+                            if(!idJornada.equals("1")){
+                                respuesta="Solo puede seleccionar plazas con jornada de horas";
+                            }
+//                            if(horas>19){
+//                                respuesta="Solo puede acumular 19 horas como máximo";
+//                            }
+                        }
+                        
+                        idCategoriaAux=idCategoria;
+                        idJornadaAux=idJornada;
+                        idNombramientoAux=idNombramiento;
+                        numPlazas++;
+                        totalHoras=horas;
+                    }
+                    
+                }
+                if(!idJornada.equals("1")&&numPlazas>1){
+                    respuesta="Solo puede seleccionar una plaza con la que participará";
+                }else{
+                    if(respuesta.isEmpty()){
+                        respuesta=idCategoria+","+idJornada+","+horas+","+idNombramiento+","+totalHoras;
+                    }
+                }
+            }
+        }catch(Exception e){
+            respuesta=e.toString();
+        }finally{
+            return respuesta;        
+        }
+    }
+    public  String desplegarCategoriasAspira(String idUsuario){        
+        String respuesta="<tr><td colspan='7' class='text-center'>Sin información</td></tr>";        
+        try{
+            String[] parametros={idUsuario};
+            List<String[]> datos=metodos.ejecutaSP("sp_consultaUsuarioCategoriaAspira",parametros);
+            if(!datos.isEmpty()){
+                respuesta="";
+                for(String[] dato:datos)
+                {
+                    respuesta+="<tr><td>"+dato[3]+"</td><td>"+dato[5]+"</td><td>"+dato[6]+"</td>";
+                    respuesta+="<td><button type='button' class='btn btn-sm' title='Borrar' onclick='confirmarCategoriaAspira("+dato[0]+")'><span class='glyphicon glyphicon-trash'></span></button>";  
+                    respuesta+="</td></tr>";
+                }
+            }
         }catch(Exception e){
             respuesta=e.toString();
         }finally{

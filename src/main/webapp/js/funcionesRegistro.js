@@ -1589,6 +1589,7 @@ function cambioCategoriaPresupuestal() {
 }
 function cambioCategoriaAspira() {   
     var tipo=$("#categoriaAspira option:selected").attr("aux");
+    var idCategoria=$("#categoriaAspira option:selected").attr('idCategoria');
     if(!tipo.includes("Real")){
         $("#avisoCategoria").removeClass("hidden");
         $("#avisoCategoria").attr("title","Se dará siempre y cuando un aspirante cumpla todos los requisitos y resulte ganador de una plaza de vacancia real, dejando desocupada la plaza que ostenta y ésta podrá asignarse a otro participante.");
@@ -1601,7 +1602,7 @@ function cambioCategoriaAspira() {
     id=$("#categoriaAspira").val(); 
     idPrograma=$("#programa").val(); 
     idPlantel=$("#plantel").val(); 
-    $.get("ConsultaCatalogos", {k: "17",i:id,pr:idPrograma,pl:idPlantel}, function(){        
+    $.get("ConsultaCatalogos", {k: "17",i:id,pr:idPrograma,pl:idPlantel,p2:idCategoria}, function(){        
     }).done(function(respuesta){
         var aux=respuesta.split("|");
         if(aux.length==2){
@@ -1612,9 +1613,10 @@ function cambioCategoriaAspira() {
 }
 function cambioCategoriaAspiraHoras() {
     var id=$("#categoriaAspira option:selected").attr("aux");
+    var idCategoria=$("#categoriaAspira option:selected").attr('idCategoria');
     idPrograma=$("#programa").val(); 
     idPlantel=$("#plantel").val(); 
-    $.get("ConsultaCatalogos", {k: "17",i:id,pr:idPrograma,pl:idPlantel}, function(){        
+    $.get("ConsultaCatalogos", {k: "17",i:id,pr:idPrograma,pl:idPlantel,p2:idCategoria}, function(){        
     }).done(function(respuesta){
         var aux=respuesta.split("|");
         if(aux.length==2){
@@ -1625,9 +1627,10 @@ function cambioCategoriaAspiraHoras() {
 }
 function cambioCategoriaAspiraHoras2() {
     var id=$("#categoriaAspira option:selected").attr("aux");
+    var idCategoria=$("#categoriaAspira option:selected").attr('idCategoria');
     idPrograma=$("#programa").val(); 
     idPlantel=$("#plantel").val(); 
-    $.get("ConsultaCatalogos", {k: "21",i:id,pr:idPrograma,pl:idPlantel}, function(){        
+    $.get("ConsultaCatalogos", {k: "21",i:id,pr:idPrograma,pl:idPlantel,p2:idCategoria}, function(){        
     }).done(function(respuesta){
         var aux=respuesta;
         $("#numhoras").html(aux);

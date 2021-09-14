@@ -571,7 +571,28 @@
                                     </div>
                                 </div>
                             </c:if>  
-                               
+                            
+                            <div class="row">
+                                    <div class="form-group col-md-3">
+                                    </div>
+                                    <div class="form-group col-md-3">
+                                    </div>
+                                    <div class="form-group col-md-3">                                   
+                                    </div>
+                                    <div class="form-group col-md-3">
+                                        <input class="btn btn-sm btn-primary" id="btnEnviarCategorias" onclick="myAgregarCategoria()" value='Agregar categoria'/>
+                                    </div>
+                                </div>
+                                
+                                <div class='table-responsive'>
+                                    <table class='table table-bordered table-condensed'>
+                                        <tr><th>Plazas a la que aspira</th><th>Jornada</th><th>Horas con las que participa</th><th>Borrar</th></tr>
+                                        <tbody id="tablaCategorias">
+                                            ${dato.desplegarCategoriasAspira(Docente.infoRegistro[0])}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            
                             </div>
                                   <div class="row">    
                                      <div class="form-group col-md-3">
@@ -1864,6 +1885,37 @@
                     $("#estatusArchivo5").attr("completo",false);                            
                 }
                 $("#modalValidarArchivos").modal("show");
+            }
+            function myAgregarCategoria(){
+                var idCategoriaAspira=$('#categoriaAspira').val();
+                var idJornadaAspira=$('#jornadaAspira').val();
+                var horasAspira=$("#numhoras option:selected").text();
+                var idCategoria=$("#categoriaAspira option:selected").attr('idCategoria');
+                
+                $.post("AgregarCategoriasAspira", {categoria:idCategoriaAspira,jornada:idJornadaAspira,horas:horasAspira,idCategoria:idCategoria}, function(data){
+                    if(data.includes("<tr>")){
+                        $("#tablaCategorias").html(data);
+                    }else{
+                        $("#mensaje").html(data);            
+                        $("#modalMensaje").modal("show");
+                    }
+                });
+            }
+            function confirmarCategoriaAspira(id){
+                $("#btnConfirmar").attr("onClick","borrarCategoriaAspira("+id+")");
+                $("#modalConfirmacion2").modal("show");
+            }
+            function borrarCategoriaAspira(id){
+                $("#modalConfirmacion2").modal("hide");
+                $.post("AgregarCategoriasAspira", {id: id,k:"B"}, function(data){
+                    if(data.includes("<tr>")){            
+                        $("#tablaCategorias").html(data);
+                    }
+                    else{
+                        $("#mensaje").html(data);            
+                        $("#modalMensaje").modal("show");
+                    } 
+                });
             }
         </script>
         
