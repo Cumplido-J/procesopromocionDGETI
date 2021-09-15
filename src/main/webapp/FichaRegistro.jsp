@@ -364,16 +364,20 @@
                     </table>
                 </c:if>
             </c:forEach>
-			<p>EVIDENCIAS REGISTRO:</p>
+            <c:if test="${registroEvidencias != null}">       
+            <p>EVIDENCIAS REGISTRO:</p>
             <table>
                 <tr><tr><th class='borde'>Criterio</th><th class='borde'>Descripcion tipo documento</th><th class='borde'>Entrego documento</th></tr>
                 ${registroEvidencias}
             </table>
+            </c:if>
+            <c:if test="${evidencias != null}">
             <p>EVIDENCIAS CRITERIOS DE VALORACIÓN:</p>
             <table>
                 <tr><tr><th class='borde'>Criterio</th><th class='borde'>Descripcion tipo documento</th><th class='borde'>Entrego documento</th></tr>
                 ${evidencias}
             </table>
+            </c:if>
             <p style="text-align:justify">De acuerdo a la documentación comprobatoria que ha proporcionado como evidencia de cumplimiento de los requisitos requeridos para su registro y de las evidencias para los criterios de valoración, usted ha sido aceptado para participar en el proceso de promoción en el servicio docente por cambio de categoría en Educación Media Superior, <jsp:include page="seccionesPlantilla/cicloEscolar.jsp" flush="true"/>.</p>
             <p style="text-align:justify">Declara bajo protesta de decir verdad que cumple con los requisitos establecidos en la Convocatoria para el proceso de promoción en el servicio docente por cambio de categoría en Educación Media Superior, <jsp:include page="seccionesPlantilla/cicloEscolar.jsp" flush="true"/>. Para confirmar su dicho, la DGETI podrá verificar la autenticidad de la documentación que proporciono, por lo que, en caso de alteración o falsificación de la misma, acepta la descalificación inmediata del proceso o, en su caso, la invalidación del nombramiento respectivo, sin perjuicio de las sanciones de tipo administrativo o penal en las que pudiera incurrir.</p>
             <c:set var="acepta" value="${Docente.infoRegistro[63] eq 'S' ? 'Acepta': 'No acepta'}"/>

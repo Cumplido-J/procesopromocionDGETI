@@ -612,7 +612,7 @@
                                         <c:set var="checked" value=""></c:set>
                                         <c:set var="in" value="in"></c:set>
                                     </c:if>
-                                    <label><input type="checkbox" id="notaDesfavorable" ${checked} name="notaDesfavorable" data-toggle="collapse" data-target="#seccionNota" >Marque la casilla si cuenta con nota desfavorable</label>
+                                    <label><input type="checkbox" id="notaDesfavorable" ${checked} name="notaDesfavorable" data-toggle="collapse" data-target="#seccionNota" >Marque la casilla si cuenta con nota desfavorable y/o sanción administrativa</label>
                                 </div>
                                 <div id="seccionNota" class="form-group col-md-6 collapse ${in}">
                                     <label class="control-label" for="btnEvidencia6">Constancia de nota favorable:</label>
@@ -1675,7 +1675,7 @@
         </div>
         <div id="modalValidarArchivos" class="modal fade" role="dialog">
             <div class="modal-dialog">
-              <div class="modal-content" style="width: 111%;">
+              <div class="modal-content" style="width: 123%;">
                 <div class="modal-header">
                   <button type="button" class="close" data-dismiss="modal">&times;</button>
                   <h4 class="modal-title" >Archivos cargados en los requisitos</h4>
@@ -1684,7 +1684,7 @@
                     <p class="control-label"><span class="glyphicon glyphicon-exclamation-sign incompleto" title="Sección incompleta" id="estatusArchivo" completo="false"></span> Información Académica - Documento comprobatorio</p>
                     <p class="control-label"><span class="glyphicon glyphicon-exclamation-sign incompleto" title="Sección incompleta" id="estatusArchivo1" completo="false"></span> Información Laboral - Constancia de antiguedad</p>
                     <p class="control-label"><span class="glyphicon glyphicon-exclamation-sign incompleto" title="Sección incompleta" id="estatusArchivo2" completo="false"></span> Información Laboral - Constancia de nombramiento definitivo</p>
-                    <p class="control-label"><span class="glyphicon glyphicon-exclamation-sign incompleto" title="Sección incompleta" id="estatusArchivo3" completo="false"></span> Información Laboral - Constancia de nota favorable</p>
+                    <p class="control-label"><span class="glyphicon glyphicon-exclamation-sign incompleto" title="Sección incompleta" id="estatusArchivo3" completo="false"></span> Información Laboral - Constancia de no contar con nota desfavorable</p>
                     <p class="control-label"><span class="glyphicon glyphicon-exclamation-sign incompleto" title="Sección incompleta" id="estatusArchivo4" completo="false"></span> Horas frente a grupo - Constancia de horas frente a grupo</p>
                     <p class="control-label"><span class="glyphicon glyphicon-exclamation-sign incompleto" title="Sección incompleta" id="estatusArchivo5" completo="false"></span> Compatibilidad - Carta protesta - Archivo de evidencia</p>
                     <br>

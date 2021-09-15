@@ -24,6 +24,7 @@
         <c:set var="disabled2" value=""></c:set>
         <c:set var="disabled3" value=""></c:set>
         <c:set var="disabled4" value=""></c:set> 
+        <c:set var="disabled5p" value=""></c:set>
         
         <c:if test='${sessionScope["rol"]!="S"}'>
             <c:if test='${sessionScope["programa"]!=""}'>
@@ -49,6 +50,17 @@
             <c:if test='${sessionScope["rol"]=="A" && sessionScope["entidad"]!="" && sessionScope["plantel"]!=""}'>
                 <c:set var="disabled3" value="disabled"></c:set>
                 <c:set var="disabled4" value="disabled"></c:set>
+            </c:if>
+        </c:if>
+        <c:if test='${sessionScope["rol"]=="S"}'>
+            <c:if test='${ sessionScope["entidad"]!= "" && sessionScope["plantel"]!= "" }'>
+                <c:set var="disabled2" value="disabled"></c:set>
+            </c:if>
+            <c:if test='${sessionScope["entidad"]!=null}'>
+                <c:set var="disabled3" value="disabled"></c:set>
+            </c:if>
+            <c:if test='${sessionScope["plantel"]!=null}'>
+                <c:set var="disabled5p" value="disabled"></c:set>
             </c:if>
         </c:if>
         <main class="page">
@@ -98,7 +110,7 @@
                       
                     <div class="form-group col-md-3">                               
                         <label class="control-label" for="plantel">Plantel:</label>
-                        <select class="form-control input-sm ${disabled4}" id="plantel" name="plantel" required>                                  
+                        <select class="form-control input-sm ${disabled4} ${disabled5p}" id="plantel" name="plantel" required>                                  
                             ${catalogo.desplegarOpcionesPlanteles2(sessionScope["subsistema"],sessionScope["entidad"],sessionScope["plantel"])}
                         </select>
                     </div>
