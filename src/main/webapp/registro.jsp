@@ -546,19 +546,28 @@
                                       </c:if>
                                   </select>
                                 </div>
+                                <c:if test='${sessionScope["programa"]=="1"}'>
                                 <div class="form-group col-md-3">
                                   <label class="control-label" for="jornadaAspira">Tipo de jornada:</label>
                                   <select class="form-control input-sm" id="jornadaAspira" name="jornadaAspira" onchange="cambioCategoriaAspiraHoras2()" required>
                                       ${catalogo.desplegarOpcionesJornadaVacante(Docente.infoRegistro[42],Docente.infoRegistro[6],Docente.infoRegistro[64],Docente.infoRegistro[44])}
-                                  </select>  
-                                  
+                                  </select>
                                 </div>
+                                </c:if>
+                                <c:if test='${sessionScope["programa"]=="2"}'>
+                                <div class="form-group col-md-3">
+                                  <label class="control-label" for="jornadaAspira">Tipo de jornada:</label>
+                                  <select class="form-control input-sm" id="jornadaAspira" name="jornadaAspira" onchange="cambioCategoriaAspiraHoras2()">
+                                      ${catalogo.desplegarOpcionesJornadaVacante(Docente.infoRegistro[42],Docente.infoRegistro[6],Docente.infoRegistro[64],Docente.infoRegistro[44])}
+                                  </select>
+                                </div>
+                                </c:if>
                                   
                                 <c:if test='${sessionScope["programa"]=="2"}'>
                                 <div class="row">
                                     <div class="form-group col-md-3">
                                       <label class="control-label" for="numhoras">Numero de horas:</label>
-                                      <select class="form-control input-sm" id="numhoras" name="numhoras" required>
+                                      <select class="form-control input-sm" id="numhoras" name="numhoras">
                                           
                                         ${catalogo.desplegarOpcionesHorasVacante(Docente.infoRegistro[42],Docente.infoRegistro[6],Docente.infoRegistro[64],Docente.infoRegistro[44])}
                                       </select>
@@ -570,7 +579,7 @@
                                     <div class="form-group col-md-3">                                   
                                     </div>
                                 </div>
-                            </c:if>  
+                            </c:if>
                             
                             <div class="row">
                                     <div class="form-group col-md-3">
@@ -1465,6 +1474,29 @@
 
             </div>
         </div>                            
+        
+        <div class="modal fade" id="modalMensajeFinHoras" role="dialog">
+            <div class="modal-dialog">
+
+              <!-- Modal content-->
+              <div class="modal-content panel">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  <h4 class="modal-title">Aviso</h4>
+                </div>
+                <div class="modal-body">
+                  <p id="mensajeFinHoras">Registro exitoso.</p>
+                </div>
+                <div class="modal-footer">
+                  <!--<a href="SesionDocente">-->
+                    <button type="button" onclick="myFunctionHoras()" class="btn btn-sm btn-default">Continuar</button>
+                 <!--</a>-->
+                 <button type="button" class="btn btn-sm btn-default" data-dismiss="modal">Cancelar</button>
+                </div>
+              </div>
+
+            </div>
+        </div>
                                     
         <div class="modal fade" id="modalConfirmacion" role="dialog">
             <div class="modal-dialog">
@@ -1748,6 +1780,12 @@
             }
             function myFunction1(){
                 $("#modalConfirmacion").modal("hide");
+                $.post("FinalizaRegistro", {z:"F"}, function(data){
+                    window.location.href = "/procesopromocion/SesionDocente";
+                });
+            }
+            function myFunctionHoras(){
+                $("#modalMensajeFinHoras").modal("hide");
                 $.post("FinalizaRegistro", {z:"F"}, function(data){
                     window.location.href = "/procesopromocion/SesionDocente";
                 });

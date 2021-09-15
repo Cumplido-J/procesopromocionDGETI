@@ -141,7 +141,11 @@ $(document).ready(function () {
                         mostrarSiguiente(2);
                     }else if(data=="fin"){
                         window.location.href = "/procesopromocion/SesionDocente";
-                    }else{
+                    }else if(data.includes("Excede")){
+                        $("#mensajeFinHoras").html(data);            
+                        $("#modalMensajeFinHoras").modal("show");
+                    }
+                    else{
                         $("#mensaje").html(data);            
                         $("#modalMensaje").modal("show");
                     }

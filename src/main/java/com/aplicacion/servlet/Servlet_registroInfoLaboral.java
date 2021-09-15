@@ -125,6 +125,10 @@ public class Servlet_registroInfoLaboral extends HttpServlet {
                 idCategoriaAspira=categoria[0];
                 nombreVacancia=categoria[1];
                 idJornadaAspira=request.getParameter("jornadaAspira");
+                if(idJornadaAspira.equals("")){
+                    idJornadaAspira="0";
+                }
+                
                 idPerfilRequerido=request.getParameter("opReqCat");                
                 if(request.getParameter("notaDesfavorable")!=null){
                     notaSancion="S";
@@ -178,77 +182,77 @@ public class Servlet_registroInfoLaboral extends HttpServlet {
             }else{
                 if(idTipoNombramiento.equals(ConstantsWS.ALTA_DEFINITIVA) || idTipoNombramiento.equals(ConstantsWS.ALTA_PROVICIONAL)){
                     int categoriaActual=Integer.parseInt(idCategoria);
-                int categoriaAspira=Integer.parseInt(idCategoriaAspira);
-                int jornadaActual=Integer.parseInt(idJornada);
-                int jornadaAspira=Integer.parseInt(idJornadaAspira);
-                int totalHoras=0;
-                boolean bandera=false;
-                if(programa.equals("1")){
-                    if((categoriaActual==3 && categoriaAspira==4)||((categoriaActual==11 && categoriaAspira==12))){
-                        if(Integer.parseInt(horas)>=18){
-                            bandera=true;
-                        }
-                    }else{
-                          
-                        String[] catAsignatura = {"1", "2", "3"};
-                        String[] catCarAsociado = {"4", "5", "6"};
-                        String[] catCarTitular = {"7", "8", "9"};
-                        String[] catDocAsignatura = {"10", "11"};
-                        String[] catDocAsociado = {"12", "13", "14"};
-                        String[] catDocTtitular = {"15", "16", "17"};
-
-                        List<String> list1 = new ArrayList<>(Arrays.asList(catAsignatura));
-                        List<String> list2 = new ArrayList<>(Arrays.asList(catCarAsociado));
-                        List<String> list3 = new ArrayList<>(Arrays.asList(catCarTitular));
-                        List<String> list4 = new ArrayList<>(Arrays.asList(catDocAsignatura));
-                        List<String> list5 = new ArrayList<>(Arrays.asList(catDocAsociado));
-                        List<String> list6 = new ArrayList<>(Arrays.asList(catDocTtitular));
-
-                        if(list1.contains(Integer.toString(categoriaAspira)) && list1.contains(Integer.toString(categoriaActual)) && jornadaAspira==jornadaActual && jornadaAspira==1){
-                            totalHoras=Integer.parseInt(numhoras)+Integer.parseInt(horas);
-                            if(totalHoras<=19){
+                    int categoriaAspira=Integer.parseInt(idCategoriaAspira);
+                    int jornadaActual=Integer.parseInt(idJornada);
+                    int jornadaAspira=Integer.parseInt(idJornadaAspira);
+                    int totalHoras=0;
+                    boolean bandera=false;
+                    if(programa.equals("1")){
+                        if((categoriaActual==3 && categoriaAspira==4)||((categoriaActual==11 && categoriaAspira==12))){
+                            if(Integer.parseInt(horas)>=18){
                                 bandera=true;
-                            }else{
-                                bandera=false;
-                            }
-                        }else if(list2.contains(categoriaAspira) && list2.contains(categoriaActual) && jornadaAspira==jornadaActual && jornadaAspira==1){
-                            totalHoras=Integer.parseInt(numhoras)+Integer.parseInt(horas);
-                            if(totalHoras<=19){
-                                bandera=true;
-                            }else{
-                                bandera=false;
-                            }
-                        }else if(list3.contains(categoriaAspira) && list3.contains(categoriaActual) && jornadaAspira==jornadaActual && jornadaAspira==1){
-                            totalHoras=Integer.parseInt(numhoras)+Integer.parseInt(horas);
-                            if(totalHoras<=19){
-                                bandera=true;
-                            }else{
-                                bandera=false;
-                            }
-                        }else if(list4.contains(categoriaAspira) && list4.contains(categoriaActual) && jornadaAspira==jornadaActual && jornadaAspira==1){
-                            totalHoras=Integer.parseInt(numhoras)+Integer.parseInt(horas);
-                            if(totalHoras<=19){
-                                bandera=true;
-                            }else{
-                                bandera=false;
-                            }
-                        }else if(list5.contains(categoriaAspira) && list5.contains(categoriaActual) && jornadaAspira==jornadaActual && jornadaAspira==1){
-                            totalHoras=Integer.parseInt(numhoras)+Integer.parseInt(horas);
-                            if(totalHoras<=19){
-                                bandera=true;
-                            }else{
-                                bandera=false;
-                            }
-                        }else if(list6.contains(categoriaAspira) && list6.contains(categoriaActual) && jornadaAspira==jornadaActual && jornadaAspira==1){
-                            totalHoras=Integer.parseInt(numhoras)+Integer.parseInt(horas);
-                            if(totalHoras<=19){
-                                bandera=true;
-                            }else{
-                                bandera=false;
                             }
                         }else{
-                            bandera=false;
-                        }
+
+                            String[] catAsignatura = {"1", "2", "3"};
+                            String[] catCarAsociado = {"4", "5", "6"};
+                            String[] catCarTitular = {"7", "8", "9"};
+                            String[] catDocAsignatura = {"10", "11"};
+                            String[] catDocAsociado = {"12", "13", "14"};
+                            String[] catDocTtitular = {"15", "16", "17"};
+
+                            List<String> list1 = new ArrayList<>(Arrays.asList(catAsignatura));
+                            List<String> list2 = new ArrayList<>(Arrays.asList(catCarAsociado));
+                            List<String> list3 = new ArrayList<>(Arrays.asList(catCarTitular));
+                            List<String> list4 = new ArrayList<>(Arrays.asList(catDocAsignatura));
+                            List<String> list5 = new ArrayList<>(Arrays.asList(catDocAsociado));
+                            List<String> list6 = new ArrayList<>(Arrays.asList(catDocTtitular));
+
+                            if(list1.contains(Integer.toString(categoriaAspira)) && list1.contains(Integer.toString(categoriaActual)) && jornadaAspira==jornadaActual && jornadaAspira==1){
+                                totalHoras=Integer.parseInt(numhoras)+Integer.parseInt(horas);
+                                if(totalHoras<=19){
+                                    bandera=true;
+                                }else{
+                                    bandera=false;
+                                }
+                            }else if(list2.contains(categoriaAspira) && list2.contains(categoriaActual) && jornadaAspira==jornadaActual && jornadaAspira==1){
+                                totalHoras=Integer.parseInt(numhoras)+Integer.parseInt(horas);
+                                if(totalHoras<=19){
+                                    bandera=true;
+                                }else{
+                                    bandera=false;
+                                }
+                            }else if(list3.contains(categoriaAspira) && list3.contains(categoriaActual) && jornadaAspira==jornadaActual && jornadaAspira==1){
+                                totalHoras=Integer.parseInt(numhoras)+Integer.parseInt(horas);
+                                if(totalHoras<=19){
+                                    bandera=true;
+                                }else{
+                                    bandera=false;
+                                }
+                            }else if(list4.contains(categoriaAspira) && list4.contains(categoriaActual) && jornadaAspira==jornadaActual && jornadaAspira==1){
+                                totalHoras=Integer.parseInt(numhoras)+Integer.parseInt(horas);
+                                if(totalHoras<=19){
+                                    bandera=true;
+                                }else{
+                                    bandera=false;
+                                }
+                            }else if(list5.contains(categoriaAspira) && list5.contains(categoriaActual) && jornadaAspira==jornadaActual && jornadaAspira==1){
+                                totalHoras=Integer.parseInt(numhoras)+Integer.parseInt(horas);
+                                if(totalHoras<=19){
+                                    bandera=true;
+                                }else{
+                                    bandera=false;
+                                }
+                            }else if(list6.contains(categoriaAspira) && list6.contains(categoriaActual) && jornadaAspira==jornadaActual && jornadaAspira==1){
+                                totalHoras=Integer.parseInt(numhoras)+Integer.parseInt(horas);
+                                if(totalHoras<=19){
+                                    bandera=true;
+                                }else{
+                                    bandera=false;
+                                }
+                            }else{
+                                bandera=false;
+                            }
                         
 //                        if(categoriaAspira==categoriaActual && jornadaAspira==jornadaActual+1){
 //                            bandera=true;
@@ -265,10 +269,17 @@ public class Servlet_registroInfoLaboral extends HttpServlet {
                     }
                     
                 }else if(programa.equals("2")){
-                    if(jornadaAspira==jornadaActual && jornadaAspira==1){
+                    String validarRespuesta=new Datos().validarSeleccionadasAdd(idUsuario);
+                    if(validarRespuesta.contains(",")){
+                        String[] auxRespuesta=validarRespuesta.split(",");
+                        validarRespuesta=auxRespuesta[4];
+                    }
+                    int totalHorasCapturadas=Integer.parseInt(validarRespuesta)+Integer.parseInt(horas);
+                    if(totalHorasCapturadas<=19){
                         bandera=true;
                     }else{
                         bandera=false;
+                        out.println("Excede el número de horas permitidas");
                     }
                 }
                 
@@ -292,15 +303,18 @@ public class Servlet_registroInfoLaboral extends HttpServlet {
                         out.print("Error en almacenamiento de datos, intente nuevamente");
                     }
                 }else{
-                    out.print("No puede aplicar a esa combinación de categoria y jornada");
                     if(programa.equals("2")){
                         if(totalHoras>19){
                             out.println("Excede el número de horas permitidas");
                         }
+                    }else{
+                        out.print("No puede aplicar a esa combinación de categoria y jornada");
                     }
                 }
                 }else{
-                    out.print("-El tipo de nombramiento no es valido para esta convocatoria solo puedes partipar con Alta definitiva o Alta provisional-");
+                    if(programa.equals("1")){
+                        out.print("-El tipo de nombramiento no es valido para esta convocatoria solo puedes partipar con Alta definitiva o Alta provisional-");
+                    }
                 }
             }
             }            

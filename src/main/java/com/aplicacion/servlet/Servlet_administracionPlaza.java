@@ -129,11 +129,26 @@ public class Servlet_administracionPlaza extends HttpServlet {
                 }
                 
                 String[] parametros={idUsuario,idCategoria,idJornada,horas,fechaPlaza,idTipoNombramiento,clave,cargo,fechaRenuncia};
-                List<String[]> datos;
+                List<String[]> datos = null;
                 if(inCompleto.equals("F")){
                     datos=metodo.ejecutaSP("sp_insertUsuarioPlazaFin",parametros);
                 }else{
-                    datos=metodo.ejecutaSP("sp_insertUsuarioPlaza",parametros);
+                    if(programa.equals("2")){
+                        String validarRespuesta=new Datos().validarSeleccionadasAdd(idUsuario);
+                        if(validarRespuesta.contains(",")){
+                            String[] auxRespuesta=validarRespuesta.split(",");
+                            validarRespuesta=auxRespuesta[4];
+                        }
+                        
+                        int horasRegistradas= Integer.parseInt(validarRespuesta)+ Integer.parseInt(horas);
+                        if(horasRegistradas<=19){
+                            datos=metodo.ejecutaSP("sp_insertUsuarioPlaza",parametros);
+                        }else{
+                            out.print("Excede el numero de horas permitidas para esta convocatoria");
+                        }
+                    }else{
+                        datos=metodo.ejecutaSP("sp_insertUsuarioPlaza",parametros);   
+                    }
                 }            
                 if(!datos.isEmpty()){
                     if(datos.get(0)[0].equals("ok")){
