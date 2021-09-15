@@ -144,8 +144,10 @@ $(document).ready(function () {
                     }else if(data.includes("Excede")){
                         $("#mensajeFinHoras").html(data);            
                         $("#modalMensajeFinHoras").modal("show");
-                    }
-                    else{
+                    }else if(data.includes("e1")){
+                        $("#mensajeFinHoras").html("Solo puedes participar con jornadas de tipo Horas para esta convocatoria tu registro sera procesado como ficha imcompleta. ¿Deseas continuar?");            
+                        $("#modalMensajeFinHoras").modal("show");
+                    }else{
                         $("#mensaje").html(data);            
                         $("#modalMensaje").modal("show");
                     }

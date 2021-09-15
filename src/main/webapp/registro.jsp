@@ -408,7 +408,7 @@
                   </div>
                   <div class="panel-collapse collapse ${in}" id="infoLaboral" >
                     <div class="panel-body">
-                      <form id="formInfoLaboral" role="form" action="RegistroInfoLaboral" method="POST">                      
+                        <form id="formInfoLaboral" role="form" action="RegistroInfoLaboral" method="POST">                      
                         <div class="row">
                             <div class="checkbox col-xs-12">
                               <c:if test = "${Docente.infoRegistro[25]=='N'}">
@@ -1591,7 +1591,7 @@
                         </div>
                         <div class="form-group col-md-6 hidden" id="seccionHoras4">
                             <label class="control-label" for="horas">Horas:</label>
-                            <input type="text" class="form-control input-sm" id="horas" name="horas" maxlength="2" /> 
+                            <input type="text" class="form-control input-sm" id="horas" name="horas" maxlength="2" required/>
                         </div>
                       </div>
                       <div class="row">

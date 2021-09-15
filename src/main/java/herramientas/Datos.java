@@ -542,6 +542,35 @@ public class Datos {
             return respuesta;        
         }
     }
+    public  String validarSeleccionadasAdd1(String idUsuario){        
+        String respuesta="";   
+        int horas=0,totalHoras=0,numPlazas=0;
+        String idCategoria="-1",idJornada="-1",idCategoriaAux="",idJornadaAux="";
+        String idNombramiento="",idNombramientoAux="";
+        try{
+            String[] parametros={idUsuario};
+            List<String[]> datos=metodos.ejecutaSP("sp_consultaUsuarioPlaza",parametros);
+            if(!datos.isEmpty()){
+                respuesta="0";                
+                for(String[] dato:datos)
+                {
+                    if(!dato[4].equals("1")){
+                        idCategoria=dato[2];
+                        idJornada=dato[4];
+                        if(dato[15].equals("2")){//Para el programa 2:Horas adicionales solo puede sumar plazas con jornada de horas
+                            if(!idJornada.equals("1")){
+                                respuesta="1";
+                        }   }
+                    }
+                }        
+            }
+
+        }catch(Exception e){
+            respuesta=e.toString();
+        }finally{
+            return respuesta;        
+        }
+    }
     public  String desplegarCategoriasAspira(String idUsuario){        
         String respuesta="<tr><td colspan='7' class='text-center'>Sin información</td></tr>";        
         try{
