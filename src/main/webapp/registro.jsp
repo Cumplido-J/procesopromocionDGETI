@@ -584,6 +584,17 @@
                                     </div>
                                 </div>
                                 
+                                <c:if test='${sessionScope["programa"]=="1"}'>
+                                <div class='table-responsive'>
+                                    <table class='table table-bordered table-condensed'>
+                                        <tr><th>Plazas a la que aspira</th><th>Jornada</th><th>Borrar</th></tr>
+                                        <tbody id="tablaCategorias">
+                                            ${dato.desplegarCategoriasAspira(Docente.infoRegistro[0])}
+                                        </tbody>
+                                    </table>
+                                </div>
+                                </c:if>
+                                <c:if test='${sessionScope["programa"]=="2"}'>
                                 <div class='table-responsive'>
                                     <table class='table table-bordered table-condensed'>
                                         <tr><th>Plazas a la que aspira</th><th>Jornada</th><th>Horas con las que participa</th><th>Borrar</th></tr>
@@ -592,6 +603,7 @@
                                         </tbody>
                                     </table>
                                 </div>
+                                </c:if>
                             
                             </div>
                                   <div class="row">    
