@@ -138,7 +138,14 @@ public class Servlet_administracionPlaza extends HttpServlet {
                         if(validarRespuesta.contains(",")){
                             String[] auxRespuesta=validarRespuesta.split(",");
                             validarRespuesta=auxRespuesta[4];
+                            if(validarRespuesta.equals("")){
+                                validarRespuesta="0";
+                            }
                         }
+                        
+                        if(validarRespuesta.equals("")){
+                                validarRespuesta="0";
+                            }
                         
                         int horasRegistradas= Integer.parseInt(validarRespuesta)+ Integer.parseInt(horas);
                         if(horasRegistradas<=19){
