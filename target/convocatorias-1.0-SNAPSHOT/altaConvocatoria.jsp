@@ -25,16 +25,16 @@
         
         <c:if test='${sessionScope["rol"]=="S"}'>
             <c:if test='${sessionScope["programa"]!=""}'>
-                <c:set var="disabled1" value="disabled"></c:set>
+                <c:set var="disabled1" value=""></c:set>
             </c:if>
             <c:if test='${sessionScope["subsistema"]!=""}'>
-                <c:set var="disabled2" value="disabled"></c:set>
+                <c:set var="disabled2" value=""></c:set>
             </c:if>
             <c:if test='${sessionScope["entidad"]!=null}'>
-                <c:set var="disabled3" value="disabled"></c:set>
+                <c:set var="disabled3" value=""></c:set>
             </c:if>
             <c:if test='${sessionScope["plantel"]!=null}'>
-                <c:set var="disabled4" value="disabled"></c:set>
+                <c:set var="disabled4" value=""></c:set>
             </c:if>
         </c:if>
         <main class="page">
@@ -50,7 +50,7 @@
                 <div class="row">
                     <div class="form-group col-xs-12">                               
                         <label class="control-label" for="programa">Programa:<span class="text-danger" title="Campo obligatorio">*</span></label>
-                        <select class="form-control input-sm ${disabled1}" id="programa" name="programa" required>                                  
+                        <select class="form-control input-sm ${disabled1}" id="programa" name="programa" onchange="actualizarPlanteles()" required>                                  
                             ${catalogo.desplegarOpcionesProgramas(sessionScope["programa"])}
                         </select>
                     </div>
@@ -169,6 +169,15 @@
                 $.get("Servlet_consultaConBase", {p:idPrograma, s:idSubsistema, e:idEntidad, k:idPlantel}, function(respuesta){
                     
                     if(respuesta.includes("No")){
+                        $("#publicacion").val("");
+                        $("#inicioRegistro").val("");
+                        $("#finRegistro").val("");
+                        $("#inicioValoracion").val("");
+                        $("#finValoracion").val("");
+                        $("#inicioDictaminacion").val("");
+                        $("#finDictaminacion").val("");
+                        $("#resultados").val("");
+                        actualizarPlanteles();
                         $("#mensaje").html(respuesta);
                         $("#modalMensaje").modal();   
                     }else{

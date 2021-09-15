@@ -242,6 +242,7 @@
               <!-- Modal content-->
               <div class="modal-content panel">
                   <form id="formRegistro" action="RegistroEncuestado" method="POST">
+                      <input type="hidden" name="idPeriodoActivo" id="idPeriodoActivo" value="${docente.infoRegistro[84]}">
                     <div class="modal-header">
                       <button type="button" class="close" data-dismiss="modal">&times;</button>
                       <h4 class="modal-title">Registro</h4>

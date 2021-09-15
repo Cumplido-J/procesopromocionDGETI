@@ -97,6 +97,7 @@
                             <option value="">---Seleccionar una opción---</option>
                             <option value="D">DOCENTE</option>
                             <option value="A">ADMINISTRADOR</option>
+                            <option value="S">SUPER</option>
                         </select>
                     </div>
                 </div>

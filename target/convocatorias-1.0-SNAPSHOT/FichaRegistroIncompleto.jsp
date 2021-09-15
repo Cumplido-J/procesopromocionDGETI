@@ -266,11 +266,31 @@
                                 <tr>
                                     <td class="borde"><c:out value="${hora[2]}"/></td>
                                     <td class="borde">
-                                        <c:if test = "${hora[5] != null}">
-                                            <c:out value="${hora[5]}"/> - 
+                                        <c:if test = "${hora[3] != null}"> 
+                                            <c:if test = "${hora[5] != null}">
+                                                <c:out value="${hora[5]}"/> - 
+                                            </c:if>
+                                            <c:out value="${hora[4]}"/><br/>
                                         </c:if>
-                                        <c:out value="${hora[4]}"/><br/>
-                                    </td>   
+                                            
+                                        <c:if test = "${hora[13] != null}">
+                                            <c:if test = "${hora[3] != null}">  <hr class="red"></c:if>
+                                            <c:if test = "${hora[15] != null}">
+                                                <c:out value="${hora[15]}"/> - 
+                                            </c:if>
+                                            <c:out value="${hora[16]}"/><br/>
+                                        </c:if>
+                                    
+                                        <c:if test = "${hora[17] != null}">
+                                            <c:if test = "${hora[3] != null || hora[13] != null}">  <hr class="red"></c:if>
+                                            <c:if test = "${hora[19] != null}">
+                                                <c:out value="${hora[19]}"/> - 
+                                            </c:if>
+                                            <c:out value="${hora[20]}"/><br/>
+                                            
+                                        </c:if>     
+                                        
+                                    </td>  
                                     <td class="borde"><c:out value="${hora[10]}"/></td>
                                     <td class="borde"><c:out value="${hora[6]}"/></td>
                                     <td class="borde"><c:out value="${hora[9]}"/></td>

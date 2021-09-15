@@ -139,6 +139,8 @@ $(document).ready(function () {
                 },success:function(data){
                     if(data=="ok"){
                         mostrarSiguiente(2);
+                    }else if(data=="fin"){
+                        window.location.href = "/procesopromocion/SesionDocente";
                     }else{
                         $("#mensaje").html(data);            
                         $("#modalMensaje").modal("show");
@@ -608,7 +610,8 @@ $(document).ready(function () {
                         $("#semestre").val("");
                         $("#grupo").val("");
                         $("#horas").val("");
-                        cambioTipoInfoCecyte();
+                        //cambioTipoInfoCecyte();
+                        limpiarFormHoras();
                     }
                 },error:function(){
                     
@@ -1062,7 +1065,7 @@ function cargaAsignaturas() {
 function cargaAsignaturas1() {
     version=$("#version1").val();
     semestre=$("#semestre1").val();
-    $.get("ConsultaCatalogos", {k: "5",v:version,s:semestre,m:"2"}, function(respuesta){
+    $.get("ConsultaCatalogos", {k: "22",v:version,s:semestre,m:"2"}, function(respuesta){
         $("#asignatura1").html(respuesta);
     }); 
 }
@@ -1353,6 +1356,10 @@ function mostrarSiguiente(id){
                     completo=false;
                 } 
             }
+            if($("#btnEvidencia7").val()=="Subir archivo"){
+                        completo=false;
+                        console.log("sa");
+            }
             if(completo){
                 $("#estatusInfoCompatibilidad").attr("class","glyphicon glyphicon-ok-sign completo");
                 $("#estatusInfoCompatibilidad").attr("title","Sección completa");
@@ -1364,7 +1371,8 @@ function mostrarSiguiente(id){
             } 
             if($("#funcionesOtro").is(':checked')){
                 if(!$("#compatibilidad").is(':checked')){ 
-                    $("#btnConfirmacion").attr("onClick","enviarConfirmacion(4)");
+//                    $("#btnConfirmacion").attr("onClick","enviarConfirmacion(4)");
+                    $("#btnConfirmacion").attr("onClick","myFunction1()");
                     $("#idHora").val("");
                     $("#descripcionBitacora").val("El usuario confirma que:"+$("#mensajeNoCompatibilidad").val());
                     $("#mensajeConfirmacion").html($("#mensajeNoCompatibilidad").val());
@@ -1585,6 +1593,7 @@ function cambioCategoriaPresupuestal() {
 }
 function cambioCategoriaAspira() {   
     var tipo=$("#categoriaAspira option:selected").attr("aux");
+    var idCategoria=$("#categoriaAspira option:selected").attr('idCategoria');
     if(!tipo.includes("Real")){
         $("#avisoCategoria").removeClass("hidden");
         $("#avisoCategoria").attr("title","Se dará siempre y cuando un aspirante cumpla todos los requisitos y resulte ganador de una plaza de vacancia real, dejando desocupada la plaza que ostenta y ésta podrá asignarse a otro participante.");
@@ -1597,7 +1606,7 @@ function cambioCategoriaAspira() {
     id=$("#categoriaAspira").val(); 
     idPrograma=$("#programa").val(); 
     idPlantel=$("#plantel").val(); 
-    $.get("ConsultaCatalogos", {k: "17",i:id,pr:idPrograma,pl:idPlantel}, function(){        
+    $.get("ConsultaCatalogos", {k: "17",i:id,pr:idPrograma,pl:idPlantel,p2:idCategoria}, function(){        
     }).done(function(respuesta){
         var aux=respuesta.split("|");
         if(aux.length==2){
@@ -1608,9 +1617,10 @@ function cambioCategoriaAspira() {
 }
 function cambioCategoriaAspiraHoras() {
     var id=$("#categoriaAspira option:selected").attr("aux");
+    var idCategoria=$("#categoriaAspira option:selected").attr('idCategoria');
     idPrograma=$("#programa").val(); 
     idPlantel=$("#plantel").val(); 
-    $.get("ConsultaCatalogos", {k: "17",i:id,pr:idPrograma,pl:idPlantel}, function(){        
+    $.get("ConsultaCatalogos", {k: "17",i:id,pr:idPrograma,pl:idPlantel,p2:idCategoria}, function(){        
     }).done(function(respuesta){
         var aux=respuesta.split("|");
         if(aux.length==2){
@@ -1621,9 +1631,10 @@ function cambioCategoriaAspiraHoras() {
 }
 function cambioCategoriaAspiraHoras2() {
     var id=$("#categoriaAspira option:selected").attr("aux");
+    var idCategoria=$("#categoriaAspira option:selected").attr('idCategoria');
     idPrograma=$("#programa").val(); 
     idPlantel=$("#plantel").val(); 
-    $.get("ConsultaCatalogos", {k: "21",i:id,pr:idPrograma,pl:idPlantel}, function(){        
+    $.get("ConsultaCatalogos", {k: "21",i:id,pr:idPrograma,pl:idPlantel,p2:idCategoria}, function(){        
     }).done(function(respuesta){
         var aux=respuesta;
         $("#numhoras").html(aux);
@@ -1983,4 +1994,71 @@ function mostrarCamposDirector() {
    else{
         document.getElementById('seccionDirectivoHoras').style.display = 'none';
    }
+}
+
+function cargaCarreras2() {
+    version=$("#version2").val();
+    semestre=$("#semestre1").val();
+    $.get("ConsultaCatalogos", {k: "24",v:version,s:semestre}, function(respuesta){
+        $("#carrera_cp1").html(respuesta);
+        $("#modulo1").val("");
+        $("#submodulo1").val("");
+    }); 
+}
+
+function cambioCarreraCP1_1() {
+    version=$("#version2").val();
+    semestre=$("#semestre1").val();
+    carrera=$("#carrera_cp1").val();
+    $.get("ConsultaCatalogos", {k: "26",v:version,s:semestre,c:carrera}, function(respuesta){
+        $("#modulo1").html(respuesta);
+        $("#submodulo1").val("");
+    }); 
+}
+
+function cambioModulo2() {
+    version=$("#version2").val();
+    semestre=$("#semestre1").val();
+    carrera=$("#carrera_cp1").val();
+    modulo=$("#modulo1").val();
+    $.get("ConsultaCatalogos", {k: "25",v:version,s:semestre,c:carrera,m:modulo}, function(respuesta){
+        $("#submodulo1").html(respuesta);
+    }); 
+}
+
+
+function cargaVersionCBP(idSubsistema){
+      $.get("ConsultaCatalogos", {k: "23",m:idSubsistema}, function(respuesta){
+        $("#version1").html(respuesta);
+      }); 
+}
+
+function cargaVersionCP(){
+    $.get("ConsultaCatalogos", {k: "4"}, function(respuesta){
+        $("#version2").html(respuesta);
+    }); 
+}
+
+function limpiarFormHoras(){
+    //$("#periodo").val("");
+    //$("#grupo").val("");
+    $("#semestre1").val("");
+    $("#version1").val("");
+    $("#version2").val("");
+    $("#asignatura1").val("");
+    $("#carrera_cp1").val("");
+    $("#modulo1").val("");
+    $("#submodulo1").val("");
+    $("#taller1").val("");
+    
+}
+
+function cargaSemestreGeneral(){
+    cargaCarreras2();
+    cargaAsignaturas1();
+}
+function limpiarCampatibilidad(){
+    $("#numHorasOtro").val("");
+    $("#compatibilidad").prop('checked', false);
+    
 }

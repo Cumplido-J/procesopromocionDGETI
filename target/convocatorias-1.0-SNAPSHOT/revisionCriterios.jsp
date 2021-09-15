@@ -32,7 +32,7 @@
                       <span class="icon-bar"></span>
                       <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="/">DGETI</a>
+                    <a class="navbar-brand" href="/">DGETI-CECYTE</a>
                   </div>
                   <div class="collapse navbar-collapse" id="subenlaces">
                     <ul class="nav navbar-nav navbar-right">      
@@ -372,7 +372,7 @@
                             </div>
                             <div id="seccionCursos" class="collapse ${in}">
                             <div class="text-left">
-                                <label class="control-label">Cursos de actualización relacionados con la asignatura y/o módulo que imparte, o mejora pedagógica en los 2 años anteriores</label>
+                                <label class="control-label">Cursos de actualización relacionados con la asignatura y/o módulo que imparte, o mejora pedagógica solo desde su última promoción en adelante</label>
                             </div>
                             
                             <div class='table-responsive'>
@@ -563,6 +563,7 @@
                             <div id="seccionParticipaciones" class="collapse ${in}">
                             
                             <div class='table-responsive'>
+                                <label class="control-label">Subir evidencias solo de su última promoción en adelante</label><br>
                                 <label class="text-warning" id="alertaCarga"><span class="glyphicon glyphicon-warning-sign"></span>&nbsp;Utilice la barra de desplazamiento para recorrer la tabla y visualizar todos los elementos</label>
                                 <table class='table table-bordered table-condensed'>
                                     <tr><th>Nombre de la participación en eventos y actividades de fortalecimiento académico y formación integral del educando</th><th>Periodo o Fecha de realización</th><th>Institución educativa con reconocimiento oficial que emite constancia</th><th>Constancia o documento probatorio</th><c:if test='${sessionScope["permisoActual"]=="6"}'><th>Evaluación Comité Revisor</th><th>Evaluación Consejo Dictaminador</th></c:if><c:if test='${sessionScope["permisoActual"]!="6"}'><th>Evaluación Comité Revisor</th></c:if></tr>
@@ -657,6 +658,7 @@
                             <div id="seccionTutorias" class="collapse ${in}">
                             
                             <div class='table-responsive'>
+                                <label class="control-label">Subir evidencias solo de su última promoción en adelante</label><br>
                                 <label class="text-warning" id="alertaCarga"><span class="glyphicon glyphicon-warning-sign"></span>&nbsp;Utilice la barra de desplazamiento para recorrer la tabla y visualizar todos los elementos</label>
                                 <table class='table table-bordered table-condensed'>
                                     <tr><th>Periodo o Fecha de realización</th><th>Constancia o documento probatorio</th><c:if test='${sessionScope["permisoActual"]=="6"}'><th>Evaluación Comité Revisor</th><th>Evaluación Consejo Dictaminador</th></c:if><c:if test='${sessionScope["permisoActual"]!="6"}'><th>Evaluación Comité Revisor</th></c:if></tr>
@@ -753,6 +755,7 @@
                             <div id="seccionPublicaciones" class="collapse ${in}">
                             
                             <div class='table-responsive'>
+                                <label class="control-label">Subir evidencias solo de su última promoción en adelante</label><br>
                                 <label class="text-warning" id="alertaCarga"><span class="glyphicon glyphicon-warning-sign"></span>&nbsp;Utilice la barra de desplazamiento para recorrer la tabla y visualizar todos los elementos</label>
                                 <table class='table table-bordered table-condensed'>
                                     <tr><th>Nombre de  la publicación</th><th>Medio en el que se publicó</th><th>Fecha de publicación</th><th>ISSN/ISBN</th><c:if test='${sessionScope["permisoActual"]=="6"}'><th>Evaluación Comité Revisor</th><th>Evaluación Consejo Dictaminador</th></c:if><c:if test='${sessionScope["permisoActual"]!="6"}'><th>Evaluación Comité Revisor</th></c:if></tr>

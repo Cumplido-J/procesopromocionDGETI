@@ -53,7 +53,7 @@
                 <div class="row">
                     <div class="form-group col-xs-12">                               
                         <label class="control-label" for="programa">Programa:<span class="text-danger" title="Campo obligatorio">*</span></label>
-                        <select class="form-control input-sm " id="programa" name="programa" required>                                  
+                        <select class="form-control input-sm " id="programa" name="programa" onchange="actualizaCategoria()" required>                                  
                             ${catalogo.desplegarOpcionesProgramas(sessionScope["programa"])}
                         </select>
                     </div>
@@ -146,5 +146,18 @@
         <jsp:include page="seccionesPlantilla/scripts.jsp"/>
         <!--Agregar scripts aquí-->
         <script src="js/funcionesAltaVacancia.js"></script>
+        <script>
+            function actualizaCategoria() {
+                var idPrograma=$('#programa').val();
+                if(idPrograma==1 || idPrograma==3){
+                    var idPrograma1=27;
+                }else if(idPrograma==2){
+                    var idPrograma1=28;
+                }
+                $.get("ConsultaCatalogos", {k: idPrograma1}, function(respuesta){
+                    $("#categoria").html(respuesta);
+                });
+            }
+        </script>
     </body>
 </html>

@@ -127,9 +127,9 @@
                                 <th>RFC</th>
                                 <th>Nombre</th>
                                 <th>Estatus</th>
-                                <th>Puntaje Consejo</th>
+                                <th>Puntaje Comite Consejo</th>
                                 <c:if test='${sessionScope["permisoActual"]=="6"}'>
-                                <th>Puntaje Dictaminador</th>
+                                <th>Puntaje Comite Revisor</th>
                                 </c:if>
                                 <th>Opciones</th>
                             </tr>

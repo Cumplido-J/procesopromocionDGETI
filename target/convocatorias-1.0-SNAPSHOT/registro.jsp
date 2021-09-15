@@ -99,7 +99,18 @@
               <!--FIN Breadcrumbs-->
               <div class="text-center">
                 <h4>Registro de requisitos para participar en el:</h4>
-                <h4>Programa de Promoción en el Servicio Docente por Cambio de Categoría en Educación Media Superior</h4>
+                <h4>Programa de Promoción en el Servicio Docente por 
+                    
+                      <c:if test='${sessionScope["programa"]=="1"}'>
+                      cambio de categoría  
+                      </c:if>
+                      <c:if test='${sessionScope["programa"]=="2"}'>
+                      horas adicionales 
+                      </c:if>
+                       <c:if test='${sessionScope["programa"]=="3"}'>
+                      incentivos
+                      </c:if>
+                    en Educación Media Superior</h4>
               </div>
               <!--Paneles colapsables-->
               <div class="panel-group ficha-collapse" id="accordion">
@@ -560,7 +571,28 @@
                                     </div>
                                 </div>
                             </c:if>  
-                               
+                            
+                            <div class="row">
+                                    <div class="form-group col-md-3">
+                                    </div>
+                                    <div class="form-group col-md-3">
+                                    </div>
+                                    <div class="form-group col-md-3">                                   
+                                    </div>
+                                    <div class="form-group col-md-3">
+                                        <input class="btn btn-sm btn-primary" id="btnEnviarCategorias" onclick="myAgregarCategoria()" value='Agregar categoria'/>
+                                    </div>
+                                </div>
+                                
+                                <div class='table-responsive'>
+                                    <table class='table table-bordered table-condensed'>
+                                        <tr><th>Plazas a la que aspira</th><th>Jornada</th><th>Horas con las que participa</th><th>Borrar</th></tr>
+                                        <tbody id="tablaCategorias">
+                                            ${dato.desplegarCategoriasAspira(Docente.infoRegistro[0])}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            
                             </div>
                                   <div class="row">    
                                      <div class="form-group col-md-3">
@@ -728,7 +760,7 @@
                             <c:if test="${!vistaAdmin}">
                                 <div class="text-center">
                                     <c:if test='${sessionScope["programa"]!=2 && sessionScope["subsistema"]!=2}'>
-                                        <input type="button" class="btn btn-link btn-sm" value="(+) Agregar información" data-toggle="modal" data-target="#modalInformacion"/>
+                                        <input type="button" class="btn btn-link btn-sm" value="(+) Agregar información" data-toggle="modal" data-target="#modalInformacionHoras"/>
                                     </c:if>
                                     <c:if test='${sessionScope["programa"]==2 && sessionScope["subsistema"]!=2}'>
                                         <input type="button" class="btn btn-link btn-sm" value="(+) Agregar información" data-toggle="modal" data-target="#modalInformacionHoras"/>
@@ -869,7 +901,7 @@
                     <h4 class="panel-title">
                       <a data-parent="#accordion" data-toggle="collapse" href="#infoCompatibilidad" aria-expanded="true" aria-controls="infoCompatibilidad">
                       Compatibilidad - Carta protesta
-                        <c:set var="bandera" value="${Docente.verificaSeccion('4')}"></c:set>
+                        <c:set var="bandera" value="${Docente.verificaSeccion('7')}"></c:set>
                         <c:if test="${!vistaAdmin}">
                         <c:if test = "${bandera==true}">
                             <span class="glyphicon glyphicon-ok-sign completo" title="Sección completa" id="estatusInfoCompatibilidad" completo="true"></span>  
@@ -911,7 +943,7 @@
                                     </c:if>                                    
                                 </div> 
                             </div>
-                        <div class="checkbox col-xs-12">   
+                        <div class="checkbox col-xs-12">
                         <c:if test="${Docente.infoRegistro[60]=='S'}">
                             <c:set var="checked" value="checked"></c:set>
                             <c:set var="in" value="in"></c:set>
@@ -921,7 +953,7 @@
                             <c:set var="in" value=""></c:set>
                         </c:if>
                           
-                          <label><input data-toggle="collapse" ${checked} data-target="#seccionOtro" type="checkbox" name="funcionesOtro" id="funcionesOtro">Marque la casilla si desempeña funciones en otro subsistema</label>
+                            <label><input data-toggle="collapse" ${checked} data-target="#seccionOtro" type="checkbox" name="funcionesOtro" id="funcionesOtro" onClick="limpiarCampatibilidad()">Marque la casilla si desempeña funciones en otro subsistema</label>
                         </div>
                         <div id="seccionOtro" class="collapse ${in}" >
                             <div class="form-group col-md-3">
@@ -1034,6 +1066,8 @@
                                 
                           </c:if>
                           <br/>
+                            <input type="hidden" id="rfc" name="rfc" value="${Docente.rfc}">
+                            <input type="hidden" id="idUsuario" name="idUsuario" value="${Docente.idUsuario}">
                               <c:if test="${!vistaAdmin}">
                               <center><input type="button" disabled="true" class="btn btn-primary" value="Continuar" id="btnFinalizar" onclick="validarArchivos()"></center>
                               </c:if>
@@ -1209,9 +1243,10 @@
                     <div class="container-fluid">
                         
                         <form id="formHorasGrupo1" role="form" method="POST" action="RegistroHorasGrupo">
+                            <input type="hidden" name="accion" id="accion" value="dgeti"/>
                             <div class="form-group col-md-6" >
                                 <label class="control-label" for="periodo">Periodo:</label>
-                                <select class="form-control input-sm" id="periodo" name="periodo" required>
+                                <select class="form-control input-sm" id="periodo" name="periodo"  required>
                                     <%=new Catalogos().desplegarOpcionesPeriodos()%>  
                                     
                                 </select>                          
@@ -1220,9 +1255,9 @@
                                 <label class="control-label" for="grupo">Grupo:</label>
                                 <input type="text" class="form-control input-sm" id="grupo" name="grupo" maxlength="5" required>                                                                 
                             </div>
-                            <div class="form-group col-md-6" id="divSemestre1">
+                            <div class="form-group col-md-12" id="divSemestre1">
                                 <label class="control-label" for="semestre1">Semestre:</label>
-                                <select class="form-control input-sm" id="semestre1" name="semestre1" required>
+                                <select class="form-control input-sm" id="semestre1" name="semestre1" onchange="cargaSemestreGeneral()" required>
                                     <option value="">-Seleccione-</option>
                                     <option value="1">1</option>
                                     <option value="2">2</option>
@@ -1232,53 +1267,64 @@
                                     <option value="6">6</option>
                                 </select>                          
                             </div>
-                            <div class="form-group col-md-6">
+                           <!-- <div class="form-group col-md-6">
+                               
                                 <label class="control-label" for="tipoInfo">Tipo de información:</label>
                                 <select class="form-control input-sm" id="tipoInfoCecyte" name="tipoInfoCecyte" onchange="cambioTipoInfoCecyte(2)" required>
                                     <option value="">-Seleccione-</option>
                                     <option value="cbp">Componente básico y/o propedeútico</option>
                                     <option value="cp">Componente profesional</option>
                                     <option value="tl">Taller / laboratorio</option>
-                                </select>                          
-                            </div>
-                            <div class="form-group col-md-6" id="divVersion1" hidden>
-                                <label class="control-label" for="version1">Versión:</label>
-                                <select class="form-control input-sm" id="version1" name="version1" onChange="cambioVersion()">
-                                    <option value="">-Seleccione-</option>                                        
+                                </select>                        
+                            </div> -->
+
+                            <div class="form-group col-md-6" id="divVersion1" >
+                                <label class="control-label" for="version1">Versión Asignatura:</label>
+                                <select class="form-control input-sm" id="version1" name="version1" onchange="cargaAsignaturas1()" required>
+                                       
+                                   
+                                    <%=new Catalogos().desplegarVersionesCompBPDGETI("1")%>   
                                 </select>
-                                <input type="text" class="form-control input-sm ${hidden}" id="versionOtro" placeholder="Indique" name="versionOtro" value="" ${required}>
+                                    <%--<!-- comment<input type="text" class="form-control input-sm ${hidden}" id="versionOtro" placeholder="Indique" name="versionOtro" value="" ${required}> --%>
                             </div>                            
-                            <div class="form-group col-md-6" id="divAsignatura1" hidden>
+                            <div class="form-group col-md-6" id="divAsignatura1" >
                                 <label class="control-label" for="asignatura1" >Asignatura:</label>
-                                <select class="form-control input-sm" id="asignatura1" name="asignatura1" onchange="cambioAsignatura()">
+                                <select class="form-control input-sm" id="asignatura1" name="asignatura1" onchange="cambioAsignatura()" required >
                                     <option value="">-Seleccione-</option>                                        
                                 </select>                          
                             </div>
-                            <div class="form-group col-md-6" id="divCarrera1" hidden>
+                            <div class="form-group col-md-6" id="divVersion2" >
+                                <label class="control-label" for="version1">Versión Carrera:</label>
+                                <select class="form-control input-sm" id="version2" name="version2" onchange="cargaCarreras2()" required> 
+                                    <%=new Catalogos().desplegarVersionesCompPDGETI()%>                                        
+                                </select>
+                                    <%-- <input type="text" class="form-control input-sm ${hidden}" id="versionOtro" placeholder="Indique" name="versionOtro" value="" ${required}>--%>
+                            </div>
+                            <div class="form-group col-md-6" id="divCarrera1" >
                                 <label class="control-label" for="carrera_cp1">Carrera:</label>
-                                <select class="form-control input-sm" id="carrera_cp1" name="carrera_cp1" onchange="cambioCarreraCP1()">
+                                <select class="form-control input-sm" id="carrera_cp1" name="carrera_cp1" onchange="cambioCarreraCP1_1()" required>
                                     <option value="">-Seleccione-</option>                                        
                                 </select>
-                                <input type="text" class="form-control input-sm ${hidden}" id="carreraOtro" placeholder="Indique" name="carreraOtro" value="" ${required}>
+                               <%-- <input type="text" class="form-control input-sm ${hidden}" id="carreraOtro" placeholder="Indique" name="carreraOtro" value="" ${required}> --%>
                             </div>
-                            <div class="form-group col-md-6" id="divModulo1" hidden>
+                            <div class="form-group col-md-6" id="divModulo1" >
                                 <label class="control-label" for="modulo1">Modulo:</label>
-                                <select class="form-control input-sm" id="modulo1" name="modulo1" onchange="cambioModulo()">
+                                <select class="form-control input-sm" id="modulo1" name="modulo1" onchange="cambioModulo2()" required>
                                     <option value="">-Seleccione-</option>                                        
                                 </select>
-                                <input type="text" class="form-control input-sm ${hidden}" id="moduloOtro" placeholder="Indique" name="moduloOtro" value="" ${required}>
+                               <%-- <input type="text" class="form-control input-sm ${hidden}" id="moduloOtro" placeholder="Indique" name="moduloOtro" value="" ${required}> --%>
                             </div>
-                            <div class="form-group col-md-6" id="divSubmodulo1" hidden>
+                            <div class="form-group col-md-6" id="divSubmodulo1" >
                                 <label class="control-label" for="submodulo1">Submodulo:</label>
-                                <select class="form-control input-sm" id="submodulo1" name="submodulo1" onchange="cambioSubmodulo()">
+                                <select class="form-control input-sm" id="submodulo1" name="submodulo1" onchange="cambioSubmodulo()" required>
                                     <option value="">-Seleccione-</option>                                        
                                 </select>
-                                <input type="text" class="form-control input-sm ${hidden}" id="submoduloOtro" placeholder="Indique" name="submoduloOtro" value="" ${required}>
+                               <%-- <input type="text" class="form-control input-sm ${hidden}" id="submoduloOtro" placeholder="Indique" name="submoduloOtro" value="" ${required}> --%>
                             </div>
-                            <div id="divTaller1" hidden>
+                            <div id="divTaller1" >
                                 <div class="form-group col-md-6">
                                     <label class="control-label" for="taller1">Taller / laboratorio:</label>
-                                    <select class="form-control input-sm" id="taller1" name="taller1">
+                                    <select class="form-control input-sm" id="taller1" name="taller1" required>
                                         <%=new Catalogos().desplegarTalleres()%>                                        
                                     </select>                          
                                 </div>
@@ -1398,9 +1444,9 @@
                   <p id="mensajeFin">Registro exitoso.</p>
                 </div>
                 <div class="modal-footer">
-                  <a href="SesionDocente">
+                  <!--<a href="SesionDocente">-->
                     <button type="button" onclick="myFunction()" class="btn btn-sm btn-default">Continuar</button>
-                 </a>
+                 <!--</a>-->
                  <button type="button" class="btn btn-sm btn-default" data-dismiss="modal">Cancelar</button>
                 </div>
               </div>
@@ -1467,7 +1513,7 @@
                             <div class="form-group col-md-6">
                               <label class="control-label" for="clvPresupCategoria">Clave Presupuestal (Categoría):</label>
                               <select class="form-control input-sm" id="categoriaPresupuestal" name="categoriaPresupuestal" onchange="cambioCategoriaPresupuestal()" required>
-                                ${catalogo.desplegarCategoriasPresupuestales()}
+                                ${catalogo.desplegarCategoriasPresupuestales2()}
                               </select>                          
                             </div>
                         </c:if>  
@@ -1629,7 +1675,7 @@
         </div>
         <div id="modalValidarArchivos" class="modal fade" role="dialog">
             <div class="modal-dialog">
-              <div class="modal-content" style="width: 111%;">
+              <div class="modal-content" style="width: 123%;">
                 <div class="modal-header">
                   <button type="button" class="close" data-dismiss="modal">&times;</button>
                   <h4 class="modal-title" >Archivos cargados en los requisitos</h4>
@@ -1638,7 +1684,7 @@
                     <p class="control-label"><span class="glyphicon glyphicon-exclamation-sign incompleto" title="Sección incompleta" id="estatusArchivo" completo="false"></span> Información Académica - Documento comprobatorio</p>
                     <p class="control-label"><span class="glyphicon glyphicon-exclamation-sign incompleto" title="Sección incompleta" id="estatusArchivo1" completo="false"></span> Información Laboral - Constancia de antiguedad</p>
                     <p class="control-label"><span class="glyphicon glyphicon-exclamation-sign incompleto" title="Sección incompleta" id="estatusArchivo2" completo="false"></span> Información Laboral - Constancia de nombramiento definitivo</p>
-                    <p class="control-label"><span class="glyphicon glyphicon-exclamation-sign incompleto" title="Sección incompleta" id="estatusArchivo3" completo="false"></span> Información Laboral - Constancia de nota favorable</p>
+                    <p class="control-label"><span class="glyphicon glyphicon-exclamation-sign incompleto" title="Sección incompleta" id="estatusArchivo3" completo="false"></span> Información Laboral - Constancia de no contar con nota desfavorable</p>
                     <p class="control-label"><span class="glyphicon glyphicon-exclamation-sign incompleto" title="Sección incompleta" id="estatusArchivo4" completo="false"></span> Horas frente a grupo - Constancia de horas frente a grupo</p>
                     <p class="control-label"><span class="glyphicon glyphicon-exclamation-sign incompleto" title="Sección incompleta" id="estatusArchivo5" completo="false"></span> Compatibilidad - Carta protesta - Archivo de evidencia</p>
                     <br>
@@ -1677,13 +1723,7 @@
                 
                 $("#modalMensajeFin").modal("hide");
                 $.post("FinalizaRegistro", {z:"F"}, function(data){
-                    if(data.includes("<tr>")){
-                        //$("#tablaPlazas").html(data);
-                    }
-                    else{
-                        $("#mensaje").html(data);            
-                        $("#modalMensaje").modal("show");
-                    } 
+                    window.location.href = "/procesopromocion/SesionDocente";
                 });
                 
                 $.post("AdministracionPlaza", {z:"F",categoria:idCategoria,jornada:idJornada,
@@ -1694,6 +1734,13 @@
                     }
                 });
             }
+            function myFunction1(){
+                $("#modalConfirmacion").modal("hide");
+                $.post("FinalizaRegistro", {z:"F"}, function(data){
+                    window.location.href = "/procesopromocion/SesionDocente";
+                });
+            }
+        </script>
         </script>
         <script>
             $( function() {
@@ -1838,6 +1885,37 @@
                     $("#estatusArchivo5").attr("completo",false);                            
                 }
                 $("#modalValidarArchivos").modal("show");
+            }
+            function myAgregarCategoria(){
+                var idCategoriaAspira=$('#categoriaAspira').val();
+                var idJornadaAspira=$('#jornadaAspira').val();
+                var horasAspira=$("#numhoras option:selected").text();
+                var idCategoria=$("#categoriaAspira option:selected").attr('idCategoria');
+                
+                $.post("AgregarCategoriasAspira", {categoria:idCategoriaAspira,jornada:idJornadaAspira,horas:horasAspira,idCategoria:idCategoria}, function(data){
+                    if(data.includes("<tr>")){
+                        $("#tablaCategorias").html(data);
+                    }else{
+                        $("#mensaje").html(data);            
+                        $("#modalMensaje").modal("show");
+                    }
+                });
+            }
+            function confirmarCategoriaAspira(id){
+                $("#btnConfirmar").attr("onClick","borrarCategoriaAspira("+id+")");
+                $("#modalConfirmacion2").modal("show");
+            }
+            function borrarCategoriaAspira(id){
+                $("#modalConfirmacion2").modal("hide");
+                $.post("AgregarCategoriasAspira", {id: id,k:"B"}, function(data){
+                    if(data.includes("<tr>")){            
+                        $("#tablaCategorias").html(data);
+                    }
+                    else{
+                        $("#mensaje").html(data);            
+                        $("#modalMensaje").modal("show");
+                    } 
+                });
             }
         </script>
         
