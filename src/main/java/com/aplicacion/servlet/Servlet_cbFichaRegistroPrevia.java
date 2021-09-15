@@ -95,8 +95,12 @@ public class Servlet_cbFichaRegistroPrevia extends HttpServlet {
             docente=new Docente();
             docente.setIdUsuario(idUsuario);
             docente.consultaInfoAspirante();
-            docente.consultaHoras();            
-            docente.actualizaBanderaIngles();
+            if(subsistemaUsuario.equals("2")){
+                docente.consultaHorasCecyte();
+            }else{
+                docente.consultaHoras();
+                docente.actualizaBanderaIngles();
+            }
             String[][] puntajes=cv.consultaPuntajes(idUsuario); 
             Catalogos catalogos=new Catalogos();
             ArrayList<String> datosUser=catalogos.getSelectUsuarioByID(idUsuario);
@@ -113,6 +117,8 @@ public class Servlet_cbFichaRegistroPrevia extends HttpServlet {
             request.setAttribute("tutorias", cv.getFilasTutoriasFicha(idUsuario));
             request.setAttribute("publicaciones", cv.getFilasPublicacionesFicha(idUsuario));
             request.setAttribute("resultados", cv.getFilasResultadosFicha(idUsuario));
+            request.setAttribute("evidencias", cv.getFilasResultadosConstancias(idUsuario));
+            request.setAttribute("registroEvidencias", cv.getFilasResultadosRegistro(idUsuario));
             request.setAttribute("rutaimagenP", rutaImagenP);
             ServletContext sc = getServletContext();
             RequestDispatcher rd = sc.getRequestDispatcher("/FichaRegistroPrevia.jsp");

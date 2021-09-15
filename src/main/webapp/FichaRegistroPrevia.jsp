@@ -110,7 +110,7 @@
                 </tr>
                 <tr>
                     <td>CATEGORÍA A LA QUE ASPIRA</td>
-                    <td>:${Docente.infoRegistro[41]}-${Docente.infoRegistro[43]} ${Docente.infoRegistro[77]}-${Docente.infoRegistro[45]}</td>
+                    <td>:${Docente.infoRegistro[41]}-${Docente.infoRegistro[43]}-${Docente.infoRegistro[45]}</td>
                 </tr>
                 <tr>
                     <td>GRADO ACADÉMICO REQUERIDO</td>
@@ -214,7 +214,7 @@
                                 
                 <tr>
                     <td>FECHA Y HORA DE REGISTRO</td>
-                    <td>:----------------------</td>
+                    <td>:${fecha.formatoImprimirFH(Docente.infoRegistro[61])}</td>
                 </tr>
                 <tr>
                     <td>CONSIDERACIONES PARTICULARES</td>
@@ -227,6 +227,7 @@
                 </tr>                
                 <tr>
                     <td colspan="2">
+                        <td colspan="2">
                         <table >
                             <tr>
                                 <th class="borde">PERIODO</th>
@@ -235,13 +236,14 @@
                                 <th class="borde">SEMESTRE</th>
                                 <th class="borde">HORAS</th>
                             </tr>
-                            <c:forEach items="${Docente.getListaHoras()}" var="hora">
+                            <c:if test='${Docente.infoRegistro[75] != "2"}'>
+                                 <c:forEach items="${Docente.getListaHoras()}" var="hora">
                                 <tr>
                                     <td class="borde"><c:out value="${hora[2]}"/></td>
                                     <td class="borde">
                                         <c:if test = "${hora[3] != null}"> 
                                             <c:if test = "${hora[5] != null}">
-                                                <c:out value="${hora[5]}"/> -
+                                                <c:out value="${hora[5]}"/> - 
                                             </c:if>
                                             <c:out value="${hora[4]}"/><br/>
                                         </c:if>
@@ -263,7 +265,7 @@
                                             
                                         </c:if>     
                                         
-                                    </td>   
+                                    </td>  
                                     <td class="borde"><c:out value="${hora[10]}"/></td>
                                     <td class="borde"><c:out value="${hora[6]}"/></td>
                                     <td class="borde"><c:out value="${hora[9]}"/></td>
@@ -273,6 +275,28 @@
                                 <td colspan="4" class="borde">HORAS FRENTE A GRUPO</td>
                                 <td class="borde"><b>${Docente.getTotalHoras()}</b></td>
                             </tr>
+                            </c:if>
+                            
+                            <c:if test='${Docente.infoRegistro[75] == "2"}'>
+                                <c:forEach items="${Docente.getListaHorasCecyte()}" var="hora">
+                                <tr>
+                                    <td class="borde"><c:out value="${hora[2]}"/></td>
+                                    <td class="borde">
+                                        <c:if test = "${hora[11] != null}">
+                                            <c:out value="${hora[11]}"/> - 
+                                        </c:if>
+                                        <c:out value="${hora[5]}"/><br/>
+                                    </td>   
+                                    <td class="borde"><c:out value="${hora[3]}"/></td>
+                                    <td class="borde"><c:out value="${hora[4]}"/></td>
+                                    <td class="borde"><c:out value="${hora[10]}"/></td>
+                                </tr>
+                            </c:forEach>
+                            <tr>
+                                <td colspan="4" class="borde">HORAS FRENTE A GRUPO</td>
+                                <td class="borde"><b>${Docente.getTotalHorasCecyte()}</b></td>
+                            </tr>
+                            </c:if>
                         </table>
                     </td>
                 </tr>
@@ -334,6 +358,16 @@
                 </c:if>
 
             </c:forEach>
+            <p>EVIDENCIAS REGISTRO:</p>
+            <table>
+                <tr><tr><th class='borde'>Criterio</th><th class='borde'>Descripcion tipo documento</th><th class='borde'>Entrego documento</th></tr>
+                ${registroEvidencias}
+            </table>
+            <p>EVIDENCIAS CRITERIOS DE VALORACIÓN:</p>
+            <table>
+                <tr><tr><th class='borde'>Criterio</th><th class='borde'>Descripcion tipo documento</th><th class='borde'>Entrego documento</th></tr>
+                ${evidencias}
+            </table>
             <p style="text-align:justify">De acuerdo a la documentación comprobatoria que ha proporcionado como evidencia de cumplimiento de los requisitos requeridos para su registro y de las evidencias para los criterios de valoración, usted ha sido aceptado para participar en el proceso de promoción en el servicio docente por cambio de categoría en Educación Media Superior, <jsp:include page="seccionesPlantilla/cicloEscolar.jsp" flush="true"/>.</p>
             <p style="text-align:justify">Declara bajo protesta de decir verdad que cumple con los requisitos establecidos en la Convocatoria para el proceso de promoción en el servicio docente por cambio de categoría en Educación Media Superior, <jsp:include page="seccionesPlantilla/cicloEscolar.jsp" flush="true"/>. Para confirmar su dicho, la DGETI podrá verificar la autenticidad de la documentación que proporciono, por lo que, en caso de alteración o falsificación de la misma, acepta la descalificación inmediata del proceso o, en su caso, la invalidación del nombramiento respectivo, sin perjuicio de las sanciones de tipo administrativo o penal en las que pudiera incurrir.</p>
             <c:set var="acepta" value="${Docente.infoRegistro[63] eq 'S' ? 'Acepta': 'No acepta'}"/>
