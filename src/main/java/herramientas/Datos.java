@@ -551,7 +551,7 @@ public class Datos {
                 respuesta="";
                 for(String[] dato:datos)
                 {
-                    respuesta+="<tr><td>"+dato[3]+"</td><td>"+dato[5]+"</td><td>"+dato[6]==null? "N/A":dato[6]+"</td>";
+                    respuesta+="<tr><td>"+dato[3]+"</td><td>"+dato[5]+"</td><td>"+dato[6]+"</td>";
                     respuesta+="<td><button type='button' class='btn btn-sm' title='Borrar' onclick='confirmarCategoriaAspira("+dato[0]+")'><span class='glyphicon glyphicon-trash'></span></button>";  
                     respuesta+="</td></tr>";
                 }
