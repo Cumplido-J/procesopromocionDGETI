@@ -187,27 +187,27 @@ public class Servlet_registroInfoLaboral extends HttpServlet {
                     int jornadaAspira=Integer.parseInt(idJornadaAspira);
                     int totalHoras=0;
                     boolean bandera=false;
+                    
+                    String[] catAsignatura = {"1", "2", "3"};
+                    String[] catCarAsociado = {"4", "5", "6"};
+                    String[] catCarTitular = {"7", "8", "9"};
+                    String[] catDocAsignatura = {"10", "11"};
+                    String[] catDocAsociado = {"12", "13", "14"};
+                    String[] catDocTtitular = {"15", "16", "17"};
+
+                    List<String> list1 = new ArrayList<>(Arrays.asList(catAsignatura));
+                    List<String> list2 = new ArrayList<>(Arrays.asList(catCarAsociado));
+                    List<String> list3 = new ArrayList<>(Arrays.asList(catCarTitular));
+                    List<String> list4 = new ArrayList<>(Arrays.asList(catDocAsignatura));
+                    List<String> list5 = new ArrayList<>(Arrays.asList(catDocAsociado));
+                    List<String> list6 = new ArrayList<>(Arrays.asList(catDocTtitular));
+                    
                     if(programa.equals("1")){
                         if((categoriaActual==3 && categoriaAspira==4)||((categoriaActual==11 && categoriaAspira==12))){
                             if(Integer.parseInt(horas)>=18){
                                 bandera=true;
                             }
                         }else{
-
-                            String[] catAsignatura = {"1", "2", "3"};
-                            String[] catCarAsociado = {"4", "5", "6"};
-                            String[] catCarTitular = {"7", "8", "9"};
-                            String[] catDocAsignatura = {"10", "11"};
-                            String[] catDocAsociado = {"12", "13", "14"};
-                            String[] catDocTtitular = {"15", "16", "17"};
-
-                            List<String> list1 = new ArrayList<>(Arrays.asList(catAsignatura));
-                            List<String> list2 = new ArrayList<>(Arrays.asList(catCarAsociado));
-                            List<String> list3 = new ArrayList<>(Arrays.asList(catCarTitular));
-                            List<String> list4 = new ArrayList<>(Arrays.asList(catDocAsignatura));
-                            List<String> list5 = new ArrayList<>(Arrays.asList(catDocAsociado));
-                            List<String> list6 = new ArrayList<>(Arrays.asList(catDocTtitular));
-
                             if(list1.contains(Integer.toString(categoriaAspira)) && list1.contains(Integer.toString(categoriaActual)) && jornadaAspira==jornadaActual && jornadaAspira==1){
                                 totalHoras=Integer.parseInt(numhoras)+Integer.parseInt(horas);
                                 if(totalHoras<=19){
@@ -289,6 +289,12 @@ public class Servlet_registroInfoLaboral extends HttpServlet {
                             out.println("Excede el número de horas permitidas tu registro sera procesado como ficha imcompleta. ¿Deseas continuar?");
                         }
                     }
+                    
+                    if((categoriaActual==3 && categoriaAspira==4)||((categoriaActual==11 && categoriaAspira==12))){
+                            if(Integer.parseInt(horas)>=18){
+                                bandera=true;
+                            }
+                        }
                 }
                 
                 if(programa.equals("1")){

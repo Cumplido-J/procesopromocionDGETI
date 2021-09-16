@@ -8,6 +8,8 @@ package com.aplicacion.servlet;
 import herramientas.Datos;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -126,18 +128,88 @@ public class Servlet_agregarCategoriasAspira extends HttpServlet {
                     horasSel=aux[4];
                 }
                 
-                String[] parametros={idUsuario,idCategoria,idJornada,horas,horasSel,idCat};
-                List<String[]> datos;                           
-                datos=metodo.ejecutaSP("sp_registroplazaaspira",parametros);
+                String[] parametros1={idUsuario};
+                List<String[]> datos1=metodo.ejecutaSP("sp_consultaUsuarioPlaza",parametros1);
                 
-                if(!datos.isEmpty()){
-                    if(datos.get(0)[0].contains("permitidas")){
-                        out.print(datos.get(0)[0].toString());
-                    }else if(datos.get(0)[0].contains("previamente")){
-                        out.print(datos.get(0)[0].toString());
+                String[] docente = {"1", "2", "3","4", "5", "6","7", "8", "9"};
+                String[] tecnicoDdocente = {"10", "11","12", "13", "14","15", "16", "17"};
+                
+                List<String> list1 = new ArrayList<String>();
+                List<String> list2 = new ArrayList<String>();
+                List<String> d = new ArrayList<>(Arrays.asList(docente));
+                List<String> td = new ArrayList<>(Arrays.asList(tecnicoDdocente));
+                
+                if(!datos1.isEmpty()){
+                    respuesta="";
+                    for(String[] dato:datos1){
+                        if(dato[4].equals("1")){
+                            String idCategoria1=dato[2];
+                            if(d.contains(idCategoria1)){
+                                list1.add(idCategoria1);
+                            }
+                            if(td.contains(idCategoria1)){
+                                list2.add(idCategoria1);
+                            }
+                        }
+                    }
+                }
+                
+                if(list1.size()>0 && list2.size()>0){
+                    if(d.contains(idCategoria)){
+                        String[] parametros={idUsuario,idCategoria,idJornada,horas,horasSel,idCat};
+                        List<String[]> datos;                           
+                        datos=metodo.ejecutaSP("sp_registroplazaaspira",parametros);
+
+                        if(!datos.isEmpty()){
+                            if(datos.get(0)[0].contains("permitidas")){
+                                out.print(datos.get(0)[0].toString());
+                            }else if(datos.get(0)[0].contains("previamente")){
+                                out.print(datos.get(0)[0].toString());
+                            }else{
+                                String respuestaCategorias=new Datos().desplegarCategoriasAspira(idUsuario);
+                                out.print(respuestaCategorias);
+                            }
+                        }
                     }else{
-                        String respuestaCategorias=new Datos().desplegarCategoriasAspira(idUsuario);
-                        out.print(respuestaCategorias);
+                        out.print("Solo puede participar con una categoria de Docente.");
+                    }
+                }else if(list1.size()>0 && list1!=null && list2.size()==0){
+                    if(d.contains(idCategoria)){
+                        String[] parametros={idUsuario,idCategoria,idJornada,horas,horasSel,idCat};
+                        List<String[]> datos;                           
+                        datos=metodo.ejecutaSP("sp_registroplazaaspira",parametros);
+
+                        if(!datos.isEmpty()){
+                            if(datos.get(0)[0].contains("permitidas")){
+                                out.print(datos.get(0)[0].toString());
+                            }else if(datos.get(0)[0].contains("previamente")){
+                                out.print(datos.get(0)[0].toString());
+                            }else{
+                                String respuestaCategorias=new Datos().desplegarCategoriasAspira(idUsuario);
+                                out.print(respuestaCategorias);
+                            }
+                        }
+                    }else{
+                        out.print("Solo puede participar con una categoria de Docente.");
+                    }
+                }else if(list1.size()==0 && list2.size()>0){
+                    if(td.contains(idCategoria)){
+                        String[] parametros={idUsuario,idCategoria,idJornada,horas,horasSel,idCat};
+                        List<String[]> datos;                           
+                        datos=metodo.ejecutaSP("sp_registroplazaaspira",parametros);
+
+                        if(!datos.isEmpty()){
+                            if(datos.get(0)[0].contains("permitidas")){
+                                out.print(datos.get(0)[0].toString());
+                            }else if(datos.get(0)[0].contains("previamente")){
+                                out.print(datos.get(0)[0].toString());
+                            }else{
+                                String respuestaCategorias=new Datos().desplegarCategoriasAspira(idUsuario);
+                                out.print(respuestaCategorias);
+                            }
+                        }
+                    }else{
+                        out.print("Solo puede participar con una categoria de Tècnico.");
                     }
                 }
             }
