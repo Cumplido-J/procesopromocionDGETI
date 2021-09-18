@@ -104,7 +104,7 @@ public class Servlet_registroInfoLaboral extends HttpServlet {
             
             //out.println(idUsuario);
             Fecha fecha=new Fecha();
-            String activo,ingresoSubsistema="",ingresoPlantel="",idJornada="",fechaPlaza="",idTipoNombramiento="",fechaUltimaPromocion="",idJornadaAspira="",idPerfilRequerido="",notaSancion="N",idCategoria="",idCategoriaAspira="",nombreVacancia="";
+            String activo,ingresoSubsistema="",ingresoPlantel="",idJornada="",fechaPlaza="",idTipoNombramiento="",fechaUltimaPromocion="",idJornadaAspira="",idPerfilRequerido="",notaSancion="N",idCategoria="",idCategoriaAspira="",nombreVacancia="", idVacancia=null;
             if(request.getParameter("activoServicio")!=null){
                 activo="S";
                 ingresoSubsistema=fecha.formatoAlmacenar(request.getParameter("ingresoSubsistema"));
@@ -119,11 +119,14 @@ public class Servlet_registroInfoLaboral extends HttpServlet {
                     fechaUltimaPromocion="";
                 }
                 String categoriaNombre=request.getParameter("categoriaAspira");
-                
+
                 String[] categoria;
                 categoria = categoriaNombre.split("-");
                 idCategoriaAspira=categoria[0];
                 nombreVacancia=categoria[1];
+                if(programa.equals("1")){idVacancia=categoria[2];}
+               
+                
                 idJornadaAspira=request.getParameter("jornadaAspira");
                 if(idJornadaAspira.equals("")){
                     idJornadaAspira="0";
@@ -203,6 +206,31 @@ public class Servlet_registroInfoLaboral extends HttpServlet {
                     List<String> list6 = new ArrayList<>(Arrays.asList(catDocTtitular));
                     
                     if(programa.equals("1")){
+                        if((categoriaActual==3 && categoriaAspira==4 && idJornadaAspira.equals("2"))||
+                          (categoriaActual==2 && categoriaAspira==4 && idJornadaAspira.equals("2")) ||
+                          (categoriaActual==1 && categoriaAspira==4 && idJornadaAspira.equals("2"))
+                            //((categoriaActual==11 && categoriaAspira==12))
+                          ){
+                            if(Integer.parseInt(horas)>=18 && Integer.parseInt(horas)<=19){
+                                bandera=true;
+                            }
+                        }else{
+                            if(categoriaAspira==categoriaActual && jornadaAspira==jornadaActual+1){
+                                bandera=true;
+                            }else if(categoriaAspira==categoriaActual+1 && jornadaAspira==jornadaActual){
+                                bandera=true;
+                            }else if(categoriaAspira==categoriaActual+1 && jornadaAspira==jornadaActual+1){
+                                bandera=true;
+                            }
+                        }
+                        totalHoras=Integer.parseInt(numhoras)+Integer.parseInt(horas);
+                        if(totalHoras>18 && (jornadaAspira==3 || jornadaAspira==4)){
+                            bandera=false;
+                        }
+                        
+                        
+                        
+                        /*
                         if((categoriaActual==3 && categoriaAspira==4)||((categoriaActual==11 && categoriaAspira==12))){
                             if(Integer.parseInt(horas)>=18){
                                 bandera=true;
@@ -267,7 +295,7 @@ public class Servlet_registroInfoLaboral extends HttpServlet {
                     if(totalHoras>18 && (jornadaAspira==3 || jornadaAspira==4)){
                         bandera=false;
                     }
-                    
+                    */
                 }else if(programa.equals("2")){
                     String validarRespuesta=new Datos().validarSeleccionadasAdd(idUsuario);
                     String validarRespuesta1=new Datos().validarSeleccionadasAdd1(idUsuario);
@@ -296,17 +324,35 @@ public class Servlet_registroInfoLaboral extends HttpServlet {
                             }
                         }
                 }
-                
+  
                 if(programa.equals("1")){
                     totalHoras=0;
+                }else if(programa.equals("2")){
+                    String[] parametros={idUsuario};  
+                    List<String[]> infoPlazasAspira=new Metodos_sql().ejecutaSP("sp_consultaUsuarioCategoriaAspira",parametros);
+                    for(String[] dato:infoPlazasAspira){
+                        totalHoras +=dato[6]!= null ? Integer.parseInt(dato[6]) : 0;
+                    }
+                    /*String validarRespuesta=new Datos().validarSeleccionadasAdd(idUsuario);
+                    if(validarRespuesta.contains(",")){
+                            String[] auxRespuesta=validarRespuesta.split(",");
+                            
+                            totalHoras= auxRespuesta[2]!= null ? Integer.parseInt(auxRespuesta[2]) : 0;
+                    }*/
+                     
                 }  
                 
                 if(bandera){
                 //out.println(notaSancion);
                     Metodos_sql metodo = new Metodos_sql();
-                    String[] parametros={idUsuario,activo,ingresoSubsistema,ingresoPlantel,idCategoria,idJornada,fechaPlaza,idTipoNombramiento,fechaUltimaPromocion,idCategoriaAspira,idJornadaAspira,idPerfilRequerido,notaSancion,nombreVacancia,String.valueOf(totalHoras)};
-                    List<String[]> datos;                           
-                    datos=metodo.ejecutaSP("sp_registroInfoLaboral",parametros);           
+                     List<String[]> datos=null;  
+                    if(programa.equals("1")){
+                        String[] parametros={idUsuario,activo,ingresoSubsistema,ingresoPlantel,idCategoria,idJornada,fechaPlaza,idTipoNombramiento,fechaUltimaPromocion,idCategoriaAspira,idJornadaAspira,idPerfilRequerido,notaSancion,nombreVacancia,String.valueOf(totalHoras),idVacancia};                        
+                        datos=metodo.ejecutaSP("sp_registroInfoLaboral",parametros);   
+                    }else if(programa.equals("2")){
+                        String[] parametros={idUsuario,activo,ingresoSubsistema,ingresoPlantel,idCategoria,idJornada,fechaPlaza,idTipoNombramiento,fechaUltimaPromocion,idCategoriaAspira,idJornadaAspira,idPerfilRequerido,notaSancion,nombreVacancia,String.valueOf(totalHoras)};                        
+                        datos=metodo.ejecutaSP("sp_registroInfoLaboralHoras",parametros); 
+                    }
                     if(!datos.isEmpty()){
                         if(datos.get(0)[0].contains("-")){
                             out.print("No puede aplicar a esa combinación de categoria y jornada-");

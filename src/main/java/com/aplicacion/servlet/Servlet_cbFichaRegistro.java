@@ -122,7 +122,9 @@ public class Servlet_cbFichaRegistro extends HttpServlet {
             String[] puntajeEncuestas=cv.consultaPuntajeEncuestas(rfc, datosUser.get(15));
             String[] parametros={idUsuario};            
             List<String[]> infoPlazas=new Metodos_sql().ejecutaSP("sp_consultaUsuarioPlaza",parametros);
+            List<String[]> infoPlazasAspira=new Metodos_sql().ejecutaSP("sp_consultaUsuarioCategoriaAspira",parametros);
             request.setAttribute("infoPlazas", infoPlazas);
+            request.setAttribute("infoPlazasAspira", infoPlazasAspira);
             request.setAttribute("Docente", docente);            
             request.setAttribute("puntajes", puntajes);
             request.setAttribute("puntajeEncuestas", puntajeEncuestas);            

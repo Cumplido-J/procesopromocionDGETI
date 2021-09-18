@@ -9,6 +9,8 @@ import herramientas.Datos;
 import herramientas.Fecha;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -106,6 +108,7 @@ public class Servlet_administracionPlaza extends HttpServlet {
                 String horas="";
                 if(Integer.parseInt(subsistema)!=2){
                     horas=request.getParameter("horas");
+                    horas= !horas.equals("") ? horas : "0";
                 }else{
                    horas=request.getParameter("horas3"); 
                 }
@@ -126,6 +129,7 @@ public class Servlet_administracionPlaza extends HttpServlet {
                 if(request.getParameter("cbDirectivo")==null && inCompleto.equals("F")){
                     cargo=request.getParameter("cargo");
                     fechaRenuncia=fecha.formatoAlmacenar(request.getParameter("fechaRenuncia"));
+                    clave=request.getParameter("clave");
                 }
                 
                 String[] parametros={idUsuario,idCategoria,idJornada,horas,fechaPlaza,idTipoNombramiento,clave,cargo,fechaRenuncia};
@@ -135,9 +139,11 @@ public class Servlet_administracionPlaza extends HttpServlet {
                 }else{
                     if(programa.equals("2")){
                         String validarRespuesta=new Datos().validarSeleccionadasAdd(idUsuario);
+                        String idCategoriaRespuesta="0";
                         if(validarRespuesta.contains(",")){
                             String[] auxRespuesta=validarRespuesta.split(",");
                             validarRespuesta=auxRespuesta[4];
+                            idCategoriaRespuesta=auxRespuesta[0];
                             if(validarRespuesta.equals("")){
                                 validarRespuesta="0";
                             }
@@ -146,26 +152,71 @@ public class Servlet_administracionPlaza extends HttpServlet {
                         if(validarRespuesta.equals("")){
                                 validarRespuesta="0";
                             }
+                        boolean registro=true;
+                        String texto="";
+                        String[] docente = {"1", "2", "3"};
+                        String[] tecnicoDdocente = {"10", "11"};
+                        String[] docenteTresCuartos = {"4", "5" ,"6","7","8","9","12","13","14","15","16","17"};
+                        List<String> d = new ArrayList<>(Arrays.asList(docente));
+                        List<String> td = new ArrayList<>(Arrays.asList(tecnicoDdocente));
+                        List<String> dtc = new ArrayList<>(Arrays.asList(docenteTresCuartos));
                         
                         int horasRegistradas= Integer.parseInt(validarRespuesta)+ Integer.parseInt(horas);
-                        if(horasRegistradas<=19){
-                            datos=metodo.ejecutaSP("sp_insertUsuarioPlaza",parametros);
-                        }else{
-                            out.print("Excede el numero de horas permitidas para esta convocatoria");
+                        if( !idCategoriaRespuesta.equals("0") ){
+                            if( td.contains(idCategoriaRespuesta) || d.contains(idCategoriaRespuesta)){
+                                if( td.contains(idCategoria) || d.contains(idCategoria)){
+                                    registro = true;
+                                }else if(dtc.contains(idCategoria)){
+                                    registro = false;
+                                    texto = "No puede registrar una categoría de medio o 3/4 de tiempo, se marcará como ficha incompleta";
+                                }
+                                else{
+                                    registro = false;
+                                    texto = "Unicamente puede registrar categorias del mismo tipo";
+                                }
+                            }/*else if( d.contains(idCategoriaRespuesta) ){
+                                if( d.contains(idCategoria) ){
+                                    registro = true;
+                                }else{
+                                    registro = false;
+                                    texto = "Unicamente puede registrar categorias del mismo tipo";
+                                }
+                            }*/
+                            else if(dtc.contains(idCategoria)){
+                                registro = false;
+                                texto = "No puede registrar una categoría de medio o 3/4 de tiempo, se marcará como ficha incompleta";
+                            }
+                        }else if( !idCategoria.equals("") ){
+                            if(dtc.contains(idCategoria)){
+                                registro = false;
+                                texto = "No puede registrar una categoría de medio o 3/4 de tiempo, se marcará como ficha incompleta";
+                            }
                         }
+                        
+                        if(registro){
+                            if(horasRegistradas<=19){
+                                datos=metodo.ejecutaSP("sp_insertUsuarioPlaza",parametros);
+                            }else{
+                                out.print("Excede el numero de horas permitidas para esta convocatoria");
+                            }
+                        }else{                        //out.print(datos.get(0)[0]);
+                            out.print(texto);
+                        }       
                     }else{
                         datos=metodo.ejecutaSP("sp_insertUsuarioPlaza",parametros);   
                     }
-                }            
+                }
+                if(datos != null){
                 if(!datos.isEmpty()){
                     if(datos.get(0)[0].equals("ok")){
                         String informacion=new Datos().desplegarPlazas(idUsuario);
-                        out.print(informacion);                     
+                        out.print(informacion);  
                     }else{
                         out.print(datos.get(0)[0]);
                     }
                 }else{
                     out.print("Error en almacenamiento de datos, intente nuevamente");
+                }
                 }
             }else{
                 String id=request.getParameter("id");

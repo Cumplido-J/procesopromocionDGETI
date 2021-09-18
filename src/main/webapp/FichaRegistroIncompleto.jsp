@@ -104,15 +104,7 @@
                     <td>CENTRO DE TRABAJO</td>
                     <td>:${Docente.infoRegistro[9]}-${Docente.infoRegistro[10]}</td>
                 </tr>
-                <tr>
-                    <td>CATEGORÍA A LA QUE ASPIRA</td>
-                    <c:if test="${Docente.infoRegistro[41]!=null}">
-                        <td>:${Docente.infoRegistro[41]}-${Docente.infoRegistro[43]}-${Docente.infoRegistro[45]}</td>
-                    </c:if>
-                    <c:if test="${Docente.infoRegistro[41]==null}">
-                        <td>:-------------------------------------</td>
-                    </c:if>
-                </tr>
+              
                 <tr>
                     <td>GRADO ACADÉMICO REQUERIDO</td>
                     <c:if test="${Docente.infoRegistro[47]!=null}">
@@ -158,10 +150,23 @@
                         <td>:-------------------------------------</td>
                     </c:if>
                 </tr>
+                 <c:if test='${Docente.infoRegistro[85]!=null }'>
+                    <tr>
+                        <td>PLAZA QUE OSTENTA:</td>
+                        <td>:${Docente.infoRegistro[29]}-${Docente.infoRegistro[31]}-${Docente.infoRegistro[33]}-${Docente.infoRegistro[86]}</td>
+                    </tr>
+                    <tr>
+                    <td>CATEGORÍA A LA QUE ASPIRA</td>
+                        <td>:${Docente.infoRegistro[41]}-${Docente.infoRegistro[43]}-${Docente.infoRegistro[45]}</td>
+                    </tr>
+                </c:if>
                 <tr>
                     <td COLSPAN="2">
                         PLAZAS QUE OSTENTA:
                         <table>
+                            <c:if test='${Docente.infoRegistro[85]==null && infoPlazasAspira != null}'>
+                            <tr><th class="borde" COLSPAN="6">PLAZAS QUE OSTENTA:</th> </tr>
+                            </c:if>
                             <tr><th class="borde">CLAVE PRESUPUESTAL</th><th class="borde">FECHA DESDE QUE OSTENTA LA PLAZA</th><th class="borde">TIPO DE NOMBRAMIENTO</th><th class="borde">CATEGORIA</th><th class="borde">JORNADA</th><th class="borde">FUNCIÓN DIRECTIVA</th></tr>
                             
                                 <c:forEach items="${infoPlazas}" var="plaza">
@@ -191,7 +196,26 @@
                             
                         </table>
                     </td>                    
-                </tr>                
+                </tr>
+                <c:if test='${Docente.infoRegistro[85]==null && infoPlazasAspira != null}'>
+                <tr>
+                    <td COLSPAN="2">
+                        
+                        <table>
+                            
+                            <tr><th class="borde" COLSPAN="6">CATEGORÍAS A LA QUE ASPIRA:</th> </tr>
+                            
+                            <tr><th class="borde">CATEGORÍA</th><th class="borde">Jornada</th><th class="borde">Horas a las que aspira</th></tr>
+                            
+                                <c:forEach items="${infoPlazasAspira}" var="plaza">
+                                    <tr><td class="borde">${plaza[3]}</td><td class="borde">${plaza[5]} (${plaza[7]})</td><td class="borde"><center>${plaza[6]}</center></td>
+                                    </tr>
+                                </c:forEach>
+                            
+                        </table>
+                    </td>                    
+                </tr>
+                </c:if>
                 <tr>
                     <td>FECHA DE SU ÚLTIMA_PROMOCIÓN</td>
                     <c:if test="${Docente.infoRegistro[39]!=null}">
