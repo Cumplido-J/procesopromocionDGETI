@@ -174,11 +174,13 @@
 <!--                        <input id="btnEvidencia2" type="button" class="btn btn-sm btn-link incompleto" value="Subir archivo" onclick="abrirModalArchivo(2)"/>
                         <span class="glyphicon glyphicon-exclamation-sign incompleto" id="alertaBtnEvidencia2" title="Sección incompleta"></span>-->
                     </article>
-                    <article class="articleses">
-                        <h3>Paso 5:</h3>
-                        <a href="FichaRegistroClon" target="_blank" ><img src="<%=Imagen.muestraImagen(RutaConfig.getRutaCarpeta()+"imagenes/EvidVal.jpg")%>" alt=""></a>
-                        <a href="FichaRegistroClon"  target="_blank" ><h3>Ficha de <br/> registro Docente</h3></a>
-                    </article>
+                    <c:if test='${sessionScope["permisoActual"]!="5"}'>
+                        <article class="articleses">
+                            <h3>Paso 5:</h3>
+                            <a href="FichaRegistroClon" target="_blank" ><img src="<%=Imagen.muestraImagen(RutaConfig.getRutaCarpeta()+"imagenes/EvidVal.jpg")%>" alt=""></a>
+                            <a href="FichaRegistroClon"  target="_blank" ><h3>Ficha de <br/> registro Docente</h3></a>
+                        </article>
+                    </c:if>
                     <article class="articleses">
                         <h3>Paso 5.1:</h3>
                         <a href="FichaRegistro" target="_blank" ><img src="<%=Imagen.muestraImagen(RutaConfig.getRutaCarpeta()+"imagenes/EvidVal.jpg")%>" alt=""></a>
@@ -364,12 +366,12 @@
                                 <input type="file" class="form-control input-sm" id="archivoCartaRevisor" name="archivoCartaRevisor" onchange="subirArchivoR_();" accept=".pdf" />
                                 <c:if test = '${sessionScope["programa"]=="1"}'>
                                 <a href="descargas/listadecotejoparaelcomitérevisorcambiodecategoría10092021.pdf" download>
-                                    Descargar carta aceptación revisor
+                                    Descarga lista de cotejo revisor
                                 </a>
                                 </c:if>
                                 <c:if test = '${sessionScope["programa"]=="2"}'>
                                 <a href="descargas/listadecotejoparaelcomitérevisorhorasadicionales10092021.pdf" download>
-                                    Descargar carta aceptación revisor
+                                    Descarga lista de cotejo revisor
                                 </a>
                                 </c:if>
                         </form>  

@@ -46,7 +46,8 @@
             <%
                 response.sendRedirect("/procesopromocion/SesionDocente");
             %>
-            </c:if>       
+            </c:if>
+            <input type="hidden" id="tipoSubsistemaRe" name="tipoSubsistemaRe" value="${sessionScope["subsistema"]}" />
         </c:if>
         <c:if test="${vistaAdmin}">    
         <c:set var="disabled1" value=""></c:set>
@@ -408,7 +409,7 @@
                   </div>
                   <div class="panel-collapse collapse ${in}" id="infoLaboral" >
                     <div class="panel-body">
-                      <form id="formInfoLaboral" role="form" action="RegistroInfoLaboral" method="POST">                      
+                        <form id="formInfoLaboral" role="form" action="RegistroInfoLaboral" method="POST">                      
                         <div class="row">
                             <div class="checkbox col-xs-12">
                               <c:if test = "${Docente.infoRegistro[25]=='N'}">
@@ -535,30 +536,54 @@
                                 </div>                             
                             </div>
                             <div class="row">
-                                <div class="form-group col-md-6">
-                                  <label class="control-label" for="categoriaAspira">Categoría a la que aspira: <span id="avisoCategoria" class="glyphicon glyphicon-warning-sign text-warning hidden"></span></label>
-                                  <select class="form-control input-sm" id="categoriaAspira" name="categoriaAspira" onchange="cambioCategoriaAspira()" required>                                     
-                                      <c:if test = "${Docente.infoRegistro[6]==null&& Docente.infoRegistro[64]==null}">
-                                      ${catalogo.desplegarOpcionesCategoriasVacantes(sessionScope["plantel"],sessionScope["programa"],Docente.infoRegistro[42],Docente.infoRegistro[78],Docente.infoRegistro[44],sessionScope["subsistema"])}
-                                      </c:if>
-                                      <c:if test = "${Docente.infoRegistro[6]!=null&& Docente.infoRegistro[64]!=null}">
-                                      ${catalogo.desplegarOpcionesCategoriasVacantes(Docente.infoRegistro[6],Docente.infoRegistro[64],Docente.infoRegistro[42],Docente.infoRegistro[78],Docente.infoRegistro[44],Docente.infoRegistro[75])}
-                                      </c:if>
-                                  </select>
-                                </div>
+                                <c:if test='${sessionScope["programa"]=="1"}'>
+                                    <div class="form-group col-md-6">
+                                      <label class="control-label" for="categoriaAspira">Categoría a la que aspira: <span id="avisoCategoria" class="glyphicon glyphicon-warning-sign text-warning hidden"></span></label>
+                                      <select class="form-control input-sm" id="categoriaAspira" name="categoriaAspira" onchange="cambioCategoriaAspira()" required>                                     
+                                          <c:if test = "${Docente.infoRegistro[6]==null&& Docente.infoRegistro[64]==null}">
+                                          ${catalogo.desplegarOpcionesCategoriasVacantes(sessionScope["plantel"],sessionScope["programa"],Docente.infoRegistro[42],Docente.infoRegistro[78],Docente.infoRegistro[44],sessionScope["subsistema"],Docente.infoRegistro[85])}
+                                          </c:if>
+                                          <c:if test = "${Docente.infoRegistro[6]!=null&& Docente.infoRegistro[64]!=null}">
+                                          ${catalogo.desplegarOpcionesCategoriasVacantes(Docente.infoRegistro[6],Docente.infoRegistro[64],Docente.infoRegistro[42],Docente.infoRegistro[78],Docente.infoRegistro[44],Docente.infoRegistro[75],Docente.infoRegistro[85])}
+                                          </c:if>
+                                      </select>
+                                    </div>
+                                </c:if> 
+                                <c:if test='${sessionScope["programa"]=="2"}'>
+                                    <div class="form-group col-md-6">
+                                      <label class="control-label" for="categoriaAspira">Categoría a la que aspira: <span id="avisoCategoria" class="glyphicon glyphicon-warning-sign text-warning hidden"></span></label>
+                                      <select class="form-control input-sm" id="categoriaAspira" name="categoriaAspira" onchange="cambioCategoriaAspiraHoras()" required>                                     
+                                          <c:if test = "${Docente.infoRegistro[6]==null&& Docente.infoRegistro[64]==null}">
+                                          ${catalogo.desplegarOpcionesCategoriasVacantes(sessionScope["plantel"],sessionScope["programa"],Docente.infoRegistro[42],Docente.infoRegistro[78],Docente.infoRegistro[44],sessionScope["subsistema"],Docente.infoRegistro[85])}
+                                          </c:if>
+                                          <c:if test = "${Docente.infoRegistro[6]!=null&& Docente.infoRegistro[64]!=null}">
+                                          ${catalogo.desplegarOpcionesCategoriasVacantes(Docente.infoRegistro[6],Docente.infoRegistro[64],Docente.infoRegistro[42],Docente.infoRegistro[78],Docente.infoRegistro[44],Docente.infoRegistro[75],Docente.infoRegistro[85])}
+                                          </c:if>
+                                      </select>
+                                    </div>
+                                </c:if>
+                                <c:if test='${sessionScope["programa"]=="1"}'>
                                 <div class="form-group col-md-3">
                                   <label class="control-label" for="jornadaAspira">Tipo de jornada:</label>
                                   <select class="form-control input-sm" id="jornadaAspira" name="jornadaAspira" onchange="cambioCategoriaAspiraHoras2()" required>
-                                      ${catalogo.desplegarOpcionesJornadaVacante(Docente.infoRegistro[42],Docente.infoRegistro[6],Docente.infoRegistro[64],Docente.infoRegistro[44])}
-                                  </select>  
-                                  
+                                      ${catalogo.desplegarOpcionesJornadaVacante(Docente.infoRegistro[42],Docente.infoRegistro[6],Docente.infoRegistro[64],Docente.infoRegistro[44],Docente.infoRegistro[85])}
+                                  </select>
                                 </div>
+                                </c:if>
+                                <c:if test='${sessionScope["programa"]=="2"}'>
+                                <div class="form-group col-md-3">
+                                  <label class="control-label" for="jornadaAspira">Tipo de jornada:</label>
+                                  <select class="form-control input-sm" id="jornadaAspira" name="jornadaAspira" onchange="cambioCategoriaAspiraHoras2()">
+                                      ${catalogo.desplegarOpcionesJornadaVacante(Docente.infoRegistro[42],Docente.infoRegistro[6],Docente.infoRegistro[64],Docente.infoRegistro[44])}
+                                  </select>
+                                </div>
+                                </c:if>
                                   
                                 <c:if test='${sessionScope["programa"]=="2"}'>
                                 <div class="row">
                                     <div class="form-group col-md-3">
                                       <label class="control-label" for="numhoras">Numero de horas:</label>
-                                      <select class="form-control input-sm" id="numhoras" name="numhoras" required>
+                                      <select class="form-control input-sm" id="numhoras" name="numhoras">
                                           
                                         ${catalogo.desplegarOpcionesHorasVacante(Docente.infoRegistro[42],Docente.infoRegistro[6],Docente.infoRegistro[64],Docente.infoRegistro[44])}
                                       </select>
@@ -570,9 +595,9 @@
                                     <div class="form-group col-md-3">                                   
                                     </div>
                                 </div>
-                            </c:if>  
-                            
-                            <div class="row">
+                            </c:if>
+                                <c:if test='${sessionScope["programa"]=="2"}'>
+                                <div class="row">
                                     <div class="form-group col-md-3">
                                     </div>
                                     <div class="form-group col-md-3">
@@ -580,10 +605,11 @@
                                     <div class="form-group col-md-3">                                   
                                     </div>
                                     <div class="form-group col-md-3">
-                                        <input class="btn btn-sm btn-primary" id="btnEnviarCategorias" onclick="myAgregarCategoria()" value='Agregar categoria'/>
+                                        <input class="btn btn-sm btn-primary" type="button" id="btnEnviarCategorias" onclick="myAgregarCategoria()" value='Agregar categoría'/>
                                     </div>
                                 </div>
-                                
+                                </c:if>
+                                <c:if test='${sessionScope["programa"]=="2"}'>
                                 <div class='table-responsive'>
                                     <table class='table table-bordered table-condensed'>
                                         <tr><th>Plazas a la que aspira</th><th>Jornada</th><th>Horas con las que participa</th><th>Borrar</th></tr>
@@ -592,16 +618,27 @@
                                         </tbody>
                                     </table>
                                 </div>
+                                </c:if>
                             
                             </div>
-                                  <div class="row">    
-                                     <div class="form-group col-md-3">
-                                    <label class="control-label">Seleccione el requisito cumplido de acuerdo a su situación:</label><br>
-                                    <span id="rbRequisitos">
-                                        ${catalogo.desplegarRequisitosCategoria(Docente.infoRegistro[42],Docente.infoRegistro[46])}
-                                    </span>                                    
-                                    </div>
-                                  </div>
+                                <div class="row">    
+                                    <c:if test='${sessionScope["programa"]=="1"}'>
+                                        <div class="form-group col-md-3">
+                                        <label class="control-label">Seleccione el requisito cumplido de acuerdo a su situación:</label><br>
+                                        <span id="rbRequisitos">
+                                            ${catalogo.desplegarRequisitosCategoria(Docente.infoRegistro[42],Docente.infoRegistro[46])}
+                                        </span>                                    
+                                        </div>
+                                    </c:if>
+                                    <c:if test='${sessionScope["programa"]=="2"}'>
+                                        <div class="form-group col-md-3">
+                                        <label class="control-label">Seleccione el requisito cumplido de acuerdo a su situación:</label><br>
+                                        <span id="rbRequisitos">
+                                            ${catalogo.desplegarRequisitosCategoria(Docente.infoRegistro[42],Docente.infoRegistro[46])}
+                                        </span>                                    
+                                        </div>
+                                    </c:if>
+                                </div>
                             <div class="row">
                                 <div class="checkbox col-md-6">
                                     <c:if test = "${Docente.infoRegistro[48]=='S'}">
@@ -1452,7 +1489,51 @@
               </div>
 
             </div>
-        </div>                            
+        </div>
+                                    
+        <div class="modal fade" id="modalMensajeFinTresCuartos" role="dialog">
+            <div class="modal-dialog">
+              <!-- Modal content-->
+              <div class="modal-content panel">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  <h4 class="modal-title">Aviso</h4>
+                </div>
+                <div class="modal-body">
+                  <p id="mensajeFinTresCuartos">Registro exitoso.</p>
+                </div>
+                <div class="modal-footer">
+                  <!--<a href="SesionDocente">-->
+                    <button type="button" onclick="myFunction()" class="btn btn-sm btn-default">Continuar</button>
+                 <!--</a>-->
+                 <button type="button" class="btn btn-sm btn-default" data-dismiss="modal">Cancelar</button>
+                </div>
+              </div>
+            </div>
+        </div> 
+        
+        <div class="modal fade" id="modalMensajeFinHoras" role="dialog">
+            <div class="modal-dialog">
+
+              <!-- Modal content-->
+              <div class="modal-content panel">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  <h4 class="modal-title">Aviso</h4>
+                </div>
+                <div class="modal-body">
+                  <p id="mensajeFinHoras">Registro exitoso.</p>
+                </div>
+                <div class="modal-footer">
+                  <!--<a href="SesionDocente">-->
+                    <button type="button" onclick="myFunctionTresCuartos()" class="btn btn-sm btn-default">Continuar</button>
+                 <!--</a>-->
+                 <button type="button" class="btn btn-sm btn-default" data-dismiss="modal">Cancelar</button>
+                </div>
+              </div>
+
+            </div>
+        </div>
                                     
         <div class="modal fade" id="modalConfirmacion" role="dialog">
             <div class="modal-dialog">
@@ -1547,7 +1628,7 @@
                         </div>
                         <div class="form-group col-md-6 hidden" id="seccionHoras4">
                             <label class="control-label" for="horas">Horas:</label>
-                            <input type="text" class="form-control input-sm" id="horas" name="horas" maxlength="2" /> 
+                            <input type="text" class="form-control input-sm" id="horas" name="horas" maxlength="2" required/>
                         </div>
                       </div>
                       <div class="row">
@@ -1717,10 +1798,24 @@
                 var horas=$('#horas2').val();
                 var fechaPlaza=$('#fechaPlaza').val();
                 var idTipoNombramiento=$('#tipoNombramiento').val();
-                var clave=$('#clave').val();
+                
+
+                var tipoSubsistemaRe=$('#tipoSubsistemaRe').val();
+                var clave="";
+                if(tipoSubsistemaRe === "1"){
+                var clavePresupUnidad=$('#clavePresupUnidad').val();
+                var categoriaPresupuestal=$('#categoriaPresupuestal').val();
+                var clavePresupHoras=$('#clavePresupHoras').val();
+                var clavePresupPlaza=$('#clavePresupPlaza').val();
+                clave=clavePresupUnidad+categoriaPresupuestal+clavePresupHoras+clavePresupPlaza;
+                }else if(tipoSubsistemaRe === "2" ){
+                    clave=$('#clavePresupUnidad').val();
+                }
+                
+                //var clave=$('#clave').val();
                 var cargo=$('#cargo').val();
                 var fechaRenuncia=$('#fechaRenuncia').val();
-                
+                console.log("ss");
                 $("#modalMensajeFin").modal("hide");
                 $.post("FinalizaRegistro", {z:"F"}, function(data){
                     window.location.href = "/procesopromocion/SesionDocente";
@@ -1736,6 +1831,18 @@
             }
             function myFunction1(){
                 $("#modalConfirmacion").modal("hide");
+                $.post("FinalizaRegistro", {z:"F"}, function(data){
+                    window.location.href = "/procesopromocion/SesionDocente";
+                });
+            }
+            function myFunctionHoras(){
+                $("#modalMensajeFinHoras").modal("hide");
+                $.post("FinalizaRegistro", {z:"F"}, function(data){
+                    window.location.href = "/procesopromocion/SesionDocente";
+                });
+            }
+            function myFunctionTresCuartos(){
+                $("#modalMensajeFinTresCuartos").modal("hide");
                 $.post("FinalizaRegistro", {z:"F"}, function(data){
                     window.location.href = "/procesopromocion/SesionDocente";
                 });
@@ -1895,6 +2002,7 @@
                 $.post("AgregarCategoriasAspira", {categoria:idCategoriaAspira,jornada:idJornadaAspira,horas:horasAspira,idCategoria:idCategoria}, function(data){
                     if(data.includes("<tr>")){
                         $("#tablaCategorias").html(data);
+                        cambioCategoriaAspiraHorasValidado();
                     }else{
                         $("#mensaje").html(data);            
                         $("#modalMensaje").modal("show");

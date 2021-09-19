@@ -141,6 +141,12 @@ $(document).ready(function () {
                         mostrarSiguiente(2);
                     }else if(data=="fin"){
                         window.location.href = "/procesopromocion/SesionDocente";
+                    }else if(data.includes("Excede")){
+                        $("#mensajeFinHoras").html(data);            
+                        $("#modalMensajeFinHoras").modal("show");
+                    }else if(data.includes("e1")){
+                        $("#mensajeFinHoras").html("Solo puedes participar con jornadas de tipo Horas para esta convocatoria tu registro sera procesado como ficha imcompleta. ¿Deseas continuar?");            
+                        $("#modalMensajeFinHoras").modal("show");
                     }else{
                         $("#mensaje").html(data);            
                         $("#modalMensaje").modal("show");
@@ -204,7 +210,9 @@ $(document).ready(function () {
         },
         submitHandler:function(){
             $("#categoria").removeAttr("disabled");
-            $("#jornada").removeAttr("disabled");                        
+            $("#jornada").removeAttr("disabled");
+            //$("#categoriaPresupuestal").removeAttr("disabled");
+            //$("#clavePresupHoras").removeAttr("disabled");
             $("#valorClavePresupuestal").val($("#categoriaPresupuestal option:selected").attr("ClavePresupuestal"));
             $.ajax({
                 type:$('#formPlaza').attr("method"),
@@ -213,9 +221,11 @@ $(document).ready(function () {
                 beforeSend:function(){
                     $("#categoria").removeAttr("disabled");
                     $("#jornada").removeAttr("disabled");
+                    //$("#categoriaPresupuestal").removeAttr("disabled");
+                    //$("#clavePresupHoras").removeAttr("disabled");  
                     $("#btnGuardarPlaza").val("Guardando...");
                     $("#btnGuardarPlaza").attr("disabled","disabled");
-                    $("#valorClavePresupuestal").val($("#categoriaPresupuestal option:selected").attr("ClavePresupuestal"));
+                  $("#valorClavePresupuestal").val($("#categoriaPresupuestal option:selected").attr("ClavePresupuestal"));
                 },
                 complete:function(){
                    $("#btnGuardarPlaza").val("Guardar"); 
@@ -228,7 +238,12 @@ $(document).ready(function () {
                     else if(data.includes("anterior")){
                         $("#mensajeFin").html(data);            
                         $("#modalMensajeFin").modal("show");
-                    }else{
+                    }
+                    else if(data.includes("No puede registrar una")){
+                        $("#mensajeFinTresCuartos").html(data);            
+                        $("#modalMensajeFinTresCuartos").modal("show");
+                    }
+                    else{
                         $("#mensaje").html(data);            
                         $("#modalMensaje").modal("show");
                     }                    
@@ -1591,7 +1606,7 @@ function cambioCategoriaPresupuestal() {
     $("#categoria").attr("disabled","disabled");
     $("#jornada").attr("disabled","disabled");
 }
-function cambioCategoriaAspira() {   
+function cambioCategoriaAspira() {
     var tipo=$("#categoriaAspira option:selected").attr("aux");
     var idCategoria=$("#categoriaAspira option:selected").attr('idCategoria');
     if(!tipo.includes("Real")){
@@ -1606,7 +1621,7 @@ function cambioCategoriaAspira() {
     id=$("#categoriaAspira").val(); 
     idPrograma=$("#programa").val(); 
     idPlantel=$("#plantel").val(); 
-    $.get("ConsultaCatalogos", {k: "17",i:id,pr:idPrograma,pl:idPlantel,p2:idCategoria}, function(){        
+    $.get("ConsultaCatalogos", {k: "17",i:id,pr:idPrograma,pl:idPlantel,p2:idCategoria}, function(){      
     }).done(function(respuesta){
         var aux=respuesta.split("|");
         if(aux.length==2){
@@ -1630,6 +1645,7 @@ function cambioCategoriaAspiraHoras() {
     });
 }
 function cambioCategoriaAspiraHoras2() {
+    console.log("aa");
     var id=$("#categoriaAspira option:selected").attr("aux");
     var idCategoria=$("#categoriaAspira option:selected").attr('idCategoria');
     idPrograma=$("#programa").val(); 
@@ -2061,4 +2077,55 @@ function limpiarCampatibilidad(){
     $("#numHorasOtro").val("");
     $("#compatibilidad").prop('checked', false);
     
+}
+
+
+function cambioCategoriaAspiraHoras() {
+    var tipo=$("#categoriaAspira option:selected").attr("aux");
+    var idCategoria=$("#categoriaAspira option:selected").attr('idCategoria');
+    if(!tipo.includes("Real")){
+        $("#avisoCategoria").removeClass("hidden");
+        $("#avisoCategoria").attr("title","Se dará siempre y cuando un aspirante cumpla todos los requisitos y resulte ganador de una plaza de vacancia real, dejando desocupada la plaza que ostenta y ésta podrá asignarse a otro participante.");
+        $("#categoriaAspira").attr("title","Se dará siempre y cuando un aspirante cumpla todos los requisitos y resulte ganador de una plaza de vacancia real, dejando desocupada la plaza que ostenta y ésta podrá asignarse a otro participante.");
+    }else{
+        $("#avisoCategoria").removeAttr("title");
+        $("#avisoCategoria").addClass("hidden");
+        $("#categoriaAspira").removeAttr("title");
+    } 
+    id=$("#categoriaAspira").val(); 
+    idPrograma=$("#programa").val(); 
+    idPlantel=$("#plantel").val(); 
+    $.get("ConsultaCatalogos", {k: "17",i:id,pr:idPrograma,pl:idPlantel,p2:idCategoria}, function(){      
+    }).done(function(respuesta){
+        var aux=respuesta.split("|");
+        if(aux.length==2){
+            $("#jornadaAspira").html(aux[0]);
+            //$("#rbRequisitos").html(aux[1]);
+        }
+    });
+}
+
+function cambioCategoriaAspiraHorasValidado() {
+    var tipo=$("#categoriaAspira option:selected").attr("aux");
+    var idCategoria=$("#categoriaAspira option:selected").attr('idCategoria');
+    if(!tipo.includes("Real")){
+        $("#avisoCategoria").removeClass("hidden");
+        $("#avisoCategoria").attr("title","Se dará siempre y cuando un aspirante cumpla todos los requisitos y resulte ganador de una plaza de vacancia real, dejando desocupada la plaza que ostenta y ésta podrá asignarse a otro participante.");
+        $("#categoriaAspira").attr("title","Se dará siempre y cuando un aspirante cumpla todos los requisitos y resulte ganador de una plaza de vacancia real, dejando desocupada la plaza que ostenta y ésta podrá asignarse a otro participante.");
+    }else{
+        $("#avisoCategoria").removeAttr("title");
+        $("#avisoCategoria").addClass("hidden");
+        $("#categoriaAspira").removeAttr("title");
+    } 
+    id=$("#categoriaAspira").val(); 
+    idPrograma=$("#programa").val(); 
+    idPlantel=$("#plantel").val(); 
+    $.get("ConsultaCatalogos", {k: "17",i:id,pr:idPrograma,pl:idPlantel,p2:idCategoria}, function(){      
+    }).done(function(respuesta){
+        var aux=respuesta.split("|");
+        if(aux.length==2){
+            //$("#jornadaAspira").html(aux[0]);
+            $("#rbRequisitos").html(aux[1]);
+        }
+    });
 }

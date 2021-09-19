@@ -749,7 +749,7 @@ public class Catalogos {
     
     public String desplegarCatalogosEstatus(String idUsuario, String idPermisoActual, Object vinculos){        
         String respuesta="<option value=''>-Seleccione-</option>";
-        String[] parametros={idUsuario};
+        String[] parametros={idUsuario,idPermisoActual};
         try{
             List<String[]> datos=metodos.ejecutaSP("sp_selectCatEstatusidUsuario",parametros);
             if(!datos.isEmpty())
