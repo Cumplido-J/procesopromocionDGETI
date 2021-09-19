@@ -299,14 +299,20 @@ public class Servlet_registroInfoLaboral extends HttpServlet {
                 }else if(programa.equals("2")){
                     String validarRespuesta=new Datos().validarSeleccionadasAdd(idUsuario);
                     String validarRespuesta1=new Datos().validarSeleccionadasAdd1(idUsuario);
+                    String HorasAspiraDocente= new Datos().validarHorasAspira(idUsuario);
+
                     String idJornadaHoras="";
+                    
+                    
                     if(validarRespuesta.contains(",")){
                         String[] auxRespuesta=validarRespuesta.split(",");
                         validarRespuesta=auxRespuesta[4];
                         idJornadaHoras=auxRespuesta[4];
                     }
-                    int totalHorasCapturadas=Integer.parseInt(validarRespuesta)+Integer.parseInt(horas);
-                    if(totalHorasCapturadas<=18 && validarRespuesta1.contains("0")){
+                    totalHoras+= Integer.parseInt(validarRespuesta);
+                    //int totalHorasCapturadas=Integer.parseInt(validarRespuesta)+Integer.parseInt(horas);
+                    int totalHorasCapturadas=Integer.parseInt(validarRespuesta)+Integer.parseInt(HorasAspiraDocente);
+                    if(totalHorasCapturadas<=19 && validarRespuesta1.contains("0")){
                         bandera=true;
                     }else{
                         bandera=false;
@@ -314,7 +320,7 @@ public class Servlet_registroInfoLaboral extends HttpServlet {
                             out.println("e1");
 
                         }else if(totalHorasCapturadas>19){
-                            out.println("Excede el número de horas permitidas tu registro sera procesado como ficha imcompleta. ¿Deseas continuar?");
+                            out.println("Excede el número de horas permitidas tu registro sera procesado como ficha incompleta. ¿Deseas continuar?");
                         }
                     }
                     

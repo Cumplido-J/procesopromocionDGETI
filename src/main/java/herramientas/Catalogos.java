@@ -583,11 +583,9 @@ public class Catalogos {
         String aux="value='"+id+"-"+tipoVacancia+"'";
         if(idTipoVacancia != null){aux="value='"+id+"-"+tipoVacancia+"-"+idVacanciaAspirante+"'";}
         respuesta=respuesta.replaceFirst(aux, aux+" selected");
-            System.out.println("-__________-_______");
         return respuesta;  
     }
-    public String desplegarOpcionesJornadaVacante(String idCategoria,String idPlantel,String idPrograma,String idVacanciaAspirante){
-        System.out.println("---------------------");        
+    public String desplegarOpcionesJornadaVacante(String idCategoria,String idPlantel,String idPrograma,String idVacanciaAspirante){       
         String respuesta="<option value=''>-Seleccione-</option>";
         if(idCategoria.contains("R") || idCategoria.contains("C")){
             String[] categoria;
@@ -651,14 +649,14 @@ public class Catalogos {
         respuesta=respuesta.replaceFirst(aux, aux+" selected");        
         return respuesta;  
     }
-    public String desplegarOpcionesHorasVacante(String idCategoria,String idPlantel,String idPrograma){        
+    public String desplegarOpcionesHorasVacante(String idCategoria,String idPlantel,String idPrograma,String idVacanciaAspirante){        
         String respuesta="<option value=''>-Seleccione-</option>";
         if(idCategoria.contains("R") || idCategoria.contains("C")){
             String[] categoria;
         categoria = idCategoria.split("-");
                 idCategoria=categoria[0];
         }
-        String[] parametros={idCategoria,idPlantel,idPrograma};
+        String[] parametros={idCategoria,idPlantel,idPrograma, idVacanciaAspirante};
         try{
             List<String[]> datos=metodos.ejecutaSP("sp_consultaJornadaVacante",parametros);
             for(String[] dato:datos){
@@ -671,8 +669,8 @@ public class Catalogos {
             return respuesta;        
         }
     }
-    public String desplegarOpcionesHorasVacante(String idCategoria,String idPlantel,String idPrograma,String id){
-        String respuesta=desplegarOpcionesHorasVacante(idCategoria,idPlantel,idPrograma);
+    public String desplegarOpcionesHorasVacante(String idCategoria,String idPlantel,String idPrograma,String id,String idVacanciaAspirante){
+        String respuesta=desplegarOpcionesHorasVacante(idCategoria,idPlantel,idPrograma,idVacanciaAspirante);
         String aux="value='"+id+"'";
         respuesta=respuesta.replaceFirst(aux, aux+" selected");
         return respuesta;  

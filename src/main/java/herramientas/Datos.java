@@ -591,4 +591,26 @@ public class Datos {
             return respuesta;        
         }
     }
+    
+        public  String validarHorasAspira(String idUsuario){        
+        String respuesta="";   
+
+        try{
+            String[] parametros={idUsuario};
+            List<String[]> datos=metodos.ejecutaSP("sp_consultaUsuarioCategoriaAspira",parametros);
+            if(!datos.isEmpty()){
+                int suma=0;               
+                for(String[] dato:datos)
+                {
+                  suma+=Integer.parseInt(dato[6]);
+                }  
+                respuesta=""+suma;
+            }
+            
+        }catch(Exception e){
+            respuesta=e.toString();
+        }finally{
+            return respuesta;        
+        }
+    }
 }
