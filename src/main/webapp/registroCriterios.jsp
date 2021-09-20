@@ -669,13 +669,13 @@
                                 <input type='hidden' name='idCriterio' value='${criterios[9][0]}'> 
                                 <div class="row">
                                     <div class="form-group col-md-6">
-                                        <label class="control-label">10.1A Planeación didáctica: Docente</label>
+                                        <label class="control-label">10.A. Planeación didáctica: Docente</label>
                                         <select class="form-control input-sm" id="puntaje10" name="puntaje10" required>                                  
                                           ${catalogo.desplegarOpcionesPuntaje(10,puntajes[9][3],sessionScope["idUsuario"])}
                                       </select>
                                     </div>
                                     <div class="form-group col-md-6">
-                                        <label class="control-label">10.1AB Portafolio de evidencias de Evaluación del aprendizaje</label>
+                                        <label class="control-label">10.B. Portafolio de evidencias de Evaluación del aprendizaje</label>
                                         <select class="form-control input-sm" id="puntaje11" name="puntaje11" required>                                  
                                           ${catalogo.desplegarOpcionesPuntaje(11,puntajes[10][3],sessionScope["idUsuario"])}
                                         </select>
@@ -683,7 +683,7 @@
                                 </div>
                                 <div class="row">
                                     <div class="form-group col-md-6">                                                             
-                                      <label class="control-label">10.2A Observación en el aula (práctica docente)
+                                      <label class="control-label">10.C. Observación en el aula (práctica docente)
                                           <br/>Nivel de desempeño en la observación de clase en aula (práctica docente)
                                       </label>
                                       <select class="form-control input-sm" id="puntaje12" name="puntaje12" required>                                  
@@ -691,7 +691,7 @@
                                       </select>
                                     </div>
                                     <div class="form-group col-md-6">                                                             
-                                      <label class="control-label">10.3A Porcentaje de aprobación escolar (Resultados educativos) por asignatura, actividad paraescolar o módulo profesional:<br/><br/></label>
+                                      <label class="control-label">10.D. Porcentaje de aprobación escolar (Resultados educativos) por asignatura, actividad paraescolar o módulo profesional:<br/><br/></label>
                                       <select class="form-control input-sm" id="puntaje13" name="puntaje13" required>                                  
                                           ${catalogo.desplegarOpcionesPuntaje(13,puntajes[12][3],sessionScope["idUsuario"])}
                                       </select>
@@ -699,7 +699,7 @@
                                 </div>
                                 <div class="row">
                                     <div class="form-group col-md-6">                                                             
-                                      <label class="control-label">10.4A Dictamen del área académica
+                                      <label class="control-label">10.E. Dictamen del área académica
                                       <br/>Nivel de Desempeño(resultados educativos): 
                                       </label>
                                       <select class="form-control input-sm" id="puntaje13" name="puntaje14" required>                                  
@@ -708,7 +708,7 @@
                                     </div>
                                 </div>
                                 <div class="col-xs-12">
-                                    <label class="control-label">Evidencia de participación en actividades para mejorar los resultados educativos</label>
+                                    <label class="control-label">10.F. Evidencia de participación en actividades para mejorar los resultados educativos</label>
                                     <div class='text-center'>
                                         <input type="hidden" id="pEvidencias" value="${resultados[1]}"/>
                                         <input type='button' class='btn btn-sm btn-link' value='(+) Agregar información' onClick="abrirModalResultado()"/>

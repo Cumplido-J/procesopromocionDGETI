@@ -1818,7 +1818,7 @@
                 console.log("ss");
                 $("#modalMensajeFin").modal("hide");
                 $.post("FinalizaRegistro", {z:"F"}, function(data){
-                    window.location.href = "/procesopromocion/SesionDocente";
+                    window.location.href = "/promocion/SesionDocente";
                 });
                 
                 $.post("AdministracionPlaza", {z:"F",categoria:idCategoria,jornada:idJornada,
@@ -1832,19 +1832,19 @@
             function myFunction1(){
                 $("#modalConfirmacion").modal("hide");
                 $.post("FinalizaRegistro", {z:"F"}, function(data){
-                    window.location.href = "/procesopromocion/SesionDocente";
+                    window.location.href = "/promocion/SesionDocente";
                 });
             }
             function myFunctionHoras(){
                 $("#modalMensajeFinHoras").modal("hide");
                 $.post("FinalizaRegistro", {z:"F"}, function(data){
-                    window.location.href = "/procesopromocion/SesionDocente";
+                    window.location.href = "/promocion/SesionDocente";
                 });
             }
             function myFunctionTresCuartos(){
                 $("#modalMensajeFinTresCuartos").modal("hide");
                 $.post("FinalizaRegistro", {z:"F"}, function(data){
-                    window.location.href = "/procesopromocion/SesionDocente";
+                    window.location.href = "/promocion/SesionDocente";
                 });
             }
         </script>
@@ -1933,7 +1933,7 @@
                 var cbPublico=$('#cbPublico').val();
                 
                 $.post("FinalizaRegistro", {k:k,cbPublico:cbPublico}, function(data){
-                     window.location.href = "/procesopromocion/SesionDocente";
+                     window.location.href = "/promocion/SesionDocente";
                 });
             }
             function validarArchivos(){
