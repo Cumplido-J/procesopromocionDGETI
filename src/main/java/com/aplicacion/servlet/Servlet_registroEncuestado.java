@@ -98,6 +98,7 @@ public class Servlet_registroEncuestado extends HttpServlet {
                 String correo=request.getParameter("correo");
                 String tipoEncuesta=request.getParameter("tipoEncuesta");
                 String idPeriodoActivo=request.getParameter("idPeriodoActivo");
+                String idPrograma=session.getAttribute("programa").toString();
                 //String[] p2={idUsuario,curp,correo,tipoEncuesta};
                 Metodos_sql metodos=new Metodos_sql(); 
                 Correo c=new Correo();
@@ -109,7 +110,7 @@ public class Servlet_registroEncuestado extends HttpServlet {
                     retorno=metodos.ejecutaSPEncuestas("sp_selectLecturaUrl",parametrosAux);
                 }while(!retorno.isEmpty());
                 
-                String[] parametros2={rfc,curp,parametros[0],tipoEncuesta,correo,idPeriodoActivo};
+                String[] parametros2={rfc,curp,parametros[0],tipoEncuesta,correo,idPeriodoActivo, idPrograma};
                 retorno=metodos.ejecutaSPEncuestas("sp_insertLecturaUrl",parametros2);
                 if(!retorno.isEmpty()){                    
                     if(retorno.get(0)[0].equals("ok")){   
