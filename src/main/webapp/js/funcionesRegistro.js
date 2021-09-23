@@ -2129,3 +2129,105 @@ function cambioCategoriaAspiraHorasValidado() {
         }
     });
 }
+
+function validObserPaso1R1(e) {
+    obser=document.getElementById("observacion1P1R");
+    if(obser.value === ""){
+        obser.style.borderColor = "red"; 
+        e.preventDefault() ;
+    }else if(obser.value !== ""){
+        obser.style.borderColor = "gray";
+        var observacion1P1R=$('#observacion1P1R').val();
+        $.post("RegistroInfoAcademica", {accion:"observacionesPaso1",observacion1P1R:observacion1P1R}, function(data){});
+    }
+}
+
+function validObserPaso2R1(e) {
+    obser=document.getElementById("observacion2P1R");
+    if(obser.value === ""){
+        obser.style.borderColor = "red"; 
+        e.preventDefault() ;
+    }else if(obser.value !== ""){
+        obser.style.borderColor = "gray";
+        var observacion2P1R=$('#observacion2P1R').val();
+        $.post("RegistroInfoAcademica", {accion:"observacionesPaso2",observacion2P1R:observacion2P1R}, function(data){});
+    }
+}
+
+function validObserPaso3R1(e) {
+    obser=document.getElementById("observacion3P1R");
+    if(obser.value === ""){
+        obser.style.borderColor = "red"; 
+        e.preventDefault() ;
+    }else if(obser.value !== ""){
+        obser.style.borderColor = "gray";
+        var observacion3P1R=$('#observacion3P1R').val();
+        $.post("RegistroInfoAcademica", {accion:"observacionesPaso3",observacion3P1R:observacion3P1R}, function(data){});
+    }
+}
+
+function validObserPaso4R1(e) {
+    obser=document.getElementById("observacion4P1R");
+    if(obser.value === ""){
+        obser.style.borderColor = "red"; 
+        e.preventDefault() ;
+    }else if(obser.value !== ""){
+        obser.style.borderColor = "gray";
+        var observacion4P1R=$('#observacion4P1R').val();
+        $.post("RegistroInfoAcademica", {accion:"observacionesPaso4",observacion4P1R:observacion4P1R}, function(data){
+            $("#infoCompatibilidad").collapse("hide");
+             $("#btnFinalizar").removeAttr("disabled");
+        });
+    }
+}
+
+function validObserPaso1R2(e) {
+    obser=document.getElementById("observacion1P1D");
+    if(obser.value === ""){
+        obser.style.borderColor = "red"; 
+        e.preventDefault() ;
+    }else if(obser.value !== ""){
+        obser.style.borderColor = "gray";
+        var observacion1P1D=$('#observacion1P1D').val();
+        $.post("RegistroInfoAcademica", {accion:"observacionesPaso1",observacion1P1R:"",observacion1P1D:observacion1P1D}, function(data){});
+    }
+}
+
+function validObserPaso2R2(e) {
+    obser=document.getElementById("observacion2P1D");
+    if(obser.value === ""){
+        obser.style.borderColor = "red"; 
+        e.preventDefault() ;
+    }else if(obser.value !== ""){
+        obser.style.borderColor = "gray";
+        var observacion2P1D=$('#observacion2P1D').val();
+        $.post("RegistroInfoAcademica", {accion:"observacionesPaso2",observacion2P1R:"",observacion2P1D:observacion2P1D}, function(data){});
+    }
+}
+
+function validObserPaso3R2(e) {
+    obser=document.getElementById("observacion3P1D");
+    if(obser.value === ""){
+        obser.style.borderColor = "red"; 
+        e.preventDefault() ;
+    }else if(obser.value !== ""){
+        obser.style.borderColor = "gray";
+        var observacion3P1D=$('#observacion3P1D').val();
+        $.post("RegistroInfoAcademica", {accion:"observacionesPaso3",observacion3P1R:"",observacion3P1D:observacion3P1D}, function(data){});
+    }
+}
+
+function validObserPaso4R2(e) {
+    obser=document.getElementById("observacion4P1D");
+    if(obser.value === ""){
+        obser.style.borderColor = "red"; 
+        e.preventDefault() ;
+    }else if(obser.value !== ""){
+        obser.style.borderColor = "gray";
+        var observacion4P1D=$('#observacion4P1D').val();
+        $.post("RegistroInfoAcademica", {accion:"observacionesPaso4",observacion4P1R:"",observacion4P1D:observacion4P1D}, function(data){
+            $("#infoCompatibilidad").collapse("hide");
+             $("#btnFinalizar").removeAttr("disabled");
+        });
+    }
+}

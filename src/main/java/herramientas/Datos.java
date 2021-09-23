@@ -593,7 +593,7 @@ public class Datos {
     }
     
         public  String validarHorasAspira(String idUsuario){        
-        String respuesta="";   
+        String respuesta="0";   
 
         try{
             String[] parametros={idUsuario};

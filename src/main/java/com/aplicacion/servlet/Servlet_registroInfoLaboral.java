@@ -120,6 +120,9 @@ public class Servlet_registroInfoLaboral extends HttpServlet {
                 }
                 String categoriaNombre=request.getParameter("categoriaAspira");
 
+                if(programa.equals("2")){
+                    categoriaNombre=  categoriaNombre.isEmpty() ? "3-Real-22328" : categoriaNombre;
+                }
                 String[] categoria;
                 categoria = categoriaNombre.split("-");
                 idCategoriaAspira=categoria[0];
@@ -300,7 +303,7 @@ public class Servlet_registroInfoLaboral extends HttpServlet {
                     String validarRespuesta=new Datos().validarSeleccionadasAdd(idUsuario);
                     String validarRespuesta1=new Datos().validarSeleccionadasAdd1(idUsuario);
                     String HorasAspiraDocente= new Datos().validarHorasAspira(idUsuario);
-
+                    
                     String idJornadaHoras="";
                     
                     
@@ -328,7 +331,11 @@ public class Servlet_registroInfoLaboral extends HttpServlet {
                             if(Integer.parseInt(horas)>=18){
                                 bandera=true;
                             }
-                        }
+                    }
+                    if(HorasAspiraDocente.equals("0")){
+                      out.print("Debe registrar una categoria");
+                      bandera=false;
+                    }
                 }
   
                 if(programa.equals("1")){

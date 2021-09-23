@@ -329,6 +329,23 @@
                             </div>
                         </div>     
                         
+                             <c:if test="${vistaAdmin}">
+                                <div class="col-xs-12">
+                                <!--<form id="formInfoAcademicaOb1" role="form" action="RegistroInfoAcademica" method="POST">-->
+                               <!-- <input type="hidden" id="accion" name="accion" value="observacionesPaso1">-->
+                                     <%-- <c:if test='${sessionScope["permisoActualEdicion"]=="F"}'>    --%>
+                                <label class="control-label">Observaciones comité revisor:</label>    
+                                <textarea ${disabled1}  class="form-control text-uppercase ${disabled1}" id="observacion1P1R" name="observacion1P1R" maxlength="2000" onKeyUp="cambioObservacionesPaso1(this)" >${observacionesR[4]}</textarea>
+                                     <%-- </c:if>--%>
+                                <c:if test='${sessionScope["permisoActual"]=="6"}'>
+                                <input type="hidden" id="observacion1P1R" name="observacion1P1R" value="">
+                                <label class="control-label">Observaciones consejo dictaminador:</label>
+                                <textarea  class="form-control text-uppercase" id="observacion1P1D" name="observacion1P1D" maxlength="2000" onKeyUp="cambioObservacionesPaso1(this)"  required>${observacionesR[0]}</textarea>
+                                </c:if>
+                                <!--<input style="margin-top:10px;" disabled="true" type="submit"  class="btn btn-primary" value="Guardar" id="btnFinalizarOb1" onclick="cerrar(1)">-->
+                                <!--  </form>--><br>
+                                </div>
+                            </c:if>
                             <div class="col-xs-12 text-right">
                               <c:if test="${!vistaAdmin}">
                                 <input  class="btn btn-sm btn-primary" type="reset" value="Limpiar"/>
@@ -339,7 +356,12 @@
                                       <input class="btn btn-sm btn-primary" id="btnEnviar1" type="submit" value='Validar información' disabled/>
                                   </c:if>
                                   <c:if test='${sessionScope["permisoActualEdicion"]=="V"}'>
-                                      <input class="btn btn-sm btn-primary" id="btnEnviar1" type="submit" value='Validar información'/>
+                                      <c:if test='${sessionScope["permisoActual"]=="5"}'>
+                                        <input onclick="validObserPaso1R1(event)" class="btn btn-sm btn-primary" id="btnEnviar1" type="submit" value='Validar - guardar información' />
+                                      </c:if>
+                                      <c:if test='${sessionScope["permisoActual"]=="6"}'>
+                                        <input onclick="validObserPaso1R2(event)" class="btn btn-sm btn-primary" id="btnEnviar1" type="submit" value='Validar - guardar información' />
+                                      </c:if>  
                                   </c:if>
                               </c:if>
                               <!--<input type="button" class="btn btn-sm btn-primary" value="Guardar y continuar" onclick="mostrarSiguiente(1)"/>-->
@@ -347,21 +369,6 @@
                         
                       </form>
                             
-                <c:if test="${vistaAdmin}">
-                    <form id="formInfoAcademicaOb1" role="form" action="RegistroInfoAcademica" method="POST">
-                      <input type="hidden" id="accion" name="accion" value="observacionesPaso1">
-                         <%-- <c:if test='${sessionScope["permisoActualEdicion"]=="F"}'>    --%>
-                    <label class="control-label">Observaciones comité revisor:</label>    
-                    <textarea ${disabled1}  class="form-control text-uppercase ${disabled1}" id="observacion1P1R" name="observacion1P1R" maxlength="2000" onKeyUp="cambioObservacionesPaso1(this)" >${observacionesR[4]}</textarea>
-                         <%-- </c:if>--%>
-                    <c:if test='${sessionScope["permisoActual"]=="6"}'>
-                    <input type="hidden" id="observacion1P1R" name="observacion1P1R" value="">
-                    <label class="control-label">Observaciones consejo dictaminador:</label>
-                    <textarea  class="form-control text-uppercase" id="observacion1P1D" name="observacion1P1D" maxlength="2000" onKeyUp="cambioObservacionesPaso1(this)"  required>${observacionesR[0]}</textarea>
-                    </c:if>
-                    <input style="margin-top:10px;" disabled="true" type="submit"  class="btn btn-primary" value="Guardar" id="btnFinalizarOb1" onclick="cerrar(1)">
-                    </form>
-                </c:if>      
                     </div>
                   </div>
                 </div>
@@ -552,6 +559,17 @@
                                 <c:if test='${sessionScope["programa"]=="2"}'>
                                     <div class="form-group col-md-6">
                                       <label class="control-label" for="categoriaAspira">Categoría a la que aspira: <span id="avisoCategoria" class="glyphicon glyphicon-warning-sign text-warning hidden"></span></label>
+                                      <c:if test="${vistaAdmin}">
+                                      <select class="form-control input-sm" id="categoriaAspira" name="categoriaAspira" onchange="cambioCategoriaAspiraHoras()">                                     
+                                          <c:if test = "${Docente.infoRegistro[6]==null&& Docente.infoRegistro[64]==null}">
+                                          ${catalogo.desplegarOpcionesCategoriasVacantes(sessionScope["plantel"],sessionScope["programa"],Docente.infoRegistro[42],Docente.infoRegistro[78],Docente.infoRegistro[44],sessionScope["subsistema"],Docente.infoRegistro[85])}
+                                          </c:if>
+                                          <c:if test = "${Docente.infoRegistro[6]!=null&& Docente.infoRegistro[64]!=null}">
+                                          ${catalogo.desplegarOpcionesCategoriasVacantes(Docente.infoRegistro[6],Docente.infoRegistro[64],Docente.infoRegistro[42],Docente.infoRegistro[78],Docente.infoRegistro[44],Docente.infoRegistro[75],Docente.infoRegistro[85])}
+                                          </c:if>
+                                      </select>
+                                      </c:if>
+                                      <c:if test="${!vistaAdmin}">
                                       <select class="form-control input-sm" id="categoriaAspira" name="categoriaAspira" onchange="cambioCategoriaAspiraHoras()" required>                                     
                                           <c:if test = "${Docente.infoRegistro[6]==null&& Docente.infoRegistro[64]==null}">
                                           ${catalogo.desplegarOpcionesCategoriasVacantes(sessionScope["plantel"],sessionScope["programa"],Docente.infoRegistro[42],Docente.infoRegistro[78],Docente.infoRegistro[44],sessionScope["subsistema"],Docente.infoRegistro[85])}
@@ -560,6 +578,7 @@
                                           ${catalogo.desplegarOpcionesCategoriasVacantes(Docente.infoRegistro[6],Docente.infoRegistro[64],Docente.infoRegistro[42],Docente.infoRegistro[78],Docente.infoRegistro[44],Docente.infoRegistro[75],Docente.infoRegistro[85])}
                                           </c:if>
                                       </select>
+                                      </c:if>
                                     </div>
                                 </c:if>
                                 <c:if test='${sessionScope["programa"]=="1"}'>
@@ -664,6 +683,23 @@
                                 </div> 
                             </div>
                         </div>
+                         <c:if test="${vistaAdmin}">
+                             <div class="col-xs-12">
+                            <!--<form id="formInfoAcademicaOb2" role="form" action="RegistroInfoAcademica" method="POST">-->
+                              <input type="hidden" id="accion" name="accion" value="observacionesPaso2">
+                                 <%-- <c:if test='${sessionScope["permisoActualEdicion"]=="F"}'>    --%>
+                            <label class="control-label">Observaciones comité revisor:</label>    
+                            <textarea ${disabled1}  class="form-control text-uppercase ${disabled1}" id="observacion2P1R" name="observacion2P1R" maxlength="2000" onKeyUp="cambioObservacionesPaso2(this)">${observacionesR[5]}</textarea>
+                                 <%-- </c:if>--%>
+                            <c:if test='${sessionScope["permisoActual"]=="6"}'>
+                            <input type="hidden" id="observacion2P1R" name="observacion2P1R" value="">
+                            <label class="control-label">Observaciones consejo dictaminador:</label>
+                            <textarea  class="form-control text-uppercase" id="observacion2P1D" name="observacion2P1D" maxlength="2000" onKeyUp="cambioObservacionesPaso2(this)"  required>${observacionesR[1]}</textarea>
+                            </c:if>
+                            <!--<input style="margin-top:10px;" disabled="true" type="submit"  class="btn btn-primary" value="Guardar" id="btnFinalizarOb2" onclick="cerrar(2)" >-->
+                            <!--</form>--><br>
+                             </div>
+                        </c:if>            
                         <div class="col-xs-12 text-right">
                               <c:if test="${!vistaAdmin}">
                                 <input  class="btn btn-sm btn-primary" type="reset" value="Limpiar"/>
@@ -674,28 +710,20 @@
                                       <input class="btn btn-sm btn-primary" id="btnEnviar2" type="submit" value='Validar información' disabled/>
                                   </c:if>
                                   <c:if test='${sessionScope["permisoActualEdicion"]=="V"}'>
-                                      <input class="btn btn-sm btn-primary" id="btnEnviar2" type="submit" value='Validar información'/>
+                                        <!--<input class="btn btn-sm btn-primary" id="btnEnviar2" type="submit" value='Validar información'/>-->
+                                        <c:if test='${sessionScope["permisoActual"]=="5"}'>
+                                            <input onclick="validObserPaso2R1(event)" class="btn btn-sm btn-primary" id="btnEnviar2" type="submit" value='Validar - guardar información'/>
+                                        </c:if>
+                                        <c:if test='${sessionScope["permisoActual"]=="6"}'>
+                                            <input onclick="validObserPaso2R2(event)" class="btn btn-sm btn-primary" id="btnEnviar2" type="submit" value='Validar - guardar información'/>
+                                        </c:if> 
                                   </c:if>
                               </c:if>
                               <!--<input type="button" class="btn btn-sm btn-primary" value="Guardar y continuar" onclick="mostrarSiguiente(1)"/>-->
                         </div>
                       </form>
                     
-                <c:if test="${vistaAdmin}">
-                    <form id="formInfoAcademicaOb2" role="form" action="RegistroInfoAcademica" method="POST">
-                      <input type="hidden" id="accion" name="accion" value="observacionesPaso2">
-                         <%-- <c:if test='${sessionScope["permisoActualEdicion"]=="F"}'>    --%>
-                    <label class="control-label">Observaciones comité revisor:</label>    
-                    <textarea ${disabled1}  class="form-control text-uppercase ${disabled1}" id="observacion2P1R" name="observacion2P1R" maxlength="2000" onKeyUp="cambioObservacionesPaso2(this)">${observacionesR[5]}</textarea>
-                         <%-- </c:if>--%>
-                    <c:if test='${sessionScope["permisoActual"]=="6"}'>
-                    <input type="hidden" id="observacion2P1R" name="observacion2P1R" value="">
-                    <label class="control-label">Observaciones consejo dictaminador:</label>
-                    <textarea  class="form-control text-uppercase" id="observacion2P1D" name="observacion2P1D" maxlength="2000" onKeyUp="cambioObservacionesPaso2(this)"  required>${observacionesR[1]}</textarea>
-                    </c:if>
-                    <input style="margin-top:10px;" disabled="true" type="submit"  class="btn btn-primary" value="Guardar" id="btnFinalizarOb2" onclick="cerrar(2)" >
-                    </form>
-                </c:if>
+               
                                     
                   </div>
                 </div>
@@ -887,6 +915,23 @@
                                 </c:if>                                
                             </div>
                         </div>
+                         <c:if test="${vistaAdmin}">
+                            <div class="col-xs-12">
+                            <!--<form id="formInfoAcademicaOb3" role="form" action="RegistroInfoAcademica" method="POST">-->
+                              <input type="hidden" id="accion3" name="accion" value="observacionesPaso3">
+                                 <%-- <c:if test='${sessionScope["permisoActualEdicion"]=="F"}'>    --%>
+                            <label class="control-label">Observaciones comité revisor:</label>    
+                            <textarea ${disabled1} class="form-control text-uppercase ${disabled1}" id="observacion3P1R" name="observacion3P1R" maxlength="2000" onKeyUp="cambioObservacionesPaso3(this)" >${observacionesR[6]}</textarea>
+                                 <%-- </c:if>--%>
+                            <c:if test='${sessionScope["permisoActual"]=="6"}'>
+                            <input type="hidden" id="observacion3P1R" name="observacion3P1R" value="">
+                            <label class="control-label">Observaciones consejo dictaminador:</label>
+                            <textarea  class="form-control text-uppercase" id="observacion3P1D" name="observacion3P1D" maxlength="2000" onKeyUp="cambioObservacionesPaso3(this)"  required>${observacionesR[2]}</textarea>
+                            </c:if>
+                            <!--<input style="margin-top:10px;" disabled="true" type="submit"  class="btn btn-primary" value="Guardar" id="btnFinalizarOb3" onclick="cerrar(3)">-->
+                            <!--</form>--><br>
+                            </div>
+                        </c:if>         
                         <div class="col-xs-12 text-right">
                               <c:if test="${!vistaAdmin}">
                                 <input  class="btn btn-sm btn-primary" type="reset" value="Limpiar"/>
@@ -897,7 +942,13 @@
                                       <input class="btn btn-sm btn-primary" id="btnEnviar3" type="submit" value='Validar información' disabled/>
                                   </c:if>
                                   <c:if test='${sessionScope["permisoActualEdicion"]=="V"}'>
-                                      <input class="btn btn-sm btn-primary" id="btnEnviar3" type="submit" value='Validar información'/>
+                                      <!--<input class="btn btn-sm btn-primary" id="btnEnviar3" type="submit" value='Validar información'/>-->
+                                      <c:if test='${sessionScope["permisoActual"]=="5"}'>
+                                            <input onclick="validObserPaso3R1(event)" class="btn btn-sm btn-primary" id="btnEnviar3" type="submit" value='Validar - guardar información'/>
+                                      </c:if>
+                                      <c:if test='${sessionScope["permisoActual"]=="6"}'>
+                                            <input onclick="validObserPaso3R2(event)" class="btn btn-sm btn-primary" id="btnEnviar3" type="submit" value='Validar - guardar información'/>
+                                      </c:if>
                                   </c:if>
                               </c:if>
                               <!--<input type="button" class="btn btn-sm btn-primary" value="Guardar y continuar" onclick="mostrarSiguiente(1)"/>-->
@@ -905,21 +956,7 @@
                       </form>
                     
                                 
-                <c:if test="${vistaAdmin}">
-                    <form id="formInfoAcademicaOb3" role="form" action="RegistroInfoAcademica" method="POST">
-                      <input type="hidden" id="accion3" name="accion" value="observacionesPaso3">
-                         <%-- <c:if test='${sessionScope["permisoActualEdicion"]=="F"}'>    --%>
-                    <label class="control-label">Observaciones comité revisor:</label>    
-                    <textarea ${disabled1} class="form-control text-uppercase ${disabled1}" id="observacion3P1R" name="observacion3P1R" maxlength="2000" onKeyUp="cambioObservacionesPaso3(this)" >${observacionesR[6]}</textarea>
-                         <%-- </c:if>--%>
-                    <c:if test='${sessionScope["permisoActual"]=="6"}'>
-                   <input type="hidden" id="observacion3P1R" name="observacion3P1R" value="">
-                    <label class="control-label">Observaciones consejo dictaminador:</label>
-                    <textarea  class="form-control text-uppercase" id="observacion3P1D" name="observacion3P1D" maxlength="2000" onKeyUp="cambioObservacionesPaso3(this)"  required>${observacionesR[2]}</textarea>
-                    </c:if>
-                    <input style="margin-top:10px;" disabled="true" type="submit"  class="btn btn-primary" value="Guardar" id="btnFinalizarOb3" onclick="cerrar(3)">
-                    </form>
-                </c:if> 
+               
                                 
                                 
                     </div>
@@ -1010,26 +1047,9 @@
                             </div>
                             
                         </div>
-                        <div class="col-xs-12 text-right">
-                              <c:if test="${!vistaAdmin}">
-                                <input  class="btn btn-sm btn-primary" type="reset" value="Limpiar"/>
-                                <input class="btn btn-sm btn-primary" id="btnEnviar4" type="submit" value='Guardar y continuar'/>
-                              </c:if>
-                              <c:if test="${vistaAdmin}">
-                                  <c:if test='${sessionScope["permisoActualEdicion"]=="F"}'>
-                                      <input class="btn btn-sm btn-primary" id="btnEnviar4" type="submit" value='Validar información' disabled/>
-                                  </c:if>
-                                  <c:if test='${sessionScope["permisoActualEdicion"]=="V"}'>
-                                      <input class="btn btn-sm btn-primary" id="btnEnviar4" type="submit" value='Validar información'/>
-                                  </c:if>
-                              </c:if>
-                              <!--<input type="button" class="btn btn-sm btn-primary" value="Guardar y continuar" onclick="mostrarSiguiente(1)"/>-->
-                            </div>
-                      </form>
-                            
-                            
                             <c:if test="${vistaAdmin}">
-                                <form id="formInfoAcademicaOb4" role="form" action="RegistroInfoAcademica" method="POST" >
+                                <div class="col-xs-12">
+                                <!--<form id="formInfoAcademicaOb4" role="form" action="RegistroInfoAcademica" method="POST" >-->
                                    
                                   <input type="hidden" id="accion4" name="accion" value="observacionesPaso4">
                                      <%-- <c:if test='${sessionScope["permisoActualEdicion"]=="F"}'>    --%>
@@ -1041,9 +1061,35 @@
                                 <label class="control-label">Observaciones consejo dictaminador:</label>
                                 <textarea  class="form-control text-uppercase" id="observacion4P1D" name="observacion4P1D" maxlength="2000" onKeyUp="cambioObservacionesPaso4(this)"  required>${observacionesR[3]}</textarea>
                                 </c:if>
-                                <input style="margin-top:10px;" disabled="true" type="submit"  class="btn btn-primary" value="Guardar" id="btnFinalizarOb4" onclick="cerrar(4)">
-                                </form>
-                            </c:if> 
+                                <!--<input style="margin-top:10px;" disabled="true" type="submit"  class="btn btn-primary" value="Guardar" id="btnFinalizarOb4" onclick="cerrar(4)">-->
+                                <!--</form>--><br>
+                                </div>
+                            </c:if>    
+                        <div class="col-xs-12 text-right">
+                              <c:if test="${!vistaAdmin}">
+                                <input  class="btn btn-sm btn-primary" type="reset" value="Limpiar"/>
+                                <input class="btn btn-sm btn-primary" id="btnEnviar4" type="submit" value='Guardar y continuar'/>
+                              </c:if>
+                              <c:if test="${vistaAdmin}">
+                                  <c:if test='${sessionScope["permisoActualEdicion"]=="F"}'>
+                                      <input class="btn btn-sm btn-primary" id="btnEnviar4" type="submit" value='Validar información' disabled/>
+                                  </c:if>
+                                  <c:if test='${sessionScope["permisoActualEdicion"]=="V"}'>
+                                      <!--<input class="btn btn-sm btn-primary" id="btnEnviar4" type="submit" value='Validar información'/>-->
+                                      <c:if test='${sessionScope["permisoActual"]=="5"}'>
+                                        <input onclick="validObserPaso4R1(event)" class="btn btn-sm btn-primary" id="btnEnviar4" type="submit" value='Validar - guardar información'/>
+                                      </c:if>
+                                      <c:if test='${sessionScope["permisoActual"]=="6"}'>
+                                        <input onclick="validObserPaso4R2(event)" class="btn btn-sm btn-primary" id="btnEnviar4" type="submit" value='Validar - guardar información'/>
+                                      </c:if>
+                                  </c:if>
+                              </c:if>
+                              <!--<input type="button" class="btn btn-sm btn-primary" value="Guardar y continuar" onclick="mostrarSiguiente(1)"/>-->
+                            </div>
+                      </form>
+                            
+                            
+ 
                             
                     </div>
                   </div>
