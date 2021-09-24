@@ -180,8 +180,8 @@
                     
                 <c:if test = "${Docente.infoRegistro[83]!=null}">    
                     <center><article id="pasoFicha" for="pasoFicha" name="pasoFicha" class="articleses">
-                        <a href="FichaRegistroClon" target="_blank" ><img src="<%=Imagen.muestraImagen(RutaConfig.getRutaCarpeta()+"imagenes/EvidVal.jpg")%>" alt=""></a>
-                        <a href="FichaRegistroClon"  target="_blank" ><h3>Comprobante de ficha <br/>de registro</h3></a>
+                        <a href="FichaRegistro" target="_blank" ><img src="<%=Imagen.muestraImagen(RutaConfig.getRutaCarpeta()+"imagenes/EvidVal.jpg")%>" alt=""></a>
+                        <a href="FichaRegistro"  target="_blank" ><h3>Comprobante de ficha <br/>de registro</h3></a>
                         </article>    </center>
                 </c:if>  
                 <c:if test='${sessionScope["fechaDictaminacion"]=="1"}'>

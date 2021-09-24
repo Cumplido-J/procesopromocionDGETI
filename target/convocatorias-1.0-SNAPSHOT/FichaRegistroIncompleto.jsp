@@ -197,7 +197,7 @@
                         </table>
                     </td>                    
                 </tr>
-                <c:if test='${Docente.infoRegistro[85]==null && infoPlazasAspira != null}'>
+                <c:if test='${Docente.infoRegistro[85]==null && infoPlazasAspira != null && sessionScope["programa"]=="2"}'>
                 <tr>
                     <td COLSPAN="2">
                         
@@ -205,15 +205,19 @@
                             
                             <tr><th class="borde" COLSPAN="6">CATEGORÍAS A LA QUE ASPIRA:</th> </tr>
                             
-                            <tr><th class="borde">CATEGORÍA</th><th class="borde">Jornada</th><th class="borde">Horas a las que aspira</th></tr>
+                            <tr><th class="borde">CATEGORÍA</th><th class="borde">Horas a las que aspira</th></tr>
                             
                                 <c:forEach items="${infoPlazasAspira}" var="plaza">
-                                    <tr><td class="borde">${plaza[3]}</td><td class="borde">${plaza[5]} (${plaza[7]})</td><td class="borde"><center>${plaza[6]}</center></td>
+                                    <tr><td class="borde">${plaza[3]}</td><td class="borde"><center>${plaza[6]}</center></td>
                                     </tr>
                                 </c:forEach>
                             
                         </table>
                     </td>                    
+                </tr>
+                <tr>
+                    <td>TOTAL DE HORAS A LA QUE ASPIRA</td>
+                    <td>:${Docente.infoRegistro[87]}</td>
                 </tr>
                 </c:if>
                 <tr>
