@@ -66,4 +66,16 @@ public class UtileriasHelper {
 		}
 		return objeto;
 	}
+        public String convertObjectToJson(Object object) {
+            String json = "";
+            GsonBuilder builder = new GsonBuilder().serializeNulls();
+            builder.disableHtmlEscaping();
+            Gson gson = builder.create();
+            try {
+                json = gson.toJson(object);
+            } catch (Exception e) {
+                System.out.println(e.toString());
+            }
+            return json;
+        }
 }

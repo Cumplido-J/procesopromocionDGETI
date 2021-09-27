@@ -155,6 +155,21 @@ public class Servlet_guardarArchivo extends HttpServlet {
                 }
                 ous.close();
                 is.close();
+                if(Integer.parseInt(idRequisitoR)==1){
+                    idRequisitoR="19";
+                    Metodos_sql metodo = new Metodos_sql();
+                    String[] parametros={idUsuario,idRequisitoR,idDocente};
+                    List<String[]> datos;                           
+                    datos=metodo.ejecutaSP("sp_registroConstancia",parametros);            
+                    if(!datos.isEmpty()){
+                        out.print("ok");
+                        datos=metodo.ejecutaSP("sp_registroConstancia",parametros);
+                    }else{
+                        out.print("Error en almacenamiento de datos, intente nuevamente");
+                    }
+                }else{
+                    out.print("ok");
+                }
             }else{
                 Part archivo=request.getPart("archivo");
                 InputStream is=archivo.getInputStream();
@@ -174,7 +189,7 @@ public class Servlet_guardarArchivo extends HttpServlet {
                 }
                 ous.close();
                 is.close();
-                if(Integer.parseInt(idRequisito)<19){
+                if(Integer.parseInt(idRequisito)<20){
                     Metodos_sql metodo = new Metodos_sql();
                     String[] parametros={idUsuario,idRequisito,idDocente};
                     List<String[]> datos;                           
