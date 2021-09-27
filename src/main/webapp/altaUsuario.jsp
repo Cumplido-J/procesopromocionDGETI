@@ -129,6 +129,15 @@
                         <label class="control-label">Correo electrónico:<span class="text-danger" title="Campo obligatorio">*</span></label>
                         <input type="text" class="form-control input-sm" name="correo" id="correo" maxlength="50" required/>
                         <label class="error" id="alertaCorreo" hidden >Ingrese una dirección de correo válida</label>
+                    </div>  
+                    <div class="form-group col-md-4">                               
+                        <label class="control-label" for="tusuario">Tipo Usuario</label>
+                        <select class="form-control input-sm" id="tusuario" name="tusuario" required>
+                            <option value="">---Seleccionar una opción---</option>
+                            <option value="D">DOCENTE</option>
+                            <option value="A">ADMINISTRADOR</option>
+                            <option value="S">SUPER</option>
+                        </select>
                     </div>                    
                 </div>
                 <div class="row col-xs-12">

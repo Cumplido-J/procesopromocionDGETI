@@ -110,8 +110,17 @@ public class Servlet_registrarUsuario extends HttpServlet {
                 String movil=request.getParameter("movil"); 
                 String correo=request.getParameter("correo");
                 String pass=request.getParameter("pass");
+                String perfil=request.getParameter("tusuario");
+                String permisosReq=request.getParameter("permisos");
+                
                 String consideraciones=""; 
                 String contrasena;
+                
+                if (!(request.getParameter("permisos")==null))
+                {
+                    if (permisosReq.equals("")) {permisosReq=null;}
+                }
+                                
                 if(id.equals("")){
                     contrasena=Pin.generaPin();
                 }else{
@@ -128,8 +137,8 @@ public class Servlet_registrarUsuario extends HttpServlet {
                     pass=encriptarPass;
                 }
                 
-                if(request.getParameter("permisos")==null){
-                    String perfil="D";
+                if(permisosReq==null && perfil.equals("D")){
+                    //perfil="D";
                     Metodos_sql metodo = new Metodos_sql();
                     List<String[]> datos;            
                     String[] parametros={entidad,plantel,nombre,apellido1,apellido2,correo,pass,usuario,fijo,movil,perfil,consideraciones,nivel,subsistema,programa,id};                                      
@@ -146,12 +155,14 @@ public class Servlet_registrarUsuario extends HttpServlet {
                     }else{
                         out.print("Error en almacenamiento de datos, intente nuevamente");
                     }
+                }else if (permisosReq!=null && perfil.equals("D")) {
+                    out.print("Al tipo de usuario Docente no se le asignan permisos");
                 }else{
                     String permisos=request.getParameter("permisos");
                     String[] aux=permisos.split(";");
                 
 
-                    String perfil="A";
+                    //perfil="A";
                     String respuesta="Error en almacenamiento de datos, intente nuevamente";
                     Metodos_sql metodo = new Metodos_sql();
                     List<String[]> datos;            

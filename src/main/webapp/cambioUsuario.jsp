@@ -132,6 +132,12 @@
                         <label class="control-label">Actualizar Contraseña:<span class="text-danger" title="Campo obligatorio">*</span></label>
                         <input type="password" class="form-control input-sm" name="pass" id="pass" />
                     </div>
+                    <div class="form-group col-md-4">                               
+                        <label class="control-label" for="tusuario">Tipo Usuario</label>
+                        <select class="form-control input-sm" id="tusuario" name="tusuario" required>
+                            ${catalogo.desplegarOpcionesTipoUsuario(informacion[10])}
+                        </select>
+                    </div> 
                 </div>
                 <c:if test='${informacion[10]!="D"}'>
                    <div class="row col-xs-12">

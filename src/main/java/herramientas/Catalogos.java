@@ -136,6 +136,19 @@ public class Catalogos {
             return respuesta;        
         }
     }
+    
+    public String desplegarOpcionesTipoUsuario(String idTipoUsuario){ 
+        String respuesta="<option value=''>---Seleccionar una opción---</option>";
+        respuesta+="<option value='D'>DOCENTE</option>";
+        respuesta+="<option value='A'>ADMINISTRADOR</option>";
+        respuesta+="<option value='S'>SUPER</option>"; 
+        
+        String aux="value='"+idTipoUsuario+"'";
+        respuesta=respuesta.replaceFirst(aux, aux + " selected");
+        
+        return respuesta;        
+    }
+    
     public String desplegarOpcionesTipoInstitucion(String idEstado,String id){
         String respuesta=desplegarOpcionesTipoInstitucion(idEstado);
         String aux="value='"+id+"'";
