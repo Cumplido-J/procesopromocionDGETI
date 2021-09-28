@@ -159,6 +159,14 @@ public class Datos {
                     respuesta="";
                     for(String[] dato:datos)
                     {
+                        String[] parametros1={dato[0]};
+                        List<String[]> datos1=metodos.ejecutaSP("sp_consultaListaCotejo",parametros1);
+                        String listaCotejo="";
+                        if(!datos1.isEmpty()){
+                            listaCotejo="Si";
+                        }else{
+                            listaCotejo="No";
+                        }
                         respuesta+="<tr><td>"+dato[12]+"</td><td>"+dato[10]+"</td><td>"+dato[2]+"</td><td>"+dato[4]+"</td><td>"+dato[6]+"</td><td>"+dato[5]+"</td><td>"+dato[8]+"</td><td>"+dato[13]+"</td><td>"; 
                         if (idPermiso.equals("6"))
                         {
@@ -176,7 +184,7 @@ public class Datos {
                         respuesta+="<form method='POST' action='VistaDocente'><input type='hidden' name='idUsuario' value='"+dato[0]+"'><input type='hidden' name='rfc' value='"+dato[6]+"'><input class='btn btn-sm btn-link' type='submit' value='Ver información'/></form>";                                                               
 
 
-                        respuesta+="</td></tr>";
+                        respuesta+="</td><<td class='text-center'>"+listaCotejo+"</td></tr>";
                     }
                 }
             }
