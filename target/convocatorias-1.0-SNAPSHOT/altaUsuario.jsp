@@ -39,7 +39,7 @@
             <div class="container">
                 <!--Agregar contenido de página aquí-->
                 <div class="text-center">
-                    <h4>Alta de administrador</h4>                       
+                    <h4>Alta de Usuario</h4>                       
                 </div>
                 <div class="row col-xs-12">
                     <p>Los campos marcados con <span class="text-danger" title="Campo obligatorio">*</span> son obligatorios.</p>
@@ -132,7 +132,7 @@
                     </div>  
                     <div class="form-group col-md-4">                               
                         <label class="control-label" for="tusuario">Tipo Usuario</label>
-                        <select class="form-control input-sm" id="tusuario" name="tusuario" required>
+                        <select class="form-control input-sm" id="tusuario" name="tusuario" onchange="habilitaPermisos()" required>
                             <option value="">---Seleccionar una opción---</option>
                             <option value="D">DOCENTE</option>
                             <option value="A">ADMINISTRADOR</option>
@@ -140,7 +140,7 @@
                         </select>
                     </div>                    
                 </div>
-                <div class="row col-xs-12">
+                <div class="row col-xs-12" id="PermisosAsignados1">
                     <label class="control-label">Permisos asignados:<span class="text-danger" title="Campo obligatorio">*</span></label><br/>  
                     ${catalogo.desplegarOpcionesPermisos()}    
                     <input type="hidden" id="permisos" name="permisos"/>

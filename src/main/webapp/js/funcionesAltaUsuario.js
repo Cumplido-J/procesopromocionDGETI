@@ -244,6 +244,13 @@ function cambioPermiso(objeto){
     }
 }
 
-
-
-
+function habilitaPermisos(){
+    
+    var rol = $("#tusuario").val();
+    if(rol==="D"){
+        $("#PermisosAsignados1").addClass("hidden");
+    }else{
+        $("#PermisosAsignados1").removeClass("hidden");
+    }   
+           
+}

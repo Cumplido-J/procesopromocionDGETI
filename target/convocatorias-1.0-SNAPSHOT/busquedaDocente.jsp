@@ -132,6 +132,7 @@
                                 <th>Puntaje Comite Revisor</th>
                                 </c:if>
                                 <th>Opciones</th>
+                                <th>Lista de Cotejo</th>
                             </tr>
                         </thead>
                         <tbody id="seccionEditable">${dato.desplegarDocentes(sessionScope["programa"],sessionScope["subsistema"],sessionScope["entidad"],sessionScope["plantel"],'','',sessionScope["permisoActual"],sessionScope["idUsuario"],periodoIdActivo)}</tbody>

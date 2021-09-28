@@ -120,7 +120,9 @@ public class Servlet_registrarUsuario extends HttpServlet {
                 {
                     if (permisosReq.equals("")) {permisosReq=null;}
                 }
-                                
+                      
+                if (perfil.equals("D")) {permisosReq=null;}
+                
                 if(id.equals("")){
                     contrasena=Pin.generaPin();
                 }else{
