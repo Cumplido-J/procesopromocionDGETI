@@ -29,6 +29,7 @@ import metodos_sql.Metodos_sql;
 @WebServlet(name = "FichaRegistroClon", urlPatterns = {"/FichaRegistroClon"})
 public class Servlet_cbFichaRegistroClon extends HttpServlet {
     Docente docente;
+    Docente docente1;
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -105,6 +106,11 @@ public class Servlet_cbFichaRegistroClon extends HttpServlet {
             String idUsuarioPadre=datosUser.get(16);
             
             CriteriosValoracion cv=new CriteriosValoracion();
+            List<String[]> infoCategoria=null;
+            if( idUsuarioPadre !=null ){
+                String[] parametros={idUsuario};   
+                infoCategoria=new Metodos_sql().ejecutaSP("sp_consultaVacanciaDocente",parametros);
+            }
             docente=new Docente();
             docente.setIdUsuario(idUsuario);
             docente.consultaInfoAspirante2();
@@ -116,6 +122,9 @@ public class Servlet_cbFichaRegistroClon extends HttpServlet {
                 docente.actualizaBanderaIngles();
             }
 
+            docente1=new Docente();
+            docente1.setIdUsuario(idUsuario);
+            docente1.consultaInfoAspirante();
             
             idUsuario = idUsuarioPadre != null ? idUsuarioPadre: idUsuario;
             String[][] puntajes=cv.consultaPuntajes(idUsuario); 
@@ -134,10 +143,14 @@ public class Servlet_cbFichaRegistroClon extends HttpServlet {
             request.setAttribute("tutorias", cv.getFilasTutoriasFicha(idUsuario));
             request.setAttribute("publicaciones", cv.getFilasPublicacionesFicha(idUsuario));
             request.setAttribute("resultados", cv.getFilasResultadosFicha(idUsuario));
+            request.setAttribute("evidencias", cv.getFilasResultadosConstancias(idUsuario));
+            request.setAttribute("registroEvidencias", cv.getFilasResultadosRegistro(idUsuario));
             request.setAttribute("rutaimagen", rutaImagen);
             request.setAttribute("banderaIdUsuarioPadre", (idUsuarioPadre != null));
+            request.setAttribute("Docente1", docente1);
+            request.setAttribute( "infoCategoria", idUsuarioPadre != null ? infoCategoria : null );
             ServletContext sc = getServletContext();
-            RequestDispatcher rd = sc.getRequestDispatcher("/FichaRegistro.jsp");
+            RequestDispatcher rd = sc.getRequestDispatcher("/FichaRegistroClon.jsp");
             rd.forward(request,response);
         }else{
             response.sendRedirect("login.jsp");
