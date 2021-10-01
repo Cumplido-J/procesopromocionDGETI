@@ -112,7 +112,7 @@ public class Servlet_registroEncuestado extends HttpServlet {
                 
                 String[] parametros2={rfc,curp,parametros[0],tipoEncuesta,correo,idPeriodoActivo, idPrograma};
                 retorno=metodos.ejecutaSPEncuestas("sp_insertLecturaUrl",parametros2);
-                if(!retorno.isEmpty()){                    
+                if(!retorno.isEmpty()){            
                     if(retorno.get(0)[0].equals("ok")){   
                         FileWriter fichero = null;
                         PrintWriter pw = null;
@@ -121,7 +121,7 @@ public class Servlet_registroEncuestado extends HttpServlet {
                         pw.println("RFC:"+rfc+" PIN:" + parametros[0]);
                         fichero.close();
                         c.enviarCorreo("Envío de PIN","El PIN de acceso asignado es:<b>"+parametros[0]+"</b>. <br/>Acceda a la página https://www.encuestadocente.sep.gob.mx para contestar el formulario.", correo);
-                    }
+                    
                     Docente d=new Docente();
                     d.setIdUsuario(idUsuario);
                     d.setRfc(rfc);
@@ -129,6 +129,10 @@ public class Servlet_registroEncuestado extends HttpServlet {
                     String[] datos=d.generaFilasEncuestados(tipoEncuesta);
                     System.out.println(datos[0]+"|"+datos[1]);
                     out.print(datos[0]+"|"+datos[1]); 
+                    }
+                    else if(retorno.get(0)[0].equals("CURP o correo previamente registrado")){
+                        out.print("CURP o correo previamente registrado");
+                    }
                 }else{
                     out.print("Error de almacenamiento, intente más tarde");
                 }

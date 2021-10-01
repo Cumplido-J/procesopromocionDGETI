@@ -181,7 +181,12 @@ public class Datos {
                                 respuesta+="<span class='glyphicon glyphicon-ok-sign completo' title='Aspirante evaluado'></span>";
                             }
                         } 
-                        respuesta+="<form method='POST' action='VistaDocente'><input type='hidden' name='idUsuario' value='"+dato[0]+"'><input type='hidden' name='rfc' value='"+dato[6]+"'><input class='btn btn-sm btn-link' type='submit' value='Ver información'/></form>";                                                               
+                        if(!dato[15].equals("")){
+                            respuesta+="<form method='POST' action='VistaDocente'><input type='hidden' name='idUsuario' value='"+dato[0]+"'><input type='hidden' name='rfc' value='"+dato[6]+"'><input disabled class='btn btn-sm btn-link' type='submit' value='Ver información'/></form>";
+                        }else{
+                            respuesta+="<form method='POST' action='VistaDocente'><input type='hidden' name='idUsuario' value='"+dato[0]+"'><input type='hidden' name='rfc' value='"+dato[6]+"'><input class='btn btn-sm btn-link' type='submit' value='Ver información'/></form>";
+                        }
+                                                                                       
 
 
                         respuesta+="</td><<td class='text-center'>"+listaCotejo+"</td></tr>";

@@ -131,7 +131,14 @@ public class Servlet_cbFichaDictamen extends HttpServlet {
             //docente.setIdUsuario( idUsuarioPadre !=null ? idUsuarioPadre: idUsuario);// se reinicia el id en caso de que exista un idUsuarioPadre
             //Catalogos catalogos=new Catalogos();
             //ArrayList<String> datosUser=catalogos.getSelectUsuarioByID(idUsuario);
-            String[] puntajeEncuestas=cv.consultaPuntajeEncuestas(rfc,datosUser.get(15));
+            String[] puntajeEncuestas=null;
+            if(idUsuarioPadre !=null ){
+                ArrayList<String> datosUser2=catalgo.getSelectUsuarioByID(idUsuarioPadre);
+                puntajeEncuestas=cv.consultaPuntajeEncuestas(rfc,datosUser2.get(15));
+            }else{
+                puntajeEncuestas=cv.consultaPuntajeEncuestas(rfc,datosUser.get(15));
+            }
+            //puntajeEncuestas=cv.consultaPuntajeEncuestas(rfc,datosUser.get(15));
             request.setAttribute("puntajeEncuestas", puntajeEncuestas);
             
             String[] parametros={idUsuario};            
@@ -139,7 +146,7 @@ public class Servlet_cbFichaDictamen extends HttpServlet {
             request.setAttribute("infoPlazas", infoPlazas);
             request.setAttribute("Docente", docente);
             request.setAttribute("rutaImagenInc", rutaImagenInc);
-             request.setAttribute("observacionesR", catalgo.getSelectObservacionPaso1(idUsuario));
+            request.setAttribute("observacionesR", catalgo.getSelectObservacionPaso1(idUsuario));
             ServletContext sc = getServletContext();
             RequestDispatcher rd = sc.getRequestDispatcher("/FichaDictamen.jsp");
             rd.forward(request,response);

@@ -190,8 +190,8 @@
                     <c:if test='${sessionScope["permisoActual"]=="5"}'>
                         <article class="articleses ">
                             <h3>Paso 6: </h3>
-                            <!--                                <a title="Ver ejemplo" onclick="abrirModalEjemplo(1)"></a>
-                                                              <a><img src="<%=Imagen.muestraImagen(RutaConfig.getRutaCarpeta() + "imagenes/EvidReg.jpg")%>" alt=""></a><br> -->
+                            <%--                                <a title="Ver ejemplo" onclick="abrirModalEjemplo(1)"></a>
+                                                              <a><img src="<%=Imagen.muestraImagen(RutaConfig.getRutaCarpeta() + "imagenes/EvidReg.jpg")%>" alt=""></a><br> --%>
                             <c:if test = "${Docente.documentoCargado4('1')==true}">
                                 <a href="#" onclick="abrirModalRevisorFile(1)"><img src="<%=Imagen.muestraImagen(RutaConfig.getRutaCarpeta() + "imagenes/EvidVal.jpg")%>" alt=""></a>
                                 <input id="btnEvidenciaR" type="button" class="btn btn-sm btn-link" value="Ver documento" onclick="abrirModalRevisorFile(1)"/>
@@ -519,7 +519,7 @@ function validaArchivoR_(){
                     $("#ifArchivoRevisor").attr("src","Archivo?z="+id); 
                     $("#ifArchivoRevisor").removeAttr("hidden");
                 }else{
-                    $("#ifArchivoRevisor").attr("src","Archivo?i="+id); 
+                    $("#ifArchivoRevisor").attr("src","Archivo?z="+id); 
                     $("#ifArchivoRevisor").removeAttr("hidden");
                 }
 

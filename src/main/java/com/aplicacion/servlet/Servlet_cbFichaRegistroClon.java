@@ -127,8 +127,17 @@ public class Servlet_cbFichaRegistroClon extends HttpServlet {
             docente1.consultaInfoAspirante();
             
             idUsuario = idUsuarioPadre != null ? idUsuarioPadre: idUsuario;
-            String[][] puntajes=cv.consultaPuntajes(idUsuario); 
-            String[] puntajeEncuestas=cv.consultaPuntajeEncuestas(rfc, datosUser.get(15));
+            String[][] puntajes=cv.consultaPuntajes(idUsuario);
+            String[] puntajeEncuestas=null;
+           
+            if(idUsuarioPadre !=null ){
+                ArrayList<String> datosUser2=catalogos.getSelectUsuarioByID(idUsuarioPadre);
+                puntajeEncuestas=cv.consultaPuntajeEncuestas(rfc,datosUser2.get(15));
+            }else{
+                puntajeEncuestas=cv.consultaPuntajeEncuestas(rfc,datosUser.get(15));
+            }
+            //String[] puntajeEncuestas=cv.consultaPuntajeEncuestas(rfc, datosUser.get(15));
+            
             String[] parametros={idUsuario};            
             List<String[]> infoPlazas=new Metodos_sql().ejecutaSP("sp_consultaUsuarioPlaza",parametros);
             List<String[]> infoPlazasAspira=new Metodos_sql().ejecutaSP("sp_consultaUsuarioCategoriaAspira",parametros);
