@@ -70,7 +70,7 @@ $(document).ready(function () {
             }
         },
         submitHandler:function(){
-            var aux=$("#btnEnviar1").val(); 
+            var aux=$("#btnEnviar1").val();
             $.ajax({
                 type:$('#formInfoAcademica').attr("method"),
                 url:$('#formInfoAcademica').attr("action"),
@@ -83,7 +83,7 @@ $(document).ready(function () {
                    $("#btnEnviar1").val(aux); 
                    $("#btnEnviar1").removeAttr("disabled");
                 },success:function(data){
-                    if(data=="ok"){                                               
+                    if(data=="ok"){
                         mostrarSiguiente(1);
                     }else{
                         $("#mensaje").html(data);            
@@ -1255,10 +1255,18 @@ function mostrarSiguiente(id){
                 $("#estatusInfoAcademica").attr("class","glyphicon glyphicon-ok-sign completo");
                 $("#estatusInfoAcademica").attr("title","Sección completa");
                 $("#estatusInfoAcademica").attr("completo",true);
+                
+                $("#estatusInfoAcademicaD").attr("class","glyphicon glyphicon-ok-sign completo");
+                $("#estatusInfoAcademicaD").attr("title","Sección completa");
+                $("#estatusInfoAcademicaD").attr("completo",true);
             }else{
                 $("#estatusInfoAcademica").attr("class","glyphicon glyphicon-exclamation-sign incompleto");
                 $("#estatusInfoAcademica").attr("title","Sección incompleta");
                 $("#estatusInfoAcademica").attr("completo",false);
+                
+                $("#estatusInfoAcademicaD").attr("class","glyphicon glyphicon-exclamation-sign incompleto");
+                $("#estatusInfoAcademicaD").attr("title","Sección incompleta");
+                $("#estatusInfoAcademicaD").attr("completo",false);
             }           
             $("#infoAcademica").collapse("hide");
             $("#panelInfoLaboral").removeAttr("hidden");
@@ -1280,10 +1288,18 @@ function mostrarSiguiente(id){
                 $("#estatusInfoLaboral").attr("class","glyphicon glyphicon-ok-sign completo");
                 $("#estatusInfoLaboral").attr("title","Sección completa");
                 $("#estatusInfoLaboral").attr("completo",true);
+                
+                $("#estatusInfoLaboralD").attr("class","glyphicon glyphicon-ok-sign completo");
+                $("#estatusInfoLaboralD").attr("title","Sección completa");
+                $("#estatusInfoLaboralD").attr("completo",true);
             }else{
                 $("#estatusInfoLaboral").attr("class","glyphicon glyphicon-exclamation-sign incompleto");
                 $("#estatusInfoLaboral").attr("title","Sección incompleta");
                 $("#estatusInfoLaboral").attr("completo",false);
+                
+                $("#estatusInfoLaboralD").attr("class","glyphicon glyphicon-exclamation-sign incompleto");
+                $("#estatusInfoLaboralD").attr("title","Sección incompleta");
+                $("#estatusInfoLaboralD").attr("completo",false);
             } 
             
             if($("#activoServicio").is(':checked')){                
@@ -1335,10 +1351,18 @@ function mostrarSiguiente(id){
                 $("#estatusInfoHoras").attr("class","glyphicon glyphicon-ok-sign completo");
                 $("#estatusInfoHoras").attr("title","Sección completa");
                 $("#estatusInfoHoras").attr("completo",true);
+                
+                $("#estatusInfoHorasD").attr("class","glyphicon glyphicon-ok-sign completo");
+                $("#estatusInfoHorasD").attr("title","Sección completa");
+                $("#estatusInfoHorasD").attr("completo",true);
             }else{
                 $("#estatusInfoHoras").attr("class","glyphicon glyphicon-exclamation-sign incompleto");
                 $("#estatusInfoHoras").attr("title","Sección incompleta");
                 $("#estatusInfoHoras").attr("completo",false);
+            
+                $("#estatusInfoHorasD").attr("class","glyphicon glyphicon-exclamation-sign incompleto");
+                $("#estatusInfoHorasD").attr("title","Sección incompleta");
+                $("#estatusInfoHorasD").attr("completo",false);
             } 
             
             if($("#frenteGrupo").is(':checked')){
@@ -1379,10 +1403,18 @@ function mostrarSiguiente(id){
                 $("#estatusInfoCompatibilidad").attr("class","glyphicon glyphicon-ok-sign completo");
                 $("#estatusInfoCompatibilidad").attr("title","Sección completa");
                 $("#estatusInfoCompatibilidad").attr("completo",true);
+                
+                $("#estatusInfoCompatibilidadD").attr("class","glyphicon glyphicon-ok-sign completo");
+                $("#estatusInfoCompatibilidadD").attr("title","Sección completa");
+                $("#estatusInfoCompatibilidadD").attr("completo",true);
             }else{
                 $("#estatusInfoCompatibilidad").attr("class","glyphicon glyphicon-exclamation-sign incompleto");
                 $("#estatusInfoCompatibilidad").attr("title","Sección incompleta");
                 $("#estatusInfoCompatibilidad").attr("completo",false);
+                
+                $("#estatusInfoCompatibilidadD").attr("class","glyphicon glyphicon-exclamation-sign incompleto");
+                $("#estatusInfoCompatibilidadD").attr("title","Sección incompleta");
+                $("#estatusInfoCompatibilidadD").attr("completo",false);
             } 
             if($("#funcionesOtro").is(':checked')){
                 if(!$("#compatibilidad").is(':checked')){ 

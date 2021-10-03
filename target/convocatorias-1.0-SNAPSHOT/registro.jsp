@@ -133,12 +133,20 @@
                         </c:if>
                         <c:if test="${vistaAdmin}">
                             <c:set var="in" value=""></c:set>
-                            <c:if test="${Docente.infoRegistro[67]!=null}">
+                            <c:if test="${observacionesR[4]!=null}">
                                 <span class="glyphicon glyphicon-ok-sign completo" title="Sección completa" id="estatusInfoAcademica" completo="true"></span>                                  
                             </c:if>
-                            <c:if test="${Docente.infoRegistro[67]==null}">
+                            <c:if test="${observacionesR[4]==null}">
                                 <span class="glyphicon glyphicon-exclamation-sign incompleto" title="Sección incompleta" id="estatusInfoAcademica" completo="false"></span>                                
-                            </c:if>  
+                            </c:if>
+                            <c:if test='${sessionScope["permisoActual"]=="6"}'>
+                                <c:if test="${observacionesR[0]!=null}">
+                                    <span class="glyphicon glyphicon-ok-sign completo" title="Sección completa" id="estatusInfoAcademicaD" completo="true"></span>                                  
+                                </c:if>
+                                <c:if test="${observacionesR[0]==null}">
+                                    <span class="glyphicon glyphicon-exclamation-sign incompleto" title="Sección incompleta" id="estatusInfoAcademicaD" completo="false"></span>                                
+                                </c:if>
+                            </c:if>
                         </c:if>    
                         </a>
                     </h4>
@@ -403,12 +411,20 @@
                         </c:if>
                         <c:if test="${vistaAdmin}">
                             <c:set var="in" value=""></c:set>
-                            <c:if test="${Docente.infoRegistro[67]!=null}">
+                            <c:if test="${observacionesR[5]!=null}">
                                 <span class="glyphicon glyphicon-ok-sign completo" title="Sección completa" id="estatusInfoLaboral" completo="true"></span>                                  
                             </c:if>
-                            <c:if test="${Docente.infoRegistro[67]==null}">
+                            <c:if test="${observacionesR[5]==null}">
                                 <span class="glyphicon glyphicon-exclamation-sign incompleto" title="Sección incompleta" id="estatusInfoLaboral" completo="false"></span>                                
-                            </c:if>  
+                            </c:if>
+                            <c:if test='${sessionScope["permisoActual"]=="6"}'>
+                                <c:if test="${observacionesR[1]!=null}">
+                                    <span class="glyphicon glyphicon-ok-sign completo" title="Sección completa" id="estatusInfoLaboralD" completo="true"></span>                                  
+                                </c:if>
+                                <c:if test="${observacionesR[1]==null}">
+                                    <span class="glyphicon glyphicon-exclamation-sign incompleto" title="Sección incompleta" id="estatusInfoLaboralD" completo="false"></span>                                
+                                </c:if>
+                            </c:if>
                         </c:if>   
                         </a>
                     </h4>
@@ -755,12 +771,20 @@
                         </c:if>
                         <c:if test="${vistaAdmin}">
                             <c:set var="in" value=""></c:set>
-                            <c:if test="${Docente.infoRegistro[67]!=null}">
+                            <c:if test="${observacionesR[6]!=null}">
                                 <span class="glyphicon glyphicon-ok-sign completo" title="Sección completa" id="estatusInfoHoras" completo="true"></span>                                  
                             </c:if>
-                            <c:if test="${Docente.infoRegistro[67]==null}">
+                            <c:if test="${observacionesR[6]==null}">
                                 <span class="glyphicon glyphicon-exclamation-sign incompleto" title="Sección incompleta" id="estatusInfoHoras" completo="false"></span>                                
-                            </c:if>  
+                            </c:if>
+                            <c:if test='${sessionScope["permisoActual"]=="6"}'>
+                                <c:if test="${observacionesR[2]!=null}">
+                                    <span class="glyphicon glyphicon-ok-sign completo" title="Sección completa" id="estatusInfoHorasD" completo="true"></span>                                  
+                                </c:if>
+                                <c:if test="${observacionesR[2]==null}">
+                                    <span class="glyphicon glyphicon-exclamation-sign incompleto" title="Sección incompleta" id="estatusInfoHorasD" completo="false"></span>                                
+                                </c:if>
+                            </c:if>                                
                         </c:if>   
                       </a>
                     </h4>
@@ -988,12 +1012,20 @@
                         </c:if>
                         <c:if test="${vistaAdmin}">
                             <c:set var="in" value=""></c:set>
-                            <c:if test="${Docente.infoRegistro[67]!=null}">
+                            <c:if test="${observacionesR[7]!=null}">
                                 <span class="glyphicon glyphicon-ok-sign completo" title="Sección completa" id="estatusInfoCompatibilidad" completo="true"></span>                                  
                             </c:if>
-                            <c:if test="${Docente.infoRegistro[67]==null}">
+                            <c:if test="${observacionesR[7]==null}">
                                 <span class="glyphicon glyphicon-exclamation-sign incompleto" title="Sección incompleta" id="estatusInfoCompatibilidad" completo="false"></span>                                
-                            </c:if>  
+                            </c:if>
+                            <c:if test='${sessionScope["permisoActual"]=="6"}'>
+                                <c:if test="${observacionesR[3]!=null}">
+                                    <span class="glyphicon glyphicon-ok-sign completo" title="Sección completa" id="estatusInfoCompatibilidadD" completo="true"></span>                                  
+                                </c:if>
+                                <c:if test="${observacionesR[3]==null}">
+                                    <span class="glyphicon glyphicon-exclamation-sign incompleto" title="Sección incompleta" id="estatusInfoCompatibilidadD" completo="false"></span>                                
+                                </c:if>
+                            </c:if>
                         </c:if>   
                       </a>
                     </h4>
