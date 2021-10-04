@@ -96,7 +96,7 @@
                                     <span class="glyphicon glyphicon-exclamation-sign ${hiddenDictaminador} incompleto" title="Criterio pendiente de revisar" id="estatus1D" completo="false"></span>                                    
                                 </c:if>                                
                           </a>
-                          <p class="text-danger ${hidden}">Puntaje Comite Revisor: <span id="p1">${puntajes[0][4]}</span></p>
+                          <p class="text-danger ${hidden}">Puntaje Comité Revisor: <span id="p1">${puntajes[0][4]}</span></p>
                           <p class="text-danger ${hiddenDictaminador}">Puntaje Consejo Dictaminador: <span id="p1D">${puntajesDictaminador[0][4]}</span></p>
                           <c:set var="total" value="${puntajes[0][4]}"></c:set>
                           <c:set var="totalDictaminador" value="${puntajesDictaminador[0][4]}"></c:set>
@@ -175,7 +175,7 @@
                             
                             </c:if>                                
                           </a>
-                          <p class="text-danger ${hidden}">Puntaje Comite Revisor: <span id="p2">${puntajes[1][4]}</span></p>
+                          <p class="text-danger ${hidden}">Puntaje Comité Revisor: <span id="p2">${puntajes[1][4]}</span></p>
                           <p class="text-danger ${hiddenDictaminador}">Puntaje Consejo Dictaminador: <span id="p2D">${puntajesDictaminador[1][4]}</span></p>
                           <c:set var="total" value="${total+puntajes[1][4]}"></c:set>
                           <c:set var="totalDictaminador" value="${totalDictaminador+puntajesDictaminador[1][4]}"></c:set>
@@ -233,7 +233,7 @@
                             <span class="glyphicon glyphicon-ok-sign completo" title="Criterio revisado" id="estatus3" completo="true"></span>
                             <span class="glyphicon glyphicon-ok-sign ${hiddenDictaminador} completo" title="Criterio revisado" id="estatus3D" completo="true"></span>
                           </a>
-                          <p class="text-danger ${hidden}">Puntaje Comite Revisor: <span id="p3">${puntajeEncuestas[5]}</span></p>
+                          <p class="text-danger ${hidden}">Puntaje Comité Revisor: <span id="p3">${puntajeEncuestas[5]}</span></p>
                           <c:set var="total" value="${total+puntajeEncuestas[5]}"></c:set>
                           <p class="text-danger ${hiddenDictaminador}">Puntaje Consejo Dictaminador: <span id="p3D">${puntajeEncuestas[5]}</span></p>
                           <c:set var="totalDictaminador" value="${totalDictaminador+puntajeEncuestas[5]}"></c:set>
@@ -271,7 +271,7 @@
                                     <span class="glyphicon glyphicon-exclamation-sign ${hiddenDictaminador} incompleto" title="Criterio pendiente de revisar" id="estatus4D" completo="false"></span>                                    
                                 </c:if>           
                           </a>
-                          <p class="text-danger ${hidden}">Puntaje Comite Revisor: <span id="p4">${puntajes[3][4]}</span></p>
+                          <p class="text-danger ${hidden}">Puntaje Comité Revisor: <span id="p4">${puntajes[3][4]}</span></p>
                           <p class="text-danger ${hiddenDictaminador}">Puntaje Consejo Dictaminador: <span id="p4D">${puntajesDictaminador[3][4]}</span></p>
                           <c:set var="total" value="${total+puntajes[3][4]}"></c:set>
                           <c:set var="totalDictaminador" value="${totalDictaminador+puntajesDictaminador[3][4]}"></c:set>
@@ -328,7 +328,7 @@
                                 <span class="glyphicon glyphicon-exclamation-sign ${hiddenDictaminador} incompleto" title="Criterio pendiente de revisar" id="estatus5D" completo="false"></span>                                    
                             </c:if>    
                           </a>
-                          <p class="text-danger ${hidden}">Puntaje Comite Revisor: 
+                          <p class="text-danger ${hidden}">Puntaje Comité Revisor: 
                               <span id="p5">
                                   <c:if test="${puntajes[4][3]=='0'}">
                                       ${puntajes[4][4]}
@@ -423,7 +423,7 @@
                                 <span class="glyphicon glyphicon-exclamation-sign ${hiddenDictaminador} incompleto" title="Criterio pendiente de revisar" id="estatus6D" completo="false"></span>                                    
                             </c:if>    
                           </a>
-                          <p class="text-danger ${hidden}">Puntaje Comite Revisor: 
+                          <p class="text-danger ${hidden}">Puntaje Comité Revisor: 
                               <span id="p6">
                                   <c:if test="${puntajes[5][3]=='0'}">
                                       ${puntajes[5][4]}
@@ -518,7 +518,7 @@
                                 <span class="glyphicon glyphicon-exclamation-sign ${hiddenDictaminador} incompleto" title="Criterio pendiente de revisar" id="estatus7D" completo="false"></span>                                    
                             </c:if>    
                           </a>
-                          <p class="text-danger ${hidden}">Puntaje Comite Revisor: 
+                          <p class="text-danger ${hidden}">Puntaje Comité Revisor: 
                               <span id="p7">
                                   <c:if test="${puntajes[6][3]=='0'}">
                                       ${puntajes[6][4]}
@@ -613,7 +613,7 @@
                                 <span class="glyphicon glyphicon-exclamation-sign ${hiddenDictaminador} incompleto" title="Criterio pendiente de revisar" id="estatus8D" completo="false"></span>                                    
                             </c:if>    
                           </a>
-                          <p class="text-danger ${hidden}">Puntaje Comite Revisor: 
+                          <p class="text-danger ${hidden}">Puntaje Comité Revisor: 
                               <span id="p8">
                                   <c:if test="${puntajes[7][3]=='0'}">
                                       ${puntajes[7][4]}
@@ -710,7 +710,7 @@
                             </c:if>
 
                           </a>
-                          <p class="text-danger ${hidden}">Puntaje Comite Revisor: 
+                          <p class="text-danger ${hidden}">Puntaje Comité Revisor: 
                               <span id="p9">
                                   <c:if test="${puntajes[8][3]=='0'}">
                                       ${puntajes[8][4]}
@@ -806,7 +806,7 @@
                                 <span class="glyphicon glyphicon-exclamation-sign ${hiddenDictaminador} incompleto" title="Criterio pendiente de revisar" id="estatus10D" completo="false"></span>                                    
                             </c:if>    
                           </a>
-                          <p class="text-danger ${hidden}">Puntaje Comite Revisor: <span id="p10">${puntajes[9][4]+puntajes[10][4]+puntajes[11][4]+puntajes[12][4]+puntajes[13][4]+resultados[1]}</span></p>
+                          <p class="text-danger ${hidden}">Puntaje Comité Revisor: <span id="p10">${puntajes[9][4]+puntajes[10][4]+puntajes[11][4]+puntajes[12][4]+puntajes[13][4]+resultados[1]}</span></p>
                           <c:set var="total" value="${total+puntajes[9][4]+puntajes[10][4]+puntajes[11][4]+puntajes[12][4]+puntajes[13][4]+resultados[1]}"></c:set>
                           <p class="text-danger ${hiddenDictaminador}">Puntaje Consejo Dictaminador: <span id="p10D">${puntajesDictaminador[9][4]+puntajesDictaminador[10][4]+puntajesDictaminador[11][4]+puntajesDictaminador[12][4]+puntajesDictaminador[13][4]+resultados[2]}</span></p>
                           <c:set var="totalDictaminador" value="${totalDictaminador+puntajesDictaminador[9][4]+puntajesDictaminador[10][4]+puntajesDictaminador[11][4]+puntajesDictaminador[12][4]+puntajesDictaminador[13][4]+resultados[2]}"></c:set>

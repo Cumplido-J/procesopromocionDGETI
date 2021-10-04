@@ -146,7 +146,7 @@
                     <td>FECHA DE INGRESO AL PLANTEL</td>
                     <td>:${fecha.formatoImprimir(Docente.infoRegistro[27])}</td>
                 </tr> 
-                <c:if test='${Docente1.infoRegistro[86]!=null }'>
+                <c:if test='${Docente1.infoRegistro[85]!=null }'>
                     <tr>
                         <td>PLAZA QUE OSTENTA:</td>
                         <td>:${Docente.infoRegistro[29]}-${Docente.infoRegistro[31]}-${Docente.infoRegistro[33]}-${Docente1.infoRegistro[86]}</td>
@@ -170,7 +170,7 @@
                     <td COLSPAN="2">
 
                         <table>
-                             <c:if test='${Docente1.infoRegistro[86]==null && infoPlazasAspira != null && sessionScope["programa"]=="2"}'>
+                             <c:if test='${Docente1.infoRegistro[85]==null && infoPlazasAspira != null && sessionScope["programa"]=="2"}'>
                             <tr><th class="borde" COLSPAN="6">PLAZAS QUE OSTENTA:</th> </tr>
                             </c:if>
                             <tr><th class="borde">CLAVE PRESUPUESTAL</th><th class="borde">FECHA DESDE QUE OSTENTA LA PLAZA</th><th class="borde">TIPO DE NOMBRAMIENTO</th><th class="borde">CATEGORIA</th><th class="borde">JORNADA</th><th class="borde">FUNCIÓN DIRECTIVA</th></tr>
@@ -203,7 +203,7 @@
                         </table>
                     </td>                    
                 </tr>
-                <c:if test='${Docente1.infoRegistro[86]==null && infoPlazasAspira != null && sessionScope["programa"]=="2"}'>
+                <c:if test='${Docente1.infoRegistro[85]==null && infoPlazasAspira != null && sessionScope["programa"]=="2"}'>
                 <tr>
                     <td COLSPAN="2">
                         
@@ -223,7 +223,7 @@
                 </tr>
                 <tr>
                     <td>TOTAL DE HORAS A LA QUE ASPIRA</td>
-                    <td>:${Docente.infoRegistro[87]}</td>
+                    <td>:${Docente1.infoRegistro[87]}</td>
                 </tr>
                 </c:if>
                 <tr>
