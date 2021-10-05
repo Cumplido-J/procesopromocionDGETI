@@ -125,7 +125,7 @@ public class Servlet_cbFichaRegistroClon extends HttpServlet {
             docente1=new Docente();
             docente1.setIdUsuario(idUsuario);
             docente1.consultaInfoAspirante();
-            
+                        
             idUsuario = idUsuarioPadre != null ? idUsuarioPadre: idUsuario;
             String[][] puntajes=cv.consultaPuntajes(idUsuario);
             String[] puntajeEncuestas=null;
@@ -158,6 +158,7 @@ public class Servlet_cbFichaRegistroClon extends HttpServlet {
             request.setAttribute("banderaIdUsuarioPadre", (idUsuarioPadre != null));
             request.setAttribute("Docente1", docente1);
             request.setAttribute( "infoCategoria", idUsuarioPadre != null ? infoCategoria : null );
+            request.setAttribute( "idUsuarioPadrePeriodo", idUsuarioPadre != null ? 1 : 0 );
             ServletContext sc = getServletContext();
             RequestDispatcher rd = sc.getRequestDispatcher("/FichaRegistroClon.jsp");
             rd.forward(request,response);

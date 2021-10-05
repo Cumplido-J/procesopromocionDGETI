@@ -181,11 +181,13 @@
                             <a href="FichaRegistroClon"  target="_blank" ><h3>Ficha de <br/> registro Docente</h3></a>
                         </article>
                     </c:if>
-                    <article class="articleses">
-                        <h3>Paso 5.1:</h3>
-                        <a href="FichaRegistro" target="_blank" ><img src="<%=Imagen.muestraImagen(RutaConfig.getRutaCarpeta()+"imagenes/EvidVal.jpg")%>" alt=""></a>
-                        <a href="FichaRegistro"  target="_blank" ><h3>Ficha de <br/>revisor </h3></a>
-                    </article>
+                    <c:if test='${sessionScope["permisoActual"]!="5"}'>            
+                        <article class="articleses">
+                            <h3>Paso 5.1:</h3>
+                            <a href="FichaRegistro" target="_blank" ><img src="<%=Imagen.muestraImagen(RutaConfig.getRutaCarpeta()+"imagenes/EvidVal.jpg")%>" alt=""></a>
+                            <a href="FichaRegistro"  target="_blank" ><h3>Ficha de <br/>revisor </h3></a>
+                        </article>
+                    </c:if>
                 </c:if>
                     <c:if test='${sessionScope["permisoActual"]=="5"}'>
                         <article class="articleses ">

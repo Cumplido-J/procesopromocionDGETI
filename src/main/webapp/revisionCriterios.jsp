@@ -972,7 +972,7 @@
                         <p><label class="control-label text-danger" id="puntajeCR1" >Puntaje total Comité:&nbsp<span id="totalCR">${total}</span></label></p>
                         <p><label class="control-label text-danger ${hiddenDictaminador}">Puntaje total Dictaminador:&nbsp<span id="totalD">${totalDictaminador}</span></label></p>
                         <br/>
-                        <label class="control-label">Comite Revisor:</label>
+                        <label class="control-label">Comité Revisor:</label>
                         <textarea class="form-control text-uppercase ${disabled1}" id="aux" name="observaciones" maxlength="2000">${docente.infoRegistro[69]}</textarea>
                         <br/>
                         <label class="control-label ${hiddenDictaminador}">Consejo Dictaminador:</label>

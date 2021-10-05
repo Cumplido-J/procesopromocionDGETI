@@ -9,6 +9,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import='herramientas.Imagen'%>
 <%@page import='herramientas.RutaConfig'%>
+<%@page import='herramientas.Catalogos'%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix ="fmt"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
@@ -19,6 +20,7 @@
         <meta charset="UTF-8">        
         <jsp:useBean id="fecha" class="herramientas.Fecha" />      
         <jsp:useBean id="now" class="java.util.Date" />
+        <jsp:useBean id="catalogoC" class="herramientas.Catalogos" />
         <fmt:formatDate var="fechaYear" value="${now}" type="both" dateStyle="long" pattern="yyyy" />
         <style>
             .borde{
@@ -50,8 +52,14 @@
                       </c:if>
                     en Educación Media Superior
                     <br/>(Promoción horizontal)
-                    <br/><jsp:include page="seccionesPlantilla/cicloEscolar.jsp" flush="true"/>
-                        
+                    <br/><%--<jsp:include page="seccionesPlantilla/cicloEscolar.jsp" flush="true"/>--%>
+                    Ciclo Escolar 
+                    <c:if test='${idUsuarioPadrePeriodo == 1}'>
+                    ${catalogoC.getCatalogoCicloEscolar(Docente.infoRegistro[82])}
+                    </c:if>  
+                    <c:if test='${idUsuarioPadrePeriodo == 0}'>
+                    ${catalogoC.getCatalogoCicloEscolar(Docente1.infoRegistro[84])}
+                    </c:if> 
                 </td>
                 <%
                     String rutaLogo = (String) request.getAttribute("rutaimagen");
@@ -421,10 +429,37 @@
                 ${evidencias}
             </table>
             </c:if>
-            <p style="text-align:justify">De acuerdo a la documentación comprobatoria que ha proporcionado como evidencia de cumplimiento de los requisitos requeridos para su registro y de las evidencias para los criterios de valoración, usted ha sido aceptado para participar en el proceso de promoción en el servicio docente por cambio de categoría en Educación Media Superior, <jsp:include page="seccionesPlantilla/cicloEscolar.jsp" flush="true"/>.</p>
-            <p style="text-align:justify">Declara bajo protesta de decir verdad que cumple con los requisitos establecidos en la Convocatoria para el proceso de promoción en el servicio docente por cambio de categoría en Educación Media Superior, <jsp:include page="seccionesPlantilla/cicloEscolar.jsp" flush="true"/>. Para confirmar su dicho, la DGETI podrá verificar la autenticidad de la documentación que proporciono, por lo que, en caso de alteración o falsificación de la misma, acepta la descalificación inmediata del proceso o, en su caso, la invalidación del nombramiento respectivo, sin perjuicio de las sanciones de tipo administrativo o penal en las que pudiera incurrir.</p>
+            <p style="text-align:justify">De acuerdo a la documentación comprobatoria que ha proporcionado como evidencia de cumplimiento de los requisitos requeridos para su registro y de las evidencias para los criterios de valoración, usted ha sido aceptado para participar en el proceso de promoción en el servicio docente por cambio de categoría en Educación Media Superior, 
+                <%--<jsp:include page="seccionesPlantilla/cicloEscolar.jsp" flush="true"/>--%>
+                    Ciclo Escolar 
+                    <c:if test='${idUsuarioPadrePeriodo == 1}'>
+                    ${catalogoC.getCatalogoCicloEscolar(Docente.infoRegistro[82])}
+                    </c:if>  
+                    <c:if test='${idUsuarioPadrePeriodo == 0}'>
+                    ${catalogoC.getCatalogoCicloEscolar(Docente1.infoRegistro[84])}
+                    </c:if>
+                .</p>
+            <p style="text-align:justify">Declara bajo protesta de decir verdad que cumple con los requisitos establecidos en la Convocatoria para el proceso de promoción en el servicio docente por cambio de categoría en Educación Media Superior, 
+               <%-- <jsp:include page="seccionesPlantilla/cicloEscolar.jsp" flush="true"/>--%>
+                Ciclo Escolar 
+                    <c:if test='${idUsuarioPadrePeriodo == 1}'>
+                    ${catalogoC.getCatalogoCicloEscolar(Docente.infoRegistro[82])}
+                    </c:if>  
+                    <c:if test='${idUsuarioPadrePeriodo == 0}'>
+                    ${catalogoC.getCatalogoCicloEscolar(Docente1.infoRegistro[84])}
+                    </c:if>
+                . Para confirmar su dicho, la DGETI podrá verificar la autenticidad de la documentación que proporciono, por lo que, en caso de alteración o falsificación de la misma, acepta la descalificación inmediata del proceso o, en su caso, la invalidación del nombramiento respectivo, sin perjuicio de las sanciones de tipo administrativo o penal en las que pudiera incurrir.</p>
             <c:set var="acepta" value="${Docente.infoRegistro[63] eq 'S' ? 'Acepta': 'No acepta'}"/>
-            <p style="text-align:justify">${acepta} hacer públicos los resultados y recomendaciones individuales que se deriven de su valoración para el proceso de promoción en el servicio docente por cambio de categoría en Educación Media Superior ingreso a la Educación Media Superior, <jsp:include page="seccionesPlantilla/cicloEscolar.jsp" flush="true"/>.</p>
+            <p style="text-align:justify">${acepta} hacer públicos los resultados y recomendaciones individuales que se deriven de su valoración para el proceso de promoción en el servicio docente por cambio de categoría en Educación Media Superior ingreso a la Educación Media Superior, 
+               <%-- <jsp:include page="seccionesPlantilla/cicloEscolar.jsp" flush="true"/>--%>
+                Ciclo Escolar 
+                    <c:if test='${idUsuarioPadrePeriodo == 1}'>
+                    ${catalogoC.getCatalogoCicloEscolar(Docente.infoRegistro[82])}
+                    </c:if>  
+                    <c:if test='${idUsuarioPadrePeriodo == 0}'>
+                    ${catalogoC.getCatalogoCicloEscolar(Docente1.infoRegistro[84])}
+                    </c:if>
+                .</p>
             
             <br/><br/><br/><center>${Docente.infoRegistro[1]} ${Docente.infoRegistro[2]} ${Docente.infoRegistro[3]}</center>
         </div>

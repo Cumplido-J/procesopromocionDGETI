@@ -9,6 +9,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import='herramientas.Imagen'%>
 <%@page import='herramientas.RutaConfig'%>
+<%@page import='herramientas.Catalogos'%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix ="fmt"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
@@ -17,6 +18,7 @@
     <head>        
         <title>DGETI | gob.mx</title>
         <meta charset="UTF-8">        
+        <jsp:useBean id="catalogoC" class="herramientas.Catalogos" />
         <jsp:useBean id="fecha" class="herramientas.Fecha" />      
         <jsp:useBean id="now" class="java.util.Date" />
         <style>
@@ -42,7 +44,8 @@
                       </c:if>
                     en Educación Media Superior 
                     <br/>(Promoción horizontal)
-                    <br/><jsp:include page="seccionesPlantilla/cicloEscolar.jsp" flush="true"/>
+                    <br/><%--<jsp:include page="seccionesPlantilla/cicloEscolar.jsp" flush="true"/>--%>
+                    Ciclo Escolar ${catalogoC.getCatalogoCicloEscolar(Docente.infoRegistro[84])}
                         
                 </td>
                 <%

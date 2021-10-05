@@ -1409,4 +1409,20 @@ public class Catalogos {
             return respuesta;        
         }
     }
+    
+    public String getCatalogoCicloEscolar(String idPeriodo){
+        String respuesta="";
+        idPeriodo = (idPeriodo != null || !idPeriodo.equals("")) ? idPeriodo: "0";
+        String[] parametros={idPeriodo};
+        try{
+            List<String[]> datos=metodos.ejecutaSP("sp_selectCicloEscolar",parametros);
+            for(String[] dato:datos){
+                respuesta+=""+dato[1];
+            }
+        }catch(Exception e){
+            respuesta=e.toString();
+        }finally{
+            return respuesta;        
+        }
+    }    
 }
