@@ -132,6 +132,15 @@ public class Servlet_guardarArchivo extends HttpServlet {
                 }
                 ous.close();
                 is.close();
+                Metodos_sql metodo = new Metodos_sql();
+                    String[] parametros={idUsuario,"20",idDocente};
+                    List<String[]> datos;                           
+                    datos=metodo.ejecutaSP("sp_registroConstancia",parametros);            
+                    if(!datos.isEmpty()){
+                        out.print("ok");
+                    }else{
+                        out.print("Error en almacenamiento de datos, intente nuevamente");
+                    }
             }else if(archivoCartaRevisor!=null){
                 String rutaCartaRevisor=p.getProperty("rutaCartaAceptacionRevisor");
                 
