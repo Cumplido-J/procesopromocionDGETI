@@ -198,7 +198,7 @@
                         </article>
                     </c:if>
                 </c:if>
-                    <c:if test='${sessionScope["permisoActual"]=="5"}'>
+                    <c:if test='${sessionScope["permisoActual"]=="5" || sessionScope["permisoActual"]=="6"}'>
                         <article class="articleses ">
                             <h3>Paso 6: </h3>
                             <%--                                <a title="Ver ejemplo" onclick="abrirModalEjemplo(1)"></a>
@@ -224,7 +224,7 @@
                     </c:if>-->
                     <c:if test='${sessionScope["permisoActual"]=="6"}'>
                     <article id="pasoFicha" for="pasoFicha" name="pasoFicha" class="articleses" >
-                            <h3>Paso 6:</h3>
+                            <h3>Paso 7:</h3>
                             <a href="FichaDictamen" target="_blank" ><img src="<%=Imagen.muestraImagen(RutaConfig.getRutaCarpeta()+"imagenes/EvidVal.jpg")%>" alt=""></a>
                             <a href="FichaDictamen"  target="_blank" ><h3>Ficha de <br/> dictamen </h3></a>
                     </article>
