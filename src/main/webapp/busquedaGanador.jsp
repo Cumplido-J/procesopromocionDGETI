@@ -274,9 +274,7 @@
                                 }else{
                                     tabla +=  "<td >Programa de Promoción en la Función por Incentivos en Educación Media Superior</td> "
                                 }
-                            }
-                            
-                            if(z==95){
+                            }else if(z==95){
                                 if(JSON.parse(JSON.stringify(reporteObject.reporte[i]))[z]!=null){
                                     tabla +=  "<td >Si</td> "
                                 }else{
