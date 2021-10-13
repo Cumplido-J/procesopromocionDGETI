@@ -254,18 +254,30 @@
 //                });
                 $.ajax({
                 type: "POST",
-                url: '/promocion/reporteAsignacion',
+                url: '/procesopromocion/reporteAsignacion',
                 data: {programa:programa,subsistema:subsistema,entidad:entidad,periodo:periodo},    
                 timeout: 360000,
                 success: function (data) {
                     var reporteObject=JSON.parse(data);
                     var tabla= ""
                     tabla +=  "<table><tr><th >id</th><th >nombre</th><th >primerApellido</th><th >segundoApellido</th><th >correo</th><th >curp</th><th >idPlantel</th><th >idEntidad</th><th >entidad</th><th >cct</th><th >plantel</th><th >telfijo</th><th >telcel</th><th >consideraciones</th><th >idEscuelaEstudio</th><th >escuela</th><th >idCarrera</th><th >carrera</th><th >anioEgreso</th><th >idGradoAcademico</th><th >grado</th><th >idModalidadTitulacion</th><th >modalidad</th><th >anioTitulacion</th><th >cedula</th><th >activo</th><th >ingresoSubsistema</th><th >ingresoPlantel</th><th >idCategoriaJornada</th><th >clave</th><th >idCategoria</th><th >categoria</th><th >idJornada</th><th >jornada</th><th >fechaPlaza</th><th >idTipoNombramiento</th><th >clave</th><th >codigo</th><th >descripcion</th><th >tipo</th><th >fechaUltimaPromocion</th><th >idCategoriaJornadaAspira</th><th >clave as claveAspira</th><th >idCategoriaAspira</th><th >categoriaAspira</th>        <th >idJornadaAspira</th><th >jornadaAspira</th><th >idPerfilRequerido</th><th >requisito</th><th >notaSancion</th><th >compatibilidad</th><th >horasOtroSubsistema</th><th >nivelCENNI</th><th >folioCENNI</th><th >idCCT</th><th >cct</th><th >idEntidadEstudio</th><th >idInstitucion</th><th >idTipoInstitucion</th><th >gradoMarginacion</th><th >frenteGrupo</th><th >funcionesOtro</th><th >finRegistro</th><th >consideraciones</th><th >publico</th><th >idPrograma</th><th >idConvocatoria</th><th >idEstatus</th><th >observacionInfo</th><th >observacionEncuestados</th><th >observacionCriterios</th><th >institucion</th><th >cct</th><th >escuela</th><th >carreraOtra</th><th >observacionCriterios2</th><th >idSubsistema</th><th >folio</th><th >tipoVacanciaAspira</th><th >idEstatus</th><th >estatus</th><th >puntaje1</th><th >puntaje2</th><th >observacionInfo</th><th >observacionEncuestados</th><th >observacionCriterios</th><th >posicion</th>"
-                + "<th >observacion1</th><th >observacion2</th><th >observacion3</th><th >observacion4</th><th >observacion5</th><th >observacion6</th><th >observacion7</th><th >observacion8</th></tr>";
+                + "<th >observacion1</th><th >observacion2</th><th >observacion3</th><th >observacion4</th><th >observacion5</th><th >observacion6</th><th >observacion7</th><th >observacion8</th><th >Lista cotejo</th></tr>";
                     for (let i = 0; i < reporteObject.reporte.length; i++) {
                         tabla +=  "<tr> "
                         for (let z = 0; z < reporteObject.reporte[i].length; z++) {
-                        tabla +=  "<td >"+JSON.parse(JSON.stringify(reporteObject.reporte[i]))[z]+"</td> "
+                            if(z==95){
+                                if(JSON.parse(JSON.stringify(reporteObject.reporte[i]))[z]!=null){
+                                    tabla +=  "<td >Si</td> "
+                                }else{
+                                    tabla +=  "<td >No</td> "
+                                }
+                            }else{
+                                if(JSON.parse(JSON.stringify(reporteObject.reporte[i]))[z]!=null){
+                                    tabla +=  "<td >"+JSON.parse(JSON.stringify(reporteObject.reporte[i]))[z]+"</td> "
+                                }else{
+                                    tabla +=  "<td >---</td> "
+                                }
+                            }
                         }
                         tabla +=  "</tr>";
                     }
