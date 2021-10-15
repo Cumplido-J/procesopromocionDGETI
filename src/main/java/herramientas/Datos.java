@@ -7,6 +7,8 @@ package herramientas;
 
 import com.aplicacion.beans.ModelReporte;
 import constants.ConstantsWS;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import metodos_sql.Metodos_sql;
 
@@ -639,4 +641,37 @@ public class Datos {
             return respuesta;        
         }
     }
+        
+    public String validarSeleccionadasCambioDeCategoria(String idUsuario){        
+        String respuesta="";   
+        String idCategoria="-1",idJornada="-1";
+        String[] docenteCambioCategoria = {"1", "2"};
+        String[] tecnicoDdocente = {"10", "11"};
+        List<String> dCambio = new ArrayList<>(Arrays.asList(docenteCambioCategoria));
+        List<String> td = new ArrayList<>(Arrays.asList(tecnicoDdocente));
+        try{
+            String[] parametros={idUsuario};
+            List<String[]> datos=metodos.ejecutaSP("sp_consultaUsuarioPlaza",parametros);
+            if(!datos.isEmpty()){
+                respuesta="";                
+                for(String[] dato:datos){
+                    if(dato[12].equals("V")){
+                        idCategoria=dato[2];
+                        idJornada=dato[4];
+                        if(dato[15].equals("1")){
+                                if(td.contains(idCategoria) || dCambio.contains(idCategoria)){
+                                    //respuesta="Solo puede seleccionar plazas de horas C E4523";
+                                    respuesta="1A-E4523";
+                                }
+                        }
+                    }
+                }
+            }
+        }catch(Exception e){
+            respuesta=e.toString();
+        }finally{
+            return respuesta;        
+        }
+    }
+        
 }

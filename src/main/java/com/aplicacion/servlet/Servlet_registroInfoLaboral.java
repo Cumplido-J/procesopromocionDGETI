@@ -209,6 +209,7 @@ public class Servlet_registroInfoLaboral extends HttpServlet {
                     List<String> list6 = new ArrayList<>(Arrays.asList(catDocTtitular));
                     
                     if(programa.equals("1")){
+                        String respuestaValidacionCDC=new Datos().validarSeleccionadasCambioDeCategoria(idUsuario);
                         if((categoriaActual==3 && categoriaAspira==4 && idJornadaAspira.equals("2"))||
                           (categoriaActual==2 && categoriaAspira==4 && idJornadaAspira.equals("2")) ||
                           (categoriaActual==1 && categoriaAspira==4 && idJornadaAspira.equals("2"))
@@ -228,6 +229,9 @@ public class Servlet_registroInfoLaboral extends HttpServlet {
                         }
                         totalHoras=Integer.parseInt(numhoras)+Integer.parseInt(horas);
                         if(totalHoras>18 && (jornadaAspira==3 || jornadaAspira==4)){
+                            bandera=false;
+                        }else if(respuestaValidacionCDC.equals("1A-E4523")){
+                            //out.println("Solo puede seleccionar plazas de horas C E4523");
                             bandera=false;
                         }
                         

@@ -203,7 +203,15 @@ public class Servlet_administracionPlaza extends HttpServlet {
                             out.print(texto);
                         }       
                     }else{
-                        datos=metodo.ejecutaSP("sp_insertUsuarioPlaza",parametros);   
+                        String[] docenteCambioCategoria = {"1", "2"};
+                        String[] tecnicoDdocente = {"10", "11"};
+                        List<String> dCambio = new ArrayList<>(Arrays.asList(docenteCambioCategoria));
+                        List<String> td = new ArrayList<>(Arrays.asList(tecnicoDdocente));
+                        if(td.contains(idCategoria) || dCambio.contains(idCategoria)){
+                            out.print("Unicamente puede asignar una categoria C E4523 de horas");
+                        }else if(!td.contains(idCategoria) || !dCambio.contains(idCategoria)){
+                            datos=metodo.ejecutaSP("sp_insertUsuarioPlaza",parametros);   
+                        }   
                     }
                 }
                 if(datos != null){
