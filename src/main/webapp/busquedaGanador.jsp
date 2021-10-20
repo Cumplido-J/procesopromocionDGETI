@@ -34,6 +34,21 @@
                         </div>
                     </div>
                     <div class="row">
+                        <div class="form-group col-md-12">                                               
+                          <label class="control-label" for="proceso">Seleccionar Proceso</label>
+                            <select class="form-control input-sm" id="proceso" name="proceso" onchange="tipoProceso()">                    
+                                <option value='0'>-Seleccione-</option>
+                                <c:if test='${sessionScope["permisoActualEdicion"]=="V"}'>
+                                    <option value='1'>Buscar aspirantes</option>
+                                    <option value='2'>Calcular resultado</option>
+                                </c:if>
+                                <c:if test='${sessionScope["permisoActualEdicion"]=="F"}'>
+                                    <option value='1'>Buscar aspirantes</option>
+                                </c:if>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row" id="container1">
                         <div class="form-group col-md-4">  
                             <label class="control-label" for="tvacancia">Tipo Vacancia</label>
                             <select class="form-control input-sm" id="tvacancia" name="tvacancia" required>
@@ -55,7 +70,7 @@
                             </select>
                         </div>
                     </div>
-                    <div class="row">
+                    <div class="row" id="container2">
                         <div class="form-group col-md-4">                                               
                           <label class="control-label" for="entidad">Entidad</label>
                           <select class="form-control input-sm ${disabled3}" id="entidad" name="entidad" onchange="actualizarPlanteles()" >                                  
@@ -75,7 +90,7 @@
                             </select>
                         </div>
                     </div>
-                     <div class="row">
+                     <div class="row" id="container3">
                         <div class="form-group col-md-4">                               
                             <label class="control-label" for="jornada">Jornada</label>
                             <select class="form-control input-sm" id="jornada" name="jornada" onchange="numeroPlazas()">                                  
@@ -89,19 +104,19 @@
                         <div class="form-group col-md-4">
                         </div>
                     </div>
-                    <div class="row">
+                    <div class="row" id="container4">
                         <c:if test='${sessionScope["permisoActualEdicion"]=="V"}'>
-                            <div class="form-group col-xs-8 text-right" style="margin-left: 28px;">                         
-                                <input class="btn btn-sm btn-primary" id="btnBuscar" value='Buscar resultados' onclick="busquedaResultados()"/>
+                            <div class="form-group col-xs-8 text-right" style="margin-left: -70px;">                    
+                                <input class="btn btn-sm btn-primary" id="btnBuscar1" value='Buscar resultados' onclick="busquedaResultados()"/>
                                 <input class="btn btn-sm btn-primary" id="btnBuscar" value='Calcular resultado' onclick="confirmacionResultados()"/>
                             </div>
                         </c:if>
                         <c:if test='${sessionScope["permisoActualEdicion"]=="F"}'>
                             <div class="form-group col-xs-8 text-right" "="" style="margin-left: -75px;">                          
-                                <input class="btn btn-sm btn-primary" id="btnBuscar" value='Buscar resultados' onclick="busquedaResultados()"/>
+                                <input class="btn btn-sm btn-primary" id="btnBuscar1" value='Buscar resultados' onclick="busquedaResultados()"/>
                             </div>
                         </c:if>
-                        <div class="form-group col-xs-4 text-right" style="margin-left: -95px;">                         
+                        <div class="form-group col-xs-4 text-right" style="margin-left: -95px;" id="btnReporte"> 
                             <img src="imagenes/excel.svg" style="width: 30px; border-radius: 50%; border: 2px solid #46b12e; margin-left: -190px;" onclick="confirmacionReporte()">
                             <span class="tooltiptext" style="margin-left: -190px;">Generar Reporte</span>
                         </div>
@@ -387,5 +402,50 @@
                     doc.output('datauriNew');
                 }
             }
+            function confirmarCategoria(id){
+                $("#btnConfirmar3").attr("onClick","confirmarCategoriaAspira("+id+")");
+                $("#modalConfirmacion3").modal("show");
+            }
+            function confirmarCategoriaAspira(id){
+                $("#modalConfirmacion3").modal("hide");
+                $.post("asignarCategoria", {id: id,z: "b"}, function(data){
+                    if(data.includes("<tr>")){            
+                        $("#seccionEditable").html(data);
+                    }
+                    else{
+                        $("#mensaje").html(data);            
+                        $("#modalMensaje").modal("show");
+                    } 
+                });
+            }
+            function tipoProceso(){
+                var idProceso=$("#proceso").val();
+                if(idProceso==0){
+                    $("#container1").hide();
+                    $("#container2").hide();
+                    $("#container3").hide();
+                    $("#container4").hide();
+                }else if(idProceso==1){
+                    $("#container1").show();
+                    $("#container2").show();
+                    $("#container3").show();
+                    $("#container4").show();
+                    $("#btnBuscar1").show();
+                    $("#btnBuscar").hide();
+                    $("#btnReporte").show();
+                }else{
+                    $("#container1").show();
+                    $("#container2").hide();
+                    $("#container3").hide();
+                    $("#container4").show();
+                    $("#btnBuscar1").hide();
+                    $("#btnBuscar").show();
+                    $("#btnReporte").hide();
+                }
+            }
+            $("#container1").hide();
+            $("#container2").hide();
+            $("#container3").hide();
+            $("#container4").hide();
         </script>
 </html>
