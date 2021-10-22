@@ -194,6 +194,13 @@ public class Servlet_administracionPlaza extends HttpServlet {
                         }
                         
                         if(registro){
+                            String[] parametrosPla={idUsuario};  
+                             List<String[]> infoPlazasAspiraH=new Metodos_sql().ejecutaSP("sp_consultaUsuarioCategoriaAspira",parametrosPla);
+                            int totalHoras=0;
+                            for(String[] dato:infoPlazasAspiraH){
+                                totalHoras +=dato[6]!= null ? Integer.parseInt(dato[6]) : 0;
+                            }
+                            horasRegistradas+=totalHoras;
                             if(horasRegistradas<=19){
                                 datos=metodo.ejecutaSP("sp_insertUsuarioPlaza",parametros);
                             }else{
