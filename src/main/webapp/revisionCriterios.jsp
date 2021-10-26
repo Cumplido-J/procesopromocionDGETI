@@ -122,7 +122,7 @@
                                    </select>
                                   <c:if test='${sessionScope["permisoActual"]=="6"}'>
                                         <label class="control-label">Evaluación Comité Revisor:</label>
-                                        <select class="form-control input-sm" id="puntaje1Referencia" name="puntaje1Referencia">
+                                        <select class="form-control input-sm disabled" id="puntaje1Referencia" name="puntaje1Referencia">
                                               ${catalogo.desplegarOpcionesPuntajeAdmin(criterios[0][0],puntajes[0][3],sessionScope["idDocente"])}                                              
                                         </select>
                                   </c:if>

@@ -594,7 +594,8 @@ public class Catalogos {
         }
        
         String aux="value='"+id+"-"+tipoVacancia+"'";
-        if(idTipoVacancia != null){aux="value='"+id+"-"+tipoVacancia+"-"+idVacanciaAspirante+"'";}
+        //if(idTipoVacancia != null){aux="value='"+id+"-"+tipoVacancia+"-"+idVacanciaAspirante+"'";}
+        if(idTipoVacancia != null){aux="idCategoria='"+idVacanciaAspirante+"'";}
         respuesta=respuesta.replaceFirst(aux, aux+" selected");
         return respuesta;  
     }
