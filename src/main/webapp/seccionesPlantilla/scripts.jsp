@@ -5,4 +5,5 @@
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>  
 <script src="https://framework-gb.cdn.gob.mx/assets/scripts/jquery-ui-datepicker.js"></script>
 <script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.1/jquery.validate.min.js"></script>
-<script src="js/funcionesCatalogos.js"></script>        
+<script src="js/funcionesCatalogos.js"></script>
+<script src="js/blockcombo.js"></script>
