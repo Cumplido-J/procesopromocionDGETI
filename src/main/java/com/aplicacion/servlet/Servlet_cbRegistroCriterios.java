@@ -67,7 +67,8 @@ public class Servlet_cbRegistroCriterios extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        HttpSession session= (HttpSession) request.getSession();     
+        HttpSession session= (HttpSession) request.getSession();  
+        System.out.println("------------------------------------------<>>>>>>>>>>>>>");
         if(session.getAttribute("rol")!=null){
             String idUsuario,rfc, idPermiso, permisoEdicion;
             boolean vistaAdmin;
@@ -97,6 +98,9 @@ public class Servlet_cbRegistroCriterios extends HttpServlet {
             Catalogos catalogos=new Catalogos();
             ArrayList<String> datosUser=catalogos.getSelectUsuarioByID(idUsuario);
             String[] puntajeEncuestas=cv.consultaPuntajeEncuestas(rfc, datosUser.get(15));
+            if( !session.getAttribute("rol").toString().equals("D")){
+                    session.setAttribute("programa",docente.getInfoRegistro()[64]);
+                }
             if(puntajeEncuestas[5]==null || puntajeEncuestas[5].isEmpty()){
                 puntajeEncuestas[5]="0.0";
             }

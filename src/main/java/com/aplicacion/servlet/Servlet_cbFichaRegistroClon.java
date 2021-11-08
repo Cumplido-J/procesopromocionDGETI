@@ -125,6 +125,10 @@ public class Servlet_cbFichaRegistroClon extends HttpServlet {
             docente1=new Docente();
             docente1.setIdUsuario(idUsuario);
             docente1.consultaInfoAspirante();
+            
+            if( !session.getAttribute("rol").toString().equals("D")){
+                session.setAttribute("programa",docente.getInfoRegistro()[64]);
+            }
                         
             idUsuario = idUsuarioPadre != null ? idUsuarioPadre: idUsuario;
             String[][] puntajes=cv.consultaPuntajes(idUsuario);

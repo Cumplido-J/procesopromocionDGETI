@@ -115,6 +115,9 @@ public class Servlet_cbFichaRegistro extends HttpServlet {
                 docente.consultaHoras();
                 docente.actualizaBanderaIngles();
             }
+            if( !session.getAttribute("rol").toString().equals("D")){
+                session.setAttribute("programa",docente.getInfoRegistro()[64]);
+            }
             idUsuario = idUsuarioPadre != null ? idUsuarioPadre: idUsuario;
             String[][] puntajes=cv.consultaPuntajes(idUsuario); 
             //Catalogos catalogos=new Catalogos();

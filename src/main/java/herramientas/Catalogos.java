@@ -1425,5 +1425,21 @@ public class Catalogos {
         }finally{
             return respuesta;        
         }
-    }    
+    }
+
+    public ArrayList<String> getconsultaInfoUser(String idUsuario){ 
+            ArrayList<String> lista=new ArrayList<>();
+        List<String[]> datos=null;
+        try{
+            String[] parametros={idUsuario};
+           datos=metodos.ejecutaSP("sp_selectUsuario", parametros);
+            for(String[] dato:datos){
+                lista.add(dato[14]);
+            }
+        }catch(Exception e){
+
+        }finally{
+            return lista;        
+        }
+    }
 }

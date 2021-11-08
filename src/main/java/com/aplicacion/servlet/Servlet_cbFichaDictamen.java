@@ -108,7 +108,9 @@ public class Servlet_cbFichaDictamen extends HttpServlet {
             docente.setIdUsuario( idUsuarioPadre !=null ? idUsuarioPadre: idUsuario);// se reinicia el id en caso de que exista un idUsuarioPadre
             docente.consultaHoras();            
             docente.actualizaBanderaIngles();
-
+            if( !session.getAttribute("rol").toString().equals("D")){
+                session.setAttribute("programa",docente.getInfoRegistro()[64]);
+            }
             idUsuario = idUsuarioPadre != null ? idUsuarioPadre: idUsuario;
             
             CriteriosValoracion cv=new CriteriosValoracion();

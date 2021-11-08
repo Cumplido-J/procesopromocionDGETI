@@ -35,6 +35,7 @@ public class Servlet_buscarDocente extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        System.out.println("wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");
@@ -61,7 +62,9 @@ public class Servlet_buscarDocente extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+                System.out.println("---------------------------------------");
         processRequest(request, response);
+
     }
 
     /**
@@ -77,6 +80,7 @@ public class Servlet_buscarDocente extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try{
+            System.out.println("---------------------------------------------------------------------------------");
             PrintWriter out = response.getWriter();
             HttpSession session= (HttpSession) request.getSession();
             /*HttpSession session= (HttpSession) request.getSession();     

@@ -4,6 +4,7 @@
     Author     : David Reyna
 --%>
 
+<%@page import="java.util.ArrayList"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%
@@ -20,6 +21,13 @@
         <jsp:useBean id="dato" class="herramientas.Datos" />
     </head>
     <body>
+        <%
+            if (session.getAttribute("idUsuario") != null) {
+                String idUsuario=session.getAttribute("idUsuario").toString();
+                ArrayList<String> getconsultaInfoUser=catalogo.getconsultaInfoUser(idUsuario);
+                session.setAttribute("programa",getconsultaInfoUser.get(0));
+            }
+        %>
         <c:set var="disabled1" value=""></c:set>
         <c:set var="disabled2" value=""></c:set>
         <c:set var="disabled3" value=""></c:set>
