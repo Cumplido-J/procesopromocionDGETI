@@ -97,6 +97,9 @@ public class Servlet_cbRegistro extends HttpServlet {
             //if(!datos[66].equalsIgnoreCase("1") || session.getAttribute("rol").toString().equals("A") || session.getAttribute("rol").toString().equals("S")){
                 docente.consultaDocumentos();
                 docente.consultaHoras();
+                if( !session.getAttribute("rol").toString().equals("D")){
+                    session.setAttribute("programa",docente.getInfoRegistro()[64]);
+                }
                 String rutaConfig = RutaConfig.getRutaConfig();
                 Properties p = new Properties(); 
                 p.load(new FileReader(rutaConfig));            

@@ -1183,8 +1183,13 @@
                           <br/>
                             <input type="hidden" id="rfc" name="rfc" value="${Docente.rfc}">
                             <input type="hidden" id="idUsuario" name="idUsuario" value="${Docente.idUsuario}">
-                              <c:if test="${!vistaAdmin}">
-                              <center><input type="button" disabled="true" class="btn btn-primary" value="Continuar" id="btnFinalizar" onclick="validarArchivos()"></center>
+                              <c:if test="${!vistaAdmin}">   
+                                <c:if test='${sessionScope["programa"]=="1"}'>
+                                    <center><input type="button" disabled="true" class="btn btn-primary" value="Continuar" id="btnFinalizar" onclick="ValidarRegistroCDC()"></center>
+                                </c:if>
+                                <c:if test='${sessionScope["programa"]=="2"}'>
+                                    <center><input type="button" disabled="true" class="btn btn-primary" value="Continuar" id="btnFinalizar" onclick="validarArchivos()"></center>
+                                </c:if>
                               </c:if>
                               <c:if test="${vistaAdmin}">
                               <center><input type="submit" disabled="true" class="btn btn-primary" value="Continuar" id="btnFinalizar"></center>
@@ -2014,6 +2019,20 @@
                      window.location.href = "/promocion/SesionDocente";
                 });
             }
+        function ValidarRegistroCDC(){
+                
+                var accion="compruebaregistroCDC";
+                
+                $.post("Servlet_compruebaregistro", {accion:accion}, function(data){
+                    if(data=="ok"){
+                        validarArchivos();
+                    }else{
+                    $("#mensaje").html(data);            
+                    $("#modalMensaje").modal("show");
+                    }
+                    
+                });
+        }    
             function validarArchivos(){
                 if($("#btnEvidencia1").val().includes("Ver")){
                     $("#estatusArchivo").attr("class","glyphicon glyphicon-ok-sign completo");

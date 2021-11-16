@@ -98,6 +98,9 @@ public class Servlet_cbFichaRegistroIncompleto extends HttpServlet {
                 docente.consultaHoras();
                 docente.actualizaBanderaIngles();
             }
+            if( !session.getAttribute("rol").toString().equals("D")){
+                session.setAttribute("programa",docente.getInfoRegistro()[64]);
+            }
             String[] parametros={idUsuario};            
             List<String[]> infoPlazas=new Metodos_sql().ejecutaSP("sp_consultaUsuarioPlaza",parametros);
             List<String[]> infoPlazasAspira=new Metodos_sql().ejecutaSP("sp_consultaUsuarioCategoriaAspira",parametros);
