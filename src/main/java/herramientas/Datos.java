@@ -378,100 +378,227 @@ public class Datos {
         }
     }
 
-    public String generarResultadosCentrales(String programa, String idSubsistema, String entidad, String plantel, String vacancia, String periodo) {
-        String respuesta = "<tr><td colspan='9' class='text-center'>Sin información</td></tr>";
-        try {
-            List<String[]> datosEntidades = metodos.ejecutaSP("sp_selectCatEntidades");
-            for (String[] dato : datosEntidades) {
-                String[] parametros = {idSubsistema, dato[0]};
-                List<String[]> datos = metodos.ejecutaSP("sp_selectCatPlanteles", parametros);
-                for (String[] datoPlanteles : datos) {
-                    String idEntidad = dato[0];
-                    String idPlantel = datoPlanteles[0];
-                    String[] parametros1 = {programa, idSubsistema, idEntidad, idPlantel, vacancia, periodo};
-                    List<String[]> datosProgramas = metodos.ejecutaSP("sp_consultaVacanciasResultados", parametros1);
-                    if (datosProgramas.size() > 0) {
-                        for (String[] datoPrograma : datosProgramas) {
-
-                            if (datoPrograma[4].contains("TD")) {
+    public String generarResultadosCentrales(String programa, String idSubsistema, String entidad, String plantel, String vacancia , String periodo){        
+        String respuesta="<tr><td colspan='9' class='text-center'>Sin información</td></tr>";        
+        try{
+            List<String[]> datosEntidades=metodos.ejecutaSP("sp_selectCatEntidades");
+            for(String[] dato:datosEntidades){
+                String[] parametros={idSubsistema,dato[0]};
+                List<String[]> datos=metodos.ejecutaSP("sp_selectCatPlanteles",parametros);
+                for(String[] datoPlanteles:datos){
+                    String idEntidad=dato[0];
+                    String idPlantel=datoPlanteles[0];
+                    String[] parametros1={programa, idSubsistema, idEntidad, idPlantel,vacancia,periodo};
+                    List<String[]> datosProgramas=metodos.ejecutaSP("sp_consultaVacanciasResultados",parametros1);
+                    if(datosProgramas.size()>0){
+                        for(String[] datoPrograma:datosProgramas){
+                            
+                            if(datoPrograma[4].contains("TD")){
                                 System.out.println("Hola");
                             }
-
-                            String[] parametrosPlazas = {programa, idSubsistema, idEntidad, idPlantel, datoPrograma[4], datoPrograma[0], datoPrograma[2], periodo};
-                            List<String[]> datosPlazas = metodos.ejecutaSP("sp_consultaNumeroPlazas", parametrosPlazas);
-                            if (datosPlazas.size() > 0) {
-                                int numeroPlazas = Integer.parseInt(datosPlazas.get(0)[8]);
-                                String[] parametrosGanador = {programa, idSubsistema, idEntidad, idPlantel, datoPrograma[0], datoPrograma[2], vacancia, periodo};
-                                List<String[]> datosGanador = metodos.ejecutaSP("sp_consultaGanadorAspirante", parametrosGanador);
-                                if (!datosGanador.isEmpty()) {
-                                    int contador = 0;
-                                    for (String[] datoGanador : datosGanador) {
-                                        int posicionGanador = 1;
-                                        //                                if(numeroPlazas>(datosGanador.indexOf(datoGanador))){
-                                        //                                    String[] parametrosGanador1={datoGanador[0],Integer.toString(posicionGanador)};
-                                        //                                    metodos.ejecutaSP("sp_insertPosicion",parametrosGanador1);
-                                        //                                }else{
-                                        //                                    contador++;
-                                        //                                    String[] parametrosGanador1={datoGanador[0],Integer.toString(contador)};
-                                        //                                    metodos.ejecutaSP("sp_insertPosicion",parametrosGanador1);
-                                        //                                }
-                                        contador++;
-                                        String[] parametrosGanador1 = {datoGanador[0], Integer.toString(contador)};
-                                        metodos.ejecutaSP("sp_insertPosicion", parametrosGanador1);
+                            
+                            String[] parametrosPlazas={programa, idSubsistema, idEntidad, idPlantel, datoPrograma[4], datoPrograma[0], datoPrograma[2], periodo};
+                            List<String[]> datosPlazas=metodos.ejecutaSP("sp_consultaNumeroPlazas",parametrosPlazas);
+                            if(datosPlazas.size()>0){
+                                int numeroPlazas=Integer.parseInt(datosPlazas.get(0)[8]);
+                                String[] parametrosGanador={programa, idSubsistema, idEntidad, idPlantel, datoPrograma[0], datoPrograma[2],vacancia, periodo};
+//                                List<String[]> datosGanador=metodos.ejecutaSP("sp_consultaGanadorAspirante",parametrosGanador);
+                                List<String[]> datosGanador=metodos.ejecutaSP("sp_consultaAspirante0001",parametrosGanador);
+                                    if(!datosGanador.isEmpty()){
+                                        int contador = 0;
+                                        for(String[] datoGanador:datosGanador){
+                                            int posicionGanador=1;
+            //                                if(numeroPlazas>(datosGanador.indexOf(datoGanador))){
+            //                                    String[] parametrosGanador1={datoGanador[0],Integer.toString(posicionGanador)};
+            //                                    metodos.ejecutaSP("sp_insertPosicion",parametrosGanador1);
+            //                                }else{
+            //                                    contador++;
+            //                                    String[] parametrosGanador1={datoGanador[0],Integer.toString(contador)};
+            //                                    metodos.ejecutaSP("sp_insertPosicion",parametrosGanador1);
+            //                                }
+                                                contador++;
+                                                String[] parametrosGanador1={datoGanador[0],Integer.toString(contador)};
+                                                metodos.ejecutaSP("sp_insertPosicion",parametrosGanador1);
+                                        }
                                     }
-                                }
                             }
                         }
                     }
                 }
             }
             return respuesta;
-        } catch (Exception e) {
-            respuesta = e.toString();
-        } finally {
-            return respuesta;
+        }catch(Exception e){
+            respuesta=e.toString();
+        }finally{
+            return respuesta;  
         }
     }
 
-    public String desplegarAspirantesAsignacion(String id, String idPrograma, String idSubsistema, String idEntidad, String idPlantel, String categoria, String jornada, String vacancia) {
-        String respuesta = "<tr><td colspan='9' class='text-center'>Sin información</td></tr>";
-        try {
-            String[] parametros = {idPrograma, idSubsistema, idEntidad, idPlantel, categoria, jornada, vacancia};
-            if (idEntidad.isEmpty() && idPlantel.isEmpty()) {
+    public String desplegarAspirantesAsignacion(String id,String idPrograma,String idSubsistema,String idEntidad,String idPlantel,String categoria,String jornada,String vacancia, String periodo){        
+        String respuesta="<tr><td colspan='9' class='text-center'>Sin información</td></tr>";        
+        try{
+            String[] parametros={idPrograma,idSubsistema,idEntidad,idPlantel,categoria,jornada,vacancia,periodo};
+            if(idEntidad.isEmpty() && idPlantel.isEmpty()){
                 return respuesta;
-            } else {
-                if (id.contains("b")) {
-                    List<String[]> datos = metodos.ejecutaSP(constants.SP_CONSULTA_GANADOR_ASPIRANTE, parametros);
-
-                    if (!datos.isEmpty()) {
-                        respuesta = "";
-                        for (String[] dato : datos) {
-                            respuesta += "<tr><td>" + dato[6] + "</td><td>" + dato[8] + "</td><td>" + dato[12] + "</td><td>" + dato[16] + "</td><td>" + dato[11] + "</td><td>" + dato[13] + "</td><td>" + (dato[10] == null ? "0" : dato[10]) + "</td>";
-                            if (dato[10] == null || dato[15] == null) {
-                                respuesta += "<td>" + "***" + "</td>" + "</tr>";
-                            } else {
+            }else{
+                if(id.contains("b")){
+                    List<String[]> datos=metodos.ejecutaSP(constants.SP_CONSULTA_GANADOR_ASPIRANTE,parametros);
+                    List<String[]> datosCatAsignacion=metodos.ejecutaSP(constants.SP_SELECT_CAT_ASIGNACION);
+                    String estatus1=datosCatAsignacion.get(0)[0];
+                    String estatus2=datosCatAsignacion.get(1)[0];
+                    String estatus3=datosCatAsignacion.get(2)[0];
+                    
+                    String estatusDesc1=datosCatAsignacion.get(0)[1];
+                    String estatusDesc2=datosCatAsignacion.get(1)[1];
+                    String estatusDesc3=datosCatAsignacion.get(2)[1];
+                    
+                    
+                    if(!datos.isEmpty()){
+                        respuesta="";
+                        for(String[] dato:datos)
+                        {
+    //                        respuesta+="<tr><td>"+dato[4]+"</td><td>"+dato[6]+"</td><td>"+dato[8]+"</td><td>"+dato[12]+"</td><td>"+dato[16]+"</td><td>"+dato[11]+"</td><td>"+dato[13]+"</td><td>"+(dato[10]==null?"0":dato[10])+"</td>";
+                            respuesta+="<tr><td>"+dato[4]+"</td><td>"+dato[6]+"</td><td>"+dato[8]+"</td><td>"+dato[17]+"</td><td>"+dato[18]+"</td><td>"+dato[11]+"</td><td>"+dato[13]+"</td><td>"+(dato[10]==null?"0":dato[10])+"</td>";
+                            if(dato[10]==null || dato[15]==null){
+                                respuesta+="<td>"+"***"+"</td>"+"</tr>";
+                            }else{
                                 //respuesta+="<td>"+(datos.indexOf(dato)+1)+"</td>"+"</tr>";
-                                respuesta += "<td>" + dato[15] + "</td>";
+                                respuesta+="<td>"+dato[15]+"</td>";
                             }
-                            respuesta += "<td><div class=\"form-group col-md-24\">  \n"
-                                    + "                            <select class=\"form-control input-sm\" id=\"tvacancia\" name=\"tvacancia\" required>\n"
-                                    + "                                <option value=\"\">Seleccionar una opción</option>\n"
-                                    + "                                <option value=\"1\">Acepto</option>\n"
-                                    + "                                <option value=\"2\">Rechazo</option>\n"
-                                    + "                            </select>\n"
-                                    + "                        </div></td>" + "</tr>";
+                            
+                            String tvacancia="tvacancia"+dato[0].toString();
+                            if(dato[19]==null){
+                                respuesta+="<td><div class=\"form-group col-md-24\">  \n" +
+            "                            <select class=\"form-control input-sm\" id="+tvacancia+" name=\"tvacancia2\" required>\n" +
+            "                                <option value=\"\" selected>Seleccionar una opción</option>\n" +
+            "                                <option value="+estatus1+">"+estatusDesc1+"</option>\n" +
+            "                                <option value="+estatus2+">"+estatusDesc2+"</option>\n" +
+            "                                <option value="+estatus3+">"+estatusDesc3+"</option>\n" +
+            "                            </select>\n" +
+            "                        </div></td><td><button type='button' class='btn btn-sm' title='Borrar' onclick='confirmarCategoria("+dato[0]+")'><span class='glyphicon glyphicon-floppy-disk incompleto2'></span></button></td>"+"</tr>";
+                            }else{
+                                if(dato[19].equals("1")){
+                                    respuesta+="<td><div class=\"form-group col-md-24\">  \n" +
+            "                            <select class=\"form-control input-sm\" id="+tvacancia+" name=\"tvacancia2\" required>\n" +
+            "                                <option value=\"\" selected>Seleccionar una opción</option>\n" +
+            "                                <option value="+estatus1+" selected>"+estatusDesc1+"</option>\n" +
+            "                                <option value="+estatus2+">"+estatusDesc2+"</option>\n" +
+            "                                <option value="+estatus3+">"+estatusDesc3+"</option>\n" +
+            "                            </select>\n" +
+            "                        </div></td><td><button type='button' class='btn btn-sm' title='Borrar' onclick='confirmarCategoria("+dato[0]+")'><span class='glyphicon glyphicon-floppy-disk incompleto2'></span></button></td>"+"</tr>";
+                                    }else if(dato[19].equals("2")){
+                                        respuesta+="<td><div class=\"form-group col-md-24\">  \n" +
+            "                            <select class=\"form-control input-sm\" id="+tvacancia+" name=\"tvacancia2\" required>\n" +
+            "                                <option value=\"\" selected>Seleccionar una opción</option>\n" +
+            "                                <option value="+estatus1+">"+estatusDesc1+"</option>\n" +
+            "                                <option value="+estatus2+" selected>"+estatusDesc2+"</option>\n" +
+            "                                <option value="+estatus3+">"+estatusDesc3+"</option>\n" +
+            "                            </select>\n" +
+            "                        </div></td><td><button type='button' class='btn btn-sm' title='Borrar' onclick='confirmarCategoria("+dato[0]+")'><span class='glyphicon glyphicon-floppy-disk incompleto2'></span></button></td>"+"</tr>";
+                                    }else if(dato[19].equals("3")){
+                                        respuesta+="<td><div class=\"form-group col-md-24\">  \n" +
+            "                            <select class=\"form-control input-sm\" id="+tvacancia+" name=\"tvacancia2\" required>\n" +
+            "                                <option value=\"\">Seleccionar una opción</option>\n" +
+            "                                <option value="+estatus1+">"+estatusDesc1+"</option>\n" +
+            "                                <option value="+estatus2+">"+estatusDesc2+"</option>\n" +
+            "                                <option value="+estatus3+" selected>"+estatusDesc3+"</option>\n" +
+            "                            </select>\n" +
+            "                        </div></td><td><button type='button' class='btn btn-sm' title='Borrar' onclick='confirmarCategoria("+dato[0]+")'><span class='glyphicon glyphicon-floppy-disk incompleto2'></span></button></td>"+"</tr>";
+                                    }
+                            }
                         }
                         return respuesta;
                     }
                 }
             }
-        } catch (Exception e) {
-            respuesta = e.toString();
-        } finally {
-            return respuesta;
+        }catch(Exception e){
+            respuesta=e.toString();
+        }finally{
+            return respuesta;        
         }
     }
-
+    public String desplegarAspirantesAsignacion2(String id,String idPrograma,String idSubsistema,String idEntidad,String idPlantel,String categoria,String jornada,String vacancia, String periodo){        
+        String respuesta="<tr><td colspan='9' class='text-center'>Sin información</td></tr>";        
+        try{
+            String[] parametros={idPrograma,idSubsistema,idEntidad,idPlantel,categoria,jornada,vacancia,periodo};
+            if(idEntidad.isEmpty() && idPlantel.isEmpty()){
+                return respuesta;
+            }else{
+                if(id.contains("b")){
+                    List<String[]> datos=metodos.ejecutaSP(constants.SP_CONSULTA_GANADOR_ASPIRANTE2,parametros);
+                    List<String[]> datosCatAsignacion=metodos.ejecutaSP(constants.SP_SELECT_CAT_ASIGNACION);
+                    String estatus1=datosCatAsignacion.get(0)[0];
+                    String estatus2=datosCatAsignacion.get(1)[0];
+                    String estatus3=datosCatAsignacion.get(2)[0];
+                    
+                    String estatusDesc1=datosCatAsignacion.get(0)[1];
+                    String estatusDesc2=datosCatAsignacion.get(1)[1];
+                    String estatusDesc3=datosCatAsignacion.get(2)[1];
+                    
+                    if(!datos.isEmpty()){
+                        respuesta="";
+                        for(String[] dato:datos)
+                        {
+    //                        respuesta+="<tr><td>"+dato[4]+"</td><td>"+dato[6]+"</td><td>"+dato[8]+"</td><td>"+dato[12]+"</td><td>"+dato[16]+"</td><td>"+dato[11]+"</td><td>"+dato[13]+"</td><td>"+(dato[10]==null?"0":dato[10])+"</td>";
+                            respuesta+="<tr><td>"+dato[4]+"</td><td>"+dato[6]+"</td><td>"+dato[8]+"</td><td>"+dato[17]+"</td><td>"+dato[18]+"</td><td>"+dato[11]+"</td><td>"+dato[13]+"</td><td>"+(dato[10]==null?"0":dato[10])+"</td>";
+                            if(dato[10]==null || dato[15]==null){
+                                respuesta+="<td>"+"***"+"</td>"+"</tr>";
+                            }else{
+                                //respuesta+="<td>"+(datos.indexOf(dato)+1)+"</td>"+"</tr>";
+                                respuesta+="<td>"+dato[15]+"</td>";
+                            }
+                            
+                            String tvacancia="tvacancia"+dato[0].toString();
+                            if(dato[19]==null){
+                                respuesta+="<td><div class=\"form-group col-md-24\">  \n" +
+            "                            <select class=\"form-control input-sm\" id="+tvacancia+" name=\"tvacancia2\" required>\n" +
+            "                                <option value=\"\" selected>Seleccionar una opción</option>\n" +
+            "                                <option value="+estatus1+">"+estatusDesc1+"</option>\n" +
+            "                                <option value="+estatus2+">"+estatusDesc2+"</option>\n" +
+            "                                <option value="+estatus3+">"+estatusDesc3+"</option>\n" +
+            "                            </select>\n" +
+            "                        </div></td><td><button type='button' class='btn btn-sm' title='Borrar' onclick='confirmarCategoria("+dato[0]+")'><span class='glyphicon glyphicon-floppy-disk incompleto2'></span></button></td>"+"</tr>";
+                            }else{
+                                if(dato[19].equals("1")){
+                                    respuesta+="<td><div class=\"form-group col-md-24\">  \n" +
+            "                            <select class=\"form-control input-sm\" id="+tvacancia+" name=\"tvacancia2\" required>\n" +
+            "                                <option value=\"\" selected>Seleccionar una opción</option>\n" +
+            "                                <option value="+estatus1+" selected>"+estatusDesc1+"</option>\n" +
+            "                                <option value="+estatus2+">"+estatusDesc2+"</option>\n" +
+            "                                <option value="+estatus3+">"+estatusDesc3+"</option>\n" +
+            "                            </select>\n" +
+            "                        </div></td><td><button type='button' class='btn btn-sm' title='Borrar' onclick='confirmarCategoria("+dato[0]+")'><span class='glyphicon glyphicon-floppy-disk incompleto2'></span></button></td>"+"</tr>";
+                                    }else if(dato[19].equals("2")){
+                                        respuesta+="<td><div class=\"form-group col-md-24\">  \n" +
+            "                            <select class=\"form-control input-sm\" id="+tvacancia+" name=\"tvacancia2\" required>\n" +
+            "                                <option value=\"\" selected>Seleccionar una opción</option>\n" +
+            "                                <option value="+estatus1+">"+estatusDesc1+"</option>\n" +
+            "                                <option value="+estatus2+" selected>"+estatusDesc2+"</option>\n" +
+            "                                <option value="+estatus3+">"+estatusDesc3+"</option>\n" +
+            "                            </select>\n" +
+            "                        </div></td><td><button type='button' class='btn btn-sm' title='Borrar' onclick='confirmarCategoria("+dato[0]+")'><span class='glyphicon glyphicon-floppy-disk incompleto2'></span></button></td>"+"</tr>";
+                                    }else if(dato[19].equals("3")){
+                                        respuesta+="<td><div class=\"form-group col-md-24\">  \n" +
+            "                            <select class=\"form-control input-sm\" id="+tvacancia+" name=\"tvacancia2\" required>\n" +
+            "                                <option value=\"\">Seleccionar una opción</option>\n" +
+            "                                <option value="+estatus1+">"+estatusDesc1+"</option>\n" +
+            "                                <option value="+estatus2+">"+estatusDesc2+"</option>\n" +
+            "                                <option value="+estatus3+" selected>"+estatusDesc3+"</option>\n" +
+            "                            </select>\n" +
+            "                        </div></td><td><button type='button' class='btn btn-sm' title='Borrar' onclick='confirmarCategoria("+dato[0]+")'><span class='glyphicon glyphicon-floppy-disk incompleto2'></span></button></td>"+"</tr>";
+                                    }
+                            }
+                        }
+                        return respuesta;
+                    }
+                }
+            }
+        }catch(Exception e){
+            respuesta=e.toString();
+        }finally{
+            return respuesta;       
+        }
+    }
     public String generarReporte(String idPrograma, String idSubsistema, String entidad, String periodo) {
         String respuesta = "<table><tr><th >id</th><th >nombre</th><th >primerApellido</th><th >segundoApellido</th><th >correo</th><th >curp</th><th >idPlantel</th><th >idEntidad</th><th >entidad</th><th >cct</th><th >plantel</th><th >telfijo</th><th >telcel</th><th >consideraciones</th><th >idEscuelaEstudio</th><th >escuela</th><th >idCarrera</th><th >carrera</th><th >anioEgreso</th><th >idGradoAcademico</th><th >grado</th><th >idModalidadTitulacion</th><th >modalidad</th><th >anioTitulacion</th><th >cedula</th><th >activo</th><th >ingresoSubsistema</th><th >ingresoPlantel</th><th >idCategoriaJornada</th><th >clave</th><th >idCategoria</th><th >categoria</th><th >idJornada</th><th >jornada</th><th >fechaPlaza</th><th >idTipoNombramiento</th><th >clave</th><th >codigo</th><th >descripcion</th><th >tipo</th><th >fechaUltimaPromocion</th><th >idCategoriaJornadaAspira</th><th >clave as claveAspira</th><th >idCategoriaAspira</th><th >categoriaAspira</th>        <th >idJornadaAspira</th><th >jornadaAspira</th><th >idPerfilRequerido</th><th >requisito</th><th >notaSancion</th><th >compatibilidad</th><th >horasOtroSubsistema</th><th >nivelCENNI</th><th >folioCENNI</th><th >idCCT</th><th >cct</th><th >idEntidadEstudio</th><th >idInstitucion</th><th >idTipoInstitucion</th><th >gradoMarginacion</th><th >frenteGrupo</th><th >funcionesOtro</th><th >finRegistro</th><th >consideraciones</th><th >publico</th><th >idPrograma</th><th >idConvocatoria</th><th >idEstatus</th><th >observacionInfo</th><th >observacionEncuestados</th><th >observacionCriterios</th><th >institucion</th><th >cct</th><th >escuela</th><th >carreraOtra</th><th >observacionCriterios2</th><th >idSubsistema</th><th >folio</th><th >tipoVacanciaAspira</th><th >idEstatus</th><th >estatus</th><th >puntaje1</th><th >puntaje2</th><th >observacionInfo</th><th >observacionEncuestados</th><th >observacionCriterios</th><th >posicion</th>"
                 + "<th >observacion1</th><th >observacion2</th><th >observacion3</th><th >observacion4</th><th >observacion5</th><th >observacion6</th><th >observacion7</th><th >observacion8</th></tr>";
@@ -820,7 +947,272 @@ public class Datos {
         lista.add(auxM);
         return lista;
     }
-    
-
-        
+    public String generarResultadosZonaEconomica(String programa,String idSubsistema,String entidad,String plantel,String vacancia,String periodo){        
+        String respuesta="<tr><td colspan='9' class='text-center'>Sin información</td></tr>";        
+        try{
+            ///Consulta catalogo de Zona Economica
+            List<String[]> datosZonaEconomica=metodos.ejecutaSP("sp_selectCatZonaEconomica");
+            for(String[] idZonaEconomica:datosZonaEconomica){
+                String zonaEconomica=idZonaEconomica[0];
+                ///Consulta el catalogo de entidades
+                List<String[]> datosEntidades=metodos.ejecutaSP("sp_selectCatEntidades");
+                for(String[] dato:datosEntidades){
+                        String idEntidad=dato[0];
+                        String[] parametrosVacancia={programa, idSubsistema, idEntidad,vacancia,periodo,zonaEconomica};
+                        //Se obtiene la vacancia de acuerdo a entidad y que esta no haya sido asignada sin importar la categoria ni jornada
+                        //Realizar Mejora en el proceso de asignacion
+                        List<String[]> datosVacancias=metodos.ejecutaSP("sp_consultaVacanciasZonaEconomica",parametrosVacancia);
+                        if(datosVacancias.size()>0){
+                            //Se iteran las vacancias previamente consultadas.
+                            for(String[] datosVacancia:datosVacancias){
+                                    String[] parametrosGanador={programa, idSubsistema, idEntidad, datosVacancia[0], datosVacancia[2],vacancia, periodo, zonaEconomica};
+                                    //Consulta los aspirantes que particpan para esta ronda.
+                                    //Consultar en sp_consultaAspirantePorZona los que existen en la tabla de ganadores.
+                                    List<String[]> datosGanador=metodos.ejecutaSP("sp_consultaAspirantePorZona",parametrosGanador);
+                                        if(!datosGanador.isEmpty()){
+                                            int posicion=0;
+                                            for(String[] datoGanador:datosGanador){
+                                                posicion++;
+                                                //Se valida que el parcticipante no exista en la tabla de ganadores al menos para el periodo en el que se esta ejecutando el proceso.
+//                                                String[] parametrosGanadorE={datoGanador[0],periodo};
+//                                                List<String[]> datosGanadorE=metodos.ejecutaSP("sp_consultaGanadores",parametrosGanadorE);
+//                                                int isGanador=Integer.parseInt(datosGanadorE.get(0)[0]);
+//                                                if(isGanador==0){
+                                                    
+//                                                  String[] parametrosGanador1={datoGanador[0],Integer.toString(1)};
+                                                    String[] parametrosGanador1={datoGanador[0],Integer.toString(posicion)};
+                                                    //String[] parametrosRonda={datoGanador[0],"2"};
+                                                    //String[] parametrosActualizarVacancia={datosVacancia[9]};
+                                                    String[] parametrosInsertGanador={datoGanador[0],idSubsistema,programa,periodo,"2",datosVacancia[9]};
+                                                    metodos.ejecutaSP("sp_insertPosicionZona",parametrosGanador1);
+                                                    //inserta en el la tabla de aspirante la ronda en la que se le asigno la plaza.
+                                                    //metodos.ejecutaSP("sp_actualizaRondaGanador",parametrosRonda);
+                                                    //Se actualiza la vacancia cuando esta es asignada. Revisar fuera del for.
+                                                    //metodos.ejecutaSP("sp_actualizarPlazaAsignada",parametrosActualizarVacancia);
+                                                    //Se inserta el usuario en la tabla de ganadoresasignacion.
+                                                    metodos.ejecutaSP(constants.SP_INSERT_GANADORES_ASIGNACION,parametrosInsertGanador); 
+                                                    //break;
+//                                                }
+                                            }
+                                        }
+                            }
+                        }
+                }
+            }
+            return respuesta;
+        }catch(Exception e){
+            respuesta=e.toString();
+        }finally{
+            return respuesta;  
+        }
+    }
+    public String desplegarAspirantesPorZona(String id,String idPrograma,String idSubsistema,String idEntidad,String idPlantel,String categoria,String jornada,String vacancia, String periodo){        
+        String respuesta="<tr><td colspan='9' class='text-center'>Sin información</td></tr>";        
+        try{
+            String[] parametros={idPrograma,idSubsistema,idEntidad,idPlantel,categoria,jornada,vacancia,periodo};
+            if(idEntidad.isEmpty() && idPlantel.isEmpty()){
+                return respuesta;
+            }else{
+                if(id.contains("b")){
+                    List<String[]> datos=metodos.ejecutaSP("sp_consultaGanadorPorZona",parametros);
+                
+                    if(!datos.isEmpty()){
+                        respuesta="";
+                        for(String[] dato:datos)
+                        {
+                            respuesta+="<tr><td>"+dato[2]+"</td><td>"+dato[4]+"</td><td>"+dato[6]+"</td><td>"+dato[8]+"</td><td>"+dato[12]+"</td><td>"+dato[16]+"</td><td>"+dato[11]+"</td><td>"+dato[13]+"</td><td>"+(dato[10]==null?"0":dato[10])+"</td>";
+                            if(dato[10]==null || dato[15]==null){
+                                respuesta+="<td>"+"***"+"</td><td>"+dato[17]+"</td></tr>";
+                            }else{
+                                respuesta+="<td>"+dato[15]+"</td>"+"+<td>"+dato[17]+"</td></tr>";
+                            }
+                        }
+                        return respuesta;
+                    }
+                }
+            }
+        }catch(Exception e){
+            respuesta=e.toString();
+        }finally{
+            return respuesta;        
+        }
+    }
+    public String desplegarAspirantesZona(String id,String idPrograma,String idSubsistema,String idEntidad,String periodo,String vacancia,String zonaEconomica,String idCategoria){        
+        String respuesta="<tr><td colspan='9' class='text-center'>Sin información</td></tr>";        
+        try{
+            String[] parametros={idPrograma,idSubsistema,idEntidad,periodo,vacancia,zonaEconomica,idCategoria};
+            if(idEntidad.isEmpty()){
+                return respuesta;
+            }else{
+                if(id.contains("b")){
+                    List<String[]> datos=metodos.ejecutaSP("sp_consultaGanadorZona",parametros);
+                    List<String[]> datosCatAsignacion=metodos.ejecutaSP(constants.SP_SELECT_CAT_ASIGNACION);
+                    String estatus1=datosCatAsignacion.get(0)[0];
+                    String estatus2=datosCatAsignacion.get(1)[0];
+                    String estatus3=datosCatAsignacion.get(2)[0];
+                    String estatus4=datosCatAsignacion.get(3)[0];
+                    
+                    String estatusDesc1=datosCatAsignacion.get(0)[1];
+                    String estatusDesc2=datosCatAsignacion.get(1)[1];
+                    String estatusDesc3=datosCatAsignacion.get(2)[1];
+                    String estatusDesc4=datosCatAsignacion.get(3)[1];
+                    
+                    if(!datos.isEmpty()){
+                        respuesta="";
+                        for(String[] dato:datos)
+                        {
+    //                        respuesta+="<tr><td>"+dato[4]+"</td><td>"+dato[6]+"</td><td>"+dato[8]+"</td><td>"+dato[12]+"</td><td>"+dato[16]+"</td><td>"+dato[11]+"</td><td>"+dato[13]+"</td><td>"+(dato[10]==null?"0":dato[10])+"</td>";
+                            respuesta+="<tr><td>"+dato[4]+"</td><td>"+dato[6]+"</td><td>"+dato[8]+"</td><td>"+dato[18]+"</td><td>"+dato[19]+"</td><td>"+dato[11]+"</td><td>"+dato[13]+"</td><td>"+(dato[10]==null?"0":dato[10])+"</td>";
+                            if(dato[10]==null || dato[15]==null){
+                                respuesta+="<td>"+"***"+"</td>"+"</tr>";
+                            }else{
+                                //respuesta+="<td>"+(datos.indexOf(dato)+1)+"</td>"+"</tr>";
+                                respuesta+="<td>"+dato[15]+"</td>";
+                            }
+                            String tvacancia="tvacancia"+dato[0].toString();
+                            if(dato[20]==null){
+                                respuesta+="<td><div class=\"form-group col-md-24\">  \n" +
+            "                            <select class=\"form-control input-sm\" id="+tvacancia+" name=\"tvacancia2\" required>\n" +
+            "                                <option value=\"\" selected>Seleccionar una opción</option>\n" +
+            "                                <option value="+estatus1+">"+estatusDesc1+"</option>\n" +
+            "                                <option value="+estatus2+">"+estatusDesc2+"</option>\n" +
+            "                                <option value="+estatus3+">"+estatusDesc3+"</option>\n" +
+            "                            </select>\n" +
+            "                        </div></td><td><button type='button' class='btn btn-sm' title='Borrar' onclick='confirmarCategoriaZona("+dato[0]+")'><span class='glyphicon glyphicon-floppy-disk incompleto2'></span></button></td>"+"</tr>";
+                            }else{
+                                if(dato[20].equals("1")){
+                                    respuesta+="<td><div class=\"form-group col-md-24\">  \n" +
+            "                            <select class=\"form-control input-sm\" id="+tvacancia+" name=\"tvacancia2\" required>\n" +
+            "                                <option value=\"\" selected>Seleccionar una opción</option>\n" +
+            "                                <option value="+estatus1+" selected>"+estatusDesc1+"</option>\n" +
+            "                                <option value="+estatus2+">"+estatusDesc2+"</option>\n" +
+            "                                <option value="+estatus3+">"+estatusDesc3+"</option>\n" +
+            "                                <option value="+estatus4+">"+estatusDesc4+"</option>\n" +
+            "                            </select>\n" +
+            "                        </div></td><td><button type='button' class='btn btn-sm' title='Borrar' onclick='confirmarCategoriaZona("+dato[0]+")'><span class='glyphicon glyphicon-floppy-disk incompleto2'></span></button></td>"+"</tr>";
+                                    }else if(dato[20].equals("2")){
+                                        respuesta+="<td><div class=\"form-group col-md-24\">  \n" +
+            "                            <select class=\"form-control input-sm\" id="+tvacancia+" name=\"tvacancia2\" required>\n" +
+            "                                <option value=\"\" selected>Seleccionar una opción</option>\n" +
+            "                                <option value="+estatus1+">"+estatusDesc1+"</option>\n" +
+            "                                <option value="+estatus2+" selected>"+estatusDesc2+"</option>\n" +
+            "                                <option value="+estatus3+">"+estatusDesc3+"</option>\n" +
+            "                                <option value="+estatus4+">"+estatusDesc4+"</option>\n" +
+            "                            </select>\n" +
+            "                        </div></td><td><button type='button' class='btn btn-sm' title='Borrar' onclick='confirmarCategoriaZona("+dato[0]+")'><span class='glyphicon glyphicon-floppy-disk incompleto2'></span></button></td>"+"</tr>";
+                                    }else if(dato[20].equals("3")){
+                                        respuesta+="<td><div class=\"form-group col-md-24\">  \n" +
+            "                            <select class=\"form-control input-sm\" id="+tvacancia+" name=\"tvacancia2\" required>\n" +
+            "                                <option value=\"\">Seleccionar una opción</option>\n" +
+            "                                <option value="+estatus1+">"+estatusDesc1+"</option>\n" +
+            "                                <option value="+estatus2+">"+estatusDesc2+"</option>\n" +
+            "                                <option value="+estatus3+" selected>"+estatusDesc3+"</option>\n" +
+            "                                <option value="+estatus4+">"+estatusDesc4+"</option>\n" +
+            "                            </select>\n" +
+            "                        </div></td><td><button type='button' class='btn btn-sm' title='Borrar' onclick='confirmarCategoriaZona("+dato[0]+")'><span class='glyphicon glyphicon-floppy-disk incompleto2'></span></button></td>"+"</tr>";
+                                    }else if(dato[20].equals("4")){
+                                        respuesta+="<td><div class=\"form-group col-md-24\">  \n" +
+            "                            <select class=\"form-control input-sm\" id="+tvacancia+" name=\"tvacancia2\" required>\n" +
+            "                                <option value=\"\">Seleccionar una opción</option>\n" +
+            "                                <option value="+estatus1+">"+estatusDesc1+"</option>\n" +
+            "                                <option value="+estatus2+">"+estatusDesc2+"</option>\n" +
+            "                                <option value="+estatus3+">"+estatusDesc3+"</option>\n" +
+            "                                <option value="+estatus4+" selected>"+estatusDesc4+"</option>\n" +
+            "                            </select>\n" +
+            "                        </div></td><td><button type='button' class='btn btn-sm' title='Borrar' onclick='confirmarCategoriaZona("+dato[0]+")'><span class='glyphicon glyphicon-floppy-disk incompleto2'></span></button></td>"+"</tr>";
+                                    }
+                            }
+                            
+                        }
+                        return respuesta;
+                    }else{
+                        respuesta="<tr><td colspan='9' class='text-center'>Sin información</td></tr>";
+                    }
+                }
+            }
+        }catch(Exception e){
+            respuesta=e.toString();
+        }finally{
+            return respuesta;       
+        }
+    }
+    public String desplegarAspirantesAsignacionUpdate(String id,String idPrograma,String idSubsistema,String idEntidad,String idPlantel,String categoria,String jornada,String vacancia, String periodo){        
+        String respuesta="";        
+        try{
+            String[] parametros={idPrograma,idSubsistema,idEntidad,idPlantel,categoria,jornada,vacancia,periodo};
+                    List<String[]> datos=metodos.ejecutaSP(constants.SP_CONSULTA_GANADOR_ASPIRANTE,parametros);
+                    List<String[]> datosCatAsignacion=metodos.ejecutaSP(constants.SP_SELECT_CAT_ASIGNACION);
+                    String estatus1=datosCatAsignacion.get(0)[0];
+                    String estatus2=datosCatAsignacion.get(1)[0];
+                    String estatus3=datosCatAsignacion.get(2)[0];
+                    
+                    String estatusDesc1=datosCatAsignacion.get(0)[1];
+                    String estatusDesc2=datosCatAsignacion.get(1)[1];
+                    String estatusDesc3=datosCatAsignacion.get(2)[1];
+                    
+                    
+                    if(!datos.isEmpty()){
+                        respuesta="";
+                        for(String[] dato:datos)
+                        {
+    //                        respuesta+="<tr><td>"+dato[4]+"</td><td>"+dato[6]+"</td><td>"+dato[8]+"</td><td>"+dato[12]+"</td><td>"+dato[16]+"</td><td>"+dato[11]+"</td><td>"+dato[13]+"</td><td>"+(dato[10]==null?"0":dato[10])+"</td>";
+                            respuesta+="<tr><td>"+dato[4]+"</td><td>"+dato[6]+"</td><td>"+dato[8]+"</td><td>"+dato[17]+"</td><td>"+dato[18]+"</td><td>"+dato[11]+"</td><td>"+dato[13]+"</td><td>"+(dato[10]==null?"0":dato[10])+"</td>";
+                            if(dato[10]==null || dato[15]==null){
+                                respuesta+="<td>"+"***"+"</td>"+"</tr>";
+                            }else{
+                                //respuesta+="<td>"+(datos.indexOf(dato)+1)+"</td>"+"</tr>";
+                                respuesta+="<td>"+dato[15]+"</td>";
+                            }
+                            String tvacancia="tvacancia"+dato[0].toString();
+                            if(dato[19]==null){
+                                respuesta+="<td><div class=\"form-group col-md-24\">  \n" +
+            "                            <select class=\"form-control input-sm\" id="+tvacancia+" name=\"tvacancia2\" required>\n" +
+            "                                <option value=\"\" selected>Seleccionar una opción</option>\n" +
+            "                                <option value="+estatus1+">"+estatusDesc1+"</option>\n" +
+            "                                <option value="+estatus2+">"+estatusDesc2+"</option>\n" +
+            "                                <option value="+estatus3+">"+estatusDesc3+"</option>\n" +
+            "                            </select>\n" +
+            "                        </div></td><td><button type='button' class='btn btn-sm' title='Borrar' onclick='confirmarCategoria("+dato[0]+")'><span class='glyphicon glyphicon-floppy-disk incompleto2'></span></button></td>"+"</tr>";
+                            }else{
+                                if(dato[19].equals("1")){
+                                    respuesta+="<td><div class=\"form-group col-md-24\">  \n" +
+            "                            <select class=\"form-control input-sm\" id="+tvacancia+" name=\"tvacancia2\" required>\n" +
+            "                                <option value=\"\" selected>Seleccionar una opción</option>\n" +
+            "                                <option value="+estatus1+" selected>"+estatusDesc1+"</option>\n" +
+            "                                <option value="+estatus2+">"+estatusDesc2+"</option>\n" +
+            "                                <option value="+estatus3+">"+estatusDesc3+"</option>\n" +
+            "                            </select>\n" +
+            "                        </div></td><td><button type='button' class='btn btn-sm' title='Borrar' onclick='confirmarCategoria("+dato[0]+")'><span class='glyphicon glyphicon-floppy-disk incompleto2'></span></button></td>"+"</tr>";
+                                    }else if(dato[19].equals("2")){
+                                        respuesta+="<td><div class=\"form-group col-md-24\">  \n" +
+            "                            <select class=\"form-control input-sm\" id="+tvacancia+" name=\"tvacancia2\" required>\n" +
+            "                                <option value=\"\" selected>Seleccionar una opción</option>\n" +
+            "                                <option value="+estatus1+">"+estatusDesc1+"</option>\n" +
+            "                                <option value="+estatus2+" selected>"+estatusDesc2+"</option>\n" +
+            "                                <option value="+estatus3+">"+estatusDesc3+"</option>\n" +
+            "                            </select>\n" +
+            "                        </div></td><td><button type='button' class='btn btn-sm' title='Borrar' onclick='confirmarCategoria("+dato[0]+")'><span class='glyphicon glyphicon-floppy-disk incompleto2'></span></button></td>"+"</tr>";
+                                    }else if(dato[19].equals("3")){
+                                        respuesta+="<td><div class=\"form-group col-md-24\">  \n" +
+            "                            <select class=\"form-control input-sm\" id="+tvacancia+" name=\"tvacancia2\" required>\n" +
+            "                                <option value=\"\">Seleccionar una opción</option>\n" +
+            "                                <option value="+estatus1+">"+estatusDesc1+"</option>\n" +
+            "                                <option value="+estatus2+">"+estatusDesc2+"</option>\n" +
+            "                                <option value="+estatus3+" selected>"+estatusDesc3+"</option>\n" +
+            "                            </select>\n" +
+            "                        </div></td><td><button type='button' class='btn btn-sm' title='Borrar' onclick='confirmarCategoria("+dato[0]+")'><span class='glyphicon glyphicon-floppy-disk incompleto2'></span></button></td>"+"</tr>";
+                                    }
+                            }
+                            
+                        }
+                        return respuesta;
+                    }else{
+                        respuesta="<tr><td colspan='9' class='text-center'>Sin información</td></tr>";
+                    }
+        }catch(Exception e){
+            respuesta=e.toString();
+        }finally{
+            return respuesta;        
+        }
+    }        
 }

@@ -5,6 +5,7 @@
  */
 package herramientas;
 
+import constants.ConstantsWS;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
@@ -1127,7 +1128,8 @@ public class Catalogos {
         String respuesta="<option value=''>-Seleccione-</option>";
         try{
             String[] parametros={idPrograma, idSubsistema, idEntidad, idPlantel, vacancia, periodo};
-            List<String[]> datos=metodos.ejecutaSP("sp_consultaVacanciasResultados",parametros);
+//            List<String[]> datos=metodos.ejecutaSP("sp_consultaVacanciasResultados",parametros);
+            List<String[]> datos=metodos.ejecutaSP("sp_consultaVacancias2",parametros);
             for(String[] dato:datos){
                 respuesta+="<option value='"+dato[0]+"'>"+dato[1]+"</option>";
             }
@@ -1158,7 +1160,17 @@ public class Catalogos {
         try{
             String[] parametros={idPrograma, idSubsistema, idEntidad, idPlantel, "D", idCategoria, idJornada, periodo};
             List<String[]> datos=metodos.ejecutaSP("sp_consultaNumeroPlazas",parametros);
-            respuesta+=datos.get(0)[8];
+            if(datos.size()>0){
+                int numPlazas=0;
+                for(String[] dato:datos){
+                    numPlazas+=Integer.parseInt(dato[8]);
+                }
+                respuesta+=Integer.toString(numPlazas);
+            }else{
+                respuesta+="0";
+            }
+                
+//            respuesta+=datos.get(0)[8];
         }catch(Exception e){
             respuesta=e.toString();
         }finally{
@@ -1166,6 +1178,52 @@ public class Catalogos {
         }
     }
     
+    public String desplegarNumeroPlazasAsignadas(String idPrograma,String idSubsistema,String idEntidad,String idPlantel, String idCategoria, String idJornada,String periodo){        
+        String respuesta="";
+        try{
+            String[] parametros={idPrograma, idSubsistema, idEntidad, idPlantel, "D", idCategoria, idJornada, periodo};
+            List<String[]> datos=metodos.ejecutaSP("sp_consultaNumeroPlazasAsignadas",parametros);
+            if(datos.size()>0){
+                int numPlazas=0;
+                for(String[] dato:datos){
+                    numPlazas+=Integer.parseInt(dato[8]);
+                }
+                respuesta+=Integer.toString(numPlazas);
+            }else{
+                respuesta+="0";
+            }
+                
+//            respuesta+=datos.get(0)[8];
+        }catch(Exception e){
+            respuesta=e.toString();
+        }finally{
+            return respuesta;
+        }
+    }
+    
+    public String desplegarNumeroPlazasZona(String idPrograma,String idSubsistema,String idEntidad,String periodo,String idCategoriaZona,String idZona){        
+        String respuesta="";
+        try{
+            String[] parametros={idPrograma,idSubsistema,idEntidad,"D",periodo,idCategoriaZona,idZona};
+            List<String[]> datos=metodos.ejecutaSP("sp_consultaNumeroPlazasZona",parametros);
+            if(datos.size()>0){
+                int numPlazas=0;
+                for(String[] dato:datos){
+                    numPlazas+=Integer.parseInt(dato[8]);
+                }
+                respuesta+=Integer.toString(numPlazas);
+            }else{
+                respuesta+="0";
+            }
+                
+//            respuesta+=datos.get(0)[8];
+        }catch(Exception e){
+            respuesta=e.toString();
+        }finally{
+            return respuesta;
+        }
+    }
+
        public ArrayList<String> getSelectObservacionPaso1(String idUsuario){ 
             ArrayList<String> lista=new ArrayList<>();
         List<String[]> datos=null;
@@ -1440,6 +1498,36 @@ public class Catalogos {
 
         }finally{
             return lista;        
+        }
+    }
+
+    public  String desplegarOpcionesZona(){        
+        String respuesta="<option value=''>-Seleccione-</option>";        
+        try{
+            List<String[]> datos=metodos.ejecutaSP(ConstantsWS.SP_SELECT_CAT_ZONA_ECONOMICA);
+            for(String[] dato:datos)
+            {
+                respuesta+="<option value='"+dato[0]+"'>"+dato[0]+"</option>";
+            }
+        }catch(Exception e){
+            respuesta=e.toString();
+        }finally{
+            return respuesta;        
+        }
+    }
+    
+    public  String desplegarOpcionesCategoria(){        
+        String respuesta="<option value=''>-Seleccione-</option>";        
+        try{
+            List<String[]> datos=metodos.ejecutaSP("sp_selectCatCategoriasJornada");
+            for(String[] dato:datos)
+            {
+                respuesta+="<option value='"+dato[0]+"'>"+dato[1]+"</option>";
+            }
+        }catch(Exception e){
+            respuesta=e.toString();
+        }finally{
+            return respuesta;        
         }
     }
 }

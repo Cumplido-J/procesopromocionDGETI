@@ -36,12 +36,18 @@ label.error{
 input.error,select.error{
     border-color: red;
 }
+select.completo{
+    border-color: green;
+}
 div.incompleto{
     background-color: orange;
     color:red;
 }
 span.incompleto{
     color:red;
+}
+span.incompleto2{
+    color: #9d2449;
 }
 span.completo{
     color:green;

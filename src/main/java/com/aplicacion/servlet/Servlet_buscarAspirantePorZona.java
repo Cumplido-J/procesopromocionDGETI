@@ -17,10 +17,10 @@ import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author Jonathan Trinidad
+ * @author Jonathan Trinidad de Lazaro
  */
-@WebServlet(name = "aspiranteGanador", urlPatterns = {"/aspiranteGanador"})
-public class Servlet_buscarAspiranteGanador extends HttpServlet {
+@WebServlet(name = "aspirantePorZona", urlPatterns = {"/aspirantePorZona"})
+public class Servlet_buscarAspirantePorZona extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -39,10 +39,10 @@ public class Servlet_buscarAspiranteGanador extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet Servlet_buscarAspiranteGanador</title>");            
+            out.println("<title>Servlet Servlet_buscarAspirantePorZona</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet Servlet_buscarAspiranteGanador at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet Servlet_buscarAspirantePorZona at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -84,15 +84,17 @@ public class Servlet_buscarAspiranteGanador extends HttpServlet {
                 String entidad=request.getParameter("entidad");
                 String plantel=request.getParameter("plantel");
                 String categoria=request.getParameter("categoria");
-                String jornada=request.getParameter("jornada");
+//              String jornada=request.getParameter("jornada");
                 String vacancia=request.getParameter("vacancia");
                 String periodo=request.getParameter("periodo");
+                String zonaEconomica=request.getParameter("zonaEconomica");
                 Datos d=new Datos();
                 if(entidad.isEmpty() && plantel.isEmpty()){
-                    out.print(d.generarResultadosCentrales(programa,subsistema,entidad,plantel,vacancia,periodo));
+                    out.print(d.generarResultadosZonaEconomica(programa,subsistema,entidad,plantel,vacancia,periodo));
                 }else{
-                    //out.print(d.desplegarAspirantesVacancia(id, programa, subsistema, entidad, plantel, categoria, jornada, vacancia, periodo));
-                    out.print(d.desplegarAspirantesAsignacion(id, programa, subsistema, entidad, plantel, categoria, jornada, vacancia, periodo));
+//                    out.print(d.desplegarAspirantesPorZona(id, programa, subsistema, entidad, plantel, categoria, jornada, vacancia, periodo));
+//                    out.print(d.desplegarAspirantesZona(id,programa,subsistema,entidad,periodo,vacancia,zonaEconomica,categoria));
+                    out.print(d.desplegarAspirantesZona(id,programa,subsistema,entidad,periodo,vacancia,zonaEconomica,categoria));
                 }
         }catch(Exception e){
             System.out.println(e.toString());

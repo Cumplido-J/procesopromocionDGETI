@@ -73,10 +73,25 @@ function numeroPlazas() {
     if(idSubsistema!="" &&  idEntidad!="")
     $.get("ConsultaCatalogos", {k:id,e:idPrograma,s:idSubsistema,i:idEntidad,m:idPlantel,n:idCategoria,p:idJornada,periodo:periodo}, function(respuesta){
         $("#plazas").html(respuesta);
+        numeroPlazasAsignadas();
     });
 }
 function confirmacion(idComite) {
     $("#idComiteBorrar").val(idComite);
     $("#modalConfirmacion2").modal("show");
+}
+function numeroPlazasAsignadas() {
+                var idPrograma=$('#programa').val();
+                var idSubsistema=$('#subsistema').val();    
+                var idEntidad=$("#entidad").val();
+                var idPlantel=$("#plantel").val();
+                var idCategoria=$("#categoria").val();
+                var idJornada=$("#jornada").val();
+                var periodo=$("#periodo").val();
+                var id="29";
+                if(idSubsistema!="" &&  idEntidad!="")
+                $.get("ConsultaCatalogos", {k:id,e:idPrograma,s:idSubsistema,i:idEntidad,m:idPlantel,n:idCategoria,p:idJornada,periodo:periodo}, function(respuesta){
+                    $("#plazasAsignadas").html(respuesta);
+                });
 }
 

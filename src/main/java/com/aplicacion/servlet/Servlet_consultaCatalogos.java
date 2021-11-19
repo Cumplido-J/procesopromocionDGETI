@@ -157,6 +157,12 @@ public class Servlet_consultaCatalogos extends HttpServlet {
                case "28":
                   respuesta=catalogo.desplegarOpcionesCategoriasHoras();
                break;
+               case "29":
+                   respuesta=catalogo.desplegarNumeroPlazasAsignadas(request.getParameter("e"),request.getParameter("s"),request.getParameter("i"),request.getParameter("m"),request.getParameter("n"),request.getParameter("p"),request.getParameter("periodo"));                   
+               break;
+               case "30":
+                   respuesta=catalogo.desplegarNumeroPlazasZona(request.getParameter("e"),request.getParameter("s"),request.getParameter("i"),request.getParameter("periodo"),request.getParameter("idCategoria"),request.getParameter("idZona"));                   
+               break;
                default : 
                    respuesta="<option value=''>-Seleccione-</option>";
                   break;
