@@ -47,7 +47,11 @@
                     <a class="navbar-brand" href="/">DGETI-CECYTE</a>
                   </div>
                   <div class="collapse navbar-collapse" id="subenlaces">
-                    <ul class="nav navbar-nav navbar-right">      
+                    <ul class="nav navbar-nav navbar-right">
+                        <c:set var="hiddenDurango" value="hidden"></c:set>
+                        <c:set var="disabledDurango" value="disabled"></c:set>
+                        <c:set var="hiddenNoDurango" value=""></c:set>
+                        <c:set var="disabledNoDurango" value=""></c:set>
                         <c:if test="${!vistaAdmin}">
                             <li><a href="SesionDocente">Regresar </a></li>
                             <c:set var="hidden" value="hidden"></c:set>
@@ -56,6 +60,12 @@
                             <li><a href="VistaDocente">Regresar</a></li>
                             <c:set var="hidden" value=""></c:set>
                         </c:if>
+                        <c:if test='${docente.infoRegistro[7]==10 && docente.infoRegistro[75]==2}'>
+                            <c:set var="hiddenDurango" value=""></c:set>
+                            <c:set var="disabledDurango" value=""></c:set>
+                            <c:set var="hiddenNoDurango" value="hidden"></c:set>
+                            <c:set var="disabledNoDurango" value="disabled"></c:set>
+                        </c:if>    
                         <li><a href="Servlet_cerrarsesion">Cerrar sesión</a></li> 
                     </ul>
                   </div>
@@ -83,7 +93,7 @@
                       <div class="panel-heading">
                         <h4 class="panel-title">
                           <a data-parent="#accordion" data-toggle="collapse" href="#panel1" aria-expanded="true" aria-controls="panel1">
-                              ${criterios[0][0]} - ${criterios[0][1]}                                
+                              1 - ${criterios[0][1]}                                
                                 <c:if test = "${puntajes[0][3]!=null && docente.documentoCargado2('2')==true}">
                                     <span class="glyphicon glyphicon-ok-sign completo" title="Sección completa" id="estatus1" completo="true"></span>                                      
                                 </c:if>
@@ -99,6 +109,8 @@
                         <div class="panel-body">
                             <form id="form1" role="form" action="RegistrarCriterio" method="POST">
                                 <input type='hidden' name='idCriterio' value='${criterios[0][0]}'>
+                                <input type='hidden' name='idEntidad' id='idEntidad' value='${docente.infoRegistro[7]}'>
+                                <input type='hidden' name='idSubsistema' id='idSubsistema' value='${docente.infoRegistro[75]}'>                                
                                 <div class="form-group col-md-6">                                                             
                                   <label class="control-label">Antigüedad:</label>
                                   <select class="form-control input-sm" id="puntaje1" name="puntaje" required>                                  
@@ -131,7 +143,7 @@
                       <div class="panel-heading">
                         <h4 class="panel-title">
                           <a data-parent="#accordion" data-toggle="collapse" href="#panel2" aria-expanded="false" aria-controls="panel2">
-                            ${criterios[1][0]} - ${criterios[1][1]}
+                            2 - ${criterios[1][1]}
                             <c:if test="${docente.infoRegistro[58]!=null}">
                             <c:if test = "${puntajes[1][3]!=null && docente.documentoCargado2('10')==true}">
                                 <span class="glyphicon glyphicon-ok-sign completo" title="Sección completa" id="estatus2" completo="true"></span>                                      
@@ -152,6 +164,8 @@
                         <div class="panel-body">
                           <form id="form2" role="form" action="RegistrarCriterio" method="POST">
                                 <input type='hidden' name='idCriterio' value='${criterios[1][0]}'>
+                                <input type='hidden' name='idEntidad' id='idEntidad' value='${docente.infoRegistro[7]}'>
+                                <input type='hidden' name='idSubsistema' id='idSubsistema' value='${docente.infoRegistro[75]}'>                                
                                 <div class="form-group col-md-6">                                                             
                                   <label class="control-label">Experiencia:</label>
                                   <select class="form-control input-sm" id="puntaje2" name="puntaje" required>                                  
@@ -181,7 +195,7 @@
                       <div class="panel-heading">
                         <h4 class="panel-title">
                           <a data-parent="#accordion" data-toggle="collapse" href="#panel3" aria-expanded="false" aria-controls="panel3">
-                          ${criterios[2][0]} - ${criterios[2][1]}
+                          3 - ${criterios[2][1]}
                             <span class="glyphicon glyphicon-ok-sign completo" title="Sección completa" id="estatus3" completo="true"></span>                                      
                           </a>
                           <p class="text-danger ${hidden}">Puntaje: <span id="p3">${puntajeEncuestas[5]}</span></p>
@@ -205,7 +219,7 @@
                       <div class="panel-heading">
                         <h4 class="panel-title">
                           <a data-parent="#accordion" data-toggle="collapse" href="#panel4" aria-expanded="false" aria-controls="panel4">
-                            ${criterios[3][0]} - ${criterios[3][1]}                               
+                            4 - ${criterios[3][1]}                               
                                 <c:if test = "${puntajes[3][3]!=null && docente.documentoCargado2('1')==true}">
                                     <span class="glyphicon glyphicon-ok-sign completo" title="Sección completa" id="estatus4" completo="true"></span>                                      
                                 </c:if>
@@ -222,6 +236,8 @@
                         <div class="panel-body">
                           <form id="form4" role="form" action="RegistrarCriterio" method="POST">
                                 <input type='hidden' name='idCriterio' value='${criterios[3][0]}'>
+                                <input type='hidden' name='idEntidad' id='idEntidad' value='${docente.infoRegistro[7]}'>
+                                <input type='hidden' name='idSubsistema' id='idSubsistema' value='${docente.infoRegistro[75]}'>                                
                                 <div class="form-group col-md-6">                                                             
                                   <label class="control-label">Máximo grado académico:</label>
                                   <select class="form-control input-sm " id="puntaje4" name="puntaje" required>                                  
@@ -253,7 +269,7 @@
                       <div class="panel-heading">
                         <h4 class="panel-title">
                           <a data-parent="#accordion" data-toggle="collapse" href="#panel5" aria-expanded="false" aria-controls="panel5">
-                          ${criterios[4][0]} - ${criterios[4][1]}
+                          5 - ${criterios[4][1]}
                             <c:if test="${puntajes[4][3]==null}">
                                 <c:if test = "${!fn:contains(cursos[0], 'colspan') && docente.documentoCargado2('13')==true}">
                                     <span class="glyphicon glyphicon-ok-sign completo" title="Sección completa" id="estatus5" completo="true"></span>                                      
@@ -285,6 +301,8 @@
                       <div class="panel-collapse collapse" id="panel5">
                         <div class="panel-body">
                             <form id="form5" role="form" action="RegistrarCriterio" method="POST">
+                            <input type='hidden' name='idEntidad' id='idEntidad' value='${docente.infoRegistro[7]}'>
+                            <input type='hidden' name='idSubsistema' id='idSubsistema' value='${docente.infoRegistro[75]}'>                                
                             <div class="row">
                                 <div class="checkbox col-xs-12">                                  
                                   <label><input type="checkbox" name="cbConstancia" id="cb5" data-toggle="collapse" data-target="#seccionCursos" ${checked}>Marque la casilla si no cuenta con evidencias de este criterio</label>
@@ -334,7 +352,7 @@
                       <div class="panel-heading">
                         <h4 class="panel-title">
                           <a data-parent="#accordion" data-toggle="collapse" href="#panel6" aria-expanded="false" aria-controls="panel6">
-                          ${criterios[5][0]} - ${criterios[5][1]}                               
+                          6 - ${criterios[5][1]}                               
                             <c:if test="${puntajes[5][3]==null}">
                                 <c:if test = "${!fn:contains(aportaciones[0], 'colspan') && docente.documentoCargado2('14')==true}">
                                     <span class="glyphicon glyphicon-ok-sign completo" title="Sección completa" id="estatus6" completo="true"></span>                                      
@@ -347,6 +365,7 @@
                                 <span class="glyphicon glyphicon-ok-sign completo" title="Sección completa" id="estatus6" completo="true"></span>
                             </c:if>
                           </a>
+                          <div class="${hiddenNoDurango} ${disabledNoDurango}">
                           <p class="text-danger ${hidden}">Puntaje: 
                               <span id="p6">
                                   <c:if test="${puntajes[5][3]=='0'}">
@@ -361,12 +380,22 @@
                                   </c:if>
                                   
                               </span></p>
+                          </div>
+                          <div class="${hiddenDurango} ${disabledDurango}">
+                              <p class="text-danger ${hidden}">Puntaje: <span id="p6">${puntajes[5][4]}</span></p>
+                          </div>
                         </h4>
                         <button type="button" class="collpase-button collapsed" data-parent="#accordion" data-toggle="collapse" href="#panel6"></button>
                       </div>
+                              
+                              
                       <div class="panel-collapse collapse" id="panel6">
                         <div class="panel-body">
                             <form id="form6" role="form" action="RegistrarCriterio" method="POST">
+                            <input type='hidden' name='idCriterio' value='${criterios[5][0]}'>
+                            <input type='hidden' name='idEntidad' id='idEntidad' value='${docente.infoRegistro[7]}'>
+                            <input type='hidden' name='idSubsistema' id='idSubsistema' value='${docente.infoRegistro[75]}'>                                
+                            <div class="${hiddenNoDurango} ${disabledNoDurango}">
                             <div class="row">
                                 <div class="checkbox col-xs-12">                                  
                                   <label><input type="checkbox" ${checked} id="cb6" name="cbConstancia" data-toggle="collapse" data-target="#seccionAportaciones">Marque la casilla si no cuenta con evidencias de este criterio</label>
@@ -384,9 +413,7 @@
                                         ${aportaciones[0]}
                                     </tbody>
                                 </table>
-                            </div>
-                            
-                            <input type='hidden' name='idCriterio' value='${criterios[5][0]}'>                                
+                            </div>                          
                             <div class="form-group col-xs-12">
                                 <label class="control-label">Carga de evidencia documental:</label>
                                 <br/>
@@ -398,9 +425,27 @@
                                         <span class="glyphicon glyphicon-exclamation-sign incompleto" id="alertaBtnEvidencia14" title="Sección incompleta"></span>  
                                     </c:if>
                             </div>
-                                
-                            
-                        </div>
+                            </div>
+                            </div>
+                            <div class="${hiddenDurango} ${disabledDurango}">
+                                <div class="form-group col-md-6">
+                                  <label class="control-label">Aportaciones en materia de mejora continua:</label>
+                                  <select class="form-control input-sm " id="puntaje16" name="puntaje" required>                                  
+                                      ${catalogo.desplegarOpcionesPuntaje(criterios[5][0],puntajes[5][3],sessionScope["idUsuario"])}
+                                  </select>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label class="control-label">Carga de evidencia documental:</label>
+                                    <br/>
+                                    <c:if test = "${docente.documentoCargado2('14')==true}">
+                                        <input id="btnEvidencia14" type="button" class="btn btn-sm btn-link" value="Ver archivo" onclick="abrirModalArchivo(14)"/>                                                                            
+                                    </c:if>
+                                    <c:if test = "${docente.documentoCargado2('14')==false}">
+                                        <input id="btnEvidencia14" type="button" class="btn btn-sm btn-link incompleto" value="Subir archivo" onclick="abrirModalArchivo(14)"/>  
+                                        <span class="glyphicon glyphicon-exclamation-sign incompleto" id="alertaBtnEvidencia14" title="Sección incompleta"></span>  
+                                    </c:if>
+                                </div>
+                            </div>        
                             <div class="col-xs-12 text-right">
                                 
                                 <input class="btn btn-sm btn-primary" id="btnEnviar6" type="submit" value='Guardar y continuar'/>                                    
@@ -413,7 +458,7 @@
                       <div class="panel-heading">
                         <h4 class="panel-title">
                           <a data-parent="#accordion" data-toggle="collapse" href="#panel7" aria-expanded="false" aria-controls="panel7">
-                          ${criterios[6][0]} - ${criterios[6][1]}                              
+                          7 - ${criterios[6][1]}                              
                             <c:if test="${puntajes[6][3]==null}">
                                 <c:if test = "${!fn:contains(participaciones[0], 'colspan') && docente.documentoCargado2('15')==true}">
                                     <span class="glyphicon glyphicon-ok-sign completo" title="Sección completa" id="estatus7" completo="true"></span>                                      
@@ -445,6 +490,8 @@
                       <div class="panel-collapse collapse" id="panel7">
                         <div class="panel-body">
                             <form id="form7" role="form" action="RegistrarCriterio" method="POST">
+                            <input type='hidden' name='idEntidad' id='idEntidad' value='${docente.infoRegistro[7]}'>
+                            <input type='hidden' name='idSubsistema' id='idSubsistema' value='${docente.infoRegistro[75]}'>                                
                             <div class="row">
                                 <div class="checkbox col-xs-12">                                  
                                   <label><input type="checkbox" ${checked} id="cb7" name="cbConstancia" data-toggle="collapse" data-target="#seccionParticipaciones">Marque la casilla si no cuenta con evidencias de este criterio</label>
@@ -491,7 +538,7 @@
                       <div class="panel-heading">
                         <h4 class="panel-title">
                           <a data-parent="#accordion" data-toggle="collapse" href="#panel8" aria-expanded="false" aria-controls="panel8">
-                          ${criterios[7][0]} - ${criterios[7][1]}                              
+                          8 - ${criterios[7][1]}                              
                             <c:if test="${puntajes[7][3]==null}">
                                 <c:if test = "${!fn:contains(tutorias[0], 'colspan') && docente.documentoCargado2('16')==true}">
                                     <span class="glyphicon glyphicon-ok-sign completo" title="Sección completa" id="estatus8" completo="true"></span>                                      
@@ -523,7 +570,8 @@
                       <div class="panel-collapse collapse" id="panel8">
                         <div class="panel-body">
                             <form id="form8" role="form" action="RegistrarCriterio" method="POST">
-                            
+                            <input type='hidden' name='idEntidad' id='idEntidad' value='${docente.infoRegistro[7]}'>
+                            <input type='hidden' name='idSubsistema' id='idSubsistema' value='${docente.infoRegistro[75]}'>                                
                             <div class="row">
                                     <div class="checkbox col-xs-12">                                  
                                       <label><input type="checkbox" id="cb8" ${checked} name="cbConstancia" data-toggle="collapse" data-target="#seccionTutorias">Marque la casilla si no cuenta con evidencias de este criterio</label>
@@ -571,7 +619,7 @@
                       <div class="panel-heading">
                         <h4 class="panel-title">
                           <a data-parent="#accordion" data-toggle="collapse" href="#panel9" aria-expanded="false" aria-controls="panel9">
-                          ${criterios[8][0]} - ${criterios[8][1]}                              
+                          9 - ${criterios[8][1]}                              
                             <c:if test="${puntajes[8][3]==null}">
                                 <c:if test = "${!fn:contains(publicaciones[0], 'colspan') && docente.documentoCargado2('18')==true}">
                                     <span class="glyphicon glyphicon-ok-sign completo" title="Sección completa" id="estatus9" completo="true"></span>                                      
@@ -603,7 +651,8 @@
                       <div class="panel-collapse collapse" id="panel9">
                         <div class="panel-body">
                             <form id="form9" role="form" action="RegistrarCriterio" method="POST">
-                            
+                            <input type='hidden' name='idEntidad' id='idEntidad' value='${docente.infoRegistro[7]}'>
+                            <input type='hidden' name='idSubsistema' id='idSubsistema' value='${docente.infoRegistro[75]}'>                                
                             <div class="row">
                                     <div class="checkbox col-xs-12">                                  
                                       <label><input type="checkbox" id="cb9" ${checked} name="cbConstancia" data-toggle="collapse" data-target="#seccionPublicaciones">Marque la casilla si no cuenta con evidencias de este criterio</label>
@@ -651,7 +700,7 @@
                       <div class="panel-heading">
                         <h4 class="panel-title">
                           <a data-parent="#accordion" data-toggle="collapse" href="#panel10" aria-expanded="false" aria-controls="panel10">
-                          ${criterios[9][0]} - ${criterios[9][1]}                              
+                          10 - ${criterios[9][1]}                              
                             <c:if test = "${puntajes[9][3]!=null && docente.documentoCargado2('18')==true}">
                                 <span class="glyphicon glyphicon-ok-sign completo" title="Sección completa" id="estatus10" completo="true"></span>                                      
                             </c:if>
@@ -659,7 +708,12 @@
                                 <span class="glyphicon glyphicon-exclamation-sign incompleto" title="Sección incompleta" id="estatus10" completo="false"></span>                                    
                             </c:if>
                           </a>
-                          <p class="text-danger ${hidden}">Puntaje: <span id="p10">${puntajes[9][4]+puntajes[10][4]+puntajes[11][4]+puntajes[12][4]+puntajes[13][4]+resultados[1]}</span></p>
+                          <div class="${hiddenNoDurango} ${disabledNoDurango}">  
+                              <p class="text-danger ${hidden}">Puntaje: <span id="p10">${puntajes[9][4]+puntajes[10][4]+puntajes[11][4]+puntajes[12][4]+puntajes[13][4]+resultados[1]}</span></p>
+                          </div>
+                          <div class="${hiddenDurango} ${disabledDurango}">
+                              <p class="text-danger ${hidden}">Puntaje: <span id="p10">${puntajes[9][4]+puntajes[10][4]+puntajes[11][4]}</span></p>                          
+                          </div>
                         </h4>
                         <button type="button" class="collpase-button collapsed" data-parent="#accordion" data-toggle="collapse" href="#panel10"></button>
                       </div>
@@ -667,6 +721,9 @@
                         <div class="panel-body">
                             <form id="form10" role="form" action="RegistrarCriterio" method="POST">
                                 <input type='hidden' name='idCriterio' value='${criterios[9][0]}'> 
+                                <input type='hidden' name='idEntidad' id='idEntidad' value='${docente.infoRegistro[7]}'>
+                                <input type='hidden' name='idSubsistema' id='idSubsistema' value='${docente.infoRegistro[75]}'>                                
+                                <div class="${hiddenNoDurango} ${disabledNoDurango}">
                                 <div class="row">
                                     <div class="form-group col-md-6">
                                         <label class="control-label">10.A. Planeación didáctica: Docente</label>
@@ -734,6 +791,42 @@
                                         <span class="glyphicon glyphicon-exclamation-sign incompleto" id="alertaBtnEvidencia18" title="Sección incompleta"></span>  
                                     </c:if>
                                 </div>
+                                </div>            
+                                <div class="${hiddenDurango} ${disabledDurango}">                                    
+                                <div class="row">
+                                    <div class="form-group col-md-6">
+                                        <label class="control-label">10.A. Planeación didáctica: Docente</label>
+                                        <select class="form-control input-sm" id="puntaje10" name="puntaje10" required>                                  
+                                          ${catalogo.desplegarOpcionesPuntaje(25,puntajes[9][3],sessionScope["idUsuario"])}
+                                      </select>
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label class="control-label">10.B. Portafolio de evidencias de Evaluación del aprendizaje</label>
+                                        <select class="form-control input-sm" id="puntaje11" name="puntaje11" required>                                  
+                                          ${catalogo.desplegarOpcionesPuntaje(26,puntajes[10][3],sessionScope["idUsuario"])}
+                                        </select>
+                                    </div>
+                                </div>   
+                                <div class="row">
+                                    <div class="form-group col-md-6">     
+                                      <label class="control-label">10.C. Porcentaje de aprobación escolar (Resultados educativos) por asignatura, actividad paraescolar o módulo profesional:<br/><br/></label>
+                                      <select class="form-control input-sm" id="puntaje13" name="puntaje13" required>                                  
+                                          ${catalogo.desplegarOpcionesPuntaje(27,puntajes[11][3],sessionScope["idUsuario"])}
+                                      </select>
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-12">
+                                    <label class="control-label">Carga de evidencia documental:</label>
+                                    <br/>
+                                    <c:if test = "${docente.documentoCargado2('18')==true}">
+                                        <input id="btnEvidencia18" type="button" class="btn btn-sm btn-link" value="Ver archivo" onclick="abrirModalArchivo(18)"/>                                                                            
+                                    </c:if>
+                                    <c:if test = "${docente.documentoCargado2('18')==false}">
+                                        <input id="btnEvidencia18" type="button" class="btn btn-sm btn-link incompleto" value="Subir archivo" onclick="abrirModalArchivo(18)"/>  
+                                        <span class="glyphicon glyphicon-exclamation-sign incompleto" id="alertaBtnEvidencia18" title="Sección incompleta"></span>  
+                                    </c:if>
+                                </div>      
+                                </div>      
                                 <div class="col-xs-12 text-right">
                                     
                                     <input class="btn btn-sm btn-primary" id="btnEnviar10" type="submit" value='Guardar y continuar'/>                                    

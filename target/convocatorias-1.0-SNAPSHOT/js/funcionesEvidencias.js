@@ -745,6 +745,7 @@ $(document).ready(function () {
                         $("#modalMensaje").modal("show");
                     }
                     else{
+                        
                         if (idPermiso === "6")
                         {$("#pEvidenciasD").val(data);}
                         else

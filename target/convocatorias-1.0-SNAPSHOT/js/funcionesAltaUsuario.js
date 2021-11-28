@@ -191,7 +191,8 @@ $(document).ready(function () {
             //alert(permisos);
             $("#permisos").val(permisos);            
             if (permisos!="" || perfilSel=="D") { 
-                if ($("#correo").val().toLowerCase().match($regex) && $("#usuario").val().toUpperCase().match($regexRFC)) {                            
+                //if ($("#correo").val().toLowerCase().match($regex) && $("#usuario").val().toUpperCase().match($regexRFC)) {
+                if ($("#correo").val().toLowerCase().match($regex)) {    
                     $.ajax({
                         type:$('#formRegistro').attr("method"),
                         url:$('#formRegistro').attr("action"),
@@ -220,6 +221,10 @@ $(document).ready(function () {
 
                         }
                     });
+                }
+                else{
+                    $("#mensaje").html("Correo no cumple con las caracteristicas");            
+                    $("#modalMensaje").modal("show");
                 }
             }else{
                 $('#alertaPermiso').removeAttr('hidden');

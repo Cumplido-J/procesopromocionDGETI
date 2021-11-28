@@ -5,6 +5,7 @@
  */
 package com.aplicacion.servlet;
 
+import com.aplicacion.beans.Docente;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -80,7 +81,10 @@ public class Servlet_registrarCriterio extends HttpServlet {
         try {
             HttpSession session= (HttpSession) request.getSession();
             String idUsuario,rfc,estatus,idPermiso;
+            int idEntidad = 0, idSubsistema = 0;
             boolean vistaAdmin;
+            idEntidad = Integer.parseInt(request.getParameter("idEntidad"));
+            idSubsistema = Integer.parseInt(request.getParameter("idSubsistema"));
             idPermiso = session.getAttribute("permisoActual").toString();
             if(session.getAttribute("rol").toString().equals("D")){
                 idUsuario=session.getAttribute("idUsuario").toString();
@@ -95,12 +99,13 @@ public class Servlet_registrarCriterio extends HttpServlet {
             }
             //String idConvocatoria=session.getAttribute("idConvocatoria").toString();
             String idCriterio=request.getParameter("idCriterio");
+            int idCriterioNum = Integer.parseInt(request.getParameter("idCriterio"));
             Metodos_sql metodo = new Metodos_sql();
             String[] parametros;
             List<String[]> datos;
-            if(!idCriterio.equals("10")){ 
+            if(!(idCriterio.equals("10") || idCriterio.equals("25"))){ 
                 String idPuntaje=null;
-                if(Integer.parseInt(idCriterio)<5){
+                if(idCriterioNum == 1 || idCriterioNum == 2 || idCriterioNum == 3 || idCriterioNum == 4 || idCriterioNum == 16 || idCriterioNum == 17 || idCriterioNum == 18 || idCriterioNum == 19 ||idCriterioNum == 21){
                     idPuntaje=request.getParameter("puntaje");    
                 }else{
                     if(request.getParameter("cbConstancia")!=null){
@@ -139,43 +144,81 @@ public class Servlet_registrarCriterio extends HttpServlet {
             }else{
                 parametros=new String[5];
                 int puntaje=0;
-                String idPuntaje10=request.getParameter("puntaje10"); 
-                String idPuntaje11=request.getParameter("puntaje11"); 
-                String idPuntaje12=request.getParameter("puntaje12"); 
-                String idPuntaje13=request.getParameter("puntaje13"); 
-                String idPuntaje14=request.getParameter("puntaje14");               
+                String idPuntaje10 = ""; 
+                String idPuntaje11 = ""; 
+                String idPuntaje12 = ""; 
+                String idPuntaje13 = ""; 
+                String idPuntaje14 = "";
+                
+                if (idEntidad == 10 && idSubsistema == 2)
+                {
+                    idPuntaje10=request.getParameter("puntaje25"); 
+                    idPuntaje11=request.getParameter("puntaje26"); 
+                    idPuntaje13=request.getParameter("puntaje27"); 
+                }               
+                else
+                {
+                    idPuntaje10=request.getParameter("puntaje10"); 
+                    idPuntaje11=request.getParameter("puntaje11"); 
+                    idPuntaje12=request.getParameter("puntaje12"); 
+                    idPuntaje13=request.getParameter("puntaje13"); 
+                    idPuntaje14=request.getParameter("puntaje14");                
+                }
                 parametros[0]=idUsuario;
-                parametros[1]="10";
+                
+                if (idEntidad == 10 && idSubsistema == 2)
+                    parametros[1]="25";
+                else
+                    parametros[1]="10";
+                                
                 parametros[2]=idPuntaje10;   
                 parametros[3]=estatus;
                 parametros[4]=idPermiso;
                 datos=metodo.ejecutaSP("sp_insertConstanciasProceso",parametros);
-                if(!datos.isEmpty()){
+                if(!datos.isEmpty( )){
                     puntaje+=Integer.parseInt(datos.get(0)[0]);
                 }
-                parametros[1]="11";
+
+                if (idEntidad == 10 && idSubsistema == 2)
+                    parametros[1]="26";
+                else
+                    parametros[1]="11";
+
                 parametros[2]=idPuntaje11;                                           
                 datos=metodo.ejecutaSP("sp_insertConstanciasProceso",parametros);
                 if(!datos.isEmpty()){
                     puntaje+=Integer.parseInt(datos.get(0)[0]);
                 }
-                parametros[1]="12";
-                parametros[2]=idPuntaje12;                                           
+
+                if (!(idEntidad == 10 && idSubsistema == 2))
+                {
+                    parametros[1]="12";
+                    parametros[2]=idPuntaje12;                                           
+                    datos=metodo.ejecutaSP("sp_insertConstanciasProceso",parametros);
+                    if(!datos.isEmpty()){
+                        puntaje+=Integer.parseInt(datos.get(0)[0]);
+                    }
+                }
+
+                if (idEntidad == 10 && idSubsistema == 2)
+                    parametros[1]="27";
+                else
+                    parametros[1]="13";
+                       
+                parametros[2]=idPuntaje13;
                 datos=metodo.ejecutaSP("sp_insertConstanciasProceso",parametros);
                 if(!datos.isEmpty()){
                     puntaje+=Integer.parseInt(datos.get(0)[0]);
                 }
-                parametros[1]="13";
-                parametros[2]=idPuntaje13;                                           
-                datos=metodo.ejecutaSP("sp_insertConstanciasProceso",parametros);
-                if(!datos.isEmpty()){
-                    puntaje+=Integer.parseInt(datos.get(0)[0]);
-                }
-                parametros[1]="14";
-                parametros[2]=idPuntaje14;                                           
-                datos=metodo.ejecutaSP("sp_insertConstanciasProceso",parametros);
-                if(!datos.isEmpty()){
-                    puntaje+=Integer.parseInt(datos.get(0)[0]);
+
+                if (!(idEntidad == 10 && idSubsistema == 2))
+                {
+                    parametros[1]="14";
+                    parametros[2]=idPuntaje14;                                           
+                    datos=metodo.ejecutaSP("sp_insertConstanciasProceso",parametros);
+                    if(!datos.isEmpty()){
+                        puntaje+=Integer.parseInt(datos.get(0)[0]);
+                    }
                 }
                 out.print(puntaje);
             }

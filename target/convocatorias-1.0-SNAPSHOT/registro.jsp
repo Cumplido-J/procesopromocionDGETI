@@ -1158,11 +1158,11 @@
                           <table>
                               <tr>
                                 <td valign="top"><input type="checkbox" name="cbProtestaVerdad" id="cbProtestaVerdad" onClick="cambioProtesta()"><td>
-                                <td>Declara bajo protesta de decir verdad que cumple con los requisitos establecidos en la Convocatoria para el proceso de promoción en el servicio docente por cambio de categoría en Educación Media Superior, <jsp:include page="seccionesPlantilla/cicloEscolar.jsp" flush="true"/>. Para confirmar su dicho, la DGETI podrá verificar la autenticidad de la documentación que proporciono, por lo que, en caso de alteración o falsificación de la misma, acepta la descalificación inmediata del proceso o, en su caso, la invalidación del nombramiento respectivo, sin perjuicio de las sanciones de tipo administrativo o penal en las que pudiera incurrir.</td>    
+                                <td>Declara bajo protesta de decir verdad que cumple con los requisitos establecidos en la Convocatoria para el proceso de promoción en el servicio docente por cambio de categoría en Educación Media Superior, <%--<jsp:include page="seccionesPlantilla/cicloEscolar.jsp" flush="true"/>--%>Ciclo Escolar ${catalogo.getCatalogoCicloEscolar(sessionScope["idPeriodoActivo"])}. Para confirmar su dicho, la DGETI podrá verificar la autenticidad de la documentación que proporciono, por lo que, en caso de alteración o falsificación de la misma, acepta la descalificación inmediata del proceso o, en su caso, la invalidación del nombramiento respectivo, sin perjuicio de las sanciones de tipo administrativo o penal en las que pudiera incurrir.</td>    
                               </tr>
                               <tr>
                                   <td valign="top"><input type="checkbox" name="cbPublico" id="cbPublico" ><td>
-                                  <td>Acepta hacer públicos los resultados y recomendaciones individuales que se deriven de su valoración para el proceso de promoción en el servicio docente por cambio de categoría en Educación Media Superior ingreso a la Educación Media Superior, <jsp:include page="seccionesPlantilla/cicloEscolar.jsp" flush="true"/>.<td>
+                                  <td>Acepta hacer públicos los resultados y recomendaciones individuales que se deriven de su valoración para el proceso de promoción en el servicio docente por cambio de categoría en Educación Media Superior ingreso a la Educación Media Superior, <%--<jsp:include page="seccionesPlantilla/cicloEscolar.jsp" flush="true"/>--%>Ciclo Escolar ${catalogo.getCatalogoCicloEscolar(sessionScope["idPeriodoActivo"])}.<td>
                               </tr>
                           </table>
                           </c:if>
@@ -1183,8 +1183,13 @@
                           <br/>
                             <input type="hidden" id="rfc" name="rfc" value="${Docente.rfc}">
                             <input type="hidden" id="idUsuario" name="idUsuario" value="${Docente.idUsuario}">
-                              <c:if test="${!vistaAdmin}">
-                              <center><input type="button" disabled="true" class="btn btn-primary" value="Continuar" id="btnFinalizar" onclick="validarArchivos()"></center>
+                              <c:if test="${!vistaAdmin}">   
+                                <c:if test='${sessionScope["programa"]=="1"}'>
+                                    <center><input type="button" disabled="true" class="btn btn-primary" value="Continuar" id="btnFinalizar" onclick="ValidarRegistroCDC()"></center>
+                                </c:if>
+                                <c:if test='${sessionScope["programa"]=="2"}'>
+                                    <center><input type="button" disabled="true" class="btn btn-primary" value="Continuar" id="btnFinalizar" onclick="validarArchivos()"></center>
+                                </c:if>
                               </c:if>
                               <c:if test="${vistaAdmin}">
                               <center><input type="submit" disabled="true" class="btn btn-primary" value="Continuar" id="btnFinalizar"></center>
@@ -2014,6 +2019,20 @@
                      window.location.href = "/promocion/SesionDocente";
                 });
             }
+        function ValidarRegistroCDC(){
+                
+                var accion="compruebaregistroCDC";
+                
+                $.post("Servlet_compruebaregistro", {accion:accion}, function(data){
+                    if(data=="ok"){
+                        validarArchivos();
+                    }else{
+                    $("#mensaje").html(data);            
+                    $("#modalMensaje").modal("show");
+                    }
+                    
+                });
+        }    
             function validarArchivos(){
                 if($("#btnEvidencia1").val().includes("Ver")){
                     $("#estatusArchivo").attr("class","glyphicon glyphicon-ok-sign completo");

@@ -86,13 +86,26 @@ public class Servlet_cbRegistroCriterios extends HttpServlet {
             permisoEdicion = session.getAttribute("permisoActualEdicion").toString();
             Metodos_sql metodos=new Metodos_sql();
             CriteriosValoracion cv=new CriteriosValoracion();
-            String[] parametros={""};            
+            String[] parametros={idUsuario};            
             List<String[]>criterios=metodos.ejecutaSP("sp_selectCatCriteriosValoracion", parametros);
             
             docente=new Docente();
             docente.setIdUsuario(idUsuario);
             docente.setRfc(rfc);
-            docente.consultaInfoAspirante();             
+            docente.consultaInfoAspirante();
+            
+            if (Integer.parseInt((docente.getInfoRegistro())[7]) == 10 && Integer.parseInt((docente.getInfoRegistro())[75]) == 2)
+            {
+                String[] infoRegsTmp = docente.getInfoRegistro();
+                if (infoRegsTmp[19].equals("11") || infoRegsTmp[19].equals("12") || infoRegsTmp[19].equals("13"))
+                    infoRegsTmp[19] = "69";
+                if (infoRegsTmp[19].equals("14"))
+                    infoRegsTmp[19] = "70";
+                if (infoRegsTmp[19].equals("15"))
+                    infoRegsTmp[19] = "71";
+                docente.setInfoRegistro(infoRegsTmp);    
+            }
+            
             docente.consultaDocumentos();
             String[][] puntajes=cv.consultaPuntajes(idUsuario); 
             Catalogos catalogos=new Catalogos();
@@ -111,7 +124,12 @@ public class Servlet_cbRegistroCriterios extends HttpServlet {
             request.setAttribute("puntajes", puntajes);
             request.setAttribute("puntajeEncuestas", puntajeEncuestas);            
             request.setAttribute("cursos", cv.getFilasCursos(idUsuario,vistaAdmin, idPermiso, permisoEdicion));
-            request.setAttribute("aportaciones", cv.getFilasAportaciones(idUsuario,vistaAdmin, idPermiso, permisoEdicion));
+
+            if (!(Integer.parseInt((docente.getInfoRegistro())[7]) == 10 && Integer.parseInt((docente.getInfoRegistro())[75]) == 2))
+            {
+                request.setAttribute("aportaciones", cv.getFilasAportaciones(idUsuario,vistaAdmin, idPermiso, permisoEdicion));
+            }           
+            
             request.setAttribute("participaciones", cv.getFilasParticipaciones(idUsuario,vistaAdmin, idPermiso, permisoEdicion));
             request.setAttribute("tutorias", cv.getFilasTutorias(idUsuario,vistaAdmin, idPermiso, permisoEdicion));
             request.setAttribute("publicaciones", cv.getFilasPublicaciones(idUsuario,vistaAdmin, idPermiso, permisoEdicion));

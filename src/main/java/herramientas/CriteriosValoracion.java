@@ -873,7 +873,7 @@ public class CriteriosValoracion {
         return retorno;
     }
     public String[][] consultaPuntajes(String idUsuario){
-        String[][] respuesta=new String[15][8];
+        String[][] respuesta;
         int c,d;
         /*for(c=0;c<15;c++){
             for(d=0;d<7;d++){
@@ -883,24 +883,48 @@ public class CriteriosValoracion {
         }*/
         String[] parametros={idUsuario};
         List<String[]> datos=metodo.ejecutaSP("sp_consultaConstanciasProceso_v2",parametros);
+        
+        if(datos.size() == 12)
+        {
+            respuesta=new String[12][8];
+            d=16;
+        }
+        else
+        {
+            respuesta=new String[15][8];
+            d=1;
+        }
+                 
         if(!datos.isEmpty()){             
             for(String[] dato:datos){
                 c=Integer.parseInt(dato[2]);
-                respuesta[c-1]=dato;
+                respuesta[c-d]=dato;
             }            
         }        
         return respuesta;
     }
     public String[][] consultaPuntajesDictaminador(String idUsuario){
-        String[][] respuesta=new String[15][8];
-        int c;
+        String[][] respuesta;
+        int c,d;
 
         String[] parametros={idUsuario};
         List<String[]> datos=metodo.ejecutaSP("sp_consultaConstanciasProcesoDictaminador_v2",parametros);
+        
+        if(datos.size() == 12)
+        {
+            respuesta=new String[12][8];
+            d=16;
+        }
+        else
+        {
+            respuesta=new String[15][8];
+            d=1;
+        }
+        
         if(!datos.isEmpty()){             
             for(String[] dato:datos){
                 c=Integer.parseInt(dato[2]);
-                respuesta[c-1]=dato;
+                respuesta[c-d]=dato;
             }            
         }        
         return respuesta;

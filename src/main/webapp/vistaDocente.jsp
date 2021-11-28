@@ -149,7 +149,7 @@
                     <article class="articleses">
                         <h3>Paso 2: </h3>
                         <a href="RegistroEncuestados"><img src="<%=Imagen.muestraImagen(RutaConfig.getRutaCarpeta()+"imagenes/EvidReg.jpg")%>" alt=""></a>
-                        <a href="RegistroEncuestados"><h3>Registro encuestados</h3></a>
+                        <a href="RegistroEncuestados"><h3>Registro encuestados</h3></a>                        
                     </article>
 
                     <article class="articleses ">

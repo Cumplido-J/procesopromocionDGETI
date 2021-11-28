@@ -7,6 +7,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import='herramientas.Imagen'%>
 <%@page import='herramientas.RutaConfig'%>
+<%@page import='herramientas.Catalogos'%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix ="fmt"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
@@ -15,6 +16,7 @@
     <head>        
         <title>Ficha de registro incompleto</title>
         <meta charset="UTF-8">
+        <jsp:useBean id="catalogoC" class="herramientas.Catalogos" />
         <jsp:useBean id="fecha" class="herramientas.Fecha" /> 
         <jsp:useBean id="now" class="java.util.Date" />
         <style>
@@ -40,7 +42,8 @@
                       </c:if>
                         en Educación Media Superior 
                         <br/>(Promoción horizontal)
-                    <br/><jsp:include page="seccionesPlantilla/cicloEscolar.jsp" flush="true"/>                                            
+                    <br/><%--<jsp:include page="seccionesPlantilla/cicloEscolar.jsp" flush="true"/>--%>
+                    Ciclo Escolar ${catalogoC.getCatalogoCicloEscolar(Docente.infoRegistro[84])}                                           
                 </td>
                 <%
                     String rutaLogo = (String) request.getAttribute("rutaImagenInc");
@@ -382,7 +385,7 @@
                 <br/>f. <b>No contar con nota desfavorable:</b> constancia emitida por el Director del plantel, de que el participante no cuenta con nota desfavorable en los dos últimos ciclos escolares inmediatos a la publicación de la convocatoria, y carta del participante, bajo protesta de decir verdad, de que no cuenta con sanción administrativa que pueda limitar su desempeño en la función.
                 <br/>g. <b>Compatibilidad de empleos:</b> constancia vigente emitida por la autoridad competente en apego a las reglas de compatibilidad.
             </p>-->
-            <p>Usted tiene su registro incompleto por lo que no es posible su participación en el proceso de promoción en el servicio docente por cambio de categoría en Educación Media Superior, <jsp:include page="seccionesPlantilla/cicloEscolar.jsp" flush="true"/>.</p>
+            <p>Usted tiene su registro incompleto por lo que no es posible su participación en el proceso de promoción en el servicio docente por cambio de categoría en Educación Media Superior, Ciclo Escolar ${catalogoC.getCatalogoCicloEscolar(Docente.infoRegistro[84])}.</p>
             
             <br/><br/><br/><center>${Docente.infoRegistro[1]} ${Docente.infoRegistro[2]} ${Docente.infoRegistro[3]}</center>
         </div>

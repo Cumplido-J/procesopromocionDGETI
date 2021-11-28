@@ -39,6 +39,10 @@
                         <c:set var="hiddenDictaminador" value="hidden"></c:set>
                         <c:set var="disabled1" value=""></c:set>
                         <c:set var="disabledEdicion" value=""></c:set>
+                        <c:set var="hiddenDurango" value="hidden"></c:set>
+                        <c:set var="disabledDurango" value="disabled"></c:set>
+                        <c:set var="hiddenNoDurango" value=""></c:set>
+                        <c:set var="disabledNoDurango" value=""></c:set>
                         <c:if test="${!vistaAdmin}">
                             <li><a href="SesionDocente">Regresar </a></li>
                             <c:set var="hidden" value="hidden"></c:set>
@@ -54,6 +58,12 @@
                                 <c:set var="disabledEdicion" value="disabled"></c:set>
                             </c:if>                            
                             
+                        </c:if>
+                        <c:if test='${(docente.infoRegistro[7]==10 && docente.infoRegistro[75]==2)}'>
+                            <c:set var="hiddenDurango" value=""></c:set>
+                            <c:set var="disabledDurango" value=""></c:set>
+                            <c:set var="hiddenNoDurango" value="hidden"></c:set>
+                            <c:set var="disabledNoDurango" value="disabled"></c:set>
                         </c:if>
                         <li><a href="Servlet_cerrarsesion">Cerrar sesión</a></li> 
                     </ul>
@@ -82,7 +92,7 @@
                       <div class="panel-heading">
                         <h4 class="panel-title">
                           <a data-parent="#accordion" data-toggle="collapse" href="#panel1" aria-expanded="true" aria-controls="panel1">
-                              ${criterios[0][0]} - ${criterios[0][1]}                                
+                                1 - ${criterios[0][1]}                                
                                 <c:if test = "${puntajes[0][7]=='R'}">
                                     <span class="glyphicon glyphicon-ok-sign completo" title="Criterio revisado" id="estatus1" completo="true"></span>                                      
                                 </c:if>
@@ -108,6 +118,8 @@
                             <form id="form1" role="form" action="RegistrarCriterio" method="POST">
                                 <input type='hidden' name='idCriterio' value='${criterios[0][0]}'>
                                 <input type='hidden' name='idPermisoD1' id='idPermisoD1' value='${sessionScope["permisoActual"]}'>
+                                <input type='hidden' name='idEntidad' id='idEntidad' value='${docente.infoRegistro[7]}'>
+                                <input type='hidden' name='idSubsistema' id='idSubsistema' value='${docente.infoRegistro[75]}'>
                                 <div class="form-group col-md-6">                                                             
                                   <label class="control-label">Antigüedad:</label>
                                   <select class="form-control input-sm" id="puntaje1" name="puntaje" required>
@@ -153,7 +165,7 @@
                       <div class="panel-heading">
                         <h4 class="panel-title">
                           <a data-parent="#accordion" data-toggle="collapse" href="#panel2" aria-expanded="false" aria-controls="panel2">
-                            ${criterios[1][0]} - ${criterios[1][1]}
+                            2 - ${criterios[1][1]}
                             <c:if test="${docente.infoRegistro[58]!=null}">
                                 <c:if test = "${puntajes[1][7]=='R'}">
                                     <span class="glyphicon glyphicon-ok-sign completo" title="Criterio revisado" id="estatus2" completo="true"></span>                                      
@@ -187,6 +199,8 @@
                           <form id="form2" role="form" action="RegistrarCriterio" method="POST">
                                 <input type='hidden' name='idCriterio' value='${criterios[1][0]}'>
                                 <input type='hidden' name='idPermisoD2' id='idPermisoD2' value='${sessionScope["permisoActual"]}'>
+                                <input type='hidden' name='idEntidad' id='idEntidad' value='${docente.infoRegistro[7]}'>
+                                <input type='hidden' name='idSubsistema' id='idSubsistema' value='${docente.infoRegistro[75]}'>
                                 <div class="form-group col-md-6">                                                             
                                   <label class="control-label">Experiencia:</label>
                                   <select class="form-control input-sm" id="puntaje2" name="puntaje" required>
@@ -229,7 +243,7 @@
                       <div class="panel-heading">
                         <h4 class="panel-title">
                           <a data-parent="#accordion" data-toggle="collapse" href="#panel3" aria-expanded="false" aria-controls="panel3">
-                          ${criterios[2][0]} - ${criterios[2][1]}
+                          3 - ${criterios[2][1]}
                             <span class="glyphicon glyphicon-ok-sign completo" title="Criterio revisado" id="estatus3" completo="true"></span>
                             <span class="glyphicon glyphicon-ok-sign ${hiddenDictaminador} completo" title="Criterio revisado" id="estatus3D" completo="true"></span>
                           </a>
@@ -257,7 +271,7 @@
                       <div class="panel-heading">
                         <h4 class="panel-title">
                           <a data-parent="#accordion" data-toggle="collapse" href="#panel4" aria-expanded="false" aria-controls="panel4">
-                            ${criterios[3][0]} - ${criterios[3][1]}                               
+                            4 - ${criterios[3][1]}                               
                                 <c:if test = "${puntajes[3][7]=='R'}">
                                     <span class="glyphicon glyphicon-ok-sign completo" title="Criterio revisado" id="estatus4" completo="true"></span>                                      
                                 </c:if>
@@ -283,9 +297,11 @@
                           <form id="form4" role="form" action="RegistrarCriterio" method="POST">
                                 <input type='hidden' name='idCriterio' value='${criterios[3][0]}'>
                                 <input type='hidden' name='idPermisoD4' id='idPermisoD4' value='${sessionScope["permisoActual"]}'>
+                                <input type='hidden' name='idEntidad' id='idEntidad' value='${docente.infoRegistro[7]}'>
+                                <input type='hidden' name='idSubsistema' id='idSubsistema' value='${docente.infoRegistro[75]}'>
                                 <div class="form-group col-md-6">                                                             
                                   <label class="control-label">Máximo grado académico:</label>
-                                  <select class="form-control input-sm" id="puntaje4" name="puntaje" required>                                  
+                                  <select class="form-control input-sm" id="puntaje4" name="puntaje" required>
                                       ${catalogo.desplegarOpcionesPuntajeAdmin(criterios[3][0],docente.infoRegistro[19],sessionScope["idDocente"])}                                                                            
                                   </select>
                                   
@@ -309,12 +325,12 @@
                             </form>
                         </div>
                       </div>
-                    </div>
+                    </div>      
                     <div class="panel panel-default">
                       <div class="panel-heading">
                         <h4 class="panel-title">
                           <a data-parent="#accordion" data-toggle="collapse" href="#panel5" aria-expanded="false" aria-controls="panel5">
-                          ${criterios[4][0]} - ${criterios[4][1]}                            
+                          5 - ${criterios[4][1]}                            
                             <c:if test="${puntajes[4][7]=='R'}">
                                 <span class="glyphicon glyphicon-ok-sign completo" title="Criterio revisado" id="estatus5" completo="true"></span>
                             </c:if>
@@ -365,6 +381,8 @@
                         <div class="panel-body">
                             <form id="form5" role="form" action="RegistrarCriterio" method="POST">
                             <input type='hidden' name='idPermisoD5' id='idPermisoD5' value='${sessionScope["permisoActual"]}'>
+                            <input type='hidden' name='idEntidad' id='idEntidad' value='${docente.infoRegistro[7]}'>
+                            <input type='hidden' name='idSubsistema' id='idSubsistema' value='${docente.infoRegistro[75]}'>
                             <div class="row">
                                 <div class="checkbox col-xs-12">                                  
                                   <label><input type="checkbox" name="cbConstancia" id="cb5" data-toggle="collapse" data-target="#seccionCursos" ${checked}>Marque la casilla si no cuenta con evidencias de este criterio</label>
@@ -404,12 +422,12 @@
                             </form>
                         </div>
                       </div>
-                    </div>
+                    </div>                            
                     <div class="panel panel-default">
                       <div class="panel-heading">
                         <h4 class="panel-title">
                           <a data-parent="#accordion" data-toggle="collapse" href="#panel6" aria-expanded="false" aria-controls="panel6">
-                          ${criterios[5][0]} - ${criterios[5][1]}                               
+                          6 - ${criterios[5][1]}                               
                             <c:if test = "${puntajes[5][7]=='R'}">
                                 <span class="glyphicon glyphicon-ok-sign completo" title="Criterio revisado" id="estatus6" completo="true"></span>                                      
                             </c:if>
@@ -423,8 +441,9 @@
                                 <span class="glyphicon glyphicon-exclamation-sign ${hiddenDictaminador} incompleto" title="Criterio pendiente de revisar" id="estatus6D" completo="false"></span>                                    
                             </c:if>    
                           </a>
-                          <p class="text-danger ${hidden}">Puntaje Comité Revisor: 
+                          <p class="text-danger ${hidden}">Puntaje Comité Revisor:
                               <span id="p6">
+                              <c:if test='${!(docente.infoRegistro[7]==10 && docente.infoRegistro[75]==2)}'>
                                   <c:if test="${puntajes[5][3]=='0'}">
                                       ${puntajes[5][4]}
                                       <c:set var="checked" value="checked"></c:set>
@@ -437,9 +456,16 @@
                                       <c:set var="in" value="in"></c:set>
                                       <c:set var="total" value="${total+aportaciones[1]}"></c:set>
                                   </c:if>                                  
-                              </span></p>
-                              <p class="text-danger ${hiddenDictaminador}">Puntaje Consejo Dictaminador: 
+                              </c:if>
+                              <c:if test='${(docente.infoRegistro[7]==10 && docente.infoRegistro[75]==2)}'>
+                                    ${puntajes[5][4]}
+                                    <c:set var="total" value="${total+puntajes[5][4]}"></c:set>
+                              </c:if>                                  
+                              </span>
+                          </p>
+                          <p class="text-danger ${hiddenDictaminador}">Puntaje Consejo Dictaminador:
                               <span id="p6D">
+                              <c:if test='${!(docente.infoRegistro[7]==10 && docente.infoRegistro[75]==2)}'>
                                   <c:if test="${puntajesDictaminador[5][3]=='0'}">
                                       ${puntajesDictaminador[5][4]}
                                       <c:set var="checked" value="checked"></c:set>
@@ -452,7 +478,13 @@
                                       <c:set var="in" value="in"></c:set>
                                       <c:set var="totalDictaminador" value="${totalDictaminador+aportaciones[2]}"></c:set>
                                   </c:if>                                  
-                              </span></p>
+                              </c:if>
+                              <c:if test='${(docente.infoRegistro[7]==10 && docente.infoRegistro[75]==2)}'>
+                                    ${puntajesDictaminador[5][4]}
+                                    <c:set var="totalDictaminador" value="${totalDictaminador+puntajesDictaminador[5][4]}"></c:set>
+                              </c:if>
+                              </span>
+                          </p>
                         </h4>
                         <button type="button" class="collpase-button collapsed" data-parent="#accordion" data-toggle="collapse" href="#panel6"></button>
                       </div>
@@ -460,24 +492,27 @@
                         <div class="panel-body">
                             <form id="form6" role="form" action="RegistrarCriterio" method="POST">
                             <input type='hidden' name='idPermisoD6' id='idPermisoD6' value='${sessionScope["permisoActual"]}'>
-                            <div class="row">
-                                <div class="checkbox col-xs-12">                                  
-                                  <label><input type="checkbox" ${checked} id="cb6" name="cbConstancia" data-toggle="collapse" data-target="#seccionAportaciones">Marque la casilla si no cuenta con evidencias de este criterio</label>
+                            <input type='hidden' name='idCriterio' value='${criterios[5][0]}'>
+                            <input type='hidden' name='idEntidad' id='idEntidad' value='${docente.infoRegistro[7]}'>
+                            <input type='hidden' name='idSubsistema' id='idSubsistema' value='${docente.infoRegistro[75]}'>
+                        <div class="${hiddenNoDurango} ${disabledNoDurango}">    
+                                <div class="row">
+                                    <div class="checkbox col-xs-12">                                  
+                                      <label><input type="checkbox" ${checked} id="cb6" name="cbConstancia" data-toggle="collapse" data-target="#seccionAportaciones">Marque la casilla si no cuenta con evidencias de este criterio</label>
+                                    </div>
                                 </div>
-                            </div>
-                            <div id="seccionAportaciones" class="collapse ${in}">
-                            
-                            <div class='table-responsive'>
-                                <label class="text-warning" id="alertaCarga"><span class="glyphicon glyphicon-warning-sign"></span>&nbsp;Utilice la barra de desplazamiento para recorrer la tabla y visualizar todos los elementos</label>
-                                <table class='table table-bordered table-condensed'>
-                                    <tr><th>Nombre de la aportación en materia de mejora continua</th><th>Periodo o Fecha de realización</th><th>Institución educativa con reconocimiento oficial que emite constancia</th><th>Constancia o documento probatorio</th><c:if test='${sessionScope["permisoActual"]=="6"}'><th>Evaluación Comité Revisor</th><th>Evaluación Consejo Dictaminador</th></c:if><c:if test='${sessionScope["permisoActual"]!="6"}'><th>Evaluación Comité Revisor</th></c:if></tr>
-                                    <tbody id="tablaAportaciones">
-                                        ${aportaciones[0]}
-                                    </tbody>
-                                </table>
-                            </div>
-                            
-                            <input type='hidden' name='idCriterio' value='${criterios[5][0]}'>                                
+                                <div id="seccionAportaciones" class="collapse ${in}">
+
+                                <div class='table-responsive'>
+                                    <label class="text-warning" id="alertaCarga"><span class="glyphicon glyphicon-warning-sign"></span>&nbsp;Utilice la barra de desplazamiento para recorrer la tabla y visualizar todos los elementos</label>
+                                    <table class='table table-bordered table-condensed'>
+                                        <tr><th>Nombre de la aportación en materia de mejora continua</th><th>Periodo o Fecha de realización</th><th>Institución educativa con reconocimiento oficial que emite constancia</th><th>Constancia o documento probatorio</th><c:if test='${sessionScope["permisoActual"]=="6"}'><th>Evaluación Comité Revisor</th><th>Evaluación Consejo Dictaminador</th></c:if><c:if test='${sessionScope["permisoActual"]!="6"}'><th>Evaluación Comité Revisor</th></c:if></tr>
+                                        <tbody id="tablaAportaciones">
+                                           ${aportaciones[0]}
+                                        </tbody>
+                                    </table>
+                                </div>                           
+                                                            
                             <div class="form-group col-xs-12">
                                 <label class="control-label">Carga de evidencia documental:</label>
                                 <br/>
@@ -489,8 +524,39 @@
                                         <span class="glyphicon glyphicon-exclamation-sign incompleto" id="alertaBtnEvidencia14" title="Sección incompleta"></span>  
                                     </c:if>
                             </div>
-                                
-                            
+                        </div>
+                        </div>
+                        <div class="${hiddenDurango} ${disabledDurango}">
+                            <div class="form-group col-md-6">
+                                <label class="control-label">Aportaciones en materia de mejora continua:</label>
+                                <select class="form-control input-sm" id="puntaje16" name="puntaje" required>
+                                    <c:choose>
+                                        <c:when test='${sessionScope["permisoActual"]=="6"}'>                                              
+                                            ${catalogo.desplegarOpcionesPuntajeAdmin(criterios[5][0],puntajesDictaminador[5][3],sessionScope["idDocente"])}
+                                        </c:when>
+                                    <c:otherwise>
+                                            ${catalogo.desplegarOpcionesPuntajeAdmin(criterios[5][0],puntajes[5][3],sessionScope["idDocente"])}                                              
+                                        </c:otherwise>
+                                    </c:choose>                                      
+                                </select>
+                                <c:if test='${sessionScope["permisoActual"]=="6"}'>
+                                    <label class="control-label">Evaluación Comité Revisor:</label>
+                                        <select class="form-control input-sm disabled" id="puntaje11Referencia" name="puntaje11Referencia">
+                                            ${catalogo.desplegarOpcionesPuntajeAdmin(criterios[5][0],puntajes[5][3],sessionScope["idDocente"])}                                              
+                                        </select>
+                                </c:if>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label class="control-label">Carga de evidencia documental:</label>
+                                <br/>
+                                <c:if test = "${docente.documentoCargado2('14')==true}">
+                                    <input id="btnEvidencia14" type="button" class="btn btn-sm btn-link" value="Ver archivo" onclick="abrirModalArchivo(14)"/>                                                                            
+                                </c:if>
+                                <c:if test = "${docente.documentoCargado2('14')==false}">
+                                    <input id="btnEvidencia14" type="button" class="btn btn-sm btn-link incompleto ${disabledEdicion}" value="Subir archivo" onclick="abrirModalArchivo(14)"/>  
+                                    <span class="glyphicon glyphicon-exclamation-sign incompleto" id="alertaBtnEvidencia14" title="Sección incompleta"></span>  
+                                </c:if>
+                            </div>
                         </div>
                             <div class="col-xs-12 text-right">
                                 
@@ -499,12 +565,12 @@
                             </form>
                         </div>        
                       </div>
-                    </div>
+                    </div>  
                     <div class="panel panel-default">
                       <div class="panel-heading">
                         <h4 class="panel-title">
                           <a data-parent="#accordion" data-toggle="collapse" href="#panel7" aria-expanded="false" aria-controls="panel7">
-                          ${criterios[6][0]} - ${criterios[6][1]}                               
+                          7 - ${criterios[6][1]}                               
                             <c:if test = "${puntajes[6][7]=='R'}">
                                 <span class="glyphicon glyphicon-ok-sign completo" title="Criterio revisado" id="estatus7" completo="true"></span>                                      
                             </c:if>
@@ -555,6 +621,8 @@
                         <div class="panel-body">
                             <form id="form7" role="form" action="RegistrarCriterio" method="POST">
                             <input type='hidden' name='idPermisoD7' id="idPermisoD7" value='${sessionScope["permisoActual"]}'>    
+                            <input type='hidden' name='idEntidad' id='idEntidad' value='${docente.infoRegistro[7]}'>
+                            <input type='hidden' name='idSubsistema' id='idSubsistema' value='${docente.infoRegistro[75]}'>
                             <div class="row">
                                 <div class="checkbox col-xs-12">                                  
                                   <label><input type="checkbox" ${checked} id="cb7" name="cbConstancia" data-toggle="collapse" data-target="#seccionParticipaciones">Marque la casilla si no cuenta con evidencias de este criterio</label>
@@ -599,7 +667,7 @@
                       <div class="panel-heading">
                         <h4 class="panel-title">
                           <a data-parent="#accordion" data-toggle="collapse" href="#panel8" aria-expanded="false" aria-controls="panel8">
-                          ${criterios[7][0]} - ${criterios[7][1]}                                
+                          8 - ${criterios[7][1]}                                
                             <c:if test = "${puntajes[7][7]=='R'}">
                                 <span class="glyphicon glyphicon-ok-sign completo" title="Criterio revisado" id="estatus8" completo="true"></span>                                      
                             </c:if>
@@ -650,6 +718,8 @@
                         <div class="panel-body">
                             <form id="form8" role="form" action="RegistrarCriterio" method="POST">
                             <input type='hidden' name='idPermisoD8' id="idPermisoD8" value='${sessionScope["permisoActual"]}'>    
+                            <input type='hidden' name='idEntidad' id='idEntidad' value='${docente.infoRegistro[7]}'>
+                            <input type='hidden' name='idSubsistema' id='idSubsistema' value='${docente.infoRegistro[75]}'>
                             <div class="row">
                                     <div class="checkbox col-xs-12">                                  
                                       <label><input type="checkbox" id="cb8" ${checked} name="cbConstancia" data-toggle="collapse" data-target="#seccionTutorias">Marque la casilla si no cuenta con evidencias de este criterio</label>
@@ -695,7 +765,7 @@
                       <div class="panel-heading">
                         <h4 class="panel-title">
                           <a data-parent="#accordion" data-toggle="collapse" href="#panel9" aria-expanded="false" aria-controls="panel9">
-                          ${criterios[8][0]} - ${criterios[8][1]} 
+                          9 - ${criterios[8][1]} 
                             <c:if test = "${puntajes[8][7]=='R'}">
                                 <span class="glyphicon glyphicon-ok-sign completo" title="Criterio revisado" id="estatus9" completo="true"></span>                                      
                             </c:if>
@@ -747,6 +817,8 @@
                         <div class="panel-body">
                             <form id="form9" role="form" action="RegistrarCriterio" method="POST">
                             <input type='hidden' name='idPermisoD9' id="idPermisoD9" value='${sessionScope["permisoActual"]}'>    
+                            <input type='hidden' name='idEntidad' id='idEntidad' value='${docente.infoRegistro[7]}'>
+                            <input type='hidden' name='idSubsistema' id='idSubsistema' value='${docente.infoRegistro[75]}'>
                             <div class="row">
                                     <div class="checkbox col-xs-12">                                  
                                       <label><input type="checkbox" id="cb9" ${checked} name="cbConstancia" data-toggle="collapse" data-target="#seccionPublicaciones">Marque la casilla si no cuenta con evidencias de este criterio</label>
@@ -792,7 +864,7 @@
                       <div class="panel-heading">
                         <h4 class="panel-title">
                           <a data-parent="#accordion" data-toggle="collapse" href="#panel10" aria-expanded="false" aria-controls="panel10">
-                          ${criterios[9][0]} - ${criterios[9][1]}  
+                          10 - ${criterios[9][1]}  
                             <c:if test = "${puntajes[9][7]=='R'}">
                                 <span class="glyphicon glyphicon-ok-sign completo" title="Criterio revisado" id="estatus10" completo="true"></span>                                      
                             </c:if>
@@ -806,10 +878,26 @@
                                 <span class="glyphicon glyphicon-exclamation-sign ${hiddenDictaminador} incompleto" title="Criterio pendiente de revisar" id="estatus10D" completo="false"></span>                                    
                             </c:if>    
                           </a>
-                          <p class="text-danger ${hidden}">Puntaje Comité Revisor: <span id="p10">${puntajes[9][4]+puntajes[10][4]+puntajes[11][4]+puntajes[12][4]+puntajes[13][4]+resultados[1]}</span></p>
-                          <c:set var="total" value="${total+puntajes[9][4]+puntajes[10][4]+puntajes[11][4]+puntajes[12][4]+puntajes[13][4]+resultados[1]}"></c:set>
-                          <p class="text-danger ${hiddenDictaminador}">Puntaje Consejo Dictaminador: <span id="p10D">${puntajesDictaminador[9][4]+puntajesDictaminador[10][4]+puntajesDictaminador[11][4]+puntajesDictaminador[12][4]+puntajesDictaminador[13][4]+resultados[2]}</span></p>
-                          <c:set var="totalDictaminador" value="${totalDictaminador+puntajesDictaminador[9][4]+puntajesDictaminador[10][4]+puntajesDictaminador[11][4]+puntajesDictaminador[12][4]+puntajesDictaminador[13][4]+resultados[2]}"></c:set>
+                            <p class="text-danger ${hidden}">Puntaje Comité Revisor: <span id="p10">
+                                <c:if test='${!(docente.infoRegistro[7]==10 && docente.infoRegistro[75]==2)}'>
+                                    ${puntajes[9][4]+puntajes[10][4]+puntajes[11][4]+puntajes[12][4]+puntajes[13][4]+resultados[1]}
+                                    <c:set var="total" value="${total+puntajes[9][4]+puntajes[10][4]+puntajes[11][4]+puntajes[12][4]+puntajes[13][4]+resultados[1]}"></c:set>
+                                </c:if>
+                                <c:if test='${(docente.infoRegistro[7]==10 && docente.infoRegistro[75]==2)}'>
+                                    ${puntajes[9][4]+puntajes[10][4]+puntajes[11][4]}
+                                    <c:set var="total" value="${total+puntajes[9][4]+puntajes[10][4]+puntajes[11][4]}"></c:set>
+                                </c:if>
+                            </span></p>
+                            <p class="text-danger ${hiddenDictaminador}">Puntaje Consejo Dictaminador: <span id="p10D">
+                                <c:if test='${!(docente.infoRegistro[7]==10 && docente.infoRegistro[75]==2)}'>    
+                                    ${puntajesDictaminador[9][4]+puntajesDictaminador[10][4]+puntajesDictaminador[11][4]+puntajesDictaminador[12][4]+puntajesDictaminador[13][4]+resultados[2]}
+                                    <c:set var="totalDictaminador" value="${totalDictaminador+puntajesDictaminador[9][4]+puntajesDictaminador[10][4]+puntajesDictaminador[11][4]+puntajesDictaminador[12][4]+puntajesDictaminador[13][4]+resultados[2]}"></c:set>
+                                </c:if>
+                                <c:if test='${(docente.infoRegistro[7]==10 && docente.infoRegistro[75]==2)}'>
+                                    ${puntajesDictaminador[9][4]+puntajesDictaminador[10][4]+puntajesDictaminador[11][4]}
+                                    <c:set var="totalDictaminador" value="${totalDictaminador+puntajesDictaminador[9][4]+puntajesDictaminador[10][4]+puntajesDictaminador[11][4]}"></c:set>  
+                                </c:if>
+                            </span></p>
                         </h4>
                         <button type="button" class="collpase-button collapsed" data-parent="#accordion" data-toggle="collapse" href="#panel10"></button>
                       </div>
@@ -818,6 +906,9 @@
                             <form id="form10E" role="form" action="RegistrarCriterio" method="POST">
                                 <input type='hidden' name='idCriterio' value='${criterios[9][0]}'>
                                 <input type='hidden' name='idPermisoD10' id="idPermisoD10" value='${sessionScope["permisoActual"]}'>    
+                                <input type='hidden' name='idEntidad' id='idEntidad' value='${docente.infoRegistro[7]}'>
+                                <input type='hidden' name='idSubsistema' id='idSubsistema' value='${docente.infoRegistro[75]}'>
+                                <div class="${hiddenNoDurango} ${disabledNoDurango}">
                                 <div class="row">
                                     <div class="form-group col-md-6">
                                         <label class="control-label">10.A Planeación didáctica: Docente</label>
@@ -952,6 +1043,81 @@
                                         <span class="glyphicon glyphicon-exclamation-sign incompleto" id="alertaBtnEvidencia18" title="Sección incompleta"></span>  
                                     </c:if>
                                 </div>
+                                </div>
+                                <div class="${hiddenDurango} ${disabledDurango}">
+                                <div class="row">
+                                    <div class="form-group col-md-6">
+                                        <label class="control-label">10.A Planeación didáctica: Docente</label>
+                                        <select class="form-control input-sm" id="puntaje25" name="puntaje25" required>                                  
+                                            <c:choose>
+                                              <c:when test='${sessionScope["permisoActual"]=="6"}'>                                              
+                                                  ${catalogo.desplegarOpcionesPuntajeAdmin("25",puntajesDictaminador[9][3],sessionScope["idDocente"])}
+                                              </c:when>
+                                              <c:otherwise>
+                                                  ${catalogo.desplegarOpcionesPuntajeAdmin("25",puntajes[9][3],sessionScope["idDocente"])}                                                  
+                                              </c:otherwise>
+                                            </c:choose>
+                                      </select>
+                                      <c:if test='${sessionScope["permisoActual"]=="6"}'>
+                                            <label class="control-label">Evaluación Comité Revisor:</label>
+                                            <select class="form-control input-sm disabled" id="puntaje8Referencia" name="puntaje8Referencia">
+                                                  ${catalogo.desplegarOpcionesPuntajeAdmin("25",puntajes[9][3],sessionScope["idDocente"])}                                              
+                                            </select>
+                                      </c:if>
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label class="control-label">10.B Portafolio de evidencias de Evaluación del aprendizaje</label>
+                                        <select class="form-control input-sm" id="puntaje26" name="puntaje26" required>                                  
+                                            <c:choose>
+                                              <c:when test='${sessionScope["permisoActual"]=="6"}'>                                              
+                                                  ${catalogo.desplegarOpcionesPuntajeAdmin("26",puntajesDictaminador[10][3],sessionScope["idDocente"])}
+                                              </c:when>
+                                              <c:otherwise>
+                                                  ${catalogo.desplegarOpcionesPuntajeAdmin("26",puntajes[10][3],sessionScope["idDocente"])}                                                  
+                                              </c:otherwise>
+                                            </c:choose>
+                                        </select>
+                                        <c:if test='${sessionScope["permisoActual"]=="6"}'>
+                                            <label class="control-label">Evaluación Comité Revisor:</label>
+                                            <select class="form-control input-sm disabled" id="puntaje9Referencia" name="puntaje9Referencia">
+                                                  ${catalogo.desplegarOpcionesPuntajeAdmin("26",puntajes[10][3],sessionScope["idDocente"])}                                              
+                                            </select>
+                                        </c:if>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group col-md-6">     
+                                      <label class="control-label">10.C Porcentaje de aprobación escolar (Resultados educativos) por las asignatura, actividades paraescolar o módulos profesionales impartidos:<br/><br/></label>
+                                      <select class="form-control input-sm" id="puntaje27" name="puntaje27" required>                                  
+                                          <c:choose>
+                                              <c:when test='${sessionScope["permisoActual"]=="6"}'>
+                                                  ${catalogo.desplegarOpcionesPuntajeAdmin("27",puntajesDictaminador[11][3],sessionScope["idDocente"])}
+                                              </c:when>
+                                              <c:otherwise>
+                                                  ${catalogo.desplegarOpcionesPuntajeAdmin("27",puntajes[11][3],sessionScope["idDocente"])}                                                                                               
+                                              </c:otherwise>
+                                           </c:choose>                                          
+                                      </select>
+                                      <c:if test='${sessionScope["permisoActual"]=="27"}'>
+                                        <label class="control-label">Evaluación Comité Revisor:</label>
+                                        <select class="form-control input-sm disabled" id="puntaje10Referencia" name="puntaje10Referencia">
+                                              ${catalogo.desplegarOpcionesPuntajeAdmin("27",puntajes[11][3],sessionScope["idDocente"])}                                              
+                                        </select>
+                                      </c:if>
+                                   </div>
+                                </div>
+                                <div class="form-group col-md-12">
+                                    <label class="control-label">Carga de evidencia documental:</label>
+                                    <br/>
+                                    <c:if test = "${docente.documentoCargado2('18')==true}">
+                                        <input id="btnEvidencia18" type="button" class="btn btn-sm btn-link" value="Ver archivo" onclick="abrirModalArchivo(18)"/>                                                                            
+                                    </c:if>
+                                    <c:if test = "${docente.documentoCargado2('18')==false}">
+                                        <input id="btnEvidencia18" type="button" class="btn btn-sm btn-link incompleto ${disabledEdicion}" value="Subir archivo" onclick="abrirModalArchivo(18)"/>  
+                                        <span class="glyphicon glyphicon-exclamation-sign incompleto" id="alertaBtnEvidencia18" title="Sección incompleta"></span>  
+                                    </c:if>
+                                </div>
+                                </div>              
                                 <div class="col-xs-12 text-right">
                                 <div class="row">
                                     <div class="checkbox col-xs-12 text-left">                                  
