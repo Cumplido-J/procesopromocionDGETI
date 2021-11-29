@@ -281,6 +281,7 @@
                 var subsistema=$("#subsistema").val();
                 var entidad=$("#entidad").val();
                 var periodo=$("#periodo").val();
+                var proceso="1";
 //                $("#modalMensajeReporte").modal("show");
                 $("#btnConfirmarReporte").val("Generando reporte...");
                 $("#btnConfirmarReporte").attr("disabled","disabled");
@@ -295,7 +296,7 @@
                 $.ajax({
                 type: "POST",
                 url: '/promocion/reporteAsignacion',
-                data: {programa:programa,subsistema:subsistema,entidad:entidad,periodo:periodo},    
+                data: {programa:programa,subsistema:subsistema,entidad:entidad,periodo:periodo,proceso:proceso},     
                 timeout: 360000,
                 success: function (data) {
                     var reporteObject=JSON.parse(data);

@@ -63,6 +63,7 @@
                                 <c:if test='${sessionScope["permisoActualEdicion"]=="V"}'>
                                     <option value='1'>Buscar aspirantes</option>
                                     <option value='2'>Asignar categoria</option>
+                                    <option value='3'>Generar reporte</option>
                                 </c:if>
                                 <c:if test='${sessionScope["permisoActualEdicion"]=="F"}'>
                                     <option value='1'>Buscar aspirantes</option>
@@ -81,10 +82,14 @@
                               ${catalogo.desplegarOpcionesZona()}
                           </select>
                         </div>
+                        <div class="form-group col-xs-4 text-right" style="margin-left: -145px;margin-top: 2%;" id="divReporteZona2">                         
+                            <img src="imagenes/excel.svg" style="width: 30px; border-radius: 50%; border: 2px solid #46b12e; margin-left: -190px;" onclick="confirmacionReporteZona()">
+                            <span class="tooltiptext" style="margin-left: -190px;">Generar Reporte</span>
+                        </div>
                     </div>
                     <div class="row">
                         <div class="form-group col-md-4" id="divCategoria">
-                            <label class="control-label" for="categoria">Categoria</label>
+                            <label class="control-label" for="categoria">Categoria a la que aspira</label>
                             <select class="form-control input-sm ${disabled3}" id="categoria" name="categoria" onchange="numeroPlazasZona()" >                                  
                                 ${catalogo.desplegarOpcionesCategoria()}
                             </select>
@@ -131,8 +136,9 @@
                                 <th>Nombre</th>
                                 <th>RFC</th>
                                 <th>Puntaje Dictaminador</th>
-                                <th>Posición</th>
                                 <th>Zona Economica</th>
+                                <th>Posición</th>
+                                <th>Estatus</th>
                                 <th>Guardar</th>
                             </tr>
                         </thead>
@@ -279,15 +285,16 @@
                     $("#seccionEditable").html(data);}
                 );
             }
-            function confirmacionReporte(){
-                $("#btnConfirmarReporte").attr("onClick","crearExcel()");
+            function confirmacionReporteZona(){
+                $("#btnConfirmarReporte").attr("onClick","crearExcelZona()");
                 $("#modalMensajeReporte").modal("show");
             }
-            function crearExcel(){
+            function crearExcelZona(){
                 var programa=$("#programa").val();
                 var subsistema=$("#subsistema").val();
                 var entidad=$("#entidad").val();
                 var periodo=$("#periodo").val();
+                var proceso="2";
 //                $("#modalMensajeReporte").modal("show");
                 $("#btnConfirmarReporte").val("Generando reporte...");
                 $("#btnConfirmarReporte").attr("disabled","disabled");
@@ -302,17 +309,38 @@
                 $.ajax({
                 type: "POST",
                 url: '/procesopromocion/reporteAsignacion',
-                data: {programa:programa,subsistema:subsistema,entidad:entidad,periodo:periodo},    
+                data: {programa:programa,subsistema:subsistema,entidad:entidad,periodo:periodo,proceso:proceso},    
                 timeout: 360000,
                 success: function (data) {
                     var reporteObject=JSON.parse(data);
                     var tabla= ""
                     tabla +=  "<table><tr><th >id</th><th >nombre</th><th >primerApellido</th><th >segundoApellido</th><th >correo</th><th >curp</th><th >idPlantel</th><th >idEntidad</th><th >entidad</th><th >cct</th><th >plantel</th><th >telfijo</th><th >telcel</th><th >consideraciones</th><th >idEscuelaEstudio</th><th >escuela</th><th >idCarrera</th><th >carrera</th><th >anioEgreso</th><th >idGradoAcademico</th><th >grado</th><th >idModalidadTitulacion</th><th >modalidad</th><th >anioTitulacion</th><th >cedula</th><th >activo</th><th >ingresoSubsistema</th><th >ingresoPlantel</th><th >idCategoriaJornada</th><th >clave</th><th >idCategoria</th><th >categoria</th><th >idJornada</th><th >jornada</th><th >fechaPlaza</th><th >idTipoNombramiento</th><th >clave</th><th >codigo</th><th >descripcion</th><th >tipo</th><th >fechaUltimaPromocion</th><th >idCategoriaJornadaAspira</th><th >clave as claveAspira</th><th >idCategoriaAspira</th><th >categoriaAspira</th>        <th >idJornadaAspira</th><th >jornadaAspira</th><th >idPerfilRequerido</th><th >requisito</th><th >notaSancion</th><th >compatibilidad</th><th >horasOtroSubsistema</th><th >nivelCENNI</th><th >folioCENNI</th><th >idCCT</th><th >cct</th><th >idEntidadEstudio</th><th >idInstitucion</th><th >idTipoInstitucion</th><th >gradoMarginacion</th><th >frenteGrupo</th><th >funcionesOtro</th><th >finRegistro</th><th >consideraciones</th><th >publico</th><th >idPrograma</th><th >idConvocatoria</th><th >idEstatus</th><th >observacionInfo</th><th >observacionEncuestados</th><th >observacionCriterios</th><th >institucion</th><th >cct</th><th >escuela</th><th >carreraOtra</th><th >observacionCriterios2</th><th >idSubsistema</th><th >folio</th><th >tipoVacanciaAspira</th><th >idEstatus</th><th >estatus</th><th >puntaje1</th><th >puntaje2</th><th >observacionInfo</th><th >observacionEncuestados</th><th >observacionCriterios</th><th >posicion</th>"
-                + "<th >observacion1</th><th >observacion2</th><th >observacion3</th><th >observacion4</th><th >observacion5</th><th >observacion6</th><th >observacion7</th><th >observacion8</th></tr>";
-                    for (let i = 1; i < reporteObject.reporte.length; i++) {
+                + "<th >observacion1</th><th >observacion2</th><th >observacion3</th><th >observacion4</th><th >observacion5</th><th >observacion6</th><th >observacion7</th><th >observacion8</th><th >Lista cotejo</th><th >zonaEconomica</th><th >idEstatusGanadorRonda1</th><th >DescEstatusGanadorRonda1</th><th >idEstatusGanadorRonda2</th><th >descEstatusGanadorRonda2</th><th >posicionEstatal</th></tr>";
+                    for (let i = 0; i < reporteObject.reporte.length; i++) {
                         tabla +=  "<tr> "
                         for (let z = 0; z < reporteObject.reporte[i].length; z++) {
-                        tabla +=  "<td >"+JSON.parse(JSON.stringify(reporteObject.reporte[i]))[z]+"</td> "
+                            
+                            if(z==65){
+                                if(JSON.parse(JSON.stringify(reporteObject.reporte[i]))[z]==1){
+                                    tabla +=  "<td >Programa de Promoción en el Servicio Docente por Cambio de Categoría en Educación Media Superior</td> "
+                                }else if(JSON.parse(JSON.stringify(reporteObject.reporte[i]))[z]==2){
+                                    tabla +=  "<td >Programa de Promoción en el Servicio Docente por Asignación de Horas Adicionales en Educación Media Superior</td> "
+                                }else{
+                                    tabla +=  "<td >Programa de Promoción en la Función por Incentivos en Educación Media Superior</td> "
+                                }
+                            }else if(z==95){
+                                if(JSON.parse(JSON.stringify(reporteObject.reporte[i]))[z]!=null){
+                                    tabla +=  "<td >Si</td> "
+                                }else{
+                                    tabla +=  "<td >No</td> "
+                                }
+                            }else{
+                                if(JSON.parse(JSON.stringify(reporteObject.reporte[i]))[z]!=null){
+                                    tabla +=  "<td >"+JSON.parse(JSON.stringify(reporteObject.reporte[i]))[z]+"</td> "
+                                }else{
+                                    tabla +=  "<td >---</td> "
+                                }
+                            }
                         }
                         tabla +=  "</tr>";
                     }
@@ -487,8 +515,8 @@
                     $("#divPlazas").show();
                     $("#divBuscar").show();
                     $("#divCalcular").hide();
-                    $("#divReporteZona").show();
-                }else{
+                    $("#divReporteZona").hide();
+                }else if(idProceso==2){
                     $("#container4").hide();
                     $("#divEntidad").hide();
                     $("#divPlantel").hide();
@@ -498,6 +526,17 @@
                     $("#divPlazas").hide();
                     $("#divCalcular").show();
                     $("#divReporteZona").hide();
+                }else{
+                    $("#container4").hide();
+                    $("#divEntidad").hide();
+                    $("#divPlantel").hide();
+                    $("#divZona").hide();
+                    $("#divCategoria").hide();
+                    $("#divPlazas").hide();
+                    $("#divBuscar").hide();
+                    $("#divCalcular").hide();
+                    $("#divReporteZona").hide();
+                    $("#divReporteZona2").show();
                 }
             }
             $("#container4").hide();
@@ -509,5 +548,6 @@
             $("#divBuscar").hide();
             $("#divCalcular").hide();
             $("#divReporteZona").hide();
+            $("#divReporteZona2").hide();
         </script>
 </html>

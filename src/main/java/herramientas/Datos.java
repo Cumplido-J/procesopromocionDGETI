@@ -6,6 +6,7 @@
 package herramientas;
 
 import com.aplicacion.beans.ModelReporte;
+import com.aplicacion.beans.ModelReporteEstatal;
 import constants.ConstantsWS;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -633,6 +634,26 @@ public class Datos {
         }
     }
 
+    public String generarReporteEstatal(String idPrograma,String idSubsistema,String periodo) {
+        String respuesta = "<table><tr><th >id</th><th >nombre</th><th >primerApellido</th><th >segundoApellido</th><th >correo</th><th >curp</th><th >idPlantel</th><th >idEntidad</th><th >entidad</th><th >cct</th><th >plantel</th><th >telfijo</th><th >telcel</th><th >consideraciones</th><th >idEscuelaEstudio</th><th >escuela</th><th >idCarrera</th><th >carrera</th><th >anioEgreso</th><th >idGradoAcademico</th><th >grado</th><th >idModalidadTitulacion</th><th >modalidad</th><th >anioTitulacion</th><th >cedula</th><th >activo</th><th >ingresoSubsistema</th><th >ingresoPlantel</th><th >idCategoriaJornada</th><th >clave</th><th >idCategoria</th><th >categoria</th><th >idJornada</th><th >jornada</th><th >fechaPlaza</th><th >idTipoNombramiento</th><th >clave</th><th >codigo</th><th >descripcion</th><th >tipo</th><th >fechaUltimaPromocion</th><th >idCategoriaJornadaAspira</th><th >clave as claveAspira</th><th >idCategoriaAspira</th><th >categoriaAspira</th>        <th >idJornadaAspira</th><th >jornadaAspira</th><th >idPerfilRequerido</th><th >requisito</th><th >notaSancion</th><th >compatibilidad</th><th >horasOtroSubsistema</th><th >nivelCENNI</th><th >folioCENNI</th><th >idCCT</th><th >cct</th><th >idEntidadEstudio</th><th >idInstitucion</th><th >idTipoInstitucion</th><th >gradoMarginacion</th><th >frenteGrupo</th><th >funcionesOtro</th><th >finRegistro</th><th >consideraciones</th><th >publico</th><th >idPrograma</th><th >idConvocatoria</th><th >idEstatus</th><th >observacionInfo</th><th >observacionEncuestados</th><th >observacionCriterios</th><th >institucion</th><th >cct</th><th >escuela</th><th >carreraOtra</th><th >observacionCriterios2</th><th >idSubsistema</th><th >folio</th><th >tipoVacanciaAspira</th><th >idEstatus</th><th >estatus</th><th >puntaje1</th><th >puntaje2</th><th >observacionInfo</th><th >observacionEncuestados</th><th >observacionCriterios</th><th >posicion</th>"
+                + "<th >observacion1</th><th >observacion2</th><th >observacion3</th><th >observacion4</th><th >observacion5</th><th >observacion6</th><th >observacion7</th><th >observacion8</th></tr>";
+        ModelReporteEstatal reporteEstatal = new ModelReporteEstatal();
+        UtileriasHelper utilerias = new UtileriasHelper();
+        String jsonReporte = "";
+        try {
+            String[] parametros = {idPrograma,idSubsistema,periodo};
+            reporteEstatal.setReporte(metodos.ejecutaSP("sp_reporteAsignacionEstatal", parametros));
+            
+            jsonReporte = utilerias.convertObjectToJson(reporteEstatal);
+            return jsonReporte;
+        } catch (Exception e) {
+            respuesta = e.toString();
+        } finally {
+//            return respuesta;
+            return jsonReporte;
+        }
+    }
+
     public String validarSeleccionadasAdd(String idUsuario) {
         String respuesta = "";
         int horas = 0, totalHoras = 0, numPlazas = 0;
@@ -1061,8 +1082,7 @@ public class Datos {
                         respuesta="";
                         for(String[] dato:datos)
                         {
-    //                        respuesta+="<tr><td>"+dato[4]+"</td><td>"+dato[6]+"</td><td>"+dato[8]+"</td><td>"+dato[12]+"</td><td>"+dato[16]+"</td><td>"+dato[11]+"</td><td>"+dato[13]+"</td><td>"+(dato[10]==null?"0":dato[10])+"</td>";
-                            respuesta+="<tr><td>"+dato[4]+"</td><td>"+dato[6]+"</td><td>"+dato[8]+"</td><td>"+dato[18]+"</td><td>"+dato[19]+"</td><td>"+dato[11]+"</td><td>"+dato[13]+"</td><td>"+(dato[10]==null?"0":dato[10])+"</td>";
+                            respuesta+="<tr><td>"+dato[4]+"</td><td>"+dato[6]+"</td><td>"+dato[8]+"</td><td>"+dato[18]+"</td><td>"+dato[19]+"</td><td>"+dato[11]+" "+(dato[21]==null?"":dato[21])+" "+(dato[22]==null?"":dato[22])+"</td><td>"+dato[13]+"</td><td>"+(dato[10]==null?"0":dato[10])+"</td><td>"+dato[17]+"</td>";
                             if(dato[10]==null || dato[15]==null){
                                 respuesta+="<td>"+"***"+"</td>"+"</tr>";
                             }else{
