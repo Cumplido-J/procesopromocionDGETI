@@ -89,8 +89,14 @@ public class Servlet_buscarAspirantePorZona extends HttpServlet {
                 String periodo=request.getParameter("periodo");
                 String zonaEconomica=request.getParameter("zonaEconomica");
                 Datos d=new Datos();
-                if(entidad.isEmpty() && plantel.isEmpty()){
-                    out.print(d.generarResultadosZonaEconomica(programa,subsistema,entidad,plantel,vacancia,periodo));
+//                if(entidad.isEmpty() && plantel.isEmpty()){
+                int idProceso=Integer.parseInt(entidad);
+                if(id.equals("r")){
+                    if(idProceso==0){
+                        out.print(d.generarResultadosZonaEconomica(programa,subsistema,entidad,plantel,vacancia,periodo));
+                    }else{
+                        out.print(d.generarResultadosZonaEconomicaPorEntidad(programa,subsistema,entidad,plantel,vacancia,periodo));
+                    }
                 }else{
 //                    out.print(d.desplegarAspirantesPorZona(id, programa, subsistema, entidad, plantel, categoria, jornada, vacancia, periodo));
 //                    out.print(d.desplegarAspirantesZona(id,programa,subsistema,entidad,periodo,vacancia,zonaEconomica,categoria));

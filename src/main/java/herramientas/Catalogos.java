@@ -37,6 +37,20 @@ public class Catalogos {
             return respuesta;        
         }
     }
+    public  String desplegarOpcionesEstado1(){        
+        String respuesta="<option value='0'>Todos los estados</option>";        
+        try{
+            List<String[]> datos=metodos.ejecutaSP("sp_selectCatEntidades");
+            for(String[] dato:datos)
+            {
+                respuesta+="<option value='"+dato[0]+"'>"+dato[1]+"</option>";
+            }
+        }catch(Exception e){
+            respuesta=e.toString();
+        }finally{
+            return respuesta;        
+        }
+    }
     public  String desplegarOpcionesEstado2(String idEstado){        
         String respuesta="<option value=''>-Seleccione-</option>";        
         try{

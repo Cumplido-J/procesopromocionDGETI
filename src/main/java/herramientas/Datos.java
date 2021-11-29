@@ -1027,6 +1027,65 @@ public class Datos {
             return respuesta;  
         }
     }
+    public String generarResultadosZonaEconomicaPorEntidad(String programa,String idSubsistema,String entidad,String plantel,String vacancia,String periodo){        
+        String respuesta="<tr><td colspan='9' class='text-center'>Sin información</td></tr>";        
+        try{
+            ///Consulta catalogo de Zona Economica
+            List<String[]> datosZonaEconomica=metodos.ejecutaSP("sp_selectCatZonaEconomica");
+            for(String[] idZonaEconomica:datosZonaEconomica){
+                String zonaEconomica=idZonaEconomica[0];
+                ///Consulta el catalogo de entidades
+//                List<String[]> datosEntidades=metodos.ejecutaSP("sp_selectCatEntidades");
+//                for(String[] dato:datosEntidades){
+                        String idEntidad=entidad;
+                        String[] parametrosVacancia={programa, idSubsistema, idEntidad,vacancia,periodo,zonaEconomica};
+                        //Se obtiene la vacancia de acuerdo a entidad y que esta no haya sido asignada sin importar la categoria ni jornada
+                        //Realizar Mejora en el proceso de asignacion
+                        List<String[]> datosVacancias=metodos.ejecutaSP("sp_consultaVacanciasZonaEconomica",parametrosVacancia);
+                        if(datosVacancias.size()>0){
+                            //Se iteran las vacancias previamente consultadas.
+                            for(String[] datosVacancia:datosVacancias){
+                                    String[] parametrosGanador={programa, idSubsistema, idEntidad, datosVacancia[0], datosVacancia[2],vacancia, periodo, zonaEconomica};
+                                    //Consulta los aspirantes que particpan para esta ronda.
+                                    //Consultar en sp_consultaAspirantePorZona los que existen en la tabla de ganadores.
+                                    List<String[]> datosGanador=metodos.ejecutaSP("sp_consultaAspirantePorZona",parametrosGanador);
+                                        if(!datosGanador.isEmpty()){
+                                            int posicion=0;
+                                            for(String[] datoGanador:datosGanador){
+                                                posicion++;
+                                                //Se valida que el parcticipante no exista en la tabla de ganadores al menos para el periodo en el que se esta ejecutando el proceso.
+//                                                String[] parametrosGanadorE={datoGanador[0],periodo};
+//                                                List<String[]> datosGanadorE=metodos.ejecutaSP("sp_consultaGanadores",parametrosGanadorE);
+//                                                int isGanador=Integer.parseInt(datosGanadorE.get(0)[0]);
+//                                                if(isGanador==0){
+                                                    
+//                                                  String[] parametrosGanador1={datoGanador[0],Integer.toString(1)};
+                                                    String[] parametrosGanador1={datoGanador[0],Integer.toString(posicion)};
+                                                    //String[] parametrosRonda={datoGanador[0],"2"};
+                                                    //String[] parametrosActualizarVacancia={datosVacancia[9]};
+                                                    String[] parametrosInsertGanador={datoGanador[0],idSubsistema,programa,periodo,"2",datosVacancia[9]};
+                                                    metodos.ejecutaSP("sp_insertPosicionZona",parametrosGanador1);
+                                                    //inserta en el la tabla de aspirante la ronda en la que se le asigno la plaza.
+                                                    //metodos.ejecutaSP("sp_actualizaRondaGanador",parametrosRonda);
+                                                    //Se actualiza la vacancia cuando esta es asignada. Revisar fuera del for.
+                                                    //metodos.ejecutaSP("sp_actualizarPlazaAsignada",parametrosActualizarVacancia);
+                                                    //Se inserta el usuario en la tabla de ganadoresasignacion.
+                                                    metodos.ejecutaSP(constants.SP_INSERT_GANADORES_ASIGNACION,parametrosInsertGanador); 
+                                                    //break;
+//                                                }
+                                            }
+                                        }
+                            }
+                        }
+//                }
+            }
+            return respuesta;
+        }catch(Exception e){
+            respuesta=e.toString();
+        }finally{
+            return respuesta;  
+        }
+    }
     public String desplegarAspirantesPorZona(String id,String idPrograma,String idSubsistema,String idEntidad,String idPlantel,String categoria,String jornada,String vacancia, String periodo){        
         String respuesta="<tr><td colspan='9' class='text-center'>Sin información</td></tr>";        
         try{

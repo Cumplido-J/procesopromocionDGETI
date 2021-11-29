@@ -76,6 +76,12 @@
                               ${catalogo.desplegarOpcionesEstado(sessionScope["entidad"])}
                           </select>
                         </div>
+                          <div class="form-group col-md-4" id="divEntidad1">                                               
+                          <label class="control-label" for="entidad">Entidad</label>
+                          <select class="form-control input-sm ${disabled3}" id="entidad1" name="entidad1">                                  
+                              ${catalogo.desplegarOpcionesEstado1()}
+                          </select>
+                        </div>
                         <div class="form-group col-md-4" id="divZona">                                               
                           <label class="control-label" for="zonaEconomica">Zona Económica</label>
                           <select class="form-control input-sm ${disabled3}" id="zonaEconomica" name="zonaEconomica" >                                  
@@ -253,7 +259,7 @@
             function calcularResultados1(){
                 var programa=$("#programa").val();
                 var subsistema=$("#subsistema").val();
-                var entidad=$("#entidad").val();
+                var entidad=$("#entidad1").val();
                 var plantel="";
                 var categoria=$("#categoria").val();
                 var jornada=$("#jornada").val();
@@ -499,6 +505,7 @@
                 if(idProceso==0){
                     $("#container4").hide();
                     $("#divEntidad").hide();
+                    $("#divEntidad1").hide();
                     $("#divPlantel").hide();
                     $("#divZona").hide();
                     $("#divCategoria").hide();
@@ -510,6 +517,7 @@
                 }else if(idProceso==1){
                     $("#container4").show();
                     $("#divEntidad").show();
+                    $("#divEntidad1").hide();
                     $("#divPlantel").show();
                     $("#divZona").show();
                     $("#divCategoria").show();
@@ -521,6 +529,7 @@
                 }else if(idProceso==2){
                     $("#container4").hide();
                     $("#divEntidad").hide();
+                    $("#divEntidad1").show();
                     $("#divPlantel").hide();
                     $("#divBuscar").hide();
                     $("#divZona").hide();
@@ -532,6 +541,7 @@
                 }else{
                     $("#container4").hide();
                     $("#divEntidad").hide();
+                    $("#divEntidad1").hide();
                     $("#divPlantel").hide();
                     $("#divZona").hide();
                     $("#divCategoria").hide();
@@ -544,6 +554,7 @@
             }
             $("#container4").hide();
             $("#divEntidad").hide();
+            $("#divEntidad1").hide();
             $("#divPlantel").hide();
             $("#divZona").hide();
             $("#divCategoria").hide();
