@@ -506,6 +506,7 @@
                     $("#divBuscar").hide();
                     $("#divCalcular").hide();
                     $("#divReporteZona").hide();
+                    $("#divReporteZona2").hide();
                 }else if(idProceso==1){
                     $("#container4").show();
                     $("#divEntidad").show();
@@ -516,6 +517,7 @@
                     $("#divBuscar").show();
                     $("#divCalcular").hide();
                     $("#divReporteZona").hide();
+                    $("#divReporteZona2").hide();
                 }else if(idProceso==2){
                     $("#container4").hide();
                     $("#divEntidad").hide();
@@ -526,6 +528,7 @@
                     $("#divPlazas").hide();
                     $("#divCalcular").show();
                     $("#divReporteZona").hide();
+                    $("#divReporteZona2").hide();
                 }else{
                     $("#container4").hide();
                     $("#divEntidad").hide();
