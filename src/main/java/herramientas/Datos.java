@@ -478,7 +478,7 @@ public class Datos {
             "                            </select>\n" +
             "                        </div></td><td><button type='button' class='btn btn-sm' title='Borrar' onclick='confirmarCategoria("+dato[0]+")'><span class='glyphicon glyphicon-floppy-disk incompleto2'></span></button></td>"+"</tr>";
                             }else{
-                                if(dato[19].equals("1")){
+                                if(dato[19].equals("1") && dato[20]==null){
                                     respuesta+="<td><div class=\"form-group col-md-24\">  \n" +
             "                            <select class=\"form-control input-sm\" id="+tvacancia+" name=\"tvacancia2\" required>\n" +
             "                                <option value=\"\" selected>Seleccionar una opción</option>\n" +
@@ -487,7 +487,7 @@ public class Datos {
             "                                <option value="+estatus3+">"+estatusDesc3+"</option>\n" +
             "                            </select>\n" +
             "                        </div></td><td><button type='button' class='btn btn-sm' title='Borrar' onclick='confirmarCategoria("+dato[0]+")'><span class='glyphicon glyphicon-floppy-disk incompleto2'></span></button></td>"+"</tr>";
-                                    }else if(dato[19].equals("2")){
+                                    }else if(dato[19].equals("2") && dato[20]==null){
                                         respuesta+="<td><div class=\"form-group col-md-24\">  \n" +
             "                            <select class=\"form-control input-sm\" id="+tvacancia+" name=\"tvacancia2\" required>\n" +
             "                                <option value=\"\" selected>Seleccionar una opción</option>\n" +
@@ -496,9 +496,18 @@ public class Datos {
             "                                <option value="+estatus3+">"+estatusDesc3+"</option>\n" +
             "                            </select>\n" +
             "                        </div></td><td><button type='button' class='btn btn-sm' title='Borrar' onclick='confirmarCategoria("+dato[0]+")'><span class='glyphicon glyphicon-floppy-disk incompleto2'></span></button></td>"+"</tr>";
-                                    }else if(dato[19].equals("3")){
+                                    }else if(dato[19].equals("3") && dato[20]==null){
                                         respuesta+="<td><div class=\"form-group col-md-24\">  \n" +
             "                            <select class=\"form-control input-sm\" id="+tvacancia+" name=\"tvacancia2\" required>\n" +
+            "                                <option value=\"\">Seleccionar una opción</option>\n" +
+            "                                <option value="+estatus1+">"+estatusDesc1+"</option>\n" +
+            "                                <option value="+estatus2+">"+estatusDesc2+"</option>\n" +
+            "                                <option value="+estatus3+" selected>"+estatusDesc3+"</option>\n" +
+            "                            </select>\n" +
+            "                        </div></td><td><button type='button' class='btn btn-sm' title='Borrar' onclick='confirmarCategoria("+dato[0]+")'><span class='glyphicon glyphicon-floppy-disk incompleto2'></span></button></td>"+"</tr>";
+                                    }else if(dato[20]!=null){
+                                        respuesta+="<td><div class=\"form-group col-md-24\">  \n" +
+            "                            <select class=\"form-control input-sm\" id="+tvacancia+" name=\"tvacancia2\" disabled>\n" +
             "                                <option value=\"\">Seleccionar una opción</option>\n" +
             "                                <option value="+estatus1+">"+estatusDesc1+"</option>\n" +
             "                                <option value="+estatus2+">"+estatusDesc2+"</option>\n" +
