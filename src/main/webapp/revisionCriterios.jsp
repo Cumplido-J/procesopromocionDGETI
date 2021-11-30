@@ -1043,7 +1043,7 @@
                                         <span class="glyphicon glyphicon-exclamation-sign incompleto" id="alertaBtnEvidencia18" title="Sección incompleta"></span>  
                                     </c:if>
                                 </div>
-                                </div>
+                               </div>
                                 <div class="${hiddenDurango} ${disabledDurango}">
                                 <div class="row">
                                     <div class="form-group col-md-6">
@@ -1098,7 +1098,7 @@
                                               </c:otherwise>
                                            </c:choose>                                          
                                       </select>
-                                      <c:if test='${sessionScope["permisoActual"]=="27"}'>
+                                      <c:if test='${sessionScope["permisoActual"]=="6"}'>
                                         <label class="control-label">Evaluación Comité Revisor:</label>
                                         <select class="form-control input-sm disabled" id="puntaje10Referencia" name="puntaje10Referencia">
                                               ${catalogo.desplegarOpcionesPuntajeAdmin("27",puntajes[11][3],sessionScope["idDocente"])}                                              

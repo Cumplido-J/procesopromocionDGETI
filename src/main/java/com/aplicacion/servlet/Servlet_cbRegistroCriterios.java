@@ -133,7 +133,12 @@ public class Servlet_cbRegistroCriterios extends HttpServlet {
             request.setAttribute("participaciones", cv.getFilasParticipaciones(idUsuario,vistaAdmin, idPermiso, permisoEdicion));
             request.setAttribute("tutorias", cv.getFilasTutorias(idUsuario,vistaAdmin, idPermiso, permisoEdicion));
             request.setAttribute("publicaciones", cv.getFilasPublicaciones(idUsuario,vistaAdmin, idPermiso, permisoEdicion));
-            request.setAttribute("resultados", cv.getFilasResultados(idUsuario,vistaAdmin, idPermiso, permisoEdicion));
+            
+            if (!(Integer.parseInt((docente.getInfoRegistro())[7]) == 10 && Integer.parseInt((docente.getInfoRegistro())[75]) == 2))
+            {
+                request.setAttribute("resultados", cv.getFilasResultados(idUsuario,vistaAdmin, idPermiso, permisoEdicion));
+            }
+            
             request.setAttribute("vistaAdmin", vistaAdmin);
             
 //            if (idPermiso.equals("6"))
