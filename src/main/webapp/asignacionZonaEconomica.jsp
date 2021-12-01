@@ -153,7 +153,7 @@
                 </div>
             </div>
             <div class="modal fade" id="modalMensaje" role="dialog">
-                <div class="modal-dialog modal-dialog-centered" id="modalMensaje" style="margin-top: 400px;">
+                <div style="width: 50%;margin: auto;margin-top: 20%;">
 
                   <!-- Modal content-->
                   <div class="modal-content panel">
@@ -171,7 +171,7 @@
                 </div>
             </div>
             <div id="modalConfirmacion2" class="modal fade" role="dialog">
-                <div class="modal-dialog">
+                <div style="width: 50%;margin: auto;margin-top: 20%;">
                   <div class="modal-content">
                     <div class="modal-header">
                       <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -191,7 +191,7 @@
                 </div>
             </div>
             <div class="modal fade" id="modalMensajeReporte" role="dialog">
-                <div class="modal-dialog">
+                <div style="width: 50%;margin: auto;margin-top: 20%;">
 
                   <!-- Modal content-->
                   <div class="modal-content panel">
@@ -212,7 +212,7 @@
                 </div>
             </div>
             <div id="modalConfirmacion3" class="modal fade" role="dialog">
-                <div class="modal-dialog">
+                <div style="width: 50%;margin: auto;margin-top: 20%;">
                   <div class="modal-content">
                     <div class="modal-header">
                       <button type="button" class="close" data-dismiss="modal">&times;</button>
