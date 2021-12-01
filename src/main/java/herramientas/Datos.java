@@ -834,6 +834,7 @@ public class Datos {
             if (!datos.isEmpty()) {
                 respuesta = "";
                 for (String[] dato : datos) {
+                    String vacancia= dato[11] != null ? dato[11] : "";
                     if (dato[9] == null) {
                         dato[9] = "NA ";
                     }
@@ -851,7 +852,8 @@ public class Datos {
                             + "<td id='" + dato[10] + "'>" + 
                             dato[9] + " <a id='" 
                             + dato[4] 
-                            + "' onClick='mostrarDatePicker(this.id);'><i class='fa fa-edit' style='color:#9d2449;'></i></a></td>";
+                            + "' onClick='mostrarDatePicker(this.id);'><i class='fa fa-edit' style='color:#9d2449;'></i></a></td>"
+                            + "<td>" +vacancia+ "</td>";
                     respuesta += "</tr>";
                 }
             }

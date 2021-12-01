@@ -98,6 +98,7 @@
                                 <th>Periodo</th>
                                 <th>Ronda</th>
                                 <th>Fecha de Aplicacion</th>
+                                <th>Vacancia asignada</th>
                             </tr>
                         </thead>
                         <tbody id="seccionEditable"></tbody>
