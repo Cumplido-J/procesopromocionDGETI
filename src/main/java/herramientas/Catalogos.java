@@ -1172,8 +1172,10 @@ public class Catalogos {
     public String desplegarNumeroPlazas(String idPrograma,String idSubsistema,String idEntidad,String idPlantel, String idCategoria, String idJornada,String periodo){        
         String respuesta="";
         try{
-            String[] parametros={idPrograma, idSubsistema, idEntidad, idPlantel, "D", idCategoria, idJornada, periodo};
-            List<String[]> datos=metodos.ejecutaSP("sp_consultaNumeroPlazas",parametros);
+//            String[] parametros={idPrograma, idSubsistema, idEntidad, idPlantel, "D", idCategoria, idJornada, periodo};
+            String[] parametros={idPrograma,idSubsistema,idEntidad,idPlantel,idCategoria,idJornada,periodo};
+//            List<String[]> datos=metodos.ejecutaSP("sp_consultaNumeroPlazas",parametros);
+            List<String[]> datos=metodos.ejecutaSP("sp_consultaNumeroPlazas001",parametros);
             if(datos.size()>0){
                 int numPlazas=0;
                 for(String[] dato:datos){

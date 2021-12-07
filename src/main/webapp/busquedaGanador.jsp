@@ -452,8 +452,11 @@
                         $("#mensaje").html("Se guardo correctamente");            
                         $("#modalMensaje").modal("show");
                         numeroPlazasAsignadas();
-                    }
-                    else{
+                    }else if(data.includes("No hay mas vacancias disponibles")){
+                        busquedaResultados();
+                        $("#mensaje").html("No hay mas vacancias disponibles");            
+                        $("#modalMensaje").modal("show");
+                    }else{
                         numeroPlazasAsignadas();
                         $("#mensaje").html(data);            
                         $("#modalMensaje").modal("show");
