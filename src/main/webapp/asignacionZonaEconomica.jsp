@@ -313,7 +313,7 @@
 //                });
                 $.ajax({
                 type: "POST",
-                url: '/promocion/reporteAsignacion',
+                url: '/procesopromocion/reporteAsignacion',
                 data: {programa:programa,subsistema:subsistema,entidad:entidad,periodo:periodo,proceso:proceso},    
                 timeout: 360000,
                 success: function (data) {
