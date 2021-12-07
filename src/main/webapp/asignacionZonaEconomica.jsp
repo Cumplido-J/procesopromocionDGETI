@@ -178,10 +178,9 @@
                       <h4 class="modal-title" >Confirmación</h4>
                     </div>
                     <div class="modal-body">
-                        <p id="mensajeConfirmacion">En este proceso se generara<br/>
-                            la posición de los participantes de forma automatica<br/>
-                            con la seleccion de la pantalla.<br/>
-                            ¿Desea continuar?</p>                  
+                        <p id="mensajeConfirmacion">En este proceso se generara la posición de los participantes de<br/>
+                            forma automatica con la seleccion de la pantalla.<br/></p>
+                        <p>¿Desea continuar?</p>                  
                     </div>
                     <div class="modal-footer">
                       <button type="button" id="btnConfirmar" class="btn btn-sm btn-default">Sí</button>
