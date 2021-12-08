@@ -1836,6 +1836,8 @@ function calculaTotalV2(){
         type="CR-";
     }
 
+    totalCR = totalCR > 1 ? totalCR : 0;
+    totalDIC = totalDIC > 1 ?totalDIC : 0;
     return type+totalCR+"-"+totalDIC;
 }
 
