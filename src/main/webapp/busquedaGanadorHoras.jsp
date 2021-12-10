@@ -8,9 +8,9 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%
     session = (HttpSession) request.getSession(true);
-    /*if (session.getAttribute("idUsuario") == null) {
+    if (session.getAttribute("idUsuario") == null) {
         response.sendRedirect("login.jsp");
-    } */
+    } 
 %>
 <html>
     <head>
