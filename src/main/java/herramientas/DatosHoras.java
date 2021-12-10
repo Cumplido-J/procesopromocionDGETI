@@ -1,3 +1,4 @@
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
@@ -30,17 +31,30 @@ public class DatosHoras {
             List<String[]> datosPlantel = metodos.ejecutaSP("sp_GanadorHorasPlanteles", parametros1);
             if (!datosPlantel.isEmpty()) {
                 for (String[] datoPlantel : datosPlantel) {
-                    System.out.println("Hola " + datoPlantel[0]);
+                    //System.out.println("Hola " + datoPlantel[0]);
                     String[] parametrosPlantel = {programa, datoPlantel[0]};
                     List<String[]> datosAspirantes = metodos.ejecutaSP("sp_GanadoresHoraPorIdPlantel", parametrosPlantel);
                     if (!datosAspirantes.isEmpty()) {
                         int contador = 0;
                         for (String[] datoAspirante : datosAspirantes) {
-                            contador++;
-                            System.out.println("IdUsuario: " + datoAspirante[0]);
-                            String[] parametrosGanador1 = {datoAspirante[0], Integer.toString(contador)};
-                            metodos.ejecutaSP("sp_insertPosicion", parametrosGanador1);
-                            registrosModificados++;
+                            String[] parametrosconsultahoras = {datoAspirante[0]};
+                            List<String[]> datoshoras_ = metodos.ejecutaSP("spConsultaHorasOstenta", parametrosconsultahoras);
+
+                            if (datoshoras_.get(0)[0] != null) {
+                                Integer horasOstenta = Integer.parseInt(datoshoras_.get(0)[0]);
+                                //System.out.println("Las horas " + horas);
+                                //int horasOstenta = 10;
+                                if (horasOstenta < 19) {
+                                    contador++;
+                                    System.out.println("IdUsuario: " + datoAspirante[0]);
+                                    String[] parametrosGanador1 = {datoAspirante[0], Integer.toString(contador)};
+                                    metodos.ejecutaSP("sp_insertPosicion", parametrosGanador1);
+                                    String[] paramplazaaspira = {datoAspirante[0], datoshoras_.get(0)[0]};
+                                    metodos.ejecutaSP("spInsertHorasOstenta", paramplazaaspira);
+                                    registrosModificados++;
+                                }
+                            }
+
                         }
                     }
                 }
