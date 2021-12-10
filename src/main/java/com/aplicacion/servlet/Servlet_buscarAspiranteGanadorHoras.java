@@ -18,10 +18,10 @@ import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author Fernando
+ * @author Jonathan Trinidad
  */
-@WebServlet(name = "Servlet_reporteAsignacion", urlPatterns = {"/reporteAsignacion"})
-public class Servlet_reporteAsignacion extends HttpServlet {
+@WebServlet(name = "aspiranteGanadorHoras", urlPatterns = {"/aspiranteGanadorHoras"})
+public class Servlet_buscarAspiranteGanadorHoras extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -40,10 +40,10 @@ public class Servlet_reporteAsignacion extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet Servlet_reporteAsignacion</title>");
+            out.println("<title>Servlet Servlet_buscarAspiranteGanador</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet Servlet_reporteAsignacion at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet Servlet_buscarAspiranteGanador at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -79,21 +79,18 @@ public class Servlet_reporteAsignacion extends HttpServlet {
         try {
             PrintWriter out = response.getWriter();
             HttpSession session = (HttpSession) request.getSession();
+            String id = request.getParameter("id");
             String programa = request.getParameter("programa");
             String subsistema = request.getParameter("subsistema");
             String entidad = request.getParameter("entidad");
+            String plantel = request.getParameter("plantel");
             String periodo = request.getParameter("periodo");
-            String proceso = request.getParameter("proceso");
-            Datos d = new Datos();
-            if (proceso.equals("1")) {
-                out.print(d.generarReporte(programa, subsistema, entidad, periodo));
-            } else if (proceso.equals("2")) {
-                out.print(d.generarReporteEstatal(programa, subsistema, periodo));
-            } else if (proceso.equals("3")) {
-                DatosHoras dh = new DatosHoras();
-                out.print(dh.generarReporte(programa, subsistema, entidad, periodo));
+            DatosHoras d = new DatosHoras();
+            if (id.equalsIgnoreCase("r")) {
+                out.print(d.generarResultadosCentrales(programa));
+            } else {
+                out.print(d.desplegarAspirantesAsignacion(id, programa, subsistema, entidad, plantel, periodo));
             }
-
         } catch (Exception e) {
             System.out.println(e.toString());
         }
