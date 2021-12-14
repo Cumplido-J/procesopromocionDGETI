@@ -759,10 +759,10 @@ $(document).ready(function () {
                         else
                         {$("#pEvidencias").val(data);}
                         
-                        var puntaje=parseFloat($("#pResultado").val())+parseFloat($("#pEvidencias").val());                        
+                        var puntaje=parseFloat( $("#pResultado").val() ? $("#pResultado").val() : 0 )+parseFloat($("#pEvidencias").val());                        
                         $("#p10").html(puntaje);
                         
-                        var puntajeD=parseFloat($("#pResultadoD").val())+parseFloat($("#pEvidenciasD").val());                        
+                        var puntajeD=parseFloat( $("#pResultadoD").val() ? $("#pResultadoD").val(): 0  )+parseFloat($("#pEvidenciasD").val());                        
                         $("#p10D").html(puntajeD);
                         calculaTotal();
                         updateDataResult();
