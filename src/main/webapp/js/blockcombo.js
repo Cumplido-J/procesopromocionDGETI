@@ -17,10 +17,10 @@ function blockCombos() {
         $("#subsistema").val(sub).attr('selected', 'selected');
         $("#entidad").val(ent).attr('selected', 'selected');
         $("#plantel").val(pla).attr('selected', 'selected');
+        }
         $("#subsistema").addClass("disabled");
         $("#entidad").addClass("disabled");
         $("#plantel").addClass("disabled");
-        }
     }
 
 }
