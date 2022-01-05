@@ -1946,12 +1946,14 @@
             });
         </script>
         <c:if test="${vistaAdmin}">
-            <script>
-                function confirmarPlaza(){
-                    $("#mensaje").html("Acción no permitida");                    
-                    $("#modalMensaje").modal("show");
-                }
-            </script>
+            <c:if test='${sessionScope["programa"]=="1"}'>
+                <script>
+                    function confirmarPlaza(){
+                        $("#mensaje").html("Acción no permitida");                    
+                        $("#modalMensaje").modal("show");
+                    }
+                </script>
+            </c:if>
             <script>
                 
               function cambioObservacionesPaso1(objeto){

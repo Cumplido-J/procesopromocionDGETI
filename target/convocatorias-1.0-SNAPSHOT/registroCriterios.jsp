@@ -796,13 +796,13 @@
                                 <div class="row">
                                     <div class="form-group col-md-6">
                                         <label class="control-label">10.A. Planeación didáctica: Docente</label>
-                                        <select class="form-control input-sm" id="puntaje10" name="puntaje10" required>                                  
+                                        <select class="form-control input-sm" id="puntaje10" name="puntaje25" required>                                  
                                           ${catalogo.desplegarOpcionesPuntaje(25,puntajes[9][3],sessionScope["idUsuario"])}
                                       </select>
                                     </div>
                                     <div class="form-group col-md-6">
                                         <label class="control-label">10.B. Portafolio de evidencias de Evaluación del aprendizaje</label>
-                                        <select class="form-control input-sm" id="puntaje11" name="puntaje11" required>                                  
+                                        <select class="form-control input-sm" id="puntaje11" name="puntaje26" required>                                  
                                           ${catalogo.desplegarOpcionesPuntaje(26,puntajes[10][3],sessionScope["idUsuario"])}
                                         </select>
                                     </div>
@@ -810,7 +810,7 @@
                                 <div class="row">
                                     <div class="form-group col-md-6">     
                                       <label class="control-label">10.C. Porcentaje de aprobación escolar (Resultados educativos) por asignatura, actividad paraescolar o módulo profesional:<br/><br/></label>
-                                      <select class="form-control input-sm" id="puntaje13" name="puntaje13" required>                                  
+                                      <select class="form-control input-sm" id="puntaje13" name="puntaje27" required>                                  
                                           ${catalogo.desplegarOpcionesPuntaje(27,puntajes[11][3],sessionScope["idUsuario"])}
                                       </select>
                                     </div>

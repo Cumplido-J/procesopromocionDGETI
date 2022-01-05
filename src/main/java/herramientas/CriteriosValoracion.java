@@ -1354,5 +1354,21 @@ public class CriteriosValoracion {
         }
         return respuesta;
     }
+    public String setPuntajeEncuestas(String idUsuario, String puntaje){
+        
+        String respuesta = "";
+        
+        String[] parametros= {idUsuario, puntaje};
+        List<String[]> datos=metodo.ejecutaSP("sp_insertReconocimientoDesempeno",parametros);
+        if(datos.isEmpty()){
+            respuesta="";
+        }else{
+            for(String[] dato:datos){
+                respuesta = dato[0];
+            }
+        }
+        
+        return respuesta;
+    }    
 	
 }

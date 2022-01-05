@@ -57,6 +57,7 @@ $(document).ready(function () {
                         //total=total+parseFloat($("#p1").html());
                         //$("#total").html(total); 
                         calculaTotal();
+                        updateDataResult();
                         $("#mensaje").html("Información guardada correctamente");            
                         $("#modalMensaje").modal("show");
                         
@@ -123,6 +124,7 @@ $(document).ready(function () {
                         else
                         {$("#p2").html(data);}
                         calculaTotal();
+                        updateDataResult();
                         $("#mensaje").html("Información guardada correctamente");            
                         $("#modalMensaje").modal("show");
                         if (idPermiso === "6")
@@ -188,6 +190,7 @@ $(document).ready(function () {
                         else
                         {$("#p4").html(data);}                        
                         calculaTotal();
+                        updateDataResult();
                         $("#mensaje").html("Información guardada correctamente");            
                         $("#modalMensaje").modal("show");
                         if (idPermiso === "6")
@@ -247,6 +250,7 @@ $(document).ready(function () {
                                 //else
                                 //{$("#p5").html(data);}  
                                 calculaTotal();
+                                updateDataResult();
                                 $("#mensaje").html("Información almacenada correctamente"); 
                             }                                        
                             $("#modalMensaje").modal("show");
@@ -325,6 +329,7 @@ $(document).ready(function () {
                         //else
                         //{$("#p6").html(data);}                         
                         calculaTotal();
+                        updateDataResult();
                         $("#mensaje").html("Información almacenada correctamente"); 
                     }  
                                            
@@ -407,6 +412,7 @@ $(document).ready(function () {
                         //else
                         //{$("#p7").html(data);}
                         calculaTotal();
+                        updateDataResult();
                         $("#mensaje").html("Información almacenada correctamente"); 
                     }                       
                                   
@@ -486,6 +492,7 @@ $(document).ready(function () {
                         //else
                         //{$("#p8").html(data);}
                         calculaTotal();
+                        updateDataResult();
                         $("#mensaje").html("Información almacenada correctamente"); 
                     }         
                         $("#modalMensaje").modal("show");
@@ -565,6 +572,7 @@ $(document).ready(function () {
                         //else
                         //{$("#p9").html(data);}
                         calculaTotal();
+                        updateDataResult();
                         $("#mensaje").html("Información almacenada correctamente"); 
                     }             
                         $("#modalMensaje").modal("show");
@@ -668,7 +676,7 @@ $(document).ready(function () {
                         var puntajeD=parseFloat($("#pResultadoD").val())+parseFloat($("#pEvidenciasD").val());                        
                         $("#p10D").html(puntajeD);
                         calculaTotal();
-                        
+                        updateDataResult();
                         $("#mensaje").html("Información guardada correctamente");            
                         $("#modalMensaje").modal("show");
                         if (idPermiso === "6")
@@ -751,13 +759,13 @@ $(document).ready(function () {
                         else
                         {$("#pEvidencias").val(data);}
                         
-                        var puntaje=parseFloat($("#pResultado").val())+parseFloat($("#pEvidencias").val());                        
+                        var puntaje=parseFloat( $("#pResultado").val() ? $("#pResultado").val() : 0 )+parseFloat($("#pEvidencias").val());                        
                         $("#p10").html(puntaje);
                         
-                        var puntajeD=parseFloat($("#pResultadoD").val())+parseFloat($("#pEvidenciasD").val());                        
+                        var puntajeD=parseFloat( $("#pResultadoD").val() ? $("#pResultadoD").val(): 0  )+parseFloat($("#pEvidenciasD").val());                        
                         $("#p10D").html(puntajeD);
                         calculaTotal();
-                        
+                        updateDataResult();
                         //$("#mensaje").html("Información guardada correctamente");            
                         //$("#modalMensaje").modal("show");
                         if (idPermiso === "6")
@@ -860,6 +868,7 @@ $(document).ready(function () {
                         $("#p5").html(aux[1]);
                         $("#p5D").html(aux[2]);
                         calculaTotal();
+                        updateDataResult();
                     }
                     else{
                         $("#mensaje").html(data);            
@@ -913,6 +922,7 @@ $(document).ready(function () {
                         $("#p6").html(aux[1]);                        
                         $("#p6D").html(aux[2]);
                         calculaTotal();
+                        updateDataResult();
                     }
                     else{
                         $("#mensaje").html(data);            
@@ -966,6 +976,7 @@ $(document).ready(function () {
                         $("#p7").html(aux[1]);  
                         $("#p7D").html(aux[2]);
                         calculaTotal();
+                        updateDataResult();
                     }
                     else{
                         $("#mensaje").html(data);            
@@ -1010,6 +1021,7 @@ $(document).ready(function () {
                         $("#p8").html(aux[1]); 
                         $("#p8D").html(aux[2]);
                         calculaTotal();
+                        updateDataResult();
                     }
                     else{
                         $("#mensaje").html(data);            
@@ -1057,6 +1069,7 @@ $(document).ready(function () {
                         $("#p9").html(aux[1]);
                         $("#p9D").html(aux[2]);
                         calculaTotal();
+                        updateDataResult();
                     }
                     else{
                         $("#mensaje").html(data);            
@@ -1223,6 +1236,7 @@ function borrarCurso(id){
             $("#p5").html(aux[1]);
             $("#p5D").html(aux[2]);
             calculaTotal();
+            updateDataResult();
         }
         else{
             $("#mensaje").html(data);            
@@ -1240,6 +1254,7 @@ function aprobarCurso(id){
             $("#p5").html(aux[1]);
             $("#p5D").html(aux[2]);
             calculaTotal();
+            updateDataResult();
         }
         else{
             $("#mensaje").html(data);            
@@ -1257,6 +1272,7 @@ function rechazarCurso(id){
             $("#p5").html(aux[1]);
             $("#p5D").html(aux[2]);
             calculaTotal();
+            updateDataResult();
         }
         else{
             $("#mensaje").html(data);            
@@ -1290,6 +1306,7 @@ function borrarAportacion(id){
             $("#p6").html(aux[1]);  
             $("#p6D").html(aux[2]);
             calculaTotal();
+            updateDataResult();
         }
         else{
             $("#mensaje").html(data);            
@@ -1306,6 +1323,7 @@ function aprobarAportacion(id){
             $("#p6").html(aux[1]);
             $("#p6D").html(aux[2]);
             calculaTotal();
+            updateDataResult();
         }
         else{
             $("#mensaje").html(data);            
@@ -1322,6 +1340,7 @@ function rechazarAportacion(id){
             $("#p6").html(aux[1]);
             $("#p6D").html(aux[2]);
             calculaTotal();
+            updateDataResult();
         }
         else{
             $("#mensaje").html(data);            
@@ -1354,6 +1373,7 @@ function borrarParticipacion(id){
             $("#p7").html(aux[1]);            
             $("#p7D").html(aux[2]);
             calculaTotal();
+            updateDataResult();
         }
         else{
             $("#mensaje").html(data);            
@@ -1370,6 +1390,7 @@ function aprobarParticipacion(id){
             $("#p7").html(aux[1]); 
             $("#p7D").html(aux[2]);
             calculaTotal();
+            updateDataResult();
         }
         else{
             $("#mensaje").html(data);            
@@ -1386,6 +1407,7 @@ function rechazarParticipacion(id){
             $("#p7").html(aux[1]);
             $("#p7D").html(aux[2]);
             calculaTotal();
+            updateDataResult();
         }
         else{
             $("#mensaje").html(data);            
@@ -1406,6 +1428,7 @@ function borrarTutoria(id){
             $("#p8").html(aux[1]);
             $("#p8D").html(aux[2]);
             calculaTotal();
+            updateDataResult();
         }
         else{
             $("#mensaje").html(data);            
@@ -1422,6 +1445,7 @@ function aprobarTutoria(id){
             $("#p8").html(aux[1]);
             $("#p8D").html(aux[2]);
             calculaTotal();
+            updateDataResult();
         }
         else{
             $("#mensaje").html(data);            
@@ -1438,6 +1462,7 @@ function rechazarTutoria(id){
             $("#p8").html(aux[1]);  
             $("#p8D").html(aux[2]);
             calculaTotal();
+            updateDataResult();
         }
         else{
             $("#mensaje").html(data);            
@@ -1458,6 +1483,7 @@ function borrarPublicacion(id){
             $("#p9").html(aux[1]);
             $("#p9D").html(aux[2]);
             calculaTotal();
+            updateDataResult();
         }
         else{
             $("#mensaje").html(data);            
@@ -1474,6 +1500,7 @@ function aprobarPublicacion(id){
             $("#p9").html(aux[1]);              
             $("#p9D").html(aux[2]);
             calculaTotal();
+            updateDataResult();
         }
         else{
             $("#mensaje").html(data);            
@@ -1490,6 +1517,7 @@ function rechazarPublicacion(id){
             $("#p9").html(aux[1]); 
             $("#p9D").html(aux[2]);
             calculaTotal();
+            updateDataResult();
         }
         else{
             $("#mensaje").html(data);            
@@ -1514,6 +1542,7 @@ function borrarResultado(id){
             var puntajeD=parseFloat(aux[2])+parseFloat($("#pEvidenciasD").val());                        
             $("#p10D").html(puntajeD);
             calculaTotal();
+            updateDataResult();
         }
         else{
             $("#mensaje").html(data);            
@@ -1534,6 +1563,7 @@ function aprobarResultado(id){
             var puntajeD=parseFloat(aux[2])+parseFloat($("#pEvidenciasD").val());                        
             $("#p10D").html(puntajeD);
             calculaTotal();
+            updateDataResult();
         }
         else{
             $("#mensaje").html(data);            
@@ -1554,6 +1584,7 @@ function rechazarResultado(id){
             var puntajeD=parseFloat(aux[2])+parseFloat($("#pEvidenciasD").val());                        
             $("#p10D").html(puntajeD);
             calculaTotal();
+            updateDataResult();
         }
         else{
             $("#mensaje").html(data);            
@@ -1785,4 +1816,33 @@ function activarEditarResultado(id){
     $("#resultadoAprueba"+id).removeClass("hidden");
     $("#resultadoRechaza"+id).removeClass("hidden");
     //$("#resultadoIncompleto"+id).removeClass("hidden");
+}
+
+function calculaTotalV2(){
+    var idPermiso=$("#idPermisoD5").val();
+    var totalCR=0, type;
+    var totalDIC=0;
+    if (idPermiso==="6")
+    {
+        totalCR=parseFloat($("#p1").html())+parseFloat($("#p2").html())+parseFloat($("#p3").html())+parseFloat($("#p4").html())+parseFloat($("#p5").html())+parseFloat($("#p6").html())+parseFloat($("#p7").html())+parseFloat($("#p8").html())+parseFloat($("#p9").html())+parseFloat($("#p10").html());
+        
+        totalDIC=parseFloat($("#p1D").html())+parseFloat($("#p2D").html())+parseFloat($("#p3D").html())+parseFloat($("#p4D").html())+parseFloat($("#p5D").html())+parseFloat($("#p6D").html())+parseFloat($("#p7D").html())+parseFloat($("#p8D").html())+parseFloat($("#p9D").html())+parseFloat($("#p10D").html());
+        type="DIC-";
+    }
+    else
+    {
+        
+        totalCR=parseFloat($("#p1").html())+parseFloat($("#p2").html())+parseFloat($("#p3").html())+parseFloat($("#p4").html())+parseFloat($("#p5").html())+parseFloat($("#p6").html())+parseFloat($("#p7").html())+parseFloat($("#p8").html())+parseFloat($("#p9").html())+parseFloat($("#p10").html());
+        type="CR-";
+    }
+
+    totalCR = totalCR > 1 ? totalCR : 0;
+    totalDIC = totalDIC > 1 ?totalDIC : 0;
+    return type+totalCR+"-"+totalDIC;
+}
+
+function updateDataResult(){
+    var total=calculaTotalV2();    
+    $.post("Servlet_RevisionCriteriosUpdate", {total:total}, function(data){
+    });
 }
