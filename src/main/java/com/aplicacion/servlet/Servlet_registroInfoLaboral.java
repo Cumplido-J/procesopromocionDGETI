@@ -175,6 +175,7 @@ public class Servlet_registroInfoLaboral extends HttpServlet {
                 Metodos_sql metodo=new Metodos_sql();
                 String[] parametros={idUsuario,"",""};
                 List<String[]> datos;
+                registroFichaIncompleta1(idUsuario);
                 datos=metodo.ejecutaSP("sp_finRegistro",parametros);
                                 
                 if(!datos.isEmpty()){
@@ -410,4 +411,19 @@ public class Servlet_registroInfoLaboral extends HttpServlet {
         return "Short description";
     }// </editor-fold>
     
+    
+    private void registroFichaIncompleta1( String idUsuario ) throws ServletException, IOException{
+    Metodos_sql metodo=new Metodos_sql();
+    List<String[]> datos; 
+        try{
+            String observacion="Cuenta con una nota desfavorable y/o sanción administrativa";
+            byte ptext[] = observacion.getBytes("ISO-8859-1"); 
+            String value =new String(ptext, "UTF-8");
+            
+            String[] parametros={idUsuario, observacion };
+            datos=metodo.ejecutaSP("sp_insertFichaIncompleta",parametros);
+        }catch(Exception e){
+            System.out.println("Error :RegistroInfoLaboral :" +e);
+        }
+    }
 }

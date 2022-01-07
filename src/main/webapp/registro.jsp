@@ -33,6 +33,8 @@
         <input type="hidden" id="mensajeNoCompatibilidad" value="${mensaje.noCompatibilidad}" />
         <input type="hidden" id="mensajeConfirmacionHora" value="${mensaje.confirmacionHora}" />
         <input type="hidden" id="mensajeRechazoHora" value="${mensaje.rechazoHora}" />
+        <input type="hidden" id="idUsuarioFichaIm" value="${Docente.idUsuario}" />
+        <input type="hidden" id="programaFichaIm" value="${sessionScope["programa"]}" />
         <c:if test = "${Docente.infoRegistro[6]==null&& Docente.infoRegistro[64]==null}">
             <input type="hidden" id="programa" value="${sessionScope["programa"]}" />
             <input type="hidden" id="plantel" value="${sessionScope["plantel"]}" />
@@ -53,6 +55,11 @@
         <c:set var="disabled1" value=""></c:set>
             <c:if test='${sessionScope["permisoActual"]=="6"}'>
                   <c:set var="disabled1" value="disabled"></c:set>
+            </c:if>
+            <c:if test = "${Docente.infoRegistro[66]=='3'}">
+                <%
+                   response.sendRedirect("/procesopromocion/VistaDocente");
+                %>
             </c:if>
         </c:if>    
         <main class="page">            
@@ -360,6 +367,7 @@
                                 <input class="btn btn-sm btn-primary" id="btnEnviar1" type="submit" value='Guardar y continuar'/>
                               </c:if>
                               <c:if test="${vistaAdmin}">
+                                <c:if test = "${validacionConvocatoria >= 0 || sessionScope['permisoTablaUsuarioEdicion']=='V'}">  
                                   <c:if test='${sessionScope["permisoActualEdicion"]=="F"}'>
                                       <input class="btn btn-sm btn-primary" id="btnEnviar1" type="submit" value='Validar información' disabled/>
                                   </c:if>
@@ -371,6 +379,7 @@
                                         <input onclick="validObserPaso1R2(event)" class="btn btn-sm btn-primary" id="btnEnviar1" type="submit" value='Validar - guardar información' />
                                       </c:if>  
                                   </c:if>
+                                </c:if>        
                               </c:if>
                               <!--<input type="button" class="btn btn-sm btn-primary" value="Guardar y continuar" onclick="mostrarSiguiente(1)"/>-->
                             </div>
@@ -722,6 +731,7 @@
                                 <input class="btn btn-sm btn-primary" id="btnEnviar2" type="submit" value='Guardar y continuar'/>
                               </c:if>
                               <c:if test="${vistaAdmin}">
+                                <c:if test = "${validacionConvocatoria >= 0 || sessionScope['permisoTablaUsuarioEdicion']=='V'}">  
                                   <c:if test='${sessionScope["permisoActualEdicion"]=="F"}'>
                                       <input class="btn btn-sm btn-primary" id="btnEnviar2" type="submit" value='Validar información' disabled/>
                                   </c:if>
@@ -734,6 +744,7 @@
                                             <input onclick="validObserPaso2R2(event)" class="btn btn-sm btn-primary" id="btnEnviar2" type="submit" value='Validar - guardar información'/>
                                         </c:if> 
                                   </c:if>
+                                </c:if>            
                               </c:if>
                               <!--<input type="button" class="btn btn-sm btn-primary" value="Guardar y continuar" onclick="mostrarSiguiente(1)"/>-->
                         </div>
@@ -962,6 +973,7 @@
                                 <input class="btn btn-sm btn-primary" id="btnEnviar3" type="submit" value='Guardar y continuar'/>
                               </c:if>
                               <c:if test="${vistaAdmin}">
+                                <c:if test = "${validacionConvocatoria >= 0 || sessionScope['permisoTablaUsuarioEdicion']=='V'}">  
                                   <c:if test='${sessionScope["permisoActualEdicion"]=="F"}'>
                                       <input class="btn btn-sm btn-primary" id="btnEnviar3" type="submit" value='Validar información' disabled/>
                                   </c:if>
@@ -974,6 +986,7 @@
                                             <input onclick="validObserPaso3R2(event)" class="btn btn-sm btn-primary" id="btnEnviar3" type="submit" value='Validar - guardar información'/>
                                       </c:if>
                                   </c:if>
+                                </c:if>            
                               </c:if>
                               <!--<input type="button" class="btn btn-sm btn-primary" value="Guardar y continuar" onclick="mostrarSiguiente(1)"/>-->
                             </div>
@@ -1103,6 +1116,7 @@
                                 <input class="btn btn-sm btn-primary" id="btnEnviar4" type="submit" value='Guardar y continuar'/>
                               </c:if>
                               <c:if test="${vistaAdmin}">
+                                <c:if test = "${validacionConvocatoria >= 0 || sessionScope['permisoTablaUsuarioEdicion']=='V'}">  
                                   <c:if test='${sessionScope["permisoActualEdicion"]=="F"}'>
                                       <input class="btn btn-sm btn-primary" id="btnEnviar4" type="submit" value='Validar información' disabled/>
                                   </c:if>
@@ -1115,6 +1129,7 @@
                                         <input onclick="validObserPaso4R2(event)" class="btn btn-sm btn-primary" id="btnEnviar4" type="submit" value='Validar - guardar información'/>
                                       </c:if>
                                   </c:if>
+                                </c:if>        
                               </c:if>
                               <!--<input type="button" class="btn btn-sm btn-primary" value="Guardar y continuar" onclick="mostrarSiguiente(1)"/>-->
                             </div>
@@ -1192,7 +1207,9 @@
                                 </c:if>
                               </c:if>
                               <c:if test="${vistaAdmin}">
-                              <center><input type="submit" disabled="true" class="btn btn-primary" value="Continuar" id="btnFinalizar"></center>
+                                <c:if test = "${validacionConvocatoria >= 0 || sessionScope['permisoTablaUsuarioEdicion']=='V'}">
+                                    <center><input type="submit" disabled="true" class="btn btn-primary" value="Continuar" id="btnFinalizar"></center>
+                              </c:if>
                               </c:if>
                       </div>
                       
@@ -1898,8 +1915,15 @@
                 //var clave=$('#clave').val();
                 var cargo=$('#cargo').val();
                 var fechaRenuncia=$('#fechaRenuncia').val();
-                console.log("ss");
+                
                 $("#modalMensajeFin").modal("hide");
+                var idUsuarioFichaIm=$('#idUsuarioFichaIm').val();
+                var programaFichaIm=$('#programaFichaIm').val();
+                if(programaFichaIm === "1" ){
+                    $.post("Servlet_FichasIncompletas", {accion:"registroFichaIncompleta1", idUsuario:idUsuarioFichaIm}, function(data){});
+                } else if(programaFichaIm === "2" ){
+                    $.post("Servlet_FichasIncompletas", {accion:"registroFichaIncompleta3", idUsuario:idUsuarioFichaIm}, function(data){});    
+                }
                 $.post("FinalizaRegistro", {z:"F"}, function(data){
                     window.location.href = "/promocion/SesionDocente";
                 });
@@ -1914,6 +1938,8 @@
             }
             function myFunction1(){
                 $("#modalConfirmacion").modal("hide");
+                var idUsuarioFichaIm=$('#idUsuarioFichaIm').val(); 
+                $.post("Servlet_FichasIncompletas", {accion:"registroFichaIncompleta2", idUsuario:idUsuarioFichaIm}, function(data){});
                 $.post("FinalizaRegistro", {z:"F"}, function(data){
                     window.location.href = "/promocion/SesionDocente";
                 });
@@ -1926,6 +1952,8 @@
             }
             function myFunctionTresCuartos(){
                 $("#modalMensajeFinTresCuartos").modal("hide");
+                var idUsuarioFichaIm=$('#idUsuarioFichaIm').val(); 
+                $.post("Servlet_FichasIncompletas", {accion:"registroFichaIncompleta4", idUsuario:idUsuarioFichaIm}, function(data){});
                 $.post("FinalizaRegistro", {z:"F"}, function(data){
                     window.location.href = "/promocion/SesionDocente";
                 });

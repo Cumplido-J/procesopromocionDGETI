@@ -118,12 +118,12 @@ public class Servlet_cbFichaDictamen extends HttpServlet {
            
             request.setAttribute("puntajesDictaminador", puntajesDictaminador);
             request.setAttribute("resultados", cv.getFilasResultados2(idUsuario,vistaAdmin, idPermiso));
-            
-            request.setAttribute("cursos", cv.getFilasCursos(idUsuario,vistaAdmin,idPermiso,permisoEdicion));
-            request.setAttribute("aportaciones", cv.getFilasAportaciones(idUsuario,vistaAdmin,idPermiso,permisoEdicion));
-            request.setAttribute("tutorias", cv.getFilasTutorias(idUsuario,vistaAdmin,idPermiso,permisoEdicion));
-            request.setAttribute("participaciones", cv.getFilasParticipaciones(idUsuario,vistaAdmin,idPermiso,permisoEdicion));
-            request.setAttribute("publicaciones", cv.getFilasPublicaciones(idUsuario,vistaAdmin,idPermiso,permisoEdicion));
+            String permisoTablaUsuarioEdicion=session.getAttribute("permisoTablaUsuarioEdicion").toString();
+            request.setAttribute("cursos", cv.getFilasCursos(idUsuario,vistaAdmin,idPermiso,permisoEdicion,permisoTablaUsuarioEdicion));
+            request.setAttribute("aportaciones", cv.getFilasAportaciones(idUsuario,vistaAdmin,idPermiso,permisoEdicion, permisoTablaUsuarioEdicion));
+            request.setAttribute("tutorias", cv.getFilasTutorias(idUsuario,vistaAdmin,idPermiso,permisoEdicion, permisoTablaUsuarioEdicion));
+            request.setAttribute("participaciones", cv.getFilasParticipaciones(idUsuario,vistaAdmin,idPermiso,permisoEdicion, permisoTablaUsuarioEdicion));
+            request.setAttribute("publicaciones", cv.getFilasPublicaciones(idUsuario,vistaAdmin,idPermiso,permisoEdicion, permisoTablaUsuarioEdicion));
             
             //docente=new Docente();
             //docente.setIdUsuario(idUsuario);

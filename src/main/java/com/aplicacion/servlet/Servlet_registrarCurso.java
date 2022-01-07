@@ -108,7 +108,8 @@ public class Servlet_registrarCurso extends HttpServlet {
                 datos=metodo.ejecutaSP("sp_insertCursos",parametros);            
                 if(!datos.isEmpty()){
                     if(datos.get(0)[0].equals("ok")){
-                        String[] infoCursos=new CriteriosValoracion().getFilasCursos(idUsuario,vistaAdmin,idPermiso,session.getAttribute("permisoActualEdicion").toString());
+                        String permisoTablaUsuarioEdicion=session.getAttribute("permisoTablaUsuarioEdicion").toString();
+                        String[] infoCursos=new CriteriosValoracion().getFilasCursos(idUsuario,vistaAdmin,idPermiso,session.getAttribute("permisoActualEdicion").toString(),permisoTablaUsuarioEdicion);
                         out.print(infoCursos[0]+"||"+infoCursos[1]+"||"+infoCursos[2]);                     
                     }
                 }else{
@@ -129,7 +130,8 @@ public class Servlet_registrarCurso extends HttpServlet {
                 }
                 if(!datos.isEmpty()){
                     if(datos.get(0)[0].equals("ok")){
-                        String[] infoCursos=new CriteriosValoracion().getFilasCursos(idUsuario,vistaAdmin,idPermiso,session.getAttribute("permisoActualEdicion").toString());
+                        String permisoTablaUsuarioEdicion=session.getAttribute("permisoTablaUsuarioEdicion").toString();
+                        String[] infoCursos=new CriteriosValoracion().getFilasCursos(idUsuario,vistaAdmin,idPermiso,session.getAttribute("permisoActualEdicion").toString(),permisoTablaUsuarioEdicion);
                         out.print(infoCursos[0]+"||"+infoCursos[1]+"||"+infoCursos[2]);                    
                     }
                 }else{

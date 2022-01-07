@@ -111,8 +111,10 @@ public class Servlet_cbRegistro extends HttpServlet {
                     docente.consultaHoras();                    
                 } 
                 docente.actualizaBanderaIngles();
+                String validacionConvocatoria= session.getAttribute("rol").toString().equals("D") ? "0" :docente.getValidaAccionPorConvocatoria(id).get(0);
                 request.setAttribute("Docente", docente);
                 request.setAttribute("vistaAdmin", vistaAdmin);
+                request.setAttribute("validacionConvocatoria", validacionConvocatoria);
                 ServletContext sc = getServletContext();
                 RequestDispatcher rd = sc.getRequestDispatcher("/registro.jsp");
                 rd.forward(request,response);

@@ -209,7 +209,7 @@ public class Servlet_preregistro extends HttpServlet {
         try {
             UtileriasHelper utilerias = new UtileriasHelper();
             Metodos_sql metodo = new Metodos_sql();
-            String rfc=request.getParameter("rfc-02").toUpperCase();
+            String rfc=request.getParameter("rfc02clon").toUpperCase();
             //String pass_=request.getParameter("pass01-p");
             //String encriptarPass = utilerias.encriptarCodigo(pass_, ConstantsWS.LLAVE_CIFRADO);
             //String pass1=encriptarPass;

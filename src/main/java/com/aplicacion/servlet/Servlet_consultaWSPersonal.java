@@ -230,7 +230,7 @@ public class Servlet_consultaWSPersonal extends HttpServlet {
             String nombre="";
             String cct1="";
             String cct2="";
-            String respuesta="";
+            String respuesta="",respuesta2="";
             if(restDatos > 0){
                 nombre=personal.get(0).getNombre();
                 cct1=personal.get(0).getCct1();
@@ -240,8 +240,9 @@ public class Servlet_consultaWSPersonal extends HttpServlet {
                 List<String[]> datos=metodo.ejecutaSP("sp_insertPreAspirante2Validacion",parametros);
                 if(!datos.isEmpty()){
                     respuesta=datos.get(0)[0];
+                    respuesta2=datos.get(0)[1];
                 }
-                out.print(nombre+"|"+respuesta);
+                out.print(nombre+"|"+respuesta+"|"+respuesta2);
             }else if(restDatos < 1){
                 out.print(nombre+"|"+respuesta+"|"+"Noencontrado");
             }

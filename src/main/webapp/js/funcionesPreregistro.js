@@ -365,30 +365,71 @@ function comprobacionRFC2(){
              
              $.post("ConsultaWSPersonal", {rfc: rfc,accion:accion}, function(respuesta){
                  var aux=respuesta.split("|");
-                 if(aux.length===2){
+                 if(aux.length>1){
                      if(aux[1]==='ok'){
                         $("#btnEnviarRFC").removeAttr("disabled");
-                        //$("#valid-form-12").removeClass("hidden");
-                        //$("#valid-form-13").removeClass("hidden");
+                        $("#mensaje").html(aux[2]);            
+                        $("#modalMensaje").modal("show");
+                        $("#btnContinuar").attr("style","display:none;");
+                        $("#btnAceptaHistorial").removeClass("hidden");
                      }
-                     else{
+                     else if(aux[1]==='no'){
+                        $("#btnEnviarRFC").attr("disabled",true);
+                        $("#mensaje").html(aux[2]);            
+                        $("#modalMensaje").modal("show");
+                        $("#btnContinuar").attr("style","display:none;");
+                        $("#btnAceptaHistorial").addClass("hidden"); 
+                     }
+                    else if(aux[1]===''){
+                        $("#mensaje").html("El RFC ingresado no se encuentra registrado en la institución, contacte al personal de recursos humanos de su plantel");            
+                        $("#modalMensaje").modal("show");
+                        $("#btnContinuar").attr("style","display:none;");
+                        $("#btnAceptaHistorial").addClass("hidden");
+                    }
+                    else{
                         $("#btnEnviarRFC").attr("disabled",true);
                         //$("#valid-form-12").addClass("hidden");
                         //$("#valid-form-13").addClass("hidden");
                         $("#mensaje").html(aux[1]);            
                         $("#modalMensaje").modal("show");
                         $("#btnContinuar").attr("style","display:none;");
+                        $("#btnAceptaHistorial").addClass("hidden");
                     }
                  }else{
                      $("#mensaje").html("El RFC ingresado no se encuentra registrado en la institución, contacte al personal de recursos humanos de su plantel");            
                      $("#modalMensaje").modal("show");
                      $("#btnContinuar").attr("style","display:none;");
+                     $("#btnAceptaHistorial").addClass("hidden");
                  }
                  console.log(aux);
              });
         }
     }else{
         $('#alertaRFC-02').attr('hidden',true);
+    }
+}
+
+function registrarAspiranteClon(){
+    var accion=$("#accion").val();
+    var rfc02clon=$("#rfc-02").val();
+    if(rfc02clon.length>1){
+        $.post("Preregistro", { accion:accion, rfc02clon:rfc02clon }, function(data){
+
+            if(data==="ok"){           
+                $("#btnContinuar").removeAttr("style");
+                $("#btnCerrar").attr("style","display:none;");
+                $("#mensaje").html("Los datos fueron almacenados correctamente");            
+                $("#modalMensaje").modal("show");
+                $("#btnAceptaHistorial").addClass("hidden");
+
+            }else{
+                $("#btnCerrar").removeAttr("style");
+                $("#btnContinuar").attr("style","display:none;");
+                $("#mensaje").html(data);            
+                $("#modalMensaje").modal("show"); 
+                $("#btnAceptaHistorial").addClass("hidden");
+            }
+        });
     }
 }
 

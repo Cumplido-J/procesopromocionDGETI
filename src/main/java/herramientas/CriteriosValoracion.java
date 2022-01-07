@@ -5,6 +5,7 @@
  */
 package herramientas;
 
+import com.aplicacion.beans.Docente;
 import java.util.ArrayList;
 import java.util.List;
 import metodos_sql.Metodos_sql;
@@ -21,7 +22,10 @@ public class CriteriosValoracion {
         metodo=new Metodos_sql();
         fecha=new Fecha();
     }    
-    public String[] getFilasCursos(String idUsuario,boolean vistaAdmin, String idPermiso,String permisoActualEdicion){   
+    public String[] getFilasCursos(String idUsuario,boolean vistaAdmin, String idPermiso,String permisoActualEdicion,String permisoTablaUsuarioEdicion){   
+        Docente docente=new Docente();
+        String validacionConvocatoria= vistaAdmin ? docente.getValidaAccionPorConvocatoria(idUsuario).get(0) : "0";
+        String disabledValid= (Integer.parseInt(validacionConvocatoria)  >= 0 || permisoTablaUsuarioEdicion.equals("V"))? "" :"disabled";
         String[] respuesta={"","",""}; 
         String valido;
         int puntaje=0;
@@ -95,31 +99,31 @@ public class CriteriosValoracion {
                 {valido = dato[9];}
                 if(vistaAdmin){
                     if(valido==null){
-                        respuesta[0]+="<button type='button' class='btn btn-sm  " + permisoEdicion + "' title='Aprobar' onclick='aprobarCurso("+dato[0]+")'>";
+                        respuesta[0]+="<button type='button' class='btn btn-sm  " + permisoEdicion + "' title='Aprobar' onclick='aprobarCurso("+dato[0]+")' "+disabledValid+"  >";
                         respuesta[0]+="<span class='glyphicon glyphicon-ok completo'></span>";
                         respuesta[0]+="</button>";
-                        respuesta[0]+="<button type='button' class='btn btn-sm  " + permisoEdicion + "' title='No cumple con la evidencia' onclick='rechazarCurso("+dato[0]+")'>";
+                        respuesta[0]+="<button type='button' class='btn btn-sm  " + permisoEdicion + "' title='No cumple con la evidencia' onclick='rechazarCurso("+dato[0]+")' "+disabledValid+"  >";
                         respuesta[0]+="<span class='glyphicon glyphicon-remove incompleto'></span>";                    
                         respuesta[0]+="</button>";
                         respuesta[0]+="<span class='glyphicon glyphicon-exclamation-sign incompleto' title='Sección incompleta'></span>";
                     }else{
                         //Nuevo código
-                        respuesta[0]+="<button id='cursoAprueba" + dato[0] + "' name='cursoAprueba" + dato[0] + "' type='button' class='btn btn-sm  " + permisoEdicion + " hidden' title='Aprobar' onclick='aprobarCurso("+dato[0]+")'>";
+                        respuesta[0]+="<button id='cursoAprueba" + dato[0] + "' name='cursoAprueba" + dato[0] + "' type='button' class='btn btn-sm  " + permisoEdicion + " hidden' title='Aprobar' onclick='aprobarCurso("+dato[0]+")'  "+disabledValid+"  >";
                         respuesta[0]+="<span class='glyphicon glyphicon-ok completo'></span>";
                         respuesta[0]+="</button>";
-                        respuesta[0]+="<button id='cursoRechaza" + dato[0] + "' name='cursoRechaza" + dato[0] + "' type='button' class='btn btn-sm  " + permisoEdicion + " hidden' title='No cumple con la evidencia' onclick='rechazarCurso("+dato[0]+")'>";
+                        respuesta[0]+="<button id='cursoRechaza" + dato[0] + "' name='cursoRechaza" + dato[0] + "' type='button' class='btn btn-sm  " + permisoEdicion + " hidden' title='No cumple con la evidencia' onclick='rechazarCurso("+dato[0]+")'  "+disabledValid+"  >";
                         respuesta[0]+="<span class='glyphicon glyphicon-remove incompleto'></span>";                    
                         respuesta[0]+="</button>";
                         ////respuesta[0]+="<span id='cursoIncompleto" + dato[0] + "' name='cursoIncompleto" + dato[0] + "' class='glyphicon glyphicon-exclamation-sign incompleto hidden disabled' title='Sección incompleta'></span>";
 
                         if(valido.equals("V")){
-                            respuesta[0]+="<button type='button' id='cursoAprobado" + dato[0] + "' name='cursoAprobado" + dato[0] + "' class='btn btn-sm  " + permisoEdicion + "' title='Aprobado/Editar' onclick='activarEditarCurso(" + dato[0] + ")'>";
+                            respuesta[0]+="<button type='button' id='cursoAprobado" + dato[0] + "' name='cursoAprobado" + dato[0] + "' class='btn btn-sm  " + permisoEdicion + "' title='Aprobado/Editar' onclick='activarEditarCurso(" + dato[0] + ")'  "+disabledValid+"  >";
                             respuesta[0]+="<span class='glyphicon glyphicon-ok completo'></span>";
                             respuesta[0]+="</button>";
 
                             //respuesta[0]+="<span class='glyphicon glyphicon-ok completo' title='Aprobado'></span>";
                         }else{
-                            respuesta[0]+="<button type='button' id='cursoRechazado" + dato[0] + "' name='cursoRechazado" + dato[0] + "' class='btn btn-sm  " + permisoEdicion + "' title='No cumple con la evidencia/Editar' onclick='activarEditarCurso(" + dato[0] + ")'>";
+                            respuesta[0]+="<button type='button' id='cursoRechazado" + dato[0] + "' name='cursoRechazado" + dato[0] + "' class='btn btn-sm  " + permisoEdicion + "' title='No cumple con la evidencia/Editar' onclick='activarEditarCurso(" + dato[0] + ")'  "+disabledValid+"  >";
                             respuesta[0]+="<span class='glyphicon glyphicon-remove incompleto'></span>";                    
                             respuesta[0]+="</button>";
                             
@@ -157,7 +161,10 @@ public class CriteriosValoracion {
         respuesta[2]=""+puntajeD;
         return respuesta;
     }
-    public String[] getFilasAportaciones(String idUsuario,boolean vistaAdmin, String idPermiso,String permisoActualEdicion){   
+    public String[] getFilasAportaciones(String idUsuario,boolean vistaAdmin, String idPermiso,String permisoActualEdicion, String permisoTablaUsuarioEdicion){   
+        Docente docente=new Docente();
+        String validacionConvocatoria= vistaAdmin ? docente.getValidaAccionPorConvocatoria(idUsuario).get(0) : "0";
+        String disabledValid= (Integer.parseInt(validacionConvocatoria)  >= 0 || permisoTablaUsuarioEdicion.equals("V"))? "" :"disabled";
         String respuesta;
         String puntaje, puntajeD;
         String valido;
@@ -216,30 +223,30 @@ public class CriteriosValoracion {
                 {valido = dato[8];}
                 if(vistaAdmin){
                     if(valido==null){
-                        respuesta+="<button type='button' class='btn btn-sm " + permisoEdicion + "' title='Aprobar' onclick='aprobarAportacion("+dato[0]+")'>";
+                        respuesta+="<button type='button' class='btn btn-sm " + permisoEdicion + "' title='Aprobar' onclick='aprobarAportacion("+dato[0]+")' "+disabledValid+">";
                         respuesta+="<span class='glyphicon glyphicon-ok completo'></span>";
                         respuesta+="</button>";
-                        respuesta+="<button type='button' class='btn btn-sm " + permisoEdicion + "' title='No cumple con la evidencia' onclick='rechazarAportacion("+dato[0]+")'>";
+                        respuesta+="<button type='button' class='btn btn-sm " + permisoEdicion + "' title='No cumple con la evidencia' onclick='rechazarAportacion("+dato[0]+")'  "+disabledValid+" >";
                         respuesta+="<span class='glyphicon glyphicon-remove incompleto'></span>";                    
                         respuesta+="</button>";
                         respuesta+="<span class='glyphicon glyphicon-exclamation-sign incompleto' title='Sección incompleta'></span>";
                     }else{
-                        respuesta+="<button id='aportacionAprueba" + dato[0] + "' name='aportacionAprueba" + dato[0] + "' type='button' class='btn btn-sm " + permisoEdicion + " hidden' title='Aprobar' onclick='aprobarAportacion("+dato[0]+")'>";
+                        respuesta+="<button id='aportacionAprueba" + dato[0] + "' name='aportacionAprueba" + dato[0] + "' type='button' class='btn btn-sm " + permisoEdicion + " hidden' title='Aprobar' onclick='aprobarAportacion("+dato[0]+")'  "+disabledValid+"  >";
                         respuesta+="<span class='glyphicon glyphicon-ok completo'></span>";
                         respuesta+="</button>";
-                        respuesta+="<button id='aportacionRechaza" + dato[0] + "' name='aportacionRechaza" + dato[0] + "' type='button' class='btn btn-sm " + permisoEdicion + " hidden' title='No cumple con la evidencia' onclick='rechazarAportacion("+dato[0]+")'>";
+                        respuesta+="<button id='aportacionRechaza" + dato[0] + "' name='aportacionRechaza" + dato[0] + "' type='button' class='btn btn-sm " + permisoEdicion + " hidden' title='No cumple con la evidencia' onclick='rechazarAportacion("+dato[0]+")'  "+disabledValid+"  >";
                         respuesta+="<span class='glyphicon glyphicon-remove incompleto'></span>";                    
                         respuesta+="</button>";
                         ////respuesta+="<span id='aportacionIncompleto" + dato[0] + "' name='aportacionIncompleto" + dato[0] + "' class='glyphicon glyphicon-exclamation-sign incompleto hidden' title='Sección incompleta'></span>";
                         
                         if(valido.equals("V")){
-                             respuesta+="<button type='button' id='aportacionAprobado" + dato[0] + "' name='aportacionAprobado" + dato[0] + "' class='btn btn-sm  " + permisoEdicion + "' title='Aprobado/Editar' onclick='activarEditarAportacion(" + dato[0] + ")'>";
+                             respuesta+="<button type='button' id='aportacionAprobado" + dato[0] + "' name='aportacionAprobado" + dato[0] + "' class='btn btn-sm  " + permisoEdicion + "' title='Aprobado/Editar' onclick='activarEditarAportacion(" + dato[0] + ")' "+disabledValid+"  >";
                              respuesta+="<span class='glyphicon glyphicon-ok completo'></span>";
                              respuesta+="</button>";                        
                             
                             //respuesta+="<span class='glyphicon glyphicon-ok completo' title='Aprobado'></span>";
                         }else{
-                             respuesta+="<button type='button' id='aportacionRechazado" + dato[0] + "' name='aportacionRechazado" + dato[0] + "' class='btn btn-sm  " + permisoEdicion + "' title='No cumple con la evidencia/Editar' onclick='activarEditarAportacion(" + dato[0] + ")'>";
+                             respuesta+="<button type='button' id='aportacionRechazado" + dato[0] + "' name='aportacionRechazado" + dato[0] + "' class='btn btn-sm  " + permisoEdicion + "' title='No cumple con la evidencia/Editar' onclick='activarEditarAportacion(" + dato[0] + ")' "+disabledValid+"  >";
                              respuesta+="<span class='glyphicon glyphicon-remove incompleto'></span>";                    
                              respuesta+="</button>";
                             
@@ -303,7 +310,10 @@ public class CriteriosValoracion {
         retorno[2]=puntajeD;
         return retorno;
     }
-    public String[] getFilasParticipaciones(String idUsuario,boolean vistaAdmin, String idPermiso,String permisoActualEdicion){   
+    public String[] getFilasParticipaciones(String idUsuario,boolean vistaAdmin, String idPermiso,String permisoActualEdicion,String permisoTablaUsuarioEdicion){   
+        Docente docente=new Docente();
+        String validacionConvocatoria= vistaAdmin ? docente.getValidaAccionPorConvocatoria(idUsuario).get(0) : "0";
+        String disabledValid= (Integer.parseInt(validacionConvocatoria)  >= 0 || permisoTablaUsuarioEdicion.equals("V"))? "" :"disabled";
         String[] retorno={"","0","0"};
         String respuesta;
         String puntaje, valido, puntajeD;
@@ -361,30 +371,30 @@ public class CriteriosValoracion {
                 {valido = dato[8];}                
                 if(vistaAdmin){
                     if(valido==null){
-                        respuesta+="<button type='button' class='btn btn-sm " + permisoEdicion + "' title='Aprobar' onclick='aprobarParticipacion("+dato[0]+")'>";
+                        respuesta+="<button type='button' class='btn btn-sm " + permisoEdicion + "' title='Aprobar' onclick='aprobarParticipacion("+dato[0]+")'  "+disabledValid+"  >";
                         respuesta+="<span class='glyphicon glyphicon-ok completo'></span>";
                         respuesta+="</button>";
-                        respuesta+="<button type='button' class='btn btn-sm " + permisoEdicion + "' title='No cumple con la evidencia' onclick='rechazarParticipacion("+dato[0]+")'>";
+                        respuesta+="<button type='button' class='btn btn-sm " + permisoEdicion + "' title='No cumple con la evidencia' onclick='rechazarParticipacion("+dato[0]+")'   "+disabledValid+"  >";
                         respuesta+="<span class='glyphicon glyphicon-remove incompleto'></span>";                    
                         respuesta+="</button>";
                         respuesta+="<span class='glyphicon glyphicon-exclamation-sign incompleto' title='Sección incompleta'></span>";
                     }else{
-                        respuesta+="<button id='participacionAprueba" + dato[0] + "' name='participacionAprueba" + dato[0] + "' type='button' class='btn btn-sm " + permisoEdicion + " hidden' title='Aprobar' onclick='aprobarParticipacion("+dato[0]+")'>";
+                        respuesta+="<button id='participacionAprueba" + dato[0] + "' name='participacionAprueba" + dato[0] + "' type='button' class='btn btn-sm " + permisoEdicion + " hidden' title='Aprobar' onclick='aprobarParticipacion("+dato[0]+")' "+disabledValid+"  >";
                         respuesta+="<span class='glyphicon glyphicon-ok completo'></span>";
                         respuesta+="</button>";
-                        respuesta+="<button id='participacionRechaza" + dato[0] + "' name='participacionRechaza" + dato[0] + "' type='button' class='btn btn-sm " + permisoEdicion + " hidden' title='No cumple con la evidencia' onclick='rechazarParticipacion("+dato[0]+")'>";
+                        respuesta+="<button id='participacionRechaza" + dato[0] + "' name='participacionRechaza" + dato[0] + "' type='button' class='btn btn-sm " + permisoEdicion + " hidden' title='No cumple con la evidencia' onclick='rechazarParticipacion("+dato[0]+")'  "+disabledValid+"  >";
                         respuesta+="<span class='glyphicon glyphicon-remove incompleto'></span>";                    
                         respuesta+="</button>";
                         ////respuesta+="<span id='participacionIncompleto" + dato[0] + "' name='participacionIncompleto" + dato[0] + "' class='glyphicon glyphicon-exclamation-sign incompleto hidden' title='Sección incompleta'></span>";
                         
                         if(valido.equals("V")){
-                             respuesta+="<button type='button' id='participacionAprobado" + dato[0] + "' name='participacionAprobado" + dato[0] + "' class='btn btn-sm  " + permisoEdicion + "' title='Aprobado/Editar' onclick='activarEditarParticipacion(" + dato[0] + ")'>";
+                             respuesta+="<button type='button' id='participacionAprobado" + dato[0] + "' name='participacionAprobado" + dato[0] + "' class='btn btn-sm  " + permisoEdicion + "' title='Aprobado/Editar' onclick='activarEditarParticipacion(" + dato[0] + ")'  "+disabledValid+"  >";
                              respuesta+="<span class='glyphicon glyphicon-ok completo'></span>";
                              respuesta+="</button>";                               
 
                             //respuesta+="<span class='glyphicon glyphicon-ok completo' title='Aprobado'></span>";
                         }else{
-                             respuesta+="<button type='button' id='participacionRechazado" + dato[0] + "' name='participacionRechazado" + dato[0] + "' class='btn btn-sm  " + permisoEdicion + "' title='No cumple con la evidencia/Editar' onclick='activarEditarParticipacion(" + dato[0] + ")'>";
+                             respuesta+="<button type='button' id='participacionRechazado" + dato[0] + "' name='participacionRechazado" + dato[0] + "' class='btn btn-sm  " + permisoEdicion + "' title='No cumple con la evidencia/Editar' onclick='activarEditarParticipacion(" + dato[0] + ")'  "+disabledValid+"  >";
                              respuesta+="<span class='glyphicon glyphicon-remove incompleto'></span>";                    
                              respuesta+="</button>";                            
                             
@@ -448,7 +458,10 @@ public class CriteriosValoracion {
         retorno[2]=puntajeD;
         return retorno;
     }
-    public String[] getFilasTutorias(String idUsuario,boolean vistaAdmin, String idPermiso,String permisoActualEdicion){   
+    public String[] getFilasTutorias(String idUsuario,boolean vistaAdmin, String idPermiso,String permisoActualEdicion,String permisoTablaUsuarioEdicion){   
+        Docente docente=new Docente();
+        String validacionConvocatoria= vistaAdmin ? docente.getValidaAccionPorConvocatoria(idUsuario).get(0) : "0";
+        String disabledValid= (Integer.parseInt(validacionConvocatoria)  >= 0 || permisoTablaUsuarioEdicion.equals("V"))? "" :"disabled";
         String respuesta, valido;
         String[] retorno={"","0","0"};
         String puntaje="0", puntajeD="0";
@@ -502,30 +515,30 @@ public class CriteriosValoracion {
                 {valido = dato[5];}                 
                 if(vistaAdmin){
                     if(valido==null){
-                        respuesta+="<button type='button' class='btn btn-sm " + permisoEdicion + "' title='Aprobar' onclick='aprobarTutoria("+dato[0]+")'>";
+                        respuesta+="<button type='button' class='btn btn-sm " + permisoEdicion + "' title='Aprobar' onclick='aprobarTutoria("+dato[0]+")'  "+disabledValid+"  >";
                         respuesta+="<span class='glyphicon glyphicon-ok completo'></span>";
                         respuesta+="</button>";
-                        respuesta+="<button type='button' class='btn btn-sm " + permisoEdicion + "' title='No cumple con la evidencia' onclick='rechazarTutoria("+dato[0]+")'>";
+                        respuesta+="<button type='button' class='btn btn-sm " + permisoEdicion + "' title='No cumple con la evidencia' onclick='rechazarTutoria("+dato[0]+")'  "+disabledValid+"  >";
                         respuesta+="<span class='glyphicon glyphicon-remove incompleto'></span>";                    
                         respuesta+="</button>";
                         respuesta+="<span class='glyphicon glyphicon-exclamation-sign incompleto' title='Sección incompleta'></span>";
                     }else{
-                        respuesta+="<button id='tutoriaAprueba" + dato[0] + "' name='tutoriaAprueba" + dato[0] + "' type='button' class='btn btn-sm " + permisoEdicion + " hidden' title='Aprobar' onclick='aprobarTutoria("+dato[0]+")'>";
+                        respuesta+="<button id='tutoriaAprueba" + dato[0] + "' name='tutoriaAprueba" + dato[0] + "' type='button' class='btn btn-sm " + permisoEdicion + " hidden' title='Aprobar' onclick='aprobarTutoria("+dato[0]+")'  "+disabledValid+"  >";
                         respuesta+="<span class='glyphicon glyphicon-ok completo'></span>";
                         respuesta+="</button>";
-                        respuesta+="<button id='tutoriaRechaza" + dato[0] + "' name='tutoriaRechaza" + dato[0] + "' type='button' class='btn btn-sm " + permisoEdicion + " hidden' title='No cumple con la evidencia' onclick='rechazarTutoria("+dato[0]+")'>";
+                        respuesta+="<button id='tutoriaRechaza" + dato[0] + "' name='tutoriaRechaza" + dato[0] + "' type='button' class='btn btn-sm " + permisoEdicion + " hidden' title='No cumple con la evidencia' onclick='rechazarTutoria("+dato[0]+")' "+disabledValid+"  >";
                         respuesta+="<span class='glyphicon glyphicon-remove incompleto'></span>";                    
                         respuesta+="</button>";
                         ////respuesta+="<span id='tutoriaIncompleto" + dato[0] + "' name='tutoriaIncompleto" + dato[0] + "' class='glyphicon glyphicon-exclamation-sign incompleto hidden' title='Sección incompleta'></span>";
                        
                         if(valido.equals("V")){
-                             respuesta+="<button type='button' id='tutoriaAprobado" + dato[0] + "' name='tutoriaAprobado" + dato[0] + "' class='btn btn-sm  " + permisoEdicion + "' title='Aprobado/Editar' onclick='activarEditarTutoria(" + dato[0] + ")'>";
+                             respuesta+="<button type='button' id='tutoriaAprobado" + dato[0] + "' name='tutoriaAprobado" + dato[0] + "' class='btn btn-sm  " + permisoEdicion + "' title='Aprobado/Editar' onclick='activarEditarTutoria(" + dato[0] + ")' "+disabledValid+"  >";
                              respuesta+="<span class='glyphicon glyphicon-ok completo'></span>";
                              respuesta+="</button>";                               
                             
                             //respuesta+="<span class='glyphicon glyphicon-ok completo' title='Aprobado'></span>";
                         }else{
-                             respuesta+="<button type='button' id='tutoriaRechazado" + dato[0] + "' name='tutoriaRechazado" + dato[0] + "' class='btn btn-sm  " + permisoEdicion + "' title='No cumple con la evidencia/Editar' onclick='activarEditarTutoria(" + dato[0] + ")'>";
+                             respuesta+="<button type='button' id='tutoriaRechazado" + dato[0] + "' name='tutoriaRechazado" + dato[0] + "' class='btn btn-sm  " + permisoEdicion + "' title='No cumple con la evidencia/Editar' onclick='activarEditarTutoria(" + dato[0] + ")' "+disabledValid+"  >";
                              respuesta+="<span class='glyphicon glyphicon-remove incompleto'></span>";                    
                              respuesta+="</button>";                            
                             
@@ -563,7 +576,10 @@ public class CriteriosValoracion {
         retorno[2]=puntajeD;
         return retorno;
     }
-    public String[] getFilasPublicaciones(String idUsuario,boolean vistaAdmin, String idPermiso,String permisoActualEdicion){   
+    public String[] getFilasPublicaciones(String idUsuario,boolean vistaAdmin, String idPermiso,String permisoActualEdicion, String permisoTablaUsuarioEdicion){   
+        Docente docente=new Docente();
+        String validacionConvocatoria= vistaAdmin ? docente.getValidaAccionPorConvocatoria(idUsuario).get(0) : "0";
+        String disabledValid= (Integer.parseInt(validacionConvocatoria)  >= 0 || permisoTablaUsuarioEdicion.equals("V"))? "" :"disabled";
         String respuesta, valido;
         String puntaje="0", puntajeD="0";
         String[] retorno={"","0","0"};
@@ -615,30 +631,30 @@ public class CriteriosValoracion {
                 {valido = dato[6];}                  
                 if(vistaAdmin){
                     if(valido==null){
-                        respuesta+="<button type='button' class='btn btn-sm " + permisoEdicion + "' title='Aprobar' onclick='aprobarPublicacion("+dato[0]+")'>";
+                        respuesta+="<button type='button' class='btn btn-sm " + permisoEdicion + "' title='Aprobar' onclick='aprobarPublicacion("+dato[0]+")'  "+disabledValid+"  >";
                         respuesta+="<span class='glyphicon glyphicon-ok completo'></span>";
                         respuesta+="</button>";
-                        respuesta+="<button type='button' class='btn btn-sm " + permisoEdicion + "' title='No cumple con la evidencia' onclick='rechazarPublicacion("+dato[0]+")'>";
+                        respuesta+="<button type='button' class='btn btn-sm " + permisoEdicion + "' title='No cumple con la evidencia' onclick='rechazarPublicacion("+dato[0]+")'  "+disabledValid+"  >";
                         respuesta+="<span class='glyphicon glyphicon-remove incompleto'></span>";                    
                         respuesta+="</button>";
                         respuesta+="<span class='glyphicon glyphicon-exclamation-sign incompleto' title='Sección incompleta'></span>";
                     }else{
-                        respuesta+="<button id='publicacionAprueba" + dato[0] + "' name='publicacionAprueba" + dato[0] + "' type='button' class='btn btn-sm " + permisoEdicion + " hidden' title='Aprobar' onclick='aprobarPublicacion("+dato[0]+")'>";
+                        respuesta+="<button id='publicacionAprueba" + dato[0] + "' name='publicacionAprueba" + dato[0] + "' type='button' class='btn btn-sm " + permisoEdicion + " hidden' title='Aprobar' onclick='aprobarPublicacion("+dato[0]+")'  "+disabledValid+"  >";
                         respuesta+="<span class='glyphicon glyphicon-ok completo'></span>";
                         respuesta+="</button>";
-                        respuesta+="<button id='publicacionRechaza" + dato[0] + "' name='publicacionRechaza" + dato[0] + "' type='button' class='btn btn-sm " + permisoEdicion + " hidden' title='No cumple con la evidencia' onclick='rechazarPublicacion("+dato[0]+")'>";
+                        respuesta+="<button id='publicacionRechaza" + dato[0] + "' name='publicacionRechaza" + dato[0] + "' type='button' class='btn btn-sm " + permisoEdicion + " hidden' title='No cumple con la evidencia' onclick='rechazarPublicacion("+dato[0]+")'  "+disabledValid+"  >";
                         respuesta+="<span class='glyphicon glyphicon-remove incompleto'></span>";                    
                         respuesta+="</button>";
                         ////respuesta+="<span id='publicacionIncompleto" + dato[0] + "' name='publicacionIncompleto" + dato[0] + "' class='glyphicon glyphicon-exclamation-sign incompleto hidden' title='Sección incompleta'></span>";
                         
                         if(valido.equals("V")){
-                            respuesta+="<button type='button' id='publicacionAprobado" + dato[0] + "' name='publicacionAprobado" + dato[0] + "' class='btn btn-sm  " + permisoEdicion + "' title='Aprobado/Editar' onclick='activarEditarPublicacion(" + dato[0] + ")'>";
+                            respuesta+="<button type='button' id='publicacionAprobado" + dato[0] + "' name='publicacionAprobado" + dato[0] + "' class='btn btn-sm  " + permisoEdicion + "' title='Aprobado/Editar' onclick='activarEditarPublicacion(" + dato[0] + ")'  "+disabledValid+"  >";
                             respuesta+="<span class='glyphicon glyphicon-ok completo'></span>";
                             respuesta+="</button>";                               
                             
                             //respuesta+="<span class='glyphicon glyphicon-ok completo' title='Aprobado'></span>";
                         }else{
-                            respuesta+="<button type='button' id='publicacionRechazado" + dato[0] + "' name='publicacionRechazado" + dato[0] + "' class='btn btn-sm  " + permisoEdicion + "' title='No cumple con la evidencia/Editar' onclick='activarEditarPublicacion(" + dato[0] + ")'>";
+                            respuesta+="<button type='button' id='publicacionRechazado" + dato[0] + "' name='publicacionRechazado" + dato[0] + "' class='btn btn-sm  " + permisoEdicion + "' title='No cumple con la evidencia/Editar' onclick='activarEditarPublicacion(" + dato[0] + ")'  "+disabledValid+"  >";
                             respuesta+="<span class='glyphicon glyphicon-remove incompleto'></span>";                    
                             respuesta+="</button>";                            
                             
@@ -676,7 +692,10 @@ public class CriteriosValoracion {
         retorno[2]=puntajeD;
         return retorno;
     }
-    public String[] getFilasResultados(String idUsuario,boolean vistaAdmin, String idPermiso,String permisoActualEdicion){   
+    public String[] getFilasResultados(String idUsuario,boolean vistaAdmin, String idPermiso,String permisoActualEdicion,String permisoTablaUsuarioEdicion){   
+        Docente docente=new Docente();
+        String validacionConvocatoria= vistaAdmin ? docente.getValidaAccionPorConvocatoria(idUsuario).get(0) : "0";
+        String disabledValid= (Integer.parseInt(validacionConvocatoria)  >= 0 || permisoTablaUsuarioEdicion.equals("V"))? "" :"disabled";
         String respuesta, valido;
         String puntaje="0", puntajeD="0";
         String[] retorno=new String[3];
@@ -731,30 +750,30 @@ public class CriteriosValoracion {
                 {valido = dato[7];}                 
                 if(vistaAdmin){
                     if(valido==null){
-                        respuesta+="<button type='button' class='btn btn-sm " + permisoEdicion + "' title='Aprobar' onclick='aprobarResultado("+dato[0]+")'>";
+                        respuesta+="<button type='button' class='btn btn-sm " + permisoEdicion + "' title='Aprobar' onclick='aprobarResultado("+dato[0]+")'  "+disabledValid+" >";
                         respuesta+="<span class='glyphicon glyphicon-ok completo'></span>";
                         respuesta+="</button>";
-                        respuesta+="<button type='button' class='btn btn-sm " + permisoEdicion + "' title='No cumple con la evidencia' onclick='rechazarResultado("+dato[0]+")'>";
+                        respuesta+="<button type='button' class='btn btn-sm " + permisoEdicion + "' title='No cumple con la evidencia' onclick='rechazarResultado("+dato[0]+")'  "+disabledValid+" >";
                         respuesta+="<span class='glyphicon glyphicon-remove incompleto'></span>";                    
                         respuesta+="</button>";
                         respuesta+="<span class='glyphicon glyphicon-exclamation-sign incompleto' title='Sección incompleta'></span>";
                     }else{
-                        respuesta+="<button id='resultadoAprueba" + dato[0] + "' name='resultadoAprueba" + dato[0] + "' type='button' class='btn btn-sm " + permisoEdicion + " hidden' title='Aprobar' onclick='aprobarResultado("+dato[0]+")'>";
+                        respuesta+="<button id='resultadoAprueba" + dato[0] + "' name='resultadoAprueba" + dato[0] + "' type='button' class='btn btn-sm " + permisoEdicion + " hidden' title='Aprobar' onclick='aprobarResultado("+dato[0]+")'  "+disabledValid+" >";
                         respuesta+="<span class='glyphicon glyphicon-ok completo'></span>";
                         respuesta+="</button>";
-                        respuesta+="<button id='resultadoRechaza" + dato[0] + "' name='resultadoRechaza" + dato[0] + "' type='button' class='btn btn-sm " + permisoEdicion + " hidden' title='No cumple con la evidencia' onclick='rechazarResultado("+dato[0]+")'>";
+                        respuesta+="<button id='resultadoRechaza" + dato[0] + "' name='resultadoRechaza" + dato[0] + "' type='button' class='btn btn-sm " + permisoEdicion + " hidden' title='No cumple con la evidencia' onclick='rechazarResultado("+dato[0]+")'  "+disabledValid+" >";
                         respuesta+="<span class='glyphicon glyphicon-remove incompleto'></span>";                    
                         respuesta+="</button>";
                         ////respuesta+="<span id='resultadoIncompleto" + dato[0] + "' name='resultadoIncompleto" + dato[0] + "' class='glyphicon glyphicon-exclamation-sign incompleto hidden' title='Sección incompleta'></span>";
                         
                         if(valido.equals("V")){
-                            respuesta+="<button type='button' id='resultadoAprobado" + dato[0] + "' name='resultadoAprobado" + dato[0] + "' class='btn btn-sm  " + permisoEdicion + "' title='Aprobado/Editar' onclick='activarEditarResultado(" + dato[0] + ")'>";
+                            respuesta+="<button type='button' id='resultadoAprobado" + dato[0] + "' name='resultadoAprobado" + dato[0] + "' class='btn btn-sm  " + permisoEdicion + "' title='Aprobado/Editar' onclick='activarEditarResultado(" + dato[0] + ")' "+disabledValid+"  >";
                             respuesta+="<span class='glyphicon glyphicon-ok completo'></span>";
                             respuesta+="</button>";                               
                             
                             //respuesta+="<span class='glyphicon glyphicon-ok completo' title='Aprobado'></span>";
                         }else{
-                            respuesta+="<button type='button' id='resultadoRechazado" + dato[0] + "' name='resultadoRechazado" + dato[0] + "' class='btn btn-sm  " + permisoEdicion + "' title='No cumple con la evidencia/Editar' onclick='activarEditarResultado(" + dato[0] + ")'>";
+                            respuesta+="<button type='button' id='resultadoRechazado" + dato[0] + "' name='resultadoRechazado" + dato[0] + "' class='btn btn-sm  " + permisoEdicion + "' title='No cumple con la evidencia/Editar' onclick='activarEditarResultado(" + dato[0] + ")'  "+disabledValid+" >";
                             respuesta+="<span class='glyphicon glyphicon-remove incompleto'></span>";                    
                             respuesta+="</button>";                            
                             

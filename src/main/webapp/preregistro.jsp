@@ -211,7 +211,7 @@
                             </div>-->
                         <br>
                         <div class="col-xs-6 " id="valid-form-11" hidden>
-                            <input  class="btn btn-sm btn-primary" id="btnEnviarRFC" type="submit" value='Guardar' disabled/>
+                            <!--<input  class="btn btn-sm btn-primary" id="btnEnviarRFC" type="submit" value='Guardar' disabled/>-->
                             <!--<input required type="button" class="btn btn-sm btn-primary" value="Guardar y continuar" onclick="mostrarSiguiente(1)"/>-->
                         </div>
                     </div>
@@ -230,6 +230,7 @@
                   <p id="mensaje">Registro exitoso.</p>
                 </div>
                 <div class="modal-footer">
+                  <button id="btnAceptaHistorial" onclick="registrarAspiranteClon()" type="button" class="btn btn-sm btn-default hidden" >Aceptar</button>
                   <a id="btnContinuar" href="login.jsp" class="btn btn-sm btn-default">Continuar</a>
                   <button id="btnCerrar" type="button" class="btn btn-sm btn-default" data-dismiss="modal">Cerrar</button>
                 </div>

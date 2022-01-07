@@ -71,6 +71,7 @@ public class Servlet_cbVistaDocente extends HttpServlet {
             session.setAttribute("idConvocatoria",docente.getIdConvocatoria());
             docente.consultaEncuestados();            
             request.setAttribute("Docente", docente);
+            request.setAttribute("validacionConvocatoria", docente.getValidaAccionPorConvocatoria(docente.getIdUsuario()).get(0) );
             ServletContext sc = getServletContext();
             RequestDispatcher rd = sc.getRequestDispatcher("/vistaDocente.jsp");
             rd.forward(request,response);
@@ -107,6 +108,7 @@ public class Servlet_cbVistaDocente extends HttpServlet {
             request.setAttribute("vinculos", session.getAttribute("vinculos"));
             //System.out.println("---------------------"+docente.getInfoRegistro()[64]);
             //session.setAttribute("programa",docente.getInfoRegistro()[64]);
+                        request.setAttribute("validacionConvocatoria", docente.getValidaAccionPorConvocatoria(request.getParameter("idUsuario")).get(0) );
             if( !session.getAttribute("rol").toString().equals("D")){
                     session.setAttribute("programa",docente.getInfoRegistro()[64]);
                 }

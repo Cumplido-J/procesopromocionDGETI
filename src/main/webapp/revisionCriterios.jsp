@@ -56,8 +56,12 @@
                             </c:if>
                             <c:if test='${sessionScope["permisoActualEdicion"]=="F"}'>
                                 <c:set var="disabledEdicion" value="disabled"></c:set>
+                            </c:if>
+                            <c:if test = "${docente.infoRegistro[66]=='3'}">
+                                <%
+                                   response.sendRedirect("/procesopromocion/VistaDocente");
+                                %>
                             </c:if>                            
-                            
                         </c:if>
                         <c:if test='${(docente.infoRegistro[7]==10 && docente.infoRegistro[75]==2)}'>
                             <c:set var="hiddenDurango" value=""></c:set>
@@ -150,10 +154,12 @@
                                         <span class="glyphicon glyphicon-exclamation-sign incompleto" id="alertaBtnEvidencia2" title="Sección incompleta"></span>  
                                     </c:if> 
                                 </div>
-                                <div class="col-xs-12 text-right">
-                                    
-                                    <input class="btn btn-sm btn-primary ${disabledEdicion}" id="btnEnviar1" type="submit" value='Guardar y continuar'/>                                    
-                                </div>
+                                <c:if test = "${validacionConvocatoria >= 0 || sessionScope['permisoTablaUsuarioEdicion']=='V'}">
+                                    <div class="col-xs-12 text-right">
+
+                                        <input class="btn btn-sm btn-primary ${disabledEdicion}" id="btnEnviar1" type="submit" value='Guardar y continuar'/>                                    
+                                    </div>
+                                </c:if>    
                             </form>
                         </div>
                       </div>
@@ -231,10 +237,12 @@
                                     </c:if>
                                     
                                 </div>
-                                <div class="col-xs-12 text-right">
-                                    
-                                    <input class="btn btn-sm btn-primary ${disabledEdicion}" id="btnEnviar2" type="submit" value='Guardar y continuar'/>                                    
-                                </div>
+                                <c:if test = "${validacionConvocatoria >= 0 || sessionScope['permisoTablaUsuarioEdicion']=='V'}">
+                                    <div class="col-xs-12 text-right">
+
+                                        <input class="btn btn-sm btn-primary ${disabledEdicion}" id="btnEnviar2" type="submit" value='Guardar y continuar'/>                                    
+                                    </div>
+                                </c:if>
                             </form>
                         </div>
                       </div>
@@ -318,10 +326,12 @@
                                     </c:if>
                                     
                                 </div>
-                                <div class="col-xs-12 text-right">
-                                    
-                                    <input class="btn btn-sm btn-primary ${disabledEdicion}" id="btnEnviar4" type="submit" value='Guardar y continuar'/>                                    
-                                </div>
+                                <c:if test = "${validacionConvocatoria >= 0 || sessionScope['permisoTablaUsuarioEdicion']=='V'}">  
+                                    <div class="col-xs-12 text-right">
+
+                                        <input class="btn btn-sm btn-primary ${disabledEdicion}" id="btnEnviar4" type="submit" value='Guardar y continuar'/>                                    
+                                    </div>
+                                </c:if>    
                             </form>
                         </div>
                       </div>
@@ -415,10 +425,12 @@
                                     </c:if>
                             </div>                              
                             </div>
-                            <div class="col-xs-12 text-right">
-                                
-                                <input class="btn btn-sm btn-primary ${disabledEdicion}" id="btnEnviar5" type="submit" value='Guardar y continuar'/>                                    
-                            </div>
+                            <c:if test = "${validacionConvocatoria >= 0 || sessionScope['permisoTablaUsuarioEdicion']=='V'}">
+                                <div class="col-xs-12 text-right">
+
+                                    <input class="btn btn-sm btn-primary ${disabledEdicion}" id="btnEnviar5" type="submit" value='Guardar y continuar'/>                                    
+                                </div>
+                            </c:if>
                             </form>
                         </div>
                       </div>
@@ -558,10 +570,12 @@
                                 </c:if>
                             </div>
                         </div>
-                            <div class="col-xs-12 text-right">
-                                
-                                <input class="btn btn-sm btn-primary ${disabledEdicion}" id="btnEnviar6" type="submit" value='Guardar y continuar'/>                                    
-                            </div>
+                            <c:if test = "${validacionConvocatoria >= 0 || sessionScope['permisoTablaUsuarioEdicion']=='V'}">
+                                <div class="col-xs-12 text-right">
+
+                                    <input class="btn btn-sm btn-primary ${disabledEdicion}" id="btnEnviar6" type="submit" value='Guardar y continuar'/>                                    
+                                </div>
+                            </c:if>
                             </form>
                         </div>        
                       </div>
@@ -655,10 +669,12 @@
                                 </div>
                                 
                             </div>
-                            <div class="col-xs-12 text-right">
-                                    
-                                    <input class="btn btn-sm btn-primary ${disabledEdicion}" id="btnEnviar7" type="submit" value='Guardar y continuar'/>                                    
+                            <c:if test = "${validacionConvocatoria >= 0 || sessionScope['permisoTablaUsuarioEdicion']=='V'}">    
+                                <div class="col-xs-12 text-right">
+
+                                        <input class="btn btn-sm btn-primary ${disabledEdicion}" id="btnEnviar7" type="submit" value='Guardar y continuar'/>                                    
                                 </div>
+                            </c:if>    
                             </form>
                         </div>
                       </div>
@@ -753,10 +769,12 @@
                                 
                             
                         </div>
+                            <c:if test = "${validacionConvocatoria >= 0 || sessionScope['permisoTablaUsuarioEdicion']=='V'}">    
                                 <div class="col-xs-12 text-right">
                                     
                                     <input class="btn btn-sm btn-primary ${disabledEdicion}" id="btnEnviar8" type="submit" value='Guardar y continuar'/>                                    
                                 </div>
+                            </c:if>    
                             </form>
                         </div>
                       </div>
@@ -852,10 +870,12 @@
                                 
                             
                         </div>
-                        <div class="col-xs-12 text-right">
+                            <c:if test = "${validacionConvocatoria >= 0 || sessionScope['permisoTablaUsuarioEdicion']=='V'}">    
+                                <div class="col-xs-12 text-right">
                                     
                                     <input class="btn btn-sm btn-primary ${disabledEdicion}" id="btnEnviar9" type="submit" value='Guardar y continuar'/>                                    
                                 </div>
+                            </c:if>    
                             </form>
                         </div>
                       </div>
@@ -1124,8 +1144,9 @@
                                       <label><input type="checkbox" id="cb10" name="cbConstancia">Marque la casilla si no cuenta con evidencias o no presenta las suficientes para acreditar el cumplimiento de este criterio de valoración.</label>
                                     </div>
                                 </div>
-                                    
+                                    <c:if test = "${validacionConvocatoria >= 0 || sessionScope['permisoTablaUsuarioEdicion']=='V'}">
                                     <input class="btn btn-sm btn-primary ${disabledEdicion}" id="btnEnviar10E" type="submit" value='Guardar y continuar'/>                                    
+                                    </c:if>
                                 </div>
                             </form>
                         </div>
@@ -1146,8 +1167,9 @@
                     </div>
                     <br/>                      
                     <!--<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalConfirmacion2">Finalizar registro</button>-->
+                    <c:if test = "${validacionConvocatoria >= 0 || sessionScope['permisoTablaUsuarioEdicion']=='V'}">
                     <button type="button" class="btn btn-primary ${disabledEdicion}" onClick="finalizarRevision()">Evaluación finalizada</button>
-                  
+                    </c:if>
               </div>
               
         </main>

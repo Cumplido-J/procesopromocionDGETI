@@ -68,7 +68,7 @@ public class Servlet_cbRegistroCriterios extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession session= (HttpSession) request.getSession();  
-        System.out.println("------------------------------------------<>>>>>>>>>>>>>");
+
         if(session.getAttribute("rol")!=null){
             String idUsuario,rfc, idPermiso, permisoEdicion;
             boolean vistaAdmin;
@@ -118,27 +118,28 @@ public class Servlet_cbRegistroCriterios extends HttpServlet {
                 puntajeEncuestas[5]="0.0";
             }
             puntajeEncuestas[5] =  Double.toString(Math.round(Double.parseDouble(puntajeEncuestas[5])*100.0)/100.0);
-            
+            String validacionConvocatoria= session.getAttribute("rol").toString().equals("D") ? "0" :docente.getValidaAccionPorConvocatoria(idUsuario).get(0);
+            String permisoTablaUsuarioEdicion=session.getAttribute("permisoTablaUsuarioEdicion").toString();
             cv.setPuntajeEncuestas(idUsuario, puntajeEncuestas[5]);
             
             request.setAttribute("docente", docente);
             request.setAttribute("criterios", criterios);
             request.setAttribute("puntajes", puntajes);
             request.setAttribute("puntajeEncuestas", puntajeEncuestas);            
-            request.setAttribute("cursos", cv.getFilasCursos(idUsuario,vistaAdmin, idPermiso, permisoEdicion));
+            request.setAttribute("cursos", cv.getFilasCursos(idUsuario,vistaAdmin, idPermiso, permisoEdicion, permisoTablaUsuarioEdicion));
 
             if (!(Integer.parseInt((docente.getInfoRegistro())[7]) == 10 && Integer.parseInt((docente.getInfoRegistro())[75]) == 2))
             {
-                request.setAttribute("aportaciones", cv.getFilasAportaciones(idUsuario,vistaAdmin, idPermiso, permisoEdicion));
+                request.setAttribute("aportaciones", cv.getFilasAportaciones(idUsuario,vistaAdmin, idPermiso, permisoEdicion, permisoTablaUsuarioEdicion));
             }           
             
-            request.setAttribute("participaciones", cv.getFilasParticipaciones(idUsuario,vistaAdmin, idPermiso, permisoEdicion));
-            request.setAttribute("tutorias", cv.getFilasTutorias(idUsuario,vistaAdmin, idPermiso, permisoEdicion));
-            request.setAttribute("publicaciones", cv.getFilasPublicaciones(idUsuario,vistaAdmin, idPermiso, permisoEdicion));
+            request.setAttribute("participaciones", cv.getFilasParticipaciones(idUsuario,vistaAdmin, idPermiso, permisoEdicion, permisoTablaUsuarioEdicion));
+            request.setAttribute("tutorias", cv.getFilasTutorias(idUsuario,vistaAdmin, idPermiso, permisoEdicion ,permisoTablaUsuarioEdicion));
+            request.setAttribute("publicaciones", cv.getFilasPublicaciones(idUsuario,vistaAdmin, idPermiso, permisoEdicion, permisoTablaUsuarioEdicion));
             
             if (!(Integer.parseInt((docente.getInfoRegistro())[7]) == 10 && Integer.parseInt((docente.getInfoRegistro())[75]) == 2))
             {
-                request.setAttribute("resultados", cv.getFilasResultados(idUsuario,vistaAdmin, idPermiso, permisoEdicion));
+                request.setAttribute("resultados", cv.getFilasResultados(idUsuario,vistaAdmin, idPermiso, permisoEdicion, permisoTablaUsuarioEdicion));
             }
             
             request.setAttribute("vistaAdmin", vistaAdmin);

@@ -12,6 +12,11 @@ $(document).ready(function () {
                 number:true,
                 min:1,
                 max:19
+            },
+            'vacancia':{
+                number:true,
+                min:1,
+                max:1
             }
         },
         messages: {
@@ -34,7 +39,9 @@ $(document).ready(function () {
                 required: "Seleccione una opción"
             },
             'vacancia':{
-                required: "Campo requerido"
+                required: "Campo requerido",
+                min:"Ingrese un valor mayor a 0",
+                max:"Ingrese un valor menor a 2"
             },            
             'tipoVacancia':{
                 required: "Seleccione una opción"

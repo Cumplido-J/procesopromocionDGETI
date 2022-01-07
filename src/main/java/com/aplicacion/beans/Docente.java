@@ -13,6 +13,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileReader;
 import java.lang.reflect.Type;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 import java.util.Random;
@@ -600,4 +601,40 @@ public class Docente {
         encuestados= metodos.ejecutaSPEncuestas("sp_selectLecturaUrlRFC",parametros);
         totalEncuestados=encuestados.size();
     }
+    
+    public ArrayList<String> getValidaAccionPorConvocatoria(String idUsuario){ 
+               Metodos_sql metodo=new Metodos_sql();
+               ArrayList<String> lista=new ArrayList<>();
+               List<String[]> datos=null;
+           try{
+               String[] parametros={idUsuario};
+              datos=metodo.ejecutaSP("sp_selectValidaAccionPorConvocatoria", parametros);
+
+               for(String[] dato:datos){
+                   lista.add(dato[0]);
+               }
+           }catch(Exception e){
+
+           }finally{
+               return lista;        
+           }
+    }
+        
+    public ArrayList<String> getInfoMotivoFichaIncompleta(String idUsuario){ 
+               Metodos_sql metodo=new Metodos_sql();
+               ArrayList<String> lista=new ArrayList<>();
+               List<String[]> datos=null;
+           try{
+               String[] parametros={idUsuario};
+              datos=metodo.ejecutaSP("sp_selectMotivoFichaIncompleta", parametros);
+
+               for(String[] dato:datos){
+                   lista.add(dato[0]);
+               }
+           }catch(Exception e){
+
+           }finally{
+               return lista;        
+           }
+    }    
 }

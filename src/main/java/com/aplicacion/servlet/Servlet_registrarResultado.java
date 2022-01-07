@@ -106,7 +106,8 @@ public class Servlet_registrarResultado extends HttpServlet {
                 datos=metodo.ejecutaSP("sp_insertResultados",parametros);            
                 if(!datos.isEmpty()){
                     if(datos.get(0)[0].equals("ok")){
-                        String[] info=new CriteriosValoracion().getFilasResultados(idUsuario,vistaAdmin,idPermiso,session.getAttribute("permisoActualEdicion").toString());
+                        String permisoTablaUsuarioEdicion=session.getAttribute("permisoTablaUsuarioEdicion").toString();
+                        String[] info=new CriteriosValoracion().getFilasResultados(idUsuario,vistaAdmin,idPermiso,session.getAttribute("permisoActualEdicion").toString(),permisoTablaUsuarioEdicion);
                         out.print(info[0]+"||"+info[1]+"||"+info[2]);                    
                     }else{
                         out.print(datos.get(0)[0]);
@@ -130,7 +131,8 @@ public class Servlet_registrarResultado extends HttpServlet {
                            
                 if(!datos.isEmpty()){
                     if(datos.get(0)[0].equals("ok")){
-                        String[] info=new CriteriosValoracion().getFilasResultados(idUsuario,vistaAdmin,idPermiso,session.getAttribute("permisoActualEdicion").toString());
+                        String permisoTablaUsuarioEdicion=session.getAttribute("permisoTablaUsuarioEdicion").toString();
+                        String[] info=new CriteriosValoracion().getFilasResultados(idUsuario,vistaAdmin,idPermiso,session.getAttribute("permisoActualEdicion").toString(),permisoTablaUsuarioEdicion);
                         out.print(info[0]+"||"+info[1]+"||"+info[2]);  
                     }
                 }else{
