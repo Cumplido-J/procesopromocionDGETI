@@ -58,6 +58,10 @@
             <p>DATOS DEL PARTICIPANTE</p>
             <table >
                 <tr>
+                    <td>Motivo de ficha de registro incompleto</td>
+                    <td>:${infoMotivoFichaIncompleta[0]}</td>
+                </tr>
+                <tr>
                     <td>FOLIO</td>
                     <td>:${Docente.infoRegistro[76]}</td>
                 </tr>

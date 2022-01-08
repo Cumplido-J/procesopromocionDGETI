@@ -219,6 +219,13 @@ public class Servlet_registrarCriterio extends HttpServlet {
                     if(!datos.isEmpty()){
                         puntaje+=Integer.parseInt(datos.get(0)[0]);
                     }
+                    
+                    parametros[1]="15";
+                    parametros[2]="55";                                           
+                    datos=metodo.ejecutaSP("sp_insertConstanciasProceso",parametros);
+                    if(!datos.isEmpty()){
+                        puntaje+=Integer.parseInt(datos.get(0)[0]);
+                    }
                 }
                 out.print(puntaje);
             }

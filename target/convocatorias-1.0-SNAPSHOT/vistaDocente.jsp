@@ -130,17 +130,18 @@
             </c:if>
             
             <div class="articulosses">
-                <article class="articleses">
-                    <h3>Paso 1 </h3>
-                    <a  href="Registro" ><img src="<%=Imagen.muestraImagen(RutaConfig.getRutaCarpeta()+"imagenes/EvidReg.jpg")%>" alt=""></a>
-                    <a  href="Registro" ><h3>Registro de aspirante</h3></a>
-                </article>                    
-                
+                <c:if test = "${!finIncompleto}">
+                    <article class="articleses">
+                        <h3>Paso 1 </h3>
+                        <a  href="Registro" ><img src="<%=Imagen.muestraImagen(RutaConfig.getRutaCarpeta()+"imagenes/EvidReg.jpg")%>" alt=""></a>
+                        <a  href="Registro" ><h3>Registro de aspirante</h3></a>
+                    </article>                    
+                </c:if>
                
                 <c:if test = "${finIncompleto}">
                     <c:set var="finIncompleto" value="true"></c:set>
                     <article class="articleses ">
-                        <h3>Paso 2:</h3>
+                        
                         <a href="FichaRegistroIncompleto" target="_blank"><img src="<%=Imagen.muestraImagen(RutaConfig.getRutaCarpeta()+"imagenes/EvidVal.jpg")%>" alt=""></a>
                         <a href="FichaRegistroIncompleto" target="_blank"><h3>Ficha de registro incompleto</h3></a>
                     </article>
@@ -199,21 +200,23 @@
                     </c:if>
                 </c:if>
                     <c:if test='${sessionScope["permisoActual"]=="5" || sessionScope["permisoActual"]=="6"}'>
-                        <article class="articleses ">
-                            <h3>Paso 6: </h3>
-                            <%--                                <a title="Ver ejemplo" onclick="abrirModalEjemplo(1)"></a>
-                                                              <a><img src="<%=Imagen.muestraImagen(RutaConfig.getRutaCarpeta() + "imagenes/EvidReg.jpg")%>" alt=""></a><br> --%>
-                            <c:if test = "${Docente.documentoCargado4('1')==true}">
-                                <a href="#" onclick="abrirModalRevisorFile(1)"><img src="<%=Imagen.muestraImagen(RutaConfig.getRutaCarpeta() + "imagenes/EvidVal.jpg")%>" alt=""></a>
-                                <input id="btnEvidenciaR" type="button" class="btn btn-sm btn-link" value="Ver documento" onclick="abrirModalRevisorFile(1)"/>
-                                <a onclick="abrirModalRevisorFile(1)" ><h3>Lista de cotejo <br/>de revisor</h3></a>
-                            </c:if>
-                            <c:if test = "${Docente.documentoCargado4('1')==false}">
-                                <a onclick="abrirModalRevisorFile(1)" ><img src="<%=Imagen.muestraImagen(RutaConfig.getRutaCarpeta() + "imagenes/EvidReg.jpg")%>" alt=""></a>
-                                <input id="btnEvidenciaR" type="button" class="btn btn-sm btn-link incompleto" value="" onclick="abrirModalRevisorFile(1)"/>
-                                <a onclick="abrirModalRevisorFile(1)" ><h3>Lista de cotejo <br/>de revisor</h3></a>
-                            </c:if>
-                        </article>
+                        <c:if test = "${!finIncompleto}">
+                            <article class="articleses ">
+                                <h3>Paso 6: </h3>
+                                <%--                                <a title="Ver ejemplo" onclick="abrirModalEjemplo(1)"></a>
+                                                                  <a><img src="<%=Imagen.muestraImagen(RutaConfig.getRutaCarpeta() + "imagenes/EvidReg.jpg")%>" alt=""></a><br> --%>
+                                <c:if test = "${Docente.documentoCargado4('1')==true}">
+                                    <a href="#" onclick="abrirModalRevisorFile(1)"><img src="<%=Imagen.muestraImagen(RutaConfig.getRutaCarpeta() + "imagenes/EvidVal.jpg")%>" alt=""></a>
+                                    <input id="btnEvidenciaR" type="button" class="btn btn-sm btn-link" value="Ver documento" onclick="abrirModalRevisorFile(1)"/>
+                                    <a onclick="abrirModalRevisorFile(1)" ><h3>Lista de cotejo <br/>de revisor</h3></a>
+                                </c:if>
+                                <c:if test = "${Docente.documentoCargado4('1')==false}">
+                                    <a onclick="abrirModalRevisorFile(1)" ><img src="<%=Imagen.muestraImagen(RutaConfig.getRutaCarpeta() + "imagenes/EvidReg.jpg")%>" alt=""></a>
+                                    <input id="btnEvidenciaR" type="button" class="btn btn-sm btn-link incompleto" value="" onclick="abrirModalRevisorFile(1)"/>
+                                    <a onclick="abrirModalRevisorFile(1)" ><h3>Lista de cotejo <br/>de revisor</h3></a>
+                                </c:if>
+                            </article>
+                        </c:if>
                     </c:if>
                     <!--<c:if test='${sessionScope["permisoActual"]=="5"}'>
                     <article id="pasoFicha" for="pasoFicha" name="pasoFicha" class="articleses" >
@@ -223,38 +226,44 @@
                     </article>
                     </c:if>-->
                     <c:if test='${sessionScope["permisoActual"]=="6"}'>
-                    <article id="pasoFicha" for="pasoFicha" name="pasoFicha" class="articleses" >
-                            <h3>Paso 7:</h3>
-                            <a href="FichaDictamen" target="_blank" ><img src="<%=Imagen.muestraImagen(RutaConfig.getRutaCarpeta()+"imagenes/EvidVal.jpg")%>" alt=""></a>
-                            <a href="FichaDictamen"  target="_blank" ><h3>Ficha de <br/> dictamen </h3></a>
-                    </article>
+                                    <c:if test = "${!finIncompleto}">
+                            <article id="pasoFicha" for="pasoFicha" name="pasoFicha" class="articleses" >
+                                    <h3>Paso 7:</h3>
+                                    <a href="FichaDictamen" target="_blank" ><img src="<%=Imagen.muestraImagen(RutaConfig.getRutaCarpeta()+"imagenes/EvidVal.jpg")%>" alt=""></a>
+                                    <a href="FichaDictamen"  target="_blank" ><h3>Ficha de <br/> dictamen </h3></a>
+                            </article>
+                                    </c:if>
                     </c:if>
                     <c:choose>
-                        <c:when test='${sessionScope["permisoActual"]=="6"}'>                                            
-                            <article class="articleses">
-                                <form id="formFinal" role="form" action="RevisionFinal" method="POST">
-                                    <h3></h3>
-                                    <a href=""  target="_blank" ><h3>Revision final:</h3></a>
-                                    <c:if test='${sessionScope["permisoActualEdicion"]=="F"}'>
-                                        <select class="form-control input-sm" id="revisionfinal" name="revisionfinal" required disabled>
-                                            ${catalogo.desplegarCatalogosEstatusFinal(sessionScope["idDocente"])}                                
-                                        </select>
-                                    </c:if>
-                                    <c:if test='${sessionScope["permisoActualEdicion"]=="V"}'>
-                                        <select class="form-control input-sm" id="revisionfinal" name="revisionfinal" required>
-                                            ${catalogo.desplegarCatalogosEstatusFinal(sessionScope["idDocente"])}                                
-                                        </select>
-                                    </c:if>
-                                    <div style="margin-top: 10px;">
+                        <c:when test='${sessionScope["permisoActual"]=="6"}'>
+                                        <c:if test = "${!finIncompleto}">
+                                <article class="articleses">
+                                    <form id="formFinal" role="form" action="RevisionFinal" method="POST">
+                                        <h3></h3>
+                                        <a href=""  target="_blank" ><h3>Revision final:</h3></a>
                                         <c:if test='${sessionScope["permisoActualEdicion"]=="F"}'>
-                                            <input class="btn btn-sm btn-primary" id="btnEnviarCurso" type="submit" value='Guardar' style="margin-right: 105px;" disabled=""/>
+                                            <select class="form-control input-sm" id="revisionfinal" name="revisionfinal" required disabled>
+                                                ${catalogo.desplegarCatalogosEstatusFinal(sessionScope["idDocente"])}                                
+                                            </select>
                                         </c:if>
                                         <c:if test='${sessionScope["permisoActualEdicion"]=="V"}'>
-                                            <input class="btn btn-sm btn-primary" id="btnEnviarCurso" type="submit" value='Guardar' style="margin-right: 105px;"/>
+                                            <select class="form-control input-sm" id="revisionfinal" name="revisionfinal" required>
+                                                ${catalogo.desplegarCatalogosEstatusFinal(sessionScope["idDocente"])}                                
+                                            </select>
                                         </c:if>
-                                    </div>
-                                </form>
-                            </article>
+                                        <c:if test = "${validacionConvocatoria >= 0 || sessionScope['permisoTablaUsuarioEdicion']=='V'}">
+                                            <div style="margin-top: 10px;">
+                                                <c:if test='${sessionScope["permisoActualEdicion"]=="F"}'>
+                                                    <input class="btn btn-sm btn-primary" id="btnEnviarCurso" type="submit" value='Guardar' style="margin-right: 105px;" disabled=""/>
+                                                </c:if>
+                                                <c:if test='${sessionScope["permisoActualEdicion"]=="V"}'>
+                                                    <input class="btn btn-sm btn-primary" id="btnEnviarCurso" type="submit" value='Guardar' style="margin-right: 105px;"/>
+                                                </c:if>
+                                            </div>
+                                       </c:if>
+                                    </form>
+                                </article>
+                                        </c:if>
                         </c:when>
                     </c:choose>        
                 <!--
@@ -344,12 +353,14 @@
                     <iframe name="ifRespuesta" hidden></iframe>
                     <iframe style="width:100%;height: 338px;" id="ifArchivo" name="ifArchivo" src="" hidden></iframe>
                     <div id="seccionCarga">
+                                                <c:if test = "${validacionConvocatoria >= 0 || sessionScope['permisoTablaUsuarioEdicion']=='V'}">
                         <form id="formArchivo" name="formArchivo" method="POST" enctype="multipart/form-data" >
                                 <label class="text-warning" id="alertaCarga"><span class="glyphicon glyphicon-warning-sign"></span>&nbsp;Cárgue su archivo de evidencia ya firmado.</label>
                                 <label class="control-label" for="archivo">Seleccione el archivo a cargar:</label>
                                 <input type="hidden" id="idArchivo" name="idArchivo" value="" />
                                 <input type="file" class="form-control input-sm" id="archivoCarta" name="archivoCarta" onchange="subirArchivo_();" accept=".pdf" />
-                        </form>  
+                        </form>
+                                                </c:if>
                     </div>
                 </div>
                 <div class="modal-footer">

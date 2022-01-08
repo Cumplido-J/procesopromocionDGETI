@@ -68,6 +68,11 @@
             <hr/>            
             <p>DATOS DEL PARTICIPANTE</p>
             <table >
+                <c:if test = "${banderaIdUsuarioPadre }">
+                <tr>
+                    <td><strong>El participante obto por su registro anterior</strong></td>
+                </tr>
+                </c:if>
                 <tr>
                     <td>FOLIO</td>                    
                     <td>:${Docente.infoRegistro[76]}</td>

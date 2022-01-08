@@ -113,7 +113,7 @@
                         </div>
                         <div class="form-group col-md-3">                               
                             <label class="control-label" for="vacancia">Cantidad de plazas vacantes:<span class="text-danger" title="Campo obligatorio">*</span></label>
-                            <input type="text" class="form-control input-sm" id="vacancia" name="vacancia" required/>
+                            <input type="text" class="form-control input-sm" id="vacancia" name="vacancia" required maxlength="1"/>
                         </div>
                         <div class="form-group col-md-3">                               
                             <label class="control-label" for="tipoVacancia">Tipo de vacancia:<span class="text-danger" title="Campo obligatorio">*</span></label>
