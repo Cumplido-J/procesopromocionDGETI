@@ -5,27 +5,28 @@
  */
 package com.aplicacion.servlet;
 
-import com.aplicacion.beans.Docente;
-import herramientas.Comite;
-import herramientas.Correo;
-import herramientas.Pin;
+import com.google.gson.Gson;
+import constants.ConstantsWS;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import metodos_sql.Metodos_sql;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 /**
  *
- * @author David Reyna
+ * @author Jonathan Trinidad de Lazaro
  */
-@WebServlet(name = "RegistroIntegranteComite", urlPatterns = {"/RegistroIntegranteComite"})
-public class Servlet_registroIntegranteComite extends HttpServlet {
+@WebServlet(name = "Servlet_consultarMienbroComitePorId", urlPatterns = {"/consultarMienbroComitePorId"})
+public class Servlet_consultarMienbroComitePorId extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -44,10 +45,10 @@ public class Servlet_registroIntegranteComite extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet Servlet_registroIntegranteComite</title>");            
+            out.println("<title>Servlet Servlet_consultarMienbroComitePorId</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet Servlet_registroIntegranteComite at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet Servlet_consultarMienbroComitePorId at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -79,47 +80,33 @@ public class Servlet_registroIntegranteComite extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try{
+        try {
             PrintWriter out = response.getWriter();
-            /*HttpSession session= (HttpSession) request.getSession();     
-            if(session.getAttribute("idUsuario")!=null&&session.getAttribute("rfc")!=null){*/
-                HttpSession session= (HttpSession) request.getSession();
-                String permisoEdicion = session.getAttribute("permisoEdicion").toString();
-                String idComite=request.getParameter("idComite");
-                String rfc=request.getParameter("rfc").toUpperCase();
-                String nombre=request.getParameter("nombre").toUpperCase();
-                String paterno=request.getParameter("apPaterno").toUpperCase();
-                String materno=request.getParameter("apMaterno").toUpperCase();
-                String correo=request.getParameter("correo").toLowerCase();
-                String rol=request.getParameter("rol");
-                //String[] p2={idUsuario,curp,correo,tipoEncuesta};
-                Metodos_sql metodos=new Metodos_sql(); 
-                
-                String[] parametros={idComite,rfc,nombre,paterno,materno,correo,rol};
-                List<String[]> retorno=null;                
-                retorno=metodos.ejecutaSP("sp_insertMiembroComite",parametros);
-                if(!retorno.isEmpty()){                    
-                    if(retorno.get(0)[0].equals("ok")){                        
-                        Comite c=new Comite();
-                        out.print(c.desplegarIntegrantesComite(idComite,permisoEdicion));
-                    }  
-                    else{
-                        out.print(retorno.get(0)[0]);
-                    }
-                }else{
-                    out.print("Error de almacenamiento, intente más tarde");
-                }
-                    //out.print(retorno.get(0)[0].trim());
-                
-                /*List<String[]> retorno=metodos.ejecutaSP("sp_insertEncuestado",parametros);
-                if(!retorno.isEmpty()){
-                    out.print(retorno.get(0)[0].trim());
-                }
-                System.out.println(Pin.generaPin());*/
-            //}
-        }catch(Exception e){
-            System.out.println(e.toString());
+            String id=request.getParameter("id");
+            Metodos_sql metodo = new Metodos_sql();
+            JSONObject json=new JSONObject();
+            String[] parametros={id};
+            List<String[]> datos;
+            datos=metodo.ejecutaSP("sp_consultarMiembroComitePorId",parametros);
+            
+            String rfc=datos.get(0)[2];
+            String nombre=datos.get(0)[3];
+            String primerApellido=datos.get(0)[4];
+            String segundoApellido=datos.get(0)[5];
+            String correo=datos.get(0)[6];
+            String rol=datos.get(0)[7];
+            
+            
+            json.put("rfc",rfc);
+            json.put("nombre",nombre);
+            json.put("primerApellido",primerApellido);
+            json.put("segundoApellido",segundoApellido);
+            json.put("correo",correo);
+            json.put("rol",rol);
+            
+            out.print(json.toString());
+        } catch (JSONException ex) {
+            Logger.getLogger(Servlet_consultarMienbroComitePorId.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

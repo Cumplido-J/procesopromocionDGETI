@@ -141,6 +141,12 @@
                             <td>: RECHAZADO</td>
                         </c:if>
                 </tr>
+                <c:if test="${uPadre=='1'}">
+                    <tr>
+                        <td>EL PARTICIPANTE OPTO POR SU PUNTAJE ANTERIOR:</td>
+                        <td>: SI</td>
+                    </tr>
+                </c:if>
                 <tr>
                     <td COLSPAN="2">
                         <h3>REQUISITOS:</h3>

@@ -86,7 +86,7 @@
                             <th>Rol</th>
                             <th>Opciones</th>
                         </thead>
-                        <tbody id="seccionEditable">${comite.desplegarIntegrantesComite(datos[0])}</tbody>
+                        <tbody id="seccionEditable">${comite.desplegarIntegrantesComite(datos[0],sessionScope["permisoActualEdicion"])}</tbody>
                     </table>
                 </div>
                 <div class="form-group col-md-4">
@@ -115,6 +115,10 @@
                     <input type="button" class="btn btn-sm btn-primary" value='Finalizar registro de comité' onclick="finalizaRegistro()"/>                          
                 </div>
                 </c:if>
+            <div class="col-md-4 text-center">
+                    <br/>
+                    <input type="button" class="btn btn-sm btn-primary" value='Reenviar contraseña' onclick="confirmacionPassword()"/>                          
+                </div>
             </div>
             <div class="modal fade" id="modalMensaje" role="dialog">
                 <div class="modal-dialog">
@@ -134,6 +138,24 @@
                     </div>
                   </div>
 
+                </div>
+            </div>
+            <div class="modal fade" id="modalMensaje1" role="dialog">
+                <div style="width: 30%;margin: auto;margin-top: 20%;">
+
+                  <!-- Modal content-->
+                  <div class="modal-content panel">
+                    <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal">&times;</button>
+                      <h4 class="modal-title">Aviso</h4>
+                    </div>
+                    <div class="modal-body">
+                      <p id="mensaje1">Registro exitoso.</p>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-sm btn-default" data-dismiss="modal">Cerrar</button>
+                    </div>
+                  </div>
                 </div>
             </div>
             <div class="modal fade" id="modalRegistro" role="dialog">
@@ -188,6 +210,64 @@
                         <div class="modal-footer">                      
                             <input type="button" class="btn btn-primary btn-sm" value="Cancelar" data-dismiss="modal"/>
                             <input class="btn btn-sm btn-primary" id="btnRegistrar" type="submit" value='Registrar'/>
+                        </div>
+                    </form>
+                  </div>
+
+                </div>
+            </div>
+            <div class="modal fade" id="modalRegistroEditar" role="dialog">
+                <div class="modal-dialog">
+
+                  <!-- Modal content-->
+                  <div class="modal-content panel">
+                    <form id="formComiteEditar" role="form" method="POST" action="actualizarRegistroIntegranteComite">
+                        <div class="modal-header">
+                          <button type="button" class="close" data-dismiss="modal">&times;</button>
+                          <h4 class="modal-title">Actualizar datos de integrante</h4>
+                        </div>
+                        <div class="modal-body">
+                            <p id="respuestaEditar" class="text-danger"></p>
+                            <input type="hidden" value="${datos[0]}" name="idComite" id="idComite">
+                            <div class="row">
+                                <div class="form-group col-md-6">                               
+                                    <label class="control-label">RFC:</label>
+                                    <input type="text" id="rfcEditar" name="rfcEditar" class="form-control input-sm text-uppercase" required>
+                                    <label class="error" id="alertaRFC" hidden >Ingrese un RFC válido</label>
+                                </div>
+                                <div class="form-group col-md-6">                               
+                                    <label class="control-label">Nombre:</label>
+                                    <input type="text" id="nombreEditar" name="nombreEditar" class="form-control input-sm text-uppercase" required>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-md-6">                               
+                                    <label class="control-label">Primer Apellido:</label>
+                                    <input type="text" id="apPaternoEditar" name="apPaternoEditar" class="form-control input-sm text-uppercase" required>
+                                </div>
+                                <div class="form-group col-md-6">                               
+                                    <label class="control-label">Segundo Apellido:</label>
+                                    <input type="text" id="apMaternoEditar" name="apMaternoEditar" class="form-control input-sm text-uppercase">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-md-6">                               
+                                    <label class="control-label">Correo:</label>
+                                    <input type="text" id="correoEditar" name="correoEditar" class="form-control input-sm text-lowercase" required>
+                                    <label class="error" id="alertaCorreo" hidden >Ingrese una dirección de correo válida</label>
+                                </div>
+                                <div class="form-group col-md-6">                               
+                                    <label class="control-label">Rol:</label>
+                                    <select class="form-control input-sm" id="rolEditar" name="rolEditar" required>                                  
+                                        ${catalogo.desplegarOpcionesRolComite()}
+                                    </select>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="modal-footer">                      
+                            <input type="button" class="btn btn-primary btn-sm" value="Cancelar" data-dismiss="modal"/>
+                            <input class="btn btn-sm btn-primary" id="btnEditar" type="submit" value='Registrar'/>
                         </div>
                     </form>
                   </div>
@@ -266,13 +346,42 @@
                   </div>
 
                 </div>
+            </div>
+            <div class="modal fade" id="modalConfirmacion3" role="dialog">
+                <div class="modal-dialog">
+
+                  <!-- Modal content-->
+                  <div class="modal-content panel">
+                    <form id="formFinalizar" role="form" method="POST" action="FinalizarConformacion">
+                        <div class="modal-header">
+                          <button type="button" class="close" data-dismiss="modal">&times;</button>
+                          <h4 class="modal-title">Confirmación</h4>
+                        </div>
+                        <div class="modal-body">
+                            <input type="hidden" value="${datos[0]}" name="idComite" id="idComite">
+                            <label>Se reenviara la contraseña al rol asignado al usuario ¿Desea continuar?</label>
+                            <input type="hidden" name="rolUsuario" id="rolUsuario">
+                        </div>
+                        <div class="modal-footer">
+                            <input type="button" class="btn btn-sm btn-primary" id="btnEnviar" value='Sí' onclick="enviarContrasena()"/>
+                            <input type="button" class="btn btn-primary btn-sm" value="No" data-dismiss="modal"/>
+                        </div>
+                    </form>
+                  </div>
+
+                </div>
             </div>                        
         </main>
         <script src="https://framework-gb.cdn.gob.mx/gobmx.js"></script>
         <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
         <script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.1/jquery.validate.min.js"></script>
         <script src="js/funcionesConformacionComite.js"></script>
-        
+        <script>
+            function confirmacionPassword() {
+                    $("#rolEditar").removeClass("error");
+                    $("#modalConfirmacion3").modal("show");
+            }
+        </script>
         <c:if test="${datos[0]!=null}">
             <script>
                 $("#programa").val(${datos[1]});
@@ -283,12 +392,14 @@
             </script>
         </c:if>
         <c:if test = "${datos[6]=='V'}">
+            <c:if test='${sessionScope["permisoActualEdicion"]=="F"}'>
             <script>
                 function confirmacion(){
                     $("#mensaje").html("Acción no permitida");                    
                     $("#modalMensaje").modal("show");
                 }
             </script>
+            </c:if>
         </c:if>
         
     </body>

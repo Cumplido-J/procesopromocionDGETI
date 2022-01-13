@@ -101,16 +101,23 @@ public class Comite {
             return respuesta;        
         }
     }
-    public  String desplegarIntegrantesComite(String id){        
+    public  String desplegarIntegrantesComite(String id, String permisoEdicion){        
         String respuesta="<td colspan='6' class='text-center'>Sin información</td>";        
         try{
             String[] parametros={id};
             List<String[]> datos=metodos.ejecutaSP("sp_consultaMiembrosComite",parametros);
             if(!datos.isEmpty()){
                 respuesta="";
-                for(String[] dato:datos)
+                if(permisoEdicion.equals("false")){
+                    for(String[] dato:datos)
                 {
-                    respuesta+="<tr id='integrante"+dato[0]+"'><td>"+dato[1]+"</td><td>"+dato[2]+"</td><td>"+dato[3]+"</td><td>"+dato[4]+"</td><td>"+dato[5]+"</td><td>"+dato[7]+"</td><td><input class='btn btn-sm btn-link' id='btnBorrar' type='button' value='Borrar' onClick='confirmacion("+dato[0]+")'/></td></tr>";
+                    respuesta+="<tr id='integrante"+dato[0]+"'><td>"+dato[1]+"</td><td>"+dato[2]+"</td><td>"+dato[3]+"</td><td>"+dato[4]+"</td><td>"+dato[5]+"</td><td>"+dato[7]+"</td><td><input class='btn btn-sm btn-link' id='btnBorrar' type='button' value='Borrar' onClick='confirmacion("+dato[0]+")'/></td></tr>"; 
+                }
+                }else{
+                    for(String[] dato:datos)
+                {
+                    respuesta+="<tr id='integrante"+dato[0]+"'><td>"+dato[1]+"</td><td>"+dato[2]+"</td><td>"+dato[3]+"</td><td>"+dato[4]+"</td><td>"+dato[5]+"</td><td>"+dato[7]+"</td><td><input class='btn btn-sm btn-link' id='btnBorrar' type='button' value='Borrar' onClick='confirmacion("+dato[0]+")'/><input class='btn btn-sm btn-link' id='btnEditar' type='button' value='Editar' onClick='mostrarModalRegistroEditar("+dato[0]+")'/></td></tr>";
+                }
                 }
             }
         }catch(Exception e){
@@ -189,6 +196,27 @@ public class Comite {
                         datos=metodos.ejecutaSP("sp_insertUsuarioPermiso",parametros); 
                     }
                 }
+            }           
+        }catch(Exception e){
+            respuesta=e.toString();
+        }finally{
+            return respuesta;        
+        }
+    }
+    public  String reenviarContrasena(String idComite,String idRol){        
+        String respuesta="";
+        try{
+            UtileriasHelper utilerias = new UtileriasHelper();
+            String[] parametros={idComite,idRol};
+            List<String[]> datos=metodos.ejecutaSP("sp_consultaDatosUsuario",parametros);
+            if(!datos.isEmpty()){ 
+                
+                String usuario=datos.get(0)[0];
+                String correo=datos.get(0)[1];
+                String pass=datos.get(0)[3];
+                String passDesencriptada = utilerias.desencriptarCodigo(pass, ConstantsWS.LLAVE_CIFRADO);
+                Correo c=new Correo();
+                c.enviarCorreo("Reenvío de contraseña","Usted ha sido registrado en el Sistema de Promoción Docente (disponible en https://www.promociondocente.sep.gob.mx) <br/> Sus datos de acceso son: <br/> Usuario: <b>"+usuario+"</b><br/>Contrase&ntilde;a:<b>"+passDesencriptada+"</b>", correo);
             }           
         }catch(Exception e){
             respuesta=e.toString();

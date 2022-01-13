@@ -149,6 +149,7 @@ public class Servlet_cbFichaDictamen extends HttpServlet {
             request.setAttribute("Docente", docente);
             request.setAttribute("rutaImagenInc", rutaImagenInc);
             request.setAttribute("observacionesR", catalgo.getSelectObservacionPaso1(idUsuario));
+            request.setAttribute("uPadre",idUsuarioPadre !=null ? "1": "2");
             ServletContext sc = getServletContext();
             RequestDispatcher rd = sc.getRequestDispatcher("/FichaDictamen.jsp");
             rd.forward(request,response);

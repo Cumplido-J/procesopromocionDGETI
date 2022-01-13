@@ -5,27 +5,23 @@
  */
 package com.aplicacion.servlet;
 
-import com.aplicacion.beans.Docente;
 import herramientas.Comite;
-import herramientas.Correo;
 import herramientas.Pin;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import metodos_sql.Metodos_sql;
 
 /**
  *
- * @author David Reyna
+ * @author Jonathan Trinidad de Lazaro
  */
-@WebServlet(name = "RegistroIntegranteComite", urlPatterns = {"/RegistroIntegranteComite"})
-public class Servlet_registroIntegranteComite extends HttpServlet {
+@WebServlet(name = "Servlet_reenviarContrasena", urlPatterns = {"/reenviarContrasena"})
+public class Servlet_reenviarContrasena extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -44,10 +40,10 @@ public class Servlet_registroIntegranteComite extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet Servlet_registroIntegranteComite</title>");            
+            out.println("<title>Servlet Servlet_reenviarContrasena</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet Servlet_registroIntegranteComite at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet Servlet_reenviarContrasena at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -79,45 +75,17 @@ public class Servlet_registroIntegranteComite extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
         try{
+            response.setContentType("text/html;charset=UTF-8");
             PrintWriter out = response.getWriter();
-            /*HttpSession session= (HttpSession) request.getSession();     
-            if(session.getAttribute("idUsuario")!=null&&session.getAttribute("rfc")!=null){*/
-                HttpSession session= (HttpSession) request.getSession();
-                String permisoEdicion = session.getAttribute("permisoEdicion").toString();
-                String idComite=request.getParameter("idComite");
-                String rfc=request.getParameter("rfc").toUpperCase();
-                String nombre=request.getParameter("nombre").toUpperCase();
-                String paterno=request.getParameter("apPaterno").toUpperCase();
-                String materno=request.getParameter("apMaterno").toUpperCase();
-                String correo=request.getParameter("correo").toLowerCase();
-                String rol=request.getParameter("rol");
-                //String[] p2={idUsuario,curp,correo,tipoEncuesta};
-                Metodos_sql metodos=new Metodos_sql(); 
-                
-                String[] parametros={idComite,rfc,nombre,paterno,materno,correo,rol};
-                List<String[]> retorno=null;                
-                retorno=metodos.ejecutaSP("sp_insertMiembroComite",parametros);
-                if(!retorno.isEmpty()){                    
-                    if(retorno.get(0)[0].equals("ok")){                        
-                        Comite c=new Comite();
-                        out.print(c.desplegarIntegrantesComite(idComite,permisoEdicion));
-                    }  
-                    else{
-                        out.print(retorno.get(0)[0]);
-                    }
-                }else{
-                    out.print("Error de almacenamiento, intente más tarde");
-                }
-                    //out.print(retorno.get(0)[0].trim());
-                
-                /*List<String[]> retorno=metodos.ejecutaSP("sp_insertEncuestado",parametros);
-                if(!retorno.isEmpty()){
-                    out.print(retorno.get(0)[0].trim());
-                }
-                System.out.println(Pin.generaPin());*/
-            //}
+            HttpSession session= (HttpSession) request.getSession();     
+            //if(session.getAttribute("idUsuario")!=null&&session.getAttribute("rfc")!=null){
+            String idComite=session.getAttribute("idComite").toString();
+            String idRol=request.getParameter("idRol"); 
+//            String pass=Pin.generaPin();
+            Comite c=new Comite();            
+            //finalizarComite(String idComite,String idRol,String pass,String nivel,String subsistema,String programa,String tipoComite){        
+            out.print(c.reenviarContrasena(idComite,idRol));
         }catch(Exception e){
             System.out.println(e.toString());
         }

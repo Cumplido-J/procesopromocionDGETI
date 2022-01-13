@@ -174,6 +174,12 @@
                     </tr>
                     </c:if>
                 </c:if>
+                <c:if test="${uPadre=='1'}">
+                    <tr>
+                        <td>EL PARTICIPANTE OPTO POR SU PUNTAJE ANTERIOR:</td>
+                        <td>: SI</td>
+                    </tr>
+                </c:if>
                 <tr>
                     <td COLSPAN="2">
 

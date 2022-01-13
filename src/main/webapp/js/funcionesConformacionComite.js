@@ -121,6 +121,106 @@ $(document).ready(function () {
             return false;
         }
     });
+    $('#formComiteEditar').submit(function(e) {
+        e.preventDefault();
+    }).validate({                
+        messages: {            
+            'rfcEditar':{
+                required: "Campo requerido"
+            },
+            'nombreEditar':{
+                required: "Campo requerido"
+            },
+            'apPaternoEditar':{
+                required: "Campo requerido"
+            },            
+            'correoEditar': {
+                required: "Campo requerido"
+            },
+            'rolEditar':{
+                required: "Seleccione una opción"
+            }
+        },
+        submitHandler:function(){
+            $.ajax({
+                type:$('#formComiteEditar').attr("method"),
+                url:$('#formComiteEditar').attr("action"),
+                data:$('#formComiteEditar').serialize(),
+                beforeSend:function(){
+                    $("#btnEditar").val("Editar");
+                    $("#btnEditar").attr("disabled","disabled");
+                },
+                complete:function(){
+                   $("#btnEditar").val("Editar"); 
+                   $("#btnEditar").removeAttr("disabled");
+                },success:function(data){
+                    var json=JSON.parse(data);
+                    if(json.id.includes("1")){ 
+                        $("#seccionEditable").html(json.resgistros);            
+                        $("#modalRegistroEditar").modal("hide");
+                        $("#respuesta").html("");
+                    }else{
+//                        $("#rolEditar").addClass("error");
+//                        $("#seccionEditable").html(json.resgistros);
+                        $("#respuestaEditar").html(json.mensaje);
+//                        $("#modalRegistroEditar").modal("hide");
+//                        $("#modalMensaje1").modal("show");
+//                        $("#mensaje1").html(json.mensaje);
+                    }
+                },error:function(){
+                    
+                }
+            });
+            return false;
+        }
+    });
+    $('#formComiteEditar').submit(function(e) {
+        e.preventDefault();
+    }).validate({                
+        messages: {            
+            'rfcEditar':{
+                required: "Campo requerido"
+            },
+            'nombreEditar':{
+                required: "Campo requerido"
+            },
+            'apPaternoEditar':{
+                required: "Campo requerido"
+            },            
+            'correoEditar': {
+                required: "Campo requerido"
+            },
+            'rolEditar':{
+                required: "Seleccione una opción"
+            }
+        },
+        submitHandler:function(){
+            $.ajax({
+                type:$('#formComiteEditar').attr("method"),
+                url:$('#formComiteEditar').attr("action"),
+                data:$('#formComiteEditar').serialize(),
+                beforeSend:function(){
+                    $("#btnEditar").val("Registrando...");
+                    $("#btnEditar").attr("disabled","disabled");
+                },
+                complete:function(){
+                   $("#btnEditar").val("Editar"); 
+                   $("#btnEditar").removeAttr("disabled");
+                },success:function(data){
+                    if(data.includes("<tr")){ 
+                        $("#seccionEditable").html(data);            
+                        $("#modalRegistroEditar").modal("hide");
+                        $("#respuesta").html("");
+                    }else{                        
+                        $("#respuesta").html(data);                             
+                    }
+                },error:function(){
+                    
+                }
+            });
+            return false;
+        }
+    });
     $("#formBorrar").submit(function(event){
 	event.preventDefault(); //prevent default action 
 	var post_url = $(this).attr("action"); //get form action url
@@ -269,5 +369,37 @@ function finalizaRegistro(){
         $("#modalConfirmacion2").modal("show");
     }
 }
+function mostrarModalRegistroEditar(id){    
+                $("#formComiteEditar")[0].reset();  
+                $("#respuesta").html("");
+                $.post("consultarMienbroComitePorId", {id:id}, function(data){
+                    var json=JSON.parse(data);
+                    var rfc=json.rfc;
+                    var nombre=json.nombre;
+                    var primerApellido=json.primerApellido;
+                    var segundoApellido=json.segundoApellido;
+                    var correo=json.correo;
+                    var rol=json.rol;
+                    
+                    document.getElementById('rfcEditar').innerHTML = rfc;
+                    $("#rfcEditar").val(rfc)
+                    $("#nombreEditar").val(nombre)
+                    $("#apPaternoEditar").val(primerApellido)
+                    $("#apMaternoEditar").val(segundoApellido)
+                    $("#correoEditar").val(correo)
+                    $("#rolEditar").val(rol)
+                    
+//                    document.getElementById('').innerHTML = rol;
 
+                    $("#modalRegistroEditar").modal("show");
+                }
+                );
+}
+function enviarContrasena(){
+                var idComite=$("#idComite").val();
+                var idRol=$("#rolUsuario").val();
+                $.post("reenviarContrasena", {idComite:idComite,idRol:idRol}, function(data){
+                    $("#modalConfirmacion3").modal("hide");}
+                );
+            }
 

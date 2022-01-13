@@ -140,7 +140,8 @@ public class Servlet_cbFichaRegistro extends HttpServlet {
 			request.setAttribute("evidencias", cv.getFilasResultadosConstancias(idUsuario));
             request.setAttribute("registroEvidencias", cv.getFilasResultadosRegistro(idUsuario));
             request.setAttribute("rutaimagen", rutaImagen);
-             request.setAttribute("banderaIdUsuarioPadre", (idUsuarioPadre != null));
+            request.setAttribute("banderaIdUsuarioPadre", (idUsuarioPadre != null));
+            request.setAttribute("uPadre",idUsuarioPadre !=null ? "1": "2");
             ServletContext sc = getServletContext();
             RequestDispatcher rd = sc.getRequestDispatcher("/FichaRegistro.jsp");
             rd.forward(request,response);

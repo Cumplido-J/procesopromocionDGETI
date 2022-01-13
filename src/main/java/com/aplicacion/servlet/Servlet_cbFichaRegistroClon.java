@@ -163,6 +163,7 @@ public class Servlet_cbFichaRegistroClon extends HttpServlet {
             request.setAttribute("Docente1", docente1);
             request.setAttribute( "infoCategoria", idUsuarioPadre != null ? infoCategoria : null );
             request.setAttribute( "idUsuarioPadrePeriodo", idUsuarioPadre != null ? 1 : 0 );
+            request.setAttribute("uPadre",idUsuarioPadre !=null ? "1": "2");
             ServletContext sc = getServletContext();
             RequestDispatcher rd = sc.getRequestDispatcher("/FichaRegistroClon.jsp");
             rd.forward(request,response);
