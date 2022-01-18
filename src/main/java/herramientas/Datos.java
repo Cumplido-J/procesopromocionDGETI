@@ -990,7 +990,8 @@ public class Datos {
                 List<String[]> datosEntidades=metodos.ejecutaSP("sp_selectCatEntidades");
                 for(String[] dato:datosEntidades){
                         String idEntidad=dato[0];
-                        String[] parametrosVacancia={programa, idSubsistema, idEntidad,vacancia,periodo,zonaEconomica};
+//                        String[] parametrosVacancia={programa, idSubsistema, idEntidad,vacancia,periodo,zonaEconomica};
+                        String[] parametrosVacancia={programa, idSubsistema, idEntidad,"",periodo,zonaEconomica};
                         //Se obtiene la vacancia de acuerdo a entidad y que esta no haya sido asignada sin importar la categoria ni jornada
                         //Realizar Mejora en el proceso de asignacion
                         List<String[]> datosVacancias=metodos.ejecutaSP("sp_consultaVacanciasZonaEconomica",parametrosVacancia);
@@ -1049,7 +1050,8 @@ public class Datos {
 //                List<String[]> datosEntidades=metodos.ejecutaSP("sp_selectCatEntidades");
 //                for(String[] dato:datosEntidades){
                         String idEntidad=entidad;
-                        String[] parametrosVacancia={programa, idSubsistema, idEntidad,vacancia,periodo,zonaEconomica};
+//                        String[] parametrosVacancia={programa, idSubsistema, idEntidad,vacancia,periodo,zonaEconomica};
+                        String[] parametrosVacancia={programa, idSubsistema, idEntidad,"",periodo,zonaEconomica};
                         //Se obtiene la vacancia de acuerdo a entidad y que esta no haya sido asignada sin importar la categoria ni jornada
                         //Realizar Mejora en el proceso de asignacion
                         List<String[]> datosVacancias=metodos.ejecutaSP("sp_consultaVacanciasZonaEconomica",parametrosVacancia);

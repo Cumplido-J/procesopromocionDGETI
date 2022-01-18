@@ -163,6 +163,7 @@ $(document).ready(function () {
 //                        $("#rolEditar").addClass("error");
 //                        $("#seccionEditable").html(json.resgistros);
                         $("#respuestaEditar").html(json.mensaje);
+                        $("#seccionEditable").html(json.resgistros);
 //                        $("#modalRegistroEditar").modal("hide");
 //                        $("#modalMensaje1").modal("show");
 //                        $("#mensaje1").html(json.mensaje);

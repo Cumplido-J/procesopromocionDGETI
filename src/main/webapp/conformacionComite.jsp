@@ -391,7 +391,7 @@
                 $("#tipo").val('${datos[5]}');
             </script>
         </c:if>
-        <c:if test = "${datos[6]=='V'}">
+        <c:if test = "${datos[6]=='F'}">
             <c:if test='${sessionScope["permisoActualEdicion"]=="F"}'>
             <script>
                 function confirmacion(){

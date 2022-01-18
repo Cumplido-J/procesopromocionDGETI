@@ -109,7 +109,7 @@ public class Servlet_actualizarRegistroIntegranteComite extends HttpServlet {
                     else{
                         json.put("id", "2");
                         json.put("mensaje", retorno.get(0)[0]);
-                        json.put("resgistros","");
+                        json.put("resgistros",c.desplegarIntegrantesComite(idComite,permisoEdicion));
                         out.print(json.toString());
                     }
                 }else{

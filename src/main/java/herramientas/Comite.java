@@ -108,7 +108,7 @@ public class Comite {
             List<String[]> datos=metodos.ejecutaSP("sp_consultaMiembrosComite",parametros);
             if(!datos.isEmpty()){
                 respuesta="";
-                if(permisoEdicion.equals("false")){
+                if(permisoEdicion.equals("F")){
                     for(String[] dato:datos)
                 {
                     respuesta+="<tr id='integrante"+dato[0]+"'><td>"+dato[1]+"</td><td>"+dato[2]+"</td><td>"+dato[3]+"</td><td>"+dato[4]+"</td><td>"+dato[5]+"</td><td>"+dato[7]+"</td><td><input class='btn btn-sm btn-link' id='btnBorrar' type='button' value='Borrar' onClick='confirmacion("+dato[0]+")'/></td></tr>"; 
