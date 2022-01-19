@@ -125,7 +125,8 @@ public class Servlet_cbRegistroCriterios extends HttpServlet {
             request.setAttribute("docente", docente);
             request.setAttribute("criterios", criterios);
             request.setAttribute("puntajes", puntajes);
-            request.setAttribute("puntajeEncuestas", puntajeEncuestas);            
+            request.setAttribute("puntajeEncuestas", puntajeEncuestas);
+            request.setAttribute("validacionConvocatoria", validacionConvocatoria);            
             request.setAttribute("cursos", cv.getFilasCursos(idUsuario,vistaAdmin, idPermiso, permisoEdicion, permisoTablaUsuarioEdicion));
 
             if (!(Integer.parseInt((docente.getInfoRegistro())[7]) == 10 && Integer.parseInt((docente.getInfoRegistro())[75]) == 2))
