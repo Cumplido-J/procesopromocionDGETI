@@ -360,15 +360,18 @@ public class Servlet_registroInfoLaboral extends HttpServlet {
                      
                 }  
                 
+                String cumpleregistrorevisor= (request.getParameter("cumpleregistrorevisorIL") == null ? "":request.getParameter("cumpleregistrorevisorIL"));
+                String cumpleregistrodictaminador= (request.getParameter("cumpleregistrodictaminadorIL") == null ? "":request.getParameter("cumpleregistrodictaminadorIL"));
+                
                 if(bandera){
                 //out.println(notaSancion);
                     Metodos_sql metodo = new Metodos_sql();
                      List<String[]> datos=null;  
                     if(programa.equals("1")){
-                        String[] parametros={idUsuario,activo,ingresoSubsistema,ingresoPlantel,idCategoria,idJornada,fechaPlaza,idTipoNombramiento,fechaUltimaPromocion,idCategoriaAspira,idJornadaAspira,idPerfilRequerido,notaSancion,nombreVacancia,String.valueOf(totalHoras),idVacancia};                        
+                        String[] parametros={idUsuario,activo,ingresoSubsistema,ingresoPlantel,idCategoria,idJornada,fechaPlaza,idTipoNombramiento,fechaUltimaPromocion,idCategoriaAspira,idJornadaAspira,idPerfilRequerido,notaSancion,nombreVacancia,String.valueOf(totalHoras),idVacancia,cumpleregistrorevisor,cumpleregistrodictaminador};                        
                         datos=metodo.ejecutaSP("sp_registroInfoLaboral",parametros);   
                     }else if(programa.equals("2")){
-                        String[] parametros={idUsuario,activo,ingresoSubsistema,ingresoPlantel,idCategoria,idJornada,fechaPlaza,idTipoNombramiento,fechaUltimaPromocion,idCategoriaAspira,idJornadaAspira,idPerfilRequerido,notaSancion,nombreVacancia,String.valueOf(totalHoras)};                        
+                        String[] parametros={idUsuario,activo,ingresoSubsistema,ingresoPlantel,idCategoria,idJornada,fechaPlaza,idTipoNombramiento,fechaUltimaPromocion,idCategoriaAspira,idJornadaAspira,idPerfilRequerido,notaSancion,nombreVacancia,String.valueOf(totalHoras),cumpleregistrorevisor,cumpleregistrodictaminador};                        
                         datos=metodo.ejecutaSP("sp_registroInfoLaboralHoras",parametros); 
                     }
                     if(!datos.isEmpty()){

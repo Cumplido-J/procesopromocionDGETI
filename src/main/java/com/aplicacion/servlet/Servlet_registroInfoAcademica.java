@@ -202,12 +202,12 @@ public class Servlet_registroInfoAcademica extends HttpServlet {
             String cctOtro=request.getParameter("cctOtro"); 
             String escuelaOtro=request.getParameter("escuelaOtro");
             String archivoevidencia=request.getParameter("documento");
-
-            
+            String cumpleregistrorevisor= (request.getParameter("cumpleregistrorevisorIA") == null ? "":request.getParameter("cumpleregistrorevisorIA"));
+            String cumpleregistrodictaminador= (request.getParameter("cumpleregistrodictaminadorIA") == null ? "":request.getParameter("cumpleregistrodictaminadorIA"));
 
             Metodos_sql metodo = new Metodos_sql();
             //in _idUsuario int,in _idEscuelaEstudio int, in _carrera varchar(300),in _anioEgreso int,in _idGradoAcademico int, in _idModalidadTitulacion int,in _anioTitulacion int,in _cedula varchar(20),idcct
-            String[] parametros={id,idEscuela,carrera,anioEgreso,idGrado,idModalidadTitulacion,anioTitulacion,cedula,idCCT,idEntidad,idTipoInstitucion,idInstitucion,institucionOtro,cctOtro,escuelaOtro,archivoevidencia};
+            String[] parametros={id,idEscuela,carrera,anioEgreso,idGrado,idModalidadTitulacion,anioTitulacion,cedula,idCCT,idEntidad,idTipoInstitucion,idInstitucion,institucionOtro,cctOtro,escuelaOtro,archivoevidencia,cumpleregistrorevisor,cumpleregistrodictaminador};
             List<String[]> datos;                           
             datos=metodo.ejecutaSP("sp_registroInfoAcademica",parametros);            
             if(!datos.isEmpty()){

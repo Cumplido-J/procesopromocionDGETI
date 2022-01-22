@@ -342,8 +342,25 @@
                                     </c:if>                                  
                                 </div> --%>
                             </div>
-                        </div>     
-                        
+                        </div>
+                            <c:if test="${vistaAdmin}">
+                            <div class="row">    
+                                <div class="form-group col-md-3">
+                                    <label class="control-label" for="cumpleregistrorevisorIA">Cumplimiento de Info. Académica Revisor:</label>
+                                    <select ${disabled1} class="form-control input-sm" id="cumpleregistrorevisorIA" name="cumpleregistrorevisorIA" required>
+                                        ${catalogo.desplegarOpcionesCumplimiento(Docente.getIdUsuario(),"1","Revisor")}
+                                    </select>
+                                </div>
+                                <c:if test='${sessionScope["permisoActual"]=="6"}'>
+                                <div class="form-group col-md-3">
+                                    <label class="control-label" for="cumpleregistrodictaminadorIA">Cumplimiento Info. Académica Dictaminador:</label>
+                                    <select class="form-control input-sm" id="cumpleregistrodictaminadorIA" name="cumpleregistrodictaminadorIA" required>
+                                        ${catalogo.desplegarOpcionesCumplimiento(Docente.getIdUsuario(),"1","Dictaminador")}
+                                    </select>
+                                </div> 
+                                </c:if>
+                             </div> 
+                            </c:if>
                              <c:if test="${vistaAdmin}">
                                 <div class="col-xs-12">
                                 <!--<form id="formInfoAcademicaOb1" role="form" action="RegistroInfoAcademica" method="POST">-->
@@ -359,7 +376,7 @@
                                 </c:if>
                                 <!--<input style="margin-top:10px;" disabled="true" type="submit"  class="btn btn-primary" value="Guardar" id="btnFinalizarOb1" onclick="cerrar(1)">-->
                                 <!--  </form>--><br>
-                                </div>
+                                </div>                                 
                             </c:if>
                             <div class="col-xs-12 text-right">
                               <c:if test="${!vistaAdmin}">
@@ -708,6 +725,25 @@
                                 </div> 
                             </div>
                         </div>
+                                    
+                        <c:if test="${vistaAdmin}">
+                            <div class="row">    
+                                <div class="form-group col-md-3">
+                                    <label class="control-label" for="cumpleregistrorevisorIL">Cumplimiento de Info. Laboral Revisor:</label>
+                                    <select ${disabled1} class="form-control input-sm" id="cumpleregistrorevisorIL" name="cumpleregistrorevisorIL" required>
+                                        ${catalogo.desplegarOpcionesCumplimiento(Docente.getIdUsuario(),"2","Revisor")}
+                                    </select>
+                                </div>
+                                <c:if test='${sessionScope["permisoActual"]=="6"}'>
+                                <div class="form-group col-md-3">
+                                    <label class="control-label" for="cumpleregistrodictaminadorIL">Cumplimiento de Info. Laboral Dictaminador:</label>
+                                    <select class="form-control input-sm" id="cumpleregistrodictaminadorIL" name="cumpleregistrodictaminadorIL" required>
+                                        ${catalogo.desplegarOpcionesCumplimiento(Docente.getIdUsuario(),"2","Dictaminador")}
+                                    </select>
+                                </div> 
+                                </c:if>
+                             </div> 
+                         </c:if> 
                          <c:if test="${vistaAdmin}">
                              <div class="col-xs-12">
                             <!--<form id="formInfoAcademicaOb2" role="form" action="RegistroInfoAcademica" method="POST">-->
@@ -950,6 +986,26 @@
                                 </c:if>                                
                             </div>
                         </div>
+                                
+                        <c:if test="${vistaAdmin}">
+                            <div class="row">    
+                                <div class="form-group col-md-3">
+                                    <label class="control-label" for="cumpleregistrorevisorHFG">Cumplimiento de Horas Frente a Grupo Revisor:</label>
+                                    <select ${disabled1} class="form-control input-sm" id="cumpleregistrorevisorHFG" name="cumpleregistrorevisorHFG" required>
+                                        ${catalogo.desplegarOpcionesCumplimiento(Docente.getIdUsuario(),"3","Revisor")}
+                                    </select>
+                                </div>
+                                <c:if test='${sessionScope["permisoActual"]=="6"}'>
+                                <div class="form-group col-md-3">
+                                    <label class="control-label" for="cumpleregistrodictaminadorHFG">Cumplimiento de Horas Frente a Grupo Dictaminador:</label>
+                                    <select class="form-control input-sm" id="cumpleregistrodictaminadorHFG" name="cumpleregistrodictaminadorHFG" required>
+                                        ${catalogo.desplegarOpcionesCumplimiento(Docente.getIdUsuario(),"3","Dictaminador")}
+                                    </select>
+                                </div> 
+                                </c:if>
+                             </div> 
+                         </c:if>         
+                                
                          <c:if test="${vistaAdmin}">
                             <div class="col-xs-12">
                             <!--<form id="formInfoAcademicaOb3" role="form" action="RegistroInfoAcademica" method="POST">-->
@@ -1092,6 +1148,28 @@
                             </div>
                             
                         </div>
+                            
+                        <c:if test="${vistaAdmin}">
+                        <div class="col-xs-12">    
+                            <div class="row">    
+                                <div class="form-group col-md-3">
+                                    <label class="control-label" for="cumpleregistrorevisorCCP">Cumplimiento Carta de Protesta Revisor:</label>
+                                    <select ${disabled1} class="form-control input-sm" id="cumpleregistrorevisorCCP" name="cumpleregistrorevisorCCP" required>
+                                        ${catalogo.desplegarOpcionesCumplimiento(Docente.getIdUsuario(),"4","Revisor")}
+                                    </select>
+                                </div>
+                                <c:if test='${sessionScope["permisoActual"]=="6"}'>
+                                <div class="form-group col-md-3">
+                                    <label class="control-label" for="cumpleregistrodictaminadorCCP">Cumplimiento Carta de Protesta Dictaminador:</label>
+                                    <select class="form-control input-sm" id="cumpleregistrodictaminadorCCP" name="cumpleregistrodictaminadorCCP" required>
+                                        ${catalogo.desplegarOpcionesCumplimiento(Docente.getIdUsuario(),"4","Dictaminador")}
+                                    </select>
+                                </div> 
+                                </c:if>
+                             </div>
+                        </div>            
+                         </c:if> 
+                            
                             <c:if test="${vistaAdmin}">
                                 <div class="col-xs-12">
                                 <!--<form id="formInfoAcademicaOb4" role="form" action="RegistroInfoAcademica" method="POST" >-->

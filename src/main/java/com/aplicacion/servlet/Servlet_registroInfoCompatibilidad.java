@@ -107,10 +107,12 @@ public class Servlet_registroInfoCompatibilidad extends HttpServlet {
                 compatibilidad="N";
             }
             
-
+            String cumpleregistrorevisor= (request.getParameter("cumpleregistrorevisorCCP") == null ? "":request.getParameter("cumpleregistrorevisorCCP"));
+            String cumpleregistrodictaminador= (request.getParameter("cumpleregistrodictaminadorCCP") == null ? "":request.getParameter("cumpleregistrodictaminadorCCP"));
+            
             //out.println(notaSancion);
             Metodos_sql metodo = new Metodos_sql();
-            String[] parametros={idUsuario,funcionesOtro,compatibilidad,numHorasOtro};
+            String[] parametros={idUsuario,funcionesOtro,compatibilidad,numHorasOtro,cumpleregistrorevisor,cumpleregistrodictaminador};
             List<String[]> datos;                           
             datos=metodo.ejecutaSP("sp_registroInfoCompatibilidad",parametros);            
             if(!datos.isEmpty()){

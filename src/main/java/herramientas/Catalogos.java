@@ -1546,4 +1546,27 @@ public class Catalogos {
             return respuesta;        
         }
     }
+    public String desplegarOpcionesCumplimiento(String idUsuario, String idRegistro, String permiso){
+        String respuesta="<option value=''>-Seleccione-</option><option value='V'>Cumple registro</option><option value='F'>No cumple registro</option>";
+        String aux = "seleccionar";
+        List<String[]> datos=null;
+        try{
+           String[] parametros={idUsuario,idRegistro};
+           datos=metodos.ejecutaSP("sp_consultaCumplimientoRegistro", parametros);
+           for(String[] dato:datos){
+               if (permiso.equals("Revisor"))
+                   aux="value='"+dato[3]+"'";
+               else
+                   aux="value='"+dato[4]+"'";
+           }
+           respuesta = respuesta.replaceFirst(aux, aux+" selected");
+            
+        }catch(Exception e){
+            return respuesta = e.toString();
+        }finally{
+            return respuesta;        
+        }
+
+    }
+    
 }

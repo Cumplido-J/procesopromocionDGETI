@@ -97,9 +97,11 @@ public class Servlet_registroInfoHoras extends HttpServlet {
             }
             String nivel=request.getParameter("nivelCENNI");
             String folio=request.getParameter("folio");
+            String cumpleregistrorevisor= (request.getParameter("cumpleregistrorevisorHFG") == null ? "":request.getParameter("cumpleregistrorevisorHFG"));
+            String cumpleregistrodictaminador= (request.getParameter("cumpleregistrodictaminadorHFG") == null ? "":request.getParameter("cumpleregistrodictaminadorHFG"));
             //out.println(notaSancion);
             Metodos_sql metodo = new Metodos_sql();
-            String[] parametros={idUsuario,frenteGrupo,nivel,folio};
+            String[] parametros={idUsuario,frenteGrupo,nivel,folio,cumpleregistrorevisor,cumpleregistrodictaminador};
             List<String[]> datos;                           
             datos=metodo.ejecutaSP("sp_registroInfoHoras",parametros);            
             if(!datos.isEmpty()){
