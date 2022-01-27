@@ -88,11 +88,15 @@ public class Servlet_buscarAspiranteGanador extends HttpServlet {
                 String vacancia=request.getParameter("vacancia");
                 String periodo=request.getParameter("periodo");
                 Datos d=new Datos();
-                if(entidad.isEmpty() && plantel.isEmpty()){
-                    out.print(d.generarResultadosCentrales(programa,subsistema,entidad,plantel,vacancia,periodo));
+                if(id.equals("a")){
+                    d.asignacionVacanciaPosicion1(programa, subsistema, periodo);
                 }else{
-                    //out.print(d.desplegarAspirantesVacancia(id, programa, subsistema, entidad, plantel, categoria, jornada, vacancia, periodo));
-                    out.print(d.desplegarAspirantesAsignacion(id, programa, subsistema, entidad, plantel, categoria, jornada, vacancia, periodo));
+                    if(entidad.isEmpty() && plantel.isEmpty()){
+                        out.print(d.generarResultadosCentrales(programa,subsistema,entidad,plantel,vacancia,periodo));
+                    }else{
+                        //out.print(d.desplegarAspirantesVacancia(id, programa, subsistema, entidad, plantel, categoria, jornada, vacancia, periodo));
+                        out.print(d.desplegarAspirantesAsignacion(id, programa, subsistema, entidad, plantel, categoria, jornada, vacancia, periodo));
+                    }
                 }
         }catch(Exception e){
             System.out.println(e.toString());

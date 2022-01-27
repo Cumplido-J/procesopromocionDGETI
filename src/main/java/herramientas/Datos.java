@@ -1306,5 +1306,120 @@ public class Datos {
         }finally{
             return respuesta;        
         }
-    }        
+    }
+    public String asignacionVacanciaPosicion1(String programa,String idSubsistema,String periodo){        
+        String respuesta="";        
+        try{
+            
+            List<String[]> datosSetValores=metodos.ejecutaSP("sp_updatePlazasPreliminares");
+            List<String[]> datosEntidades=metodos.ejecutaSP("sp_selectCatEntidades");
+            for(String[] dato:datosEntidades){
+                String[] parametros={idSubsistema,dato[0]};
+                List<String[]> datos=metodos.ejecutaSP("sp_selectCatPlanteles",parametros);
+                for(String[] datoPlanteles:datos){
+                    String idEntidad=dato[0];
+                    String idPlantel=datoPlanteles[0];
+                    String[] parametrosGanador={programa,idSubsistema,idEntidad,idPlantel,periodo};
+                    List<String[]> datosGanador=metodos.ejecutaSP("sp_consultaAspirantePosicion1",parametrosGanador);
+                    if(!datosGanador.isEmpty()){
+                        for(String[] datoGanador:datosGanador){
+                            String[] parametrosGanador1={datoGanador[0],datoGanador[2]};
+                            metodos.ejecutaSP("sp_updatePlazaPreliminar",parametrosGanador1);
+                        }
+                    }
+                }
+            }
+            respuesta=asignacionVacanciaPreliminar(programa, idSubsistema, periodo);
+            return respuesta;
+        }catch(Exception e){
+            respuesta=e.toString();
+        }finally{
+            return respuesta;  
+        }
+    }
+    
+    public String asignacionVacanciaPreliminar(String programa,String idSubsistema,String periodo){        
+        String respuesta="ok";        
+        try{
+            List<String[]> datosEntidades=metodos.ejecutaSP("sp_selectCatEntidades");
+            for(String[] dato:datosEntidades){
+                String[] parametros={idSubsistema,dato[0]};
+                List<String[]> datos=metodos.ejecutaSP("sp_selectCatPlanteles",parametros);
+                for(String[] datoPlanteles:datos){
+                    String idEntidad=dato[0];
+                    String idPlantel=datoPlanteles[0];
+                    String[] parametros1={programa, idSubsistema, idEntidad, idPlantel,periodo};
+                    List<String[]> datosAspirantes=metodos.ejecutaSP("sp_consultaAspirantePosicion2",parametros1);
+                    if(datosAspirantes.size()>0){
+                        for(String[] datosAspirante:datosAspirantes){
+                            
+                            String idCategoriaAspira=datosAspirante[4];
+                            String idJornadaAspira=datosAspirante[5];
+                            
+                            String[] parametrosVacancia={programa, idSubsistema, idEntidad, idPlantel,"0",periodo,idCategoriaAspira,idJornadaAspira};
+                            List<String[]> datosVacancia=metodos.ejecutaSP("sp_consultaVacanciasPorCategoria",parametrosVacancia);
+                            if(!datosVacancia.isEmpty()){
+                                // idUsuario - idVacancia
+                                // Si hay resultados para ese aspitrante se marca la vacancia como asignada preliminar.
+                                String[] parametrosGanador1={datosAspirante[0],datosVacancia.get(0)[0]};
+                                metodos.ejecutaSP("sp_updatePlazaPreliminar",parametrosGanador1);
+                            }else{
+                                // Si no hay datos se consultan las opciones del aspirante.
+                                String[] parametrosPlaza={idCategoriaAspira,idJornadaAspira};
+                                List<String[]> datosPlazas=metodos.ejecutaSP("sp_consultaOpcionesPlazasAspira",parametrosPlaza);
+                                if(!datosPlazas.isEmpty()){
+                                    String idCategoriaAspiraOpc2=datosPlazas.get(0)[4];
+                                    String idJornadaAspiraOpc2=datosPlazas.get(0)[5];
+                                    String idCategoriaAspiraOpc3=datosPlazas.get(0)[7];
+                                    String idJornadaAspiraOpc3=datosPlazas.get(0)[8];
+                                    String idCategoriaAspiraOpc4=datosPlazas.get(0)[10];
+                                    String idJornadaAspiraOpc4=datosPlazas.get(0)[11];
+                                    
+                                    // Se consulta la tabla de vacancia con la siguiente opcion.
+                                    String[] parametrosOpcion2={programa,idSubsistema,idEntidad,idPlantel,"0",periodo,idCategoriaAspiraOpc2,idJornadaAspiraOpc2};
+                                    List<String[]> datosVacancia2=metodos.ejecutaSP("sp_consultaVacanciasPorCategoria",parametrosOpcion2);
+
+                                    if(!datosVacancia2.isEmpty()){
+                                        // idUsuario - idVacancia
+                                        // Si hay resultados para ese aspitrante se marca la vacancia como asignada preliminar.
+                                        String[] parametrosGanador1={datosAspirante[0],datosVacancia2.get(0)[0]};
+                                        metodos.ejecutaSP("sp_updatePlazaPreliminar",parametrosGanador1);
+                                    }else{
+                                         if(idCategoriaAspiraOpc3!=null && idJornadaAspiraOpc3!=null){
+                                            String[] parametrosOpcion3={programa,idSubsistema,idEntidad,idPlantel,"0",periodo,idCategoriaAspiraOpc3,idJornadaAspiraOpc3};
+                                            List<String[]> datosVacancia3=metodos.ejecutaSP("sp_consultaVacanciasPorCategoria",parametrosOpcion3);
+
+                                            if(!datosVacancia2.isEmpty()){
+                                                // idUsuario - idVacancia
+                                                // Si hay resultados para ese aspitrante se marca la vacancia como asignada preliminar.
+                                                String[] parametrosGanador3={datosAspirante[0],datosVacancia3.get(0)[0]};
+                                                metodos.ejecutaSP("sp_updatePlazaPreliminar",parametrosGanador3);
+                                            }else{
+                                                if(idCategoriaAspiraOpc4!=null && idJornadaAspiraOpc4!=null){
+                                                    String[] parametrosOpcion4={programa,idSubsistema,idEntidad,"0",idPlantel,periodo,idCategoriaAspiraOpc3,idJornadaAspiraOpc3};
+                                                    List<String[]> datosVacancia4=metodos.ejecutaSP("sp_consultaVacanciasPorCategoria",parametrosOpcion4);
+
+                                                    if(!datosVacancia2.isEmpty()){
+                                                        // idUsuario - idVacancia
+                                                        // Si hay resultados para ese aspitrante se marca la vacancia como asignada preliminar.
+                                                        String[] parametrosGanador3={datosAspirante[0],datosVacancia3.get(0)[0]};
+                                                        metodos.ejecutaSP("sp_updatePlazaPreliminar",parametrosGanador3);
+                                                    }
+                                                }
+                                            }
+                                         }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            return respuesta;
+        }catch(Exception e){
+            respuesta=e.toString();
+        }finally{
+            return respuesta;  
+        }
+    }
 }

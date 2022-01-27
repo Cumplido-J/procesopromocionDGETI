@@ -41,6 +41,7 @@
                                 <c:if test='${sessionScope["permisoActualEdicion"]=="V"}'>
                                     <option value='1'>Buscar aspirantes</option>
                                     <option value='2'>Calcular resultado</option>
+                                    <option value='3'>Asignación preliminar</option>
                                 </c:if>
                                 <c:if test='${sessionScope["permisoActualEdicion"]=="F"}'>
                                     <option value='1'>Buscar aspirantes</option>
@@ -111,6 +112,7 @@
                             <div class="form-group col-xs-8 text-right" style="margin-left: -70px;">                    
                                 <input class="btn btn-sm btn-primary" id="btnBuscar1" value='Buscar resultados' onclick="busquedaResultados()"/>
                                 <input class="btn btn-sm btn-primary" id="btnBuscar" value='Calcular resultado' onclick="confirmacionResultados()"/>
+                                <input class="btn btn-sm btn-primary" id="btnBuscar2" value='Asignacion preliminar' onclick="confirmacionAsignacionPreliminar()"/>
                             </div>
                         </c:if>
                         <c:if test='${sessionScope["permisoActualEdicion"]=="F"}'>
@@ -231,7 +233,28 @@
                     </div>  
                   </div>
                 </div>
-            </div>     
+            </div>
+            <div class="modal fade" id="modalMensajeAsignacionPreliminar" role="dialog">
+                <div style="width: 50%;margin: auto;margin-top: 20%;">
+
+                  <!-- Modal content-->
+                  <div class="modal-content panel">
+                    <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal">&times;</button>
+                      <h4 class="modal-title">Asignación preliminar</h4>
+                    </div>
+                    <div class="modal-body">
+                      <p id="mensaje">Desea generar la asignación preliminar?</p>
+                    </div>
+                    <div class="modal-footer">
+                      <input class="btn btn-sm btn-primary" id="btnConfirmarAsignacion" value='Si'/>
+                      <!--<button type="button" id="btnConfirmarReporte" class="btn btn-sm btn-default">Sí</button>-->
+                      <!--<button type="button" class="btn btn-sm btn-default" data-dismiss="modal">No</button>-->
+                      <input class="btn btn-sm btn-primary" id="btnConfirmarAsignacionNo" data-dismiss="modal" value='No'/>
+                    </div>  
+                  </div>
+                </div>
+            </div>
         </main>
         <script src="https://framework-gb.cdn.gob.mx/gobmx.js"></script>
         <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
@@ -272,6 +295,22 @@
                     $("#seccionEditable").html(data);}
                 );
             }
+            function asignacionPreliminar(){
+                var programa=$("#programa").val();
+                var subsistema=$("#subsistema").val();
+                var periodo=$("#periodo").val();
+                $("#btnConfirmarAsignacion").val("Generando resultados...");
+                $("#btnConfirmarAsignacion").attr("disabled","disabled");
+                $.post("aspiranteGanador", {id:"a",programa:programa,subsistema:subsistema,periodo:periodo}, function(data){
+                     $("#btnConfirmarAsignacion").val("Si");
+                     $("#btnConfirmarAsignacion").removeAttr("disabled");
+                    $("#modalMensajeAsignacionPreliminar").modal("hide");}
+                );
+            }
+            function confirmacionAsignacionPreliminar(){
+                $("#btnConfirmarAsignacion").attr("onClick","asignacionPreliminar()");
+                $("#modalMensajeAsignacionPreliminar").modal("show");
+            }
             function confirmacionReporte(){
                 $("#btnConfirmarReporte").attr("onClick","crearExcel()");
                 $("#modalMensajeReporte").modal("show");
@@ -302,7 +341,7 @@
                     var reporteObject=JSON.parse(data);
                     var tabla= ""
                     tabla +=  "<table><tr><th >id</th><th >nombre</th><th >primerApellido</th><th >segundoApellido</th><th >correo</th><th >curp</th><th >idPlantel</th><th >idEntidad</th><th >entidad</th><th >cct</th><th >plantel</th><th >telfijo</th><th >telcel</th><th >consideraciones</th><th >idEscuelaEstudio</th><th >escuela</th><th >idCarrera</th><th >carrera</th><th >anioEgreso</th><th >idGradoAcademico</th><th >grado</th><th >idModalidadTitulacion</th><th >modalidad</th><th >anioTitulacion</th><th >cedula</th><th >activo</th><th >ingresoSubsistema</th><th >ingresoPlantel</th><th >idCategoriaJornada</th><th >clave</th><th >idCategoria</th><th >categoria</th><th >idJornada</th><th >jornada</th><th >fechaPlaza</th><th >idTipoNombramiento</th><th >clave</th><th >codigo</th><th >descripcion</th><th >tipo</th><th >fechaUltimaPromocion</th><th >idCategoriaJornadaAspira</th><th >clave as claveAspira</th><th >idCategoriaAspira</th><th >categoriaAspira</th>        <th >idJornadaAspira</th><th >jornadaAspira</th><th >idPerfilRequerido</th><th >requisito</th><th >notaSancion</th><th >compatibilidad</th><th >horasOtroSubsistema</th><th >nivelCENNI</th><th >folioCENNI</th><th >idCCT</th><th >cct</th><th >idEntidadEstudio</th><th >idInstitucion</th><th >idTipoInstitucion</th><th >gradoMarginacion</th><th >frenteGrupo</th><th >funcionesOtro</th><th >finRegistro</th><th >consideraciones</th><th >publico</th><th >Programa</th><th >idConvocatoria</th><th >idEstatus</th><th >observacionInfo</th><th >observacionEncuestados</th><th >observacionCriterios</th><th >institucion</th><th >cct</th><th >escuela</th><th >carreraOtra</th><th >observacionCriterios2</th><th >idSubsistema</th><th >folio</th><th >tipoVacanciaAspira</th><th >idEstatus</th><th >estatus</th><th >puntaje1</th><th >puntaje2</th><th >observacionInfo</th><th >observacionEncuestados</th><th >observacionCriterios</th><th >posicion</th>"
-                + "<th >observacion1</th><th >observacion2</th><th >observacion3</th><th >observacion4</th><th >observacion5</th><th >observacion6</th><th >observacion7</th><th >observacion8</th><th >Lista cotejo</th><th >idPrograma</th><th >Acepto registro anterior</th><th >Criterio1 Puntaje Revisor</th><th >Criterio1 Puntaje Dictaminador</th><th >Criterio2 Puntaje Revisor</th><th >Criterio2 Puntaje Dictaminador</th><th >Criterio3 Puntaje Revisor</th><th >Criterio3 Puntaje Dictaminador</th><th >Criterio4 Puntaje Revisor</th><th >Criterio4 Puntaje Dictaminador</th><th >Criterio5 Puntaje Revisor</th><th >Criterio5 Puntaje Dictaminador</th><th >Criterio6 Puntaje Revisor</th><th >Criterio6 Puntaje Dictaminador</th><th >Criterio7 Puntaje Revisor</th><th >Criterio7 Puntaje Dictaminador</th><th >Criterio8 Puntaje Revisor</th><th >Criterio8 Puntaje Dictaminador</th><th >Criterio9 Puntaje Revisor</th><th >Criterio9 Puntaje Dictaminador</th><th >Criterio10 Puntaje Revisor</th><th >Criterio10 Puntaje Dictaminador</th></tr>";
+                + "<th >observacion1</th><th >observacion2</th><th >observacion3</th><th >observacion4</th><th >observacion5</th><th >observacion6</th><th >observacion7</th><th >observacion8</th><th >Lista cotejo</th><th >idPrograma</th><th >Acepto registro anterior</th><th >Criterio1 Puntaje Revisor</th><th >Criterio1 Puntaje Dictaminador</th><th >Criterio2 Puntaje Revisor</th><th >Criterio2 Puntaje Dictaminador</th><th >Criterio3 Puntaje Revisor</th><th >Criterio3 Puntaje Dictaminador</th><th >Criterio4 Puntaje Revisor</th><th >Criterio4 Puntaje Dictaminador</th><th >Criterio5 Puntaje Revisor</th><th >Criterio5 Puntaje Dictaminador</th><th >Criterio6 Puntaje Revisor</th><th >Criterio6 Puntaje Dictaminador</th><th >Criterio7 Puntaje Revisor</th><th >Criterio7 Puntaje Dictaminador</th><th >Criterio8 Puntaje Revisor</th><th >Criterio8 Puntaje Dictaminador</th><th >Criterio9 Puntaje Revisor</th><th >Criterio9 Puntaje Dictaminador</th><th >Criterio10 Puntaje Revisor</th><th >Criterio10 Puntaje Dictaminador</th><th >idPlazaPremilinar</th><th >idVacancia</th><th >categoriaPreliminar</th><th >jornadaPreliminar</th></tr>";
                     for (let i = 0; i < reporteObject.reporte.length; i++) {
                         tabla +=  "<tr> "
                         for (let z = 0; z < reporteObject.reporte[i].length; z++) {
@@ -484,7 +523,8 @@
                     $("#btnBuscar1").show();
                     $("#btnBuscar").hide();
                     $("#btnReporte").show();
-                }else{
+                    $("#btnBuscar2").hide();
+                }else if(idProceso==2){
                     $("#container1").show();
                     $("#container2").hide();
                     $("#container3").hide();
@@ -492,6 +532,16 @@
                     $("#btnBuscar1").hide();
                     $("#btnBuscar").show();
                     $("#btnReporte").hide();
+                    $("#btnBuscar2").hide();
+                }else{
+                    $("#container1").show();
+                    $("#container2").hide();
+                    $("#container3").hide();
+                    $("#container4").show();
+                    $("#btnBuscar1").hide();
+                    $("#btnBuscar").hide();
+                    $("#btnReporte").hide();
+                    $("#btnBuscar2").show();
                 }
             }
             $("#container1").hide();
