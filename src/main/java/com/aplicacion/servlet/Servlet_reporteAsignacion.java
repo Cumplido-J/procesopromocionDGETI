@@ -92,6 +92,8 @@ public class Servlet_reporteAsignacion extends HttpServlet {
             } else if (proceso.equals("3")) {
                 DatosHoras dh = new DatosHoras();
                 out.print(dh.generarReporte(programa, subsistema, entidad, periodo));
+            }else if (proceso.equals("4")) {
+                out.print(d.generarReporteVacancia(programa, subsistema));
             }
 
         } catch (Exception e) {

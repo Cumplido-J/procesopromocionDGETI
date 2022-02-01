@@ -1422,4 +1422,20 @@ public class Datos {
             return respuesta;  
         }
     }
+    
+    public String generarReporteVacancia(String idPrograma, String idSubsistema) {
+        ModelReporte reporte = new ModelReporte();
+        UtileriasHelper utilerias = new UtileriasHelper();
+        String jsonReporte = "";
+        try {
+            String[] parametros = {idPrograma, idSubsistema};
+            reporte.setReporte(metodos.ejecutaSP("sp_reporteVacancia", parametros));
+            jsonReporte = utilerias.convertObjectToJson(reporte);
+            return jsonReporte;
+        } catch (Exception e) {
+            e.toString();
+        } finally {
+            return jsonReporte;
+        }
+    }
 }
