@@ -184,7 +184,7 @@ $(document).ready(function () {
                 id=$(this).val();
                 if (this.checked) {
                     permisos += id+",";                
-                    permisos+=document.getElementById('cbEscritura'+id).checked;                
+                    permisos+=document.getElementById('cbEscritura'+id).checked+","+document.getElementById('cbEliminar'+id).checked;                
                     permisos+=";";
                 }
             }); 
@@ -243,9 +243,12 @@ function cambioPermiso(objeto){
     id=id.replace("permiso","");
     if(objeto.checked){
         $("#escritura"+id).removeClass("hidden");
+        $("#eliminar"+id).removeClass("hidden");
     }else{
         $("#escritura"+id).addClass("hidden");
         $("#cbEscritura"+id).removeAttr("checked");
+        $("#eliminar"+id).addClass("hidden");
+        $("#cbEliminar"+id).removeAttr("checked");
     }
 }
 

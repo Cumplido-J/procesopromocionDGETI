@@ -172,7 +172,7 @@ public class Servlet_registrarUsuario extends HttpServlet {
                     datos=metodo.ejecutaSP("sp_insertUsuario",parametros);            
                     if(!datos.isEmpty()){
                         respuesta=datos.get(0)[0]; 
-                        parametros=new String[4];
+                        parametros=new String[5];
                         parametros[0]="";
                         parametros[1]=usuario;                
                         if(respuesta.equals("ok")){
@@ -187,6 +187,11 @@ public class Servlet_registrarUsuario extends HttpServlet {
                                     parametros[3]="V";
                                 }else{
                                     parametros[3]="F";
+                                }
+                                if(aux2[2].equals("true")){
+                                    parametros[4]="V";
+                                }else{
+                                    parametros[4]="F";
                                 }
 
                                 datos=metodo.ejecutaSP("sp_insertUsuarioPermiso",parametros);                        
