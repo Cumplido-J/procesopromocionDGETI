@@ -108,7 +108,10 @@
                     <div class="row">
                         <div class="form-group col-xs-12 text-center">                         
                             <input class="btn btn-sm btn-primary" id="btnBuscar" type="submit" value='Buscar'/> 
-                            <a href="altaVacancia.jsp" class="btn btn-sm btn-primary">Agregar</a>                        
+                            <a href="altaVacancia.jsp" class="btn btn-sm btn-primary">Agregar</a>
+                            <c:if test='${sessionScope["permisoActualEliminar"]=="V"}'>
+                                <input class="btn btn-sm btn-primary" id="btnEliminar" value='Eliminar vacancia' onclick="confirmacionEliminarVacancia()"/>
+                            </c:if>
                         </div>
                         <div class="form-group col-xs-4 text-right" style="margin-left: 650px;" id="btnReporte">                         
                             <img src="imagenes/excel.svg" style="width: 30px; border-radius: 50%; border: 2px solid #46b12e; margin-left: -190px;" onclick="confirmacionReporte()">
@@ -172,6 +175,27 @@
                       <!--<button type="button" id="btnConfirmarReporte" class="btn btn-sm btn-default">Sí</button>-->
                       <!--<button type="button" class="btn btn-sm btn-default" data-dismiss="modal">No</button>-->
                       <input class="btn btn-sm btn-primary" id="btnConfirmarReporteNo" data-dismiss="modal" value='No'/>
+                    </div>  
+                  </div>
+                </div>
+        </div>
+        <div class="modal fade" id="modalMensajeVacancia" role="dialog">
+                <div style="width: 50%;margin: auto;margin-top: 20%;">
+
+                  <!-- Modal content-->
+                  <div class="modal-content panel">
+                    <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal">&times;</button>
+                      <h4 class="modal-title">Eliminar vacancia</h4>
+                    </div>
+                    <div class="modal-body">
+                      <p id="mensaje">Desea eliminar la vacancia actual?</p>
+                    </div>
+                    <div class="modal-footer">
+                      <input class="btn btn-sm btn-primary" id="btnConfirmarEliminar" value='Si'/>
+                      <!--<button type="button" id="btnConfirmarReporte" class="btn btn-sm btn-default">Sí</button>-->
+                      <!--<button type="button" class="btn btn-sm btn-default" data-dismiss="modal">No</button>-->
+                      <input class="btn btn-sm btn-primary" id="btnConfirmarEliminarNo" data-dismiss="modal" value='No'/>
                     </div>  
                   </div>
                 </div>
@@ -309,6 +333,73 @@
 
                     doc.output('datauriNew');
                 }
+            }
+            function confirmacionEliminarVacancia(){
+                if ($("#programa").val() != "" && $("#subsistema").val() != "" && $("#entidad").val() != "" && $("#plantel").val() != "" && $("#tipo").val() != "") {
+                    $("#btnConfirmarEliminar").attr("onClick","eliminarVacancia()");
+                    $("#modalMensajeVacancia").modal("show");
+                }
+                
+                if($("#programa").val() == ""){
+                    $("#programa").removeClass("completo");
+                    $("#programa").addClass("error");
+                }else{
+                    $("#programa").removeClass("error");
+                    $("#programa").addClass("completo");
+                }
+                
+                if($("#subsistema").val() == ""){
+                    $("#subsistema").removeClass("completo");
+                    $("#subsistema").addClass("error");
+                }else{
+                    $("#subsistema").removeClass("completo");
+                    $("#subsistema").addClass("completo");
+                }
+                
+                if($("#entidad").val() == ""){
+                    $("#entidad").removeClass("completo");
+                    $("#entidad").addClass("error");
+                }else{
+                    $("#entidad").removeClass("completo");
+                    $("#entidad").addClass("completo");
+                }
+                
+                if($("#plantel").val() == ""){
+                    $("#plantel").removeClass("completo");
+                    $("#plantel").addClass("error");
+                }else{
+                    $("#plantel").removeClass("completo");
+                    $("#plantel").addClass("completo");
+                }
+                
+                if($("#tipo").val() == ""){
+                    $("#tipo").removeClass("completo");
+                    $("#tipo").addClass("error");
+                }else{
+                    $("#tipo").removeClass("completo");
+                    $("#tipo").addClass("completo");
+                }
+            }
+            function eliminarVacancia(){
+                var programa=$("#programa").val();
+                var subsistema=$("#subsistema").val();
+                var entidad=$("#entidad").val();
+                var plantel=$("#plantel").val();
+                var tipo=$("#tipo").val();
+                
+                $.post("eliminarVacancia", {programa:programa,subsistema:subsistema,entidad:entidad,plantel:plantel,tipo:tipo}, function(data){
+                    if(data.includes("<tr>")){
+                        $("#mensaje").html("Se elimino correctamente");            
+                        $("#modalMensaje").modal("show");
+                        $("#modalMensajeVacancia").modal("hide");
+                        $("#seccionEditable").html(data);
+                    }else{
+                        $("#modalMensajeVacancia").modal("hide");
+                        $("#mensaje").html("Ocurrio un error");            
+                        $("#modalMensaje").modal("show");
+                    }
+                  }
+                );
             }
         </script>
     </body>

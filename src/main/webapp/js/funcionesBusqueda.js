@@ -10,6 +10,17 @@ $(document).ready(function () {
 	var request_method = $(this).attr("method"); //get form GET/POST method
 	var form_data = $(this).serialize(); //Encode form elements for submission
 	
+        $("#programa").removeClass("completo");
+        $("#programa").removeClass("error");       
+        $("#subsistema").removeClass("completo");
+        $("#subsistema").removeClass("error");
+        $("#entidad").removeClass("completo");
+        $("#entidad").removeClass("error");
+        $("#plantel").removeClass("completo");
+        $("#plantel").removeClass("error");
+        $("#tipo").removeClass("completo");
+        $("#tipo").removeClass("error");
+        
 	$.ajax({
 		url : post_url,
 		type: request_method,

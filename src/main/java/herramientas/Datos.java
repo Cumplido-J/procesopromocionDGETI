@@ -1337,7 +1337,6 @@ public class Datos {
             return respuesta;  
         }
     }
-    
     public String asignacionVacanciaPreliminar(String programa,String idSubsistema,String periodo){        
         String respuesta="ok";        
         try{
@@ -1422,7 +1421,6 @@ public class Datos {
             return respuesta;  
         }
     }
-    
     public String generarReporteVacancia(String idPrograma, String idSubsistema) {
         ModelReporte reporte = new ModelReporte();
         UtileriasHelper utilerias = new UtileriasHelper();
@@ -1436,6 +1434,21 @@ public class Datos {
             e.toString();
         } finally {
             return jsonReporte;
+        }
+    }
+    public String eliminarVacancia(String idPrograma, String idSubsistema, String idEntidad, String idPlantel, String tipoCategoria) {
+        String respuesta = "";
+            String[] parametros = {idPrograma, idSubsistema, idEntidad, idPlantel, tipoCategoria};
+            List<String[]> datos = metodos.ejecutaSP("sp_deleteVacancias", parametros);
+        try {    
+            if(datos.get(0)[0].contains("ok")){
+                respuesta=datos.get(0)[0];
+            }
+            return respuesta;
+        } catch (Exception e) {
+            respuesta = e.toString();
+        } finally {
+            return respuesta;
         }
     }
 }

@@ -3,11 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-function establecerPermisoActual(idPermiso, permisoEdicion){
+function establecerPermisoActual(idPermiso, permisoEdicion, permisoEliminar){
     
     var respuestaIdPermiso = null;
     
-    $.get("EstableceSesionPermiso", {e:idPermiso, p:permisoEdicion}, function(respuesta){
+    $.get("EstableceSesionPermiso", {e:idPermiso,p:permisoEdicion,d:permisoEliminar}, function(respuesta){
         respuestaIdPermiso = respuesta;
     });
 

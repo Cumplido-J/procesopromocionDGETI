@@ -139,6 +139,7 @@ public class Servlet_login extends HttpServlet {
                     session.setAttribute("fechaDictaminacion",0);
                     session.setAttribute("idPeriodoActivo", datos.get(0)[15]);
                     session.setAttribute("permisoTablaUsuarioEdicion",datos.get(0)[16]);
+                    session.setAttribute("permisoActualEliminar","");
                     if(datos.get(0)[7].equals("D")){
                         String[] parametros1={datos.get(0)[3],datos.get(0)[11],datos.get(0)[1],"D"};
                         List<String[]> datos1=metodos.ejecutaSP(ConstantsWS.SP_FECHAS_CONVOCATORIA,parametros1);
@@ -189,17 +190,19 @@ public class Servlet_login extends HttpServlet {
                             String[] vinculo = null;
                             for(String[] dato:datos){
                                 //System.out.println(dato[8]+"-"+dato[9]+"-"+dato[10]);
-                                vinculo=new String[4];
+                                vinculo=new String[5];
                                 vinculo[0]=dato[8];
                                 vinculo[1]=dato[9];
                                 vinculo[2]=dato[10];
                                 vinculo[3]=dato[14];
+                                vinculo[4]=dato[17];
                                 vinculos.add(vinculo);
                             }
 
                             if (vinculos.size()== 1)
                             { session.setAttribute("permisoActual",(vinculos.get(0))[0]); 
                               session.setAttribute("permisoActualEdicion",(vinculos.get(0))[3]);
+                              session.setAttribute("permisoActualEliminar",(vinculos.get(0))[4]);
                             }                        
 
                             session.setAttribute("vinculos",vinculos);

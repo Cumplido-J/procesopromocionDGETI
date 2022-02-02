@@ -23,7 +23,7 @@
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Opciones administrador<span class="caret"></span></a>
                     <ul class="dropdown-menu" role="menu">
                         <c:forEach items="${vinculos}" var="vinculo">
-                            <li><a onclick="establecerPermisoActual(${vinculo[0]},'${vinculo[3]}')" href="${vinculo[2]}">${vinculo[1]}</a></li>
+                            <li><a onclick="establecerPermisoActual(${vinculo[0]},'${vinculo[3]}','${vinculo[4]}')" href="${vinculo[2]}">${vinculo[1]}</a></li>
                         </c:forEach>
                     </ul>
                 </li>

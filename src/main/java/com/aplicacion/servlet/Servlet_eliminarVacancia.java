@@ -5,6 +5,7 @@
  */
 package com.aplicacion.servlet;
 
+import herramientas.Datos;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -12,15 +13,14 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author pelle
+ * @author Fernando
  */
-@WebServlet(name = "EstableceSesionPermiso", urlPatterns = {"/EstableceSesionPermiso"})
-public class Servlet_estableceSesionPermiso extends HttpServlet {
-   
+@WebServlet(name = "Servlet_eliminarVacancia", urlPatterns = {"/eliminarVacancia"})
+public class Servlet_eliminarVacancia extends HttpServlet {
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -33,20 +33,17 @@ public class Servlet_estableceSesionPermiso extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        PrintWriter out = response.getWriter();
-        try {
+        try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet Servlet_consultaSesionPermiso</title>");            
+            out.println("<title>Servlet Servlet_eliminarVacancia</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet Servlet_consultaSesionPermiso at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet Servlet_eliminarVacancia at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
-        } finally {
-            out.close();
         }
     }
 
@@ -58,35 +55,11 @@ public class Servlet_estableceSesionPermiso extends HttpServlet {
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
-     */    
-        @Override
+     */
+    @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-        PrintWriter out = response.getWriter();
-        try {
-            /* TODO output your page here. You may use following sample code. */
-            String respuesta = null;
-            String key=request.getParameter("e");
-            String edicion=request.getParameter("p");
-            String eliminar=request.getParameter("d");
-            
-            HttpSession session= (HttpSession) request.getSession(true);
-            session.setAttribute("permisoActualEdicion",edicion);
-            respuesta = session.getAttribute("permisoActualEdicion").toString();
-            session.setAttribute("permisoActual",key);
-            respuesta = session.getAttribute("permisoActual").toString();                        
-            session.setAttribute("permisoActualEliminar",eliminar);
-            respuesta = session.getAttribute("permisoActualEliminar").toString();
-            
-            out.println(respuesta);
-                      
-        }catch(Exception e){
-            out.println(e);
-        } 
-        finally {
-            out.close();
-        }
+        processRequest(request, response);
     }
 
     /**
@@ -97,10 +70,29 @@ public class Servlet_estableceSesionPermiso extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-        @Override
+    @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        response.setContentType("text/html;charset=UTF-8");
+        try{
+            PrintWriter out = response.getWriter();            
+                String programa=request.getParameter("programa");
+                String subsistema=request.getParameter("subsistema");
+                String entidad=request.getParameter("entidad");
+                String plantel=request.getParameter("plantel");
+                String tipo=request.getParameter("tipo");
+                Datos d=new Datos();
+                String respuesta=d.eliminarVacancia(programa, subsistema, entidad, plantel, tipo);
+                
+                if(respuesta.equals("ok")){
+                  out.print(d.desplegarVacancias(programa, subsistema, entidad, plantel, tipo));  
+                }else{
+                    out.print("");
+                }
+                
+        }catch(Exception e){
+            System.out.println(e.toString());
+        }
     }
 
     /**
@@ -108,8 +100,9 @@ public class Servlet_estableceSesionPermiso extends HttpServlet {
      *
      * @return a String containing servlet description
      */
-        @Override
+    @Override
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
+
 }
