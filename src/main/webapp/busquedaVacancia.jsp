@@ -168,7 +168,7 @@
                       <h4 class="modal-title">Reporte asignación de categoria</h4>
                     </div>
                     <div class="modal-body">
-                      <p id="mensaje">Desea generar el reporte de asignación de categoria?</p>
+                      <p id="mensaje">¿Desea generar el reporte de la vacancia?</p>
                     </div>
                     <div class="modal-footer">
                       <input class="btn btn-sm btn-primary" id="btnConfirmarReporte" value='Si'/>
@@ -189,7 +189,7 @@
                       <h4 class="modal-title">Eliminar vacancia</h4>
                     </div>
                     <div class="modal-body">
-                      <p id="mensaje">Desea eliminar la vacancia actual?</p>
+                      <p id="mensaje">Al seleccionar esta opción borrara toda la vacancia del plantel seleccionado, ¿Está seguro de continuar?</p>
                     </div>
                     <div class="modal-footer">
                       <input class="btn btn-sm btn-primary" id="btnConfirmarEliminar" value='Si'/>
@@ -393,9 +393,13 @@
                         $("#modalMensaje").modal("show");
                         $("#modalMensajeVacancia").modal("hide");
                         $("#seccionEditable").html(data);
+                    }else if(data.includes("No")){
+                        $("#modalMensajeVacancia").modal("hide");
+                        $("#mensaje").html(data);            
+                        $("#modalMensaje").modal("show");
                     }else{
                         $("#modalMensajeVacancia").modal("hide");
-                        $("#mensaje").html("Ocurrio un error");            
+                        $("#mensaje").html("No es posible eliminar la vacancia seleccionada");            
                         $("#modalMensaje").modal("show");
                     }
                   }

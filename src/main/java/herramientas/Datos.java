@@ -1442,7 +1442,9 @@ public class Datos {
             List<String[]> datos = metodos.ejecutaSP("sp_deleteVacancias", parametros);
         try {    
             if(datos.get(0)[0].contains("ok")){
-                respuesta=datos.get(0)[0];
+                return respuesta="ok";
+            }else if(datos.get(0)[0].contains("No")){
+                return respuesta="No puede eliminar una vez que inicio el registro de aspirantes";
             }
             return respuesta;
         } catch (Exception e) {

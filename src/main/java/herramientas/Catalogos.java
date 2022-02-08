@@ -1027,7 +1027,13 @@ public class Catalogos {
                 }else{
                     hidden="hidden";
                 }
-                respuesta+="<tr><td><label><input type='checkbox' onChange='cambioPermiso(this)' class='permiso' id='permiso"+dato[0]+"' value='"+dato[0]+"' "+dato[2]+">"+dato[1]+"</label></td><td><label id='escritura"+dato[0]+"' class='"+hidden+"'><input type='checkbox' id='cbEscritura"+dato[0]+"' class='escritura' value='"+dato[0]+"' "+dato[3]+">Permiso escritura</label></td><td><label id='eliminar"+dato[0]+"' class='"+hidden+"'><input type='checkbox' id='cbEliminar"+dato[0]+"' class='eliminar' value='"+dato[0]+"' "+dato[4]+">Permiso eliminar</label></td></tr>";
+                
+                if(!dato[0].equals("3")){
+                    respuesta+="<tr><td><label><input type='checkbox' onChange='cambioPermiso(this)' class='permiso' id='permiso"+dato[0]+"' value='"+dato[0]+"' "+dato[2]+">"+dato[1]+"</label></td><td><label id='escritura"+dato[0]+"' class='"+hidden+"'><input type='checkbox' id='cbEscritura"+dato[0]+"' class='escritura' value='"+dato[0]+"' "+dato[3]+">Permiso escritura</label></td><td><label id='eliminar"+dato[0]+"' class='"+hidden+"' style='margin-left: 20px;display: none;'><input type='checkbox' id='cbEliminar"+dato[0]+"' class='eliminar' value='"+dato[0]+"' "+dato[4]+">Permiso eliminar</label></td></tr>";
+                }else{
+                    respuesta+="<tr><td><label><input type='checkbox' onChange='cambioPermiso(this)' class='permiso' id='permiso"+dato[0]+"' value='"+dato[0]+"' "+dato[2]+">"+dato[1]+"</label></td><td><label id='escritura"+dato[0]+"' class='"+hidden+"'><input type='checkbox' id='cbEscritura"+dato[0]+"' class='escritura' value='"+dato[0]+"' "+dato[3]+">Permiso escritura</label></td><td><label id='eliminar"+dato[0]+"' class='"+hidden+"' style='margin-left: 20px;'><input type='checkbox' id='cbEliminar"+dato[0]+"' class='eliminar' value='"+dato[0]+"' "+dato[4]+">Permiso eliminar</label></td></tr>";
+                }
+                
             }
             respuesta+="</table>";
         }catch(Exception e){

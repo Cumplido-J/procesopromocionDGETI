@@ -28,7 +28,7 @@
                     <div class="row">
                         <div class="form-group col-xs-12">                               
                             <label class="control-label" for="programa">Programa:</label>
-                            <select class="form-control input-sm ${disabled1}" id="programa" name="programa" disabled>                                  
+                            <select class="form-control input-sm ${disabled1}" id="programa" name="programa">                                  
                                 ${catalogo.desplegarOpcionesProgramas("1")}
                             </select>
                         </div>
