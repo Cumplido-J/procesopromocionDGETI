@@ -229,6 +229,7 @@
                         <div class="modal-body">
                             <p id="respuestaEditar" class="text-danger"></p>
                             <input type="hidden" value="${datos[0]}" name="idComite" id="idComite">
+                            <input type="hidden" name="idMiembroEditar" id="idMiembroEditar">
                             <div class="row">
                                 <div class="form-group col-md-6">                               
                                     <label class="control-label">RFC:</label>
@@ -267,7 +268,7 @@
                         </div>
                         <div class="modal-footer">                      
                             <input type="button" class="btn btn-primary btn-sm" value="Cancelar" data-dismiss="modal"/>
-                            <input class="btn btn-sm btn-primary" id="btnEditar" type="submit" value='Registrar'/>
+                            <input class="btn btn-sm btn-primary" id="btnEditar" type="submit" value='Guardar'/>
                         </div>
                     </form>
                   </div>

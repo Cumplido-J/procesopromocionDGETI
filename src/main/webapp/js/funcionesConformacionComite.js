@@ -159,6 +159,7 @@ $(document).ready(function () {
                         $("#seccionEditable").html(json.resgistros);            
                         $("#modalRegistroEditar").modal("hide");
                         $("#respuesta").html("");
+                        $("#respuestaEditar").html("");
                     }else{
 //                        $("#rolEditar").addClass("error");
 //                        $("#seccionEditable").html(json.resgistros);
@@ -381,6 +382,7 @@ function mostrarModalRegistroEditar(id){
                     var segundoApellido=json.segundoApellido;
                     var correo=json.correo;
                     var rol=json.rol;
+                    var idMiembro=id;
                     
                     document.getElementById('rfcEditar').innerHTML = rfc;
                     $("#rfcEditar").val(rfc)
@@ -389,6 +391,8 @@ function mostrarModalRegistroEditar(id){
                     $("#apMaternoEditar").val(segundoApellido)
                     $("#correoEditar").val(correo)
                     $("#rolEditar").val(rol)
+                    $("#idMiembroEditar").val(idMiembro)
+                    $("#respuestaEditar").html("");
                     
 //                    document.getElementById('').innerHTML = rol;
 

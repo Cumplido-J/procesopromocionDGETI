@@ -91,10 +91,11 @@ public class Servlet_actualizarRegistroIntegranteComite extends HttpServlet {
                 String materno=request.getParameter("apMaternoEditar").toUpperCase();
                 String correo=request.getParameter("correoEditar").toLowerCase();
                 String rol=request.getParameter("rolEditar");
+                String idMiembro=request.getParameter("idMiembroEditar");
                 //String[] p2={idUsuario,curp,correo,tipoEncuesta};
                 Metodos_sql metodos=new Metodos_sql(); 
                 
-                String[] parametros={idComite,rfc,nombre,paterno,materno,correo,rol};
+                String[] parametros={idComite,rfc,nombre,paterno,materno,correo,rol,idMiembro};
                 List<String[]> retorno=null;                
                 retorno=metodos.ejecutaSP("sp_updatetMiembroComite",parametros);
                 if(!retorno.isEmpty()){
