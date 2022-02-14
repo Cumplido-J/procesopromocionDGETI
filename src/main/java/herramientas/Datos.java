@@ -1444,7 +1444,7 @@ public class Datos {
             if(datos.get(0)[0].contains("ok")){
                 return respuesta="ok";
             }else if(datos.get(0)[0].contains("No")){
-                return respuesta="No puede eliminar una vez que inicio el registro de aspirantes";
+                return respuesta=datos.get(0)[0].toString();
             }
             return respuesta;
         } catch (Exception e) {

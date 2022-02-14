@@ -399,7 +399,7 @@
                         $("#modalMensaje").modal("show");
                     }else{
                         $("#modalMensajeVacancia").modal("hide");
-                        $("#mensaje").html("No es posible eliminar la vacancia seleccionada");            
+                        $("#mensaje").html("error");            
                         $("#modalMensaje").modal("show");
                     }
                   }

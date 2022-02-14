@@ -87,9 +87,7 @@ public class Servlet_eliminarVacancia extends HttpServlet {
                 if(respuesta.equals("ok")){
                   out.print(d.desplegarVacancias(programa, subsistema, entidad, plantel, tipo));  
                 }else if(respuesta.contains("No")){
-                    out.print("No puede eliminar una vez que inicio el registro de aspirantes");
-                }else{
-                    out.print("");
+                    out.print(respuesta);
                 }
                 
         }catch(Exception e){
